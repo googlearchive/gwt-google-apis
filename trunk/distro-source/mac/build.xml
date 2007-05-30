@@ -1,0 +1,57 @@
+<project name="dist-mac" default="build" basedir=".">
+	<property name="dist.platform" value="mac" />
+	<import file="../common.ant.xml" />
+	<property name="project.dist" location="${gwt.build.dist}/${project.distname}.tar.gz" />
+
+	<target name="build" depends="filter" description="Packages the distro">
+		<!-- TODO: figure out how to share most of this across platforms -->
+		<mkdir dir="${gwt.build.dist}" />
+		<gwt.tgz.cat destfile="${project.dist}">
+			<!-- jars -->
+			<tarfileset file="${gwt.build.lib}/gwt-google-apis.jar" prefix="${project.distname}" />
+
+			<!-- doc -->
+			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
+				<include name="doc" />
+				<include name="doc/html/**" />
+				<include name="doc/css/**" />
+				<include name="doc/javadoc/**" />
+			</tarfileset>
+
+		    <!-- samples -->
+			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
+				<include name="samples" />
+				<include name="samples/*" />
+                <include name="samples/*/windows/**" />
+                <include name="samples/*/mac/**" />
+                <include name="samples/*/linux/**" />
+                <include name="samples/*/src/**" />
+				<include name="samples/*/bin/**" />
+				<include name="samples/*/www/**" />
+			</tarfileset>
+            <!--
+			<tarfileset dir="${gwt.build.out}/samples-scripts/${dist.platform}" mode="755" prefix="${project.distname}/samples">
+				<include name="*/*-compile" />
+				<include name="*/*-shell" />
+			</tarfileset>
+			-->
+		</gwt.tgz.cat>
+
+		<if>
+			<isset property="build.host.ismac" />
+			<then>
+				<!--
+					Untar distro into the staging directory.  Must use GNU tar
+					to handle permissions and symlinks correctly.
+				-->
+				<mkdir dir="${gwt.build.staging}" />
+				<exec executable="tar">
+					<arg value="-xpzf" />
+					<arg file="${project.dist}" />
+					<arg value="-C" />
+					<arg file="${gwt.build.staging}" />
+				</exec>
+			</then>
+		</if>
+	</target>
+</project>
