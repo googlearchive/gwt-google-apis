@@ -22,17 +22,18 @@
 	
 			<!-- samples -->
 			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
-				<include name="samples" />
+<!--				<include name="samples" />-->
 				<include name="samples/*" />
+<!--
 	            <include name="samples/*/launch-scripts/**" />
+-->	            
 	            <include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
 				<include name="samples/*/www/**" />
 			</tarfileset>
 
 			<tarfileset dir="${gwt.build.out}/samples" mode="755" prefix="${project.distname}/samples">
-				<include name="*/*-compile" />
-				<include name="*/*-shell" />
+				<include name="*/launch-scripts/*/*" />
 			</tarfileset>
 		</gwt.tgz.cat>
 	</target>
@@ -56,17 +57,18 @@
 	
 			<!-- samples -->
 			<zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
-				<include name="samples" />
+<!--				<include name="samples" />-->
 				<include name="samples/*" />
+<!--	
 			    <include name="samples/*/launch-scripts/**" />
+-->			    
 			    <include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
 				<include name="samples/*/www/**" />
 			</zipfileset>
 	
 			<zipfileset dir="${gwt.build.out}/samples" prefix="${project.distname}/samples">
-				<include name="*/*-compile.cmd" />
-				<include name="*/*-shell.cmd" />
+				<include name="*/launch-scripts/*/*" />
 			</zipfileset>
 		</zip>
 	</target>
