@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gwt-google-apis"/>
-	<classpathentry kind="lib" path="/opt/gwt-mac-1.4.10/gwt-user.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gwt-user"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

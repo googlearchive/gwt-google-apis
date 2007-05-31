@@ -18,7 +18,7 @@
 		<link>
 			<name>src</name>
 			<type>2</type>
-			<locationURI>GWT_GOOGLE_APIS_ROOT/samples/gwt-note/src</locationURI>
+			<locationURI>GWT_GOOGLE_APIS_ROOT/samples/gwtnote/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
