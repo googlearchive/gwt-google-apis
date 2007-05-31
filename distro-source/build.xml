@@ -24,9 +24,7 @@
 			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
 				<include name="samples" />
 				<include name="samples/*" />
-	            <include name="samples/*/windows/**" />
-	            <include name="samples/*/mac/**" />
-	            <include name="samples/*/linux/**" />
+	            <include name="samples/*/launch-scripts/**" />
 	            <include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
 				<include name="samples/*/www/**" />
@@ -60,9 +58,7 @@
 			<zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
 				<include name="samples" />
 				<include name="samples/*" />
-			    <include name="samples/*/windows/**" />
-			    <include name="samples/*/mac/**" />
-			    <include name="samples/*/linux/**" />
+			    <include name="samples/*/launch-scripts/**" />
 			    <include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
 				<include name="samples/*/www/**" />

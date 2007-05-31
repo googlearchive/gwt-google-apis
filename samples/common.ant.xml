@@ -54,17 +54,9 @@
 	</target>
 
 	<target name="scripts" description="Create launch scripts">
-        <mkdir dir="${sample.build}/windows" />
-        <copy todir="${sample.build}/windows">
-            <fileset dir="windows" />
-        </copy>
-        <mkdir dir="${sample.build}/linux" />
-        <copy todir="${sample.build}/linux">
-            <fileset dir="linux" />
-        </copy>
-        <mkdir dir="${sample.build}/mac" />
-        <copy todir="${sample.build}/mac">
-            <fileset dir="mac" />
+        <mkdir dir="${sample.build}/launch-scripts" />
+        <copy todir="${sample.build}/launch-scripts">
+            <fileset dir="launch-scripts" />
         </copy>
     </target>
 
