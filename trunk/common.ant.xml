@@ -1,16 +1,16 @@
 <project name="common">
-        <!-- gwt.build.iscasesensitivefs is true if the filesystem of the
-          build machine is case-sensitive, false otherwise.  Update with
-          new lines for any supported platforms with case-insensitive
-          filesystems
-        -->
-        <condition property="gwt.build.iscasesensitivefs" else="false">
-          <not>
-            <or>
-              <os family="windows"/>
-            </or>
-          </not>
-        </condition>
+    <!-- gwt.build.iscasesensitivefs is true if the filesystem of the
+      build machine is case-sensitive, false otherwise.  Update with
+      new lines for any supported platforms with case-insensitive
+      filesystems
+    -->
+    <condition property="gwt.build.iscasesensitivefs" else="false">
+      <not>
+        <or>
+          <os family="windows"/>
+        </or>
+      </not>
+    </condition>
 
 	<property name="test.ant.file" location="${gwt.root}/${project.tail}/build.xml" />
 	<condition property="project.valid">
@@ -185,7 +185,7 @@
 		<element name="tar.elements" implicit="true" optional="true" />
 		<sequential>
 			<taskdef name="tar.cat" classname="com.google.gwt.ant.taskdefs.TarCat" classpath="${ant.gwt.jar}" />
-			<tar.cat destfile="${project.dist}" compression="gzip" longfile="gnu">
+			<tar.cat destfile="@{destfile}" compression="gzip" longfile="gnu">
 				<tar.elements />
 			</tar.cat>
 		</sequential>
