@@ -56,14 +56,14 @@ public class ResourceStoreTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ResourceStore#copyURL(java.lang.String, java.lang.String)}.
+   * {@link com.google.gwt.gears.localserver.client.ResourceStore#copyCapturedURL(java.lang.String, java.lang.String)}.
    */
   public void testCopyURL() {
   }
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ResourceStore#getAllURLHeaders(java.lang.String)}.
+   * {@link com.google.gwt.gears.localserver.client.ResourceStore#getAllCapturedURLHeaders(java.lang.String)}.
    */
   public void testGetAllURLHeaders() {
   }
@@ -91,7 +91,7 @@ public class ResourceStoreTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ResourceStore#getURLHeader(java.lang.String, java.lang.String)}.
+   * {@link com.google.gwt.gears.localserver.client.ResourceStore#getCapturedURLHeaderValue(java.lang.String, java.lang.String)}.
    */
   public void testGetURLHeader() {
   }
@@ -105,21 +105,21 @@ public class ResourceStoreTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ResourceStore#isURLCaptured(java.lang.String)}.
+   * {@link com.google.gwt.gears.localserver.client.ResourceStore#isCapturedURL(java.lang.String)}.
    */
   public void testIsURLCaptured() {
   }
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ResourceStore#removeURL(java.lang.String)}.
+   * {@link com.google.gwt.gears.localserver.client.ResourceStore#removeCapturedURL(java.lang.String)}.
    */
   public void testRemoveURL() {
   }
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ResourceStore#renameURL(java.lang.String, java.lang.String)}.
+   * {@link com.google.gwt.gears.localserver.client.ResourceStore#renameCapturedURL(java.lang.String, java.lang.String)}.
    */
   public void testRenameURL() {
   }

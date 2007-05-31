@@ -140,7 +140,7 @@ public class ResourceStoreDemo implements EntryPoint {
     try {
       for (int i = 0; i < FILES_TO_CAPTURE.length; ++i) {
         String url = FILES_TO_CAPTURE[i];
-        resourceStore.removeURL(url);
+        resourceStore.removeCapturedURL(url);
       }
       statusLabel.setText("Removed URLs from the store");
     } catch (GearsException e) {
