@@ -1,3 +1,3 @@
 #!/bin/sh
 APPDIR=..;
-java -XstartOnFirstThread -cp "$APPDIR/src:$APPDIR/bin:$GWT_HOME/gwt-user.jar:$GWT_HOME/gwt-dev-mac.jar:../../../gwt-google-apis.jar" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.google.gwt.gears.sample.database.DatabaseDemo;
+java -XstartOnFirstThread -cp "$APPDIR/src:$APPDIR/bin:$GWT_HOME/gwt-user.jar:$GWT_HOME/gwt-dev-mac.jar:../../../gwt-google-apis.jar" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.google.gwt.gears.sample.gwtnote.GWTNote;
