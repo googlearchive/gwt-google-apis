@@ -10,8 +10,8 @@
 		<gwt.ant dir="database" />
 	</target>
 
-	<target name="gwt-note" description="Build GWTPad">
-		<gwt.ant dir="gwt-note" />
+	<target name="gwtnote" description="Build GWTNote">
+		<gwt.ant dir="gwtnote" />
 	</target>
 
 	<target name="managedresourcestore" description="Build ManagedResourceStore">
@@ -22,11 +22,7 @@
 		<gwt.ant dir="resourcestore" />
 	</target>
 
-<!--
-	TODO Reenable gwt-note
-	<target name="-do" depends="database, gwt-note, managedresourcestore, resourcestore" description="Run all subprojects" />
--->
-	<target name="-do" depends="database, managedresourcestore, resourcestore" description="Run all subprojects" />
+	<target name="-do" depends="database, gwtnote, managedresourcestore, resourcestore" description="Run all subprojects" />
 
 	<target name="build" description="Builds Google API Library for GWT Samples">
 		<antcall target="-do">
