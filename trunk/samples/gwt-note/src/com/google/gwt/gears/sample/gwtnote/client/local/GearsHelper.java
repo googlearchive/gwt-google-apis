@@ -60,7 +60,6 @@ public class GearsHelper {
   public GearsHelper() {
     try {
       db = new Database();
-      db.open();
       try {
         db.execute(DB_FETCH_NAMES);
       } catch (GearsException ex) {
@@ -69,8 +68,8 @@ public class GearsHelper {
 
       // initialize the localstore and have it update the manifest
       localServer = new LocalServer();
-      store = localServer.createManagedStore("GWTGearsNote");
-      store.setManifestUrl(GWT.getModuleBaseURL() + "manifest");
+      store = localServer.createManagedResourceStore("GWTGearsNote");
+      store.setManifestURL(GWT.getModuleBaseURL() + "manifest");
       store.checkForUpdate();
       Timer t = new Timer() {
         public void run() {

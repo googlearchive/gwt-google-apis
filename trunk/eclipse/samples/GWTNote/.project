@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>gwt-google-apis</name>
+	<name>GWTNote</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,26 +10,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
-			<name>test</name>
-			<type>2</type>
-			<locationURI>GWT_GOOGLE_APIS_ROOT/google-apis/test</locationURI>
-		</link>
-		<link>
 			<name>src</name>
 			<type>2</type>
-			<locationURI>GWT_GOOGLE_APIS_ROOT/google-apis/src</locationURI>
+			<locationURI>GWT_GOOGLE_APIS_ROOT/samples/gwt-note/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
