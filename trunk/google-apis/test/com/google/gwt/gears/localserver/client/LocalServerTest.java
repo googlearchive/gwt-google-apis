@@ -77,7 +77,7 @@ public class LocalServerTest extends GWTTestCase {
     delayTestFinish(5000);
     String requestedURL = getMyURL();
     final ResourceStore rs = ls.createResourceStore(RESOURCE_STORE_NAME);
-    rs.removeURL(requestedURL);
+    rs.removeCapturedURL(requestedURL);
     assertFalse(ls.canServeLocally(requestedURL));
     rs.captureURL(requestedURL, new URLCaptureCallback() {
       public void onCaptureFailure(String url, int captureId) {
