@@ -94,13 +94,13 @@
 
 	<!-- References to files from the GWT build directory -->
 	<property name="ant.gwt.jar" location="${gwt.build.home}/build/lib/ant-gwt.jar" />
-	<property name="gwt.dev.jar" location="${gwt.build.home}/build/staging/gwt-${build.host.platform}-${gwt.version}/gwt-dev-${build.host.platform}.jar" />
+	<property name="gwt.dev.jar" location="${gwt.build.home}/build/staging/gwt-${build.host.platform}-0.0.0/gwt-dev-${build.host.platform}.jar" />
 	<property name="gwt.doctool.jar" location="${gwt.build.home}/build/lib/gwt-doctool.jar" />
 	<property name="gwt.google.apis.jar" location="${gwt.build.lib}/gwt-google-apis.jar"/>
-	<property name="gwt.user.jar" location="${gwt.build.home}/build/staging/gwt-${build.host.platform}-${gwt.version}/gwt-user.jar" />
+	<property name="gwt.user.jar" location="${gwt.build.home}/build/staging/gwt-${build.host.platform}-0.0.0/gwt-user.jar" />
 
 	<!-- JUnit support -->
-	<property name="gwt.dev.staging.jar" location="${gwt.build.staging}/gwt-${build.host.platform}-${gwt.version}/gwt-dev-${build.host.platform}.jar" />
+	<property name="gwt.dev.staging.jar" location="${gwt.build.staging}/gwt-${build.host.platform}-0.0.0/gwt-dev-${build.host.platform}.jar" />
 	<property name="gwt.junit.port" value="8888" />
 	<property name="gwt.junit.testcase.includes" value="**/*Test.class"/>
 	
