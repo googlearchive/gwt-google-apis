@@ -29,14 +29,16 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Sample application demonstrating how to use the 
- * {@link ManagedResourceStore} class. 
+ * Sample application demonstrating how to use the {@link ManagedResourceStore}
+ * class.
  */
 public class ManagedResourceStoreDemo implements EntryPoint {
   private static final String MANAGED_STORE_NAME = "ManagedResourceStoreDemo";
   private static final String MANIFEST_URL = "manifest_v1.json";
+
   private final Button createManagedResourceStoreButton = new Button(
-      "Create Managed Store");
+      "Map URL");
+
   private final Label statusLabel = new Label();
 
   public void onModuleLoad() {
@@ -56,10 +58,13 @@ public class ManagedResourceStoreDemo implements EntryPoint {
     LocalServer localServer;
     try {
       localServer = new LocalServer();
-      if (localServer.openManagedResourceStore(MANAGED_STORE_NAME) != null) {
+      ManagedResourceStore oldManagedResourceStore = localServer.openManagedResourceStore(MANAGED_STORE_NAME); 
+      if (oldManagedResourceStore != null) {
+        oldManagedResourceStore.setManifestURL("");
         localServer.removeManagedResourceStore(MANAGED_STORE_NAME);
+        oldManagedResourceStore = localServer.openManagedResourceStore(MANAGED_STORE_NAME); 
       }
-      
+
       final ManagedResourceStore managedResourceStore = localServer.createManagedResourceStore(MANAGED_STORE_NAME);
       managedResourceStore.setManifestURL(MANIFEST_URL);
       managedResourceStore.checkForUpdate();
@@ -68,8 +73,7 @@ public class ManagedResourceStoreDemo implements EntryPoint {
         public void run() {
           switch (managedResourceStore.getUpdateStatus()) {
             case ManagedResourceStore.UPDATE_OK:
-              statusLabel.setText("Complete, press reload to see the locally served version "
-                  + managedResourceStore.getCurrentVersion());
+              statusLabel.setText("Mapping to " + managedResourceStore.getCurrentVersion() + " was completed.  Please click on the \"Compile/Browse\" button to see the changes.");
               break;
             case ManagedResourceStore.UPDATE_CHECKING:
             case ManagedResourceStore.UPDATE_DOWNLOADING:
