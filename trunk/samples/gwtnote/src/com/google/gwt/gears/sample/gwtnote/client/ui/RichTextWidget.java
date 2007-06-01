@@ -65,8 +65,7 @@ public class RichTextWidget extends Composite {
    * Creates a new widget. This class needs access to certain fields and methods
    * on the application enclosing it.
    * 
-   * @param parent
-   *          the host application
+   * @param parent the host application
    */
   public RichTextWidget(final GWTNote parent) {
     super();
@@ -159,8 +158,7 @@ public class RichTextWidget extends Composite {
    * Registers a ChangeListener to be notified whenever the name of the current
    * note is changed by the user.
    * 
-   * @param cl
-   *          the ChangeListener to register
+   * @param cl the ChangeListener to register
    */
   public void addNameChangeListener(ChangeListener cl) {
     nameListeners.add(cl);
@@ -199,8 +197,7 @@ public class RichTextWidget extends Composite {
   /**
    * Sets the content of the textbox to the specified value.
    * 
-   * @param newText
-   *          the new content of the textbox
+   * @param newText the new content of the textbox
    */
   public void setHTML(String newText) {
     bodyWidget.setHTML(newText);
@@ -209,8 +206,7 @@ public class RichTextWidget extends Composite {
   /**
    * Sets the name of the current data.
    * 
-   * @param newName
-   *          the new name
+   * @param newName the new name
    */
   public void setName(String newName) {
     name.setText(newName);
@@ -219,13 +215,12 @@ public class RichTextWidget extends Composite {
   /**
    * Sets the contents of the name drop-down.
    * 
-   * @param newOptions
-   *          the options to include
+   * @param newOptions the options to include
    */
   public void setNameOptions(String[] newOptions) {
     Arrays.sort(newOptions);
     boolean good = true;
-    if (lastOptions != null) {
+    if (lastOptions != null && newOptions.length == lastOptions.length) {
       for (int i = 0; i < newOptions.length; ++i) {
         if (!newOptions[i].equals(lastOptions[i])) {
           good = false;
@@ -250,8 +245,7 @@ public class RichTextWidget extends Composite {
   /**
    * Sets the status message.
    * 
-   * @param status
-   *          the new status
+   * @param status the new status
    */
   public void setStatus(String status) {
     this.status.setText(status);
@@ -260,8 +254,7 @@ public class RichTextWidget extends Composite {
   /**
    * Sets the value of the version property.
    * 
-   * @param newVersion
-   *          the new version
+   * @param newVersion the new version
    */
   public void setVersion(String newVersion) {
     version = newVersion != null ? newVersion : "1";
