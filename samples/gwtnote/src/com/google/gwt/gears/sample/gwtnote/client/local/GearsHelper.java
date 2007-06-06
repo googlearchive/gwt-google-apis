@@ -36,7 +36,7 @@ public class GearsHelper {
 
   private static final String DB_INSERT = "insert into notes values (?, ?, ?)";
 
-  private static final String DB_FETCH _TEXT = "select * from notes";
+  private static final String DB_FETCH_TEXT = "select * from notes";
 
   private static final String DB_FETCH_NAMES = "select noteid from notes";
 
