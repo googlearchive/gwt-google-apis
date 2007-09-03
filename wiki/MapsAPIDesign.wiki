@@ -3,7 +3,7 @@
 = Introduction =
 
 = Goals =
-  * Create a Java binding for the Google Maps JavaScript API
+  * Create a Java binding for the Google Maps !JavaScript API
   * The Java API should be easy to use and hard to use incorrectly
 = Non-Goals =
   * Completely reinvent the API for Java; the main concepts will remain the same thought the presentation may differ
