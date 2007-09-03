@@ -8,8 +8,8 @@
 = Non-Goals =
   * Completely reinvent the API for Java; the main concepts will remain the same thought the presentation may differ
 = Use Cases =
-The following use cases demonstrate how the Java API will expose the capabilities of the JavaScript API.  For more details on each of the use cases, see  [http://www.google.com/apis/maps/documentation/index.html#Examples Maps API Examples].
-== Create a MapWidget ==
+The following use cases demonstrate how the Java API will expose the capabilities of the !JavaScript API.  For more details on each of the use cases, see  [http://www.google.com/apis/maps/documentation/index.html#Examples Maps API Examples].
+== Create a !MapWidget ==
 {{{
   LatLng mapCenter = new LatLng(33.781466, -84.387519);
   MapWidget map = new MapWidget(mapCenter, 13);
@@ -205,7 +205,6 @@ The following use cases demonstrate how the Java API will expose the capabilitie
   MarkerManger markerManager = new MarkerManager(map);
   markerManger.addMarker(...);
 }}}
-
 
 
 
