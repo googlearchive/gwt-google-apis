@@ -1,10 +1,10 @@
 #summary Maps API Design
 
 = Goals =
-  * Create a Java binding for the Google Maps !JavaScript API
-  * The Java API should be easy to use and hard to use incorrectly
+  * Create a Java binding for the Google Maps !JavaScript API.
+  * The Java API should be easy to learn, easy to use and difficult to use incorrectly.
 = Non-Goals =
-  * Completely reinvent the API for Java; the main concepts will remain the same thought the presentation may differ
+  * Completely reinvent the API for Java; the main concepts will remain the same thought the presentation may differ.
 = Use Cases =
 The following use cases demonstrate how the Java API will expose the capabilities of the !JavaScript API.  For more details on each of the use cases, see  [http://www.google.com/apis/maps/documentation/index.html#Examples Maps API Examples].
 == Create a !MapWidget ==
@@ -203,7 +203,6 @@ The following use cases demonstrate how the Java API will expose the capabilitie
   MarkerManger markerManager = new MarkerManager(map);
   markerManger.addMarker(...);
 }}}
-
 
 
 
