@@ -119,7 +119,7 @@ public class AppController {
   protected void init() {
     ready = false;
     noteData.clear(); // ditto
-    syncFromGears(true);
+    syncFromGears();
     syncToServer(true);
     
     // init the dirty-testing code
@@ -140,7 +140,7 @@ public class AppController {
    *          failed, which causes this method to take additional actions to
    *          prevent data loss when the server comes back online
    */
-  protected void syncFromGears(boolean isInit) {
+  protected void syncFromGears() {
     if (!gears.gearsEnabled()) {
       return;
     }
@@ -154,12 +154,6 @@ public class AppController {
           n = notes[i];
           noteData.put(n.getName(), n);
         }
-      }
-    }
-    if (isInit) {
-      n = (Note) noteData.get("default");
-      if (n != null) {
-        rtw.setHTML(n.getText());
       }
     }
   }
@@ -260,12 +254,6 @@ public class AppController {
     rpc.setNotes(notes, new AsyncCallback() {
       public void onFailure(Throwable caught) {
         // next call is also likely to fail, so don't bother to try
-        if (isInit) {
-          Note def = (Note) noteData.get("default");
-          if (def != null) {
-            rtw.setHeight(def.getText());
-          }
-        }
         ready = true;
       }
 
@@ -280,7 +268,7 @@ public class AppController {
    * Core execution routine. Called once per timer tick.
    */
   protected void update() {
-    syncFromGears(false);
+    syncFromGears();
     if (rpcCntdown == 0) {
       rpcCntdown = TICKS_PER_RPC;
       syncToServer(false);
@@ -312,13 +300,11 @@ public class AppController {
       if (!n.getText().equals(curData)) {
         // if the UI doesn't currently show latest data, update it
         n.setText(curData);
-        gears.updateNote(n);
       }
     } else {
       // if the user has created a new record (unknown name) just store it
       Note n = new Note(curName, "1", curData);
       noteData.put(curName, n);
-      gears.updateNote(n);
     }
 
     // add all the notes to the options list
