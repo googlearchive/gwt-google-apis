@@ -1,33 +1,29 @@
 <project name="dist" default="build" basedir=".">
 	<property name="gwt.root" location=".." />
 	<property name="project.tail" value="distro-source" />
-	<import file="common.ant.xml"/>
+	<import file="common.ant.xml" />
 
 	<target name="tar" depends="filter" description="Packages the tar.gz distro">
 		<mkdir dir="${gwt.build.dist}" />
 		<gwt.tgz.cat destfile="${gwt.build.dist}/${project.distname}.tar.gz">
 			<!-- jars -->
 			<tarfileset file="${gwt.build.lib}/gwt-google-apis.jar" prefix="${project.distname}" />
-	
+
 			<!-- distro-source files -->
 			<tarfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
 				<include name="*" />
 			</tarfileset>
-		
+
 			<!-- doc -->
 			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
 				<include name="doc" />
 				<include name="doc/javadoc/**" />
 			</tarfileset>
-	
+
 			<!-- samples -->
 			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
-<!--				<include name="samples" />-->
 				<include name="samples/*" />
-<!--
-	            <include name="samples/*/launch-scripts/**" />
--->	            
-	            <include name="samples/*/src/**" />
+				<include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
 				<include name="samples/*/www/**" />
 			</tarfileset>
@@ -45,28 +41,24 @@
 			<zipfileset file="${gwt.build.lib}/gwt-google-apis.jar" prefix="${project.distname}" />
 
 			<!-- distro-source files -->
-			<tarfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
+			<zipfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
 				<include name="*" />
-			</tarfileset>
+			</zipfileset>
 
 			<!-- doc -->
 			<zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
 				<include name="doc" />
 				<include name="doc/javadoc/**" />
 			</zipfileset>
-	
+
 			<!-- samples -->
 			<zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
-<!--				<include name="samples" />-->
 				<include name="samples/*" />
-<!--	
-			    <include name="samples/*/launch-scripts/**" />
--->			    
-			    <include name="samples/*/src/**" />
+				<include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
 				<include name="samples/*/www/**" />
 			</zipfileset>
-	
+
 			<zipfileset dir="${gwt.build.out}/samples" prefix="${project.distname}/samples">
 				<include name="*/launch-scripts/*/*" />
 			</zipfileset>
