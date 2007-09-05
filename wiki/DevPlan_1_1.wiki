@@ -2,10 +2,9 @@
 
 = Google API Library for GWT Version 1.1 Development Plan =
 
-=== New API Support ===
-  * [http://www.google.com/apis/maps/ Google Maps API] ([http://code.google.com/p/gwt-google-apis/issues/detail?id=8 #8]) - [http://code.google.com/p/gwt-google-apis/wiki/MapsAPIDesign Design Doc]
-  * [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API] ([http://code.google.com/p/gwt-google-apis/issues/detail?id=9 #9]) - [http://code.google.com/p/gwt-google-apis/wiki/AJAXSearchAPIDesign Design Doc]
-
+=== New API Support (Design Docs) ===
+  * [http://code.google.com/p/gwt-google-apis/wiki/MapsAPIDesign Google Maps API] ([http://code.google.com/p/gwt-google-apis/issues/detail?id=8 #8])
+  * [http://code.google.com/p/gwt-google-apis/wiki/AJAXSearchAPIDesign Google AJAX Search API] ([http://code.google.com/p/gwt-google-apis/issues/detail?id=9 #9])
 
 === Fixes ===
   * Method to test for Gears availability ([http://code.google.com/p/gwt-google-apis/issues/detail?id=1 #1])
@@ -13,5 +12,6 @@
   * Update to latest gears_init.js ([http://code.google.com/p/gwt-google-apis/issues/detail?id=5 #5])
   * Bugs with ResourceStore exception messages ([http://code.google.com/p/gwt-google-apis/issues/detail?id=7 #7])
   * ResourceStore URL capture does not work in GWT's hosted mode browser on Windows ([http://code.google.com/p/gwt-google-apis/issues/detail?id=10 #10])
+
 
 
