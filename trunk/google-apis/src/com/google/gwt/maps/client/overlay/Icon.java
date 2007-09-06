@@ -22,6 +22,9 @@ import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.IconImpl;
 import com.google.gwt.maps.client.util.JsUtil;
 
+/**
+ * 
+ */
 public final class Icon {
 
   public static final Icon DEFAULT_ICON = createPeer(IconImpl.impl.getDefaultIcon());

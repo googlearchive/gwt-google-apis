@@ -38,35 +38,59 @@ import java.util.Map;
  */
 public abstract class EventImpl implements JSWrapper {
 
-  public static abstract class BooleanCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class BooleanCallback extends JSFunction {
     public abstract void callback(boolean value);
   }
 
-  public static abstract class BoundsIntCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class BoundsIntCallback extends JSFunction {
     public abstract void callback(Bounds bounds, int value);
   }
 
-  public static abstract class IntIntCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class IntIntCallback extends JSFunction {
     public abstract void callback(int value1, int value2);
   }
 
-  public static abstract class LatLngCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class LatLngCallback extends JSFunction {
     public abstract void callback(LatLng latlng);
   }
 
-  public static abstract class MapTypeCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class MapTypeCallback extends JSFunction {
     public abstract void callback(MapType mapType);
   }
 
-  public static abstract class OverlayCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class OverlayCallback extends JSFunction {
     public abstract void callback(Overlay overlay);
   }
 
-  public static abstract class OverlayLatLngCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class OverlayLatLngCallback extends JSFunction {
     public abstract void callback(Overlay overlay, LatLng latlng);
   }
 
-  public static abstract class VoidCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class VoidCallback extends JSFunction {
     public abstract void callback();
   }
 

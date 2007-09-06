@@ -19,6 +19,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.RouteImpl;
 
+/**
+ * 
+ */
 public final class Route {
 
   static Route createPeer(JavaScriptObject jsoPeer) {
@@ -31,6 +34,18 @@ public final class Route {
     this.jsoPeer = jsoPeer;
   }
 
+  public Distance getDistance() {
+    return RouteImpl.impl.getDistance(jsoPeer);
+  }
+
+  public Duration getDuration() {
+    return RouteImpl.impl.getDuration(jsoPeer);
+  }
+
+  public LatLng getEndLatLng() {
+    return RouteImpl.impl.getEndLatLng(jsoPeer);
+  }
+
   public int getNumSteps() {
     return RouteImpl.impl.getNumSteps(jsoPeer);
   }
@@ -39,20 +54,8 @@ public final class Route {
     return RouteImpl.impl.getStep(jsoPeer, index);
   }
 
-  public LatLng getEndLatLng() {
-    return RouteImpl.impl.getEndLatLng(jsoPeer);
-  }
-
   public String getSummaryHtml() {
     return RouteImpl.impl.getSummaryHtml(jsoPeer);
-  }
-
-  public Distance getDistance() {
-    return RouteImpl.impl.getDistance(jsoPeer);
-  }
-
-  public Duration getDuration() {
-    return RouteImpl.impl.getDuration(jsoPeer);
   }
 
 }

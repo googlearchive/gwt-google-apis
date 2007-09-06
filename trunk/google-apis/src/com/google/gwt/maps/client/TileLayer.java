@@ -21,6 +21,9 @@ import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.impl.TileLayerImpl;
 
+/**
+ * 
+ */
 public abstract class TileLayer {
 
   private static final TileLayerImpl impl = (TileLayerImpl) GWT.create(TileLayerImpl.class);

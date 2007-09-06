@@ -20,6 +20,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 
+/**
+ * 
+ */
 public interface ControlImpl extends JSFlyweightWrapper {
   
   public static ControlImpl impl = (ControlImpl) GWT.create(ControlImpl.class);

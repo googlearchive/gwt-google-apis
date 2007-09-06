@@ -18,6 +18,9 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.DistanceImpl;
 
+/**
+ * 
+ */
 public final class Distance {
 
   static Distance createPeer(JavaScriptObject jsoPeer) {
@@ -32,11 +35,11 @@ public final class Distance {
 
   // TODO: better method names?
 
-  public int inMeters() {
-    return DistanceImpl.impl.getMeters(jsoPeer);
-  }
-
   public String inLocalizedUnits() {
     return DistanceImpl.impl.getHtml(jsoPeer);
+  }
+
+  public int inMeters() {
+    return DistanceImpl.impl.getMeters(jsoPeer);
   }
 }

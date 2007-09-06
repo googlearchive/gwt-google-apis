@@ -30,6 +30,9 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.Element;
 
+/**
+ * 
+ */
 public interface DirectionsImpl extends JSFlyweightWrapper {
 
   public static DirectionsImpl impl = (DirectionsImpl) GWT.create(DirectionsImpl.class);

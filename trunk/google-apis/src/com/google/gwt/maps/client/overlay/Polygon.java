@@ -23,24 +23,19 @@ import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 import com.google.gwt.maps.client.util.JsUtil;
 
+/**
+ * 
+ */
 public final class Polygon extends ConcreteOverlay {
-
-  public Polygon(LatLng[] points, String strokeColor, int strokeWeight,
-      double strokeOpacity, String fillColor, double fillOpacity) {
-    super(PolygonImpl.impl.construct(JsUtil.toJsList(points), strokeColor,
-        strokeWeight, strokeOpacity, fillColor, fillOpacity));
-  }
 
   public Polygon(LatLng[] points) {
     super(PolygonImpl.impl.construct(JsUtil.toJsList(points)));
   }
 
-  public int getVertextCount() {
-    return PolygonImpl.impl.getVertextCount(this);
-  }
-
-  public LatLng getVertex(int index) {
-    return PolygonImpl.impl.getVertex(this, index);
+  public Polygon(LatLng[] points, String strokeColor, int strokeWeight,
+      double strokeOpacity, String fillColor, double fillOpacity) {
+    super(PolygonImpl.impl.construct(JsUtil.toJsList(points), strokeColor,
+        strokeWeight, strokeOpacity, fillColor, fillOpacity));
   }
 
   public void addRemoveListener(final RemoveListener listener) {
@@ -52,10 +47,18 @@ public final class Polygon extends ConcreteOverlay {
         }));
   }
 
-  public void removeRemoveListener(RemoveListener listener) {
-    EventImpl.impl.removeListeners(listener);
+  public void clearRemoveListeners() {
   }
 
-  public void clearRemoveListeners() {
+  public LatLng getVertex(int index) {
+    return PolygonImpl.impl.getVertex(this, index);
+  }
+
+  public int getVertextCount() {
+    return PolygonImpl.impl.getVertextCount(this);
+  }
+
+  public void removeRemoveListener(RemoveListener listener) {
+    EventImpl.impl.removeListeners(listener);
   }
 }

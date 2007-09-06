@@ -25,15 +25,19 @@ import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 
+/**
+ * 
+ */
 public interface GeocoderImpl extends JSFlyweightWrapper {
 
-  public static GeocoderImpl impl = (GeocoderImpl) GWT.create(GeocoderImpl.class);
-
   // TODO: this is only used in GeocoderImpl. Where should it be placed?
-  public static abstract class LocationsCallback extends JSFunction {
+  /**
+   * 
+   */
+  public abstract static class LocationsCallback extends JSFunction {
     public abstract void callback(Response response);
   }
-  
+
   /**
    * @gwt.beanProperties
    */
@@ -41,15 +45,15 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
     public String getName();
 
     /**
-     * @gwt.fieldName Status
-     */
-    public ResponseStatus getStatus();
-
-    /**
      * @gwt.fieldName Placemark
      * @gwt.typeArgs <com.google.gwt.maps.client.geocode.Placemark>
      */
     public JSList getPlacemarks();
+
+    /**
+     * @gwt.fieldName Status
+     */
+    public ResponseStatus getStatus();
   }
   
   /**
@@ -58,6 +62,8 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
   public static interface ResponseStatus extends JSWrapper {
     public int getCode();
   }
+  
+  public static GeocoderImpl impl = (GeocoderImpl) GWT.create(GeocoderImpl.class);
 
   /**
    * @gwt.constructor $wnd.GClientGeocoder
@@ -69,23 +75,23 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject construct(GeocodeCache cache);
 
+  public String getBaseCountryCode(JavaScriptObject jsoPeer);
+
+  public GeocodeCache getCache(JavaScriptObject jsoPeer);
+
   public void getLatLng(JavaScriptObject jsoPeer, String address,
       LatLngCallback callback);
 
   public void getLocations(JavaScriptObject jsoPeer, String address,
       LocationsCallback callback);
 
-  public GeocodeCache getCache(JavaScriptObject jsoPeer);
+  public LatLngBounds getViewport(JavaScriptObject jsoPeer);
+
+  public void reset(JavaScriptObject jsoPeer);
+
+  public void setBaseCountryCode(JavaScriptObject jsoPeer, String countryCode);
 
   public void setCache(JavaScriptObject jsoPeer, GeocodeCache cache);
 
   public void setViewport(JavaScriptObject jsoPeer, LatLngBounds bounds);
-
-  public LatLngBounds getViewport(JavaScriptObject jsoPeer);
-
-  public void setBaseCountryCode(JavaScriptObject jsoPeer, String countryCode);
-
-  public String getBaseCountryCode(JavaScriptObject jsoPeer);
-
-  public void reset(JavaScriptObject jsoPeer);
 }

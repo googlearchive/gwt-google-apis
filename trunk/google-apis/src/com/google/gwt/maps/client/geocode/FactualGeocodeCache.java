@@ -18,6 +18,9 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.maps.client.geocode.GeocodeCache.ConcreteGeocodeCache;
 import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
 
+/**
+ * 
+ */
 public final class FactualGeocodeCache extends ConcreteGeocodeCache {
   
   public FactualGeocodeCache() {

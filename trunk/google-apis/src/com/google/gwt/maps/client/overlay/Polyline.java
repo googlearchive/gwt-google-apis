@@ -24,6 +24,9 @@ import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 import com.google.gwt.maps.client.util.JsUtil;
 
+/**
+ * 
+ */
 public final class Polyline extends ConcreteOverlay {
   
   private static Polyline createPeer(JavaScriptObject jsoPeer) {
@@ -53,14 +56,6 @@ public final class Polyline extends ConcreteOverlay {
 
   // TODO: "Factory method"?
 
-  public int getVertexCount() {
-    return PolylineImpl.impl.getVertextCount(this);
-  }
-
-  public LatLng getVertex(int index) {
-    return PolylineImpl.impl.getVertex(this, index);
-  }
-
   public void addRemoveListener(final RemoveListener listener) {
     EventImpl.impl.associate(listener, EventImpl.impl.addListenerVoid(
         super.jsoPeer, "remove", new VoidCallback() {
@@ -70,10 +65,18 @@ public final class Polyline extends ConcreteOverlay {
         }));
   }
 
-  public void removeRemoveListener(RemoveListener listener) {
-    EventImpl.impl.removeListeners(listener);
+  public void clearRemoveListeners() {
   }
 
-  public void clearRemoveListeners() {
+  public LatLng getVertex(int index) {
+    return PolylineImpl.impl.getVertex(this, index);
+  }
+
+  public int getVertexCount() {
+    return PolylineImpl.impl.getVertextCount(this);
+  }
+
+  public void removeRemoveListener(RemoveListener listener) {
+    EventImpl.impl.removeListeners(listener);
   }
 }

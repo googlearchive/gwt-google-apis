@@ -17,6 +17,9 @@ package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.overlay.Marker;
 
+/**
+ * 
+ */
 public interface MarkerClickListener {
 
   public void onClick(Marker sender);

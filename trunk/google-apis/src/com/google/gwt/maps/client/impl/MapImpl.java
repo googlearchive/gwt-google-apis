@@ -30,6 +30,9 @@ import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Element;
 
+/**
+ * 
+ */
 public interface MapImpl extends JSFlyweightWrapper {
 
   public static final MapImpl impl = (MapImpl) GWT.create(MapImpl.class);

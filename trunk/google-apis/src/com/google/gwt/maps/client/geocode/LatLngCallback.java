@@ -17,12 +17,15 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.maps.client.geom.LatLng;
 
+/**
+ * 
+ */
 public interface LatLngCallback {
   
   
-  // TODO: only call with non-null
-  public void onSuccess(LatLng point);
-
   // TODO: better names for interface and methods. Called when geocoder doesn't find a point
   public void onFailure();
+
+  // TODO: only call with non-null
+  public void onSuccess(LatLng point);
 }

@@ -18,6 +18,9 @@ package com.google.gwt.maps.client.geom;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.ProjectionImpl;
 
+/**
+ * 
+ */
 public final class MercatorProjection extends Projection {
 
   public MercatorProjection(int numZoomLevels) {
@@ -29,6 +32,14 @@ public final class MercatorProjection extends Projection {
     super(jsoPeer);
   }
 
+  public int getWrapWidth(int zoomLevel) {
+    return ProjectionImpl.impl.getWrapWidth(jsoPeer, zoomLevel);
+  }
+
+  public boolean tileCheckRange(Point point, int zoomLevel, Size tileSize) {
+    return ProjectionImpl.impl.tileCheckRange(jsoPeer, point, zoomLevel, tileSize);
+  }
+
   protected Point convertLatLngToPixel(LatLng latlng, int zoomLevel) {
     return ProjectionImpl.impl.fromLatLngToPixel(jsoPeer, latlng, zoomLevel);
   }
@@ -36,14 +47,6 @@ public final class MercatorProjection extends Projection {
   protected LatLng convertPixelToLatLng(Point point, int zoomLevel,
       boolean nofix) {
     return ProjectionImpl.impl.fromPixelToLatLng(jsoPeer, point, zoomLevel, nofix);
-  }
-
-  public int getWrapWidth(int zoomLevel) {
-    return ProjectionImpl.impl.getWrapWidth(jsoPeer, zoomLevel);
-  }
-
-  public boolean tileCheckRange(Point point, int zoomLevel, Size tileSize) {
-    return ProjectionImpl.impl.tileCheckRange(jsoPeer, point, zoomLevel, tileSize);
   }
 
 }

@@ -17,12 +17,15 @@ package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.MapWidget;
 
+/**
+ * 
+ */
 public interface MapMoveListener {
 
   public void onMove(MapWidget sender);
 
-  public void onMoveStart(MapWidget sender);
-
   public void onMoveEnd(MapWidget sender);
+
+  public void onMoveStart(MapWidget sender);
 
 }

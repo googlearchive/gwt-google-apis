@@ -23,6 +23,9 @@ import com.google.gwt.maps.client.overlay.Icon;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
 
+/**
+ * 
+ */
 public interface MarkerImpl extends JSFlyweightWrapper {
 
   public static final MarkerImpl impl = (MarkerImpl) GWT.create(MarkerImpl.class);

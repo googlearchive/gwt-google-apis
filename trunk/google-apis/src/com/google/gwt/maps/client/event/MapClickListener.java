@@ -34,6 +34,9 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Overlay;
 
+/**
+ * 
+ */
 public interface MapClickListener {
 
   public void onClick(MapWidget sender, Overlay overlay, LatLng point);

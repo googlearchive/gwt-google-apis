@@ -26,8 +26,8 @@ public interface DistanceImpl extends JSFlyweightWrapper {
 
   DistanceImpl impl = (DistanceImpl) GWT.create(DistanceImpl.class);
 
-  public int getMeters(JavaScriptObject jsoPeer);
-
   public String getHtml(JavaScriptObject jsoPeer);
+
+  public int getMeters(JavaScriptObject jsoPeer);
 
 }

@@ -23,6 +23,9 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.user.client.Element;
 
+/**
+ * 
+ */
 public interface InfoWindowImpl extends JSFlyweightWrapper {
 
   public static final InfoWindowImpl impl = (InfoWindowImpl) GWT.create(InfoWindowImpl.class);

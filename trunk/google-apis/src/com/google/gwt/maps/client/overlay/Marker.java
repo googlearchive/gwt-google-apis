@@ -29,6 +29,9 @@ import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 
+/**
+ * 
+ */
 public final class Marker extends ConcreteOverlay {
 
   private static final EventImpl EVENT_IMPL = EventImpl.impl;

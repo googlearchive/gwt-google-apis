@@ -15,11 +15,13 @@
  */
 package com.google.gwt.maps.client.geocode;
 
-
+/**
+ * 
+ */
 public interface DirectionsCallback {
 
-  public void onSuccess(DirectionResults result);
-
   public void onFailure(int statusCode);
+
+  public void onSuccess(DirectionResults result);
 
 }

@@ -15,8 +15,6 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.maps.client.MapType;
-import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.impl.TileLayerOverlayImpl;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
@@ -24,9 +22,10 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 /**
  * A TileLayerOverlay augments the map with a {@link TileLayer}. It implements
  * the {@link Overlay} interface and is added to the map using the
- * {@link MapWidget#addOverlay(Overlay)} method. The TileLayer is presented on top of
- * the existing map imagery. To replace the imagery instead, put the TileLayer
- * inside a custom {@link MapType}.
+ * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)} method. The
+ * TileLayer is presented on top of the existing map imagery. To replace the
+ * imagery instead, put the TileLayer inside a custom
+ * {@link com.google.gwt.maps.client.MapType MapType}.
  */
 public class TileLayerOverlay extends ConcreteOverlay {
 

@@ -23,19 +23,22 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 
+/**
+ * 
+ */
 public abstract class OverlayImpl implements JSFlyweightWrapper {
 
   public static final OverlayImpl impl = (OverlayImpl) GWT.create(OverlayImpl.class);
+
+  public native void bindConcreteOverlay(JavaScriptObject jsoPeer,
+      ConcreteOverlay overlay) /*-{
+     jsoPeer.__gwtPeer = overlay;
+   }-*/;
 
   /**
    * @gwt.binding
    */
   public abstract void bindOverlay(JavaScriptObject jsoPeer, Overlay overlay);
-
-  public native void bindConcreteOverlay(JavaScriptObject jsoPeer,
-      ConcreteOverlay overlay) /*-{
-    jsoPeer.__gwtPeer = overlay;
-  }-*/;
 
   /**
    * @gwt.constructor $wnd.GGeoXml
@@ -45,7 +48,7 @@ public abstract class OverlayImpl implements JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GGroundOverlay
    */
-  public abstract  JavaScriptObject constructGroundOverlay(String imageUrl,
+  public abstract JavaScriptObject constructGroundOverlay(String imageUrl,
       LatLngBounds bounds);
 
   /**

@@ -33,16 +33,16 @@ public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject construct();
 
-  public void setSelectedTab(JavaScriptObject jsoPeer, int tab);
+  public void setMapType(JavaScriptObject jsoPeer, MapType mapType);
 
   public void setMaxWidth(JavaScriptObject jsoPeer, int maxWidth);
 
-  public void setOnOpenFn(JavaScriptObject jsoPeer, VoidCallback openFunction);
-
   public void setOnCloseFn(JavaScriptObject jsoPeer, VoidCallback closeFunction);
 
-  public void setZoomLevel(JavaScriptObject jsoPeer, int zoomLevel);
+  public void setOnOpenFn(JavaScriptObject jsoPeer, VoidCallback openFunction);
 
-  public void setMapType(JavaScriptObject jsoPeer, MapType mapType);
+  public void setSelectedTab(JavaScriptObject jsoPeer, int tab);
+
+  public void setZoomLevel(JavaScriptObject jsoPeer, int zoomLevel);
 
 }

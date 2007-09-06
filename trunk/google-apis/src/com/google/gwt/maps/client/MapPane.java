@@ -19,8 +19,14 @@ import com.google.gwt.maps.client.impl.MapImpl;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
+/**
+ * 
+ */
 public final class MapPane extends AbsolutePanel {
 
+  /**
+   * 
+   */
   public static class MapPaneType {
     private final int value;
 

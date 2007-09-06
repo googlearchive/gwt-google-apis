@@ -19,6 +19,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.SizeImpl;
 
+/**
+ * 
+ */
 public final class Size {
 
   private static final SizeImpl impl = (SizeImpl) GWT.create(SizeImpl.class);

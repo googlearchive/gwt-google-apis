@@ -15,13 +15,16 @@
  */
 package com.google.gwt.maps.client.geocode;
 
+/**
+ * 
+ */
 public interface LocationCallback {
 
   // TODO: docs are terrible
 
   // TODO: better name
 
-  public void onSuccess(Placemark[] locations);
-
   public void onFailure(int statusCode);
+
+  public void onSuccess(Placemark[] locations);
 }

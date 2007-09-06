@@ -24,7 +24,7 @@
 		<link>
 			<name>src</name>
 			<type>2</type>
-			<location>/Users/mmendez/projects/gwt-google-apis/samples/maps/src</location>
+			<locationURI>GWT_GOOGLE_APIS_ROOT/samples/maps/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

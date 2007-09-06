@@ -21,7 +21,15 @@ import com.google.gwt.maps.client.CopyrightCollection;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.geom.Point;
 
+/**
+ * 
+ */
 public interface TileLayerImpl extends JSFlyweightWrapper {
+
+  /**
+   * @gwt.binding
+   */
+  public void bind(JavaScriptObject jsoPeer, TileLayer tileLayer);
 
   /**
    * @gwt.constructor $wnd.GTileLayer
@@ -34,19 +42,14 @@ public interface TileLayerImpl extends JSFlyweightWrapper {
   public JavaScriptObject construct(CopyrightCollection copyrights,
       int minResolution, int maxResolution);
 
-  /**
-   * @gwt.binding
-   */
-  public void bind(JavaScriptObject jsoPeer, TileLayer tileLayer);
+  public int getMaxResolution(TileLayer jsoPeer);
 
   public int getMinResolution(TileLayer jsoPeer);
 
-  public int getMaxResolution(TileLayer jsoPeer);
+  public double getOpacity(TileLayer jsoPeer);
 
   public String getTileUrl(TileLayer jsoPeer, Point tile, int zoomLevel);
 
   public boolean isPng(TileLayer jsoPeer);
-
-  public double getOpacity(TileLayer jsoPeer);
 
 }

@@ -19,24 +19,19 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.StepImpl;
 
+/**
+ * 
+ */
 public final class Step {
-
-  private final JavaScriptObject jsoPeer;
 
   static Step createPeer(JavaScriptObject jsoPeer) {
     return new Step(jsoPeer);
   }
 
+  private final JavaScriptObject jsoPeer;
+
   private Step(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
-  }
-
-  public LatLng getLatLng() {
-    return StepImpl.impl.getLatLng(jsoPeer);
-  }
-
-  public int getPolylineIndex() {
-    return StepImpl.impl.getPolylineIndex(jsoPeer);
   }
 
   public String getDescriptionHtml() {
@@ -49,6 +44,14 @@ public final class Step {
 
   public Duration getDuration() {
     return StepImpl.impl.getDuration(jsoPeer);
+  }
+
+  public LatLng getLatLng() {
+    return StepImpl.impl.getLatLng(jsoPeer);
+  }
+
+  public int getPolylineIndex() {
+    return StepImpl.impl.getPolylineIndex(jsoPeer);
   }
 
 }

@@ -20,8 +20,6 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.MapPane.MapPaneType;
 import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlPosition;
-import com.google.gwt.maps.client.control.MapTypeControl;
-import com.google.gwt.maps.client.control.Control.CustomControl;
 import com.google.gwt.maps.client.event.DragListener;
 import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.event.MapClickListener;
@@ -51,8 +49,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import java.util.Map;
-
+/**
+ * A widget that presents a viewable Google Map to a user. 
+ */
 public final class MapWidget extends Composite {
 
   private static class MapPanel extends FlowPanel {

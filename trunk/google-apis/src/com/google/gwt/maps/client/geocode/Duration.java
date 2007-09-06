@@ -18,6 +18,9 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.DurationImpl;
 
+/**
+ * 
+ */
 public final class Duration {
 
   static Duration createPeer(JavaScriptObject jsoPeer) {
@@ -30,12 +33,12 @@ public final class Duration {
     this.jsoPeer = jsoPeer;
   }
 
-  public int inSeconds() {
-    return DurationImpl.impl.getSeconds(jsoPeer);
-  }
-
   public String inLocalizedUnits() {
     return DurationImpl.impl.getHtml(jsoPeer);
+  }
+
+  public int inSeconds() {
+    return DurationImpl.impl.getSeconds(jsoPeer);
   }
 
 }

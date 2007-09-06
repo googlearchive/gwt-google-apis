@@ -29,11 +29,11 @@ public interface PointImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject construct(double x, double y);
 
+  public boolean equals(JavaScriptObject jso, Point other);
+
   public int getX(JavaScriptObject jso);
 
   public int getY(JavaScriptObject jso);
-
-  public boolean equals(JavaScriptObject jso, Point other);
 
   public String toString(JavaScriptObject jso);
 

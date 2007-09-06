@@ -16,7 +16,6 @@
 package com.google.gwt.maps.client.geom;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.event.MarkerListener;
 import com.google.gwt.maps.client.impl.BoundsImpl;
 import com.google.gwt.maps.client.util.JsUtil;
 
@@ -26,7 +25,7 @@ import com.google.gwt.maps.client.util.JsUtil;
  * TODO: This GBounds object appears to be a remnant from an older version of
  * the Google Maps API. In most places it has been replaced by the geographical
  * version GLatLngBounds. It is currently only used in
- * {@link MarkerListener#onChanged(com.google.gwt.maps.client.overlay.MarkerManager, Bounds, int)}.
+ * {@link com.google.gwt.maps.client.event.MarkerListener#onChanged(com.google.gwt.maps.client.overlay.MarkerManager, Bounds, int)}.
  */
 public final class Bounds {
 
@@ -36,44 +35,16 @@ public final class Bounds {
 
   private final JavaScriptObject jsoPeer;
 
-  public Bounds(Point[] points) {
-    jsoPeer = BoundsImpl.impl.construct(JsUtil.toJsList(points));
-  }
-
   public Bounds(int minX, int minY, int maxX, int maxY) {
     jsoPeer = BoundsImpl.impl.construct(minX, minY, maxX, maxY);
   }
 
+  public Bounds(Point[] points) {
+    jsoPeer = BoundsImpl.impl.construct(JsUtil.toJsList(points));
+  }
+
   private Bounds(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
-  }
-
-  public int getMinX() {
-    return BoundsImpl.impl.getMinX(jsoPeer);
-  }
-
-  public int getMaxX() {
-    return BoundsImpl.impl.getMaxX(jsoPeer);
-  }
-
-  public int getMinY() {
-    return BoundsImpl.impl.getMinY(jsoPeer);
-  }
-
-  public int getMaxY() {
-    return BoundsImpl.impl.getMaxY(jsoPeer);
-  }
-
-  public String toString() {
-    return BoundsImpl.impl.toString(jsoPeer);
-  }
-
-  public Point getUpperLeft() {
-    return BoundsImpl.impl.min(jsoPeer);
-  }
-
-  public Point getLowerRight() {
-    return BoundsImpl.impl.max(jsoPeer);
   }
 
   public boolean containsBounds(Bounds other) {
@@ -86,7 +57,35 @@ public final class Bounds {
     return bounds;
   }
 
+  public Point getLowerRight() {
+    return BoundsImpl.impl.max(jsoPeer);
+  }
+
+  public int getMaxX() {
+    return BoundsImpl.impl.getMaxX(jsoPeer);
+  }
+
+  public int getMaxY() {
+    return BoundsImpl.impl.getMaxY(jsoPeer);
+  }
+
+  public int getMinX() {
+    return BoundsImpl.impl.getMinX(jsoPeer);
+  }
+
+  public int getMinY() {
+    return BoundsImpl.impl.getMinY(jsoPeer);
+  }
+
+  public Point getUpperLeft() {
+    return BoundsImpl.impl.min(jsoPeer);
+  }
+
   public Bounds intersection(Bounds other) {
     return BoundsImpl.impl.intersection(jsoPeer, other);
+  }
+
+  public String toString() {
+    return BoundsImpl.impl.toString(jsoPeer);
   }
 }

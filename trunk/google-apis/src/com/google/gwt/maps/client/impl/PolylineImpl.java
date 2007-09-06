@@ -22,6 +22,9 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Polyline;
 
+/**
+ * 
+ */
 public interface PolylineImpl extends JSFlyweightWrapper {
 
   public static final PolylineImpl impl = (PolylineImpl) GWT.create(PolylineImpl.class);
@@ -29,8 +32,12 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList /* LatLng[] */points, String color,
-      int weight, double opacity);
+  public JavaScriptObject construct(JSList /* LatLng[] */points);
+
+  /**
+   * @gwt.constructor $wnd.GPolyline
+   */
+  public JavaScriptObject construct(JSList /* LatLng[] */points, String color);
 
   /**
    * @gwt.constructor $wnd.GPolyline
@@ -41,14 +48,10 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList /* LatLng[] */points, String color);
-
-  /**
-   * @gwt.constructor $wnd.GPolyline
-   */
-  public JavaScriptObject construct(JSList /* LatLng[] */points);
-
-  public int getVertextCount(Polyline polyline);
+  public JavaScriptObject construct(JSList /* LatLng[] */points, String color,
+      int weight, double opacity);
 
   public LatLng getVertex(Polyline polyline, int index);
+
+  public int getVertextCount(Polyline polyline);
 }

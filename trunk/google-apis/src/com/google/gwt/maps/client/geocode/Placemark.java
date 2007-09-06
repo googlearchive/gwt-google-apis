@@ -19,7 +19,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.LatLng;
 
-// TODO: exposes the right information although the names might be off.
+/**
+ * TODO: exposes the right information although the names might be off.
+ */
 public final class Placemark {
   
   // TODO: DELETE ME! (needs to function w/o)
