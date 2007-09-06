@@ -29,11 +29,24 @@
       <h1>Google Web Toolkit Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+		    <li><a href="#Release_Notes_1_0_0">1.0.0</a></li>
       </ul>
-
       <hr/>
       <a name="Release_Notes_Current"></a>
-      <h2>Release Notes for @GWT_VERSION@</h2>
+     <h2>Release Notes for @GWT_VERSION@</h2>
+      <p>
+		Added support for the <a href="http://code.google.com/apis/ajaxsearch/">Google AJAX Search API</a> and the <a href="http://www.google.com/apis/maps/">Google Maps API</a>.
+      </p>
+	  <h3>Known Issues</h3>
+	  <ul>
+	    <li>The MapsSample fails to load the image tiles on Safari Mac OSX.</li>
+	    <li>The MapsSample cannot navigate between the different use cases that it wants to demonstrate on Safari Windows.</li>
+	    <li>The Maps API requires strict HTML mode but not all of the GWT widgets will work correctly in this mode. 
+	  </ul>
+	  
+	  <hr/>      
+      <a name="Release_Notes_1_0_0"></a>
+      <h2>Release Notes for 1.0.0</h2>
       <p>
 		Initial release
       </p>
