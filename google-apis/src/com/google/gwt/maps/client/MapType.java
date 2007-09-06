@@ -19,13 +19,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.jsio.client.impl.Extractor;
-import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Projection;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.MapTypeImpl;
-import com.google.gwt.maps.client.overlay.TileLayerOverlay;
 import com.google.gwt.maps.client.util.JsUtil;
 
 /**
@@ -36,12 +34,13 @@ import com.google.gwt.maps.client.util.JsUtil;
  * {@link MapType#SATELLITE_MAP}, and {@link MapType#HYBRID_MAP}.
  * 
  * You can create instances of this class to define custom map types. In order
- * to show them on the map, use the {@link MapWidget#addMapType(MapType)} method. You
- * can use {@link TileLayerOverlay} to add to (rather than entirely replace) the
- * map's tile layers.
+ * to show them on the map, use the {@link MapWidget#addMapType(MapType)}
+ * method. You can use
+ * {@link com.google.gwt.maps.client.overlay.TileLayerOverlay TileLayerOverlay}
+ * to add to (rather than entirely replace) the map's tile layers.
  * 
  * @see MapWidget#addMapType(MapType)
- * @see TileLayerOverlay
+ * @see com.google.gwt.maps.client.overlay.TileLayerOverlay
  */
 public final class MapType {
 
@@ -195,7 +194,8 @@ public final class MapType {
   /**
    * Returns the translated, human-readable string name of the map type.
    * 
-   * The name is used as the button label in the {@link MapTypeControl}.
+   * The name is used as the button label in the
+   * {@link com.google.gwt.maps.client.control.MapTypeControl MapTypeControl}.
    * 
    * @param shortName true to return the abbreviated name
    * @return the name of the map type

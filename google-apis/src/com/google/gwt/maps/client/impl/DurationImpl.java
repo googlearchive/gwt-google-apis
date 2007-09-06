@@ -26,8 +26,8 @@ public interface DurationImpl extends JSFlyweightWrapper {
 
   static final DurationImpl impl = (DurationImpl) GWT.create(DurationImpl.class);
 
-  public int getSeconds(JavaScriptObject jsoPeer);
-
   public String getHtml(JavaScriptObject jsoPeer);
+
+  public int getSeconds(JavaScriptObject jsoPeer);
 
 }

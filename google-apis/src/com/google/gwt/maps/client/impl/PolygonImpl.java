@@ -22,9 +22,17 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Polygon;
 
+/**
+ * 
+ */
 public interface PolygonImpl extends JSFlyweightWrapper {
 
   public static final PolygonImpl impl = (PolygonImpl) GWT.create(PolygonImpl.class);
+
+  /**
+   * @gwt.constructor $wnd.GPolygon
+   */
+  public JavaScriptObject construct(JSList /* LatLng[] */points);
 
   /**
    * @gwt.constructor $wnd.GPolygon
@@ -33,12 +41,7 @@ public interface PolygonImpl extends JSFlyweightWrapper {
       String strokeColor, int strokeWeight, double strokeOpacity,
       String fillColor, double fillOpacity);
 
-  /**
-   * @gwt.constructor $wnd.GPolygon
-   */
-  public JavaScriptObject construct(JSList /* LatLng[] */points);
+  public LatLng getVertex(Polygon polygon, int index);
 
   public int getVertextCount(Polygon polygon);
-
-  public LatLng getVertex(Polygon polygon, int index);
 }

@@ -18,6 +18,9 @@ package com.google.gwt.maps.client.overlay;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.MarkerManagerOptionsImpl;
 
+/**
+ * 
+ */
 public final class MarkerManagerOptions {
 
   private final JavaScriptObject jsoPeer;

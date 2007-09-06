@@ -20,7 +20,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 
-
+/**
+ * 
+ */
 public interface CopyrightImpl extends JSFlyweightWrapper {
 
   public static final CopyrightImpl impl = (CopyrightImpl) GWT.create(CopyrightImpl.class);
@@ -28,13 +30,14 @@ public interface CopyrightImpl extends JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GCopyright
    */
-  public JavaScriptObject construct(int id, LatLngBounds bounds, int minZoomLevel, String text);
+  public JavaScriptObject construct(int id, LatLngBounds bounds,
+      int minZoomLevel, String text);
+
+  public LatLngBounds getBounds(JavaScriptObject jsoPeer);
 
   public int getId(JavaScriptObject jsoPeer);
 
   public int getMinZoomLevel(JavaScriptObject jsoPeer);
-
-  public LatLngBounds getBounds(JavaScriptObject jsoPeer);
 
   public String getText(JavaScriptObject jsoPeer);
 

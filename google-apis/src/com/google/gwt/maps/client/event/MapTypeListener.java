@@ -27,8 +27,8 @@ public interface MapTypeListener {
 
   public void onMapTypeAdded(MapWidget sender, MapType type);
 
-  public void onMapTypeRemoved(MapWidget sender, MapType type);
-
   public void onMapTypeChanged(MapWidget sender);
+
+  public void onMapTypeRemoved(MapWidget sender, MapType type);
 
 }

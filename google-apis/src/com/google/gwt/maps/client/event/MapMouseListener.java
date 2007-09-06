@@ -18,12 +18,15 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 
+/**
+ * 
+ */
 public interface MapMouseListener {
 
-  public void onMouseOver(MapWidget sender, LatLng latlng);
+  public void onMouseMove(MapWidget sender, LatLng latlng);
 
   public void onMouseOut(MapWidget sender, LatLng latlng);
 
-  public void onMouseMove(MapWidget sender, LatLng latlng);
+  public void onMouseOver(MapWidget sender, LatLng latlng);
 
 }

@@ -24,8 +24,8 @@ import com.google.gwt.maps.client.MapWidget;
  */
 public interface InfoWindowListener {
 
-  public void onInfoWindowOpened(MapWidget sender);
-
   public void onInfoWindowClosed(MapWidget sender);
+
+  public void onInfoWindowOpened(MapWidget sender);
 
 }

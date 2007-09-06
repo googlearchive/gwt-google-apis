@@ -43,12 +43,12 @@ public interface GeocodeCachePrototype extends JSWrapper {
   public void put(GeocodeCache instance, String address, JavaScriptObject reply);
 
   /**
-   * @gwt.imported toCanonical.call
-   */
-  public String toCanonical(GeocodeCache instance, String address);
-
-  /**
    * @gwt.imported reset.call
    */
   public void reset(GeocodeCache instance);
+
+  /**
+   * @gwt.imported toCanonical.call
+   */
+  public String toCanonical(GeocodeCache instance, String address);
 }

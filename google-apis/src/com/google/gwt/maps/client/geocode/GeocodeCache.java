@@ -19,6 +19,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
 import com.google.gwt.maps.client.impl.GeocodeCachePrototype;
 
+/**
+ * 
+ */
 public class GeocodeCache {
 
   // TODO: this class is both functional and a "base" class the user should be

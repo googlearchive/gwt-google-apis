@@ -28,6 +28,9 @@ import com.google.gwt.maps.client.util.JsUtil;
 
 // TODO: should status codes be refactored out into their own class?
 
+/**
+ * 
+ */
 public final class Directions {
 
   public static void load(String query, DirectionQueryOptions options) {

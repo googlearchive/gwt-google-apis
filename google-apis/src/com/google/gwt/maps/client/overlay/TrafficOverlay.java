@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.impl.TrafficOverlayImpl;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 
@@ -35,7 +34,8 @@ public final class TrafficOverlay extends ConcreteOverlay {
   /**
    * Creates a new traffic overlay.
    * 
-   * Use {@link MapWidget#addOverlay(Overlay)} to add this overlay to the map.
+   * Use {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)} to add
+   * this overlay to the map.
    */
   public TrafficOverlay() {
     super(TrafficOverlayImpl.impl.construct());

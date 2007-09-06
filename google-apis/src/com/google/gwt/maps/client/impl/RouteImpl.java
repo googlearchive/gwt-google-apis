@@ -23,20 +23,23 @@ import com.google.gwt.maps.client.geocode.Duration;
 import com.google.gwt.maps.client.geocode.Step;
 import com.google.gwt.maps.client.geom.LatLng;
 
+/**
+ * 
+ */
 public interface RouteImpl extends JSFlyweightWrapper {
 
   RouteImpl impl = (RouteImpl) GWT.create(RouteImpl.class);
+
+  public Distance getDistance(JavaScriptObject jsoPeer);
+
+  public Duration getDuration(JavaScriptObject jsoPeer);
+
+  public LatLng getEndLatLng(JavaScriptObject jsoPeer);
 
   public int getNumSteps(JavaScriptObject jsoPeer);
 
   public Step getStep(JavaScriptObject jsoPeer, int index);
 
-  public LatLng getEndLatLng(JavaScriptObject jsoPeer);
-
   public String getSummaryHtml(JavaScriptObject jsoPeer);
-
-  public Distance getDistance(JavaScriptObject jsoPeer);
-
-  public Duration getDuration(JavaScriptObject jsoPeer);
 
 }

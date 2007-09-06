@@ -17,6 +17,9 @@ package com.google.gwt.maps.client.control;
 
 import com.google.gwt.maps.client.impl.ControlImpl;
 
+/**
+ * 
+ */
 public final class LargeMapControl extends Control {
 
   public LargeMapControl() {

@@ -19,8 +19,14 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.ControlPositionImpl;
 
+/**
+ * 
+ */
 public final class ControlPosition {
 
+  /**
+   * 
+   */
   public static class ControlAnchor {
     private final int value;
 

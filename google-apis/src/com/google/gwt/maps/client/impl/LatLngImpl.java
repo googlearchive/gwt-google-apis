@@ -19,6 +19,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geom.LatLng;
 
+/**
+ * 
+ */
 public interface LatLngImpl extends JSFlyweightWrapper {
 
   /**

@@ -27,7 +27,10 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class Control {
 
-  public static abstract class CustomControl extends Control {
+  /**
+   * 
+   */
+  public abstract static class CustomControl extends Control {
 
     private final ControlPosition defaultPosition;
 

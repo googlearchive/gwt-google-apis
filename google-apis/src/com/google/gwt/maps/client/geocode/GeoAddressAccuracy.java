@@ -15,6 +15,9 @@
  */
 package com.google.gwt.maps.client.geocode;
 
+/**
+ * 
+ */
 public final class GeoAddressAccuracy {
 
   public static final int UNKNOWN_LOCATION = 0;

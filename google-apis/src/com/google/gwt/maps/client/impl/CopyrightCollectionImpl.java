@@ -22,9 +22,14 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.Copyright;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 
+/**
+ * 
+ */
 public interface CopyrightCollectionImpl extends JSFlyweightWrapper {
 
   public static final CopyrightCollectionImpl impl = (CopyrightCollectionImpl) GWT.create(CopyrightCollectionImpl.class);
+
+  public void addCopyright(JavaScriptObject jsoPeer, Copyright copyright);
 
   /**
    * @gwt.constructor $wnd.GCopyrightCollection
@@ -35,8 +40,6 @@ public interface CopyrightCollectionImpl extends JSFlyweightWrapper {
    * @gwt.constructor $wnd.GCopyrightCollection
    */
   public JavaScriptObject construct(String prefix);
-
-  public void addCopyright(JavaScriptObject jsoPeer, Copyright copyright);
 
   public JavaScriptObject getCopyrightNotice(JavaScriptObject jsoPeer,
       LatLngBounds bounds, int zoomLevel);

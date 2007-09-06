@@ -29,11 +29,11 @@ public interface SizeImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject construct(int width, int height);
 
-  public int getWidth(JavaScriptObject jso);
+  public boolean equals(JavaScriptObject jso, Size other);
 
   public int getHeight(JavaScriptObject jso);
 
-  public boolean equals(JavaScriptObject jso, Size other);
+  public int getWidth(JavaScriptObject jso);
 
   public String toString(JavaScriptObject jso);
 

@@ -23,9 +23,23 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerManagerOptions;
 
+/**
+ * 
+ */
 public interface MarkerManagerImpl extends JSFlyweightWrapper {
 
   public static final MarkerManagerImpl impl = (MarkerManagerImpl) GWT.create(MarkerManagerImpl.class);
+
+  public void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom);
+
+  public void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom,
+      int maxZoom);
+
+  public void addMarkers(JavaScriptObject jsoPeer,
+      JSList /* Marker[] */markers, int minZoom);
+
+  public void addMarkers(JavaScriptObject jsoPeer,
+      JSList /* Marker[] */markers, int minZoom, int maxZoom);
 
   /**
    * @gwt.constructor $wnd.GMarkerManager
@@ -37,18 +51,7 @@ public interface MarkerManagerImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject construct(MapWidget map, MarkerManagerOptions options);
 
-  public void addMarkers(JavaScriptObject jsoPeer,
-      JSList /* Marker[] */markers, int minZoom, int maxZoom);
-
-  public void addMarkers(JavaScriptObject jsoPeer,
-      JSList /* Marker[] */markers, int minZoom);
-
-  public void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom,
-      int maxZoom);
-
-  public void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom);
+  public int getMarkerCount(JavaScriptObject jsoPeer, int zoomLevel);
 
   public void refresh(JavaScriptObject jsoPeer);
-
-  public int getMarkerCount(JavaScriptObject jsoPeer, int zoomLevel);
 }

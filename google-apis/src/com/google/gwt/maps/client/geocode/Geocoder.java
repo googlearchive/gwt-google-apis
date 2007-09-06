@@ -24,11 +24,26 @@ import com.google.gwt.maps.client.impl.GeocoderImpl.LocationsCallback;
 import com.google.gwt.maps.client.impl.GeocoderImpl.Response;
 import com.google.gwt.maps.client.util.JsUtil;
 
+/**
+ * 
+ */
 public final class Geocoder {
 
   // TODO: name: ClientGeocoder or Geocoder?
 
+  static void print(JavaScriptObject o) {
+    System.out.print(o);
+  }
+
+  static void println(JavaScriptObject o) {
+    System.out.println(o);
+  }
+
   private final JavaScriptObject jsoPeer;
+
+  // TODO: callback interfaces
+
+  // TODO: better naming: not get* since async? find*?
 
   public Geocoder() {
     jsoPeer = GeocoderImpl.impl.construct();
@@ -37,10 +52,15 @@ public final class Geocoder {
   public Geocoder(GeocodeCache cache) {
     jsoPeer = GeocoderImpl.impl.construct(cache);
   }
+  
+  public String getBaseCountryCode() {
+    return GeocoderImpl.impl.getBaseCountryCode(jsoPeer);
+  }
 
-  // TODO: callback interfaces
-
-  // TODO: better naming: not get* since async? find*?
+  
+  public GeocodeCache getCache() {
+    return GeocoderImpl.impl.getCache(jsoPeer);
+  }
 
   // TODO: rename one of the callback types?
   public void getLatLng(String address, final LatLngCallback callback) {
@@ -71,23 +91,6 @@ public final class Geocoder {
       }
     });
   }
-  
-  static void print(JavaScriptObject o) {
-    System.out.print(o);
-  }
-
-  
-  static void println(JavaScriptObject o) {
-    System.out.println(o);
-  }
-
-  public GeocodeCache getCache() {
-    return GeocoderImpl.impl.getCache(jsoPeer);
-  }
-
-  public void setViewport(LatLngBounds bounds) {
-    GeocoderImpl.impl.setViewport(jsoPeer, bounds);
-  }
 
   public LatLngBounds getViewport() {
     return GeocoderImpl.impl.getViewport(jsoPeer);
@@ -95,18 +98,18 @@ public final class Geocoder {
 
   // TODO: perhaps a resource file with country codes?
 
+  public void reset() {
+    GeocoderImpl.impl.reset(jsoPeer);
+  }
+
   public void setBaseCountryCode(String countryCode) {
     GeocoderImpl.impl.setBaseCountryCode(jsoPeer, countryCode);
   }
 
-  public String getBaseCountryCode() {
-    return GeocoderImpl.impl.getBaseCountryCode(jsoPeer);
-  }
-
   // TODO: reset???
 
-  public void reset() {
-    GeocoderImpl.impl.reset(jsoPeer);
+  public void setViewport(LatLngBounds bounds) {
+    GeocoderImpl.impl.setViewport(jsoPeer, bounds);
   }
 
 }

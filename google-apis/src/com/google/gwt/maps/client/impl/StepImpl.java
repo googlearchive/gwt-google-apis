@@ -22,18 +22,21 @@ import com.google.gwt.maps.client.geocode.Distance;
 import com.google.gwt.maps.client.geocode.Duration;
 import com.google.gwt.maps.client.geom.LatLng;
 
+/**
+ * 
+ */
 public interface StepImpl extends JSFlyweightWrapper {
 
   StepImpl impl = (StepImpl) GWT.create(StepImpl.class);
-
-  public LatLng getLatLng(JavaScriptObject jsoPeer);
-
-  public int getPolylineIndex(JavaScriptObject jsoPeer);
 
   public String getDescriptionHtml(JavaScriptObject jsoPeer);
 
   public Distance getDistance(JavaScriptObject jsoPeer);
 
   public Duration getDuration(JavaScriptObject jsoPeer);
+
+  public LatLng getLatLng(JavaScriptObject jsoPeer);
+
+  public int getPolylineIndex(JavaScriptObject jsoPeer);
 
 }

@@ -20,6 +20,9 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.impl.DirectionQueryOptionsImpl;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * 
+ */
 public final class DirectionQueryOptions {
 
   private final JavaScriptObject jsoPeer;

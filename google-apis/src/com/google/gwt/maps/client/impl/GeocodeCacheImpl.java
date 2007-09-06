@@ -20,14 +20,17 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
 
+/**
+ * 
+ */
 public interface GeocodeCacheImpl extends JSFlyweightWrapper {
 
   public static GeocodeCacheImpl impl = (GeocodeCacheImpl) GWT.create(GeocodeCacheImpl.class);
 
   /**
-   * @gwt.constructor $wnd.GGeocodeCache
+   * @gwt.binding
    */
-  public JavaScriptObject constructGeocodeCache();
+  public void bind(JavaScriptObject jsoPeer, GeocodeCache cache);
 
   /**
    * @gwt.constructor $wnd.GFactualGeocodeCache
@@ -35,15 +38,15 @@ public interface GeocodeCacheImpl extends JSFlyweightWrapper {
   public JavaScriptObject constructFactualGeocodeCache();
 
   /**
-   * @gwt.binding
+   * @gwt.constructor $wnd.GGeocodeCache
    */
-  public void bind(JavaScriptObject jsoPeer, GeocodeCache cache);
+  public JavaScriptObject constructGeocodeCache();
 
   public boolean isCachable(GeocodeCache cache, JavaScriptObject reply);
 
   public void put(GeocodeCache cache, String address, JavaScriptObject reply);
 
-  public String toCanonical(GeocodeCache cache, String address);
-
   public void reset(GeocodeCache cache);
+
+  public String toCanonical(GeocodeCache cache, String address);
 }

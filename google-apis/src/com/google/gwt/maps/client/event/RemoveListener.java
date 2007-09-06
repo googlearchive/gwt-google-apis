@@ -17,6 +17,9 @@ package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.overlay.Overlay;
 
+/**
+ * 
+ */
 public interface RemoveListener {
 
   public void onRemove(Overlay sender);

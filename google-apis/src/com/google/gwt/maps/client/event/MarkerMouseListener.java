@@ -17,14 +17,17 @@ package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.overlay.Marker;
 
+/**
+ * 
+ */
 public interface MarkerMouseListener {
 
   public void onMouseDown(Marker sender);
 
-  public void onMouseUp(Marker sender);
+  public void onMouseOut(Marker sender);
 
   public void onMouseOver(Marker sender);
 
-  public void onMouseOut(Marker sender);
+  public void onMouseUp(Marker sender);
 
 }

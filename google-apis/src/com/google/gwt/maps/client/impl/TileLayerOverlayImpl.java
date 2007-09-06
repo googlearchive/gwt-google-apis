@@ -21,6 +21,9 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.overlay.TileLayerOverlay;
 
+/**
+ * 
+ */
 public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
 
   public static final TileLayerOverlayImpl impl = (TileLayerOverlayImpl) GWT.create(TileLayerOverlayImpl.class);

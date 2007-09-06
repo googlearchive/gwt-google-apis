@@ -24,9 +24,22 @@ import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Projection;
 import com.google.gwt.maps.client.geom.Size;
 
+/**
+ * 
+ */
 public interface ProjectionImpl extends JSFlyweightWrapper {
 
   public static final ProjectionImpl impl = (ProjectionImpl) GWT.create(ProjectionImpl.class);
+
+  /**
+   * @gwt.binding
+   */
+  public void bind(JavaScriptObject jsoPeer, MercatorProjection projection);
+
+  /**
+   * @gwt.binding
+   */
+  public void bind(JavaScriptObject jsoPeer, Projection projection);
 
   /**
    * @gwt.constructor $wnd.GProjection
@@ -37,16 +50,6 @@ public interface ProjectionImpl extends JSFlyweightWrapper {
    * @gwt.constructor $wnd.GMercatorProjection
    */
   public JavaScriptObject constructMercatorProjection(int zoomLevels);
-
-  /**
-   * @gwt.binding
-   */
-  public void bind(JavaScriptObject jsoPeer, Projection projection);
-
-  /**
-   * @gwt.binding
-   */
-  public void bind(JavaScriptObject jsoPeer, MercatorProjection projection);
 
   public Point fromLatLngToPixel(JavaScriptObject jsoPeer, LatLng latlng,
       int zoomLevel);

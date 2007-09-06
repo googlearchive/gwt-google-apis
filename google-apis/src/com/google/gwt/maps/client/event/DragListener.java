@@ -15,26 +15,20 @@
  */
 package com.google.gwt.maps.client.event;
 
-import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.overlay.Marker;
 
 /**
  * DragListener defines the interface for an object that listens to drag events
- * on a {@link MapWidget} or {@link Marker}.
+ * on a {@link com.google.gwt.maps.client.MapWidget MapWidget} or
+ * {@link  com.google.gwt.maps.client.overlay.Marker Marker}.
  * 
- * @see MapWidget#addDragListener(DragListener)
- * @see Marker#addDragListener(DragListener)
+ * @see com.google.gwt.maps.client.MapWidget#addDragListener(DragListener)
+ * @see com.google.gwt.maps.client.overlay.Marker#addDragListener(DragListener)
  */
 public interface DragListener {
 
   // TODO: how do we do the 'sender' for DragListeners since Map and Marker's
   // only common ancestor is Object? Separate listener interfaces for each?
   // Object sender?
-
-  /**
-   * Fired when the user begins dragging the map.
-   */
-  public void onDragStart();
 
   /**
    * Fired when the user drags the map.
@@ -45,5 +39,10 @@ public interface DragListener {
    * Fired when the user finishes dragging the map.
    */
   public void onDragEnd();
+
+  /**
+   * Fired when the user begins dragging the map.
+   */
+  public void onDragStart();
 
 }

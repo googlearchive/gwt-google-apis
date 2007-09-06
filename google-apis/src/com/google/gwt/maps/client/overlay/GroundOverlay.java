@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.OverlayImpl;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
@@ -34,7 +33,7 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  * 
  * TODO: more complete example
  * 
- * @see MapWidget#addOverlay(Overlay)
+ * @see com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)
  */
 public final class GroundOverlay extends ConcreteOverlay {
 

@@ -20,6 +20,9 @@ import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.util.JsUtil;
 
+/**
+ * 
+ */
 public final class Waypoint {
 
   // TODO: DELETE ME! (needs to function w/o)

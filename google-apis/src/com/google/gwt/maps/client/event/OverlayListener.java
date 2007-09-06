@@ -18,7 +18,9 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.overlay.Overlay;
 
-// TODO: should this be named MapOverlayListener?
+/**
+ * TODO: should this be named MapOverlayListener?
+ */
 public interface OverlayListener {
 
   public void onOverlayAdded(MapWidget sender, Overlay overlay);

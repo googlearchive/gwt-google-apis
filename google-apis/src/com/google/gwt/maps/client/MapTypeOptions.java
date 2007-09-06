@@ -18,6 +18,9 @@ package com.google.gwt.maps.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.MapTypeOptionsImpl;
 
+/**
+ * 
+ */
 public final class MapTypeOptions {
 
   private final JavaScriptObject jsoPeer;

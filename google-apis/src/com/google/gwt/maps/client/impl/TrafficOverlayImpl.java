@@ -20,6 +20,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.overlay.TrafficOverlay;
 
+/**
+ * 
+ */
 public interface TrafficOverlayImpl extends JSFlyweightWrapper {
 
   public static final TrafficOverlayImpl impl = (TrafficOverlayImpl) GWT.create(TrafficOverlayImpl.class);

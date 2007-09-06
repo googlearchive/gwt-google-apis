@@ -20,6 +20,9 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.impl.MarkerManagerImpl;
 import com.google.gwt.maps.client.util.JsUtil;
 
+/**
+ * 
+ */
 public final class MarkerManager {
 
   private final JavaScriptObject jsoPeer;
@@ -32,9 +35,12 @@ public final class MarkerManager {
     jsoPeer = MarkerManagerImpl.impl.construct(map, options);
   }
 
-  public void addMarkers(Marker[] markers, int minZoom, int maxZoom) {
-    MarkerManagerImpl.impl.addMarkers(jsoPeer, JsUtil.toJsList(markers),
-        minZoom, maxZoom);
+  public void addMarker(Marker marker, int minZoom) {
+    MarkerManagerImpl.impl.addMarker(jsoPeer, marker, minZoom);
+  }
+
+  public void addMarker(Marker marker, int minZoom, int maxZoom) {
+    MarkerManagerImpl.impl.addMarker(jsoPeer, marker, minZoom, maxZoom);
   }
 
   public void addMarkers(Marker[] markers, int minZoom) {
@@ -42,19 +48,16 @@ public final class MarkerManager {
         minZoom);
   }
 
-  public void addMarker(Marker marker, int minZoom, int maxZoom) {
-    MarkerManagerImpl.impl.addMarker(jsoPeer, marker, minZoom, maxZoom);
-  }
-
-  public void addMarker(Marker marker, int minZoom) {
-    MarkerManagerImpl.impl.addMarker(jsoPeer, marker, minZoom);
-  }
-
-  public void refresh() {
-    MarkerManagerImpl.impl.refresh(jsoPeer);
+  public void addMarkers(Marker[] markers, int minZoom, int maxZoom) {
+    MarkerManagerImpl.impl.addMarkers(jsoPeer, JsUtil.toJsList(markers),
+        minZoom, maxZoom);
   }
 
   public int getMarkerCount(int zoomLevel) {
     return MarkerManagerImpl.impl.getMarkerCount(jsoPeer, zoomLevel);
+  }
+
+  public void refresh() {
+    MarkerManagerImpl.impl.refresh(jsoPeer);
   }
 }

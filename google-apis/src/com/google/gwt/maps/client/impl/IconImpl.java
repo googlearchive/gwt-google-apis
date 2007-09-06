@@ -29,6 +29,12 @@ import com.google.gwt.maps.client.overlay.Icon;
 public interface IconImpl extends JSFlyweightWrapper {
 
   public static IconImpl impl = (IconImpl) GWT.create(IconImpl.class);
+
+  /**
+   * @gwt.binding
+   */
+  public void bind(JavaScriptObject jsoPeer, Icon icon);
+
   /**
    * @gwt.constructor $wnd.GIcon
    */
@@ -49,11 +55,6 @@ public interface IconImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject getDefaultIcon();
 
-  /**
-   * @gwt.binding
-   */
-  public void bind(JavaScriptObject jsoPeer, Icon icon);
-
   public String getDragCossImage(JavaScriptObject jsoPeer);
 
   public Point getDragCrossAnchor(JavaScriptObject jsoPeer);
@@ -64,12 +65,12 @@ public interface IconImpl extends JSFlyweightWrapper {
 
   public Size getIconSize(JavaScriptObject jsoPeer);
 
+  public String getImage(JavaScriptObject jsoPeer);
+
   /**
    * @gwt.typeArgs <java.lang.Integer>
    */
   public JSList getImageMap(JavaScriptObject jsoPeer);
-
-  public String getImage(JavaScriptObject jsoPeer);
 
   public Point getInfoWindowAnchor(JavaScriptObject jsoPeer);
 
@@ -79,9 +80,9 @@ public interface IconImpl extends JSFlyweightWrapper {
 
   public String getPrintImage(JavaScriptObject jsoPeer);
 
-  public Size getShadowSize(JavaScriptObject jsoPeer);
-
   public String getShadow(JavaScriptObject jsoPeer);
+
+  public Size getShadowSize(JavaScriptObject jsoPeer);
 
   public String getTransparent(JavaScriptObject jsoPeer);
 
@@ -95,12 +96,12 @@ public interface IconImpl extends JSFlyweightWrapper {
 
   public void setIconSize(JavaScriptObject jsoPeer, Size size);
 
+  public void setImage(JavaScriptObject jsoPeer, String url);
+
   /**
    * @gwt.typeArgs imageMap <java.lang.Integer>
    */
-  public void setImageMap(JavaScriptObject jsoPeer, JSList/*int[]*/ imageMap);
-
-  public void setImage(JavaScriptObject jsoPeer, String url);
+  public void setImageMap(JavaScriptObject jsoPeer, JSList/* int[] */imageMap);
 
   public void setInfoWindowAnchor(JavaScriptObject jsoPeer, Point anchor);
 
@@ -111,9 +112,9 @@ public interface IconImpl extends JSFlyweightWrapper {
 
   public void setPrintImage(JavaScriptObject jsoPeer, String url);
 
-  public void setShadowSize(JavaScriptObject jsoPeer, Size size);
-
   public void setShadow(JavaScriptObject jsoPeer, String url);
+
+  public void setShadowSize(JavaScriptObject jsoPeer, Size size);
 
   public void setTransparent(JavaScriptObject jsoPeer, String url);
 }

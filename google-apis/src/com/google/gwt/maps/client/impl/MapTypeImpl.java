@@ -52,53 +52,53 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   public JavaScriptObject construct(JSList/* TileLayer[] */layers,
       Projection projection, String name, MapTypeOptions opts);
 
-  /**
-   * @gwt.global $wnd.G_NORMAL_MAP
-   */
-  public JavaScriptObject getNormalMapType();
-
-  /**
-   * @gwt.global $wnd.G_SATELLITE_MAP
-   */
-  public JavaScriptObject getSatelliteMapType();
-
-  /**
-   * @gwt.global $wnd.G_HYBRID_MAP
-   */
-  public JavaScriptObject getHybridMapType();
-
-  public int getSpanZoomLevel(JavaScriptObject jsoPeer, LatLng center,
-      LatLng span, Size viewSize);
-
   public int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds,
       Size viewSize);
-
-  public String getName(JavaScriptObject jsoPeer, boolean shortName);
-
-  public Projection getProjection(JavaScriptObject jsoPeer);
-
-  public int getTileSize(JavaScriptObject jsoPeer);
-
-  /**
-   * @gwt.typeArgs <com.google.gwt.maps.client.TileLayer>
-   */
-  public JSList getTileLayers(JavaScriptObject jsoPeer);
-
-  public int getMinimumResolution(JavaScriptObject jsoPeer, LatLng latlng);
-
-  public int getMaximumResolution(JavaScriptObject jsoPeer, LatLng latlng);
-
-  public String getTextColor(JavaScriptObject jsoPeer);
-
-  public String getLinkColor(JavaScriptObject jsoPeer);
-
-  public String getErrorMessage(JavaScriptObject jsoPeer);
 
   /**
    * @gwt.typeArgs <java.lang.String>
    */
   public JSList getCopyrights(JavaScriptObject jsoPeer, LatLngBounds bounds,
       int zoomLevel);
+
+  public String getErrorMessage(JavaScriptObject jsoPeer);
+
+  /**
+   * @gwt.global $wnd.G_HYBRID_MAP
+   */
+  public JavaScriptObject getHybridMapType();
+
+  public String getLinkColor(JavaScriptObject jsoPeer);
+
+  public int getMaximumResolution(JavaScriptObject jsoPeer, LatLng latlng);
+
+  public int getMinimumResolution(JavaScriptObject jsoPeer, LatLng latlng);
+
+  public String getName(JavaScriptObject jsoPeer, boolean shortName);
+
+  /**
+   * @gwt.global $wnd.G_NORMAL_MAP
+   */
+  public JavaScriptObject getNormalMapType();
+
+  public Projection getProjection(JavaScriptObject jsoPeer);
+
+  /**
+   * @gwt.global $wnd.G_SATELLITE_MAP
+   */
+  public JavaScriptObject getSatelliteMapType();
+
+  public int getSpanZoomLevel(JavaScriptObject jsoPeer, LatLng center,
+      LatLng span, Size viewSize);
+
+  public String getTextColor(JavaScriptObject jsoPeer);
+
+  /**
+   * @gwt.typeArgs <com.google.gwt.maps.client.TileLayer>
+   */
+  public JSList getTileLayers(JavaScriptObject jsoPeer);
+
+  public int getTileSize(JavaScriptObject jsoPeer);
 
   public String getUrlArg(JavaScriptObject jsoPeer);
 }

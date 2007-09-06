@@ -20,6 +20,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.impl.PointImpl;
 
+/**
+ * 
+ */
 public final class Point {
 
   private static final PointImpl impl = (PointImpl) GWT.create(PointImpl.class);

@@ -17,6 +17,9 @@ package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.MapWidget;
 
+/**
+ * 
+ */
 public interface MapZoomListener {
 
   // TODO: should this be named onZoomEnd? Should this be merged with MapMoveListener

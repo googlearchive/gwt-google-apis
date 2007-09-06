@@ -20,6 +20,9 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 
+/**
+ * 
+ */
 public interface LatLngBoundsImpl extends JSFlyweightWrapper {
 
   /**
@@ -27,28 +30,28 @@ public interface LatLngBoundsImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject construct(LatLng southWest, LatLng northEast);
 
-  public boolean equals(JavaScriptObject jsoPeer, LatLngBounds other);
-
   public boolean contains(JavaScriptObject jsoPeer, LatLng coordinate);
-
-  public boolean intersects(JavaScriptObject jsoPeer, LatLngBounds other);
 
   public boolean containsBounds(JavaScriptObject jsoPeer, LatLngBounds other);
 
+  public boolean equals(JavaScriptObject jsoPeer, LatLngBounds other);
+
   public void extend(JavaScriptObject jsoPeer, LatLng coordinate);
 
-  public LatLng getSouthWest(JavaScriptObject jsoPeer);
+  public LatLng getCenter(JavaScriptObject jsoPeer);
 
   public LatLng getNorthEast(JavaScriptObject jsoPeer);
 
-  public LatLng toSpan(JavaScriptObject jsoPeer);
+  public LatLng getSouthWest(JavaScriptObject jsoPeer);
+
+  public boolean intersects(JavaScriptObject jsoPeer, LatLngBounds other);
+
+  public boolean isEmpty(JavaScriptObject jsoPeer);
 
   public boolean isFullLat(JavaScriptObject jsoPeer);
 
   public boolean isFullLng(JavaScriptObject jsoPeer);
 
-  public boolean isEmpty(JavaScriptObject jsoPeer);
-
-  public LatLng getCenter(JavaScriptObject jsoPeer);
+  public LatLng toSpan(JavaScriptObject jsoPeer);
 
 }

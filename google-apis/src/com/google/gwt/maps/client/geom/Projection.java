@@ -18,13 +18,16 @@ package com.google.gwt.maps.client.geom;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.ProjectionImpl;
 
+/**
+ * 
+ */
 public abstract class Projection {
-
-  protected final JavaScriptObject jsoPeer;
 
   static Projection createPeer(JavaScriptObject jsoPeer) {
     return new MercatorProjection(jsoPeer);
   }
+
+  protected final JavaScriptObject jsoPeer;
 
   public Projection() {
     jsoPeer = ProjectionImpl.impl.construct();
@@ -34,18 +37,6 @@ public abstract class Projection {
   protected Projection(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
-
-  /**
-   * @gwt.exported fromLatLngToPixel
-   */
-  protected abstract Point convertLatLngToPixel(LatLng latlng, int zoomLevel);
-
-  // TODO: better argument name than "nofix"
-  /**
-   * @gwt.exported fromPixelToLatLng
-   */
-  protected abstract LatLng convertPixelToLatLng(Point point, int zoomLevel,
-      boolean nofix);
 
   /**
    * @gwt.exported getWrapWidth
@@ -58,5 +49,17 @@ public abstract class Projection {
    */
   public abstract boolean tileCheckRange(Point point, int zoomLevel,
       Size tileSize);
+
+  /**
+   * @gwt.exported fromLatLngToPixel
+   */
+  protected abstract Point convertLatLngToPixel(LatLng latlng, int zoomLevel);
+
+  // TODO: better argument name than "nofix"
+  /**
+   * @gwt.exported fromPixelToLatLng
+   */
+  protected abstract LatLng convertPixelToLatLng(Point point, int zoomLevel,
+      boolean nofix);
 
 }
