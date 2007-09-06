@@ -44,7 +44,7 @@
 			<targetfiles path="${sample.build}/www/com.google.gwt.${sample.api}.sample.${sample.package}.${sample.module}/com.google.gwt.${sample.api}.sample.${sample.package}.${sample.module}.nocache.html" />
 			<sequential>
 				<mkdir dir="${sample.build}/www" />
-				<java dir="${sample.build}" classname="com.google.gwt.dev.GWTCompiler" classpath="src:${gwt.user.jar}:${gwt.dev.jar}:${gwt.google.apis.jar}" fork="yes" failonerror="true">
+				<java dir="${sample.build}" classname="com.google.gwt.dev.GWTCompiler" classpath="src:${gwt.user.jar}:${gwt.dev.jar}:${gwt.google.apis.jar}" fork="yes" failonerror="true" maxmemory="128m">
 					<arg value="-out" />
 					<arg file="${sample.build}/www" />
 					<arg value="com.google.gwt.${sample.api}.sample.${sample.package}.${sample.module}" />
