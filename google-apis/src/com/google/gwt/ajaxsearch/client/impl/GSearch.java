@@ -58,7 +58,7 @@ public interface GSearch extends JSFlyweightWrapper {
 
   public void setResultSetSize(Search jso, ResultSetSize size);
 
-  public void setSearchCompleteCallbock(Search jso,
+  public void setSearchCompleteCallback(Search jso,
       JavaScriptObject context, GSearchCompleteCallback method);
 
   public void setUserDefinedClassSuffix(Search jso,

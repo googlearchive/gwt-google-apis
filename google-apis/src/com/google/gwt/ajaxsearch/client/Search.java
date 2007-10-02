@@ -53,7 +53,7 @@ public abstract class Search {
   private SearchListenerCollection listeners;
 
   /**
-   * Package-prodected constructor to restrict the use of the class outside of
+   * Package-protected constructor to restrict the use of the class outside of
    * the AjaxSearch package.
    * 
    * @param impl The JSIO interface to use.
@@ -73,7 +73,7 @@ public abstract class Search {
   public void addSearchListener(SearchListener l) {
     if (listeners == null) {
       listeners = new SearchListenerCollection();
-      impl.setSearchCompleteCallbock(this, null, new GSearchCompleteCallback() {
+      impl.setSearchCompleteCallback(this, null, new GSearchCompleteCallback() {
         public void onSearchResult() {
           List results = getResults();
           for (Iterator i = results.iterator(); i.hasNext();) {
@@ -170,9 +170,9 @@ public abstract class Search {
    * Add additional terms to any query executed by the Search. This can be used
    * to create more specific queries.
    * 
-   * @param addition Additonal parameters to add to any queries executed by the
+   * @param addition Additional parameters to add to any queries executed by the
    *          Search.
-   * @see http://www.google.com/help/refinesearch.html
+   * @see <a href="http://www.google.com/help/refinesearch.html">Refine Search</a> 
    */
   public void setQueryAddition(String addition) {
     impl.setQueryAddition(this, addition);
@@ -189,7 +189,7 @@ public abstract class Search {
   }
 
   /**
-   * Adds a user-specifed CSS class suffix to the pre-rendered HTML provided by
+   * Adds a user-specified CSS class suffix to the pre-rendered HTML provided by
    * Results that are created by the Search.
    * 
    * @param label A CSS class suffix.
