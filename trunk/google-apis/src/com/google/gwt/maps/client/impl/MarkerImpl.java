@@ -44,7 +44,9 @@ public interface MarkerImpl extends JSFlyweightWrapper {
 
   public LatLng getPoint(Marker marker);
 
-  public boolean isVisible(Marker marker);
+  public void hide(Marker marker);
+
+  public boolean isHidden(Marker marker);
 
   public void openInfoWindow(Marker marker, JavaScriptObject content,
       JavaScriptObject options);
@@ -55,8 +57,8 @@ public interface MarkerImpl extends JSFlyweightWrapper {
   public void setImage(Marker marker, String url);
 
   public void setPoint(Marker marker, LatLng point);
-
-  public void setVisible(Marker marker, boolean visible);
+  
+  public void show(Marker marker);
 
   public void showMapBlowup(Marker marker, JavaScriptObject options);
 

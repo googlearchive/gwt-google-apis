@@ -182,7 +182,7 @@ public final class Marker extends ConcreteOverlay {
   }
 
   public boolean isVisible() {
-    return MarkerImpl.impl.isVisible(this);
+    return !MarkerImpl.impl.isHidden(this);
   }
 
   // TODO: figure out info window stuff (events)
@@ -216,7 +216,11 @@ public final class Marker extends ConcreteOverlay {
   }
 
   public void setVisible(boolean visible) {
-    MarkerImpl.impl.setVisible(this, visible);
+    if (visible) {
+      MarkerImpl.impl.show(this);
+    } else {
+      MarkerImpl.impl.hide(this);
+    }
   }
 
 }
