@@ -32,23 +32,23 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList /* LatLng[] */points);
+  public JavaScriptObject construct(JSList<LatLng> points);
 
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList /* LatLng[] */points, String color);
+  public JavaScriptObject construct(JSList<LatLng> points, String color);
 
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList /* LatLng[] */points, String color,
+  public JavaScriptObject construct(JSList<LatLng> points, String color,
       int weight);
 
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList /* LatLng[] */points, String color,
+  public JavaScriptObject construct(JSList<LatLng> points, String color,
       int weight, double opacity);
 
   public LatLng getVertex(Polyline polyline, int index);

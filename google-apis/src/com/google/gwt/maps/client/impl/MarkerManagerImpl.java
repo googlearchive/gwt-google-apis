@@ -36,10 +36,10 @@ public interface MarkerManagerImpl extends JSFlyweightWrapper {
       int maxZoom);
 
   public void addMarkers(JavaScriptObject jsoPeer,
-      JSList /* Marker[] */markers, int minZoom);
+      JSList<Marker> markers, int minZoom);
 
   public void addMarkers(JavaScriptObject jsoPeer,
-      JSList /* Marker[] */markers, int minZoom, int maxZoom);
+      JSList<Marker> markers, int minZoom, int maxZoom);
 
   /**
    * @gwt.constructor $wnd.GMarkerManager

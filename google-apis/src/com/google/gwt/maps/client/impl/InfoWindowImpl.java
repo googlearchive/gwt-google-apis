@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
+import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.user.client.Element;
@@ -56,13 +57,13 @@ public interface InfoWindowImpl extends JSFlyweightWrapper {
   public boolean isHidden(JavaScriptObject jsoPeer);
 
   public void reset(JavaScriptObject jsoPeer, LatLng point,
-      JSList /* InfoWindowTab[] */tabs, Size size);
+      JSList<InfoWindowTab> tabs, Size size);
 
   public void reset(JavaScriptObject jsoPeer, LatLng point,
-      JSList /* InfoWindowTab[] */tabs, Size size, Size offset);
+      JSList<InfoWindowTab> tabs, Size size, Size offset);
 
   public void reset(JavaScriptObject jsoPeer, LatLng point,
-      JSList /* InfoWindowTab[] */tabs, Size size, Size offset, int selectedTab);
+      JSList<InfoWindowTab> tabs, Size size, Size offset, int selectedTab);
 
   public void selectTab(JavaScriptObject jsoPeer, int index);
 

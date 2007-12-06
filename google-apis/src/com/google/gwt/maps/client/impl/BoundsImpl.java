@@ -32,7 +32,7 @@ public interface BoundsImpl extends JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GBounds
    */
-  public JavaScriptObject construct(JSList/* Point[] */points);
+  public JavaScriptObject construct(JSList<Point> points);
   /**
    * @gwt.constructor $wnd.GBounds
    */
