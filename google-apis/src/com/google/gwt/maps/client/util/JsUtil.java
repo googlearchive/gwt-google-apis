@@ -123,7 +123,7 @@ public final class JsUtil {
   }
 
   public static JSList toJsList(int[] array) {
-    JSList list = lists.asTileLayerList(lists.newArray());
+    JSList list = lists.asIntegerList(lists.newArray());
     for (int i = 0; i < array.length; i++) {
       list.add(new Integer(array[i]));
     }
