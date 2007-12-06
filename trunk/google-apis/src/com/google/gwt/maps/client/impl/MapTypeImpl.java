@@ -20,6 +20,7 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapTypeOptions;
+import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Projection;
@@ -43,13 +44,13 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GMapType
    */
-  public JavaScriptObject construct(JSList/* TileLayer[] */layers,
+  public JavaScriptObject construct(JSList<TileLayer> layers,
       Projection projection, String name);
 
   /**
    * @gwt.constructor $wnd.GMapType
    */
-  public JavaScriptObject construct(JSList/* TileLayer[] */layers,
+  public JavaScriptObject construct(JSList<TileLayer> layers,
       Projection projection, String name, MapTypeOptions opts);
 
   public int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds,
