@@ -6,10 +6,6 @@
 	<property name="sample.package" value="${sample.root}" />
 	<property name="sample.main" value="${sample.module}" />
 
-	<property.ensure name="gwt.user.jar" location="${gwt.build.lib}/gwt-user.jar" />
-	<!-- Platform shouldn't matter here, just picking one -->
-	<property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev-linux.jar" />
-
 	<!-- Mirror directory for scripts; makes building distro easier -->
 	<property name="samples.scripts" value="${gwt.build.out}/samples-scripts" />
 	<!-- Use the uppercase name rather than the lowercase name -->

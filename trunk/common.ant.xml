@@ -19,44 +19,6 @@
 	</condition>
 	<fail unless="project.valid" message="This build file is in an inconsistent state." />
 
-	<!-- Global Properties -->
-	<property environment="env" />
-	<condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
-		<isset property="env.GWT_VERSION" />
-	</condition>
-	<condition property="gwt.tools.check" value="${env.GWT_TOOLS}" else="${gwt.root}/../tools">
-		<isset property="env.GWT_TOOLS" />
-	</condition>
-	<condition property="gwt.build.home" value="${env.GWT_BUILD_HOME}" else="${gwt.root}/../gwt-trunk">
-		<isset property="env.GWT_BUILD_HOME" />
-	</condition>
-		
-	<property name="gwt.tools" location="${gwt.tools.check}" />
-	<property name="gwt.tools.lib" location="${gwt.tools}/lib" />
-	<property name="gwt.tools.antlib" location="${gwt.tools}/antlib" />
-	<property name="gwt.tools.redist" location="${gwt.tools}/redist" />
-	<property name="gwt.build" location="${gwt.root}/build" />
-	<property name="gwt.build.out" location="${gwt.build}/out" />
-	<property name="gwt.build.lib" location="${gwt.build}/lib" />
-	<property name="gwt.build.jni" location="${gwt.build}/jni" />
-	<property name="gwt.build.staging" location="${gwt.build}/staging" />
-	<property name="gwt.build.dist" location="${gwt.build}/dist" />
-	<property name="project.build" location="${gwt.build.out}/${project.tail}" />
-	<property name="project.lib" location="${gwt.build.lib}/gwt-${ant.project.name}.jar" />
-	<property name="project.jni" location="${gwt.build}/${project.tail}" />
-	<property name="javac.out" location="${project.build}/bin" />
-	<property name="javac.junit.out" location="${project.build}/bin-test" />
-	<property name="javac.debug" value="true" />
-	<property name="javac.debuglevel" value="lines,vars,source" />
-	<property name="javac.encoding" value="utf-8" />
-	<property name="javac.source" value="1.5" />
-	<property name="javac.nowarn" value="true" />
-	<property name="junit.out" location="${project.build}/test" />
-	
-	<!-- Sanity check -->
-	<available file="${gwt.tools}" type="dir" property="gwt.tools.exists" />
-	<fail unless="gwt.tools.exists" message="Cannot find '${gwt.tools}' tools directory; perhaps you should define the GWT_TOOLS environment variable" />
-
 	<!-- Platform identification -->
 	<condition property="build.host.islinux">
 		<and>
@@ -87,17 +49,63 @@
 		<isset property="build.host.iswindows" />
 	</condition>
 	<fail unless="build.host.platform" message="Building on ${os.name} is not supported" />
+	
+	<!-- Global Properties -->
+	<property environment="env" />
+	<condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
+		<isset property="env.GWT_VERSION" />
+	</condition>
+	<condition property="gwt.tools.check" value="${env.GWT_TOOLS}" else="${gwt.root}/../tools">
+		<isset property="env.GWT_TOOLS" />
+	</condition>
+	<condition property="gwt.home" value="${env.GWT_HOME}" else="${gwt.root}/../gwt-trunk/build/staging/gwt-${build.host.platform}-0.0.0">
+		<isset property="env.GWT_HOME" />
+	</condition>
+		
+	<property name="gwt.tools" location="${gwt.tools.check}" />
+	<property name="gwt.tools.lib" location="${gwt.tools}/lib" />
+	<property name="gwt.tools.antlib" location="${gwt.tools}/antlib" />
+	<property name="gwt.tools.redist" location="${gwt.tools}/redist" />
+	<property name="gwt.build" location="${gwt.root}/build" />
+	<property name="gwt.build.out" location="${gwt.build}/out" />
+	<property name="gwt.build.lib" location="${gwt.build}/lib" />
+	<property name="gwt.build.jni" location="${gwt.build}/jni" />
+	<property name="gwt.build.staging" location="${gwt.build}/staging" />
+	<property name="gwt.build.dist" location="${gwt.build}/dist" />
+	<property name="project.build" location="${gwt.build.out}/${project.tail}" />
+	<property name="project.lib" location="${gwt.build.lib}/gwt-${ant.project.name}.jar" />
+	<property name="project.jni" location="${gwt.build}/${project.tail}" />
+	<property name="javac.out" location="${project.build}/bin" />
+	<property name="javac.junit.out" location="${project.build}/bin-test" />
+	<property name="javac.debug" value="true" />
+	<property name="javac.debuglevel" value="lines,vars,source" />
+	<property name="javac.encoding" value="utf-8" />
+	<property name="javac.source" value="1.5" />
+	<property name="javac.nowarn" value="true" />
+	<property name="junit.out" location="${project.build}/test" />
+
+	<!-- References to files from the GWT_HOME directory -->
+	<property name="gwt.dev.jar" location="${gwt.home}/gwt-dev-${build.host.platform}.jar" />
+	<property name="gwt.user.jar" location="${gwt.home}/gwt-user.jar" />
+	
+	<!--  Reference to jars produced by this build -->
+	<property name="ant.gwt.jar" location="${gwt.build.lib}/ant-gwt.jar" />
+	<property name="gwt.doctool.jar" location="${gwt.build.lib}/gwt-doctool.jar" />
+	<property name="gwt.google.apis.jar" location="${gwt.build.lib}/gwt-google-apis.jar"/>
+	
+	<!-- Sanity check -->
+	<available file="${gwt.tools}" type="dir" property="gwt.tools.exists" />
+	<fail unless="gwt.tools.exists" message="Cannot find '${gwt.tools}' tools directory; perhaps you should define the GWT_TOOLS environment variable" />
+
+	<available file="${gwt.dev.jar}" property="gwt.dev.jar.exists" />
+	<fail unless="gwt.dev.jar.exists" message="Cannot find '${gwt.dev.jar}'; perhaps you should define the GWT_HOME environment variable" />
+
+	<available file="${gwt.user.jar}" property="gwt.user.jar.exists" />
+	<fail unless="gwt.user.jar.exists" message="Cannot find '${gwt.user.jar}'; perhaps you should define the GWT_HOME environment variable" />
 
 	<condition property="junit.platform.args" value="-XstartOnFirstThread" else="">
 		<equals arg1="${build.host.platform}" arg2="mac" casesensitive="false" />
 	</condition>
-
-	<!-- References to files from the GWT build directory -->
-	<property name="ant.gwt.jar" location="${gwt.build.home}/build/lib/ant-gwt.jar" />
-	<property name="gwt.dev.jar" location="${gwt.build.home}/build/staging/gwt-${build.host.platform}-0.0.0/gwt-dev-${build.host.platform}.jar" />
-	<property name="gwt.doctool.jar" location="${gwt.build.home}/build/lib/gwt-doctool.jar" />
-	<property name="gwt.google.apis.jar" location="${gwt.build.lib}/gwt-google-apis.jar"/>
-	<property name="gwt.user.jar" location="${gwt.build.home}/build/staging/gwt-${build.host.platform}-0.0.0/gwt-user.jar" />
 
 	<!-- JUnit support -->
 	<property name="gwt.junit.port" value="8888" />
