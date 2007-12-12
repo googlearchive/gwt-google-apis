@@ -6,7 +6,11 @@
 	<!-- "build" is the default when subprojects are directly targetted -->
 	<property name="target" value="build" />
 
-	<target name="dist" depends="google-apis, doc, samples" description="Run the distributions">
+	<target name="build-tools" description="Builds tools required to build the Google API Library for GWT">
+	    <gwt.ant dir="build-tools"/>
+	</target>
+		
+	<target name="dist" depends="build-tools, google-apis, doc, samples" description="Run the distributions">
 		<gwt.ant dir="distro-source" />
 	</target>
 
