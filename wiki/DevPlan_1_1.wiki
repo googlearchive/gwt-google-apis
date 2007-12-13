@@ -10,8 +10,6 @@
   * Method to test for Gears availability ([http://code.google.com/p/gwt-google-apis/issues/detail?id=1 #1])
   * Set mime types and end of line properties on all files ([http://code.google.com/p/gwt-google-apis/issues/detail?id=2 #2])
   * Update to latest gears_init.js ([http://code.google.com/p/gwt-google-apis/issues/detail?id=5 #5])
-  * Bugs with ResourceStore exception messages ([http://code.google.com/p/gwt-google-apis/issues/detail?id=7 #7])
-  * ResourceStore URL capture does not work in GWT's hosted mode browser on Windows ([http://code.google.com/p/gwt-google-apis/issues/detail?id=10 #10])
-
-
+  * Bugs with !ResourceStore exception messages ([http://code.google.com/p/gwt-google-apis/issues/detail?id=7 #7])
+  * !ResourceStore URL capture does not work in GWT's hosted mode browser on Windows ([http://code.google.com/p/gwt-google-apis/issues/detail?id=10 #10])
 
