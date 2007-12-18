@@ -85,7 +85,7 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   public boolean doubleClickZoomEnabled(JavaScriptObject jsoPeer);
 
-  public boolean draggingDisabled(JavaScriptObject jsoPeer);
+  public boolean draggingEnabled(JavaScriptObject jsoPeer);
 
   public void enableContinuousZoom(JavaScriptObject jsoPeer);
 

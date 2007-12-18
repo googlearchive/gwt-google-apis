@@ -534,7 +534,7 @@ public final class MapWidget extends Composite {
    * @return true if dragging of the map is enabled
    */
   public boolean isDraggable() {
-    return !MapImpl.impl.draggingDisabled(jsoPeer);
+    return MapImpl.impl.draggingEnabled(jsoPeer);
   }
 
   /**
