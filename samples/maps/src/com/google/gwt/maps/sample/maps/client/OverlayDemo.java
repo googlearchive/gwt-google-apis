@@ -22,6 +22,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
+import com.google.gwt.user.client.Window;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -83,15 +84,18 @@ public class OverlayDemo extends MapsDemo {
           southWest.getLongitude() + lngSpan * Math.random());
     }
 
-    Arrays.sort(points, new Comparator/* <LatLng> */() {
-      public int compare(Object o1, Object o2) {
-        LatLng p1 = (LatLng) o1;
-        LatLng p2 = (LatLng) o2;
+    Arrays.sort(points, new Comparator<LatLng>() {
+      public int compare(LatLng p1, LatLng p2) {
         return new Double(p1.getLongitude()).compareTo(new Double(
             p2.getLongitude()));
       }
     });
 
-    map.addOverlay(new Polyline(points));
+    Polyline pline = new Polyline(points);
+    map.addOverlay(pline);
+    if (pline.getVertexCount() != 5) {
+      Window.alert("Created polyline with 5 vertices, but now it has "
+          + pline.getVertexCount());
+    }
   }
 }

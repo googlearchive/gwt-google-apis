@@ -53,5 +53,5 @@ public interface PolylineImpl extends JSFlyweightWrapper {
 
   public LatLng getVertex(Polyline polyline, int index);
 
-  public int getVertextCount(Polyline polyline);
+  public int getVertexCount(Polyline polyline);
 }
