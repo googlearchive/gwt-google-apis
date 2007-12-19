@@ -73,7 +73,7 @@ public final class Polyline extends ConcreteOverlay {
   }
 
   public int getVertexCount() {
-    return PolylineImpl.impl.getVertextCount(this);
+    return PolylineImpl.impl.getVertexCount(this);
   }
 
   public void removeRemoveListener(RemoveListener listener) {
