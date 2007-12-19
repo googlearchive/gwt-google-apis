@@ -18,7 +18,8 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.MapWidget;
 
 /**
- * Defines the interface for an object that listens
+ * <code>InfoWindowListener</code> defines the interface for an object that
+ * listens to <code>InfoWindow</code> events.
  * 
  * @see MapWidget#addInfoWindowListener(InfoWindowListener)
  */
