@@ -28,6 +28,11 @@ public interface LatLngBoundsImpl extends JSFlyweightWrapper {
   /**
    * @gwt.constructor $wnd.GLatLngBounds
    */
+  public JavaScriptObject construct();
+
+  /**
+   * @gwt.constructor $wnd.GLatLngBounds
+   */
   public JavaScriptObject construct(LatLng southWest, LatLng northEast);
 
   public boolean contains(JavaScriptObject jsoPeer, LatLng coordinate);

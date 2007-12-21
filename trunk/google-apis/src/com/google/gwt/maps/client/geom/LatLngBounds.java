@@ -24,13 +24,18 @@ import com.google.gwt.maps.client.impl.LatLngBoundsImpl;
  */
 public final class LatLngBounds {
 
-  private static final LatLngBoundsImpl impl = (LatLngBoundsImpl) GWT.create(LatLngBoundsImpl.class);
+  private static final LatLngBoundsImpl impl =
+      (LatLngBoundsImpl) GWT.create(LatLngBoundsImpl.class);
 
   static LatLngBounds createPeer(JavaScriptObject jsoPeer) {
     return new LatLngBounds(jsoPeer);
   }
 
   private final JavaScriptObject jsoPeer;
+
+  public LatLngBounds() {
+    jsoPeer = impl.construct();
+  }
 
   public LatLngBounds(LatLng southWest, LatLng northEast) {
     jsoPeer = impl.construct(southWest, northEast);
