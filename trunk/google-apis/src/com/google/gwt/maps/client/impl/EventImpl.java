@@ -25,15 +25,11 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Overlay;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
- * TODO: If the callbacks were abstract then would we need the map at all?
- * 
  * @gwt.global $wnd.GEvent
  */
 public abstract class EventImpl implements JSWrapper {
@@ -96,7 +92,12 @@ public abstract class EventImpl implements JSWrapper {
 
   public static final EventImpl impl = (EventImpl) GWT.create(EventImpl.class);
 
-  private final Map /* <Object, Collection<ListenerHandle>> */handleMap = new HashMap();
+  /**
+   * Map of Java listener instances to JavaScript listener functions. This is
+   * used in cases where a listener interface needs to sync several JavaScript
+   * events in order to fulfill its contract.
+   */
+  private final Map<Object, Collection<JavaScriptObject>> javaListenerToJavaScriptListeners = new HashMap<Object, Collection<JavaScriptObject>>();
 
   public abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, BooleanCallback handler);
@@ -125,35 +126,31 @@ public abstract class EventImpl implements JSWrapper {
   public abstract JavaScriptObject addListenerVoid(JavaScriptObject source,
       String event, VoidCallback handler);
 
-  public void associate(Object listener, JavaScriptObject handle) {
-    Collection/* <ListenerHandle> */associated = (Collection) handleMap.get(listener);
+  public void associate(Object listener, JavaScriptObject jsListener) {
+    Collection<JavaScriptObject> associated = javaListenerToJavaScriptListeners.get(listener);
     if (associated == null) {
-      associated = new ArrayList();
-      handleMap.put(listener, associated);
+      associated = new ArrayList<JavaScriptObject>();
+      javaListenerToJavaScriptListeners.put(listener, associated);
     }
-    associated.add(handle);
+    associated.add(jsListener);
   }
 
-  public void associate(Object listener, JavaScriptObject[] handles) {
-    Collection/* <ListenerHandle> */associated = (Collection) handleMap.get(listener);
-    if (associated == null) {
-      associated = new ArrayList();
-      handleMap.put(listener, associated);
+  public void associate(Object listener, JavaScriptObject[] jsListeners) {
+    for (JavaScriptObject jsListener : jsListeners) {
+      associate(listener, jsListener);
     }
-    associated.addAll(Arrays.asList(handles));
   }
-  
+
   public abstract void clearListeners(JavaScriptObject source, String event);
 
   public void removeListeners(Object listener) {
-    Collection/* <ListenerHandle> */handles = (Collection) handleMap.get(listener);
-    if (handles != null) {
-      for (Iterator it = handles.iterator(); it.hasNext();) {
-        JavaScriptObject handle = (JavaScriptObject) it.next();
-        removeListener(handle);
+    Collection<JavaScriptObject> jsListeners = javaListenerToJavaScriptListeners.get(listener);
+    if (jsListeners != null) {
+      for (JavaScriptObject jsListener : jsListeners) {
+        removeListener(jsListener);
       }
     }
   }
 
-  protected abstract void removeListener(JavaScriptObject handle);
+  protected abstract void removeListener(JavaScriptObject jsListener);
 }
