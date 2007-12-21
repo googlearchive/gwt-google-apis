@@ -78,7 +78,6 @@ public final class Marker extends ConcreteOverlay {
     EVENT_IMPL.associate(listener, new JavaScriptObject[] {
         EVENT_IMPL.addListenerVoid(jsoPeer, "click", new VoidCallback() {
           public void callback() {
-            System.out.println("called");
             listener.onClick(Marker.this);
           }
         }), EVENT_IMPL.addListenerVoid(jsoPeer, "dblclick", new VoidCallback() {
