@@ -18,6 +18,7 @@ package com.google.gwt.maps.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSWrapper;
 import com.google.gwt.jsio.client.impl.Extractor;
+import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.impl.InfoWindowImpl;
 import com.google.gwt.maps.client.impl.InfoWindowOptionsImpl;
 import com.google.gwt.maps.client.util.JsUtil;
@@ -59,8 +60,8 @@ public class InfoWindowContent {
 
     public InfoWindowTab(String label, Widget content) {
       widget = content;
-      jsoPeer = InfoWindowImpl.impl.createInfoWindowTab(label,
-          content.getElement());
+      jsoPeer =
+          InfoWindowImpl.impl.createInfoWindowTab(label, content.getElement());
     }
 
     protected Widget getWidget() {
@@ -81,6 +82,28 @@ public class InfoWindowContent {
       InfoWindowOptionsImpl.impl.setMapType(super.options, mapType);
       InfoWindowOptionsImpl.impl.setZoomLevel(super.options, zoomLevel);
     }
+
+    /**
+     * Type of blowup map to show in the info window. Sets the mapType property
+     * in a GInfoWindowOptions object. See also the MapBlowupContent class
+     * constructor.
+     * 
+     * @param mapType A valid GMapType value.
+     */
+    public void setMapType(MapType mapType) {
+      InfoWindowOptionsImpl.impl.setMapType(super.options, mapType);
+    }
+
+    /**
+     * Zoom level of the blowup map in the info window. See also the
+     * MapBlowupContent class constructor. Sets the zoomLevel property in a
+     * GInfoWindowOptions object.
+     * 
+     * @param zoomLevel Zoom level of the blowup map in the info window.
+     */
+    public void setZoomLevel(int zoomLevel) {
+      InfoWindowOptionsImpl.impl.setZoomLevel(super.options, zoomLevel);
+    }
   }
 
   protected static final int TYPE_ELEMENT = 0;
@@ -91,11 +114,14 @@ public class InfoWindowContent {
 
   private final JavaScriptObject content;
 
-  private final JavaScriptObject options = InfoWindowOptionsImpl.impl.construct();
+  private final JavaScriptObject options =
+      InfoWindowOptionsImpl.impl.construct();
 
   private final int type;
 
-  private final List widgets = new ArrayList();
+  private final List<Widget> widgets = new ArrayList<Widget>();
+
+  private List<InfoWindowListener> infoWindowListeners = null;
 
   public InfoWindowContent(InfoWindowTab[] tabs) {
     this.content = ((JSWrapper) JsUtil.toJsList(tabs)).getJavaScriptObject();
@@ -112,7 +138,7 @@ public class InfoWindowContent {
     this(tabs);
     InfoWindowOptionsImpl.impl.setSelectedTab(options, selectedTab);
   }
-
+  
   public InfoWindowContent(String content) {
     Element e = DOM.createDiv();
     DOM.setInnerHTML(e, content);
@@ -131,8 +157,89 @@ public class InfoWindowContent {
     this.type = type;
   }
 
+  /**
+   * Add an InfoWindowListener that will get called back when the info window
+   * pops open or closed. Multiple listeners can be added.
+   * 
+   * @param l listener to add.
+   */
+  public void addInfoWindowListener(InfoWindowListener l) {
+    if (infoWindowListeners == null) {
+      infoWindowListeners = new ArrayList<InfoWindowListener>();
+    }
+    infoWindowListeners.add(l);
+  }
+
+  public void removeInfoWindowListeners() {
+    infoWindowListeners = null;
+  }
+
+  /**
+   * Specifies content to be shown when the InfoWindow is maximized.
+   * 
+   * @param windowMaximizedContent content to be shown
+   */
+  public void setMaxContent(String windowMaximizedContent) {
+    InfoWindowOptionsImpl.impl.setMaxContentString(options,
+        windowMaximizedContent);
+  }
+
+  /**
+   * Specifies content to be shown when the InfoWindow is maximized.
+   * 
+   * @param windowMaximizedContent content to be shown
+   */
+  public void setMaxContent(Widget windowMaximizedContent) {
+    InfoWindowOptionsImpl.impl.setMaxContentElement(options,
+        windowMaximizedContent.getElement());
+  }
+
+  /**
+   * Specifies title to be shown when the InfoWindow is maximized.
+   * 
+   * @param windowMaximizedTitle
+   */
+  public void setMaxTitle(String windowMaximizedTitle) {
+    InfoWindowOptionsImpl.impl.setMaxTitleString(options, windowMaximizedTitle);
+  }
+
+  /**
+   * Specifies title to be shown when the InfoWindow is maximized.
+   * 
+   * @param windowMaximizedTitle Title to be shown
+   */
+  public void setMaxTitle(Widget windowMaximizedTitle) {
+    InfoWindowOptionsImpl.impl.setMaxTitleElement(options,
+        windowMaximizedTitle.getElement());
+  }
+
+  /**
+   * Maximum width of the info window content, in pixels.
+   * 
+   * @param maxWidth Maximum width of the info window content in pixels
+   */
+  public void setMaxWidth(int maxWidth) {
+    InfoWindowOptionsImpl.impl.setMaxWidth(options, maxWidth);
+  }
+
+  /**
+   * Indicates whether or not the info window should close for a click on the
+   * map that was not on a marker. If set to true, the info window will not
+   * close when the map is clicked. The default value is false
+   * 
+   * @param noCloseFlag Pass true to leave the window open when the map is
+   *        clicked.
+   */
+  public void setNoCloseOnClick(boolean noCloseFlag) {
+    InfoWindowOptionsImpl.impl.setNoCloseOnClick(options, noCloseFlag);
+  }
+
   protected JavaScriptObject getContent() {
     return content;
+  }
+
+  protected List<InfoWindowListener> getInfoWindowListeners() {
+    return infoWindowListeners;
   }
 
   protected JavaScriptObject getOptions() {
@@ -143,7 +250,8 @@ public class InfoWindowContent {
     return type;
   }
 
-  protected List getWidgets() {
+  protected List<Widget> getWidgets() {
     return widgets;
   }
+
 }

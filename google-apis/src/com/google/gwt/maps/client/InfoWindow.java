@@ -21,14 +21,18 @@ import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.InfoWindowImpl;
+import com.google.gwt.maps.client.impl.InfoWindowOptionsImpl;
 import com.google.gwt.maps.client.impl.MapImpl;
 import com.google.gwt.maps.client.impl.MarkerImpl;
+import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.util.JsUtil;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -51,14 +55,18 @@ public final class InfoWindow {
       adopt(w);
     }
 
+    @Override
     public boolean isAttached() {
       return true;
     }
   }
 
+
+
   private final JavaScriptObject jsoPeer;
 
   private final MapWidget map;
+
 
   /**
    * The virtual panel is used to as a point to attach
@@ -95,6 +103,8 @@ public final class InfoWindow {
     JsUtil.toArray(elementList, containers);
     return containers;
   }
+
+  // private InfoWindowEventCallbacks eventCallbacks = null;
 
   /**
    * Returns the offset, in pixels, of the tip of the info window from the point
@@ -200,21 +210,25 @@ public final class InfoWindow {
   }
 
   private void beginAttach(InfoWindowContent content) {
-    List contentWidgets = content.getWidgets();
+    List<Widget> contentWidgets = content.getWidgets();
     for (int i = 0; i < contentWidgets.size(); i++) {
-      virtualPanel.beginAttach((Widget) contentWidgets.get(i));
+      virtualPanel.beginAttach(contentWidgets.get(i));
+    }
+    List<InfoWindowListener> listeners = content.getInfoWindowListeners();
+    if (listeners != null) {
+      initEventCallbacks(content, listeners);
     }
   }
 
   private void finishAttach(InfoWindowContent content) {
-    final List contentWidgets = content.getWidgets();
+    final List<Widget> contentWidgets = content.getWidgets();
     for (int i = 0; i < contentWidgets.size(); i++) {
-      virtualPanel.finishAttach((Widget) contentWidgets.get(i));
+      virtualPanel.finishAttach(contentWidgets.get(i));
     }
     map.addInfoWindowListener(new InfoWindowListener() {
       public void onInfoWindowClosed(MapWidget sender) {
         for (int i = 0; i < contentWidgets.size(); i++) {
-          virtualPanel.remove((Widget) contentWidgets.get(i));
+          virtualPanel.remove(contentWidgets.get(i));
         }
       }
 
@@ -222,4 +236,46 @@ public final class InfoWindow {
       }
     });
   }
+
+  /**
+   * This method implements a chain of listeners for the InfoWindow object
+   * instead of just a single callback as provided by the native JavaScript Maps
+   * API. This was done to make the GWT API more intuitive to Java programmers.
+   * 
+   */
+  private void initEventCallbacks(InfoWindowContent content,
+      List<InfoWindowListener> listeners) {
+    final List<InfoWindowListener> listenerList =
+        new ArrayList<InfoWindowListener>(listeners);
+
+    // Initialize internal callbacks in InfoWindowOptions that will kick off
+    // the list of InfoWindowListeners stored in this object.
+    InfoWindowOptionsImpl.impl.setOnCloseFn(content.getOptions(),
+        new VoidCallback() {
+          @Override
+          public void callback() {
+            Iterator<InfoWindowListener> iter = listenerList.iterator();
+            InfoWindowListener cb;
+
+            while (iter.hasNext()) {
+              cb = iter.next();
+              cb.onInfoWindowClosed(map);
+            }
+          }
+        });
+    InfoWindowOptionsImpl.impl.setOnOpenFn(content.getOptions(),
+        new VoidCallback() {
+          @Override
+          public void callback() {
+            Iterator<InfoWindowListener> iter = listenerList.iterator();
+            InfoWindowListener cb;
+
+            while (iter.hasNext()) {
+              cb = iter.next();
+              cb.onInfoWindowOpened(map);
+            }
+          }
+        });
+  }
+
 }
