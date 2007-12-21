@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
@@ -30,6 +31,8 @@ import com.google.gwt.user.client.ui.FormHandler;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormSubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormSubmitEvent;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -39,17 +42,15 @@ import com.google.gwt.user.client.ui.Widget;
  * Use the GClientGeocoder.getLatLng() method to convert a string address into a
  * GLatLng. Because geocoding involves sending a request to Google's servers, it
  * can take some time. To avoid making your script wait, you should pass in a
- * callback function to exdcute after the response returns.
+ * callback function to execute after the response returns.
  * 
  * In this example, we geocode an address, add a marker at that point, and open
  * an info window displaying the address.
  */
 public class GeocoderDemo extends MapsDemo {
 
-  private MapWidget map;
-
-  private Geocoder geocoder;
-
+  static final private double atlantaLat = 33.7814790;
+  static final private double atlantaLng = -84.3880580;
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
       public MapsDemo createInstance() {
@@ -61,16 +62,24 @@ public class GeocoderDemo extends MapsDemo {
       }
     };
   }
+  private Geocoder geocoder;
+  private Label latLabel;
+  private Label lngLabel;
+
+  private MapWidget map;
 
   public GeocoderDemo() {
     Panel panel = new FlowPanel();
     final FormPanel form = new FormPanel();
     form.setAction("#");
+
     Panel formElements = new FlowPanel();
     final TextBox address = new TextBox();
     address.setVisibleLength(60);
-    address.setText("1600 Amphitheatre Pky, Mountain View, CA");
+    address.setText("10 10th Street, Atlanta, GA");
     formElements.add(address);
+    formElements.add(buildLatLngPanel());
+
     Button submit = new Button("Go!");
     submit.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
@@ -90,11 +99,30 @@ public class GeocoderDemo extends MapsDemo {
     });
     panel.add(form);
 
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(new LatLng(atlantaLat, atlantaLng), 13);
     map.setSize("500px", "300px");
     panel.add(map);
     initWidget(panel);
     geocoder = new Geocoder();
+  }
+
+  /* Build a horizontal panel to display latitude and longitude returned 
+   * from the geocoding service.
+   * 
+   * Broke this function out to make the constructor more readable.
+   */
+  private Panel buildLatLngPanel() {
+    HorizontalPanel horiz = new HorizontalPanel();
+    horiz.add(new Label("Lat:"));
+    latLabel = new Label();
+    latLabel.setText(Double.toString(atlantaLat));
+    horiz.add(latLabel);
+    horiz.add(new Label("Long:"));
+    lngLabel = new Label();
+    lngLabel.setText(Double.toString(atlantaLng));
+    horiz.add(lngLabel);
+    horiz.setSpacing(10);
+    return horiz;
   }
 
   private void showAddress(final String address) {
@@ -109,6 +137,9 @@ public class GeocoderDemo extends MapsDemo {
         Marker marker = new Marker(point);
         map.addOverlay(marker);
         info.open(marker, new InfoWindowContent(address));
+        NumberFormat fmt = NumberFormat.getFormat("#.0000000#");
+        latLabel.setText(fmt.format(point.getLatitude()));
+        lngLabel.setText(fmt.format(point.getLongitude()));
       }
     });
   }

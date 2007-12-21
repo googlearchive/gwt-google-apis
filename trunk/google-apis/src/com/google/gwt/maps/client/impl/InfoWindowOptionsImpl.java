@@ -35,7 +35,37 @@ public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
 
   public void setMapType(JavaScriptObject jsoPeer, MapType mapType);
 
+  /**
+   * JSIO will not create a JS binding to an overloaded method. Use the
+   * fieldName annotation to map 2 differently named functions to the same JS
+   * property.
+   * 
+   * @gwt.fieldName maxContent
+   */
+  public void setMaxContentElement(JavaScriptObject jsoPeer,
+      JavaScriptObject maximizedContentWidget);
+
+  /**
+   * @gwt.fieldName maxContent
+   */
+  public void setMaxContentString(JavaScriptObject jsoPeer,
+      String windowMaximizedContent);
+
+  /**
+   * @gwt.fieldName maxTitle
+   */
+  public void setMaxTitleElement(JavaScriptObject jsoPeer,
+      JavaScriptObject maximizedTitleWidget);
+
+  /**
+   * @gwt.fieldName maxTitle
+   */
+  public void setMaxTitleString(JavaScriptObject jsoPeer,
+      String windowMaximizedTitle);
+
   public void setMaxWidth(JavaScriptObject jsoPeer, int maxWidth);
+
+  public void setNoCloseOnClick(JavaScriptObject jsoPeer, boolean noCloseFlag);
 
   public void setOnCloseFn(JavaScriptObject jsoPeer, VoidCallback closeFunction);
 
