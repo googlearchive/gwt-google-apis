@@ -1,7 +1,4 @@
-#summary Getting Started with the GWT Google APIs
+﻿#summary Getting Started with the GWT Google APIs
 
 = Getting Started =
 
- * [FAQ_UnableToFindModule GWT compiler is unable to find module on classpath.]
-
- * [FAQ_ImportCannotBeResolved GWT compiler cannot resolve import.]
