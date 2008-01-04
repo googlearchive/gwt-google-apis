@@ -4,4 +4,4 @@
 
 
 [FAQ_GettingStarted Getting Started]
-Problems frequently encountered when using GWT for the first time.
+Problems frequently encountered when using the Google API Library for GWT for the first time.
