@@ -37,16 +37,18 @@ import com.google.gwt.user.client.DeferredCommand;
  */
 public class WeatherMapDemo extends MapsDemo {
 
-  private static final String IMAGE_LOCATION = "http://www.google.com/apis/maps/documentation/markermanager/";
-
-  private static final String[] IMAGES = {"sun", "rain", "snow", "storm"};
+  private static final String[] IMAGES = {
+      "sun", "rain", "snow", "storm"
+  };
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new WeatherMapDemo();
       }
 
+      @Override
       public String getName() {
         return "Weather Map";
       }
@@ -60,11 +62,11 @@ public class WeatherMapDemo extends MapsDemo {
   public WeatherMapDemo() {
     icons = new Icon[IMAGES.length];
     for (int i = 0; i < IMAGES.length; i++) {
-      icons[i] = new Icon(IMAGE_LOCATION + IMAGES[i] + ".png");
+      icons[i] = new Icon(IMAGES[i] + ".png");
       icons[i].setIconAnchor(new Point(16, 16));
       icons[i].setInfoWindowAnchor(new Point(16, 0));
       icons[i].setIconSize(new Size(32, 32));
-      icons[i].setShadowURL(IMAGE_LOCATION + IMAGES[i] + "-shadow.png");
+      icons[i].setShadowURL(IMAGES[i] + "-shadow.png");
       icons[i].setShadowSize(new Size(59, 32));
     }
 
@@ -73,12 +75,12 @@ public class WeatherMapDemo extends MapsDemo {
     map.addControl(new LargeMapControl());
     map.setDoubleClickZoom(true);
     initWidget(map);
-    
+
     // Delay this so that the rest of the UI can be rendered
     DeferredCommand.addCommand(new Command() {
       public void execute() {
         setupWeatherMarkers();
-      }      
+      }
     });
   }
 
