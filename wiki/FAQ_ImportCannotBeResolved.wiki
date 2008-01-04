@@ -12,12 +12,11 @@ Analyzing source in module 'com.example.gearsTest'
       [ERROR] Line 26:  Gears cannot be resolved
 }}}
 
-The problem you are encountering is that there is no module that provides the package `com.google.gwt.gears` on the module source path.  This can be resolved in one of two ways:
+The problem you are encountering is that there is no package `com.google.gwt.gears` on the module source path.  This can be resolved in one of two ways:
 
- 1 Add a `<source>` tag to your _<module>_`.gwt.xml` file that defines the package path.
- 1 Add an `<inherits>` tag if your Third party library provides one.   For using the
-Gears package in GWT Google API, the appropriate line is:
+ 1 Add a `<source>` tag to your _<module>_`.gwt.xml` file that adds the package to the module source path.
+ 1 Add an `<inherits>` tag to your _<module>_`.gwt.xml` file if your third party library provides one.   For using the Gears package in GWT Google API, the appropriate line is:
 
 {{{
    <inherits name='com.google.gwt.gears.Gears'>
-}}} 
+}}}
