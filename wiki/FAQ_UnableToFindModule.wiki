@@ -15,7 +15,7 @@ com.google.gwt.core.ext.UnableToCompleteException: (see previous log entries)
 ...
 }}}
 
-The most common way to invoke the GWT compiler is through the _<module>_`-compile` script created by the `projectCreator` convenience script.   When using any third party API, you need to make sure that the GWT compiler can access the third party source code through the Java classpath.  The solution is to modify the _<module>_`-compile` script and add the `gwt-google-apis.jar` file to the `-cp` argument:
+The most common way to invoke the GWT compiler is through the _<module>_`-compile` script created by the `projectCreator` convenience script.   When using any third party API, you need to make sure that the GWT compiler can access the third party source code through the Java classpath.  In this case, the solution is to modify the _<module>_`-compile` script and add the `gwt-google-apis.jar` file to the `-cp` argument:
 
 {{{
 #!/bin/sh
