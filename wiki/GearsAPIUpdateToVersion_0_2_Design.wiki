@@ -1,0 +1,24 @@
+#summary Design: Gears API Update to version 0.2
+
+= Goals =
+  * Expose the new features of the Gears API version 0.2 in a GWT friendly way.
+
+= Non-goals =
+  * TBD
+
+= Changes Gears API version 0.2 = 
+  # New HttpRequest Module API
+  # New Timer Module API
+  # Update WorkerPool API
+  # Update LocalServer API
+  # Update Factory API
+
+= Proposed Use Cases =
+  # Create a worker thread from a GWT module's {GWT Module}.nocache.js file.
+  # Allow HttpRequest Module API to be used from a worker thread.
+  # Allow the Timer Module API to be used from a worker thread.
+  
+= Open Issues = 
+  # Will WorkerPool.createWorkerFromUrl allow a worker thread to be created from the {GWT Module}.nocache.js file?
+  # Can we use a GWT rebind rule to select the Gears HttpRequest Module API when GWT's RequestBuilder is used from within a worker thread module?
+  # Can we use a GWT rebind rule to select the Gears Timer Module API when GWT's Timer class is used from a worker thread?
