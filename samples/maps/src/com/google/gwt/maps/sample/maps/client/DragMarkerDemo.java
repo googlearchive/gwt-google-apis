@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,6 +22,7 @@ import com.google.gwt.maps.client.event.DragListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
+import com.google.gwt.user.client.ui.HTML;
 
 /**
  * Markers are interactive objects that can be clicked on and dragged to a new
@@ -34,20 +35,36 @@ import com.google.gwt.maps.client.overlay.MarkerOptions;
  * option to false and it will drop down gracefully.
  */
 public class DragMarkerDemo extends MapsDemo {
+  private static HTML descHTML = null;
 
-  private MapWidget map;
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA.</p>"
+      + "<p>Draws a marker at the center of the maps window.  The marker will move if you click and drag it.</p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/marker-drag.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/marker-drag.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new DragMarkerDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
       public String getName() {
         return "Draggable Markers";
       }
     };
   }
+
+  private MapWidget map;
 
   public DragMarkerDemo() {
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
@@ -56,6 +73,7 @@ public class DragMarkerDemo extends MapsDemo {
 
   }
 
+  @Override
   public void onShow() {
     map.clearOverlays();
 

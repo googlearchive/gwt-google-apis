@@ -17,12 +17,17 @@
   <inherits name="com.google.gwt.maps.GoogleMaps" />
   <entry-point class="com.google.gwt.maps.sample.maps.client.HelloMaps" />
 
+  <stylesheet src="GWT-default.css" />
   <stylesheet src="TextualZoomControl.css" />
+  <stylesheet src="HelloMaps.css" />
+ 
+
   <!--
     If you want to deploy this application outside of localhost,
     you must obtain a Google Maps API key at:
     http://www.google.com/apis/maps/signup.html
     Replace the src attribute below with a URL that contains your key.
   -->
-  <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
+  <!--script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" -->
+  <script src="http://maps.google.com/maps?file=api&amp;v=2.81&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
 </module>

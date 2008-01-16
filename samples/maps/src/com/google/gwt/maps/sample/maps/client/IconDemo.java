@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,6 +25,7 @@ import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.overlay.Icon;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
+import com.google.gwt.user.client.ui.HTML;
 
 /**
  * This example creates a new type of icon, using the <a
@@ -35,19 +36,37 @@ import com.google.gwt.maps.client.overlay.MarkerOptions;
  */
 public class IconDemo extends MapsDemo {
 
-  private MapWidget map;
+  private static HTML descHTML = null;
+
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA.</p>"
+      + "<p>Displays a new type of icon (mini marker) at random points"
+      + "inside the maps viewport.</p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/icon-simple.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/icon-simple.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new IconDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+      
+      @Override
       public String getName() {
         return "Creating Icons";
       }
     };
   }
+
+  private MapWidget map;
 
   public IconDemo() {
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
@@ -57,6 +76,7 @@ public class IconDemo extends MapsDemo {
     map.addControl(new MapTypeControl());
   }
 
+  @Override
   public void onShow() {
     map.clearOverlays();
 

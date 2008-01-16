@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,6 +22,7 @@ import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -40,23 +41,41 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class KmlOverlayDemo extends MapsDemo {
 
-  private MapWidget map;
+  private static HTML descHTML = null;
 
-  private GeoXmlOverlay geoXml;
-
-  private boolean geoXmlShown;
+  private static final String descString = "<p>Creates a map view of the "
+      + "contents of a Geo KML file</p>"
+      + "<p>Displays some paths in a KML file hosted at Google.</p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geoxml-kml.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/geoxml-kml.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new KmlOverlayDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+      
+      @Override
       public String getName() {
         return "KML Overlays";
       }
     };
   }
+
+  private MapWidget map;
+
+  private GeoXmlOverlay geoXml;
+
+  private boolean geoXmlShown;
 
   public KmlOverlayDemo() {
     Panel panel = new FlowPanel();
@@ -81,6 +100,7 @@ public class KmlOverlayDemo extends MapsDemo {
     geoXml = new GeoXmlOverlay("http://mapgadgets.googlepages.com/cta.kml");
   }
 
+  @Override
   public void onShow() {
     if (!geoXmlShown) {
       map.addOverlay(geoXml);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,6 +18,7 @@ package com.google.gwt.maps.sample.maps.client;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.HTML;
 
 /**
  * The following example displays a map, waits two seconds, and then pans to a
@@ -29,23 +30,42 @@ import com.google.gwt.user.client.Timer;
  */
 public class AnimateDemo extends MapsDemo {
 
-  private MapWidget map;
-  
-  private final LatLng start = new LatLng(37.4419, -122.1419);
-  
-  private final LatLng end = new LatLng(37.4569, -122.1569);
+  private static HTML descHTML = null;
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+      + "You should be able to scroll the viewport by clicking and dragging "
+      + "with the mouse.</p>\n"
+      + "<p>After one second, the map will automatically scroll "
+      + "diagonally.</p>\n"
+      + "<p>Eqivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/map-animate.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/map-animate.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new AnimateDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
       public String getName() {
         return "Map Movement and Animation";
       }
     };
   }
+
+  private MapWidget map;
+
+  private final LatLng start = new LatLng(37.4419, -122.1419);
+
+  private final LatLng end = new LatLng(37.4569, -122.1569);
 
   public AnimateDemo() {
     map = new MapWidget(start, 13);
@@ -53,9 +73,11 @@ public class AnimateDemo extends MapsDemo {
     initWidget(map);
   }
 
+  @Override
   public void onShow() {
     map.setCenter(start);
     new Timer() {
+      @Override
       public void run() {
         map.panTo(end);
       }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -45,28 +46,22 @@ import com.google.gwt.user.client.ui.Widget;
  * with the getContainer() method on Map
  */
 public class CustomControlDemo extends MapsDemo {
-
-  private MapWidget map;
-
-  public static MapsDemoInfo init() {
-    return new MapsDemoInfo() {
-      public MapsDemo createInstance() {
-        return new CustomControlDemo();
-      }
-
-      public String getName() {
-        return "Custom Map Controls";
-      }
-    };
-  }
+  private static HTML descHTML = null;
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+      + "The standard zoom in and zoom out controls have been replaced with a "
+      + "custom control in the form of two boxes with the text 'Zoom In' and 'Zoom Out' " 
+      + "at the upper left of the map.</p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/control-custom.html\">" 
+      + "http://code.google.com/apis/maps/documentation/examples/control-custom.html</a></p>\n";
 
   private static class TextualZoomControl extends CustomControl {
     public TextualZoomControl() {
       super(new ControlPosition(ControlPosition.TOP_LEFT, 7, 7));
     }
 
+    @Override
     protected Widget initialize(final MapWidget map) {
-      System.out.println("initializing!");
       Panel container = new FlowPanel();
       container.add(new TextualZoomWidget("Zoom In", new ClickListener() {
         public void onClick(Widget sender) {
@@ -92,6 +87,29 @@ public class CustomControlDemo extends MapsDemo {
       setStyleName("textualZoomControl");
     }
   }
+
+  public static MapsDemoInfo init() {
+    return new MapsDemoInfo() {
+      @Override
+      public MapsDemo createInstance() {
+        return new CustomControlDemo();
+      }
+
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+      
+      @Override
+      public String getName() {
+        return "Custom Map Controls";
+      }
+    };
+  }
+
+  private MapWidget map;
 
   public CustomControlDemo() {
     map = new MapWidget(new LatLng(37.441944, -122.141944), 13);

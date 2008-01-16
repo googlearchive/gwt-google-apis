@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -32,7 +32,7 @@ public class DemoList extends Composite {
 
 //  private HorizontalPanel list = new HorizontalPanel();
   private ListBox list = new ListBox();
-  private ArrayList sinks = new ArrayList();
+  private ArrayList<MapsDemoInfo> sinks = new ArrayList<MapsDemoInfo>();
 
   public DemoList() {
     initWidget(list);
@@ -42,7 +42,6 @@ public class DemoList extends Composite {
         History.newItem(list.getItemText(list.getSelectedIndex()));
       }      
     });
-    setStyleName("ks-List");
   }
 
   public void addMapsDemo(final MapsDemoInfo info) {
@@ -53,7 +52,7 @@ public class DemoList extends Composite {
 
   public MapsDemoInfo find(String sinkName) {
     for (int i = 0; i < sinks.size(); ++i) {
-      MapsDemoInfo info = (MapsDemoInfo) sinks.get(i);
+      MapsDemoInfo info = sinks.get(i);
       if (info.getName().equals(sinkName)) {
         return info;
       }

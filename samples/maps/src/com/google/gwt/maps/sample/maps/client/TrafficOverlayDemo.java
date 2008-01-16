@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,6 +21,7 @@ import com.google.gwt.maps.client.overlay.TrafficOverlay;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -33,24 +34,43 @@ import com.google.gwt.user.client.ui.Widget;
  * displayed only for supported cities.
  */
 public class TrafficOverlayDemo extends MapsDemo {
+  private static HTML descHTML = null;
+
+  private static final String descString = "<p>Displays a map centered on Brooklyn, NY USA</p>"
+    + "<p>The Google traffic service is called and retrieves an overlay "
+    + "representing current traffic conditions.  Pressing the 'Toggle Traffic' " 
+    + "button will alternately hide and show the overlay.</p>"
+    + "<p>Equivalent to the Maps JavaScript API Example: "
+    + "<a href=\"http://code.google.com/apis/maps/documentation/examples/trafficOverlay.html\">" 
+    + "http://code.google.com/apis/maps/documentation/examples/trafficOverlay.html</a></p>\n";
+
+ 
+  public static MapsDemoInfo init() {
+    return new MapsDemoInfo() {
+      @Override
+      public MapsDemo createInstance() {
+        return new TrafficOverlayDemo();
+      }
+
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
+      public String getName() {
+        return "Traffic Overlays";
+      }
+    };
+  }
 
   private MapWidget map;
 
   private TrafficOverlay trafficInfo;
 
   private boolean trafficShown;
-
-  public static MapsDemoInfo init() {
-    return new MapsDemoInfo() {
-      public MapsDemo createInstance() {
-        return new TrafficOverlayDemo();
-      }
-
-      public String getName() {
-        return "Traffic Overlays";
-      }
-    };
-  }
 
   public TrafficOverlayDemo() {
     Panel panel = new FlowPanel();
@@ -74,6 +94,7 @@ public class TrafficOverlayDemo extends MapsDemo {
     trafficInfo = new TrafficOverlay();
   }
 
+  @Override
   public void onShow() {
     map.clearOverlays();
     map.addOverlay(trafficInfo);
