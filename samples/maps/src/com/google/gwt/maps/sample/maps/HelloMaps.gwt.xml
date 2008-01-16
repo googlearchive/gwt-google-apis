@@ -1,5 +1,5 @@
 <!--                                                                        -->
-<!-- Copyright 2007 Google Inc.                                             -->
+<!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
 <!-- may not use this file except in compliance with the License. You may   -->
 <!-- may obtain a copy of the License at                                    -->
@@ -28,6 +28,5 @@
     http://www.google.com/apis/maps/signup.html
     Replace the src attribute below with a URL that contains your key.
   -->
-  <!--script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" -->
-  <script src="http://maps.google.com/maps?file=api&amp;v=2.81&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
+  <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
 </module>
