@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,6 +26,7 @@ import com.google.gwt.maps.client.overlay.MarkerManager;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.ui.HTML;
 
 /**
  * The Google Maps API now allows you to add traffic information to your maps.
@@ -36,6 +37,13 @@ import com.google.gwt.user.client.DeferredCommand;
  * only for supported cities.
  */
 public class WeatherMapDemo extends MapsDemo {
+  private static HTML descHTML = null;
+
+  private static final String descString = "<p>Displays a map centered on Europe</p>"
+      + "<p>Displays random icons of weather events on the map at zoom levels 3, 6, 8.</p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://gmaps-utility-library.googlecode.com/svn/trunk/markermanager/release/examples/weather_map.html\">"
+      + "http://gmaps-utility-library.googlecode.com/svn/trunk/markermanager/release/examples/weather_map.html</a></p>\n";
 
   private static final String[] IMAGES = {
       "sun", "rain", "snow", "storm"
@@ -46,6 +54,13 @@ public class WeatherMapDemo extends MapsDemo {
       @Override
       public MapsDemo createInstance() {
         return new WeatherMapDemo();
+      }
+
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
       }
 
       @Override

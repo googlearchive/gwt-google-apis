@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,6 +19,7 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.MapMoveListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 
@@ -30,14 +31,36 @@ import com.google.gwt.user.client.ui.Panel;
  */
 public class EventDemo extends MapsDemo {
 
+  private static HTML descHTML =
+      null;
+  private static final String descString =
+      "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+          + "You should be able to scroll the viewport by clicking and dragging "
+          + "with the mouse.</p>\n"
+          + "<p>Dragging the map fires a MapMoveListener that reports the "
+          + "Lat/Lng coordinates below the map.</p>"
+          + "<p>Equivalent to the Maps JavaScript API Example: "
+          + "<a href=\"http://code.google.com/apis/maps/documentation/examples/event-context.html\">"
+          + "http://code.google.com/apis/maps/documentation/examples/event-context.html</a></p>\n";
+
   private MapWidget map;
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new EventDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML =
+              new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
       public String getName() {
         return "Event Listeners";
       }
@@ -45,11 +68,14 @@ public class EventDemo extends MapsDemo {
   }
 
   public EventDemo() {
-    Panel panel = new FlowPanel();
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    Panel panel =
+        new FlowPanel();
+    map =
+        new MapWidget(new LatLng(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     panel.add(map);
-    final Label message = new Label();
+    final Label message =
+        new Label();
     panel.add(message);
     initWidget(panel);
     map.addMapMoveListener(new MapMoveListener() {

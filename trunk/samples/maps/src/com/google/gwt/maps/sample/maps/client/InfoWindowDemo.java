@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -44,13 +43,49 @@ public class InfoWindowDemo extends MapsDemo {
 
   private static final String TEST_DEFAULT = "Default Info Window";
   private static final String TEST_MAX_CONTENT = "Test maxContent";
-  private static final String TEST_MAX_TITLE_CONTENT_WIDGET =
-      "Test Maximized with Widgets";
+  private static final String TEST_MAX_TITLE_CONTENT_WIDGET = "Test Maximized with Widgets";
   private static final String TEST_IMAGE = "Test adding an Image";
   private static final String TEST_NO_CLICK = "Test noClick";
   private static final String TEST_TABS = "Test with Tabs";
-  private static final String TEST_INFO_WINDOW_LISTENER =
-      "Test Info Window Listener";
+  private static final String TEST_INFO_WINDOW_LISTENER = "Test Info Window Listener";
+  private static final String TEST_MAP_BLOWUP = "Test Map Blowup Info Window";
+
+  private static HTML descHTML = null;
+  private static final String descString = "<h2>InfoWindow Demos</h2>\n"
+      + "<p>Tests the InfoWindow APIs</p>" + "<ol>\n" + " <li><b>"
+      + TEST_DEFAULT
+      + "</b>: Display an info window with a tree widget in "
+      + "the center of the current viewport.  Click on the map outside the "
+      + "and the InfoWindow will close.\n"
+      + "Equivalent to Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/map-infowindow.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/map-infowindow.html</a></li>"
+      + "<li><b>"
+      + TEST_MAX_CONTENT
+      + "</b>: Add a Maximized Title and Content to "
+      + "the InfoWindow</li>\n"
+      + "<li><b>"
+      + TEST_MAX_TITLE_CONTENT_WIDGET
+      + "</b>: Instead of text, use widgets"
+      + "for the title and content when maximized.</li>\n"
+      + "<li><b>"
+      + TEST_IMAGE
+      + "</b>: Use an image in the main InfoWindow.</li>"
+      + "<li><b>"
+      + TEST_NO_CLICK
+      + "</b>: Turn on the 'noClick' setting so that the "
+      + " InfoWindow won't close when you click on the map.</li>\n"
+      + "<li><b>"
+      + TEST_TABS
+      + "</b>: Create an InfoWindow with three tabs.</li>"
+      + "<li><b>"
+      + TEST_INFO_WINDOW_LISTENER
+      + "</b>: Register two "
+      + "InfoWindowListeners</li>\n" 
+      + "<li><b>"
+      + TEST_MAP_BLOWUP
+      + "</b>: Display a Map Blowup inside an InfoWindow</li>"
+      + "</ol>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -58,6 +93,13 @@ public class InfoWindowDemo extends MapsDemo {
       @Override
       public MapsDemo createInstance() {
         return new InfoWindowDemo();
+      }
+
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
       }
 
       @Override
@@ -76,10 +118,8 @@ public class InfoWindowDemo extends MapsDemo {
 
     VerticalPanel vertPanel = new VerticalPanel();
     vertPanel.setStyleName("hm-panel");
-    vertPanel.setSpacing(10);
 
     map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
-    map.setSize("500px", "300px");
     vertPanel.add(map);
 
     actionListBox = new ListBox();
@@ -90,6 +130,7 @@ public class InfoWindowDemo extends MapsDemo {
     actionListBox.addItem(TEST_MAX_CONTENT);
     actionListBox.addItem(TEST_MAX_TITLE_CONTENT_WIDGET);
     actionListBox.addItem(TEST_INFO_WINDOW_LISTENER);
+    actionListBox.addItem(TEST_MAP_BLOWUP);
 
     actionListBox.addChangeListener(new ChangeListener() {
       public void onChange(Widget sender) {
@@ -103,10 +144,12 @@ public class InfoWindowDemo extends MapsDemo {
     horizPanel.add(new Label("Choose Action:"));
     horizPanel.add(actionListBox);
     horizPanel.setSpacing(10);
+
     vertPanel.add(horizPanel);
 
     vertPanel.add(map);
     initWidget(vertPanel);
+
   }
 
   @Override
@@ -125,19 +168,18 @@ public class InfoWindowDemo extends MapsDemo {
     }
 
     info = map.getInfoWindow();
-    String selection =
-        actionListBox.getItemText(actionListBox.getSelectedIndex());
+    String selection = actionListBox.getItemText(actionListBox.getSelectedIndex());
 
-    if (selection == null) return;
+    if (selection == null)
+      return;
 
     InfoWindowContent content;
 
     if (selection.equals(TEST_MAX_CONTENT)) {
 
       // Demonstrate the use of the maxTitle and maxContent properties
-      HTML htmlWidget =
-          new HTML("<h1>ATTENTION PLEASE</h1>"
-              + "<p> I have a few things to say to you (click maximize.)</p>");
+      HTML htmlWidget = new HTML("<h1>ATTENTION PLEASE</h1>"
+          + "<p> I have a few things to say to you (click maximize.)</p>");
       content = new InfoWindowContent(htmlWidget);
       content.setMaxContent("<p>Now is the time for all good men to come to the"
           + " aid of their country because we hold these truths to be self"
@@ -152,16 +194,16 @@ public class InfoWindowDemo extends MapsDemo {
     } else if (selection.equals(TEST_IMAGE)) {
 
       // An image that isn't loaded yet doesn't work well sometimes
-      HTML htmlWidget = new HTML("<img src=\"boot.jpg\">");
+      // Specify the width and height to work around this.
+      HTML htmlWidget = new HTML(
+          "<img src=\"boot.jpg\" width=\"235\" height=\"287\">");
       content = new InfoWindowContent(htmlWidget);
     } else if (selection.equals(TEST_NO_CLICK)) {
 
       // Demonstrates setting the info window to stay "sticky" and not
       // automatically close when the user clicks on the maps window.
-      HTML htmlWidget =
-          new HTML(
-              "<h1>STICKY INFO WINDOW</h1>"
-                  + "<p> Click if you must, you won't get rid of me that easily.</p>");
+      HTML htmlWidget = new HTML("<h1>STICKY INFO WINDOW</h1>"
+          + "<p> Click if you must, you won't get rid of me that easily.</p>");
       content = new InfoWindowContent(htmlWidget);
       content.setNoCloseOnClick(true);
     } else if (selection.equals(TEST_TABS)) {
@@ -176,7 +218,10 @@ public class InfoWindowDemo extends MapsDemo {
 
       // Display listeners when the info window is opened and closed.
       content = displayInfoWindowWithListeners();
+    } else if (selection.equals(TEST_MAP_BLOWUP)) {
 
+      // Display a Map Blowup Window
+      content = new InfoWindowContent.MapBlowupContent();
     } else {
 
       // The default case
@@ -196,8 +241,8 @@ public class InfoWindowDemo extends MapsDemo {
   }
 
   private InfoWindowContent displayInfoWindowMaxWidget() {
-    final InfoWindowContent content =
-        new InfoWindowContent("There's more to see (hit the maximize button)");
+    final InfoWindowContent content = new InfoWindowContent(
+        "There's more to see (hit the maximize button)");
     content.setMaxTitle(new HTML("<i>Maximized Italic Boots</i>"));
     content.setMaxContent(new Image("boot.jpg"));
     return content;
@@ -221,19 +266,19 @@ public class InfoWindowDemo extends MapsDemo {
    * @return an newly initialized content object to open an InfoWindow
    */
   private InfoWindowContent displayInfoWindowWithListeners() {
-    InfoWindowContent content =
-        new InfoWindowContent("Expect 2 alerts on open and close.");
+    InfoWindowContent content = new InfoWindowContent(
+        "Expect 2 alerts on open and close.");
     content.addInfoWindowListener(new InfoWindowListener() {
       public void onInfoWindowClosed(MapWidget sender) {
         Window.alert("Closed InfoWindow (1)");
-        if (sender == null)  {
+        if (sender == null) {
           Window.alert("null Map window!");
         }
       }
 
       public void onInfoWindowOpened(MapWidget sender) {
         Window.alert("Opened InfoWindow (1)");
-        if (sender == null)  {
+        if (sender == null) {
           Window.alert("null Map window!");
         }
       }
@@ -241,14 +286,14 @@ public class InfoWindowDemo extends MapsDemo {
     content.addInfoWindowListener(new InfoWindowListener() {
       public void onInfoWindowClosed(MapWidget sender) {
         Window.alert("Closed InfoWindow (2)");
-        if (sender == null)  {
+        if (sender == null) {
           Window.alert("null Map window!");
         }
       }
 
       public void onInfoWindowOpened(MapWidget sender) {
         Window.alert("Opened InfoWindow (2)");
-        if (sender == null)  {
+        if (sender == null) {
           Window.alert("null Map window!");
         }
       }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,6 +19,7 @@ import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.client.geocode.Geocoder;
 import com.google.gwt.maps.client.geocode.LatLngCallback;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -31,6 +32,7 @@ import com.google.gwt.user.client.ui.FormHandler;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormSubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormSubmitEvent;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -48,20 +50,41 @@ import com.google.gwt.user.client.ui.Widget;
  * an info window displaying the address.
  */
 public class GeocoderDemo extends MapsDemo {
+  private static HTML descHTML = null;
+
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA.</p>"
+      + "<p>Type an address in the textbox.  Clicking the 'Go' button will"
+      + "contact the Google Geocoding service, display the resulting "
+      + "Lat/Lng coordinates, and re-position the map with those coordinates"
+      + "in the center </p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geocoding-simple.html\">" 
+      + "http://code.google.com/apis/maps/documentation/examples/geocoding-simple.html</a></p>\n";
 
   static final private double atlantaLat = 33.7814790;
   static final private double atlantaLng = -84.3880580;
+
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new GeocoderDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
       public String getName() {
-        return "Geocoding";
+        return "Geocoding: Simple";
       }
     };
   }
+
   private Geocoder geocoder;
   private Label latLabel;
   private Label lngLabel;
@@ -103,11 +126,12 @@ public class GeocoderDemo extends MapsDemo {
     map.setSize("500px", "300px");
     panel.add(map);
     initWidget(panel);
-    geocoder = new Geocoder();
+    geocoder = new Geocoder(new GeocodeCache());
   }
 
-  /* Build a horizontal panel to display latitude and longitude returned 
-   * from the geocoding service.
+  /*
+   * Build a horizontal panel to display latitude and longitude returned from
+   * the geocoding service.
    * 
    * Broke this function out to make the constructor more readable.
    */

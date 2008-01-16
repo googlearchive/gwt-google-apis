@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,6 +24,7 @@ import com.google.gwt.maps.client.event.MarkerClickListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.user.client.ui.HTML;
 
 /**
  * In this example, we show a custom info window above each marker by listening
@@ -31,19 +32,34 @@ import com.google.gwt.maps.client.overlay.Marker;
  */
 public class MarkerInfoWindowDemo extends MapsDemo {
 
-  private MapWidget map;
+  private static HTML descHTML = null;
+
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA.</p>"
+      + "<p>Displays markers at random points.  Clicking on a marker displays an "
+      + "InfoWindow with the number of the marker in the content.</p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new MarkerInfoWindowDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
       public String getName() {
         return "Display Info Windows Above Markers";
       }
     };
   }
+
+  private MapWidget map;
 
   public MarkerInfoWindowDemo() {
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
@@ -51,6 +67,23 @@ public class MarkerInfoWindowDemo extends MapsDemo {
     initWidget(map);
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
+  }
+
+  @Override
+  public void onShow() {
+    map.clearOverlays();
+
+    // Add 10 markers to the map at random locations
+    LatLngBounds bounds = map.getBounds();
+    LatLng southWest = bounds.getSouthWest();
+    LatLng northEast = bounds.getNorthEast();
+    double lngSpan = northEast.getLongitude() - southWest.getLongitude();
+    double latSpan = northEast.getLatitude() - southWest.getLatitude();
+    for (int i = 0; i < 10; i++) {
+      LatLng point = new LatLng(southWest.getLatitude() + latSpan
+          * Math.random(), southWest.getLongitude() + lngSpan * Math.random());
+      map.addOverlay(createMarker(point, i + 1));
+    }
   }
 
   private Marker createMarker(LatLng point, final int number) {
@@ -66,21 +99,5 @@ public class MarkerInfoWindowDemo extends MapsDemo {
       }
     });
     return marker;
-  }
-
-  public void onShow() {
-    map.clearOverlays();
-
-    // Add 10 markers to the map at random locations
-    LatLngBounds bounds = map.getBounds();
-    LatLng southWest = bounds.getSouthWest();
-    LatLng northEast = bounds.getNorthEast();
-    double lngSpan = northEast.getLongitude() - southWest.getLongitude();
-    double latSpan = northEast.getLatitude() - southWest.getLatitude();
-    for (int i = 0; i < 10; i++) {
-      LatLng point = new LatLng(southWest.getLatitude() + latSpan
-          * Math.random(), southWest.getLongitude() + lngSpan * Math.random());
-      map.addOverlay(createMarker(point, i + 1));
-    }
   }
 }

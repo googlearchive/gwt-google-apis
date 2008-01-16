@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,6 +23,7 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HTML;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -38,20 +39,38 @@ import java.util.Comparator;
  * and VML</a> for more information.
  */
 public class OverlayDemo extends MapsDemo {
-
-  private MapWidget map;
+  private static HTML descHTML = null;
+  private static final String descString =
+      "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+          + "You should be able to scroll the viewport by clicking and dragging "
+          + "with the mouse.</p>\n"
+          + "<p>You should see a purple polyline with multiple segments " 
+          + "(The vertices are randomly generated).</p>"
+          + "<p>Equivalent to the Maps JavaScript API Example: "
+          + "<a href=\"http://code.google.com/apis/maps/documentation/examples/polyline-simple.html\">"
+          + "http://code.google.com/apis/maps/documentation/examples/polyline-simple.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new OverlayDemo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null) descHTML = new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
       public String getName() {
         return "Map Overlays";
       }
     };
   }
+
+  private MapWidget map;
 
   public OverlayDemo() {
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
@@ -61,6 +80,7 @@ public class OverlayDemo extends MapsDemo {
     map.addControl(new MapTypeControl());
   }
 
+  @Override
   public void onShow() {
     map.clearOverlays();
 
@@ -71,8 +91,9 @@ public class OverlayDemo extends MapsDemo {
     double lngSpan = northEast.getLongitude() - southWest.getLongitude();
     double latSpan = northEast.getLatitude() - southWest.getLatitude();
     for (int i = 0; i < 10; i++) {
-      LatLng point = new LatLng(southWest.getLatitude() + latSpan
-          * Math.random(), southWest.getLongitude() + lngSpan * Math.random());
+      LatLng point =
+          new LatLng(southWest.getLatitude() + latSpan * Math.random(),
+              southWest.getLongitude() + lngSpan * Math.random());
       map.addOverlay(new Marker(point));
     }
 
@@ -80,8 +101,9 @@ public class OverlayDemo extends MapsDemo {
     // longitude so that the line does not intersect itself.
     LatLng[] points = new LatLng[5];
     for (int i = 0; i < 5; i++) {
-      points[i] = new LatLng(southWest.getLatitude() + latSpan * Math.random(),
-          southWest.getLongitude() + lngSpan * Math.random());
+      points[i] =
+          new LatLng(southWest.getLatitude() + latSpan * Math.random(),
+              southWest.getLongitude() + lngSpan * Math.random());
     }
 
     Arrays.sort(points, new Comparator<LatLng>() {

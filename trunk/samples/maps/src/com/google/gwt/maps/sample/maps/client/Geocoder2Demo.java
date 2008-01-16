@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.FormHandler;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormSubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormSubmitEvent;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -47,10 +48,16 @@ import com.google.gwt.user.client.ui.Widget;
  * an info window displaying the address.
  */
 public class Geocoder2Demo extends MapsDemo {
+  private static HTML descHTML = null;
 
-  private MapWidget map;
-
-  private Geocoder geocoder;
+  private static final String descString = "<p> Creates a zoomed out map.</p>"
+      + "<p>Clicking on one of the buttons below the map submits the  address to "
+      + "the Google Geocoding service.  When the query returns sucessfully"
+      + "the map will display a marker on the coordinates and display the "
+      + "country code returned from the query in an InfoWindow.</p>"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geocoding-extraction.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/geocoding-extraction.html</a></p>\n";
 
   private static final String[] sampleAddresses = {
       "1600 amphitheatre mtn view ca",
@@ -59,19 +66,33 @@ public class Geocoder2Demo extends MapsDemo {
       "Champ de Mars 75007 Paris, France", "Piazza del Colosseo, Roma, Italia",
       "Domkloster 3, 50667 Köln, Deutschland",
       "Plaza de la Virgen de los Reyes, 41920, Sevilla, España",
-      "123 Main St, Googleville"};
+      "123 Main St, Googleville"
+  };
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new Geocoder2Demo();
       }
 
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+
+      @Override
       public String getName() {
-        return "Extracting Structured Address Information";
+        return "Geocoding: Extracting Address Information";
       }
     };
   }
+
+  private MapWidget map;
+
+  private Geocoder geocoder;
 
   public Geocoder2Demo() {
     Panel panel = new FlowPanel();
@@ -103,7 +124,7 @@ public class Geocoder2Demo extends MapsDemo {
     panel.add(form);
 
     map = new MapWidget(new LatLng(34, 0), 1);
-    map.setSize("500px", "300px");
+    map.setSize("100%", "480px");
     panel.add(map);
 
     for (int i = 0; i < sampleAddresses.length; i++) {

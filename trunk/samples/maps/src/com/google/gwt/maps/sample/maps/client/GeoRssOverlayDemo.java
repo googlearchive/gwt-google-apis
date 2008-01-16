@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,13 +22,14 @@ import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * The Google Maps API supports the KML and GeoRSS data formats for displaying
  * geographic information. These data formats are added to a map using the
- * GGeoXml object, whose constructor takes the URL of a publically accessible
+ * GGeoXml object, whose constructor takes the URL of a publicly accessible
  * XML file. GGeoXml placemarks are rendered as markers, while GGeoXml polylines
  * and polygons are rendered as Google Maps API polylines and polygons.
  * &lt;GroundOverlay&gt; elements within KML files are rendered as
@@ -42,23 +43,40 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class GeoRssOverlayDemo extends MapsDemo {
 
-  private MapWidget map;
+  private static HTML descHTML = null;
 
-  private GeoXmlOverlay geoXml;
-
-  private boolean geoXmlShown;
+  private static final String descString = "<p>Creates a map view of the "
+      + "contents of a Geo RSS file</p>"
+      + "<p>Each entry in the RSS file is displayed as a marker.</p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geoxml-rss.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/geoxml-rss.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
+      @Override
       public MapsDemo createInstance() {
         return new GeoRssOverlayDemo();
       }
-
+      
+      @Override
+      public HTML getDescriptionHTML() {
+        if (descHTML == null)
+          descHTML = new HTML(descString);
+        return descHTML;
+      }
+      
+      @Override
       public String getName() {
         return "GeoRSS Overlays";
       }
     };
   }
+  private MapWidget map;
+
+  private GeoXmlOverlay geoXml;
+
+  private boolean geoXmlShown;
 
   public GeoRssOverlayDemo() {
     Panel panel = new FlowPanel();
@@ -85,6 +103,7 @@ public class GeoRssOverlayDemo extends MapsDemo {
         "http://api.flickr.com/services/feeds/groups_pool.gne?id=322338@N20&format=rss_200&georss=1");
   }
 
+  @Override
   public void onShow() {
     map.clearOverlays();
     map.addOverlay(geoXml);
