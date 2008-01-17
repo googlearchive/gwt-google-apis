@@ -7,7 +7,7 @@
   * [http://code.google.com/p/gwt-google-apis/wiki/AJAXSearchAPIDesign Google AJAX Search API] ([http://code.google.com/p/gwt-google-apis/issues/detail?id=9 #9])
 
 === API Updates ===
-  * Update Gears bindings to support Gears API version 0.2.
+  * [http://code.google.com/p/gwt-google-apis/wiki/GearsAPIUpdateToVersion_0_2_Design Update Gears bindings to support Gears API version 0.2.]
 
 === Fixes ===
   * Method to test for Gears availability ([http://code.google.com/p/gwt-google-apis/issues/detail?id=1 #1])
