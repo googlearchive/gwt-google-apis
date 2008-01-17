@@ -10,11 +10,15 @@
   # New HttpRequest Module API
   # New Timer Module API
   # Update WorkerPool API
+    * Add onerror callback
+    * Add createWorkerFromURL
+    * Add allowCrossOrigin
+    * Update onmessage callback to use the messageObject parameter
   # Update LocalServer API
-  # Update Factory API
+  # Expose the Factory version property
 
 = Proposed Use Cases =
-  # Create a worker thread from a GWT module's {GWT Module}.nocache.js file.
+  # Create a worker thread from a URL.
   # Allow HttpRequest Module API to be used from a worker thread.
   # Allow the Timer Module API to be used from a worker thread.
   
