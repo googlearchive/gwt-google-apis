@@ -1,57 +1,54 @@
-/*
- * Copyright 2007 Google Inc.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
-// Sets up google.gears.factory to point to an instance of GearsFactory.
+// Copyright 2007 Google Inc. All Rights Reserved.
 //
-// google.gears.factory is *the only* supported way to access GearsFactory.
-// We reserve the right to change the way Scour is exposed in the browser at
-// in the future, but we will always support the google.gears.factory object.
+// Sets up google.gears.*, which is *the only* supported way to access Gears.
 //
 // Circumvent this file at your own risk!
+//
+// In the future, Gears may automatically define google.gears.* without this
+// file. Gears may use these objects to transparently fix bugs and compatibility
+// issues. Applications that use the code below will continue to work seamlessly
+// when that happens.
 
-if (typeof google == 'undefined') {
-  var google = {};
-}
+(function() {
+  // We are already defined. Hooray!
+  if (window.google && google.gears) {
+    return;
+  }
 
-if (typeof google.gears == 'undefined') {
-  google.gears = {};
-}
+  var factory = null;
 
-if (typeof google.gears.factory == 'undefined') {
-  google.gears.factory = (function() {
-    // Firefox
-    if (typeof GearsFactory != 'undefined') {
-      return new GearsFactory();
-    }
-
+  // Firefox
+  if (typeof GearsFactory != 'undefined') {
+    factory = new GearsFactory();
+  } else {
     // IE
     try {
-      return new ActiveXObject('Gears.Factory');
-    } catch (e) {}
-
-    // Safari
-    if (navigator.mimeTypes["application/x-googlegears"]) {
-      var factory = document.createElement("object");
-      factory.style.display = "none";
-      factory.width = "0";
-      factory.height = "0";
-      factory.type = "application/x-googlegears";
-      document.documentElement.appendChild(factory);
-      return factory;
+      factory = new ActiveXObject('Gears.Factory');
+    } catch (e) {
+      // Safari
+      if (navigator.mimeTypes["application/x-googlegears"]) {
+        factory = document.createElement("object");
+        factory.style.display = "none";
+        factory.width = 0;
+        factory.height = 0;
+        factory.type = "application/x-googlegears";
+        document.documentElement.appendChild(factory);
+      }
     }
+  }
 
-    return null;
-  })();
-}
+  // *Do not* define any objects if Gears is not installed. This mimics the
+  // behavior of Gears defining the objects in the future.
+  if (!factory) {
+    return;
+  }
+
+  // Now set up the objects, being careful not to overwrite anything.
+  if (!window.google) {
+    window.google = {};
+  }
+
+  if (!google.gears) {
+    google.gears = {factory: factory};
+  }
+})();
