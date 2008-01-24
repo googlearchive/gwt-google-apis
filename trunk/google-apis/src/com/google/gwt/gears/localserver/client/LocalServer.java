@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -38,22 +38,14 @@ public class LocalServer {
    * @return
    */
   private static native boolean nativeCanServeLocally(JavaScriptObject jso,
-      String url) throws GearsException /*-{
-    try {
-      return jso.canServeLocally(url);
-    } catch (e) {
-      @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-    }
+      String url) /*-{
+    return jso.canServeLocally(url);
   }-*/;
 
   private static native void nativeRemoveStore(JavaScriptObject server,
-      String name, String requiredCookie) throws GearsException /*-{
-   try {
-   server.removeStore(name, requiredCookie);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
-   }-*/;
+      String name, String requiredCookie) /*-{
+    server.removeStore(name, requiredCookie);
+  }-*/;
 
   /**
    * Reference to the local server JavaScript object provided by Gears
@@ -97,7 +89,11 @@ public class LocalServer {
       throw new IllegalArgumentException();
     }
     
-    return nativeCanServeLocally(server, url);
+    try {
+      return nativeCanServeLocally(server, url);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -134,7 +130,7 @@ public class LocalServer {
       }
       return new ManagedResourceStore(jso);
     } catch (JavaScriptException e) {
-      throw new GearsException("Error: " + e.getMessage());
+      throw new GearsException(e.getMessage(), e);
     }
   }
 
@@ -170,7 +166,7 @@ public class LocalServer {
       }
       return new ResourceStore(jso);
     } catch (JavaScriptException e) {
-      throw new GearsException("Error: " + e.getMessage());
+      throw new GearsException(e.getMessage(), e);
     }
   }
 
@@ -205,7 +201,7 @@ public class LocalServer {
       }
       return new ManagedResourceStore(jso);
     } catch (JavaScriptException e) {
-      throw new GearsException("Error: " + e.getMessage());
+      throw new GearsException(e.getMessage(), e);
     }
   }
 
@@ -238,7 +234,7 @@ public class LocalServer {
       }
       return new ResourceStore(jso);
     } catch (JavaScriptException e) {
-      throw new GearsException("Error: " + e.getMessage());
+      throw new GearsException(e.getMessage(), e);
     }
   }
 
@@ -264,7 +260,7 @@ public class LocalServer {
     try {
       nativeCallMethod("removeManagedStore", name, requiredCookie);
     } catch (JavaScriptException e) {
-      throw new GearsException("Error: " + e.getMessage());
+      throw new GearsException(e.getMessage(), e);
     }
   }
 
@@ -287,7 +283,11 @@ public class LocalServer {
    */
   public void removeResourceStore(String name, String requiredCookie)
       throws GearsException {
-    nativeRemoveStore(server, name, requiredCookie);
+    try {
+      nativeRemoveStore(server, name, requiredCookie);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**

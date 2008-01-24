@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -113,15 +113,16 @@ public class GearsHelper {
     ArrayList al = new ArrayList();
     try {
       rs = db.execute(DB_FETCH_TEXT);
+      while (rs.isValidRow()) {
+        Note nd = new Note(rs.getFieldAsString(0), rs.getFieldAsString(1), rs
+            .getFieldAsString(2));
+        al.add(nd);
+        rs.next();
+      }
     } catch (DatabaseException e) {
       return null;
     }
-    while (rs.isValidRow()) {
-      Note nd = new Note(rs.getFieldAsString(0), rs.getFieldAsString(1), rs
-          .getFieldAsString(2));
-      al.add(nd);
-      rs.next();
-    }
+    
     Note[] notes = new Note[al.size()];
     for (int i = 0; i < al.size(); ++i) {
       notes[i] = (Note) al.get(i);

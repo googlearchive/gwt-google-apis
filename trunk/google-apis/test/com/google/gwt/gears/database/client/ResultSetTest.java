@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -38,6 +38,33 @@ public class ResultSetTest extends GWTTestCase {
     rs.close();
 
     return db.execute("select * from test");
+  }
+
+  private static void storeAndVerifyDate(Database db, Date value, 
+      boolean asString)
+      throws DatabaseException {
+
+    String stringValue;
+    if (asString) {
+      stringValue = value.toString();
+    } else {
+      stringValue = Long.toString(value.getTime());
+    } 
+
+    ResultSet rs = createDatabase(db, asString ? "string" : "number", stringValue);
+    rs.close();
+    rs = db.execute("select * from test");
+    try {
+      Date retrievedDate = rs.getFieldAsDate(0);
+      assertEquals(value.toString(), retrievedDate.toString());
+      if (!asString) {
+        // The dates will not be equal if we stored them as a string 
+        // because we loose precision in the milliseconds component.
+        assertEquals(value, retrievedDate);
+      }
+    } finally {
+      rs.close();
+    }
   }
 
   public String getModuleName() {
@@ -112,15 +139,8 @@ public class ResultSetTest extends GWTTestCase {
     Database db = new Database(DB_NAME);
     try {
       Date value = new Date();
-      ResultSet rs = createDatabase(db, "number", value.toString());
-      rs.close();
-      rs = db.execute("select * from test");
-      try {
-        assertEquals(value.getTime(), rs.getFieldAsDate(0).getTime());
-        assertEquals(value, rs.getFieldAsDate(0));
-      } finally {
-        rs.close();
-      }
+      storeAndVerifyDate(db, value, true);
+      storeAndVerifyDate(db, value, false);
     } finally {
       db.close();
     }

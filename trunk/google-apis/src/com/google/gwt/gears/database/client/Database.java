@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -33,6 +33,15 @@ import com.google.gwt.gears.core.client.impl.GearsImpl;
  */
 public class Database {
 
+  private static ResultSet execute(JavaScriptObject jso, String statement, 
+      String[] args) throws DatabaseException {
+    try {
+      return new ResultSet(nativeExecute(jso, statement, args));
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
+  }
+  
   /**
    * Native proxy call to the close method on the JavaScript object.
    */
@@ -48,19 +57,14 @@ public class Database {
    * @return the JavaScript object corresponding to a ResultSet
    */
   private static native JavaScriptObject nativeExecute(
-      JavaScriptObject database, String statement, String[] args)
-      throws DatabaseException /*-{
-   try {
-   if (args == null) {
-   return database.execute(statement);
-   } else {
-   var newArgs = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(args);
-   return database.execute(statement, newArgs);
-   }
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwDatabaseException(Ljava/lang/String;)(e.toString());
-   }
-   }-*/;
+      JavaScriptObject database, String statement, String[] args) /*-{
+    if (args == null) {
+      return database.execute(statement);
+    } else {
+      var newArgs = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(args);
+      return database.execute(statement, newArgs);
+    }
+  }-*/;
 
   private static native int nativeGetLastInsertRowId(JavaScriptObject database) /*-{
    return database.lastInsertRowId;
@@ -125,7 +129,12 @@ public class Database {
       throw new NullPointerException();
     }
     dbObj = GearsImpl.create(className, classVersion);
-    nativeOpen(dbObj, databaseName);
+
+    try {
+      nativeOpen(dbObj, databaseName);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -136,11 +145,11 @@ public class Database {
   public void close() throws DatabaseException {
     try {
       nativeClose(dbObj);
-    } catch (JavaScriptException e) {
-      throw new DatabaseException("Error closing database " + e.getMessage(), e);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
     }
   }
-
+  
   /**
    * Executes the indicated SQL statement, and returns the results. Note that
    * the {@link ResultSet} returned must be closed when it is no longer needed.
@@ -156,7 +165,7 @@ public class Database {
       throw new NullPointerException();
     }
 
-    return new ResultSet(nativeExecute(dbObj, statement, null));
+    return execute(dbObj, statement, null);
   }
 
   /**
@@ -179,7 +188,7 @@ public class Database {
       throw new NullPointerException();
     }
 
-    return new ResultSet(nativeExecute(dbObj, statement, args));
+    return execute(dbObj, statement, args);
   }
 
   /**

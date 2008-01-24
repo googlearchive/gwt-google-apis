@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.gears.workerpool.client;
 
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.gears.core.client.Gears;
 import com.google.gwt.gears.core.client.GearsException;
@@ -53,21 +54,13 @@ public class WorkerPool {
    * @return the ID of the newly-created thread
    */
   private static native int nativeCreateWorkerByString(JavaScriptObject pool,
-      String javaScript) throws GearsException /*-{
-   try {
+      String javaScript) /*-{
    return pool.createWorker(javaScript);
-   } catch (e) {
-   @com.google.gwt.gears.workerpool.client.WorkerPool::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native void nativeSendMessage(JavaScriptObject pool,
-      String message, int destWorker) throws GearsException /*-{
-   try {
+      String message, int destWorker) /*-{
    pool.sendMessage(message, destWorker);
-   } catch (e) {
-   @com.google.gwt.gears.workerpool.client.WorkerPool::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   /**
@@ -82,10 +75,6 @@ public class WorkerPool {
    @com.google.gwt.gears.workerpool.client.WorkerPool::fireOnMessageReceived(Lcom/google/gwt/gears/workerpool/client/WorkerPool;Ljava/lang/String;I)(jPool, msg, srcId);
    }
    }-*/;
-
-  private static void throwGearsException(String message) throws GearsException {
-    throw new GearsException(message);
-  }
 
   /**
    * The callback function registered to this worker thread.
@@ -137,7 +126,11 @@ public class WorkerPool {
       throw new NullPointerException();
     }
 
-    return nativeCreateWorkerByString(pool, javaScript);
+    try {
+      return nativeCreateWorkerByString(pool, javaScript);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -154,7 +147,12 @@ public class WorkerPool {
     if (message == null) {
       throw new NullPointerException();
     }
-    nativeSendMessage(pool, message, destWorker);
+    
+    try {
+      nativeSendMessage(pool, message, destWorker);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
   
   /**
