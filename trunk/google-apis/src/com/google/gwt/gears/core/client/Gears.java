@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -47,12 +47,31 @@ public class Gears {
    * This string has no defined format, and client code should not rely on its
    * contents or a particular parsing algorithm.
    * 
-   * @return the build info string for the current version of Gears
+   * @return the build info string for the current version of Gears, or 
+   * <code>null</code> if Gears is not installed.
    */
-  public static native String getBuildInfo() /*-{
-   return $wnd.google.gears.factory.getBuildInfo();
-   }-*/;
+  public static String getBuildInfo() {
+    if (isInstalled()) {
+      return nativeGetBuildInfo();
+    }
+    
+    return null;
+  }
+  
+  /**
+   * Returns <code>true</code> if Gears is installed.
+   * 
+   * @return <code>true</code> if Gears is installed
+   */
+  public static native boolean isInstalled() /*-{
+    var available = $wnd.google && $wnd.google.gears;
+    return available != null;
+  }-*/;
 
+  private static native String nativeGetBuildInfo() /*-{
+   return $wnd.google.gears.factory.getBuildInfo();
+  }-*/;
+  
   /**
    * Default constructor. Intentionally private.
    */
