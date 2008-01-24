@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,6 +16,7 @@
 package com.google.gwt.gears.localserver.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.gears.core.client.GearsException;
@@ -25,6 +26,14 @@ import com.google.gwt.user.client.Element;
  * Manages an ad-hoc collection of captured URLs, which can be served locally.
  */
 public class ResourceStore {
+  private static int captureURLs(JavaScriptObject jso, String[] urls, URLCaptureCallback callback) throws GearsException {
+    try {
+      return nativeCaptureURL(jso, urls, callback);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
+  }
+
   /*
    * Called from JSNI code.
    */
@@ -52,13 +61,10 @@ public class ResourceStore {
    rStoreObj.abortCapture(captureId);    
    }-*/;
 
+  // TODO: Revisit implementing file capture.
   private static native void nativeCaptureFile(JavaScriptObject rStoreObj,
-      Element element, String url) throws GearsException /*-{
-   try {
+      Element element, String url) /*-{
    return rStoreObj.captureFile(element, url);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   /**
@@ -69,64 +75,40 @@ public class ResourceStore {
    * @return an ID for the capture operation
    */
   private static native int nativeCaptureURL(JavaScriptObject rStoreObj,
-      String[] urls, URLCaptureCallback callback) throws GearsException /*-{
-   try {
+      String[] urls, URLCaptureCallback callback) /*-{
    var newUrls = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(urls);
    var callbackFunc = function(url, success, captureId) {
    @com.google.gwt.gears.localserver.client.ResourceStore::fireURLCaptureCallback(Lcom/google/gwt/gears/localserver/client/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
    };
    return rStoreObj.capture(newUrls, callbackFunc);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native void nativeCopyURL(JavaScriptObject rStoreObj,
-      String src, String dest) throws GearsException /*-{
-   try {
+      String src, String dest) /*-{
    rStoreObj.copy(src, dest);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
+  // TODO: Revisit file capture mechanism
   private static native JavaScriptObject nativeCreateFileSubmitter(
-      JavaScriptObject rStoreObj) throws GearsException /*-{
-   try {
+      JavaScriptObject rStoreObj) /*-{
    return rStoreObj.createFileSubmitter()();
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native String nativeGetAllURLHeaders(
-      JavaScriptObject rStoreObj, String url) throws GearsException /*-{
-   try {
+      JavaScriptObject rStoreObj, String url) /*-{
    var headers = rStoreObj.getAllHeaders(url);
    return headers == null ? null : headers;
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   } 
    }-*/;
 
   private static native String nativeGetCapturedFileName(
-      JavaScriptObject rStoreObj, String url) throws GearsException /*-{
-   try {
+      JavaScriptObject rStoreObj, String url) /*-{
    var fileName = rStoreObj.getCapturedFileName(url);
    return fileName == null ? null : fileName;
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native String nativeGetCapturedURLHeader(
-      JavaScriptObject rStoreObj, String url, String name)
-      throws GearsException /*-{
-   try {
+      JavaScriptObject rStoreObj, String url, String name) /*-{
    return rStoreObj.getHeader(url, name);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native String nativeGetName(JavaScriptObject rStoreObj) /*-{
@@ -143,30 +125,18 @@ public class ResourceStore {
    }-*/;
 
   private static native boolean nativeIsURLCaptured(JavaScriptObject rStoreObj,
-      String url) throws GearsException /*-{
-   try {
+      String url) /*-{
    return rStoreObj.isCaptured(url);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }        
    }-*/;
 
   private static native void nativeRemoveURL(JavaScriptObject rStoreObj,
-      String url) throws GearsException /*-{
-   try {
+      String url) /*-{
    rStoreObj.remove(url);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }        
    }-*/;
 
   private static native void nativeRenameURL(JavaScriptObject rStoreObj,
-      String src, String dest) throws GearsException /*-{
-   try {
+      String src, String dest) /*-{
    rStoreObj.rename(src, dest);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }        
    }-*/;
 
   private static native void nativeSetEnabled(JavaScriptObject rStoreObj,
@@ -176,11 +146,7 @@ public class ResourceStore {
 
   private static native void nativeSetFileInputElement(
       JavaScriptObject fileSub, Element element, String url) /*-{
-   try {
    fileSub.setFileInputElement(element, url);
-   } catch (e) {
-   @com.google.gwt.gears.core.client.impl.GearsImpl::throwGearsException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   /**
@@ -232,9 +198,9 @@ public class ResourceStore {
    */
   public int captureURL(String url, URLCaptureCallback callback)
       throws GearsException {
-    return nativeCaptureURL(rStoreObj, new String[] {url}, callback);
+    return captureURLs(rStoreObj, new String[] {url}, callback);
   }
-
+  
   /**
    * Initiates an asynchronous background task to capture the indicated URLs.
    * The return value is a captureId which can be passed to abortCapture to
@@ -251,7 +217,7 @@ public class ResourceStore {
    */
   public int captureURLs(String[] urls, URLCaptureCallback callback)
       throws GearsException {
-    return nativeCaptureURL(rStoreObj, urls, callback);
+    return captureURLs(rStoreObj, urls, callback);
   }
 
   /**
@@ -263,7 +229,11 @@ public class ResourceStore {
    *           same origin as the current page
    */
   public void copyCapturedURL(String srcUrl, String destUrl) throws GearsException {
-    nativeCopyURL(rStoreObj, srcUrl, destUrl);
+    try {
+      nativeCopyURL(rStoreObj, srcUrl, destUrl);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -278,7 +248,11 @@ public class ResourceStore {
    */
   public String getAllCapturedURLHeaders(String capturedURL)
       throws GearsException {
-    return nativeGetAllURLHeaders(rStoreObj, capturedURL);
+    try {
+      return nativeGetAllURLHeaders(rStoreObj, capturedURL);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -293,7 +267,11 @@ public class ResourceStore {
    */
   public String getCapturedURLHeaderValue(String capturedURL, String headerName)
       throws GearsException {
-    return nativeGetCapturedURLHeader(rStoreObj, capturedURL, headerName);
+    try {
+      return nativeGetCapturedURLHeader(rStoreObj, capturedURL, headerName);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -325,7 +303,11 @@ public class ResourceStore {
    *           current page
    */
   public boolean isCapturedURL(String url) throws GearsException {
-    return nativeIsURLCaptured(rStoreObj, url);
+    try {
+      return nativeIsURLCaptured(rStoreObj, url);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -345,7 +327,11 @@ public class ResourceStore {
    *           current page
    */
   public void removeCapturedURL(String url) throws GearsException {
-    nativeRemoveURL(rStoreObj, url);
+    try {
+      nativeRemoveURL(rStoreObj, url);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -359,7 +345,11 @@ public class ResourceStore {
    */
   public void renameCapturedURL(String srcURL, String destURL)
       throws GearsException {
-    nativeRenameURL(rStoreObj, srcURL, destURL);
+    try {
+      nativeRenameURL(rStoreObj, srcURL, destURL);
+    } catch (JavaScriptException ex) {
+      throw new GearsException(ex.getMessage(), ex);
+    }
   }
 
   /**

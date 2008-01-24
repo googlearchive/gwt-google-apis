@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -64,8 +64,8 @@ public class WorkerPoolTest extends GWTTestCase {
       }
     });
 
-    int wID = wp.createWorkerFromString("");
-    wp.sendMessage("stop", wID);
+    // You can create a worker from an empty string, you just can't sent it a message.
+    wp.createWorkerFromString("");
   }
 
   /**
@@ -79,7 +79,6 @@ public class WorkerPoolTest extends GWTTestCase {
       public void onMessageReceived(String message, int srcWorker) {
       }
     });
-
     try {
       int wID = wp.createWorkerFromString(null);
       wp.sendMessage("stop", wID);
@@ -96,7 +95,7 @@ public class WorkerPoolTest extends GWTTestCase {
   public void testSendMessage() {
     try {
       WorkerPool wp = new WorkerPool(null);
-      int workerID = wp.createWorkerFromString("");
+      int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
       wp.sendMessage("foo", workerID);
     } catch (GearsException e) {
       fail(e.getMessage());
@@ -110,7 +109,7 @@ public class WorkerPoolTest extends GWTTestCase {
   public void testSendMessageEmpty() {
     try {
       WorkerPool wp = new WorkerPool(null);
-      int workerID = wp.createWorkerFromString("");
+      int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
       wp.sendMessage("", workerID);
     } catch (GearsException e) {
       fail(e.getMessage());
@@ -127,7 +126,7 @@ public class WorkerPoolTest extends GWTTestCase {
 
     try {
       WorkerPool wp = new WorkerPool(null);
-      int workerID = wp.createWorkerFromString("");
+      int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
       wp.sendMessage("", -2);
       fail("Expected a GearsException");
     } catch (GearsException e) {
@@ -143,7 +142,7 @@ public class WorkerPoolTest extends GWTTestCase {
    */
   public void testSendMessageNull() throws GearsException {
     WorkerPool wp = new WorkerPool(null);
-    int workerID = wp.createWorkerFromString("");
+    int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
 
     try {
       wp.sendMessage(null, workerID);

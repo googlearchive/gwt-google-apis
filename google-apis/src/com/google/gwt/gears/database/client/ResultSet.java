@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.gears.database.client;
 
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 
 import java.util.Date;
@@ -25,21 +26,32 @@ import java.util.Date;
  * longer needed.
  */
 public class ResultSet {
+  private static double getFieldAsDouble(JavaScriptObject jso, int fieldIndex) 
+    throws DatabaseException {
+    try {
+      return nativeGetFieldAsDouble(jso, fieldIndex);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
+  }
+  
+  private static String getFieldAsString(JavaScriptObject jso, int fieldIndex) throws DatabaseException {
+    try {
+      return nativeGetFieldAsString(jso, fieldIndex);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
+  }
+
   /**
    * Native proxy call to the close method on the JavaScript object.
    */
-  private static native void nativeClose(JavaScriptObject rsetObj)
-      throws DatabaseException /*-{
-   try {
+  private static native void nativeClose(JavaScriptObject rsetObj) /*-{
    rsetObj.close();
-   } catch (e) {
-   @com.google.gwt.gears.database.client.ResultSet::throwDatabaseException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native char nativeGetFieldAsChar(JavaScriptObject rsetObj,
-      int fieldIndex) throws DatabaseException /*-{
-   try {
+      int fieldIndex) /*-{
    var val = rsetObj.field(fieldIndex);
    if (val == null) {
    return 0;
@@ -50,53 +62,32 @@ public class ResultSet {
    } else {
    return val;
    }
-   } catch (e) {
-   @com.google.gwt.gears.database.client.ResultSet::throwDatabaseException(Ljava/lang/String;)(e.toString());
-   }   
    }-*/;
 
   private static native long nativeGetFieldAsDate(JavaScriptObject rsetObj,
-      int fieldIndex) throws DatabaseException /*-{
-    try {
-      var val = rsetObj.field(fieldIndex);
-      if (val == null) {
-        return -1;
+      int fieldIndex) /*-{
+    var val = rsetObj.field(fieldIndex);
+    if (val == null) {
+      return -1;
+    } else {
+      if (typeof val == 'string') {
+        return @java.util.Date::parse(Ljava/lang/String;)(val);
       } else {
-        if (typeof val == 'string') {
-          var d = Date.parse(val);
-          try {
-            alert(d.getTime());
-          } catch (e) {
-            alert(e);
-          }
-          return isNAN(d) ? -1 : d;
-        } else {
-          return Number(val);
-        }
+        return Number(val);
       }
-    } catch (e) {
-     @com.google.gwt.gears.database.client.ResultSet::throwDatabaseException(Ljava/lang/String;)(e.toString());
-   }
+    }
    }-*/;
 
   private static native double nativeGetFieldAsDouble(JavaScriptObject rsetObj,
-      int fieldIndex) throws DatabaseException /*-{
-   try {
+      int fieldIndex) /*-{
    var val = rsetObj.field(fieldIndex);
    return val == null ? 0 : Number(val); 
-   } catch (e) {
-   @com.google.gwt.gears.database.client.ResultSet::throwDatabaseException(Ljava/lang/String;)(e.toString());
-   }   
    }-*/;
 
   private static native String nativeGetFieldAsString(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
-   try {
    var val = rsetObj.field(fieldIndex);
    return val == null ? null : String(val);
-   } catch (e) {
-   @com.google.gwt.gears.database.client.ResultSet::throwDatabaseException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native int nativeGetFieldCount(JavaScriptObject rsetObj) /*-{
@@ -104,12 +95,8 @@ public class ResultSet {
    }-*/;
 
   private static native String nativeGetFieldName(JavaScriptObject rsetObj,
-      int fieldIndex) throws DatabaseException /*-{
-   try {
+      int fieldIndex) /*-{
    return rsetObj.fieldName(fieldIndex);
-   } catch (e) {
-   @com.google.gwt.gears.database.client.ResultSet::throwDatabaseException(Ljava/lang/String;)(e.toString());
-   }
    }-*/;
 
   private static native boolean nativeIsValidRow(JavaScriptObject rsetObj) /*-{
@@ -119,14 +106,6 @@ public class ResultSet {
   private static native void nativeNext(JavaScriptObject rsetObj) /*-{
    rsetObj.next();
    }-*/;
-
-  /*
-   * Called from JSNI
-   */
-  private static void throwDatabaseException(String message)
-      throws DatabaseException {
-    throw new DatabaseException(message);
-  }
 
   /**
    * Reference to the result set JavaScript object provided by Gears.
@@ -141,7 +120,7 @@ public class ResultSet {
   ResultSet(JavaScriptObject jsoRSet) {
     rsetObj = jsoRSet;
   }
-
+  
   /**
    * Closes the result set. Destroys the SQL statement that gave rise to this
    * result set. Calling close() is required. User code must always call close()
@@ -150,7 +129,11 @@ public class ResultSet {
    * @throws DatabaseException on any error
    */
   public void close() throws DatabaseException {
-    nativeClose(rsetObj);
+    try {
+      nativeClose(rsetObj);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -162,7 +145,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public byte getFieldAsByte(int fieldIndex) throws DatabaseException {
-    return (byte) nativeGetFieldAsDouble(rsetObj, fieldIndex);
+    return (byte) getFieldAsDouble(rsetObj, fieldIndex);
   }
 
   /**
@@ -174,12 +157,20 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public char getFieldAsChar(int fieldIndex) throws DatabaseException {
-    return nativeGetFieldAsChar(rsetObj, fieldIndex);
+    try {
+      return nativeGetFieldAsChar(rsetObj, fieldIndex);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
   }
-
+  
   public Date getFieldAsDate(int fieldIndex) throws DatabaseException {
-    String value = nativeGetFieldAsString(rsetObj, fieldIndex);
-    return new Date(value);
+    try {
+      long value = nativeGetFieldAsDate(rsetObj, fieldIndex);
+      return new Date(value);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -191,7 +182,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public double getFieldAsDouble(int fieldIndex) throws DatabaseException {
-    return nativeGetFieldAsDouble(rsetObj, fieldIndex);
+    return getFieldAsDouble(rsetObj, fieldIndex);
   }
 
   /**
@@ -203,7 +194,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public float getFieldAsFloat(int fieldIndex) throws DatabaseException {
-    return (float) nativeGetFieldAsDouble(rsetObj, fieldIndex);
+    return (float) getFieldAsDouble(rsetObj, fieldIndex);
   }
 
   /**
@@ -215,7 +206,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public int getFieldAsInt(int fieldIndex) throws DatabaseException {
-    return (int) nativeGetFieldAsDouble(rsetObj, fieldIndex);
+    return (int) getFieldAsDouble(rsetObj, fieldIndex);
   }
 
   /**
@@ -227,7 +218,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public long getFieldAsLong(int fieldIndex) throws DatabaseException {
-    return (long) nativeGetFieldAsDouble(rsetObj, fieldIndex);
+    return (long) getFieldAsDouble(rsetObj, fieldIndex);
   }
 
   /**
@@ -239,7 +230,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public short getFieldAsShort(int fieldIndex) throws DatabaseException {
-    return (short) nativeGetFieldAsDouble(rsetObj, fieldIndex);
+    return (short) getFieldAsDouble(rsetObj, fieldIndex);
   }
 
   /**
@@ -250,8 +241,8 @@ public class ResultSet {
    * @return the field value as a String
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
-  public String getFieldAsString(int fieldIndex) {
-    return nativeGetFieldAsString(rsetObj, fieldIndex);
+  public String getFieldAsString(int fieldIndex) throws DatabaseException {
+    return getFieldAsString(rsetObj, fieldIndex);
   }
 
   /**
@@ -270,7 +261,11 @@ public class ResultSet {
    * @return the name of the field
    */
   public String getFieldName(int fieldIndex) throws DatabaseException {
-    return nativeGetFieldName(rsetObj, fieldIndex);
+    try {
+      return nativeGetFieldName(rsetObj, fieldIndex);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
   }
 
   /**
