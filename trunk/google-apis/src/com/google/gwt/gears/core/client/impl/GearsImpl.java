@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,8 +18,8 @@ package com.google.gwt.gears.core.client.impl;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.gears.core.client.Gears;
 import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.database.client.DatabaseException;
 
 /**
  * 
@@ -65,19 +65,16 @@ public class GearsImpl {
    */
   public static JavaScriptObject create(String className, String version)
       throws GearsException {
+    if (!Gears.isInstalled()) {
+      throw new GearsException("Google Gears is not installed.");
+    }
+      
     try {
       JavaScriptObject jso = nativeCreate(className, version);
-      if (jso == null) {
-        // TODO: What? This should never return null...
-        throw new NullPointerException();
-      }
+      assert (jso != null);
       return jso;
     } catch (JavaScriptException e) {
-      // TODO: Is this possible?
       throw new GearsException(e.getMessage(), e);
-    } catch (NullPointerException e) {
-      // TODO: Is this possible?
-      throw new GearsException("Null DB handle", e);
     }
   }
 
@@ -116,20 +113,5 @@ public class GearsImpl {
    */
   private static int getLength(String[] arr) {
     return arr.length;
-  }
-  
-  /*
-   * Called from JSNI
-   */
-  private static void throwDatabaseException(String message)
-      throws DatabaseException {
-    throw new DatabaseException(message);
-  }
-
-  /*
-   * Called from JSNI
-   */
-  private static void throwGearsException(String message) throws GearsException {
-    throw new GearsException(message);
   }
 }
