@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -55,7 +55,7 @@ public interface IconImpl extends JSFlyweightWrapper {
    */
   public JavaScriptObject getDefaultIcon();
 
-  public String getDragCossImage(JavaScriptObject jsoPeer);
+  public String getDragCrossImage(JavaScriptObject jsoPeer);
 
   public Point getDragCrossAnchor(JavaScriptObject jsoPeer);
 
@@ -86,7 +86,7 @@ public interface IconImpl extends JSFlyweightWrapper {
 
   public String getTransparent(JavaScriptObject jsoPeer);
 
-  public void setDragCossImageUrl(JavaScriptObject jsoPeer, String url);
+  public void setDragCrossImage(JavaScriptObject jsoPeer, String url);
 
   public void setDragCrossAnchor(JavaScriptObject jsoPeer, Point anchor);
 
