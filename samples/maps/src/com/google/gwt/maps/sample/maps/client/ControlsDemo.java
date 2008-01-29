@@ -15,10 +15,13 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
@@ -28,17 +31,15 @@ import com.google.gwt.user.client.ui.HTML;
  */
 public class ControlsDemo extends MapsDemo {
 
-  private static HTML descHTML =
-      null;
-  private static final String descString =
-      "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
-          + "You should be able to scroll the viewport by clicking and dragging "
-          + "with the mouse.</p>\n"
-          + "<p>The map window should be decorated with controls for zooming "
-          + "in and out and for changing the map type.</p>"
-          + "<p>Equivalent to the Maps JavaScript API Example: "
-          + "<a href=\"http://code.google.com/apis/maps/documentation/examples/control-simple.html\">"
-          + "http://code.google.com/apis/maps/documentation/examples/control-simple.html</a></p>\n";
+  private static HTML descHTML = null;
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+      + "You should be able to scroll the viewport by clicking and dragging "
+      + "with the mouse.</p>\n"
+      + "<p>The map window should be decorated with controls for zooming "
+      + "in and out and for changing the map type.</p>"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/control-simple.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/control-simple.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -50,8 +51,7 @@ public class ControlsDemo extends MapsDemo {
       @Override
       public HTML getDescriptionHTML() {
         if (descHTML == null)
-          descHTML =
-              new HTML(descString);
+          descHTML = new HTML(descString);
         return descHTML;
       }
 
@@ -65,11 +65,33 @@ public class ControlsDemo extends MapsDemo {
   private MapWidget map;
 
   public ControlsDemo() {
-    map =
-        new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
+
+    Timer timer = new Timer() {
+
+      @Override
+      public void run() {
+        // Exercise the minimum & maximum resolution entry points.
+        MapType types[] = map.getMapTypes();
+        for (MapType t : types) {
+          int minResolution = t.getMinimumResolution();
+          int maxResolution = t.getMaximumResolution();
+          GWT.log("Map Type: " + t.getName(true) + " Min resolution: "
+              + minResolution + " Max Resolution: " + maxResolution, null);
+
+          minResolution = t.getMinimumResolution(map.getCenter());
+          maxResolution = t.getMaximumResolution(map.getCenter());
+          GWT.log("@ point: " + map.getCenter().toString() + " Map Type: "
+              + t.getName(true) + " Min resolution: " + minResolution
+              + " Max Resolution: " + maxResolution, null);
+        }
+      }
+    };
+    timer.schedule(1000);
+
   }
 }
