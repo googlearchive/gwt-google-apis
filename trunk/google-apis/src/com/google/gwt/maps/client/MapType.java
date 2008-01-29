@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -82,7 +82,9 @@ public final class MapType {
     NORMAL_MAP = createPeer(impl.getNormalMapType());
     SATELLITE_MAP = createPeer(impl.getSatelliteMapType());
     HYBRID_MAP = createPeer(impl.getHybridMapType());
-    DEFAULT_MAP_TYPES = new MapType[] {NORMAL_MAP, SATELLITE_MAP, HYBRID_MAP};
+    DEFAULT_MAP_TYPES = new MapType[] {
+        NORMAL_MAP, SATELLITE_MAP, HYBRID_MAP
+    };
   }
 
   static MapType createPeer(JavaScriptObject jsoPeer) {
@@ -173,11 +175,32 @@ public final class MapType {
    * Returns the highest zoom level at which this map type is defined for a
    * given point.
    * 
+   * @return the highest zoom level for the point
+   */
+  public int getMaximumResolution() {
+    return impl.getMaximumResolution(jsoPeer);
+  }
+
+  /**
+   * Returns the highest zoom level at which this map type is defined for a
+   * given point.
+   * 
    * @param latlng the point at which to find the maximum resolution
    * @return the highest zoom level for the point
    */
   public int getMaximumResolution(LatLng latlng) {
     return impl.getMaximumResolution(jsoPeer, latlng);
+  }
+
+  /**
+   * Returns the lowest zoom level at which this map type is defined for a given
+   * point.
+   * 
+   * @param latlng the point at which to find the minimum resolution
+   * @return the lowest zoom level for the point
+   */
+  public int getMinimumResolution() {
+    return impl.getMinimumResolution(jsoPeer);
   }
 
   /**
