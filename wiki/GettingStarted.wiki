@@ -8,7 +8,7 @@ Google services and browser extensions such as
 [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
 [http://code.google.com/apis/maps/ Google Maps API],
 [http://code.google.com/apis/gears/ Google Gears API],  and 
-[http://code.google.com/apis/base/ Boogle Base Data API].  The GWT Google 
+[http://code.google.com/apis/base/ Google Base Data API].  The GWT Google 
 APIs are intended to give GWT developers easy access to the latest 
 capabilities of these Google APIs without having to resort to writing lots 
 of integration code using !JavaScript.

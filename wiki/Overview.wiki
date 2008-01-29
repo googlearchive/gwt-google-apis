@@ -6,7 +6,7 @@ Using Google APIs you can integrate some of Google's online services such as
 [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
 [http://code.google.com/apis/maps/ Google Maps API],
 [http://code.google.com/apis/gears/ Google Gears API],  and 
-[http://code.google.com/apis/base/ Boogle Base Data API] into third party websites.  These APIs were originally offered as !JavaScript APIs for web programmers.  
+[http://code.google.com/apis/base/ Google Base Data API] into third party websites.  These APIs were originally offered as !JavaScript APIs for web programmers.  
 
 The [http://code.google.com/webtoolkit/ Google Web Toolkit] (GWT) brings a new dimension to web programming by offering a way to write a web application in the Java langauge, and deploy it to the web using !JavaScript.  
 
