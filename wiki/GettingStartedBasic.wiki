@@ -1,10 +1,12 @@
 #summary Adding Google APIs to a GWT Project
 
-= Getting Started with the Google Web Toolkit =
+= Introduction  =
 
 This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familir with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
 
 = Using a library or source code =
+
+When you develop code with the GWT Google APIs you have two choices.  You can either use the library from a JAR file, or you can use the library by pointing to a source tree, usually a current version of the library checked out from the Subversion repository.  Which method you choose depends on your development needs.
 
 The production version of the GWT Google APIs is distributed as a
 `.jar` file that is easy to integrate with an existing GWT project.
@@ -17,17 +19,16 @@ from a [http://subversion.tigris.org/ Subversion] repository hosted by
 need to use the latest features and bug fixes by the library, or if
 you are interested in contributing patches to the library.
 
+
 == Adding Google APIs to a GWT Project as a library ==
 
-This section describes how to integrate the `gwt-google-apis` JAR library
+This section describes how to integrate the `gwt-google-apis.jar` library
 with an existing GWT project.
 
 === Getting the GWT Google APIs library ===
 
-You can download the latest production release of the GWT Google APIs
-library from the
-[http://code.google.com/p/gwt-google-apis/downloads/list project
-download page].  After you download the distribution, uncompress
+You can download the latest production release of the GWT Google APIslibrary from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  
+After you download the distribution, uncompress
 it.  Inside the folder you will find a file named
 `gwt-google-apis.jar`. This is the one file you need to integrate the
 APIs with your project. 
@@ -70,7 +71,7 @@ Created file MapsTutorial/MapsTutorial-shell
 Created file MapsTutorial/MapsTutorial-compile
 }}}
 
-In order to use the  `MapsTutorial-shell` and MapsTutorial-compile` scripts to launch hosted mode or compile to !JavaScript, you will need to modify them to add _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar` to the classpath.  In the following example, the GWT jar files and GWT Google API jar file have been copied to the same path, `/usr/local/gwt`
+In order to use the  `MapsTutorial-shell` and `MapsTutorial-compile` scripts to launch hosted mode or compile to !JavaScript, you will need to modify them to add _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar` to the classpath.  In the following example, the GWT jar files and GWT Google API jar file have been copied to the same path, `/usr/local/gwt`
 
 Edit `MapsTutorial-shell` in a text editor (such as Notepad or vi) and append the jar file to the `-cp` argument to `java`.
 
@@ -123,30 +124,30 @@ Compilation succeeded
 
 === Updating Eclipse Build and Launch Configuration ===
 
-If you aren't using Eclipse, skip down to the section named _Testing a reference to a Google API_ below.
+If you aren't using Eclipse, skip down to the section named _Testing a Project using a Google API_ below.
 
 If you are using the Eclipse IDE and created your project with `applicationCreator -eclipse`, then you will have a `.project` file and a `MapsTutorial.launch` file in the root of your project.  
 
 Import the project into eclipse using the _File->Import..._ command.
 
-In order to build a project in Eclipse that references the GWT Google APIs, you need to add the `gwt-google-apis.jar` file to the Java build path.  Make sure your new project is open and select your project in the tree on the left and navigate to:
+In order to build a project in Eclipse that references the GWT Google APIs, you need to add the `gwt-google-apis.jar` file to the Java build path.  
 
-  _Project->Properties...->Java Build Path->Libraries_
-
-Choose the _Add External JARs_ option and add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`
+  1 Make sure your new project is open and select your project in the tree on the left.
+  1 Navigate to  _Project->Properties...->Java Build Path->Libraries_
+  1 Choose the _Add External JARs_ option and add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic2.png
 
 Next, you need to update the launch configuration.  
 
   1 Make sure your new project is open.
-  1 Navigate to _Run->Open Run Dialog...->_
-  1 Select _Java Application_ in the tree on the left, 
-  1 Select your project name (`MapsTutorial` in our example)
+  1 Navigate to _Run->Open Run Dialog..._
+  1 In the Run Dialog, open the  _Java Application_ branch in the tree on the left.
+  1 Select your project name (`MapsTutorial` in our example.)
   1 Open the _Classpath_ tab.  
   1 Select the _User Entries_ item in the tree.
   1 Click the _Add External JARs_ button 
-  1 Add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`.  Make sure that the _MapsTutorial (default classpath)_ is at the bottom of the list.
+  1 Add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`.  Make sure that the _!MapsTutorial (default classpath)_ is at the bottom of the list.
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic3.png
 
@@ -230,7 +231,7 @@ java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gw
 
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
 
-=== Importing the GWT Google APIs source code into an Eclipse project ===
+=== Creating an Eclipse project from the GWT Google APIs source code ===
 
 TODO: Document how to create a project out of the checked out SVN source
 
@@ -243,17 +244,18 @@ Import the project into eclipse using the _File->Import..._ command.
 After you sucessfully import the project, you need to update the launch configuration.  This will will allow you to launch hosted mode from Eclipse's `Run Dialog...` menu option.  
 
  1 Make sure your new project is open. 
- 1 Navigate to  _Run->Open Run Dialog...->_
- 1 Select _Java Application_ in the tree on the left, then select your project name (`MapsTutorial` in our example)
- 2 Open the Classpath tab.  Select the _User Entries_ item in the tree.
- 3 Click the _Advanced..._ button, 
- 4 Select _Add Folders_ and _OK_.  
- 5 When the file browser appears, select the directory `src` from the `gwt-google-apis` project you created in the previous step.  
- 6 Use the _Up_ and _Down_ button to move the _src_ folders to the top of the _User Entries_ list.  Make sure that the _MapsTutorial (default classpath)_ is at the bottom of the list.
+ 1 Navigate to  _Run->Open Run Dialog..._
+ 1 In the Run Dialog, open the _Java Application_ branch in the tree on the left
+ 1 Select your project name (`MapsTutorial` in our example.)
+ 1 Open the Classpath tab.  Select the _User Entries_ item in the tree.
+ 1 Click the _Advanced..._ button.
+ 1 Select _Add Folders_ and _OK_.  
+ 1 When the file browser appears, select the directory `src` from the `gwt-google-apis` project you created previously.  
+ 1 Use the _Up_ and _Down_ button to move the _src_ folders to the top of the _User Entries_ list.  Make sure that the _!MapsTutorial (default classpath)_ is at the bottom of the list.
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic4.png
 
-== Testing a reference to a Google API ==
+== Testing a Project using a Google API ==
 
 TODO: Add an import to gwt.xml
 TODO: Modify the .java file
