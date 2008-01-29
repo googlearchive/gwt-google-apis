@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+u * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,7 @@ import com.google.gwt.maps.client.impl.IconImpl;
 import com.google.gwt.maps.client.util.JsUtil;
 
 /**
- * 
+ * Wrapper for the Maps API GIcon class
  */
 public final class Icon {
 
@@ -54,7 +54,7 @@ public final class Icon {
   }
 
   public String getDragCossImageUrl() {
-    return IconImpl.impl.getDragCossImage(jsoPeer);
+    return IconImpl.impl.getDragCrossImage(jsoPeer);
   }
 
   public Point getDragCrossAnchor() {
@@ -92,7 +92,8 @@ public final class Icon {
     return IconImpl.impl.getMaxHeight(jsoPeer);
   }
 
-  // TODO: why is this different than getPrintImageUrl?
+  // This different than getPrintImageUrl because of browser differences
+  // in Mozilla/Firefox. (problems with transparent images on IE?)
   public String getMozPrintImageURL() {
     return IconImpl.impl.getMozPrintImage(jsoPeer);
   }
@@ -113,8 +114,8 @@ public final class Icon {
     return IconImpl.impl.getTransparent(jsoPeer);
   }
 
-  public void setDragCossImageURL(String url) {
-    IconImpl.impl.setDragCossImageUrl(jsoPeer, url);
+  public void setDragCrossImageURL(String url) {
+    IconImpl.impl.setDragCrossImage(jsoPeer, url);
   }
 
   public void setDragCrossAnchor(Point anchor) {
@@ -149,7 +150,8 @@ public final class Icon {
     IconImpl.impl.setMaxHeight(jsoPeer, height);
   }
 
-  // TODO: why is this different than getPrintImageUrl?
+  // This different than getPrintImageUrl because of browser differences
+  // in Mozilla/Firefox (problems with transparent images on IE?)
   public void setMozPrintImageURL(String url) {
     IconImpl.impl.setMozPrintImage(jsoPeer, url);
   }
