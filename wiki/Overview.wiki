@@ -1,0 +1,18 @@
+#summary Overview of the GWT Google APIs project
+
+= Overview =
+
+Using Google APIs you can integrate some of Google's online services such as 
+[http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
+[http://code.google.com/apis/maps/ Google Maps API],
+[http://code.google.com/apis/gears/ Google Gears API],  and 
+[http://code.google.com/apis/base/ Boogle Base Data API] into third party websites.  These APIs were originally offered as !JavaScript APIs for web programmers.  
+
+The [http://code.google.com/webtoolkit/ Google Web Toolkit] (GWT) brings a new dimension to web programming by offering a way to write a web application in the Java langauge, and deploy it to the web using !JavaScript.  
+
+The GWT Google APIs eases integrating existing Google APIs and browser extensions with an application written using GWT.   The API is a set of Java bindings, giving GWT developers easy access to the latest capabilities of Google APIs without having to resort to writing custom integration code using !JavaScript.
+
+
+
+
+
