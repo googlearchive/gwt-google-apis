@@ -46,17 +46,216 @@ use the `applicationCreator` tool, or an IDE plugin, or create a
 project manually.  Essentially, you need to then add the path
 _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar` to the Java classpath.
 
+
 === Updating <project>-compile and <project>-shell ===
 
-=== Updating Eclipse launch configuration ===
+First, create a project with `projectCreator` and `applicationCreator` as shown in the GWT Getting Started tutorial and Developer Guide:
 
+{{{
+$PP_OFF
+$ projectCreator -eclipse MapsTutorial -out MapsTutorial
+Created directory MapsTutorial/src
+Created directory MapsTutorial/test
+Created file MapsTutorial/.project
+Created file MapsTutorial/.classpath
+
+$ applicationCreator -out MapsTutorial com.example.google.gwt.mapstutorial.client.MapsTutorial
+Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial
+Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/client
+Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/public
+Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml
+Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/public/MapsTutorial.html
+Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/client/MapsTutorial.java
+Created file MapsTutorial/MapsTutorial-shell
+Created file MapsTutorial/MapsTutorial-compile
+}}}
+
+In order to use the  `MapsTutorial-shell` and MapsTutorial-compile` scripts to launch hosted mode or compile to !JavaScript, you will need to modify them to add _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar` to the classpath.  In the following example, the GWT jar files and GWT Google API jar file have been copied to the same path, `/usr/local/gwt`
+
+Edit `MapsTutorial-shell` in a text editor (such as Notepad or vi) and append the jar file to the `-cp` argument to `java`.
+
+{{{
+$PP_OFF
+#!/bin/sh
+APPDIR=`dirname $0`;
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-linux-0.0.0/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt-google-apis.jar" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
+}}}
+
+and make a similar change to `MapsTutorial-compile`:
+
+{{{
+$PP_OFF
+#!/bin/sh
+APPDIR=`dirname $0`;
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt_google_apis.jar" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
+}}}
+
+
+If you use `ant` to build the project, you also need to add gwt-google-apis.jar to the classpath in `MapsTutorial.ant.xml`:
+
+{{{
+$PP_OFF
+  ...
+  <!-- set classpath -->
+  <path id="project.class.path">
+    <pathelement path="${java.class.path}/"/>
+    <pathelement path="/usr/local/gwt/gwt-user.jar"/>
+    <!-- Additional dependencies (such as junit) go here -->
+    <pathelement path="/usr/local/gwt/gwt-google-apis.jar"/>
+  </path>
+  ...
+}}}
+
+
+Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` script.  You should see the skeleton project come up:
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic1.png
+
+Also try out the `MapsTutorial-compile` script:
+
+{{{
+$PP_OFF
+$ ./MapsTutorial-compile
+Compiling into ./www/com.example.google.gwt.mapstutorial.MapsTutorial
+Copying all files found on public path
+Compilation succeeded
+}}}
+
+=== Updating Eclipse Build and Launch Configuration ===
+
+If you aren't using Eclipse, skip down to the section named _Testing a reference to a Google API_ below.
+
+If you are using the Eclipse IDE and created your project with `applicationCreator -eclipse`, then you will have a `.project` file and a `MapsTutorial.launch` file in the root of your project.  
+
+Import the project into eclipse using the _File->Import..._ command.
+
+In order to build a project in Eclipse that references the GWT Google APIs, you need to add the `gwt-google-apis.jar` file to the Java build path.  Make sure your new project is open and select your project in the tree on the left and navigate to:
+
+  _Project->Properties...->Java Build Path->Libraries_
+
+Choose the _Add External JARs_ option and add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic2.png
+
+Next, you need to update the launch configuration.  
+
+  1 Make sure your new project is open.
+  1 Navigate to _Run->Open Run Dialog...->_
+  1 Select _Java Application_ in the tree on the left, 
+  1 Select your project name (`MapsTutorial` in our example)
+  1 Open the _Classpath_ tab.  
+  1 Select the _User Entries_ item in the tree.
+  1 Click the _Add External JARs_ button 
+  1 Add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`.  Make sure that the _MapsTutorial (default classpath)_ is at the bottom of the list.
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic3.png
 
 == Adding Google APIs to a GWT Project from source ==
 
+This section describes how to integrate your project with the GWT
+Google APIs project using a checkout of the subversion
+repository.
+
 === Getting the GWT Google APIs source ===
+
+Downloading the latest source code requires the use of a
+[http://subversion.tigris.org/ Subversion] client.  The Subversion
+website contains command line clients for most operating systems.
+Also, some IDEs can access a subversion repository natively or with a
+plugin.  You can also find open source and commercial Subversion
+clients on the web.
+
+To get started, point your client at the GWT Google APIs subversion repsoitory  [http://code.google.com/p/gwt-google-apis/source subversion repository] and check out a copy of the project into a directory.
+
+The following example shows a checkout using the command line client on Linux:
+
+{{{
+$PP_OFF
+ $ cd /usr/local/src/
+ $ svn checkout http://gwt-google-apis.googlecode.com/svn/trunk/ gwt-google-apis
+ A    gwt-google-apis/distro-source
+ A    gwt-google-apis/distro-source/common.ant.xml
+ A    gwt-google-apis/distro-source/core
+ A    gwt-google-apis/distro-source/core/src
+ ...
+Checked out revision 88.
+}}}
+
+Remember the path where you performed the checkout.  This documentation will refer to this path as _GWT_GOOGLE_APIS_DIR_.
+
 
 === Updating <project>-compile and <project>-shell ===
 
-=== Updating Eclipse launch configuration ===
+{{{
+$PP_OFF
+$  projectCreator -eclipse MapsTutorial -out MapsTutorial
+Created directory MapsTutorial/src
+Created directory MapsTutorial/test
+Created file MapsTutorial/.project
+Created file MapsTutorial/.classpath
 
+$ applicationCreator -eclipse MapsTutorial -out MapsTutorial com.example.google.gwt.mapstutorial.client.MapsTutorial
+Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial
+Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/client
+Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/public
+Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml
+Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/public/MapsTutorial.html
+Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/client/MapsTutorial.java
+Created file MapsTutorial/MapsTutorial.launch
+Created file MapsTutorial/MapsTutorial-shell
+Created file MapsTutorial/MapsTutorial-compile
+}}}
 
+The GWT compiler uses the Java sources, not compiled classes, and expects to find them on the Java class path, so we have to add the checkout source directory to the Java classpath.  In our example, we checked out the `trunk` direcotory of the GWT Google APIs project into:
+
+`/usr/local/gwt-google-apis`
+
+First, let's modify the command line script `MapsTutorial-shell` and append the source directory to the `-cp` argument to `java`:
+
+{{{
+$PP_OFF
+#!/bin/sh
+APPDIR=`dirname $0`;
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-linux-0.0.0/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt-google-apis/google-apis/src" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
+}}}
+
+Next, make a similar change to the `MapsTutorial-compile` script:
+
+{{{
+$PP_OFF
+#!/bin/sh
+APPDIR=`dirname $0`;
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt-google-apis/google-apis/src" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
+}}}
+
+Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
+
+=== Importing the GWT Google APIs source code into an Eclipse project ===
+
+TODO: Document how to create a project out of the checked out SVN source
+
+=== Updating Eclipse Build and Launch Configuration ===
+
+If you are using the Eclipse IDE and created your project with `applicationCreator -eclipse`, then you will have a `.project` file and a `MapsTutorial.launch` file in the root of your project.  
+
+Import the project into eclipse using the _File->Import..._ command.
+
+After you sucessfully import the project, you need to update the launch configuration.  This will will allow you to launch hosted mode from Eclipse's `Run Dialog...` menu option.  
+
+ 1 Make sure your new project is open. 
+ 1 Navigate to  _Run->Open Run Dialog...->_
+ 1 Select _Java Application_ in the tree on the left, then select your project name (`MapsTutorial` in our example)
+ 2 Open the Classpath tab.  Select the _User Entries_ item in the tree.
+ 3 Click the _Advanced..._ button, 
+ 4 Select _Add Folders_ and _OK_.  
+ 5 When the file browser appears, select the directory `src` from the `gwt-google-apis` project you created in the previous step.  
+ 6 Use the _Up_ and _Down_ button to move the _src_ folders to the top of the _User Entries_ list.  Make sure that the _MapsTutorial (default classpath)_ is at the bottom of the list.
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic4.png
+
+== Testing a reference to a Google API ==
+
+TODO: Add an import to gwt.xml
+TODO: Modify the .java file
+TODO: Run in hosted mode
+TODO: Run in web mode
