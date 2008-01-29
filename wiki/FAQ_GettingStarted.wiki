@@ -1,4 +1,4 @@
-﻿#summary Getting Started with the GWT Google APIs
+#summary Getting Started with the GWT Google APIs
 
 = Getting Started =
 

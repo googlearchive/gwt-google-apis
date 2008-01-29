@@ -1,0 +1,62 @@
+#summary Adding Google APIs to a GWT Project
+
+= Getting Started with the Google Web Toolkit =
+
+This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familir with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
+
+= Using a library or source code =
+
+The production version of the GWT Google APIs is distributed as a
+`.jar` file that is easy to integrate with an existing GWT project.
+Choose the `.jar` file library if you need a stable release of the
+library and do not care to get the latest features.
+
+The latest version of the API source code is also publicly available
+from a [http://subversion.tigris.org/ Subversion] repository hosted by
+[http://code.google.com/ Google Code].  Choose the source code if you
+need to use the latest features and bug fixes by the library, or if
+you are interested in contributing patches to the library.
+
+== Adding Google APIs to a GWT Project as a library ==
+
+This section describes how to integrate the `gwt-google-apis` JAR library
+with an existing GWT project.
+
+=== Getting the GWT Google APIs library ===
+
+You can download the latest production release of the GWT Google APIs
+library from the
+[http://code.google.com/p/gwt-google-apis/downloads/list project
+download page].  After you download the distribution, uncompress
+it.  Inside the folder you will find a file named
+`gwt-google-apis.jar`. This is the one file you need to integrate the
+APIs with your project. 
+
+You can either reference the `.jar` file from the folder that you
+uncompressed the project in, or copy it to another location, such as
+the location of your GWT distribution (containing
+`gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  Whichever
+place you choose, this documentation will refer to this path as
+_GWT_GOOGLE_APIS_DIR_.
+
+=== Creating your project ===
+
+If you have not yet created a GWT project, create one now.  You can
+use the `applicationCreator` tool, or an IDE plugin, or create a
+project manually.  Essentially, you need to then add the path
+_GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar` to the Java classpath.
+
+=== Updating <project>-compile and <project>-shell ===
+
+=== Updating Eclipse launch configuration ===
+
+
+== Adding Google APIs to a GWT Project from source ==
+
+=== Getting the GWT Google APIs source ===
+
+=== Updating <project>-compile and <project>-shell ===
+
+=== Updating Eclipse launch configuration ===
+
+
