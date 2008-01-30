@@ -276,7 +276,7 @@ Next, update the launch configuration.  This will will allow you to launch hoste
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic4.png
 
-== Creating a small Project using a Google API ==
+== Creating a Small Project using the Google Maps API ==
 
 Before continuing, make sure you can launch the skeleton project in hosted mode by either running _MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
 
@@ -314,15 +314,54 @@ Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/publ
 
     <div id="mapsTutorial">
 
-  </body>
+</body>
 }}}
-TODO: Modify the .html file 
 
 === Add a map object to .java source ===
 
-TODO: Modify the .java file
+To complete the `MapsTutorial.java` file, add some imports, a member to store a `MapWidget` instance, and replace the body of the `onModuleLoad()` method. 
+
+{{{
+package com.example.google.gwt.mapstutorial.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.maps.client.InfoWindowContent;
+import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.control.LargeMapControl;
+import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.ui.RootPanel;
+
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+public class MapsTutorial implements EntryPoint {
+  private MapWidget map;
+
+  // GWT module entry point method.
+  public void onModuleLoad() {
+    
+    // Open a map centered on Cawker City, KS USA
+    map = new MapWidget(new LatLng(39.509,-98.434), 2);
+    map.setSize("500px", "300px");
+    
+    // Add some controls for the zoom level
+    map.addControl(new LargeMapControl());
+    
+    // Add an info window to highlight a point of interest
+    map.getInfoWindow().open(map.getCenter(), 
+        new InfoWindowContent("World's Largest Ball of Twine"));
+    
+    // Add the map to the HTML host page
+    RootPanel.get("mapsTutorial").add(map);
+  }
+}
+}}}
+
 
 === Run the MapsTutorial sample project ===
 
-TODO: Run in hosted mode
-TODO: Run in web mode
+Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic5.png
+
+If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.
