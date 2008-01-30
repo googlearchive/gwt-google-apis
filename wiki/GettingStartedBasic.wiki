@@ -207,7 +207,7 @@ Created file MapsTutorial/MapsTutorial-shell
 Created file MapsTutorial/MapsTutorial-compile
 }}}
 
-The GWT compiler uses the Java sources, not compiled classes, and expects to find them on the Java class path, so we have to add the checkout source directory to the Java classpath.  In our example, we checked out the `trunk` direcotory of the GWT Google APIs project into:
+The GWT compiler uses the Java sources, not compiled classes, and expects to find them on the Java class path, so we have to add the checkout source directory to the Java classpath.  In our example, we checked out the `trunk` directory of the GWT Google APIs project into:
 
 `/usr/local/gwt-google-apis`
 
@@ -231,9 +231,20 @@ java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gw
 
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
 
-=== Creating an Eclipse project from the GWT Google APIs source code ===
+=== Import the Eclipse project from the GWT Google APIs source code ===
 
-TODO: Document how to create a project out of the checked out SVN source
+  1 Choose _File->Import..._ from the menu bar.
+  1 Select _General->Existing Projects into Workspace_
+  1 Browse from _Select root directory_ to the path you checked out from subversion (_GWT_GOOGLE_APIS_DIR_`/eclipse` or `/usr/local/gwt/gwt-google-apis/eclipse` in our example.)
+  1 You should see a project named `gwt-google-apis` on the list.  Make sure it is selected.
+  1 Choose _Finish_ to import the project.
+
+You may need to fixup the project's build path.  
+
+  1 Make sure the `gwt-google-apis` project is open and selected in the tree on the left.
+  1 Navigate to  _Project->Properties...->Java Build Path->Libraries_
+  1 Add the `gwt-dev-<arch>.jar` and `gwt-user.jar` libraries to the _Libraries_ tab.
+  1 Alternatively, if you have imported the GWT source projects, add the gwt-dev-<arch> and gwt-user projects to the _Projects_ tab.
 
 === Updating Eclipse Build and Launch Configuration ===
 
