@@ -133,7 +133,9 @@ Import the project into eclipse using the _File->Import..._ command.
 In order to build a project in Eclipse that references the GWT Google APIs, you need to add the `gwt-google-apis.jar` file to the Java build path.  
 
   1 Make sure your new project is open and select your project in the tree on the left.
-  1 Navigate to  _Project->Properties...->Java Build Path->Libraries_
+  1 Navigate to  _Project->Properties..._
+  1 Select _Java Build Path_ from the tree on the left.
+  1 Open the _Libraries_ tab.
   1 Choose the _Add External JARs_ option and add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic2.png
@@ -250,9 +252,17 @@ You may need to fixup the project's build path.
 
 If you are using the Eclipse IDE and created your project with `applicationCreator -eclipse`, then you will have a `.project` file and a `MapsTutorial.launch` file in the root of your project.  
 
-Import the project into eclipse using the _File->Import..._ command.
+Import the MapsTutorial project into eclipse using the _File->Import..._ command.
 
-After you sucessfully import the project, you need to update the launch configuration.  This will will allow you to launch hosted mode from Eclipse's `Run Dialog...` menu option.  
+After you sucessfully import the project, you first need to update the MapsTutorial build configuration.
+
+  1 Make sure your new project is open and select your project in the tree on the left.
+  1 Navigate to  _Project->Properties...
+  1 Select _Java Build Path_ in the tree on the left
+  1 Open the _Projects_ tab.
+  1 Add the project `gwt-google-apis`.
+
+Next, update the launch configuration.  This will will allow you to launch hosted mode from Eclipse's `Run Dialog...` menu option.  
 
  1 Make sure your new project is open. 
  1 Navigate to  _Run->Open Run Dialog..._
@@ -266,9 +276,53 @@ After you sucessfully import the project, you need to update the launch configur
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic4.png
 
-== Testing a Project using a Google API ==
+== Creating a small Project using a Google API ==
 
-TODO: Add an import to gwt.xml
+Before continuing, make sure you can launch the skeleton project in hosted mode by either running _MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
+
+=== Modify MapsTutorial.gwt.xml ===
+
+Since this example will use the Google Maps API, we need to modify the default `MapsTutorial.gwt.xml` file in two ways:
+
+  1 Add an `<inherits>` entry to pull in the GWT Google APIs module for Google Maps.
+  1 Add a reference to the Maps JavaScript API.  
+
+Note that in order to use the Maps API, you need to apply for a Google Maps API key.  A key that will work with `localhost` is provided for development purposes, but you will need to apply for your own key to deploy to a website.
+
+{{{
+ <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
+ <inherits name="com.google.gwt.maps.GoogleMaps" />
+
+ <!--
+    If you want to deploy this application outside of localhost,
+    you must obtain a Google Maps API key at:
+    http://www.google.com/apis/maps/signup.html
+    Replace the src attribute below with a URL that contains your key.
+  -->
+ <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
+
+}}}
+
+=== Update the HTML host file ===
+
+Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/public/MapsTutorial.html` with a `<div>` tag that we can use for the GWT application.
+
+{{{
+<body>
+
+    <h1>MapsTutorial</h1>
+
+    <div id="mapsTutorial">
+
+  </body>
+}}}
+TODO: Modify the .html file 
+
+=== Add a map object to .java source ===
+
 TODO: Modify the .java file
+
+=== Run the MapsTutorial sample project ===
+
 TODO: Run in hosted mode
 TODO: Run in web mode
