@@ -2,7 +2,7 @@
 
 = Introduction  =
 
-This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familir with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
+This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familiar with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
 
 = Using a library or source code =
 
@@ -27,7 +27,7 @@ with an existing GWT project.
 
 === Getting the GWT Google APIs library ===
 
-You can download the latest production release of the GWT Google APIslibrary from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  
+You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  
 After you download the distribution, uncompress
 it.  Inside the folder you will find a file named
 `gwt-google-apis.jar`. This is the one file you need to integrate the
@@ -168,7 +168,7 @@ Also, some IDEs can access a subversion repository natively or with a
 plugin.  You can also find open source and commercial Subversion
 clients on the web.
 
-To get started, point your client at the GWT Google APIs subversion repsoitory  [http://code.google.com/p/gwt-google-apis/source subversion repository] and check out a copy of the project into a directory.
+To get started, point your client at the GWT Google APIs subversion repository  [http://code.google.com/p/gwt-google-apis/source subversion repository] and check out a copy of the project into a directory.
 
 The following example shows a checkout using the command line client on Linux:
 
@@ -252,9 +252,9 @@ You may need to fixup the project's build path.
 
 If you are using the Eclipse IDE and created your project with `applicationCreator -eclipse`, then you will have a `.project` file and a `MapsTutorial.launch` file in the root of your project.  
 
-Import the MapsTutorial project into eclipse using the _File->Import..._ command.
+Import the !MapsTutorial project into eclipse using the _File->Import..._ command.
 
-After you sucessfully import the project, you first need to update the MapsTutorial build configuration.
+After you successfully import the project, you first need to update the !MapsTutorial build configuration.
 
   1 Make sure your new project is open and select your project in the tree on the left.
   1 Navigate to  _Project->Properties...
@@ -278,14 +278,14 @@ Next, update the launch configuration.  This will will allow you to launch hoste
 
 == Creating a Small Project using the Google Maps API ==
 
-Before continuing, make sure you can launch the skeleton project in hosted mode by either running _MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
+Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
 
-=== Modify MapsTutorial.gwt.xml ===
+=== Modify !MapsTutorial.gwt.xml ===
 
 Since this example will use the Google Maps API, we need to modify the default `MapsTutorial.gwt.xml` file in two ways:
 
   1 Add an `<inherits>` entry to pull in the GWT Google APIs module for Google Maps.
-  1 Add a reference to the Maps JavaScript API.  
+  1 Add a reference to the Google Maps !JavaScript API.  
 
 Note that in order to use the Maps API, you need to apply for a Google Maps API key.  A key that will work with `localhost` is provided for development purposes, but you will need to apply for your own key to deploy to a website.
 
@@ -331,9 +331,6 @@ import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.RootPanel;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
 public class MapsTutorial implements EntryPoint {
   private MapWidget map;
 
@@ -358,9 +355,9 @@ public class MapsTutorial implements EntryPoint {
 }}}
 
 
-=== Run the MapsTutorial sample project ===
+=== Run the !MapsTutorial sample project ===
 
-Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
+Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _!MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic5.png
 
