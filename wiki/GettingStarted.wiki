@@ -6,9 +6,8 @@ The GWT Google APIs are a set of Java bindings using the
 [http://code.google.com/webtoolkit/ Google Web Toolkit] (GWT) to use 
 Google services and browser extensions such as 
 [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
-[http://code.google.com/apis/maps/ Google Maps API],
-[http://code.google.com/apis/gears/ Google Gears API],  and 
-[http://code.google.com/apis/base/ Google Base Data API].  The GWT Google 
+[http://code.google.com/apis/maps/ Google Maps API], and
+[http://code.google.com/apis/gears/ Google Gears API].  The GWT Google 
 APIs are intended to give GWT developers easy access to the latest 
 capabilities of these Google APIs without having to resort to writing lots 
 of integration code using !JavaScript.
@@ -16,7 +15,7 @@ of integration code using !JavaScript.
 
 = Getting Started Tutorials =
 
-This guide is a tutorial that demonstrates how to integrate the GWT Google APIs into your GWT projects.  The tutorials will show step by step how to setup a project and develop sample applications using the Google AJAX Search, Maps, Gears, and Base APIs.
+This guide is a tutorial that demonstrates how to integrate the GWT Google APIs into your GWT projects.  The tutorials will show step by step how to setup a project and develop sample applications using the Google AJAX Search, Maps, and Gears.
 
  * [GettingStartedBasic Adding GWT Google APIs to a GWT Project] Start here to setup a GWT project.
 
@@ -25,8 +24,6 @@ This guide is a tutorial that demonstrates how to integrate the GWT Google APIs 
  * [GettingStartedMaps Using Google Maps in a project] A walkthrough of how to use Google Maps in a GWT project.
 
  * [GettingStartedGears Using Google Gears in a project] A walkthrough of how to use the Google Gears API in a GWT project.
-
- * [GettingStartedBase Using Google Base in a project] A walkthrough of how to use the Google Base API in a GWT project.
 
 
 = Other Resources =
