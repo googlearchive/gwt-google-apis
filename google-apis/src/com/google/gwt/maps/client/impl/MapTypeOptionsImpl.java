@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,32 +20,37 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
+ * This class corresponds to the GMapTypeOptions class in the Maps JavaScript
+ * API.
+ * 
  * @gwt.beanProperties
  */
 public interface MapTypeOptionsImpl extends JSFlyweightWrapper {
 
-  public static final MapTypeOptionsImpl impl = (MapTypeOptionsImpl) GWT.create(MapTypeOptionsImpl.class);
+  static final MapTypeOptionsImpl impl = (MapTypeOptionsImpl) GWT.create(MapTypeOptionsImpl.class);
 
   /**
    * @gwt.constructor Object
    */
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public void setAlt(JavaScriptObject jsoPeer, String alt);
+  void setAlt(JavaScriptObject jsoPeer, String alt);
 
-  public void setErrorMessage(JavaScriptObject jsoPeer, String errorMessage);
+  void setErrorMessage(JavaScriptObject jsoPeer, String errorMessage);
 
-  public void setLinkColor(JavaScriptObject jsoPeer, String linkColor);
+  void setLinkColor(JavaScriptObject jsoPeer, String linkColor);
 
-  public void setMaxResolution(JavaScriptObject jsoPeer, int maxResolution);
+  void setMaxResolution(JavaScriptObject jsoPeer, int maxResolution);
 
-  public void setMinResolution(JavaScriptObject jsoPeer, int minResolution);
+  void setMinResolution(JavaScriptObject jsoPeer, int minResolution);
 
-  public void setShortName(JavaScriptObject jsoPeer, String shortName);
+  void setRadius(JavaScriptObject jsoPeer, int radius);
 
-  public void setTileColor(JavaScriptObject jsoPeer, String tileColor);
+  void setShortName(JavaScriptObject jsoPeer, String shortName);
 
-  public void setTileSize(JavaScriptObject jsoPeer, int tileSize);
+  void setTextColor(JavaScriptObject jsoPeer, String tileColor);
 
-  public void setUrlArg(JavaScriptObject jsoPeer, String urlArg);
+  void setTileSize(JavaScriptObject jsoPeer, int tileSize);
+
+  void setUrlArg(JavaScriptObject jsoPeer, String urlArg);
 }
