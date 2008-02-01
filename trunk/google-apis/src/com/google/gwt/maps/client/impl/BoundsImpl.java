@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,36 +26,40 @@ import com.google.gwt.maps.client.geom.Point;
  * @gwt.beanProperties
  */
 public interface BoundsImpl extends JSFlyweightWrapper {
-  
-  public static final BoundsImpl impl = (BoundsImpl) GWT.create(BoundsImpl.class);
+
+  static final BoundsImpl impl = (BoundsImpl) GWT.create(BoundsImpl.class);
 
   /**
    * @gwt.constructor $wnd.GBounds
    */
-  public JavaScriptObject construct(JSList<Point> points);
+  JavaScriptObject construct(int minX, int minY, int maxX, int maxY);
+
   /**
    * @gwt.constructor $wnd.GBounds
    */
-  public JavaScriptObject construct(int minX, int minY, int maxX, int maxY);
+  JavaScriptObject construct(JSList<Point> points);
 
-  public boolean containsBounds(JavaScriptObject jsoPeer, Bounds other);
+  boolean containsBounds(JavaScriptObject jsoPeer, Bounds other);
 
-  public void extend(JavaScriptObject jsoPeer, Point point);
+  boolean containsPoint(JavaScriptObject jsoPeer, Point point);
 
-  public int getMaxX(JavaScriptObject jsoPeer);
+  void extend(JavaScriptObject jsoPeer, Point point);
 
-  public int getMaxY(JavaScriptObject jsoPeer);
+  int getMaxX(JavaScriptObject jsoPeer);
 
-  public int getMinX(JavaScriptObject jsoPeer);
+  int getMaxY(JavaScriptObject jsoPeer);
 
-  public int getMinY(JavaScriptObject jsoPeer);
+  int getMinX(JavaScriptObject jsoPeer);
 
-  public Bounds intersection(JavaScriptObject jsoPeer, Bounds other);
+  int getMinY(JavaScriptObject jsoPeer);
 
-  public Point max(JavaScriptObject jsoPeer);
+  Bounds intersection(JavaScriptObject jsoPeer, Bounds other);
 
-  public Point min(JavaScriptObject jsoPeer);
+  Point max(JavaScriptObject jsoPeer);
 
-  public String toString(JavaScriptObject jsoPeer);
+  Point mid(JavaScriptObject jsoPeer);
 
+  Point min(JavaScriptObject jsoPeer);
+
+  String toString(JavaScriptObject jsoPeer);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,6 +26,9 @@ import com.google.gwt.maps.client.util.JsUtil;
  * the Google Maps API. In most places it has been replaced by the geographical
  * version GLatLngBounds. It is currently only used in
  * {@link com.google.gwt.maps.client.event.MarkerListener#onChanged(com.google.gwt.maps.client.overlay.MarkerManager, Bounds, int)}.
+ * 
+ * (Nevertheless, the Maps API has recently added methods 'mid' and 
+ * 'containsPoint')
  */
 public final class Bounds {
 
@@ -51,10 +54,18 @@ public final class Bounds {
     return BoundsImpl.impl.containsBounds(jsoPeer, other);
   }
 
+  public boolean containsPoint(Point p) {
+    return BoundsImpl.impl.containsPoint(jsoPeer, p);
+  }
+
   public Bounds extend(Point point) {
     Bounds bounds = new Bounds(getMinX(), getMinY(), getMaxX(), getMaxY());
     BoundsImpl.impl.extend(bounds.jsoPeer, point);
     return bounds;
+  }
+
+  public Point getCenter() {
+    return BoundsImpl.impl.mid(jsoPeer);
   }
 
   public Point getLowerRight() {
