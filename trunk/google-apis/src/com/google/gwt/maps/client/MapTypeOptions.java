@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -49,12 +49,16 @@ public final class MapTypeOptions {
     MapTypeOptionsImpl.impl.setMinResolution(jsoPeer, minResolution);
   }
 
+  public void setRadius(int radius) {
+    MapTypeOptionsImpl.impl.setRadius(jsoPeer, radius);
+  }
+
   public void setShortName(String shortName) {
     MapTypeOptionsImpl.impl.setShortName(jsoPeer, shortName);
   }
 
-  public void setTileColor(String tileColor) {
-    MapTypeOptionsImpl.impl.setTileColor(jsoPeer, tileColor);
+  public void setTextColor(String textColor) {
+    MapTypeOptionsImpl.impl.setTextColor(jsoPeer, textColor);
   }
 
   public void setTileSize(int tileSize) {
