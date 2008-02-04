@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -50,7 +50,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A widget that presents a viewable Google Map to a user. 
+ * A widget that presents a viewable Google Map to a user.
  */
 public final class MapWidget extends Composite {
 
@@ -81,8 +81,8 @@ public final class MapWidget extends Composite {
   }
 
   private static native void nativeUnload() /*-{
-     $wnd.GUnload && $wnd.GUnload();
-   }-*/;
+      $wnd.GUnload && $wnd.GUnload();
+    }-*/;
 
   /**
    * Reference to GMap2 object.
@@ -106,12 +106,24 @@ public final class MapWidget extends Composite {
     this(center, zoomLevel, null, null);
   }
 
+  /**
+   * Creates a new map widget and sets the view to the specified center point
+   * and zoom level. Also, sets the dragging and draggable cursor values. See
+   * the W3C CSS spec for allowable cursor string values.
+   * 
+   * @param center the geographical point about which to center
+   * @param zoomLevel zoomLevel the zoom level
+   * @param draggableCursor CSS name of the cursor to display when the map is
+   *          draggable
+   * @param draggingCursor CSS name of the cursor to display when the map is
+   *          being dragged
+   */
   public MapWidget(LatLng center, int zoomLevel, String draggableCursor,
       String draggingCursor) {
     initWidget(mapContainer);
     JavaScriptObject opts = MapOptionsImpl.impl.construct();
     MapOptionsImpl.impl.setDraggableCursor(opts, draggableCursor);
-    MapOptionsImpl.impl.setDraggableCursor(opts, draggingCursor);
+    MapOptionsImpl.impl.setDraggingCursor(opts, draggingCursor);
     jsoPeer = MapImpl.impl.construct(getElement(), opts);
     MapImpl.impl.bind(jsoPeer, this);
     setCenter(center, zoomLevel);
@@ -120,6 +132,7 @@ public final class MapWidget extends Composite {
   public void addClickListener(final MapClickListener listener) {
     EventImpl.impl.associate(listener, EventImpl.impl.addListener(jsoPeer,
         "click", new OverlayLatLngCallback() {
+          @Override
           public void callback(Overlay overlay, LatLng latlng) {
             listener.onClick(MapWidget.this, overlay, latlng);
           }
@@ -165,16 +178,19 @@ public final class MapWidget extends Composite {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
         EventImpl.impl.addListenerVoid(jsoPeer, "dragstart",
             new VoidCallback() {
+              @Override
               public void callback() {
                 listener.onDragStart();
               }
             }),
         EventImpl.impl.addListenerVoid(jsoPeer, "drag", new VoidCallback() {
+          @Override
           public void callback() {
             listener.onDrag();
           }
         }),
         EventImpl.impl.addListenerVoid(jsoPeer, "dragend", new VoidCallback() {
+          @Override
           public void callback() {
             listener.onDragEnd();
           }
@@ -185,12 +201,14 @@ public final class MapWidget extends Composite {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
         EventImpl.impl.addListenerVoid(jsoPeer, "infowindowopen",
             new VoidCallback() {
+              @Override
               public void callback() {
                 listener.onInfoWindowOpened(MapWidget.this);
               }
             }),
         EventImpl.impl.addListenerVoid(jsoPeer, "infowindowclose",
             new VoidCallback() {
+              @Override
               public void callback() {
                 listener.onInfoWindowClosed(MapWidget.this);
               }
@@ -200,16 +218,19 @@ public final class MapWidget extends Composite {
   public void addMapMouseListener(final MapMouseListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
         EventImpl.impl.addListener(jsoPeer, "mouseover", new LatLngCallback() {
+          @Override
           public void callback(LatLng latlng) {
             listener.onMouseOver(MapWidget.this, latlng);
           }
         }),
         EventImpl.impl.addListener(jsoPeer, "mouseout", new LatLngCallback() {
+          @Override
           public void callback(LatLng latlng) {
             listener.onMouseOut(MapWidget.this, latlng);
           }
         }),
         EventImpl.impl.addListener(jsoPeer, "mousemove", new LatLngCallback() {
+          @Override
           public void callback(LatLng latlng) {
             listener.onMouseMove(MapWidget.this, latlng);
           }
@@ -219,17 +240,20 @@ public final class MapWidget extends Composite {
   public void addMapMoveListener(final MapMoveListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
         EventImpl.impl.addListenerVoid(jsoPeer, "move", new VoidCallback() {
+          @Override
           public void callback() {
             listener.onMove(MapWidget.this);
           }
         }),
         EventImpl.impl.addListenerVoid(jsoPeer, "movestart",
             new VoidCallback() {
+              @Override
               public void callback() {
                 listener.onMoveStart(MapWidget.this);
               }
             }),
         EventImpl.impl.addListenerVoid(jsoPeer, "moveend", new VoidCallback() {
+          @Override
           public void callback() {
             listener.onMoveEnd(MapWidget.this);
           }
@@ -250,18 +274,21 @@ public final class MapWidget extends Composite {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
         EventImpl.impl.addListener(jsoPeer, "addmaptype",
             new MapTypeCallback() {
+              @Override
               public void callback(MapType mapType) {
                 listener.onMapTypeAdded(MapWidget.this, mapType);
               }
             }),
         EventImpl.impl.addListener(jsoPeer, "removemaptype",
             new MapTypeCallback() {
+              @Override
               public void callback(MapType mapType) {
                 listener.onMapTypeRemoved(MapWidget.this, mapType);
               }
             }),
         EventImpl.impl.addListenerVoid(jsoPeer, "maptypechanged",
             new VoidCallback() {
+              @Override
               public void callback() {
                 listener.onMapTypeChanged(MapWidget.this);
               }
@@ -271,6 +298,7 @@ public final class MapWidget extends Composite {
   public void addMapZoomListener(final MapZoomListener listener) {
     EventImpl.impl.associate(listener, EventImpl.impl.addListener(jsoPeer,
         "zoomend", new IntIntCallback() {
+          @Override
           public void callback(int oldLevel, int newLevel) {
             listener.onZoom(MapWidget.this, oldLevel, newLevel);
           }
@@ -290,18 +318,21 @@ public final class MapWidget extends Composite {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
         EventImpl.impl.addListener(jsoPeer, "addoverlay",
             new OverlayCallback() {
+              @Override
               public void callback(Overlay overlay) {
                 listener.onOverlayAdded(MapWidget.this, overlay);
               }
             }),
         EventImpl.impl.addListener(jsoPeer, "removeoverlay",
             new OverlayCallback() {
+              @Override
               public void callback(Overlay overlay) {
                 listener.onOverlayRemoved(MapWidget.this, overlay);
               }
             }),
         EventImpl.impl.addListenerVoid(jsoPeer, "clearoverlays",
             new VoidCallback() {
+              @Override
               public void callback() {
                 listener.onOverlaysCleared(MapWidget.this);
               }
@@ -419,8 +450,8 @@ public final class MapWidget extends Composite {
    * map view. The zoom level is computed for the currently selected map type.
    * If no map type is selected yet, the first on the list of map types is used.
    * 
-   * @param bounds
-   * @return
+   * @param bounds a rectangular region to test
+   * @return the zoom level at wich the bounds fit in the map view.
    */
   public int getBoundsZoomLevel(LatLngBounds bounds) {
     return MapImpl.impl.getBoundsZoomLevel(jsoPeer, bounds);
@@ -482,6 +513,16 @@ public final class MapWidget extends Composite {
    */
   public MapPane getPane(MapPaneType type) {
     return MapPane.getPane(this, type);
+  }
+
+  /**
+   * This method is not meant to be published, but is needed internally to
+   * support the GeoXmlOverlay gotoDefaultViewport() method.
+   * 
+   * @return JavaScript object that is encapsulated by the MapWidget object.
+   */
+  public JavaScriptObject getPeer() {
+    return jsoPeer;
   }
 
   /**
@@ -717,7 +758,7 @@ public final class MapWidget extends Composite {
    * Enables or disables continuous zooming on supported browsers. Continuous
    * zooming is disabled by default.
    * 
-   * @param enabled true to enable contious zooming
+   * @param enabled true to enable continous zooming
    */
   public void setContinuousZoom(boolean enabled) {
     if (enabled) {
@@ -765,6 +806,7 @@ public final class MapWidget extends Composite {
     }
   }
 
+  @Override
   public void setHeight(String height) {
     super.setHeight(height);
     checkResize();
@@ -798,12 +840,14 @@ public final class MapWidget extends Composite {
     }
   }
 
+  @Override
   public void setSize(String width, String height) {
     super.setWidth(width);
     super.setHeight(height);
     checkResize();
   }
 
+  @Override
   public void setWidth(String width) {
     super.setWidth(width);
     checkResize();
@@ -841,6 +885,7 @@ public final class MapWidget extends Composite {
     mapContainer.addVirtual(w);
   }
 
+  @Override
   protected void onAttach() {
     super.onAttach();
     checkResize();
