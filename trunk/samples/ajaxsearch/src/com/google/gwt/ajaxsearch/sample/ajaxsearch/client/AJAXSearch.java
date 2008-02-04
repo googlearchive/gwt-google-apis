@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -37,7 +37,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalSplitPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -50,7 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
     WindowResizeListener {
 
-  private HorizontalSplitPanel hp = new HorizontalSplitPanel();
+  private HorizontalPanel hp = new HorizontalPanel();
   private VerticalPanel clips = new VerticalPanel();
 
   public void onKeep(SearchControl control, final Result result) {
@@ -93,7 +93,8 @@ public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
 
     clips.setWidth("100%");
     clips.addStyleName("clips");
-    clips.add(new Label("Clippings:"));
+    
+    clips.add(new Label("Saved Clippings:"));
 
     SearchControlOptions options = new SearchControlOptions();
 
@@ -116,6 +117,7 @@ public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
     searchControl.addSearchListener(this);
     searchControl.execute("Google Web Toolkit");
     
+    clips.setWidth("200px");
     hp.add(clips);
     hp.add(searchControl);
     RootPanel.get().add(hp, 5, 5);
