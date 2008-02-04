@@ -163,6 +163,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
   protected void loadMapsDemos() {
     list.addMapsDemo(SimpleDemo.init());
     list.addMapsDemo(AnimateDemo.init());
+    list.addMapsDemo(DragCursorDemo.init());
     list.addMapsDemo(ControlsDemo.init());
     list.addMapsDemo(EventDemo.init());
     list.addMapsDemo(InfoWindowDemo.init());
