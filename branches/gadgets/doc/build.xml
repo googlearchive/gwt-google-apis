@@ -1,0 +1,159 @@
+<project name="doc" default="build" basedir=".">
+	<property name="gwt.root" location=".." />
+	<property name="project.tail" value="doc" />
+	<import file="${gwt.root}/common.ant.xml" />
+
+	<property.ensure name="java.tools.path" location="${java.home}/../lib/tools.jar" unless="build.host.ismac" message="Cannot find ${java.home}/../lib/tools.jar; please use a JDK when building doc rather than a JRE." />
+
+	<property name="GOOGLE_APIS_PKGS" value="com.google.gwt.gears.core.client;com.google.gwt.gears.database.client;com.google.gwt.gears.localserver.client;com.google.gwt.gears.workerpool.client;com.google.gwt.ajaxsearch.client;com.google.gwt.maps.client;com.google.gwt.maps.client.control;com.google.gwt.maps.client.event;com.google.gwt.maps.client.geocode;com.google.gwt.maps.client.geom;com.google.gwt.maps.client.overlay" />
+	
+	<!--
+		*** Note that if the USER_SOURCE_PATH paths are updated,
+		the fileset dependencies in the outofdate tags in the doc,
+		user, and javadoc targets must be updated as well.
+	-->
+	<path id="GOOGLE_APIS_SOURCE_PATH">
+		<pathelement location="${gwt.root}/google-apis/src" />
+		<pathelement location="${gwt.root}/google-apis/javadoc" />
+	</path>
+
+	<path id="GOOGLE_APIS_CLASS_PATH">
+		<pathelement location="${gwt.build.lib}/gwt-google-apis.jar" />
+		<pathelement location="${gwt.user.jar}" />
+		<pathelement location="${gwt.dev.jar}" />
+		<pathelement location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
+	</path>
+
+	<!--
+		*** Note that if the DOC_SOURCE_PATH paths are updated,
+		the fileset dependencies in the outofdate tags in the
+		doc target must be updated as well.
+	-->
+	<path id="DOC_SOURCE_PATH">
+		<pathelement location="./src" />
+		<path refid="GOOGLE_APIS_SOURCE_PATH" />
+	</path>
+
+	<path id="DOC_PATH">
+		<pathelement location="./src" />
+		<pathelement location="${gwt.doctool.jar}" />
+		<path path="${java.tools.path}" />
+		<path refid="GOOGLE_APIS_SOURCE_PATH" />
+	</path>
+
+	<target name="doc">
+		<outofdate>
+			<sourcefiles>
+				<fileset dir="${gwt.root}/google-apis/src">
+					<include name="**/*.java" />
+				</fileset>
+				<fileset dir="${gwt.root}/google-apis/javadoc">
+					<include name="**/*.java" />
+				</fileset>
+			</sourcefiles>
+			<targetfiles>
+				<!--
+					only checks one output file, will not
+					rebuild other files if this one is up
+					to date
+				-->
+				<pathelement path="${project.build}/gwt-doc.doc.xml" />
+			</targetfiles>
+			<sequential>
+				<java classpathref="DOC_PATH" classname="com.google.doctool.DocTool" fork="yes" failonerror="true">
+					<arg value="doc" />
+					<arg value="gwt-doc" />
+					<arg value="-out" />
+					<arg value="${project.build}" />
+					<arg value="-classpath" />
+					<arg pathref="GOOGLE_APIS_CLASS_PATH" />
+					<arg value="-sourcepath" />
+					<arg pathref="DOC_SOURCE_PATH" />
+					<arg value="-packages" />
+					<arg value="${DOC_PKGS}" />
+				</java>
+			</sequential>
+		</outofdate>
+	</target>
+
+	<target name="google-apis">
+		<outofdate>
+			<sourcefiles>
+				<fileset file="./src/gwt-google-apis.html" />
+				<fileset dir="${gwt.root}/google-apis/src">
+					<include name="**/*.java" />
+				</fileset>
+				<fileset dir="${gwt.root}/google-apis/javadoc">
+					<include name="**/*.java" />
+				</fileset>
+			</sourcefiles>
+			<targetfiles>
+				<!--
+					only checks one output file, will not rebuild other files
+					if this one is up to date
+				-->
+				<pathelement path="${project.build}/gwt-google-apis.java.xml" />
+			</targetfiles>
+			<sequential>
+				<java classpathref="DOC_PATH" classname="com.google.doctool.DocTool" fork="yes" failonerror="true">
+					<arg value="java" />
+					<arg value="gwt-google-apis" />
+					<arg value="-out" />
+					<arg value="${project.build}" />
+					<arg value="-overview" />
+					<arg value="./src/gwt-google-apis.html" />
+					<arg value="-classpath" />
+					<arg pathref="GOOGLE_APIS_CLASS_PATH" />
+					<arg value="-sourcepath" />
+					<arg pathref="GOOGLE_APIS_SOURCE_PATH" />
+					<arg value="-packages" />
+					<arg value="${GOOGLE_APIS_PKGS}" />
+				</java>
+			</sequential>
+		</outofdate>
+	</target>
+
+	<target name="javadoc">
+		<outofdate>
+			<sourcefiles>
+				<fileset file="./src/gwt-google-apis.html" />
+				<fileset dir="${gwt.root}/google-apis/src">
+					<include name="**/*.java" />
+				</fileset>
+				<fileset dir="${gwt.root}/google-apis/javadoc">
+					<include name="**/*.java" />
+				</fileset>
+			</sourcefiles>
+			<targetfiles>
+				<!--
+					only checks one output file, will not rebuild other
+					files if this one is up to date
+				-->
+				<pathelement path="${project.build}/javadoc/index.html" />
+			</targetfiles>
+			<sequential>
+				<echo>Building javadoc</echo>
+				<java classpathref="DOC_PATH" classname="com.google.doctool.custom.GWTJavaDoclet" fork="yes" failonerror="true">
+					<arg value="-quiet" />
+					<arg value="-source" />
+					<arg value="1.5" />
+					<arg value="-encoding"/>
+					<arg value="UTF-8"/>
+					<arg value="-d" />
+					<arg value="${project.build}/javadoc" />
+					<arg value="-classpath" />
+					<arg pathref="GOOGLE_APIS_CLASS_PATH" />
+					<arg value="-sourcepath" />
+					<arg pathref="GOOGLE_APIS_SOURCE_PATH" />
+					<arg value="-examplepackages" />
+					<arg value="com.google.gwt.gears.examples" />
+					<arg value="-packages" />
+					<arg value="${GOOGLE_APIS_PKGS}" />
+				</java>
+			</sequential>
+		</outofdate>
+	</target>
+
+	<target name="build" depends="javadoc" />
+</project>
+

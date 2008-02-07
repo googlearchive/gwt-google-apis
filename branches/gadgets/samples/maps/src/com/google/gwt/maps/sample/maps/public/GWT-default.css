@@ -1,0 +1,594 @@
+/**
+ * Applied to the entire page.
+ */
+body {
+  color: black;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 12pt;
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  overflow: visible;
+  background: #E1E7F2 url(images/bg_gradient.gif) repeat-x;
+  direction: ltr;
+}
+
+table {
+  font-size: 100%;
+}
+
+a, a:visited, a:hover {
+  color: #0000AA;
+}
+
+/**
+ * Applied to buttons.
+ */
+.gwt-Button {
+}
+
+.gwt-Button:active {
+}
+
+.gwt-Button[disabled] {
+  color: #888;
+}
+
+/**
+ * Applied to the checkbox and text next to the checkbox.
+ */
+.gwt-CheckBox {
+}
+
+.gwt-CheckBox-disabled {
+  color: #888;
+}
+
+/**
+ * Applied to the dialog box.
+ */
+.gwt-DialogBox {
+  border: 1px solid #bbbbbb;
+}
+
+.gwt-DialogBox .Caption {
+  background: #e3e8f3 url(images/bg_headergradient.gif) repeat-x;
+  padding: 4px 4px 4px 8px;
+  cursor: default;
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.gwt-DialogBox .Content {
+  background: white;
+}
+
+.gwt-DialogBox .Content table {
+  filter: alpha(opacity=100); /* Fixes rendering issues in IE7 */
+}
+
+/**
+ * Applied to the disclosure panel, which shows or hides content when the user
+ * toggles the header.
+ */
+.gwt-DisclosurePanel {
+}
+
+.gwt-DisclosurePanel a {
+  text-decoration: none;  /* Remove underline from header */ 
+}
+
+.gwt-DisclosurePanel-open {
+}
+
+.gwt-DisclosurePanel-closed {
+}
+
+.gwt-DisclosurePanel .header {
+}
+
+.gwt-DisclosurePanel .content {
+  border-left: 3px solid #e8eef7;
+  padding: 4px 0px 4px 8px;
+  margin-left: 6px;
+}
+
+/**
+ * Applied to the File Upload.
+ */
+.gwt-FileUpload {
+}
+
+/**
+ * Applied to the Frame widget, which is an iframe wrapper.
+ */
+.gwt-Frame {
+}
+
+/**
+ * Applied to split panels.
+ */
+.gwt-HorizontalSplitPanel {
+  border: 4px solid #E1E7F2;
+}
+
+.gwt-HorizontalSplitPanel .hsplitter {
+  cursor: move;
+  background-color: #E1E7F2;
+  border-right: 1px solid #BBBBBB;
+  border-left: 1px solid #BBBBBB; 
+}
+
+.gwt-VerticalSplitPanel {
+  border: 4px solid #E1E7F2;
+}
+
+.gwt-VerticalSplitPanel .vsplitter {
+  cursor: move;
+  background-color: #E1E7F2;
+  border-top: 1px solid #BBBBBB;
+  border-bottom: 1px solid #BBBBBB; 
+}
+
+/**
+ * Applied to all HTML label elements.
+ */
+.gwt-HTML {
+}
+
+/**
+ * Applied to all Hyperlinks.
+ */
+.gwt-Hyperlink {
+}
+
+/**
+ * Applied to all Images
+ */
+.gwt-Image {
+}
+
+/**
+ * Applied to all Label elements.
+ */
+.gwt-Label {
+}
+
+/**
+ * Applied to list boxes.
+ */
+.gwt-ListBox {
+}
+
+/**
+ * Applied to the menu bar.
+ */
+.gwt-MenuBar {
+  cursor: default;
+  border: 1px solid #BBBBBB;
+}
+
+.gwt-MenuBar .gwt-MenuItem {
+  cursor: default;
+}
+
+.gwt-MenuBar .gwt-MenuItem-selected {
+  background: #E0EDFE;
+}
+
+.gwt-MenuBar-horizontal {
+  background: #e3e8f3 url(images/bg_headergradient.gif) repeat-x;
+}
+
+.gwt-MenuBar-horizontal .gwt-MenuItem {
+  padding: 0px 10px;
+  vertical-align: bottom;
+  color: #666666;
+  font-weight: bold;
+}
+
+.gwt-MenuBar-vertical {
+  background-color: white;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+
+.gwt-MenuBar-vertical .gwt-MenuItem {
+  padding: 4px 20px 4px 8px;
+}
+
+/**
+ * Applied to the password input box.
+ */
+.gwt-PasswordTextBox {
+  padding: 2px;
+}
+.gwt-PasswordTextBox-readonly {
+  color: #888;
+}
+
+/**
+ * Applied to the push button, a customizable button that can be pressed
+ * and released.
+ */
+.gwt-PushButton-up {
+  padding: 2px;
+  background-color: #efebe7;
+  border: 2px solid #faf9f7;
+  border-right: 2px solid #848280;
+  border-bottom: 2px solid #848280;
+  cursor: pointer;
+  cursor: hand;
+}
+  
+.gwt-PushButton-up-hovering {
+  padding: 2px;
+  background-color: #efebe7;
+  border: 2px solid #faf9f7;
+  border-right: 2px solid #848280;
+  border-bottom: 2px solid #848280;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-PushButton-up-disabled {
+  padding: 2px;
+  background-color: #efebe7;
+  border: 2px solid #e7e4e0;
+  border-right: 2px solid #625b54;
+  border-bottom: 2px solid #625b54;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.gwt-PushButton-up-disabled .gwt-Image {
+  filter: alpha(opacity=30);
+}
+
+.gwt-PushButton-down {
+  padding: 2px 1px 2px 3px;
+  background-color: #efebe7;
+  border: 2px solid #848280;
+  border-right: 2px solid #faf9f7;
+  border-bottom: 2px solid #faf9f7;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-PushButton-down-hovering {
+  padding: 2px 1px 2px 3px;
+  background-color: #efebe7;
+  border: 2px solid #848280;
+  border-right: 2px solid #faf9f7;
+  border-bottom: 2px solid #faf9f7;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-PushButton-down-disabled {
+  padding: 2px 1px 2px 3px;
+  background-color: #efebe7;
+  border: 2px solid #e7e4e0;
+  border-right: 2px solid #625b54;
+  border-bottom: 2px solid #625b54;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.gwt-PushButton-down-disabled .gwt-Image {
+  filter: alpha(opacity=30);
+}
+
+/**
+ * Applied to radio buttons and the text next to them.
+ */
+.gwt-RadioButton {
+  padding: 4px 4px 3px 3px;
+}
+
+.gwt-RadioButton-disabled {
+  color: #888;
+}
+
+/**
+ * Applied to the Rich Text Area.
+ */
+.gwt-RichTextArea {
+}
+
+.hasRichTextToolbar {
+  border: 0px;
+}
+
+.gwt-RichTextToolbar {
+  background: #e3e8f3 url(images/bg_headergradient.gif) repeat-x;
+  border-bottom: 1px solid #BBBBBB;
+  padding: 3px;
+  margin: 0px;
+}
+
+.gwt-RichTextToolbar .gwt-PushButton-up {
+  padding: 0px 1px 0px 0px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  border-width: 1px; 
+}
+
+.gwt-RichTextToolbar .gwt-PushButton-up-hovering {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0px 1px 0px 0px;
+  border-width: 1px; 
+}
+
+.gwt-RichTextToolbar .gwt-PushButton-down {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 1px;
+  border-width: 1px; 
+}
+
+.gwt-RichTextToolbar .gwt-PushButton-down-hovering {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 1px;
+  border-width: 1px; 
+}
+
+.gwt-RichTextToolbar .gwt-ToggleButton-up {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0px 1px 0px 0px;
+  border-width: 1px;
+}
+
+.gwt-RichTextToolbar .gwt-ToggleButton-up-hovering {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0px 1px 0px 0px;
+  border-width: 1px;
+}
+
+.gwt-RichTextToolbar .gwt-ToggleButton-down {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 1px;
+  border-width: 1px;
+}
+
+.gwt-RichTextToolbar .gwt-ToggleButton-down-hovering {
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 1px;
+  border-width: 1px;
+}
+
+/**
+ * Applied to the stack panel, a vertical menu widget that reveals one
+ * category at a time.
+ */
+.gwt-StackPanel {
+  border-spacing: 0px;
+  border: 1px solid #666666;
+}
+
+.gwt-StackPanel .gwt-StackPanelItem {
+  font-weight: bold;
+  font-size: 1.3em;
+  background: #e3e8f3 url(images/bg_headergradient.gif) repeat-x;
+  color: #666666;
+  border: 1px solid #e3e8f3;
+  padding: 5px 3px 5px 10px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-StackPanel .gwt-StackPanelItem-selected {
+  color: black;
+  cursor: default;
+}
+
+.gwt-StackPanel .gwt-StackPanelContent {
+  padding: 2px 2px 10px 5px;
+}
+
+/**
+ * Applied to the suggest box.
+ */
+.gwt-SuggestBox {
+  padding: 2px;
+}
+ 
+.gwt-SuggestBoxPopup {
+  background: #E0ECFF;
+  margin-left: 2px;
+  padding: 2px;
+  background: #eaeff6 url(images/bg_suggestgradient.gif) repeat-x;
+  border: 1px solid #bbbbbb;
+}
+
+.gwt-SuggestBoxPopup .item {
+  padding: 2px 6px;
+  color: #424242;
+  cursor: default;
+}
+
+.gwt-SuggestBoxPopup .item-selected {
+  background-color: #E0EDFE;
+  background: #eaeff6 url(images/bg_listgradient.gif) repeat-x;
+}
+
+/**
+ * Applied to the tab panel.  The tab panel provides CSS access to
+ * the tab bar element and the table cell that wraps the tab bar element,
+ * which allows for rounded edges via the sliding window method.
+ */ 
+.gwt-TabBar {
+}
+
+.gwt-TabBar .gwt-TabBarFirst {
+  width: 5px;  /* first tab distance from the left */
+}
+
+.gwt-TabBar .gwt-TabBarRest {
+}
+
+.gwt-TabBar .gwt-TabBarItem {
+  padding: 3px 4px 2px 4px;
+  cursor: pointer;
+  cursor: hand;
+  color: #666666;
+  font-weight: bold;
+  background: white url(images/tab.gif) no-repeat right top;
+  margin-left: 6px;    /* Size of right image, used for sliding window */
+  padding-right: 10px; /* +6px to balance margin-left */
+  text-align: center;
+}
+
+.gwt-TabBar .gwt-TabBarItem-wrapper {
+  padding: 0px;
+  background: white url(images/tab.gif) no-repeat left top;
+  border-left: 5px solid white; /* Spacing between tabs */
+}
+
+.gwt-TabBar .gwt-TabBarItem-selected {
+  cursor: default;
+  color: black;
+  background: white url(images/tab.gif) no-repeat right -100px;
+}
+
+.gwt-TabBar .gwt-TabBarItem-wrapper-selected {
+  background: white url(images/tab.gif) no-repeat left -100px;
+}
+
+.gwt-TabPanel {
+}
+
+.gwt-TabPanelBottom {
+  border-color: #BBBBBB;
+  border-style: solid;
+  border-width: 3px 2px 5px;
+  width: 100%;
+}
+
+/**
+ * Applied to general text areas.
+ */
+.gwt-TextArea {
+  padding: 2px;
+}
+
+.gwt-TextArea-readonly {
+  color: #888;
+}
+
+/**
+ * Applied to text boxes.
+ */
+.gwt-TextBox {
+  padding: 2px;
+}
+
+.gwt-TextBox-readonly {
+  color: #888;
+}
+
+/**
+ * Applied to toggle buttons, a customizable button that can be toggled
+ * between two states (similar to a checkbox).
+ */
+.gwt-ToggleButton-up {
+  padding: 2px;
+  background-color: #efebe7;
+  border: 2px solid #faf9f7;
+  border-right: 2px solid #848280;
+  border-bottom: 2px solid #848280;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-ToggleButton-up-hovering {
+  padding: 2px;
+  background-color: #efebe7;
+  border: 2px solid #faf9f7;
+  border-right: 2px solid #848280;
+  border-bottom: 2px solid #848280;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-ToggleButton-up-disabled {
+  padding: 2px;
+  background-color: #efebe7;
+  border: 2px solid #e7e4e0;
+  border-right: 2px solid #625b54;
+  border-bottom: 2px solid #625b54;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.gwt-ToggleButton-up-disabled .gwt-Image {
+  filter: alpha(opacity=30);
+}
+
+.gwt-ToggleButton-down {
+  padding: 2px 1px 2px 3px;
+  background-color: #f5f5f5;
+  border: 2px solid #848280;
+  border-right: 2px solid #faf9f7;
+  border-bottom: 2px solid #faf9f7;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-ToggleButton-down-hovering {
+  padding: 2px 1px 2px 3px;
+  background-color: #f5f5f5;
+  border: 2px solid #848280;
+  border-right: 2px solid #faf9f7;
+  border-bottom: 2px solid #faf9f7;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.gwt-ToggleButton-down-disabled {
+  padding: 2px 1px 2px 3px;
+  background-color: #efebe7;
+  border: 2px solid #e7e4e0;
+  border-right: 2px solid #625b54;
+  border-bottom: 2px solid #625b54;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.gwt-ToggleButton-down-disabled .gwt-Image {
+  filter: alpha(opacity=30);
+}
+
+/**
+ * Applied to the Tree.
+ */
+.gwt-Tree {
+  background: white;
+}
+
+.gwt-Tree .gwt-TreeItem-wrapper {
+  margin: 0px 0px 0px 20px;  // Indentation
+}
+
+.gwt-Tree .gwt-TreeItem {
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid white;
+  white-space: nowrap;
+  cursor: hand;
+  cursor: pointer;
+}
+
+.gwt-Tree .gwt-TreeItem-hovering {
+}
+
+.gwt-Tree .gwt-TreeItem-selected {
+  background: #93c2f1 url(images/bg_listgradient.gif) repeat-x;
+  border: 1px dotted #888;
+}
