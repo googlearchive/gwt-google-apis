@@ -116,6 +116,15 @@
 	-->
 	<property name="gwt.remote.browsers" value="" />
 
+        <!-- Gears support -->
+
+        <!-- Currently the test only asks if the host is Windows. A further -->
+        <!-- check to see that Gears is actually installed would be nice.   -->
+        <!-- Once out of process hosted mode is in place, other platforms   -->
+        <!-- can be tested and more sophisticated detection is in order.    -->
+        <condition property="build.host.hasgears">
+               <equals arg1="${build.host.iswindows}" arg2="true" />
+        </condition>
 
 	<!-- Pulls in tasks defined in ant-contrib, i.e. foreach -->
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
