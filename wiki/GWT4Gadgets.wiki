@@ -1,0 +1,29 @@
+#summary Support for iGoogle Gadgets / OpenSocial Apps / Google Mapplets
+#labels Phase-Design
+
+= Introduction =
+
+iGoogle Gadgets, Mapplets, and !OpenSocial apps (collectively referred to as Gadgets) are essentially regular web applications with an additional manifest file designed to run in a container environment.  The goal of the GWT4Gadgets sub-project is to make GWT the easiest way to create and deploy Gadgets.
+
+= Major features =
+
+  * Automatic generation of the Gadget manifest file
+  * Produce a bootstrap sequence more optimal than you would choose to implement by hand
+  * Provide extensible access to emerging or container-specific APIs (e.g. !OpenSocial)
+  * Maximize Gadget performance and minimize impact on the developer's hosts by taking advantage of available caching mechanisms.
+
+= Punchlist =
+
+|| *Todo* || *Status* || *Owners* ||
+|| Bootstrap || Working || BobV ||
+|| Manifest generation || Working || BobV ||
+|| Standard API bindings || Prototyped ||
+|| !OpenSocial API bindings ||
+|| Mapplets API bindings ||
+|| I18N ||
+|| Demo App ||
+
+= Code location =
+
+http://gwt-google-apis.googlecode.com/svn/branches/gadgets/
+  * Requires the GWT Linker API
