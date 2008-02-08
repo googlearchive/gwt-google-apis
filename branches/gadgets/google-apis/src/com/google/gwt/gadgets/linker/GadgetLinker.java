@@ -53,9 +53,9 @@ public final class GadgetLinker extends XSLinker {
       throws UnableToCompleteException {
     logger = logger.branch(TreeLogger.DEBUG, "Building gadget manifest", null);
 
-    String bootstrap = "<script>\n"
+    String bootstrap = "<script>\n(function (){"
         + context.optimizeJavaScript(logger, generateSelectionScript(logger,
-            context)) + "</script>";
+            context)) + "})()</script>";
 
     for (GeneratedResource manifestResource : context.getGeneratedResources()) {
       // Find the stub manifests

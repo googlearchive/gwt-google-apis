@@ -14,7 +14,8 @@
  * the License.
  */
 
-function __MODULE_FUNC__() {
+// The GadgetLinker will wrap all of this in an anonymous function
+window.__MODULE_FUNC__ = function() {
   // ---------------- INTERNAL GLOBALS ----------------
   
   // Cache symbols locally for good obfuscation
@@ -91,43 +92,39 @@ function __MODULE_FUNC__() {
   // gwt:property, gwt:onPropertyErrorFn, gwt:onLoadErrorFn
   //
   function processMetas() {
-    var metas = document.getElementsByTagName('meta');
-    for (var i = 0, n = metas.length; i < n; ++i) {
-      var meta = metas[i], name = meta.getAttribute('name'), content;
-  
-      if (name) {
-        if (name == 'gwt:property') {
-          content = meta.getAttribute('content');
-          if (content) {
-            var value, eq = content.indexOf('=');
-            if (eq >= 0) {
-              name = content.substring(0, eq);
-              value = content.substring(eq+1);
-            } else {
-              name = content;
-              value = '';
-            }
-            metaProps[name] = value;
+    var meta;
+    var prefs = new _IG_Prefs();
+    
+    if (meta = prefs.getString('gwt:onLoadErrorFn')) {
+      try {
+        onLoadErrorFunc = eval(meta);
+      } catch (e) {
+        alert('Bad handler \"' + content + '\" for \"gwt:onLoadErrorFn\"');
+      }
+    }
+    
+    if (meta = prefs.getString('gwt:onPropertyErrorFn')) {
+      try {
+        propertyErrorFunc = eval(meta);
+      } catch (e) {
+        alert('Bad handler \"' + content +
+          '\" for \"gwt:onPropertyErrorFn\"');
+      }
+    }
+    
+    if (meta = prefs.getArray('gwt:property')) {
+      for (var i = 0; i < meta.length; i++) {
+        var content = meta[i];
+        if (content) {
+          var value, eq = content.indexOf('=');
+          if (eq >= 0) {
+            name = content.substring(0, eq);
+            value = content.substring(eq+1);
+          } else {
+            name = content;
+            value = '';
           }
-        } else if (name == 'gwt:onPropertyErrorFn') {
-          content = meta.getAttribute('content');
-          if (content) {
-            try {
-              propertyErrorFunc = eval(content);
-            } catch (e) {
-              alert('Bad handler \"' + content +
-                '\" for \"gwt:onPropertyErrorFn\"');
-            }
-          }
-        } else if (name == 'gwt:onLoadErrorFn') {
-          content = meta.getAttribute('content');
-          if (content) {
-            try {
-              onLoadErrorFunc = eval(content);
-            } catch (e) {
-              alert('Bad handler \"' + content + '\" for \"gwt:onLoadErrorFn\"');
-            }
-          }
+          metaProps[name] = value;
         }
       }
     }
