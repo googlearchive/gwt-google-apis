@@ -108,11 +108,20 @@
 	</condition>
 
 	<!-- JUnit support -->
-	<property name="gwt.junit.port" value="8888" />
+
+	<!-- 
+           gwt.junit.port - port number to use for junit server.         
+              Traditionally, this port has been fixed at '8888'           
+              Set to '8889 to avoid conflicting with another hosted mode  
+              browser running on the same system.                         
+              For parallel testing, we must use 'auto' for the port number 
+        -->
+	<property name="gwt.junit.port" value="8889" />
 	<property name="gwt.junit.testcase.includes" value="**/*Test.class"/>
 	
 	<!--
-		Comma delimited list of host and path components on which to run remote browser testing.
+		Comma delimited list of host and path components on 
+                which to run remote browser testing.
 	-->
 	<property name="gwt.remote.browsers" value="" />
 
