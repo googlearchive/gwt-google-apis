@@ -21,11 +21,11 @@ iGoogle Gadgets, Mapplets, and !OpenSocial apps (collectively referred to as Gad
 || *Todo* || *Status* || *Owners* ||
 || [GWT4GadgetsBootstrap Bootstrap] || Working || BobV ||
 || [GWT4GadgetsManifest Manifest generation] || Working || BobV ||
-|| Standard API bindings || Prototyped ||
-|| !OpenSocial API bindings ||
-|| Mapplets API bindings ||
+|| Standard API bindings || Prototyped || Zundel ||
+|| !OpenSocial API bindings || Planned for 1.1 || Zundel ||
+|| Mapplets API bindings || Post-1.1 without a volunteer ||
 || [GWT4GadgetsXHR XHR] / !RequestBuilder / RPC || Investigation ongoing || BobV ||
-|| I18N ||
+|| I18N || Document, no specific support in 1.1 ||
 || Demo App ||
 
 = Code location =
