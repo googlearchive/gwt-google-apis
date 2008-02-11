@@ -5,6 +5,7 @@
 === New API Support (Design Docs) ===
   * [http://code.google.com/p/gwt-google-apis/wiki/MapsAPIDesign Google Maps API] ([http://code.google.com/p/gwt-google-apis/issues/detail?id=8 #8])
   * [http://code.google.com/p/gwt-google-apis/wiki/AJAXSearchAPIDesign Google AJAX Search API] ([http://code.google.com/p/gwt-google-apis/issues/detail?id=9 #9])
+  * [http://code.google.com/p/gwt-google-apis/wiki/GWT4Gadgets Gadgets]
 
 === API Updates ===
   * [http://code.google.com/p/gwt-google-apis/wiki/GearsAPIUpdateToVersion_0_2_Design Update Gears bindings to support Gears API version 0.2.]
