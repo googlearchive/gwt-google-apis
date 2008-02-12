@@ -14,8 +14,7 @@
  * the License.
  */
 
-// The GadgetLinker will wrap all of this in an anonymous function
-window.__MODULE_FUNC__ = function() {
+function __MODULE_FUNC__() {
   // ---------------- INTERNAL GLOBALS ----------------
   
   // Cache symbols locally for good obfuscation
