@@ -13,6 +13,7 @@
 <!-- limitations under the License.                                         -->
 
 <module>
+  <inherits name="com.google.gwt.i18n.I18N"/>
   <inherits name="com.google.gwt.user.User" />
   <inherits name="com.google.gwt.maps.GoogleMaps" />
   <entry-point class="com.google.gwt.maps.sample.maps.client.HelloMaps" />
