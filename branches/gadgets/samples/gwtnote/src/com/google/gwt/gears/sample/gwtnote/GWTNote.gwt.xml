@@ -1,6 +1,0 @@
-<module>
-  <inherits name="com.google.gwt.user.User"/>
-  <inherits name="com.google.gwt.gears.Gears"/>
-  <entry-point class="com.google.gwt.gears.sample.gwtnote.client.GWTNote"/>
-  <servlet path="/rpc" class="com.google.gwt.gears.sample.gwtnote.server.NoteServiceImpl"/>
-</module>

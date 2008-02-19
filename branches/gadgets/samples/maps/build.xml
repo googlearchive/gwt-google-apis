@@ -1,6 +1,0 @@
-<project name="database" default="build" basedir=".">
-	<property name="sample.api" value="maps"/>
-	<property name="sample.root" value="maps" />
-	<property name="sample.module" value="HelloMaps" />
-	<import file="../common.ant.xml" />
-</project>
