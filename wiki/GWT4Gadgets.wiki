@@ -30,5 +30,4 @@ iGoogle Gadgets, Mapplets, and !OpenSocial apps (collectively referred to as Gad
 
 = Code location =
 
-http://gwt-google-apis.googlecode.com/svn/branches/gadgets/
-  * Requires the GWT Linker API
+The code is located in the GALGWT trunk, in the `com.google.gwt.gadegts` and `com.google.gwt.mapplets` packages.
