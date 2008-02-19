@@ -19,6 +19,10 @@
 		<gwt.ant dir="gwtnote" />
 	</target>
 
+	<target name="hellogadgets" description="Build HelloGadgets">
+		<gwt.ant dir="hellogadgets" />
+	</target>
+
 	<target name="managedresourcestore" description="Build ManagedResourceStore">
 		<gwt.ant dir="managedresourcestore" />
 	</target>
@@ -32,7 +36,7 @@
 	</target>
 
 	
-	<target name="-do" depends="ajaxsearch, database, gwtnote, managedresourcestore, maps, resourcestore" description="Run all subprojects" />
+	<target name="-do" depends="ajaxsearch, database, gwtnote, hellogadgets, managedresourcestore, maps, resourcestore" description="Run all subprojects" />
 
 	<target name="build" description="Builds Google API Library for GWT Samples">
 		<antcall target="-do">
