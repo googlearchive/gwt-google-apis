@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,44 +22,43 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.MercatorProjection;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Projection;
-import com.google.gwt.maps.client.geom.Size;
 
 /**
  * 
  */
 public interface ProjectionImpl extends JSFlyweightWrapper {
 
-  public static final ProjectionImpl impl = (ProjectionImpl) GWT.create(ProjectionImpl.class);
+  ProjectionImpl impl = (ProjectionImpl) GWT.create(ProjectionImpl.class);
 
   /**
    * @gwt.binding
    */
-  public void bind(JavaScriptObject jsoPeer, MercatorProjection projection);
+  void bind(JavaScriptObject jsoPeer, MercatorProjection projection);
 
   /**
    * @gwt.binding
    */
-  public void bind(JavaScriptObject jsoPeer, Projection projection);
+  void bind(JavaScriptObject jsoPeer, Projection projection);
 
   /**
    * @gwt.constructor $wnd.GProjection
    */
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
   /**
    * @gwt.constructor $wnd.GMercatorProjection
    */
-  public JavaScriptObject constructMercatorProjection(int zoomLevels);
+  JavaScriptObject constructMercatorProjection(int zoomLevels);
 
-  public Point fromLatLngToPixel(JavaScriptObject jsoPeer, LatLng latlng,
+  Point fromLatLngToPixel(JavaScriptObject jsoPeer, LatLng latlng,
       int zoomLevel);
 
-  public LatLng fromPixelToLatLng(JavaScriptObject jsoPeer, Point point,
-      int zoomLevel, boolean nofix);
+  LatLng fromPixelToLatLng(JavaScriptObject jsoPeer, Point point,
+      int zoomLevel, boolean unbounded);
 
-  public int getWrapWidth(JavaScriptObject jsoPeer, int zoomLevel);
+  int getWrapWidth(JavaScriptObject jsoPeer, int zoomLevel);
 
-  public boolean tileCheckRange(JavaScriptObject jsoPeer, Point point,
-      int zoomLevel, Size tileSize);
+  boolean tileCheckRange(JavaScriptObject jsoPeer, Point point,
+      int zoomLevel, int tileSize);
 
 }
