@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -39,27 +39,25 @@ public abstract class Projection {
   }
 
   /**
+   * @gwt.exported fromLatLngToPixel
+   */
+  public abstract Point convertLatLngToPixel(LatLng latlng, int zoomLevel);
+
+  /**
+   * @gwt.exported fromPixelToLatLng
+   */
+  public abstract LatLng convertPixelToLatLng(Point point, int zoomLevel,
+      boolean unbounded);
+
+  /**
    * @gwt.exported getWrapWidth
    */
   public abstract int getWrapWidth(int zoomLevel);
 
-  // TODO: better method name
   /**
    * @gwt.exported tileCheckRange
    */
   public abstract boolean tileCheckRange(Point point, int zoomLevel,
-      Size tileSize);
-
-  /**
-   * @gwt.exported fromLatLngToPixel
-   */
-  protected abstract Point convertLatLngToPixel(LatLng latlng, int zoomLevel);
-
-  // TODO: better argument name than "nofix"
-  /**
-   * @gwt.exported fromPixelToLatLng
-   */
-  protected abstract LatLng convertPixelToLatLng(Point point, int zoomLevel,
-      boolean nofix);
+      int tileSize);
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,28 +25,26 @@ public final class MercatorProjection extends Projection {
 
   public MercatorProjection(int numZoomLevels) {
     super(ProjectionImpl.impl.constructMercatorProjection(numZoomLevels));
-    ProjectionImpl.impl.bind(jsoPeer, this);
   }
 
   protected MercatorProjection(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 
+  public Point convertLatLngToPixel(LatLng latlng, int zoomLevel) {
+    return ProjectionImpl.impl.fromLatLngToPixel(jsoPeer, latlng, zoomLevel);
+  }
+
+  public LatLng convertPixelToLatLng(Point point, int zoomLevel,
+      boolean unbound) {
+    return ProjectionImpl.impl.fromPixelToLatLng(jsoPeer, point, zoomLevel, unbound);
+  }
+
   public int getWrapWidth(int zoomLevel) {
     return ProjectionImpl.impl.getWrapWidth(jsoPeer, zoomLevel);
   }
 
-  public boolean tileCheckRange(Point point, int zoomLevel, Size tileSize) {
+  public boolean tileCheckRange(Point point, int zoomLevel, int tileSize) {
     return ProjectionImpl.impl.tileCheckRange(jsoPeer, point, zoomLevel, tileSize);
   }
-
-  protected Point convertLatLngToPixel(LatLng latlng, int zoomLevel) {
-    return ProjectionImpl.impl.fromLatLngToPixel(jsoPeer, latlng, zoomLevel);
-  }
-
-  protected LatLng convertPixelToLatLng(Point point, int zoomLevel,
-      boolean nofix) {
-    return ProjectionImpl.impl.fromPixelToLatLng(jsoPeer, point, zoomLevel, nofix);
-  }
-
 }
