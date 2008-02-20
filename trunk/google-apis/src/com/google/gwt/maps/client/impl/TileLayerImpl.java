@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.client.impl;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.CopyrightCollection;
@@ -26,30 +27,32 @@ import com.google.gwt.maps.client.geom.Point;
  */
 public interface TileLayerImpl extends JSFlyweightWrapper {
 
+  TileLayerImpl impl = (TileLayerImpl) GWT.create(TileLayerImpl.class);
+
   /**
    * @gwt.binding
    */
-  public void bind(JavaScriptObject jsoPeer, TileLayer tileLayer);
+  void bind(JavaScriptObject jsoPeer, TileLayer tileLayer);
 
   /**
    * @gwt.constructor $wnd.GTileLayer
    */
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
   /**
    * @gwt.constructor $wnd.GTileLayer
    */
-  public JavaScriptObject construct(CopyrightCollection copyrights,
+  JavaScriptObject construct(CopyrightCollection copyrights,
       int minResolution, int maxResolution);
 
-  public int getMaxResolution(TileLayer jsoPeer);
+  double getOpacity(TileLayer jsoPeer);
 
-  public int getMinResolution(TileLayer jsoPeer);
+  String getTileUrl(TileLayer jsoPeer, Point tile, int zoomLevel);
 
-  public double getOpacity(TileLayer jsoPeer);
+  boolean isPng(TileLayer jsoPeer);
 
-  public String getTileUrl(TileLayer jsoPeer, Point tile, int zoomLevel);
+  int maxResolution(TileLayer jsoPeer);
 
-  public boolean isPng(TileLayer jsoPeer);
+  int minResolution(TileLayer jsoPeer);
 
 }

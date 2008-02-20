@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.Point;
@@ -25,8 +24,6 @@ import com.google.gwt.maps.client.impl.TileLayerImpl;
  * 
  */
 public abstract class TileLayer {
-
-  private static final TileLayerImpl impl = (TileLayerImpl) GWT.create(TileLayerImpl.class);
 
   // TODO: abstract? concrete? both?
   
@@ -43,16 +40,19 @@ public abstract class TileLayer {
 
   static TileLayer createPeer(JavaScriptObject jsoPeer) {
     return new TileLayer(jsoPeer) {
+      @Override
       public double getOpacity() {
-        return impl.getOpacity(this);
+        return TileLayerImpl.impl.getOpacity(this);
       }
 
+      @Override
       public String getTileURL(Point tile, int zoomLevel) {
-        return impl.getTileUrl(this, tile, zoomLevel);
+        return TileLayerImpl.impl.getTileUrl(this, tile, zoomLevel);
       }
 
+      @Override
       public boolean isPng() {
-        return impl.isPng(this);
+        return TileLayerImpl.impl.isPng(this);
       }
     };
   }
@@ -61,8 +61,8 @@ public abstract class TileLayer {
 
   public TileLayer(CopyrightCollection copyrights, int minResolution,
       int maxResolution) {
-    jsoPeer = impl.construct(copyrights, minResolution, maxResolution);
-    impl.bind(jsoPeer, this);
+    jsoPeer = TileLayerImpl.impl.construct(copyrights, minResolution, maxResolution);
+    TileLayerImpl.impl.bind(jsoPeer, this);
   }
 
   private TileLayer(JavaScriptObject jsoPeer) {
@@ -70,11 +70,11 @@ public abstract class TileLayer {
   }
 
   public int getMaxResolution() {
-    return impl.getMaxResolution(this);
+    return TileLayerImpl.impl.maxResolution(this);
   }
 
   public int getMinResolution() {
-    return impl.getMinResolution(this);
+    return TileLayerImpl.impl.minResolution(this);
   }
 
   /**
