@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,9 +20,7 @@ import com.google.gwt.ajaxsearch.client.impl.GnewsResult;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -52,6 +50,7 @@ public class NewsResult extends Result {
 
     private final JavaScriptObject jsoPeer;
 
+    // TODO: Do we even need this constructor?  If so, can it be private?
     public RelatedStory() {
       this(GnewsResult.RelatedStory.IMPL.construct());
     }
@@ -112,15 +111,8 @@ public class NewsResult extends Result {
   /**
    * A List of {@link NewsResult.RelatedStory}.
    */
-  public List getRelatedStories() {
-    List jsos = GnewsResult.IMPL.getRelatedStories(this);
-    ArrayList toReturn = new ArrayList();
-
-    for (Iterator i = jsos.iterator(); i.hasNext();) {
-      toReturn.add(new RelatedStory((JavaScriptObject) i.next()));
-    }
-
-    return toReturn;
+  public List<RelatedStory> getRelatedStories() {
+    return GnewsResult.IMPL.getRelatedStories(this);
   }
 
   public String getTitle() {

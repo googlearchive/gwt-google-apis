@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -44,9 +44,6 @@ public interface CopyrightCollectionImpl extends JSFlyweightWrapper {
   public JavaScriptObject getCopyrightNotice(JavaScriptObject jsoPeer,
       LatLngBounds bounds, int zoomLevel);
 
-  /**
-   * @gwt.typeArgs <java.lang.String>
-   */
-  public JSList/* String[] */getCopyrights(JavaScriptObject jsoPeer,
+  public JSList<String> getCopyrights(JavaScriptObject jsoPeer,
       LatLngBounds bounds, int zoomLevel);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,8 +20,6 @@ import com.google.gwt.ajaxsearch.client.impl.GlocalResult;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -52,6 +50,7 @@ public class LocalResult extends Result {
 
     private final JavaScriptObject jsoPeer;
 
+    // TODO: Do we even need this constructor?  If so, can it be private?
     public PhoneNumber() {
       this(GlocalResult.PhoneNumber.IMPL.construct());
     }
@@ -105,17 +104,10 @@ public class LocalResult extends Result {
   }
 
   /**
-   * Return a list of {@link LocalResult.PhoneNumber}.
+   * Returns a list of {@link LocalResult.PhoneNumber}.
    */
-  public List getPhoneNumbers() {
-    List jsos = GlocalResult.IMPL.getPhoneNumbers(this);
-    ArrayList toReturn = new ArrayList();
-
-    for (Iterator i = jsos.iterator(); i.hasNext();) {
-      toReturn.add(new PhoneNumber((JavaScriptObject) i.next()));
-    }
-
-    return toReturn;
+  public List<PhoneNumber> getPhoneNumbers() {
+    return  GlocalResult.IMPL.getPhoneNumbers(this);
   }
 
   public String getRegion() {

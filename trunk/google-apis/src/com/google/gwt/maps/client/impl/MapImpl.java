@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -118,10 +118,7 @@ public interface MapImpl extends JSFlyweightWrapper {
   // Replaced by getElement()?
   // public Element getContainer(JavaScriptObject jsoPeer);
   //  
-  /**
-   * @gwt.typeArgs <com.google.gwt.maps.client.MapType>
-   */
-  public JSList getMapTypes(JavaScriptObject jsoPeerPeer);
+  public JSList<MapType> getMapTypes(JavaScriptObject jsoPeerPeer);
 
   public Element getPane(MapWidget map, int id);
 

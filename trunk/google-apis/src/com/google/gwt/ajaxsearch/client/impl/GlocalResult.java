@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -54,10 +54,7 @@ public interface GlocalResult extends GResult {
   public String getDdUrlToHere(LocalResult obj);
   public String getLat(LocalResult obj);
   public String getLng(LocalResult obj);
-  /**
-   * @gwt.typeArgs <com.google.gwt.ajaxsearch.client.LocalResult.PhoneNumber>
-   */
-  public JSList getPhoneNumbers(LocalResult obj);
+  public JSList<LocalResult.PhoneNumber> getPhoneNumbers(LocalResult obj);
   public String getRegion(LocalResult obj);
   public String getStreetAddress(LocalResult obj);
   public String getTitle(LocalResult obj);
