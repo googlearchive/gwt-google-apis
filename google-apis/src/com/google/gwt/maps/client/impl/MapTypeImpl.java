@@ -51,10 +51,7 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   public int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds,
       Size viewSize);
 
-  /**
-   * @gwt.typeArgs <java.lang.String>
-   */
-  public JSList getCopyrights(JavaScriptObject jsoPeer, LatLngBounds bounds,
+  public JSList<String> getCopyrights(JavaScriptObject jsoPeer, LatLngBounds bounds,
       int zoomLevel);
 
   public String getErrorMessage(JavaScriptObject jsoPeer);
@@ -93,10 +90,7 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
 
   public String getTextColor(JavaScriptObject jsoPeer);
 
-  /**
-   * @gwt.typeArgs <com.google.gwt.maps.client.TileLayer>
-   */
-  public JSList getTileLayers(JavaScriptObject jsoPeer);
+  public JSList<TileLayer> getTileLayers(JavaScriptObject jsoPeer);
 
   public int getTileSize(JavaScriptObject jsoPeer);
 

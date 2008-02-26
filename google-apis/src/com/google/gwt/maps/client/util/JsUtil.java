@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -43,46 +43,39 @@ public final class JsUtil {
 
   static interface ListGenerator extends JSFlyweightWrapper {
     /**
-     * @gwt.typeArgs <com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab>
      * @gwt.fieldName valueOf
      */
-    public JSList asInfoWindowTabList(JavaScriptObject jso);
+    public JSList<InfoWindowTab> asInfoWindowTabList(JavaScriptObject jso);
 
     /**
-     * @gwt.typeArgs <java.lang.Integer>
      * @gwt.fieldName valueOf
      */
-    public JSList asIntegerList(JavaScriptObject jso);
+    public JSList<Integer> asIntegerList(JavaScriptObject jso);
 
     /**
-     * @gwt.typeArgs <com.google.gwt.maps.client.geom.LatLng>
      * @gwt.fieldName valueOf
      */
-    public JSList asLatLngList(JavaScriptObject jso);
+    public JSList<LatLng> asLatLngList(JavaScriptObject jso);
 
     /**
-     * @gwt.typeArgs <com.google.gwt.maps.client.overlay.Marker>
      * @gwt.fieldName valueOf
      */
-    public JSList asMarkerList(JavaScriptObject jso);
+    public JSList<Marker> asMarkerList(JavaScriptObject jso);
 
     /**
-     * @gwt.typeArgs <com.google.gwt.maps.client.geom.Point>
      * @gwt.fieldName valueOf
      */
-    public JSList asPointList(JavaScriptObject jso);
+    public JSList<Point> asPointList(JavaScriptObject jso);
 
     /**
-     * @gwt.typeArgs <com.google.gwt.maps.client.TileLayer>
      * @gwt.fieldName valueOf
      */
-    public JSList asTileLayerList(JavaScriptObject jso);
+    public JSList<TileLayer> asTileLayerList(JavaScriptObject jso);
 
     /**
-     * @gwt.typeArgs <com.google.gwt.maps.client.geocode.Waypoint>
      * @gwt.fieldName valueOf
      */
-    public JSList asWaypointList(JavaScriptObject jso);
+    public JSList<Waypoint> asWaypointList(JavaScriptObject jso);
 
     /**
      * @gwt.constructor Array

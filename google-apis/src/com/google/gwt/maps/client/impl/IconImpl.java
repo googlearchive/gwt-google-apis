@@ -67,10 +67,7 @@ public interface IconImpl extends JSFlyweightWrapper {
 
   String getImage(JavaScriptObject jsoPeer);
 
-  /**
-   * @gwt.typeArgs <java.lang.Integer>
-   */
-  JSList getImageMap(JavaScriptObject jsoPeer);
+  JSList<Integer> getImageMap(JavaScriptObject jsoPeer);
 
   Point getInfoWindowAnchor(JavaScriptObject jsoPeer);
 
@@ -98,10 +95,7 @@ public interface IconImpl extends JSFlyweightWrapper {
 
   void setImage(JavaScriptObject jsoPeer, String url);
 
-  /**
-   * @gwt.typeArgs imageMap <java.lang.Integer>
-   */
-  void setImageMap(JavaScriptObject jsoPeer, JSList/* int[] */imageMap);
+  void setImageMap(JavaScriptObject jsoPeer, JSList<Integer> imageMap);
 
   void setInfoWindowAnchor(JavaScriptObject jsoPeer, Point anchor);
 

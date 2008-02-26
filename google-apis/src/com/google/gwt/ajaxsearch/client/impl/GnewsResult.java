@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -57,9 +57,8 @@ public interface GnewsResult extends GResult {
   public String getPublisher(NewsResult obj);
   /**
    * @gwt.fieldName relatedStories
-   * @gwt.typeArgs <com.google.gwt.ajaxsearch.client.NewsResult.RelatedStory>
    */
-  public JSList getRelatedStories(NewsResult obj);
+  public JSList<NewsResult.RelatedStory> getRelatedStories(NewsResult obj);
   public String getTitle(NewsResult obj);
   public String getTitleNoFormatting(NewsResult obj);
   public String getUnescapedUrl(NewsResult obj);

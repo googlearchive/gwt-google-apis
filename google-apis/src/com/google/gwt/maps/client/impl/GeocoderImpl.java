@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,6 +22,7 @@ import com.google.gwt.jsio.client.JSFunction;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.jsio.client.JSWrapper;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
+import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 
@@ -46,9 +47,8 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
 
     /**
      * @gwt.fieldName Placemark
-     * @gwt.typeArgs <com.google.gwt.maps.client.geocode.Placemark>
      */
-    public JSList getPlacemarks();
+    public JSList<Placemark> getPlacemarks();
 
     /**
      * @gwt.fieldName Status
