@@ -9,7 +9,7 @@
 
 === API Updates ===
   * [http://code.google.com/p/gwt-google-apis/wiki/GearsAPIUpdateToVersion_0_2_Design Update Gears bindings to support Gears API version 0.2.]
-
+  * Update to allow auto generation of offline manifests.
 === Fixes ===
   * Method to test for Gears availability ([http://code.google.com/p/gwt-google-apis/issues/detail?id=1 #1])
   * Set mime types and end of line properties on all files ([http://code.google.com/p/gwt-google-apis/issues/detail?id=2 #2])
