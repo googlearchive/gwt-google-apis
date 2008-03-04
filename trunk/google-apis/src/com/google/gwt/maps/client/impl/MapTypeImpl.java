@@ -34,65 +34,117 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   /**
    * @gwt.binding
    */
-  public void bind(JavaScriptObject jsoPeer, MapType mapType);
+  void bind(JavaScriptObject jsoPeer, MapType mapType);
 
   /**
    * @gwt.constructor $wnd.GMapType
    */
-  public JavaScriptObject construct(JSList<TileLayer> layers,
-      Projection projection, String name);
+  JavaScriptObject construct(JSList<? extends TileLayer> layers, Projection projection,
+      String name);
 
   /**
    * @gwt.constructor $wnd.GMapType
    */
-  public JavaScriptObject construct(JSList<TileLayer> layers,
-      Projection projection, String name, MapTypeOptions opts);
+  JavaScriptObject construct(JSList<? extends TileLayer> layers, Projection projection,
+      String name, MapTypeOptions opts);
 
-  public int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds,
+  int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds,
       Size viewSize);
 
-  public JSList<String> getCopyrights(JavaScriptObject jsoPeer, LatLngBounds bounds,
+  JSList<String> getCopyrights(JavaScriptObject jsoPeer, LatLngBounds bounds,
       int zoomLevel);
 
-  public String getErrorMessage(JavaScriptObject jsoPeer);
+  /**
+   * @gwt.global $wnd.G_DEFAULT_MAP_TYPES
+   */
+  JavaScriptObject getDefaultMapTypes();
+
+  String getErrorMessage(JavaScriptObject jsoPeer);
 
   /**
    * @gwt.global $wnd.G_HYBRID_MAP
    */
-  public JavaScriptObject getHybridMapType();
+  JavaScriptObject getHybridMapType();
 
-  public String getLinkColor(JavaScriptObject jsoPeer);
+  String getLinkColor(JavaScriptObject jsoPeer);
 
-  public int getMaximumResolution(JavaScriptObject jsoPeer);
+  /**
+   * @gwt.global $wnd.G_MARS_ELEVATION_MAP
+   */
+  JavaScriptObject getMarsElevationMap();
 
-  public int getMaximumResolution(JavaScriptObject jsoPeer, LatLng latlng);
+  /**
+   * @gwt.global $wnd.G_MARS_INFRARED_MAP
+   */
+  JavaScriptObject getMarsInfraredMap();
 
-  public int getMinimumResolution(JavaScriptObject jsoPeer);
+  /**
+   * @gwt.global $wnd.G_MARS_VISIBLE_MAP
+   */
+  JavaScriptObject getMarsVisibleMap();
 
-  public int getMinimumResolution(JavaScriptObject jsoPeer, LatLng latlng);
+  int getMaximumResolution(JavaScriptObject jsoPeer);
 
-  public String getName(JavaScriptObject jsoPeer, boolean shortName);
+  int getMaximumResolution(JavaScriptObject jsoPeer, LatLng latlng);
+
+  int getMinimumResolution(JavaScriptObject jsoPeer);
+
+  int getMinimumResolution(JavaScriptObject jsoPeer, LatLng latlng);
+
+  /**
+   * @gwt.global $wnd.G_MOON_ELEVATION_MAP
+   */
+  JavaScriptObject getMoonElevationMapType();
+
+  /**
+   * @gwt.global $wnd.G_MOON_MAP_TYPES
+   */
+  JavaScriptObject getMoonMapTypes();
+
+  /**
+   * @gwt.global $wnd.G_MOON_VISIBLE_MAP
+   */
+  JavaScriptObject getMoonVisibleMap();
+
+  String getName(JavaScriptObject jsoPeer, boolean shortName);
 
   /**
    * @gwt.global $wnd.G_NORMAL_MAP
    */
-  public JavaScriptObject getNormalMapType();
+  JavaScriptObject getNormalMapType();
 
-  public Projection getProjection(JavaScriptObject jsoPeer);
+  /**
+   * @gwt.global $wnd.G_PHYSICAL_MAP
+   */
+  JavaScriptObject getPhysicalMapType();
+
+  Projection getProjection(JavaScriptObject jsoPeer);
 
   /**
    * @gwt.global $wnd.G_SATELLITE_MAP
    */
-  public JavaScriptObject getSatelliteMapType();
+  JavaScriptObject getSatelliteMapType();
 
-  public int getSpanZoomLevel(JavaScriptObject jsoPeer, LatLng center,
-      LatLng span, Size viewSize);
+  /**
+   * @gwt.global $wnd.G_SKY_MAP_TYPES
+   */
+  JavaScriptObject getSkyMapTypes();
 
-  public String getTextColor(JavaScriptObject jsoPeer);
+  /**
+   * @gwt.global $wnd.G_SKY_VISIBLE_MAP
+   */
+  JavaScriptObject getSkyVisibleMap();
 
-  public JSList<TileLayer> getTileLayers(JavaScriptObject jsoPeer);
+  int getSpanZoomLevel(JavaScriptObject jsoPeer, LatLng center, LatLng span,
+      Size viewSize);
 
-  public int getTileSize(JavaScriptObject jsoPeer);
+  String getTextColor(JavaScriptObject jsoPeer);
 
-  public String getUrlArg(JavaScriptObject jsoPeer);
+
+  JSList<TileLayer> getTileLayers(JavaScriptObject jsoPeer);
+
+  int getTileSize(JavaScriptObject jsoPeer);
+
+  String getUrlArg(JavaScriptObject jsoPeer);
+
 }

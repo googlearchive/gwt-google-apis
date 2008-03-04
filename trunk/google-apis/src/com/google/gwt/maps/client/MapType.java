@@ -30,8 +30,8 @@ import com.google.gwt.maps.client.util.JsUtil;
  * A MapType is a sequence of tile layers, a map projection, a tile size, and
  * assorted other settings, link colors, and copyrights.
  * 
- * There are three predefine map types: {@link MapType#NORMAL_MAP},
- * {@link MapType#SATELLITE_MAP}, and {@link MapType#HYBRID_MAP}.
+ * There are three predefine map types: {@link MapType#normalMap},
+ * {@link MapType#satelliteMap}, and {@link MapType#hybridMap}.
  * 
  * You can create instances of this class to define custom map types. In order
  * to show them on the map, use the {@link MapWidget#addMapType(MapType)}
@@ -44,29 +44,6 @@ import com.google.gwt.maps.client.util.JsUtil;
  */
 public final class MapType {
 
-  /**
-   * An array of the three predefined map types.
-   */
-  public static final MapType[] DEFAULT_MAP_TYPES;
-
-  /**
-   * A map type that shows transparent street maps over Google Earth satellite
-   * images.
-   */
-  public static final MapType HYBRID_MAP;
-
-  /**
-   * The normal street map type.
-   */
-  public static final MapType NORMAL_MAP;
-
-  /**
-   * A map type that shows Google Earth satellite images.
-   */
-  public static final MapType SATELLITE_MAP;
-
-  private static final MapTypeImpl impl = (MapTypeImpl) GWT.create(MapTypeImpl.class);
-
   // TODO: DELETE ME! (needs to function w/o)
   private static final Extractor __extractor = new Extractor() {
     public Object fromJS(JavaScriptObject jso) {
@@ -78,19 +55,310 @@ public final class MapType {
     }
   };
 
-  static {
-    NORMAL_MAP = createPeer(impl.getNormalMapType());
-    SATELLITE_MAP = createPeer(impl.getSatelliteMapType());
-    HYBRID_MAP = createPeer(impl.getHybridMapType());
-    DEFAULT_MAP_TYPES = new MapType[] {
-        NORMAL_MAP, SATELLITE_MAP, HYBRID_MAP
-    };
+  private static MapType[] defaultMapTypes;
+  private static MapType hybridMap;
+  private static final MapTypeImpl impl = (MapTypeImpl) GWT.create(MapTypeImpl.class);
+  private static boolean mapTypesInitialized = false;
+  private static MapType marsElevationMap;
+  private static MapType marsInfraredMap;
+  private static MapType[] marsMapTypes;
+  private static MapType marsVisibleMap;
+  private static MapType moonElevationMap;
+  private static MapType[] moonMapTypes;
+  private static MapType moonVisibleMap;
+  private static MapType normalMap;
+  private static MapType physicalMap;
+  private static MapType satelliteMap;
+  private static MapType[] skyMapTypes;
+
+  private static MapType skyVisibleMap;
+
+  /**
+   * Returns G_DEFAULT_MAP_TYPES as an Java Array of MapType objects.
+   * 
+   * @return an array of MapType objects
+   */
+  public static MapType[] getDefaultMapTypes() {
+    if (defaultMapTypes != null) {
+      return defaultMapTypes;
+    }
+    initMapTypes();
+    int size = getDefaultMapTypesSize();
+    defaultMapTypes = new MapType[size];
+    for (int i = 0; i < defaultMapTypes.length; i++) {
+      defaultMapTypes[i] = getDefaultMapType(i);
+    }
+    return defaultMapTypes;
   }
 
-  static MapType createPeer(JavaScriptObject jsoPeer) {
+  /**
+   * @return a map type that shows transparent street maps over Google Earth
+   *         satellite images.
+   */
+  public static MapType getHybridMap() {
+    initMapTypes();
+    return hybridMap;
+  }
+
+  /**
+   * @return a map type displays a shaded relief map of the surface of Mars,
+   *         color-coded by altitude. This map type is not displayed within map
+   *         type controls by default. (Since 2.95)
+   */
+  public static MapType getMarsElevationMap() {
+    initMapTypes();
+    return marsElevationMap;
+  }
+
+  /**
+   * @return a map type displays a shaded infrared map of the surface of Mars,
+   *         where warmer areas appear brighter and colder areas appear darker.
+   *         (Since 2.95)
+   */
+  public static MapType getMarsInfraredMap() {
+    initMapTypes();
+    return marsInfraredMap;
+  }
+
+  /**
+   * Turns G_MARS_MAP_TYPES into a Java Array of MapType objects.
+   * 
+   * @return an array of MapType objects
+   */
+  public static MapType[] getMarsMapTypes() {
+    if (marsMapTypes != null) {
+      return marsMapTypes;
+    }
+    initMapTypes();
+    int size = getMarsMapTypesSize();
+    marsMapTypes = new MapType[size];
+    for (int i = 0; i < marsMapTypes.length; i++) {
+      marsMapTypes[i] = getMarsMapType(i);
+    }
+    return marsMapTypes;
+  }
+
+  /**
+   * @return a map type that displays photographs taken from orbit around Mars.
+   *         This map type is not displayed within map type controls by default.
+   *         (Since 2.95)
+   */
+  public static MapType getMarsVisibleMap() {
+    initMapTypes();
+    return marsVisibleMap;
+  }
+
+  /**
+   * @return a map type that displays a shaded terrain map of the surface of the
+   *         Moon, color-coded by altitude. This map type is not displayed
+   *         within map type controls by default. (Since 2.95)
+   */
+  public static MapType getMoonElevationMap() {
+    initMapTypes();
+    return moonElevationMap;
+  }
+
+  /**
+   * Turns G_MOON_MAP_TYPES into a Java Array of MapType objects.
+   * 
+   * @return an array of MapType objects
+   */
+  public static MapType[] getMoonMapTypes() {
+    if (moonMapTypes != null) {
+      return moonMapTypes;
+    }
+    initMapTypes();
+    int size = getMoonMapTypesSize();
+    moonMapTypes = new MapType[size];
+    for (int i = 0; i < moonMapTypes.length; i++) {
+      moonMapTypes[i] = getMoonMapType(i);
+    }
+    return moonMapTypes;
+  }
+
+  /**
+   * @return a map type that displays photographs taken from orbit around the
+   *         moon. This map type is not displayed within map type controls by
+   *         default. (Since 2.95)
+   */
+  public static MapType getMoonVisibleMap() {
+    initMapTypes();
+    return moonVisibleMap;
+  }
+
+  /**
+   * @return the normal street map type.
+   */
+  public static MapType getNormalMap() {
+    initMapTypes();
+    return normalMap;
+  }
+
+  /**
+   * @return a map type that shows a terrain view.
+   */
+  public static MapType getPhysicalMap() {
+    initMapTypes();
+    return physicalMap;
+  }
+
+  /**
+   * @return a map type that shows Google Earth satellite images.
+   */
+  public static MapType getSatelliteMap() {
+    initMapTypes();
+    return satelliteMap;
+  }
+
+  /**
+   * Turns G_SKY_MAP_TYPES into a Java Array of MapType objects.
+   * 
+   * @return an array of MapType objects
+   */
+  public static MapType[] getSkyMapTypes() {
+    if (skyMapTypes != null) {
+      return skyMapTypes;
+    }
+    initMapTypes();
+    int size = getSkyMapTypesSize();
+    skyMapTypes = new MapType[size];
+    for (int i = 0; i < skyMapTypes.length; i++) {
+      skyMapTypes[i] = getSkyMapType(i);
+    }
+    return skyMapTypes;
+  }
+
+  /**
+   * @return a map type shows a mosaic of the sky, covering the full celestial
+   *         sphere. (Since 2.95)
+   */
+  public static MapType getSkyVisibleMap() {
+    initMapTypes();
+    return skyVisibleMap;
+  }
+
+  /**
+   * @param jsoPeer a JavaScriptObject to wrap with a Java object.
+   * @return A Java object wrapper for the jsoPeer passed.
+   */
+  private static MapType createPeer(JavaScriptObject jsoPeer) {
     MapType mapType = new MapType(jsoPeer);
     impl.bind(jsoPeer, mapType);
     return mapType;
+  }
+
+  /**
+   * Return one member of the G_DEFAULT_MAP_TYPES array. If it has already been
+   * wrapped, return the wrapped object. Otherwise, wrap the object.
+   * 
+   * @param i index into the array
+   * @return an element of the array as a Java object
+   */
+  private static native MapType getDefaultMapType(int i) /*-{
+     var o = $wnd.G_DEFAULT_MAP_TYPES[i];
+     if (o.__gwtPeer) {
+        // Avoid double wrapping the object.
+        return o.__gwtPeer;
+     } else {
+       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+     }
+  }-*/;
+
+  /**
+   * @return the length of the G_DEFAULT_MAP_TYPES array.
+   */
+  private static native int getDefaultMapTypesSize() /*-{
+     return $wnd.G_DEFAULT_MAP_TYPES.length;
+   }-*/;
+
+  /**
+   * Return one member of the G_MARS_MAP_TYPES array. If it has already been
+   * wrapped, return the wrapped object. Otherwise, wrap the object.
+   * 
+   * @param i index into the array
+   * @return an element of the array as a Java object
+   */
+  private static native MapType getMarsMapType(int i) /*-{
+     var o = $wnd.G_MARS_MAP_TYPES[i];
+     if (o.__gwtPeer) {
+        // Avoid double wrapping the object.
+        return o.__gwtPeer;
+      } else {
+        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+      }
+   }-*/;
+
+  /**
+   * @return the length of the MARS_MAP_TYPES array.
+   */
+  private static native int getMarsMapTypesSize() /*-{
+     return $wnd.G_MARS_MAP_TYPES.length;
+   }-*/;
+
+  /**
+   * Return one member of the G_MOON_MAP_TYPES array. If it has already been
+   * wrapped, return the wrapped object. Otherwise, wrap the object.
+   * 
+   * @param i index into the array
+   * @return an element of the array as a Java object
+   */
+  private static native MapType getMoonMapType(int i) /*-{
+      var o = $wnd.G_MOON_MAP_TYPES[i];
+      if (o.__gwtPeer) {
+         // Avoid double wrapping the object.
+         return o.__gwtPeer;
+      } else {
+        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+      }
+   }-*/;
+
+  /**
+   * @return the length of the MOON_MAP_TYPES array.
+   */
+  private static native int getMoonMapTypesSize() /*-{
+     return $wnd.G_MOON_MAP_TYPES.length;
+   }-*/;
+
+  /**
+   * Return one member of the G_SKY_MAP_TYPES array. If it has already been
+   * wrapped, return the wrapped object. Otherwise, wrap the object.
+   * 
+   * @param i index into the array
+   * @return an element of the array as a Java object
+   */
+  private static native MapType getSkyMapType(int i) /*-{
+      var o = $wnd.G_SKY_MAP_TYPES[i];
+      if (o.__gwtPeer) {
+         // Avoid double wrapping the object.
+         return o.__gwtPeer;
+      } else {
+        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+      }
+   }-*/;
+
+  /**
+   * @return the length of the SKY_MAP_TYPES array.
+   */
+  private static native int getSkyMapTypesSize() /*-{
+     return $wnd.G_SKY_MAP_TYPES.length;
+   }-*/;
+
+  private static void initMapTypes() {
+    if (mapTypesInitialized) {
+      return;
+    }
+
+    normalMap = createPeer(impl.getNormalMapType());
+    satelliteMap = createPeer(impl.getSatelliteMapType());
+    hybridMap = createPeer(impl.getHybridMapType());
+    physicalMap = createPeer(impl.getPhysicalMapType());
+    moonElevationMap = createPeer(impl.getMoonElevationMapType());
+    moonVisibleMap = createPeer(impl.getMoonVisibleMap());
+    marsElevationMap = createPeer(impl.getMarsElevationMap());
+    marsVisibleMap = createPeer(impl.getMarsVisibleMap());
+    marsInfraredMap = createPeer(impl.getMarsInfraredMap());
+    skyVisibleMap = createPeer(impl.getSkyVisibleMap());
+    mapTypesInitialized = true;
   }
 
   private final JavaScriptObject jsoPeer;
@@ -146,7 +414,7 @@ public final class MapType {
    * @return the copyrights corresponding to the given viewport
    */
   public String[] getCopyrights(LatLngBounds bounds, int zoomLevel) {
-    JSList copyrights = impl.getCopyrights(jsoPeer, bounds, zoomLevel);
+    JSList<String> copyrights = impl.getCopyrights(jsoPeer, bounds, zoomLevel);
     String[] returnValue = new String[copyrights.size()];
     JsUtil.toArray(copyrights, returnValue);
     return returnValue;
@@ -196,7 +464,6 @@ public final class MapType {
    * Returns the lowest zoom level at which this map type is defined for a given
    * point.
    * 
-   * @param latlng the point at which to find the minimum resolution
    * @return the lowest zoom level for the point
    */
   public int getMinimumResolution() {
@@ -240,7 +507,7 @@ public final class MapType {
    * Returns the highest resolution zoom level required to show the given span
    * with the given center point.
    * 
-   * @todo example, better descriptions
+   * @TODO example, better descriptions
    * 
    * @param center the center of the viewport
    * @param span the span of the viewport
@@ -266,7 +533,7 @@ public final class MapType {
    * @return the tile layers
    */
   public TileLayer[] getTileLayers() {
-    JSList layers = impl.getTileLayers(jsoPeer);
+    JSList<TileLayer> layers = impl.getTileLayers(jsoPeer);
     TileLayer[] returnValue = new TileLayer[layers.size()];
     JsUtil.toArray(layers, returnValue);
     return returnValue;
@@ -292,4 +559,5 @@ public final class MapType {
   public String getUrlArg() {
     return impl.getUrlArg(jsoPeer);
   }
+
 }
