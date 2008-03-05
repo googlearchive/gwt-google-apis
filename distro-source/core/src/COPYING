@@ -7,6 +7,10 @@ by Google is licensed under the Apache License, v. 2.0.  Source code for
 software included in this distribution is available from the Google API Library 
 for Google Web Toolkit project. 
 
+This distribution contains code from the Xerces library
+licensed under the Apache License, v. 2.0 and
+available from http://xerces.apache.org.
+
 =====
 
 Apache License
