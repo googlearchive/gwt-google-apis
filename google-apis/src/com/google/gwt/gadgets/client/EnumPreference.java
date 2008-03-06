@@ -20,7 +20,9 @@ import com.google.gwt.gadgets.client.impl.PreferenceGeneratorName;
 import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 
 /**
- * A preference containing only enumerated values.
+ * A preference containing only enumerated values. The enumerated values will be
+ * presented to the user in the order in which the values are defined within the
+ * declaration of the enumeration.
  * 
  * @param <E> the type of enumeration
  */
