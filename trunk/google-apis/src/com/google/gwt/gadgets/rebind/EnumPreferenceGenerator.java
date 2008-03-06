@@ -28,6 +28,11 @@ import com.google.gwt.user.rebind.SourceWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 /**
  * Used to generate instantiations of the EnumPreferences type.
  */
@@ -64,7 +69,16 @@ public class EnumPreferenceGenerator implements PreferenceGenerator {
     JEnumType enumType = getEnumType(preferenceType);
     assert enumType != null;
 
-    for (JEnumConstant constant : enumType.getEnumConstants()) {
+    // Order the JEnumConstants by ordinal value
+    SortedSet<JEnumConstant> constants = new TreeSet<JEnumConstant>(
+        new Comparator<JEnumConstant>() {
+          public int compare(JEnumConstant o1, JEnumConstant o2) {
+            return o1.getOrdinal() - o2.getOrdinal();
+          }
+        });
+    constants.addAll(Arrays.asList(enumType.getEnumConstants()));
+
+    for (JEnumConstant constant : constants) {
       Element enumValue = (Element) userPref.appendChild(d.createElement("enumvalue"));
       enumValue.setAttribute("value", constant.getName());
 

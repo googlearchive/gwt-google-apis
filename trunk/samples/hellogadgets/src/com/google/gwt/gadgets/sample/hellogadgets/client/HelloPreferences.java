@@ -31,11 +31,11 @@ public interface HelloPreferences extends UserPreferences {
    * The horizontal alignment of the button.
    */
   public static enum ButtonPosition {
-    @EnumDisplayValue("Center")
-    CENTER("center"),
-
     @EnumDisplayValue("Left")
     LEFT("left"),
+
+    @EnumDisplayValue("Center")
+    CENTER("center"),
 
     @EnumDisplayValue("Right")
     RIGHT("right");
