@@ -23,7 +23,13 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -40,15 +46,19 @@ import java.util.Comparator;
  */
 public class OverlayDemo extends MapsDemo {
   private static HTML descHTML = null;
-  private static final String descString =
-      "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
-          + "You should be able to scroll the viewport by clicking and dragging "
-          + "with the mouse.</p>\n"
-          + "<p>You should see a purple polyline with multiple segments " 
-          + "(The vertices are randomly generated).</p>"
-          + "<p>Equivalent to the Maps JavaScript API Example: "
-          + "<a href=\"http://code.google.com/apis/maps/documentation/examples/polyline-simple.html\">"
-          + "http://code.google.com/apis/maps/documentation/examples/polyline-simple.html</a></p>\n";
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+      + "You should be able to scroll the viewport by clicking and dragging "
+      + "with the mouse.</p>\n"
+      + "<p>You should see a purple polyline with multiple segments "
+      + "(The vertices are randomly generated).</p>"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/polyline-simple.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/polyline-simple.html</a></p>\n";
+
+  // A polyline stored in an encoded string.
+  private static final String ENCODED_LEVELS = "B????????????????????????????????????B";
+  private static final String ENCODED_POINTS = "iuowFf{kbMzH}N`IbJb@zBpYzO{dAvfF{LwDyN`_@`NzKqB|Ec@|L}BKmBbCoPjrBeEdy@uJ`Mn@zoAer@bjA~Xz{JczBa]pIps@de@tW}rCdxSwhPl`XgikCl{soA{dLdAaaF~cCyxCk_Aao@jp@kEvnCgoJ`]y[pVguKhCkUflAwrEzKk@yzCv^k@?mI";
+  private static final int NUM_POINTS = 10;
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -59,7 +69,9 @@ public class OverlayDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null) descHTML = new HTML(descString);
+        if (descHTML == null) {
+          descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -70,54 +82,130 @@ public class OverlayDemo extends MapsDemo {
     };
   }
 
+  private enum OverlayDemos {
+    TEST_POLYLINE_ENCODED("Display polyline from an encoded string"), TEST_POLYLINE_ONE(
+        "Display a polyline"), TEST_POLYLINE_TRANSPARENT(
+        "Display encoded polyline with default transparency"), TEST_TEN_MARKERS(
+        "Display 10 Random Markers");
+
+    final String value;
+
+    OverlayDemos(String s) {
+      value = s;
+    }
+
+    String valueOf() {
+      return value;
+    }
+  }
+
+  private ListBox actionListBox;
   private MapWidget map;
 
   public OverlayDemo() {
+
+    VerticalPanel vertPanel = new VerticalPanel();
+    vertPanel.setStyleName("hm-panel");
+
+    actionListBox = new ListBox();
+    for (OverlayDemos od : OverlayDemos.values()) {
+      actionListBox.addItem(od.valueOf());
+    }
+    actionListBox.addChangeListener(new ChangeListener() {
+      public void onChange(Widget sender) {
+        displayOverlay();
+      }
+
+    });
+
+    HorizontalPanel horizPanel = new HorizontalPanel();
+    horizPanel.add(new Label("Choose Action:"));
+    horizPanel.add(actionListBox);
+    horizPanel.setSpacing(10);
+
+    vertPanel.add(horizPanel);
+
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
-    initWidget(map);
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
+    vertPanel.add(map);
+
+    initWidget(vertPanel);
   }
 
   @Override
   public void onShow() {
+    displayOverlay();
+  }
+
+  private void displayOverlay() {
+
     map.clearOverlays();
 
-    // Add 10 markers in random locations on the map
     LatLngBounds bounds = map.getBounds();
     LatLng southWest = bounds.getSouthWest();
     LatLng northEast = bounds.getNorthEast();
     double lngSpan = northEast.getLongitude() - southWest.getLongitude();
     double latSpan = northEast.getLatitude() - southWest.getLatitude();
-    for (int i = 0; i < 10; i++) {
-      LatLng point =
-          new LatLng(southWest.getLatitude() + latSpan * Math.random(),
-              southWest.getLongitude() + lngSpan * Math.random());
-      map.addOverlay(new Marker(point));
+
+    LatLng[] points = new LatLng[NUM_POINTS];
+
+    for (int i = 0; i < NUM_POINTS; i++) {
+      points[i] = new LatLng(southWest.getLatitude() + latSpan * Math.random(),
+          southWest.getLongitude() + lngSpan * Math.random());
     }
 
-    // Add a polyline with five random points. Sort the points by
-    // longitude so that the line does not intersect itself.
-    LatLng[] points = new LatLng[5];
-    for (int i = 0; i < 5; i++) {
-      points[i] =
-          new LatLng(southWest.getLatitude() + latSpan * Math.random(),
-              southWest.getLongitude() + lngSpan * Math.random());
-    }
+    OverlayDemos selected = OverlayDemos.values()[actionListBox.getSelectedIndex()];
 
-    Arrays.sort(points, new Comparator<LatLng>() {
-      public int compare(LatLng p1, LatLng p2) {
-        return new Double(p1.getLongitude()).compareTo(new Double(
-            p2.getLongitude()));
+    switch (selected) {
+      case TEST_TEN_MARKERS: {
+        // Add markers in random locations on the map
+        for (int i = 0; i < NUM_POINTS; i++) {
+          map.addOverlay(new Marker(points[i]));
+        }
       }
-    });
+        break;
 
-    Polyline pline = new Polyline(points);
-    map.addOverlay(pline);
-    if (pline.getVertexCount() != 5) {
-      Window.alert("Created polyline with 5 vertices, but now it has "
-          + pline.getVertexCount());
+      case TEST_POLYLINE_ONE: {
+        // Add a polyline with NUM_POINTS random points. Sort the points by
+        // longitude so that the line does not intersect itself.
+        Arrays.sort(points, new Comparator<LatLng>() {
+          public int compare(LatLng p1, LatLng p2) {
+            return new Double(p1.getLongitude()).compareTo(new Double(
+                p2.getLongitude()));
+          }
+        });
+        Polyline pline = new Polyline(points);
+        map.addOverlay(pline);
+        if (pline.getVertexCount() != NUM_POINTS) {
+          Window.alert("Created polyline with " + NUM_POINTS
+              + " vertices, but now it has " + pline.getVertexCount());
+        }
+      }
+        break;
+
+      case TEST_POLYLINE_ENCODED: {
+        // Add a polyline encoded in a string
+        map.setCenter(new LatLng(40.71213418976525, -73.96785736083984), 15);
+        Polyline pline = Polyline.fromEncoded("#3333cc", 10, 1.0,
+            ENCODED_POINTS, 32, ENCODED_LEVELS, 4);
+        map.addOverlay(pline);
+      }
+        break;
+
+      case TEST_POLYLINE_TRANSPARENT: {
+        // Add a polyline with transparency
+        map.setCenter(new LatLng(40.71213418976525, -73.96785736083984), 15);
+        Polyline pline = Polyline.fromEncoded(ENCODED_POINTS, 32,
+            ENCODED_LEVELS, 4);
+        map.addOverlay(pline);
+      }
+        break;
+
+      default:
+        Window.alert("Cannot handle selection: " + selected.valueOf());
+        break;
     }
   }
 }

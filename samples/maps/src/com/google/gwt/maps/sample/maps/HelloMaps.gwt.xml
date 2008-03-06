@@ -16,6 +16,8 @@
   <inherits name="com.google.gwt.i18n.I18N"/>
   <inherits name="com.google.gwt.user.User" />
   <inherits name="com.google.gwt.maps.GoogleMaps" />
+  <inherits name="com.google.gwt.i18n.I18N" />
+  
   <entry-point class="com.google.gwt.maps.sample.maps.client.HelloMaps" />
 
   <stylesheet src="GWT-default.css" />
