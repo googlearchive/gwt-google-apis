@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,25 +19,34 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.impl.ControlImpl;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Control is the abstract base class for all
+ * Control is the abstract base class for all Map Control types.
  */
 public class Control {
 
   /**
-   * 
+   * This class should be extended to create a custom control type.
    */
   public abstract static class CustomControl extends Control {
 
     private final ControlPosition defaultPosition;
 
+    /**
+     * Create a new CustomControl which is not printable or selectable.
+     * @param defaultPosition location of the controls on the map.
+     */
     protected CustomControl(ControlPosition defaultPosition) {
       this(defaultPosition, false, false);
     }
 
+    /**
+     * Create a new CustomControl which can be either printable, selectable or both.
+     * @param defaultPosition
+     * @param printable indicates that the control should be visible in the print output of the map
+     * @param selectable indicates that the control will contain text that should be selectable.
+     */
     protected CustomControl(ControlPosition defaultPosition, boolean printable,
         boolean selectable) {
       super(ControlImpl.impl.createControl(printable, selectable));
@@ -77,21 +86,29 @@ public class Control {
      */
     Element initializeControl(MapWidget map) {
       Widget w = initialize(map);
-      // Wrap the widget in a flow panel to prevent click events from being
-      // supressed
-      FlowPanel panel = new FlowPanel();
-      panel.add(w);
-      map.addControlWidget(panel);
-      return panel.getElement();
+      map.addControlWidget(w);
+      return w.getElement();
     }
   }
 
+  /**
+   * Factory method used by JSIO to wrap an existing JSO in a GWT Java object.
+   * @param jsoPeer
+   * @return a new instance of control
+   */
   static Control createPeer(JavaScriptObject jsoPeer) {
     return new Control(jsoPeer);
   }
 
+  /**
+   * The JSO being wrapped by this class.
+   */
   private final JavaScriptObject jsoPeer;
 
+  /**
+   * Constructor for creating a new instance of this class from an existing JSO.
+   * @param jsoPeer
+   */
   protected Control(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
