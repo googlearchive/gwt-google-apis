@@ -15,17 +15,28 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlPosition;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -46,14 +57,78 @@ import com.google.gwt.user.client.ui.Widget;
  * with the getContainer() method on Map
  */
 public class CustomControlDemo extends MapsDemo {
-  private static HTML descHTML = null;
-  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
-      + "The standard zoom in and zoom out controls have been replaced with a "
-      + "custom control in the form of two boxes with the text 'Zoom In' and 'Zoom Out' " 
-      + "at the upper left of the map.</p>\n"
-      + "<p>Equivalent to the Maps JavaScript API Example: "
-      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/control-custom.html\">" 
-      + "http://code.google.com/apis/maps/documentation/examples/control-custom.html</a></p>\n";
+
+  /**
+   * Images used in the custom map control for zooming
+   */
+  public interface ControlImageBundle extends ImageBundle {
+    AbstractImagePrototype minus();
+    /**
+     * @gwt.resource mozicon_earth.png
+     */
+    AbstractImagePrototype moziconEarth();
+
+    AbstractImagePrototype plus();
+
+    AbstractImagePrototype traffic();
+  }
+
+  private enum ControlDemos {
+   TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"),
+   TEST_TEXT_CUSTOM_ZOOM_CONTROL("Use a custom Text Zoom Control");
+   
+    final String value;
+    
+    ControlDemos(String s) {
+      value = s;
+    }
+    String valueOf() {
+      return value;
+    }
+  }
+  private static class ImageZoomControl extends CustomControl {
+    public ImageZoomControl() {
+      super(new ControlPosition(ControlPosition.TOP_LEFT, 7, 7));
+    }
+
+    @Override
+    protected Widget initialize(final MapWidget map) {
+      ControlImageBundle imgBundle = GWT.create(ControlImageBundle.class);
+      Image trafficImage = imgBundle.traffic().createImage();
+      Image satelliteImage = imgBundle.moziconEarth().createImage();
+      Image zoomInImage = imgBundle.plus().createImage();
+      Image zoomOutImage = imgBundle.minus().createImage();
+
+      trafficImage.addClickListener(new ClickListener() {
+        public void onClick(Widget sender) {
+          map.setCurrentMapType(MapType.getNormalMap());
+        }
+      });
+      satelliteImage.addClickListener(new ClickListener() {
+        public void onClick(Widget sender) {
+          map.setCurrentMapType(MapType.getSatelliteMap());
+        }
+      });
+      zoomInImage.addClickListener(new ClickListener() {
+        public void onClick(Widget sender) {
+          map.zoomIn();
+        }
+      });
+      zoomOutImage.addClickListener(new ClickListener() {
+        public void onClick(Widget sender) {
+          map.zoomOut();
+        }
+      });
+
+      Grid container = new Grid(2, 2);
+      container.setWidget(0, 0, zoomInImage);
+      container.setWidget(1, 0, zoomOutImage);
+      container.setWidget(0, 1, trafficImage);
+      container.setWidget(1, 1, satelliteImage);
+
+      return container;
+    }
+  }
 
   private static class TextualZoomControl extends CustomControl {
     public TextualZoomControl() {
@@ -63,30 +138,37 @@ public class CustomControlDemo extends MapsDemo {
     @Override
     protected Widget initialize(final MapWidget map) {
       Panel container = new FlowPanel();
-      container.add(new TextualZoomWidget("Zoom In", new ClickListener() {
+      Button zoomInButton = new Button("Zoom In");
+      zoomInButton.setStyleName("textualZoomControl");
+      zoomInButton.addClickListener(new ClickListener() {
         public void onClick(Widget sender) {
           map.zoomIn();
         }
-      }));
-      container.add(new TextualZoomWidget("Zoom Out", new ClickListener() {
+      });
+      Button zoomOutButton = new Button("Zoom Out");
+      zoomOutButton.setStyleName("textualZoomControl");
+      zoomOutButton.addClickListener(new ClickListener() {
         public void onClick(Widget sender) {
           map.zoomOut();
         }
-      }));
+      });
+
+      container.add(zoomInButton);
+      container.add(zoomOutButton);
       return container;
     }
   }
 
-  private static class TextualZoomWidget extends Composite {
-    public TextualZoomWidget(String text, ClickListener listener) {
-      FocusPanel panel = new FocusPanel();
-      DOM.setInnerText(panel.getElement(), text);
-      panel.setTitle(text);
-      panel.addClickListener(listener);
-      initWidget(panel);
-      setStyleName("textualZoomControl");
-    }
-  }
+  private static HTML descHTML = null;
+
+  private static final String descString = ""
+      + "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+      + "The standard zoom in and zoom out controls have been replaced with a "
+      + "custom control in the form of two boxes with the text 'Zoom In' and 'Zoom Out' "
+      + "at the upper left of the map.</p>\n"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/control-custom.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/control-custom.html</a></p>\n";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -97,11 +179,12 @@ public class CustomControlDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
-      
+
       @Override
       public String getName() {
         return "Custom Map Controls";
@@ -109,12 +192,69 @@ public class CustomControlDemo extends MapsDemo {
     };
   }
 
+  private ListBox actionListBox;
+
+  private Control currentControl = null;
+
   private MapWidget map;
 
   public CustomControlDemo() {
+
+    VerticalPanel vertPanel = new VerticalPanel();
+    vertPanel.setStyleName("hm-panel");
+
+    actionListBox = new ListBox();
+    for (ControlDemos cd : ControlDemos.values()) {
+      actionListBox.addItem(cd.valueOf());
+    }
+
+    actionListBox.addChangeListener(new ChangeListener() {
+      public void onChange(Widget sender) {
+        displayCustomControl();
+      }
+    });
+
+    HorizontalPanel horizPanel = new HorizontalPanel();
+    horizPanel.add(new Label("Choose Action:"));
+    horizPanel.add(actionListBox);
+    horizPanel.setSpacing(10);
+    vertPanel.add(horizPanel);
+
     map = new MapWidget(new LatLng(37.441944, -122.141944), 13);
     map.setSize("600px", "400px");
-    map.addControl(new TextualZoomControl());
-    initWidget(map);
+    map.addMapType(MapType.getNormalMap());
+    map.addMapType(MapType.getSatelliteMap());
+    vertPanel.add(map);
+
+    initWidget(vertPanel);
+    displayCustomControl();
+  }
+
+  /**
+   * Display the appropriate custom control depending on what the user has
+   * selected in the action box.
+   */
+  private void displayCustomControl() {
+
+    if (currentControl != null) {
+      map.removeControl(currentControl);
+      currentControl = null;
+    }
+
+    ControlDemos selected = ControlDemos.values()[actionListBox.getSelectedIndex()];
+ 
+    switch(selected) {
+      case TEST_IMAGE_CUSTOM_ZOOM_CONTROL: 
+      currentControl = new ImageZoomControl();
+      break;
+      case TEST_TEXT_CUSTOM_ZOOM_CONTROL:
+      currentControl = new TextualZoomControl();
+      break;
+      default:
+      Window.alert("Unknown selection: " + selected.valueOf());
+      return;
+    }
+
+    map.addControl(currentControl);
   }
 }
