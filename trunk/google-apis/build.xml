@@ -55,8 +55,8 @@
 	</target>
 
 	<target name="remoteweb-test" description="Run a remoteweb test at the given host and path">
-		<echo message="Performing remote browser testing at rmi://${gwt.remote.browser}" />
-		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -remoteweb rmi://${gwt.remote.browser}" test.out="${junit.out}/${gwt.remote.browser}" test.cases="default.web.tests" />
+		<echo message="Performing remote browser testing at ${gwt.remote.browser}" />
+		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -remoteweb ${gwt.remote.browser}" test.out="${junit.out}/${gwt.remote.browser}" test.cases="default.web.tests" />
 	</target>
 
 	<target name="test.hosted" 
