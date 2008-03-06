@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,38 +20,39 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.overlay.Polyline;
 
 /**
  * 
  */
 public interface PolylineImpl extends JSFlyweightWrapper {
 
-  public static final PolylineImpl impl = (PolylineImpl) GWT.create(PolylineImpl.class);
+  PolylineImpl impl = (PolylineImpl) GWT.create(PolylineImpl.class);
 
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList<LatLng> points);
+  JavaScriptObject construct(JSList<LatLng> points);
 
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList<LatLng> points, String color);
-
+  JavaScriptObject construct(JSList<LatLng> points, String color);
+ 
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList<LatLng> points, String color,
+  JavaScriptObject construct(JSList<LatLng> points, String color,
       int weight);
-
+  
   /**
    * @gwt.constructor $wnd.GPolyline
    */
-  public JavaScriptObject construct(JSList<LatLng> points, String color,
+  JavaScriptObject construct(JSList<LatLng> points, String color,
       int weight, double opacity);
 
-  public LatLng getVertex(Polyline polyline, int index);
-
-  public int getVertexCount(Polyline polyline);
+  LatLng getVertex(JavaScriptObject jsoPeer, int index);
+  
+  int getVertexCount(JavaScriptObject jsoPeer); 
 }
+
+

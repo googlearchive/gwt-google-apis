@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,7 +19,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.MapEvent;
+import com.google.gwt.maps.client.impl.PolylineFactoryImpl;
 import com.google.gwt.maps.client.impl.PolylineImpl;
+import com.google.gwt.maps.client.impl.PolylineOptionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 import com.google.gwt.maps.client.util.JsUtil;
@@ -28,7 +31,30 @@ import com.google.gwt.maps.client.util.JsUtil;
  * 
  */
 public final class Polyline extends ConcreteOverlay {
-  
+
+  public static Polyline fromEncoded(String color, int weight, double opacity,
+      String encodedPoints, int zoomFactor, String encodedLevels, int numLevels) {
+    JavaScriptObject optionsJso = PolylineOptionsImpl.impl.construct();
+    PolylineOptionsImpl.impl.setColor(optionsJso, color);
+    PolylineOptionsImpl.impl.setWeight(optionsJso, weight);
+    PolylineOptionsImpl.impl.setOpacity(optionsJso, opacity);
+    PolylineOptionsImpl.impl.setPoints(optionsJso, encodedPoints);
+    PolylineOptionsImpl.impl.setZoomFactor(optionsJso, zoomFactor);
+    PolylineOptionsImpl.impl.setLevels(optionsJso, encodedLevels);
+    PolylineOptionsImpl.impl.setNumLevels(optionsJso, numLevels);
+    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(optionsJso));
+  }
+
+  public static Polyline fromEncoded(String encodedPoints, int zoomFactor, 
+      String encodedLevels, int numLevels) {
+    JavaScriptObject optionsJso = PolylineOptionsImpl.impl.construct();
+    PolylineOptionsImpl.impl.setPoints(optionsJso, encodedPoints);
+    PolylineOptionsImpl.impl.setZoomFactor(optionsJso, zoomFactor);
+    PolylineOptionsImpl.impl.setLevels(optionsJso, encodedLevels);
+    PolylineOptionsImpl.impl.setNumLevels(optionsJso, numLevels);
+    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(optionsJso));
+  }
+
   private static Polyline createPeer(JavaScriptObject jsoPeer) {
     return new Polyline(jsoPeer);
   }
@@ -49,16 +75,15 @@ public final class Polyline extends ConcreteOverlay {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight,
         opacity));
   }
-  
+
   private Polyline(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 
-  // TODO: "Factory method"?
-
   public void addRemoveListener(final RemoveListener listener) {
     EventImpl.impl.associate(listener, EventImpl.impl.addListenerVoid(
-        super.jsoPeer, "remove", new VoidCallback() {
+        super.jsoPeer, MapEvent.REMOVE, new VoidCallback() {
+          @Override
           public void callback() {
             listener.onRemove(Polyline.this);
           }
@@ -69,11 +94,11 @@ public final class Polyline extends ConcreteOverlay {
   }
 
   public LatLng getVertex(int index) {
-    return PolylineImpl.impl.getVertex(this, index);
+    return PolylineImpl.impl.getVertex(super.jsoPeer, index);
   }
 
   public int getVertexCount() {
-    return PolylineImpl.impl.getVertexCount(this);
+    return PolylineImpl.impl.getVertexCount(super.jsoPeer);
   }
 
   public void removeRemoveListener(RemoveListener listener) {
