@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,6 +18,7 @@ package com.google.gwt.maps.client.overlay;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolygonImpl;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
@@ -40,7 +41,8 @@ public final class Polygon extends ConcreteOverlay {
 
   public void addRemoveListener(final RemoveListener listener) {
     EventImpl.impl.associate(listener, EventImpl.impl.addListenerVoid(
-        super.jsoPeer, "remove", new VoidCallback() {
+        super.jsoPeer, MapEvent.REMOVE, new VoidCallback() {
+          @Override
           public void callback() {
             listener.onRemove(Polygon.this);
           }
