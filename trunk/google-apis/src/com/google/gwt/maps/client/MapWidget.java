@@ -33,6 +33,7 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MapImpl;
 import com.google.gwt.maps.client.impl.MapOptionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl.IntIntCallback;
@@ -41,8 +42,10 @@ import com.google.gwt.maps.client.impl.EventImpl.MapTypeCallback;
 import com.google.gwt.maps.client.impl.EventImpl.OverlayCallback;
 import com.google.gwt.maps.client.impl.EventImpl.OverlayLatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
+import com.google.gwt.maps.client.impl.EventImpl.PointElementOverlayCallback;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.maps.client.util.JsUtil;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -76,13 +79,13 @@ public final class MapWidget extends Composite {
     });
   }
 
+  private static native void nativeUnload() /*-{
+    $wnd.GUnload && $wnd.GUnload();
+  }-*/;
+
   static MapWidget createPeer(JavaScriptObject jsoPeer) {
     throw new UnsupportedOperationException();
   }
-
-  private static native void nativeUnload() /*-{
-      $wnd.GUnload && $wnd.GUnload();
-    }-*/;
 
   /**
    * Reference to GMap2 object.
@@ -130,13 +133,29 @@ public final class MapWidget extends Composite {
   }
 
   public void addClickListener(final MapClickListener listener) {
+    
     EventImpl.impl.associate(listener, EventImpl.impl.addListener(jsoPeer,
-        "click", new OverlayLatLngCallback() {
+        MapEvent.CLICK, new OverlayLatLngCallback() {
           @Override
           public void callback(Overlay overlay, LatLng latlng) {
             listener.onClick(MapWidget.this, overlay, latlng);
-          }
+          }         
         }));
+    EventImpl.impl.associate(listener, EventImpl.impl.addListener(jsoPeer,
+        MapEvent.DBLCLICK, new OverlayLatLngCallback() {
+      @Override
+      public void callback(Overlay overlay, LatLng latlng) {
+        listener.onDoubleClick(MapWidget.this, overlay, latlng);
+      }     
+    }));
+    EventImpl.impl.associate(listener, EventImpl.impl.addListener(jsoPeer,
+        MapEvent.SINGLERIGHTCLICK, new PointElementOverlayCallback() {
+      @Override
+      public void callback(Point point, Element element,
+          Overlay overlay) {
+        listener.onRightClick(MapWidget.this, point, element, overlay);
+      }     
+    }));
   }
 
   /**
@@ -176,38 +195,40 @@ public final class MapWidget extends Composite {
 
   public void addDragListener(final DragListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
-        EventImpl.impl.addListenerVoid(jsoPeer, "dragstart",
+        EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.DRAGSTART,
             new VoidCallback() {
               @Override
               public void callback() {
                 listener.onDragStart();
               }
             }),
-        EventImpl.impl.addListenerVoid(jsoPeer, "drag", new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onDrag();
-          }
-        }),
-        EventImpl.impl.addListenerVoid(jsoPeer, "dragend", new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onDragEnd();
-          }
-        })});
+        EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.DRAG,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onDrag();
+              }
+            }),
+        EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.DRAGEND,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onDragEnd();
+              }
+            })});
   }
 
   public void addInfoWindowListener(final InfoWindowListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
-        EventImpl.impl.addListenerVoid(jsoPeer, "infowindowopen",
-            new VoidCallback() {
+        EventImpl.impl.addListenerVoid(jsoPeer,
+            MapEvent.INFOWINDOWOPEN, new VoidCallback() {
               @Override
               public void callback() {
                 listener.onInfoWindowOpened(MapWidget.this);
               }
             }),
-        EventImpl.impl.addListenerVoid(jsoPeer, "infowindowclose",
-            new VoidCallback() {
+        EventImpl.impl.addListenerVoid(jsoPeer,
+            MapEvent.INFOWINDOWCLOSE, new VoidCallback() {
               @Override
               public void callback() {
                 listener.onInfoWindowClosed(MapWidget.this);
@@ -217,47 +238,52 @@ public final class MapWidget extends Composite {
 
   public void addMapMouseListener(final MapMouseListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
-        EventImpl.impl.addListener(jsoPeer, "mouseover", new LatLngCallback() {
-          @Override
-          public void callback(LatLng latlng) {
-            listener.onMouseOver(MapWidget.this, latlng);
-          }
-        }),
-        EventImpl.impl.addListener(jsoPeer, "mouseout", new LatLngCallback() {
-          @Override
-          public void callback(LatLng latlng) {
-            listener.onMouseOut(MapWidget.this, latlng);
-          }
-        }),
-        EventImpl.impl.addListener(jsoPeer, "mousemove", new LatLngCallback() {
-          @Override
-          public void callback(LatLng latlng) {
-            listener.onMouseMove(MapWidget.this, latlng);
-          }
-        })});
+        EventImpl.impl.addListener(jsoPeer, MapEvent.MOUSEOVER,
+            new LatLngCallback() {
+              @Override
+              public void callback(LatLng latlng) {
+                listener.onMouseOver(MapWidget.this, latlng);
+              }
+            }),
+        EventImpl.impl.addListener(jsoPeer, MapEvent.MOUSEOUT,
+            new LatLngCallback() {
+              @Override
+              public void callback(LatLng latlng) {
+                listener.onMouseOut(MapWidget.this, latlng);
+              }
+            }),
+        EventImpl.impl.addListener(jsoPeer, MapEvent.MOUSEMOVE,
+            new LatLngCallback() {
+              @Override
+              public void callback(LatLng latlng) {
+                listener.onMouseMove(MapWidget.this, latlng);
+              }
+            })});
   }
 
   public void addMapMoveListener(final MapMoveListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
-        EventImpl.impl.addListenerVoid(jsoPeer, "move", new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onMove(MapWidget.this);
-          }
-        }),
-        EventImpl.impl.addListenerVoid(jsoPeer, "movestart",
+        EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.MOVE,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onMove(MapWidget.this);
+              }
+            }),
+        EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.MOVESTART,
             new VoidCallback() {
               @Override
               public void callback() {
                 listener.onMoveStart(MapWidget.this);
               }
             }),
-        EventImpl.impl.addListenerVoid(jsoPeer, "moveend", new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onMoveEnd(MapWidget.this);
-          }
-        })});
+        EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.MOVEEND,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onMoveEnd(MapWidget.this);
+              }
+            })});
   }
 
   /**
@@ -272,22 +298,22 @@ public final class MapWidget extends Composite {
 
   public void addMapTypeListener(final MapTypeListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
-        EventImpl.impl.addListener(jsoPeer, "addmaptype",
+        EventImpl.impl.addListener(jsoPeer, MapEvent.ADDMAPTYPE,
             new MapTypeCallback() {
               @Override
               public void callback(MapType mapType) {
                 listener.onMapTypeAdded(MapWidget.this, mapType);
               }
             }),
-        EventImpl.impl.addListener(jsoPeer, "removemaptype",
+        EventImpl.impl.addListener(jsoPeer, MapEvent.REMOVEMAPTYPE,
             new MapTypeCallback() {
               @Override
               public void callback(MapType mapType) {
                 listener.onMapTypeRemoved(MapWidget.this, mapType);
               }
             }),
-        EventImpl.impl.addListenerVoid(jsoPeer, "maptypechanged",
-            new VoidCallback() {
+        EventImpl.impl.addListenerVoid(jsoPeer,
+            MapEvent.MAPTYPECHANGED, new VoidCallback() {
               @Override
               public void callback() {
                 listener.onMapTypeChanged(MapWidget.this);
@@ -297,7 +323,7 @@ public final class MapWidget extends Composite {
 
   public void addMapZoomListener(final MapZoomListener listener) {
     EventImpl.impl.associate(listener, EventImpl.impl.addListener(jsoPeer,
-        "zoomend", new IntIntCallback() {
+        MapEvent.ZOOMEND, new IntIntCallback() {
           @Override
           public void callback(int oldLevel, int newLevel) {
             listener.onZoom(MapWidget.this, oldLevel, newLevel);
@@ -306,7 +332,7 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Adds an overlay to the map and fires the addoverlay event.
+   * Adds an overlay to the map and fires the "addoverlay" event.
    * 
    * @param overlay
    */
@@ -316,21 +342,21 @@ public final class MapWidget extends Composite {
 
   public void addOverlayListener(final OverlayListener listener) {
     EventImpl.impl.associate(listener, new JavaScriptObject[] {
-        EventImpl.impl.addListener(jsoPeer, "addoverlay",
+        EventImpl.impl.addListener(jsoPeer, MapEvent.ADDOVERLAY,
             new OverlayCallback() {
               @Override
               public void callback(Overlay overlay) {
                 listener.onOverlayAdded(MapWidget.this, overlay);
               }
             }),
-        EventImpl.impl.addListener(jsoPeer, "removeoverlay",
+        EventImpl.impl.addListener(jsoPeer, MapEvent.REMOVEOVERLAY,
             new OverlayCallback() {
               @Override
               public void callback(Overlay overlay) {
                 listener.onOverlayRemoved(MapWidget.this, overlay);
               }
             }),
-        EventImpl.impl.addListenerVoid(jsoPeer, "clearoverlays",
+        EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.CLEAROVERLAYS,
             new VoidCallback() {
               @Override
               public void callback() {
@@ -351,50 +377,50 @@ public final class MapWidget extends Composite {
   }
 
   public void clearDragListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "dragstart");
-    EventImpl.impl.clearListeners(jsoPeer, "drag");
-    EventImpl.impl.clearListeners(jsoPeer, "dragend");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.DRAGSTART);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.DRAG);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.DRAGEND);
   }
 
   public void clearInfoWindowListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "infowindowopen");
-    EventImpl.impl.clearListeners(jsoPeer, "infowindowclose");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.INFOWINDOWOPEN);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.INFOWINDOWCLOSE);
   }
 
   public void clearMapClickListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "click");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.CLICK);
   }
 
   public void clearMapMouseListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "mouseover");
-    EventImpl.impl.clearListeners(jsoPeer, "mouseout");
-    EventImpl.impl.clearListeners(jsoPeer, "mousemove");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOUSEOVER);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOUSEOUT);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOUSEMOVE);
   }
 
   public void clearMapMoveListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "move");
-    EventImpl.impl.clearListeners(jsoPeer, "movestart");
-    EventImpl.impl.clearListeners(jsoPeer, "moveend");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOVE);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOVESTART);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOVEEND);
   }
 
   public void clearMapTypeListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "addmaptype");
-    EventImpl.impl.clearListeners(jsoPeer, "removemaptype");
-    EventImpl.impl.clearListeners(jsoPeer, "maptypechanged");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.ADDMAPTYPE);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.REMOVEMAPTYPE);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MAPTYPECHANGED);
   }
 
   public void clearMapZoomListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "zoomend");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.ZOOMEND);
   }
 
   public void clearOverlayListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "addoverlay");
-    EventImpl.impl.clearListeners(jsoPeer, "removeoverlay");
-    EventImpl.impl.clearListeners(jsoPeer, "clearoverlays");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.ADDOVERLAY);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.REMOVEOVERLAY);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.CLEAROVERLAYS);
   }
 
   /**
-   * Removes all overlay from the map, and fires the clearoverlays event.
+   * Removes all overlay from the map, and fires the "clearoverlays" event.
    */
   public void clearOverlays() {
     MapImpl.impl.clearOverlays(jsoPeer);
@@ -417,8 +443,8 @@ public final class MapWidget extends Composite {
    * that holds the draggable map. You need this when you implement interaction
    * with custom overlays.
    * 
-   * @param pixel
-   * @return
+   * @param pixel point on the map to convert to Lat/Lng
+   * @return a set of converted coordinates
    */
   public LatLng convertDivPixelToLatLng(Point pixel) {
     return MapImpl.impl.fromDivPixelToLatLng(jsoPeer, pixel);
@@ -475,7 +501,6 @@ public final class MapWidget extends Composite {
     return MapImpl.impl.getCurrentMapType(jsoPeer);
   }
 
-  // TODO: map.getInfoWindow or InfoWindow.getInfoWindow(map);
   /**
    * Gets the info window associated with the map.
    * 
@@ -497,17 +522,16 @@ public final class MapWidget extends Composite {
    */
   public MapType[] getMapTypes() {
     new ControlPosition(ControlPosition.BOTTOM_LEFT, 0, 0);
-    JSList types = MapImpl.impl.getMapTypes(jsoPeer);
+    JSList<MapType> types = MapImpl.impl.getMapTypes(jsoPeer);
     MapType[] returnValue = new MapType[types.size()];
     JsUtil.toArray(types, returnValue);
     return returnValue;
   }
 
   /**
-   * Returns the overlay DIV with the given id. Used by {@link Overlay}
-   * instances in the method {@link Overlay#initialize(Map)} to draw themselves
-   * on the map.
-   * 
+   * Returns the overlay DIV with the given id. Used by some subclasses of
+   * {@link Overlay}.
+   *   
    * @param type the id of the layer
    * @return the corresponding overlay pane
    */
@@ -670,7 +694,7 @@ public final class MapWidget extends Composite {
    * type. The last remaining map type cannot be removed.
    * 
    * This method will update the set of buttons displayed by the
-   * {@link MapTypeControl} and will fire the removemaptype event.
+   * {@link Control} and will fire the "removemaptype" event.
    */
   public void removeMapType(MapType type) {
     MapImpl.impl.removeMapType(jsoPeer, type);
@@ -686,7 +710,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes the overlay from the map. If the overlay was on the map, it fires
-   * the removeoverlay event.
+   * the "removeoverlay" event.
    * 
    * @param overlay the overlay to remove from the map
    */
@@ -758,7 +782,7 @@ public final class MapWidget extends Composite {
    * Enables or disables continuous zooming on supported browsers. Continuous
    * zooming is disabled by default.
    * 
-   * @param enabled true to enable continous zooming
+   * @param enabled true to enable continuous zooming
    */
   public void setContinuousZoom(boolean enabled) {
     if (enabled) {

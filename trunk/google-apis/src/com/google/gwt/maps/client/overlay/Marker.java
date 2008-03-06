@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,6 +24,7 @@ import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.VisibilityListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MarkerImpl;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
@@ -76,61 +77,85 @@ public final class Marker extends ConcreteOverlay {
 
   public void addClickListener(final MarkerClickListener listener) {
     EVENT_IMPL.associate(listener, new JavaScriptObject[] {
-        EVENT_IMPL.addListenerVoid(jsoPeer, "click", new VoidCallback() {
-          public void callback() {
-            listener.onClick(Marker.this);
-          }
-        }), EVENT_IMPL.addListenerVoid(jsoPeer, "dblclick", new VoidCallback() {
-          public void callback() {
-            listener.onDoubleClick(Marker.this);
-          }
-        })});
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.CLICK,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onClick(Marker.this);
+              }
+            }),
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DBLCLICK,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onDoubleClick(Marker.this);
+              }
+            })});
   }
 
   public void addDragListener(final DragListener listener) {
     EVENT_IMPL.associate(listener, new JavaScriptObject[] {
-        EVENT_IMPL.addListenerVoid(jsoPeer, "dragstart", new VoidCallback() {
-          public void callback() {
-            listener.onDragStart();
-          }
-        }), EVENT_IMPL.addListenerVoid(jsoPeer, "drag", new VoidCallback() {
-          public void callback() {
-            listener.onDrag();
-          }
-        }), EVENT_IMPL.addListenerVoid(jsoPeer, "dragend", new VoidCallback() {
-          public void callback() {
-            listener.onDragEnd();
-          }
-        })});
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAGSTART,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onDragStart();
+              }
+            }),
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAG,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onDrag();
+              }
+            }),
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAGEND,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onDragEnd();
+              }
+            })});
   }
 
   public void addMouseListener(final MarkerMouseListener listener) {
     EVENT_IMPL.associate(listener, new JavaScriptObject[] {
-        EVENT_IMPL.addListenerVoid(jsoPeer, "mousedown", new VoidCallback() {
-          public void callback() {
-            listener.onMouseDown(Marker.this);
-          }
-        }), EVENT_IMPL.addListenerVoid(jsoPeer, "mouseup", new VoidCallback() {
-          public void callback() {
-            listener.onMouseUp(Marker.this);
-          }
-        }),
-        EVENT_IMPL.addListenerVoid(jsoPeer, "mouseover", new VoidCallback() {
-          public void callback() {
-            listener.onMouseOver(Marker.this);
-          }
-        }), EVENT_IMPL.addListenerVoid(jsoPeer, "mouseout", new VoidCallback() {
-          public void callback() {
-            listener.onMouseOut(Marker.this);
-          }
-        })});
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEDOWN,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onMouseDown(Marker.this);
+              }
+            }),
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEUP,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onMouseUp(Marker.this);
+              }
+            }),
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEOVER,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onMouseOver(Marker.this);
+              }
+            }),
+        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEOUT,
+            new VoidCallback() {
+              @Override
+              public void callback() {
+                listener.onMouseOut(Marker.this);
+              }
+            })});
   }
 
   // TODO: dragging, draggable
 
   public void addRemoveListener(final RemoveListener listener) {
     EVENT_IMPL.associate(listener, EVENT_IMPL.addListenerVoid(jsoPeer,
-        "remove", new VoidCallback() {
+        MapEvent.REMOVE, new VoidCallback() {
+          @Override
           public void callback() {
             listener.onRemove(Marker.this);
           }
@@ -139,7 +164,8 @@ public final class Marker extends ConcreteOverlay {
 
   public void addVisibilityListener(final VisibilityListener listener) {
     EVENT_IMPL.associate(listener, EVENT_IMPL.addListener(jsoPeer,
-        "visibilitychanged", new BooleanCallback() {
+        MapEvent.VISIBILITYCHANGED, new BooleanCallback() {
+          @Override
           public void callback(boolean isVisible) {
             listener.onVisibilityChanged(Marker.this, isVisible);
           }
@@ -147,29 +173,29 @@ public final class Marker extends ConcreteOverlay {
   }
 
   public void clearClickListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "click");
-    EventImpl.impl.clearListeners(jsoPeer, "dblclick");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.CLICK);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.DBLCLICK);
   }
 
   public void clearDragListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "dragstart");
-    EventImpl.impl.clearListeners(jsoPeer, "drag");
-    EventImpl.impl.clearListeners(jsoPeer, "dragend");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.DRAGSTART);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.DRAG);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.DRAGEND);
   }
 
   public void clearMouseListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "mousedown");
-    EventImpl.impl.clearListeners(jsoPeer, "mouseup");
-    EventImpl.impl.clearListeners(jsoPeer, "mouseover");
-    EventImpl.impl.clearListeners(jsoPeer, "mouseout");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOUSEDOWN);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOUSEUP);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOUSEOVER);
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.MOUSEOUT);
   }
 
   public void clearRemoveListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "remove");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.REMOVE);
   }
 
   public void clearVisibilityListeners() {
-    EventImpl.impl.clearListeners(jsoPeer, "visibilitychanged");
+    EventImpl.impl.clearListeners(jsoPeer, MapEvent.VISIBILITYCHANGED);
   }
 
   public Icon getIcon() {
@@ -183,8 +209,6 @@ public final class Marker extends ConcreteOverlay {
   public boolean isVisible() {
     return !MarkerImpl.impl.isHidden(this);
   }
-
-  // TODO: figure out info window stuff (events)
 
   public void removeClickListener(MarkerClickListener listener) {
     EVENT_IMPL.removeListeners(listener);
@@ -221,5 +245,4 @@ public final class Marker extends ConcreteOverlay {
       MarkerImpl.impl.hide(this);
     }
   }
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,15 +18,16 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.DirectionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.util.JsUtil;
 
 // TODO: note "load", "error", and "addoverlay" semi-documented events
 
-// TODO: do we want to create a nd GDirections object for every load and
-// provide an asyncrhonous callback?
+// TODO: do we want to create a new GDirections object for every load and
+// provide an asynchronous callback?
 
-// TODO: should status codes be refactored out into their own class?
+// TODO: should status codes be refactored to their own class?
 
 /**
  * 
@@ -72,7 +73,8 @@ public final class Directions {
 
   private static void addLoadListener(final JavaScriptObject jsoPeer,
       final DirectionsCallback callback) {
-    EventImpl.impl.addListenerVoid(jsoPeer, "load", new VoidCallback() {
+    EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.LOAD, new VoidCallback() {
+      @Override
       public void callback() {
         int statusCode = DirectionsImpl.impl.getStatusCode(jsoPeer);
         if (statusCode == StatusCodes.SUCCESS) {
