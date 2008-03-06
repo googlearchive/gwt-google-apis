@@ -35,6 +35,7 @@ import java.util.Arrays;
  * This is not part of the public API and may change or be removed from future
  * versions.
  * 
+ * TODO: Shouldn't this be an implementation class?
  * 
  * TODO: I'd like to see the functionality provided by this class incorporated
  * into JSIO (gwt-api-interop).
@@ -45,42 +46,42 @@ public final class JsUtil {
     /**
      * @gwt.fieldName valueOf
      */
-    public JSList<InfoWindowTab> asInfoWindowTabList(JavaScriptObject jso);
+    JSList<InfoWindowTab> asInfoWindowTabList(JavaScriptObject jso);
 
     /**
      * @gwt.fieldName valueOf
      */
-    public JSList<Integer> asIntegerList(JavaScriptObject jso);
+    JSList<Integer> asIntegerList(JavaScriptObject jso);
 
     /**
      * @gwt.fieldName valueOf
      */
-    public JSList<LatLng> asLatLngList(JavaScriptObject jso);
+    JSList<LatLng> asLatLngList(JavaScriptObject jso);
 
     /**
      * @gwt.fieldName valueOf
      */
-    public JSList<Marker> asMarkerList(JavaScriptObject jso);
+    JSList<Marker> asMarkerList(JavaScriptObject jso);
 
     /**
      * @gwt.fieldName valueOf
      */
-    public JSList<Point> asPointList(JavaScriptObject jso);
+    JSList<Point> asPointList(JavaScriptObject jso);
 
     /**
      * @gwt.fieldName valueOf
      */
-    public JSList<TileLayer> asTileLayerList(JavaScriptObject jso);
+    JSList<TileLayer> asTileLayerList(JavaScriptObject jso);
 
     /**
      * @gwt.fieldName valueOf
      */
-    public JSList<Waypoint> asWaypointList(JavaScriptObject jso);
+    JSList<Waypoint> asWaypointList(JavaScriptObject jso);
 
     /**
      * @gwt.constructor Array
      */
-    public JavaScriptObject newArray();
+    JavaScriptObject newArray();
   }
 
   private static final ListGenerator lists = (ListGenerator) GWT.create(ListGenerator.class);
@@ -97,58 +98,58 @@ public final class JsUtil {
     return new String(str);
   }-*/;
 
-  public static void toArray(JSList list, int[] array) {
+  public static void toArray(JSList<Integer> list, int[] array) {
     for (int i = 0; i < array.length; i++) {
       array[i] = ((Integer) list.get(i)).intValue();
     }
   }
 
-  public static void toArray(JSList list, Object[] array) {
+  public static void toArray(JSList<?> list, Object[] array) {
     for (int i = 0; i < array.length; i++) {
       array[i] = list.get(i);
     }
   }
 
-  public static JSList toJsList(InfoWindowTab[] array) {
-    JSList list = lists.asInfoWindowTabList(lists.newArray());
+  public static JSList<InfoWindowTab> toJsList(InfoWindowTab[] array) {
+    JSList<InfoWindowTab> list = lists.asInfoWindowTabList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }
 
-  public static JSList toJsList(int[] array) {
-    JSList list = lists.asIntegerList(lists.newArray());
+  public static JSList<Integer> toJsList(int[] array) {
+    JSList<Integer> list = lists.asIntegerList(lists.newArray());
     for (int i = 0; i < array.length; i++) {
       list.add(new Integer(array[i]));
     }
     return list;
   }
 
-  public static JSList toJsList(LatLng[] array) {
-    JSList list = lists.asLatLngList(lists.newArray());
+  public static JSList<LatLng> toJsList(LatLng[] array) {
+    JSList<LatLng> list = lists.asLatLngList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }
 
-  public static JSList toJsList(Marker[] array) {
-    JSList list = lists.asMarkerList(lists.newArray());
+  public static JSList<Marker> toJsList(Marker[] array) {
+    JSList<Marker> list = lists.asMarkerList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }
 
-  public static JSList toJsList(Point[] array) {
-    JSList list = lists.asPointList(lists.newArray());
+  public static JSList<Point> toJsList(Point[] array) {
+    JSList<Point> list = lists.asPointList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }
 
-  public static JSList toJsList(TileLayer[] array) {
-    JSList list = lists.asTileLayerList(lists.newArray());
+  public static JSList<TileLayer> toJsList(TileLayer[] array) {
+    JSList<TileLayer> list = lists.asTileLayerList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }
 
-  public static JSList toJsList(Waypoint[] array) {
-    JSList list = lists.asWaypointList(lists.newArray());
+  public static JSList<Waypoint> toJsList(Waypoint[] array) {
+    JSList<Waypoint> list = lists.asWaypointList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }

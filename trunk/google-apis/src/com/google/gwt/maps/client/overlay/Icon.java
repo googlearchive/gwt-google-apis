@@ -74,7 +74,7 @@ public final class Icon {
   }
 
   public int[] getImageMap() {
-    JSList imageMap = IconImpl.impl.getImageMap(jsoPeer);
+    JSList<Integer> imageMap = IconImpl.impl.getImageMap(jsoPeer);
     int[] returnValue = new int[imageMap.size()];
     JsUtil.toArray(imageMap, returnValue);
     return returnValue;
