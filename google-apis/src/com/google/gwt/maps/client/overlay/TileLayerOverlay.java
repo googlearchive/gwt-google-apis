@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.client.overlay;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.impl.TileLayerOverlayImpl;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
@@ -29,6 +30,17 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  */
 public class TileLayerOverlay extends ConcreteOverlay {
 
+  public static TileLayerOverlay createPeer(JavaScriptObject jso) {
+    TileLayerOverlay overlay = new TileLayerOverlay(jso);
+    // perform bind to make sure the right JSO was passed
+    TileLayerOverlayImpl.impl.bind(jso, overlay);
+    return overlay;
+  }
+  
+  private TileLayerOverlay(JavaScriptObject jso) {
+    super(jso);
+  }
+  
   /**
    * Creates a tile layer overlay from the given tile layer.
    * 

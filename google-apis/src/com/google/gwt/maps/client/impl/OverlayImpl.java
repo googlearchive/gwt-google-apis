@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -32,18 +32,13 @@ public abstract class OverlayImpl implements JSFlyweightWrapper {
 
   public native void bindConcreteOverlay(JavaScriptObject jsoPeer,
       ConcreteOverlay overlay) /*-{
-     jsoPeer.__gwtPeer = overlay;
-   }-*/;
+      jsoPeer.__gwtPeer = overlay;
+    }-*/;
 
   /**
    * @gwt.binding
    */
   public abstract void bindOverlay(JavaScriptObject jsoPeer, Overlay overlay);
-
-  /**
-   * @gwt.constructor $wnd.GGeoXml
-   */
-  public abstract JavaScriptObject constructGeoXmlOverlay(String url);
 
   /**
    * @gwt.constructor $wnd.GGroundOverlay

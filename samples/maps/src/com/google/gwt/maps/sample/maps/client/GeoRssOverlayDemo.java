@@ -15,10 +15,13 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.overlay.GeoXmlLoadCallback;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -29,7 +32,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * The Google Maps API supports the KML and GeoRSS data formats for displaying
  * geographic information. These data formats are added to a map using the
- * GGeoXml object, whose constructor takes the URL of a publicly accessible
+ * GGeoXml object, whose factory method takes the URL of a publicly accessible
  * XML file. GGeoXml placemarks are rendered as markers, while GGeoXml polylines
  * and polygons are rendered as Google Maps API polylines and polygons.
  * &lt;GroundOverlay&gt; elements within KML files are rendered as
@@ -38,8 +41,8 @@ import com.google.gwt.user.client.ui.Widget;
  * GeoXmlOverlay objects are added to a map using the
  * {@link MapWidget#addOverlay(com.google.gwt.maps.client.overlay.Overlay)}
  * method. (You can remove them from the map using
- * {@link MapWidget#removeOverlay(com.google.gwt.maps.client.overlay.Overlay)}.)Both
- * KML and GeoRSS XML files are supported.
+ * {@link MapWidget#removeOverlay(com.google.gwt.maps.client.overlay.Overlay)}.)
+ * Both KML and GeoRSS XML files are supported.
  */
 public class GeoRssOverlayDemo extends MapsDemo {
 
@@ -58,35 +61,41 @@ public class GeoRssOverlayDemo extends MapsDemo {
       public MapsDemo createInstance() {
         return new GeoRssOverlayDemo();
       }
-      
+
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
-      
+
       @Override
       public String getName() {
         return "GeoRSS Overlays";
       }
     };
   }
-  private MapWidget map;
 
   private GeoXmlOverlay geoXml;
-
   private boolean geoXmlShown;
+  private MapWidget map;
+  private Button toggleButton;
 
   public GeoRssOverlayDemo() {
     Panel panel = new FlowPanel();
 
     map = new MapWidget(new LatLng(49.496675, -102.65625), 3);
     map.setSize("640px", "480px");
+    map.addControl(new LargeMapControl());
     panel.add(map);
-    Button toggleButton = new Button("Toggle Markers");
+    toggleButton = new Button("Toggle Markers");
+    toggleButton.setEnabled(false);
     toggleButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
+        if (geoXml == null) {
+          return;
+        }
         if (geoXmlShown) {
           map.removeOverlay(geoXml);
         } else {
@@ -98,15 +107,39 @@ public class GeoRssOverlayDemo extends MapsDemo {
     panel.add(toggleButton);
     initWidget(panel);
 
-    map.addControl(new LargeMapControl());
-    geoXml = new GeoXmlOverlay(
-        "http://api.flickr.com/services/feeds/groups_pool.gne?id=322338@N20&format=rss_200&georss=1");
+    GeoXmlOverlay.load(
+        "http://api.flickr.com/services/feeds/groups_pool.gne?id=322338@N20&format=rss_200&georss=1",
+        new GeoXmlLoadCallback() {
+          @Override
+          public void onFailure(String url, Throwable e) {
+            StringBuffer message = new StringBuffer("GeoRss File " + url 
+                + " failed to load");
+            if (e != null) {
+              message.append(e.toString());
+            }
+            Window.alert(message.toString());
+          }
+
+          @Override
+          public void onSuccess(String url, GeoXmlOverlay overlay) {
+            geoXml = overlay;
+            toggleButton.setEnabled(true);
+            map.addOverlay(geoXml);
+            GWT.log("GeoRss File " + url + "loaded sucessfully", null);
+            GWT.log("Default Center=" + geoXml.getDefaultCenter(), null);
+            GWT.log("Default Span=" + geoXml.getDefaultSpan(), null);
+            GWT.log("Default Bounds=" + geoXml.getDefaultBounds(), null);
+            GWT.log("Supports hide=" + geoXml.supportsHide(), null);
+          }
+        });
   }
 
   @Override
   public void onShow() {
     map.clearOverlays();
-    map.addOverlay(geoXml);
+    if (geoXml != null) {
+      map.addOverlay(geoXml);
+    }
     geoXmlShown = true;
   }
 }
