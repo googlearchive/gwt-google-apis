@@ -26,16 +26,21 @@ import com.google.gwt.maps.client.overlay.TileLayerOverlay;
  */
 public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
 
-  public static final TileLayerOverlayImpl impl = (TileLayerOverlayImpl) GWT.create(TileLayerOverlayImpl.class);
+  TileLayerOverlayImpl impl = (TileLayerOverlayImpl) GWT.create(TileLayerOverlayImpl.class);
 
+  /**
+   * @gwt.binding $wnd.GTileLayerOverlay
+   */
+  
+  void bind(JavaScriptObject jsoPeer, TileLayerOverlay overlay);
   /**
    * @gwt.constructor $wnd.GTileLayerOverlay
    */
-  public JavaScriptObject construct(TileLayer tileLayer);
+  JavaScriptObject construct(TileLayer tileLayer);
   
-  public TileLayer getTileLayer(TileLayerOverlay overlay);
+  TileLayer getTileLayer(TileLayerOverlay overlay);
   
-  public void hide(TileLayerOverlay overlay);
+  void hide(TileLayerOverlay overlay);
   
-  public void show(TileLayerOverlay overlay);
+  void show(TileLayerOverlay overlay);
 }
