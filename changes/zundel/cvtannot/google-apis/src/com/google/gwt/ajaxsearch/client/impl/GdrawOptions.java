@@ -24,7 +24,8 @@ import com.google.gwt.user.client.Element;
  * 
  */
 @Constructor("$wnd.GdrawOptions")
-public interface GdrawOptions extends JSWrapper {
+public interface GdrawOptions extends JSWrapper<GdrawOptions> {
+  
   public void setDrawMode(DrawMode mode);
   
   public void setInput(Element e);

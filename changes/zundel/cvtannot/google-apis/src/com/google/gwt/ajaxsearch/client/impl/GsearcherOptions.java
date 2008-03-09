@@ -24,7 +24,7 @@ import com.google.gwt.user.client.Element;
  * Used with {@link GSearchControl#addSearcher(GSearch, GsearcherOptions)}.
  */
 @Constructor("$wnd.GsearcherOptions")
-public interface GsearcherOptions extends JSWrapper {
+public interface GsearcherOptions extends JSWrapper<GsearcherOptions> {
   public void setExpandMode(ExpandMode mode);
   public void setRoot(Element e);
   public void setVideoResultsTbHeight(int height);
