@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.TileLayer;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.TileLayerOverlay;
 
 /**
@@ -28,9 +29,7 @@ public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
 
   public static final TileLayerOverlayImpl impl = (TileLayerOverlayImpl) GWT.create(TileLayerOverlayImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GTileLayerOverlay
-   */
+  @Constructor("$wnd.GTileLayerOverlay")
   public JavaScriptObject construct(TileLayer tileLayer);
   
   public TileLayer getTileLayer(TileLayerOverlay overlay);

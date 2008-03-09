@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,6 +21,8 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 
 /**
@@ -35,25 +37,17 @@ public abstract class OverlayImpl implements JSFlyweightWrapper {
      jsoPeer.__gwtPeer = overlay;
    }-*/;
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   public abstract void bindOverlay(JavaScriptObject jsoPeer, Overlay overlay);
 
-  /**
-   * @gwt.constructor $wnd.GGeoXml
-   */
+  @Constructor("$wnd.GGeoXml")
   public abstract JavaScriptObject constructGeoXmlOverlay(String url);
 
-  /**
-   * @gwt.constructor $wnd.GGroundOverlay
-   */
+  @Constructor("$wnd.GGroundOverlay")
   public abstract JavaScriptObject constructGroundOverlay(String imageUrl,
       LatLngBounds bounds);
 
-  /**
-   * @gwt.constructor $wnd.GOverlay
-   */
+  @Constructor("$wnd.GOverlay")
   public abstract JavaScriptObject constructOverlay();
 
   public abstract Overlay copy(JavaScriptObject jsoPeer);

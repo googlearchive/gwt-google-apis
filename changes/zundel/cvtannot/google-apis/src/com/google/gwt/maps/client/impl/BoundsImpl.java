@@ -20,23 +20,22 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.Bounds;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Point;
 
 /**
- * @gwt.beanProperties
+ * 
  */
+@BeanProperties
 public interface BoundsImpl extends JSFlyweightWrapper {
 
   static final BoundsImpl impl = (BoundsImpl) GWT.create(BoundsImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GBounds
-   */
+  @Constructor("$wnd.GBounds")
   JavaScriptObject construct(int minX, int minY, int maxX, int maxY);
 
-  /**
-   * @gwt.constructor $wnd.GBounds
-   */
+  @Constructor("$wnd.GBounds")
   JavaScriptObject construct(JSList<Point> points);
 
   boolean containsBounds(JavaScriptObject jsoPeer, Bounds other);

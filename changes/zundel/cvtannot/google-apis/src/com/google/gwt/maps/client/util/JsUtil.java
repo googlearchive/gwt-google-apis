@@ -27,6 +27,9 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
 
+import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.FieldName;
+
 import java.util.Arrays;
 
 /**
@@ -43,44 +46,28 @@ import java.util.Arrays;
 public final class JsUtil {
 
   static interface ListGenerator extends JSFlyweightWrapper {
-    /**
-     * @gwt.fieldName valueOf
-     */
+    @FieldName("valueOf")
     JSList<InfoWindowTab> asInfoWindowTabList(JavaScriptObject jso);
 
-    /**
-     * @gwt.fieldName valueOf
-     */
+    @FieldName("valueOf")
     JSList<Integer> asIntegerList(JavaScriptObject jso);
 
-    /**
-     * @gwt.fieldName valueOf
-     */
+    @FieldName("valueOf")
     JSList<LatLng> asLatLngList(JavaScriptObject jso);
 
-    /**
-     * @gwt.fieldName valueOf
-     */
+    @FieldName("valueOf")
     JSList<Marker> asMarkerList(JavaScriptObject jso);
 
-    /**
-     * @gwt.fieldName valueOf
-     */
+    @FieldName("valueOf")
     JSList<Point> asPointList(JavaScriptObject jso);
 
-    /**
-     * @gwt.fieldName valueOf
-     */
+    @FieldName("valueOf")
     JSList<TileLayer> asTileLayerList(JavaScriptObject jso);
 
-    /**
-     * @gwt.fieldName valueOf
-     */
+    @FieldName("valueOf")
     JSList<Waypoint> asWaypointList(JavaScriptObject jso);
 
-    /**
-     * @gwt.constructor Array
-     */
+    @Constructor("Array")
     JavaScriptObject newArray();
   }
 

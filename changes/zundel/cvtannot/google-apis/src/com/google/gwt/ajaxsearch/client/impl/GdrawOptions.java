@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,11 +17,13 @@ package com.google.gwt.ajaxsearch.client.impl;
 
 import com.google.gwt.ajaxsearch.client.DrawMode;
 import com.google.gwt.jsio.client.JSWrapper;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.user.client.Element;
 
 /**
- * @gwt.constructor $wnd.GdrawOptions
+ * 
  */
+@Constructor("$wnd.GdrawOptions")
 public interface GdrawOptions extends JSWrapper {
   public void setDrawMode(DrawMode mode);
   

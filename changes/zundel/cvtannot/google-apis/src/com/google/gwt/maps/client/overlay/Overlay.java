@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.jsio.client.Exported;
 import com.google.gwt.maps.client.impl.OverlayImpl;
 
 /**
@@ -80,24 +81,16 @@ public abstract class Overlay {
     this.jsoPeer = jsoPeer;
   }
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   protected abstract Overlay copy();
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   protected abstract void initialize(MapWidget map);
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   protected abstract void redraw(boolean force);
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   protected abstract void remove();
 
 }

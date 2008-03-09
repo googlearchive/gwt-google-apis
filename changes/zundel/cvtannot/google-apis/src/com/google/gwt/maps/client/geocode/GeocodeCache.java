@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
+import com.google.gwt.jsio.client.Exported;
 import com.google.gwt.maps.client.impl.GeocodeCachePrototype;
 
 /**
@@ -67,9 +68,7 @@ public class GeocodeCache {
   }
 
   // TODO: can we be more specific
-  /**
-   * @gwt.exported
-   */
+  @Exported
   public JavaScriptObject get(String address) {
     return GeocodeCachePrototype.impl.get(this, address);
   }
@@ -77,30 +76,22 @@ public class GeocodeCache {
   // TODO: cacheable or cachable? I think cacheable is the preferred spelling,
   // but, Maps API uses cachable
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   public boolean isCacheable(JavaScriptObject reply) {
     return GeocodeCachePrototype.impl.isCachable(this, reply);
   }
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   public void put(String address, JavaScriptObject reply) {
     GeocodeCachePrototype.impl.put(this, address, reply);
   }
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   public void reset() {
     GeocodeCachePrototype.impl.reset(this);
   }
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   public String toCanonical(String address) {
     return GeocodeCachePrototype.impl.toCanonical(this, address);
   }

@@ -17,20 +17,22 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
- * @gwt.beanProperties
  * 
  */
+@BeanProperties
 public abstract class PolylineOptionsImpl implements JSFlyweightWrapper {
   public static final PolylineOptionsImpl impl = GWT.create(PolylineOptionsImpl.class);
 
   /**
    * The Maps API does not provide a GPolylineOptions constructor.  It asvises
    * to use Object instead.
-   * @gwt.constructor Object
    */
+  @Constructor("Object")
   public abstract JavaScriptObject construct();
 
   public abstract void setColor(JavaScriptObject jsoPeer, String color);

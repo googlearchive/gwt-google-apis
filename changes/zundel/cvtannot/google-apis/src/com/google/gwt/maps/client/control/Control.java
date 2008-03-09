@@ -19,6 +19,8 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.impl.ControlImpl;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.jsio.client.Exported;
+import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -61,9 +63,9 @@ public class Control {
      * {@link MapWidget#addControl(Control)} method.
      * 
      * @return the default position of this control
-     * @gwt.fieldName getDefaultPosition
-     * @gwt.exported
      */
+    @FieldName("getDefaultPosition")
+    @Exported
     protected final ControlPosition getDefaultPosition() {
       return defaultPosition;
     }
@@ -81,9 +83,9 @@ public class Control {
     /**
      * Initializes the control. Called from JavaScript.
      * 
-     * @gwt.fieldName initialize
-     * @gwt.exported
      */
+    @FieldName("initialize")
+    @Exported
     Element initializeControl(MapWidget map) {
       Widget w = initialize(map);
       map.addControlWidget(w);

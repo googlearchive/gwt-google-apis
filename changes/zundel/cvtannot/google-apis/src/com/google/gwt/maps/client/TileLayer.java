@@ -18,6 +18,8 @@ package com.google.gwt.maps.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.Point;
+import com.google.gwt.jsio.client.Exported;
+import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.maps.client.impl.TileLayerImpl;
 
 /**
@@ -77,20 +79,14 @@ public abstract class TileLayer {
     return TileLayerImpl.impl.minResolution(this);
   }
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   public abstract double getOpacity();
 
-  /**
-   * @gwt.exported
-   * @gwt.fieldName getTileUrl
-   */
+  @Exported
+  @FieldName("getTileUrl")
   public abstract String getTileURL(Point tile, int zoomLevel);
 
-  /**
-   * @gwt.exported
-   */
+  @Exported
   public abstract boolean isPng();
 
 }

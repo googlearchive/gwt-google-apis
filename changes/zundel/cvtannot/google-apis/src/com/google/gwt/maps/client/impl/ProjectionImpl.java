@@ -21,6 +21,8 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.MercatorProjection;
 import com.google.gwt.maps.client.geom.Point;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Projection;
 
 /**
@@ -30,24 +32,16 @@ public interface ProjectionImpl extends JSFlyweightWrapper {
 
   ProjectionImpl impl = (ProjectionImpl) GWT.create(ProjectionImpl.class);
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   void bind(JavaScriptObject jsoPeer, MercatorProjection projection);
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   void bind(JavaScriptObject jsoPeer, Projection projection);
 
-  /**
-   * @gwt.constructor $wnd.GProjection
-   */
+  @Constructor("$wnd.GProjection")
   JavaScriptObject construct();
 
-  /**
-   * @gwt.constructor $wnd.GMercatorProjection
-   */
+  @Constructor("$wnd.GMercatorProjection")
   JavaScriptObject constructMercatorProjection(int zoomLevels);
 
   Point fromLatLngToPixel(JavaScriptObject jsoPeer, LatLng latlng,

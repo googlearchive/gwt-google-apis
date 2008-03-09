@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,6 +29,9 @@ import com.google.gwt.maps.client.geocode.Waypoint;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -38,9 +41,7 @@ public interface DirectionsImpl extends JSFlyweightWrapper {
 
   public static DirectionsImpl impl = (DirectionsImpl) GWT.create(DirectionsImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GDirections
-   */
+  @Constructor("$wnd.GDirections")
   public JavaScriptObject construct(MapWidget map, Element panel);
 
   public LatLngBounds getBounds(JavaScriptObject jsoPeer);
@@ -63,10 +64,8 @@ public interface DirectionsImpl extends JSFlyweightWrapper {
 
   public Route getRoute(JavaScriptObject jsoPeer, int i);
 
-  /**
-   * @gwt.beanProperties
-   * @gwt.fieldName getStatus().code
-   */
+  @BeanProperties
+  @FieldName("getStatus().code")
   public int getStatusCode(JavaScriptObject jsoPeer);
 
   public String getSummaryHtml(JavaScriptObject jsoPeer);

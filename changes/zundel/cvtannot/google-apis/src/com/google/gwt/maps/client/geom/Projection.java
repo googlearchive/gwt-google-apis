@@ -16,6 +16,7 @@
 package com.google.gwt.maps.client.geom;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.Exported;
 import com.google.gwt.maps.client.impl.ProjectionImpl;
 
 /**
@@ -38,25 +39,17 @@ public abstract class Projection {
     this.jsoPeer = jsoPeer;
   }
 
-  /**
-   * @gwt.exported fromLatLngToPixel
-   */
+  @Exported
   public abstract Point convertLatLngToPixel(LatLng latlng, int zoomLevel);
 
-  /**
-   * @gwt.exported fromPixelToLatLng
-   */
+  @Exported
   public abstract LatLng convertPixelToLatLng(Point point, int zoomLevel,
       boolean unbounded);
 
-  /**
-   * @gwt.exported getWrapWidth
-   */
+  @Exported
   public abstract int getWrapWidth(int zoomLevel);
 
-  /**
-   * @gwt.exported tileCheckRange
-   */
+  @Exported
   public abstract boolean tileCheckRange(Point point, int zoomLevel,
       int tileSize);
 

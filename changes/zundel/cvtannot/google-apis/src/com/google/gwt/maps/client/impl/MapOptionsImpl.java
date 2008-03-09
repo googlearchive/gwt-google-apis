@@ -17,18 +17,19 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
- * @gwt.beanProperties
+ *
  */
+@BeanProperties
 public interface MapOptionsImpl extends JSFlyweightWrapper {
 
   public static final MapOptionsImpl impl = (MapOptionsImpl) GWT.create(MapOptionsImpl.class);
 
-  /**
-   * @gwt.constructor Object
-   */
+  @Constructor("Object")
   public JavaScriptObject construct();
 
   public void setDraggableCursor(JavaScriptObject jsoPeer, String cursor);

@@ -24,6 +24,9 @@ import com.google.gwt.jsio.client.JSWrapper;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geom.LatLngBounds;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 
 /**
@@ -40,39 +43,33 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
   }
 
   /**
-   * @gwt.beanProperties
+   * 
    */
-  public static interface Response extends JSWrapper {
+  @BeanProperties
+  public static interface Response extends JSWrapper<Response> {
     public String getName();
 
-    /**
-     * @gwt.fieldName Placemark
-     */
+    @FieldName("Placemark")
     public JSList<Placemark> getPlacemarks();
 
-    /**
-     * @gwt.fieldName Status
-     */
+    @FieldName("Status")
     public ResponseStatus getStatus();
   }
-  
+
   /**
-   * @gwt.beanProperties
+   * 
    */
-  public static interface ResponseStatus extends JSWrapper {
+  @BeanProperties
+  public static interface ResponseStatus extends JSWrapper<ResponseStatus> {
     public int getCode();
   }
   
   public static GeocoderImpl impl = (GeocoderImpl) GWT.create(GeocoderImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GClientGeocoder
-   */
+  @Constructor("$wnd.GClientGeocoder")
   public JavaScriptObject construct();
 
-  /**
-   * @gwt.constructor $wnd.GClientGeocoder
-   */
+  @Constructor("$wnd.GClientGeocoder")
   public JavaScriptObject construct(GeocodeCache cache);
 
   public String getBaseCountryCode(JavaScriptObject jsoPeer);

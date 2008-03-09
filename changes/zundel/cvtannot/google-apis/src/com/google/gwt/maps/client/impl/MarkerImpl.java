@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,6 +21,7 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Icon;
 import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
 
 /**
@@ -30,14 +31,10 @@ public interface MarkerImpl extends JSFlyweightWrapper {
 
   public static final MarkerImpl impl = (MarkerImpl) GWT.create(MarkerImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GMarker
-   */
+  @Constructor("$wnd.GMarker")
   public JavaScriptObject construct(LatLng point);
 
-  /**
-   * @gwt.constructor $wnd.GMarker
-   */
+  @Constructor("$wnd.GMarker")
   public JavaScriptObject construct(LatLng point, MarkerOptions options);
 
   public Icon getIcon(Marker marker);

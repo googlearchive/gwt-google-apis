@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,37 +18,30 @@ package com.google.gwt.maps.client.impl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSWrapper;
+import com.google.gwt.jsio.client.Global;
+import com.google.gwt.jsio.client.Imported;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
 
 /**
- * @gwt.global $wnd.GGeocodeCache.prototype
+ * 
  */
-public interface GeocodeCachePrototype extends JSWrapper {
+@Global("$wnd.GGeocodeCache.prototype")
+public interface GeocodeCachePrototype extends JSWrapper<GeocodeCachePrototype> {
 
   public static GeocodeCachePrototype impl = (GeocodeCachePrototype) GWT.create(GeocodeCachePrototype.class);
 
-  /**
-   * @gwt.imported get.call
-   */
+  @Imported
   public JavaScriptObject get(GeocodeCache instance, String address);
 
-  /**
-   * @gwt.imported isCachable.call
-   */
+  @Imported
   public boolean isCachable(GeocodeCache instance, JavaScriptObject reply);
 
-  /**
-   * @gwt.imported put.call
-   */
+  @Imported
   public void put(GeocodeCache instance, String address, JavaScriptObject reply);
 
-  /**
-   * @gwt.imported reset.call
-   */
+  @Imported
   public void reset(GeocodeCache instance);
 
-  /**
-   * @gwt.imported toCanonical.call
-   */
+  @Imported
   public String toCanonical(GeocodeCache instance, String address);
 }

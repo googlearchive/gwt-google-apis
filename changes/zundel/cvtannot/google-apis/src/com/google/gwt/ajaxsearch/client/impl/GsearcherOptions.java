@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,12 +17,13 @@ package com.google.gwt.ajaxsearch.client.impl;
 
 import com.google.gwt.ajaxsearch.client.ExpandMode;
 import com.google.gwt.jsio.client.JSWrapper;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.user.client.Element;
 
 /**
  * Used with {@link GSearchControl#addSearcher(GSearch, GsearcherOptions)}.
- * @gwt.constructor $wnd.GsearcherOptions
  */
+@Constructor("$wnd.GsearcherOptions")
 public interface GsearcherOptions extends JSWrapper {
   public void setExpandMode(ExpandMode mode);
   public void setRoot(Element e);

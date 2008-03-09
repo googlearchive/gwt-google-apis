@@ -20,6 +20,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.Copyright;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 
 /**
@@ -31,14 +32,10 @@ public interface CopyrightCollectionImpl extends JSFlyweightWrapper {
 
   public void addCopyright(JavaScriptObject jsoPeer, Copyright copyright);
 
-  /**
-   * @gwt.constructor $wnd.GCopyrightCollection
-   */
+  @Constructor("$wnd.GCopyrightCollection")
   public JavaScriptObject construct();
 
-  /**
-   * @gwt.constructor $wnd.GCopyrightCollection
-   */
+  @Constructor("$wnd.GCopyrightCollection")
   public JavaScriptObject construct(String prefix);
 
   public JavaScriptObject getCopyrightNotice(JavaScriptObject jsoPeer,

@@ -22,6 +22,7 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -31,14 +32,10 @@ public interface InfoWindowImpl extends JSFlyweightWrapper {
 
   public static final InfoWindowImpl impl = (InfoWindowImpl) GWT.create(InfoWindowImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GInfoWindowTab
-   */
+  @Constructor("$wnd.GInfoWindowTab")
   public JavaScriptObject createInfoWindowTab(String label, String content);
 
-  /**
-   * @gwt.constructor $wnd.GInfoWindowTab
-   */
+  @Constructor("$wnd.GInfoWindowTab")
   public JavaScriptObject createInfoWindowTab(String label, Element content);
 
   public JSList<Element> getContentContainers(JavaScriptObject jsoPeer);

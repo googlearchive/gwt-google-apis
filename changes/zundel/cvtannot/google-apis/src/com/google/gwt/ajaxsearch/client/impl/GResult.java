@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,6 +19,10 @@ import com.google.gwt.ajaxsearch.client.Result;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -27,26 +31,22 @@ import com.google.gwt.user.client.Element;
  * utility method {@link #castToBestType()} to provide a more specific class of
  * GResult wrapper.
  * 
- * @gwt.beanProperties
  */
+@BeanProperties
 public interface GResult extends JSFlyweightWrapper {
   public static final GResult IMPL = (GResult) GWT.create(GResult.class);
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   public void bind(JavaScriptObject obj, Result result);
 
-  /**
-   * @gwt.constructor Object
-   */
+  @Constructor("Object")
   public JavaScriptObject construct();
 
   /**
    * This is accessed from {@link Result#createPeer}.
    * 
-   * @gwt.fieldName GsearchResultClass
    */
+  @FieldName("GsearchResultClass")
   public String getGsearchResultClass(JavaScriptObject obj);
 
   /**

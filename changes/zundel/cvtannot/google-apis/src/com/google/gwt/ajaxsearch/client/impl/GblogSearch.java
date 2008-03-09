@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,20 +19,20 @@ import com.google.gwt.ajaxsearch.client.ResultOrder;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * @gwt.constructor $wnd.GblogSearch
+ * 
  */
+@Constructor("$wnd.GblogSearch")
 public interface GblogSearch extends GSearch {
   public static final JSOpaque RESULT_CLASS =
       new JSOpaque("$wnd.GblogSearch.RESULT_CLASS");
   public static final GblogSearch IMPL =
       (GblogSearch)GWT.create(GblogSearch.class);
 
-  /**
-   * @gwt.constructor $wnd.GblogSearch
-   */
+  @Constructor("$wnd.GblogSearch")
   public abstract JavaScriptObject construct();
 
   public abstract void setResultOrder(Search jso, ResultOrder order);
