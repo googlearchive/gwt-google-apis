@@ -28,7 +28,7 @@ public class DragCursorDemo extends MapsDemo {
   private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
       + "You should be able to scroll the viewport by clicking and dragging "
       + "with the mouse.</p>\n"
-      + "<p>The default mouse cursors have been overriden with crosshairs "
+      + "<p>The default mouse cursors have been overridden with crosshairs "
       + "when hovering over the map, and the text cursor when dragging the map.</p>"
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/map-simple.html\">"
@@ -44,19 +44,20 @@ public class DragCursorDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
       @Override
       public String getName() {
-        return "Overide Map Drag Cursor";
+        return "Override Map Drag Cursor";
       }
     };
   }
 
-  private MapWidget map;
+  private final MapWidget map;
 
   public DragCursorDemo() {
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13, "crosshair", "text");

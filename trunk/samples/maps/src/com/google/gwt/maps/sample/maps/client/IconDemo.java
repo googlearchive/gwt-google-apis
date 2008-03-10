@@ -54,8 +54,9 @@ public class IconDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
       
@@ -101,8 +102,6 @@ public class IconDemo extends MapsDemo {
       LatLng point = new LatLng(southWest.getLatitude() + latSpan
           * Math.random(), southWest.getLongitude() + lngSpan * Math.random());
 
-      // TODO(sgross): perhaps we wan't the 'deprecated' constructor. It's much
-      // easier to use
       map.addOverlay(new Marker(point, options));
     }
   }

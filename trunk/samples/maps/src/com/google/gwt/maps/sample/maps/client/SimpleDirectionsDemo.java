@@ -100,8 +100,6 @@ public class SimpleDirectionsDemo extends MapsDemo {
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/directions-simple.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/directions-simple.html</a></p>\n";
 
-  private MapWidget map;
-
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
       @Override
@@ -111,8 +109,9 @@ public class SimpleDirectionsDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -123,13 +122,15 @@ public class SimpleDirectionsDemo extends MapsDemo {
     };
   }
 
+  private MapWidget map;
+
   public SimpleDirectionsDemo() {
     final Grid grid = new Grid(1, 2);
     grid.setWidth("100%");
     grid.getCellFormatter().setWidth(0, 0, "74%");
-    grid.getCellFormatter().setVerticalAlignment(0,0, HasVerticalAlignment.ALIGN_TOP);
+    grid.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_TOP);
     grid.getCellFormatter().setWidth(0, 1, "24%");
-    grid.getCellFormatter().setVerticalAlignment(0,1, HasVerticalAlignment.ALIGN_TOP);
+    grid.getCellFormatter().setVerticalAlignment(0, 1, HasVerticalAlignment.ALIGN_TOP);
     map = new MapWidget(new LatLng(42.351505, -71.094455), 15);
     map.setHeight("480px");
     grid.setWidget(0, 0, map);
@@ -150,8 +151,6 @@ public class SimpleDirectionsDemo extends MapsDemo {
       public void onSuccess(DirectionResults result) {
         // do something to resize the widgets...
       }
-
     });
-
   }
 }

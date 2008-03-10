@@ -59,10 +59,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class CustomControlDemo extends MapsDemo {
 
   /**
-   * Images used in the custom map control for zooming
+   * Images used in the custom map control for zooming.
    */
   public interface ControlImageBundle extends ImageBundle {
     AbstractImagePrototype minus();
+
     /**
      * @gwt.resource mozicon_earth.png
      */
@@ -74,14 +75,15 @@ public class CustomControlDemo extends MapsDemo {
   }
 
   private enum ControlDemos {
-   TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"),
-   TEST_TEXT_CUSTOM_ZOOM_CONTROL("Use a custom Text Zoom Control");
-   
+    TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"), TEST_TEXT_CUSTOM_ZOOM_CONTROL(
+        "Use a custom Text Zoom Control");
+
     final String value;
-    
+
     ControlDemos(String s) {
       value = s;
     }
+
     String valueOf() {
       return value;
     }
@@ -192,11 +194,11 @@ public class CustomControlDemo extends MapsDemo {
     };
   }
 
-  private ListBox actionListBox;
+  private final ListBox actionListBox;
 
   private Control currentControl = null;
 
-  private MapWidget map;
+  private final MapWidget map;
 
   public CustomControlDemo() {
 
@@ -242,17 +244,17 @@ public class CustomControlDemo extends MapsDemo {
     }
 
     ControlDemos selected = ControlDemos.values()[actionListBox.getSelectedIndex()];
- 
-    switch(selected) {
-      case TEST_IMAGE_CUSTOM_ZOOM_CONTROL: 
-      currentControl = new ImageZoomControl();
-      break;
+
+    switch (selected) {
+      case TEST_IMAGE_CUSTOM_ZOOM_CONTROL:
+        currentControl = new ImageZoomControl();
+        break;
       case TEST_TEXT_CUSTOM_ZOOM_CONTROL:
-      currentControl = new TextualZoomControl();
-      break;
+        currentControl = new TextualZoomControl();
+        break;
       default:
-      Window.alert("Unknown selection: " + selected.valueOf());
-      return;
+        Window.alert("Unknown selection: " + selected.valueOf());
+        return;
     }
 
     map.addControl(currentControl);

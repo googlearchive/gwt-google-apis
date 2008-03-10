@@ -29,22 +29,21 @@ import com.google.gwt.user.client.ui.Widget;
  * The Google Maps API now allows you to add traffic information to your maps.
  * Traffic information is displayed using the GTrafficOverlay, which implements
  * the GOverlay interface. You add traffic information to your map using the
- * Map.addOverlay() method. GTrafficOverlay has two methods (hide() and
- * show()) for toggling display of the traffic overlay. Traffic information is
- * displayed only for supported cities.
+ * Map.addOverlay() method. GTrafficOverlay has two methods (hide() and show())
+ * for toggling display of the traffic overlay. Traffic information is displayed
+ * only for supported cities.
  */
 public class TrafficOverlayDemo extends MapsDemo {
   private static HTML descHTML = null;
 
   private static final String descString = "<p>Displays a map centered on Brooklyn, NY USA</p>"
-    + "<p>The Google traffic service is called and retrieves an overlay "
-    + "representing current traffic conditions.  Pressing the 'Toggle Traffic' " 
-    + "button will alternately hide and show the overlay.</p>"
-    + "<p>Equivalent to the Maps JavaScript API Example: "
-    + "<a href=\"http://code.google.com/apis/maps/documentation/examples/trafficOverlay.html\">" 
-    + "http://code.google.com/apis/maps/documentation/examples/trafficOverlay.html</a></p>\n";
+      + "<p>The Google traffic service is called and retrieves an overlay "
+      + "representing current traffic conditions.  Pressing the 'Toggle Traffic' "
+      + "button will alternately hide and show the overlay.</p>"
+      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/trafficOverlay.html\">"
+      + "http://code.google.com/apis/maps/documentation/examples/trafficOverlay.html</a></p>\n";
 
- 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
       @Override
@@ -54,8 +53,9 @@ public class TrafficOverlayDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 

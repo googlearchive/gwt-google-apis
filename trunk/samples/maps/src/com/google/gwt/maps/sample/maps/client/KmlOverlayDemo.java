@@ -47,7 +47,7 @@ public class KmlOverlayDemo extends MapsDemo {
   private static HTML descHTML = null;
 
   private static final String descString = "<p>Creates a map view of the "
-      + "contents of a Geo KML file</p>"
+      + "contents of a KML file</p>"
       + "<p>Displays some paths in a KML file hosted at Google.</p>\n"
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geoxml-kml.html\">"
@@ -77,8 +77,8 @@ public class KmlOverlayDemo extends MapsDemo {
 
   private GeoXmlOverlay geoXml = null;
   private boolean geoXmlShown;
-  private MapWidget map;
-  private Button removeAddButton;
+  private final MapWidget map;
+  private final Button removeAddButton;
 
   public KmlOverlayDemo() {
     Panel panel = new FlowPanel();
@@ -99,7 +99,7 @@ public class KmlOverlayDemo extends MapsDemo {
         if (geoXml == null) {
           return;
         }
-        if (geoXmlShown) {         
+        if (geoXmlShown) {
           map.removeOverlay(geoXml);
           showHideButton.setEnabled(false);
         } else {
@@ -111,7 +111,6 @@ public class KmlOverlayDemo extends MapsDemo {
     });
     panel.add(removeAddButton);
 
-    
     showHideButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         if (geoXml == null) {
@@ -124,30 +123,30 @@ public class KmlOverlayDemo extends MapsDemo {
         }
       }
     });
-    
+
     panel.add(showHideButton);
     initWidget(panel);
 
     GeoXmlOverlay.load("http://mapgadgets.googlepages.com/cta.kml",
         new GeoXmlLoadCallback() {
-      
+
           @Override
           public void onFailure(String url, Throwable e) {
-            StringBuffer message = new StringBuffer( "KML File " + url 
+            StringBuffer message = new StringBuffer("KML File " + url
                 + " failed to load");
             if (e != null) {
               message.append(e.toString());
             }
             Window.alert(message.toString());
           }
-          
+
           @Override
           public void onSuccess(String url, GeoXmlOverlay overlay) {
             geoXml = overlay;
             removeAddButton.setEnabled(true);
             showHideButton.setEnabled(true);
             map.addOverlay(geoXml);
-            GWT.log("KML File " + url + "loaded sucessfully", null);
+            GWT.log("KML File " + url + "loaded successfully", null);
             GWT.log("Default Center=" + geoXml.getDefaultCenter(), null);
             GWT.log("Default Span=" + geoXml.getDefaultSpan(), null);
             GWT.log("Default Bounds=" + geoXml.getDefaultBounds(), null);
@@ -162,6 +161,6 @@ public class KmlOverlayDemo extends MapsDemo {
     if (geoXml != null) {
       map.addOverlay(geoXml);
     }
-    geoXmlShown = true;   
+    geoXmlShown = true;
   }
 }

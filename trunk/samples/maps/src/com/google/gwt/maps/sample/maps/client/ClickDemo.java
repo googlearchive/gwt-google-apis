@@ -15,13 +15,16 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.event.MapClickListener;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
@@ -38,13 +41,11 @@ import com.google.gwt.user.client.ui.HTML;
  * marker, we remove it from the map.
  */
 public class ClickDemo extends MapsDemo {
-  private static HTML descHTML =
-      null;
-  private static final String descString =
-      "<p>Creates a 500 x 300 "
-          + "pixel map viewport centered on Palo Alto, CA USA. " + "</p>\n"
-          + "<p>Each time the mouse is clicked in this demo, a new marker is"
-          + "placed on the map at the point there the click event occured.</p>";
+  private static HTML descHTML = null;
+  private static final String descString = "<p>Creates a 500 x 300 "
+      + "pixel map viewport centered on Palo Alto, CA USA. " + "</p>\n"
+      + "<p>Each time the mouse is clicked in this demo, a new marker is"
+      + "placed on the map at the point there the click event occurred.</p>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -55,9 +56,9 @@ public class ClickDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
-          descHTML =
-              new HTML(descString);
+        if (descHTML == null) {
+          descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -68,11 +69,10 @@ public class ClickDemo extends MapsDemo {
     };
   }
 
-  private MapWidget map;
+  private final MapWidget map;
 
   public ClickDemo() {
-    map =
-        new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
 
@@ -80,12 +80,24 @@ public class ClickDemo extends MapsDemo {
     map.addControl(new MapTypeControl());
 
     map.addClickListener(new MapClickListener() {
+      @Override
       public void onClick(MapWidget sender, Overlay overlay, LatLng point) {
         if (overlay != null && overlay instanceof Marker) {
           map.removeOverlay(overlay);
         } else {
           map.addOverlay(new Marker(point));
         }
+      }
+
+      @Override
+      public void onDoubleClick(MapWidget sender, Overlay overlay, LatLng point) {
+        GWT.log("Got double click at " + point, null);
+      }
+
+      @Override
+      public void onRightClick(MapWidget sender, Point point, Element element,
+          Overlay overlay) {
+        GWT.log("Got right click at " + point, null);
       }
     });
   }

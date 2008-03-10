@@ -52,8 +52,9 @@ public class DragMarkerDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -70,7 +71,6 @@ public class DragMarkerDemo extends MapsDemo {
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
-
   }
 
   @Override
