@@ -50,8 +50,9 @@ public class ControlsDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -92,6 +93,5 @@ public class ControlsDemo extends MapsDemo {
       }
     };
     timer.schedule(1000);
-
   }
 }

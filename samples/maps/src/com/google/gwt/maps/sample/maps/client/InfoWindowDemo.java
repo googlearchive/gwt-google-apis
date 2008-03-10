@@ -81,11 +81,10 @@ public class InfoWindowDemo extends MapsDemo {
       + "<li><b>"
       + TEST_INFO_WINDOW_LISTENER
       + "</b>: Register two "
-      + "InfoWindowListeners</li>\n" 
+      + "InfoWindowListeners</li>\n"
       + "<li><b>"
       + TEST_MAP_BLOWUP
-      + "</b>: Display a Map Blowup inside an InfoWindow</li>"
-      + "</ol>";
+      + "</b>: Display a Map Blowup inside an InfoWindow</li>" + "</ol>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -97,8 +96,9 @@ public class InfoWindowDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -109,8 +109,8 @@ public class InfoWindowDemo extends MapsDemo {
     };
   }
 
-  private MapWidget map;
-  private ListBox actionListBox;
+  private final MapWidget map;
+  private final ListBox actionListBox;
 
   private InfoWindow info = null;
 
@@ -149,7 +149,6 @@ public class InfoWindowDemo extends MapsDemo {
 
     vertPanel.add(map);
     initWidget(vertPanel);
-
   }
 
   @Override
@@ -158,7 +157,7 @@ public class InfoWindowDemo extends MapsDemo {
   }
 
   /**
-   * Display one of the info Window test cases
+   * Display one of the info Window test cases.
    */
   private void displayInfoWindow() {
 
@@ -170,8 +169,9 @@ public class InfoWindowDemo extends MapsDemo {
     info = map.getInfoWindow();
     String selection = actionListBox.getItemText(actionListBox.getSelectedIndex());
 
-    if (selection == null)
+    if (selection == null) {
       return;
+    }
 
     InfoWindowContent content;
 
@@ -257,7 +257,6 @@ public class InfoWindowDemo extends MapsDemo {
     tabs[2] = new InfoWindowTab("Tab 3", "<h1>Tab 3 Content</h1>");
     final InfoWindowContent content = new InfoWindowContent(tabs, 1);
     return content;
-
   }
 
   /**

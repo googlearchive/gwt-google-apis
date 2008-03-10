@@ -45,6 +45,24 @@ import java.util.Comparator;
  * and VML</a> for more information.
  */
 public class OverlayDemo extends MapsDemo {
+  private enum OverlayDemos {
+    
+    TEST_POLYLINE_ENCODED("Display polyline from an encoded string"), TEST_POLYLINE_ONE(
+        "Display a polyline"), TEST_POLYLINE_TRANSPARENT(
+        "Display encoded polyline with default transparency"), TEST_TEN_MARKERS(
+        "Display 10 Random Markers");
+
+    final String value;
+
+    OverlayDemos(String s) {
+      value = s;
+    }
+
+    String valueOf() {
+      return value;
+    }
+  }
+  
   private static HTML descHTML = null;
   private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
       + "You should be able to scroll the viewport by clicking and dragging "
@@ -54,10 +72,11 @@ public class OverlayDemo extends MapsDemo {
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/polyline-simple.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/polyline-simple.html</a></p>\n";
-
+  
   // A polyline stored in an encoded string.
   private static final String ENCODED_LEVELS = "B????????????????????????????????????B";
   private static final String ENCODED_POINTS = "iuowFf{kbMzH}N`IbJb@zBpYzO{dAvfF{LwDyN`_@`NzKqB|Ec@|L}BKmBbCoPjrBeEdy@uJ`Mn@zoAer@bjA~Xz{JczBa]pIps@de@tW}rCdxSwhPl`XgikCl{soA{dLdAaaF~cCyxCk_Aao@jp@kEvnCgoJ`]y[pVguKhCkUflAwrEzKk@yzCv^k@?mI";
+
   private static final int NUM_POINTS = 10;
 
   public static MapsDemoInfo init() {
@@ -80,23 +99,6 @@ public class OverlayDemo extends MapsDemo {
         return "Map Overlays";
       }
     };
-  }
-
-  private enum OverlayDemos {
-    TEST_POLYLINE_ENCODED("Display polyline from an encoded string"), TEST_POLYLINE_ONE(
-        "Display a polyline"), TEST_POLYLINE_TRANSPARENT(
-        "Display encoded polyline with default transparency"), TEST_TEN_MARKERS(
-        "Display 10 Random Markers");
-
-    final String value;
-
-    OverlayDemos(String s) {
-      value = s;
-    }
-
-    String valueOf() {
-      return value;
-    }
   }
 
   private ListBox actionListBox;

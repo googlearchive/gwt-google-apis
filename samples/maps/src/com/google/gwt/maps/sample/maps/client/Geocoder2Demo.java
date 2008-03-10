@@ -42,7 +42,7 @@ import com.google.gwt.user.client.ui.Widget;
  * Use the GClientGeocoder.getLatLng() method to convert a string address into a
  * GLatLng. Because geocoding involves sending a request to Google's servers, it
  * can take some time. To avoid making your script wait, you should pass in a
- * callback function to exdcute after the response returns.
+ * callback function to execute after the response returns.
  * 
  * In this example, we geocode an address, add a marker at that point, and open
  * an info window displaying the address.
@@ -52,7 +52,7 @@ public class Geocoder2Demo extends MapsDemo {
 
   private static final String descString = "<p> Creates a zoomed out map.</p>"
       + "<p>Clicking on one of the buttons below the map submits the  address to "
-      + "the Google Geocoding service.  When the query returns sucessfully"
+      + "the Google Geocoding service.  When the query returns successfully"
       + "the map will display a marker on the coordinates and display the "
       + "country code returned from the query in an InfoWindow.</p>"
       + "<p>Equivalent to the Maps JavaScript API Example: "
@@ -66,8 +66,7 @@ public class Geocoder2Demo extends MapsDemo {
       "Champ de Mars 75007 Paris, France", "Piazza del Colosseo, Roma, Italia",
       "Domkloster 3, 50667 Köln, Deutschland",
       "Plaza de la Virgen de los Reyes, 41920, Sevilla, España",
-      "123 Main St, Googleville"
-  };
+      "123 Main St, Googleville"};
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -78,8 +77,9 @@ public class Geocoder2Demo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -90,9 +90,9 @@ public class Geocoder2Demo extends MapsDemo {
     };
   }
 
-  private MapWidget map;
+  private final Geocoder geocoder;
 
-  private Geocoder geocoder;
+  private final MapWidget map;
 
   public Geocoder2Demo() {
     Panel panel = new FlowPanel();

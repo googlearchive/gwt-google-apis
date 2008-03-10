@@ -27,6 +27,10 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * This demo shows how to create a custom overlay in the form of a Rectangle
+ * and add it to the map.
+ */
 public class CustomOverlayDemo extends MapsDemo {
   private static class Rectangle extends Widget {
     public Rectangle() {
@@ -114,8 +118,9 @@ public class CustomOverlayDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 

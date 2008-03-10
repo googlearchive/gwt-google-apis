@@ -104,6 +104,5 @@ public class CustomMapTypeDemo extends MapsDemo {
     vertPanel.add(map);
 
     initWidget(vertPanel);
-
   }
 }

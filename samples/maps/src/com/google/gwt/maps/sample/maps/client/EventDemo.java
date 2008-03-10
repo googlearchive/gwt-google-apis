@@ -43,8 +43,6 @@ public class EventDemo extends MapsDemo {
           + "<a href=\"http://code.google.com/apis/maps/documentation/examples/event-context.html\">"
           + "http://code.google.com/apis/maps/documentation/examples/event-context.html</a></p>\n";
 
-  private MapWidget map;
-
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
       @Override
@@ -54,9 +52,9 @@ public class EventDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
-          descHTML =
-              new HTML(descString);
+        if (descHTML == null) {
+          descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -66,6 +64,8 @@ public class EventDemo extends MapsDemo {
       }
     };
   }
+
+  private MapWidget map;
 
   public EventDemo() {
     Panel panel =

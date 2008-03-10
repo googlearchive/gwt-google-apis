@@ -50,8 +50,9 @@ import com.google.gwt.user.client.ui.Widget;
  * an info window displaying the address.
  */
 public class GeocoderDemo extends MapsDemo {
+  private static final double atlantaLat = 33.7814790;
+  private static final double atlantaLng = -84.3880580;
   private static HTML descHTML = null;
-
   private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA.</p>"
       + "<p>Type an address in the textbox.  Clicking the 'Go' button will"
       + "contact the Google Geocoding service, display the resulting "
@@ -60,9 +61,6 @@ public class GeocoderDemo extends MapsDemo {
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geocoding-simple.html\">" 
       + "http://code.google.com/apis/maps/documentation/examples/geocoding-simple.html</a></p>\n";
-
-  static final private double atlantaLat = 33.7814790;
-  static final private double atlantaLng = -84.3880580;
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -73,8 +71,9 @@ public class GeocoderDemo extends MapsDemo {
 
       @Override
       public HTML getDescriptionHTML() {
-        if (descHTML == null)
+        if (descHTML == null) {
           descHTML = new HTML(descString);
+        }
         return descHTML;
       }
 
@@ -88,7 +87,6 @@ public class GeocoderDemo extends MapsDemo {
   private Geocoder geocoder;
   private Label latLabel;
   private Label lngLabel;
-
   private MapWidget map;
 
   public GeocoderDemo() {

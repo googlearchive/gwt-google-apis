@@ -29,14 +29,17 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * Main class for implementing the HelloMaps gwt-google-apis demo.
+ */
 public class HelloMaps implements EntryPoint, HistoryListener {
 
   protected DemoList list = new DemoList();
   private MapsDemoInfo curInfo;
   private MapsDemo curMapsDemo;
   private HTML description = new HTML();
-  private FlexTable outerPanel = new FlexTable();
   private VerticalPanel innerPanel = new VerticalPanel();
+  private FlexTable outerPanel = new FlexTable();
 
   public void onHistoryChanged(String token) {
     // Find the MapsDemoInfo associated with the history context. If one is
@@ -135,7 +138,10 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     innerPanel.add(curMapsDemo);
     outerPanel.setWidget(2, 0, info.getDescriptionHTML());
 
-    outerPanel.setWidget(3, 0, new HTML(
+    outerPanel.setWidget(
+        3,
+        0,
+        new HTML(
             "These concepts behind these demos"
                 + " are explained in the "
                 + "<a href=\"http://www.google.com/apis/maps/documentation/index.html\">"
