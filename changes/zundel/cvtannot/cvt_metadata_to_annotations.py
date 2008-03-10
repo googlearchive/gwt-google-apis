@@ -18,8 +18,6 @@
 #
 # cvt_metadata_to_annotations.py - Convert GWT JSIO code to use Java annotations
 #
-# usage: cvt_metadata_to_annotations.py [--test] [--verbose] filename1 [filename 2 [...]]
-#
 # Finds any metadata comments that are used by JSIO and replaces them
 # with the equivalent Annotation syntax.  For example.
 #
@@ -34,7 +32,7 @@
 # (and the appropriate 'import' added to the file)
 #
 # If the 2nd line of the file looks like a Google copyright, the 
-# copyright is updated to 2008.
+# copyright is updated to the current year.
 
 # WARNING: Make sure you have a backup copy of your code before running this.
 #          script.  It doesn't handle all cases approprately
@@ -50,28 +48,74 @@ import re
 import os
 import pdb # interactive debugger
 import datetime
+import sys
 
-options=[];
-javadoc_start_re=re.compile('^\s*\/\*\*');
-javadoc_end_re=re.compile('\*\/');
+global options
+options=[]
+javadoc_start_re=re.compile('^\s*\/\*\*')
+javadoc_end_re=re.compile('\*\/')
+full_description="""
+Example JSIO metadata:
+
+   /**                                
+    * @gwt.constructor $wnd.MyObject  
+    */                                
+
+ is converted to:
+
+   @Constructor("$wnd.MyObject")
+
+ - When a file is found that needs converting, the old file is backed up to
+   <filename>.save and the new file is re-written to <filename>
+ - The appropriate 'import' statements are added to the file.
+ - If a javadoc comment is empty after the conversion, the comment is removed.
+ - If the 2nd line of the file looks like a Google copyright, the
+    copyright is updated to he current year.
+
+ WARNING: Make sure you have a backup copy of your code before running this.
+          script.  It doesn't handle all cases approprately:
+              - encoding a javadoc comment in a string
+              - a commented out javadoc comment.
+"""
+
 
 def main ():
-  # read command line args
-  p = optparse.OptionParser()
-  p.add_option('--test', '-t', action='store_true')
-  p.add_option('--verbose', '-v', action='store_true')
-  options, files_to_convert = p.parse_args()
+  """The main entry point"""
+  global options
 
-  #print "Options.test = ", options.test
-  #print len(files_to_convert), " files to convert = ", files_to_convert
+  # read command line args
+  p = optparse.OptionParser(description="""Converts GWT JSIO metadata 
+specifications to Java 1.5 annotations.  Old files are backed up as 
+<filename>.save if any data is changed. """)
+
+  p.add_option('--usage', '-?', action='store_true', 
+               help="Extended usage information")
+  p.add_option('--test', '-t', action='store_true', 
+               help='Test run only - do not change any files')
+  p.add_option('--verbose', '-v', action='store_true', 
+               help='Print messages while running')
+  (options, files_to_convert) = p.parse_args()
+
+  if options.usage:
+    p.print_help()
+    print full_description
+    sys.exit()
+
+  if options.verbose:
+      print len(files_to_convert), " files to examine."
 
   # For each file to process:
   for curr_filename in files_to_convert:
     convert_file(curr_filename)
 
-# Convert a single file
+
 def convert_file (curr_filename):
+    """ Convert a single file from metatdata to annotations"""
     global java_imports
+    global options
+
+    if options.verbose:
+      print "Examining file ", curr_filename
 
     doc_changed = False
     java_imports = set([])
@@ -99,24 +143,34 @@ def convert_file (curr_filename):
         # append the current line to copy in memory
         file_contents.append(curr_line)
          
+    if doc_changed == False:
+        return False
+
     # Update the file if it was modfied
-    if len(file_contents) > 0 and doc_changed:
-      # merge in the new java imports
-      file_contents = merge_imports(file_contents) 
+    # merge in the new java imports
+    file_contents = merge_imports(file_contents) 
       
-      # back up the old copy of the file
-      os.rename(curr_filename, curr_filename + ".save")
+    if options.test:
+      print "Would have modified: ",curr_filename
+      return False
+    
+    # back up the old copy of the file
+    os.rename(curr_filename, curr_filename + ".save")
+    
+    output_file = open(curr_filename, "w")
+    for line in file_contents:
+      output_file.writelines(line)
+    output_file.close()
+      
+    # write out the in-memory copy that has been modified to the old filename.
+    if options.verbose:
+      print "  Modified: ", curr_filename
+      print "  Old file backed up to: ", curr_filename + ".save"
 
-      output_file = open(curr_filename, "w")
-      for line in file_contents:
-        output_file.writelines(line)
-      output_file.close()
+    return True
 
-      # write out the in-memory copy that has been modified to the old filename.
-      print curr_filename + ": doc modified"
-
-# Slurp out a comment from the file
 def slurp_javadoc_comment (curr_file, comment_start):
+  """Slurp out a comment from the file"""
   comment=[comment_start];
   while True:
       curr_line = curr_file.readline()
@@ -142,8 +196,9 @@ gwt_read_only_re = re.compile('\@gwt.readOnly')
 blank_comment_re = re.compile('\s*\/\*\*[\*\s]*\*\/')
 comment_start_whitespace_re = re.compile('^(\s*)\/')
 
-# Convert a comment containing JSIO metadata into a comment and annotations 
+
 def convert_metadata(orig_comment):
+  """Convert a comment containing JSIO metadata into a comment and annotations """
   global java_imports
   final_comment = []
   final_annotations=[]
@@ -200,7 +255,6 @@ def convert_metadata(orig_comment):
     comment_changed = True
     final_comment_string = reduce(lambda x,y: x+y, final_comment)
     if (blank_comment_re.search(final_comment_string)):
-      #print ("EMPTY COMMENT FOUND: ", final_comment)
       final_comment = [];
   else:
     comment_changed = False
@@ -208,10 +262,14 @@ def convert_metadata(orig_comment):
   # Nuke any comments that are now empty
   return final_comment + final_annotations, comment_changed
 
-# Merge in the imports in java_imports into the file  below the last
-# imports already declared.
+copyright_re = re.compile('^ \* Copyright 20\d\d Google Inc')
+
 def merge_imports(contents):
+  """Merge in the imports in java_imports into the file  below the last
+  imports already declared."""
+
   global java_imports
+  global options
 
   # Sort the imports and put them in a list
   #   (there's got to be a simpler way to convert a set to a list)
@@ -219,15 +277,12 @@ def merge_imports(contents):
   [ sorted_imports.append(i) for i in java_imports ]
   sorted_imports.sort()
 
-  #print "Sorted imports= ", sorted_imports
-
   # Scan the file_contents from the end of the file until the last 'import'
   # line is found.
   curr_lineno = filelen = len(contents)
 
-  #print "There are ", curr_lineno, " lines in the file."
   copyright_line = contents[1];
-  if (str(copyright_line).startswith(" * Copyright 2007 Google Inc")):
+  if copyright_re.match(str(copyright_line)):
     now = datetime.date.today();
     contents[1] = " * Copyright " + str(now.year) + " Google Inc.\n"
 
@@ -236,8 +291,6 @@ def merge_imports(contents):
     curr_line = contents[curr_lineno] # should be a string
     if str(curr_line).startswith("import "):
        break;
-      
-  #print "Imports end at line: ", curr_lineno
 
   # This the place to merge together the imports
   top = contents[:curr_lineno + 1];
