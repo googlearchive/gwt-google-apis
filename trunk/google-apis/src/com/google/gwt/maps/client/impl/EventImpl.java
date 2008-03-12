@@ -31,11 +31,6 @@ import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Element;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 
 /**
  * 
@@ -107,13 +102,6 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   public static final EventImpl impl = (EventImpl) GWT.create(EventImpl.class);
 
-  /**
-   * Map of Java listener instances to JavaScript listener functions. This is
-   * used in cases where a listener interface needs to sync several JavaScript
-   * events in order to fulfill its contract.
-   */
-  private final Map<Object, Collection<JavaScriptObject>> javaListenerToJavaScriptListeners = new HashMap<Object, Collection<JavaScriptObject>>();
-
   public JavaScriptObject addListener(JavaScriptObject source, MapEvent event,
       BooleanCallback handler) {
     return addListener(source, event.value(), handler);
@@ -154,33 +142,7 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
     return addListenerVoid(source, event.value(), handler);
   }
 
-  public void associate(Object listener, JavaScriptObject jsListener) {
-    Collection<JavaScriptObject> associated = javaListenerToJavaScriptListeners.get(listener);
-    if (associated == null) {
-      associated = new ArrayList<JavaScriptObject>();
-      javaListenerToJavaScriptListeners.put(listener, associated);
-    }
-    associated.add(jsListener);
-  }
-
-  public void associate(Object listener, JavaScriptObject[] jsListeners) {
-    for (JavaScriptObject jsListener : jsListeners) {
-      associate(listener, jsListener);
-    }
-  }
-
-  public void clearListeners(JavaScriptObject source, MapEvent event) {
-    clearListeners(source, event.value());
-  }
-
-  public void removeListeners(Object listener) {
-    Collection<JavaScriptObject> jsListeners = javaListenerToJavaScriptListeners.get(listener);
-    if (jsListeners != null) {
-      for (JavaScriptObject jsListener : jsListeners) {
-        removeListener(jsListener);
-      }
-    }
-  }
+  public abstract void removeListener(JavaScriptObject mapEventHandle);
 
   protected abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, BooleanCallback handler);
@@ -207,7 +169,6 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   protected abstract JavaScriptObject addListenerVoid(JavaScriptObject source,
       String event, VoidCallback handler);
 
+  // We don't use this method with the advent of the ListenerCollection.
   protected abstract void clearListeners(JavaScriptObject source, String event);
-
-  protected abstract void removeListener(JavaScriptObject jsListener);
 }

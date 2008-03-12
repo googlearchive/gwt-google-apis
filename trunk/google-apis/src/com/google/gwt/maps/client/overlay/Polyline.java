@@ -19,6 +19,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.ListenerCollection;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolylineFactoryImpl;
 import com.google.gwt.maps.client.impl.PolylineImpl;
@@ -45,7 +46,7 @@ public final class Polyline extends ConcreteOverlay {
     return new Polyline(PolylineFactoryImpl.impl.fromEncoded(optionsJso));
   }
 
-  public static Polyline fromEncoded(String encodedPoints, int zoomFactor, 
+  public static Polyline fromEncoded(String encodedPoints, int zoomFactor,
       String encodedLevels, int numLevels) {
     JavaScriptObject optionsJso = PolylineOptionsImpl.impl.construct();
     PolylineOptionsImpl.impl.setPoints(optionsJso, encodedPoints);
@@ -58,6 +59,8 @@ public final class Polyline extends ConcreteOverlay {
   private static Polyline createPeer(JavaScriptObject jsoPeer) {
     return new Polyline(jsoPeer);
   }
+
+  private ListenerCollection<RemoveListener> removeListeners;
 
   public Polyline(LatLng[] points) {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points)));
@@ -81,16 +84,24 @@ public final class Polyline extends ConcreteOverlay {
   }
 
   public void addRemoveListener(final RemoveListener listener) {
-    EventImpl.impl.associate(listener, EventImpl.impl.addListenerVoid(
+    if (removeListeners == null) {
+      removeListeners = new ListenerCollection<RemoveListener>();
+    }
+
+    JavaScriptObject removeEventHandles[] = {EventImpl.impl.addListenerVoid(
         super.jsoPeer, MapEvent.REMOVE, new VoidCallback() {
           @Override
           public void callback() {
             listener.onRemove(Polyline.this);
           }
-        }));
+        })};
+    removeListeners.addListener(listener, removeEventHandles);
   }
 
   public void clearRemoveListeners() {
+    if (removeListeners != null) {
+      removeListeners.clearListeners();
+    }
   }
 
   public LatLng getVertex(int index) {
@@ -102,6 +113,8 @@ public final class Polyline extends ConcreteOverlay {
   }
 
   public void removeRemoveListener(RemoveListener listener) {
-    EventImpl.impl.removeListeners(listener);
+    if (removeListeners != null) {
+      removeListeners.removeListener(listener);
+    }
   }
 }

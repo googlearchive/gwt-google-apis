@@ -25,38 +25,45 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
 
 /**
- * 
+ * Wrapper for the GMarker object
  */
 public interface MarkerImpl extends JSFlyweightWrapper {
 
-  public static final MarkerImpl impl = (MarkerImpl) GWT.create(MarkerImpl.class);
+  MarkerImpl impl = (MarkerImpl) GWT.create(MarkerImpl.class);
 
   @Constructor("$wnd.GMarker")
-  public JavaScriptObject construct(LatLng point);
+  JavaScriptObject construct(LatLng point);
 
   @Constructor("$wnd.GMarker")
-  public JavaScriptObject construct(LatLng point, MarkerOptions options);
+  JavaScriptObject construct(LatLng point, MarkerOptions options);
 
-  public Icon getIcon(Marker marker);
+  void disableDragging(Marker marker);
 
-  public LatLng getPoint(Marker marker);
+  boolean draggable(Marker marker);
 
-  public void hide(Marker marker);
+  boolean draggingEnabled(Marker marker);
 
-  public boolean isHidden(Marker marker);
+  void enableDragging(Marker marker);
 
-  public void openInfoWindow(Marker marker, JavaScriptObject content,
-      JavaScriptObject options);
+  Icon getIcon(Marker marker);
 
-  public void openInfoWindowTabs(Marker marker, JavaScriptObject content,
-      JavaScriptObject options);
+  LatLng getPoint(Marker marker);
 
-  public void setImage(Marker marker, String url);
+  void hide(Marker marker);
 
-  public void setPoint(Marker marker, LatLng point);
+  boolean isHidden(Marker marker);
   
-  public void show(Marker marker);
+  void openInfoWindow(Marker marker, JavaScriptObject content,
+      JavaScriptObject options);
 
-  public void showMapBlowup(Marker marker, JavaScriptObject options);
+  void openInfoWindowTabs(Marker marker, JavaScriptObject content,
+      JavaScriptObject options);
 
+  void setImage(Marker marker, String url);
+  
+  void setPoint(Marker marker, LatLng point);
+  
+  void show(Marker marker);
+  
+  void showMapBlowup(Marker marker, JavaScriptObject options);
 }
