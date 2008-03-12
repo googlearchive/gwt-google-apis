@@ -152,7 +152,7 @@ public class GeocoderDemo extends MapsDemo {
     NumberFormat fmt = NumberFormat.getFormat("#.0000000#");
     latLabel.setText(fmt.format(point.getLatitude()));
     lngLabel.setText(fmt.format(point.getLongitude()));
-  }625
+  }
 
   private void showAddress(final String address) {
     final InfoWindow info = map.getInfoWindow();
