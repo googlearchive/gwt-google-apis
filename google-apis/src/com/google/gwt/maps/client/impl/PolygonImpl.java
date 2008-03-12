@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,6 +20,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.Polygon;
 
 /**
@@ -29,14 +30,10 @@ public interface PolygonImpl extends JSFlyweightWrapper {
 
   public static final PolygonImpl impl = (PolygonImpl) GWT.create(PolygonImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GPolygon
-   */
+  @Constructor("$wnd.GPolygon")
   public JavaScriptObject construct(JSList /* LatLng[] */points);
 
-  /**
-   * @gwt.constructor $wnd.GPolygon
-   */
+  @Constructor("$wnd.GPolygon")
   public JavaScriptObject construct(JSList /* LatLng[] */points,
       String strokeColor, int strokeWeight, double strokeOpacity,
       String fillColor, double fillOpacity);

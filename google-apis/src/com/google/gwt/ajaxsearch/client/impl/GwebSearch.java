@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,6 +18,7 @@ package com.google.gwt.ajaxsearch.client.impl;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
@@ -29,9 +30,7 @@ public interface GwebSearch extends GSearch {
   public static final GwebSearch IMPL =
   (GwebSearch)GWT.create(GwebSearch.class);
 
-  /**
-   * @gwt.constructor $wnd.GwebSearch
-   */
+  @Constructor("$wnd.GwebSearch")
   public abstract JavaScriptObject construct();
 
   public abstract void setSiteRestriction(Search jso, String site);

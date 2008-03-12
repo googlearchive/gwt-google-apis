@@ -31,11 +31,11 @@ public final class MercatorProjection extends Projection {
     super(jsoPeer);
   }
 
-  public Point convertLatLngToPixel(LatLng latlng, int zoomLevel) {
+  public Point fromLatLngToPixel(LatLng latlng, int zoomLevel) {
     return ProjectionImpl.impl.fromLatLngToPixel(jsoPeer, latlng, zoomLevel);
   }
 
-  public LatLng convertPixelToLatLng(Point point, int zoomLevel,
+  public LatLng fromPixelToLatLng(Point point, int zoomLevel,
       boolean unbound) {
     return ProjectionImpl.impl.fromPixelToLatLng(jsoPeer, point, zoomLevel, unbound);
   }

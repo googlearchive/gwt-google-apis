@@ -20,6 +20,8 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.CopyrightCollection;
 import com.google.gwt.maps.client.TileLayer;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Point;
 
 /**
@@ -29,19 +31,13 @@ public interface TileLayerImpl extends JSFlyweightWrapper {
 
   TileLayerImpl impl = (TileLayerImpl) GWT.create(TileLayerImpl.class);
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   void bind(JavaScriptObject jsoPeer, TileLayer tileLayer);
 
-  /**
-   * @gwt.constructor $wnd.GTileLayer
-   */
+  @Constructor("$wnd.GTileLayer")
   JavaScriptObject construct();
 
-  /**
-   * @gwt.constructor $wnd.GTileLayer
-   */
+  @Constructor("$wnd.GTileLayer")
   JavaScriptObject construct(CopyrightCollection copyrights,
       int minResolution, int maxResolution);
 

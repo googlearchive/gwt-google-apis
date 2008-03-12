@@ -19,27 +19,27 @@ import com.google.gwt.ajaxsearch.client.LocalResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSList;
 
 /**
- * @gwt.beanProperties
  * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GlocalResult
  */
+@BeanProperties
 public interface GlocalResult extends GResult {
   public static final GlocalResult IMPL =
     (GlocalResult)GWT.create(GlocalResult.class);
 
   /**
    * A phone number attached to the result.
-   * @gwt.beanProperties
    */
+  @BeanProperties
   public interface PhoneNumber extends JSFlyweightWrapper {
     public static final PhoneNumber IMPL =
       (PhoneNumber)GWT.create(PhoneNumber.class);
     
-    /**
-     * @gwt.constructor Object
-     */
+    @Constructor("Object")
     public JavaScriptObject construct();
 
     public String getNumber(LocalResult.PhoneNumber obj);

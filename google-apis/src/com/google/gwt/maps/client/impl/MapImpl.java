@@ -28,6 +28,8 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -46,9 +48,7 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   public void addOverlay(JavaScriptObject jsoPeer, Overlay overlay);
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   public void bind(JavaScriptObject jsoPeer, MapWidget map);
 
   // Notifies the map of a change of the size of its container. Call this method
@@ -60,14 +60,10 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   public void closeInfoWindow(MapWidget map);
 
-  /**
-   * @gwt.constructor $wnd.GMap2
-   */
+  @Constructor("$wnd.GMap2")
   public JavaScriptObject construct(Element container);
 
-  /**
-   * @gwt.constructor $wnd.GMap2
-   */
+  @Constructor("$wnd.GMap2")
   public JavaScriptObject construct(Element container,
       JavaScriptObject mapOptions);
 
@@ -128,9 +124,7 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   public boolean infoWindowEnabled(JavaScriptObject jsoPeer);
 
-  /**
-   * @gwt.constructor $wnd.GKeyboardHandler
-   */
+  @Constructor("$wnd.GKeyboardHandler")
   public JavaScriptObject installKeyboardHandler(MapWidget map);
 
   // Boolean Returns true iff the map was initialized by setCenter() since it

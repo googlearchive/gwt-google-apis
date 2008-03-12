@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
@@ -28,25 +29,17 @@ public interface PolylineImpl extends JSFlyweightWrapper {
 
   PolylineImpl impl = (PolylineImpl) GWT.create(PolylineImpl.class);
 
-  /**
-   * @gwt.constructor $wnd.GPolyline
-   */
+  @Constructor("$wnd.GPolyline")
   JavaScriptObject construct(JSList<LatLng> points);
 
-  /**
-   * @gwt.constructor $wnd.GPolyline
-   */
+  @Constructor("$wnd.GPolyline")
   JavaScriptObject construct(JSList<LatLng> points, String color);
  
-  /**
-   * @gwt.constructor $wnd.GPolyline
-   */
+  @Constructor("$wnd.GPolyline")
   JavaScriptObject construct(JSList<LatLng> points, String color,
       int weight);
   
-  /**
-   * @gwt.constructor $wnd.GPolyline
-   */
+  @Constructor("$wnd.GPolyline")
   JavaScriptObject construct(JSList<LatLng> points, String color,
       int weight, double opacity);
 
