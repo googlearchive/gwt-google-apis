@@ -19,7 +19,6 @@ import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.client.geocode.Geocoder;
 import com.google.gwt.maps.client.geocode.LatLngCallback;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -50,16 +49,18 @@ import com.google.gwt.user.client.ui.Widget;
  * an info window displaying the address.
  */
 public class GeocoderDemo extends MapsDemo {
-  private static final double atlantaLat = 33.7814790;
-  private static final double atlantaLng = -84.3880580;
+
+  private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);
+
   private static HTML descHTML = null;
-  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA.</p>"
+  private static final String descString = "<p>Creates a 500 x 300 pixel map "
+    + "viewport centered on Atlanta, GA USA.</p>"
       + "<p>Type an address in the textbox.  Clicking the 'Go' button will"
       + "contact the Google Geocoding service, display the resulting "
       + "Lat/Lng coordinates, and re-position the map with those coordinates"
       + "in the center </p>\n"
       + "<p>Equivalent to the Maps JavaScript API Example: "
-      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geocoding-simple.html\">" 
+      + "<a href=\"http://code.google.com/apis/maps/documentation/examples/geocoding-simple.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/geocoding-simple.html</a></p>\n";
 
   public static MapsDemoInfo init() {
@@ -87,6 +88,7 @@ public class GeocoderDemo extends MapsDemo {
   private Geocoder geocoder;
   private Label latLabel;
   private Label lngLabel;
+
   private MapWidget map;
 
   public GeocoderDemo() {
@@ -100,6 +102,7 @@ public class GeocoderDemo extends MapsDemo {
     address.setText("10 10th Street, Atlanta, GA");
     formElements.add(address);
     formElements.add(buildLatLngPanel());
+    this.displayLatLng(ATLANTA);
 
     Button submit = new Button("Go!");
     submit.addClickListener(new ClickListener() {
@@ -120,11 +123,11 @@ public class GeocoderDemo extends MapsDemo {
     });
     panel.add(form);
 
-    map = new MapWidget(new LatLng(atlantaLat, atlantaLng), 13);
+    map = new MapWidget(ATLANTA, 13);
     map.setSize("500px", "300px");
     panel.add(map);
     initWidget(panel);
-    geocoder = new Geocoder(new GeocodeCache());
+    geocoder = new Geocoder();
   }
 
   /*
@@ -137,15 +140,19 @@ public class GeocoderDemo extends MapsDemo {
     HorizontalPanel horiz = new HorizontalPanel();
     horiz.add(new Label("Lat:"));
     latLabel = new Label();
-    latLabel.setText(Double.toString(atlantaLat));
     horiz.add(latLabel);
     horiz.add(new Label("Long:"));
     lngLabel = new Label();
-    lngLabel.setText(Double.toString(atlantaLng));
     horiz.add(lngLabel);
     horiz.setSpacing(10);
     return horiz;
   }
+
+  private void displayLatLng(LatLng point) {
+    NumberFormat fmt = NumberFormat.getFormat("#.0000000#");
+    latLabel.setText(fmt.format(point.getLatitude()));
+    lngLabel.setText(fmt.format(point.getLongitude()));
+  }625
 
   private void showAddress(final String address) {
     final InfoWindow info = map.getInfoWindow();
@@ -159,9 +166,7 @@ public class GeocoderDemo extends MapsDemo {
         Marker marker = new Marker(point);
         map.addOverlay(marker);
         info.open(marker, new InfoWindowContent(address));
-        NumberFormat fmt = NumberFormat.getFormat("#.0000000#");
-        latLabel.setText(fmt.format(point.getLatitude()));
-        lngLabel.setText(fmt.format(point.getLongitude()));
+        displayLatLng(point);
       }
     });
   }
