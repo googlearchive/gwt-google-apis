@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,15 +16,14 @@
 package com.google.gwt.ajaxsearch.client;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A specialized List that is used to invoke methods on KeepListeners.
  */
-class KeepListenerCollection extends ArrayList {
+class KeepListenerCollection extends ArrayList<KeepListener> {
   public void fireKeep(SearchControl control, Result result) {
-    for (Iterator i = iterator(); i.hasNext();) {
-      ((KeepListener)i.next()).onKeep(control, result);
+    for (KeepListener l : this) {
+      l.onKeep(control, result);
     }
   }
 }

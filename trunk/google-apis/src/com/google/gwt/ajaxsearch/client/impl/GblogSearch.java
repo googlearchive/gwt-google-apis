@@ -15,7 +15,6 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.ResultOrder;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -23,19 +22,16 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * 
+ * BlogSearch backend.
  */
-@Constructor("$wnd.GblogSearch")
 public interface GblogSearch extends GSearch {
-  public static final JSOpaque RESULT_CLASS =
-      new JSOpaque("$wnd.GblogSearch.RESULT_CLASS");
-  public static final GblogSearch IMPL =
-      (GblogSearch)GWT.create(GblogSearch.class);
+  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GblogSearch.RESULT_CLASS");
+  GblogSearch IMPL = (GblogSearch) GWT.create(GblogSearch.class);
 
   @Constructor("$wnd.GblogSearch")
-  public abstract JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public abstract void setResultOrder(Search jso, ResultOrder order);
+  void setResultOrder(Search jso, JSOpaque order);
 
-  public abstract void setSiteRestriction(Search jso, String site);
+  void setSiteRestriction(Search jso, String site);
 }

@@ -18,40 +18,35 @@ package com.google.gwt.ajaxsearch.client.impl;
 import com.google.gwt.ajaxsearch.client.Result;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.jsio.client.Binding;
 import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.FieldName;
+import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.user.client.Element;
 
 /**
- * Represents a search result. Because of the lack of inherent type information
- * in the underlying JavaScriptObjects, this wrapper class is equipped with the
- * utility method {@link #castToBestType()} to provide a more specific class of
- * GResult wrapper.
- * 
+ * Represents a search result.
  */
 @BeanProperties
 public interface GResult extends JSFlyweightWrapper {
-  public static final GResult IMPL = (GResult) GWT.create(GResult.class);
+  GResult IMPL = GWT.create(GResult.class);
 
   @Binding
-  public void bind(JavaScriptObject obj, Result result);
+  void bind(JavaScriptObject obj, Result result);
 
-  @Constructor("Object")
-  public JavaScriptObject construct();
+  @Constructor("$wnd.Object")
+  JavaScriptObject construct();
 
   /**
    * This is accessed from {@link Result#createPeer}.
-   * 
    */
   @FieldName("GsearchResultClass")
-  public String getGsearchResultClass(JavaScriptObject obj);
+  String getGsearchResultClass(JavaScriptObject obj);
 
   /**
    * The docs for the JS library indicate that cloneNode() must be invoked on
    * the returned Element before it is used by client code.
    */
-  public Element getHtml(Result result);
+  Element getHtml(Result result);
 }

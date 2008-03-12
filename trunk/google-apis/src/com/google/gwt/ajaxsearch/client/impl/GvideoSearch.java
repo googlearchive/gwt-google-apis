@@ -15,7 +15,6 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.ResultOrder;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -25,15 +24,12 @@ import com.google.gwt.jsio.client.JSOpaque;
 /**
  * 
  */
-@Constructor("$wnd.GvideoSearch")
 public interface GvideoSearch extends GSearch {
-  public static final JSOpaque RESULT_CLASS =
-      new JSOpaque("$wnd.GvideoSearch.RESULT_CLASS");
-  public static final GvideoSearch IMPL =
-      (GvideoSearch)GWT.create(GvideoSearch.class);
+  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GvideoSearch.RESULT_CLASS");
+  GvideoSearch IMPL = GWT.create(GvideoSearch.class);
 
   @Constructor("$wnd.GvideoSearch")
-  public abstract JavaScriptObject construct();
-  
-  public abstract void setResultOrder(Search jso, ResultOrder order);
+  JavaScriptObject construct();
+
+  void setResultOrder(Search jso, JSOpaque order);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -28,10 +28,10 @@ public class BookSearch extends Search {
   }
 
   public void setRestriction(RestrictType type) {
-    IMPL.setRestriction(this, type);
+    IMPL.setRestriction(this, type.getValue());
   }
 
   public void setRestriction(RestrictType type, RestrictValue value) {
-    IMPL.setRestriction(this, type, value);
+    IMPL.setRestriction(this, type.getValue(), value.getValue());
   }
 }

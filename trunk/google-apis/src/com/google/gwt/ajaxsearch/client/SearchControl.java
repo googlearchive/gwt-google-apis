@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,14 +24,11 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * Encapsulates the Google Ajax Search API search control.
  */
 public class SearchControl extends Composite {
-  private static final GSearchControl SEARCH_CONTROL = (GSearchControl) GWT.create(GSearchControl.class);
+  private static final GSearchControl SEARCH_CONTROL = GWT.create(GSearchControl.class);
 
   /**
    * Enables the SearchControl facade to be used as a return type through JSIO
@@ -54,15 +51,15 @@ public class SearchControl extends Composite {
    * The backing JSO, named per JSIO spec.
    */
   private final JavaScriptObject jsoPeer = SEARCH_CONTROL.construct();
-  
+
   /**
-   * Retains all KeepListeners that should be notified when the user clicks
-   * on the "keep" link in the SearchControl.
+   * Retains all KeepListeners that should be notified when the user clicks on
+   * the "keep" link in the SearchControl.
    */
   private final KeepListenerCollection keepListeners = new KeepListenerCollection();
-  
+
   /**
-   * Retains all SearchListeners that should be notified when the SearchControl 
+   * Retains all SearchListeners that should be notified when the SearchControl
    * receives Result.
    */
   private final SearchListenerCollection resultListeners = new SearchListenerCollection();
@@ -86,10 +83,7 @@ public class SearchControl extends Composite {
         new SearchControlCompleteCallback() {
           public void onSearchResult(SearchControl control, Search search) {
             assert control == SearchControl.this;
-
-            List results = search.getResults();
-            for (Iterator i = results.iterator(); i.hasNext();) {
-              Result result = ((Result) i.next());
+            for (Result result : search.getResults()) {
               resultListeners.fireResult(search, result);
             }
           }
@@ -102,31 +96,31 @@ public class SearchControl extends Composite {
           keepListeners.fireKeep(SearchControl.this, result);
         }
       };
-  
+
       // keepLabel may be either a String or a KeepLabel
       if (options.keepLabel instanceof String) {
         SEARCH_CONTROL.setOnKeepCallback(this, null, keepCallback,
             (String) options.keepLabel);
       } else if (options.keepLabel instanceof KeepLabel) {
         SEARCH_CONTROL.setOnKeepCallback(this, null, keepCallback,
-            (KeepLabel) options.keepLabel);
+            ((KeepLabel) options.keepLabel).getValue());
       }
     }
 
     // Explicitly set the linkTarget if one is defined.
     if (options.linkTarget != null) {
-      SEARCH_CONTROL.setLinkTarget(this, options.linkTarget);
+      SEARCH_CONTROL.setLinkTarget(this, options.linkTarget.getValue());
     }
 
     // Set the timeoutInterval if necessary
     if (options.timeoutInterval != null) {
-      SEARCH_CONTROL.setTimeoutInterval(this, options.timeoutInterval);
+      SEARCH_CONTROL.setTimeoutInterval(this,
+          options.timeoutInterval.getValue());
     }
 
     // Add all Searches to the control
-    for (Iterator i = options.searchers.iterator(); i.hasNext();) {
-      Search search = (Search) i.next();
-      GsearcherOptions searchOptions = (GsearcherOptions) options.searcherOptions.get(search);
+    for (Search search : options.searchers) {
+      GsearcherOptions searchOptions = options.searcherOptions.get(search);
       SEARCH_CONTROL.addSearcher(this, search, searchOptions);
     }
 

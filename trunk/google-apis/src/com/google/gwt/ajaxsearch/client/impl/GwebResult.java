@@ -16,22 +16,27 @@
 package com.google.gwt.ajaxsearch.client.impl;
 
 import com.google.gwt.ajaxsearch.client.WebResult;
-import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.jsio.client.BeanProperties;
 
 /**
  * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GwebResult
  */
 @BeanProperties
 public interface GwebResult extends GResult {
-  public static final GwebResult IMPL =
-    (GwebResult)GWT.create(GwebResult.class);
+  GwebResult IMPL = GWT.create(GwebResult.class);
 
-  public String getCacheUrl(WebResult obj);
-  public String getContent(WebResult obj);
-  public String getTitle(WebResult obj);
-  public String getTitleNoFormatting(WebResult obj);
-  public String getUnescapedUrl(WebResult obj);
-  public String getUrl(WebResult obj);
-  public String getVisibleUrl(WebResult obj);
+  String getCacheUrl(WebResult obj);
+
+  String getContent(WebResult obj);
+
+  String getTitle(WebResult obj);
+
+  String getTitleNoFormatting(WebResult obj);
+
+  String getUnescapedUrl(WebResult obj);
+
+  String getUrl(WebResult obj);
+
+  String getVisibleUrl(WebResult obj);
 }

@@ -18,9 +18,9 @@ package com.google.gwt.ajaxsearch.client.impl;
 import com.google.gwt.ajaxsearch.client.LocalResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 
 /**
@@ -28,36 +28,46 @@ import com.google.gwt.jsio.client.JSList;
  */
 @BeanProperties
 public interface GlocalResult extends GResult {
-  public static final GlocalResult IMPL =
-    (GlocalResult)GWT.create(GlocalResult.class);
+  GlocalResult IMPL = GWT.create(GlocalResult.class);
 
   /**
    * A phone number attached to the result.
    */
   @BeanProperties
   public interface PhoneNumber extends JSFlyweightWrapper {
-    public static final PhoneNumber IMPL =
-      (PhoneNumber)GWT.create(PhoneNumber.class);
-    
-    @Constructor("Object")
-    public JavaScriptObject construct();
+    PhoneNumber IMPL = GWT.create(PhoneNumber.class);
 
-    public String getNumber(LocalResult.PhoneNumber obj);
+    @Constructor("$wnd.Object")
+    JavaScriptObject construct();
 
-    public String getType(LocalResult.PhoneNumber obj);
+    String getNumber(LocalResult.PhoneNumber obj);
+
+    String getType(LocalResult.PhoneNumber obj);
   }
 
-  public String getCity(LocalResult obj);
-  public String getCountry(LocalResult obj);
-  public String getDdUrl(LocalResult obj);
-  public String getDdUrlFromHere(LocalResult obj);
-  public String getDdUrlToHere(LocalResult obj);
-  public String getLat(LocalResult obj);
-  public String getLng(LocalResult obj);
-  public JSList<LocalResult.PhoneNumber> getPhoneNumbers(LocalResult obj);
-  public String getRegion(LocalResult obj);
-  public String getStreetAddress(LocalResult obj);
-  public String getTitle(LocalResult obj);
-  public String getTitleNoFormatting(LocalResult obj);
-  public String getUrl(LocalResult obj);
+  String getCity(LocalResult obj);
+
+  String getCountry(LocalResult obj);
+
+  String getDdUrl(LocalResult obj);
+
+  String getDdUrlFromHere(LocalResult obj);
+
+  String getDdUrlToHere(LocalResult obj);
+
+  String getLat(LocalResult obj);
+
+  String getLng(LocalResult obj);
+
+  JSList<LocalResult.PhoneNumber> getPhoneNumbers(LocalResult obj);
+
+  String getRegion(LocalResult obj);
+
+  String getStreetAddress(LocalResult obj);
+
+  String getTitle(LocalResult obj);
+
+  String getTitleNoFormatting(LocalResult obj);
+
+  String getUrl(LocalResult obj);
 }

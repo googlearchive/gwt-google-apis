@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,19 +25,25 @@ import com.google.gwt.jsio.client.JSOpaque;
  * @see NewsSearch#setResultOrder(ResultOrder)
  * @see VideoSearch#setResultOrder(ResultOrder)
  */
-public final class ResultOrder extends JSOpaque {
+public enum ResultOrder {
 
   /**
    * Order results in reverse chronological order.
    */
-  public static final ResultOrder DATE = new ResultOrder("DATE");
-  
+  DATE("DATE"),
+
   /**
    * Order results by relevance to the query.
    */
-  public static final ResultOrder RELEVANCE = new ResultOrder("RELEVANCE");
+  RELEVANCE("RELEVANCE");
+
+  private final JSOpaque value;
 
   private ResultOrder(String order) {
-    super("$wnd.GSearch.ORDER_BY_" + order);
+    value = new JSOpaque("$wnd.GSearch.ORDER_BY_" + order);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }

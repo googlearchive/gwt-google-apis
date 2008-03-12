@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,23 +24,29 @@ import com.google.gwt.jsio.client.JSOpaque;
  * 
  * @see SearchControlOptions#add(Search, ExpandMode)
  */
-public final class ExpandMode extends JSOpaque {
+public enum ExpandMode {
   /**
    * Results are not immediately displayed.
    */
-  public static final ExpandMode CLOSED = new ExpandMode("CLOSED");
+  CLOSED("CLOSED"),
 
   /**
    * All results for a Search are displayed.
    */
-  public static final ExpandMode OPEN = new ExpandMode("OPEN");
+  OPEN("OPEN"),
 
   /**
    * A subset of the results for a Search are initially displayed.
    */
-  public static final ExpandMode PARTIAL = new ExpandMode("PARTIAL");
+  PARTIAL("PARTIAL");
+
+  private final JSOpaque value;
 
   private ExpandMode(String mode) {
-    super("$wnd.GSearchControl.EXPAND_MODE_" + mode);
+    value = new JSOpaque("$wnd.GSearchControl.EXPAND_MODE_" + mode);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }

@@ -15,7 +15,6 @@
  */
 package com.google.gwt.ajaxsearch.client;
 
-import com.google.gwt.jsio.client.Imported;
 import com.google.gwt.ajaxsearch.client.impl.GblogSearch;
 
 /**
@@ -23,17 +22,15 @@ import com.google.gwt.ajaxsearch.client.impl.GblogSearch;
  */
 public class BlogSearch extends Search {
   private static final GblogSearch IMPL = GblogSearch.IMPL;
-  
+
   public BlogSearch() {
     super(IMPL);
   }
 
-  @Imported
   public void setResultOrder(ResultOrder order) {
-    IMPL.setResultOrder(this, order);
+    IMPL.setResultOrder(this, order.getValue());
   }
 
-  @Imported
   public void setSiteRestriction(String site) {
     IMPL.setSiteRestriction(this, site);
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -35,13 +35,14 @@ import java.util.Date;
  * The base class from which all search result types derive.
  */
 public class Result {
-  private static final Extractor __extractor = new Extractor() {
-    public Object fromJS(JavaScriptObject jso) {
+  @SuppressWarnings("unused")
+  private static final Extractor<Result> __extractor = new Extractor<Result>() {
+    public Result fromJS(JavaScriptObject jso) {
       return createPeer(jso);
     }
 
-    public JavaScriptObject toJS(Object o) {
-      return ((Result) o).jsoPeer;
+    public JavaScriptObject toJS(Result o) {
+      return o.jsoPeer;
     }
   };
 
@@ -49,8 +50,8 @@ public class Result {
    * Invoke cloneNode on an Element. This needs to be moved into DOM.
    */
   static native Element cloneNode(Element elt) /*-{
-   return elt.cloneNode(true);
-   }-*/;
+    return elt.cloneNode(true);
+  }-*/;
 
   /**
    * Takes a JSON-style result object and creates a Result of the most specific
@@ -79,6 +80,7 @@ public class Result {
     return new Result(obj);
   }
 
+  @SuppressWarnings("deprecation")
   static Date makeDate(String date) {
     return new Date(date);
   }

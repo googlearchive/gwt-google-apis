@@ -38,19 +38,20 @@ public class NewsResult extends Result {
    * A news story that is related to a primary NewsResult.
    */
   public static class RelatedStory {
-    private static final Extractor __extractor = new Extractor() {
-      public Object fromJS(JavaScriptObject jso) {
+    @SuppressWarnings("unused")
+    private static final Extractor<RelatedStory> __extractor = new Extractor<RelatedStory>() {
+      public RelatedStory fromJS(JavaScriptObject jso) {
         return new RelatedStory(jso);
       }
 
-      public JavaScriptObject toJS(Object o) {
-        return ((RelatedStory) o).jsoPeer;
+      public JavaScriptObject toJS(RelatedStory o) {
+        return o.jsoPeer;
       }
     };
 
     private final JavaScriptObject jsoPeer;
 
-    // TODO: Do we even need this constructor?  If so, can it be private?
+    // TODO: Do we even need this constructor? If so, can it be private?
     public RelatedStory() {
       this(GnewsResult.RelatedStory.IMPL.construct());
     }

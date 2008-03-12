@@ -15,8 +15,6 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.RestrictType;
-import com.google.gwt.ajaxsearch.client.RestrictValue;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -24,20 +22,16 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * 
  */
 @Constructor("$wnd.GbookSearch")
 public interface GbookSearch extends GSearch {
-  public static final JSOpaque RESULT_CLASS =
-      new JSOpaque("$wnd.GbookSearch.RESULT_CLASS");
-  public static final GbookSearch IMPL =
-      (GbookSearch)GWT.create(GbookSearch.class);
+  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GbookSearch.RESULT_CLASS");
+  GbookSearch IMPL = GWT.create(GbookSearch.class);
 
   @Constructor("$wnd.GbookSearch")
-  public abstract JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public abstract void setRestriction(Search jso, RestrictType type);
+  void setRestriction(Search jso, JSOpaque type);
 
-  public abstract void setRestriction(Search jso, RestrictType type,
-      RestrictValue value);
+  void setRestriction(Search jso, JSOpaque type, JSOpaque value);
 }

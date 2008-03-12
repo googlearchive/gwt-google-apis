@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,32 +18,39 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * Sets the target window to display full results in when the user selects
- * a result in a SearchControl.
+ * Sets the target window to display full results in when the user selects a
+ * result in a SearchControl.
+ * 
  * @see SearchControlOptions#setLinkTarget(LinkTarget)
  */
-public final class LinkTarget extends JSOpaque {
+public enum LinkTarget {
   /**
    * The result should be displayed in a new window.
    */
-  public static final LinkTarget BLANK = new LinkTarget("BLANK");
+  BLANK("BLANK"),
 
   /**
    * The result should be displayed in the current window or frame.
    */
-  public static final LinkTarget SELF = new LinkTarget("SELF");
+  SELF("SELF"),
 
   /**
    * The result should replace any frameset.
    */
-  public static final LinkTarget TOP = new LinkTarget("TOP");
+  TOP("TOP"),
 
   /**
    * The result should be displayed in the frame's parent window.
    */
-  public static final LinkTarget PARENT = new LinkTarget("PARENT");
+  PARENT("PARENT");
+
+  private final JSOpaque value;
 
   private LinkTarget(String reference) {
-    super("$wnd.GSearch.LINK_TARGET_" + reference);
+    value = new JSOpaque("$wnd.GSearch.LINK_TARGET_" + reference);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }

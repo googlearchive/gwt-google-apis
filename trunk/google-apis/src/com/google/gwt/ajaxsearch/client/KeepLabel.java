@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,34 +22,40 @@ import com.google.gwt.jsio.client.JSOpaque;
  * 
  * @see SearchControlOptions#setKeepLabel(KeepLabel)
  */
-public final class KeepLabel extends JSOpaque {
-  
+public enum KeepLabel {
+
   /**
    * A localized message for "save".
    */
-  public static final KeepLabel SAVE = new KeepLabel("SAVE");
-  
+  SAVE("SAVE"),
+
   /**
    * A localized message for "keep".
    */
-  public static final KeepLabel KEEP = new KeepLabel("KEEP");
-  
+  KEEP("KEEP"),
+
   /**
    * A localized message for "include".
    */
-  public static final KeepLabel INCLUDE = new KeepLabel("INCLUDE");
-  
+  INCLUDE("INCLUDE"),
+
   /**
    * A localized message for "copy".
    */
-  public static final KeepLabel COPY = new KeepLabel("COPY");
+  COPY("COPY"),
 
   /**
    * No label should be displayed, just the icon.
    */
-  public static final KeepLabel BLANK = new KeepLabel("BLANK");
+  BLANK("BLANK");
+
+  private final JSOpaque value;
 
   private KeepLabel(String keep) {
-    super("$wnd.GSearchControl.KEEP_LABEL_" + keep);
+    value = new JSOpaque("$wnd.GSearchControl.KEEP_LABEL_" + keep);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }

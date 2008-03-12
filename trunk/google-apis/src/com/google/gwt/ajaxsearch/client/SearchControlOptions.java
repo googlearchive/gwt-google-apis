@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,31 +29,29 @@ import java.util.Map;
  */
 public final class SearchControlOptions {
 
-  final GdrawOptions drawOptions = (GdrawOptions) GWT.create(GdrawOptions.class);
+  final GdrawOptions drawOptions = GWT.create(GdrawOptions.class);
 
   /**
    * Maintain order in which the Search objects are added.
    */
-  // List<Search>
-  final List searchers = new ArrayList();
+  final List<Search> searchers = new ArrayList<Search>();
 
   /**
    * Associate Search objects with options objects.
    */
-  // Map<Search, GsearcherOptions>
-  final Map searcherOptions = new HashMap();
+  final Map<Search, GsearcherOptions> searcherOptions = new HashMap<Search, GsearcherOptions>();
 
   /**
-   * The last value set by a call to {@link #setKeepLabel}.  It is an Object
+   * The last value set by a call to {@link #setKeepLabel}. It is an Object
    * because it can be a String or a {@link KeepLabel}.
    */
   Object keepLabel;
-  
+
   /**
    * The last value set by a calls to {@link #setLinkTarget}.
    */
   LinkTarget linkTarget;
-  
+
   /**
    * The last value set by a call to {@link #setTimeoutInterval}.
    */
@@ -95,7 +93,7 @@ public final class SearchControlOptions {
    */
   public void add(Search s, ExpandMode expandMode) {
     GsearcherOptions options = (GsearcherOptions) GWT.create(GsearcherOptions.class);
-    options.setExpandMode(expandMode);
+    options.setExpandMode(expandMode.getValue());
 
     searchers.add(s);
     searcherOptions.put(s, options);
@@ -128,7 +126,7 @@ public final class SearchControlOptions {
    * @param mode The desired DrawMode for the SearchControl
    */
   public void setDrawMode(DrawMode mode) {
-    drawOptions.setDrawMode(mode);
+    drawOptions.setDrawMode(mode.getValue());
   }
 
   /**

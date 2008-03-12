@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,18 +24,24 @@ import com.google.gwt.jsio.client.JSOpaque;
  * 
  * @see Search#setResultSetSize(ResultSetSize)
  */
-public final class ResultSetSize extends JSOpaque {
+public enum ResultSetSize {
   /**
    * Requests a large number of results.
    */
-  public static final ResultSetSize LARGE = new ResultSetSize("LARGE");
-  
+  LARGE("LARGE"),
+
   /**
    * Requests a smaller number of results.
    */
-  public static final ResultSetSize SMALL = new ResultSetSize("SMALL");
+  SMALL("SMALL");
+
+  private final JSOpaque value;
 
   private ResultSetSize(String size) {
-    super("$wnd.GSearch." + size + "_RESULTSET");
+    value = new JSOpaque(size);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }
