@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,6 +18,8 @@ package com.google.gwt.maps.client.impl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 
 /**
@@ -27,38 +29,24 @@ public interface ControlImpl extends JSFlyweightWrapper {
   
   public static ControlImpl impl = (ControlImpl) GWT.create(ControlImpl.class);
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   public void bind(JavaScriptObject jsoPeer, CustomControl control);
 
-  /**
-   * @gwt.constructor $wnd.GControl
-   */
+  @Constructor("$wnd.GControl")
   public JavaScriptObject createControl(boolean printable, boolean selectable);
 
-  /**
-   * @gwt.constructor $wnd.GLargeMapControl
-   */
+  @Constructor("$wnd.GLargeMapControl")
   public JavaScriptObject createLargeMapControl();
 
-  /**
-   * @gwt.constructor $wnd.GMapTypeControl
-   */
+  @Constructor("$wnd.GMapTypeControl")
   public JavaScriptObject createMapTypeControl();
 
-  /**
-   * @gwt.constructor $wnd.GScaleControl
-   */
+  @Constructor("$wnd.GScaleControl")
   public JavaScriptObject createScaleControl();
   
-  /**
-   * @gwt.constructor $wnd.GSmallMapControl
-   */
+  @Constructor("$wnd.GSmallMapControl")
   public JavaScriptObject createSmallMapControl();
   
-  /**
-   * @gwt.constructor $wnd.GSmallZoomControl
-   */
+  @Constructor("$wnd.GSmallZoomControl")
   public JavaScriptObject createSmallZoomControl();
 }

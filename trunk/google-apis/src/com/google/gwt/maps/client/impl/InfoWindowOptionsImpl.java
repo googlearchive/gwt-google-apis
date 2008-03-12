@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,18 +19,20 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.MapType;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 
 /**
- * @gwt.beanProperties
+ * 
  */
+@BeanProperties
 public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
 
   public static final InfoWindowOptionsImpl impl = (InfoWindowOptionsImpl) GWT.create(InfoWindowOptionsImpl.class);
 
-  /**
-   * @gwt.constructor Object
-   */
+  @Constructor("Object")
   public JavaScriptObject construct();
 
   public void setMapType(JavaScriptObject jsoPeer, MapType mapType);
@@ -40,26 +42,20 @@ public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
    * fieldName annotation to map 2 differently named functions to the same JS
    * property.
    * 
-   * @gwt.fieldName maxContent
    */
+  @FieldName("maxContent")
   public void setMaxContentElement(JavaScriptObject jsoPeer,
       JavaScriptObject maximizedContentWidget);
 
-  /**
-   * @gwt.fieldName maxContent
-   */
+  @FieldName("maxContent")
   public void setMaxContentString(JavaScriptObject jsoPeer,
       String windowMaximizedContent);
 
-  /**
-   * @gwt.fieldName maxTitle
-   */
+  @FieldName("maxTitle")
   public void setMaxTitleElement(JavaScriptObject jsoPeer,
       JavaScriptObject maximizedTitleWidget);
 
-  /**
-   * @gwt.fieldName maxTitle
-   */
+  @FieldName("maxTitle")
   public void setMaxTitleString(JavaScriptObject jsoPeer,
       String windowMaximizedTitle);
 

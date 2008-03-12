@@ -19,27 +19,28 @@ import com.google.gwt.ajaxsearch.client.NewsResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.jsio.client.JSList;
 
 /**
- * @gwt.beanProperties
  * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GnewsResult
  */
+@BeanProperties
 public interface GnewsResult extends GResult {
   public static final GnewsResult IMPL =
     (GnewsResult)GWT.create(GnewsResult.class);
 
   /**
    * A news story that is related to a primary GnewsResult.
-   * @gwt.beanProperties
    */
+  @BeanProperties
   public static interface RelatedStory extends JSFlyweightWrapper {
     public static final RelatedStory IMPL =
       (RelatedStory)GWT.create(RelatedStory.class);
 
-    /**
-     * @gwt.constructor Object
-     */
+    @Constructor("Object")
     public JavaScriptObject construct();
     public String getLocation(NewsResult.RelatedStory obj);
     public String getPublishedDate(NewsResult.RelatedStory obj);
@@ -55,9 +56,7 @@ public interface GnewsResult extends GResult {
   public String getLocation(NewsResult obj);
   public String getPublishedDate(NewsResult obj);
   public String getPublisher(NewsResult obj);
-  /**
-   * @gwt.fieldName relatedStories
-   */
+  @FieldName("relatedStories")
   public JSList<NewsResult.RelatedStory> getRelatedStories(NewsResult obj);
   public String getTitle(NewsResult obj);
   public String getTitleNoFormatting(NewsResult obj);

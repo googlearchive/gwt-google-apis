@@ -17,21 +17,21 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
  * This class corresponds to the GMapTypeOptions class in the Maps JavaScript
  * API.
  * 
- * @gwt.beanProperties
  */
+@BeanProperties
 public interface MapTypeOptionsImpl extends JSFlyweightWrapper {
 
   static final MapTypeOptionsImpl impl = (MapTypeOptionsImpl) GWT.create(MapTypeOptionsImpl.class);
 
-  /**
-   * @gwt.constructor Object
-   */
+  @Constructor("Object")
   JavaScriptObject construct();
 
   void setAlt(JavaScriptObject jsoPeer, String alt);

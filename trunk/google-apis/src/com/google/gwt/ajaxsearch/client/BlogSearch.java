@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.ajaxsearch.client;
 
+import com.google.gwt.jsio.client.Imported;
 import com.google.gwt.ajaxsearch.client.impl.GblogSearch;
 
 /**
@@ -27,16 +28,12 @@ public class BlogSearch extends Search {
     super(IMPL);
   }
 
-  /**
-   * @gwt.imported true
-   */
+  @Imported
   public void setResultOrder(ResultOrder order) {
     IMPL.setResultOrder(this, order);
   }
 
-  /**
-   * @gwt.imported true
-   */
+  @Imported
   public void setSiteRestriction(String site) {
     IMPL.setSiteRestriction(this, site);
   }

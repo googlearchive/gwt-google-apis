@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,12 +16,13 @@
 package com.google.gwt.ajaxsearch.client.impl;
 
 import com.google.gwt.ajaxsearch.client.VideoResult;
+import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.core.client.GWT;
 
 /**
- * @gwt.beanProperties
  * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GvideoResult
  */
+@BeanProperties
 public interface GvideoResult extends GResult {
   public static final GvideoResult IMPL =
     (GvideoResult)GWT.create(GvideoResult.class);

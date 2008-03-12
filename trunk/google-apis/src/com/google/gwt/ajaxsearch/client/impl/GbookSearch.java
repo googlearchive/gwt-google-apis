@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,20 +20,20 @@ import com.google.gwt.ajaxsearch.client.RestrictValue;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * @gwt.constructor $wnd.GbookSearch
+ * 
  */
+@Constructor("$wnd.GbookSearch")
 public interface GbookSearch extends GSearch {
   public static final JSOpaque RESULT_CLASS =
       new JSOpaque("$wnd.GbookSearch.RESULT_CLASS");
   public static final GbookSearch IMPL =
       (GbookSearch)GWT.create(GbookSearch.class);
 
-  /**
-   * @gwt.constructor $wnd.GbookSearch
-   */
+  @Constructor("$wnd.GbookSearch")
   public abstract JavaScriptObject construct();
 
   public abstract void setRestriction(Search jso, RestrictType type);

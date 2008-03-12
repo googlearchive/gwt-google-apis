@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,6 +23,8 @@ import com.google.gwt.ajaxsearch.client.SearchControl;
 import com.google.gwt.ajaxsearch.client.TimeoutInterval;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -32,15 +34,11 @@ public interface GSearchControl extends JSFlyweightWrapper {
   
   void addSearcher(SearchControl jso, Search searcher);
   void addSearcher(SearchControl jso, Search searcher, GsearcherOptions options);
-  /**
-   * @gwt.binding
-   */
+  @Binding
   void bind(JavaScriptObject jso, SearchControl control);
   void cancelSearch(SearchControl jso);
   void clearAllResults(SearchControl jso);
-  /**
-   * @gwt.constructor $wnd.GSearchControl
-   */
+  @Constructor("$wnd.GSearchControl")
   JavaScriptObject construct();
   void draw(SearchControl jso, Element e);
   void draw(SearchControl jso, Element e, GdrawOptions opts);

@@ -21,38 +21,33 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Size;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.Global;
 import com.google.gwt.maps.client.overlay.Icon;
 
 /**
- * @gwt.beanProperties
+ * 
  */
+@BeanProperties
 public interface IconImpl extends JSFlyweightWrapper {
 
   IconImpl impl = (IconImpl) GWT.create(IconImpl.class);
 
-  /**
-   * @gwt.binding
-   */
+  @Binding
   void bind(JavaScriptObject jsoPeer, Icon icon);
 
-  /**
-   * @gwt.constructor $wnd.GIcon
-   */
+  @Constructor("$wnd.GIcon")
   JavaScriptObject construct();
 
-  /**
-   * @gwt.constructor $wnd.GIcon
-   */
+  @Constructor("$wnd.GIcon")
   JavaScriptObject construct(Icon icon);
 
-  /**
-   * @gwt.constructor $wnd.GIcon
-   */
+  @Constructor("$wnd.GIcon")
   JavaScriptObject construct(Icon icon, String url);
 
-  /**
-   * @gwt.global $wnd.G_DEFAULT_ICON
-   */
+  @Global("$wnd.G_DEFAULT_ICON")
   JavaScriptObject getDefaultIcon();
 
   Point getDragCrossAnchor(JavaScriptObject jsoPeer);

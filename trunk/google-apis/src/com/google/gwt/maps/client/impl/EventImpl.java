@@ -15,10 +15,15 @@
  */
 package com.google.gwt.maps.client.impl;
 
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+
+import com.google.gwt.jsio.client.FieldName;
+import com.google.gwt.jsio.client.Global;
 import com.google.gwt.jsio.client.JSFunction;
 import com.google.gwt.jsio.client.JSWrapper;
+
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.geom.Bounds;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -31,10 +36,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * @gwt.global $wnd.GEvent
+ * 
  */
-public abstract class EventImpl implements JSWrapper {
+@Global("$wnd.GEvent")
+public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   /**
    * 
@@ -196,9 +203,7 @@ public abstract class EventImpl implements JSWrapper {
   protected abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, PointElementOverlayCallback handler);
 
-  /**
-   * @gwt.fieldName addListener
-   */
+  @FieldName("addListener")
   protected abstract JavaScriptObject addListenerVoid(JavaScriptObject source,
       String event, VoidCallback handler);
 

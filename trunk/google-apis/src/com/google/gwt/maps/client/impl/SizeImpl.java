@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,16 +17,17 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Size;
 
 /**
- * @gwt.beanProperties
+ * 
  */
+@BeanProperties
 public interface SizeImpl extends JSFlyweightWrapper {
 
-  /**
-   * @gwt.constructor $wnd.GSize
-   */
+  @Constructor("$wnd.GSize")
   public JavaScriptObject construct(int width, int height);
 
   public boolean equals(JavaScriptObject jso, Size other);

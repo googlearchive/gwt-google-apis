@@ -22,6 +22,8 @@ import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
+import com.google.gwt.jsio.client.BeanProperties;
+import com.google.gwt.jsio.client.Binding;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -29,9 +31,7 @@ import com.google.gwt.user.client.Element;
  */
 public interface GSearch extends JSFlyweightWrapper {
   
-  /**
-   * @gwt.binding
-   */
+  @Binding
   public void bind(JavaScriptObject jso, Search search);
   
   public void clearResults(Search jso);
@@ -44,9 +44,7 @@ public interface GSearch extends JSFlyweightWrapper {
 
   public Element getAttribution(Search jso);
 
-  /**
-   * @gwt.beanProperties
-   */
+  @BeanProperties
   public JSList<Result> getResults(Search search);
 
   public void setLinkTarget(Search jso, LinkTarget target);
