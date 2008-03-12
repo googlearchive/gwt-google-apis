@@ -25,16 +25,23 @@ import com.google.gwt.user.client.Element;
  */
 @BeanProperties
 public interface GbookResult extends GResult {
-  public static final GbookResult IMPL =
-    (GbookResult)GWT.create(GbookResult.class);
+  GbookResult IMPL = GWT.create(GbookResult.class);
 
-  public abstract String getAuthors(BookResult obj);
-  public abstract String getBookId(BookResult obj);
-  public abstract String getPageCount(BookResult obj);
-  public abstract String getPublishedYear(BookResult obj);
-  public abstract Element getThumbnailHtml(BookResult obj);
-  public abstract String getTitle(BookResult obj);
-  public abstract String getTitleNoFormatting(BookResult obj);
-  public abstract String getUnescapedUrl(BookResult obj);
-  public abstract String getUrl(BookResult obj);
+  String getAuthors(BookResult obj);
+
+  String getBookId(BookResult obj);
+
+  String getPageCount(BookResult obj);
+
+  String getPublishedYear(BookResult obj);
+
+  Element getThumbnailHtml(BookResult obj);
+
+  String getTitle(BookResult obj);
+
+  String getTitleNoFormatting(BookResult obj);
+
+  String getUnescapedUrl(BookResult obj);
+
+  String getUrl(BookResult obj);
 }

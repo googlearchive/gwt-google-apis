@@ -15,41 +15,60 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.KeepLabel;
-import com.google.gwt.ajaxsearch.client.LinkTarget;
-import com.google.gwt.ajaxsearch.client.ResultSetSize;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.ajaxsearch.client.SearchControl;
-import com.google.gwt.ajaxsearch.client.TimeoutInterval;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.Binding;
 import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.JSOpaque;
 import com.google.gwt.user.client.Element;
 
 /**
  * Allows access to the Google AJAX Search API's major UI control.
  */
 public interface GSearchControl extends JSFlyweightWrapper {
-  
+
   void addSearcher(SearchControl jso, Search searcher);
+
   void addSearcher(SearchControl jso, Search searcher, GsearcherOptions options);
+
   @Binding
   void bind(JavaScriptObject jso, SearchControl control);
+
   void cancelSearch(SearchControl jso);
+
   void clearAllResults(SearchControl jso);
+
   @Constructor("$wnd.GSearchControl")
   JavaScriptObject construct();
+
   void draw(SearchControl jso, Element e);
+
   void draw(SearchControl jso, Element e, GdrawOptions opts);
+
   void execute(SearchControl jso);
+
   void execute(SearchControl jso, String query);
-  void setLinkTarget(SearchControl jso, LinkTarget target);
-  void setOnKeepCallback(SearchControl jso, JavaScriptObject context, KeepCallback method);
-  void setOnKeepCallback(SearchControl jso, JavaScriptObject context, KeepCallback method, KeepLabel label);
-  void setOnKeepCallback(SearchControl jso, JavaScriptObject context, KeepCallback method, String label);
-  void setResultSetSize(SearchControl jso, ResultSetSize size);
-  void setSearchCompleteCallback(SearchControl jso, JavaScriptObject context, SearchControlCompleteCallback method);
-  void setSearchStartingCallback(SearchControl jso, JavaScriptObject context, SearchStartingCallback method);
-  void setTimeoutInterval(SearchControl jso, TimeoutInterval interval);
+
+  void setLinkTarget(SearchControl jso, JSOpaque target);
+
+  void setOnKeepCallback(SearchControl jso, JavaScriptObject context,
+      KeepCallback method);
+
+  void setOnKeepCallback(SearchControl jso, JavaScriptObject context,
+      KeepCallback method, JSOpaque label);
+
+  void setOnKeepCallback(SearchControl jso, JavaScriptObject context,
+      KeepCallback method, String label);
+
+  void setResultSetSize(SearchControl jso, JSOpaque size);
+
+  void setSearchCompleteCallback(SearchControl jso, JavaScriptObject context,
+      SearchControlCompleteCallback method);
+
+  void setSearchStartingCallback(SearchControl jso, JavaScriptObject context,
+      SearchStartingCallback method);
+
+  void setTimeoutInterval(SearchControl jso, JSOpaque interval);
 }

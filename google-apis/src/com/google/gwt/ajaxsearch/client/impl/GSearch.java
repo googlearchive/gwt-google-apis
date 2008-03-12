@@ -15,51 +15,49 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.LinkTarget;
 import com.google.gwt.ajaxsearch.client.Result;
-import com.google.gwt.ajaxsearch.client.ResultSetSize;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.jsio.client.Binding;
+import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.jsio.client.JSList;
+import com.google.gwt.jsio.client.JSOpaque;
 import com.google.gwt.user.client.Element;
 
 /**
  * An interface to the base GSearch classes.
  */
 public interface GSearch extends JSFlyweightWrapper {
-  
+
   @Binding
-  public void bind(JavaScriptObject jso, Search search);
-  
-  public void clearResults(Search jso);
-  
-  public JavaScriptObject construct();
+  void bind(JavaScriptObject jso, Search search);
 
-  public void createResultHtml(Search jso, Result result);
+  void clearResults(Search jso);
 
-  public void execute(Search jso, String query);
+  JavaScriptObject construct();
 
-  public Element getAttribution(Search jso);
+  void createResultHtml(Search jso, Result result);
+
+  void execute(Search jso, String query);
+
+  Element getAttribution(Search jso);
 
   @BeanProperties
-  public JSList<Result> getResults(Search search);
+  JSList<Result> getResults(Search search);
 
-  public void setLinkTarget(Search jso, LinkTarget target);
+  void setLinkTarget(Search jso, JSOpaque target);
 
-  public void setNoHtmlGeneration(Search jso);
+  void setNoHtmlGeneration(Search jso);
 
-  public void setQueryAddition(Search jso, String addition);
+  void setQueryAddition(Search jso, String addition);
 
-  public void setResultSetSize(Search jso, ResultSetSize size);
+  void setResultSetSize(Search jso, JSOpaque size);
 
-  public void setSearchCompleteCallback(Search jso,
-      JavaScriptObject context, GSearchCompleteCallback method);
+  void setSearchCompleteCallback(Search jso, JavaScriptObject context,
+      GSearchCompleteCallback method);
 
-  public void setUserDefinedClassSuffix(Search jso,
-      String label);
+  void setUserDefinedClassSuffix(Search jso, String label);
 
-  public void setUserDefinedLabel(Search jso, String label);
+  void setUserDefinedLabel(Search jso, String label);
 }

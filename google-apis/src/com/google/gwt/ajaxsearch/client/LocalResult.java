@@ -30,13 +30,14 @@ public class LocalResult extends Result {
    * A phone number.
    */
   public static class PhoneNumber {
-    private static final Extractor __extractor = new Extractor() {
-      public Object fromJS(JavaScriptObject jso) {
+    @SuppressWarnings("unused")
+    private static final Extractor<PhoneNumber> __extractor = new Extractor<PhoneNumber>() {
+      public PhoneNumber fromJS(JavaScriptObject jso) {
         return new PhoneNumber(jso);
       }
 
-      public JavaScriptObject toJS(Object o) {
-        return ((PhoneNumber) o).jsoPeer;
+      public JavaScriptObject toJS(PhoneNumber o) {
+        return o.jsoPeer;
       }
     };
 
@@ -50,7 +51,7 @@ public class LocalResult extends Result {
 
     private final JavaScriptObject jsoPeer;
 
-    // TODO: Do we even need this constructor?  If so, can it be private?
+    // TODO: Do we even need this constructor? If so, can it be private?
     public PhoneNumber() {
       this(GlocalResult.PhoneNumber.IMPL.construct());
     }
@@ -107,7 +108,7 @@ public class LocalResult extends Result {
    * Returns a list of {@link LocalResult.PhoneNumber}.
    */
   public List<PhoneNumber> getPhoneNumbers() {
-    return  GlocalResult.IMPL.getPhoneNumbers(this);
+    return GlocalResult.IMPL.getPhoneNumbers(this);
   }
 
   public String getRegion() {

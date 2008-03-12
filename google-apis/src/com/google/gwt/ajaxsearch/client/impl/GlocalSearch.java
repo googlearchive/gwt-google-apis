@@ -15,7 +15,6 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.AddressLookupMode;
 import com.google.gwt.ajaxsearch.client.Search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -23,24 +22,19 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * 
  */
-@Constructor("$wnd.GlocalSearch")
 public interface GlocalSearch extends GSearch {
-  public static final JSOpaque RESULT_CLASS =
-      new JSOpaque("$wnd.GlocalSearch.RESULT_CLASS");
-  public static final GlocalSearch IMPL =
-      (GlocalSearch)GWT.create(GlocalSearch.class);
+  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GlocalSearch.RESULT_CLASS");
+  GlocalSearch IMPL = GWT.create(GlocalSearch.class);
 
   @Constructor("$wnd.GlocalSearch")
-  public abstract JavaScriptObject construct();
-  
+  JavaScriptObject construct();
+
   // XXX Possible integration with Maps API. Consider code bloat before adding
   // public void setCenterPoint(GMap point);
   // public void setCenterPoint(GPoint point);
 
-  public abstract void setAddressLookupMode(Search jso,
-      AddressLookupMode mode);
+  void setAddressLookupMode(Search jso, JSOpaque mode);
 
-  public abstract void setCenterPoint(Search jso, String point);
+  void setCenterPoint(Search jso, String point);
 }

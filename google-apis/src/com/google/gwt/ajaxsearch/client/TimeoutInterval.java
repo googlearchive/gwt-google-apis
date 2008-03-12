@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,12 +21,16 @@ import com.google.gwt.jsio.client.JSOpaque;
  * Controls the delay between the last keystroke typed into a SearchControl and
  * automatically initiating a search.
  */
-public final class TimeoutInterval extends JSOpaque {
-  public static final TimeoutInterval SHORT = new TimeoutInterval("SHORT");
-  public static final TimeoutInterval MEDIUM = new TimeoutInterval("MEDIUM");
-  public static final TimeoutInterval LONG = new TimeoutInterval("LONG");
+public enum TimeoutInterval {
+  SHORT("SHORT"), MEDIUM("MEDIUM"), LONG("LONG");
+
+  private final JSOpaque value;
 
   private TimeoutInterval(String interval) {
-    super("$wnd.GSearchControl.TIMEOUT_" + interval);
+    value = new JSOpaque("$wnd.GSearchControl.TIMEOUT_" + interval);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }

@@ -15,9 +15,9 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.ExpandMode;
-import com.google.gwt.jsio.client.JSWrapper;
 import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.JSOpaque;
+import com.google.gwt.jsio.client.JSWrapper;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -25,7 +25,9 @@ import com.google.gwt.user.client.Element;
  */
 @Constructor("$wnd.GsearcherOptions")
 public interface GsearcherOptions extends JSWrapper<GsearcherOptions> {
-  public void setExpandMode(ExpandMode mode);
-  public void setRoot(Element e);
-  public void setVideoResultsTbHeight(int height);
+  void setExpandMode(JSOpaque mode);
+
+  void setRoot(Element e);
+
+  void setVideoResultsTbHeight(int height);
 }

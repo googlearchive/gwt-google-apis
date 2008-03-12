@@ -16,26 +16,35 @@
 package com.google.gwt.ajaxsearch.client.impl;
 
 import com.google.gwt.ajaxsearch.client.VideoResult;
-import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.jsio.client.BeanProperties;
 
 /**
  * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GvideoResult
  */
 @BeanProperties
 public interface GvideoResult extends GResult {
-  public static final GvideoResult IMPL =
-    (GvideoResult)GWT.create(GvideoResult.class);
+  GvideoResult IMPL = GWT.create(GvideoResult.class);
 
-  public String getContent(VideoResult obj);
-  public String getDuration(VideoResult obj);
-  public String getPlayUrl(VideoResult obj);
-  public String getPublished(VideoResult obj);
-  public String getPublisher(VideoResult obj);
-  public String getTbHeight(VideoResult obj);
-  public String getTbUrl(VideoResult obj);
-  public String getTbWidth(VideoResult obj);
-  public String getTitle(VideoResult obj);
-  public String getTitleNoFormatting(VideoResult obj);
-  public String getUrl(VideoResult obj);
+  String getContent(VideoResult obj);
+
+  String getDuration(VideoResult obj);
+
+  String getPlayUrl(VideoResult obj);
+
+  String getPublished(VideoResult obj);
+
+  String getPublisher(VideoResult obj);
+
+  String getTbHeight(VideoResult obj);
+
+  String getTbUrl(VideoResult obj);
+
+  String getTbWidth(VideoResult obj);
+
+  String getTitle(VideoResult obj);
+
+  String getTitleNoFormatting(VideoResult obj);
+
+  String getUrl(VideoResult obj);
 }

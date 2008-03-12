@@ -25,19 +25,16 @@ import com.google.gwt.jsio.client.JSOpaque;
  * A flyweight binding to the GwebSearch API object.
  */
 public interface GwebSearch extends GSearch {
-  public static final JSOpaque RESULT_CLASS =
-      new JSOpaque("$wnd.GwebSearch.RESULT_CLASS");
-  public static final GwebSearch IMPL =
-  (GwebSearch)GWT.create(GwebSearch.class);
+  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GwebSearch.RESULT_CLASS");
+  GwebSearch IMPL = GWT.create(GwebSearch.class);
 
   @Constructor("$wnd.GwebSearch")
-  public abstract JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public abstract void setSiteRestriction(Search jso, String site);
+  void setSiteRestriction(Search jso, String site);
 
-  public abstract void setSiteRestriction(Search jso, String site,
-      String refinement);
+  void setSiteRestriction(Search jso, String site, String refinement);
 
-  public abstract void setSiteRestriction(Search jso, String site,
-      String refinement, String moreResultsTemplate);
+  void setSiteRestriction(Search jso, String site, String refinement,
+      String moreResultsTemplate);
 }

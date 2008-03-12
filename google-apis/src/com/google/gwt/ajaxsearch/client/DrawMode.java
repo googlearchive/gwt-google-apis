@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,13 +18,18 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * Used internally by{@link SearchControlOptions#add(Search, ExpandMode)}.
+ * Used by {@link SearchControlOptions#setDrawMode(DrawMode)}.
  */
-public final class DrawMode extends JSOpaque {
-  public static final DrawMode LINEAR = new DrawMode("LINEAR");
-  public static final DrawMode TABBED = new DrawMode("TABBED");
-  
+public enum DrawMode {
+  LINEAR("LINEAR"), TABBED("TABBED");
+
+  private final JSOpaque value;
+
   private DrawMode(String mode) {
-    super("$wnd.GSearchControl.DRAW_MODE_" + mode);
+    value = new JSOpaque("$wnd.GSearchControl.DRAW_MODE_" + mode);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }

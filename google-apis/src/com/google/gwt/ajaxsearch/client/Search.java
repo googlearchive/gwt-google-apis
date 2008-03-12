@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,7 +20,6 @@ import com.google.gwt.ajaxsearch.client.impl.GSearchCompleteCallback;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.Widget;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -75,9 +74,7 @@ public abstract class Search {
       listeners = new SearchListenerCollection();
       impl.setSearchCompleteCallback(this, null, new GSearchCompleteCallback() {
         public void onSearchResult() {
-          List results = getResults();
-          for (Iterator i = results.iterator(); i.hasNext();) {
-            Result result = ((Result) i.next());
+          for (Result result : getResults()) {
             listeners.fireResult(Search.this, result);
           }
         }
@@ -94,9 +91,9 @@ public abstract class Search {
   }
 
   /**
-   * Regenerate the HTML associated with a Result object.  This can be used to regenerate
-   * the pre-rendered HTML associated with a Result object if {@link #setNoHtmlGeneration()}
-   * had been previously called on the Search.
+   * Regenerate the HTML associated with a Result object. This can be used to
+   * regenerate the pre-rendered HTML associated with a Result object if
+   * {@link #setNoHtmlGeneration()} had been previously called on the Search.
    * 
    * @param result The Result to re-render.
    */
@@ -130,7 +127,7 @@ public abstract class Search {
    * 
    * @return A List of {@link Result} objects.
    */
-  public List /* <? extends Result> */getResults() {
+  public List<? extends Result> getResults() {
     return impl.getResults(this);
   }
 
@@ -153,7 +150,7 @@ public abstract class Search {
    *          object.
    */
   public void setLinkTarget(LinkTarget target) {
-    impl.setLinkTarget(this, target);
+    impl.setLinkTarget(this, target.getValue());
   }
 
   /**
@@ -172,7 +169,7 @@ public abstract class Search {
    * 
    * @param addition Additional parameters to add to any queries executed by the
    *          Search.
-   * @see <a href="http://www.google.com/help/refinesearch.html">Refine Search</a> 
+   * @see <a href="http://www.google.com/help/refinesearch.html">Refine Search</a>
    */
   public void setQueryAddition(String addition) {
     impl.setQueryAddition(this, addition);
@@ -185,7 +182,7 @@ public abstract class Search {
    * @param size The desired number of results.
    */
   public void setResultSetSize(ResultSetSize size) {
-    impl.setResultSetSize(this, size);
+    impl.setResultSetSize(this, size.getValue());
   }
 
   /**

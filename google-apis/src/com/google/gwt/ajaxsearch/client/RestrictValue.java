@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,11 +21,16 @@ import com.google.gwt.jsio.client.JSOpaque;
  * Used with {@link BookSearch#setRestriction(RestrictType, RestrictValue)} to
  * control the types of results displayed.
  */
-public class RestrictValue extends JSOpaque {
-  public static final RestrictValue FULL_VIEW = new RestrictValue("FULL_VIEW");
-  public static final RestrictValue ALL = new RestrictValue("ALL");
+public enum RestrictValue {
+  FULL_VIEW("FULL_VIEW"), ALL("ALL");
+
+  private final JSOpaque value;
 
   private RestrictValue(String type) {
-    super("$wnd.GbookSearch.TYPE_" + type + "_BOOKS");
+    value = new JSOpaque("$wnd.GbookSearch.TYPE_" + type + "_BOOKS");
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }

@@ -16,22 +16,27 @@
 package com.google.gwt.ajaxsearch.client.impl;
 
 import com.google.gwt.ajaxsearch.client.BlogResult;
-import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.jsio.client.BeanProperties;
 
 /**
  * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GblogResult
  */
 @BeanProperties
 public interface GblogResult extends GResult {
-  public static final GblogResult IMPL =
-    (GblogResult)GWT.create(GblogResult.class);
+  GblogResult IMPL = GWT.create(GblogResult.class);
 
-  public String getAuthor(BlogResult obj);
-  public String getBlogUrl(BlogResult obj);
-  public String getContent(BlogResult obj);
-  public String getPostUrl(BlogResult obj);
-  public String getPublishedDate(BlogResult obj);
-  public String getTitle(BlogResult obj);
-  public String getTitleNoFormatting(BlogResult obj);
+  String getAuthor(BlogResult obj);
+
+  String getBlogUrl(BlogResult obj);
+
+  String getContent(BlogResult obj);
+
+  String getPostUrl(BlogResult obj);
+
+  String getPublishedDate(BlogResult obj);
+
+  String getTitle(BlogResult obj);
+
+  String getTitleNoFormatting(BlogResult obj);
 }

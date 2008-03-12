@@ -15,20 +15,19 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.DrawMode;
-import com.google.gwt.jsio.client.JSWrapper;
 import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.JSOpaque;
+import com.google.gwt.jsio.client.JSWrapper;
 import com.google.gwt.user.client.Element;
 
 /**
- * 
+ * Wrapper around a GdrawOptions object.
  */
 @Constructor("$wnd.GdrawOptions")
 public interface GdrawOptions extends JSWrapper<GdrawOptions> {
-  
-  public void setDrawMode(DrawMode mode);
-  
-  public void setInput(Element e);
-  
-  public void setSearchFormRoot(Element element);
+  void setDrawMode(JSOpaque mode);
+
+  void setInput(Element e);
+
+  void setSearchFormRoot(Element element);
 }

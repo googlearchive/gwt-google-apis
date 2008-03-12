@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,12 +22,12 @@ import com.google.gwt.ajaxsearch.client.impl.GvideoSearch;
  */
 public class VideoSearch extends Search {
   private static final GvideoSearch IMPL = GvideoSearch.IMPL;
-  
+
   public VideoSearch() {
     super(IMPL);
   }
 
   public void setResultOrder(ResultOrder order) {
-    IMPL.setResultOrder(this, order);
+    IMPL.setResultOrder(this, order.getValue());
   }
 }

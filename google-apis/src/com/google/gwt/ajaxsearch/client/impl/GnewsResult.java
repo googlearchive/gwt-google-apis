@@ -18,10 +18,10 @@ package com.google.gwt.ajaxsearch.client.impl;
 import com.google.gwt.ajaxsearch.client.NewsResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.FieldName;
+import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 
 /**
@@ -29,37 +29,51 @@ import com.google.gwt.jsio.client.JSList;
  */
 @BeanProperties
 public interface GnewsResult extends GResult {
-  public static final GnewsResult IMPL =
-    (GnewsResult)GWT.create(GnewsResult.class);
+  GnewsResult IMPL = GWT.create(GnewsResult.class);
 
   /**
    * A news story that is related to a primary GnewsResult.
    */
   @BeanProperties
   public static interface RelatedStory extends JSFlyweightWrapper {
-    public static final RelatedStory IMPL =
-      (RelatedStory)GWT.create(RelatedStory.class);
+    RelatedStory IMPL = GWT.create(RelatedStory.class);
 
-    @Constructor("Object")
-    public JavaScriptObject construct();
-    public String getLocation(NewsResult.RelatedStory obj);
-    public String getPublishedDate(NewsResult.RelatedStory obj);
-    public String getPublisher(NewsResult.RelatedStory obj);
-    public String getTitle(NewsResult.RelatedStory obj);
-    public String getTitleNoFormatting(NewsResult.RelatedStory obj);
-    public String getUnescapedUrl(NewsResult.RelatedStory obj);
-    public String getUrl(NewsResult.RelatedStory obj);
+    @Constructor("$wnd.Object")
+    JavaScriptObject construct();
+
+    String getLocation(NewsResult.RelatedStory obj);
+
+    String getPublishedDate(NewsResult.RelatedStory obj);
+
+    String getPublisher(NewsResult.RelatedStory obj);
+
+    String getTitle(NewsResult.RelatedStory obj);
+
+    String getTitleNoFormatting(NewsResult.RelatedStory obj);
+
+    String getUnescapedUrl(NewsResult.RelatedStory obj);
+
+    String getUrl(NewsResult.RelatedStory obj);
   }
-  
-  public String getClusterUrl(NewsResult obj);
-  public String getContent(NewsResult obj);
-  public String getLocation(NewsResult obj);
-  public String getPublishedDate(NewsResult obj);
-  public String getPublisher(NewsResult obj);
+
+  String getClusterUrl(NewsResult obj);
+
+  String getContent(NewsResult obj);
+
+  String getLocation(NewsResult obj);
+
+  String getPublishedDate(NewsResult obj);
+
+  String getPublisher(NewsResult obj);
+
   @FieldName("relatedStories")
-  public JSList<NewsResult.RelatedStory> getRelatedStories(NewsResult obj);
-  public String getTitle(NewsResult obj);
-  public String getTitleNoFormatting(NewsResult obj);
-  public String getUnescapedUrl(NewsResult obj);
-  public String getUrl(NewsResult obj);
+  JSList<NewsResult.RelatedStory> getRelatedStories(NewsResult obj);
+
+  String getTitle(NewsResult obj);
+
+  String getTitleNoFormatting(NewsResult obj);
+
+  String getUnescapedUrl(NewsResult obj);
+
+  String getUrl(NewsResult obj);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,20 +20,23 @@ import com.google.gwt.jsio.client.JSOpaque;
 /**
  * Used with {@link LocalSearch#setAddressLookupMode(AddressLookupMode)}.
  */
-public final class AddressLookupMode extends JSOpaque {
+public enum AddressLookupMode {
   /**
    * Disables resolving addresses.
    */
-  public static final AddressLookupMode DISABLED =
-      new AddressLookupMode("DISABLED");
-  
+  DISABLED("DISABLED"),
   /**
    * Enables resolving addresses.
    */
-  public static final AddressLookupMode ENABLED =
-      new AddressLookupMode("ENABLED");
+  ENABLED("ENABLED");
+
+  private final JSOpaque value;
 
   private AddressLookupMode(String mode) {
-    super("$wnd.GlocalSearch.ADDRESS_LOOKUP_" + mode);
+    value = new JSOpaque("$wnd.GlocalSearch.ADDRESS_LOOKUP_" + mode);
+  }
+
+  JSOpaque getValue() {
+    return value;
   }
 }
