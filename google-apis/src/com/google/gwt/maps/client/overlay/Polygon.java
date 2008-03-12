@@ -15,9 +15,11 @@
  */
 package com.google.gwt.maps.client.overlay;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.ListenerCollection;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolygonImpl;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
@@ -28,6 +30,8 @@ import com.google.gwt.maps.client.util.JsUtil;
  * 
  */
 public final class Polygon extends ConcreteOverlay {
+
+  private ListenerCollection<RemoveListener> removeListeners;
 
   public Polygon(LatLng[] points) {
     super(PolygonImpl.impl.construct(JsUtil.toJsList(points)));
@@ -40,16 +44,23 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   public void addRemoveListener(final RemoveListener listener) {
-    EventImpl.impl.associate(listener, EventImpl.impl.addListenerVoid(
+    if (removeListeners == null) {
+      removeListeners = new ListenerCollection<RemoveListener>();
+    }
+    JavaScriptObject removeEventHandles[] = {EventImpl.impl.addListenerVoid(
         super.jsoPeer, MapEvent.REMOVE, new VoidCallback() {
           @Override
           public void callback() {
             listener.onRemove(Polygon.this);
           }
-        }));
+        })};
+    removeListeners.addListener(listener, removeEventHandles);
   }
 
   public void clearRemoveListeners() {
+    if (removeListeners != null) {
+      removeListeners.clearListeners();
+    }
   }
 
   public LatLng getVertex(int index) {
@@ -61,6 +72,8 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   public void removeRemoveListener(RemoveListener listener) {
-    EventImpl.impl.removeListeners(listener);
+    if (removeListeners != null) {
+      removeListeners.removeListener(listener);
+    }
   }
 }
