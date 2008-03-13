@@ -22,8 +22,8 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Projection;
 import com.google.gwt.maps.client.geom.Size;
+import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapTypeImpl;
-import com.google.gwt.maps.client.util.JsUtil;
 
 /**
  * A MapType is a sequence of tile layers, a map projection, a tile size, and

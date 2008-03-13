@@ -18,7 +18,7 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.util.JsUtil;
+import com.google.gwt.maps.client.impl.JsUtil;
 
 /**
  * 

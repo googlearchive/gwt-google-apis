@@ -21,7 +21,7 @@ import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.impl.InfoWindowImpl;
 import com.google.gwt.maps.client.impl.InfoWindowOptionsImpl;
-import com.google.gwt.maps.client.util.JsUtil;
+import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;

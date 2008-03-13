@@ -17,8 +17,8 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MarkerManagerImpl;
-import com.google.gwt.maps.client.util.JsUtil;
 
 /**
  * 

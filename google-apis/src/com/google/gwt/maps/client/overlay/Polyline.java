@@ -19,6 +19,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.ListenerCollection;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolylineFactoryImpl;
@@ -26,7 +27,6 @@ import com.google.gwt.maps.client.impl.PolylineImpl;
 import com.google.gwt.maps.client.impl.PolylineOptionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
-import com.google.gwt.maps.client.util.JsUtil;
 
 /**
  * 
