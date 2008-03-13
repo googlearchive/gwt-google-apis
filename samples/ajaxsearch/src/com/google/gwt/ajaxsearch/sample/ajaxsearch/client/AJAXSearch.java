@@ -50,19 +50,27 @@ import com.google.gwt.user.client.ui.Widget;
 public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
     WindowResizeListener {
 
-  private HorizontalPanel hp = new HorizontalPanel();
+  private class GoogleCodeWebSearch extends WebSearch {
+    public GoogleCodeWebSearch() {
+      setSiteRestriction("code.google.com");
+      setUserDefinedLabel("Google Code");
+      setResultSetSize(ResultSetSize.LARGE);
+    }
+  }
   private VerticalPanel clips = new VerticalPanel();
+
+  private HorizontalPanel hp = new HorizontalPanel();
 
   public void onKeep(SearchControl control, final Result result) {
     String title;
     if (result instanceof WebResult) {
-      WebResult web = (WebResult)result;
+      WebResult web = (WebResult) result;
       title = web.getTitle();
     } else if (result instanceof NewsResult) {
-      NewsResult web = (NewsResult)result;
+      NewsResult web = (NewsResult) result;
       title = web.getTitle();
     } else if (result instanceof VideoResult) {
-      VideoResult video = (VideoResult)result;
+      VideoResult video = (VideoResult) result;
       title = video.getTitle();
       // Metadata is also available
       System.out.println(video.getTbHeight() + "x" + video.getTbWidth() + " "
@@ -134,13 +142,5 @@ public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
 
   public void onWindowResized(int width, int height) {
     hp.setPixelSize(width - 30, height - 30);
-  }
-
-  private class GoogleCodeWebSearch extends WebSearch {
-    public GoogleCodeWebSearch() {
-      setSiteRestriction("code.google.com");
-      setUserDefinedLabel("Google Code");
-      setResultSetSize(ResultSetSize.LARGE);
-    }
   }
 }

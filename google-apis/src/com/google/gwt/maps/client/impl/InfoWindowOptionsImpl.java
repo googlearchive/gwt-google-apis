@@ -30,12 +30,12 @@ import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 @BeanProperties
 public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
 
-  public static final InfoWindowOptionsImpl impl = (InfoWindowOptionsImpl) GWT.create(InfoWindowOptionsImpl.class);
+  InfoWindowOptionsImpl impl = GWT.create(InfoWindowOptionsImpl.class);
 
   @Constructor("Object")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public void setMapType(JavaScriptObject jsoPeer, MapType mapType);
+  void setMapType(JavaScriptObject jsoPeer, MapType mapType);
 
   /**
    * JSIO will not create a JS binding to an overloaded method. Use the
@@ -44,31 +44,31 @@ public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
    * 
    */
   @FieldName("maxContent")
-  public void setMaxContentElement(JavaScriptObject jsoPeer,
+  void setMaxContentElement(JavaScriptObject jsoPeer,
       JavaScriptObject maximizedContentWidget);
 
   @FieldName("maxContent")
-  public void setMaxContentString(JavaScriptObject jsoPeer,
+  void setMaxContentString(JavaScriptObject jsoPeer,
       String windowMaximizedContent);
 
   @FieldName("maxTitle")
-  public void setMaxTitleElement(JavaScriptObject jsoPeer,
+  void setMaxTitleElement(JavaScriptObject jsoPeer,
       JavaScriptObject maximizedTitleWidget);
 
   @FieldName("maxTitle")
-  public void setMaxTitleString(JavaScriptObject jsoPeer,
+  void setMaxTitleString(JavaScriptObject jsoPeer,
       String windowMaximizedTitle);
 
-  public void setMaxWidth(JavaScriptObject jsoPeer, int maxWidth);
+  void setMaxWidth(JavaScriptObject jsoPeer, int maxWidth);
 
-  public void setNoCloseOnClick(JavaScriptObject jsoPeer, boolean noCloseFlag);
+  void setNoCloseOnClick(JavaScriptObject jsoPeer, boolean noCloseFlag);
 
-  public void setOnCloseFn(JavaScriptObject jsoPeer, VoidCallback closeFunction);
+  void setOnCloseFn(JavaScriptObject jsoPeer, VoidCallback closeFunction);
 
-  public void setOnOpenFn(JavaScriptObject jsoPeer, VoidCallback openFunction);
+  void setOnOpenFn(JavaScriptObject jsoPeer, VoidCallback openFunction);
 
-  public void setSelectedTab(JavaScriptObject jsoPeer, int tab);
+  void setSelectedTab(JavaScriptObject jsoPeer, int tab);
 
-  public void setZoomLevel(JavaScriptObject jsoPeer, int zoomLevel);
+  void setZoomLevel(JavaScriptObject jsoPeer, int zoomLevel);
 
 }

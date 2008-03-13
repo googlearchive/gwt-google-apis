@@ -47,13 +47,13 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
    */
   @BeanProperties
   public static interface Response extends JSWrapper<Response> {
-    public String getName();
+    String getName();
 
     @FieldName("Placemark")
-    public JSList<Placemark> getPlacemarks();
+    JSList<Placemark> getPlacemarks();
 
     @FieldName("Status")
-    public ResponseStatus getStatus();
+    ResponseStatus getStatus();
   }
 
   /**
@@ -61,34 +61,34 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
    */
   @BeanProperties
   public static interface ResponseStatus extends JSWrapper<ResponseStatus> {
-    public int getCode();
+    int getCode();
   }
   
-  public static GeocoderImpl impl = (GeocoderImpl) GWT.create(GeocoderImpl.class);
+  GeocoderImpl impl = GWT.create(GeocoderImpl.class);
 
   @Constructor("$wnd.GClientGeocoder")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
   @Constructor("$wnd.GClientGeocoder")
-  public JavaScriptObject construct(GeocodeCache cache);
+  JavaScriptObject construct(GeocodeCache cache);
 
-  public String getBaseCountryCode(JavaScriptObject jsoPeer);
+  String getBaseCountryCode(JavaScriptObject jsoPeer);
 
-  public GeocodeCache getCache(JavaScriptObject jsoPeer);
+  GeocodeCache getCache(JavaScriptObject jsoPeer);
 
-  public void getLatLng(JavaScriptObject jsoPeer, String address,
+  void getLatLng(JavaScriptObject jsoPeer, String address,
       LatLngCallback callback);
 
-  public void getLocations(JavaScriptObject jsoPeer, String address,
+  void getLocations(JavaScriptObject jsoPeer, String address,
       LocationsCallback callback);
 
-  public LatLngBounds getViewport(JavaScriptObject jsoPeer);
+  LatLngBounds getViewport(JavaScriptObject jsoPeer);
 
-  public void reset(JavaScriptObject jsoPeer);
+  void reset(JavaScriptObject jsoPeer);
 
-  public void setBaseCountryCode(JavaScriptObject jsoPeer, String countryCode);
+  void setBaseCountryCode(JavaScriptObject jsoPeer, String countryCode);
 
-  public void setCache(JavaScriptObject jsoPeer, GeocodeCache cache);
+  void setCache(JavaScriptObject jsoPeer, GeocodeCache cache);
 
-  public void setViewport(JavaScriptObject jsoPeer, LatLngBounds bounds);
+  void setViewport(JavaScriptObject jsoPeer, LatLngBounds bounds);
 }

@@ -71,7 +71,7 @@ public final class JsUtil {
     JavaScriptObject newArray();
   }
 
-  private static final ListGenerator lists = (ListGenerator) GWT.create(ListGenerator.class);
+  private static final ListGenerator lists = GWT.create(ListGenerator.class);
 
   public static native JavaScriptObject asJavaScriptObject(LatLng latlng) /*-{
     return latlng.@com.google.gwt.maps.client.geom.LatLng::jsoPeer;
@@ -87,7 +87,7 @@ public final class JsUtil {
 
   public static void toArray(JSList<Integer> list, int[] array) {
     for (int i = 0; i < array.length; i++) {
-      array[i] = ((Integer) list.get(i)).intValue();
+      array[i] = list.get(i).intValue();
     }
   }
 

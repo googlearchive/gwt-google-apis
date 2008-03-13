@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,15 +16,12 @@
 package com.google.gwt.maps.client.geocode;
 
 /**
- * 
+ * Used as an argument for the getLocations() method in  {@link com.google.gwt.maps.client.geocode.Geocoder}.
  */
+//TODO(samgross): better names for interface and methods.
 public interface LocationCallback {
 
-  // TODO: docs are terrible
+  void onFailure(int statusCode);
 
-  // TODO: better name
-
-  public void onFailure(int statusCode);
-
-  public void onSuccess(Placemark[] locations);
+  void onSuccess(Placemark[] locations);
 }

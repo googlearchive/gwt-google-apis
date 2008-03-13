@@ -72,6 +72,7 @@ public class GearsHelper {
       store.setManifestURL(GWT.getModuleBaseURL() + "manifest");
       store.checkForUpdate();
       Timer t = new Timer() {
+        @Override
         public void run() {
           int status = store.getUpdateStatus();
           if (status == ManagedResourceStore.UPDATE_OK) {
@@ -110,22 +111,22 @@ public class GearsHelper {
     }
 
     ResultSet rs = null;
-    ArrayList al = new ArrayList();
+    ArrayList<Note> al = new ArrayList<Note>();
     try {
       rs = db.execute(DB_FETCH_TEXT);
       while (rs.isValidRow()) {
-        Note nd = new Note(rs.getFieldAsString(0), rs.getFieldAsString(1), rs
-            .getFieldAsString(2));
+        Note nd = new Note(rs.getFieldAsString(0), rs.getFieldAsString(1),
+            rs.getFieldAsString(2));
         al.add(nd);
         rs.next();
       }
     } catch (DatabaseException e) {
       return null;
     }
-    
+
     Note[] notes = new Note[al.size()];
     for (int i = 0; i < al.size(); ++i) {
-      notes[i] = (Note) al.get(i);
+      notes[i] = al.get(i);
     }
     return notes;
   }
@@ -139,10 +140,7 @@ public class GearsHelper {
    * <code>dirty</code> specifies whether the current operation makes the row
    * dirty, not the absolute state of the row.
    * 
-   * @param n
-   *          the note to update
-   * @param b
-   *          whether the note should be dirty or not
+   * @param n the note to update
    */
   public void updateNote(Note n) {
     if (db == null) {
@@ -157,7 +155,7 @@ public class GearsHelper {
     ResultSet rs = null;
     try {
       // test whether the row exists or not -- controls behavior below
-      args = new String[] { name };
+      args = new String[] {name};
       rs = db.execute(DB_EXISTS, args);
     } catch (DatabaseException e1) {
       return;
@@ -165,14 +163,14 @@ public class GearsHelper {
 
     // if row exists update it; if not, create a new one
     if (rs.isValidRow()) {
-      args = new String[] { vers, data, name };
+      args = new String[] {vers, data, name};
       try {
         db.execute(DB_UPDATE, args);
       } catch (DatabaseException e) {
         return;
       }
     } else {
-      args = new String[] { name, vers, data };
+      args = new String[] {name, vers, data};
       try {
         db.execute(DB_INSERT, args);
       } catch (DatabaseException e) {

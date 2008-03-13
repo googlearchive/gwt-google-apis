@@ -30,7 +30,7 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  */
 public abstract class OverlayImpl implements JSFlyweightWrapper {
 
-  public static final OverlayImpl impl = (OverlayImpl) GWT.create(OverlayImpl.class);
+  public static final OverlayImpl impl = GWT.create(OverlayImpl.class);
 
   public native void bindConcreteOverlay(JavaScriptObject jsoPeer,
       ConcreteOverlay overlay) /*-{

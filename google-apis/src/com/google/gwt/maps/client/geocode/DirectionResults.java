@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,6 +18,7 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.DirectionsImpl;
+import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
 
 import java.util.AbstractList;
@@ -50,24 +51,28 @@ public final class DirectionResults {
     return DirectionsImpl.impl.getDuration(jsoPeer);
   }
 
-  public List /* <Marker> */getMarkers() {
-    return new AbstractList() {
-      public Object get(int i) {
+  public List<Marker> getMarkers() {
+    return new AbstractList<Marker>() {
+      @Override
+      public Marker get(int i) {
         return DirectionsImpl.impl.getMarker(jsoPeer, i);
       }
 
+      @Override
       public int size() {
         return DirectionsImpl.impl.getNumGeocodes(jsoPeer);
       }
     };
   }
 
-  public List /* <Placemark> */getPlacemarks() {
-    return new AbstractList() {
-      public Object get(int i) {
+  public List<Placemark> getPlacemarks() {
+    return new AbstractList<Placemark>() {
+      @Override
+      public Placemark get(int i) {
         return DirectionsImpl.impl.getGeocode(jsoPeer, i);
       }
 
+      @Override
       public int size() {
         return DirectionsImpl.impl.getNumGeocodes(jsoPeer);
       }
@@ -78,12 +83,14 @@ public final class DirectionResults {
     return DirectionsImpl.impl.getPolyline(jsoPeer);
   }
 
-  public List /* <Route> */getRoutes() {
-    return new AbstractList() {
-      public Object get(int i) {
+  public List<Route> getRoutes() {
+    return new AbstractList<Route>() {
+      @Override
+      public Route get(int i) {
         return DirectionsImpl.impl.getRoute(jsoPeer, i);
       }
 
+      @Override
       public int size() {
         return DirectionsImpl.impl.getNumRoutes(jsoPeer);
       }

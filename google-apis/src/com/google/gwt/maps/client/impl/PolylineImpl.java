@@ -27,7 +27,7 @@ import com.google.gwt.maps.client.geom.LatLng;
  */
 public interface PolylineImpl extends JSFlyweightWrapper {
 
-  PolylineImpl impl = (PolylineImpl) GWT.create(PolylineImpl.class);
+  PolylineImpl impl = GWT.create(PolylineImpl.class);
 
   @Constructor("$wnd.GPolyline")
   JavaScriptObject construct(JSList<LatLng> points);
@@ -47,5 +47,3 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   
   int getVertexCount(JavaScriptObject jsoPeer); 
 }
-
-

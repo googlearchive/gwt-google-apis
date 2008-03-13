@@ -28,20 +28,20 @@ import com.google.gwt.maps.client.geocode.GeocodeCache;
 @Global("$wnd.GGeocodeCache.prototype")
 public interface GeocodeCachePrototype extends JSWrapper<GeocodeCachePrototype> {
 
-  public static GeocodeCachePrototype impl = (GeocodeCachePrototype) GWT.create(GeocodeCachePrototype.class);
+  GeocodeCachePrototype impl = GWT.create(GeocodeCachePrototype.class);
 
   @Imported
-  public JavaScriptObject get(GeocodeCache instance, String address);
+  JavaScriptObject get(GeocodeCache instance, String address);
 
   @Imported
-  public boolean isCachable(GeocodeCache instance, JavaScriptObject reply);
+  boolean isCachable(GeocodeCache instance, JavaScriptObject reply);
 
   @Imported
-  public void put(GeocodeCache instance, String address, JavaScriptObject reply);
+  void put(GeocodeCache instance, String address, JavaScriptObject reply);
 
   @Imported
-  public void reset(GeocodeCache instance);
+  void reset(GeocodeCache instance);
 
   @Imported
-  public String toCanonical(GeocodeCache instance, String address);
+  String toCanonical(GeocodeCache instance, String address);
 }

@@ -30,7 +30,7 @@ import com.google.gwt.maps.client.geom.Point;
 @BeanProperties
 public interface BoundsImpl extends JSFlyweightWrapper {
 
-  static final BoundsImpl impl = (BoundsImpl) GWT.create(BoundsImpl.class);
+  BoundsImpl impl = GWT.create(BoundsImpl.class);
 
   @Constructor("$wnd.GBounds")
   JavaScriptObject construct(int minX, int minY, int maxX, int maxY);

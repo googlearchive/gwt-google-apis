@@ -28,21 +28,21 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 @BeanProperties
 public interface DirectionQueryOptionsImpl extends JSFlyweightWrapper {
 
-  public static final DirectionQueryOptionsImpl impl = (DirectionQueryOptionsImpl) GWT.create(DirectionQueryOptionsImpl.class);
+  DirectionQueryOptionsImpl impl = GWT.create(DirectionQueryOptionsImpl.class);
 
   @Constructor("Object")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public void setLocale(JavaScriptObject jsoPeer, String locale);
+  void setLocale(JavaScriptObject jsoPeer, String locale);
 
-  public void setPreserveViewport(JavaScriptObject jsoPeer,
+  void setPreserveViewport(JavaScriptObject jsoPeer,
       boolean preserveViewport);
 
   @FieldName("getPolyline")
-  public void setRetrievePolyline(JavaScriptObject jsoPeer,
+  void setRetrievePolyline(JavaScriptObject jsoPeer,
       boolean retrievePolyline);
 
   @FieldName("getSteps")
-  public void setRetrieveSteps(JavaScriptObject jsoPeer, boolean retrieveSteps);
+  void setRetrieveSteps(JavaScriptObject jsoPeer, boolean retrieveSteps);
 
 }

@@ -30,7 +30,7 @@ public interface NoteServiceAsync {
    * 
    * @param callback the callback to notify when the request is complete
    */
-  public void getNotes(AsyncCallback callback);
+  void getNotes(AsyncCallback<Note[]> callback);
 
   /**
    * Updates the server with some potentially changed note data.
@@ -38,5 +38,5 @@ public interface NoteServiceAsync {
    * @param notes an array of Note that need to be updated
    * @param callback the callback to notify when the request is complete
    */
-  public void setNotes(Note[] notes, AsyncCallback callback);
+  void setNotes(Note[] notes, AsyncCallback<Void> callback);
 }

@@ -27,14 +27,14 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 @BeanProperties
 public interface MarkerManagerOptionsImpl extends JSFlyweightWrapper {
 
-  public static final MarkerManagerOptionsImpl impl = (MarkerManagerOptionsImpl) GWT.create(MarkerManagerOptionsImpl.class);
+  MarkerManagerOptionsImpl impl = GWT.create(MarkerManagerOptionsImpl.class);
 
   @Constructor("Object")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public void setBorderPadding(JavaScriptObject jsoPeer, int borderPadding);
+  void setBorderPadding(JavaScriptObject jsoPeer, int borderPadding);
 
-  public void setMaxZoom(JavaScriptObject jsoPeer, int maxZoom);
+  void setMaxZoom(JavaScriptObject jsoPeer, int maxZoom);
 
-  public void setTrackMarkers(JavaScriptObject jsoPeer, boolean trackMarkers);
+  void setTrackMarkers(JavaScriptObject jsoPeer, boolean trackMarkers);
 }

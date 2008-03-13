@@ -61,15 +61,12 @@ public final class InfoWindow {
     }
   }
 
-
-
   private final JavaScriptObject jsoPeer;
 
   private final MapWidget map;
 
-
   /**
-   * The virtual panel is used to as a point to attach
+   * The virtual panel is used as a point to attach.
    */
   private final VirtualPanel virtualPanel = new VirtualPanel();
 
@@ -98,7 +95,7 @@ public final class InfoWindow {
    * @return the Elements that hold the content of the tabs of this info window
    */
   public Element[] getContentContainers() {
-    JSList elementList = InfoWindowImpl.impl.getContentContainers(jsoPeer);
+    JSList<Element> elementList = InfoWindowImpl.impl.getContentContainers(jsoPeer);
     Element[] containers = new Element[elementList.size()];
     JsUtil.toArray(elementList, containers);
     return containers;
@@ -245,8 +242,8 @@ public final class InfoWindow {
    */
   private void initEventCallbacks(InfoWindowContent content,
       List<InfoWindowListener> listeners) {
-    final List<InfoWindowListener> listenerList =
-        new ArrayList<InfoWindowListener>(listeners);
+    final List<InfoWindowListener> listenerList = new ArrayList<InfoWindowListener>(
+        listeners);
 
     // Initialize internal callbacks in InfoWindowOptions that will kick off
     // the list of InfoWindowListeners stored in this object.

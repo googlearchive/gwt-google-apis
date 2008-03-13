@@ -27,8 +27,6 @@ import com.google.gwt.maps.client.impl.TileLayerImpl;
  */
 public abstract class TileLayer {
 
-  // TODO: abstract? concrete? both?
-  
   // TODO: DELETE ME! (needs to function w/o)
   private static final Extractor __extractor = new Extractor() {
     public Object fromJS(JavaScriptObject jso) {
@@ -63,7 +61,8 @@ public abstract class TileLayer {
 
   public TileLayer(CopyrightCollection copyrights, int minResolution,
       int maxResolution) {
-    jsoPeer = TileLayerImpl.impl.construct(copyrights, minResolution, maxResolution);
+    jsoPeer = TileLayerImpl.impl.construct(copyrights, minResolution,
+        maxResolution);
     TileLayerImpl.impl.bind(jsoPeer, this);
   }
 

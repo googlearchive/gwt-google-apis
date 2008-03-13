@@ -96,6 +96,7 @@ public final class Bounds {
     return BoundsImpl.impl.intersection(jsoPeer, other);
   }
 
+  @Override
   public String toString() {
     return BoundsImpl.impl.toString(jsoPeer);
   }

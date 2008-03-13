@@ -26,10 +26,10 @@ import com.google.gwt.maps.client.overlay.TrafficOverlay;
  */
 public interface TrafficOverlayImpl extends JSFlyweightWrapper {
 
-  public static final TrafficOverlayImpl impl = (TrafficOverlayImpl) GWT.create(TrafficOverlayImpl.class);
+  TrafficOverlayImpl impl = GWT.create(TrafficOverlayImpl.class);
 
   @Constructor("$wnd.GTrafficOverlay")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public void setVisible(TrafficOverlay overlay, boolean visible);
+  void setVisible(TrafficOverlay overlay, boolean visible);
 }

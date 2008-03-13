@@ -30,7 +30,7 @@ import com.google.gwt.maps.client.geom.Projection;
  */
 public interface ProjectionImpl extends JSFlyweightWrapper {
 
-  ProjectionImpl impl = (ProjectionImpl) GWT.create(ProjectionImpl.class);
+  ProjectionImpl impl = GWT.create(ProjectionImpl.class);
 
   @Binding
   void bind(JavaScriptObject jsoPeer, MercatorProjection projection);

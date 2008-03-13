@@ -29,7 +29,7 @@ import com.google.gwt.maps.client.geom.Point;
  */
 public interface TileLayerImpl extends JSFlyweightWrapper {
 
-  TileLayerImpl impl = (TileLayerImpl) GWT.create(TileLayerImpl.class);
+  TileLayerImpl impl = GWT.create(TileLayerImpl.class);
 
   @Binding
   void bind(JavaScriptObject jsoPeer, TileLayer tileLayer);

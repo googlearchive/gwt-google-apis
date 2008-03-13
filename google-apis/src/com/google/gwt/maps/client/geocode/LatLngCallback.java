@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,14 +18,15 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * 
+ * Used as an argument to
+ * {@link com.google.gwt.maps.client.geocode.Geocoder#getLatLng(String,LatLngCallback)}.
  */
+// TODO(samgross): better names for interface and methods.
+// TODO(zundel): This callback interface has the same name as
+// EventImpl.LatLngCallback. yuk.
 public interface LatLngCallback {
-  
-  
-  // TODO: better names for interface and methods. Called when geocoder doesn't find a point
-  public void onFailure();
 
-  // TODO: only call with non-null
-  public void onSuccess(LatLng point);
+  void onFailure();
+
+  void onSuccess(LatLng point);
 }

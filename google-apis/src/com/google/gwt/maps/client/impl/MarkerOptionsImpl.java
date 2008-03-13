@@ -28,23 +28,23 @@ import com.google.gwt.maps.client.overlay.Icon;
 @BeanProperties
 public interface MarkerOptionsImpl extends JSFlyweightWrapper {
 
-  public static final MarkerOptionsImpl impl = (MarkerOptionsImpl) GWT.create(MarkerOptionsImpl.class);
+  MarkerOptionsImpl impl = GWT.create(MarkerOptionsImpl.class);
 
   @Constructor("Object")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public void setBounceGravity(JavaScriptObject jsoPeer, double bounceGravity);
+  void setBounceGravity(JavaScriptObject jsoPeer, double bounceGravity);
 
-  public void setBouncy(JavaScriptObject jsoPeer, boolean bouncy);
+  void setBouncy(JavaScriptObject jsoPeer, boolean bouncy);
 
-  public void setClickable(JavaScriptObject jsoPeer, boolean clickable);
+  void setClickable(JavaScriptObject jsoPeer, boolean clickable);
 
-  public void setDragCrossMove(JavaScriptObject jsoPeer, boolean dragCrossMove);
+  void setDragCrossMove(JavaScriptObject jsoPeer, boolean dragCrossMove);
 
-  public void setDraggable(JavaScriptObject jsoPeer, boolean draggable);
+  void setDraggable(JavaScriptObject jsoPeer, boolean draggable);
 
-  public void setIcon(JavaScriptObject jsoPeer, Icon icon);
+  void setIcon(JavaScriptObject jsoPeer, Icon icon);
 
-  public void setTitle(JavaScriptObject jsoPeer, String title);
+  void setTitle(JavaScriptObject jsoPeer, String title);
 
 }

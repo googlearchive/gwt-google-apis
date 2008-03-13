@@ -20,18 +20,23 @@ import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * TODO: exposes the right information although the names might be off.
+ * 
  */
+//TODO(zundel): I am not sure why this class is not using JSFlyweightWrapper
+// like the rest of the project.
+// TODO(samgross): exposes the right information
+// although the names might be off.
 public final class Placemark {
   
   // TODO: DELETE ME! (needs to function w/o)
-  private static final Extractor __extractor = new Extractor() {
-    public Object fromJS(JavaScriptObject jso) {
+  @SuppressWarnings("unused")
+  private static final Extractor<Placemark> __extractor = new Extractor<Placemark>() {
+    public Placemark fromJS(JavaScriptObject jso) {
       return createPeer(jso);
     }
 
-    public JavaScriptObject toJS(Object o) {
-      return ((Placemark) o).jsoPeer;
+    public JavaScriptObject toJS(Placemark o) {
+      return o.jsoPeer;
     }
   };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,6 +16,7 @@
 package com.google.gwt.gears.sample.database.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.gears.core.client.Gears;
 import com.google.gwt.gears.core.client.GearsException;
 import com.google.gwt.gears.database.client.Database;
 import com.google.gwt.gears.database.client.DatabaseException;
@@ -29,16 +30,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
-   * Sample application demonstrating how to use the {@link Database} class.
+ * Sample application demonstrating how to use the {@link Database} class.
  */
 public class DatabaseDemo implements EntryPoint {
-  private static native boolean isGearsInstalled() /*-{
-   try {
-   return $wnd.google.gears.factory != null;
-   } catch (e) {
-   return false;
-   }
-   }-*/;
 
   private final Button button = new Button("Add");
   private Database db;
@@ -48,7 +42,7 @@ public class DatabaseDemo implements EntryPoint {
       new Label(), new Label(), new Label()};
 
   public void onModuleLoad() {
-    assert (isGearsInstalled());
+    assert (Gears.isInstalled());
 
     RootPanel rootPanel = RootPanel.get();
     rootPanel.add(input);

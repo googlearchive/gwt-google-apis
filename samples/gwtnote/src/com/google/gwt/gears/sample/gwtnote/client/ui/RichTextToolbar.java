@@ -1,5 +1,5 @@
 /*
- * Copyright 2006 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -287,7 +287,7 @@ public class RichTextToolbar extends Composite {
         extended.removeFormat();
       } else if (sender == richText) {
         // We use the RichTextArea's onKeyUp event to update the toolbar status.
-        // This will catch any cases where the user moves the cursur using the
+        // This will catch any cases where the user moves the cursor using the
         // keyboard, or uses one of the browser's built-in keyboard shortcuts.
         updateStatus();
       }
@@ -302,7 +302,7 @@ public class RichTextToolbar extends Composite {
     public void onKeyUp(Widget sender, char keyCode, int modifiers) {
       if (sender == richText) {
         // We use the RichTextArea's onKeyUp event to update the toolbar status.
-        // This will catch any cases where the user moves the cursur using the
+        // This will catch any cases where the user moves the cursor using the
         // keyboard, or uses one of the browser's built-in keyboard shortcuts.
         updateStatus();
       }
@@ -315,8 +315,8 @@ public class RichTextToolbar extends Composite {
       RichTextArea.FontSize.LARGE, RichTextArea.FontSize.X_LARGE,
       RichTextArea.FontSize.XX_LARGE};
 
-  private Images images = (Images) GWT.create(Images.class);
-  private Strings strings = (Strings) GWT.create(Strings.class);
+  private Images images = GWT.create(Images.class);
+  private Strings strings = GWT.create(Strings.class);
   private EventListener listener = new EventListener();
 
   private RichTextArea richText;

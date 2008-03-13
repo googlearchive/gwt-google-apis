@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,8 +29,6 @@ import com.google.gwt.maps.client.util.JsUtil;
  */
 public final class Geocoder {
 
-  // TODO: name: ClientGeocoder or Geocoder?
-
   static void print(JavaScriptObject o) {
     System.out.print(o);
   }
@@ -41,10 +39,7 @@ public final class Geocoder {
 
   private final JavaScriptObject jsoPeer;
 
-  // TODO: callback interfaces
-
-  // TODO: better naming: not get* since async? find*?
-
+  // TODO(samgross): name: ClientGeocoder or Geocoder?
   public Geocoder() {
     jsoPeer = GeocoderImpl.impl.construct();
   }
@@ -56,16 +51,17 @@ public final class Geocoder {
   public String getBaseCountryCode() {
     return GeocoderImpl.impl.getBaseCountryCode(jsoPeer);
   }
-
   
   public GeocodeCache getCache() {
     return GeocoderImpl.impl.getCache(jsoPeer);
   }
-
-  // TODO: rename one of the callback types?
+  
+  // TODO(samgross): better naming: not get* since async? find*?
+  // TODO(samgross): rename one of the callback types?
   public void getLatLng(String address, final LatLngCallback callback) {
     GeocoderImpl.impl.getLatLng(jsoPeer, address,
         new com.google.gwt.maps.client.impl.EventImpl.LatLngCallback() {
+          @Override
           public void callback(LatLng latlng) {
             if (latlng != null) {
               callback.onSuccess(latlng);
@@ -75,13 +71,14 @@ public final class Geocoder {
           }
         });
   }
-
+  
   public void getLocations(String address, final LocationCallback callback) {
     GeocoderImpl.impl.getLocations(jsoPeer, address, new LocationsCallback() {
+      @Override
       public void callback(Response response) {
         int statusCode = response.getStatus().getCode();
         if (statusCode == StatusCodes.SUCCESS) {
-          JSList placemarkList = response.getPlacemarks();
+          JSList<Placemark> placemarkList = response.getPlacemarks();
           Placemark[] placemarks = new Placemark[placemarkList.size()];
           JsUtil.toArray(placemarkList, placemarks);
           callback.onSuccess(placemarks);
@@ -96,17 +93,15 @@ public final class Geocoder {
     return GeocoderImpl.impl.getViewport(jsoPeer);
   }
 
-  // TODO: perhaps a resource file with country codes?
 
   public void reset() {
     GeocoderImpl.impl.reset(jsoPeer);
   }
 
+  // TODO(samgross): perhaps a resource file with country codes?
   public void setBaseCountryCode(String countryCode) {
     GeocoderImpl.impl.setBaseCountryCode(jsoPeer, countryCode);
   }
-
-  // TODO: reset???
 
   public void setViewport(LatLngBounds bounds) {
     GeocoderImpl.impl.setViewport(jsoPeer, bounds);

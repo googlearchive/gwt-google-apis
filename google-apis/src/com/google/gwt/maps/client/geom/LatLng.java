@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -27,9 +27,8 @@ import com.google.gwt.maps.client.impl.LatLngImpl;
  */
 public final class LatLng {
 
-  private static final LatLngImpl impl = (LatLngImpl) GWT.create(LatLngImpl.class);
-
   // TODO: DELETE ME! (needs to function w/o)
+  @SuppressWarnings("unused")
   private static final Extractor __extractor = new Extractor() {
     public Object fromJS(JavaScriptObject jso) {
       return createPeer(jso);
@@ -39,6 +38,8 @@ public final class LatLng {
       return ((LatLng) o).jsoPeer;
     }
   };
+
+  private static final LatLngImpl impl = GWT.create(LatLngImpl.class);
 
   static LatLng createPeer(JavaScriptObject jso) {
     return new LatLng(jso);
@@ -65,12 +66,13 @@ public final class LatLng {
    * approximated as a sphere.
    * 
    * @param other
-   * @return
+   * @return the distance computed between the two points
    */
   public double distanceFrom(LatLng other) {
     return impl.distanceFrom(jsoPeer, other);
   }
 
+  @Override
   public boolean equals(Object other) {
     if (other instanceof LatLng) {
       return impl.equals(jsoPeer, (LatLng) other);
@@ -118,6 +120,12 @@ public final class LatLng {
     return impl.lngRadians(jsoPeer);
   }
 
+  @Override
+  public int hashCode() {
+    return ((int) getLatitude() * 1000000) ^ (19 * (int) getLongitude() * 1000000);  
+  }
+
+  @Override
   public String toString() {
     return impl.toString(jsoPeer);
   }

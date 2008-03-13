@@ -52,11 +52,11 @@ public class NoteServiceImpl extends RemoteServiceServlet implements
    *         empty
    */
   public Note[] getNotes() {
-    Map data = getDataMap();
+    Map<String,Note> data = getDataMap();
     Note[] notes = new Note[data.size()];
-    Iterator it = data.values().iterator();
+    Iterator<Note> it = data.values().iterator();
     for (int i = 0; it.hasNext(); ++i) {
-      notes[i] = (Note) it.next();
+      notes[i] = it.next();
     }
     return notes;
   }
@@ -76,10 +76,10 @@ public class NoteServiceImpl extends RemoteServiceServlet implements
     if (notes == null) {
       return;
     }
-    Map data = getDataMap();
+    Map<String,Note> data = getDataMap();
     for (int i = 0; i < notes.length; ++i) {
       if (data.containsKey(notes[i].getName())) {
-        Note nd = (Note) data.get(notes[i].getName());
+        Note nd = data.get(notes[i].getName());
         int newVer = Integer.parseInt(notes[i].getVersion());
         int oldVer = Integer.parseInt(nd.getVersion());
         if (newVer >= oldVer) {
@@ -99,10 +99,10 @@ public class NoteServiceImpl extends RemoteServiceServlet implements
    * 
    * @return a Map containing all data known to the server
    */
-  protected Map getDataMap() {
-    Map m = (Map) getServletContext().getAttribute("com.google.gearsdemo.data");
+  protected Map<String,Note> getDataMap() {
+    Map<String,Note> m = (Map<String,Note>) getServletContext().getAttribute("com.google.gearsdemo.data");
     if (m == null) {
-      m = new HashMap();
+      m = new HashMap<String,Note>();
       m.put("default", new Note("default", "1", ""));
       getServletContext().setAttribute("com.google.gearsdemo.data", m);
     }
