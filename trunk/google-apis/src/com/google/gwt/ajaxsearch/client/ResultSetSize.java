@@ -38,7 +38,7 @@ public enum ResultSetSize {
   private final JSOpaque value;
 
   private ResultSetSize(String size) {
-    value = new JSOpaque(size);
+    value = new JSOpaque("$wnd.GSearch." + size + "_RESULTSET");
   }
 
   JSOpaque getValue() {
