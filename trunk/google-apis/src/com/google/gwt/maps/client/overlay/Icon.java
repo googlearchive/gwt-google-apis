@@ -20,7 +20,7 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.IconImpl;
-import com.google.gwt.maps.client.util.JsUtil;
+import com.google.gwt.maps.client.impl.JsUtil;
 
 /**
  * Wrapper for the Maps API GIcon class

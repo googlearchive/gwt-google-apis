@@ -18,9 +18,9 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.DirectionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl;
+import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
-import com.google.gwt.maps.client.util.JsUtil;
 
 // TODO: note "load", "error", and "addoverlay" semi-documented events
 

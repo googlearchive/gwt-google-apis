@@ -20,7 +20,7 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.event.CopyrightListener;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.CopyrightCollectionImpl;
-import com.google.gwt.maps.client.util.JsUtil;
+import com.google.gwt.maps.client.impl.JsUtil;
 
 /**
  * Manages copyright messages displayed on maps of custom map type. If you don't

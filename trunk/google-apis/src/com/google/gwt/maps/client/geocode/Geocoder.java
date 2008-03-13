@@ -20,9 +20,9 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.GeocoderImpl;
+import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.GeocoderImpl.LocationsCallback;
 import com.google.gwt.maps.client.impl.GeocoderImpl.Response;
-import com.google.gwt.maps.client.util.JsUtil;
 
 /**
  * 
