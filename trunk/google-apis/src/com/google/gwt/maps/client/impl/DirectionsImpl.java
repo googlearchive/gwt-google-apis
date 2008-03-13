@@ -39,41 +39,41 @@ import com.google.gwt.user.client.Element;
  */
 public interface DirectionsImpl extends JSFlyweightWrapper {
 
-  public static DirectionsImpl impl = (DirectionsImpl) GWT.create(DirectionsImpl.class);
+  DirectionsImpl impl = GWT.create(DirectionsImpl.class);
 
   @Constructor("$wnd.GDirections")
-  public JavaScriptObject construct(MapWidget map, Element panel);
+  JavaScriptObject construct(MapWidget map, Element panel);
 
-  public LatLngBounds getBounds(JavaScriptObject jsoPeer);
+  LatLngBounds getBounds(JavaScriptObject jsoPeer);
 
-  public String getCopyrightsHtml(JavaScriptObject jsoPeer);
+  String getCopyrightsHtml(JavaScriptObject jsoPeer);
 
-  public Distance getDistance(JavaScriptObject jsoPeer);
+  Distance getDistance(JavaScriptObject jsoPeer);
 
-  public Duration getDuration(JavaScriptObject jsoPeer);
+  Duration getDuration(JavaScriptObject jsoPeer);
 
-  public Placemark getGeocode(JavaScriptObject jsoPeer, int i);
+  Placemark getGeocode(JavaScriptObject jsoPeer, int i);
 
-  public Marker getMarker(JavaScriptObject jsoPeer, int i);
+  Marker getMarker(JavaScriptObject jsoPeer, int i);
 
-  public int getNumGeocodes(JavaScriptObject jsoPeer);
+  int getNumGeocodes(JavaScriptObject jsoPeer);
 
-  public int getNumRoutes(JavaScriptObject jsoPeer);
+  int getNumRoutes(JavaScriptObject jsoPeer);
 
-  public Polyline getPolyline(JavaScriptObject jsoPeer);
+  Polyline getPolyline(JavaScriptObject jsoPeer);
 
-  public Route getRoute(JavaScriptObject jsoPeer, int i);
+  Route getRoute(JavaScriptObject jsoPeer, int i);
 
   @BeanProperties
   @FieldName("getStatus().code")
-  public int getStatusCode(JavaScriptObject jsoPeer);
+  int getStatusCode(JavaScriptObject jsoPeer);
 
-  public String getSummaryHtml(JavaScriptObject jsoPeer);
+  String getSummaryHtml(JavaScriptObject jsoPeer);
 
-  public void load(JavaScriptObject jsoPeer, String query,
+  void load(JavaScriptObject jsoPeer, String query,
       DirectionQueryOptions options);
 
-  public void loadFromWaypoints(JavaScriptObject jsoPeer,
+  void loadFromWaypoints(JavaScriptObject jsoPeer,
       JSList<Waypoint> waypoints, DirectionQueryOptions options);
 
 }

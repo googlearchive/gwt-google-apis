@@ -27,12 +27,12 @@ public interface NoteService extends RemoteService {
    * 
    * @return a List of Note objects
    */
-  public Note[] getNotes();
+  Note[] getNotes();
 
   /**
    * Updates the server with some potentially changed note data.
    *
    * @param notes an array of Note that need to be updated
    */
-  public void setNotes(Note[] notes);
+  void setNotes(Note[] notes);
 }

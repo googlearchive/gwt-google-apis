@@ -27,22 +27,22 @@ import com.google.gwt.maps.client.geocode.GeocodeCache;
  */
 public interface GeocodeCacheImpl extends JSFlyweightWrapper {
 
-  public static GeocodeCacheImpl impl = (GeocodeCacheImpl) GWT.create(GeocodeCacheImpl.class);
+  GeocodeCacheImpl impl = GWT.create(GeocodeCacheImpl.class);
 
   @Binding
-  public void bind(JavaScriptObject jsoPeer, GeocodeCache cache);
+  void bind(JavaScriptObject jsoPeer, GeocodeCache cache);
 
   @Constructor("$wnd.GFactualGeocodeCache")
-  public JavaScriptObject constructFactualGeocodeCache();
+  JavaScriptObject constructFactualGeocodeCache();
 
   @Constructor("$wnd.GGeocodeCache")
-  public JavaScriptObject constructGeocodeCache();
+  JavaScriptObject constructGeocodeCache();
 
-  public boolean isCachable(GeocodeCache cache, JavaScriptObject reply);
+  boolean isCachable(GeocodeCache cache, JavaScriptObject reply);
 
-  public void put(GeocodeCache cache, String address, JavaScriptObject reply);
+  void put(GeocodeCache cache, String address, JavaScriptObject reply);
 
-  public void reset(GeocodeCache cache);
+  void reset(GeocodeCache cache);
 
-  public String toCanonical(GeocodeCache cache, String address);
+  String toCanonical(GeocodeCache cache, String address);
 }

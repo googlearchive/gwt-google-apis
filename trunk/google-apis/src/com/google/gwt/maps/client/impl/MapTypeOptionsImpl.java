@@ -29,7 +29,7 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 @BeanProperties
 public interface MapTypeOptionsImpl extends JSFlyweightWrapper {
 
-  static final MapTypeOptionsImpl impl = (MapTypeOptionsImpl) GWT.create(MapTypeOptionsImpl.class);
+  MapTypeOptionsImpl impl = GWT.create(MapTypeOptionsImpl.class);
 
   @Constructor("Object")
   JavaScriptObject construct();

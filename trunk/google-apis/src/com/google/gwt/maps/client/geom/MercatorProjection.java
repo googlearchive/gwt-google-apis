@@ -31,19 +31,23 @@ public final class MercatorProjection extends Projection {
     super(jsoPeer);
   }
 
+  @Override
   public Point fromLatLngToPixel(LatLng latlng, int zoomLevel) {
     return ProjectionImpl.impl.fromLatLngToPixel(jsoPeer, latlng, zoomLevel);
   }
 
+  @Override
   public LatLng fromPixelToLatLng(Point point, int zoomLevel,
       boolean unbound) {
     return ProjectionImpl.impl.fromPixelToLatLng(jsoPeer, point, zoomLevel, unbound);
   }
 
+  @Override
   public int getWrapWidth(int zoomLevel) {
     return ProjectionImpl.impl.getWrapWidth(jsoPeer, zoomLevel);
   }
 
+  @Override
   public boolean tileCheckRange(Point point, int zoomLevel, int tileSize) {
     return ProjectionImpl.impl.tileCheckRange(jsoPeer, point, zoomLevel, tileSize);
   }

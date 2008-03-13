@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -28,18 +28,18 @@ import com.google.gwt.maps.client.geom.LatLng;
  */
 public interface RouteImpl extends JSFlyweightWrapper {
 
-  RouteImpl impl = (RouteImpl) GWT.create(RouteImpl.class);
+  RouteImpl impl = GWT.create(RouteImpl.class);
 
-  public Distance getDistance(JavaScriptObject jsoPeer);
+  Distance getDistance(JavaScriptObject jsoPeer);
 
-  public Duration getDuration(JavaScriptObject jsoPeer);
+  Duration getDuration(JavaScriptObject jsoPeer);
 
-  public LatLng getEndLatLng(JavaScriptObject jsoPeer);
+  LatLng getEndLatLng(JavaScriptObject jsoPeer);
 
-  public int getNumSteps(JavaScriptObject jsoPeer);
+  int getNumSteps(JavaScriptObject jsoPeer);
 
-  public Step getStep(JavaScriptObject jsoPeer, int index);
+  Step getStep(JavaScriptObject jsoPeer, int index);
 
-  public String getSummaryHtml(JavaScriptObject jsoPeer);
+  String getSummaryHtml(JavaScriptObject jsoPeer);
 
 }

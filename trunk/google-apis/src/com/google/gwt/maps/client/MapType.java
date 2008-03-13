@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.jsio.client.impl.Extractor;
@@ -57,7 +56,6 @@ public final class MapType {
 
   private static MapType[] defaultMapTypes;
   private static MapType hybridMap;
-  private static final MapTypeImpl impl = (MapTypeImpl) GWT.create(MapTypeImpl.class);
   private static boolean mapTypesInitialized = false;
   private static MapType marsElevationMap;
   private static MapType marsInfraredMap;
@@ -243,7 +241,7 @@ public final class MapType {
    */
   private static MapType createPeer(JavaScriptObject jsoPeer) {
     MapType mapType = new MapType(jsoPeer);
-    impl.bind(jsoPeer, mapType);
+    MapTypeImpl.impl.bind(jsoPeer, mapType);
     return mapType;
   }
 
@@ -348,16 +346,16 @@ public final class MapType {
       return;
     }
 
-    normalMap = createPeer(impl.getNormalMapType());
-    satelliteMap = createPeer(impl.getSatelliteMapType());
-    hybridMap = createPeer(impl.getHybridMapType());
-    physicalMap = createPeer(impl.getPhysicalMapType());
-    moonElevationMap = createPeer(impl.getMoonElevationMapType());
-    moonVisibleMap = createPeer(impl.getMoonVisibleMap());
-    marsElevationMap = createPeer(impl.getMarsElevationMap());
-    marsVisibleMap = createPeer(impl.getMarsVisibleMap());
-    marsInfraredMap = createPeer(impl.getMarsInfraredMap());
-    skyVisibleMap = createPeer(impl.getSkyVisibleMap());
+    normalMap = createPeer(MapTypeImpl.impl.getNormalMapType());
+    satelliteMap = createPeer(MapTypeImpl.impl.getSatelliteMapType());
+    hybridMap = createPeer(MapTypeImpl.impl.getHybridMapType());
+    physicalMap = createPeer(MapTypeImpl.impl.getPhysicalMapType());
+    moonElevationMap = createPeer(MapTypeImpl.impl.getMoonElevationMapType());
+    moonVisibleMap = createPeer(MapTypeImpl.impl.getMoonVisibleMap());
+    marsElevationMap = createPeer(MapTypeImpl.impl.getMarsElevationMap());
+    marsVisibleMap = createPeer(MapTypeImpl.impl.getMarsVisibleMap());
+    marsInfraredMap = createPeer(MapTypeImpl.impl.getMarsInfraredMap());
+    skyVisibleMap = createPeer(MapTypeImpl.impl.getSkyVisibleMap());
     mapTypesInitialized = true;
   }
 
@@ -371,8 +369,8 @@ public final class MapType {
    * @param name the name of the map type
    */
   public MapType(TileLayer[] layers, Projection projection, String name) {
-    jsoPeer = impl.construct(JsUtil.toJsList(layers), projection, name);
-    impl.bind(jsoPeer, this);
+    jsoPeer = MapTypeImpl.impl.construct(JsUtil.toJsList(layers), projection, name);
+    MapTypeImpl.impl.bind(jsoPeer, this);
   }
 
   /**
@@ -386,8 +384,8 @@ public final class MapType {
    */
   public MapType(TileLayer[] layers, Projection projection, String name,
       MapTypeOptions options) {
-    jsoPeer = impl.construct(JsUtil.toJsList(layers), projection, name, options);
-    impl.bind(jsoPeer, this);
+    jsoPeer = MapTypeImpl.impl.construct(JsUtil.toJsList(layers), projection, name, options);
+    MapTypeImpl.impl.bind(jsoPeer, this);
   }
 
   private MapType(JavaScriptObject jsoPeer) {
@@ -403,7 +401,7 @@ public final class MapType {
    * @return the zoom level required to show the given bounds
    */
   public int getBoundsZoomLevel(LatLngBounds bounds, Size viewSize) {
-    return impl.getBoundsZoomLevel(jsoPeer, bounds, viewSize);
+    return MapTypeImpl.impl.getBoundsZoomLevel(jsoPeer, bounds, viewSize);
   }
 
   /**
@@ -414,7 +412,7 @@ public final class MapType {
    * @return the copyrights corresponding to the given viewport
    */
   public String[] getCopyrights(LatLngBounds bounds, int zoomLevel) {
-    JSList<String> copyrights = impl.getCopyrights(jsoPeer, bounds, zoomLevel);
+    JSList<String> copyrights = MapTypeImpl.impl.getCopyrights(jsoPeer, bounds, zoomLevel);
     String[] returnValue = new String[copyrights.size()];
     JsUtil.toArray(copyrights, returnValue);
     return returnValue;
@@ -427,7 +425,7 @@ public final class MapType {
    * @return the error message for empty tiles
    */
   public String getErrorMessage() {
-    return impl.getErrorMessage(jsoPeer);
+    return MapTypeImpl.impl.getErrorMessage(jsoPeer);
   }
 
   /**
@@ -436,7 +434,7 @@ public final class MapType {
    * @return the color used for hyperlinks
    */
   public String getLinkColor() {
-    return impl.getLinkColor(jsoPeer);
+    return MapTypeImpl.impl.getLinkColor(jsoPeer);
   }
 
   /**
@@ -446,7 +444,7 @@ public final class MapType {
    * @return the highest zoom level for the point
    */
   public int getMaximumResolution() {
-    return impl.getMaximumResolution(jsoPeer);
+    return MapTypeImpl.impl.getMaximumResolution(jsoPeer);
   }
 
   /**
@@ -457,7 +455,7 @@ public final class MapType {
    * @return the highest zoom level for the point
    */
   public int getMaximumResolution(LatLng latlng) {
-    return impl.getMaximumResolution(jsoPeer, latlng);
+    return MapTypeImpl.impl.getMaximumResolution(jsoPeer, latlng);
   }
 
   /**
@@ -467,7 +465,7 @@ public final class MapType {
    * @return the lowest zoom level for the point
    */
   public int getMinimumResolution() {
-    return impl.getMinimumResolution(jsoPeer);
+    return MapTypeImpl.impl.getMinimumResolution(jsoPeer);
   }
 
   /**
@@ -478,7 +476,7 @@ public final class MapType {
    * @return the lowest zoom level for the point
    */
   public int getMinimumResolution(LatLng latlng) {
-    return impl.getMinimumResolution(jsoPeer, latlng);
+    return MapTypeImpl.impl.getMinimumResolution(jsoPeer, latlng);
   }
 
   /**
@@ -491,7 +489,7 @@ public final class MapType {
    * @return the name of the map type
    */
   public String getName(boolean shortName) {
-    return impl.getName(jsoPeer, shortName);
+    return MapTypeImpl.impl.getName(jsoPeer, shortName);
   }
 
   /**
@@ -500,7 +498,7 @@ public final class MapType {
    * @return the projection used by this map type
    */
   public Projection getProjection() {
-    return impl.getProjection(jsoPeer);
+    return MapTypeImpl.impl.getProjection(jsoPeer);
   }
 
   /**
@@ -515,7 +513,7 @@ public final class MapType {
    * @return the highest possible zoom level
    */
   public int getSpanZoomLevel(LatLng center, LatLng span, Size viewSize) {
-    return impl.getSpanZoomLevel(jsoPeer, center, span, viewSize);
+    return MapTypeImpl.impl.getSpanZoomLevel(jsoPeer, center, span, viewSize);
   }
 
   /**
@@ -524,7 +522,7 @@ public final class MapType {
    * @return the color used for text displayed on the map
    */
   public String getTextColor() {
-    return impl.getTextColor(jsoPeer);
+    return MapTypeImpl.impl.getTextColor(jsoPeer);
   }
 
   /**
@@ -533,7 +531,7 @@ public final class MapType {
    * @return the tile layers
    */
   public TileLayer[] getTileLayers() {
-    JSList<TileLayer> layers = impl.getTileLayers(jsoPeer);
+    JSList<TileLayer> layers = MapTypeImpl.impl.getTileLayers(jsoPeer);
     TileLayer[] returnValue = new TileLayer[layers.size()];
     JsUtil.toArray(layers, returnValue);
     return returnValue;
@@ -545,7 +543,7 @@ public final class MapType {
    * @return the size of the tiles
    */
   public int getTileSize() {
-    return impl.getTileSize(jsoPeer);
+    return MapTypeImpl.impl.getTileSize(jsoPeer);
   }
 
   /**
@@ -557,7 +555,7 @@ public final class MapType {
    * @return the URL argument used to refer to this map type
    */
   public String getUrlArg() {
-    return impl.getUrlArg(jsoPeer);
+    return MapTypeImpl.impl.getUrlArg(jsoPeer);
   }
 
 }

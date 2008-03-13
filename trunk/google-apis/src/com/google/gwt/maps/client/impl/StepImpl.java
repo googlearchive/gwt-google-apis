@@ -27,16 +27,16 @@ import com.google.gwt.maps.client.geom.LatLng;
  */
 public interface StepImpl extends JSFlyweightWrapper {
 
-  StepImpl impl = (StepImpl) GWT.create(StepImpl.class);
+  StepImpl impl = GWT.create(StepImpl.class);
 
-  public String getDescriptionHtml(JavaScriptObject jsoPeer);
+  String getDescriptionHtml(JavaScriptObject jsoPeer);
 
-  public Distance getDistance(JavaScriptObject jsoPeer);
+  Distance getDistance(JavaScriptObject jsoPeer);
 
-  public Duration getDuration(JavaScriptObject jsoPeer);
+  Duration getDuration(JavaScriptObject jsoPeer);
 
-  public LatLng getLatLng(JavaScriptObject jsoPeer);
+  LatLng getLatLng(JavaScriptObject jsoPeer);
 
-  public int getPolylineIndex(JavaScriptObject jsoPeer);
+  int getPolylineIndex(JavaScriptObject jsoPeer);
 
 }

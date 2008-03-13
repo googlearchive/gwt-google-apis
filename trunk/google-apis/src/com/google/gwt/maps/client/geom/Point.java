@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,8 +25,6 @@ import com.google.gwt.maps.client.impl.PointImpl;
  */
 public final class Point {
 
-  private static final PointImpl impl = (PointImpl) GWT.create(PointImpl.class);
-
   // TODO: DELETE ME! (needs to function w/o)
   private static final Extractor __extractor = new Extractor() {
     public Object fromJS(JavaScriptObject jso) {
@@ -37,6 +35,8 @@ public final class Point {
       return ((Point) o).jsoPeer;
     }
   };
+
+  private static final PointImpl impl = GWT.create(PointImpl.class);
 
   static Point createPeer(JavaScriptObject jso) {
     return new Point(jso);
@@ -52,6 +52,7 @@ public final class Point {
     this.jsoPeer = jso;
   }
 
+  @Override
   public boolean equals(Object obj) {
     if (obj instanceof Point) {
       return impl.equals(jsoPeer, (Point) obj);
@@ -62,11 +63,17 @@ public final class Point {
   public int getX() {
     return impl.getX(jsoPeer);
   }
-
+  
   public int getY() {
     return impl.getY(jsoPeer);
   }
 
+  @Override
+  public int hashCode() {
+    return getX() + (101 * getY());
+  }
+
+  @Override
   public String toString() {
     return impl.toString(jsoPeer);
   }

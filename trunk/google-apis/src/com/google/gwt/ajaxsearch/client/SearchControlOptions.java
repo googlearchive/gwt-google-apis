@@ -92,7 +92,7 @@ public final class SearchControlOptions {
    *          SearchControl
    */
   public void add(Search s, ExpandMode expandMode) {
-    GsearcherOptions options = (GsearcherOptions) GWT.create(GsearcherOptions.class);
+    GsearcherOptions options = GWT.create(GsearcherOptions.class);
     options.setExpandMode(expandMode.getValue());
 
     searchers.add(s);

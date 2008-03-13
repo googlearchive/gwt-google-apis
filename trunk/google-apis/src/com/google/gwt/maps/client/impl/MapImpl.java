@@ -37,142 +37,142 @@ import com.google.gwt.user.client.Element;
  */
 public interface MapImpl extends JSFlyweightWrapper {
 
-  public static final MapImpl impl = (MapImpl) GWT.create(MapImpl.class);
+  MapImpl impl = GWT.create(MapImpl.class);
 
-  public void addControl(JavaScriptObject jsoPeer, Control control);
+  void addControl(JavaScriptObject jsoPeer, Control control);
 
-  public void addControl(JavaScriptObject jsoPeer, Control control,
+  void addControl(JavaScriptObject jsoPeer, Control control,
       ControlPosition position);
 
-  public void addMapType(JavaScriptObject jsoPeerPeer, MapType type);
+  void addMapType(JavaScriptObject jsoPeerPeer, MapType type);
 
-  public void addOverlay(JavaScriptObject jsoPeer, Overlay overlay);
+  void addOverlay(JavaScriptObject jsoPeer, Overlay overlay);
 
   @Binding
-  public void bind(JavaScriptObject jsoPeer, MapWidget map);
+  void bind(JavaScriptObject jsoPeer, MapWidget map);
 
   // Notifies the map of a change of the size of its container. Call this method
   // after the size of the container DOM object has changed, so that the map can
   // adjust itself to fit the new size.
-  public void checkResize(JavaScriptObject jsoPeer);
+  void checkResize(JavaScriptObject jsoPeer);
 
-  public void clearOverlays(JavaScriptObject jsoPeer);
+  void clearOverlays(JavaScriptObject jsoPeer);
 
-  public void closeInfoWindow(MapWidget map);
-
-  @Constructor("$wnd.GMap2")
-  public JavaScriptObject construct(Element container);
+  void closeInfoWindow(MapWidget map);
 
   @Constructor("$wnd.GMap2")
-  public JavaScriptObject construct(Element container,
+  JavaScriptObject construct(Element container);
+
+  @Constructor("$wnd.GMap2")
+  JavaScriptObject construct(Element container,
       JavaScriptObject mapOptions);
 
-  public boolean continuousZoomEnabled(JavaScriptObject jsoPeer);
+  boolean continuousZoomEnabled(JavaScriptObject jsoPeer);
 
-  public void disableContinuousZoom(JavaScriptObject jsoPeer);
+  void disableContinuousZoom(JavaScriptObject jsoPeer);
 
-  public void disableDoubleClickZoom(JavaScriptObject jsoPeer);
+  void disableDoubleClickZoom(JavaScriptObject jsoPeer);
 
-  public void disableDragging(JavaScriptObject jsoPeer);
+  void disableDragging(JavaScriptObject jsoPeer);
 
-  public void disableInfoWindow(JavaScriptObject jsoPeer);
+  void disableInfoWindow(JavaScriptObject jsoPeer);
 
-  public void disableScrollWheelZoom(JavaScriptObject jsoPeer);
+  void disableScrollWheelZoom(JavaScriptObject jsoPeer);
 
-  public boolean doubleClickZoomEnabled(JavaScriptObject jsoPeer);
+  boolean doubleClickZoomEnabled(JavaScriptObject jsoPeer);
 
-  public boolean draggingEnabled(JavaScriptObject jsoPeer);
+  boolean draggingEnabled(JavaScriptObject jsoPeer);
 
-  public void enableContinuousZoom(JavaScriptObject jsoPeer);
+  void enableContinuousZoom(JavaScriptObject jsoPeer);
 
-  public void enableDoubleClickZoom(JavaScriptObject jsoPeer);
+  void enableDoubleClickZoom(JavaScriptObject jsoPeer);
 
-  public void enableDragging(JavaScriptObject jsoPeer);
+  void enableDragging(JavaScriptObject jsoPeer);
 
-  public void enableInfoWindow(JavaScriptObject jsoPeer);
+  void enableInfoWindow(JavaScriptObject jsoPeer);
 
-  public void enableScrollWheelZoom(JavaScriptObject jsoPeer);
+  void enableScrollWheelZoom(JavaScriptObject jsoPeer);
 
-  public LatLng fromContainerPixelToLatLng(JavaScriptObject jsoPeer, Point pixel);
+  LatLng fromContainerPixelToLatLng(JavaScriptObject jsoPeer, Point pixel);
 
-  public LatLng fromDivPixelToLatLng(JavaScriptObject jsoPeer, Point pixel);
+  LatLng fromDivPixelToLatLng(JavaScriptObject jsoPeer, Point pixel);
 
-  public Point fromLatLngToDivPixel(JavaScriptObject jsoPeer, LatLng latlng);
+  Point fromLatLngToDivPixel(JavaScriptObject jsoPeer, LatLng latlng);
 
-  public LatLngBounds getBounds(JavaScriptObject jsoPeer);
+  LatLngBounds getBounds(JavaScriptObject jsoPeer);
 
-  public int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds);
+  int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds);
 
   // GLatLng Returns the geographical coordinates of the center point of the map
   // view.
-  public LatLng getCenter(JavaScriptObject jsoPeer);
+  LatLng getCenter(JavaScriptObject jsoPeer);
 
-  public MapType getCurrentMapType(JavaScriptObject jsoPeerPeer);
+  MapType getCurrentMapType(JavaScriptObject jsoPeerPeer);
 
-  public JavaScriptObject getInfoWindow(MapWidget map);
+  JavaScriptObject getInfoWindow(MapWidget map);
 
   // Replaced by getElement()?
   // public Element getContainer(JavaScriptObject jsoPeer);
   //  
-  public JSList<MapType> getMapTypes(JavaScriptObject jsoPeerPeer);
+  JSList<MapType> getMapTypes(JavaScriptObject jsoPeerPeer);
 
-  public Element getPane(MapWidget map, int id);
+  Element getPane(MapWidget map, int id);
 
-  public Size getSize(JavaScriptObject jsoPeer);
+  Size getSize(JavaScriptObject jsoPeer);
 
-  public int getZoom(JavaScriptObject jsoPeer);
+  int getZoom(JavaScriptObject jsoPeer);
 
-  public boolean infoWindowEnabled(JavaScriptObject jsoPeer);
+  boolean infoWindowEnabled(JavaScriptObject jsoPeer);
 
   @Constructor("$wnd.GKeyboardHandler")
-  public JavaScriptObject installKeyboardHandler(MapWidget map);
+  JavaScriptObject installKeyboardHandler(MapWidget map);
 
   // Boolean Returns true iff the map was initialized by setCenter() since it
   // was created.
-  public boolean isLoaded(JavaScriptObject jsoPeer);
+  boolean isLoaded(JavaScriptObject jsoPeer);
 
-  public void openInfoWindow(MapWidget map, LatLng point, JavaScriptObject content,
+  void openInfoWindow(MapWidget map, LatLng point, JavaScriptObject content,
       JavaScriptObject options);
   
-  public void openInfoWindow(MapWidget map, LatLng point, String content,
+  void openInfoWindow(MapWidget map, LatLng point, String content,
       JavaScriptObject options);
 
-  public void openInfoWindowTabs(MapWidget map, LatLng point,
+  void openInfoWindowTabs(MapWidget map, LatLng point,
       JavaScriptObject content, JavaScriptObject options);
 
-  public void panBy(JavaScriptObject jsoPeer, Size distance);
+  void panBy(JavaScriptObject jsoPeer, Size distance);
 
-  public void panDirection(JavaScriptObject jsoPeer, int dx, int dy);
+  void panDirection(JavaScriptObject jsoPeer, int dx, int dy);
 
-  public void panTo(JavaScriptObject jsoPeer, LatLng center);
+  void panTo(JavaScriptObject jsoPeer, LatLng center);
 
-  public void removeControl(JavaScriptObject jsoPeer, Control control);
+  void removeControl(JavaScriptObject jsoPeer, Control control);
 
-  public void removeMapType(JavaScriptObject jsoPeerPeer, MapType type);
+  void removeMapType(JavaScriptObject jsoPeerPeer, MapType type);
 
-  public void removeOverlay(JavaScriptObject jsoPeer, Overlay overlay);
+  void removeOverlay(JavaScriptObject jsoPeer, Overlay overlay);
 
-  public void returnToSavedPosition(JavaScriptObject jsoPeer);
+  void returnToSavedPosition(JavaScriptObject jsoPeer);
 
-  public void savePosition(JavaScriptObject jsoPeer);
+  void savePosition(JavaScriptObject jsoPeer);
 
-  public boolean scrollWheelZoomEnabled(JavaScriptObject jsoPeer);
+  boolean scrollWheelZoomEnabled(JavaScriptObject jsoPeer);
 
-  public void setCenter(JavaScriptObject jsoPeer, LatLng center);
+  void setCenter(JavaScriptObject jsoPeer, LatLng center);
 
-  public void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom);
+  void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom);
 
-  public void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom,
+  void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom,
       MapType type);
 
-  public void setMapType(JavaScriptObject jsoPeerPeer, MapType type);
+  void setMapType(JavaScriptObject jsoPeerPeer, MapType type);
 
-  public void setZoom(JavaScriptObject jsoPeer, int level);
+  void setZoom(JavaScriptObject jsoPeer, int level);
 
-  public void showMapBlowup(MapWidget map, LatLng point, JavaScriptObject options);
+  void showMapBlowup(MapWidget map, LatLng point, JavaScriptObject options);
 
-  public void zoomIn(JavaScriptObject jsoPeer);
+  void zoomIn(JavaScriptObject jsoPeer);
 
-  public void zoomOut(JavaScriptObject jsoPeer);
+  void zoomOut(JavaScriptObject jsoPeer);
 
 }

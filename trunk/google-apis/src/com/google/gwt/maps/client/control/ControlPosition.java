@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -49,7 +49,7 @@ public final class ControlPosition {
 
   private final JavaScriptObject jsoPeer;
 
-  // TODO: size or ints
+  // TODO(samgross): size or ints
   public ControlPosition(ControlAnchor anchor, int offsetX, int offsetY) {
     jsoPeer = ControlPositionImpl.impl.construct(anchor.value, new Size(offsetX, offsetY));
   }

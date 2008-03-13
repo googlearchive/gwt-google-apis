@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,12 +22,12 @@ import com.google.gwt.maps.client.overlay.Marker;
  */
 public interface MarkerMouseListener {
 
-  public void onMouseDown(Marker sender);
+  void onMouseDown(Marker sender);
 
-  public void onMouseOut(Marker sender);
+  void onMouseOut(Marker sender);
 
-  public void onMouseOver(Marker sender);
+  void onMouseOver(Marker sender);
 
-  public void onMouseUp(Marker sender);
+  void onMouseUp(Marker sender);
 
 }

@@ -27,33 +27,33 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 public interface LatLngBoundsImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GLatLngBounds")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
   @Constructor("$wnd.GLatLngBounds")
-  public JavaScriptObject construct(LatLng southWest, LatLng northEast);
+  JavaScriptObject construct(LatLng southWest, LatLng northEast);
 
-  public boolean contains(JavaScriptObject jsoPeer, LatLng coordinate);
+  boolean contains(JavaScriptObject jsoPeer, LatLng coordinate);
 
-  public boolean containsBounds(JavaScriptObject jsoPeer, LatLngBounds other);
+  boolean containsBounds(JavaScriptObject jsoPeer, LatLngBounds other);
 
-  public boolean equals(JavaScriptObject jsoPeer, LatLngBounds other);
+  boolean equals(JavaScriptObject jsoPeer, LatLngBounds other);
 
-  public void extend(JavaScriptObject jsoPeer, LatLng coordinate);
+  void extend(JavaScriptObject jsoPeer, LatLng coordinate);
 
-  public LatLng getCenter(JavaScriptObject jsoPeer);
+  LatLng getCenter(JavaScriptObject jsoPeer);
 
-  public LatLng getNorthEast(JavaScriptObject jsoPeer);
+  LatLng getNorthEast(JavaScriptObject jsoPeer);
 
-  public LatLng getSouthWest(JavaScriptObject jsoPeer);
+  LatLng getSouthWest(JavaScriptObject jsoPeer);
 
-  public boolean intersects(JavaScriptObject jsoPeer, LatLngBounds other);
+  boolean intersects(JavaScriptObject jsoPeer, LatLngBounds other);
 
-  public boolean isEmpty(JavaScriptObject jsoPeer);
+  boolean isEmpty(JavaScriptObject jsoPeer);
 
-  public boolean isFullLat(JavaScriptObject jsoPeer);
+  boolean isFullLat(JavaScriptObject jsoPeer);
 
-  public boolean isFullLng(JavaScriptObject jsoPeer);
+  boolean isFullLng(JavaScriptObject jsoPeer);
 
-  public LatLng toSpan(JavaScriptObject jsoPeer);
+  LatLng toSpan(JavaScriptObject jsoPeer);
 
 }

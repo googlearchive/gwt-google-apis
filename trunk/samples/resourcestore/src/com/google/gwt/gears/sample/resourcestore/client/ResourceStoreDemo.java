@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -99,10 +99,12 @@ public class ResourceStoreDemo implements EntryPoint {
     try {
       int pendingCaptureId = resourceStore.captureURLs(FILES_TO_CAPTURE,
           new URLCaptureCallback() {
+            @Override
             public void onCaptureFailure(String url, int captureId) {
               statusLabel.setText("Failed to capture URL: " + url);
             }
 
+            @Override
             public void onCaptureSuccess(String url, int captureId) {
               statusLabel.setText("Captured URL: " + url);
             }

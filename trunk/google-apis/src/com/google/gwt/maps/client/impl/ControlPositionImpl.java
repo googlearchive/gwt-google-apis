@@ -26,9 +26,9 @@ import com.google.gwt.maps.client.geom.Size;
  */
 public interface ControlPositionImpl extends JSFlyweightWrapper {
  
-  public static final ControlPositionImpl impl = (ControlPositionImpl) GWT.create(ControlPositionImpl.class);
+  ControlPositionImpl impl = GWT.create(ControlPositionImpl.class);
 
   @Constructor("$wnd.GControlPosition")
-  public JavaScriptObject construct(int anchor, Size offset);
+  JavaScriptObject construct(int anchor, Size offset);
 
 }

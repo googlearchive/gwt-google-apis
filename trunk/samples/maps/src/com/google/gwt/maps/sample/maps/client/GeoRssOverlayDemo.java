@@ -125,7 +125,7 @@ public class GeoRssOverlayDemo extends MapsDemo {
             geoXml = overlay;
             toggleButton.setEnabled(true);
             map.addOverlay(geoXml);
-            GWT.log("GeoRss File " + url + "loaded sucessfully", null);
+            GWT.log("GeoRss File " + url + "loaded successfully", null);
             GWT.log("Default Center=" + geoXml.getDefaultCenter(), null);
             GWT.log("Default Span=" + geoXml.getDefaultSpan(), null);
             GWT.log("Default Bounds=" + geoXml.getDefaultBounds(), null);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -51,7 +51,7 @@ public class AppController {
 
   private NoteServiceAsync rpc = null;
 
-  private HashMap noteData = new HashMap();
+  private HashMap<String,Note> noteData = new HashMap<String,Note>();
 
   private int rpcCntdown = TICKS_PER_RPC;
 
@@ -62,7 +62,7 @@ public class AppController {
    */
   public AppController() {
     // set up RPC handles
-    rpc = (NoteServiceAsync) GWT.create(NoteService.class);
+    rpc = GWT.create(NoteService.class);
     String rpcUrl = GWT.getModuleBaseURL() + "rpc";
     ((ServiceDefTarget) rpc).setServiceEntryPoint(rpcUrl);
 
@@ -83,7 +83,7 @@ public class AppController {
       public void onChange(Widget sender) {
         String newName = rtw.getName();
         if (noteData.containsKey(newName)) {
-          Note n = (Note) noteData.get(newName);
+          Note n = noteData.get(newName);
           if (!rtw.getHTML().equals(n.getText())) {
             rtw.setHTML(n.getText());
           }
@@ -103,6 +103,7 @@ public class AppController {
     init();
 
     Timer t = new Timer() {
+      @Override
       public void run() {
         if (!ready) {
           return;
@@ -124,7 +125,7 @@ public class AppController {
     
     // init the dirty-testing code
     localDirty = false;
-    Note def = (Note)noteData.get("default");
+    Note def = noteData.get("default");
     if (def != null) {
       lastData = def.getText();
     }
@@ -157,7 +158,7 @@ public class AppController {
       }
     }
     if (isInit) {
-      n = (Note) noteData.get("default");
+      n = noteData.get("default");
       if (n != null) {
         rtw.setHTML(n.getText());
       }
@@ -174,13 +175,12 @@ public class AppController {
    *          in an attempt to sync from the Gears database
    */
   protected void syncFromServer(final boolean isInit) {
-    rpc.getNotes(new AsyncCallback() {
+    rpc.getNotes(new AsyncCallback<Note[]>() {
       public void onFailure(Throwable caught) {
         ready = true;
       }
 
-      public void onSuccess(Object result) {
-        Note[] notes = (Note[]) result;
+      public void onSuccess(Note[] notes) {
         if (notes == null) {
           ready = true;
           return;
@@ -199,7 +199,7 @@ public class AppController {
           }
 
           // record exists -- check if server version is more recent & handle it
-          Note current = (Note) noteData.get(n.getName());
+          Note current = noteData.get(n.getName());
           if (!current.getVersion().equals(n.getVersion())) {
             current.setVersion(n.getVersion());
             if (current.getText().equals(n.getText())) {
@@ -231,7 +231,7 @@ public class AppController {
 
         // in the special case of startup, check for default value
         if (isInit) {
-          Note def = (Note) noteData.get("default");
+          Note def = noteData.get("default");
           if (def != null) {
             rtw.setHTML(def.getText());
           }
@@ -243,7 +243,7 @@ public class AppController {
 
   /**
    * Uploads the current set of dirty (modified) notes to the server, and upon
-   * acknowledgement of that, fetches the server's set of data.
+   * acknowledgment of that, fetches the server's set of data.
    */
   protected void syncToServer(final boolean isInit) {
     // temporarily stall the main timer loop until we're done
@@ -251,17 +251,17 @@ public class AppController {
 
     // convert our Map of notes into an array
     Note[] notes = new Note[noteData.size()];
-    Iterator it = noteData.values().iterator();
+    Iterator<Note> it = noteData.values().iterator();
     for (int i = 0; it.hasNext(); ++i) {
-      notes[i] = (Note) it.next();
+      notes[i] = it.next();
     }
 
     // upload our current data
-    rpc.setNotes(notes, new AsyncCallback() {
+    rpc.setNotes(notes, new AsyncCallback<Void>() {
       public void onFailure(Throwable caught) {
         // next call is also likely to fail, so don't bother to try
         if (isInit) {
-          Note def = (Note) noteData.get("default");
+          Note def = noteData.get("default");
           if (def != null) {
             rtw.setHeight(def.getText());
           }
@@ -269,7 +269,7 @@ public class AppController {
         ready = true;
       }
 
-      public void onSuccess(Object result) {
+      public void onSuccess(Void result) {
         // it worked: now request server's data
         syncFromServer(isInit); // releases 'ready' later
       }
@@ -307,8 +307,8 @@ public class AppController {
     }
 
     if (noteData.containsKey(curName)) {
-      // fetch the lastest data for the note the user is trying to look at
-      Note n = (Note) noteData.get(curName);
+      // fetch the latest data for the note the user is trying to look at
+      Note n = noteData.get(curName);
       if (!n.getText().equals(curData)) {
         // if the UI doesn't currently show latest data, update it
         n.setText(curData);
@@ -322,10 +322,10 @@ public class AppController {
     }
 
     // add all the notes to the options list
-    Iterator it = noteData.keySet().iterator();
+    Iterator<String> it = noteData.keySet().iterator();
     String[] names = new String[noteData.size()];
     for (int i = 0; it.hasNext(); ++i) {
-      names[i] = (String) it.next();
+      names[i] = it.next();
     }
     rtw.setNameOptions(names);
   }

@@ -28,14 +28,14 @@ import com.google.gwt.maps.client.geom.Point;
 public interface PointImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GPoint")
-  public JavaScriptObject construct(double x, double y);
+  JavaScriptObject construct(double x, double y);
 
-  public boolean equals(JavaScriptObject jso, Point other);
+  boolean equals(JavaScriptObject jso, Point other);
 
-  public int getX(JavaScriptObject jso);
+  int getX(JavaScriptObject jso);
 
-  public int getY(JavaScriptObject jso);
+  int getY(JavaScriptObject jso);
 
-  public String toString(JavaScriptObject jso);
+  String toString(JavaScriptObject jso);
 
 }

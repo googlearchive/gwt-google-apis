@@ -100,7 +100,7 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
     public abstract void callback();
   }
 
-  public static final EventImpl impl = (EventImpl) GWT.create(EventImpl.class);
+  public static final EventImpl impl = GWT.create(EventImpl.class);
 
   public JavaScriptObject addListener(JavaScriptObject source, MapEvent event,
       BooleanCallback handler) {

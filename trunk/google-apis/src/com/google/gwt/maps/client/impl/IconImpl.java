@@ -33,7 +33,7 @@ import com.google.gwt.maps.client.overlay.Icon;
 @BeanProperties
 public interface IconImpl extends JSFlyweightWrapper {
 
-  IconImpl impl = (IconImpl) GWT.create(IconImpl.class);
+  IconImpl impl = GWT.create(IconImpl.class);
 
   @Binding
   void bind(JavaScriptObject jsoPeer, Icon icon);

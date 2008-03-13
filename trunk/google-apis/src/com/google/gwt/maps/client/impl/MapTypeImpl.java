@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.client.impl;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
@@ -33,6 +34,7 @@ import com.google.gwt.maps.client.geom.Size;
  * A Flyweight style wrapper for the Maps JavaScript MapType class.
  */
 public interface MapTypeImpl extends JSFlyweightWrapper {
+  MapTypeImpl impl = GWT.create(MapTypeImpl.class);
 
   @Binding
   void bind(JavaScriptObject jsoPeer, MapType mapType);

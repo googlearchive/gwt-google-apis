@@ -20,6 +20,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListenerAdapter;
 import com.google.gwt.user.client.ui.Label;
@@ -32,6 +33,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * A text-editing widget suitable for use in the main panel of a GWT app.
@@ -59,7 +61,7 @@ public class RichTextWidget extends Composite {
 
   private String[] lastOptions = null;
 
-  private ArrayList nameListeners = new ArrayList();
+  private List<ChangeListener> nameListeners = new ArrayList<ChangeListener>();
 
   /**
    * Creates a new widget. This class needs access to certain fields and methods
@@ -78,12 +80,13 @@ public class RichTextWidget extends Composite {
 
     header.add(new Label("GWT GearsNote"));
 
-    header.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
+    header.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
     status = new Label("Ready");
     header.add(status);
 
     this.bodyWidget = new RichTextArea();
     bodyWidget.addKeyboardListener(new KeyboardListenerAdapter() {
+      @Override
       public void onKeyPress(Widget sender, char keyCode, int modifiers) {
         String newText = bodyWidget.getText();
         if (((newText == null) && (curText != null))
@@ -135,12 +138,12 @@ public class RichTextWidget extends Composite {
       }
     });
     HorizontalPanel tmp = new HorizontalPanel();
-    tmp.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
+    tmp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
     tmp.add(new Label("Note name:"));
     tmp.add(name);
     tmp.add(nameEdit);
     tmp.add(options);
-    controls.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
+    controls.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
     controls.setWidth("100%");
     controls.add(tmp);
     top.add(controls);
@@ -267,7 +270,7 @@ public class RichTextWidget extends Composite {
    */
   private void notifyNameListeners() {
     for (int i = 0; i < nameListeners.size(); ++i) {
-      ((ChangeListener) nameListeners.get(i)).onChange(this);
+      (nameListeners.get(i)).onChange(this);
     }
   }
 }

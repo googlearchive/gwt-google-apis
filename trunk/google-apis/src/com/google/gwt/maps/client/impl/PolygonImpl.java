@@ -28,17 +28,17 @@ import com.google.gwt.maps.client.overlay.Polygon;
  */
 public interface PolygonImpl extends JSFlyweightWrapper {
 
-  public static final PolygonImpl impl = (PolygonImpl) GWT.create(PolygonImpl.class);
+  PolygonImpl impl = GWT.create(PolygonImpl.class);
 
   @Constructor("$wnd.GPolygon")
-  public JavaScriptObject construct(JSList /* LatLng[] */points);
+  JavaScriptObject construct(JSList<LatLng> points);
 
   @Constructor("$wnd.GPolygon")
-  public JavaScriptObject construct(JSList /* LatLng[] */points,
+  JavaScriptObject construct(JSList<LatLng> points,
       String strokeColor, int strokeWeight, double strokeOpacity,
       String fillColor, double fillOpacity);
 
-  public LatLng getVertex(Polygon polygon, int index);
+  LatLng getVertex(Polygon polygon, int index);
 
-  public int getVertextCount(Polygon polygon);
+  int getVertextCount(Polygon polygon);
 }

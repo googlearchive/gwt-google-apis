@@ -22,31 +22,34 @@ import com.google.gwt.maps.client.impl.GeocodeCachePrototype;
 
 /**
  * 
+ * This class is both functional and a base class so the user can extend it.
  */
 public class GeocodeCache {
 
-  // TODO: this class is both functional and a "base" class the user should be
-  // able to extend.
-
-  // TODO: do we want to use the prototype pattern?
+  // TODO(zundel): Needs to be modeled after Overlay & ConcreteOverlay
+  // (prototype pattern?)
 
   static class ConcreteGeocodeCache extends GeocodeCache {
     public ConcreteGeocodeCache(JavaScriptObject jsoPeer) {
       super(jsoPeer);
     }
 
+    @Override
     public boolean isCacheable(JavaScriptObject reply) {
       return GeocodeCacheImpl.impl.isCachable(this, reply);
     }
 
+    @Override
     public void put(String address, JavaScriptObject reply) {
       GeocodeCacheImpl.impl.put(this, address, reply);
     }
 
+    @Override
     public void reset() {
       GeocodeCacheImpl.impl.reset(this);
     }
 
+    @Override
     public String toCanonical(String address) {
       return GeocodeCacheImpl.impl.toCanonical(this, address);
     }
@@ -67,13 +70,14 @@ public class GeocodeCache {
     this.jsoPeer = jsoPeer;
   }
 
-  // TODO: can we be more specific
+  // TODO: get() is too generic. Can we be more specific
   @Exported
   public JavaScriptObject get(String address) {
     return GeocodeCachePrototype.impl.get(this, address);
   }
 
-  // TODO: cacheable or cachable? I think cacheable is the preferred spelling,
+  // TODO(samgross): cacheable or cachable? I think cacheable is the preferred
+  // spelling,
   // but, Maps API uses cachable
 
   @Exported

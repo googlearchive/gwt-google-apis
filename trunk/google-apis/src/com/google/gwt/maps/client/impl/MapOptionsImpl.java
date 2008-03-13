@@ -27,12 +27,12 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 @BeanProperties
 public interface MapOptionsImpl extends JSFlyweightWrapper {
 
-  public static final MapOptionsImpl impl = (MapOptionsImpl) GWT.create(MapOptionsImpl.class);
+  MapOptionsImpl impl = GWT.create(MapOptionsImpl.class);
 
   @Constructor("Object")
-  public JavaScriptObject construct();
+  JavaScriptObject construct();
 
-  public void setDraggableCursor(JavaScriptObject jsoPeer, String cursor);
+  void setDraggableCursor(JavaScriptObject jsoPeer, String cursor);
 
-  public void setDraggingCursor(JavaScriptObject jsoPeer, String cursor);
+  void setDraggingCursor(JavaScriptObject jsoPeer, String cursor);
 }

@@ -26,26 +26,26 @@ import com.google.gwt.maps.client.geom.LatLng;
 public interface LatLngImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GLatLng")
-  public JavaScriptObject construct(double latitude, double longitude);
+  JavaScriptObject construct(double latitude, double longitude);
 
   @Constructor("$wnd.GLatLng")
-  public JavaScriptObject construct(double latitude, double longitude,
+  JavaScriptObject construct(double latitude, double longitude,
       boolean unbounded);
 
-  public double distanceFrom(JavaScriptObject jso, LatLng other);
+  double distanceFrom(JavaScriptObject jso, LatLng other);
 
-  public boolean equals(JavaScriptObject jso, LatLng other);
+  boolean equals(JavaScriptObject jso, LatLng other);
 
-  public double lat(JavaScriptObject jso);
+  double lat(JavaScriptObject jso);
 
-  public double latRadians(JavaScriptObject jso);
+  double latRadians(JavaScriptObject jso);
 
-  public double lng(JavaScriptObject jso);
+  double lng(JavaScriptObject jso);
 
-  public double lngRadians(JavaScriptObject jso);
+  double lngRadians(JavaScriptObject jso);
 
-  public String toString(JavaScriptObject jso);
+  String toString(JavaScriptObject jso);
 
-  public String toUrlValue(JavaScriptObject jso, int precision);
+  String toUrlValue(JavaScriptObject jso, int precision);
 
 }

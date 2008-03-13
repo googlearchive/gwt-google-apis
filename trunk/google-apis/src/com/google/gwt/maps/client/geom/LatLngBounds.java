@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,7 +25,7 @@ import com.google.gwt.maps.client.impl.LatLngBoundsImpl;
 public final class LatLngBounds {
 
   private static final LatLngBoundsImpl impl =
-      (LatLngBoundsImpl) GWT.create(LatLngBoundsImpl.class);
+      GWT.create(LatLngBoundsImpl.class);
 
   static LatLngBounds createPeer(JavaScriptObject jsoPeer) {
     return new LatLngBounds(jsoPeer);
@@ -53,13 +53,14 @@ public final class LatLngBounds {
     return impl.containsBounds(jsoPeer, other);
   }
 
+  @Override
   public boolean equals(Object other) {
     if (other instanceof LatLngBounds) {
       return impl.equals(jsoPeer, (LatLngBounds) other);
     }
     return false;
   }
-
+  
   public LatLngBounds extend(LatLng coordinate) {
     LatLngBounds extended = new LatLngBounds(getSouthWest(), getNorthEast());
     impl.extend(extended.jsoPeer, coordinate);
@@ -76,6 +77,11 @@ public final class LatLngBounds {
 
   public LatLng getSouthWest() {
     return impl.getSouthWest(jsoPeer);
+  }
+
+  @Override
+  public int hashCode() {
+    return getNorthEast().hashCode() ^ (37 * getSouthWest().hashCode());
   }
 
   public boolean intersects(LatLngBounds other) {

@@ -28,19 +28,19 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
  */
 public interface CopyrightCollectionImpl extends JSFlyweightWrapper {
 
-  public static final CopyrightCollectionImpl impl = (CopyrightCollectionImpl) GWT.create(CopyrightCollectionImpl.class);
+  CopyrightCollectionImpl impl = GWT.create(CopyrightCollectionImpl.class);
 
-  public void addCopyright(JavaScriptObject jsoPeer, Copyright copyright);
-
-  @Constructor("$wnd.GCopyrightCollection")
-  public JavaScriptObject construct();
+  void addCopyright(JavaScriptObject jsoPeer, Copyright copyright);
 
   @Constructor("$wnd.GCopyrightCollection")
-  public JavaScriptObject construct(String prefix);
+  JavaScriptObject construct();
 
-  public JavaScriptObject getCopyrightNotice(JavaScriptObject jsoPeer,
+  @Constructor("$wnd.GCopyrightCollection")
+  JavaScriptObject construct(String prefix);
+
+  JavaScriptObject getCopyrightNotice(JavaScriptObject jsoPeer,
       LatLngBounds bounds, int zoomLevel);
 
-  public JSList<String> getCopyrights(JavaScriptObject jsoPeer,
+  JSList<String> getCopyrights(JavaScriptObject jsoPeer,
       LatLngBounds bounds, int zoomLevel);
 }

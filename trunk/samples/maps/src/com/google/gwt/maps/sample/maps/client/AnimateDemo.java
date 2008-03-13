@@ -36,7 +36,7 @@ public class AnimateDemo extends MapsDemo {
       + "with the mouse.</p>\n"
       + "<p>After one second, the map will automatically scroll "
       + "diagonally.</p>\n"
-      + "<p>Eqivalent to the Maps JavaScript API Example: "
+      + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/map-animate.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/map-animate.html</a></p>\n";
 

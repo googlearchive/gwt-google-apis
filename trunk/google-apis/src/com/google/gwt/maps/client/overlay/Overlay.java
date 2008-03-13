@@ -27,9 +27,6 @@ public abstract class Overlay {
 
   /**
    * This class is used to wrap Overlays written entirely in JavaScript.
-   * 
-   * TODO: should this class be abstract? TODO: why is this concrete? TODO: why
-   * is this public?
    */
   public static class ConcreteOverlay extends Overlay {
     public ConcreteOverlay(JavaScriptObject jsoPeer) {
@@ -37,18 +34,22 @@ public abstract class Overlay {
       OverlayImpl.impl.bindConcreteOverlay(jsoPeer, this);
     }
 
+    @Override
     protected final Overlay copy() {
       return OverlayImpl.impl.copy(super.jsoPeer);
     }
 
+    @Override
     protected final void initialize(MapWidget map) {
       OverlayImpl.impl.initialize(super.jsoPeer, map);
     }
 
+    @Override
     protected final void redraw(boolean force) {
       OverlayImpl.impl.redraw(super.jsoPeer, force);
     }
 
+    @Override
     protected final void remove() {
       OverlayImpl.impl.remove(super.jsoPeer);
     }
@@ -60,7 +61,7 @@ public abstract class Overlay {
    * creating the 3D appearance of marker overlays.
    * 
    * @param latitutde
-   * @return
+   * @return a CSS z-index value
    */
   public static native int getZIndex(double latitutde) /*-{
     return $wnd.GOverlay.getZIndex(latitude);

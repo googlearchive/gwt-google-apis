@@ -26,10 +26,10 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 @BeanProperties
 public interface DistanceImpl extends JSFlyweightWrapper {
 
-  DistanceImpl impl = (DistanceImpl) GWT.create(DistanceImpl.class);
+  DistanceImpl impl = GWT.create(DistanceImpl.class);
 
-  public String getHtml(JavaScriptObject jsoPeer);
+  String getHtml(JavaScriptObject jsoPeer);
 
-  public int getMeters(JavaScriptObject jsoPeer);
+  int getMeters(JavaScriptObject jsoPeer);
 
 }

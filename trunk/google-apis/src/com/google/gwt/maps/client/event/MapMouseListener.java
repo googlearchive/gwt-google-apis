@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,10 +23,10 @@ import com.google.gwt.maps.client.geom.LatLng;
  */
 public interface MapMouseListener {
 
-  public void onMouseMove(MapWidget sender, LatLng latlng);
+  void onMouseMove(MapWidget sender, LatLng latlng);
 
-  public void onMouseOut(MapWidget sender, LatLng latlng);
+  void onMouseOut(MapWidget sender, LatLng latlng);
 
-  public void onMouseOver(MapWidget sender, LatLng latlng);
+  void onMouseOver(MapWidget sender, LatLng latlng);
 
 }

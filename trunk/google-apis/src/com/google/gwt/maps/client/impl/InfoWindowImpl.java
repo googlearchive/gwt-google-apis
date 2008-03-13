@@ -30,37 +30,37 @@ import com.google.gwt.user.client.Element;
  */
 public interface InfoWindowImpl extends JSFlyweightWrapper {
 
-  public static final InfoWindowImpl impl = (InfoWindowImpl) GWT.create(InfoWindowImpl.class);
+  InfoWindowImpl impl = GWT.create(InfoWindowImpl.class);
 
   @Constructor("$wnd.GInfoWindowTab")
-  public JavaScriptObject createInfoWindowTab(String label, String content);
+  JavaScriptObject createInfoWindowTab(String label, String content);
 
   @Constructor("$wnd.GInfoWindowTab")
-  public JavaScriptObject createInfoWindowTab(String label, Element content);
+  JavaScriptObject createInfoWindowTab(String label, Element content);
 
-  public JSList<Element> getContentContainers(JavaScriptObject jsoPeer);
+  JSList<Element> getContentContainers(JavaScriptObject jsoPeer);
 
-  public Size getPixelOffset(JavaScriptObject jsoPeer);
+  Size getPixelOffset(JavaScriptObject jsoPeer);
 
-  public LatLng getPoint(JavaScriptObject jsoPeer);
+  LatLng getPoint(JavaScriptObject jsoPeer);
 
-  public int getSelectedTab(JavaScriptObject jsoPeer);
+  int getSelectedTab(JavaScriptObject jsoPeer);
 
-  public void hide(JavaScriptObject jsoPeer);
+  void hide(JavaScriptObject jsoPeer);
 
-  public boolean isHidden(JavaScriptObject jsoPeer);
+  boolean isHidden(JavaScriptObject jsoPeer);
 
-  public void reset(JavaScriptObject jsoPeer, LatLng point,
+  void reset(JavaScriptObject jsoPeer, LatLng point,
       JSList<InfoWindowTab> tabs, Size size);
 
-  public void reset(JavaScriptObject jsoPeer, LatLng point,
+  void reset(JavaScriptObject jsoPeer, LatLng point,
       JSList<InfoWindowTab> tabs, Size size, Size offset);
 
-  public void reset(JavaScriptObject jsoPeer, LatLng point,
+  void reset(JavaScriptObject jsoPeer, LatLng point,
       JSList<InfoWindowTab> tabs, Size size, Size offset, int selectedTab);
 
-  public void selectTab(JavaScriptObject jsoPeer, int index);
+  void selectTab(JavaScriptObject jsoPeer, int index);
 
-  public void show(JavaScriptObject jsoPeer);
+  void show(JavaScriptObject jsoPeer);
 
 }

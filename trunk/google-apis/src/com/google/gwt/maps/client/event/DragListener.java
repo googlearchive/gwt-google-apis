@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,23 +26,23 @@ package com.google.gwt.maps.client.event;
  */
 public interface DragListener {
 
-  // TODO: how do we do the 'sender' for DragListeners since Map and Marker's
+  // TODO(samgross): how do we do the 'sender' for DragListeners since Map and Marker's
   // only common ancestor is Object? Separate listener interfaces for each?
   // Object sender?
 
   /**
    * Fired when the user drags the map.
    */
-  public void onDrag();
+  void onDrag();
 
   /**
    * Fired when the user finishes dragging the map.
    */
-  public void onDragEnd();
+  void onDragEnd();
 
   /**
    * Fired when the user begins dragging the map.
    */
-  public void onDragStart();
+  void onDragStart();
 
 }

@@ -28,7 +28,7 @@ import com.google.gwt.jsio.client.Binding;
  */
 public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
 
-  TileLayerOverlayImpl impl = (TileLayerOverlayImpl) GWT.create(TileLayerOverlayImpl.class);
+  TileLayerOverlayImpl impl = GWT.create(TileLayerOverlayImpl.class);
 
   @Binding
   void bind(JavaScriptObject jsoPeer, TileLayerOverlay overlay);

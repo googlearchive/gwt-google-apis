@@ -26,7 +26,7 @@ import com.google.gwt.jsio.client.JSOpaque;
  */
 public interface GblogSearch extends GSearch {
   JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GblogSearch.RESULT_CLASS");
-  GblogSearch IMPL = (GblogSearch) GWT.create(GblogSearch.class);
+  GblogSearch IMPL = GWT.create(GblogSearch.class);
 
   @Constructor("$wnd.GblogSearch")
   JavaScriptObject construct();

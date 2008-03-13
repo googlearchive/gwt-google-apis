@@ -29,7 +29,7 @@ import com.google.gwt.maps.client.overlay.MarkerOptions;
  */
 public interface MarkerImpl extends JSFlyweightWrapper {
 
-  MarkerImpl impl = (MarkerImpl) GWT.create(MarkerImpl.class);
+  MarkerImpl impl = GWT.create(MarkerImpl.class);
 
   @Constructor("$wnd.GMarker")
   JavaScriptObject construct(LatLng point);

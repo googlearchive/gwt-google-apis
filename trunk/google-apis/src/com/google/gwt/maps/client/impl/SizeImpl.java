@@ -28,14 +28,14 @@ import com.google.gwt.maps.client.geom.Size;
 public interface SizeImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GSize")
-  public JavaScriptObject construct(int width, int height);
+  JavaScriptObject construct(int width, int height);
 
-  public boolean equals(JavaScriptObject jso, Size other);
+  boolean equals(JavaScriptObject jso, Size other);
 
-  public int getHeight(JavaScriptObject jso);
+  int getHeight(JavaScriptObject jso);
 
-  public int getWidth(JavaScriptObject jso);
+  int getWidth(JavaScriptObject jso);
 
-  public String toString(JavaScriptObject jso);
+  String toString(JavaScriptObject jso);
 
 }

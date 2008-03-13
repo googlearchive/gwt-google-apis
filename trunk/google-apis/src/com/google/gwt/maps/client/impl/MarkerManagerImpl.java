@@ -29,26 +29,26 @@ import com.google.gwt.maps.client.overlay.MarkerManagerOptions;
  */
 public interface MarkerManagerImpl extends JSFlyweightWrapper {
 
-  public static final MarkerManagerImpl impl = (MarkerManagerImpl) GWT.create(MarkerManagerImpl.class);
+  MarkerManagerImpl impl = GWT.create(MarkerManagerImpl.class);
 
-  public void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom);
+  void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom);
 
-  public void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom,
+  void addMarker(JavaScriptObject jsoPeer, Marker marker, int minZoom,
       int maxZoom);
 
-  public void addMarkers(JavaScriptObject jsoPeer,
+  void addMarkers(JavaScriptObject jsoPeer,
       JSList<Marker> markers, int minZoom);
 
-  public void addMarkers(JavaScriptObject jsoPeer,
+  void addMarkers(JavaScriptObject jsoPeer,
       JSList<Marker> markers, int minZoom, int maxZoom);
 
   @Constructor("$wnd.GMarkerManager")
-  public JavaScriptObject construct(MapWidget map);
+  JavaScriptObject construct(MapWidget map);
 
   @Constructor("$wnd.GMarkerManager")
-  public JavaScriptObject construct(MapWidget map, MarkerManagerOptions options);
+  JavaScriptObject construct(MapWidget map, MarkerManagerOptions options);
 
-  public int getMarkerCount(JavaScriptObject jsoPeer, int zoomLevel);
+  int getMarkerCount(JavaScriptObject jsoPeer, int zoomLevel);
 
-  public void refresh(JavaScriptObject jsoPeer);
+  void refresh(JavaScriptObject jsoPeer);
 }

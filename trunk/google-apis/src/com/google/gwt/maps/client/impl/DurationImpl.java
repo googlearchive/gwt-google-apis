@@ -26,10 +26,10 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 @BeanProperties
 public interface DurationImpl extends JSFlyweightWrapper {
 
-  static final DurationImpl impl = (DurationImpl) GWT.create(DurationImpl.class);
+  DurationImpl impl = GWT.create(DurationImpl.class);
 
-  public String getHtml(JavaScriptObject jsoPeer);
+  String getHtml(JavaScriptObject jsoPeer);
 
-  public int getSeconds(JavaScriptObject jsoPeer);
+  int getSeconds(JavaScriptObject jsoPeer);
 
 }

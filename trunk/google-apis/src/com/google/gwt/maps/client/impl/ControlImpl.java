@@ -27,26 +27,26 @@ import com.google.gwt.maps.client.control.Control.CustomControl;
  */
 public interface ControlImpl extends JSFlyweightWrapper {
   
-  public static ControlImpl impl = (ControlImpl) GWT.create(ControlImpl.class);
+  ControlImpl impl = GWT.create(ControlImpl.class);
 
   @Binding
-  public void bind(JavaScriptObject jsoPeer, CustomControl control);
+  void bind(JavaScriptObject jsoPeer, CustomControl control);
 
   @Constructor("$wnd.GControl")
-  public JavaScriptObject createControl(boolean printable, boolean selectable);
+  JavaScriptObject createControl(boolean printable, boolean selectable);
 
   @Constructor("$wnd.GLargeMapControl")
-  public JavaScriptObject createLargeMapControl();
+  JavaScriptObject createLargeMapControl();
 
   @Constructor("$wnd.GMapTypeControl")
-  public JavaScriptObject createMapTypeControl();
+  JavaScriptObject createMapTypeControl();
 
   @Constructor("$wnd.GScaleControl")
-  public JavaScriptObject createScaleControl();
+  JavaScriptObject createScaleControl();
   
   @Constructor("$wnd.GSmallMapControl")
-  public JavaScriptObject createSmallMapControl();
+  JavaScriptObject createSmallMapControl();
   
   @Constructor("$wnd.GSmallZoomControl")
-  public JavaScriptObject createSmallZoomControl();
+  JavaScriptObject createSmallZoomControl();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,7 +24,7 @@ import com.google.gwt.maps.client.impl.SizeImpl;
  */
 public final class Size {
 
-  private static final SizeImpl impl = (SizeImpl) GWT.create(SizeImpl.class);
+  private static final SizeImpl impl = GWT.create(SizeImpl.class);
 
   static Size createPeer(JavaScriptObject jso) {
     return new Size(jso);
@@ -40,13 +40,14 @@ public final class Size {
     this.jsoPeer = jso;
   }
 
+  @Override
   public boolean equals(Object obj) {
     if (obj instanceof Size) {
-      return impl.equals((Size) obj);
+      return impl.equals(obj);
     }
     return false;
   }
-
+  
   public int getHeight() {
     return impl.getHeight(jsoPeer);
   }
@@ -55,6 +56,12 @@ public final class Size {
     return impl.getWidth(jsoPeer);
   }
 
+  @Override
+  public int hashCode() {
+    return getWidth() + (101 * getHeight());
+  }
+
+  @Override
   public String toString() {
     return impl.toString(jsoPeer);
   }
