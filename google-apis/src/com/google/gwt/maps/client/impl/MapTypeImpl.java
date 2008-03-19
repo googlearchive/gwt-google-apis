@@ -47,6 +47,8 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   JavaScriptObject construct(JSList<? extends TileLayer> layers, Projection projection,
       String name, MapTypeOptions opts);
 
+  String getAlt(JavaScriptObject jsoPeer);
+  
   int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds,
       Size viewSize);
 
