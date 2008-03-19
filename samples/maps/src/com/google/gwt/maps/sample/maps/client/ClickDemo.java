@@ -79,7 +79,7 @@ public class ClickDemo extends MapsDemo {
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
 
-    map.addClickListener(new MapClickListener() {
+    map.addMapClickListener(new MapClickListener() {
       @Override
       public void onClick(MapWidget sender, Overlay overlay, LatLng point) {
         if (overlay != null && overlay instanceof Marker) {

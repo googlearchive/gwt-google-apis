@@ -30,22 +30,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ * InfoWindowContent describes the type of content that can be displayed in an
+ * InfoWindow.
  */
 public class InfoWindowContent {
-
+  
+  /*
+   * Design Note: This class that wraps the GInfoWindowOptions object and enables
+   * us to unify the three Maps API classes for plain info windows (GInfoWindow),
+   * Info Windows with tabs (GInfoWindowTab) and blowup info windows into a
+   * unified InfoWindow class for the gwt-google-apis version of the Maps API.
+   */
+  
   /**
-   * 
+   * Class that allows access to one tab of a tabbed info window.
    */
   public static final class InfoWindowTab {
+
     // TODO: DELETE ME! (needs to function w/o)
-    private static final Extractor __extractor = new Extractor() {
-      public Object fromJS(JavaScriptObject jso) {
+    @SuppressWarnings("unused")
+    private static final Extractor<InfoWindowTab> __extractor = new Extractor<InfoWindowTab>() {
+      public InfoWindowTab fromJS(JavaScriptObject jso) {
         throw new UnsupportedOperationException();
       }
 
-      public JavaScriptObject toJS(Object o) {
-        return ((InfoWindowTab) o).jsoPeer;
+      public JavaScriptObject toJS(InfoWindowTab o) {
+        return o.jsoPeer;
       }
     };
 
@@ -53,15 +63,29 @@ public class InfoWindowContent {
 
     private final Widget widget;
 
+    /**
+     * Create a new tab on an InfoWindow with the specified HTML string as the
+     * content.
+     * 
+     * @param label The label to display on the tab.
+     * @param content The HTML data to display when the tab is in focus.
+     */
     public InfoWindowTab(String label, String content) {
       widget = null;
       jsoPeer = InfoWindowImpl.impl.createInfoWindowTab(label, content);
     }
 
+    /**
+     * Create a new tab on an InfoWindow with the specified GWT widget as the
+     * content.
+     * 
+     * @param label The label to display on the tab.
+     * @param content The widget to display when the tab is in focus.
+     */
     public InfoWindowTab(String label, Widget content) {
       widget = content;
-      jsoPeer =
-          InfoWindowImpl.impl.createInfoWindowTab(label, content.getElement());
+      jsoPeer = InfoWindowImpl.impl.createInfoWindowTab(label,
+          content.getElement());
     }
 
     protected Widget getWidget() {
@@ -70,13 +94,24 @@ public class InfoWindowContent {
   }
 
   /**
-   * 
+   * Class that represents the content of a blowup map.
    */
   public static final class MapBlowupContent extends InfoWindowContent {
+
+    /**
+     * Create a new blowup map with default parameters for map type and zoom
+     * level.
+     */
     public MapBlowupContent() {
       super(TYPE_MAP_BLOWUP);
     }
 
+    /**
+     * Create a new blowup map.
+     * 
+     * @param mapType The type of map to display in the blowup.
+     * @param zoomLevel The level of zoom to display in the blowup.
+     */
     public MapBlowupContent(MapType mapType, int zoomLevel) {
       super(TYPE_MAP_BLOWUP);
       InfoWindowOptionsImpl.impl.setMapType(super.options, mapType);
@@ -114,8 +149,7 @@ public class InfoWindowContent {
 
   private final JavaScriptObject content;
 
-  private final JavaScriptObject options =
-      InfoWindowOptionsImpl.impl.construct();
+  private final JavaScriptObject options = InfoWindowOptionsImpl.impl.construct();
 
   private final int type;
 
@@ -123,6 +157,11 @@ public class InfoWindowContent {
 
   private List<InfoWindowListener> infoWindowListeners = null;
 
+  /**
+   * Create a new InfoWindowContent object given an array of tabs.
+   * 
+   * @param tabs A populated array of tabs to display in an info window.
+   */
   public InfoWindowContent(InfoWindowTab[] tabs) {
     this.content = ((JSWrapper) JsUtil.toJsList(tabs)).getJavaScriptObject();
     this.type = TYPE_TABBED;
@@ -134,11 +173,24 @@ public class InfoWindowContent {
     }
   }
 
+  /**
+   * Create a new InfoWindowContent object given an array of tabs, setting the
+   * focus to a particular tab.
+   * 
+   * @param tabs A populated array of tabs to display in an info window.
+   * @param selectedTab The tab to select when the info window is displayed.
+   */
   public InfoWindowContent(InfoWindowTab[] tabs, int selectedTab) {
     this(tabs);
     InfoWindowOptionsImpl.impl.setSelectedTab(options, selectedTab);
   }
-  
+
+  /**
+   * Create a new InfoWindowContent object containing an HTML string to display
+   * in the window.
+   * 
+   * @param content An HTML string to display in the window.
+   */
   public InfoWindowContent(String content) {
     Element e = DOM.createDiv();
     DOM.setInnerHTML(e, content);
@@ -146,6 +198,11 @@ public class InfoWindowContent {
     this.type = TYPE_ELEMENT;
   }
 
+  /**
+   * Create the new InfoWindowContent object containing a GWT Widget.
+   * 
+   * @param content A widget to display in the window.
+   */
   public InfoWindowContent(Widget content) {
     this.content = content.getElement();
     this.type = TYPE_ELEMENT;
@@ -170,6 +227,11 @@ public class InfoWindowContent {
     infoWindowListeners.add(l);
   }
 
+  /**
+   * Remove any previously added InfoWindowListeners from this content object.
+   * This will only affect the object before the content is used to create a
+   * particular InfoWindow.
+   */
   public void removeInfoWindowListeners() {
     infoWindowListeners = null;
   }
@@ -228,7 +290,7 @@ public class InfoWindowContent {
    * close when the map is clicked. The default value is false
    * 
    * @param noCloseFlag Pass true to leave the window open when the map is
-   *        clicked.
+   *          clicked.
    */
   public void setNoCloseOnClick(boolean noCloseFlag) {
     InfoWindowOptionsImpl.impl.setNoCloseOnClick(options, noCloseFlag);
@@ -253,5 +315,4 @@ public class InfoWindowContent {
   protected List<Widget> getWidgets() {
     return widgets;
   }
-
 }

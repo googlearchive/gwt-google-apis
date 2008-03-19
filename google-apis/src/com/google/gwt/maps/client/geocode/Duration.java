@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,7 +19,11 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.DurationImpl;
 
 /**
- * 
+ * An object returned by
+ * {@link com.google.gwt.maps.client.geocode.DirectionResults#getDuration()}
+ * This object contains two fields: a number indicating the numeric value of the
+ * time (in seconds), and a string containing a localized string representation
+ * of the time.
  */
 public final class Duration {
 
@@ -33,10 +37,16 @@ public final class Duration {
     this.jsoPeer = jsoPeer;
   }
 
+  /**
+   * @return a string containing a localized string representation of the time.
+   */
   public String inLocalizedUnits() {
     return DurationImpl.impl.getHtml(jsoPeer);
   }
 
+  /**
+   * @return a number indicating the numeric value of the time (in seconds)
+   */
   public int inSeconds() {
     return DurationImpl.impl.getSeconds(jsoPeer);
   }

@@ -16,12 +16,21 @@
 package com.google.gwt.maps.client.geocode;
 
 /**
- * Used as an argument for the getLocations() method in  {@link com.google.gwt.maps.client.geocode.Geocoder}.
+ * Used as an argument for the getLocations() method in
+ * {@link com.google.gwt.maps.client.geocode.Geocoder#getLocations(String, LocationCallback)}.
  */
-//TODO(samgross): better names for interface and methods.
+// TODO(samgross): better names for interface and methods.
 public interface LocationCallback {
 
+  /**
+   * Called when the geocoding service fails.
+   * @param statusCode a value defined in {@link StatusCodes}
+   */
   void onFailure(int statusCode);
 
+  /**
+   * Called when the geocoding service returns a result successfully.
+   * @param locations an array of Placemarks that match the query.
+   */
   void onSuccess(Placemark[] locations);
 }

@@ -44,13 +44,14 @@ import com.google.gwt.maps.client.impl.MapTypeImpl;
 public final class MapType {
 
   // TODO: DELETE ME! (needs to function w/o)
-  private static final Extractor __extractor = new Extractor() {
-    public Object fromJS(JavaScriptObject jso) {
+  @SuppressWarnings("unused")
+  private static final Extractor<MapType> __extractor = new Extractor<MapType>() {
+    public MapType fromJS(JavaScriptObject jso) {
       return new MapType(jso);
     }
 
-    public JavaScriptObject toJS(Object o) {
-      return ((MapType) o).jsoPeer;
+    public JavaScriptObject toJS(MapType o) {
+      return o.jsoPeer;
     }
   };
 
@@ -369,7 +370,8 @@ public final class MapType {
    * @param name the name of the map type
    */
   public MapType(TileLayer[] layers, Projection projection, String name) {
-    jsoPeer = MapTypeImpl.impl.construct(JsUtil.toJsList(layers), projection, name);
+    jsoPeer = MapTypeImpl.impl.construct(JsUtil.toJsList(layers), projection,
+        name);
     MapTypeImpl.impl.bind(jsoPeer, this);
   }
 
@@ -384,7 +386,8 @@ public final class MapType {
    */
   public MapType(TileLayer[] layers, Projection projection, String name,
       MapTypeOptions options) {
-    jsoPeer = MapTypeImpl.impl.construct(JsUtil.toJsList(layers), projection, name, options);
+    jsoPeer = MapTypeImpl.impl.construct(JsUtil.toJsList(layers), projection,
+        name, options);
     MapTypeImpl.impl.bind(jsoPeer, this);
   }
 
@@ -392,6 +395,13 @@ public final class MapType {
     this.jsoPeer = jsoPeer;
   }
 
+  /**
+   * @return returns to the map the alternative text of this map type.
+   */
+  public String getAlt() {
+    return MapTypeImpl.impl.getAlt(jsoPeer);
+  }
+  
   /**
    * Returns the highest resolution zoom level that shows show the given
    * geographical bounds in a map of the given pixel size.
@@ -412,7 +422,8 @@ public final class MapType {
    * @return the copyrights corresponding to the given viewport
    */
   public String[] getCopyrights(LatLngBounds bounds, int zoomLevel) {
-    JSList<String> copyrights = MapTypeImpl.impl.getCopyrights(jsoPeer, bounds, zoomLevel);
+    JSList<String> copyrights = MapTypeImpl.impl.getCopyrights(jsoPeer, bounds,
+        zoomLevel);
     String[] returnValue = new String[copyrights.size()];
     JsUtil.toArray(copyrights, returnValue);
     return returnValue;

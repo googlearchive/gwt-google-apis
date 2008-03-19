@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,7 +19,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.DistanceImpl;
 
 /**
- * 
+ * The object contains two fields: a number called indicating the numeric value
+ * of the distance (in meters), and a string containing a localized string
+ * representation of the distance in the units that are predominant in the
+ * starting country of this set of directions.
  */
 public final class Distance {
 
@@ -33,12 +36,17 @@ public final class Distance {
     this.jsoPeer = jsoPeer;
   }
 
-  // TODO: better method names?
-
+  /**
+   * @return the distance in the units that are predominant in the starting
+   *         country of this set of directions.
+   */
   public String inLocalizedUnits() {
     return DistanceImpl.impl.getHtml(jsoPeer);
   }
 
+  /**
+   * @return the distance measured in meters.
+   */
   public int inMeters() {
     return DistanceImpl.impl.getMeters(jsoPeer);
   }

@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
+import com.google.gwt.jsio.client.JSOpaque;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.Control;
@@ -116,7 +117,7 @@ public interface MapImpl extends JSFlyweightWrapper {
   //  
   JSList<MapType> getMapTypes(JavaScriptObject jsoPeerPeer);
 
-  Element getPane(MapWidget map, int id);
+  Element getPane(MapWidget map, JSOpaque id);
 
   Size getSize(JavaScriptObject jsoPeer);
 

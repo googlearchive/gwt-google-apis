@@ -23,18 +23,22 @@ import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.maps.client.impl.TileLayerImpl;
 
 /**
- * 
+ * Implement this class in order to provide custom map tile layers, either
+ * through MapType or TileLayerOverlay.  An implementation should use an
+ * instance of TileLayer as a prototype, because this implements the copyright
+ * handling.
  */
 public abstract class TileLayer {
 
   // TODO: DELETE ME! (needs to function w/o)
-  private static final Extractor __extractor = new Extractor() {
-    public Object fromJS(JavaScriptObject jso) {
+  @SuppressWarnings("unused")
+  private static final Extractor<TileLayer> __extractor = new Extractor<TileLayer>() {
+    public TileLayer fromJS(JavaScriptObject jso) {
       return createPeer(jso);
     }
 
-    public JavaScriptObject toJS(Object o) {
-      return ((TileLayer) o).jsoPeer;
+    public JavaScriptObject toJS(TileLayer o) {
+      return o.jsoPeer;
     }
   };
 
@@ -59,6 +63,11 @@ public abstract class TileLayer {
 
   private final JavaScriptObject jsoPeer;
 
+  /**
+   * @param copyrights copyrights to use for copyright handling
+   * @param minResolution minimum zoom level to use for this tile layer
+   * @param maxResolution maximum zoom level to use for this tile layer
+   */
   public TileLayer(CopyrightCollection copyrights, int minResolution,
       int maxResolution) {
     jsoPeer = TileLayerImpl.impl.construct(copyrights, minResolution,
@@ -66,25 +75,64 @@ public abstract class TileLayer {
     TileLayerImpl.impl.bind(jsoPeer, this);
   }
 
+  /**
+   * Constructs a new TileLayer instance by wrapping an existing JavaScript instance
+   * of GTileLayer.
+   * 
+   * @param jsoPeer object to wrap.
+   */
   private TileLayer(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
 
+  /**
+   * Returns to the map type the highest zoom level of this tile layer.
+   * 
+   * @return the highest zoom level of this tile layer.
+   */
   public int getMaxResolution() {
     return TileLayerImpl.impl.maxResolution(this);
   }
 
+  /**
+   * Returns to the map type the lowest zoom level of this tile layer.
+   * 
+   * @return the the lowest zoom level of this tile layer.
+   */
   public int getMinResolution() {
     return TileLayerImpl.impl.minResolution(this);
   }
 
+  /**
+   * Returns to the map the opacity with which to display this tile
+   * layer. 1.0 is opaque, 0.0 is transparent.
+   * 
+   * @return the opacity value to use for this tile layer.
+   */
   @Exported
   public abstract double getOpacity();
 
+  /**
+   * Returns to the map the URL of the map tile with the tile indices
+   * given by the x and y properties of the Point, at the given zoom level.
+   * 
+   * @param tile index of tile to compute URL for
+   * @param zoomLevel zoom level to compute URL for
+   * @return a URL to use to fetch the tile at the specified point and zoom
+   *         level.
+   */
   @Exported
   @FieldName("getTileUrl")
   public abstract String getTileURL(Point tile, int zoomLevel);
 
+  /**
+   * Returns to the map the copyright messages for this tile layer
+   * that are pertinent for the given map region at the given zoom level. This
+   * is used to generate the copyright message of the GMapType to which this
+   * tile layer belongs.
+   * 
+   * @return A string representing the copyright messages.
+   */
   @Exported
   public abstract boolean isPng();
 

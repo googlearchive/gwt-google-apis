@@ -26,6 +26,15 @@ import com.google.gwt.maps.client.CopyrightCollection;
  */
 public interface CopyrightListener {
 
+  /**
+   * Called on a "newcopyright" event. This event is fired when a new copyright
+   * is added to the copyright collection of one of the tile layers contained in
+   * this map type.
+   * 
+   * @param sender the originator of this event.
+   * @param copyright the new copyright that was added.
+   */
+  
   void onNewCopyright(CopyrightCollection sender, Copyright copyright);
 
 }

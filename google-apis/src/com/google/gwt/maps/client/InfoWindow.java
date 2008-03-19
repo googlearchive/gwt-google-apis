@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -36,7 +36,12 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * There is only one instance of an {@link InfoWindow} per map.
+ * Each map within the Google Maps API may show a single "info window" of type
+ * InfoWindow, which displays HTML content in a floating window above the map.
+ * The info window looks a little like a comic-book word balloon; it has a
+ * content area and a tapered stem, where the tip of the stem is at a specified
+ * point on the map. You can see the info window in action by clicking a marker
+ * in Google Maps. 
  * 
  * @see MapWidget#getInfoWindow()
  */
@@ -142,10 +147,11 @@ public final class InfoWindow {
   /**
    * Opens the info window at the given point with the given content.
    * 
-   * If an info window is already open on the map
+   * If an info window is already open on the map.
    * 
-   * @param point
-   * @param content
+   * @param point position to use as the origin of the Info Window.
+   * @param content An object that is filled with the content to display in the
+   *          InfoWindow.
    */
   public void open(LatLng point, InfoWindowContent content) {
     beginAttach(content);
@@ -165,6 +171,13 @@ public final class InfoWindow {
     finishAttach(content);
   }
 
+  /**
+   * Create a new info window on a Marker.
+   * 
+   * @param marker Marker to open window over.
+   * @param content An object that is filled with the content to display in the
+   *          InfoWindow.
+   */
   public void open(Marker marker, InfoWindowContent content) {
     beginAttach(content);
     switch (content.getType()) {
@@ -183,6 +196,8 @@ public final class InfoWindow {
     finishAttach(content);
   }
 
+  // TODO(zundel): Implement reset?
+  
   /**
    * Selects the tab with the given index. This has the same effect as clicking
    * on the corresponding tab.

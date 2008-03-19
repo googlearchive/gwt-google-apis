@@ -18,8 +18,8 @@ package com.google.gwt.maps.sample.maps.client;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
-import com.google.gwt.maps.client.event.DragListener;
 import com.google.gwt.maps.client.event.MarkerClickListener;
+import com.google.gwt.maps.client.event.MarkerDragListener;
 import com.google.gwt.maps.client.event.MarkerMouseListener;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.VisibilityListener;
@@ -217,11 +217,11 @@ public class MarkerEventDemo extends MapsDemo {
           }
 
         };
-        marker.addClickListener(l);
+        marker.addMarkerClickListener(l);
         removeListenerButton.addClickListener(new ClickListener() {
 
           public void onClick(Widget sender) {
-            marker.removeClickListener(l);
+            marker.removeMarkerClickListener(l);
             // removeRowFromTable(nextListenerId);
           }
 
@@ -230,26 +230,26 @@ public class MarkerEventDemo extends MapsDemo {
         break;
 
       case DRAG_LISTENER: {
-        final DragListener l = new DragListener() {
+        final MarkerDragListener l = new MarkerDragListener() {
 
-          public void onDrag() {
+          public void onDrag(Marker sender) {
             textBox.setText(textBox.getText() + "onDrag() ");
           }
 
-          public void onDragEnd() {
+          public void onDragEnd(Marker sender) {
             textBox.setText(textBox.getText() + "onDragEnd() ");
           }
 
-          public void onDragStart() {
+          public void onDragStart(Marker sender) {
             textBox.setText(textBox.getText() + "onDragStart() ");
           }
         };
 
-        marker.addDragListener(l);
+        marker.addMarkerDragListener(l);
         removeListenerButton.addClickListener(new ClickListener() {
 
           public void onClick(Widget sender) {
-            marker.removeDragListener(l);
+            marker.removeMarkerDragListener(l);
             // removeRowFromTable(nextListenerId);
           }
         });
@@ -275,11 +275,11 @@ public class MarkerEventDemo extends MapsDemo {
           }
         };
 
-        marker.addMouseListener(l);
+        marker.addMarkerMouseListener(l);
         removeListenerButton.addClickListener(new ClickListener() {
 
           public void onClick(Widget sender) {
-            marker.removeMouseListener(l);
+            marker.removeMarkerMouseListener(l);
             // removeRowFromTable(nextListenerId);
           }
         });
@@ -430,10 +430,10 @@ public class MarkerEventDemo extends MapsDemo {
 
         switch (a) {
           case DRAG_LISTENER:
-            marker.clearDragListeners();
+            marker.clearMarkerDragListeners();
             break;
           case MARKER_CLICK_LISTENER:
-            marker.clearClickListeners();
+            marker.clearMarkerClickListeners();
             break;
           case MARKER_MOUSE_LISTENER:
             marker.clearMouseListeners();

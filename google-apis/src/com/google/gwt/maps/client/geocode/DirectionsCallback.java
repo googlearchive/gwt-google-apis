@@ -16,12 +16,25 @@
 package com.google.gwt.maps.client.geocode;
 
 /**
- * 
+ * An interface containing methods used to return results from a Directions
+ * query.
  */
 public interface DirectionsCallback {
 
+  /**
+   * Called when a Directions load() method fails.
+   * 
+   * @param statusCode A numeric value from the {@link StatusCodes} class.
+   */
   void onFailure(int statusCode);
 
+  /**
+   * Called when a Directions.load() query returns successfully.
+   * 
+   * @param result represents the set of results from the last successfully
+   *          loaded query. These results are valid until the next
+   *          load() request is made on the associated Directions object.
+   */
   void onSuccess(DirectionResults result);
 
 }

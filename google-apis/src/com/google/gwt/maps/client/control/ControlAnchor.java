@@ -13,23 +13,29 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.maps.client.impl;
+package com.google.gwt.maps.client.control;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
-import com.google.gwt.maps.client.geom.Size;
 
 /**
- * 
+ * Wraps the class GControlAnchor which is used by {@link ControlPosition} to determine
+ * which corner of the screen to use as an anchor for positioning a control.
  */
-public interface ControlPositionImpl extends JSFlyweightWrapper {
- 
-  ControlPositionImpl impl = GWT.create(ControlPositionImpl.class);
+public enum ControlAnchor {
 
-  @Constructor("$wnd.GControlPosition")
-  JavaScriptObject construct(JSOpaque anchor, Size offset);
+  BOTTOM_LEFT("$wnd.G_ANCHOR_BOTTOM_LEFT"), 
+  BOTTOM_RIGHT("$wnd.G_ANCHOR_BOTTOM_RIGHT"), 
+  TOP_LEFT("$wnd.G_ANCHOR_TOP_LEFT"), 
+  TOP_RIGHT("$wnd.G_ANCHOR_TOP_RIGHT");
+
+  private final JSOpaque value;
+
+  private ControlAnchor(String constantName) {
+    value = new JSOpaque(constantName);
+  }
+
+  JSOpaque getValue() {
+    return value;
+  }
 
 }

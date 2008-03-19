@@ -17,8 +17,8 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor; 
-import com.google.gwt.maps.client.event.DragListener;
 import com.google.gwt.maps.client.event.MarkerClickListener;
+import com.google.gwt.maps.client.event.MarkerDragListener;
 import com.google.gwt.maps.client.event.MarkerMouseListener;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.VisibilityListener;
@@ -64,7 +64,7 @@ public final class Marker extends ConcreteOverlay {
 
   // Keep track of JSO's registered for each instance of addXXXListener()
   private ListenerCollection<MarkerClickListener> clickListeners;
-  private ListenerCollection<DragListener> dragListeners;
+  private ListenerCollection<MarkerDragListener> dragListeners;
   private ListenerCollection<MarkerMouseListener> mouseListeners;
   private ListenerCollection<RemoveListener> removeListeners;
   private ListenerCollection<VisibilityListener> visibilityListeners;
@@ -101,7 +101,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param listener a click listener
    */
-  public void addClickListener(final MarkerClickListener listener) {
+  public void addMarkerClickListener(final MarkerClickListener listener) {
     if (clickListeners == null) {
       clickListeners = new ListenerCollection<MarkerClickListener>();
     }
@@ -127,29 +127,29 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param listener a drag event listener
    */
-  public void addDragListener(final DragListener listener) {
+  public void addMarkerDragListener(final MarkerDragListener listener) {
     if (dragListeners == null) {
-      dragListeners = new ListenerCollection<DragListener>();
+      dragListeners = new ListenerCollection<MarkerDragListener>();
     }
     JavaScriptObject[] dragEventHandles = {
         EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAGSTART,
             new VoidCallback() {
               @Override
               public void callback() {
-                listener.onDragStart();
+                listener.onDragStart(Marker.this);
               }
             }),
         EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAG, new VoidCallback() {
           @Override
           public void callback() {
-            listener.onDrag();
+            listener.onDrag(Marker.this);
           }
         }),
         EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAGEND,
             new VoidCallback() {
               @Override
               public void callback() {
-                listener.onDragEnd();
+                listener.onDragEnd(Marker.this);
               }
             })};
     dragListeners.addListener(listener, dragEventHandles);
@@ -160,7 +160,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param listener a mouse event listener
    */
-  public void addMouseListener(final MarkerMouseListener listener) {
+  public void addMarkerMouseListener(final MarkerMouseListener listener) {
     if (mouseListeners == null) {
       mouseListeners = new ListenerCollection<MarkerMouseListener>();
     }
@@ -239,7 +239,7 @@ public final class Marker extends ConcreteOverlay {
   /**
    * Remove all click listeners registered with this Marker.
    */
-  public void clearClickListeners() {
+  public void clearMarkerClickListeners() {
     if (clickListeners != null) {
       clickListeners.clearListeners();
     }
@@ -248,7 +248,7 @@ public final class Marker extends ConcreteOverlay {
   /**
    * Remove all drag listeners registered with this Marker.
    */
-  public void clearDragListeners() {
+  public void clearMarkerDragListeners() {
     if (dragListeners != null) {
       dragListeners.clearListeners();
     }
@@ -326,7 +326,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param listener click listener events to remove
    */
-  public void removeClickListener(MarkerClickListener listener) {
+  public void removeMarkerClickListener(MarkerClickListener listener) {
     if (clickListeners != null) {
       clickListeners.removeListener(listener);
     }
@@ -337,7 +337,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param listener drag listener events to remove
    */
-  public void removeDragListener(DragListener listener) {
+  public void removeMarkerDragListener(MarkerDragListener listener) {
     if (dragListeners != null) {
       dragListeners.removeListener(listener);
     }
@@ -348,7 +348,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param listener mouse listener to remove
    */
-  public void removeMouseListener(MarkerMouseListener listener) {
+  public void removeMarkerMouseListener(MarkerMouseListener listener) {
     if (mouseListeners != null) {
       mouseListeners.removeListener(listener);
     }

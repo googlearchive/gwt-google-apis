@@ -124,7 +124,7 @@ public class IconClassDemo extends MapsDemo {
     options.setIcon(icon);
     final Marker marker = new Marker(point, options);
 
-    marker.addClickListener(new MarkerClickListener() {
+    marker.addMarkerClickListener(new MarkerClickListener() {
       public void onClick(Marker sender) {
         InfoWindow info = map.getInfoWindow();
         info.open(sender, new InfoWindowContent("Marker <b>" + letter + "</b>"));
