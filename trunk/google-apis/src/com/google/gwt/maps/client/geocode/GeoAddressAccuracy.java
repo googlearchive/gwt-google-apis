@@ -16,8 +16,9 @@
 package com.google.gwt.maps.client.geocode;
 
 /**
- * 
+ * These constant values are returned by {@link Placemark#getAccuracy()}.
  */
+// TODO(zundel): should this be an enum?
 public final class GeoAddressAccuracy {
 
   public static final int UNKNOWN_LOCATION = 0;

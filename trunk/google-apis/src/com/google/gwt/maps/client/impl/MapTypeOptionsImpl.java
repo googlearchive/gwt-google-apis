@@ -24,7 +24,6 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 /**
  * This class corresponds to the GMapTypeOptions class in the Maps JavaScript
  * API.
- * 
  */
 @BeanProperties
 public interface MapTypeOptionsImpl extends JSFlyweightWrapper {

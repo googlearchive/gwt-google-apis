@@ -17,6 +17,7 @@ package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
 import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.control.Control.CustomControl;
@@ -39,7 +40,12 @@ public class MapTypeDemo extends MapsDemo {
     private final HashMap<String, MapType> mapTypes = new HashMap<String, MapType>();
 
     DemoCustomMapTypeControl() {
-      super(new ControlPosition(ControlPosition.TOP_RIGHT, 7, 7));
+      super(new ControlPosition(ControlAnchor.TOP_RIGHT, 7, 7));
+    }
+
+    @Override
+    public boolean isSelectable() {
+      return true;
     }
 
     @Override

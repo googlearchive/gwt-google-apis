@@ -69,7 +69,9 @@ public final class CopyrightCollection {
     CopyrightCollectionImpl.impl.addCopyright(jsoPeer, copyright);
   }
 
+  // TODO: Implement copyright listener for 'newcopyright' event. See issue 95.
   public void addCopyrightListener(CopyrightListener listener) {
+    throw new UnsupportedOperationException();
   }
 
   public void clearCopyrightListeners() {

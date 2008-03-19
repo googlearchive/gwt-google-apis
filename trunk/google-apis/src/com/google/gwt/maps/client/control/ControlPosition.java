@@ -20,40 +20,41 @@ import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.ControlPositionImpl;
 
 /**
- * 
+ * This class described the position of a control in the map view. It consists
+ * of a corner relative to where the control is positioned, and an offset that
+ * determines this position. It can be passed as optional argument position to
+ * the method {@link com.google.gwt.maps.client.MapWidget#addControl(Control)},
+ * and it is returned from method
+ * {@link com.google.gwt.maps.client.control.Control.CustomControl#getDefaultPosition()}.
  */
 public final class ControlPosition {
-
-  /**
-   * 
-   */
-  public static class ControlAnchor {
-    private final int value;
-
-    private ControlAnchor(int value) {
-      this.value = value;
-    }
-  }
-
-  public static final ControlAnchor BOTTOM_LEFT = new ControlAnchor(2);
-
-  public static final ControlAnchor BOTTOM_RIGHT = new ControlAnchor(3);
-
-  public static final ControlAnchor TOP_LEFT = new ControlAnchor(0);
-
-  public static final ControlAnchor TOP_RIGHT = new ControlAnchor(1);
 
   static ControlPosition createPeer(JavaScriptObject jsoPeer) {
     return new ControlPosition(jsoPeer);
   }
 
+  @SuppressWarnings("unused")
   private final JavaScriptObject jsoPeer;
 
-  // TODO(samgross): size or ints
+  /**
+   * Create a new ControlPosition.
+   * 
+   * @param anchor specifies which corner of the screen the X and Y offsets are
+   *          computed from.
+   * @param offsetX number of horizontal pixels offset from the corner.
+   * @param offsetY number of vertical pixels offset from teh corner.
+   */
   public ControlPosition(ControlAnchor anchor, int offsetX, int offsetY) {
-    jsoPeer = ControlPositionImpl.impl.construct(anchor.value, new Size(offsetX, offsetY));
+    jsoPeer = ControlPositionImpl.impl.construct(anchor.getValue(), new Size(
+        offsetX, offsetY));
   }
 
+  /**
+   * Wrap an existing GControlPosition JavaScriptObject to make a new
+   * ControlPosition instance.
+   * 
+   * @param jsoPeer
+   */
   private ControlPosition(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }

@@ -89,7 +89,7 @@ public class MarkerInfoWindowDemo extends MapsDemo {
 
   private Marker createMarker(LatLng point, final int number) {
     final Marker marker = new Marker(point);
-    marker.addClickListener(new MarkerClickListener() {
+    marker.addMarkerClickListener(new MarkerClickListener() {
       public void onClick(Marker sender) {
         InfoWindow info = map.getInfoWindow();
         info.open(marker,

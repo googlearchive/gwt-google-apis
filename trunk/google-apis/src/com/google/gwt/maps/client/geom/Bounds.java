@@ -21,14 +21,6 @@ import com.google.gwt.maps.client.impl.JsUtil;
 
 /**
  * Represents a rectangular bound.
- * 
- * TODO: This GBounds object appears to be a remnant from an older version of
- * the Google Maps API. In most places it has been replaced by the geographical
- * version GLatLngBounds. It is currently only used in
- * {@link com.google.gwt.maps.client.event.MarkerListener#onChanged(com.google.gwt.maps.client.overlay.MarkerManager, Bounds, int)}.
- * 
- * (Nevertheless, the Maps API has recently added methods 'mid' and 
- * 'containsPoint')
  */
 public final class Bounds {
 

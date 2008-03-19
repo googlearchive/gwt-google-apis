@@ -17,6 +17,7 @@ package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.maps.client.MapPane;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.MapPaneType;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -74,7 +75,7 @@ public class CustomOverlayDemo extends MapsDemo {
     @Override
     protected void initialize(MapWidget map) {
       this.map = map;
-      pane = map.getPane(MapPane.MAP_PANE);
+      pane = map.getPane(MapPaneType.MAP_PANE);
       pane.add(rectangle);
     }
 

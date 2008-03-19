@@ -13,23 +13,29 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.maps.client.impl;
+package com.google.gwt.maps.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSOpaque;
-import com.google.gwt.maps.client.geom.Size;
 
 /**
- * 
+ * Identifies a layer of the map used as a parameter to {@link MapWidget#getPane()}.
  */
-public interface ControlPositionImpl extends JSFlyweightWrapper {
- 
-  ControlPositionImpl impl = GWT.create(ControlPositionImpl.class);
+public enum MapPaneType {
 
-  @Constructor("$wnd.GControlPosition")
-  JavaScriptObject construct(JSOpaque anchor, Size offset);
+  FLOAT_PANE("$wnd.G_MAP_FLOAT_PANE"), 
+  FLOAT_SHADOW_PANE("$wnd.G_MAP_FLOAT_SHADOW_PANE"), 
+  MAP_PANE("$wnd.G_MAP_MAP_PANE"), 
+  MARKER_MOUSE_TARGET_PANE("$wnd.G_MAP_MARKER_MOUSE_TARGET_PANE"), 
+  MARKER_PANE("$wnd.G_MAP_MARKER_PANE"), 
+  MARKER_SHADOW_PANE("$wnd.G_MAP_MARKER_SHADOW_PANE");
 
+  private final JSOpaque value;
+
+  private MapPaneType(String value) {
+    this.value = new JSOpaque(value);
+  }
+
+  JSOpaque getValue() {
+    return value;
+  }
 }

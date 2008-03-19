@@ -20,14 +20,12 @@ import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * 
+ * This class represents a JSON result returned from the Google Geocoding service.
  */
-//TODO(zundel): I am not sure why this class is not using JSFlyweightWrapper
-// like the rest of the project.
-// TODO(samgross): exposes the right information
-// although the names might be off.
+// TODO(samgross): exposes the right information although the names might be off.
+// TODO(zundel): This class is a candidate for GWT 1.5 native JSO support.
 public final class Placemark {
-  
+
   // TODO: DELETE ME! (needs to function w/o)
   @SuppressWarnings("unused")
   private static final Extractor<Placemark> __extractor = new Extractor<Placemark>() {
@@ -52,7 +50,8 @@ public final class Placemark {
     return placemark.address || null;
   }-*/;
 
-  private static native String nativeGetAdministrativeArea(JavaScriptObject placemark) /*-{
+  private static native String nativeGetAdministrativeArea(
+      JavaScriptObject placemark) /*-{
     var AdministrativeArea = placemark.AddressDetails.Country.AdministrativeArea;
     return AdministrativeArea && AdministrativeArea.AdministrativeAreaName || null;
   }-*/;
@@ -100,7 +99,8 @@ public final class Placemark {
     return null;
   }-*/;
 
-  private static native String nativeGetSubAdministrativeArea(JavaScriptObject placemark) /*-{
+  private static native String nativeGetSubAdministrativeArea(
+      JavaScriptObject placemark) /*-{
     var AdministrativeArea = placemark.AddressDetails.Country.AdministrativeArea;
     if (AdministrativeArea) {
       var SubAdministrativeArea = AdministrativeArea.SubAdministrativeArea;
@@ -114,41 +114,83 @@ public final class Placemark {
   private Placemark(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
-  
+
+  /**
+   * An attribute indicating how accurately the Google servers were able to
+   * geocode the given address.
+   * 
+   * @return one of the integer values defined in GeoAddressAccuracy
+   */
   public int getAccuracy() {
     return nativeGetAccuracy(jsoPeer);
   }
-  
+
+  /**
+   * @return a nicely formatted and properly capitalized version of the address
+   *         including city, state, postal code and country.
+   */
   public String getAddress() {
     return nativeGetAddress(jsoPeer);
   }
 
+  /**
+   * xAL field for "LocalityName" returned by the query.
+   * 
+   * @return the name of the city for the address.
+   */
   public String getCity() {
     return nativeGetLocality(jsoPeer);
   }
-  
+
+  /**
+ * The xAL field "CountryNameCode" for the country code.
+ * 
+ * @return a two letter country code for the address.
+ */
   public String getCountry() {
     return nativeGetCountry(jsoPeer);
   }
 
+  /**
+   * The xAL field for "SubAdministrativeAreaName".
+   * 
+   * @return the name of the county
+   */
   public String getCounty() {
     return nativeGetSubAdministrativeArea(jsoPeer);
   }
-  
+
+  /**
+   * @return the point corresponding to the decoded address.
+   */
   public LatLng getPoint() {
     return new LatLng(nativeGetLat(jsoPeer), nativeGetLng(jsoPeer));
   }
 
+  /**
+   * The xAL field for "PostalCode".
+   * 
+   * @return the postal code to use with the address.
+   */
   public String getPostalCode() {
     return nativeGetPostalCode(jsoPeer);
   }
 
+  /**
+   * The xAL field for "AdministrativeArea".
+   * 
+   * @return the name of the state.
+   */
   public String getState() {
     return nativeGetAdministrativeArea(jsoPeer);
   }
 
+  /**
+   * The xAL field for "ThoroughfareName".
+   * 
+   * @return the name of the street.
+   */
   public String getStreet() {
     return nativeGetStreet(jsoPeer);
   }
-
 }

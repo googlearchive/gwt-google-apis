@@ -18,7 +18,7 @@ package com.google.gwt.maps.sample.maps.client;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.event.DragListener;
+import com.google.gwt.maps.client.event.MarkerDragListener;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
@@ -82,13 +82,13 @@ public class DragMarkerDemo extends MapsDemo {
     final Marker marker = new Marker(map.getCenter(), options);
     final InfoWindow info = map.getInfoWindow();
 
-    marker.addDragListener(new DragListener() {
+    marker.addMarkerDragListener(new MarkerDragListener() {
       boolean created = false;
 
-      public void onDrag() {
+      public void onDrag(Marker sender) {
       }
 
-      public void onDragEnd() {
+      public void onDragEnd(Marker sender) {
         if (created) {
           info.setVisible(true);
         } else {
@@ -96,7 +96,7 @@ public class DragMarkerDemo extends MapsDemo {
         }
       }
 
-      public void onDragStart() {
+      public void onDragStart(Marker sender) {
         info.setVisible(false);
       }
     });

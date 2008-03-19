@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,12 +18,14 @@ package com.google.gwt.maps.client.control;
 import com.google.gwt.maps.client.impl.ControlImpl;
 
 /**
- * 
+ * Creates a control that displays the map scale.
  */
 public final class ScaleControl extends Control {
 
+  /**
+   * Creates a control that displays the map scale.
+   */
   public ScaleControl() {
     super(ControlImpl.impl.createScaleControl());
   }
-
 }

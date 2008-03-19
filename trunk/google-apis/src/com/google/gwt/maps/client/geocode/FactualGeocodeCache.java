@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,12 +19,14 @@ import com.google.gwt.maps.client.geocode.GeocodeCache.ConcreteGeocodeCache;
 import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
 
 /**
- * 
+ * This class refines the basic GeocodeCache class by placing stricter
+ * conditions on cached replies. It only caches replies which are very unlikely
+ * to change within a short period of time.
  */
 public final class FactualGeocodeCache extends ConcreteGeocodeCache {
-  
+
   public FactualGeocodeCache() {
     super(GeocodeCacheImpl.impl.constructFactualGeocodeCache());
   }
-  
+
 }

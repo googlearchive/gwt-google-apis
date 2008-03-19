@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,12 +18,15 @@ package com.google.gwt.maps.client.control;
 import com.google.gwt.maps.client.impl.ControlImpl;
 
 /**
- * 
+ * Creates a standard map type control for selecting and switching between
+ * supported map types via buttons.
  */
 public final class MapTypeControl extends Control {
 
+  /**
+   * Create a new standard map type control.
+   */
   public MapTypeControl() {
     super(ControlImpl.impl.createMapTypeControl());
   }
-
 }

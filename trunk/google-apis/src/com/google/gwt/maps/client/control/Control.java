@@ -37,6 +37,7 @@ public class Control {
 
     /**
      * Create a new CustomControl which is not printable or selectable.
+     * 
      * @param defaultPosition location of the controls on the map.
      */
     protected CustomControl(ControlPosition defaultPosition) {
@@ -44,10 +45,14 @@ public class Control {
     }
 
     /**
-     * Create a new CustomControl which can be either printable, selectable or both.
+     * Create a new CustomControl which can be either printable, selectable or
+     * both.
+     * 
      * @param defaultPosition
-     * @param printable indicates that the control should be visible in the print output of the map
-     * @param selectable indicates that the control will contain text that should be selectable.
+     * @param printable indicates that the control should be visible in the
+     *          print output of the map
+     * @param selectable indicates that the control will contain text that
+     *          should be selectable.
      */
     protected CustomControl(ControlPosition defaultPosition, boolean printable,
         boolean selectable) {
@@ -57,6 +62,12 @@ public class Control {
     }
 
     /**
+     * Returns to the map if the control contains selectable text.
+     * @return true if the control contains selectable text.
+     */
+    public abstract boolean isSelectable();
+
+    /**
      * Gets the default position of this control.
      * 
      * The default position is used with the one argument
@@ -64,7 +75,6 @@ public class Control {
      * 
      * @return the default position of this control
      */
-    @FieldName("getDefaultPosition")
     @Exported
     protected final ControlPosition getDefaultPosition() {
       return defaultPosition;
@@ -95,6 +105,7 @@ public class Control {
 
   /**
    * Factory method used by JSIO to wrap an existing JSO in a GWT Java object.
+   * 
    * @param jsoPeer
    * @return a new instance of control
    */
@@ -109,6 +120,7 @@ public class Control {
 
   /**
    * Constructor for creating a new instance of this class from an existing JSO.
+   * 
    * @param jsoPeer
    */
   protected Control(JavaScriptObject jsoPeer) {

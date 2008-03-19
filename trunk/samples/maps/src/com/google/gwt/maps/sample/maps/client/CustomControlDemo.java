@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.Control;
+import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -90,9 +91,10 @@ public class CustomControlDemo extends MapsDemo {
   }
   private static class ImageZoomControl extends CustomControl {
     public ImageZoomControl() {
-      super(new ControlPosition(ControlPosition.TOP_LEFT, 7, 7));
+      super(new ControlPosition(ControlAnchor.TOP_LEFT, 7, 7));
     }
 
+    
     @Override
     protected Widget initialize(final MapWidget map) {
       ControlImageBundle imgBundle = GWT.create(ControlImageBundle.class);
@@ -130,11 +132,17 @@ public class CustomControlDemo extends MapsDemo {
 
       return container;
     }
+
+
+    @Override
+    public boolean isSelectable() {
+      return false;
+    }
   }
 
   private static class TextualZoomControl extends CustomControl {
     public TextualZoomControl() {
-      super(new ControlPosition(ControlPosition.TOP_LEFT, 7, 7));
+      super(new ControlPosition(ControlAnchor.TOP_LEFT, 7, 7));
     }
 
     @Override
@@ -158,6 +166,11 @@ public class CustomControlDemo extends MapsDemo {
       container.add(zoomInButton);
       container.add(zoomOutButton);
       return container;
+    }
+
+    @Override
+    public boolean isSelectable() {
+      return false;
     }
   }
 

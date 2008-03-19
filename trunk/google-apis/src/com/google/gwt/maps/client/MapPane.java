@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,93 +15,29 @@
  */
 package com.google.gwt.maps.client;
 
+import com.google.gwt.jsio.client.JSOpaque;
 import com.google.gwt.maps.client.impl.MapImpl;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 /**
- * 
+ * Represents a DIV element for the specified layer of the map identified by the
+ * G_MAP_XXX_PANE constants in the Maps API.
  */
 public final class MapPane extends AbsolutePanel {
 
   /**
+   * Retrieve the specified MapPane. Always creates a new MapPane object
    * 
+   * @param map The map to query
+   * @param layer The DIV element representing the layer of the map to return.
+   * @return a new instance of a MapPane object.
    */
-  public static class MapPaneType {
-    private final int value;
-
-    private MapPaneType(int value) {
-      this.value = value;
-    }
-
-    protected int getValue() {
-      return value;
-    }
+  static MapPane getPane(MapWidget map, MapPaneType layer) {
+    return new MapPane(map, layer.getValue());
   }
 
-  public static final MapPaneType FLOAT_PANE = new MapPaneType(7);
-
-  public static final MapPaneType FLOAT_SHADOW_PANE = new MapPaneType(5);
-
-  public static final MapPaneType MAP_PANE = new MapPaneType(0);
-
-  public static final MapPaneType MARKER_MOUSE_PANE = new MapPaneType(6);
-
-  public static final MapPaneType MARKER_PANE = new MapPaneType(4);
-
-  public static final MapPaneType MARKER_SHADOW_PANE = new MapPaneType(2);
-
-  private static MapPane floatPane;
-
-  private static MapPane floatShadowPane;
-
-  private static MapPane mapPane;
-
-  private static MapPane markerMousePane;
-
-  private static MapPane markerPane;
-
-  private static MapPane markerShadowPane;
-
-  protected static MapPane getPane(MapWidget map, MapPaneType type) {
-    int typeId = type.value;
-    switch (typeId) {
-      case 0:
-        if (mapPane == null) {
-          mapPane = new MapPane(map, typeId);
-        }
-        return mapPane;
-      case 2:
-        if (markerShadowPane == null) {
-          markerShadowPane = new MapPane(map, typeId);
-        }
-        return markerShadowPane;
-      case 4:
-        if (markerPane == null) {
-          markerPane = new MapPane(map, typeId);
-        }
-        return markerPane;
-      case 5:
-        if (floatShadowPane == null) {
-          floatShadowPane = new MapPane(map, typeId);
-        }
-        return floatShadowPane;
-      case 6:
-        if (markerMousePane == null) {
-          markerMousePane = new MapPane(map, typeId);
-        }
-        return markerMousePane;
-      case 7:
-        if (floatPane == null) {
-          floatPane = new MapPane(map, typeId);
-        }
-        return floatPane;
-      default:
-        return null;
-    }
-  }
-
-  private MapPane(MapWidget map, int paneId) {
+  private MapPane(MapWidget map, JSOpaque paneId) {
     Element mapPaneElement = MapImpl.impl.getPane(map, paneId);
     setElement(mapPaneElement);
     map.addVirtual(this);

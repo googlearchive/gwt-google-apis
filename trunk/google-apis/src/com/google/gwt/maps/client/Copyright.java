@@ -67,7 +67,7 @@ public final class Copyright {
   }
 
   /**
-   * Gets the minimum zoom level at which this copyright displays
+   * Gets the minimum zoom level at which this copyright displays.
    * 
    * @return the minimum zoom level at which this copyright displays
    */

@@ -24,10 +24,10 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @see DirectionQueryOptions#DirectionQueryOptions(com.google.gwt.maps.client.MapWidget,
  *      DirectionsPanel)
- *      
- * TODO: should this be final?  Need to see if subclassing can get us
- * into trouble.
  */
+
+ // TODO(samgross): should this be final?  Need to see if subclassing can get us
+ // into trouble.
 public class DirectionsPanel extends Widget {
 
   /**
