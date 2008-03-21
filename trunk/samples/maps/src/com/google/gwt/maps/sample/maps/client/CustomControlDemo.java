@@ -65,9 +65,7 @@ public class CustomControlDemo extends MapsDemo {
   public interface ControlImageBundle extends ImageBundle {
     AbstractImagePrototype minus();
 
-    /**
-     * @gwt.resource mozicon_earth.png
-     */
+    @Resource("mozicon_earth.png")
     AbstractImagePrototype moziconEarth();
 
     AbstractImagePrototype plus();

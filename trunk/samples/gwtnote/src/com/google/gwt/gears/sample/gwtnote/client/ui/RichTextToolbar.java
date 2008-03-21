@@ -47,94 +47,58 @@ public class RichTextToolbar extends Composite {
    */
   public interface Images extends ImageBundle {
 
-    /**
-     * @gwt.resource bold.gif
-     */
+    @Resource("bold.gif")
     AbstractImagePrototype bold();
 
-    /**
-     * @gwt.resource createLink.gif
-     */
+    @Resource("createLink.gif")
     AbstractImagePrototype createLink();
 
-    /**
-     * @gwt.resource hr.gif
-     */
+    @Resource("hr.gif")
     AbstractImagePrototype hr();
 
-    /**
-     * @gwt.resource indent.gif
-     */
+    @Resource("indent.gif")
     AbstractImagePrototype indent();
 
-    /**
-     * @gwt.resource insertImage.gif
-     */
+    @Resource("insertImage.gif")
     AbstractImagePrototype insertImage();
 
-    /**
-     * @gwt.resource italic.gif
-     */
+    @Resource("italic.gif")
     AbstractImagePrototype italic();
 
-    /**
-     * @gwt.resource justifyCenter.gif
-     */
+    @Resource("justifyCenter.gif")
     AbstractImagePrototype justifyCenter();
 
-    /**
-     * @gwt.resource justifyLeft.gif
-     */
+    @Resource("justifyLeft.gif")
     AbstractImagePrototype justifyLeft();
 
-    /**
-     * @gwt.resource justifyRight.gif
-     */
+    @Resource("justifyRight.gif")
     AbstractImagePrototype justifyRight();
 
-    /**
-     * @gwt.resource ol.gif
-     */
+    @Resource("ol.gif")
     AbstractImagePrototype ol();
 
-    /**
-     * @gwt.resource outdent.gif
-     */
+    @Resource("outdent.gif")
     AbstractImagePrototype outdent();
 
-    /**
-     * @gwt.resource removeFormat.gif
-     */
+    @Resource("removeFormat.gif")
     AbstractImagePrototype removeFormat();
 
-    /**
-     * @gwt.resource removeLink.gif
-     */
+    @Resource("removeLink.gif")
     AbstractImagePrototype removeLink();
 
-    /**
-     * @gwt.resource strikeThrough.gif
-     */
+    @Resource("strikeThrough.gif")
     AbstractImagePrototype strikeThrough();
 
-    /**
-     * @gwt.resource subscript.gif
-     */
+    @Resource("subscript.gif")
     AbstractImagePrototype subscript();
 
-    /**
-     * @gwt.resource superscript.gif
-     */
+    @Resource("superscript.gif")
     AbstractImagePrototype superscript();
 
-    /**
-     * @gwt.resource ul.gif
-     */
+    @Resource("ul.gif")
     AbstractImagePrototype ul();
 
-    /**
-     * @gwt.resource underline.gif
-     */
+    @Resource("underline.gif")
     AbstractImagePrototype underline();
   }
 
