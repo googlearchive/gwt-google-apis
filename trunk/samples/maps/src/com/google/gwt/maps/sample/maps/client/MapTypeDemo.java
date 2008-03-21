@@ -28,7 +28,9 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This example demonstrates the different map types available from the Maps
@@ -51,8 +53,9 @@ public class MapTypeDemo extends MapsDemo {
     @Override
     protected Widget initialize(final MapWidget map) {
       initListByMapType("", MapType.getDefaultMapTypes());
-      MapType tmpTypeArray[] = {MapType.getPhysicalMap()};
-      initListByMapType("", tmpTypeArray);
+      List<MapType> tmpTypeList = new ArrayList<MapType>();
+      tmpTypeList.add(MapType.getPhysicalMap());
+      initListByMapType("", tmpTypeList);
       initListByMapType("Moon: ", MapType.getMoonMapTypes());
       initListByMapType("Mars: ", MapType.getMarsMapTypes());
       initListByMapType("Sky: ", MapType.getSkyMapTypes());
@@ -69,7 +72,7 @@ public class MapTypeDemo extends MapsDemo {
       return lb;
     }
 
-    private void initListByMapType(String prefix, MapType types[]) {
+    private void initListByMapType(String prefix, List<MapType> types) {
       for (MapType mt : types) {
         String key = prefix + mt.getName(false);
         lb.addItem(key);
