@@ -29,32 +29,59 @@ public final class LatLng {
 
   // TODO: DELETE ME! (needs to function w/o)
   @SuppressWarnings("unused")
-  private static final Extractor __extractor = new Extractor() {
-    public Object fromJS(JavaScriptObject jso) {
+  private static final Extractor<LatLng> __extractor = new Extractor<LatLng>() {
+    public LatLng fromJS(JavaScriptObject jso) {
       return createPeer(jso);
     }
 
-    public JavaScriptObject toJS(Object o) {
-      return ((LatLng) o).jsoPeer;
+    public JavaScriptObject toJS(LatLng o) {
+      return o.jsoPeer;
     }
   };
 
   private static final LatLngImpl impl = GWT.create(LatLngImpl.class);
 
+  /**
+   * Wrap an existing GLatLng.
+   * 
+   * @param jso the object to wrap
+   * @return a newly created LatLng that wraps the GLatLng JavaScript object.
+   */
   static LatLng createPeer(JavaScriptObject jso) {
     return new LatLng(jso);
   }
 
   private final JavaScriptObject jsoPeer;
 
+  /**
+   * Create a new point. latitude will be clamped to lie between -90 degrees and
+   * +90 degrees, and longitude will be wrapped to lie between -180 degrees and
+   * +180 degrees.
+   * 
+   * @param latitude value between -90 and +90 degrees (clamped)
+   * @param longitude value between -180 and +180 degrees (wrapped)
+   */
   public LatLng(double latitude, double longitude) {
     jsoPeer = impl.construct(latitude, longitude);
   }
-  
+
+  /**
+   * Create a new point. latitude will be clamped to lie between -90 degrees and
+   * +90 degrees, and longitude will be wrapped to lie between -180 degrees and
+   * +180 degrees.
+   * 
+   * @param latitude value between -90 and +90 degrees (clamped)
+   * @param longitude value between -180 and +180 degrees (wrapped)
+   * @param unbounded if <code>true</code>, then numbers will not be wrapped or clamped.
+   */
   public LatLng(double latitude, double longitude, boolean unbounded) {
     jsoPeer = impl.construct(latitude, longitude, unbounded);
   }
 
+  /**
+   * Create a new object from an existing java script object.
+   * @param jso object to wrap.
+   */
   private LatLng(JavaScriptObject jso) {
     this.jsoPeer = jso;
   }
@@ -122,7 +149,8 @@ public final class LatLng {
 
   @Override
   public int hashCode() {
-    return ((int) getLatitude() * 1000000) ^ (19 * (int) getLongitude() * 1000000);  
+    return ((int) getLatitude() * 1000000)
+        ^ (19 * (int) getLongitude() * 1000000);
   }
 
   @Override

@@ -16,7 +16,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.impl.Extractor; 
+import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.event.MarkerClickListener;
 import com.google.gwt.maps.client.event.MarkerDragListener;
 import com.google.gwt.maps.client.event.MarkerMouseListener;
@@ -46,13 +46,14 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 public final class Marker extends ConcreteOverlay {
 
   // TODO: DELETE ME! (needs to function w/o)
-  private static final Extractor __extractor = new Extractor() {
-    public Object fromJS(JavaScriptObject jso) {
+  @SuppressWarnings("unused")
+  private static final Extractor<Marker> __extractor = new Extractor<Marker>() {
+    public Marker fromJS(JavaScriptObject jso) {
       throw new UnsupportedOperationException();
     }
 
-    public JavaScriptObject toJS(Object o) {
-      return ((Marker) o).jsoPeer;
+    public JavaScriptObject toJS(Marker o) {
+      return o.jsoPeer;
     }
   };
 
@@ -75,8 +76,11 @@ public final class Marker extends ConcreteOverlay {
 
   /**
    * Create a new marker at the specified point using default options. Add the
-   * newly created marker to a @{link MapWidget} with the 
-   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)} method.
+   * newly created marker to a
+   * 
+   * @{link MapWidget} with the
+   *        {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
+   *        method.
    * 
    * @param point The point to create the new marker.
    */
@@ -86,8 +90,11 @@ public final class Marker extends ConcreteOverlay {
 
   /**
    * Create a new marker at the specified point using the supplied options
-   * overrides. Add the newly created marker to a @{link MapWidget} with the 
-   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)} method.
+   * overrides. Add the newly created marker to a
+   * 
+   * @{link MapWidget} with the
+   *        {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
+   *        method.
    * 
    * @param point The point to create the new marker.
    * @param options Use settings in this object to override the Marker defaults.
@@ -281,7 +288,7 @@ public final class Marker extends ConcreteOverlay {
     }
   }
 
-  /** 
+  /**
    * @return the current icon used for this Marker.
    */
   public Icon getIcon() {
@@ -296,26 +303,30 @@ public final class Marker extends ConcreteOverlay {
   }
 
 /**
- * See if this Marker was created as a draggable marker type 
- * (The draggable option was set in MarkerOptions when it was constructed.) 
- * @return true if the marker was initialized as a draggable type of marker
- */  
+ * See if this Marker was created as a draggable marker type, that is, the
+ * draggable option was set in MarkerOptions when it was constructed.
+ * 
+ * @return <code>true</code> if the marker was initialized as a draggable type
+ *         of marker
+ */
   public boolean isDraggable() {
     return MarkerImpl.impl.draggable(this);
   }
 
 /**
- * Returns true if this marker is not only a draggable type of marker,
- * (see @{link isDraggable}) but dragging is currently enabled for the marker 
- * (see @{link setDraggingEnabled}).
- * @return true if the marker can currently be dragged
- */ 
+ * Returns <code>true</code> if this marker is not only a draggable type of marker.
+ * 
+ * @return <code>true</code> if the marker can currently be dragged
+ * 
+ * @see Marker#isDraggable()
+ * @see Marker#setDraggingEnabled(boolean)
+ */
   public boolean isDraggingEnabled() {
     return MarkerImpl.impl.draggingEnabled(this);
   }
-  
+
   /**
-   * @return returns true if the marker is currently visible on the map
+   * @return returns <code>true</code> if the marker is currently visible on the map
    */
   public boolean isVisible() {
     return !MarkerImpl.impl.isHidden(this);
@@ -376,12 +387,13 @@ public final class Marker extends ConcreteOverlay {
     }
   }
 
- /**
-  * Allow this marker to be dragged.  Note: in order for dragging to work,
-  * the Marker must be created using the @{link MarkerOptions#setDraggable(boolean)
-  * option.
-  * @param value  true to allow the marker to be dragged.
-  */
+  /**
+   * Allow this marker to be dragged. Note: in order for dragging to work, the
+   * Marker must be created using the
+   * 
+   * @{link MarkerOptions#setDraggable(boolean) option.
+   * @param value <code>true</code> to allow the marker to be dragged.
+   */
   public void setDraggingEnabled(boolean value) {
     if (value) {
       MarkerImpl.impl.enableDragging(this);
@@ -389,9 +401,10 @@ public final class Marker extends ConcreteOverlay {
       MarkerImpl.impl.disableDragging(this);
     }
   }
-  
+
   /**
    * Use an image for this marker.
+   * 
    * @param url The URL to the image to display.
    */
   public void setImage(String url) {
@@ -400,6 +413,7 @@ public final class Marker extends ConcreteOverlay {
 
   /**
    * Move the marker to the specified point.
+   * 
    * @param point position to move the marker to.
    */
   public void setPoint(LatLng point) {
@@ -409,7 +423,7 @@ public final class Marker extends ConcreteOverlay {
   /**
    * Toggle the visibility of the Marker on the map it is associated with.
    * 
-   * @param visible set to true to make the marker visible.
+   * @param visible set to <code>true</code> to make the marker visible.
    */
   public void setVisible(boolean visible) {
     if (visible) {

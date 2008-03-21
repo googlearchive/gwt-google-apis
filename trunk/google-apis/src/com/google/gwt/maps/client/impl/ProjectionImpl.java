@@ -21,12 +21,13 @@ import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.MercatorProjection;
 import com.google.gwt.maps.client.geom.Point;
+import com.google.gwt.maps.client.geom.TileIndex;
 import com.google.gwt.jsio.client.Binding;
 import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Projection;
 
 /**
- * 
+ * Wrapper for the GProjection class.
  */
 public interface ProjectionImpl extends JSFlyweightWrapper {
 
@@ -52,7 +53,7 @@ public interface ProjectionImpl extends JSFlyweightWrapper {
 
   int getWrapWidth(JavaScriptObject jsoPeer, int zoomLevel);
 
-  boolean tileCheckRange(JavaScriptObject jsoPeer, Point point,
+  boolean tileCheckRange(JavaScriptObject jsoPeer, TileIndex point,
       int zoomLevel, int tileSize);
 
 }

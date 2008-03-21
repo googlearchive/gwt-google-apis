@@ -19,7 +19,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 
 /**
  * Used as an argument to
- * {@link com.google.gwt.maps.client.geocode.Geocoder#getLatLng(String,LatLngCallback)} 
+ * {@link com.google.gwt.maps.client.geocode.Geocoder#getLatLng(String,LatLngCallback)}.
  */
 // TODO(samgross): better names for interface and methods.
 // TODO(zundel): This callback interface has the same name as
@@ -33,6 +33,7 @@ public interface LatLngCallback {
 
   /**
    * Invoked when the geocoding call succeeds.
+   * 
    * @param point the point returned from the Google geocoder server.
    */
   void onSuccess(LatLng point);

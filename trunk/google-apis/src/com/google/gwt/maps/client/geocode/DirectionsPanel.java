@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class DirectionsPanel extends Widget {
 
   /**
-   * Creates a new directions panel.
+   * Constructs a new directions panel.
    */
   public DirectionsPanel() {
     setElement(DOM.createDiv());

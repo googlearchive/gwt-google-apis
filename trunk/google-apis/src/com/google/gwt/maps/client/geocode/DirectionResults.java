@@ -48,6 +48,9 @@ public final class DirectionResults {
   }
 
   /**
+   * Returns an HTML string containing the copyright information for this
+   * result.
+   * 
    * @return an HTML string containing the copyright information for this
    *         result.
    */
@@ -78,6 +81,8 @@ public final class DirectionResults {
   }
 
   /**
+   * Returns the list of Markers associated with the geocode.
+   * 
    * @return the list of Markers associated with the geocode.
    */
   public List<Marker> getMarkers() {
@@ -95,6 +100,8 @@ public final class DirectionResults {
   }
 
   /**
+   * Returns the list of the geocoded results.
+   * 
    * @return list of the geocoded results.
    */
   public List<Placemark> getPlacemarks() {
@@ -112,15 +119,19 @@ public final class DirectionResults {
   }
 
   /**
+   * Returns the Polyline object associated with the entire directions response.
+   * Note that there is a single polyline that represents all the routes in the
+   * response.
+   * 
    * @return the Polyline object associated with the entire directions response.
-   *         Note that there is a single polyline that represents all the routes
-   *         in the response.
    */
   public Polyline getPolyline() {
     return DirectionsImpl.impl.getPolyline(jsoPeer);
   }
 
   /**
+   * Returns the list of Route objects in the response.
+   * 
    * @return the list of Route objects in the response.
    */
   public List<Route> getRoutes() {
@@ -138,6 +149,9 @@ public final class DirectionResults {
   }
 
   /**
+   * Returns an HTML snippet containing a summary of the distance and time for
+   * this entire directions request.
+   * 
    * @return an HTML snippet containing a summary of the distance and time for
    *         this entire directions request.
    */

@@ -18,12 +18,13 @@ package com.google.gwt.maps.client;
 import com.google.gwt.jsio.client.JSOpaque;
 
 /**
- * Identifies a layer of the map used as a parameter to {@link MapWidget#getPane()}.
+ * Identifies a layer of the map used as a parameter to
+ * {@link MapWidget#getPane(MapPaneType)}.
  */
 public enum MapPaneType {
 
   FLOAT_PANE("$wnd.G_MAP_FLOAT_PANE"), 
-  FLOAT_SHADOW_PANE("$wnd.G_MAP_FLOAT_SHADOW_PANE"), 
+  FLOAT_SHADOW_PANE("$wnd.G_MAP_FLOAT_SHADOW_PANE"),
   MAP_PANE("$wnd.G_MAP_MAP_PANE"), 
   MARKER_MOUSE_TARGET_PANE("$wnd.G_MAP_MARKER_MOUSE_TARGET_PANE"), 
   MARKER_PANE("$wnd.G_MAP_MARKER_PANE"), 

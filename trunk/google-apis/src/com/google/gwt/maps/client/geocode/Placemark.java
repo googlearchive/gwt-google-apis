@@ -20,9 +20,11 @@ import com.google.gwt.jsio.client.impl.Extractor;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * This class represents a JSON result returned from the Google Geocoding service.
+ * This class represents a JSON result returned from the Google Geocoding
+ * service.
  */
-// TODO(samgross): exposes the right information although the names might be off.
+// TODO(samgross): exposes the right information although the names might be
+// off.
 // TODO(zundel): This class is a candidate for GWT 1.5 native JSO support.
 public final class Placemark {
 
@@ -126,6 +128,8 @@ public final class Placemark {
   }
 
   /**
+   * Returns the entire address for this result.
+   * 
    * @return a nicely formatted and properly capitalized version of the address
    *         including city, state, postal code and country.
    */
@@ -143,10 +147,10 @@ public final class Placemark {
   }
 
   /**
- * The xAL field "CountryNameCode" for the country code.
- * 
- * @return a two letter country code for the address.
- */
+   * The xAL field "CountryNameCode" for the country code.
+   * 
+   * @return a two letter country code for the address.
+   */
   public String getCountry() {
     return nativeGetCountry(jsoPeer);
   }
@@ -161,6 +165,8 @@ public final class Placemark {
   }
 
   /**
+   * Returns the point corresponding to the decoded address.
+   * 
    * @return the point corresponding to the decoded address.
    */
   public LatLng getPoint() {

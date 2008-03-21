@@ -24,12 +24,14 @@ public interface LocationCallback {
 
   /**
    * Called when the geocoding service fails.
+   * 
    * @param statusCode a value defined in {@link StatusCodes}
    */
   void onFailure(int statusCode);
 
   /**
    * Called when the geocoding service returns a result successfully.
+   * 
    * @param locations an array of Placemarks that match the query.
    */
   void onSuccess(Placemark[] locations);

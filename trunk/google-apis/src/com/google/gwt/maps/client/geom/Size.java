@@ -20,7 +20,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.SizeImpl;
 
 /**
- * 
+ * A Size represents the size in pixels of a rectangular area of the map. The
+ * size object has two parameters, width and height. Width is a difference in
+ * the x-coordinate; height is a difference in the y-coordinate, of points.
  */
 public final class Size {
 
@@ -32,10 +34,21 @@ public final class Size {
 
   private final JavaScriptObject jsoPeer;
 
+  /**
+   * Construct a new Size object.
+   * 
+   * @param width Width is a difference in the x-coordinate.
+   * @param height height is a difference in the y-coordinate, of points.
+   */
   public Size(int width, int height) {
     jsoPeer = impl.construct(width, height);
   }
 
+  /**
+   * Wrap an existing GSize object.
+   * 
+   * @param jso the JavaScriptObject to wrap.
+   */
   private Size(JavaScriptObject jso) {
     this.jsoPeer = jso;
   }
@@ -47,11 +60,21 @@ public final class Size {
     }
     return false;
   }
-  
+
+  /**
+   * Returns the height parameter.
+   * 
+   * @return the height parameter.
+   */
   public int getHeight() {
     return impl.getHeight(jsoPeer);
   }
 
+  /**
+   * Returns the width parameter.
+   * 
+   * @return the width parameter.
+   */
   public int getWidth() {
     return impl.getWidth(jsoPeer);
   }
