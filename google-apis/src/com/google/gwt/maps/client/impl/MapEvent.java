@@ -31,6 +31,7 @@ public enum MapEvent {
   DRAG("drag"),
   DRAGEND("dragend"),
   DRAGSTART("dragstart"),
+  ERROR("error"),
   INFOWINDOWBEFORECLOSE("infowindowbeforeclose"),
   INFOWINDOWCLOSE("infowindowclose"),
   INFOWINDOWOPEN("infowindowopen"),
