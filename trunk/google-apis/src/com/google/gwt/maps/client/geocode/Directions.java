@@ -37,7 +37,7 @@ import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 public final class Directions {
 
   /**
-   * Launch a new Directions query.
+   * Load a new Directions query.
    * 
    * @param query a string containing any valid directions query, e.g. "from:
    *          Seattle to: San Francisco" or "from: Toronto to: Ottawa to: New
@@ -49,7 +49,7 @@ public final class Directions {
   }
 
   /**
-   * Launch a new Directions query.
+   * Load a new Directions query.
    * 
    * @param query a string containing any valid directions query, e.g. "from:
    *          Seattle to: San Francisco" or "from: Toronto to: Ottawa to: New
@@ -60,14 +60,14 @@ public final class Directions {
   public static void load(String query, DirectionQueryOptions options,
       DirectionsCallback callback) {
     JavaScriptObject jsoPeer = createDirections(options);
-    DirectionsImpl.impl.load(jsoPeer, query, options);
     if (callback != null) {
       addLoadListener(jsoPeer, callback);
     }
+    DirectionsImpl.impl.load(jsoPeer, query, options);
   }
 
   /**
-   * Launch a new Directions query.
+   * Load a new Directions query.
    * 
    * @param query a string containing any valid directions query, e.g. "from:
    *          Seattle to: San Francisco" or "from: Toronto to: Ottawa to: New
@@ -79,10 +79,10 @@ public final class Directions {
   }
 
   /**
-   * Issues a new directions query using an array of waypoints as input instead
+   * Load a new directions query using an array of waypoints as input instead
    * of a single query string.
    * 
-   * @param waypoints Array of waypoints.
+   * @param waypoints an array of waypoints.
    * @param options optional parameters to use with the query.
    * 
    * @see Directions#load(String,DirectionQueryOptions)
@@ -93,7 +93,7 @@ public final class Directions {
   }
 
   /**
-   * Issues a new directions query using an array of waypoints as input instead
+   * Load a new directions query using an array of waypoints as input instead
    * of a single query string.
    * 
    * @param waypoints Array of waypoints.
@@ -113,10 +113,10 @@ public final class Directions {
   }
 
   /**
-   * Issues a new directions query using an array of waypoints as input instead
+   * Load a new directions query using an array of waypoints as input instead
    * of a single query string.
    * 
-   * @param waypoints Array of waypoints.
+   * @param waypoints an array of waypoints.
    * @param callback methods to call when the load() succeeds or fails.
    * 
    * @see Directions#load(String,DirectionsCallback)
@@ -135,7 +135,8 @@ public final class Directions {
    * @param callback A method to call when the "load" event fires.
    */
   private static void addLoadListener(final JavaScriptObject jsoPeer,
-      final DirectionsCallback callback) {
+      final DirectionsCallback callback) {  
+    
     EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.LOAD, new VoidCallback() {
       @Override
       public void callback() {
@@ -146,6 +147,14 @@ public final class Directions {
         } else {
           callback.onFailure(statusCode);
         }
+      }
+    });
+    
+    EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.ERROR, new VoidCallback() {
+      @Override
+      public void callback() {
+        int statusCode = DirectionsImpl.impl.getStatusCode(jsoPeer);
+        callback.onFailure(statusCode);
       }
     });
   }

@@ -22,7 +22,9 @@ import com.google.gwt.maps.client.geocode.DirectionResults;
 import com.google.gwt.maps.client.geocode.Directions;
 import com.google.gwt.maps.client.geocode.DirectionsCallback;
 import com.google.gwt.maps.client.geocode.DirectionsPanel;
+import com.google.gwt.maps.client.geocode.StatusCodes;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -93,9 +95,11 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 public class SimpleDirectionsDemo extends MapsDemo {
   private static HTML descHTML = null;
 
-  private static final String descString = "<p>Displays a map centered on Cambridge, MA USA</p>"
-      + "<p>Queries the Google Directions service and displays a polyline, markers"
-      + "on the map, and textual directions on the right.</p>\n"
+  private static final String descString = "<p>Displays a map centered on "
+      + "Cambridge, MA USA</p>"
+      + "<p>Queries the Google Directions service and displays a polyline, "
+      + "markers on the map, and textual directions on the right.  The "
+      + "directions are from the MIT dorms to Fenway Park.</p>\n"
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/directions-simple.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/directions-simple.html</a></p>\n";
@@ -128,9 +132,11 @@ public class SimpleDirectionsDemo extends MapsDemo {
     final Grid grid = new Grid(1, 2);
     grid.setWidth("100%");
     grid.getCellFormatter().setWidth(0, 0, "74%");
-    grid.getCellFormatter().setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_TOP);
+    grid.getCellFormatter().setVerticalAlignment(0, 0,
+        HasVerticalAlignment.ALIGN_TOP);
     grid.getCellFormatter().setWidth(0, 1, "24%");
-    grid.getCellFormatter().setVerticalAlignment(0, 1, HasVerticalAlignment.ALIGN_TOP);
+    grid.getCellFormatter().setVerticalAlignment(0, 1,
+        HasVerticalAlignment.ALIGN_TOP);
     map = new MapWidget(new LatLng(42.351505, -71.094455), 15);
     map.setHeight("480px");
     grid.setWidget(0, 0, map);
@@ -141,15 +147,16 @@ public class SimpleDirectionsDemo extends MapsDemo {
     initWidget(grid);
 
     DirectionQueryOptions opts = new DirectionQueryOptions(map, directionsPanel);
-    String query = "500 Memorial Drive, Cambridge, MA to Fenway Park, Boston, MA";
+    String query = "from: 500 Memorial Dr, Cambridge, MA to: 4 Yawkey Way, Boston, MA";
     Directions.load(query, opts, new DirectionsCallback() {
 
       public void onFailure(int statusCode) {
-        GWT.log("Failed to load directions: Status " + statusCode, null);
+        Window.alert("Failed to load directions: Status "
+            + StatusCodes.getName(statusCode) + " " + statusCode);
       }
 
       public void onSuccess(DirectionResults result) {
-        // do something to resize the widgets...
+        GWT.log("Successfully loaded directions.", null);
       }
     });
   }
