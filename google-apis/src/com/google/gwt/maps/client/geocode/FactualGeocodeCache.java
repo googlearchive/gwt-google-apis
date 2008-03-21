@@ -25,6 +25,10 @@ import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
  */
 public final class FactualGeocodeCache extends ConcreteGeocodeCache {
 
+  /**
+   * Constructs a new cache that only caches replies which are very unlikely to
+   * change within a short period of time.
+   */
   public FactualGeocodeCache() {
     super(GeocodeCacheImpl.impl.constructFactualGeocodeCache());
   }

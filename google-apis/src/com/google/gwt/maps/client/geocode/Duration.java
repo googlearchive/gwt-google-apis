@@ -38,6 +38,7 @@ public final class Duration {
   }
 
   /**
+   * Returns a string containing a localized string representation of the time.
    * @return a string containing a localized string representation of the time.
    */
   public String inLocalizedUnits() {
@@ -45,10 +46,10 @@ public final class Duration {
   }
 
   /**
-   * @return a number indicating the numeric value of the time (in seconds)
+   * Returns a number indicating the numeric value of the time (in seconds).
+   * @return a number indicating the numeric value of the time (in seconds).
    */
   public int inSeconds() {
     return DurationImpl.impl.getSeconds(jsoPeer);
   }
-
 }

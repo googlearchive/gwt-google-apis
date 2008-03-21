@@ -37,6 +37,9 @@ public final class Distance {
   }
 
   /**
+   * Returns the distance in the units that are predominant in the starting
+   * country of this set of directions.
+   * 
    * @return the distance in the units that are predominant in the starting
    *         country of this set of directions.
    */
@@ -45,6 +48,7 @@ public final class Distance {
   }
 
   /**
+   * Returns the distance measured in meters.
    * @return the distance measured in meters.
    */
   public int inMeters() {

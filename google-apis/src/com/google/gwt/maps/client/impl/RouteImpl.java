@@ -20,11 +20,12 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geocode.Distance;
 import com.google.gwt.maps.client.geocode.Duration;
+import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geocode.Step;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * 
+ * Wraps the GRoute object from the Maps API.
  */
 public interface RouteImpl extends JSFlyweightWrapper {
 
@@ -34,12 +35,16 @@ public interface RouteImpl extends JSFlyweightWrapper {
 
   Duration getDuration(JavaScriptObject jsoPeer);
 
+  Placemark getEndGeocode(JavaScriptObject jsoPeer);
+
   LatLng getEndLatLng(JavaScriptObject jsoPeer);
 
   int getNumSteps(JavaScriptObject jsoPeer);
 
+  Placemark getStartGeocode(JavaScriptObject jsoPeer);
+
   Step getStep(JavaScriptObject jsoPeer, int index);
-
+  
   String getSummaryHtml(JavaScriptObject jsoPeer);
-
+  
 }

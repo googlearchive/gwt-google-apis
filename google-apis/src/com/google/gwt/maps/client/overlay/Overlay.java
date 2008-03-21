@@ -67,6 +67,14 @@ public abstract class Overlay {
     return $wnd.GOverlay.getZIndex(latitude);
   }-*/;
 
+  /**
+   * Used to create a new Overlay by wrapping an existing GOverlay object.
+   * This method is invoked by the jsio library.
+   * 
+   * @param jsoPeer GOverlay object to wrap.
+   * @return a new instance of Overlay.
+   */
+  @SuppressWarnings("unused")
   private static Overlay createPeer(JavaScriptObject jsoPeer) {
     return new ConcreteOverlay(jsoPeer);
   }

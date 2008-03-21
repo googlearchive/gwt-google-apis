@@ -34,14 +34,15 @@ import java.util.List;
  * InfoWindow.
  */
 public class InfoWindowContent {
-  
+
   /*
-   * Design Note: This class that wraps the GInfoWindowOptions object and enables
-   * us to unify the three Maps API classes for plain info windows (GInfoWindow),
-   * Info Windows with tabs (GInfoWindowTab) and blowup info windows into a
-   * unified InfoWindow class for the gwt-google-apis version of the Maps API.
+   * Design Note: This class that wraps the GInfoWindowOptions object and
+   * enables us to unify the three Maps API classes for plain info windows
+   * (GInfoWindow), Info Windows with tabs (GInfoWindowTab) and blowup info
+   * windows into a unified InfoWindow class for the gwt-google-apis version of
+   * the Maps API.
    */
-  
+
   /**
    * Class that allows access to one tab of a tabbed info window.
    */
@@ -162,6 +163,7 @@ public class InfoWindowContent {
    * 
    * @param tabs A populated array of tabs to display in an info window.
    */
+  @SuppressWarnings("unchecked")
   public InfoWindowContent(InfoWindowTab[] tabs) {
     this.content = ((JSWrapper) JsUtil.toJsList(tabs)).getJavaScriptObject();
     this.type = TYPE_TABBED;
@@ -286,11 +288,12 @@ public class InfoWindowContent {
 
   /**
    * Indicates whether or not the info window should close for a click on the
-   * map that was not on a marker. If set to true, the info window will not
-   * close when the map is clicked. The default value is false
+   * map that was not on a marker. If set to <code>true</code>, the info
+   * window will not close when the map is clicked. The default value is
+   * <code>false</code>
    * 
-   * @param noCloseFlag Pass true to leave the window open when the map is
-   *          clicked.
+   * @param noCloseFlag Pass <code>true</code> to leave the window open when
+   *          the map is clicked.
    */
   public void setNoCloseOnClick(boolean noCloseFlag) {
     InfoWindowOptionsImpl.impl.setNoCloseOnClick(options, noCloseFlag);

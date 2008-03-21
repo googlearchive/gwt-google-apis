@@ -54,16 +54,20 @@ public final class Geocoder {
   }
 
   /**
-   * @return the current country code in use by the given geocoder. (If no
-   *         country code is in effect, this method returns null.)
+   * Returns the current country code in use by the given geocoder. (If no
+   * country code is in effect, this method returns <code>null</code>.)
+   * 
+   * @return the current country code in use by the given geocoder.
    */
   public String getBaseCountryCode() {
     return GeocoderImpl.impl.getBaseCountryCode(jsoPeer);
   }
 
   /**
-   * @return currently used geocode cache, or null, if no client-side caching is
-   *         performed.
+   * Returns the currently used geocode cache.
+   * 
+   * @return currently used geocode cache, or <code>null</code>, if no
+   *         client-side caching is performed.
    */
   public GeocodeCache getCache() {
     return GeocoderImpl.impl.getCache(jsoPeer);
@@ -73,8 +77,8 @@ public final class Geocoder {
    * Sends a request to Google servers to geocode the specified address. If the
    * address was successfully located, the user-specified callback function is
    * invoked with a LatLng point. Otherwise, the callback function is given a
-   * null point. In case of ambiguous addresses, only the point for the best
-   * match is passed to the callback function.
+   * <code>null</code> point. In case of ambiguous addresses, only the point
+   * for the best match is passed to the callback function.
    * 
    * @param address the address to search for.
    * @param callback methods to call when the query returns.
@@ -97,7 +101,7 @@ public final class Geocoder {
 
   /**
    * Sends a request to Google servers to geocode the specified address. A reply
-   * that contains status code, and if successful, one or more Placemark
+   * that contains status code, and if successful, one or more {@link Placemark}
    * objects, is passed to the user-specified callback function. Unlike the
    * {@link Geocoder#getLatLng(String,LatLngCallback)} method, the callback
    * function may determine the reasons for failure by examining the code value
@@ -124,6 +128,8 @@ public final class Geocoder {
   }
 
   /**
+   * Returns the viewport for magnifying geocoding results within that geocoder.
+   * 
    * @return the viewport for magnifying geocoding results within that geocoder.
    */
   public LatLngBounds getViewport() {
@@ -131,9 +137,8 @@ public final class Geocoder {
   }
 
   /**
-   * Resets the geocoder. In particular this method calls the
-   * GGeocodeCache.reset() method on the client-side cache, if one is used by
-   * this geocoder.
+   * Resets the geocoder. In particular this method resets the client-side
+   * cache, if one is used by this geocoder.
    */
   public void reset() {
     GeocoderImpl.impl.reset(jsoPeer);

@@ -22,7 +22,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Size;
 
 /**
- * 
+ *  Wrapper for the Maps API GMaps.
  */
 @BeanProperties
 public interface SizeImpl extends JSFlyweightWrapper {

@@ -18,9 +18,13 @@ package com.google.gwt.maps.client.geocode;
 /**
  * These constant values are returned by {@link Placemark#getAccuracy()}.
  */
-// TODO(zundel): should this be an enum?
 public final class GeoAddressAccuracy {
 
+  /*
+   * Design note: the JavaScript Maps API does not actually define these
+   * constants, it simply specifies the meaning of the numeric values. Thus,
+   * there is no way to seed these constants from JavaScript.
+   */
   public static final int UNKNOWN_LOCATION = 0;
 
   public static final int COUNTRY = 1;
@@ -39,6 +43,7 @@ public final class GeoAddressAccuracy {
 
   public static final int ADDRESS = 8;
 
+  // This class is not meant to be instantiated by users
   private GeoAddressAccuracy() {
   }
 }

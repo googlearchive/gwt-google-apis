@@ -56,6 +56,14 @@ public final class Polyline extends ConcreteOverlay {
     return new Polyline(PolylineFactoryImpl.impl.fromEncoded(optionsJso));
   }
 
+  /**
+   * Used to create a new Polyline by wrapping an existing GPolyline object.
+   * This method is invoked by the jsio library.
+   * 
+   * @param jsoPeer GPolyline object to wrap.
+   * @return a new instance of Polyline.
+   */
+  @SuppressWarnings("unused")
   private static Polyline createPeer(JavaScriptObject jsoPeer) {
     return new Polyline(jsoPeer);
   }

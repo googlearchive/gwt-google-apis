@@ -33,9 +33,6 @@ public interface BoundsImpl extends JSFlyweightWrapper {
   BoundsImpl impl = GWT.create(BoundsImpl.class);
 
   @Constructor("$wnd.GBounds")
-  JavaScriptObject construct(int minX, int minY, int maxX, int maxY);
-
-  @Constructor("$wnd.GBounds")
   JavaScriptObject construct(JSList<Point> points);
 
   boolean containsBounds(JavaScriptObject jsoPeer, Bounds other);
@@ -51,8 +48,6 @@ public interface BoundsImpl extends JSFlyweightWrapper {
   int getMinX(JavaScriptObject jsoPeer);
 
   int getMinY(JavaScriptObject jsoPeer);
-
-  Bounds intersection(JavaScriptObject jsoPeer, Bounds other);
 
   Point max(JavaScriptObject jsoPeer);
 
