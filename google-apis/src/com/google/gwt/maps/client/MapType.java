@@ -25,6 +25,10 @@ import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapTypeImpl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * A MapType is a sequence of tile layers, a map projection, a tile size, and
  * assorted other settings, link colors, and copyrights.
@@ -55,42 +59,46 @@ public final class MapType {
     }
   };
 
-  private static MapType[] defaultMapTypes;
+  private static List<MapType> defaultMapTypes;
   private static MapType hybridMap;
   private static boolean mapTypesInitialized = false;
   private static MapType marsElevationMap;
   private static MapType marsInfraredMap;
-  private static MapType[] marsMapTypes;
+  private static List<MapType> marsMapTypes;
   private static MapType marsVisibleMap;
   private static MapType moonElevationMap;
-  private static MapType[] moonMapTypes;
+  private static List<MapType> moonMapTypes;
   private static MapType moonVisibleMap;
   private static MapType normalMap;
   private static MapType physicalMap;
   private static MapType satelliteMap;
-  private static MapType[] skyMapTypes;
+  private static List<MapType> skyMapTypes;
 
   private static MapType skyVisibleMap;
 
   /**
    * Returns G_DEFAULT_MAP_TYPES as an Java Array of MapType objects.
    * 
-   * @return an array of MapType objects
+   * @return  an immutable list of MapType objects.
    */
-  public static MapType[] getDefaultMapTypes() {
+  public static List<MapType> getDefaultMapTypes() {
     if (defaultMapTypes != null) {
       return defaultMapTypes;
     }
     initMapTypes();
     int size = getDefaultMapTypesSize();
-    defaultMapTypes = new MapType[size];
-    for (int i = 0; i < defaultMapTypes.length; i++) {
-      defaultMapTypes[i] = getDefaultMapType(i);
+    List<MapType> l = new ArrayList<MapType>();
+    for (int i = 0; i < size; i++) {
+      l.add(getDefaultMapType(i));
     }
+    defaultMapTypes = Collections.unmodifiableList(l);
     return defaultMapTypes;
   }
 
   /**
+   * Returns a map type that shows transparent street maps over Google Earth
+   * satellite images.
+   * 
    * @return a map type that shows transparent street maps over Google Earth
    *         satellite images.
    */
@@ -100,6 +108,8 @@ public final class MapType {
   }
 
   /**
+   * Returns a map type displays a shaded relief map of the surface of Mars.
+   * 
    * @return a map type displays a shaded relief map of the surface of Mars,
    *         color-coded by altitude. This map type is not displayed within map
    *         type controls by default. (Since 2.95)
@@ -110,6 +120,8 @@ public final class MapType {
   }
 
   /**
+   * Returns a map type displays a shaded infrared map of the surface of Mars.
+   * 
    * @return a map type displays a shaded infrared map of the surface of Mars,
    *         where warmer areas appear brighter and colder areas appear darker.
    *         (Since 2.95)
@@ -120,24 +132,27 @@ public final class MapType {
   }
 
   /**
-   * Turns G_MARS_MAP_TYPES into a Java Array of MapType objects.
+   * Turns G_MARS_MAP_TYPES into an immutable of MapType objects.
    * 
-   * @return an array of MapType objects
+   * @return  an immutable list of MapType objects.
    */
-  public static MapType[] getMarsMapTypes() {
+  public static List<MapType> getMarsMapTypes() {
     if (marsMapTypes != null) {
       return marsMapTypes;
     }
     initMapTypes();
     int size = getMarsMapTypesSize();
-    marsMapTypes = new MapType[size];
-    for (int i = 0; i < marsMapTypes.length; i++) {
-      marsMapTypes[i] = getMarsMapType(i);
+    List<MapType> l = new ArrayList<MapType>();
+    for (int i = 0; i < size; i++) {
+      l.add(getMarsMapType(i));
     }
+    marsMapTypes = Collections.unmodifiableList(l);
     return marsMapTypes;
   }
 
   /**
+   * Returns a map type that displays photographs taken from orbit around Mars.
+   * 
    * @return a map type that displays photographs taken from orbit around Mars.
    *         This map type is not displayed within map type controls by default.
    *         (Since 2.95)
@@ -148,6 +163,9 @@ public final class MapType {
   }
 
   /**
+   * Returns a map type that displays a shaded terrain map of the surface of the
+   * Moon.
+   * 
    * @return a map type that displays a shaded terrain map of the surface of the
    *         Moon, color-coded by altitude. This map type is not displayed
    *         within map type controls by default. (Since 2.95)
@@ -158,24 +176,28 @@ public final class MapType {
   }
 
   /**
-   * Turns G_MOON_MAP_TYPES into a Java Array of MapType objects.
+   * Turns G_MOON_MAP_TYPES into an immutable list of MapType objects.
    * 
-   * @return an array of MapType objects
+   * @return an immutable list of MapType objects.
    */
-  public static MapType[] getMoonMapTypes() {
+  public static List<MapType> getMoonMapTypes() {
     if (moonMapTypes != null) {
       return moonMapTypes;
     }
     initMapTypes();
     int size = getMoonMapTypesSize();
-    moonMapTypes = new MapType[size];
-    for (int i = 0; i < moonMapTypes.length; i++) {
-      moonMapTypes[i] = getMoonMapType(i);
+    List<MapType> l = new ArrayList<MapType>();
+    for (int i = 0; i < size; i++) {
+      l.add(getMoonMapType(i));
     }
+    moonMapTypes = Collections.unmodifiableList(l);
     return moonMapTypes;
   }
 
   /**
+   * Returns a map type that displays photographs taken from orbit around the
+   * moon.
+   * 
    * @return a map type that displays photographs taken from orbit around the
    *         moon. This map type is not displayed within map type controls by
    *         default. (Since 2.95)
@@ -186,6 +208,8 @@ public final class MapType {
   }
 
   /**
+   * Returns the normal street map type.
+   * 
    * @return the normal street map type.
    */
   public static MapType getNormalMap() {
@@ -194,6 +218,8 @@ public final class MapType {
   }
 
   /**
+   * Returns a map type that shows a terrain view.
+   * 
    * @return a map type that shows a terrain view.
    */
   public static MapType getPhysicalMap() {
@@ -202,6 +228,8 @@ public final class MapType {
   }
 
   /**
+   * Returns a map type that shows Google Earth satellite images.
+   * 
    * @return a map type that shows Google Earth satellite images.
    */
   public static MapType getSatelliteMap() {
@@ -210,24 +238,27 @@ public final class MapType {
   }
 
   /**
-   * Turns G_SKY_MAP_TYPES into a Java Array of MapType objects.
+   * Turns G_SKY_MAP_TYPES into an immutable list of MapType objects.
    * 
-   * @return an array of MapType objects
+   * @return an immutable list of MapType objects.
    */
-  public static MapType[] getSkyMapTypes() {
+  public static List<MapType> getSkyMapTypes() {
     if (skyMapTypes != null) {
       return skyMapTypes;
     }
     initMapTypes();
     int size = getSkyMapTypesSize();
-    skyMapTypes = new MapType[size];
-    for (int i = 0; i < skyMapTypes.length; i++) {
-      skyMapTypes[i] = getSkyMapType(i);
+    List<MapType> l = new ArrayList<MapType>();
+    for (int i = 0; i < size; i++) {
+      l.add(getSkyMapType(i));
     }
+    skyMapTypes = Collections.unmodifiableList(l);
     return skyMapTypes;
   }
 
   /**
+   * Returns a map type shows a mosaic of the sky.
+   * 
    * @return a map type shows a mosaic of the sky, covering the full celestial
    *         sphere. (Since 2.95)
    */
@@ -237,6 +268,8 @@ public final class MapType {
   }
 
   /**
+   * Wraps an existing GMapType object.
+   * 
    * @param jsoPeer a JavaScriptObject to wrap with a Java object.
    * @return A Java object wrapper for the jsoPeer passed.
    */
@@ -396,12 +429,14 @@ public final class MapType {
   }
 
   /**
-   * @return returns to the map the alternative text of this map type.
+   * Returns to the map the alternative text of this map type.
+   * 
+   * @return to the map the alternative text of this map type.
    */
   public String getAlt() {
     return MapTypeImpl.impl.getAlt(jsoPeer);
   }
-  
+
   /**
    * Returns the highest resolution zoom level that shows show the given
    * geographical bounds in a map of the given pixel size.
@@ -539,7 +574,7 @@ public final class MapType {
   /**
    * Returns the array of tile layers in the z-order they should be displayed.
    * 
-   * @return the tile layers
+   * @return the tile layers.
    */
   public TileLayer[] getTileLayers() {
     JSList<TileLayer> layers = MapTypeImpl.impl.getTileLayers(jsoPeer);
@@ -551,7 +586,7 @@ public final class MapType {
   /**
    * Returns the tile size of this map's tile layers.
    * 
-   * @return the size of the tiles
+   * @return the size of the tiles.
    */
   public int getTileSize() {
     return MapTypeImpl.impl.getTileSize(jsoPeer);
