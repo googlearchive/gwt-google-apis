@@ -55,8 +55,8 @@
 	</target>
 
 	<target name="remoteweb-test" description="Run a remoteweb test at the given host and path">
-		<echo message="Performing remote browser testing at ${gwt.remote.browser}" />
-		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -remoteweb ${gwt.remote.browser}" test.out="${junit.out}/${gwt.remote.browser}" test.cases="default.web.tests" />
+		<echo message="Performing remote browser testing at ${gwt.remote.browsers}" />
+		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -remoteweb ${gwt.remote.browsers}" test.out="${junit.out}/remoteweb" test.cases="default.web.tests" />
 	</target>
 
 	<target name="test.hosted" 
@@ -82,31 +82,14 @@
         </target>
 
 	<target name="test" depends="compile, compile.tests" description="Run hosted-mode, web-mode and remoteweb tests for this project.">
-		<property.ensure name="distro.built" location="${gwt.dev.jar}" message="GWT must be built before performing any tests.  This can be fixed by running ant in the ${gwt.root} directory." />
-
 		<!--
-			Run hosted and web mode tests for the platform 
-                        on which this build is executing
+			Run hosted and web mode tests for the platform on which this build
+			is executing
 		-->
 		<parallel threadcount="1">
 			<antcall target="test.hosted"/>
-
 			<antcall target="test.web"/>
-
-			<!--
-				Run remote browser testing for the comma 
-                                delimited list of remote browsers.
-
-                                If you change maxThreads > 1 to turn on 
-                                parallel testing, make sure that the
-                                property gwt.junit.port is set to "auto"
-			-->
-			<foreach list="${gwt.remote.browsers}" 
-                                 delimiter="," 
-                                 parallel="true" 
-                                 maxThreads="1" 
-                                 target="remoteweb-test" 
-                                 param="gwt.remote.browser" />
+			<antcall target="remoteweb-test"/>
 		</parallel>
 	</target>
 
