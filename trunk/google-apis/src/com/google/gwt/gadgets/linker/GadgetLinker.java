@@ -15,12 +15,12 @@
  */
 package com.google.gwt.gadgets.linker;
 
+import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.linker.GeneratedResource;
-import com.google.gwt.dev.linker.LinkerContext;
-import com.google.gwt.dev.linker.XSLinker;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.core.ext.linker.EmittedArtifact;
+import com.google.gwt.core.linker.XSLinker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,57 +31,58 @@ import java.io.InputStreamReader;
  */
 public final class GadgetLinker extends XSLinker {
 
+  private EmittedArtifact manifestArtifact;
+
   @Override
   public String getDescription() {
     return "Google Gadget";
   }
 
   @Override
-  protected void doEmitGeneratedResource(TreeLogger logger,
-      LinkerContext context, GeneratedResource resource)
-      throws UnableToCompleteException {
+  public ArtifactSet link(TreeLogger logger, LinkerContext context,
+      ArtifactSet artifacts) throws UnableToCompleteException {
+    ArtifactSet toLink = new ArtifactSet(artifacts);
+
     // Mask the stub manifest created by the generator
-    if (resource.getPartialPath().endsWith(".gadget.xml")) {
-      return;
+    for (EmittedArtifact res : toLink.find(EmittedArtifact.class)) {
+      if (res.getPartialPath().endsWith(".gadget.xml")) {
+        manifestArtifact = res;
+        toLink.remove(res);
+        break;
+      }
     }
 
-    super.doEmitGeneratedResource(logger, context, resource);
+    return super.link(logger, context, toLink);
   }
 
   @Override
-  protected void emitSelectionScript(TreeLogger logger, LinkerContext context)
+  protected EmittedArtifact emitSelectionScript(TreeLogger logger,
+      LinkerContext context, ArtifactSet artifacts)
       throws UnableToCompleteException {
     logger = logger.branch(TreeLogger.DEBUG, "Building gadget manifest", null);
 
     String bootstrap = "<script>"
         + context.optimizeJavaScript(logger, generateSelectionScript(logger,
-            context)) + "</script>";
+            context, artifacts)) + "</script>";
 
-    for (GeneratedResource manifestResource : context.getGeneratedResources()) {
-      // Find the stub manifests
-      if (!manifestResource.getPartialPath().endsWith((".gadget.xml"))) {
-        continue;
+    // Read the content
+    StringBuffer manifest = new StringBuffer();
+    try {
+      BufferedReader in = new BufferedReader(new InputStreamReader(
+          manifestArtifact.getContents(logger)));
+      for (String line = in.readLine(); line != null; line = in.readLine()) {
+        manifest.append(line).append("\n");
       }
-
-      // Read the contents
-      StringBuffer manifest = new StringBuffer();
-      try {
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-            manifestResource.tryGetResourceAsStream(logger)));
-        for (String line = in.readLine(); line != null; line = in.readLine()) {
-          manifest.append(line).append("\n");
-        }
-        in.close();
-      } catch (IOException e) {
-        logger.log(TreeLogger.ERROR, "Unable to read manifest stub", e);
-        throw new UnableToCompleteException();
-      }
-
-      replaceAll(manifest, "__BOOTSTRAP__", bootstrap);
-
-      doEmit(logger, context, Util.getBytes(manifest.toString()),
-          manifestResource.getPartialPath());
+      in.close();
+    } catch (IOException e) {
+      logger.log(TreeLogger.ERROR, "Unable to read manifest stub", e);
+      throw new UnableToCompleteException();
     }
+
+    replaceAll(manifest, "__BOOTSTRAP__", bootstrap);
+
+    return emitString(logger, manifest.toString(),
+        manifestArtifact.getPartialPath());
   }
 
   @Override

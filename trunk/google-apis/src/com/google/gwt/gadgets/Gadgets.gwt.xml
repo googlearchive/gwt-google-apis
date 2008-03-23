@@ -16,7 +16,7 @@
   <!-- Produces the final Gadget manifest -->
   <define-linker name="gadget"
     class="com.google.gwt.gadgets.linker.GadgetLinker" />
-  <set-linker name="gadget" />
+  <add-linker name="gadget" />
 
   <!-- Generates the top layer of the Gadget sandwich -->
   <generate-with class="com.google.gwt.gadgets.rebind.GadgetGenerator">
