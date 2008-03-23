@@ -1,7 +1,0 @@
-{
-  "betaManifestVersion": 1,
-  "version": "v1",
-  "entries": [
-    { "url": "ManagedResourceStoreDemo.html",
-      "src": "ManagedResourceStoreDemo_v1.html" } ]
-}

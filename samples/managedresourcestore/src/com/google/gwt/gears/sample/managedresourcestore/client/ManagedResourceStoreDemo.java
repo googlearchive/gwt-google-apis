@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,6 +19,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.gears.core.client.GearsException;
 import com.google.gwt.gears.localserver.client.LocalServer;
 import com.google.gwt.gears.localserver.client.ManagedResourceStore;
+import com.google.gwt.gears.offline.client.Offline;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -30,53 +31,83 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Sample application demonstrating how to use the {@link ManagedResourceStore}
- * class.
+ * class provided by the {@link Offline} support.
  */
 public class ManagedResourceStoreDemo implements EntryPoint {
-  private static final String MANAGED_STORE_NAME = "ManagedResourceStoreDemo";
-  private static final String MANIFEST_URL = "manifest_v1.json";
 
   private final Button createManagedResourceStoreButton = new Button(
-      "Map URL");
+      "Go Offline");
+
+  private final Button removeManagedResourceStoreButton = new Button(
+      "Remove Store");
 
   private final Label statusLabel = new Label();
 
   public void onModuleLoad() {
+    HorizontalPanel hpanel = new HorizontalPanel();
+    RootPanel.get().add(hpanel);
+
+    hpanel.add(createManagedResourceStoreButton);
+
+    // See if we're already running from a ManagedResourceStore
+    try {
+      LocalServer server = new LocalServer();
+
+      // This check to see if the host page can be served locally
+      if (server.canServeLocally(Window.Location.getPath())) {
+        createManagedResourceStoreButton.setText("Refresh Manifest");
+
+        // Give the user an opportunity to delete the MRS
+        hpanel.add(removeManagedResourceStoreButton);
+      }
+    } catch (GearsException e) {
+      // Gears probably isn't available (e.g. hosted mode)
+    }
+
     createManagedResourceStoreButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
+        statusLabel.setText("Starting update");
         createManagedResourceStore();
       }
     });
 
-    HorizontalPanel hpanel = new HorizontalPanel();
-    hpanel.add(createManagedResourceStoreButton);
+    removeManagedResourceStoreButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        try {
+          LocalServer server = new LocalServer();
+          ManagedResourceStore store = Offline.getManagedResourceStore();
+          server.removeManagedResourceStore(store.getName());
+          statusLabel.setText("Removed ManagedResourceStore");
+        } catch (GearsException e) {
+          statusLabel.setText(e.getMessage());
+        }
+      }
+    });
+
     hpanel.add(statusLabel);
-    RootPanel.get().add(hpanel);
   }
 
   private void createManagedResourceStore() {
-    LocalServer localServer;
     try {
-      localServer = new LocalServer();
-      ManagedResourceStore oldManagedResourceStore = localServer.openManagedResourceStore(MANAGED_STORE_NAME); 
-      if (oldManagedResourceStore != null) {
-        oldManagedResourceStore.setManifestURL("");
-        localServer.removeManagedResourceStore(MANAGED_STORE_NAME);
-        oldManagedResourceStore = localServer.openManagedResourceStore(MANAGED_STORE_NAME); 
-      }
-
-      final ManagedResourceStore managedResourceStore = localServer.createManagedResourceStore(MANAGED_STORE_NAME);
-      managedResourceStore.setManifestURL(MANIFEST_URL);
-      managedResourceStore.checkForUpdate();
+      final ManagedResourceStore managedResourceStore = Offline.getManagedResourceStore();
 
       new Timer() {
+        final String oldVersion = managedResourceStore.getCurrentVersion();
+
         public void run() {
           switch (managedResourceStore.getUpdateStatus()) {
             case ManagedResourceStore.UPDATE_OK:
-              statusLabel.setText("Mapping to " + managedResourceStore.getCurrentVersion() + " was completed.  Please click on the \"Compile/Browse\" button to see the changes.");
+              if (managedResourceStore.getCurrentVersion().equals(oldVersion)) {
+                statusLabel.setText("No update was available.");
+              } else {
+                statusLabel.setText("Update to "
+                    + managedResourceStore.getCurrentVersion()
+                    + " was completed.  Please refresh the page to see the changes.");
+              }
               break;
             case ManagedResourceStore.UPDATE_CHECKING:
             case ManagedResourceStore.UPDATE_DOWNLOADING:
+              statusLabel.setText("Transferring data");
               schedule(500);
               break;
             case ManagedResourceStore.UPDATE_FAILED:
@@ -87,6 +118,7 @@ public class ManagedResourceStoreDemo implements EntryPoint {
       }.schedule(500);
 
     } catch (GearsException e) {
+      statusLabel.setText("");
       Window.alert(e.getMessage());
     }
   }

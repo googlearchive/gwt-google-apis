@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--                                                                        -->
 <!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
@@ -12,14 +13,16 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<!-- Gears ManagedResourceStore example                                     -->
-<!--                                                                        -->
+<!--
+  Inheriting this module will automatically create a ManagedResourceStore
+  manifest and configure the application to run in an offline mode.
+-->
 <module>
-  <inherits name='com.google.gwt.user.User' />
+  <inherits name="com.google.gwt.gears.Gears" />
+  <source path="offline/client" />
 
-  <!-- The following lines add Google Gears support and automatic offline mode -->
-  <inherits name='com.google.gwt.gears.Gears' />
-  <inherits name='com.google.gwt.gears.Offline' />
-  <entry-point
-    class='com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemo' />
+  <!-- Add a Linker to generate the manifest file. -->
+  <define-linker name="gearsManifest"
+    class="com.google.gwt.gears.offline.linker.GearsManifestLinker" />
+  <add-linker name="gearsManifest" />
 </module>
