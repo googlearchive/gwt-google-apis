@@ -2,19 +2,116 @@
 #
 # quick and dirty to write map widget event code
 
-sourcename = "MapWidget"
-prefix1 = "MapMoveEnd"
-prefix2 = "mapMoveEnd"
-mapeventname = "MOVEEND"
-callbackmethod = "onMoveEnd"
+# Copyright 2008 Google Inc.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
 
-imports_template = "\
+
+import optparse
+import re
+import os
+import pdb # interactive debugger
+import datetime
+import sys
+
+
+global options
+options=[]
+global sourcename
+sourcename = "MapWidget"
+global stripprefix
+stripprefix = "Map"
+
+eventfilename="./mapwidgetevents.txt";
+
+
+def main ():
+  """The main entry point"""
+  global options
+
+  # read command line args
+  p = optparse.OptionParser(description="""Create map events implementation""");
+
+  p.add_option('--verbose', '-v', action='store_true', 
+               help='Print messages while running')
+  (options, event_input_filename) = p.parse_args()
+
+  if len(event_input_filename) !=  1:
+    print "Expected filenaming containing events handlers to create as last argument";
+    p.print_help()
+    sys.exit()
+
+  events=[]
+
+  eventfile=open(event_input_filename[0]);
+  while True:
+      curr_line = eventfile.readline()
+      if len(curr_line) == 0:
+             break;
+      events.append(curr_line.rstrip())
+  eventfile.close()
+
+  process_events(events)
+  return
+ 
+def process_events (events):
+  """Process the array of events read in from the file"""
+  global sourcename
+  global options
+  global stripprefix
+
+  imports = ""
+  add_handlers = ""
+  clear_handlers = ""
+  remove_handlers = ""
+  trigger_handlers = ""
+ 
+  for event in events:
+    # The name of the event looks like: "MapMoveStart"  Create variations of
+    # capitalization and suffixes using this name
+    prefix1 = event
+    if options.verbose:
+      print "prefix1 is ", prefix1
+    prefix2 = event
+    prefix2 = event[:1].lower() + event[1:]
+    if options.verbose:
+      print "prefix2 is ", prefix2
+
+    # strip off the prefix used to differentiate the source of the event.
+    if event.startswith(stripprefix):
+      tmpsuffix = event[len(stripprefix):]
+    else:
+      tmpsuffix = event
+
+    mapeventname = tmpsuffix.upper()
+    if options.verbose:
+      print "mapeventname is ", mapeventname
+    callbackmethod = "on" + tmpsuffix
+    if options.verbose:
+      print "callbackmethod is ", callbackmethod
+          
+    imports += "\
 import com.google.gwt.maps.client.event." + prefix1 + "Handler;\n\
 import com.google.gwt.maps.client.event." + prefix1 + "Handler." + prefix1 + "Event;\n"
 
-add_template = "\n\
+    add_handlers += "\n\
   private HandlerCollection<" + prefix1 + "Handler> "  + prefix2 + "Handlers;\n\
 \n\
+ /**\n\
+  *\n\
+  *\n\
+  * @param handler the handler to call when this event fires.\n\
+  */\n\
   public void add" + prefix1 + "Handler(final " + prefix1 + "Handler handler) {\n\
     if (" + prefix2 + "Handlers == null) {\n\
       "+ prefix2 + "Handlers = new HandlerCollection<" + prefix1 + "Handler>(\n\
@@ -31,7 +128,7 @@ add_template = "\n\
   }\n\
 \n"
 
-clear_template="\
+    clear_handlers += "\
   /**\n\
    * Removes all handlers of this map added with\n\
    * {@link " + sourcename + "#add" + prefix1 + "Handler(" + prefix1 + "Handler)}.\n\
@@ -43,7 +140,7 @@ clear_template="\
   }\n\
 \n"
 
-remove_template = "\
+    remove_handlers += "\
   /**\n\
    * Removes a single handler of this map previously added with\n\
    * {@link " + sourcename + "#add" + prefix1 + "Handler(" + prefix1 + "Handler)}.\n\
@@ -56,7 +153,19 @@ remove_template = "\
     }\n\
   }\n"
 
-handler_template = "\
+    trigger_handlers += "\
+  /**\n\
+   * Manually trigger the specified event on this object.\n\
+   * \n\
+   * @param event an event to deliver to the handler.\n\
+   */\n\
+  public void trigger(" + prefix1 + "Event event) {\n\
+    " + prefix2 + "Handlers.trigger();\n\
+  }\n\
+\n"
+
+
+    handler = "\
 /*\n\
  * Copyright 2008 Google Inc.\n\
  * \n\
@@ -110,10 +219,21 @@ public interface " + prefix1 + "Handler {\n\
    */\n\
   void "+callbackmethod+"(" + prefix1 + "Event event);\n\
 }\n"
+    handler_file = open (prefix1+"Handler.java","w");
+    handler_file.write(handler);
+    handler_file.close();
+    
+  sourcefile = open (sourcename + ".java.imports", "w");
+  sourcefile.write(imports);
+  sourcefile.close();
 
-print imports_template
-print add_template
-print clear_template
-print remove_template
-print
-print handler_template
+  sourcefile = open (sourcename + ".java.methods", "w");
+  sourcefile.write(add_handlers);
+  sourcefile.write(clear_handlers);
+  sourcefile.write(remove_handlers);
+  sourcefile.write(trigger_handlers);
+  sourcefile.close();
+  
+# Invoke the main entry point
+main()
+sys.exit()

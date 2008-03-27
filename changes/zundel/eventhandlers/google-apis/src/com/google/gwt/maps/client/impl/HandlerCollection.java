@@ -151,4 +151,10 @@ public class HandlerCollection<E> {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, point, elem, overlay);
   }
   
+  /**
+   * Manually trigger an event that takes an overlay and point argument.
+   */
+  public void trigger() {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value);
+  }
 }

@@ -20,23 +20,56 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
+import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.InfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.InfoWindowListener;
+import com.google.gwt.maps.client.event.InfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
+import com.google.gwt.maps.client.event.MapAddOverlayHandler;
+import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MapClickListener;
 import com.google.gwt.maps.client.event.MapDoubleClickHandler;
 import com.google.gwt.maps.client.event.MapDragListener;
+import com.google.gwt.maps.client.event.MapDragStartHandler;
+import com.google.gwt.maps.client.event.MapDragendHandler;
+import com.google.gwt.maps.client.event.MapLoadHandler;
 import com.google.gwt.maps.client.event.MapMouseListener;
+import com.google.gwt.maps.client.event.MapMouseOutHandler;
+import com.google.gwt.maps.client.event.MapMouseOverHandler;
+import com.google.gwt.maps.client.event.MapMoveEndHandler;
 import com.google.gwt.maps.client.event.MapMoveHandler;
 import com.google.gwt.maps.client.event.MapMoveListener;
 import com.google.gwt.maps.client.event.MapMoveStartHandler;
+import com.google.gwt.maps.client.event.MapRemoveMapTypeHandler;
+import com.google.gwt.maps.client.event.MapRemoveOverlayHandler;
 import com.google.gwt.maps.client.event.MapRightClickHandler;
+import com.google.gwt.maps.client.event.MapTypeChangedHandler;
 import com.google.gwt.maps.client.event.MapTypeListener;
+import com.google.gwt.maps.client.event.MapZoomEndHandler;
 import com.google.gwt.maps.client.event.MapZoomListener;
 import com.google.gwt.maps.client.event.OverlayListener;
+import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler.InfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.InfoWindowCloseHandler.InfoWindowCloseEvent;
+import com.google.gwt.maps.client.event.InfoWindowOpenHandler.InfoWindowOpenEvent;
+import com.google.gwt.maps.client.event.MapAddMapTypeHandler.MapAddMapTypeEvent;
+import com.google.gwt.maps.client.event.MapAddOverlayHandler.MapAddOverlayEvent;
+import com.google.gwt.maps.client.event.MapClearOverlaysHandler.MapClearOverlaysEvent;
 import com.google.gwt.maps.client.event.MapClickHandler.MapClickEvent;
 import com.google.gwt.maps.client.event.MapDoubleClickHandler.MapDoubleClickEvent;
+import com.google.gwt.maps.client.event.MapDragStartHandler.MapDragStartEvent;
+import com.google.gwt.maps.client.event.MapDragendHandler.MapDragendEvent;
+import com.google.gwt.maps.client.event.MapLoadHandler.MapLoadEvent;
+import com.google.gwt.maps.client.event.MapMouseOutHandler.MapMouseOutEvent;
+import com.google.gwt.maps.client.event.MapMouseOverHandler.MapMouseOverEvent;
+import com.google.gwt.maps.client.event.MapMoveEndHandler.MapMoveEndEvent;
+import com.google.gwt.maps.client.event.MapMoveHandler.MapMoveEvent;
 import com.google.gwt.maps.client.event.MapMoveStartHandler.MapMoveStartEvent;
+import com.google.gwt.maps.client.event.MapRemoveMapTypeHandler.MapRemoveMapTypeEvent;
+import com.google.gwt.maps.client.event.MapRemoveOverlayHandler.MapRemoveOverlayEvent;
 import com.google.gwt.maps.client.event.MapRightClickHandler.MapRightClickEvent;
+import com.google.gwt.maps.client.event.MapTypeChangedHandler.MapTypeChangedEvent;
+import com.google.gwt.maps.client.event.MapZoomEndHandler.MapZoomEndEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Point;
@@ -62,9 +95,6 @@ import com.google.gwt.user.client.WindowCloseListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.maps.client.event.MapMoveEndHandler;
-import com.google.gwt.maps.client.event.MapMoveEndHandler.MapMoveEndEvent;
-import com.google.gwt.maps.client.event.MapMoveHandler.MapMoveEvent;
 
 /**
  * A widget that presents a viewable Google Map to a user.
@@ -93,78 +123,105 @@ public final class MapWidget extends Composite {
     });
   }
 
+  private static native void nativeUnload() /*-{
+       $wnd.GUnload && $wnd.GUnload();
+     }-*/;
+
   static MapWidget createPeer(JavaScriptObject jsoPeer) {
     throw new UnsupportedOperationException();
   }
-
-  private static native void nativeUnload() /*-{
-      $wnd.GUnload && $wnd.GUnload();
-    }-*/;
 
   private HandlerCollection<MapClickHandler> clickHandlers;
   private ListenerCollection<MapClickListener> clickListeners;
   private HandlerCollection<MapDoubleClickHandler> doubleClickHandlers;
   private ListenerCollection<MapDragListener> dragListeners;
-  
+
+  private HandlerCollection<InfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
+  private HandlerCollection<InfoWindowCloseHandler> infoWindowCloseHandlers;
   private ListenerCollection<InfoWindowListener> infoWindowListeners;
+
+  private HandlerCollection<InfoWindowOpenHandler> infoWindowOpenHandlers;
+
   /* Reference to GMap2 object. */
   private final JavaScriptObject jsoPeer;
+
+  private HandlerCollection<MapAddMapTypeHandler> mapAddMapTypeHandlers;
+  private HandlerCollection<MapAddOverlayHandler> mapAddOverlayHandlers;
+  private HandlerCollection<MapClearOverlaysHandler> mapClearOverlaysHandlers;
   private final MapPanel mapContainer = new MapPanel();
+  private HandlerCollection<MapDragendHandler> mapDragendHandlers;
+  private HandlerCollection<MapDragStartHandler> mapDragStartHandlers;
+
+  private HandlerCollection<MapLoadHandler> mapLoadHandlers;
+
+  private HandlerCollection<MapMouseOutHandler> mapMouseOutHandlers;
+
+  private HandlerCollection<MapMouseOverHandler> mapMouseOverHandlers;
 
   private HandlerCollection<MapMoveEndHandler> mapMoveEndHandlers;
 
   private HandlerCollection<MapMoveHandler> mapMoveHandlers;
 
   private HandlerCollection<MapMoveStartHandler> mapMoveStartHandlers;
+
+  private HandlerCollection<MapRemoveMapTypeHandler> mapRemoveMapTypeHandlers;
+
+  private HandlerCollection<MapRemoveOverlayHandler> mapRemoveOverlayHandlers;
+
+  private HandlerCollection<MapTypeChangedHandler> mapTypeChangedHandlers;
+
   private ListenerCollection<MapTypeListener> mapTypeListeners;
+
+  private HandlerCollection<MapZoomEndHandler> mapZoomEndHandlers;
+
   private ListenerCollection<MapMouseListener> mouseListeners;
+
   private ListenerCollection<MapMoveListener> moveListeners;
+
   private ListenerCollection<OverlayListener> overlayListeners;
+
   private HandlerCollection<MapRightClickHandler> rightClickHandlers;
 
+  private ListenerCollection<MapZoomListener> zoomListeners;
 
+  public MapWidget() {
+    this(DEFAULT_CENTER, 8, null, null);
+  }
 
-    private ListenerCollection<MapZoomListener> zoomListeners;
+  /**
+   * Creates a new map widget and sets the view to the given center and zoom
+   * level.
+   * 
+   * @param center the geographical point about which to center
+   * @param zoomLevel the zoom level
+   */
+  public MapWidget(LatLng center, int zoomLevel) {
+    this(center, zoomLevel, null, null);
+  }
 
-    public MapWidget() {
-      this(DEFAULT_CENTER, 8, null, null);
-    }
+  /**
+   * Creates a new map widget and sets the view to the specified center point
+   * and zoom level. Also, sets the dragging and draggable cursor values. See
+   * the W3C CSS spec for allowable cursor string values.
+   * 
+   * @param center the geographical point about which to center
+   * @param zoomLevel zoomLevel the zoom level
+   * @param draggableCursor CSS name of the cursor to display when the map is
+   *          draggable
+   * @param draggingCursor CSS name of the cursor to display when the map is
+   *          being dragged
+   */
+  public MapWidget(LatLng center, int zoomLevel, String draggableCursor,
+      String draggingCursor) {
+    initWidget(mapContainer);
+    JavaScriptObject opts = MapOptionsImpl.impl.construct();
+    MapOptionsImpl.impl.setDraggableCursor(opts, draggableCursor);
+    MapOptionsImpl.impl.setDraggingCursor(opts, draggingCursor);
+    jsoPeer = MapImpl.impl.construct(getElement(), opts);
+    MapImpl.impl.bind(jsoPeer, this);
+    setCenter(center, zoomLevel);
+  }
 
-
-    /**
-     * Creates a new map widget and sets the view to the given center and zoom
-     * level.
-     * 
-     * @param center the geographical point about which to center
-     * @param zoomLevel the zoom level
-     */
-    public MapWidget(LatLng center, int zoomLevel) {
-      this(center, zoomLevel, null, null);
-    }
-
-
-    /**
-     * Creates a new map widget and sets the view to the specified center point
-     * and zoom level. Also, sets the dragging and draggable cursor values. See
-     * the W3C CSS spec for allowable cursor string values.
-     * 
-     * @param center the geographical point about which to center
-     * @param zoomLevel zoomLevel the zoom level
-     * @param draggableCursor CSS name of the cursor to display when the map is
-     *          draggable
-     * @param draggingCursor CSS name of the cursor to display when the map is
-     *          being dragged
-     */
-    public MapWidget(LatLng center, int zoomLevel, String draggableCursor,
-        String draggingCursor) {
-      initWidget(mapContainer);
-      JavaScriptObject opts = MapOptionsImpl.impl.construct();
-      MapOptionsImpl.impl.setDraggableCursor(opts, draggableCursor);
-      MapOptionsImpl.impl.setDraggingCursor(opts, draggingCursor);
-      jsoPeer = MapImpl.impl.construct(getElement(), opts);
-      MapImpl.impl.bind(jsoPeer, this);
-      setCenter(center, zoomLevel);
-    }
   /**
    * Adds a control to the map. The default position of the control is used. A
    * control instance cannot be added more than once to the map.
@@ -200,6 +257,48 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowBeforeCloseHandler(
+      final InfoWindowBeforeCloseHandler handler) {
+    if (infoWindowBeforeCloseHandlers == null) {
+      infoWindowBeforeCloseHandlers = new HandlerCollection<InfoWindowBeforeCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
+    }
+
+    infoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowBeforeCloseEvent e = new InfoWindowBeforeCloseEvent(
+            MapWidget.this);
+        handler.onInfoWindowBeforeClose(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowCloseHandler(final InfoWindowCloseHandler handler) {
+    if (infoWindowCloseHandlers == null) {
+      infoWindowCloseHandlers = new HandlerCollection<InfoWindowCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWCLOSE);
+    }
+
+    infoWindowCloseHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowCloseEvent e = new InfoWindowCloseEvent(MapWidget.this);
+        handler.onInfoWindowClose(e);
+      }
+    });
+  }
+
+  /**
    * Add a listener for InfoWindow events.
    * 
    * @param listener listener to invoke on InfoWindow events
@@ -224,6 +323,86 @@ public final class MapWidget extends Composite {
               }
             })};
     infoWindowListeners.addListener(listener, infoWindowEventHandles);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowOpenHandler(final InfoWindowOpenHandler handler) {
+    if (infoWindowOpenHandlers == null) {
+      infoWindowOpenHandlers = new HandlerCollection<InfoWindowOpenHandler>(
+          jsoPeer, MapEvent.INFOWINDOWOPEN);
+    }
+
+    infoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowOpenEvent e = new InfoWindowOpenEvent(MapWidget.this);
+        handler.onInfoWindowOpen(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapAddMapTypeHandler(final MapAddMapTypeHandler handler) {
+    if (mapAddMapTypeHandlers == null) {
+      mapAddMapTypeHandlers = new HandlerCollection<MapAddMapTypeHandler>(
+          jsoPeer, MapEvent.ADDMAPTYPE);
+    }
+
+    mapAddMapTypeHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapAddMapTypeEvent e = new MapAddMapTypeEvent(MapWidget.this);
+        handler.onAddMapType(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapAddOverlayHandler(final MapAddOverlayHandler handler) {
+    if (mapAddOverlayHandlers == null) {
+      mapAddOverlayHandlers = new HandlerCollection<MapAddOverlayHandler>(
+          jsoPeer, MapEvent.ADDOVERLAY);
+    }
+
+    mapAddOverlayHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapAddOverlayEvent e = new MapAddOverlayEvent(MapWidget.this);
+        handler.onAddOverlay(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapClearOverlaysHandler(final MapClearOverlaysHandler handler) {
+    if (mapClearOverlaysHandlers == null) {
+      mapClearOverlaysHandlers = new HandlerCollection<MapClearOverlaysHandler>(
+          jsoPeer, MapEvent.CLEAROVERLAYS);
+    }
+
+    mapClearOverlaysHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapClearOverlaysEvent e = new MapClearOverlaysEvent(MapWidget.this);
+        handler.onClearOverlays(e);
+      }
+    });
   }
 
   /**
@@ -252,7 +431,8 @@ public final class MapWidget extends Composite {
    * 
    * @param listener listener to invoke on mouse click events.
    * 
-   * @see {@link MapWidget#addMapClickHandler(MapClickHandler)}
+   * @deprecated replace with
+   *             {@link MapWidget#addMapClickHandler(MapClickHandler)}
    */
   @Deprecated
   public void addMapClickListener(final MapClickListener listener) {
@@ -307,6 +487,26 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapDragendHandler(final MapDragendHandler handler) {
+    if (mapDragendHandlers == null) {
+      mapDragendHandlers = new HandlerCollection<MapDragendHandler>(jsoPeer,
+          MapEvent.DRAGEND);
+    }
+
+    mapDragendHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapDragendEvent e = new MapDragendEvent(MapWidget.this);
+        handler.onDragend(e);
+      }
+    });
+  }
+
+  /**
    * Add a drag listener for mouse drag events.
    * 
    * @param listener listener to invoke on mouse drag events.
@@ -338,6 +538,46 @@ public final class MapWidget extends Composite {
               }
             })};
     dragListeners.addListener(listener, dragEventHandles);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapDragStartHandler(final MapDragStartHandler handler) {
+    if (mapDragStartHandlers == null) {
+      mapDragStartHandlers = new HandlerCollection<MapDragStartHandler>(
+          jsoPeer, MapEvent.DRAGSTART);
+    }
+
+    mapDragStartHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapDragStartEvent e = new MapDragStartEvent(MapWidget.this);
+        handler.onDragStart(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapLoadHandler(final MapLoadHandler handler) {
+    if (mapLoadHandlers == null) {
+      mapLoadHandlers = new HandlerCollection<MapLoadHandler>(jsoPeer,
+          MapEvent.LOAD);
+    }
+
+    mapLoadHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapLoadEvent e = new MapLoadEvent(MapWidget.this);
+        handler.onLoad(e);
+      }
+    });
   }
 
   /**
@@ -374,10 +614,50 @@ public final class MapWidget extends Composite {
     mouseListeners.addListener(listener, mouseEventHandles);
   }
 
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapMouseOutHandler(final MapMouseOutHandler handler) {
+    if (mapMouseOutHandlers == null) {
+      mapMouseOutHandlers = new HandlerCollection<MapMouseOutHandler>(jsoPeer,
+          MapEvent.MOUSEOUT);
+    }
+
+    mapMouseOutHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapMouseOutEvent e = new MapMouseOutEvent(MapWidget.this);
+        handler.onMouseOut(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapMouseOverHandler(final MapMouseOverHandler handler) {
+    if (mapMouseOverHandlers == null) {
+      mapMouseOverHandlers = new HandlerCollection<MapMouseOverHandler>(
+          jsoPeer, MapEvent.MOUSEOVER);
+    }
+
+    mapMouseOverHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapMouseOverEvent e = new MapMouseOverEvent(MapWidget.this);
+        handler.onMouseOver(e);
+      }
+    });
+  }
+
   public void addMapMoveEndHandler(final MapMoveEndHandler handler) {
     if (mapMoveEndHandlers == null) {
-      mapMoveEndHandlers = new HandlerCollection<MapMoveEndHandler>(
-          jsoPeer, MapEvent.MOVEEND);
+      mapMoveEndHandlers = new HandlerCollection<MapMoveEndHandler>(jsoPeer,
+          MapEvent.MOVEEND);
     }
 
     mapMoveEndHandlers.addHandler(handler, new VoidCallback() {
@@ -386,17 +666,18 @@ public final class MapWidget extends Composite {
         MapMoveEndEvent e = new MapMoveEndEvent(MapWidget.this);
         handler.onMoveEnd(e);
       }
-    }); 
+    });
   }
 
   /**
    * This event is fired, possibly repeatedly, while the map view is changing.
-   * @param handler handler to invoke on map move events.  
+   * 
+   * @param handler handler to invoke on map move events.
    */
   public void addMapMoveHandler(final MapMoveHandler handler) {
     if (mapMoveHandlers == null) {
-      mapMoveHandlers = new HandlerCollection<MapMoveHandler>(
-          jsoPeer, MapEvent.MOVE);
+      mapMoveHandlers = new HandlerCollection<MapMoveHandler>(jsoPeer,
+          MapEvent.MOVE);
     }
 
     mapMoveHandlers.addHandler(handler, new VoidCallback() {
@@ -405,9 +686,9 @@ public final class MapWidget extends Composite {
         MapMoveEvent e = new MapMoveEvent(MapWidget.this);
         handler.onMove(e);
       }
-    }); 
+    });
   }
-  
+
   /**
    * Add a listener for map move events.
    * 
@@ -443,11 +724,11 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * This event is fired when the map view starts changing. This can be 
-   * caused by dragging, in which case a {@link MapDragStart} event is also fired, 
-   * or by invocation of a method that changes the map view.
+   * This event is fired when the map view starts changing. This can be caused
+   * by dragging, in which case a {@link MapDragStartEvent} is also fired, or by
+   * invocation of a method that changes the map view.
    * 
-   * @param handler handler to invoke on map move events.  
+   * @param handler handler to invoke on map move events.
    */
   public void addMapMoveStartHandler(final MapMoveStartHandler handler) {
     if (mapMoveStartHandlers == null) {
@@ -461,11 +742,51 @@ public final class MapWidget extends Composite {
         MapMoveStartEvent e = new MapMoveStartEvent(MapWidget.this);
         handler.onMoveStart(e);
       }
-    }); 
+    });
   }
 
   /**
-   * Add a click handler for mouse right click events. 
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapRemoveMapTypeHandler(final MapRemoveMapTypeHandler handler) {
+    if (mapRemoveMapTypeHandlers == null) {
+      mapRemoveMapTypeHandlers = new HandlerCollection<MapRemoveMapTypeHandler>(
+          jsoPeer, MapEvent.REMOVEMAPTYPE);
+    }
+
+    mapRemoveMapTypeHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapRemoveMapTypeEvent e = new MapRemoveMapTypeEvent(MapWidget.this);
+        handler.onRemoveMapType(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapRemoveOverlayHandler(final MapRemoveOverlayHandler handler) {
+    if (mapRemoveOverlayHandlers == null) {
+      mapRemoveOverlayHandlers = new HandlerCollection<MapRemoveOverlayHandler>(
+          jsoPeer, MapEvent.REMOVEOVERLAY);
+    }
+
+    mapRemoveOverlayHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapRemoveOverlayEvent e = new MapRemoveOverlayEvent(MapWidget.this);
+        handler.onRemoveOverlay(e);
+      }
+    });
+  }
+
+  /**
+   * Add a click handler for mouse right click events.
    * 
    * @param handler handler to invoke on mouse click events.
    */
@@ -478,12 +799,13 @@ public final class MapWidget extends Composite {
     rightClickHandlers.addHandler(handler, new PointElementOverlayCallback() {
       @Override
       public void callback(Point point, Element elem, Overlay overlay) {
-        MapRightClickEvent e = new MapRightClickEvent(MapWidget.this, point, elem,  overlay);
+        MapRightClickEvent e = new MapRightClickEvent(MapWidget.this, point,
+            elem, overlay);
         handler.onRightClick(e);
       }
     });
   }
-  
+
   /**
    * Adds a new map type to the map. See section GMapType for how to define
    * custom map types.
@@ -492,6 +814,26 @@ public final class MapWidget extends Composite {
    */
   public void addMapType(MapType type) {
     MapImpl.impl.addMapType(jsoPeer, type);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapTypeChangedHandler(final MapTypeChangedHandler handler) {
+    if (mapTypeChangedHandlers == null) {
+      mapTypeChangedHandlers = new HandlerCollection<MapTypeChangedHandler>(
+          jsoPeer, MapEvent.MAPTYPECHANGED);
+    }
+
+    mapTypeChangedHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapTypeChangedEvent e = new MapTypeChangedEvent(MapWidget.this);
+        handler.onTypeChanged(e);
+      }
+    });
   }
 
   public void addMapTypeListener(final MapTypeListener listener) {
@@ -522,6 +864,26 @@ public final class MapWidget extends Composite {
               }
             })};
     mapTypeListeners.addListener(listener, mapTypeEventHandles);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMapZoomEndHandler(final MapZoomEndHandler handler) {
+    if (mapZoomEndHandlers == null) {
+      mapZoomEndHandlers = new HandlerCollection<MapZoomEndHandler>(jsoPeer,
+          MapEvent.ZOOMEND);
+    }
+
+    mapZoomEndHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MapZoomEndEvent e = new MapZoomEndEvent(MapWidget.this);
+        handler.onZoomEnd(e);
+      }
+    });
   }
 
   /**
@@ -600,12 +962,72 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addInfoWindowBeforeCloseHandler(InfoWindowBeforeCloseHandler)}.
+   */
+  public void clearInfoWindowBeforeCloseHandlers() {
+    if (infoWindowBeforeCloseHandlers != null) {
+      infoWindowBeforeCloseHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addInfoWindowCloseHandler(InfoWindowCloseHandler)}.
+   */
+  public void clearInfoWindowCloseHandlers() {
+    if (infoWindowCloseHandlers != null) {
+      infoWindowCloseHandlers.clearHandlers();
+    }
+  }
+
+  /**
    * Removes all listeners of this map added with
    * {@link MapWidget#addInfoWindowListener(InfoWindowListener)}.
    */
   public void clearInfoWindowListeners() {
     if (infoWindowListeners != null) {
       infoWindowListeners.clearListeners();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addInfoWindowOpenHandler(InfoWindowOpenHandler)}.
+   */
+  public void clearInfoWindowOpenHandlers() {
+    if (infoWindowOpenHandlers != null) {
+      infoWindowOpenHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapAddMapTypeHandler(MapAddMapTypeHandler)}.
+   */
+  public void clearMapAddMapTypeHandlers() {
+    if (mapAddMapTypeHandlers != null) {
+      mapAddMapTypeHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapAddOverlayHandler(MapAddOverlayHandler)}.
+   */
+  public void clearMapAddOverlayHandlers() {
+    if (mapAddOverlayHandlers != null) {
+      mapAddOverlayHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapClearOverlaysHandler(MapClearOverlaysHandler)}.
+   */
+  public void clearMapClearOverlaysHandlers() {
+    if (mapClearOverlaysHandlers != null) {
+      mapClearOverlaysHandlers.clearHandlers();
     }
   }
 
@@ -640,6 +1062,16 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapDragendHandler(MapDragendHandler)}.
+   */
+  public void clearMapDragendHandlers() {
+    if (mapDragendHandlers != null) {
+      mapDragendHandlers.clearHandlers();
+    }
+  }
+
+  /**
    * Removes all listeners of this map added with
    * {@link MapWidget#addMapDragListener(MapDragListener)}.
    */
@@ -649,6 +1081,25 @@ public final class MapWidget extends Composite {
     }
   }
 
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapDragStartHandler(MapDragStartHandler)}.
+   */
+  public void clearMapDragStartHandlers() {
+    if (mapDragStartHandlers != null) {
+      mapDragStartHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapLoadHandler(MapLoadHandler)}.
+   */
+  public void clearMapLoadHandlers() {
+    if (mapLoadHandlers != null) {
+      mapLoadHandlers.clearHandlers();
+    }
+  }
 
   /**
    * Removes all listeners of this map added with
@@ -659,7 +1110,27 @@ public final class MapWidget extends Composite {
       mouseListeners.clearListeners();
     }
   }
-  
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapMouseOutHandler(MapMouseOutHandler)}.
+   */
+  public void clearMapMouseOutHandlers() {
+    if (mapMouseOutHandlers != null) {
+      mapMouseOutHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapMouseOverHandler(MapMouseOverHandler)}.
+   */
+  public void clearMapMouseOverHandlers() {
+    if (mapMouseOverHandlers != null) {
+      mapMouseOverHandlers.clearHandlers();
+    }
+  }
+
   /**
    * Removes all handlers of this map added with
    * {@link MapWidget#addMapMoveEndHandler(MapMoveEndHandler)}.
@@ -669,7 +1140,7 @@ public final class MapWidget extends Composite {
       mapMoveEndHandlers.clearHandlers();
     }
   }
-  
+
   /**
    * Removes all handlers of this map added with
    * {@link MapWidget#addMapMoveHandler(MapMoveHandler)}.
@@ -679,7 +1150,7 @@ public final class MapWidget extends Composite {
       mapMoveHandlers.clearHandlers();
     }
   }
-  
+
   /**
    * Removes all listeners of this map added with
    * {@link MapWidget#addMapMoveListener(MapMoveListener)}.
@@ -689,7 +1160,7 @@ public final class MapWidget extends Composite {
       moveListeners.clearListeners();
     }
   }
-  
+
   /**
    * Removes all handlers of this map added with
    * {@link MapWidget#addMapMoveStartHandler(MapMoveStartHandler)}.
@@ -699,7 +1170,27 @@ public final class MapWidget extends Composite {
       mapMoveStartHandlers.clearHandlers();
     }
   }
-  
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapRemoveMapTypeHandler(MapRemoveMapTypeHandler)}.
+   */
+  public void clearMapRemoveMapTypeHandlers() {
+    if (mapRemoveMapTypeHandlers != null) {
+      mapRemoveMapTypeHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapRemoveOverlayHandler(MapRemoveOverlayHandler)}.
+   */
+  public void clearMapRemoveOverlayHandlers() {
+    if (mapRemoveOverlayHandlers != null) {
+      mapRemoveOverlayHandlers.clearHandlers();
+    }
+  }
+
   /**
    * Removes all click handlers of this map added with
    * {@link MapWidget#addMapRightClickHandler(MapRightClickHandler)}.
@@ -711,12 +1202,32 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapTypeChangedHandler(MapTypeChangedHandler)}.
+   */
+  public void clearMapTypeChangedHandlers() {
+    if (mapTypeChangedHandlers != null) {
+      mapTypeChangedHandlers.clearHandlers();
+    }
+  }
+
+  /**
    * Removes all listeners of this map added with
    * {@link MapWidget#addMapTypeListener(MapTypeListener)}.
    */
   public void clearMapTypeListeners() {
     if (mapTypeListeners != null) {
       mapTypeListeners.clearListeners();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapZoomEndHandler(MapZoomEndHandler)}.
+   */
+  public void clearMapZoomEndHandlers() {
+    if (mapZoomEndHandlers != null) {
+      mapZoomEndHandlers.clearHandlers();
     }
   }
 
@@ -985,6 +1496,31 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addInfoWindowBeforeCloseHandler(InfoWindowBeforeCloseHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowBeforeCloseHandler(
+      InfoWindowBeforeCloseHandler handler) {
+    if (infoWindowBeforeCloseHandlers != null) {
+      infoWindowBeforeCloseHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addInfoWindowCloseHandler(InfoWindowCloseHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowCloseHandler(InfoWindowCloseHandler handler) {
+    if (infoWindowCloseHandlers != null) {
+      infoWindowCloseHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
    * Removes a single listener of this map previously added with
    * {@link MapWidget#addInfoWindowListener(InfoWindowListener)}.
    * 
@@ -993,6 +1529,54 @@ public final class MapWidget extends Composite {
   public void removeInfoWindowListener(InfoWindowListener listener) {
     if (infoWindowListeners != null) {
       infoWindowListeners.removeListener(listener);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addInfoWindowOpenHandler(InfoWindowOpenHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowOpenHandler(InfoWindowOpenHandler handler) {
+    if (infoWindowOpenHandlers != null) {
+      infoWindowOpenHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapAddMapTypeHandler(MapAddMapTypeHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapAddMapTypeHandler(MapAddMapTypeHandler handler) {
+    if (mapAddMapTypeHandlers != null) {
+      mapAddMapTypeHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapAddOverlayHandler(MapAddOverlayHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapAddOverlayHandler(MapAddOverlayHandler handler) {
+    if (mapAddOverlayHandlers != null) {
+      mapAddOverlayHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapClearOverlaysHandler(MapClearOverlaysHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapClearOverlaysHandler(MapClearOverlaysHandler handler) {
+    if (mapClearOverlaysHandlers != null) {
+      mapClearOverlaysHandlers.removeHandler(handler);
     }
   }
 
@@ -1007,7 +1591,7 @@ public final class MapWidget extends Composite {
       clickHandlers.removeHandler(handler);
     }
   }
-  
+
   /**
    * Removes a single listener of this map previously added with
    * {@link MapWidget#addMapClickListener(MapClickListener)}.
@@ -1022,7 +1606,7 @@ public final class MapWidget extends Composite {
       clickListeners.removeListener(listener);
     }
   }
-  
+
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapDoubleClickHandler(MapDoubleClickHandler)}.
@@ -1034,7 +1618,19 @@ public final class MapWidget extends Composite {
       doubleClickHandlers.removeHandler(handler);
     }
   }
-  
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapDragendHandler(MapDragendHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapDragendHandler(MapDragendHandler handler) {
+    if (mapDragendHandlers != null) {
+      mapDragendHandlers.removeHandler(handler);
+    }
+  }
+
   /**
    * Removes the given drag listener from the map previously added with
    * {@link MapWidget#addMapDragListener(MapDragListener)}.
@@ -1046,7 +1642,31 @@ public final class MapWidget extends Composite {
       dragListeners.removeListener(listener);
     }
   }
-  
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapDragStartHandler(MapDragStartHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapDragStartHandler(MapDragStartHandler handler) {
+    if (mapDragStartHandlers != null) {
+      mapDragStartHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapLoadHandler(MapLoadHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapLoadHandler(MapLoadHandler handler) {
+    if (mapLoadHandlers != null) {
+      mapLoadHandlers.removeHandler(handler);
+    }
+  }
+
   /**
    * Removes a single listener of this map previously added with
    * {@link MapWidget#addMapMouseListener(MapMouseListener)}.
@@ -1059,8 +1679,31 @@ public final class MapWidget extends Composite {
       mouseListeners.removeListener(listener);
     }
   }
-  
-  
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapMouseOutHandler(MapMouseOutHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapMouseOutHandler(MapMouseOutHandler handler) {
+    if (mapMouseOutHandlers != null) {
+      mapMouseOutHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapMouseOverHandler(MapMouseOverHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapMouseOverHandler(MapMouseOverHandler handler) {
+    if (mapMouseOverHandlers != null) {
+      mapMouseOverHandlers.removeHandler(handler);
+    }
+  }
+
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMoveEndHandler(MapMoveEndHandler)}.
@@ -1084,7 +1727,7 @@ public final class MapWidget extends Composite {
       mapMoveHandlers.removeHandler(handler);
     }
   }
-  
+
   /**
    * Removes a single listener of this map previously added with
    * {@link MapWidget#addMapMoveListener(MapMoveListener)}.
@@ -1097,7 +1740,7 @@ public final class MapWidget extends Composite {
       moveListeners.removeListener(listener);
     }
   }
-  
+
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMoveStartHandler(MapMoveStartHandler)}.
@@ -1107,6 +1750,30 @@ public final class MapWidget extends Composite {
   public void removeMapMoveStartHandler(MapMoveStartHandler handler) {
     if (mapMoveStartHandlers != null) {
       mapMoveStartHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapRemoveMapTypeHandler(MapRemoveMapTypeHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapRemoveMapTypeHandler(MapRemoveMapTypeHandler handler) {
+    if (mapRemoveMapTypeHandlers != null) {
+      mapRemoveMapTypeHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapRemoveOverlayHandler(MapRemoveOverlayHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapRemoveOverlayHandler(MapRemoveOverlayHandler handler) {
+    if (mapRemoveOverlayHandlers != null) {
+      mapRemoveOverlayHandlers.removeHandler(handler);
     }
   }
 
@@ -1137,6 +1804,18 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapTypeChangedHandler(MapTypeChangedHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapTypeChangedHandler(MapTypeChangedHandler handler) {
+    if (mapTypeChangedHandlers != null) {
+      mapTypeChangedHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
    * Removes a single listener of this map previously added with
    * {@link MapWidget#addMapTypeListener(MapTypeListener)}.
    * 
@@ -1145,6 +1824,18 @@ public final class MapWidget extends Composite {
   public void removeMapTypeListener(MapTypeListener listener) {
     if (mapTypeListeners != null) {
       mapTypeListeners.removeListener(listener);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapZoomEndHandler(MapZoomEndHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapZoomEndHandler(MapZoomEndHandler handler) {
+    if (mapZoomEndHandlers != null) {
+      mapZoomEndHandlers.removeHandler(handler);
     }
   }
 
@@ -1349,6 +2040,60 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
+  public void trigger(InfoWindowBeforeCloseEvent event) {
+    infoWindowBeforeCloseHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(InfoWindowCloseEvent event) {
+    infoWindowCloseHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(InfoWindowOpenEvent event) {
+    infoWindowOpenHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapAddMapTypeEvent event) {
+    mapAddMapTypeHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapAddOverlayEvent event) {
+    mapAddOverlayHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapClearOverlaysEvent event) {
+    mapClearOverlaysHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
   public void trigger(MapClickEvent event) {
     clickHandlers.trigger(event.getOverlay(), event.getPoint());
   }
@@ -1367,10 +2112,92 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MapRightClickEvent event) {
-    rightClickHandlers.trigger(event.getPoint(), event.getElement(), event.getOverlay());
+  public void trigger(MapDragendEvent event) {
+    mapDragendHandlers.trigger();
   }
-  
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapDragStartEvent event) {
+    mapDragStartHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapLoadEvent event) {
+    mapLoadHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapMouseOutEvent event) {
+    mapMouseOutHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapMouseOverEvent event) {
+    mapMouseOverHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapRemoveMapTypeEvent event) {
+    mapRemoveMapTypeHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapRemoveOverlayEvent event) {
+    mapRemoveOverlayHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapRightClickEvent event) {
+    rightClickHandlers.trigger(event.getPoint(), event.getElement(),
+        event.getOverlay());
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapTypeChangedEvent event) {
+    mapTypeChangedHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapZoomEndEvent event) {
+    mapZoomEndHandlers.trigger();
+  }
+
   /**
    * Increments zoom level by one.
    */
@@ -1399,6 +2226,5 @@ public final class MapWidget extends Composite {
     super.onAttach();
     checkResize();
   }
-  
-  
+
 }
