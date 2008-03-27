@@ -17,15 +17,42 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.impl.Extractor;
+import com.google.gwt.maps.client.event.MarkerClickHandler;
 import com.google.gwt.maps.client.event.MarkerClickListener;
+import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
+import com.google.gwt.maps.client.event.MarkerDragEndHandler;
+import com.google.gwt.maps.client.event.MarkerDragHandler;
 import com.google.gwt.maps.client.event.MarkerDragListener;
+import com.google.gwt.maps.client.event.MarkerDragStartHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MarkerMouseDownHandler;
 import com.google.gwt.maps.client.event.MarkerMouseListener;
+import com.google.gwt.maps.client.event.MarkerMouseOutHandler;
+import com.google.gwt.maps.client.event.MarkerMouseOverHandler;
+import com.google.gwt.maps.client.event.MarkerMouseUpHandler;
+import com.google.gwt.maps.client.event.MarkerRemoveHandler;
+import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.VisibilityListener;
+import com.google.gwt.maps.client.event.MarkerClickHandler.MarkerClickEvent;
+import com.google.gwt.maps.client.event.MarkerDoubleClickHandler.MarkerDoubleClickEvent;
+import com.google.gwt.maps.client.event.MarkerDragEndHandler.MarkerDragEndEvent;
+import com.google.gwt.maps.client.event.MarkerDragHandler.MarkerDragEvent;
+import com.google.gwt.maps.client.event.MarkerDragStartHandler.MarkerDragStartEvent;
+import com.google.gwt.maps.client.event.MarkerInfoWindowBeforeCloseHandler.MarkerInfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler.MarkerInfoWindowOpenEvent;
+import com.google.gwt.maps.client.event.MarkerMouseDownHandler.MarkerMouseDownEvent;
+import com.google.gwt.maps.client.event.MarkerMouseOutHandler.MarkerMouseOutEvent;
+import com.google.gwt.maps.client.event.MarkerMouseOverHandler.MarkerMouseOverEvent;
+import com.google.gwt.maps.client.event.MarkerMouseUpHandler.MarkerMouseUpEvent;
+import com.google.gwt.maps.client.event.MarkerRemoveHandler.MarkerRemoveEvent;
+import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler.MarkerVisibilityChangedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
-import com.google.gwt.maps.client.impl.MapEvent;
+import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.ListenerCollection;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MarkerImpl;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
@@ -66,13 +93,22 @@ public final class Marker extends ConcreteOverlay {
   // Keep track of JSO's registered for each instance of addXXXListener()
   private ListenerCollection<MarkerClickListener> clickListeners;
   private ListenerCollection<MarkerDragListener> dragListeners;
+  private HandlerCollection<MarkerInfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
+  private HandlerCollection<MarkerInfoWindowOpenHandler> infoWindowOpenHandlers;
+  private HandlerCollection<MarkerClickHandler> markerClickHandlers;
+  private HandlerCollection<MarkerDoubleClickHandler> markerDoubleClickHandlers;
+  private HandlerCollection<MarkerDragEndHandler> markerDragEndHandlers;
+  private HandlerCollection<MarkerDragHandler> markerDragHandlers;
+  private HandlerCollection<MarkerDragStartHandler> markerDragStartHandlers;
+  private HandlerCollection<MarkerMouseDownHandler> markerMouseDownHandlers;
+  private HandlerCollection<MarkerMouseOutHandler> markerMouseOutHandlers;
+  private HandlerCollection<MarkerMouseOverHandler> markerMouseOverHandlers;
+  private HandlerCollection<MarkerMouseUpHandler> markerMouseUpHandlers;
+  private HandlerCollection<MarkerRemoveHandler> markerRemoveHandlers;
+  private HandlerCollection<MarkerVisibilityChangedHandler> markerVisibilityChangedHandlers;
   private ListenerCollection<MarkerMouseListener> mouseListeners;
   private ListenerCollection<RemoveListener> removeListeners;
   private ListenerCollection<VisibilityListener> visibilityListeners;
-
-  private Marker(JavaScriptObject jsoPeer) {
-    super(jsoPeer);
-  }
 
   /**
    * Create a new marker at the specified point using default options. Add the
@@ -103,6 +139,73 @@ public final class Marker extends ConcreteOverlay {
     super(MarkerImpl.impl.construct(point, options));
   }
 
+  private Marker(JavaScriptObject jsoPeer) {
+    super(jsoPeer);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerInfoWindowBeforeCloseHandler(
+      final MarkerInfoWindowBeforeCloseHandler handler) {
+    if (infoWindowBeforeCloseHandlers == null) {
+      infoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
+    }
+
+    infoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerInfoWindowBeforeCloseEvent e = new MarkerInfoWindowBeforeCloseEvent(
+            Marker.this);
+        handler.onInfoWindowBeforeClose(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerInfoWindowOpenHandler(
+      final MarkerInfoWindowOpenHandler handler) {
+    if (infoWindowOpenHandlers == null) {
+      infoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
+          jsoPeer, MapEvent.INFOWINDOWOPEN);
+    }
+
+    infoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(Marker.this);
+        handler.onInfoWindowOpen(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerClickHandler(final MarkerClickHandler handler) {
+    if (markerClickHandlers == null) {
+      markerClickHandlers = new HandlerCollection<MarkerClickHandler>(jsoPeer,
+          MapEvent.CLICK);
+    }
+
+    markerClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerClickEvent e = new MarkerClickEvent(Marker.this);
+        handler.onClick(e);
+      }
+    });
+  }
+
   /**
    * Associate a click event listener with this Marker.
    * 
@@ -127,6 +230,66 @@ public final class Marker extends ConcreteOverlay {
               }
             })};
     clickListeners.addListener(listener, clickEventHandles);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerDoubleClickHandler(final MarkerDoubleClickHandler handler) {
+    if (markerDoubleClickHandlers == null) {
+      markerDoubleClickHandlers = new HandlerCollection<MarkerDoubleClickHandler>(
+          jsoPeer, MapEvent.DBLCLICK);
+    }
+
+    markerDoubleClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerDoubleClickEvent e = new MarkerDoubleClickEvent(Marker.this);
+        handler.onDoubleClick(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerDragEndHandler(final MarkerDragEndHandler handler) {
+    if (markerDragEndHandlers == null) {
+      markerDragEndHandlers = new HandlerCollection<MarkerDragEndHandler>(
+          jsoPeer, MapEvent.DRAGEND);
+    }
+
+    markerDragEndHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerDragEndEvent e = new MarkerDragEndEvent(Marker.this);
+        handler.onDragEnd(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerDragHandler(final MarkerDragHandler handler) {
+    if (markerDragHandlers == null) {
+      markerDragHandlers = new HandlerCollection<MarkerDragHandler>(jsoPeer,
+          MapEvent.DRAG);
+    }
+
+    markerDragHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerDragEvent e = new MarkerDragEvent(Marker.this);
+        handler.onDrag(e);
+      }
+    });
   }
 
   /**
@@ -160,6 +323,46 @@ public final class Marker extends ConcreteOverlay {
               }
             })};
     dragListeners.addListener(listener, dragEventHandles);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerDragStartHandler(final MarkerDragStartHandler handler) {
+    if (markerDragStartHandlers == null) {
+      markerDragStartHandlers = new HandlerCollection<MarkerDragStartHandler>(
+          jsoPeer, MapEvent.DRAGSTART);
+    }
+
+    markerDragStartHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerDragStartEvent e = new MarkerDragStartEvent(Marker.this);
+        handler.onDragStart(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerMouseDownHandler(final MarkerMouseDownHandler handler) {
+    if (markerMouseDownHandlers == null) {
+      markerMouseDownHandlers = new HandlerCollection<MarkerMouseDownHandler>(
+          jsoPeer, MapEvent.MOUSEDOWN);
+    }
+
+    markerMouseDownHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerMouseDownEvent e = new MarkerMouseDownEvent(Marker.this);
+        handler.onMouseDown(e);
+      }
+    });
   }
 
   /**
@@ -204,6 +407,108 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerMouseOutHandler(final MarkerMouseOutHandler handler) {
+    if (markerMouseOutHandlers == null) {
+      markerMouseOutHandlers = new HandlerCollection<MarkerMouseOutHandler>(
+          jsoPeer, MapEvent.MOUSEOUT);
+    }
+
+    markerMouseOutHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerMouseOutEvent e = new MarkerMouseOutEvent(Marker.this);
+        handler.onMouseOut(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerMouseOverHandler(final MarkerMouseOverHandler handler) {
+    if (markerMouseOverHandlers == null) {
+      markerMouseOverHandlers = new HandlerCollection<MarkerMouseOverHandler>(
+          jsoPeer, MapEvent.MOUSEOVER);
+    }
+
+    markerMouseOverHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerMouseOverEvent e = new MarkerMouseOverEvent(Marker.this);
+        handler.onMouseOver(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerMouseUpHandler(final MarkerMouseUpHandler handler) {
+    if (markerMouseUpHandlers == null) {
+      markerMouseUpHandlers = new HandlerCollection<MarkerMouseUpHandler>(
+          jsoPeer, MapEvent.MOUSEUP);
+    }
+
+    markerMouseUpHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerMouseUpEvent e = new MarkerMouseUpEvent(Marker.this);
+        handler.onMouseUp(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerRemoveHandler(final MarkerRemoveHandler handler) {
+    if (markerRemoveHandlers == null) {
+      markerRemoveHandlers = new HandlerCollection<MarkerRemoveHandler>(
+          jsoPeer, MapEvent.REMOVE);
+    }
+
+    markerRemoveHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerRemoveEvent e = new MarkerRemoveEvent(Marker.this);
+        handler.onRemove(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerVisibilityChangedHandler(
+      final MarkerVisibilityChangedHandler handler) {
+    if (markerVisibilityChangedHandlers == null) {
+      markerVisibilityChangedHandlers = new HandlerCollection<MarkerVisibilityChangedHandler>(
+          jsoPeer, MapEvent.VISIBILITYCHANGED);
+    }
+
+    markerVisibilityChangedHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerVisibilityChangedEvent e = new MarkerVisibilityChangedEvent(
+            Marker.this);
+        handler.onVisibilityChanged(e);
+      }
+    });
+  }
+
+  /**
    * Associate a remove listener with this Marker.
    * 
    * @param listener a remove event listener
@@ -244,6 +549,36 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerInfoWindowBeforeCloseHandler(MarkerInfoWindowBeforeCloseHandler)}.
+   */
+  public void clearInfoWindowBeforeCloseHandlers() {
+    if (infoWindowBeforeCloseHandlers != null) {
+      infoWindowBeforeCloseHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerInfoWindowOpenHandler(MarkerInfoWindowOpenHandler)}.
+   */
+  public void clearInfoWindowOpenHandlers() {
+    if (infoWindowOpenHandlers != null) {
+      infoWindowOpenHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerClickHandler(MarkerClickHandler)}.
+   */
+  public void clearMarkerClickHandlers() {
+    if (markerClickHandlers != null) {
+      markerClickHandlers.clearHandlers();
+    }
+  }
+
+  /**
    * Remove all click listeners registered with this Marker.
    */
   public void clearMarkerClickListeners() {
@@ -253,11 +588,111 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerDoubleClickHandler(MarkerDoubleClickHandler)}.
+   */
+  public void clearMarkerDoubleClickHandlers() {
+    if (markerDoubleClickHandlers != null) {
+      markerDoubleClickHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerDragEndHandler(MarkerDragEndHandler)}.
+   */
+  public void clearMarkerDragEndHandlers() {
+    if (markerDragEndHandlers != null) {
+      markerDragEndHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerDragHandler(MarkerDragHandler)}.
+   */
+  public void clearMarkerDragHandlers() {
+    if (markerDragHandlers != null) {
+      markerDragHandlers.clearHandlers();
+    }
+  }
+
+  /**
    * Remove all drag listeners registered with this Marker.
    */
   public void clearMarkerDragListeners() {
     if (dragListeners != null) {
       dragListeners.clearListeners();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerDragStartHandler(MarkerDragStartHandler)}.
+   */
+  public void clearMarkerDragStartHandlers() {
+    if (markerDragStartHandlers != null) {
+      markerDragStartHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerMouseDownHandler(MarkerMouseDownHandler)}.
+   */
+  public void clearMarkerMouseDownHandlers() {
+    if (markerMouseDownHandlers != null) {
+      markerMouseDownHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerMouseOutHandler(MarkerMouseOutHandler)}.
+   */
+  public void clearMarkerMouseOutHandlers() {
+    if (markerMouseOutHandlers != null) {
+      markerMouseOutHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerMouseOverHandler(MarkerMouseOverHandler)}.
+   */
+  public void clearMarkerMouseOverHandlers() {
+    if (markerMouseOverHandlers != null) {
+      markerMouseOverHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerMouseUpHandler(MarkerMouseUpHandler)}.
+   */
+  public void clearMarkerMouseUpHandlers() {
+    if (markerMouseUpHandlers != null) {
+      markerMouseUpHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerRemoveHandler(MarkerRemoveHandler)}.
+   */
+  public void clearMarkerRemoveHandlers() {
+    if (markerRemoveHandlers != null) {
+      markerRemoveHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link Marker#addMarkerVisibilityChangedHandler(MarkerVisibilityChangedHandler)}.
+   */
+  public void clearMarkerVisibilityChangedHandlers() {
+    if (markerVisibilityChangedHandlers != null) {
+      markerVisibilityChangedHandlers.clearHandlers();
     }
   }
 
@@ -302,34 +737,73 @@ public final class Marker extends ConcreteOverlay {
     return MarkerImpl.impl.getPoint(this);
   }
 
-/**
- * See if this Marker was created as a draggable marker type, that is, the
- * draggable option was set in MarkerOptions when it was constructed.
- * 
- * @return <code>true</code> if the marker was initialized as a draggable type
- *         of marker
- */
+  /**
+   * See if this Marker was created as a draggable marker type, that is, the
+   * draggable option was set in MarkerOptions when it was constructed.
+   * 
+   * @return <code>true</code> if the marker was initialized as a draggable
+   *         type of marker
+   */
   public boolean isDraggable() {
     return MarkerImpl.impl.draggable(this);
   }
 
-/**
- * Returns <code>true</code> if this marker is not only a draggable type of marker.
- * 
- * @return <code>true</code> if the marker can currently be dragged
- * 
- * @see Marker#isDraggable()
- * @see Marker#setDraggingEnabled(boolean)
- */
+  /**
+   * Returns <code>true</code> if this marker is not only a draggable type of
+   * marker.
+   * 
+   * @return <code>true</code> if the marker can currently be dragged
+   * 
+   * @see Marker#isDraggable()
+   * @see Marker#setDraggingEnabled(boolean)
+   */
   public boolean isDraggingEnabled() {
     return MarkerImpl.impl.draggingEnabled(this);
   }
 
   /**
-   * @return returns <code>true</code> if the marker is currently visible on the map
+   * @return returns <code>true</code> if the marker is currently visible on
+   *         the map
    */
   public boolean isVisible() {
     return !MarkerImpl.impl.isHidden(this);
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerInfoWindowBeforeCloseHandler(MarkerInfoWindowBeforeCloseHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowBeforeCloseHandler(
+      MarkerInfoWindowBeforeCloseHandler handler) {
+    if (infoWindowBeforeCloseHandlers != null) {
+      infoWindowBeforeCloseHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerInfoWindowOpenHandler(MarkerInfoWindowOpenHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowOpenHandler(MarkerInfoWindowOpenHandler handler) {
+    if (infoWindowOpenHandlers != null) {
+      infoWindowOpenHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerClickHandler(MarkerClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerClickHandler(MarkerClickHandler handler) {
+    if (markerClickHandlers != null) {
+      markerClickHandlers.removeHandler(handler);
+    }
   }
 
   /**
@@ -340,6 +814,42 @@ public final class Marker extends ConcreteOverlay {
   public void removeMarkerClickListener(MarkerClickListener listener) {
     if (clickListeners != null) {
       clickListeners.removeListener(listener);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerDoubleClickHandler(MarkerDoubleClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerDoubleClickHandler(MarkerDoubleClickHandler handler) {
+    if (markerDoubleClickHandlers != null) {
+      markerDoubleClickHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerDragEndHandler(MarkerDragEndHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerDragEndHandler(MarkerDragEndHandler handler) {
+    if (markerDragEndHandlers != null) {
+      markerDragEndHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerDragHandler(MarkerDragHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerDragHandler(MarkerDragHandler handler) {
+    if (markerDragHandlers != null) {
+      markerDragHandlers.removeHandler(handler);
     }
   }
 
@@ -355,6 +865,30 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerDragStartHandler(MarkerDragStartHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerDragStartHandler(MarkerDragStartHandler handler) {
+    if (markerDragStartHandlers != null) {
+      markerDragStartHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerMouseDownHandler(MarkerMouseDownHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerMouseDownHandler(MarkerMouseDownHandler handler) {
+    if (markerMouseDownHandlers != null) {
+      markerMouseDownHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
    * Remove a single mouse listener registered with this marker.
    * 
    * @param listener mouse listener to remove
@@ -362,6 +896,67 @@ public final class Marker extends ConcreteOverlay {
   public void removeMarkerMouseListener(MarkerMouseListener listener) {
     if (mouseListeners != null) {
       mouseListeners.removeListener(listener);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerMouseOutHandler(MarkerMouseOutHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerMouseOutHandler(MarkerMouseOutHandler handler) {
+    if (markerMouseOutHandlers != null) {
+      markerMouseOutHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerMouseOverHandler(MarkerMouseOverHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerMouseOverHandler(MarkerMouseOverHandler handler) {
+    if (markerMouseOverHandlers != null) {
+      markerMouseOverHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerMouseUpHandler(MarkerMouseUpHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerMouseUpHandler(MarkerMouseUpHandler handler) {
+    if (markerMouseUpHandlers != null) {
+      markerMouseUpHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerRemoveHandler(MarkerRemoveHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerRemoveHandler(MarkerRemoveHandler handler) {
+    if (markerRemoveHandlers != null) {
+      markerRemoveHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerVisibilityChangedHandler(MarkerVisibilityChangedHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerVisibilityChangedHandler(
+      MarkerVisibilityChangedHandler handler) {
+    if (markerVisibilityChangedHandlers != null) {
+      markerVisibilityChangedHandlers.removeHandler(handler);
     }
   }
 
@@ -431,5 +1026,122 @@ public final class Marker extends ConcreteOverlay {
     } else {
       MarkerImpl.impl.hide(this);
     }
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerInfoWindowBeforeCloseEvent event) {
+    infoWindowBeforeCloseHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerInfoWindowOpenEvent event) {
+    infoWindowOpenHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerClickEvent event) {
+    markerClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerDoubleClickEvent event) {
+    markerDoubleClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerDragEndEvent event) {
+    markerDragEndHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerDragEvent event) {
+    markerDragHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerDragStartEvent event) {
+    markerDragStartHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerMouseDownEvent event) {
+    markerMouseDownHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerMouseOutEvent event) {
+    markerMouseOutHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerMouseOverEvent event) {
+    markerMouseOverHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerMouseUpEvent event) {
+    markerMouseUpHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerRemoveEvent event) {
+    markerRemoveHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MarkerVisibilityChangedEvent event) {
+    markerVisibilityChangedHandlers.trigger();
   }
 }
