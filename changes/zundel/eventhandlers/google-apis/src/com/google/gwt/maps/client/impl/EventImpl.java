@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client.impl;
 
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -30,7 +29,6 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Element;
-
 
 /**
  * 
@@ -144,31 +142,42 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   public abstract void removeListener(JavaScriptObject mapEventHandle);
 
-  protected abstract JavaScriptObject addListener(JavaScriptObject source,
+  // We don't use this method with the advent of the ListenerCollection.
+  protected abstract void clearListeners(JavaScriptObject source, String event);
+  
+  abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, BooleanCallback handler);
 
-  protected abstract JavaScriptObject addListener(JavaScriptObject source,
+  abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, IntIntCallback handler);
 
-  protected abstract JavaScriptObject addListener(JavaScriptObject source,
+  abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, LatLngCallback handler);
 
-  protected abstract JavaScriptObject addListener(JavaScriptObject source,
+  abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, MapTypeCallback handler);
 
-  protected abstract JavaScriptObject addListener(JavaScriptObject source,
+  abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, OverlayCallback handler);
 
-  protected abstract JavaScriptObject addListener(JavaScriptObject source,
+  abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, OverlayLatLngCallback handler);
 
-  protected abstract JavaScriptObject addListener(JavaScriptObject source,
+  abstract JavaScriptObject addListener(JavaScriptObject source,
       String event, PointElementOverlayCallback handler);
 
   @FieldName("addListener")
-  protected abstract JavaScriptObject addListenerVoid(JavaScriptObject source,
+  abstract JavaScriptObject addListenerVoid(JavaScriptObject source,
       String event, VoidCallback handler);
+  
+  abstract void trigger(JavaScriptObject source, String mapEventString);
+  
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      boolean value);
 
-  // We don't use this method with the advent of the ListenerCollection.
-  protected abstract void clearListeners(JavaScriptObject source, String event);
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      Overlay overlay, LatLng latlng);
+  
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      Point point, Element elem, Overlay overlay);
 }

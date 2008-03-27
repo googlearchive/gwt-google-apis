@@ -1,0 +1,15 @@
+MapAddMapType
+MapRemoveMapType
+MapZoomEnd
+MapTypeChanged
+InfoWindowOpen
+InfoWindowBeforeClose
+InfoWindowClose
+MapAddOverlay
+MapRemoveOverlay
+MapClearOverlays
+MapMouseOver
+MapMouseOut
+MapDragStart
+MapDragend
+MapLoad

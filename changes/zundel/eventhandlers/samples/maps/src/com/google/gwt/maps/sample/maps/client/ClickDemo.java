@@ -15,16 +15,13 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
-import com.google.gwt.maps.client.event.MapClickListener;
+import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
@@ -79,25 +76,17 @@ public class ClickDemo extends MapsDemo {
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
 
-    map.addMapClickListener(new MapClickListener() {
-      @Override
-      public void onClick(MapWidget sender, Overlay overlay, LatLng point) {
+    map.addMapClickHandler(new MapClickHandler() {
+      public void onClick(MapClickEvent e) {
+        MapWidget sender = e.getSender();
+        Overlay overlay = e.getOverlay();
+        LatLng point = e.getPoint();
+
         if (overlay != null && overlay instanceof Marker) {
           map.removeOverlay(overlay);
         } else {
           map.addOverlay(new Marker(point));
         }
-      }
-
-      @Override
-      public void onDoubleClick(MapWidget sender, Overlay overlay, LatLng point) {
-        GWT.log("Got double click at " + point, null);
-      }
-
-      @Override
-      public void onRightClick(MapWidget sender, Point point, Element element,
-          Overlay overlay) {
-        GWT.log("Got right click at " + point, null);
       }
     });
   }
