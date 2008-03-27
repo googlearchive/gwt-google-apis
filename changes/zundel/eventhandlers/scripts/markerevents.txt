@@ -1,0 +1,13 @@
+MarkerClick
+MarkerDoubleClick
+MarkerMouseDown
+MarkerMouseUp
+MarkerMouseOver
+MarkerMouseOut
+MarkerInfoWindowOpen
+MarkerInfoWindowBeforeClose
+MarkerRemove
+MarkerDragStart
+MarkerDrag
+MarkerDragEnd
+MarkerVisibilityChanged

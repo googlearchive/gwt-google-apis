@@ -17,12 +17,24 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSList;
+import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowListener;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
+import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
+import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
+import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler.InfoWindowCloseClickEvent;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler.InfoWindowMaximizeClickEvent;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler.InfoWindowMaximizeEndEvent;
+import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler.InfoWindowRestoreClickEvent;
+import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler.InfoWindowRestoreEndEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
+import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.InfoWindowImpl;
 import com.google.gwt.maps.client.impl.InfoWindowOptionsImpl;
 import com.google.gwt.maps.client.impl.JsUtil;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MapImpl;
 import com.google.gwt.maps.client.impl.MarkerImpl;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
@@ -41,7 +53,7 @@ import java.util.List;
  * The info window looks a little like a comic-book word balloon; it has a
  * content area and a tapered stem, where the tip of the stem is at a specified
  * point on the map. You can see the info window in action by clicking a marker
- * in Google Maps. 
+ * in Google Maps.
  * 
  * @see MapWidget#getInfoWindow()
  */
@@ -66,7 +78,15 @@ public final class InfoWindow {
     }
   }
 
+  private HandlerCollection<InfoWindowCloseClickHandler> infoWindowCloseClickHandlers;
+  private HandlerCollection<InfoWindowMaximizeClickHandler> infoWindowMaximizeClickHandlers;
+  private HandlerCollection<InfoWindowMaximizeEndHandler> infoWindowMaximizeEndHandlers;
+  private HandlerCollection<InfoWindowRestoreClickHandler> infoWindowRestoreClickHandlers;
+  private HandlerCollection<InfoWindowRestoreEndHandler> infoWindowRestoreEndHandlers;
+  
   private final JavaScriptObject jsoPeer;
+
+  // private InfoWindowEventCallbacks eventCallbacks = null;
 
   private final MapWidget map;
 
@@ -84,6 +104,166 @@ public final class InfoWindow {
   InfoWindow(MapWidget map) {
     this.map = map;
     jsoPeer = MapImpl.impl.getInfoWindow(map);
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowCloseClickHandler(
+      final InfoWindowCloseClickHandler handler) {
+    if (infoWindowCloseClickHandlers == null) {
+      infoWindowCloseClickHandlers = new HandlerCollection<InfoWindowCloseClickHandler>(
+          jsoPeer, MapEvent.CLOSECLICK);
+    }
+
+    infoWindowCloseClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowCloseClickEvent e = new InfoWindowCloseClickEvent(
+            InfoWindow.this);
+        handler.onCloseClick(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowMaximizeClickHandler(
+      final InfoWindowMaximizeClickHandler handler) {
+    if (infoWindowMaximizeClickHandlers == null) {
+      infoWindowMaximizeClickHandlers = new HandlerCollection<InfoWindowMaximizeClickHandler>(
+          jsoPeer, MapEvent.MAXIMIZECLICK);
+    }
+
+    infoWindowMaximizeClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowMaximizeClickEvent e = new InfoWindowMaximizeClickEvent(
+            InfoWindow.this);
+        handler.onMaximizeClick(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowMaximizeEndHandler(
+      final InfoWindowMaximizeEndHandler handler) {
+    if (infoWindowMaximizeEndHandlers == null) {
+      infoWindowMaximizeEndHandlers = new HandlerCollection<InfoWindowMaximizeEndHandler>(
+          jsoPeer, MapEvent.MAXIMIZEEND);
+    }
+
+    infoWindowMaximizeEndHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowMaximizeEndEvent e = new InfoWindowMaximizeEndEvent(
+            InfoWindow.this);
+        handler.onMaximizeEnd(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowRestoreClickHandler(
+      final InfoWindowRestoreClickHandler handler) {
+    if (infoWindowRestoreClickHandlers == null) {
+      infoWindowRestoreClickHandlers = new HandlerCollection<InfoWindowRestoreClickHandler>(
+          jsoPeer, MapEvent.RESTORECLICK);
+    }
+
+    infoWindowRestoreClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowRestoreClickEvent e = new InfoWindowRestoreClickEvent(
+            InfoWindow.this);
+        handler.onRestoreClick(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowRestoreEndHandler(
+      final InfoWindowRestoreEndHandler handler) {
+    if (infoWindowRestoreEndHandlers == null) {
+      infoWindowRestoreEndHandlers = new HandlerCollection<InfoWindowRestoreEndHandler>(
+          jsoPeer, MapEvent.RESTOREEND);
+    }
+
+    infoWindowRestoreEndHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowRestoreEndEvent e = new InfoWindowRestoreEndEvent(
+            InfoWindow.this);
+        handler.onRestoreEnd(e);
+      }
+    });
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)}.
+   */
+  public void clearInfoWindowCloseClickHandlers() {
+    if (infoWindowCloseClickHandlers != null) {
+      infoWindowCloseClickHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)}.
+   */
+  public void clearInfoWindowMaximizeClickHandlers() {
+    if (infoWindowMaximizeClickHandlers != null) {
+      infoWindowMaximizeClickHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)}.
+   */
+  public void clearInfoWindowMaximizeEndHandlers() {
+    if (infoWindowMaximizeEndHandlers != null) {
+      infoWindowMaximizeEndHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}.
+   */
+  public void clearInfoWindowRestoreClickHandlers() {
+    if (infoWindowRestoreClickHandlers != null) {
+      infoWindowRestoreClickHandlers.clearHandlers();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)}.
+   */
+  public void clearInfoWindowRestoreEndHandlers() {
+    if (infoWindowRestoreEndHandlers != null) {
+      infoWindowRestoreEndHandlers.clearHandlers();
+    }
   }
 
   /**
@@ -105,8 +285,6 @@ public final class InfoWindow {
     JsUtil.toArray(elementList, containers);
     return containers;
   }
-
-  // private InfoWindowEventCallbacks eventCallbacks = null;
 
   /**
    * Returns the offset, in pixels, of the tip of the info window from the point
@@ -196,8 +374,71 @@ public final class InfoWindow {
     finishAttach(content);
   }
 
-  // TODO(zundel): Implement reset?
-  
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowCloseClickHandler(
+      InfoWindowCloseClickHandler handler) {
+    if (infoWindowCloseClickHandlers != null) {
+      infoWindowCloseClickHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowMaximizeClickHandler(
+      InfoWindowMaximizeClickHandler handler) {
+    if (infoWindowMaximizeClickHandlers != null) {
+      infoWindowMaximizeClickHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowMaximizeEndHandler(
+      InfoWindowMaximizeEndHandler handler) {
+    if (infoWindowMaximizeEndHandlers != null) {
+      infoWindowMaximizeEndHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowRestoreClickHandler(
+      InfoWindowRestoreClickHandler handler) {
+    if (infoWindowRestoreClickHandlers != null) {
+      infoWindowRestoreClickHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowRestoreEndHandler(
+      InfoWindowRestoreEndHandler handler) {
+    if (infoWindowRestoreEndHandlers != null) {
+      infoWindowRestoreEndHandlers.removeHandler(handler);
+    }
+  }
+
   /**
    * Selects the tab with the given index. This has the same effect as clicking
    * on the corresponding tab.
@@ -219,6 +460,53 @@ public final class InfoWindow {
     } else {
       InfoWindowImpl.impl.hide(jsoPeer);
     }
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(InfoWindowCloseClickEvent event) {
+    infoWindowCloseClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(InfoWindowMaximizeClickEvent event) {
+    infoWindowMaximizeClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(InfoWindowMaximizeEndEvent event) {
+    infoWindowMaximizeEndHandlers.trigger();
+  }
+
+  // TODO(zundel): Implement reset?
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(InfoWindowRestoreClickEvent event) {
+    infoWindowRestoreClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(InfoWindowRestoreEndEvent event) {
+    infoWindowRestoreEndHandlers.trigger();
   }
 
   private void beginAttach(InfoWindowContent content) {

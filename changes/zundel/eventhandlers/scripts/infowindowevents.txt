@@ -1,0 +1,5 @@
+InfoWindowCloseClick
+InfoWindowMaximizeClick
+InfoWindowMaximizeEnd
+InfoWindowRestoreClick
+InfoWindowRestoreEnd
