@@ -16,35 +16,37 @@
 package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.maps.client.geom.LatLng;
 
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.REMOVEOVERLAYevents from the
+ * Provides an interface to implement in order to receive MapEvent.MOUSEOUTevents from the
   * {@link MapWidget}.
  */
-public interface MapRemoveOverlayHandler {
+public interface MapMouseMoveHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.REMOVEOVERLAY event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.MOUSEMOVE event on a {@link MapWidget}.
    */
-  class MapRemoveOverlayEvent extends EventObject {
-    private final Overlay overlay;
-
-    public MapRemoveOverlayEvent(MapWidget source, Overlay overlay) {
+  class MapMouseMoveEvent extends EventObject {
+    
+    private final LatLng point;
+    
+    public MapMouseMoveEvent(MapWidget source, LatLng point) {
       super(source);
-      this.overlay = overlay;
+      this.point = point;
     }
-    
+
     /**
-     * Returns the overlay associated with this event.
-     * @return the overlay associated with this event.
+     * Returns the map coordinates for this event.
+     * 
+     * @return the map coordinates for this event.
      */
-    public Overlay getOverlay() {
-      return overlay;
+    public LatLng getPoint() {
+      return point;
     }
-    
+
     /**
      * Returns the instance of the map that generated this event.
      * 
@@ -56,9 +58,9 @@ public interface MapRemoveOverlayHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.REMOVEOVERLAY event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.MOUSEOUT event fires on a {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */
-  void onRemoveOverlay(MapRemoveOverlayEvent event);
+  void onMouseMove(MapMouseMoveEvent event);
 }

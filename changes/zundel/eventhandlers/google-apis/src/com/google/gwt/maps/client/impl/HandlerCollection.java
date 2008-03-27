@@ -16,8 +16,13 @@
 package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
+import com.google.gwt.maps.client.impl.EventImpl.IntIntCallback;
+import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
+import com.google.gwt.maps.client.impl.EventImpl.MapTypeCallback;
+import com.google.gwt.maps.client.impl.EventImpl.OverlayCallback;
 import com.google.gwt.maps.client.impl.EventImpl.OverlayLatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.PointElementOverlayCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
@@ -64,6 +69,54 @@ public class HandlerCollection<E> {
    * @param listener The listener to add to the collection
    * @param callback The callback to call when the event fires.
    */
+  public void addHandler(E listener, IntIntCallback callback) {
+    JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
+        mapEvent.value(), callback);
+    handlers.add(new HandleContainer<E>(listener, jso));
+  }
+
+  /**
+   * Add a listener and the event handles associated with it.
+   * 
+   * @param listener The listener to add to the collection
+   * @param callback The callback to call when the event fires.
+   */
+  public void addHandler(E listener, LatLngCallback callback) {
+    JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
+        mapEvent.value(), callback);
+    handlers.add(new HandleContainer<E>(listener, jso));
+  }
+
+  /**
+   * Add a listener and the event handles associated with it.
+   * 
+   * @param listener The listener to add to the collection
+   * @param callback The callback to call when the event fires.
+   */
+  public void addHandler(E listener, MapTypeCallback callback) {
+    JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
+        mapEvent.value(), callback);
+    handlers.add(new HandleContainer<E>(listener, jso));
+  }
+
+  /**
+   * Add a listener and the event handles associated with it.
+   * 
+   * @param listener The listener to add to the collection
+   * @param callback The callback to call when the event fires.
+   */
+  public void addHandler(E listener, OverlayCallback callback) {
+    JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
+        mapEvent.value(), callback);
+    handlers.add(new HandleContainer<E>(listener, jso));
+  }
+
+  /**
+   * Add a listener and the event handles associated with it.
+   * 
+   * @param listener The listener to add to the collection
+   * @param callback The callback to call when the event fires.
+   */
   public void addHandler(E listener, OverlayLatLngCallback callback) {
     JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
         mapEvent.value(), callback);
@@ -81,7 +134,7 @@ public class HandlerCollection<E> {
         mapEvent.value(), callback);
     handlers.add(new HandleContainer<E>(listener, jso));
   }
-  
+
   /**
    * Add a listener and the event handles associated with it.
    * 
@@ -93,6 +146,7 @@ public class HandlerCollection<E> {
         mapEvent.value(), callback);
     handlers.add(new HandleContainer<E>(listener, jso));
   }
+
   /**
    * Remove all events for this type of listener.
    */
@@ -105,7 +159,7 @@ public class HandlerCollection<E> {
     }
     handlers.clear();
   }
-  
+
   /**
    * The type of event this collection represents.
    * 
@@ -134,6 +188,53 @@ public class HandlerCollection<E> {
 
   /**
    * Manually trigger an event that takes an overlay and point argument.
+   */
+  public void trigger() {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value);
+  }
+
+  /**
+   * Manually trigger an event that takes two integer arguments.
+   * 
+   * @param arg1 first integer argument.
+   * @param arg2 second integer argument.
+   */
+  public void trigger(int arg1, int arg2) {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value, arg1, arg2);
+  }
+
+  /**
+   * Manually trigger an event that takes  {@link LatLng}
+   * arguments.
+   * 
+   * @param point A coordinate to send as a parameter of the event.
+   */
+  public void trigger(LatLng point) {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value, point);
+  }
+
+  /**
+   * Manually trigger an event that takes a {@link MapType} argument.
+   * 
+   * @param type the map type to send as a parameter of the event.
+   */
+  public void trigger(MapType type) {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value, type);
+  }
+
+  /**
+   * Manually trigger an event that takes an {@link Overlay} argument.
+   * 
+   * @param overlay the overlay argument for the event.
+   */
+  public void trigger(Overlay overlay) {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value, overlay);
+  }
+
+  /**
+   * Manually trigger an event that takes {@link Overlay} and {@link LatLng}
+   * arguments.
+   * 
    * @param overlay An overlay to send as a parameter of the event.
    * @param point A coordinate to send as a parameter of the event.
    */
@@ -142,19 +243,14 @@ public class HandlerCollection<E> {
   }
   
   /**
-   * Manually trigger an event that takes an overlay and point argument.
+   * Manually trigger an event that takes {@link Point}, {@link Element}, and
+   * {@link Overlay} arguments.
+   * 
    * @param elem A DOM element
    * @param overlay An overlay to send as a parameter of the event.
    * @param point A coordinate to send as a parameter of the event.
    */
   public void trigger(Point point, Element elem, Overlay overlay) {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, point, elem, overlay);
-  }
-  
-  /**
-   * Manually trigger an event that takes an overlay and point argument.
-   */
-  public void trigger() {
-    EventImpl.impl.trigger(jsoPeer, mapEvent.value);
   }
 }

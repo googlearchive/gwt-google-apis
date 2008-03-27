@@ -16,6 +16,7 @@
 package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.geom.LatLng;
 
 import java.util.EventObject;
 
@@ -29,11 +30,21 @@ public interface MapMouseOverHandler {
    * Encapsulates the arguments for the MapEvent.MOUSEOVER event on a {@link MapWidget}.
    */
   class MapMouseOverEvent extends EventObject {
-
-    public MapMouseOverEvent(MapWidget source) {
+    private final LatLng point;
+     
+    public MapMouseOverEvent(MapWidget source, LatLng point) {
       super(source);
+      this.point = point;
     }
-
+    
+    /**
+     * Returns the map coordinates for this event.
+     * @return the map coordinates for this event.
+     */
+    public LatLng getPoint() {
+      return point;
+    }
+    
     /**
      * Returns the instance of the map that generated this event.
      * 

@@ -16,6 +16,7 @@
 package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.overlay.Overlay;
 
 import java.util.EventObject;
 
@@ -29,9 +30,19 @@ public interface MapAddOverlayHandler {
    * Encapsulates the arguments for the MapEvent.ADDOVERLAY event on a {@link MapWidget}.
    */
   class MapAddOverlayEvent extends EventObject {
-
-    public MapAddOverlayEvent(MapWidget source) {
+    private final Overlay overlay;
+    
+    public MapAddOverlayEvent(MapWidget source, Overlay overlay) {
       super(source);
+      this.overlay = overlay;
+    }
+
+    /**
+     * Returns the overlay associated with this event.
+     * @return the overlay associated with this event.
+     */
+    public Overlay getOverlay() {
+      return overlay;
     }
 
     /**

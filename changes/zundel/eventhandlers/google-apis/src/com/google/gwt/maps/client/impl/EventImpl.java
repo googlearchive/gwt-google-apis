@@ -144,40 +144,53 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   // We don't use this method with the advent of the ListenerCollection.
   protected abstract void clearListeners(JavaScriptObject source, String event);
-  
-  abstract JavaScriptObject addListener(JavaScriptObject source,
-      String event, BooleanCallback handler);
 
-  abstract JavaScriptObject addListener(JavaScriptObject source,
-      String event, IntIntCallback handler);
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      BooleanCallback handler);
 
-  abstract JavaScriptObject addListener(JavaScriptObject source,
-      String event, LatLngCallback handler);
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      IntIntCallback handler);
 
-  abstract JavaScriptObject addListener(JavaScriptObject source,
-      String event, MapTypeCallback handler);
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      LatLngCallback handler);
 
-  abstract JavaScriptObject addListener(JavaScriptObject source,
-      String event, OverlayCallback handler);
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      MapTypeCallback handler);
 
-  abstract JavaScriptObject addListener(JavaScriptObject source,
-      String event, OverlayLatLngCallback handler);
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      OverlayCallback handler);
 
-  abstract JavaScriptObject addListener(JavaScriptObject source,
-      String event, PointElementOverlayCallback handler);
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      OverlayLatLngCallback handler);
+
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      PointElementOverlayCallback handler);
 
   @FieldName("addListener")
   abstract JavaScriptObject addListenerVoid(JavaScriptObject source,
       String event, VoidCallback handler);
-  
+
   abstract void trigger(JavaScriptObject source, String mapEventString);
-  
+
   abstract void trigger(JavaScriptObject source, String mapEventString,
       boolean value);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
+      int arg1, int arg2);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      LatLng latlng);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      MapType type);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      Overlay overlay);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
       Overlay overlay, LatLng latlng);
-  
+
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Point point, Element elem, Overlay overlay);
+
 }

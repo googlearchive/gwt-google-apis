@@ -20,18 +20,41 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.ZOOMENDevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.ZOOMENDevents
+ * from the {@link MapWidget}.
  */
 public interface MapZoomEndHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.ZOOMEND event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.ZOOMEND event on a
+   * {@link MapWidget}.
    */
   class MapZoomEndEvent extends EventObject {
+    final int newZoomLevel;
+    final int oldZoomLevel;
 
-    public MapZoomEndEvent(MapWidget source) {
+    public MapZoomEndEvent(MapWidget source, int oldZoomLevel, int newZoomLevel) {
       super(source);
+      this.oldZoomLevel = oldZoomLevel;
+      this.newZoomLevel = newZoomLevel;
+    }
+
+    /**
+     * Returns the zoom level after the event was fired.
+     * 
+     * @return the zoom level after the event was fired.
+     */
+    public int getNewZoomLevel() {
+      return newZoomLevel;
+    }
+
+    /**
+     * Returns the zoom level before the event was fired.
+     * 
+     * @return the zoom level before the event was fired.
+     */
+    public int getOldZoomLevel() {
+      return oldZoomLevel;
     }
 
     /**
@@ -45,7 +68,8 @@ public interface MapZoomEndHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.ZOOMEND event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.ZOOMEND event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

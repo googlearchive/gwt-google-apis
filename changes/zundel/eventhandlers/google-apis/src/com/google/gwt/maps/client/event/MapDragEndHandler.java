@@ -15,27 +15,23 @@
  */
 package com.google.gwt.maps.client.event;
 
-import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive
- * MapEvent.REMOVEMAPTYPEevents from the {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.DRAGENDevents from the
+  * {@link MapWidget}.
  */
-public interface MapRemoveMapTypeHandler {
+public interface MapDragEndHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.REMOVEMAPTYPE event on a
-   * {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.DRAGEND event on a {@link MapWidget}.
    */
-  class MapRemoveMapTypeEvent extends EventObject {
-    private final MapType type;
+  class MapDragEndEvent extends EventObject {
 
-    public MapRemoveMapTypeEvent(MapWidget source, MapType type) {
+    public MapDragEndEvent(MapWidget source) {
       super(source);
-      this.type = type;
     }
 
     /**
@@ -46,22 +42,12 @@ public interface MapRemoveMapTypeHandler {
     public MapWidget getSender() {
       return (MapWidget) getSource();
     }
-
-    /**
-     * Returns the map type associated with this event.
-     * 
-     * @return the map type associated with this event.
-     */
-    public MapType getType() {
-      return type;
-    }
   }
 
   /**
-   * Method to be invoked when a MapEvent.REMOVEMAPTYPE event fires on a
-   * {@link MapWidget}.
+   * Method to be invoked when a MapEvent.DRAGEND event fires on a {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */
-  void onRemoveMapType(MapRemoveMapTypeEvent event);
+  void onDragend(MapDragEndEvent event);
 }

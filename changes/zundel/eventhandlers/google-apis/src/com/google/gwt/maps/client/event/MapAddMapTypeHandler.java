@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.client.event;
 
+import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 
 import java.util.EventObject;
@@ -29,9 +30,11 @@ public interface MapAddMapTypeHandler {
    * Encapsulates the arguments for the MapEvent.ADDMAPTYPE event on a {@link MapWidget}.
    */
   class MapAddMapTypeEvent extends EventObject {
-
-    public MapAddMapTypeEvent(MapWidget source) {
+    private final MapType type;
+    
+    public MapAddMapTypeEvent(MapWidget source, MapType type) {
       super(source);
+      this.type = type;
     }
 
     /**
@@ -41,6 +44,14 @@ public interface MapAddMapTypeHandler {
      */
     public MapWidget getSender() {
       return (MapWidget) getSource();
+    }
+
+    /**
+     * Returns the map type associated with this event.
+     * @return the map type associated with this event.
+     */
+    public MapType getType() {
+      return type;
     }
   }
 

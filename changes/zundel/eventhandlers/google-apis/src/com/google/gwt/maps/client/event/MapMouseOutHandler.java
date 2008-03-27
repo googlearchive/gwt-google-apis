@@ -16,11 +16,12 @@
 package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.geom.LatLng;
 
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.MOUSEOUTevents from the
+ * Provides an interface to implement in order to receive MapEvent.MOUSEOUT events from the
   * {@link MapWidget}.
  */
 public interface MapMouseOutHandler {
@@ -29,9 +30,20 @@ public interface MapMouseOutHandler {
    * Encapsulates the arguments for the MapEvent.MOUSEOUT event on a {@link MapWidget}.
    */
   class MapMouseOutEvent extends EventObject {
+    private final LatLng point;
 
-    public MapMouseOutEvent(MapWidget source) {
+    public MapMouseOutEvent(MapWidget source, LatLng point) {
       super(source);
+      this.point = point;
+    }
+
+    /**
+     * Returns the map coordinates for this event.
+     * 
+     * @return the map coordinates for this event.
+     */
+    public LatLng getPoint() {
+      return point;
     }
 
     /**
