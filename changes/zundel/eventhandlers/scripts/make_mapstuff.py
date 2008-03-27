@@ -28,14 +28,16 @@ import sys
 global options
 options=[]
 global sourcename
-#sourcename = "MapWidget"
-sourcename = "Marker"
-global stripprefix
-#stripprefix = "Map"
-stripprefix = "Marker"
+sourcename = "MapWidget"
+#sourcename = "Marker"
+#sourcename = "InfoWindow"
 
-#eventfilename="./mapwidgetevents.txt";
-eventfilename="./markerevents.txt";
+global stripprefix
+stripprefix = "Map"
+#stripprefix = "Marker"
+#stripprefix = "InfoWindow"
+
+package="com.google.gwt.maps.client"
 
 def main ():
   """The main entry point"""
@@ -185,7 +187,7 @@ import com.google.gwt.maps.client.event." + prefix1 + "Handler." + prefix1 + "Ev
  */\n\
 package com.google.gwt.maps.client.event;\n\
 \n\
-import com.google.gwt.maps.client.overlay." + sourcename + ";\n\
+import " + package + "." + sourcename + ";\n\
 \n\
 import java.util.EventObject;\n\
 \n\
