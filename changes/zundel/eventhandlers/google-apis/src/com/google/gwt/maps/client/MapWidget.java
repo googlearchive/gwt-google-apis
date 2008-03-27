@@ -2157,6 +2157,33 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
+  public void trigger(MapMoveEvent event) {
+    mapMoveHandlers.trigger();
+  }
+  
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapMoveStartEvent event) {
+    mapMoveStartHandlers.trigger();
+  }
+  
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  public void trigger(MapMoveEndEvent event) {
+    mapMoveEndHandlers.trigger();
+  }
+  
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
   public void trigger(MapRemoveMapTypeEvent event) {
     mapRemoveMapTypeHandlers.trigger();
   }
