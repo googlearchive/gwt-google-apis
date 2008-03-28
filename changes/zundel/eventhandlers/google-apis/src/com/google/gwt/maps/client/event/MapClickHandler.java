@@ -31,14 +31,26 @@ public interface MapClickHandler {
   /**
    * Encapsulates the arguments for the "click" event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapClickEvent extends EventObject {
+    private final LatLng latlng;
     private final Overlay overlay;
-    private final LatLng point;
 
-    public MapClickEvent(MapWidget source, Overlay overlay, LatLng point) {
+    public MapClickEvent(MapWidget source, Overlay overlay, LatLng latlng) {
       super(source);
       this.overlay = overlay;
-      this.point = point;
+      this.latlng = latlng;
+    }
+
+    /**
+     * If the click is not on a marker, the geographical coordinates of the
+     * point that was clicked are passed in the point argument.
+     * 
+     * @return a point coordinate if the click was not over a marker, otherwise
+     *         <code>null</code>.
+     */
+    public LatLng getLatLng() {
+      return latlng;
     }
 
     /**
@@ -51,17 +63,6 @@ public interface MapClickHandler {
      */
     public Overlay getOverlay() {
       return overlay;
-    }
-
-    /**
-     * If the click is not on a marker, the geographical coordinates of the
-     * point that was clicked are passed in the point argument.
-     * 
-     * @return a point coordinate if the click was not over a marker, otherwise
-     *         <code>null</code>.
-     */
-    public LatLng getPoint() {
-      return point;
     }
     
     /**

@@ -28,6 +28,7 @@ public interface InfoWindowMaximizeClickHandler {
   /**
    * Encapsulates the arguments for the MapEvent.MAXIMIZECLICK event on a {@link InfoWindow}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowMaximizeClickEvent extends EventObject {
 
     public InfoWindowMaximizeClickEvent(InfoWindow source) {

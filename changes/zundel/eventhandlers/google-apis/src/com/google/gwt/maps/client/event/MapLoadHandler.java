@@ -28,6 +28,7 @@ public interface MapLoadHandler {
   /**
    * Encapsulates the arguments for the MapEvent.LOAD event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapLoadEvent extends EventObject {
 
     public MapLoadEvent(MapWidget source) {

@@ -29,6 +29,7 @@ public interface MapRemoveOverlayHandler {
   /**
    * Encapsulates the arguments for the MapEvent.REMOVEOVERLAY event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   class MapRemoveOverlayEvent extends EventObject {
     private final Overlay overlay;
 

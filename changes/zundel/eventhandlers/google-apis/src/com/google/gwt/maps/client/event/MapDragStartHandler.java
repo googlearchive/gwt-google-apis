@@ -28,6 +28,7 @@ public interface MapDragStartHandler {
   /**
    * Encapsulates the arguments for the MapEvent.DRAGSTART event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapDragStartEvent extends EventObject {
 
     public MapDragStartEvent(MapWidget source) {

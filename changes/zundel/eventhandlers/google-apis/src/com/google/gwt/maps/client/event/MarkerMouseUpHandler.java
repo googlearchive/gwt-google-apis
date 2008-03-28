@@ -28,6 +28,7 @@ public interface MarkerMouseUpHandler {
   /**
    * Encapsulates the arguments for the MapEvent.MOUSEUP event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerMouseUpEvent extends EventObject {
 
     public MarkerMouseUpEvent(Marker source) {

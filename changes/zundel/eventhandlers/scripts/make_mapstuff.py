@@ -47,7 +47,7 @@ def main ():
   p = optparse.OptionParser(description="""Create map events implementation""");
 
   p.add_option('--verbose', '-v', action='store_true', 
-               help='Print messages while running')
+               help='Print messages while running')a
   (options, event_input_filename) = p.parse_args()
 
   if len(event_input_filename) !=  1:
@@ -164,7 +164,7 @@ import com.google.gwt.maps.client.event." + prefix1 + "Handler." + prefix1 + "Ev
    * @param event an event to deliver to the handler.\n\
    */\n\
   public void trigger(" + prefix1 + "Event event) {\n\
-    " + prefix2 + "Handlers.trigger();\n\
+    " + prefix2 + "Handlers.triggerVoid();\n\
   }\n\
 \n"
 
@@ -192,7 +192,7 @@ import " + package + "." + sourcename + ";\n\
 import java.util.EventObject;\n\
 \n\
 /**\n\
- * Provides an interface to implement in order to receive MapEvent."+ mapeventname + "events from the\n\
+ * Provides an interface to implement in order to receive MapEvent."+ mapeventname + " events from the\n\
   * {@link " + sourcename + "}.\n\
  */\n\
 public interface " + prefix1 + "Handler {\n\
@@ -200,6 +200,7 @@ public interface " + prefix1 + "Handler {\n\
   /**\n\
    * Encapsulates the arguments for the MapEvent." + mapeventname+ " event on a {@link " + sourcename + "}.\n\
    */\n\
+  @SuppressWarnings("serial")\n\
   class " + prefix1 + "Event extends EventObject {\n\
 \n\
     public " + prefix1 + "Event(" + sourcename + " source) {\n\

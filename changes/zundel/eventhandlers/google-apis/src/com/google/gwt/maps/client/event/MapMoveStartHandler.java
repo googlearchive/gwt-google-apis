@@ -29,6 +29,7 @@ public interface MapMoveStartHandler {
   /**
    * Encapsulates the arguments for the "click" event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   class MapMoveStartEvent extends EventObject {
 
     public MapMoveStartEvent(MapWidget source) {

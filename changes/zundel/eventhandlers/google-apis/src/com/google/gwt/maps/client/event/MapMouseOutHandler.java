@@ -29,12 +29,13 @@ public interface MapMouseOutHandler {
   /**
    * Encapsulates the arguments for the MapEvent.MOUSEOUT event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapMouseOutEvent extends EventObject {
-    private final LatLng point;
+    private final LatLng latlng;
 
-    public MapMouseOutEvent(MapWidget source, LatLng point) {
+    public MapMouseOutEvent(MapWidget source, LatLng latlng) {
       super(source);
-      this.point = point;
+      this.latlng = latlng;
     }
 
     /**
@@ -42,8 +43,8 @@ public interface MapMouseOutHandler {
      * 
      * @return the map coordinates for this event.
      */
-    public LatLng getPoint() {
-      return point;
+    public LatLng getLatLng() {
+      return latlng;
     }
 
     /**

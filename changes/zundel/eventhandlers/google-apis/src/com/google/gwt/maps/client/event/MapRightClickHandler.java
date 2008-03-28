@@ -32,6 +32,7 @@ public interface MapRightClickHandler {
   /**
    * Encapsulates the arguments for the "click" event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   class MapRightClickEvent extends EventObject {
     private final Element elem;
     private final Overlay overlay;

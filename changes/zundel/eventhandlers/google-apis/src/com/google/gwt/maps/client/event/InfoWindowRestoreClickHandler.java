@@ -28,6 +28,7 @@ public interface InfoWindowRestoreClickHandler {
   /**
    * Encapsulates the arguments for the MapEvent.RESTORECLICK event on a {@link InfoWindow}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowRestoreClickEvent extends EventObject {
 
     public InfoWindowRestoreClickEvent(InfoWindow source) {

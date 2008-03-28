@@ -28,6 +28,7 @@ public interface MarkerMouseDownHandler {
   /**
    * Encapsulates the arguments for the MapEvent.MOUSEDOWN event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerMouseDownEvent extends EventObject {
 
     public MarkerMouseDownEvent(Marker source) {

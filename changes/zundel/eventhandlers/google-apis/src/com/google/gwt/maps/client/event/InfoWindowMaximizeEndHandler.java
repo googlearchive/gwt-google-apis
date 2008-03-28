@@ -28,6 +28,7 @@ public interface InfoWindowMaximizeEndHandler {
   /**
    * Encapsulates the arguments for the MapEvent.MAXIMIZEEND event on a {@link InfoWindow}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowMaximizeEndEvent extends EventObject {
 
     public InfoWindowMaximizeEndEvent(InfoWindow source) {

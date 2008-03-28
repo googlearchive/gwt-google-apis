@@ -28,6 +28,7 @@ public interface MarkerInfoWindowBeforeCloseHandler {
   /**
    * Encapsulates the arguments for the MapEvent.INFOWINDOWBEFORECLOSE event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerInfoWindowBeforeCloseEvent extends EventObject {
 
     public MarkerInfoWindowBeforeCloseEvent(Marker source) {

@@ -28,6 +28,7 @@ public interface InfoWindowRestoreEndHandler {
   /**
    * Encapsulates the arguments for the MapEvent.RESTOREEND event on a {@link InfoWindow}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowRestoreEndEvent extends EventObject {
 
     public InfoWindowRestoreEndEvent(InfoWindow source) {

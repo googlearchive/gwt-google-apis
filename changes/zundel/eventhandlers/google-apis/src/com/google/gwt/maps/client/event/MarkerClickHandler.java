@@ -28,6 +28,8 @@ public interface MarkerClickHandler {
   /**
    * Encapsulates the arguments for the MapEvent.CLICK event on a {@link Marker}.
    */
+  
+  @SuppressWarnings("serial")
   class MarkerClickEvent extends EventObject {
 
     public MarkerClickEvent(Marker source) {

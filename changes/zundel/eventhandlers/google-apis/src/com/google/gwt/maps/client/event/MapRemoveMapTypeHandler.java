@@ -30,6 +30,7 @@ public interface MapRemoveMapTypeHandler {
    * Encapsulates the arguments for the MapEvent.REMOVEMAPTYPE event on a
    * {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   class MapRemoveMapTypeEvent extends EventObject {
     private final MapType type;
 

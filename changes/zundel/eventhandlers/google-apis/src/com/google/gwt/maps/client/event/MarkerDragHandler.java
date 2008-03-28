@@ -28,6 +28,7 @@ public interface MarkerDragHandler {
   /**
    * Encapsulates the arguments for the MapEvent.DRAG event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerDragEvent extends EventObject {
 
     public MarkerDragEvent(Marker source) {

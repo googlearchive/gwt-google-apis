@@ -239,7 +239,7 @@ public class HandlerCollection<E> {
    * @param point A coordinate to send as a parameter of the event.
    */
   public void trigger(Overlay overlay, LatLng point) {
-    EventImpl.impl.trigger(jsoPeer, mapEvent.value, overlay, point);
+    EventImpl.impl.triggerVoid(jsoPeer, mapEvent.value, overlay, point);
   }
   
   /**

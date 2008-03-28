@@ -29,6 +29,7 @@ public interface MapAddOverlayHandler {
   /**
    * Encapsulates the arguments for the MapEvent.ADDOVERLAY event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapAddOverlayEvent extends EventObject {
     private final Overlay overlay;
     

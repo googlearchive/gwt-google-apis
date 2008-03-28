@@ -28,6 +28,7 @@ public interface MarkerDoubleClickHandler {
   /**
    * Encapsulates the arguments for the MapEvent.DOUBLECLICK event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerDoubleClickEvent extends EventObject {
 
     public MarkerDoubleClickEvent(Marker source) {

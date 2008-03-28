@@ -28,6 +28,7 @@ public interface MapDragEndHandler {
   /**
    * Encapsulates the arguments for the MapEvent.DRAGEND event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapDragEndEvent extends EventObject {
 
     public MapDragEndEvent(MapWidget source) {
@@ -49,5 +50,5 @@ public interface MapDragEndHandler {
    * 
    * @param event contains the properties of the event.
    */
-  void onDragend(MapDragEndEvent event);
+  void onDragEnd(MapDragEndEvent event);
 }

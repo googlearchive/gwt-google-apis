@@ -28,6 +28,7 @@ public interface MarkerMouseOutHandler {
   /**
    * Encapsulates the arguments for the MapEvent.MOUSEOUT event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerMouseOutEvent extends EventObject {
 
     public MarkerMouseOutEvent(Marker source) {

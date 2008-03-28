@@ -20,7 +20,7 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.ZOOMENDevents
+ * Provides an interface to implement in order to receive MapEvent.ZOOMEND events
  * from the {@link MapWidget}.
  */
 public interface MapZoomEndHandler {
@@ -29,6 +29,7 @@ public interface MapZoomEndHandler {
    * Encapsulates the arguments for the MapEvent.ZOOMEND event on a
    * {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   class MapZoomEndEvent extends EventObject {
     final int newZoomLevel;
     final int oldZoomLevel;

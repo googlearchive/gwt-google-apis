@@ -29,20 +29,22 @@ public interface MapMouseOverHandler {
   /**
    * Encapsulates the arguments for the MapEvent.MOUSEOVER event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapMouseOverEvent extends EventObject {
-    private final LatLng point;
+    
+    private final LatLng latlng;
      
-    public MapMouseOverEvent(MapWidget source, LatLng point) {
+    public MapMouseOverEvent(MapWidget source, LatLng latlng) {
       super(source);
-      this.point = point;
+      this.latlng = latlng;
     }
     
     /**
      * Returns the map coordinates for this event.
      * @return the map coordinates for this event.
      */
-    public LatLng getPoint() {
-      return point;
+    public LatLng getLatLng() {
+      return latlng;
     }
     
     /**

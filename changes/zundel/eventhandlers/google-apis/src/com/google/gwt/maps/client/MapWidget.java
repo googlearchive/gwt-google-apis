@@ -507,7 +507,7 @@ public final class MapWidget extends Composite {
       @Override
       public void callback() {
         MapDragEndEvent e = new MapDragEndEvent(MapWidget.this);
-        handler.onDragend(e);
+        handler.onDragEnd(e);
       }
     });
   }
@@ -661,6 +661,27 @@ public final class MapWidget extends Composite {
    * 
    * @param handler the handler to call when this event fires.
    */
+  public void addMapMouseMoveHandler(final MapMouseMoveHandler handler) {
+    if (mapMouseOutHandlers == null) {
+      mapMouseMoveHandlers = new HandlerCollection<MapMouseMoveHandler>(
+          jsoPeer, MapEvent.MOUSEMOVE);
+    }
+
+    mapMouseMoveHandlers.addHandler(handler, new LatLngCallback() {
+      @Override
+      public void callback(LatLng point) {
+        MapMouseMoveEvent e = new MapMouseMoveEvent(MapWidget.this, point);
+        handler.onMouseMove(e);
+      }
+    });
+  }
+
+  /**
+   * This event is fired when the user moves the mouse over the map from outside
+   * the map.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
   public void addMapMouseOutHandler(final MapMouseOutHandler handler) {
     if (mapMouseOutHandlers == null) {
       mapMouseOutHandlers = new HandlerCollection<MapMouseOutHandler>(jsoPeer,
@@ -696,28 +717,7 @@ public final class MapWidget extends Composite {
       }
     });
   }
-
-  /**
-   * This event is fired when the user moves the mouse over the map from outside
-   * the map.
-   * 
-   * @param handler the handler to call when this event fires.
-   */
-  public void addMapMouseMoveHandler(final MapMouseMoveHandler handler) {
-    if (mapMouseOutHandlers == null) {
-      mapMouseMoveHandlers = new HandlerCollection<MapMouseMoveHandler>(
-          jsoPeer, MapEvent.MOUSEMOVE);
-    }
-
-    mapMouseMoveHandlers.addHandler(handler, new LatLngCallback() {
-      @Override
-      public void callback(LatLng point) {
-        MapMouseMoveEvent e = new MapMouseMoveEvent(MapWidget.this, point);
-        handler.onMouseMove(e);
-      }
-    });
-  }
-
+  
   /**
    * This event is fired when the change of the map view ends.
    * 
@@ -856,7 +856,8 @@ public final class MapWidget extends Composite {
     mapRemoveOverlayHandlers.addHandler(handler, new OverlayCallback() {
       @Override
       public void callback(Overlay overlay) {
-        MapRemoveOverlayEvent e = new MapRemoveOverlayEvent(MapWidget.this, overlay);
+        MapRemoveOverlayEvent e = new MapRemoveOverlayEvent(MapWidget.this,
+            overlay);
         handler.onRemoveOverlay(e);
       }
     });
@@ -1021,6 +1022,11 @@ public final class MapWidget extends Composite {
    * Add a listener for overlays being added and removed from the map.
    * 
    * @param listener a listener to call back.
+   * 
+   * @deprecated see
+   *             {@link MapWidget#addMapAddOverlayHandler(MapAddOverlayHandler)}
+   *             and
+   *             {@link MapWidget#addMapRemoveOverlayHandler(MapRemoveOverlayHandler)}
    */
   public void addOverlayListener(final OverlayListener listener) {
     if (overlayListeners == null) {
@@ -1228,6 +1234,16 @@ public final class MapWidget extends Composite {
   public void clearMapMouseListeners() {
     if (mouseListeners != null) {
       mouseListeners.clearListeners();
+    }
+  }
+
+  /**
+   * Removes all handlers of this map added with
+   * {@link MapWidget#addMapMoveEndHandler(MapMoveEndHandler)}.
+   */
+  public void clearMapMouseMoveHandlers() {
+    if (mapMouseMoveHandlers != null) {
+      mapMouseMoveHandlers.clearHandlers();
     }
   }
 
@@ -1839,6 +1855,18 @@ public final class MapWidget extends Composite {
    * 
    * @param handler the handler to remove
    */
+  public void removeMapMouseMoveHandler(MapMouseMoveHandler handler) {
+    if (mapMouseMoveHandlers != null) {
+      mapMouseMoveHandlers.removeHandler(handler);
+    }
+  }
+  
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link MapWidget#addMapMouseOutHandler(MapMouseOutHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
   public void removeMapMouseOutHandler(MapMouseOutHandler handler) {
     if (mapMouseOutHandlers != null) {
       mapMouseOutHandlers.removeHandler(handler);
@@ -2233,7 +2261,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   public void trigger(MapAddMapTypeEvent event) {
-    mapAddMapTypeHandlers.trigger();
+    mapAddMapTypeHandlers.trigger(event.getType());
   }
 
   /**
@@ -2260,7 +2288,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   public void trigger(MapClickEvent event) {
-    clickHandlers.trigger(event.getOverlay(), event.getPoint());
+    clickHandlers.trigger(event.getOverlay(), event.getLatLng());
   }
 
   /**
@@ -2269,7 +2297,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   public void trigger(MapDoubleClickEvent event) {
-    doubleClickHandlers.trigger(null, event.getPoint());
+    doubleClickHandlers.trigger(null, event.getLatLng());
   }
 
   /**
@@ -2313,8 +2341,17 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
+  public void trigger(MapMouseMoveEvent event) {
+    mapMouseMoveHandlers.trigger(event.getLatLng());
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
   public void trigger(MapMouseOutEvent event) {
-    mapMouseOutHandlers.trigger(event.getPoint());
+    mapMouseOutHandlers.trigger(event.getLatLng());
   }
 
   /**
@@ -2323,18 +2360,9 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   public void trigger(MapMouseOverEvent event) {
-    mapMouseOverHandlers.trigger(event.getPoint());
+    mapMouseOverHandlers.trigger(event.getLatLng());
   }
-  
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * @param event an event to deliver to the handler.
-   */
-  public void trigger(MapMouseMoveEvent event) {
-    mapMouseMoveHandlers.trigger(event.getPoint());
-  }
-  
+
   /**
    * Manually trigger the specified event on this object.
    * 

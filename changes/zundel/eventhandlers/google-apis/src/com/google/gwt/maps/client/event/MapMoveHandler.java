@@ -21,27 +21,37 @@ import com.google.gwt.maps.client.impl.MapEvent;
 import java.util.EventObject;
 
 /**
- * 
+ * Provides an interface to implement in order to receive MapEvent.MOVEEND
+ * events from the {@link MapWidget}.
  */
 public interface MapMoveHandler {
   /**
-   * 
+   * Encapsulates the arguments for the MapEvent.MAPMOVE event on a
+   * {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   public class MapMoveEvent extends EventObject {
-    private static final MapEvent mapEvent = MapEvent.MOVE; 
+    
+    private static final MapEvent mapEvent = MapEvent.MOVE;
 
     public MapMoveEvent(MapWidget m) {
       super(m);
     }
-    
+
     public MapEvent getMapEvent() {
       return mapEvent;
     }
-    
+
     public MapWidget getSender() {
       return (MapWidget) getSource();
     }
   }
   
+  /**
+   * Method to be invoked when a MapEvent.MOVE event fires on a
+   * {@link MapWidget}.
+   * 
+   * @param event contains the properties of the event.
+   */
   void onMove(MapMoveEvent event);
 }

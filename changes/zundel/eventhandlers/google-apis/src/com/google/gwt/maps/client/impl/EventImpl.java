@@ -188,9 +188,9 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       Overlay overlay);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
-      Overlay overlay, LatLng latlng);
-
-  abstract void trigger(JavaScriptObject source, String mapEventString,
       Point point, Element elem, Overlay overlay);
 
+  @FieldName("trigger")
+  abstract void triggerVoid(JavaScriptObject source, String mapEventString,
+      Overlay overlay, LatLng latlng);
 }

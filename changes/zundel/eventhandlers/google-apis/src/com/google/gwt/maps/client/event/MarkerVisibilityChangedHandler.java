@@ -28,6 +28,7 @@ public interface MarkerVisibilityChangedHandler {
   /**
    * Encapsulates the arguments for the MapEvent.VISIBILITYCHANGED event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerVisibilityChangedEvent extends EventObject {
 
     public MarkerVisibilityChangedEvent(Marker source) {

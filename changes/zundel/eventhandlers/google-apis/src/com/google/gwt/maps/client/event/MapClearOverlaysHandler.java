@@ -28,6 +28,7 @@ public interface MapClearOverlaysHandler {
   /**
    * Encapsulates the arguments for the MapEvent.CLEAROVERLAYS event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapClearOverlaysEvent extends EventObject {
 
     public MapClearOverlaysEvent(MapWidget source) {

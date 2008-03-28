@@ -28,6 +28,7 @@ public interface InfoWindowBeforeCloseHandler {
   /**
    * Encapsulates the arguments for the MapEvent.INFOWINDOWBEFORECLOSE event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowBeforeCloseEvent extends EventObject {
 
     public InfoWindowBeforeCloseEvent(MapWidget source) {

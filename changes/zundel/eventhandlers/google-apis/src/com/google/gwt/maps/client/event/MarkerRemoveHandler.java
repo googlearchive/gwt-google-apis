@@ -28,6 +28,7 @@ public interface MarkerRemoveHandler {
   /**
    * Encapsulates the arguments for the MapEvent.REMOVE event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerRemoveEvent extends EventObject {
 
     public MarkerRemoveEvent(Marker source) {

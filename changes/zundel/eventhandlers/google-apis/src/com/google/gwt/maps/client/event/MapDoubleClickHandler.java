@@ -30,12 +30,13 @@ public interface MapDoubleClickHandler {
   /**
    * Encapsulates the arguments for the "click" event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapDoubleClickEvent extends EventObject {
-    private final LatLng point;
+    private final LatLng latlng;
 
-    public MapDoubleClickEvent(MapWidget source, LatLng point) {
+    public MapDoubleClickEvent(MapWidget source, LatLng latlng) {
       super(source);
-      this.point = point;
+      this.latlng = latlng;
     }
 
     /**
@@ -45,8 +46,8 @@ public interface MapDoubleClickHandler {
      * @return a point coordinate if the click was not over a marker, otherwise
      *         <code>null</code>.
      */
-    public LatLng getPoint() {
-      return point;
+    public LatLng getLatLng() {
+      return latlng;
     }
     
     /**

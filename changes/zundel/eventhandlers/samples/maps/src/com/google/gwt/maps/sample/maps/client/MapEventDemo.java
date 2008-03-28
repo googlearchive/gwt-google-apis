@@ -15,20 +15,41 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.maps.client.InfoWindow;
+import com.google.gwt.maps.client.InfoWindowContent;
+import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
+import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.InfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.InfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
+import com.google.gwt.maps.client.event.MapAddOverlayHandler;
+import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MapDoubleClickHandler;
+import com.google.gwt.maps.client.event.MapDragEndHandler;
+import com.google.gwt.maps.client.event.MapDragHandler;
+import com.google.gwt.maps.client.event.MapDragStartHandler;
+import com.google.gwt.maps.client.event.MapLoadHandler;
+import com.google.gwt.maps.client.event.MapMouseMoveHandler;
+import com.google.gwt.maps.client.event.MapMouseOutHandler;
+import com.google.gwt.maps.client.event.MapMouseOverHandler;
 import com.google.gwt.maps.client.event.MapMoveEndHandler;
 import com.google.gwt.maps.client.event.MapMoveHandler;
 import com.google.gwt.maps.client.event.MapMoveStartHandler;
+import com.google.gwt.maps.client.event.MapRemoveMapTypeHandler;
+import com.google.gwt.maps.client.event.MapRemoveOverlayHandler;
 import com.google.gwt.maps.client.event.MapRightClickHandler;
+import com.google.gwt.maps.client.event.MapTypeChangedHandler;
+import com.google.gwt.maps.client.event.MapZoomEndHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -46,11 +67,29 @@ import com.google.gwt.user.client.ui.Widget;
 public class MapEventDemo extends MapsDemo {
 
   private enum HandlerActions {
-
-    MAP_CLICK_HANDLER("MapClickHandler"), MAP_RIGHT_CLICK_HANDLER(
-        "MapRightClickHandler"), MAP_DOUBLE_CLICK_HANDLER(
-        "MapDoubleClickHandler"), MAP_MOVE_HANDLER("MapMoveHandler"), MAP_MOVE_END_HANDLER(
-        "MapMoveEndHandler"), MAP_MOVE_START_HANDLER("MapMoveStartHandler");
+    INFO_WINDOW_BEFORE_CLOSE_HANDLER("InfoWindowBeforeCloseHandler"), //
+    INFO_WINDOW_CLOSE_HANDLER("InfoWindowCloseHandler"), //
+    INFO_WINDOW_OPEN_HANDLER("InfoWindowOpenHandler"), //
+    MAP_CLEAR_OVERLAYS_HANDLER("MapClearOverlaysHandler"), //
+    MAP_ADD_MAP_TYPE_HANDLER("MapAddMapTypeHandler"), //
+    MAP_ADD_OVERLAY_HANDLER("MapAddOverlayHandler"), //
+    MAP_CLICK_HANDLER("MapClickHandler"), //
+    MAP_DOUBLE_CLICK_HANDLER("MapDoubleClickHandler"), // 
+    MAP_DRAG_END_HANDLER("MapDragEndHandler"), //
+    MAP_DRAG_HANDLER("MapDragHandler"), //
+    MAP_DRAG_START_HANDLER("MapDragStartHandler"), //
+    MAP_LOAD_HANDLER("MapLoadHandler"), // Can we really test this here?
+    MAP_MOUSE_OVER_HANDLER("MapMouseOverHandler"), //
+    MAP_MOUSE_MOVE_HANDLER("MapMouseMoveHandler"), //
+    MAP_MOUSE_OUT_HANDLER("MapMouseOutHandler"), //
+    MAP_MOVE_END_HANDLER("MapMoveEndHandler"), //
+    MAP_MOVE_HANDLER("MapMoveHandler"), //
+    MAP_MOVE_START_HANDLER("MapMoveStartHandler"), //
+    MAP_REMOVE_MAP_TYPE_HANDLER("MapRemoveMapTypeHandler"), //
+    MAP_REMOVE_OVERLAY_HANDLER("MapRemoveOverlayHandler"), //
+    MAP_RIGHT_CLICK_HANDLER("MapRightClickHandler"), //
+    MAP_TYPE_CHANGED_HANDLER("MapTypeChangedHandler"), //
+    MAP_ZOOM_END_HANDLER("MapZoomEndHandler"); //
 
     private final String value;
 
@@ -125,16 +164,30 @@ public class MapEventDemo extends MapsDemo {
   private MapWidget map;
   private Marker marker;
   // Saves the state of whether the maker is currently removed from the map
-  private boolean removed = false;
+  private boolean markerRemoved = false;
+  // Saves the state of whether the sky map type has been removed.
+  private boolean mapTypeRemoved = false;
 
   public MapEventDemo() {
     VerticalPanel vp = new VerticalPanel();
+    final CheckBox loadedCheckBox = new CheckBox("Loaded");
+    loadedCheckBox.setChecked(false);
 
     // Center the new map on Midtown Atlanta
     map = new MapWidget(ATLANTA, 13);
     map.setSize("500px", "300px");
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
+
+    // TODO(zundel): I can't get the load handler to fire.
+    map.addMapLoadHandler(new MapLoadHandler() {
+
+      public void onLoad(MapLoadEvent event) {
+        loadedCheckBox.setChecked(true);
+        loadedCheckBox.setEnabled(false);
+      }
+
+    });
 
     MarkerOptions opt = new MarkerOptions();
     opt.setDraggable(true);
@@ -151,6 +204,7 @@ public class MapEventDemo extends MapsDemo {
     handlerTable = new FlexTable();
     clearListenerTable();
 
+    vp.add(loadedCheckBox);
     vp.add(map);
     vp.add(hp1);
     vp.add(hp2);
@@ -158,19 +212,6 @@ public class MapEventDemo extends MapsDemo {
     vp.add(handlerTable);
 
     initWidget(vp);
-  }
-
-  private void clearListenerTable() {
-    int numRows = handlerTable.getRowCount();
-    for (int i = numRows - 1; i >= 0; i--) {
-      handlerTable.removeRow(i);
-    }
-
-    handlerTable.setHTML(0, 0, "<b>ID</b>");
-    handlerTable.setHTML(0, 1, "<b>Type</b>");
-    handlerTable.setHTML(0, 2, "<b>Events</b>");
-    handlerTable.setHTML(0, 3, "<b>Clear Text</b>");
-    handlerTable.setHTML(0, 4, "<b>Remove Listener</b>");
   }
 
   @Override
@@ -207,11 +248,140 @@ public class MapEventDemo extends MapsDemo {
 
     // Add event specific handlers
     switch (a) {
+      case INFO_WINDOW_BEFORE_CLOSE_HANDLER: {
+        final InfoWindowBeforeCloseHandler h = new InfoWindowBeforeCloseHandler() {
+
+          public void onInfoWindowBeforeClose(InfoWindowBeforeCloseEvent event) {
+            textBox.setText(textBox.getText() + "onInfoWindowBeforeClose()");
+          }
+
+        };
+
+        map.addInfoWindowBeforeCloseHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeInfoWindowBeforeCloseHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case INFO_WINDOW_CLOSE_HANDLER: {
+        final InfoWindowCloseHandler h = new InfoWindowCloseHandler() {
+
+          public void onInfoWindowClose(InfoWindowCloseEvent event) {
+            textBox.setText(textBox.getText() + "onInfoWindowClose()");
+          }
+
+        };
+
+        map.addInfoWindowCloseHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeInfoWindowCloseHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case INFO_WINDOW_OPEN_HANDLER: {
+        final InfoWindowOpenHandler h = new InfoWindowOpenHandler() {
+
+          public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+            textBox.setText(textBox.getText() + "onInfoWindowOpen()");
+          }
+
+        };
+
+        map.addInfoWindowOpenHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeInfoWindowOpenHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case MAP_CLEAR_OVERLAYS_HANDLER: {
+        final MapClearOverlaysHandler h = new MapClearOverlaysHandler() {
+
+          public void onClearOverlays(MapClearOverlaysEvent event) {
+            textBox.setText(textBox.getText() + "onClearOverlays()");
+          }
+
+        };
+
+        map.addMapClearOverlaysHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapClearOverlaysHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case MAP_ADD_MAP_TYPE_HANDLER: {
+        final MapAddMapTypeHandler h = new MapAddMapTypeHandler() {
+
+          public void onAddMapType(MapAddMapTypeEvent event) {
+            textBox.setText(textBox.getText() + "onAddMapType("
+                + event.getType().getName(true) + ")");
+          }
+
+        };
+
+        map.addMapAddMapTypeHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapAddMapTypeHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case MAP_ADD_OVERLAY_HANDLER: {
+        final MapAddOverlayHandler h = new MapAddOverlayHandler() {
+
+          public void onAddOverlay(MapAddOverlayEvent event) {
+            textBox.setText(textBox.getText() + "onAddOverlay("
+                + event.getOverlay() + ")");
+          }
+
+        };
+
+        map.addMapAddOverlayHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapAddOverlayHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
       case MAP_CLICK_HANDLER: {
         final MapClickHandler h = new MapClickHandler() {
 
           public void onClick(MapClickEvent e) {
-            textBox.setText(textBox.getText() + "onClick(" + e.getPoint() + ")");
+            textBox.setText(textBox.getText() + "onClick(" + e.getLatLng()
+                + ")");
           }
 
         };
@@ -231,7 +401,8 @@ public class MapEventDemo extends MapsDemo {
         final MapDoubleClickHandler h = new MapDoubleClickHandler() {
 
           public void onDoubleClick(MapDoubleClickEvent e) {
-            textBox.setText(textBox.getText() + "onDoubleClick(" + e.getPoint() + ")");
+            textBox.setText(textBox.getText() + "onDoubleClick("
+                + e.getLatLng() + ")");
           }
         };
         map.addMapDoubleClickHandler(h);
@@ -244,33 +415,128 @@ public class MapEventDemo extends MapsDemo {
       }
         break;
 
-      case MAP_RIGHT_CLICK_HANDLER: {
-        final MapRightClickHandler h = new MapRightClickHandler() {
+      case MAP_DRAG_END_HANDLER: {
+        final MapDragEndHandler h = new MapDragEndHandler() {
 
-          public void onRightClick(MapRightClickEvent e) {
-            textBox.setText(textBox.getText() + "onRightClick(" + e.getPoint() + ")");
+          public void onDragEnd(MapDragEndEvent event) {
+            textBox.setText(textBox.getText() + "onDragEnd()");
           }
+
         };
-        map.addMapRightClickHandler(h);
+
+        map.addMapDragEndHandler(h);
         removeHandlerButton.addClickListener(new ClickListener() {
+
           public void onClick(Widget sender) {
-            map.removeMapRightClickHandler(h);
+            map.removeMapDragEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
+
         });
       }
         break;
-      case MAP_MOVE_HANDLER: {
-        final MapMoveHandler h = new MapMoveHandler() {
+      case MAP_DRAG_HANDLER: {
+        final MapDragHandler h = new MapDragHandler() {
 
-          public void onMove(MapMoveEvent e) {
-            textBox.setText(textBox.getText() + "onMove()");
+          public void onDrag(MapDragEvent event) {
+            textBox.setText(textBox.getText() + "onDrag()");
+          }
+
+        };
+
+        map.addMapDragHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapDragHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case MAP_DRAG_START_HANDLER: {
+        final MapDragStartHandler h = new MapDragStartHandler() {
+
+          public void onDragStart(MapDragStartEvent event) {
+            textBox.setText(textBox.getText() + "onDragStart()");
+          }
+
+        };
+
+        map.addMapDragStartHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapDragStartHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case MAP_LOAD_HANDLER:
+        // Not supported
+        break;
+
+      case MAP_MOUSE_OUT_HANDLER: {
+        final MapMouseOutHandler h = new MapMouseOutHandler() {
+
+          public void onMouseOut(MapMouseOutEvent event) {
+            textBox.setText(textBox.getText() + "onMouseOut("
+                + event.getLatLng() + ")");
+          }
+
+        };
+
+        map.addMapMouseOutHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapMouseOutHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case MAP_MOUSE_OVER_HANDLER: {
+        final MapMouseOverHandler h = new MapMouseOverHandler() {
+
+          public void onMouseOver(MapMouseOverEvent event) {
+            textBox.setText(textBox.getText() + "onMouseOver("
+                + event.getLatLng() + ")");
+          }
+
+        };
+
+        map.addMapMouseOverHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapMouseOverHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+
+      case MAP_MOUSE_MOVE_HANDLER: {
+        final MapMouseMoveHandler h = new MapMouseMoveHandler() {
+
+          public void onMouseMove(MapMouseMoveEvent event) {
+            textBox.setText(textBox.getText() + "onMouseMove("
+                + event.getLatLng() + ")");
           }
         };
-        map.addMapMoveHandler(h);
+        map.addMapMouseMoveHandler(h);
         removeHandlerButton.addClickListener(new ClickListener() {
           public void onClick(Widget sender) {
-            map.removeMapMoveHandler(h);
+            map.removeMapMouseMoveHandler(h);
             // removeRowFromTable(nextListenerId);
           }
         });
@@ -294,6 +560,23 @@ public class MapEventDemo extends MapsDemo {
       }
         break;
 
+      case MAP_MOVE_HANDLER: {
+        final MapMoveHandler h = new MapMoveHandler() {
+
+          public void onMove(MapMoveEvent e) {
+            textBox.setText(textBox.getText() + "onMove()");
+          }
+        };
+        map.addMapMoveHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            map.removeMapMoveHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+        });
+      }
+        break;
+
       case MAP_MOVE_START_HANDLER: {
         final MapMoveStartHandler h = new MapMoveStartHandler() {
 
@@ -311,9 +594,117 @@ public class MapEventDemo extends MapsDemo {
       }
         break;
 
+      case MAP_REMOVE_MAP_TYPE_HANDLER: {
+        final MapRemoveMapTypeHandler h = new MapRemoveMapTypeHandler() {
+
+          public void onRemoveMapType(MapRemoveMapTypeEvent event) {
+            textBox.setText(textBox.getText() + "onRemoveMapType("
+                + event.getType().getName(true) + ")");
+          }
+
+        };
+
+        map.addMapRemoveMapTypeHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapRemoveMapTypeHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+      case MAP_REMOVE_OVERLAY_HANDLER: {
+        final MapRemoveOverlayHandler h = new MapRemoveOverlayHandler() {
+
+          public void onRemoveOverlay(MapRemoveOverlayEvent event) {
+            textBox.setText(textBox.getText() + "onRemoveOverlay("
+                + event.getOverlay().toString() + ")");
+          }
+
+        };
+
+        map.addMapRemoveOverlayHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            map.removeMapRemoveOverlayHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+
+        });
+      }
+        break;
+      case MAP_RIGHT_CLICK_HANDLER: {
+        final MapRightClickHandler h = new MapRightClickHandler() {
+
+          public void onRightClick(MapRightClickEvent e) {
+            textBox.setText(textBox.getText() + "onRightClick(" + e.getPoint()
+                + ")");
+          }
+        };
+        map.addMapRightClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            map.removeMapRightClickHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+        });
+      }
+        break;
+
+      case MAP_TYPE_CHANGED_HANDLER: {
+        final MapTypeChangedHandler h = new MapTypeChangedHandler() {
+
+          public void onTypeChanged(MapTypeChangedEvent e) {
+            textBox.setText(textBox.getText() + "onTypeChanged()");
+          }
+        };
+        map.addMapTypeChangedHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            map.removeMapTypeChangedHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+        });
+      }
+        break;
+
+      case MAP_ZOOM_END_HANDLER: {
+        final MapZoomEndHandler h = new MapZoomEndHandler() {
+
+          public void onZoomEnd(MapZoomEndEvent e) {
+            textBox.setText(textBox.getText() + "onZoomEnd("
+                + e.getNewZoomLevel() + "," + e.getOldZoomLevel() + ")");
+          }
+        };
+        map.addMapZoomEndHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            map.removeMapZoomEndHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+        });
+      }
+        break;
+
       default:
         Window.alert("Unhandled HandlerActions case : " + a.valueOf());
     }
+  }
+
+  private void clearListenerTable() {
+    int numRows = handlerTable.getRowCount();
+    for (int i = numRows - 1; i >= 0; i--) {
+      handlerTable.removeRow(i);
+    }
+
+    handlerTable.setHTML(0, 0, "<b>ID</b>");
+    handlerTable.setHTML(0, 1, "<b>Type</b>");
+    handlerTable.setHTML(0, 2, "<b>Events</b>");
+    handlerTable.setHTML(0, 3, "<b>Clear Text</b>");
+    handlerTable.setHTML(0, 4, "<b>Remove Listener</b>");
   }
 
   /**
@@ -341,36 +732,53 @@ public class MapEventDemo extends MapsDemo {
     final Button removeButton = new Button("Remove Marker");
     removeButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
-        if (!removed) {
+        if (!markerRemoved) {
           map.removeOverlay(marker);
           removeButton.setText("Add Marker");
         } else {
           map.addOverlay(marker);
           removeButton.setText("Remove Marker");
         }
-        hideButton.setEnabled(removed);
-        removed = !removed;
+        hideButton.setEnabled(markerRemoved);
+        markerRemoved = !markerRemoved;
       }
     });
     hp.add(removeButton);
 
-    // Create a button to Set the marker as draggable
-    final Button draggableButton = new Button("Disable Dragging");
-    draggableButton.addClickListener(new ClickListener() {
+    final Button clearOverlaysButton = new Button("Clear Overlays");
+    clearOverlaysButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        map.clearOverlays();
+      }
+    });
+    hp.add(clearOverlaysButton);
+
+    final Button infoWindowButton = new Button("Show InfoWindow");
+    infoWindowButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        InfoWindow info = map.getInfoWindow();
+        info.open(map.getCenter(), new InfoWindowContent("Hello Maps!"));
+      }
+    });
+    hp.add(infoWindowButton);
+
+    final Button mapTypeButton = new Button("Add Map Type");
+    mapTypeButton.addClickListener(new ClickListener() {
 
       public void onClick(Widget sender) {
-        boolean state = !marker.isDraggingEnabled();
-        marker.setDraggingEnabled(state);
-        if (state) {
-          draggableButton.setText("Disable Dragging");
+        if (!mapTypeRemoved) {
+          map.addMapType(MapType.getSkyVisibleMap());
+          mapTypeButton.setText("Remove MapType");
         } else {
-          draggableButton.setText("Enable Dragging");
+          map.removeMapType(MapType.getSkyVisibleMap());
+          removeButton.setText("Add MapType");
         }
+        mapTypeRemoved = !mapTypeRemoved;
       }
 
     });
-    hp.add(draggableButton);
-
+    hp.add(mapTypeButton);
+    
     // Create a button to clear out the table.
     final Button clearTableButton = new Button("Clear Table");
     clearTableButton.addClickListener(new ClickListener() {
@@ -419,14 +827,72 @@ public class MapEventDemo extends MapsDemo {
         HandlerActions a = HandlerActions.values()[selectedIndex];
 
         switch (a) {
+
+          case INFO_WINDOW_BEFORE_CLOSE_HANDLER:
+            map.clearInfoWindowBeforeCloseHandlers();
+            break;
+          case INFO_WINDOW_CLOSE_HANDLER:
+            map.clearInfoWindowCloseHandlers();
+            break;
+          case INFO_WINDOW_OPEN_HANDLER:
+            map.clearInfoWindowOpenHandlers();
+            break;
+          case MAP_CLEAR_OVERLAYS_HANDLER:
+            map.clearMapAddOverlayHandlers();
+            break;
+          case MAP_ADD_MAP_TYPE_HANDLER:
+            map.clearMapAddMapTypeHandlers();
+            break;
+          case MAP_ADD_OVERLAY_HANDLER:
+            map.clearMapAddOverlayHandlers();
+            break;
           case MAP_CLICK_HANDLER:
             map.clearMapClickHandlers();
             break;
           case MAP_DOUBLE_CLICK_HANDLER:
             map.clearMapDoubleClickHandlers();
             break;
+          case MAP_DRAG_END_HANDLER:
+            map.clearMapDragEndHandlers();
+            break;
+          case MAP_DRAG_HANDLER:
+            map.clearMapDragHandlers();
+            break;
+          case MAP_DRAG_START_HANDLER:
+            map.clearMapDragStartHandlers();
+            break;
+          case MAP_LOAD_HANDLER:
+            map.clearMapLoadHandlers();
+            break;
+          case MAP_MOUSE_OVER_HANDLER:
+            map.clearMapMouseOverHandlers();
+            break;
+          case MAP_MOUSE_MOVE_HANDLER:
+            map.clearMapMouseMoveHandlers();
+            break;
+          case MAP_MOVE_END_HANDLER:
+            map.clearMapMoveEndHandlers();
+            break;
+          case MAP_MOVE_HANDLER:
+            map.clearMapMoveHandlers();
+            break;
+          case MAP_MOVE_START_HANDLER:
+            map.clearMapMoveStartHandlers();
+            break;
+          case MAP_REMOVE_MAP_TYPE_HANDLER:
+            map.clearMapRemoveMapTypeHandlers();
+            break;
+          case MAP_REMOVE_OVERLAY_HANDLER:
+            map.clearMapRemoveOverlayHandlers();
+            break;
           case MAP_RIGHT_CLICK_HANDLER:
             map.clearMapRightClickHandlers();
+            break;
+          case MAP_TYPE_CHANGED_HANDLER:
+            map.clearMapTypeChangedHandlers();
+            break;
+          case MAP_ZOOM_END_HANDLER:
+            map.clearMapZoomEndHandlers();
             break;
           default:
             Window.alert("No handling to clear " + a.valueOf());

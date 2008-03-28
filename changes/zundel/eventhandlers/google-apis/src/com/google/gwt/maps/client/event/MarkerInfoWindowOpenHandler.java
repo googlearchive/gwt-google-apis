@@ -28,6 +28,7 @@ public interface MarkerInfoWindowOpenHandler {
   /**
    * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerInfoWindowOpenEvent extends EventObject {
 
     public MarkerInfoWindowOpenEvent(Marker source) {

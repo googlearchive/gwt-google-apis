@@ -28,6 +28,7 @@ public interface InfoWindowCloseHandler {
   /**
    * Encapsulates the arguments for the MapEvent.INFOWINDOWCLOSE event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowCloseEvent extends EventObject {
 
     public InfoWindowCloseEvent(MapWidget source) {

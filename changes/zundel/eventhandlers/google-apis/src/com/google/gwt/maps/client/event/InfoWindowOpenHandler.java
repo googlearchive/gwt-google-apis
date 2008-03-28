@@ -28,6 +28,7 @@ public interface InfoWindowOpenHandler {
   /**
    * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowOpenEvent extends EventObject {
 
     public InfoWindowOpenEvent(MapWidget source) {

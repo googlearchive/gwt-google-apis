@@ -11,5 +11,6 @@ MapClearOverlays
 MapMouseOver
 MapMouseOut
 MapDragStart
-MapDragend
+MapDrag
+MapDragEnd
 MapLoad

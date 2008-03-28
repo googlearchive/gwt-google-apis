@@ -29,6 +29,7 @@ public interface MapAddMapTypeHandler {
   /**
    * Encapsulates the arguments for the MapEvent.ADDMAPTYPE event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapAddMapTypeEvent extends EventObject {
     private final MapType type;
     

@@ -80,7 +80,7 @@ public class ClickDemo extends MapsDemo {
       public void onClick(MapClickEvent e) {
         MapWidget sender = e.getSender();
         Overlay overlay = e.getOverlay();
-        LatLng point = e.getPoint();
+        LatLng point = e.getLatLng();
 
         if (overlay != null && overlay instanceof Marker) {
           map.removeOverlay(overlay);

@@ -20,14 +20,16 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.MOVEENDevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.MOVEEND
+ * events from the {@link MapWidget}.
  */
 public interface MapMoveEndHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.MOVEEND event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.MOVEEND event on a
+   * {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   class MapMoveEndEvent extends EventObject {
 
     public MapMoveEndEvent(MapWidget source) {
@@ -45,10 +47,10 @@ public interface MapMoveEndHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.MOVEEND event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.MOVEEND event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */
   void onMoveEnd(MapMoveEndEvent event);
 }
-

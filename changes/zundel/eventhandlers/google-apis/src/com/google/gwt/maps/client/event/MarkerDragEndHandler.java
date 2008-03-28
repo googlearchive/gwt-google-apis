@@ -28,6 +28,7 @@ public interface MarkerDragEndHandler {
   /**
    * Encapsulates the arguments for the MapEvent.DRAGEND event on a {@link Marker}.
    */
+  @SuppressWarnings("serial")
   class MarkerDragEndEvent extends EventObject {
 
     public MarkerDragEndEvent(Marker source) {

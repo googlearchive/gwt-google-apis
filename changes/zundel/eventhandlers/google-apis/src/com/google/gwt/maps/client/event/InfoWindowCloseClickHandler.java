@@ -28,6 +28,7 @@ public interface InfoWindowCloseClickHandler {
   /**
    * Encapsulates the arguments for the MapEvent.CLOSECLICK event on a {@link InfoWindow}.
    */
+  @SuppressWarnings("serial") 
   class InfoWindowCloseClickEvent extends EventObject {
 
     public InfoWindowCloseClickEvent(InfoWindow source) {

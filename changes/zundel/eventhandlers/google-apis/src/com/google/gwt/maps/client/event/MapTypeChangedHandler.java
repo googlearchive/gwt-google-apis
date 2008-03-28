@@ -28,6 +28,7 @@ public interface MapTypeChangedHandler {
   /**
    * Encapsulates the arguments for the MapEvent.TYPECHANGED event on a {@link MapWidget}.
    */
+  @SuppressWarnings("serial")
   class MapTypeChangedEvent extends EventObject {
 
     public MapTypeChangedEvent(MapWidget source) {

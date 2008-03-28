@@ -21,21 +21,23 @@ import com.google.gwt.maps.client.geom.LatLng;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.MOUSEOUTevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive
+ * MapEvent.MOUSEOUTevents from the {@link MapWidget}.
  */
 public interface MapMouseMoveHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.MOUSEMOVE event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.MOUSEMOVE event on a
+   * {@link MapWidget}.
    */
+  @SuppressWarnings("serial") 
   class MapMouseMoveEvent extends EventObject {
-    
-    private final LatLng point;
-    
-    public MapMouseMoveEvent(MapWidget source, LatLng point) {
+
+    private final LatLng latlng;
+
+    public MapMouseMoveEvent(MapWidget source, LatLng latlng) {
       super(source);
-      this.point = point;
+      this.latlng = latlng;
     }
 
     /**
@@ -43,8 +45,8 @@ public interface MapMouseMoveHandler {
      * 
      * @return the map coordinates for this event.
      */
-    public LatLng getPoint() {
-      return point;
+    public LatLng getLatLng() {
+      return latlng;
     }
 
     /**
@@ -58,7 +60,8 @@ public interface MapMouseMoveHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.MOUSEOUT event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.MOUSEOUT event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */
