@@ -26,7 +26,8 @@ import com.google.gwt.user.client.Element;
  * Manages an ad-hoc collection of captured URLs, which can be served locally.
  */
 public class ResourceStore {
-  private static int captureURLs(JavaScriptObject jso, String[] urls, URLCaptureCallback callback) throws GearsException {
+  private static int captureURLs(JavaScriptObject jso, String[] urls,
+      URLCaptureCallback callback) throws GearsException {
     try {
       return nativeCaptureURL(jso, urls, callback);
     } catch (JavaScriptException ex) {
@@ -37,6 +38,7 @@ public class ResourceStore {
   /*
    * Called from JSNI code.
    */
+  @SuppressWarnings("unused")
   private static void fireURLCaptureCallback(URLCaptureCallback callback,
       String url, boolean success, int captureId) {
     try {
@@ -58,14 +60,14 @@ public class ResourceStore {
    */
   private static native void nativeAbortCapture(JavaScriptObject rStoreObj,
       int captureId) /*-{
-   rStoreObj.abortCapture(captureId);    
-   }-*/;
+    rStoreObj.abortCapture(captureId);    
+  }-*/;
 
   // TODO: Revisit implementing file capture.
   private static native void nativeCaptureFile(JavaScriptObject rStoreObj,
       Element element, String url) /*-{
-   return rStoreObj.captureFile(element, url);
-   }-*/;
+    return rStoreObj.captureFile(element, url);
+  }-*/;
 
   /**
    * Native proxy call to the capture method on the JavaScript object.
@@ -76,78 +78,78 @@ public class ResourceStore {
    */
   private static native int nativeCaptureURL(JavaScriptObject rStoreObj,
       String[] urls, URLCaptureCallback callback) /*-{
-   var newUrls = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(urls);
-   var callbackFunc = function(url, success, captureId) {
-   @com.google.gwt.gears.localserver.client.ResourceStore::fireURLCaptureCallback(Lcom/google/gwt/gears/localserver/client/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
-   };
-   return rStoreObj.capture(newUrls, callbackFunc);
-   }-*/;
+    var newUrls = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(urls);
+    var callbackFunc = function(url, success, captureId) {
+      @com.google.gwt.gears.localserver.client.ResourceStore::fireURLCaptureCallback(Lcom/google/gwt/gears/localserver/client/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
+    };
+    return rStoreObj.capture(newUrls, callbackFunc);
+  }-*/;
 
   private static native void nativeCopyURL(JavaScriptObject rStoreObj,
       String src, String dest) /*-{
-   rStoreObj.copy(src, dest);
-   }-*/;
+    rStoreObj.copy(src, dest);
+  }-*/;
 
   // TODO: Revisit file capture mechanism
   private static native JavaScriptObject nativeCreateFileSubmitter(
       JavaScriptObject rStoreObj) /*-{
-   return rStoreObj.createFileSubmitter()();
-   }-*/;
+    return rStoreObj.createFileSubmitter()();
+  }-*/;
 
   private static native String nativeGetAllURLHeaders(
       JavaScriptObject rStoreObj, String url) /*-{
-   var headers = rStoreObj.getAllHeaders(url);
-   return headers == null ? null : headers;
-   }-*/;
+    var headers = rStoreObj.getAllHeaders(url);
+    return headers == null ? null : headers;
+  }-*/;
 
   private static native String nativeGetCapturedFileName(
       JavaScriptObject rStoreObj, String url) /*-{
-   var fileName = rStoreObj.getCapturedFileName(url);
-   return fileName == null ? null : fileName;
-   }-*/;
+    var fileName = rStoreObj.getCapturedFileName(url);
+    return fileName == null ? null : fileName;
+  }-*/;
 
   private static native String nativeGetCapturedURLHeader(
       JavaScriptObject rStoreObj, String url, String name) /*-{
-   return rStoreObj.getHeader(url, name);
-   }-*/;
+    return rStoreObj.getHeader(url, name);
+  }-*/;
 
   private static native String nativeGetName(JavaScriptObject rStoreObj) /*-{
-   return rStoreObj.name == null ? null : rStoreObj.name;
-   }-*/;
+    return rStoreObj.name == null ? null : rStoreObj.name;
+  }-*/;
 
   private static native String nativeGetRequiredCookie(
       JavaScriptObject rStoreObj) /*-{
-   return rStoreObj.requiredCookie;
-   }-*/;
+    return rStoreObj.requiredCookie;
+  }-*/;
 
   private static native boolean nativeIsEnabled(JavaScriptObject rStoreObj) /*-{
-   return rStoreObj.enabled;
-   }-*/;
+    return rStoreObj.enabled;
+  }-*/;
 
   private static native boolean nativeIsURLCaptured(JavaScriptObject rStoreObj,
       String url) /*-{
-   return rStoreObj.isCaptured(url);
-   }-*/;
+    return rStoreObj.isCaptured(url);
+  }-*/;
 
   private static native void nativeRemoveURL(JavaScriptObject rStoreObj,
       String url) /*-{
-   rStoreObj.remove(url);
-   }-*/;
+    rStoreObj.remove(url);
+  }-*/;
 
   private static native void nativeRenameURL(JavaScriptObject rStoreObj,
       String src, String dest) /*-{
-   rStoreObj.rename(src, dest);
-   }-*/;
+    rStoreObj.rename(src, dest);
+  }-*/;
 
   private static native void nativeSetEnabled(JavaScriptObject rStoreObj,
       boolean enabled) /*-{
-   rStoreObj.enabled = enabled;
-   }-*/;
+    rStoreObj.enabled = enabled;
+  }-*/;
 
   private static native void nativeSetFileInputElement(
       JavaScriptObject fileSub, Element element, String url) /*-{
-   fileSub.setFileInputElement(element, url);
-   }-*/;
+    fileSub.setFileInputElement(element, url);
+  }-*/;
 
   /**
    * Reference to the FileSubmitter JavaScript object provided by Gears.
@@ -200,7 +202,7 @@ public class ResourceStore {
       throws GearsException {
     return captureURLs(rStoreObj, new String[] {url}, callback);
   }
-  
+
   /**
    * Initiates an asynchronous background task to capture the indicated URLs.
    * The return value is a captureId which can be passed to abortCapture to
@@ -228,7 +230,8 @@ public class ResourceStore {
    * @throws GearsException if the source or destination URL is not from the
    *           same origin as the current page
    */
-  public void copyCapturedURL(String srcUrl, String destUrl) throws GearsException {
+  public void copyCapturedURL(String srcUrl, String destUrl)
+      throws GearsException {
     try {
       nativeCopyURL(rStoreObj, srcUrl, destUrl);
     } catch (JavaScriptException ex) {

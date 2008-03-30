@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,27 +19,23 @@ package com.google.gwt.gears.localserver.client;
  * A callback class used to receive notification of {@link ResourceStore}
  * capture operations.
  * 
- * TODO(mmendez): how about just onFailure or onSuccess since we know we are in 
- * 
+ * TODO(mmendez): how about just onFailure or onSuccess since we know we are in
+ * the URL capture callback.
  */
 public abstract class URLCaptureCallback {
   /**
    * Callback method invoked when a capture operation fails.
    * 
-   * @param url
-   *          the URL that was requested for capture
-   * @param captureId
-   *          the ID of the capture operation
+   * @param url the URL that was requested for capture
+   * @param captureId the ID of the capture operation
    */
   public abstract void onCaptureFailure(String url, int captureId);
 
   /**
    * Callback method invoked when a capture operation succeeds.
    * 
-   * @param url
-   *          the URL that was requested for capture
-   * @param captureId
-   *          the ID of the capture operation
+   * @param url the URL that was requested for capture
+   * @param captureId the ID of the capture operation
    */
   public abstract void onCaptureSuccess(String url, int captureId);
 }

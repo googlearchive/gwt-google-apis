@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,12 +16,13 @@
 package com.google.gwt.gears.core.client;
 
 /**
- * Base class for Gears-related exceptions. 
+ * Base class for Gears-related exceptions.
  */
+@SuppressWarnings("serial")
 public class GearsException extends Exception {
-
   /**
    * Creates a new exception.
+   * 
    * @param message the message for this exception
    */
   public GearsException(String message) {
@@ -30,10 +31,11 @@ public class GearsException extends Exception {
 
   /**
    * Creates a new exception with the indicated root cause.
+   * 
    * @param message the message for this exception
    * @param cause the root cause of this exception
    */
   public GearsException(String message, Throwable cause) {
     super(message, cause);
-  }  
+  }
 }

@@ -33,7 +33,7 @@ import com.google.gwt.gears.core.client.impl.GearsImpl;
  */
 public class Database {
 
-  private static ResultSet execute(JavaScriptObject jso, String statement, 
+  private static ResultSet execute(JavaScriptObject jso, String statement,
       String[] args) throws DatabaseException {
     try {
       return new ResultSet(nativeExecute(jso, statement, args));
@@ -41,13 +41,13 @@ public class Database {
       throw new DatabaseException(ex.getMessage(), ex);
     }
   }
-  
+
   /**
    * Native proxy call to the close method on the JavaScript object.
    */
   private static native void nativeClose(JavaScriptObject database) /*-{
-   return database.close();
-   }-*/;
+    return database.close();
+  }-*/;
 
   /**
    * Native proxy call to the execute method on the JavaScript object.
@@ -67,8 +67,8 @@ public class Database {
   }-*/;
 
   private static native int nativeGetLastInsertRowId(JavaScriptObject database) /*-{
-   return database.lastInsertRowId;
-   }-*/;
+    return database.lastInsertRowId;
+  }-*/;
 
   /**
    * Native proxy call to the open method on the JavaScript object.
@@ -76,12 +76,12 @@ public class Database {
    * @param name the name to open, or null
    */
   private static native void nativeOpen(JavaScriptObject database, String name) /*-{
-   if (name == null) {
-   return database.open();
-   } else {
-   return database.open(name);
-   }
-   }-*/;
+    if (name == null) {
+      return database.open();
+    } else {
+      return database.open(name);
+    }
+  }-*/;
 
   /**
    * Reference to the database JavaScript object provided by Gears.
@@ -149,7 +149,7 @@ public class Database {
       throw new DatabaseException(ex.getMessage(), ex);
     }
   }
-  
+
   /**
    * Executes the indicated SQL statement, and returns the results. Note that
    * the {@link ResultSet} returned must be closed when it is no longer needed.

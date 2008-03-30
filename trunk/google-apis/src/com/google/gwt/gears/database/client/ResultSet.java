@@ -26,16 +26,17 @@ import java.util.Date;
  * longer needed.
  */
 public class ResultSet {
-  private static double getFieldAsDouble(JavaScriptObject jso, int fieldIndex) 
-    throws DatabaseException {
+  private static double getFieldAsDouble(JavaScriptObject jso, int fieldIndex)
+      throws DatabaseException {
     try {
       return nativeGetFieldAsDouble(jso, fieldIndex);
     } catch (JavaScriptException ex) {
       throw new DatabaseException(ex.getMessage(), ex);
     }
   }
-  
-  private static String getFieldAsString(JavaScriptObject jso, int fieldIndex) throws DatabaseException {
+
+  private static String getFieldAsString(JavaScriptObject jso, int fieldIndex)
+      throws DatabaseException {
     try {
       return nativeGetFieldAsString(jso, fieldIndex);
     } catch (JavaScriptException ex) {
@@ -47,22 +48,22 @@ public class ResultSet {
    * Native proxy call to the close method on the JavaScript object.
    */
   private static native void nativeClose(JavaScriptObject rsetObj) /*-{
-   rsetObj.close();
-   }-*/;
+    rsetObj.close();
+  }-*/;
 
   private static native char nativeGetFieldAsChar(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
-   var val = rsetObj.field(fieldIndex);
-   if (val == null) {
-   return 0;
-   }
+    var val = rsetObj.field(fieldIndex);
+    if (val == null) {
+      return 0;
+    }
    
-   if (typeof val == 'string') {
-   return val.charCodeAt(0);
-   } else {
-   return val;
-   }
-   }-*/;
+    if (typeof val == 'string') {
+      return val.charCodeAt(0);
+    } else {
+      return val;
+    }
+  }-*/;
 
   private static native long nativeGetFieldAsDate(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
@@ -76,36 +77,36 @@ public class ResultSet {
         return Number(val);
       }
     }
-   }-*/;
+  }-*/;
 
   private static native double nativeGetFieldAsDouble(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
-   var val = rsetObj.field(fieldIndex);
-   return val == null ? 0 : Number(val); 
-   }-*/;
+    var val = rsetObj.field(fieldIndex);
+    return val == null ? 0 : Number(val); 
+  }-*/;
 
   private static native String nativeGetFieldAsString(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
-   var val = rsetObj.field(fieldIndex);
-   return val == null ? null : String(val);
-   }-*/;
+    var val = rsetObj.field(fieldIndex);
+    return val == null ? null : String(val);
+  }-*/;
 
   private static native int nativeGetFieldCount(JavaScriptObject rsetObj) /*-{
-   return rsetObj.fieldCount();
-   }-*/;
+    return rsetObj.fieldCount();
+  }-*/;
 
   private static native String nativeGetFieldName(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
-   return rsetObj.fieldName(fieldIndex);
-   }-*/;
+    return rsetObj.fieldName(fieldIndex);
+  }-*/;
 
   private static native boolean nativeIsValidRow(JavaScriptObject rsetObj) /*-{
-   return rsetObj.isValidRow();
-   }-*/;
+    return rsetObj.isValidRow();
+  }-*/;
 
   private static native void nativeNext(JavaScriptObject rsetObj) /*-{
-   rsetObj.next();
-   }-*/;
+    rsetObj.next();
+  }-*/;
 
   /**
    * Reference to the result set JavaScript object provided by Gears.
@@ -120,7 +121,7 @@ public class ResultSet {
   ResultSet(JavaScriptObject jsoRSet) {
     rsetObj = jsoRSet;
   }
-  
+
   /**
    * Closes the result set. Destroys the SQL statement that gave rise to this
    * result set. Calling close() is required. User code must always call close()
@@ -163,7 +164,7 @@ public class ResultSet {
       throw new DatabaseException(ex.getMessage(), ex);
     }
   }
-  
+
   public Date getFieldAsDate(int fieldIndex) throws DatabaseException {
     try {
       long value = nativeGetFieldAsDate(rsetObj, fieldIndex);
