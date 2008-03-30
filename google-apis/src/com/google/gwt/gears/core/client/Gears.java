@@ -25,19 +25,19 @@ package com.google.gwt.gears.core.client;
  */
 public class Gears {
   /**
-   * String used to request a Database instance from Gears
+   * String used to request a Database instance from Gears.
    */
   public static final String DATABASE = "beta.database";
 
   public static final String GEARS_VERSION = "1.0";
 
   /**
-   * String used to request a LocalServer instance from Gears
+   * String used to request a LocalServer instance from Gears.
    */
   public static final String LOCALSERVER = "beta.localserver";
 
   /**
-   * String used to request a Database instance from Gears
+   * String used to request a Database instance from Gears.
    */
   public static final String WORKERPOOL = "beta.workerpool";
 
@@ -47,17 +47,17 @@ public class Gears {
    * This string has no defined format, and client code should not rely on its
    * contents or a particular parsing algorithm.
    * 
-   * @return the build info string for the current version of Gears, or 
-   * <code>null</code> if Gears is not installed.
+   * @return the build info string for the current version of Gears, or
+   *         <code>null</code> if Gears is not installed.
    */
   public static String getBuildInfo() {
     if (isInstalled()) {
       return nativeGetBuildInfo();
     }
-    
+
     return null;
   }
-  
+
   /**
    * Returns <code>true</code> if Gears is installed.
    * 
@@ -69,12 +69,13 @@ public class Gears {
   }-*/;
 
   private static native String nativeGetBuildInfo() /*-{
-   return $wnd.google.gears.factory.getBuildInfo();
+    return $wnd.google.gears.factory.getBuildInfo();
   }-*/;
-  
+
   /**
    * Default constructor. Intentionally private.
    */
   private Gears() {
+    // Not instantiable
   }
 }

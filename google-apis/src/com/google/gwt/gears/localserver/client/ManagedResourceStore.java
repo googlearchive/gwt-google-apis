@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -55,53 +55,53 @@ public class ManagedResourceStore {
   public static final int UPDATE_OK = 0;
 
   private static native void nativeCheckForUpdate(JavaScriptObject jsStore) /*-{
-   jsStore.checkForUpdate();
-   }-*/;
+    jsStore.checkForUpdate();
+  }-*/;
 
   private static native String nativeGetCurrentVersion(JavaScriptObject jsStore) /*-{
-   return jsStore.currentVersion == null ? "" : jsStore.currentVersion;
-   }-*/;
+    return jsStore.currentVersion == null ? "" : jsStore.currentVersion;
+  }-*/;
 
   private static native String nativeGetLastErrorMessage(
       JavaScriptObject jsStore)/*-{
-   var err = jsStore.lastErrorMessage;
-   return err == null ? null : err;
-   }-*/;
+    var err = jsStore.lastErrorMessage;
+    return err == null ? null : err;
+  }-*/;
 
   private static native long nativeGetLastUpdateCheckTime(
       JavaScriptObject jsStore) /*-{
-   return jsStore.lastUpdateCheckTime;
-   }-*/;
+    return jsStore.lastUpdateCheckTime;
+  }-*/;
 
   private static native String nativeGetManifestURL(JavaScriptObject jsStore) /*-{
-   return jsStore.manifestUrl == null ? null : jsStore.manifestUrl;
-   }-*/;
+    return jsStore.manifestUrl == null ? null : jsStore.manifestUrl;
+  }-*/;
 
   private static native String nativeGetName(JavaScriptObject jsStore) /*-{
-   return jsStore.name == null ? null : jsStore.name;
-   }-*/;
+    return jsStore.name == null ? null : jsStore.name;
+  }-*/;
 
   private static native String nativeGetRequiredCookie(JavaScriptObject jsStore) /*-{
-   return jsStore.requiredCookie == null ? null : jsStore.requiredCookie;
-   }-*/;
+    return jsStore.requiredCookie == null ? null : jsStore.requiredCookie;
+  }-*/;
 
   private static native int nativeGetUpdateStatus(JavaScriptObject jsStore) /*-{
-   return jsStore.updateStatus;
-   }-*/;
+    return jsStore.updateStatus;
+  }-*/;
 
   private static native boolean nativeIsEnabled(JavaScriptObject jsStore) /*-{
-   return jsStore.enabled;
-   }-*/;
+    return jsStore.enabled;
+  }-*/;
 
   private static native void nativeSetEnabled(JavaScriptObject jsStore,
       boolean enabled) /*-{
-   jsStore.enabled = enabled;
-   }-*/;
+    jsStore.enabled = enabled;
+  }-*/;
 
   private static native void nativeSetManifestURL(JavaScriptObject jsStore,
       String manifestURL) /*-{
-   jsStore.manifestUrl = manifestURL;
-   }-*/;
+    jsStore.manifestUrl = manifestURL;
+  }-*/;
 
   /**
    * Reference to the ManagedResourceStore JavaScript object provided by Gears.
@@ -123,6 +123,7 @@ public class ManagedResourceStore {
    * 
    * @see #ManagedResourceStore(JavaScriptObject)
    */
+  @SuppressWarnings("unused")
   private ManagedResourceStore() {
     // not default instantiable
   }

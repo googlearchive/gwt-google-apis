@@ -48,7 +48,7 @@ public class LocalServer {
   }-*/;
 
   /**
-   * Reference to the local server JavaScript object provided by Gears
+   * Reference to the local server JavaScript object provided by Gears.
    */
   private final JavaScriptObject server;
 
@@ -84,11 +84,11 @@ public class LocalServer {
     if (url == null) {
       throw new NullPointerException();
     }
-    
+
     if (url.trim().length() == 0) {
       throw new IllegalArgumentException();
     }
-    
+
     try {
       return nativeCanServeLocally(server, url);
     } catch (JavaScriptException ex) {
@@ -314,10 +314,10 @@ public class LocalServer {
    */
   private native JavaScriptObject nativeCallMethod(String func, String name,
       String requiredCookie) /*-{
-   if (requiredCookie == null) {
-   return (this.@com.google.gwt.gears.localserver.client.LocalServer::server)[func](name) || null;
-   } else {
-   return (this.@com.google.gwt.gears.localserver.client.LocalServer::server)[func](name, requiredCookie) || null;
-   }
-   }-*/;
+    if (requiredCookie == null) {
+      return (this.@com.google.gwt.gears.localserver.client.LocalServer::server)[func](name) || null;
+    } else {
+      return (this.@com.google.gwt.gears.localserver.client.LocalServer::server)[func](name, requiredCookie) || null;
+    }
+  }-*/;
 }

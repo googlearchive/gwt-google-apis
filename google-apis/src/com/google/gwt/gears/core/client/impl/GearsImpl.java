@@ -40,13 +40,13 @@ public class GearsImpl {
    * @return an array of JavaScript strings
    */
   public static native JavaScriptObject convertToJavaScript(String[] ary) /*-{
-   var newAry = [];
-   var len = @com.google.gwt.gears.core.client.impl.GearsImpl::getLength([Ljava/lang/String;)(ary);
-   for (var i = 0; i < len; ++i) {
-   newAry[i] = @com.google.gwt.gears.core.client.impl.GearsImpl::getIthEntry([Ljava/lang/String;I)(ary, i); 
-   }
-   return newAry;
-   }-*/;
+    var newAry = [];
+    var len = @com.google.gwt.gears.core.client.impl.GearsImpl::getLength([Ljava/lang/String;)(ary);
+    for (var i = 0; i < len; ++i) {
+      newAry[i] = @com.google.gwt.gears.core.client.impl.GearsImpl::getIthEntry([Ljava/lang/String;I)(ary, i); 
+    }
+    return newAry;
+  }-*/;
 
   /**
    * Private common handler for all <code>createFoo</code> requests. Used to
@@ -68,7 +68,7 @@ public class GearsImpl {
     if (!Gears.isInstalled()) {
       throw new GearsException("Google Gears is not installed.");
     }
-      
+
     try {
       JavaScriptObject jso = nativeCreate(className, version);
       assert (jso != null);
@@ -91,8 +91,8 @@ public class GearsImpl {
    */
   public static native JavaScriptObject nativeCreate(String className,
       String version) /*-{
-   return $wnd.google.gears.factory.create(className, version);
-   }-*/;
+    return $wnd.google.gears.factory.create(className, version);
+  }-*/;
 
   /**
    * Unpacks and returns the <code>i</code>-ith element of <code>arr</code>.
@@ -101,6 +101,7 @@ public class GearsImpl {
    * @param i the index of the entry to fetch
    * @return <code>arr[i]</code>
    */
+  @SuppressWarnings("unused")
   private static String getIthEntry(String[] arr, int i) {
     return arr[i];
   }
@@ -111,6 +112,7 @@ public class GearsImpl {
    * @param arr
    * @return
    */
+  @SuppressWarnings("unused")
   private static int getLength(String[] arr) {
     return arr.length;
   }
