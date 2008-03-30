@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,10 +23,8 @@ public interface MessageHandler {
   /**
    * Called when a message has been sent to this thread by another thread.
    * 
-   * @param message
-   *          the contents of the message sent by the sender
-   * @param srcWorker
-   *          the WorkerPool thread ID of the sender
+   * @param message the contents of the message sent by the sender
+   * @param srcWorker the WorkerPool thread ID of the sender
    */
-  public void onMessageReceived(String message, int srcWorker);
+  void onMessageReceived(String message, int srcWorker);
 }

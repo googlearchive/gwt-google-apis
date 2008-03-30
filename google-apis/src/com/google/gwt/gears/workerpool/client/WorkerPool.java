@@ -38,6 +38,7 @@ public class WorkerPool {
   /*
    * This method is called from JSNI.
    */
+  @SuppressWarnings("unused")
   private static void fireOnMessageReceived(WorkerPool pool, String msg,
       int srcWorkerId) {
     if (pool.callback != null) {
@@ -55,13 +56,13 @@ public class WorkerPool {
    */
   private static native int nativeCreateWorkerByString(JavaScriptObject pool,
       String javaScript) /*-{
-   return pool.createWorker(javaScript);
-   }-*/;
+    return pool.createWorker(javaScript);
+  }-*/;
 
   private static native void nativeSendMessage(JavaScriptObject pool,
       String message, int destWorker) /*-{
-   pool.sendMessage(message, destWorker);
-   }-*/;
+    pool.sendMessage(message, destWorker);
+  }-*/;
 
   /**
    * Sets the raw JavaScript onmessage handler to a function which dynamically
@@ -70,11 +71,11 @@ public class WorkerPool {
    */
   private static native void setOnMessage(WorkerPool workerPool,
       JavaScriptObject jsPool) /*-{
-   var jPool = workerPool;
-   jsPool.onmessage = function(msg, srcId) {
-   @com.google.gwt.gears.workerpool.client.WorkerPool::fireOnMessageReceived(Lcom/google/gwt/gears/workerpool/client/WorkerPool;Ljava/lang/String;I)(jPool, msg, srcId);
-   }
-   }-*/;
+    var jPool = workerPool;
+    jsPool.onmessage = function(msg, srcId) {
+      @com.google.gwt.gears.workerpool.client.WorkerPool::fireOnMessageReceived(Lcom/google/gwt/gears/workerpool/client/WorkerPool;Ljava/lang/String;I)(jPool, msg, srcId);
+    }
+  }-*/;
 
   /**
    * The callback function registered to this worker thread.
@@ -140,21 +141,21 @@ public class WorkerPool {
    * @param message the data to send
    * @param destWorker the thread to send the data to
    * @throws NullPointerException of <code>message</code> is <code>null</code>
-   * @throws GearsException if the <code>message</code> cannot be sent to the 
-   * specified <code>destWorker</code>
+   * @throws GearsException if the <code>message</code> cannot be sent to the
+   *           specified <code>destWorker</code>
    */
   public void sendMessage(String message, int destWorker) throws GearsException {
     if (message == null) {
       throw new NullPointerException();
     }
-    
+
     try {
       nativeSendMessage(pool, message, destWorker);
     } catch (JavaScriptException ex) {
       throw new GearsException(ex.getMessage(), ex);
     }
   }
-  
+
   /**
    * Returns the JavaScript <code>WorkerPool</code> object wrapped by this
    * instance.
