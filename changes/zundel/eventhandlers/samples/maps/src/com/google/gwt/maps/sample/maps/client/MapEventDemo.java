@@ -32,7 +32,6 @@ import com.google.gwt.maps.client.event.MapDoubleClickHandler;
 import com.google.gwt.maps.client.event.MapDragEndHandler;
 import com.google.gwt.maps.client.event.MapDragHandler;
 import com.google.gwt.maps.client.event.MapDragStartHandler;
-import com.google.gwt.maps.client.event.MapLoadHandler;
 import com.google.gwt.maps.client.event.MapMouseMoveHandler;
 import com.google.gwt.maps.client.event.MapMouseOutHandler;
 import com.google.gwt.maps.client.event.MapMouseOverHandler;
@@ -49,7 +48,6 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -66,8 +64,9 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class MapEventDemo extends MapsDemo {
 
-  private enum HandlerActions {
-    INFO_WINDOW_BEFORE_CLOSE_HANDLER("InfoWindowBeforeCloseHandler"), //
+  // EOL Comments added to fix Eclipse automatic formatting
+  private enum HandlerActions { 
+    INFO_WINDOW_BEFORE_CLOSE_HANDLER("InfoWindowBeforeCloseHandler"), //                                                                      // 
     INFO_WINDOW_CLOSE_HANDLER("InfoWindowCloseHandler"), //
     INFO_WINDOW_OPEN_HANDLER("InfoWindowOpenHandler"), //
     MAP_CLEAR_OVERLAYS_HANDLER("MapClearOverlaysHandler"), //
@@ -78,7 +77,6 @@ public class MapEventDemo extends MapsDemo {
     MAP_DRAG_END_HANDLER("MapDragEndHandler"), //
     MAP_DRAG_HANDLER("MapDragHandler"), //
     MAP_DRAG_START_HANDLER("MapDragStartHandler"), //
-    MAP_LOAD_HANDLER("MapLoadHandler"), // Can we really test this here?
     MAP_MOUSE_OVER_HANDLER("MapMouseOverHandler"), //
     MAP_MOUSE_MOVE_HANDLER("MapMouseMoveHandler"), //
     MAP_MOUSE_OUT_HANDLER("MapMouseOutHandler"), //
@@ -170,24 +168,12 @@ public class MapEventDemo extends MapsDemo {
 
   public MapEventDemo() {
     VerticalPanel vp = new VerticalPanel();
-    final CheckBox loadedCheckBox = new CheckBox("Loaded");
-    loadedCheckBox.setChecked(false);
 
     // Center the new map on Midtown Atlanta
     map = new MapWidget(ATLANTA, 13);
     map.setSize("500px", "300px");
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
-
-    // TODO(zundel): I can't get the load handler to fire.
-    map.addMapLoadHandler(new MapLoadHandler() {
-
-      public void onLoad(MapLoadEvent event) {
-        loadedCheckBox.setChecked(true);
-        loadedCheckBox.setEnabled(false);
-      }
-
-    });
 
     MarkerOptions opt = new MarkerOptions();
     opt.setDraggable(true);
@@ -204,7 +190,6 @@ public class MapEventDemo extends MapsDemo {
     handlerTable = new FlexTable();
     clearListenerTable();
 
-    vp.add(loadedCheckBox);
     vp.add(map);
     vp.add(hp1);
     vp.add(hp2);
@@ -475,10 +460,6 @@ public class MapEventDemo extends MapsDemo {
 
         });
       }
-        break;
-
-      case MAP_LOAD_HANDLER:
-        // Not supported
         break;
 
       case MAP_MOUSE_OUT_HANDLER: {
@@ -778,7 +759,7 @@ public class MapEventDemo extends MapsDemo {
 
     });
     hp.add(mapTypeButton);
-    
+
     // Create a button to clear out the table.
     final Button clearTableButton = new Button("Clear Table");
     clearTableButton.addClickListener(new ClickListener() {
@@ -860,9 +841,6 @@ public class MapEventDemo extends MapsDemo {
             break;
           case MAP_DRAG_START_HANDLER:
             map.clearMapDragStartHandlers();
-            break;
-          case MAP_LOAD_HANDLER:
-            map.clearMapLoadHandlers();
             break;
           case MAP_MOUSE_OVER_HANDLER:
             map.clearMapMouseOverHandlers();

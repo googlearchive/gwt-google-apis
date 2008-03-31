@@ -16,22 +16,48 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.InfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.InfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
+import com.google.gwt.maps.client.event.MapAddOverlayHandler;
+import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MapDoubleClickHandler;
+import com.google.gwt.maps.client.event.MapDragEndHandler;
+import com.google.gwt.maps.client.event.MapDragHandler;
+import com.google.gwt.maps.client.event.MapDragStartHandler;
+import com.google.gwt.maps.client.event.MapMouseMoveHandler;
+import com.google.gwt.maps.client.event.MapMouseOutHandler;
+import com.google.gwt.maps.client.event.MapMouseOverHandler;
 import com.google.gwt.maps.client.event.MapMoveEndHandler;
 import com.google.gwt.maps.client.event.MapMoveHandler;
 import com.google.gwt.maps.client.event.MapMoveStartHandler;
 import com.google.gwt.maps.client.event.MapRemoveMapTypeHandler;
+import com.google.gwt.maps.client.event.MapRemoveOverlayHandler;
 import com.google.gwt.maps.client.event.MapRightClickHandler;
+import com.google.gwt.maps.client.event.MapZoomEndHandler;
+import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler.InfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.InfoWindowCloseHandler.InfoWindowCloseEvent;
+import com.google.gwt.maps.client.event.InfoWindowOpenHandler.InfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler.MapAddMapTypeEvent;
+import com.google.gwt.maps.client.event.MapAddOverlayHandler.MapAddOverlayEvent;
+import com.google.gwt.maps.client.event.MapClearOverlaysHandler.MapClearOverlaysEvent;
 import com.google.gwt.maps.client.event.MapClickHandler.MapClickEvent;
 import com.google.gwt.maps.client.event.MapDoubleClickHandler.MapDoubleClickEvent;
+import com.google.gwt.maps.client.event.MapDragEndHandler.MapDragEndEvent;
+import com.google.gwt.maps.client.event.MapDragHandler.MapDragEvent;
+import com.google.gwt.maps.client.event.MapDragStartHandler.MapDragStartEvent;
+import com.google.gwt.maps.client.event.MapMouseMoveHandler.MapMouseMoveEvent;
+import com.google.gwt.maps.client.event.MapMouseOutHandler.MapMouseOutEvent;
+import com.google.gwt.maps.client.event.MapMouseOverHandler.MapMouseOverEvent;
 import com.google.gwt.maps.client.event.MapMoveEndHandler.MapMoveEndEvent;
 import com.google.gwt.maps.client.event.MapMoveHandler.MapMoveEvent;
 import com.google.gwt.maps.client.event.MapMoveStartHandler.MapMoveStartEvent;
 import com.google.gwt.maps.client.event.MapRemoveMapTypeHandler.MapRemoveMapTypeEvent;
+import com.google.gwt.maps.client.event.MapRemoveOverlayHandler.MapRemoveOverlayEvent;
 import com.google.gwt.maps.client.event.MapRightClickHandler.MapRightClickEvent;
+import com.google.gwt.maps.client.event.MapZoomEndHandler.MapZoomEndEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
@@ -40,12 +66,17 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * Tests for the Maps events.
+ * Tests for the MapWidget events.
  * 
  * Design Note(zundel): These events are, in theory, asynchronous, but as I
  * wrote these test cases, it seems that they are called synchronously in many
  * cases. Nevertheless, I'm leaving the asynchronous test infrastructure in case
  * the underlying implementation changes.
+ * 
+ * Most events have a test that is triggered by the GEvent.trigger() mechanism
+ * (testXXXTrigger()) as well as a test that is triggered by API calls
+ * (testXXXEvent()). Some of the events depend on user interaction and cannot be
+ * triggered by the Maps API calls.
  */
 public class MapWidgetEventsTest extends GWTTestCase {
 
@@ -57,12 +88,135 @@ public class MapWidgetEventsTest extends GWTTestCase {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
-  /**
-   * This test can use the built-in maps triggering mechanism w/o resorting to
-   * using one of the trigger() methods.
-   */
-  public void testMapAddMapTypeEvent() {
+  public void testInfoWindowBeforeCloseEvent() {
+    final MapWidget m = new MapWidget();
+    m.addInfoWindowBeforeCloseHandler(new InfoWindowBeforeCloseHandler() {
 
+      public void onInfoWindowBeforeClose(InfoWindowBeforeCloseEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
+        finishTest();
+      }
+
+    });
+
+    RootPanel.get().add(m);
+
+    final InfoWindow info = m.getInfoWindow();
+
+    // If we do not wait for the infowindowopen event before calling close,
+    // the close event will never fire.
+    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
+      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+        info.close();
+      }
+    });
+    info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
+
+    delayTestFinish(5000);
+  }
+
+  public void testInfoWindowBeforeCloseTrigger() {
+    final MapWidget m = new MapWidget();
+    m.addInfoWindowBeforeCloseHandler(new InfoWindowBeforeCloseHandler() {
+
+      public void onInfoWindowBeforeClose(InfoWindowBeforeCloseEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    InfoWindowBeforeCloseEvent e = new InfoWindowBeforeCloseEvent(m);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  public void testInfoWindowCloseEvent() {
+    final MapWidget m = new MapWidget();
+    m.setSize("300px", "300px");
+    RootPanel.get().add(m);
+
+    m.addInfoWindowCloseHandler(new InfoWindowCloseHandler() {
+
+      public void onInfoWindowClose(InfoWindowCloseEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
+        finishTest();
+      }
+
+    });
+
+    final InfoWindow info = m.getInfoWindow();
+
+    // If we do not wait for the infowindowopen event before calling close,
+    // the close event will never fire.
+    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
+      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+        info.close();
+      }
+    });
+
+    info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
+    delayTestFinish(5000);
+  }
+
+  public void testInfoWindowCloseTrigger() {
+    final MapWidget m = new MapWidget();
+    m.addInfoWindowCloseHandler(new InfoWindowCloseHandler() {
+
+      public void onInfoWindowClose(InfoWindowCloseEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    InfoWindowCloseEvent e = new InfoWindowCloseEvent(m);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  public void testInfoWindowOpenEvent() {
+    final MapWidget m = new MapWidget();
+    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
+
+      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
+        finishTest();
+      }
+
+    });
+
+    RootPanel.get().add(m);
+
+    delayTestFinish(5000);
+    InfoWindow info = m.getInfoWindow();
+    info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
+  }
+
+  public void testInfoWindowOpenTrigger() {
+    final MapWidget m = new MapWidget();
+    RootPanel.get().add(m);
+    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
+
+      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
+        finishTest();
+      }
+
+    });
+
+    InfoWindowOpenEvent e = new InfoWindowOpenEvent(m);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  public void testMapAddMapTypeEvent() {
     MapWidget m = new MapWidget();
     m.addMapAddMapTypeHandler(new MapAddMapTypeHandler() {
 
@@ -79,11 +233,12 @@ public class MapWidgetEventsTest extends GWTTestCase {
   }
 
   public void testMapAddMapTypeTrigger() {
-
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
     m.addMapAddMapTypeHandler(new MapAddMapTypeHandler() {
 
       public void onAddMapType(MapAddMapTypeEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
         assertTrue("maptype doesn't match", event.getType().equals(
             MapType.getMarsElevationMap()));
         finishTest();
@@ -97,13 +252,93 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.trigger(e);
   }
 
+  public void testMapAddOverlayEvent() {
+    final MapWidget m = new MapWidget();
+    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
+
+      public void onAddOverlay(MapAddOverlayEvent event) {
+        assertEquals(event.getSender(), m);
+        assertEquals(event.getOverlay(), marker);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    delayTestFinish(5000);
+    m.addOverlay(marker);
+  }
+
+  public void testMapAddOverlayTrigger() {
+    final MapWidget m = new MapWidget();
+    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
+
+      public void onAddOverlay(MapAddOverlayEvent event) {
+        assertEquals(event.getSender(), m);
+        assertEquals(event.getOverlay(), marker);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    MapAddOverlayEvent e = new MapAddOverlayEvent(m, marker);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  /**
+   * This test can use the built-in maps triggering mechanism w/o resorting to
+   * using one of the trigger() methods.
+   */
+  public void testMapClearOverlayEvent() {
+    final MapWidget m = new MapWidget();
+    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
+
+      public void onClearOverlays(MapClearOverlaysEvent event) {
+        assertEquals(event.getSender(), m);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    delayTestFinish(5000);
+    m.addOverlay(marker);
+    m.clearOverlays();
+  }
+
+  public void testMapClearOverlayTrigger() {
+
+    final MapWidget m = new MapWidget();
+    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
+
+      public void onClearOverlays(MapClearOverlaysEvent event) {
+        assertEquals(event.getSender(), m);
+
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    MapClearOverlaysEvent e = new MapClearOverlaysEvent(m);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  /**
+   * Note: testMapClickEvent() can't be implemented as there is no way to create
+   * a "click" event by API calls apart from GEvent.trigger().
+   */
   public void testMapClickTrigger() {
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
     m.addMapClickHandler(new MapClickHandler() {
 
-      public void onClick(MapClickEvent e) {
-        Overlay o = e.getOverlay();
-        LatLng p = e.getLatLng();
+      public void onClick(MapClickEvent event) {
+        Overlay o = event.getOverlay();
+        LatLng p = event.getLatLng();
+        assertEquals(event.getSender(), m);
         assertNotNull("maker is null", o);
         Marker marker = (Marker) o;
         assertTrue(marker.getPoint().getLatitude() == 12.34);
@@ -122,12 +357,17 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.trigger(e);
   }
 
+  /**
+   * Note: testMapDoubleClickEvent() can't be implemented as there is no way to
+   * create a "dblclick" event by API calls apart from GEvent.trigger().
+   */
   public void testMapDoubleClickTrigger() {
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
     m.addMapDoubleClickHandler(new MapDoubleClickHandler() {
 
-      public void onDoubleClick(MapDoubleClickEvent e) {
-        LatLng p = e.getLatLng();
+      public void onDoubleClick(MapDoubleClickEvent event) {
+        assertEquals(event.getSender(), m);
+        LatLng p = event.getLatLng();
         assertNotNull("point is null", p);
         assertTrue(p.getLatitude() == 10.1);
         assertTrue(p.getLongitude() == 12.2);
@@ -141,99 +381,259 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.trigger(e);
   }
 
-  public void testMapMoveEndEvent() {
-    delayTestFinish(15000);
-
-    final LatLng start = new LatLng(37.4419, -122.1419);
-    final LatLng end = new LatLng(37.4569, -122.1569);
-
+  /**
+   * Note: testDragEndEvent() can't be implemented as there is no way to create
+   * a "dragend" event by API calls apart from GEvent.trigger().
+   */
+  public void testMapDragEndTrigger() {
     final MapWidget m = new MapWidget();
+    RootPanel.get().add(m);
 
-    m.addMapMoveEndHandler(new MapMoveEndHandler() {
+    m.addMapDragEndHandler(new MapDragEndHandler() {
 
-      public void onMoveEnd(MapMoveEndEvent event) {
+      public void onDragEnd(MapDragEndEvent event) {
+        assertEquals(event.getSender(), m);
+        finishTest();
+      }
+    });
+
+    delayTestFinish(5000);
+    MapDragEndEvent e = new MapDragEndEvent(m);
+    m.trigger(e);
+  }
+
+  /**
+   * Note: testMapDrag() can't be implemented as there is no way to create a
+   * "drag" event by API calls apart from GEvent.trigger().
+   */
+  public void testMapDragTrigger() {
+    final MapWidget m = new MapWidget();
+    RootPanel.get().add(m);
+
+    m.addMapDragHandler(new MapDragHandler() {
+
+      public void onDrag(MapDragEvent event) {
+        assertEquals(event.getSender(), m);
+        finishTest();
+      }
+    });
+
+    delayTestFinish(5000);
+    MapDragEvent e = new MapDragEvent(m);
+    m.trigger(e);
+  }
+
+  /**
+   * Note: testMapDragStartEvent() can't be implemented as there is no way to
+   * create a "dragstart" event by API calls apart from GEvent.trigger().
+   */
+  public void testMapDragStartTrigger() {
+    final MapWidget m = new MapWidget();
+    RootPanel.get().add(m);
+
+    m.addMapDragStartHandler(new MapDragStartHandler() {
+
+      public void onDragStart(MapDragStartEvent event) {
+        assertEquals(event.getSender(), m);
+        finishTest();
+      }
+    });
+
+    delayTestFinish(5000);
+    MapDragStartEvent e = new MapDragStartEvent(m);
+    m.trigger(e);
+  }
+
+  /**
+   * Note: testMapMouseMoveEvent() can't be implemented as there is no way to
+   * create a "mousemove" event by API calls apart from GEvent.trigger().
+   */
+  public void testMapMouseMoveTrigger() {
+    final MapWidget m = new MapWidget();
+    final LatLng latlng = new LatLng(1.0, 2.0);
+
+    m.addMapMouseMoveHandler(new MapMouseMoveHandler() {
+
+      public void onMouseMove(MapMouseMoveEvent event) {
+        assertEquals(event.getSender(), m);
+        assertEquals(latlng, event.getLatLng());
         finishTest();
       }
 
     });
     RootPanel.get().add(m);
+    MapMouseMoveEvent e = new MapMouseMoveEvent(m, latlng);
+    delayTestFinish(5000);
+    m.trigger(e);
   }
 
-  public void testMapMoveEndTrigger() {
-    delayTestFinish(5000);
+  /**
+   * Note: testMapMouseOutEvent() can't be implemented as there is no way to
+   * create a "mouseout" event by API calls apart from GEvent.trigger().
+   */
+  public void testMapMouseOutTrigger() {
+    final MapWidget m = new MapWidget();
+    final LatLng latlng = new LatLng(1.0, 2.0);
 
-    MapWidget m = new MapWidget(new LatLng(37.4419, -122.1419), 13);
-    
-    MapMoveEndHandler handler = new MapMoveEndHandler() {
+    m.addMapMouseOutHandler(new MapMouseOutHandler() {
 
-      public void onMoveEnd(MapMoveEndEvent event) {
-        System.out.println("onMoveEnd()");
+      public void onMouseOut(MapMouseOutEvent event) {
+
+        assertEquals(event.getSender(), m);
+        assertEquals(latlng, event.getLatLng());
+
         finishTest();
       }
 
-    };
-      
-    m.addMapMoveEndHandler(handler);
-    
+    });
     RootPanel.get().add(m);
+    MapMouseOutEvent e = new MapMouseOutEvent(m, latlng);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  /**
+   * Note: testMapMouseOverEvent() can't be implemented as there is no way to
+   * create a "mouseover" event by API calls apart from GEvent.trigger().
+   */
+  public void testMapMouseOverTrigger() {
+    final MapWidget m = new MapWidget();
+    final LatLng latlng = new LatLng(1.0, 2.0);
+
+    m.addMapMouseOverHandler(new MapMouseOverHandler() {
+
+      public void onMouseOver(MapMouseOverEvent event) {
+
+        assertEquals(event.getSender(), m);
+        assertEquals(latlng, event.getLatLng());
+
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    MapMouseOverEvent e = new MapMouseOverEvent(m, latlng);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  public void testMapMoveEndEvent() {
+    final LatLng end = new LatLng(37.4569, -122.1569);
+    final MapWidget m = new MapWidget();
+
+    /*
+     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
+     * implicit in. Call now so that first move event won't get in the way of
+     * the test.
+     */
+    RootPanel.get().add(m);
+
+    m.addMapMoveEndHandler(new MapMoveEndHandler() {
+
+      public void onMoveEnd(MapMoveEndEvent event) {
+        assertEquals(event.getSender(), m);
+        finishTest();
+      }
+
+    });
+    delayTestFinish(5000);
+    m.setCenter(end);
+  }
+
+  // TODO(zundel): come up with a reason why testMapMoveStartEvent() doesn't
+  // work
+
+  // public void testMapMoveStartEvent() {
+  //
+  // final LatLng start = new LatLng(37.4419, -122.1419);
+  // final LatLng end = new LatLng(37.4569, -122.1569);
+  //
+  // final MapWidget m = new MapWidget();
+  //
+  // /*
+  // * The MoveEnd event gets called on setCenter(). There is a setCenter() call
+  // * implicit in. Call now so that first move event won't get in the way of
+  // * the test.
+  // */
+  // RootPanel.get().add(m);
+  //
+  // m.addMapMoveStartHandler(new MapMoveStartHandler() {
+  //
+  // public void onMoveStart(MapMoveStartEvent event) {
+  // finishTest();
+  // }
+  //
+  // });
+  // delayTestFinish(5000);
+  // m.setCenter(start);
+  // new Timer() {
+  // @Override
+  // public void run() {
+  // m.panTo(end);
+  // }
+  // }.schedule(250);
+  // }
+
+  public void testMapMoveEndTrigger() {
+    final MapWidget m = new MapWidget();
+
+    /*
+     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
+     * implicit in. Call now so that first move event won't get in the way of
+     * the test.
+     */
+    RootPanel.get().add(m);
+
+    m.addMapMoveEndHandler(new MapMoveEndHandler() {
+
+      public void onMoveEnd(MapMoveEndEvent event) {
+        assertEquals(event.getSender(), m);
+        finishTest();
+      }
+
+    });
+
+    delayTestFinish(5000);
 
     MapMoveEndEvent e = new MapMoveEndEvent(m);
     m.trigger(e);
   }
 
-  // public void testMapMoveEvent() {
-  // assertTrue("Test not implemented.", false);
-  // }
+  public void testMapMoveEvent() {
+    final LatLng start = new LatLng(37.4419, -122.1419);
+    final LatLng end = new LatLng(37.4569, -122.1569);
 
-//  /**
-//   * This test can use the built-in maps triggering mechanism w/o resorting to
-//   * using one of the trigger() methods.
-//   * 
-//   * TODO(zundel): this test is broken
-//   */
-//  public void testMapMoveStartEvent() {
-//    delayTestFinish(15000);
-//
-//    final LatLng start = new LatLng(37.4419, -122.1419);
-//    final LatLng end = new LatLng(37.4569, -122.1569);
-//
-//    final MapWidget m = new MapWidget();
-//
-//    m.addMapMoveStartHandler(new MapMoveStartHandler() {
-//
-//      public void onMoveStart(MapMoveStartEvent event) {
-//        finishTest();
-//      }
-//
-//    });
-//    RootPanel.get().add(m);
-//
-//    m.addMapLoadHandler(new MapLoadHandler() {
-//
-//      public void onLoad(MapLoadEvent event) {
-//        System.out.println("load event popped.");
-//        m.setCenter(start);
-//        Timer cmd = new Timer() {
-//
-//          @Override
-//          public void run() {
-//            /* Move the map */
-//            System.out.println("Timer popped");
-//            m.panTo(end);
-//          }
-//        };
-//        cmd.schedule(100);
-//      }
-//
-//    });
-//  }
+    final MapWidget m = new MapWidget(start, 13);
+
+    /*
+     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
+     * implicit in. Call now so that first move event won't get in the way of
+     * the test.
+     */
+    RootPanel.get().add(m);
+
+    m.addMapMoveHandler(new MapMoveHandler() {
+
+      public void onMove(MapMoveEvent event) {
+        assertEquals(event.getSender(), m);
+        finishTest();
+      }
+
+    });
+
+    delayTestFinish(5000);
+    MapMoveEvent e = new MapMoveEvent(m);
+    m.setCenter(end);
+  }
 
   public void testMapMoveStartTrigger() {
     delayTestFinish(5000);
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
     m.addMapMoveStartHandler(new MapMoveStartHandler() {
 
       public void onMoveStart(MapMoveStartEvent event) {
+        MapWidget sender = event.getSender();
+        assertEquals(sender, m);
         finishTest();
       }
 
@@ -244,30 +644,35 @@ public class MapWidgetEventsTest extends GWTTestCase {
   }
 
   public void testMapMoveTrigger() {
-    delayTestFinish(5000);
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
+
+    RootPanel.get().add(m);
+
     m.addMapMoveHandler(new MapMoveHandler() {
 
       public void onMove(MapMoveEvent event) {
+        assertEquals(event.getSender(), m);
         finishTest();
       }
 
     });
-    RootPanel.get().add(m);
+    delayTestFinish(5000);
+
     MapMoveEvent e = new MapMoveEvent(m);
     m.trigger(e);
   }
-  
+
   /**
    * This test can use the built-in maps triggering mechanism w/o resorting to
    * using one of the trigger() methods.
    */
   public void testMapRemoveMapTypeEvent() {
 
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
     m.addMapRemoveMapTypeHandler(new MapRemoveMapTypeHandler() {
 
       public void onRemoveMapType(MapRemoveMapTypeEvent event) {
+        assertEquals(event.getSender(), m);
         assertTrue("maptype doesn't match", event.getType().equals(
             MapType.getNormalMap()));
         finishTest();
@@ -280,11 +685,11 @@ public class MapWidgetEventsTest extends GWTTestCase {
   }
 
   public void testMapRemoveMapTypeTrigger() {
-
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
     m.addMapRemoveMapTypeHandler(new MapRemoveMapTypeHandler() {
 
       public void onRemoveMapType(MapRemoveMapTypeEvent event) {
+        assertEquals(event.getSender(), m);
         assertTrue("maptype doesn't match", event.getType().equals(
             MapType.getNormalMap()));
         finishTest();
@@ -297,14 +702,60 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.trigger(e);
   }
 
+  /**
+   * This test can use the built-in maps triggering mechanism w/o resorting to
+   * using one of the trigger() methods.
+   */
+  public void testMapRemoveOverlayEvent() {
+    final MapWidget m = new MapWidget();
+    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
+
+      public void onRemoveOverlay(MapRemoveOverlayEvent event) {
+        assertEquals(event.getSender(), m);
+        assertEquals(event.getOverlay(), marker);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    delayTestFinish(5000);
+    m.addOverlay(marker);
+    m.removeOverlay(marker);
+  }
+
+  public void testMapRemoveOverlayTrigger() {
+
+    final MapWidget m = new MapWidget();
+    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
+
+      public void onRemoveOverlay(MapRemoveOverlayEvent event) {
+        assertEquals(event.getSender(), m);
+        assertEquals(event.getOverlay(), marker);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    MapRemoveOverlayEvent e = new MapRemoveOverlayEvent(m, marker);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
+
+  /**
+   * Note: testMapRightClickEvent() can't be implemented as there is no way to
+   * create a "singlerightclick" event by API calls apart from GEvent.trigger().
+   */
   public void testMapRightClickTrigger() {
-    MapWidget m = new MapWidget();
+    final MapWidget m = new MapWidget();
     m.addMapRightClickHandler(new MapRightClickHandler() {
 
-      public void onRightClick(MapRightClickEvent e) {
-        Point p = e.getPoint();
-        Marker marker = (Marker) e.getOverlay();
-        Element elem = e.getElement();
+      public void onRightClick(MapRightClickEvent event) {
+        assertEquals(event.getSender(), m);
+        Point p = event.getPoint();
+        Marker marker = (Marker) event.getOverlay();
+        Element elem = event.getElement();
         assertNotNull("point is null", p);
         assertTrue(p.getX() == 101);
         assertTrue(p.getY() == 222);
@@ -324,4 +775,46 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.trigger(e);
   }
 
+  public void testMapZoomEndEvent() {
+
+    final MapWidget m = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+
+    m.addMapZoomEndHandler(new MapZoomEndHandler() {
+
+      public void onZoomEnd(MapZoomEndEvent event) {
+        int oldZoom = event.getOldZoomLevel();
+        int newZoom = event.getNewZoomLevel();
+        assertEquals(event.getSender(), m);
+        assertEquals(oldZoom, 13);
+        assertEquals(newZoom, 14);
+        finishTest();
+      }
+
+    });
+
+    RootPanel.get().add(m);
+
+    delayTestFinish(5000);
+    m.setZoomLevel(14);
+  }
+
+  public void testMapZoomEndTrigger() {
+    final MapWidget m = new MapWidget();
+    m.addMapZoomEndHandler(new MapZoomEndHandler() {
+
+      public void onZoomEnd(MapZoomEndEvent event) {
+        int oldZoom = event.getOldZoomLevel();
+        int newZoom = event.getNewZoomLevel();
+        assertEquals(event.getSender(), m);
+        assertEquals(oldZoom, 13);
+        assertEquals(newZoom, 14);
+        finishTest();
+      }
+
+    });
+    RootPanel.get().add(m);
+    MapZoomEndEvent e = new MapZoomEndEvent(m, 13, 14);
+    delayTestFinish(5000);
+    m.trigger(e);
+  }
 }

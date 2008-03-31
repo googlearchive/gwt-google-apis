@@ -142,7 +142,7 @@ public class HandlerCollection<E> {
    * @param callback The callback to call when the event fires.
    */
   public void addHandler(E listener, VoidCallback callback) {
-    JavaScriptObject jso = EventImpl.impl.addListenerVoid(jsoPeer,
+    JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
         mapEvent.value(), callback);
     handlers.add(new HandleContainer<E>(listener, jso));
   }
@@ -239,7 +239,7 @@ public class HandlerCollection<E> {
    * @param point A coordinate to send as a parameter of the event.
    */
   public void trigger(Overlay overlay, LatLng point) {
-    EventImpl.impl.triggerVoid(jsoPeer, mapEvent.value, overlay, point);
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value, overlay, point);
   }
   
   /**

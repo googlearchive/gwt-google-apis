@@ -17,12 +17,9 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-
-import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.jsio.client.Global;
 import com.google.gwt.jsio.client.JSFunction;
 import com.google.gwt.jsio.client.JSWrapper;
-
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.geom.Bounds;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -137,7 +134,7 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   public JavaScriptObject addListenerVoid(JavaScriptObject source,
       MapEvent event, VoidCallback handler) {
-    return addListenerVoid(source, event.value(), handler);
+    return addListener(source, event.value(), handler);
   }
 
   public abstract void removeListener(JavaScriptObject mapEventHandle);
@@ -166,9 +163,8 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
       PointElementOverlayCallback handler);
 
-  @FieldName("addListener")
-  abstract JavaScriptObject addListenerVoid(JavaScriptObject source,
-      String event, VoidCallback handler);
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      VoidCallback handler);
 
   abstract void trigger(JavaScriptObject source, String mapEventString);
 
@@ -188,9 +184,8 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       Overlay overlay);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
-      Point point, Element elem, Overlay overlay);
-
-  @FieldName("trigger")
-  abstract void triggerVoid(JavaScriptObject source, String mapEventString,
       Overlay overlay, LatLng latlng);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      Point point, Element elem, Overlay overlay);
 }
