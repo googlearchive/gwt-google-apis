@@ -47,9 +47,11 @@ public class MarkerEventDemo extends MapsDemo {
 
   private enum ListenerActions {
 
-    DRAG_LISTENER("DragListener"), MARKER_CLICK_LISTENER("MarkerClickListener"), MARKER_MOUSE_LISTENER(
-        "MarkerMouseListener"), REMOVE_LISTENER("RemoveListener"), VISIBILITY_LISTENER(
-        "VisibilityListener");
+    DRAG_LISTENER("DragListener"), //
+    MARKER_CLICK_LISTENER("MarkerClickListener"), //
+    MARKER_MOUSE_LISTENER("MarkerMouseListener"), //
+    REMOVE_LISTENER("RemoveListener"), //
+    VISIBILITY_LISTENER("VisibilityListener");//
 
     private final String value;
 
@@ -75,10 +77,10 @@ public class MarkerEventDemo extends MapsDemo {
       + "shows the marker which triggers the VisibilityListener.</li>\n"
       + " <li><b>Remove/Add Marker</b> button alternately removes and adds "
       + "the marker to the map which triggers the removeListener.</li>\n"
-      + " <li><b>Enable/Disable Dragging</b> turns dragging on and off " 
+      + " <li><b>Enable/Disable Dragging</b> turns dragging on and off "
       + "on the marker.  Dragging must be enabled to trigger the DragListener.</li>\n"
       + " <li><b>Clear Table</b> Remove all entries from the table below.</li>\n"
-      + " <li><b>Add Listener</b> Adds a listener of the type " 
+      + " <li><b>Add Listener</b> Adds a listener of the type "
       + "specified in the listbox.  This will create a new entry in the table "
       + "to monitor and control the listener.</li>\n"
       + " <li><b>Clear Listeners of this Type</b> Clears all listeners of the"
@@ -96,6 +98,7 @@ public class MarkerEventDemo extends MapsDemo {
 
   // A unique number assigned to each new listener added.
   private static int listenerId = 0;
+
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
       @Override
@@ -133,22 +136,22 @@ public class MarkerEventDemo extends MapsDemo {
     map.setSize("500px", "300px");
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
-    
+
     MarkerOptions opt = new MarkerOptions();
     opt.setDraggable(true);
     marker = new Marker(ATLANTA, opt);
 
     HorizontalPanel hp1 = createActionButtons();
     HorizontalPanel hp2 = createListenerListBox();
-    
+
     // Make a spacer
-    HorizontalPanel hp3 = new HorizontalPanel();    
+    HorizontalPanel hp3 = new HorizontalPanel();
     hp3.add(new Label(" "));
     hp3.setSize("1em", "1em");
-    
+
     listenerTable = new FlexTable();
     clearListenerTable();
-   
+
     vp.add(map);
     vp.add(hp1);
     vp.add(hp2);
@@ -163,11 +166,11 @@ public class MarkerEventDemo extends MapsDemo {
     for (int i = numRows - 1; i >= 0; i--) {
       listenerTable.removeRow(i);
     }
-    
+
     listenerTable.setHTML(0, 0, "<b>ID</b>");
-    listenerTable.setHTML(0,1,"<b>Type</b>");
+    listenerTable.setHTML(0, 1, "<b>Type</b>");
     listenerTable.setHTML(0, 2, "<b>Events</b>");
-    listenerTable.setHTML(0,3, "<b>Clear Text</b>");
+    listenerTable.setHTML(0, 3, "<b>Clear Text</b>");
     listenerTable.setHTML(0, 4, "<b>Remove Listener</b>");
   }
 
@@ -179,7 +182,7 @@ public class MarkerEventDemo extends MapsDemo {
   private void addListenerToMarker(ListenerActions a) {
     // Create a unique ID for this new listener.
     final int nextListenerId = ++listenerId;
-    
+
     // Create a new row to add to the UI.
     final int rowNumber = listenerTable.getRowCount();
     listenerTable.setWidget(rowNumber, 0, new Label("" + nextListenerId));
@@ -377,10 +380,10 @@ public class MarkerEventDemo extends MapsDemo {
           draggableButton.setText("Enable Dragging");
         }
       }
-      
+
     });
     hp.add(draggableButton);
-    
+
     // Create a button to clear out the table.
     final Button clearTableButton = new Button("Clear Table");
     clearTableButton.addClickListener(new ClickListener() {
@@ -420,37 +423,7 @@ public class MarkerEventDemo extends MapsDemo {
 
     });
     h.add(b);
-
-    b = new Button("Clear Listeners of this Type");
-    b.addClickListener(new ClickListener() {
-
-      public void onClick(Widget sender) {
-        int selectedIndex = listenerBox.getSelectedIndex();
-        ListenerActions a = ListenerActions.values()[selectedIndex];
-
-        switch (a) {
-          case DRAG_LISTENER:
-            marker.clearMarkerDragListeners();
-            break;
-          case MARKER_CLICK_LISTENER:
-            marker.clearMarkerClickListeners();
-            break;
-          case MARKER_MOUSE_LISTENER:
-            marker.clearMouseListeners();
-            break;
-          case REMOVE_LISTENER:
-            marker.clearRemoveListeners();
-            break;
-          case VISIBILITY_LISTENER:
-            marker.clearVisibilityListeners();
-            break;
-          default:
-            Window.alert("No handling to clear " + a.valueOf());
-        }
-      }
-
-    });
-    h.add(b);
+    
     return h;
   }
 }
