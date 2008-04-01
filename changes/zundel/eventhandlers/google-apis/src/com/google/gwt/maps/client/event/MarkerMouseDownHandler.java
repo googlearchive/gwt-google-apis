@@ -20,13 +20,14 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.MOUSEDOWNevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive MapEvent.MOUSEDOWN
+ * events from the {@link Marker}.
  */
 public interface MarkerMouseDownHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.MOUSEDOWN event on a {@link Marker}.
+   * Encapsulates the arguments for the MapEvent.MOUSEDOWN event on a
+   * {@link Marker}.
    */
   @SuppressWarnings("serial")
   class MarkerMouseDownEvent extends EventObject {
@@ -46,7 +47,8 @@ public interface MarkerMouseDownHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.MOUSEDOWN event fires on a {@link Marker}.
+   * Method to be invoked when a MapEvent.MOUSEDOWN event fires on a
+   * {@link Marker}.
    * 
    * @param event contains the properties of the event.
    */

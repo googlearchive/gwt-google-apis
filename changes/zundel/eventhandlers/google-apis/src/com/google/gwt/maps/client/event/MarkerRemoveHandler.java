@@ -20,13 +20,14 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.REMOVEevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive MapEvent.REMOVE events
+ * from the {@link Marker}.
  */
 public interface MarkerRemoveHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.REMOVE event on a {@link Marker}.
+   * Encapsulates the arguments for the MapEvent.REMOVE event on a
+   * {@link Marker}.
    */
   @SuppressWarnings("serial")
   class MarkerRemoveEvent extends EventObject {

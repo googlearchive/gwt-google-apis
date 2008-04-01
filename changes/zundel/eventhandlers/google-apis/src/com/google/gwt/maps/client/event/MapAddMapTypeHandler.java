@@ -21,18 +21,19 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.ADDMAPTYPEevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.ADDMAPTYPE
+ * events from the {@link MapWidget}.
  */
 public interface MapAddMapTypeHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.ADDMAPTYPE event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.ADDMAPTYPE event on a
+   * {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class MapAddMapTypeEvent extends EventObject {
     private final MapType type;
-    
+
     public MapAddMapTypeEvent(MapWidget source, MapType type) {
       super(source);
       this.type = type;
@@ -49,6 +50,7 @@ public interface MapAddMapTypeHandler {
 
     /**
      * Returns the map type associated with this event.
+     * 
      * @return the map type associated with this event.
      */
     public MapType getType() {
@@ -57,7 +59,8 @@ public interface MapAddMapTypeHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.ADDMAPTYPE event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.ADDMAPTYPE event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

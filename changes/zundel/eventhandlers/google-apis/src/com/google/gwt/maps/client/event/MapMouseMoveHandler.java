@@ -30,7 +30,7 @@ public interface MapMouseMoveHandler {
    * Encapsulates the arguments for the MapEvent.MOUSEMOVE event on a
    * {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class MapMouseMoveEvent extends EventObject {
 
     private final LatLng latlng;

@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.INFOWINDOWBEFORECLOSEevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive
+ * MapEvent.INFOWINDOWBEFORECLOSE events from the {@link MapWidget}.
  */
 public interface InfoWindowBeforeCloseHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.INFOWINDOWBEFORECLOSE event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.INFOWINDOWBEFORECLOSE event on
+   * a {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class InfoWindowBeforeCloseEvent extends EventObject {
 
     public InfoWindowBeforeCloseEvent(MapWidget source) {
@@ -46,7 +47,8 @@ public interface InfoWindowBeforeCloseHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.INFOWINDOWBEFORECLOSE event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.INFOWINDOWBEFORECLOSE event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

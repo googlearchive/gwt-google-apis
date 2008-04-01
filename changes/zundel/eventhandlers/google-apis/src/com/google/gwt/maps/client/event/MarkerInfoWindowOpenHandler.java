@@ -20,13 +20,14 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.INFOWINDOWOPENevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive
+ * MapEvent.INFOWINDOWOPEN events from the {@link Marker}.
  */
 public interface MarkerInfoWindowOpenHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a {@link Marker}.
+   * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a
+   * {@link Marker}.
    */
   @SuppressWarnings("serial")
   class MarkerInfoWindowOpenEvent extends EventObject {
@@ -46,7 +47,8 @@ public interface MarkerInfoWindowOpenHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.INFOWINDOWOPEN event fires on a {@link Marker}.
+   * Method to be invoked when a MapEvent.INFOWINDOWOPEN event fires on a
+   * {@link Marker}.
    * 
    * @param event contains the properties of the event.
    */

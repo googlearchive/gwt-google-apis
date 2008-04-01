@@ -20,13 +20,14 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.TYPECHANGEDevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.TYPECHANGED
+ * events from the {@link MapWidget}.
  */
 public interface MapTypeChangedHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.TYPECHANGED event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.TYPECHANGED event on a
+   * {@link MapWidget}.
    */
   @SuppressWarnings("serial")
   class MapTypeChangedEvent extends EventObject {
@@ -46,7 +47,8 @@ public interface MapTypeChangedHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.TYPECHANGED event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.TYPECHANGED event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

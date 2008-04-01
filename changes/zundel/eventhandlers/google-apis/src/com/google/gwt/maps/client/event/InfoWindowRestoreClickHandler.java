@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.InfoWindow;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.RESTORECLICKevents from the
-  * {@link InfoWindow}.
+ * Provides an interface to implement in order to receive MapEvent.RESTORECLICK
+ * events from the {@link InfoWindow}.
  */
 public interface InfoWindowRestoreClickHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.RESTORECLICK event on a {@link InfoWindow}.
+   * Encapsulates the arguments for the MapEvent.RESTORECLICK event on a
+   * {@link InfoWindow}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class InfoWindowRestoreClickEvent extends EventObject {
 
     public InfoWindowRestoreClickEvent(InfoWindow source) {
@@ -46,7 +47,8 @@ public interface InfoWindowRestoreClickHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.RESTORECLICK event fires on a {@link InfoWindow}.
+   * Method to be invoked when a MapEvent.RESTORECLICK event fires on a
+   * {@link InfoWindow}.
    * 
    * @param event contains the properties of the event.
    */

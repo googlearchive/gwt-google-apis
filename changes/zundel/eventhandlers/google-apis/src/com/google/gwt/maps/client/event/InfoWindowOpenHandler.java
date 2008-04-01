@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.INFOWINDOWOPENevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive
+ * MapEvent.INFOWINDOWOPEN events from the {@link MapWidget}.
  */
 public interface InfoWindowOpenHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a
+   * {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class InfoWindowOpenEvent extends EventObject {
 
     public InfoWindowOpenEvent(MapWidget source) {
@@ -46,7 +47,8 @@ public interface InfoWindowOpenHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.INFOWINDOWOPEN event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.INFOWINDOWOPEN event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

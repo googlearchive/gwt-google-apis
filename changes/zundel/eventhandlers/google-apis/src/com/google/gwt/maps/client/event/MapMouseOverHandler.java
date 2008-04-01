@@ -21,32 +21,34 @@ import com.google.gwt.maps.client.geom.LatLng;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.MOUSEOVERevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.MOUSEOVER
+ * events from the {@link MapWidget}.
  */
 public interface MapMouseOverHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.MOUSEOVER event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.MOUSEOVER event on a
+   * {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class MapMouseOverEvent extends EventObject {
-    
+
     private final LatLng latlng;
-     
+
     public MapMouseOverEvent(MapWidget source, LatLng latlng) {
       super(source);
       this.latlng = latlng;
     }
-    
+
     /**
      * Returns the map coordinates for this event.
+     * 
      * @return the map coordinates for this event.
      */
     public LatLng getLatLng() {
       return latlng;
     }
-    
+
     /**
      * Returns the instance of the map that generated this event.
      * 
@@ -58,7 +60,8 @@ public interface MapMouseOverHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.MOUSEOVER event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.MOUSEOVER event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

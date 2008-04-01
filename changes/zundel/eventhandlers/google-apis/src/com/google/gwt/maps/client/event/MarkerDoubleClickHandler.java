@@ -20,13 +20,14 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.DOUBLECLICKevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive MapEvent.DOUBLECLICK
+ * events from the {@link Marker}.
  */
 public interface MarkerDoubleClickHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.DOUBLECLICK event on a {@link Marker}.
+   * Encapsulates the arguments for the MapEvent.DOUBLECLICK event on a
+   * {@link Marker}.
    */
   @SuppressWarnings("serial")
   class MarkerDoubleClickEvent extends EventObject {
@@ -46,7 +47,8 @@ public interface MarkerDoubleClickHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.DOUBLECLICK event fires on a {@link Marker}.
+   * Method to be invoked when a MapEvent.DOUBLECLICK event fires on a
+   * {@link Marker}.
    * 
    * @param event contains the properties of the event.
    */

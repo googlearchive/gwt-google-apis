@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.CLEAROVERLAYSevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.CLEAROVERLAYS
+ * events from the {@link MapWidget}.
  */
 public interface MapClearOverlaysHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.CLEAROVERLAYS event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.CLEAROVERLAYS event on a
+   * {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class MapClearOverlaysEvent extends EventObject {
 
     public MapClearOverlaysEvent(MapWidget source) {
@@ -46,7 +47,8 @@ public interface MapClearOverlaysHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.CLEAROVERLAYS event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.CLEAROVERLAYS event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

@@ -20,13 +20,14 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.INFOWINDOWBEFORECLOSEevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive
+ * MapEvent.INFOWINDOWBEFORECLOSE events from the {@link Marker}.
  */
 public interface MarkerInfoWindowBeforeCloseHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.INFOWINDOWBEFORECLOSE event on a {@link Marker}.
+   * Encapsulates the arguments for the MapEvent.INFOWINDOWBEFORECLOSE event on
+   * a {@link Marker}.
    */
   @SuppressWarnings("serial")
   class MarkerInfoWindowBeforeCloseEvent extends EventObject {
@@ -46,7 +47,8 @@ public interface MarkerInfoWindowBeforeCloseHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.INFOWINDOWBEFORECLOSE event fires on a {@link Marker}.
+   * Method to be invoked when a MapEvent.INFOWINDOWBEFORECLOSE event fires on a
+   * {@link Marker}.
    * 
    * @param event contains the properties of the event.
    */

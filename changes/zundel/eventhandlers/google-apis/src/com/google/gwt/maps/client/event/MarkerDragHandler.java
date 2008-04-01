@@ -20,8 +20,8 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.DRAGevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive MapEvent.DRAG events
+ * from the {@link Marker}.
  */
 public interface MarkerDragHandler {
 

@@ -20,13 +20,14 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.MOUSEOUTevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive MapEvent.MOUSEOUT
+ * events from the {@link Marker}.
  */
 public interface MarkerMouseOutHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.MOUSEOUT event on a {@link Marker}.
+   * Encapsulates the arguments for the MapEvent.MOUSEOUT event on a
+   * {@link Marker}.
    */
   @SuppressWarnings("serial")
   class MarkerMouseOutEvent extends EventObject {
@@ -46,7 +47,8 @@ public interface MarkerMouseOutHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.MOUSEOUT event fires on a {@link Marker}.
+   * Method to be invoked when a MapEvent.MOUSEOUT event fires on a
+   * {@link Marker}.
    * 
    * @param event contains the properties of the event.
    */

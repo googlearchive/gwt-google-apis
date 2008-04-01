@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.MapWidget;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.DRAGSTARTevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.DRAGSTART
+ * events from the {@link MapWidget}.
  */
 public interface MapDragStartHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.DRAGSTART event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.DRAGSTART event on a
+   * {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class MapDragStartEvent extends EventObject {
 
     public MapDragStartEvent(MapWidget source) {
@@ -46,7 +47,8 @@ public interface MapDragStartHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.DRAGSTART event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.DRAGSTART event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

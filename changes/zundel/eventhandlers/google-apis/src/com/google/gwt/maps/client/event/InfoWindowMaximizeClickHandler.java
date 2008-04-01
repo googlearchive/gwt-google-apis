@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.InfoWindow;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.MAXIMIZECLICKevents from the
-  * {@link InfoWindow}.
+ * Provides an interface to implement in order to receive MapEvent.MAXIMIZECLICK
+ * events from the {@link InfoWindow}.
  */
 public interface InfoWindowMaximizeClickHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.MAXIMIZECLICK event on a {@link InfoWindow}.
+   * Encapsulates the arguments for the MapEvent.MAXIMIZECLICK event on a
+   * {@link InfoWindow}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class InfoWindowMaximizeClickEvent extends EventObject {
 
     public InfoWindowMaximizeClickEvent(InfoWindow source) {
@@ -46,7 +47,8 @@ public interface InfoWindowMaximizeClickHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.MAXIMIZECLICK event fires on a {@link InfoWindow}.
+   * Method to be invoked when a MapEvent.MAXIMIZECLICK event fires on a
+   * {@link InfoWindow}.
    * 
    * @param event contains the properties of the event.
    */

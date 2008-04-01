@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.InfoWindow;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.RESTOREENDevents from the
-  * {@link InfoWindow}.
+ * Provides an interface to implement in order to receive MapEvent.RESTOREEND
+ * events from the {@link InfoWindow}.
  */
 public interface InfoWindowRestoreEndHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.RESTOREEND event on a {@link InfoWindow}.
+   * Encapsulates the arguments for the MapEvent.RESTOREEND event on a
+   * {@link InfoWindow}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class InfoWindowRestoreEndEvent extends EventObject {
 
     public InfoWindowRestoreEndEvent(InfoWindow source) {
@@ -46,7 +47,8 @@ public interface InfoWindowRestoreEndHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.RESTOREEND event fires on a {@link InfoWindow}.
+   * Method to be invoked when a MapEvent.RESTOREEND event fires on a
+   * {@link InfoWindow}.
    * 
    * @param event contains the properties of the event.
    */

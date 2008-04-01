@@ -498,11 +498,11 @@ public final class Marker extends ConcreteOverlay {
           jsoPeer, MapEvent.VISIBILITYCHANGED);
     }
 
-    markerVisibilityChangedHandlers.addHandler(handler, new VoidCallback() {
+    markerVisibilityChangedHandlers.addHandler(handler, new BooleanCallback() {
       @Override
-      public void callback() {
+      public void callback(boolean visible) {
         MarkerVisibilityChangedEvent e = new MarkerVisibilityChangedEvent(
-            Marker.this);
+            Marker.this, visible);
         handler.onVisibilityChanged(e);
       }
     });

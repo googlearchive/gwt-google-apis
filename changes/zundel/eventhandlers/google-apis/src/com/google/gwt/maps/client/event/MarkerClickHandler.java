@@ -20,15 +20,15 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.CLICKevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive MapEvent.CLICK events
+ * from the {@link Marker}.
  */
 public interface MarkerClickHandler {
 
   /**
    * Encapsulates the arguments for the MapEvent.CLICK event on a {@link Marker}.
    */
-  
+
   @SuppressWarnings("serial")
   class MarkerClickEvent extends EventObject {
 

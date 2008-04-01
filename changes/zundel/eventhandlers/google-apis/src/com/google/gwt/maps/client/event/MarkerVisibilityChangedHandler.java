@@ -20,19 +20,23 @@ import com.google.gwt.maps.client.overlay.Marker;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.VISIBILITYCHANGEDevents from the
-  * {@link Marker}.
+ * Provides an interface to implement in order to receive
+ * MapEvent.VISIBILITYCHANGEDevents from the {@link Marker}.
  */
 public interface MarkerVisibilityChangedHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.VISIBILITYCHANGED event on a {@link Marker}.
+   * Encapsulates the arguments for the MapEvent.VISIBILITYCHANGED event on a
+   * {@link Marker}.
    */
   @SuppressWarnings("serial")
   class MarkerVisibilityChangedEvent extends EventObject {
 
-    public MarkerVisibilityChangedEvent(Marker source) {
+    boolean visible;
+
+    public MarkerVisibilityChangedEvent(Marker source, boolean visible) {
       super(source);
+      this.visible = visible;
     }
 
     /**
@@ -43,10 +47,20 @@ public interface MarkerVisibilityChangedHandler {
     public Marker getSender() {
       return (Marker) getSource();
     }
+
+    /**
+     * Returns the visible state of the marker.
+     * 
+     * @return true if the marker is visible.
+     */
+    public boolean isVisible() {
+      return visible;
+    }
   }
 
   /**
-   * Method to be invoked when a MapEvent.VISIBILITYCHANGED event fires on a {@link Marker}.
+   * Method to be invoked when a MapEvent.VISIBILITYCHANGED event fires on a
+   * {@link Marker}.
    * 
    * @param event contains the properties of the event.
    */

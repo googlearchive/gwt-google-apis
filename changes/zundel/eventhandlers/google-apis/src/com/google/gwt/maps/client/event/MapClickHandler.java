@@ -23,7 +23,7 @@ import java.util.EventObject;
 
 /**
  * Provides an interface to implement in order to receive click events from the
- * {@link MapWidget}. Note that this event fired twice when the user intends to 
+ * {@link MapWidget}. Note that this event fired twice when the user intends to
  * send a double click.
  */
 public interface MapClickHandler {
@@ -31,7 +31,7 @@ public interface MapClickHandler {
   /**
    * Encapsulates the arguments for the "click" event on a {@link MapWidget}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class MapClickEvent extends EventObject {
     private final LatLng latlng;
     private final Overlay overlay;
@@ -64,9 +64,10 @@ public interface MapClickHandler {
     public Overlay getOverlay() {
       return overlay;
     }
-    
+
     /**
      * Returns the instance of the map that generated this event.
+     * 
      * @return the instance of the map that generated this event.
      */
     public MapWidget getSender() {

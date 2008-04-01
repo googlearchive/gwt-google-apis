@@ -21,13 +21,14 @@ import com.google.gwt.maps.client.overlay.Overlay;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.REMOVEOVERLAYevents from the
-  * {@link MapWidget}.
+ * Provides an interface to implement in order to receive MapEvent.REMOVEOVERLAY
+ * events from the {@link MapWidget}.
  */
 public interface MapRemoveOverlayHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.REMOVEOVERLAY event on a {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.REMOVEOVERLAY event on a
+   * {@link MapWidget}.
    */
   @SuppressWarnings("serial")
   class MapRemoveOverlayEvent extends EventObject {
@@ -37,15 +38,16 @@ public interface MapRemoveOverlayHandler {
       super(source);
       this.overlay = overlay;
     }
-    
+
     /**
      * Returns the overlay associated with this event.
+     * 
      * @return the overlay associated with this event.
      */
     public Overlay getOverlay() {
       return overlay;
     }
-    
+
     /**
      * Returns the instance of the map that generated this event.
      * 
@@ -57,7 +59,8 @@ public interface MapRemoveOverlayHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.REMOVEOVERLAY event fires on a {@link MapWidget}.
+   * Method to be invoked when a MapEvent.REMOVEOVERLAY event fires on a
+   * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */

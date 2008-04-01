@@ -20,15 +20,16 @@ import com.google.gwt.maps.client.InfoWindow;
 import java.util.EventObject;
 
 /**
- * Provides an interface to implement in order to receive MapEvent.CLOSECLICKevents from the
-  * {@link InfoWindow}.
+ * Provides an interface to implement in order to receive MapEvent.CLOSECLICK
+ * events from the {@link InfoWindow}.
  */
 public interface InfoWindowCloseClickHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.CLOSECLICK event on a {@link InfoWindow}.
+   * Encapsulates the arguments for the MapEvent.CLOSECLICK event on a
+   * {@link InfoWindow}.
    */
-  @SuppressWarnings("serial") 
+  @SuppressWarnings("serial")
   class InfoWindowCloseClickEvent extends EventObject {
 
     public InfoWindowCloseClickEvent(InfoWindow source) {
@@ -46,7 +47,8 @@ public interface InfoWindowCloseClickHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.CLOSECLICK event fires on a {@link InfoWindow}.
+   * Method to be invoked when a MapEvent.CLOSECLICK event fires on a
+   * {@link InfoWindow}.
    * 
    * @param event contains the properties of the event.
    */
