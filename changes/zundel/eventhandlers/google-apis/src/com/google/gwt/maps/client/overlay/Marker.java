@@ -549,181 +549,6 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerInfoWindowBeforeCloseHandler(MarkerInfoWindowBeforeCloseHandler)}.
-   */
-  public void clearInfoWindowBeforeCloseHandlers() {
-    if (infoWindowBeforeCloseHandlers != null) {
-      infoWindowBeforeCloseHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerInfoWindowOpenHandler(MarkerInfoWindowOpenHandler)}.
-   */
-  public void clearInfoWindowOpenHandlers() {
-    if (infoWindowOpenHandlers != null) {
-      infoWindowOpenHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerClickHandler(MarkerClickHandler)}.
-   */
-  public void clearMarkerClickHandlers() {
-    if (markerClickHandlers != null) {
-      markerClickHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Remove all click listeners registered with this Marker.
-   */
-  public void clearMarkerClickListeners() {
-    if (clickListeners != null) {
-      clickListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerDoubleClickHandler(MarkerDoubleClickHandler)}.
-   */
-  public void clearMarkerDoubleClickHandlers() {
-    if (markerDoubleClickHandlers != null) {
-      markerDoubleClickHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerDragEndHandler(MarkerDragEndHandler)}.
-   */
-  public void clearMarkerDragEndHandlers() {
-    if (markerDragEndHandlers != null) {
-      markerDragEndHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerDragHandler(MarkerDragHandler)}.
-   */
-  public void clearMarkerDragHandlers() {
-    if (markerDragHandlers != null) {
-      markerDragHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Remove all drag listeners registered with this Marker.
-   */
-  public void clearMarkerDragListeners() {
-    if (dragListeners != null) {
-      dragListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerDragStartHandler(MarkerDragStartHandler)}.
-   */
-  public void clearMarkerDragStartHandlers() {
-    if (markerDragStartHandlers != null) {
-      markerDragStartHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerMouseDownHandler(MarkerMouseDownHandler)}.
-   */
-  public void clearMarkerMouseDownHandlers() {
-    if (markerMouseDownHandlers != null) {
-      markerMouseDownHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerMouseOutHandler(MarkerMouseOutHandler)}.
-   */
-  public void clearMarkerMouseOutHandlers() {
-    if (markerMouseOutHandlers != null) {
-      markerMouseOutHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerMouseOverHandler(MarkerMouseOverHandler)}.
-   */
-  public void clearMarkerMouseOverHandlers() {
-    if (markerMouseOverHandlers != null) {
-      markerMouseOverHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerMouseUpHandler(MarkerMouseUpHandler)}.
-   */
-  public void clearMarkerMouseUpHandlers() {
-    if (markerMouseUpHandlers != null) {
-      markerMouseUpHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerRemoveHandler(MarkerRemoveHandler)}.
-   */
-  public void clearMarkerRemoveHandlers() {
-    if (markerRemoveHandlers != null) {
-      markerRemoveHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link Marker#addMarkerVisibilityChangedHandler(MarkerVisibilityChangedHandler)}.
-   */
-  public void clearMarkerVisibilityChangedHandlers() {
-    if (markerVisibilityChangedHandlers != null) {
-      markerVisibilityChangedHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Remove all mouse listeners registered with this Marker.
-   */
-  public void clearMouseListeners() {
-    if (mouseListeners != null) {
-      mouseListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Remove all remove listeners registered with this Marker.
-   */
-  public void clearRemoveListeners() {
-    if (removeListeners != null) {
-      removeListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Remove all visibility listeners registered with this Marker.
-   */
-  public void clearVisibilityListeners() {
-    if (visibilityListeners != null) {
-      visibilityListeners.clearListeners();
-    }
-  }
-
-  /**
    * @return the current icon used for this Marker.
    */
   public Icon getIcon() {
@@ -1031,117 +856,143 @@ public final class Marker extends ConcreteOverlay {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerInfoWindowBeforeCloseEvent event) {
+  void trigger(MarkerInfoWindowBeforeCloseEvent event) {
     infoWindowBeforeCloseHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerInfoWindowOpenEvent event) {
+  void trigger(MarkerInfoWindowOpenEvent event) {
     infoWindowOpenHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerClickEvent event) {
+  void trigger(MarkerClickEvent event) {
     markerClickHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerDoubleClickEvent event) {
+  void trigger(MarkerDoubleClickEvent event) {
     markerDoubleClickHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerDragEndEvent event) {
+  void trigger(MarkerDragEndEvent event) {
     markerDragEndHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerDragEvent event) {
+  void trigger(MarkerDragEvent event) {
     markerDragHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerDragStartEvent event) {
+  void trigger(MarkerDragStartEvent event) {
     markerDragStartHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerMouseDownEvent event) {
+  void trigger(MarkerMouseDownEvent event) {
     markerMouseDownHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerMouseOutEvent event) {
+  void trigger(MarkerMouseOutEvent event) {
     markerMouseOutHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerMouseOverEvent event) {
+   void trigger(MarkerMouseOverEvent event) {
     markerMouseOverHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerMouseUpEvent event) {
+  void trigger(MarkerMouseUpEvent event) {
     markerMouseUpHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerRemoveEvent event) {
+  void trigger(MarkerRemoveEvent event) {
     markerRemoveHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(MarkerVisibilityChangedEvent event) {
+  void trigger(MarkerVisibilityChangedEvent event) {
     markerVisibilityChangedHandlers.trigger();
   }
 }

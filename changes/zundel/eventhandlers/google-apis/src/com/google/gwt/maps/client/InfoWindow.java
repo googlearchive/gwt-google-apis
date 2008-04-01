@@ -129,7 +129,7 @@ public final class InfoWindow {
   }
 
   /**
-   * 
+   * TODO(zundel): add javadoc comments.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -214,36 +214,6 @@ public final class InfoWindow {
         handler.onRestoreEnd(e);
       }
     });
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)}.
-   */
-  public void clearInfoWindowCloseClickHandlers() {
-    if (infoWindowCloseClickHandlers != null) {
-      infoWindowCloseClickHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)}.
-   */
-  public void clearInfoWindowMaximizeClickHandlers() {
-    if (infoWindowMaximizeClickHandlers != null) {
-      infoWindowMaximizeClickHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)}.
-   */
-  public void clearInfoWindowMaximizeEndHandlers() {
-    if (infoWindowMaximizeEndHandlers != null) {
-      infoWindowMaximizeEndHandlers.clearHandlers();
-    }
   }
 
   /**
@@ -439,6 +409,8 @@ public final class InfoWindow {
     }
   }
 
+  // TODO(zundel): Implement reset?
+
   /**
    * Selects the tab with the given index. This has the same effect as clicking
    * on the corresponding tab.
@@ -465,9 +437,11 @@ public final class InfoWindow {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(InfoWindowCloseClickEvent event) {
+  void trigger(InfoWindowCloseClickEvent event) {
     infoWindowCloseClickHandlers.trigger();
   }
 
@@ -476,36 +450,39 @@ public final class InfoWindow {
    * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(InfoWindowMaximizeClickEvent event) {
+  void trigger(InfoWindowMaximizeClickEvent event) {
     infoWindowMaximizeClickHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(InfoWindowMaximizeEndEvent event) {
+  void trigger(InfoWindowMaximizeEndEvent event) {
     infoWindowMaximizeEndHandlers.trigger();
   }
-
-  // TODO(zundel): Implement reset?
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * @param event an event to deliver to the handler.
    */
-  public void trigger(InfoWindowRestoreClickEvent event) {
+  void trigger(InfoWindowRestoreClickEvent event) {
     infoWindowRestoreClickHandlers.trigger();
   }
 
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
-  public void trigger(InfoWindowRestoreEndEvent event) {
+  void trigger(InfoWindowRestoreEndEvent event) {
     infoWindowRestoreEndHandlers.trigger();
   }
 
@@ -525,6 +502,7 @@ public final class InfoWindow {
     for (int i = 0; i < contentWidgets.size(); i++) {
       virtualPanel.finishAttach(contentWidgets.get(i));
     }
+    // TODO(zundel): modify to use InfoWindowClosedHandler
     map.addInfoWindowListener(new InfoWindowListener() {
       public void onInfoWindowClosed(MapWidget sender) {
         for (int i = 0; i < contentWidgets.size(); i++) {
@@ -541,7 +519,6 @@ public final class InfoWindow {
    * This method implements a chain of listeners for the InfoWindow object
    * instead of just a single callback as provided by the native JavaScript Maps
    * API. This was done to make the GWT API more intuitive to Java programmers.
-   * 
    */
   private void initEventCallbacks(InfoWindowContent content,
       List<InfoWindowListener> listeners) {

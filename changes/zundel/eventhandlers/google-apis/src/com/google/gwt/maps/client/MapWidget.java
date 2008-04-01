@@ -1051,85 +1051,6 @@ public final class MapWidget extends Composite {
     setCenter(center);
   }
 
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addInfoWindowBeforeCloseHandler(InfoWindowBeforeCloseHandler)}.
-   */
-  public void clearInfoWindowBeforeCloseHandlers() {
-    if (infoWindowBeforeCloseHandlers != null) {
-      infoWindowBeforeCloseHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addInfoWindowCloseHandler(InfoWindowCloseHandler)}.
-   */
-  public void clearInfoWindowCloseHandlers() {
-    if (infoWindowCloseHandlers != null) {
-      infoWindowCloseHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all listeners of this map added with
-   * {@link MapWidget#addInfoWindowListener(InfoWindowListener)}.
-   */
-  public void clearInfoWindowListeners() {
-    if (infoWindowListeners != null) {
-      infoWindowListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addInfoWindowOpenHandler(InfoWindowOpenHandler)}.
-   */
-  public void clearInfoWindowOpenHandlers() {
-    if (infoWindowOpenHandlers != null) {
-      infoWindowOpenHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapAddMapTypeHandler(MapAddMapTypeHandler)}.
-   */
-  public void clearMapAddMapTypeHandlers() {
-    if (mapAddMapTypeHandlers != null) {
-      mapAddMapTypeHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapAddOverlayHandler(MapAddOverlayHandler)}.
-   */
-  public void clearMapAddOverlayHandlers() {
-    if (mapAddOverlayHandlers != null) {
-      mapAddOverlayHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapClearOverlaysHandler(MapClearOverlaysHandler)}.
-   */
-  public void clearMapClearOverlaysHandlers() {
-    if (mapClearOverlaysHandlers != null) {
-      mapClearOverlaysHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all click handlers of this map added with
-   * {@link MapWidget#addMapClickHandler(MapClickHandler)}.
-   */
-  public void clearMapClickHandlers() {
-    if (clickHandlers != null) {
-      clickHandlers.clearHandlers();
-    }
-  }
 
   /**
    * Removes all listeners of this map added with
@@ -1144,36 +1065,7 @@ public final class MapWidget extends Composite {
     }
   }
 
-  /**
-   * Removes all click handlers of this map added with
-   * {@link MapWidget#addMapDoubleClickHandler(MapDoubleClickHandler)}.
-   */
-  public void clearMapDoubleClickHandlers() {
-    if (doubleClickHandlers != null) {
-      doubleClickHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapDragEndHandler(MapDragEndHandler)}.
-   */
-  public void clearMapDragEndHandlers() {
-    if (mapDragEndHandlers != null) {
-      mapDragEndHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapDragHandler(MapDragHandler)}.
-   */
-  public void clearMapDragHandlers() {
-    if (mapDragHandlers != null) {
-      mapDragHandlers.clearHandlers();
-    }
-  }
-
+  
   /**
    * Removes all listeners of this map added with
    * {@link MapWidget#addMapDragListener(MapDragListener)}.
@@ -1184,16 +1076,6 @@ public final class MapWidget extends Composite {
   public void clearMapDragListeners() {
     if (dragListeners != null) {
       dragListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapDragStartHandler(MapDragStartHandler)}.
-   */
-  public void clearMapDragStartHandlers() {
-    if (mapDragStartHandlers != null) {
-      mapDragStartHandlers.clearHandlers();
     }
   }
 
@@ -1211,56 +1093,6 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapMoveEndHandler(MapMoveEndHandler)}.
-   */
-  public void clearMapMouseMoveHandlers() {
-    if (mapMouseMoveHandlers != null) {
-      mapMouseMoveHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapMouseOutHandler(MapMouseOutHandler)}.
-   */
-  public void clearMapMouseOutHandlers() {
-    if (mapMouseOutHandlers != null) {
-      mapMouseOutHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapMouseOverHandler(MapMouseOverHandler)}.
-   */
-  public void clearMapMouseOverHandlers() {
-    if (mapMouseOverHandlers != null) {
-      mapMouseOverHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapMoveEndHandler(MapMoveEndHandler)}.
-   */
-  public void clearMapMoveEndHandlers() {
-    if (mapMoveEndHandlers != null) {
-      mapMoveEndHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapMoveHandler(MapMoveHandler)}.
-   */
-  public void clearMapMoveHandlers() {
-    if (mapMoveHandlers != null) {
-      mapMoveHandlers.clearHandlers();
-    }
-  }
-
-  /**
    * Removes all listeners of this map added with
    * {@link MapWidget#addMapMoveListener(MapMoveListener)}.
    * 
@@ -1274,56 +1106,6 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapMoveStartHandler(MapMoveStartHandler)}.
-   */
-  public void clearMapMoveStartHandlers() {
-    if (mapMoveStartHandlers != null) {
-      mapMoveStartHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapRemoveMapTypeHandler(MapRemoveMapTypeHandler)}.
-   */
-  public void clearMapRemoveMapTypeHandlers() {
-    if (mapRemoveMapTypeHandlers != null) {
-      mapRemoveMapTypeHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapRemoveOverlayHandler(MapRemoveOverlayHandler)}.
-   */
-  public void clearMapRemoveOverlayHandlers() {
-    if (mapRemoveOverlayHandlers != null) {
-      mapRemoveOverlayHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all click handlers of this map added with
-   * {@link MapWidget#addMapRightClickHandler(MapRightClickHandler)}.
-   */
-  public void clearMapRightClickHandlers() {
-    if (rightClickHandlers != null) {
-      rightClickHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapTypeChangedHandler(MapTypeChangedHandler)}.
-   */
-  public void clearMapTypeChangedHandlers() {
-    if (mapTypeChangedHandlers != null) {
-      mapTypeChangedHandlers.clearHandlers();
-    }
-  }
-
-  /**
    * Removes all listeners of this map added with
    * {@link MapWidget#addMapTypeListener(MapTypeListener)}.
    * 
@@ -1333,16 +1115,6 @@ public final class MapWidget extends Composite {
   public void clearMapTypeListeners() {
     if (mapTypeListeners != null) {
       mapTypeListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link MapWidget#addMapZoomEndHandler(MapZoomEndHandler)}.
-   */
-  public void clearMapZoomEndHandlers() {
-    if (mapZoomEndHandlers != null) {
-      mapZoomEndHandlers.clearHandlers();
     }
   }
 
@@ -2221,6 +1993,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowBeforeCloseEvent event) {
@@ -2229,6 +2003,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2239,6 +2015,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowOpenEvent event) {
@@ -2247,6 +2025,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2257,6 +2037,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapAddOverlayEvent event) {
@@ -2265,6 +2047,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2275,6 +2059,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapClickEvent event) {
@@ -2283,6 +2069,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2293,6 +2081,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragEndEvent event) {
@@ -2301,6 +2091,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2311,6 +2103,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragStartEvent event) {
@@ -2319,6 +2113,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2329,6 +2125,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMouseOutEvent event) {
@@ -2337,6 +2135,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2347,6 +2147,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveEndEvent event) {
@@ -2355,6 +2157,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2365,6 +2169,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveStartEvent event) {
@@ -2373,6 +2179,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2383,6 +2191,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapRemoveOverlayEvent event) {
@@ -2391,6 +2201,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
@@ -2402,6 +2214,8 @@ public final class MapWidget extends Composite {
   /**
    * Manually trigger the specified event on this object.
    * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapTypeChangedEvent event) {
@@ -2410,6 +2224,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
    * 
    * @param event an event to deliver to the handler.
    */
