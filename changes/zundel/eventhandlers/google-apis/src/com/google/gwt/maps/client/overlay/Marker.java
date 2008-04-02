@@ -93,8 +93,8 @@ public final class Marker extends ConcreteOverlay {
   // Keep track of JSO's registered for each instance of addXXXListener()
   private ListenerCollection<MarkerClickListener> clickListeners;
   private ListenerCollection<MarkerDragListener> dragListeners;
-  private HandlerCollection<MarkerInfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
-  private HandlerCollection<MarkerInfoWindowOpenHandler> infoWindowOpenHandlers;
+  private HandlerCollection<MarkerInfoWindowBeforeCloseHandler> markerInfoWindowBeforeCloseHandlers;
+  private HandlerCollection<MarkerInfoWindowOpenHandler> markerInfoWindowOpenHandlers;
   private HandlerCollection<MarkerClickHandler> markerClickHandlers;
   private HandlerCollection<MarkerDoubleClickHandler> markerDoubleClickHandlers;
   private HandlerCollection<MarkerDragEndHandler> markerDragEndHandlers;
@@ -150,12 +150,12 @@ public final class Marker extends ConcreteOverlay {
    */
   public void addMarkerInfoWindowBeforeCloseHandler(
       final MarkerInfoWindowBeforeCloseHandler handler) {
-    if (infoWindowBeforeCloseHandlers == null) {
-      infoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
+    if (markerInfoWindowBeforeCloseHandlers == null) {
+      markerInfoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
           jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
     }
 
-    infoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
+    markerInfoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
       @Override
       public void callback() {
         MarkerInfoWindowBeforeCloseEvent e = new MarkerInfoWindowBeforeCloseEvent(
@@ -172,12 +172,12 @@ public final class Marker extends ConcreteOverlay {
    */
   public void addMarkerInfoWindowOpenHandler(
       final MarkerInfoWindowOpenHandler handler) {
-    if (infoWindowOpenHandlers == null) {
-      infoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
+    if (markerInfoWindowOpenHandlers == null) {
+      markerInfoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
           jsoPeer, MapEvent.INFOWINDOWOPEN);
     }
 
-    infoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
+    markerInfoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
       @Override
       public void callback() {
         MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(Marker.this);
@@ -602,8 +602,8 @@ public final class Marker extends ConcreteOverlay {
    */
   public void removeInfoWindowBeforeCloseHandler(
       MarkerInfoWindowBeforeCloseHandler handler) {
-    if (infoWindowBeforeCloseHandlers != null) {
-      infoWindowBeforeCloseHandlers.removeHandler(handler);
+    if (markerInfoWindowBeforeCloseHandlers != null) {
+      markerInfoWindowBeforeCloseHandlers.removeHandler(handler);
     }
   }
 
@@ -614,8 +614,8 @@ public final class Marker extends ConcreteOverlay {
    * @param handler the handler to remove
    */
   public void removeInfoWindowOpenHandler(MarkerInfoWindowOpenHandler handler) {
-    if (infoWindowOpenHandlers != null) {
-      infoWindowOpenHandlers.removeHandler(handler);
+    if (markerInfoWindowOpenHandlers != null) {
+      markerInfoWindowOpenHandlers.removeHandler(handler);
     }
   }
 
@@ -861,7 +861,11 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerInfoWindowBeforeCloseEvent event) {
-    infoWindowBeforeCloseHandlers.trigger();
+    if (markerInfoWindowBeforeCloseHandlers == null) {
+      markerInfoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
+    }
+    markerInfoWindowBeforeCloseHandlers.trigger();
   }
 
   /**
@@ -872,7 +876,11 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerInfoWindowOpenEvent event) {
-    infoWindowOpenHandlers.trigger();
+    if (markerInfoWindowOpenHandlers == null) {
+      markerInfoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
+          jsoPeer, MapEvent.INFOWINDOWOPEN);
+    }
+    markerInfoWindowOpenHandlers.trigger();
   }
 
   /**
@@ -883,6 +891,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerClickEvent event) {
+    if (markerClickHandlers == null) {
+      markerClickHandlers = new HandlerCollection<MarkerClickHandler>(jsoPeer,
+          MapEvent.CLICK);
+    }
     markerClickHandlers.trigger();
   }
 
@@ -894,6 +906,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerDoubleClickEvent event) {
+    if (markerDoubleClickHandlers == null) {
+      markerDoubleClickHandlers = new HandlerCollection<MarkerDoubleClickHandler>(
+          jsoPeer, MapEvent.DBLCLICK);
+    }
     markerDoubleClickHandlers.trigger();
   }
 
@@ -905,6 +921,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerDragEndEvent event) {
+    if (markerDragEndHandlers == null) {
+      markerDragEndHandlers = new HandlerCollection<MarkerDragEndHandler>(
+          jsoPeer, MapEvent.DRAGEND);
+    }
     markerDragEndHandlers.trigger();
   }
 
@@ -916,6 +936,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerDragEvent event) {
+    if (markerDragHandlers == null) {
+      markerDragHandlers = new HandlerCollection<MarkerDragHandler>(jsoPeer,
+          MapEvent.DRAG);
+    }
     markerDragHandlers.trigger();
   }
 
@@ -927,6 +951,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerDragStartEvent event) {
+    if (markerDragStartHandlers == null) {
+      markerDragStartHandlers = new HandlerCollection<MarkerDragStartHandler>(
+          jsoPeer, MapEvent.DRAGSTART);
+    }
     markerDragStartHandlers.trigger();
   }
 
@@ -938,6 +966,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerMouseDownEvent event) {
+    if (markerMouseDownHandlers == null) {
+      markerMouseDownHandlers = new HandlerCollection<MarkerMouseDownHandler>(
+          jsoPeer, MapEvent.MOUSEDOWN);
+    }
     markerMouseDownHandlers.trigger();
   }
 
@@ -949,6 +981,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerMouseOutEvent event) {
+    if (markerMouseOutHandlers == null) {
+      markerMouseOutHandlers = new HandlerCollection<MarkerMouseOutHandler>(
+          jsoPeer, MapEvent.MOUSEOUT);
+    }
     markerMouseOutHandlers.trigger();
   }
 
@@ -959,7 +995,11 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param event an event to deliver to the handler.
    */
-   void trigger(MarkerMouseOverEvent event) {
+  void trigger(MarkerMouseOverEvent event) {
+    if (markerMouseOverHandlers == null) {
+      markerMouseOverHandlers = new HandlerCollection<MarkerMouseOverHandler>(
+          jsoPeer, MapEvent.MOUSEOVER);
+    }
     markerMouseOverHandlers.trigger();
   }
 
@@ -971,6 +1011,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerMouseUpEvent event) {
+    if (markerMouseUpHandlers == null) {
+      markerMouseUpHandlers = new HandlerCollection<MarkerMouseUpHandler>(
+          jsoPeer, MapEvent.MOUSEUP);
+    }
     markerMouseUpHandlers.trigger();
   }
 
@@ -982,6 +1026,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerRemoveEvent event) {
+    if (markerRemoveHandlers == null) {
+      markerRemoveHandlers = new HandlerCollection<MarkerRemoveHandler>(
+          jsoPeer, MapEvent.REMOVE);
+    }
     markerRemoveHandlers.trigger();
   }
 
@@ -993,6 +1041,10 @@ public final class Marker extends ConcreteOverlay {
    * @param event an event to deliver to the handler.
    */
   void trigger(MarkerVisibilityChangedEvent event) {
+    if (markerVisibilityChangedHandlers == null) {
+      markerVisibilityChangedHandlers = new HandlerCollection<MarkerVisibilityChangedHandler>(
+          jsoPeer, MapEvent.VISIBILITYCHANGED);
+    }
     markerVisibilityChangedHandlers.trigger();
   }
 }

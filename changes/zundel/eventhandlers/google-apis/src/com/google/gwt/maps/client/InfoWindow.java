@@ -83,7 +83,7 @@ public final class InfoWindow {
   private HandlerCollection<InfoWindowMaximizeEndHandler> infoWindowMaximizeEndHandlers;
   private HandlerCollection<InfoWindowRestoreClickHandler> infoWindowRestoreClickHandlers;
   private HandlerCollection<InfoWindowRestoreEndHandler> infoWindowRestoreEndHandlers;
-  
+
   private final JavaScriptObject jsoPeer;
 
   // private InfoWindowEventCallbacks eventCallbacks = null;
@@ -442,6 +442,10 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowCloseClickEvent event) {
+    if (infoWindowCloseClickHandlers == null) {
+      infoWindowCloseClickHandlers = new HandlerCollection<InfoWindowCloseClickHandler>(
+          jsoPeer, MapEvent.INFOWINDOWCLOSE);
+    }
     infoWindowCloseClickHandlers.trigger();
   }
 
@@ -451,6 +455,10 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowMaximizeClickEvent event) {
+    if (infoWindowMaximizeClickHandlers == null) {
+      infoWindowMaximizeClickHandlers = new HandlerCollection<InfoWindowMaximizeClickHandler>(
+          jsoPeer, MapEvent.MAXIMIZECLICK);
+    }
     infoWindowMaximizeClickHandlers.trigger();
   }
 
@@ -462,6 +470,10 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowMaximizeEndEvent event) {
+    if (infoWindowMaximizeEndHandlers == null) {
+      infoWindowMaximizeEndHandlers = new HandlerCollection<InfoWindowMaximizeEndHandler>(
+          jsoPeer, MapEvent.MAXIMIZEEND);
+    }
     infoWindowMaximizeEndHandlers.trigger();
   }
 
@@ -469,9 +481,14 @@ public final class InfoWindow {
    * Manually trigger the specified event on this object.
    * 
    * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowRestoreClickEvent event) {
+    if (infoWindowRestoreClickHandlers == null) {
+      infoWindowRestoreClickHandlers = new HandlerCollection<InfoWindowRestoreClickHandler>(
+          jsoPeer, MapEvent.RESTORECLICK);
+    }
     infoWindowRestoreClickHandlers.trigger();
   }
 
@@ -483,6 +500,10 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowRestoreEndEvent event) {
+    if (infoWindowRestoreEndHandlers == null) {
+      infoWindowRestoreEndHandlers = new HandlerCollection<InfoWindowRestoreEndHandler>(
+          jsoPeer, MapEvent.RESTOREEND);
+    }
     infoWindowRestoreEndHandlers.trigger();
   }
 
