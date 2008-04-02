@@ -113,10 +113,7 @@ public final class InfoWindow {
    */
   public void addInfoWindowCloseClickHandler(
       final InfoWindowCloseClickHandler handler) {
-    if (infoWindowCloseClickHandlers == null) {
-      infoWindowCloseClickHandlers = new HandlerCollection<InfoWindowCloseClickHandler>(
-          jsoPeer, MapEvent.CLOSECLICK);
-    }
+    maybeInitInfoWindowCloseClickHandlers();
 
     infoWindowCloseClickHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -135,10 +132,7 @@ public final class InfoWindow {
    */
   public void addInfoWindowMaximizeClickHandler(
       final InfoWindowMaximizeClickHandler handler) {
-    if (infoWindowMaximizeClickHandlers == null) {
-      infoWindowMaximizeClickHandlers = new HandlerCollection<InfoWindowMaximizeClickHandler>(
-          jsoPeer, MapEvent.MAXIMIZECLICK);
-    }
+    maybeInitInfoWindowMaximizeClickHandlers();
 
     infoWindowMaximizeClickHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -157,10 +151,7 @@ public final class InfoWindow {
    */
   public void addInfoWindowMaximizeEndHandler(
       final InfoWindowMaximizeEndHandler handler) {
-    if (infoWindowMaximizeEndHandlers == null) {
-      infoWindowMaximizeEndHandlers = new HandlerCollection<InfoWindowMaximizeEndHandler>(
-          jsoPeer, MapEvent.MAXIMIZEEND);
-    }
+    maybeInitInfoWindowMaximizeEndHandlers();
 
     infoWindowMaximizeEndHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -179,10 +170,7 @@ public final class InfoWindow {
    */
   public void addInfoWindowRestoreClickHandler(
       final InfoWindowRestoreClickHandler handler) {
-    if (infoWindowRestoreClickHandlers == null) {
-      infoWindowRestoreClickHandlers = new HandlerCollection<InfoWindowRestoreClickHandler>(
-          jsoPeer, MapEvent.RESTORECLICK);
-    }
+    maybeInitInfoWindowRestoreClickHandlers();
 
     infoWindowRestoreClickHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -201,10 +189,7 @@ public final class InfoWindow {
    */
   public void addInfoWindowRestoreEndHandler(
       final InfoWindowRestoreEndHandler handler) {
-    if (infoWindowRestoreEndHandlers == null) {
-      infoWindowRestoreEndHandlers = new HandlerCollection<InfoWindowRestoreEndHandler>(
-          jsoPeer, MapEvent.RESTOREEND);
-    }
+    maybeInitInfoWindowRestoreEndHandlers();
 
     infoWindowRestoreEndHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -214,26 +199,6 @@ public final class InfoWindow {
         handler.onRestoreEnd(e);
       }
     });
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}.
-   */
-  public void clearInfoWindowRestoreClickHandlers() {
-    if (infoWindowRestoreClickHandlers != null) {
-      infoWindowRestoreClickHandlers.clearHandlers();
-    }
-  }
-
-  /**
-   * Removes all handlers of this map added with
-   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)}.
-   */
-  public void clearInfoWindowRestoreEndHandlers() {
-    if (infoWindowRestoreEndHandlers != null) {
-      infoWindowRestoreEndHandlers.clearHandlers();
-    }
   }
 
   /**
@@ -409,8 +374,6 @@ public final class InfoWindow {
     }
   }
 
-  // TODO(zundel): Implement reset?
-
   /**
    * Selects the tab with the given index. This has the same effect as clicking
    * on the corresponding tab.
@@ -420,6 +383,8 @@ public final class InfoWindow {
   public void selectTab(int index) {
     InfoWindowImpl.impl.selectTab(jsoPeer, index);
   }
+
+  // TODO(zundel): Implement reset?
 
   /**
    * Shows or hides the info window.
@@ -442,10 +407,7 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowCloseClickEvent event) {
-    if (infoWindowCloseClickHandlers == null) {
-      infoWindowCloseClickHandlers = new HandlerCollection<InfoWindowCloseClickHandler>(
-          jsoPeer, MapEvent.INFOWINDOWCLOSE);
-    }
+    maybeInitInfoWindowCloseClickHandlers();
     infoWindowCloseClickHandlers.trigger();
   }
 
@@ -455,10 +417,7 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowMaximizeClickEvent event) {
-    if (infoWindowMaximizeClickHandlers == null) {
-      infoWindowMaximizeClickHandlers = new HandlerCollection<InfoWindowMaximizeClickHandler>(
-          jsoPeer, MapEvent.MAXIMIZECLICK);
-    }
+    maybeInitInfoWindowMaximizeClickHandlers();
     infoWindowMaximizeClickHandlers.trigger();
   }
 
@@ -470,10 +429,7 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowMaximizeEndEvent event) {
-    if (infoWindowMaximizeEndHandlers == null) {
-      infoWindowMaximizeEndHandlers = new HandlerCollection<InfoWindowMaximizeEndHandler>(
-          jsoPeer, MapEvent.MAXIMIZEEND);
-    }
+    maybeInitInfoWindowMaximizeEndHandlers();
     infoWindowMaximizeEndHandlers.trigger();
   }
 
@@ -485,10 +441,7 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowRestoreClickEvent event) {
-    if (infoWindowRestoreClickHandlers == null) {
-      infoWindowRestoreClickHandlers = new HandlerCollection<InfoWindowRestoreClickHandler>(
-          jsoPeer, MapEvent.RESTORECLICK);
-    }
+    maybeInitInfoWindowRestoreClickHandlers();
     infoWindowRestoreClickHandlers.trigger();
   }
 
@@ -500,10 +453,7 @@ public final class InfoWindow {
    * @param event an event to deliver to the handler.
    */
   void trigger(InfoWindowRestoreEndEvent event) {
-    if (infoWindowRestoreEndHandlers == null) {
-      infoWindowRestoreEndHandlers = new HandlerCollection<InfoWindowRestoreEndHandler>(
-          jsoPeer, MapEvent.RESTOREEND);
-    }
+    maybeInitInfoWindowRestoreEndHandlers();
     infoWindowRestoreEndHandlers.trigger();
   }
 
@@ -574,6 +524,56 @@ public final class InfoWindow {
             }
           }
         });
+  }
+
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowCloseClickHandlers() {
+    if (infoWindowCloseClickHandlers == null) {
+      infoWindowCloseClickHandlers = new HandlerCollection<InfoWindowCloseClickHandler>(
+          jsoPeer, MapEvent.INFOWINDOWCLOSE);
+    }
+  }
+
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowMaximizeClickHandlers() {
+    if (infoWindowMaximizeClickHandlers == null) {
+      infoWindowMaximizeClickHandlers = new HandlerCollection<InfoWindowMaximizeClickHandler>(
+          jsoPeer, MapEvent.MAXIMIZECLICK);
+    }
+  }
+
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowMaximizeEndHandlers() {
+    if (infoWindowMaximizeEndHandlers == null) {
+      infoWindowMaximizeEndHandlers = new HandlerCollection<InfoWindowMaximizeEndHandler>(
+          jsoPeer, MapEvent.MAXIMIZEEND);
+    }
+  }
+
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowRestoreClickHandlers() {
+    if (infoWindowRestoreClickHandlers == null) {
+      infoWindowRestoreClickHandlers = new HandlerCollection<InfoWindowRestoreClickHandler>(
+          jsoPeer, MapEvent.RESTORECLICK);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitInfoWindowRestoreEndHandlers() {
+    if (infoWindowRestoreEndHandlers == null) {
+      infoWindowRestoreEndHandlers = new HandlerCollection<InfoWindowRestoreEndHandler>(
+          jsoPeer, MapEvent.RESTOREEND);
+    }
   }
 
 }

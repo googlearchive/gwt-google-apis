@@ -128,30 +128,30 @@ public final class MapWidget extends Composite {
     });
   }
 
-  private static native void nativeUnload() /*-{
-    $wnd.GUnload && $wnd.GUnload();
-   }-*/;
-
   static MapWidget createPeer(JavaScriptObject jsoPeer) {
     throw new UnsupportedOperationException();
   }
 
-  private HandlerCollection<MapClickHandler> mapClickHandlers;
+  private static native void nativeUnload() /*-{
+    $wnd.GUnload && $wnd.GUnload();
+   }-*/;
+
   private ListenerCollection<MapClickListener> clickListeners;
-  private HandlerCollection<MapDoubleClickHandler> mapDoubleClickHandlers;
   private ListenerCollection<MapDragListener> dragListeners;
   private HandlerCollection<MapInfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
   private HandlerCollection<MapInfoWindowCloseHandler> infoWindowCloseHandlers;
   private ListenerCollection<InfoWindowListener> infoWindowListeners;
   private HandlerCollection<MapInfoWindowOpenHandler> infoWindowOpenHandlers;
-
   /* Reference to GMap2 object. */
   private final JavaScriptObject jsoPeer;
-
   private HandlerCollection<MapAddMapTypeHandler> mapAddMapTypeHandlers;
+
   private HandlerCollection<MapAddOverlayHandler> mapAddOverlayHandlers;
+
   private HandlerCollection<MapClearOverlaysHandler> mapClearOverlaysHandlers;
+  private HandlerCollection<MapClickHandler> mapClickHandlers;
   private final MapPanel mapContainer = new MapPanel();
+  private HandlerCollection<MapDoubleClickHandler> mapDoubleClickHandlers;
   private HandlerCollection<MapDragEndHandler> mapDragEndHandlers;
   private HandlerCollection<MapDragHandler> mapDragHandlers;
   private HandlerCollection<MapDragStartHandler> mapDragStartHandlers;
@@ -163,13 +163,13 @@ public final class MapWidget extends Composite {
   private HandlerCollection<MapMoveStartHandler> mapMoveStartHandlers;
   private HandlerCollection<MapRemoveMapTypeHandler> mapRemoveMapTypeHandlers;
   private HandlerCollection<MapRemoveOverlayHandler> mapRemoveOverlayHandlers;
+  private HandlerCollection<MapRightClickHandler> mapRightClickHandlers;
   private HandlerCollection<MapTypeChangedHandler> mapTypeChangedHandlers;
   private ListenerCollection<MapTypeListener> mapTypeListeners;
   private HandlerCollection<MapZoomEndHandler> mapZoomEndHandlers;
   private ListenerCollection<MapMouseListener> mouseListeners;
   private ListenerCollection<MapMoveListener> moveListeners;
   private ListenerCollection<OverlayListener> overlayListeners;
-  private HandlerCollection<MapRightClickHandler> mapRightClickHandlers;
   private ListenerCollection<MapZoomListener> zoomListeners;
 
   public MapWidget() {
@@ -256,10 +256,7 @@ public final class MapWidget extends Composite {
    */
   public void addInfoWindowBeforeCloseHandler(
       final MapInfoWindowBeforeCloseHandler handler) {
-    if (infoWindowBeforeCloseHandlers == null) {
-      infoWindowBeforeCloseHandlers = new HandlerCollection<MapInfoWindowBeforeCloseHandler>(
-          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
-    }
+    maybeInitInfoWindowBeforeCloseHandlers();
 
     infoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -282,10 +279,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addInfoWindowCloseHandler(final MapInfoWindowCloseHandler handler) {
-    if (infoWindowCloseHandlers == null) {
-      infoWindowCloseHandlers = new HandlerCollection<MapInfoWindowCloseHandler>(
-          jsoPeer, MapEvent.INFOWINDOWCLOSE);
-    }
+    maybeInitInfoWindowCloseHandlers();
 
     infoWindowCloseHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -336,10 +330,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addInfoWindowOpenHandler(final MapInfoWindowOpenHandler handler) {
-    if (infoWindowOpenHandlers == null) {
-      infoWindowOpenHandlers = new HandlerCollection<MapInfoWindowOpenHandler>(
-          jsoPeer, MapEvent.INFOWINDOWOPEN);
-    }
+    maybeInitInfoWindowOpenHandlers();
 
     infoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -356,10 +347,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapAddMapTypeHandler(final MapAddMapTypeHandler handler) {
-    if (mapAddMapTypeHandlers == null) {
-      mapAddMapTypeHandlers = new HandlerCollection<MapAddMapTypeHandler>(
-          jsoPeer, MapEvent.ADDMAPTYPE);
-    }
+    maybeInitMapAddMapTypeHandlers();
 
     mapAddMapTypeHandlers.addHandler(handler, new MapTypeCallback() {
       @Override
@@ -378,10 +366,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapAddOverlayHandler(final MapAddOverlayHandler handler) {
-    if (mapAddOverlayHandlers == null) {
-      mapAddOverlayHandlers = new HandlerCollection<MapAddOverlayHandler>(
-          jsoPeer, MapEvent.ADDOVERLAY);
-    }
+    maybeInitMapAddOverlayHandlers();
 
     mapAddOverlayHandlers.addHandler(handler, new OverlayCallback() {
       @Override
@@ -399,10 +384,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapClearOverlaysHandler(final MapClearOverlaysHandler handler) {
-    if (mapClearOverlaysHandlers == null) {
-      mapClearOverlaysHandlers = new HandlerCollection<MapClearOverlaysHandler>(
-          jsoPeer, MapEvent.CLEAROVERLAYS);
-    }
+    maybeInitMapClearOverlaysHandlers();
 
     mapClearOverlaysHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -420,10 +402,7 @@ public final class MapWidget extends Composite {
    * @param handler handler to invoke on mouse click events.
    */
   public void addMapClickHandler(final MapClickHandler handler) {
-    if (mapClickHandlers == null) {
-      mapClickHandlers = new HandlerCollection<MapClickHandler>(jsoPeer,
-          MapEvent.CLICK);
-    }
+    maybeInitMapClickHandlers();
 
     mapClickHandlers.addHandler(handler, new OverlayLatLngCallback() {
       @Override
@@ -482,10 +461,7 @@ public final class MapWidget extends Composite {
    * @param handler handler to invoke on mouse double click events.
    */
   public void addMapDoubleClickHandler(final MapDoubleClickHandler handler) {
-    if (mapDoubleClickHandlers == null) {
-      mapDoubleClickHandlers = new HandlerCollection<MapDoubleClickHandler>(
-          jsoPeer, MapEvent.DBLCLICK);
-    }
+    maybeInitMapDoubleClickHandlers();
 
     mapDoubleClickHandlers.addHandler(handler, new OverlayLatLngCallback() {
       @Override
@@ -503,10 +479,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapDragEndHandler(final MapDragEndHandler handler) {
-    if (mapDragEndHandlers == null) {
-      mapDragEndHandlers = new HandlerCollection<MapDragEndHandler>(jsoPeer,
-          MapEvent.DRAGEND);
-    }
+    maybeInitMapDragEndHandlers();
 
     mapDragEndHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -523,10 +496,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapDragHandler(final MapDragHandler handler) {
-    if (mapDragHandlers == null) {
-      mapDragHandlers = new HandlerCollection<MapDragHandler>(jsoPeer,
-          MapEvent.DRAG);
-    }
+    maybeInitMapDragHandlers();
 
     mapDragHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -583,10 +553,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapDragStartHandler(final MapDragStartHandler handler) {
-    if (mapDragStartHandlers == null) {
-      mapDragStartHandlers = new HandlerCollection<MapDragStartHandler>(
-          jsoPeer, MapEvent.DRAGSTART);
-    }
+    maybeInitMapDragStartHandlers();
 
     mapDragStartHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -645,10 +612,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapMouseMoveHandler(final MapMouseMoveHandler handler) {
-    if (mapMouseOutHandlers == null) {
-      mapMouseMoveHandlers = new HandlerCollection<MapMouseMoveHandler>(
-          jsoPeer, MapEvent.MOUSEMOVE);
-    }
+    maybeInitMapMouseMoveHandlers();
 
     mapMouseMoveHandlers.addHandler(handler, new LatLngCallback() {
       @Override
@@ -666,10 +630,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapMouseOutHandler(final MapMouseOutHandler handler) {
-    if (mapMouseOutHandlers == null) {
-      mapMouseOutHandlers = new HandlerCollection<MapMouseOutHandler>(jsoPeer,
-          MapEvent.MOUSEOUT);
-    }
+    maybeInitMapMouseOutHandlers();
 
     mapMouseOutHandlers.addHandler(handler, new LatLngCallback() {
       @Override
@@ -687,10 +648,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapMouseOverHandler(final MapMouseOverHandler handler) {
-    if (mapMouseOverHandlers == null) {
-      mapMouseOverHandlers = new HandlerCollection<MapMouseOverHandler>(
-          jsoPeer, MapEvent.MOUSEOVER);
-    }
+    maybeInitMapMouseOverHandlers();
 
     mapMouseOverHandlers.addHandler(handler, new LatLngCallback() {
       @Override
@@ -707,10 +665,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapMoveEndHandler(final MapMoveEndHandler handler) {
-    if (mapMoveEndHandlers == null) {
-      mapMoveEndHandlers = new HandlerCollection<MapMoveEndHandler>(jsoPeer,
-          MapEvent.MOVEEND);
-    }
+    maybeInitMapMoveEndHandlers();
 
     mapMoveEndHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -727,10 +682,7 @@ public final class MapWidget extends Composite {
    * @param handler handler to invoke on map move events.
    */
   public void addMapMoveHandler(final MapMoveHandler handler) {
-    if (mapMoveHandlers == null) {
-      mapMoveHandlers = new HandlerCollection<MapMoveHandler>(jsoPeer,
-          MapEvent.MOVE);
-    }
+    maybeInitMapMoveHandlers();
 
     mapMoveHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -788,10 +740,7 @@ public final class MapWidget extends Composite {
    * @param handler handler to invoke on map move events.
    */
   public void addMapMoveStartHandler(final MapMoveStartHandler handler) {
-    if (mapMoveStartHandlers == null) {
-      mapMoveStartHandlers = new HandlerCollection<MapMoveStartHandler>(
-          jsoPeer, MapEvent.MOVESTART);
-    }
+    maybeInitMapMoveStartHandlers();
 
     mapMoveStartHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -808,10 +757,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapRemoveMapTypeHandler(final MapRemoveMapTypeHandler handler) {
-    if (mapRemoveMapTypeHandlers == null) {
-      mapRemoveMapTypeHandlers = new HandlerCollection<MapRemoveMapTypeHandler>(
-          jsoPeer, MapEvent.REMOVEMAPTYPE);
-    }
+    maybeInitMapRemoveMapTypeEvent();
 
     mapRemoveMapTypeHandlers.addHandler(handler, new MapTypeCallback() {
       @Override
@@ -831,10 +777,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapRemoveOverlayHandler(final MapRemoveOverlayHandler handler) {
-    if (mapRemoveOverlayHandlers == null) {
-      mapRemoveOverlayHandlers = new HandlerCollection<MapRemoveOverlayHandler>(
-          jsoPeer, MapEvent.REMOVEOVERLAY);
-    }
+    maybeInitMapRemoveOverlayHandlers();
 
     mapRemoveOverlayHandlers.addHandler(handler, new OverlayCallback() {
       @Override
@@ -862,10 +805,7 @@ public final class MapWidget extends Composite {
    * @param handler handler to invoke on mouse click events.
    */
   public void addMapRightClickHandler(final MapRightClickHandler handler) {
-    if (mapRightClickHandlers == null) {
-      mapRightClickHandlers = new HandlerCollection<MapRightClickHandler>(
-          jsoPeer, MapEvent.SINGLERIGHTCLICK);
-    }
+    maybeInitMapRightClickHandlers();
 
     mapRightClickHandlers.addHandler(handler,
         new PointElementOverlayCallback() {
@@ -894,10 +834,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapTypeChangedHandler(final MapTypeChangedHandler handler) {
-    if (mapTypeChangedHandlers == null) {
-      mapTypeChangedHandlers = new HandlerCollection<MapTypeChangedHandler>(
-          jsoPeer, MapEvent.MAPTYPECHANGED);
-    }
+    maybeInitMapTypeChangedHandlers();
 
     mapTypeChangedHandlers.addHandler(handler, new VoidCallback() {
       @Override
@@ -954,10 +891,7 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addMapZoomEndHandler(final MapZoomEndHandler handler) {
-    if (mapZoomEndHandlers == null) {
-      mapZoomEndHandlers = new HandlerCollection<MapZoomEndHandler>(jsoPeer,
-          MapEvent.ZOOMEND);
-    }
+    maybeInitMapZoomEndHandlers();
 
     mapZoomEndHandlers.addHandler(handler, new IntIntCallback() {
       @Override
@@ -1996,57 +1930,8 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(MapInfoWindowBeforeCloseEvent event) {
-    if (infoWindowBeforeCloseHandlers == null) {
-      infoWindowBeforeCloseHandlers = new HandlerCollection<MapInfoWindowBeforeCloseHandler>(
-          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
-    }
-
-    infoWindowBeforeCloseHandlers.trigger();
-  }
-
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * Note: The trigger() methods are provided for unit testing purposes only.
-   * 
-   * @param event an event to deliver to the handler.
-   */
-  void trigger(MapInfoWindowCloseEvent event) {
-    if (infoWindowCloseHandlers == null) {
-      infoWindowCloseHandlers = new HandlerCollection<MapInfoWindowCloseHandler>(
-          jsoPeer, MapEvent.INFOWINDOWCLOSE);
-    }
-    infoWindowCloseHandlers.trigger();
-  }
-
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * Note: The trigger() methods are provided for unit testing purposes only.
-   * 
-   * @param event an event to deliver to the handler.
-   */
-  void trigger(MapInfoWindowOpenEvent event) {
-    if (infoWindowOpenHandlers == null) {
-      infoWindowOpenHandlers = new HandlerCollection<MapInfoWindowOpenHandler>(
-          jsoPeer, MapEvent.INFOWINDOWOPEN);
-    }
-    infoWindowOpenHandlers.trigger();
-  }
-
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * Note: The trigger() methods are provided for unit testing purposes only.
-   * 
-   * @param event an event to deliver to the handler.
-   */
   void trigger(MapAddMapTypeEvent event) {
-    if (mapAddMapTypeHandlers == null) {
-      mapAddMapTypeHandlers = new HandlerCollection<MapAddMapTypeHandler>(
-          jsoPeer, MapEvent.ADDMAPTYPE);
-    }
+    maybeInitMapAddMapTypeHandlers();
     mapAddMapTypeHandlers.trigger(event.getType());
   }
 
@@ -2058,10 +1943,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapAddOverlayEvent event) {
-    if (mapAddOverlayHandlers == null) {
-      mapAddOverlayHandlers = new HandlerCollection<MapAddOverlayHandler>(
-          jsoPeer, MapEvent.ADDOVERLAY);
-    }
+    maybeInitMapAddOverlayHandlers();
     mapAddOverlayHandlers.trigger(event.getOverlay());
   }
 
@@ -2074,10 +1956,7 @@ public final class MapWidget extends Composite {
    */
 
   void trigger(MapClearOverlaysEvent event) {
-    if (mapClearOverlaysHandlers == null) {
-      mapClearOverlaysHandlers = new HandlerCollection<MapClearOverlaysHandler>(
-          jsoPeer, MapEvent.CLEAROVERLAYS);
-    }
+    maybeInitMapClearOverlaysHandlers();
     mapClearOverlaysHandlers.trigger();
   }
 
@@ -2089,10 +1968,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapClickEvent event) {
-    if (mapClickHandlers == null) {
-      mapClickHandlers = new HandlerCollection<MapClickHandler>(jsoPeer,
-          MapEvent.CLICK);
-    }
+    maybeInitMapClickHandlers();
     mapClickHandlers.trigger(event.getOverlay(), event.getLatLng());
   }
 
@@ -2104,10 +1980,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDoubleClickEvent event) {
-    if (mapDoubleClickHandlers == null) {
-      mapDoubleClickHandlers = new HandlerCollection<MapDoubleClickHandler>(
-          jsoPeer, MapEvent.DBLCLICK);
-    }
+    maybeInitMapDoubleClickHandlers();
     mapDoubleClickHandlers.trigger(null, event.getLatLng());
   }
 
@@ -2119,10 +1992,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragEndEvent event) {
-    if (mapDragEndHandlers == null) {
-      mapDragEndHandlers = new HandlerCollection<MapDragEndHandler>(jsoPeer,
-          MapEvent.DRAGEND);
-    }
+    maybeInitMapDragEndHandlers();
     mapDragEndHandlers.trigger();
   }
 
@@ -2134,10 +2004,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragEvent event) {
-    if (mapDragHandlers == null) {
-      mapDragHandlers = new HandlerCollection<MapDragHandler>(jsoPeer,
-          MapEvent.DRAG);
-    }
+    maybeInitMapDragHandlers();
     mapDragHandlers.trigger();
   }
 
@@ -2149,10 +2016,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragStartEvent event) {
-    if (mapDragStartHandlers == null) {
-      mapDragStartHandlers = new HandlerCollection<MapDragStartHandler>(
-          jsoPeer, MapEvent.DRAGSTART);
-    }
+    maybeInitMapDragStartHandlers();
     mapDragStartHandlers.trigger();
   }
 
@@ -2163,11 +2027,44 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
+  void trigger(MapInfoWindowBeforeCloseEvent event) {
+    maybeInitInfoWindowBeforeCloseHandlers();
+    infoWindowBeforeCloseHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(MapInfoWindowCloseEvent event) {
+    maybeInitInfoWindowCloseHandlers();
+    infoWindowCloseHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(MapInfoWindowOpenEvent event) {
+    maybeInitInfoWindowOpenHandlers();
+    infoWindowOpenHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
   void trigger(MapMouseMoveEvent event) {
-    if (mapMouseMoveHandlers == null) {
-      mapMouseMoveHandlers = new HandlerCollection<MapMouseMoveHandler>(
-          jsoPeer, MapEvent.MOUSEMOVE);
-    }
+    maybeInitMapMouseMoveHandlers();
     mapMouseMoveHandlers.trigger(event.getLatLng());
   }
 
@@ -2179,10 +2076,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMouseOutEvent event) {
-    if (mapMouseOutHandlers == null) {
-      mapMouseOutHandlers = new HandlerCollection<MapMouseOutHandler>(jsoPeer,
-          MapEvent.MOUSEOUT);
-    }
+    maybeInitMapMouseOutHandlers();
     mapMouseOutHandlers.trigger(event.getLatLng());
   }
 
@@ -2194,10 +2088,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMouseOverEvent event) {
-    if (mapMouseOverHandlers == null) {
-      mapMouseOverHandlers = new HandlerCollection<MapMouseOverHandler>(
-          jsoPeer, MapEvent.MOUSEOVER);
-    }
+    maybeInitMapMouseOverHandlers();
     mapMouseOverHandlers.trigger(event.getLatLng());
   }
 
@@ -2209,10 +2100,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveEndEvent event) {
-    if (mapMoveEndHandlers == null) {
-      mapMoveEndHandlers = new HandlerCollection<MapMoveEndHandler>(jsoPeer,
-          MapEvent.MOVEEND);
-    }
+    maybeInitMapMoveEndHandlers();
     mapMoveEndHandlers.trigger();
   }
 
@@ -2224,10 +2112,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveEvent event) {
-    if (mapMoveHandlers == null) {
-      mapMoveHandlers = new HandlerCollection<MapMoveHandler>(jsoPeer,
-          MapEvent.MOVE);
-    }
+    maybeInitMapMoveHandlers();
     mapMoveHandlers.trigger();
   }
 
@@ -2239,10 +2124,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveStartEvent event) {
-    if (mapMoveStartHandlers == null) {
-      mapMoveStartHandlers = new HandlerCollection<MapMoveStartHandler>(
-          jsoPeer, MapEvent.MOVESTART);
-    }
+    maybeInitMapMoveStartHandlers();
     mapMoveStartHandlers.trigger();
   }
 
@@ -2254,10 +2136,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapRemoveMapTypeEvent event) {
-    if (mapRemoveMapTypeHandlers == null) {
-      mapRemoveMapTypeHandlers = new HandlerCollection<MapRemoveMapTypeHandler>(
-          jsoPeer, MapEvent.REMOVEMAPTYPE);
-    }
+    maybeInitMapRemoveMapTypeEvent();
     mapRemoveMapTypeHandlers.trigger(event.getType());
   }
 
@@ -2269,10 +2148,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapRemoveOverlayEvent event) {
-    if (mapRemoveOverlayHandlers == null) {
-      mapRemoveOverlayHandlers = new HandlerCollection<MapRemoveOverlayHandler>(
-          jsoPeer, MapEvent.REMOVEOVERLAY);
-    }
+    maybeInitMapRemoveOverlayHandlers();
     mapRemoveOverlayHandlers.trigger(event.getOverlay());
   }
 
@@ -2284,10 +2160,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapRightClickEvent event) {
-    if (mapRightClickHandlers == null) {
-      mapRightClickHandlers = new HandlerCollection<MapRightClickHandler>(
-          jsoPeer, MapEvent.SINGLERIGHTCLICK);
-    }
+    maybeInitMapRightClickHandlers();
     mapRightClickHandlers.trigger(event.getPoint(), event.getElement(),
         event.getOverlay());
   }
@@ -2300,10 +2173,7 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapTypeChangedEvent event) {
-    if (mapTypeChangedHandlers == null) {
-      mapTypeChangedHandlers = new HandlerCollection<MapTypeChangedHandler>(
-          jsoPeer, MapEvent.MAPTYPECHANGED);
-    }
+    maybeInitMapTypeChangedHandlers();
     mapTypeChangedHandlers.trigger();
   }
 
@@ -2315,10 +2185,227 @@ public final class MapWidget extends Composite {
    * @param event an event to deliver to the handler.
    */
   void trigger(MapZoomEndEvent event) {
+    maybeInitMapZoomEndHandlers();
+    mapZoomEndHandlers.trigger(event.getOldZoomLevel(), event.getNewZoomLevel());
+  }
+
+  /**
+   * 
+   */
+  private void maybeInitInfoWindowBeforeCloseHandlers() {
+    if (infoWindowBeforeCloseHandlers == null) {
+      infoWindowBeforeCloseHandlers = new HandlerCollection<MapInfoWindowBeforeCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitInfoWindowCloseHandlers() {
+    if (infoWindowCloseHandlers == null) {
+      infoWindowCloseHandlers = new HandlerCollection<MapInfoWindowCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWCLOSE);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitInfoWindowOpenHandlers() {
+    if (infoWindowOpenHandlers == null) {
+      infoWindowOpenHandlers = new HandlerCollection<MapInfoWindowOpenHandler>(
+          jsoPeer, MapEvent.INFOWINDOWOPEN);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapAddMapTypeHandlers() {
+    if (mapAddMapTypeHandlers == null) {
+      mapAddMapTypeHandlers = new HandlerCollection<MapAddMapTypeHandler>(
+          jsoPeer, MapEvent.ADDMAPTYPE);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapAddOverlayHandlers() {
+    if (mapAddOverlayHandlers == null) {
+      mapAddOverlayHandlers = new HandlerCollection<MapAddOverlayHandler>(
+          jsoPeer, MapEvent.ADDOVERLAY);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapClearOverlaysHandlers() {
+    if (mapClearOverlaysHandlers == null) {
+      mapClearOverlaysHandlers = new HandlerCollection<MapClearOverlaysHandler>(
+          jsoPeer, MapEvent.CLEAROVERLAYS);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapClickHandlers() {
+    if (mapClickHandlers == null) {
+      mapClickHandlers = new HandlerCollection<MapClickHandler>(jsoPeer,
+          MapEvent.CLICK);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapDoubleClickHandlers() {
+    if (mapDoubleClickHandlers == null) {
+      mapDoubleClickHandlers = new HandlerCollection<MapDoubleClickHandler>(
+          jsoPeer, MapEvent.DBLCLICK);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapDragEndHandlers() {
+    if (mapDragEndHandlers == null) {
+      mapDragEndHandlers = new HandlerCollection<MapDragEndHandler>(jsoPeer,
+          MapEvent.DRAGEND);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapDragHandlers() {
+    if (mapDragHandlers == null) {
+      mapDragHandlers = new HandlerCollection<MapDragHandler>(jsoPeer,
+          MapEvent.DRAG);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapDragStartHandlers() {
+    if (mapDragStartHandlers == null) {
+      mapDragStartHandlers = new HandlerCollection<MapDragStartHandler>(
+          jsoPeer, MapEvent.DRAGSTART);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapMouseMoveHandlers() {
+    if (mapMouseMoveHandlers == null) {
+      mapMouseMoveHandlers = new HandlerCollection<MapMouseMoveHandler>(
+          jsoPeer, MapEvent.MOUSEMOVE);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapMouseOutHandlers() {
+    if (mapMouseOutHandlers == null) {
+      mapMouseOutHandlers = new HandlerCollection<MapMouseOutHandler>(jsoPeer,
+          MapEvent.MOUSEOUT);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapMouseOverHandlers() {
+    if (mapMouseOverHandlers == null) {
+      mapMouseOverHandlers = new HandlerCollection<MapMouseOverHandler>(
+          jsoPeer, MapEvent.MOUSEOVER);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapMoveEndHandlers() {
+    if (mapMoveEndHandlers == null) {
+      mapMoveEndHandlers = new HandlerCollection<MapMoveEndHandler>(jsoPeer,
+          MapEvent.MOVEEND);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapMoveHandlers() {
+    if (mapMoveHandlers == null) {
+      mapMoveHandlers = new HandlerCollection<MapMoveHandler>(jsoPeer,
+          MapEvent.MOVE);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapMoveStartHandlers() {
+    if (mapMoveStartHandlers == null) {
+      mapMoveStartHandlers = new HandlerCollection<MapMoveStartHandler>(
+          jsoPeer, MapEvent.MOVESTART);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapRemoveMapTypeEvent() {
+    if (mapRemoveMapTypeHandlers == null) {
+      mapRemoveMapTypeHandlers = new HandlerCollection<MapRemoveMapTypeHandler>(
+          jsoPeer, MapEvent.REMOVEMAPTYPE);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapRemoveOverlayHandlers() {
+    if (mapRemoveOverlayHandlers == null) {
+      mapRemoveOverlayHandlers = new HandlerCollection<MapRemoveOverlayHandler>(
+          jsoPeer, MapEvent.REMOVEOVERLAY);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapRightClickHandlers() {
+    if (mapRightClickHandlers == null) {
+      mapRightClickHandlers = new HandlerCollection<MapRightClickHandler>(
+          jsoPeer, MapEvent.SINGLERIGHTCLICK);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapTypeChangedHandlers() {
+    if (mapTypeChangedHandlers == null) {
+      mapTypeChangedHandlers = new HandlerCollection<MapTypeChangedHandler>(
+          jsoPeer, MapEvent.MAPTYPECHANGED);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapZoomEndHandlers() {
     if (mapZoomEndHandlers == null) {
       mapZoomEndHandlers = new HandlerCollection<MapZoomEndHandler>(jsoPeer,
           MapEvent.ZOOMEND);
     }
-    mapZoomEndHandlers.trigger(event.getOldZoomLevel(), event.getNewZoomLevel());
   }
 }

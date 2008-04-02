@@ -205,7 +205,6 @@ public class HandlerCollection<E> {
   public void trigger() {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value);
   }
-
   
   /**
    * Manually trigger an event that takes a single boolean argument.
