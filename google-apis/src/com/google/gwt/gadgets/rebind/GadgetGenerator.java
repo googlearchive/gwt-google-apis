@@ -26,12 +26,12 @@ import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.gadgets.annotations.DataType;
-import com.google.gwt.gadgets.annotations.FeatureName;
-import com.google.gwt.gadgets.annotations.ModulePrefs;
-import com.google.gwt.gadgets.annotations.PreferenceAttributes;
 import com.google.gwt.gadgets.client.GadgetFeature;
-import com.google.gwt.gadgets.client.Preference;
+import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
+import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
+import com.google.gwt.gadgets.client.UserPreferences.DataType;
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
+import com.google.gwt.gadgets.client.UserPreferences.PreferenceAttributes;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -272,21 +272,26 @@ public class GadgetGenerator extends Generator {
     }
 
     // Root elements
-    Element module = (Element) d.appendChild(d.createElement("module"));
-    Element modulePrefs = (Element) module.appendChild(d.createElement("moduleprefs"));
+    Element module = (Element) d.appendChild(d.createElement("Module"));
+    Element modulePrefs = (Element) module.appendChild(d.createElement("ModulePrefs"));
 
     // Write out the ModulePrefs tag
     ModulePrefs prefs = type.getAnnotation(ModulePrefs.class);
     if (prefs != null) {
-      GadgetUtils.writeAnnotationToElement(logger, prefs, modulePrefs);
+      GadgetUtils.writeAnnotationToElement(logger, prefs, modulePrefs,
+          "requirements");
+      GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
+          prefs.requirements());
     }
 
     // Write out the UserPref tags
-    JClassType preferenceType = typeOracle.findType(Preference.class.getName());
+    JClassType preferenceType = typeOracle.findType(Preference.class.getName().replace('$', '.'));
+    assert preferenceType != null;
+
     JClassType prefsType = GadgetUtils.getUserPrefsType(logger, typeOracle,
         type);
     for (JMethod m : prefsType.getOverridableMethods()) {
-      Element userPref = (Element) module.appendChild(d.createElement("userpref"));
+      Element userPref = (Element) module.appendChild(d.createElement("UserPref"));
       configurePreferenceElement(logger, d, userPref, preferenceType, m);
     }
 
@@ -300,15 +305,18 @@ public class GadgetGenerator extends Generator {
           if (FeatureName.INTRINSIC.equals(feature)) {
             continue;
           }
-          Element require = (Element) modulePrefs.appendChild(d.createElement("require"));
+          Element require = (Element) modulePrefs.appendChild(d.createElement("Require"));
           require.setAttribute("feature", feature);
         }
       }
+
+      GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
+          name.requirements());
     }
 
     // The Gadget linker will fill in the bootstrap
     // <content type="html">
-    Element content = (Element) module.appendChild(d.createElement("content"));
+    Element content = (Element) module.appendChild(d.createElement("Content"));
     content.setAttribute("type", "html");
     content.appendChild(d.createCDATASection("__BOOTSTRAP__"));
 

@@ -16,17 +16,25 @@
 package com.google.gwt.gadgets.client;
 
 /**
- * Provides access to intrinsic features of the container.
+ * Provides access to intrinsic APIs provided by the container that are not part
+ * of a feature-specific API.
  */
 public class IntrinsicFeature implements GadgetFeature {
   private IntrinsicFeature() {
   }
-  
+
+  /**
+   * Returns a proxy URL that can be used to access a given URL.
+   */
   public native String getCachedUrl(String url) /*-{
     return $wnd._IG_GetCachedUrl(url);
   }-*/;
-  
-  public native String getCachedUrl(String url, long refreshInterval) /*-{
-    return $wnd._IG_GetCachedUrl(url, (refreshInterval / 1000));
+
+  /**
+   * Returns a proxy URL that can be used to access a given URL with a specified
+   * refresh interval specified in seconds.
+   */
+  public native String getCachedUrl(String url, int refreshIntervalSeconds) /*-{
+    return $wnd._IG_GetCachedUrl(url, refreshInterval);
   }-*/;
 }

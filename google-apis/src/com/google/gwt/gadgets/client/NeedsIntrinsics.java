@@ -15,7 +15,7 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.gadgets.annotations.FeatureName;
+import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 
 /**
  * Indicates that a Gadget requires access to intrinsic features of the
@@ -23,5 +23,5 @@ import com.google.gwt.gadgets.annotations.FeatureName;
  */
 @FeatureName(FeatureName.INTRINSIC)
 public interface NeedsIntrinsics {
-  public void initializeFeature(IntrinsicFeature feature);
+  void initializeFeature(IntrinsicFeature feature);
 }

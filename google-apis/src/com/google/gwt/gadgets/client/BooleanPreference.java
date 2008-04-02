@@ -15,8 +15,8 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.gadgets.annotations.DataType;
-import com.google.gwt.gadgets.client.impl.PreferencesUtil;
+import com.google.gwt.gadgets.client.UserPreferences.DataType;
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
 
 /**
  * A Boolean preference.
@@ -25,10 +25,10 @@ import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 public abstract class BooleanPreference extends Preference<Boolean> {
 
   public Boolean getValue() {
-    return PreferencesUtil.getBool(getName());
+    return prefs.getBool(getName());
   }
 
   void set(Boolean value) {
-    PreferencesUtil.set(getName(), value.toString());
+    prefs.set(getName(), value.toString());
   }
 }

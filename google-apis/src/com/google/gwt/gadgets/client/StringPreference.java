@@ -15,8 +15,8 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.gadgets.annotations.DataType;
-import com.google.gwt.gadgets.client.impl.PreferencesUtil;
+import com.google.gwt.gadgets.client.UserPreferences.DataType;
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
 
 /**
  * A String preference.
@@ -24,10 +24,10 @@ import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 @DataType("string")
 public abstract class StringPreference extends Preference<String> {
   public String getValue() {
-    return PreferencesUtil.getString(getName());
+    return prefs.getString(getName());
   }
 
   void set(String value) {
-    PreferencesUtil.set(getName(), value);
+    prefs.set(getName(), value);
   }
 }

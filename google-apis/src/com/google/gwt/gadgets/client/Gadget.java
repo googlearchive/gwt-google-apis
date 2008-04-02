@@ -16,6 +16,10 @@
 package com.google.gwt.gadgets.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.gadgets.client.GadgetFeature.MayRequire;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
 /**
  * A base class for writing a Google Gadget.
@@ -36,13 +40,60 @@ import com.google.gwt.core.client.EntryPoint;
  * <p>
  * Access to user preferences is provided through a user-defined subtype of the
  * {@link UserPreferences} interface. Each preference should be defined as a
- * zero-argument method, returning the desired type of {@link Preference}. The
- * Gadget type should be parameterized with the specific UserPrefrences subtype,
- * which will be provided to the {@link #init(UserPreferences)} method.
+ * zero-argument method, returning the desired type of
+ * {@link UserPreferences.Preference}. The Gadget type should be parameterized
+ * with the specific UserPreferences subtype, which will be provided to the
+ * {@link #init(UserPreferences)} method.
  * 
  * @param <T> the type of UserPreferences the Gadget expects.
  */
 public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
+  /**
+   * Defines the preferences associated with the gadget.
+   */
+  @Target(ElementType.TYPE)
+  public @interface ModulePrefs {
+    String author() default "";
+
+    String author_aboutme() default "";
+
+    String author_affiliation() default "";
+
+    String author_email() default "";
+
+    String author_link() default "";
+
+    String author_location() default "";
+
+    String author_photo() default "";
+
+    String author_quote() default "";
+
+    String description() default "";
+
+    String directory_title() default "";
+
+    int height() default 200;
+
+    MayRequire[] requirements() default {};
+
+    boolean scaling() default true;
+
+    String screenshot() default "";
+
+    boolean scrolling() default false;
+
+    boolean singleton() default true;
+
+    String thumbnail() default "";
+
+    String title() default "";
+
+    String title_url() default "";
+
+    int width() default 320;
+  }
+
   protected Gadget() {
   }
 

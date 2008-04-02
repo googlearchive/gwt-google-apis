@@ -16,8 +16,8 @@
 package com.google.gwt.gadgets.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.gadgets.annotations.DataType;
-import com.google.gwt.gadgets.client.impl.PreferencesUtil;
+import com.google.gwt.gadgets.client.UserPreferences.DataType;
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
 
 /**
  * A list of String preferences.
@@ -25,14 +25,14 @@ import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 @DataType("list")
 public abstract class ListPreference extends Preference<String[]> {
   public String[] getValue() {
-    return PreferencesUtil.getString(getName()).split("\\|");
+    return prefs.getString(getName()).split("\\|");
   }
 
   void set(String[] value) {
     JavaScriptObject array = JavaScriptObject.createArray();
     for (String s : value) {
-      PreferencesUtil.push(array, s);
+      prefs.push(array, s);
     }
-    PreferencesUtil.setArray(getName(), array);
+    prefs.setArray(getName(), array);
   }
 }

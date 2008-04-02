@@ -23,7 +23,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.gadgets.client.Preference;
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
 import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
@@ -72,7 +72,8 @@ public class UserPreferencesGenerator extends Generator {
 
     // If an implementation already exists, we don't need to do any work
     if (out != null) {
-      JClassType preferenceType = typeOracle.findType(Preference.class.getName());
+      JClassType preferenceType = typeOracle.findType(Preference.class.getName().replace('$', '.'));
+      assert preferenceType != null;
 
       // We really use a SourceWriter since it's convenient
       SourceWriter sw = f.createSourceWriter(context, out);

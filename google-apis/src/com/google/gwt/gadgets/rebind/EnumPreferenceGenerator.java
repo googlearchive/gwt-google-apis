@@ -22,7 +22,7 @@ import com.google.gwt.core.ext.typeinfo.JEnumConstant;
 import com.google.gwt.core.ext.typeinfo.JEnumType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.gadgets.annotations.EnumDisplayValue;
+import com.google.gwt.gadgets.client.EnumPreference.EnumDisplayValue;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import org.w3c.dom.Document;
@@ -79,7 +79,7 @@ public class EnumPreferenceGenerator implements PreferenceGenerator {
     constants.addAll(Arrays.asList(enumType.getEnumConstants()));
 
     for (JEnumConstant constant : constants) {
-      Element enumValue = (Element) userPref.appendChild(d.createElement("enumvalue"));
+      Element enumValue = (Element) userPref.appendChild(d.createElement("EnumValue"));
       enumValue.setAttribute("value", constant.getName());
 
       EnumDisplayValue displayValue = constant.getAnnotation(EnumDisplayValue.class);
@@ -101,7 +101,7 @@ public class EnumPreferenceGenerator implements PreferenceGenerator {
     sw.println("public " + enumType.getQualifiedSourceName() + " getValue() {");
     sw.indent();
     sw.println("return " + enumType.getQualifiedSourceName()
-        + ".valueOf(PreferencesUtil.getString(getName()));");
+        + ".valueOf(prefs.getString(getName()));");
     sw.outdent();
     sw.println("}");
 

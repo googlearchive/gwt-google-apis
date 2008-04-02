@@ -15,6 +15,8 @@
  */
 package com.google.gwt.gadgets.client;
 
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
+
 /**
  * Provides access to the preference-saving API.
  */
@@ -22,6 +24,14 @@ public class SetPrefsFeature implements GadgetFeature {
   private SetPrefsFeature() {
   }
 
+  /**
+   * Assign a new value to the specified preference.
+   * 
+   * @param <T> the type of data encapsulated by the preference
+   * @param pref a Preference object obtained from a subtype of
+   *          {@link UserPreferences}
+   * @param value the new value to assign
+   */
   public <T> void set(Preference<T> pref, T value) {
     pref.set(value);
   }
