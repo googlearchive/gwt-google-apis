@@ -161,19 +161,6 @@ public class HandlerCollection<E> {
   }
 
   /**
-   * Remove all events for this type of listener.
-   */
-  public void clearHandlers() {
-    // Iterate through our container, looking for this instance of the listener
-    for (HandleContainer<E> hc : handlers) {
-      // We've found the listener, so iterate and remove the handle that
-      // was originally returned from GEvent.addListener()
-      EventImpl.impl.removeListener(hc.eventHandlerJso);
-    }
-    handlers.clear();
-  }
-
-  /**
    * The type of event this collection represents.
    * 
    * @return the event type this collection was created with.
