@@ -187,6 +187,11 @@ public final class GearsManifestLinker extends AbstractLinker {
     StringBuffer entries = new StringBuffer();
     boolean needsComma = false;
     paths : for (EmittedArtifact artifact : artifacts) {
+      if (artifact.isPrivate()) {
+        // These artifacts won't be in the module output directory
+        continue;
+      }
+
       String path = artifact.getPartialPath();
       for (Pattern p : filters) {
         if (p.matcher(path).matches()) {
