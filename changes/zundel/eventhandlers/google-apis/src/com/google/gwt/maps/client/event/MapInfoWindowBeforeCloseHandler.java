@@ -23,16 +23,16 @@ import java.util.EventObject;
  * Provides an interface to implement in order to receive
  * MapEvent.INFOWINDOWBEFORECLOSE events from the {@link MapWidget}.
  */
-public interface InfoWindowBeforeCloseHandler {
+public interface MapInfoWindowBeforeCloseHandler {
 
   /**
    * Encapsulates the arguments for the MapEvent.INFOWINDOWBEFORECLOSE event on
    * a {@link MapWidget}.
    */
   @SuppressWarnings("serial")
-  class InfoWindowBeforeCloseEvent extends EventObject {
+  class MapInfoWindowBeforeCloseEvent extends EventObject {
 
-    public InfoWindowBeforeCloseEvent(MapWidget source) {
+    public MapInfoWindowBeforeCloseEvent(MapWidget source) {
       super(source);
     }
 
@@ -52,5 +52,5 @@ public interface InfoWindowBeforeCloseHandler {
    * 
    * @param event contains the properties of the event.
    */
-  void onInfoWindowBeforeClose(InfoWindowBeforeCloseEvent event);
+  void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event);
 }

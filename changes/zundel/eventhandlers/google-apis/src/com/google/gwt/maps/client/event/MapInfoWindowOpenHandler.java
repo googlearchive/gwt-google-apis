@@ -21,18 +21,18 @@ import java.util.EventObject;
 
 /**
  * Provides an interface to implement in order to receive
- * MapEvent.INFOWINDOWCLOSE events from the {@link MapWidget}.
+ * MapEvent.INFOWINDOWOPEN events from the {@link MapWidget}.
  */
-public interface InfoWindowCloseHandler {
+public interface MapInfoWindowOpenHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.INFOWINDOWCLOSE event on a
+   * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a
    * {@link MapWidget}.
    */
   @SuppressWarnings("serial")
-  class InfoWindowCloseEvent extends EventObject {
+  class MapInfoWindowOpenEvent extends EventObject {
 
-    public InfoWindowCloseEvent(MapWidget source) {
+    public MapInfoWindowOpenEvent(MapWidget source) {
       super(source);
     }
 
@@ -47,10 +47,10 @@ public interface InfoWindowCloseHandler {
   }
 
   /**
-   * Method to be invoked when a MapEvent.INFOWINDOWCLOSE event fires on a
+   * Method to be invoked when a MapEvent.INFOWINDOWOPEN event fires on a
    * {@link MapWidget}.
    * 
    * @param event contains the properties of the event.
    */
-  void onInfoWindowClose(InfoWindowCloseEvent event);
+  void onInfoWindowOpen(MapInfoWindowOpenEvent event);
 }

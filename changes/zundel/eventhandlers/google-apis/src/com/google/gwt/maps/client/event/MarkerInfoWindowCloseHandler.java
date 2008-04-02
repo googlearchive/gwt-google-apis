@@ -15,24 +15,24 @@
  */
 package com.google.gwt.maps.client.event;
 
-import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.overlay.Marker;
 
 import java.util.EventObject;
 
 /**
  * Provides an interface to implement in order to receive
- * MapEvent.INFOWINDOWOPEN events from the {@link MapWidget}.
+ * MapEvent.INFOWINDOWCLOSE events from the {@link Marker}.
  */
-public interface InfoWindowOpenHandler {
+public interface MarkerInfoWindowCloseHandler {
 
   /**
-   * Encapsulates the arguments for the MapEvent.INFOWINDOWOPEN event on a
-   * {@link MapWidget}.
+   * Encapsulates the arguments for the MapEvent.INFOWINDOWCLOSE event on
+   * a {@link Marker}.
    */
   @SuppressWarnings("serial")
-  class InfoWindowOpenEvent extends EventObject {
+  class MarkerInfoWindowCloseEvent extends EventObject {
 
-    public InfoWindowOpenEvent(MapWidget source) {
+    public MarkerInfoWindowCloseEvent(Marker source) {
       super(source);
     }
 
@@ -41,16 +41,16 @@ public interface InfoWindowOpenHandler {
      * 
      * @return the instance of the map that generated this event.
      */
-    public MapWidget getSender() {
-      return (MapWidget) getSource();
+    public Marker getSender() {
+      return (Marker) getSource();
     }
   }
 
   /**
-   * Method to be invoked when a MapEvent.INFOWINDOWOPEN event fires on a
-   * {@link MapWidget}.
+   * Method to be invoked when a MapEvent.INFOWINDOWCLOSE event fires on a
+   * {@link Marker}.
    * 
    * @param event contains the properties of the event.
    */
-  void onInfoWindowOpen(InfoWindowOpenEvent event);
+  void onInfoWindowClose(MarkerInfoWindowCloseEvent event);
 }

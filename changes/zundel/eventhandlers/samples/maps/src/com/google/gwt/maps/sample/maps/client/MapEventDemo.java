@@ -21,9 +21,9 @@ import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
-import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler;
-import com.google.gwt.maps.client.event.InfoWindowCloseHandler;
-import com.google.gwt.maps.client.event.InfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -234,9 +234,9 @@ public class MapEventDemo extends MapsDemo {
     // Add event specific handlers
     switch (a) {
       case INFO_WINDOW_BEFORE_CLOSE_HANDLER: {
-        final InfoWindowBeforeCloseHandler h = new InfoWindowBeforeCloseHandler() {
+        final MapInfoWindowBeforeCloseHandler h = new MapInfoWindowBeforeCloseHandler() {
 
-          public void onInfoWindowBeforeClose(InfoWindowBeforeCloseEvent event) {
+          public void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event) {
             textBox.setText(textBox.getText() + "onInfoWindowBeforeClose()");
           }
 
@@ -255,9 +255,9 @@ public class MapEventDemo extends MapsDemo {
         break;
 
       case INFO_WINDOW_CLOSE_HANDLER: {
-        final InfoWindowCloseHandler h = new InfoWindowCloseHandler() {
+        final MapInfoWindowCloseHandler h = new MapInfoWindowCloseHandler() {
 
-          public void onInfoWindowClose(InfoWindowCloseEvent event) {
+          public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
             textBox.setText(textBox.getText() + "onInfoWindowClose()");
           }
 
@@ -276,9 +276,9 @@ public class MapEventDemo extends MapsDemo {
         break;
 
       case INFO_WINDOW_OPEN_HANDLER: {
-        final InfoWindowOpenHandler h = new InfoWindowOpenHandler() {
+        final MapInfoWindowOpenHandler h = new MapInfoWindowOpenHandler() {
 
-          public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
             textBox.setText(textBox.getText() + "onInfoWindowOpen()");
           }
 

@@ -25,6 +25,7 @@ import com.google.gwt.maps.client.event.MarkerDragHandler;
 import com.google.gwt.maps.client.event.MarkerDragListener;
 import com.google.gwt.maps.client.event.MarkerDragStartHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MarkerMouseDownHandler;
 import com.google.gwt.maps.client.event.MarkerMouseListener;
@@ -41,6 +42,7 @@ import com.google.gwt.maps.client.event.MarkerDragEndHandler.MarkerDragEndEvent;
 import com.google.gwt.maps.client.event.MarkerDragHandler.MarkerDragEvent;
 import com.google.gwt.maps.client.event.MarkerDragStartHandler.MarkerDragStartEvent;
 import com.google.gwt.maps.client.event.MarkerInfoWindowBeforeCloseHandler.MarkerInfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.MarkerInfoWindowCloseHandler.MarkerInfoWindowCloseEvent;
 import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler.MarkerInfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MarkerMouseDownHandler.MarkerMouseDownEvent;
 import com.google.gwt.maps.client.event.MarkerMouseOutHandler.MarkerMouseOutEvent;
@@ -93,13 +95,14 @@ public final class Marker extends ConcreteOverlay {
   // Keep track of JSO's registered for each instance of addXXXListener()
   private ListenerCollection<MarkerClickListener> clickListeners;
   private ListenerCollection<MarkerDragListener> dragListeners;
-  private HandlerCollection<MarkerInfoWindowBeforeCloseHandler> markerInfoWindowBeforeCloseHandlers;
-  private HandlerCollection<MarkerInfoWindowOpenHandler> markerInfoWindowOpenHandlers;
   private HandlerCollection<MarkerClickHandler> markerClickHandlers;
-  private HandlerCollection<MarkerDoubleClickHandler> markerDoubleClickHandlers;
+  private HandlerCollection<MarkerDoubleClickHandler> markerDoubleClickHandlers;  
   private HandlerCollection<MarkerDragEndHandler> markerDragEndHandlers;
   private HandlerCollection<MarkerDragHandler> markerDragHandlers;
   private HandlerCollection<MarkerDragStartHandler> markerDragStartHandlers;
+  private HandlerCollection<MarkerInfoWindowBeforeCloseHandler> markerInfoWindowBeforeCloseHandlers;
+  private HandlerCollection<MarkerInfoWindowCloseHandler> markerInfoWindowCloseHandlers;
+  private HandlerCollection<MarkerInfoWindowOpenHandler> markerInfoWindowOpenHandlers;
   private HandlerCollection<MarkerMouseDownHandler> markerMouseDownHandlers;
   private HandlerCollection<MarkerMouseOutHandler> markerMouseOutHandlers;
   private HandlerCollection<MarkerMouseOverHandler> markerMouseOverHandlers;
@@ -148,49 +151,6 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param handler the handler to call when this event fires.
    */
-  public void addMarkerInfoWindowBeforeCloseHandler(
-      final MarkerInfoWindowBeforeCloseHandler handler) {
-    if (markerInfoWindowBeforeCloseHandlers == null) {
-      markerInfoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
-          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
-    }
-
-    markerInfoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
-      @Override
-      public void callback() {
-        MarkerInfoWindowBeforeCloseEvent e = new MarkerInfoWindowBeforeCloseEvent(
-            Marker.this);
-        handler.onInfoWindowBeforeClose(e);
-      }
-    });
-  }
-
-  /**
-   * 
-   * 
-   * @param handler the handler to call when this event fires.
-   */
-  public void addMarkerInfoWindowOpenHandler(
-      final MarkerInfoWindowOpenHandler handler) {
-    if (markerInfoWindowOpenHandlers == null) {
-      markerInfoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
-          jsoPeer, MapEvent.INFOWINDOWOPEN);
-    }
-
-    markerInfoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
-      @Override
-      public void callback() {
-        MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(Marker.this);
-        handler.onInfoWindowOpen(e);
-      }
-    });
-  }
-
-  /**
-   * 
-   * 
-   * @param handler the handler to call when this event fires.
-   */
   public void addMarkerClickHandler(final MarkerClickHandler handler) {
     if (markerClickHandlers == null) {
       markerClickHandlers = new HandlerCollection<MarkerClickHandler>(jsoPeer,
@@ -205,7 +165,7 @@ public final class Marker extends ConcreteOverlay {
       }
     });
   }
-
+  
   /**
    * Associate a click event listener with this Marker.
    * 
@@ -341,6 +301,71 @@ public final class Marker extends ConcreteOverlay {
       public void callback() {
         MarkerDragStartEvent e = new MarkerDragStartEvent(Marker.this);
         handler.onDragStart(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerInfoWindowBeforeCloseHandler(
+      final MarkerInfoWindowBeforeCloseHandler handler) {
+    if (markerInfoWindowBeforeCloseHandlers == null) {
+      markerInfoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
+    }
+
+    markerInfoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerInfoWindowBeforeCloseEvent e = new MarkerInfoWindowBeforeCloseEvent(
+            Marker.this);
+        handler.onInfoWindowBeforeClose(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerInfoWindowCloseHandler(
+      final MarkerInfoWindowCloseHandler handler) {
+    if (markerInfoWindowCloseHandlers == null) {
+      markerInfoWindowCloseHandlers = new HandlerCollection<MarkerInfoWindowCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWCLOSE);
+    }
+
+    markerInfoWindowCloseHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerInfoWindowCloseEvent e = new MarkerInfoWindowCloseEvent(
+            Marker.this);
+        handler.onInfoWindowClose(e);
+      }
+    });
+  }
+
+  /**
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addMarkerInfoWindowOpenHandler(
+      final MarkerInfoWindowOpenHandler handler) {
+    if (markerInfoWindowOpenHandlers == null) {
+      markerInfoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
+          jsoPeer, MapEvent.INFOWINDOWOPEN);
+    }
+
+    markerInfoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(Marker.this);
+        handler.onInfoWindowOpen(e);
       }
     });
   }
@@ -596,31 +621,6 @@ public final class Marker extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link Marker#addMarkerInfoWindowBeforeCloseHandler(MarkerInfoWindowBeforeCloseHandler)}.
-   * 
-   * @param handler the handler to remove
-   */
-  public void removeInfoWindowBeforeCloseHandler(
-      MarkerInfoWindowBeforeCloseHandler handler) {
-    if (markerInfoWindowBeforeCloseHandlers != null) {
-      markerInfoWindowBeforeCloseHandlers.removeHandler(handler);
-    }
-  }
-
-  /**
-   * Removes a single handler of this map previously added with
-   * {@link Marker#addMarkerInfoWindowOpenHandler(MarkerInfoWindowOpenHandler)}.
-   * 
-   * @param handler the handler to remove
-   */
-  public void removeInfoWindowOpenHandler(MarkerInfoWindowOpenHandler handler) {
-    if (markerInfoWindowOpenHandlers != null) {
-      markerInfoWindowOpenHandlers.removeHandler(handler);
-    }
-  }
-
-  /**
-   * Removes a single handler of this map previously added with
    * {@link Marker#addMarkerClickHandler(MarkerClickHandler)}.
    * 
    * @param handler the handler to remove
@@ -698,6 +698,44 @@ public final class Marker extends ConcreteOverlay {
   public void removeMarkerDragStartHandler(MarkerDragStartHandler handler) {
     if (markerDragStartHandlers != null) {
       markerDragStartHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerInfoWindowBeforeCloseHandler(MarkerInfoWindowBeforeCloseHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerInfoWindowBeforeCloseHandler(
+      MarkerInfoWindowBeforeCloseHandler handler) {
+    if (markerInfoWindowBeforeCloseHandlers != null) {
+      markerInfoWindowBeforeCloseHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerInfoWindowCloseHandler(MarkerInfoWindowCloseHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerInfoWindowCloseHandler(
+      MarkerInfoWindowCloseHandler handler) {
+    if (markerInfoWindowCloseHandlers != null) {
+      markerInfoWindowCloseHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Marker#addMarkerInfoWindowOpenHandler(MarkerInfoWindowOpenHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMarkerInfoWindowOpenHandler(MarkerInfoWindowOpenHandler handler) {
+    if (markerInfoWindowOpenHandlers != null) {
+      markerInfoWindowOpenHandlers.removeHandler(handler);
     }
   }
 
@@ -860,36 +898,6 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(MarkerInfoWindowBeforeCloseEvent event) {
-    if (markerInfoWindowBeforeCloseHandlers == null) {
-      markerInfoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
-          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
-    }
-    markerInfoWindowBeforeCloseHandlers.trigger();
-  }
-
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * Note: The trigger() methods are provided for unit testing purposes only.
-   * 
-   * @param event an event to deliver to the handler.
-   */
-  void trigger(MarkerInfoWindowOpenEvent event) {
-    if (markerInfoWindowOpenHandlers == null) {
-      markerInfoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
-          jsoPeer, MapEvent.INFOWINDOWOPEN);
-    }
-    markerInfoWindowOpenHandlers.trigger();
-  }
-
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * Note: The trigger() methods are provided for unit testing purposes only.
-   * 
-   * @param event an event to deliver to the handler.
-   */
   void trigger(MarkerClickEvent event) {
     if (markerClickHandlers == null) {
       markerClickHandlers = new HandlerCollection<MarkerClickHandler>(jsoPeer,
@@ -912,7 +920,7 @@ public final class Marker extends ConcreteOverlay {
     }
     markerDoubleClickHandlers.trigger();
   }
-
+  
   /**
    * Manually trigger the specified event on this object.
    * 
@@ -956,6 +964,51 @@ public final class Marker extends ConcreteOverlay {
           jsoPeer, MapEvent.DRAGSTART);
     }
     markerDragStartHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(MarkerInfoWindowBeforeCloseEvent event) {
+    if (markerInfoWindowBeforeCloseHandlers == null) {
+      markerInfoWindowBeforeCloseHandlers = new HandlerCollection<MarkerInfoWindowBeforeCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
+    }
+    markerInfoWindowBeforeCloseHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(MarkerInfoWindowCloseEvent event) {
+    if (markerInfoWindowCloseHandlers == null) {
+      markerInfoWindowCloseHandlers = new HandlerCollection<MarkerInfoWindowCloseHandler>(
+          jsoPeer, MapEvent.INFOWINDOWCLOSE);
+    }
+    markerInfoWindowCloseHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(MarkerInfoWindowOpenEvent event) {
+    if (markerInfoWindowOpenHandlers == null) {
+      markerInfoWindowOpenHandlers = new HandlerCollection<MarkerInfoWindowOpenHandler>(
+          jsoPeer, MapEvent.INFOWINDOWOPEN);
+    }
+    markerInfoWindowOpenHandlers.trigger();
   }
 
   /**

@@ -20,10 +20,10 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
-import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler;
-import com.google.gwt.maps.client.event.InfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.InfoWindowListener;
-import com.google.gwt.maps.client.event.InfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -50,9 +50,9 @@ import com.google.gwt.maps.client.event.MapTypeListener;
 import com.google.gwt.maps.client.event.MapZoomEndHandler;
 import com.google.gwt.maps.client.event.MapZoomListener;
 import com.google.gwt.maps.client.event.OverlayListener;
-import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler.InfoWindowBeforeCloseEvent;
-import com.google.gwt.maps.client.event.InfoWindowCloseHandler.InfoWindowCloseEvent;
-import com.google.gwt.maps.client.event.InfoWindowOpenHandler.InfoWindowOpenEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler.MapInfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler.MapInfoWindowCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler.MapInfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler.MapAddMapTypeEvent;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler.MapAddOverlayEvent;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler.MapClearOverlaysEvent;
@@ -101,11 +101,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * A widget that presents a viewable Google Map to a user.
  * 
- * The 'load' event requires that a handler be registered before
- * GMap2.setCenter() is called. Since that method is always called in the
- * MapWidget constructor, it isn't clear that gwt-google-apis users need this
- * event.
- * 
  * Note: the GEvent.trigger methods are implemented by the API but intended for
  * internal testing only.
  */
@@ -134,8 +129,8 @@ public final class MapWidget extends Composite {
   }
 
   private static native void nativeUnload() /*-{
-                          $wnd.GUnload && $wnd.GUnload();
-                        }-*/;
+    $wnd.GUnload && $wnd.GUnload();
+   }-*/;
 
   static MapWidget createPeer(JavaScriptObject jsoPeer) {
     throw new UnsupportedOperationException();
@@ -145,10 +140,10 @@ public final class MapWidget extends Composite {
   private ListenerCollection<MapClickListener> clickListeners;
   private HandlerCollection<MapDoubleClickHandler> mapDoubleClickHandlers;
   private ListenerCollection<MapDragListener> dragListeners;
-  private HandlerCollection<InfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
-  private HandlerCollection<InfoWindowCloseHandler> infoWindowCloseHandlers;
+  private HandlerCollection<MapInfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
+  private HandlerCollection<MapInfoWindowCloseHandler> infoWindowCloseHandlers;
   private ListenerCollection<InfoWindowListener> infoWindowListeners;
-  private HandlerCollection<InfoWindowOpenHandler> infoWindowOpenHandlers;
+  private HandlerCollection<MapInfoWindowOpenHandler> infoWindowOpenHandlers;
 
   /* Reference to GMap2 object. */
   private final JavaScriptObject jsoPeer;
@@ -191,12 +186,17 @@ public final class MapWidget extends Composite {
   public MapWidget(LatLng center, int zoomLevel) {
     this(center, zoomLevel, null, null);
   }
-
+  
   /**
    * Creates a new map widget and sets the view to the specified center point
    * and zoom level. Also, sets the dragging and draggable cursor values. See
    * the W3C CSS spec for allowable cursor string values.
    * 
+   * Note: The 'load' event requires that a handler be registered before
+   * GMap2.setCenter() is called. Since that method is always called in this
+   * constructor, it isn't clear that gwt-google-apis users needs this
+   * event.
+   *
    * @param center the geographical point about which to center
    * @param zoomLevel zoomLevel the zoom level
    * @param draggableCursor CSS name of the cursor to display when the map is
@@ -255,16 +255,16 @@ public final class MapWidget extends Composite {
    * @param handler the handler to call when this event fires.
    */
   public void addInfoWindowBeforeCloseHandler(
-      final InfoWindowBeforeCloseHandler handler) {
+      final MapInfoWindowBeforeCloseHandler handler) {
     if (infoWindowBeforeCloseHandlers == null) {
-      infoWindowBeforeCloseHandlers = new HandlerCollection<InfoWindowBeforeCloseHandler>(
+      infoWindowBeforeCloseHandlers = new HandlerCollection<MapInfoWindowBeforeCloseHandler>(
           jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
     }
 
     infoWindowBeforeCloseHandlers.addHandler(handler, new VoidCallback() {
       @Override
       public void callback() {
-        InfoWindowBeforeCloseEvent e = new InfoWindowBeforeCloseEvent(
+        MapInfoWindowBeforeCloseEvent e = new MapInfoWindowBeforeCloseEvent(
             MapWidget.this);
         handler.onInfoWindowBeforeClose(e);
       }
@@ -273,24 +273,24 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when the info window closes. The handler
-   * {@link InfoWindowBeforeCloseHandler} is fired before this event. If a
+   * {@link MapInfoWindowBeforeCloseHandler} is fired before this event. If a
    * currently open info window is reopened at a different point using another
-   * call to openInfoWindow*(), the handler {@link InfoWindowBeforeCloseHandler},
-   * {@link InfoWindowCloseHandler} and {@link InfoWindowOpenHandler} are fired
+   * call to openInfoWindow*(), the handler {@link MapInfoWindowBeforeCloseHandler},
+   * {@link MapInfoWindowCloseHandler} and {@link MapInfoWindowOpenHandler} are fired
    * in this order
    * 
    * @param handler the handler to call when this event fires.
    */
-  public void addInfoWindowCloseHandler(final InfoWindowCloseHandler handler) {
+  public void addInfoWindowCloseHandler(final MapInfoWindowCloseHandler handler) {
     if (infoWindowCloseHandlers == null) {
-      infoWindowCloseHandlers = new HandlerCollection<InfoWindowCloseHandler>(
+      infoWindowCloseHandlers = new HandlerCollection<MapInfoWindowCloseHandler>(
           jsoPeer, MapEvent.INFOWINDOWCLOSE);
     }
 
     infoWindowCloseHandlers.addHandler(handler, new VoidCallback() {
       @Override
       public void callback() {
-        InfoWindowCloseEvent e = new InfoWindowCloseEvent(MapWidget.this);
+        MapInfoWindowCloseEvent e = new MapInfoWindowCloseEvent(MapWidget.this);
         handler.onInfoWindowClose(e);
       }
     });
@@ -302,10 +302,10 @@ public final class MapWidget extends Composite {
    * @param listener listener to invoke on InfoWindow events
    * 
    * @deprecated see
-   *             {@link MapWidget#addInfoWindowBeforeCloseHandler(InfoWindowBeforeCloseHandler)},
-   *             {@link MapWidget#addInfoWindowCloseHandler(InfoWindowCloseHandler)},
+   *             {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)},
+   *             {@link MapWidget#addInfoWindowCloseHandler(MapInfoWindowCloseHandler)},
    *             and
-   *             {@link MapWidget#addInfoWindowOpenHandler(InfoWindowOpenHandler)}
+   *             {@link MapWidget#addInfoWindowOpenHandler(MapInfoWindowOpenHandler)}
    */
   @Deprecated
   public void addInfoWindowListener(final InfoWindowListener listener) {
@@ -335,16 +335,16 @@ public final class MapWidget extends Composite {
    * 
    * @param handler the handler to call when this event fires.
    */
-  public void addInfoWindowOpenHandler(final InfoWindowOpenHandler handler) {
+  public void addInfoWindowOpenHandler(final MapInfoWindowOpenHandler handler) {
     if (infoWindowOpenHandlers == null) {
-      infoWindowOpenHandlers = new HandlerCollection<InfoWindowOpenHandler>(
+      infoWindowOpenHandlers = new HandlerCollection<MapInfoWindowOpenHandler>(
           jsoPeer, MapEvent.INFOWINDOWOPEN);
     }
 
     infoWindowOpenHandlers.addHandler(handler, new VoidCallback() {
       @Override
       public void callback() {
-        InfoWindowOpenEvent e = new InfoWindowOpenEvent(MapWidget.this);
+        MapInfoWindowOpenEvent e = new MapInfoWindowOpenEvent(MapWidget.this);
         handler.onInfoWindowOpen(e);
       }
     });
@@ -1389,12 +1389,12 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link MapWidget#addInfoWindowBeforeCloseHandler(InfoWindowBeforeCloseHandler)}.
+   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)}.
    * 
    * @param handler the handler to remove
    */
   public void removeInfoWindowBeforeCloseHandler(
-      InfoWindowBeforeCloseHandler handler) {
+      MapInfoWindowBeforeCloseHandler handler) {
     if (infoWindowBeforeCloseHandlers != null) {
       infoWindowBeforeCloseHandlers.removeHandler(handler);
     }
@@ -1402,11 +1402,11 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link MapWidget#addInfoWindowCloseHandler(InfoWindowCloseHandler)}.
+   * {@link MapWidget#addInfoWindowCloseHandler(MapInfoWindowCloseHandler)}.
    * 
    * @param handler the handler to remove
    */
-  public void removeInfoWindowCloseHandler(InfoWindowCloseHandler handler) {
+  public void removeInfoWindowCloseHandler(MapInfoWindowCloseHandler handler) {
     if (infoWindowCloseHandlers != null) {
       infoWindowCloseHandlers.removeHandler(handler);
     }
@@ -1429,11 +1429,11 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link MapWidget#addInfoWindowOpenHandler(InfoWindowOpenHandler)}.
+   * {@link MapWidget#addInfoWindowOpenHandler(MapInfoWindowOpenHandler)}.
    * 
    * @param handler the handler to remove
    */
-  public void removeInfoWindowOpenHandler(InfoWindowOpenHandler handler) {
+  public void removeInfoWindowOpenHandler(MapInfoWindowOpenHandler handler) {
     if (infoWindowOpenHandlers != null) {
       infoWindowOpenHandlers.removeHandler(handler);
     }
@@ -1996,9 +1996,9 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(InfoWindowBeforeCloseEvent event) {
+  void trigger(MapInfoWindowBeforeCloseEvent event) {
     if (infoWindowBeforeCloseHandlers == null) {
-      infoWindowBeforeCloseHandlers = new HandlerCollection<InfoWindowBeforeCloseHandler>(
+      infoWindowBeforeCloseHandlers = new HandlerCollection<MapInfoWindowBeforeCloseHandler>(
           jsoPeer, MapEvent.INFOWINDOWBEFORECLOSE);
     }
 
@@ -2012,9 +2012,9 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(InfoWindowCloseEvent event) {
+  void trigger(MapInfoWindowCloseEvent event) {
     if (infoWindowCloseHandlers == null) {
-      infoWindowCloseHandlers = new HandlerCollection<InfoWindowCloseHandler>(
+      infoWindowCloseHandlers = new HandlerCollection<MapInfoWindowCloseHandler>(
           jsoPeer, MapEvent.INFOWINDOWCLOSE);
     }
     infoWindowCloseHandlers.trigger();
@@ -2027,9 +2027,9 @@ public final class MapWidget extends Composite {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(InfoWindowOpenEvent event) {
+  void trigger(MapInfoWindowOpenEvent event) {
     if (infoWindowOpenHandlers == null) {
-      infoWindowOpenHandlers = new HandlerCollection<InfoWindowOpenHandler>(
+      infoWindowOpenHandlers = new HandlerCollection<MapInfoWindowOpenHandler>(
           jsoPeer, MapEvent.INFOWINDOWOPEN);
     }
     infoWindowOpenHandlers.trigger();

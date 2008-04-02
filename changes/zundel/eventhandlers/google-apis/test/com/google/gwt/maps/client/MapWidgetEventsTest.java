@@ -16,9 +16,9 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler;
-import com.google.gwt.maps.client.event.InfoWindowCloseHandler;
-import com.google.gwt.maps.client.event.InfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -37,9 +37,9 @@ import com.google.gwt.maps.client.event.MapRemoveMapTypeHandler;
 import com.google.gwt.maps.client.event.MapRemoveOverlayHandler;
 import com.google.gwt.maps.client.event.MapRightClickHandler;
 import com.google.gwt.maps.client.event.MapZoomEndHandler;
-import com.google.gwt.maps.client.event.InfoWindowBeforeCloseHandler.InfoWindowBeforeCloseEvent;
-import com.google.gwt.maps.client.event.InfoWindowCloseHandler.InfoWindowCloseEvent;
-import com.google.gwt.maps.client.event.InfoWindowOpenHandler.InfoWindowOpenEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler.MapInfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler.MapInfoWindowCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler.MapInfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler.MapAddMapTypeEvent;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler.MapAddOverlayEvent;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler.MapClearOverlaysEvent;
@@ -79,6 +79,8 @@ import com.google.gwt.user.client.ui.RootPanel;
  * triggered by the Maps API calls.
  */
 public class MapWidgetEventsTest extends GWTTestCase {
+  // length of time to wait for asyncronous test to complete.
+  static final int ASYNC_DELAY_MSEC = 5000;
 
   // Used as a flag to test some trigger callback methods.
   static boolean passed;
@@ -90,9 +92,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
   public void testInfoWindowBeforeCloseEvent() {
     final MapWidget m = new MapWidget();
-    m.addInfoWindowBeforeCloseHandler(new InfoWindowBeforeCloseHandler() {
+    m.addInfoWindowBeforeCloseHandler(new MapInfoWindowBeforeCloseHandler() {
 
-      public void onInfoWindowBeforeClose(InfoWindowBeforeCloseEvent event) {
+      public void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event) {
         MapWidget sender = event.getSender();
         assertEquals(sender, m);
         finishTest();
@@ -106,21 +108,21 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     // If we do not wait for the infowindowopen event before calling close,
     // the close event will never fire.
-    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
-      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
         info.close();
       }
     });
     info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 
   public void testInfoWindowBeforeCloseTrigger() {
     final MapWidget m = new MapWidget();
-    m.addInfoWindowBeforeCloseHandler(new InfoWindowBeforeCloseHandler() {
+    m.addInfoWindowBeforeCloseHandler(new MapInfoWindowBeforeCloseHandler() {
 
-      public void onInfoWindowBeforeClose(InfoWindowBeforeCloseEvent event) {
+      public void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event) {
         MapWidget sender = event.getSender();
         assertEquals(sender, m);
         finishTest();
@@ -128,8 +130,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    InfoWindowBeforeCloseEvent e = new InfoWindowBeforeCloseEvent(m);
-    delayTestFinish(5000);
+    MapInfoWindowBeforeCloseEvent e = new MapInfoWindowBeforeCloseEvent(m);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -138,9 +140,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.setSize("300px", "300px");
     RootPanel.get().add(m);
 
-    m.addInfoWindowCloseHandler(new InfoWindowCloseHandler() {
+    m.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
 
-      public void onInfoWindowClose(InfoWindowCloseEvent event) {
+      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
         MapWidget sender = event.getSender();
         assertEquals(sender, m);
         finishTest();
@@ -152,21 +154,21 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     // If we do not wait for the infowindowopen event before calling close,
     // the close event will never fire.
-    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
-      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
         info.close();
       }
     });
 
     info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 
   public void testInfoWindowCloseTrigger() {
     final MapWidget m = new MapWidget();
-    m.addInfoWindowCloseHandler(new InfoWindowCloseHandler() {
+    m.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
 
-      public void onInfoWindowClose(InfoWindowCloseEvent event) {
+      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
         MapWidget sender = event.getSender();
         assertEquals(sender, m);
         finishTest();
@@ -174,16 +176,16 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    InfoWindowCloseEvent e = new InfoWindowCloseEvent(m);
-    delayTestFinish(5000);
+    MapInfoWindowCloseEvent e = new MapInfoWindowCloseEvent(m);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
   public void testInfoWindowOpenEvent() {
     final MapWidget m = new MapWidget();
-    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
+    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
-      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
         MapWidget sender = event.getSender();
         assertEquals(sender, m);
         finishTest();
@@ -193,7 +195,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     RootPanel.get().add(m);
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     InfoWindow info = m.getInfoWindow();
     info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
   }
@@ -201,9 +203,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
   public void testInfoWindowOpenTrigger() {
     final MapWidget m = new MapWidget();
     RootPanel.get().add(m);
-    m.addInfoWindowOpenHandler(new InfoWindowOpenHandler() {
+    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
-      public void onInfoWindowOpen(InfoWindowOpenEvent event) {
+      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
         MapWidget sender = event.getSender();
         assertEquals(sender, m);
         finishTest();
@@ -211,8 +213,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
 
-    InfoWindowOpenEvent e = new InfoWindowOpenEvent(m);
-    delayTestFinish(5000);
+    MapInfoWindowOpenEvent e = new MapInfoWindowOpenEvent(m);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -228,7 +230,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.addMapType(MapType.getMarsElevationMap());
   }
 
@@ -248,7 +250,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     RootPanel.get().add(m);
     MapAddMapTypeEvent e = new MapAddMapTypeEvent(m,
         MapType.getMarsElevationMap());
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -265,7 +267,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.addOverlay(marker);
   }
 
@@ -283,7 +285,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapAddOverlayEvent e = new MapAddOverlayEvent(m, marker);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -303,7 +305,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.addOverlay(marker);
     m.clearOverlays();
   }
@@ -323,7 +325,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapClearOverlaysEvent e = new MapClearOverlaysEvent(m);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -353,7 +355,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     RootPanel.get().add(m);
     Marker marker = new Marker(new LatLng(12.34, -22.2));
     MapClickEvent e = new MapClickEvent(m, marker, new LatLng(10.1, 12.2));
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -377,7 +379,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapDoubleClickEvent e = new MapDoubleClickEvent(m, new LatLng(10.1, 12.2));
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -397,7 +399,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
       }
     });
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     MapDragEndEvent e = new MapDragEndEvent(m);
     m.trigger(e);
   }
@@ -418,7 +420,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
       }
     });
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     MapDragEvent e = new MapDragEvent(m);
     m.trigger(e);
   }
@@ -439,7 +441,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
       }
     });
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     MapDragStartEvent e = new MapDragStartEvent(m);
     m.trigger(e);
   }
@@ -463,7 +465,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapMouseMoveEvent e = new MapMouseMoveEvent(m, latlng);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -488,7 +490,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapMouseOutEvent e = new MapMouseOutEvent(m, latlng);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -513,7 +515,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapMouseOverEvent e = new MapMouseOverEvent(m, latlng);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -536,7 +538,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
       }
 
     });
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.setCenter(end);
   }
 
@@ -564,7 +566,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
   // }
   //
   // });
-  // delayTestFinish(5000);
+  // delayTestFinish(ASYNC_DELAY_MSEC);
   // m.setCenter(start);
   // new Timer() {
   // @Override
@@ -593,7 +595,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
 
     MapMoveEndEvent e = new MapMoveEndEvent(m);
     m.trigger(e);
@@ -621,13 +623,13 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     MapMoveEvent e = new MapMoveEvent(m);
     m.setCenter(end);
   }
 
   public void testMapMoveStartTrigger() {
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     final MapWidget m = new MapWidget();
     m.addMapMoveStartHandler(new MapMoveStartHandler() {
 
@@ -656,7 +658,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
       }
 
     });
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
 
     MapMoveEvent e = new MapMoveEvent(m);
     m.trigger(e);
@@ -680,7 +682,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.removeMapType(MapType.getNormalMap());
   }
 
@@ -698,7 +700,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     MapRemoveMapTypeEvent e = new MapRemoveMapTypeEvent(m,
         MapType.getNormalMap());
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -719,7 +721,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.addOverlay(marker);
     m.removeOverlay(marker);
   }
@@ -739,7 +741,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapRemoveOverlayEvent e = new MapRemoveOverlayEvent(m, marker);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -771,7 +773,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     Marker marker = new Marker(new LatLng(12.34, -22.2));
     MapRightClickEvent e = new MapRightClickEvent(m, new Point(101, 222),
         m.getElement(), marker);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
@@ -794,7 +796,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     RootPanel.get().add(m);
 
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.setZoomLevel(14);
   }
 
@@ -814,7 +816,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     MapZoomEndEvent e = new MapZoomEndEvent(m, 13, 14);
-    delayTestFinish(5000);
+    delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 }
