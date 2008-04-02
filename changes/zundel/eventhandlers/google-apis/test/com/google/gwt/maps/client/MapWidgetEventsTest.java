@@ -16,9 +16,6 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
-import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
-import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -27,6 +24,9 @@ import com.google.gwt.maps.client.event.MapDoubleClickHandler;
 import com.google.gwt.maps.client.event.MapDragEndHandler;
 import com.google.gwt.maps.client.event.MapDragHandler;
 import com.google.gwt.maps.client.event.MapDragStartHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapMouseMoveHandler;
 import com.google.gwt.maps.client.event.MapMouseOutHandler;
 import com.google.gwt.maps.client.event.MapMouseOverHandler;
@@ -37,9 +37,6 @@ import com.google.gwt.maps.client.event.MapRemoveMapTypeHandler;
 import com.google.gwt.maps.client.event.MapRemoveOverlayHandler;
 import com.google.gwt.maps.client.event.MapRightClickHandler;
 import com.google.gwt.maps.client.event.MapZoomEndHandler;
-import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler.MapInfoWindowBeforeCloseEvent;
-import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler.MapInfoWindowCloseEvent;
-import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler.MapInfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler.MapAddMapTypeEvent;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler.MapAddOverlayEvent;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler.MapClearOverlaysEvent;
@@ -48,6 +45,9 @@ import com.google.gwt.maps.client.event.MapDoubleClickHandler.MapDoubleClickEven
 import com.google.gwt.maps.client.event.MapDragEndHandler.MapDragEndEvent;
 import com.google.gwt.maps.client.event.MapDragHandler.MapDragEvent;
 import com.google.gwt.maps.client.event.MapDragStartHandler.MapDragStartEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler.MapInfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler.MapInfoWindowCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler.MapInfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MapMouseMoveHandler.MapMouseMoveEvent;
 import com.google.gwt.maps.client.event.MapMouseOutHandler.MapMouseOutEvent;
 import com.google.gwt.maps.client.event.MapMouseOverHandler.MapMouseOverEvent;
@@ -79,7 +79,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * triggered by the Maps API calls.
  */
 public class MapWidgetEventsTest extends GWTTestCase {
-  // length of time to wait for asyncronous test to complete.
+  // length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 5000;
 
   // Used as a flag to test some trigger callback methods.
@@ -137,7 +137,6 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
   public void testInfoWindowCloseEvent() {
     final MapWidget m = new MapWidget();
-    m.setSize("300px", "300px");
     RootPanel.get().add(m);
 
     m.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
@@ -541,40 +540,35 @@ public class MapWidgetEventsTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.setCenter(end);
   }
+  
+   public void testMapMoveStartEvent() {
 
-  // TODO(zundel): come up with a reason why testMapMoveStartEvent() doesn't
-  // work
+    final LatLng start = new LatLng(37.4419, -122.1419);
+    final LatLng end = new LatLng(37.45, -122.15);
 
-  // public void testMapMoveStartEvent() {
-  //
-  // final LatLng start = new LatLng(37.4419, -122.1419);
-  // final LatLng end = new LatLng(37.4569, -122.1569);
-  //
-  // final MapWidget m = new MapWidget();
-  //
-  // /*
-  // * The MoveEnd event gets called on setCenter(). There is a setCenter() call
-  // * implicit in. Call now so that first move event won't get in the way of
-  // * the test.
-  // */
-  // RootPanel.get().add(m);
-  //
-  // m.addMapMoveStartHandler(new MapMoveStartHandler() {
-  //
-  // public void onMoveStart(MapMoveStartEvent event) {
-  // finishTest();
-  // }
-  //
-  // });
-  // delayTestFinish(ASYNC_DELAY_MSEC);
-  // m.setCenter(start);
-  // new Timer() {
-  // @Override
-  // public void run() {
-  // m.panTo(end);
-  // }
-  // }.schedule(250);
-  // }
+    final MapWidget m = new MapWidget(start, 13);
+    
+    // Apparently, setting the size is important for the move event.
+    m.setSize("300px", "300px");
+
+    /*
+     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
+     * implicit in. Call now so that first move event won't get in the way of
+     * the test.
+     */
+    RootPanel.get().add(m);
+
+    m.addMapMoveStartHandler(new MapMoveStartHandler() {
+
+      public void onMoveStart(MapMoveStartEvent event) {
+        finishTest();
+      }
+
+    });
+    
+    delayTestFinish(ASYNC_DELAY_MSEC);
+    m.panTo(end);
+  }
 
   public void testMapMoveEndTrigger() {
     final MapWidget m = new MapWidget();
