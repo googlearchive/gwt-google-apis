@@ -15,7 +15,7 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.gadgets.annotations.FeatureName;
+import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 
 /**
  * Indicates that a Gadget may need to be resized automatically by the
@@ -23,5 +23,5 @@ import com.google.gwt.gadgets.annotations.FeatureName;
  */
 @FeatureName("dynamic-height")
 public interface NeedsDynamicHeight {
-  public void initializeFeature(DynamicHeightFeature feature);
+  void initializeFeature(DynamicHeightFeature feature);
 }

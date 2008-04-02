@@ -28,7 +28,7 @@ public class AnalyticsFeature implements GadgetFeature {
    * @param id the Google Analytics account ID
    * @param path the virtual page view path that should be recorded
    */
-  public native void pageView(String id, String path) /*-{
+  public native void recordPageView(String id, String path) /*-{
     $wnd._IG_Analytics(id, path);
   }-*/;
 }

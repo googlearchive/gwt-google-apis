@@ -15,13 +15,12 @@
  */
 package com.google.gwt.gadgets.sample.hellogadgets.client;
 
-import com.google.gwt.gadgets.annotations.EnumDisplayValue;
-import com.google.gwt.gadgets.annotations.PreferenceAttributes;
-import com.google.gwt.gadgets.annotations.PreferenceAttributes.Options;
 import com.google.gwt.gadgets.client.BooleanPreference;
 import com.google.gwt.gadgets.client.EnumPreference;
 import com.google.gwt.gadgets.client.StringPreference;
 import com.google.gwt.gadgets.client.UserPreferences;
+import com.google.gwt.gadgets.client.EnumPreference.EnumDisplayValue;
+import com.google.gwt.gadgets.client.UserPreferences.PreferenceAttributes.Options;
 
 /**
  * The preferences for the HelloWorld Gadget.

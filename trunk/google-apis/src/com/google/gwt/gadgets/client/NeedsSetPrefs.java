@@ -15,7 +15,7 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.gadgets.annotations.FeatureName;
+import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 
 /**
  * Indicates that a Gadget intends to save preferences data.

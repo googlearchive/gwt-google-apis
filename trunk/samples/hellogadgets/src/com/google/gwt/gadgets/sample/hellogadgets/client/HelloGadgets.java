@@ -16,7 +16,6 @@
 package com.google.gwt.gadgets.sample.hellogadgets.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.gadgets.annotations.ModulePrefs;
 import com.google.gwt.gadgets.client.Gadget;
 import com.google.gwt.gadgets.client.IntrinsicFeature;
 import com.google.gwt.gadgets.client.NeedsIntrinsics;
@@ -24,12 +23,13 @@ import com.google.gwt.gadgets.client.NeedsSetPrefs;
 import com.google.gwt.gadgets.client.NeedsSetTitle;
 import com.google.gwt.gadgets.client.SetPrefsFeature;
 import com.google.gwt.gadgets.client.SetTitleFeature;
+import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
+import com.google.gwt.gadgets.sample.hellogadgets.client.HelloPreferences.ButtonPosition;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.gadgets.sample.hellogadgets.client.HelloPreferences.ButtonPosition;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;

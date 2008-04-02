@@ -15,9 +15,12 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.gadgets.annotations.DataType;
+import com.google.gwt.gadgets.client.UserPreferences.DataType;
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
 import com.google.gwt.gadgets.client.impl.PreferenceGeneratorName;
-import com.google.gwt.gadgets.client.impl.PreferencesUtil;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
 /**
  * A preference containing only enumerated values. The enumerated values will be
@@ -29,7 +32,28 @@ import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 @DataType("enum")
 @PreferenceGeneratorName("com.google.gwt.gadgets.rebind.EnumPreferenceGenerator")
 public abstract class EnumPreference<E extends Enum<E>> extends Preference<E> {
+  /**
+   * Declares the display name for Enum preference values.
+   * <p>
+   * Example:
+   * 
+   * <pre>
+   * public enum MyEnum {
+   *   {@literal @}EnumDisplayValue(&quot;Pretty&quot;)
+   *   FOO,
+   *   {@literal @}EnumDisplayValue(&quot;Names&quot;)
+   *   BAR,
+   *   {@literal @}EnumDisplayValue(&quot;For humans&quot;)
+   *   BAZ
+   * }
+   * </pre>
+   */
+  @Target(ElementType.FIELD)
+  public @interface EnumDisplayValue {
+    String value();
+  }
+
   void set(E value) {
-    PreferencesUtil.set(getName(), value.name());
+    prefs.set(getName(), value.name());
   }
 }

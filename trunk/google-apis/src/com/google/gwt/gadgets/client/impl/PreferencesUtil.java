@@ -18,43 +18,35 @@ package com.google.gwt.gadgets.client.impl;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Utility methods for the preferences support.
+ * Provides access to Gadget preferences support.
  */
-public class PreferencesUtil {
-  public static JavaScriptObject prefs;
+public class PreferencesUtil extends JavaScriptObject {
 
-  public static native boolean getBool(String name) /*-{
-    return @com.google.gwt.gadgets.client.impl.PreferencesUtil::prefs.getBool(name) || false;
-  }-*/;
-
-  public static native String getString(String name) /*-{
-    return (
-      _ = @com.google.gwt.gadgets.client.impl.PreferencesUtil::prefs.getString(name),
-      _ == undefined ? null : _);
-  }-*/;
-  
-  public static void maybeInit() {
-    if (prefs == null) {
-      prefs = nativeInitPrefs();
-    }
-  }
-
-  public static native JavaScriptObject nativeInitPrefs() /*-{
+  public static native PreferencesUtil nativeInitPrefs() /*-{
      return new $wnd._IG_Prefs();
    }-*/;
 
-  public static native void push(JavaScriptObject array, String value) /*-{
+  protected PreferencesUtil() {
+  }
+
+  public final native boolean getBool(String name) /*-{
+    return this.getBool(name) || false;
+  }-*/;
+
+  public final native String getString(String name) /*-{
+    var maybeString = this.getString(name);
+    return maybeString == undefined ? null : maybeString;
+  }-*/;
+
+  public final native void push(JavaScriptObject array, String value) /*-{
     array.push(value);
   }-*/;
 
-  public static native void set(String name, String value) /*-{
-    @com.google.gwt.gadgets.client.impl.PreferencesUtil::prefs.set(name, value);
+  public final native void set(String name, String value) /*-{
+    this.set(name, value);
   }-*/;
 
-  public static native void setArray(String name, JavaScriptObject value) /*-{
-    @com.google.gwt.gadgets.client.impl.PreferencesUtil::prefs.setArray(name, value);
+  public final native void setArray(String name, JavaScriptObject value) /*-{
+    this.setArray(name, value);
   }-*/;
-
-  private PreferencesUtil() {
-  }
 }
