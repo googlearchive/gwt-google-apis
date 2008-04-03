@@ -21,6 +21,11 @@ import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
+import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
+import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
+import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
 import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
 import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
@@ -66,9 +71,14 @@ public class MapEventDemo extends MapsDemo {
 
   // EOL Comments added to fix Eclipse automatic formatting
   private enum HandlerActions { 
-    INFO_WINDOW_BEFORE_CLOSE_HANDLER("InfoWindowBeforeCloseHandler"), //                                                                      // 
-    INFO_WINDOW_CLOSE_HANDLER("InfoWindowCloseHandler"), //
-    INFO_WINDOW_OPEN_HANDLER("InfoWindowOpenHandler"), //
+    INFO_WINDOW_CLOSE_CLICK_HANDLER("InfoWindowCloseClickHandler"), //
+    INFO_WINDOW_MAXIMIZE_CLICK_HANDLER("InfoWindowMaximizeClickHandler"), //
+    INFO_WINDOW_MAXIMIZE_END_HANDLER("InfoWindowMaximizeEndHandler"), //
+    INFO_WINDOW_RESTORE_CLICK_HANDLER("InfoWindowRestoreClickHandler"), //
+    INFO_WINDOW_RESTORE_END_HANDLER("InfoWindowRestoreEndHandler"), //
+    MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER("MapInfoWindowBeforeCloseHandler"), //                                                                      // 
+    MAP_INFO_WINDOW_CLOSE_HANDLER("MapInfoWindowCloseHandler"), //
+    MAP_INFO_WINDOW_OPEN_HANDLER("MapInfoWindowOpenHandler"), //
     MAP_CLEAR_OVERLAYS_HANDLER("MapClearOverlaysHandler"), //
     MAP_ADD_MAP_TYPE_HANDLER("MapAddMapTypeHandler"), //
     MAP_ADD_OVERLAY_HANDLER("MapAddOverlayHandler"), //
@@ -233,7 +243,107 @@ public class MapEventDemo extends MapsDemo {
 
     // Add event specific handlers
     switch (a) {
-      case INFO_WINDOW_BEFORE_CLOSE_HANDLER: {
+      case INFO_WINDOW_CLOSE_CLICK_HANDLER: {
+        final InfoWindowCloseClickHandler h = new InfoWindowCloseClickHandler() {
+          
+          public void onCloseClick(InfoWindowCloseClickEvent event) {
+            textBox.setText(textBox.getText() + "onCloseClick()");
+          }
+          
+        };
+        map.getInfoWindow().addInfoWindowCloseClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          
+          public void onClick(Widget sender) {
+            map.getInfoWindow().removeInfoWindowCloseClickHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+          
+        });
+      }
+        break;
+        
+      case INFO_WINDOW_MAXIMIZE_CLICK_HANDLER:  {
+        final InfoWindowMaximizeClickHandler h = new InfoWindowMaximizeClickHandler() {
+          
+          public void onMaximizeClick(InfoWindowMaximizeClickEvent event) {
+            textBox.setText(textBox.getText() + "onMaximizeClick()");
+          }
+          
+        };
+        map.getInfoWindow().addInfoWindowMaximizeClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          
+          public void onClick(Widget sender) {
+            map.getInfoWindow().removeInfoWindowMaximizeClickHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+          
+        });
+      }
+        break;
+        
+      case INFO_WINDOW_MAXIMIZE_END_HANDLER:  {
+        final InfoWindowMaximizeEndHandler h = new InfoWindowMaximizeEndHandler() {
+          
+          public void onMaximizeEnd(InfoWindowMaximizeEndEvent event) {
+            textBox.setText(textBox.getText() + "onMaximizeEnd()");
+          }
+          
+        };
+        map.getInfoWindow().addInfoWindowMaximizeEndHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          
+          public void onClick(Widget sender) {
+            map.getInfoWindow().removeInfoWindowMaximizeEndHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+          
+        });
+      }
+        break;
+        
+      case INFO_WINDOW_RESTORE_CLICK_HANDLER:  {
+        final InfoWindowRestoreClickHandler h = new InfoWindowRestoreClickHandler() {
+          
+          public void onRestoreClick(InfoWindowRestoreClickEvent event) {
+            textBox.setText(textBox.getText() + "onRestoreClick()");
+          }
+          
+        };
+        map.getInfoWindow().addInfoWindowRestoreClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          
+          public void onClick(Widget sender) {
+            map.getInfoWindow().removeInfoWindowRestoreClickHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+          
+        });
+      }
+        break;
+        
+      case INFO_WINDOW_RESTORE_END_HANDLER:  {
+        final InfoWindowRestoreEndHandler h = new InfoWindowRestoreEndHandler() {
+          
+          public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
+            textBox.setText(textBox.getText() + "onRestoreEnd()");
+          }
+          
+        };
+        map.getInfoWindow().addInfoWindowRestoreEndHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          
+          public void onClick(Widget sender) {
+            map.getInfoWindow().removeInfoWindowRestoreEndHandler(h);
+            // removeRowFromTable(nextListenerId);
+          }
+          
+        });
+      }
+        break;
+        
+      case MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER: {
         final MapInfoWindowBeforeCloseHandler h = new MapInfoWindowBeforeCloseHandler() {
 
           public void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event) {
@@ -254,7 +364,7 @@ public class MapEventDemo extends MapsDemo {
       }
         break;
 
-      case INFO_WINDOW_CLOSE_HANDLER: {
+      case MAP_INFO_WINDOW_CLOSE_HANDLER: {
         final MapInfoWindowCloseHandler h = new MapInfoWindowCloseHandler() {
 
           public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
@@ -275,7 +385,7 @@ public class MapEventDemo extends MapsDemo {
       }
         break;
 
-      case INFO_WINDOW_OPEN_HANDLER: {
+      case MAP_INFO_WINDOW_OPEN_HANDLER: {
         final MapInfoWindowOpenHandler h = new MapInfoWindowOpenHandler() {
 
           public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
@@ -738,7 +848,10 @@ public class MapEventDemo extends MapsDemo {
     infoWindowButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         InfoWindow info = map.getInfoWindow();
-        info.open(map.getCenter(), new InfoWindowContent("Hello Maps!"));
+        InfoWindowContent content = new InfoWindowContent("Hello Maps!");
+        content.setMaxContent("Hello Maps - more content");
+        content.setMaxTitle("Hello Maps");
+        info.open(map.getCenter(), content);
       }
     });
     hp.add(infoWindowButton);

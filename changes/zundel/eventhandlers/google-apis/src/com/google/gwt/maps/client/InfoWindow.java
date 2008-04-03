@@ -86,8 +86,6 @@ public final class InfoWindow {
 
   private final JavaScriptObject jsoPeer;
 
-  // private InfoWindowEventCallbacks eventCallbacks = null;
-
   private final MapWidget map;
 
   /**
@@ -107,7 +105,9 @@ public final class InfoWindow {
   }
 
   /**
-   * 
+   * This event is fired when the info window close button is clicked. An event
+   * handler for this event can implement to close the info window, by calling
+   * the {@link InfoWindow#close()} method.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -126,7 +126,7 @@ public final class InfoWindow {
   }
 
   /**
-   * TODO(zundel): add javadoc comments.
+   * Signals that the info window is about to be maximized.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -145,7 +145,7 @@ public final class InfoWindow {
   }
 
   /**
-   * 
+   * Signals that the info window is about to be maximized.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -164,7 +164,8 @@ public final class InfoWindow {
   }
 
   /**
-   * 
+   * Signals that the info window is about to be restored to the non-maximized
+   * state.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -183,7 +184,8 @@ public final class InfoWindow {
   }
 
   /**
-   * 
+   * Signals that the info window has completed the restore operation to the
+   * non-maximized state.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -206,6 +208,29 @@ public final class InfoWindow {
    */
   public void close() {
     MapImpl.impl.closeInfoWindow(map);
+  }
+
+  /**
+   * Enables maximization of the info window. A maximizable info window expands
+   * to fill most of the map with contents specified via the maxContent and
+   * maxTitle properties of GInfoWindowOptions. The info window must have been
+   * opened with maxContent or maxTitle options in order for enableMaximize() or
+   * {@link InfoWindow#disableMaximize} to have any effect. An info window
+   * opened with maxContent or maxTitle will have maximization enabled by
+   * default.
+   */
+  public void disableMaximize() {
+    InfoWindowImpl.impl.disableMaximize(jsoPeer);
+  }
+
+  /**
+   * Disables maximization of the info window. The infowindow must have been
+   * opened with maxContent or maxTitle options. Note that if the info window is
+   * currently opened, this function will remove the maximize buton but will not
+   * restore the window to its minimized state.
+   */
+  public void enableMaximize() {
+    InfoWindowImpl.impl.enableMaximize(jsoPeer);
   }
 
   /**
@@ -255,6 +280,15 @@ public final class InfoWindow {
    */
   public boolean isVisible() {
     return !InfoWindowImpl.impl.isHidden(jsoPeer);
+  }
+
+  /**
+   * Maximizes the infowindow. The infowindow must have been opened with
+   * maxContent or maxTitle options, and it must not have had its maximization
+   * disabled through {@link InfoWindow#disableMaximize}
+   */
+  public void maximize() {
+    InfoWindowImpl.impl.maximize(jsoPeer);
   }
 
   /**
@@ -330,6 +364,9 @@ public final class InfoWindow {
    */
   public void removeInfoWindowMaximizeClickHandler(
       InfoWindowMaximizeClickHandler handler) {
+
+    assert jsoPeer == MapImpl.impl.getInfoWindow(map);
+
     if (infoWindowMaximizeClickHandlers != null) {
       infoWindowMaximizeClickHandlers.removeHandler(handler);
     }
@@ -347,6 +384,8 @@ public final class InfoWindow {
       infoWindowMaximizeEndHandlers.removeHandler(handler);
     }
   }
+
+  // TODO(zundel): Implement reset?
 
   /**
    * Removes a single handler of this map previously added with
@@ -375,6 +414,14 @@ public final class InfoWindow {
   }
 
   /**
+   * Restores the info window to its default (non-maximized) state. The
+   * infowindow must have been opened with maxContent or maxTitle options
+   */
+  public void restore() {
+    InfoWindowImpl.impl.restore(jsoPeer);
+  }
+
+  /**
    * Selects the tab with the given index. This has the same effect as clicking
    * on the corresponding tab.
    * 
@@ -383,8 +430,6 @@ public final class InfoWindow {
   public void selectTab(int index) {
     InfoWindowImpl.impl.selectTab(jsoPeer, index);
   }
-
-  // TODO(zundel): Implement reset?
 
   /**
    * Shows or hides the info window.
@@ -532,7 +577,7 @@ public final class InfoWindow {
   private void maybeInitInfoWindowCloseClickHandlers() {
     if (infoWindowCloseClickHandlers == null) {
       infoWindowCloseClickHandlers = new HandlerCollection<InfoWindowCloseClickHandler>(
-          jsoPeer, MapEvent.INFOWINDOWCLOSE);
+          jsoPeer, MapEvent.CLOSECLICK);
     }
   }
 
@@ -575,5 +620,4 @@ public final class InfoWindow {
           jsoPeer, MapEvent.RESTOREEND);
     }
   }
-
 }

@@ -82,9 +82,6 @@ public class MapWidgetEventsTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 5000;
 
-  // Used as a flag to test some trigger callback methods.
-  static boolean passed;
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";

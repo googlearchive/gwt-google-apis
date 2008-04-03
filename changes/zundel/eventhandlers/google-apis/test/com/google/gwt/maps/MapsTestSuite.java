@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps;
 
+import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
 
 import junit.framework.Test;
@@ -27,9 +28,9 @@ import junit.framework.TestSuite;
 public class MapsTestSuite extends TestCase {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Maps API");
-
-    suite.addTestSuite(MapWidgetEventsTest.class); 
     
+    suite.addTestSuite(MapWidgetEventsTest.class); 
+    suite.addTestSuite(InfoWindowEventsTest.class);
     return suite;
   }
 }

@@ -134,7 +134,7 @@ public final class MapWidget extends Composite {
 
   private static native void nativeUnload() /*-{
     $wnd.GUnload && $wnd.GUnload();
-   }-*/;
+  }-*/;
 
   private ListenerCollection<MapClickListener> clickListeners;
   private ListenerCollection<MapDragListener> dragListeners;
