@@ -68,7 +68,7 @@ public class ManagedResourceStore {
     return err == null ? null : err;
   }-*/;
 
-  private static native long nativeGetLastUpdateCheckTime(
+  private static native double nativeGetLastUpdateCheckTime(
       JavaScriptObject jsStore) /*-{
     return jsStore.lastUpdateCheckTime;
   }-*/;
@@ -112,7 +112,7 @@ public class ManagedResourceStore {
    * Constructs a ManagedResourceStore object backed by the provided Gears
    * managed store object.
    * 
-   * @param jsDb the object returned from the Gears factory's create method
+   * @param jso the object returned from the Gears factory's create method
    */
   ManagedResourceStore(JavaScriptObject jso) {
     this.mgdStore = jso;
@@ -163,7 +163,7 @@ public class ManagedResourceStore {
    * @return the lastUpdateCheckTime
    */
   public long getLastUpdateCheckTime() {
-    return nativeGetLastUpdateCheckTime(mgdStore);
+    return (long) nativeGetLastUpdateCheckTime(mgdStore);
   }
 
   /**
