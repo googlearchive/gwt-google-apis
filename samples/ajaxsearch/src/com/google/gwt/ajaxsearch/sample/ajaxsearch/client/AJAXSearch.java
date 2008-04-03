@@ -137,7 +137,7 @@ public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
    * in the API.
    */
   public void onSearchResult(Search search, Result result) {
-    System.out.println("The result is a " + GWT.getTypeName(result));
+    System.out.println("The result is a " + result.getClass().getName());
   }
 
   public void onWindowResized(int width, int height) {
