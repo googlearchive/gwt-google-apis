@@ -84,8 +84,8 @@ public class ControlsDemo extends MapsDemo {
           GWT.log("Map Type: " + t.getName(true) + " Min resolution: "
               + minResolution + " Max Resolution: " + maxResolution, null);
 
-          minResolution = t.getMinimumResolution(map.getCenter());
-          maxResolution = t.getMaximumResolution(map.getCenter());
+          minResolution = t.getMinimumResolution();
+          maxResolution = t.getMaximumResolution();
           GWT.log("@ point: " + map.getCenter().toString() + " Map Type: "
               + t.getName(true) + " Min resolution: " + minResolution
               + " Max Resolution: " + maxResolution, null);
