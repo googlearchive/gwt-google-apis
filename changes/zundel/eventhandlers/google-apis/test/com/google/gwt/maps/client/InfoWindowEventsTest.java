@@ -16,8 +16,6 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
@@ -25,10 +23,9 @@ import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
 import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler.InfoWindowCloseClickEvent;
-import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler.InfoWindowMaximizeClickEvent;
-import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler.InfoWindowMaximizeEndEvent;
-import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler.InfoWindowRestoreClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler.InfoWindowRestoreEndEvent;
+import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Tests for the InfoWindow events.
