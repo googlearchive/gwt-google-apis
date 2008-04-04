@@ -26,9 +26,6 @@ import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
-import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
-import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
-import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -37,6 +34,9 @@ import com.google.gwt.maps.client.event.MapDoubleClickHandler;
 import com.google.gwt.maps.client.event.MapDragEndHandler;
 import com.google.gwt.maps.client.event.MapDragHandler;
 import com.google.gwt.maps.client.event.MapDragStartHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapMouseMoveHandler;
 import com.google.gwt.maps.client.event.MapMouseOutHandler;
 import com.google.gwt.maps.client.event.MapMouseOverHandler;
@@ -48,6 +48,20 @@ import com.google.gwt.maps.client.event.MapRemoveOverlayHandler;
 import com.google.gwt.maps.client.event.MapRightClickHandler;
 import com.google.gwt.maps.client.event.MapTypeChangedHandler;
 import com.google.gwt.maps.client.event.MapZoomEndHandler;
+import com.google.gwt.maps.client.event.MarkerClickHandler;
+import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
+import com.google.gwt.maps.client.event.MarkerDragEndHandler;
+import com.google.gwt.maps.client.event.MarkerDragHandler;
+import com.google.gwt.maps.client.event.MarkerDragStartHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MarkerMouseDownHandler;
+import com.google.gwt.maps.client.event.MarkerMouseOutHandler;
+import com.google.gwt.maps.client.event.MarkerMouseOverHandler;
+import com.google.gwt.maps.client.event.MarkerMouseUpHandler;
+import com.google.gwt.maps.client.event.MarkerRemoveHandler;
+import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
@@ -59,6 +73,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -70,13 +85,13 @@ import com.google.gwt.user.client.ui.Widget;
 public class MapEventDemo extends MapsDemo {
 
   // EOL Comments added to fix Eclipse automatic formatting
-  private enum HandlerActions { 
+  private enum HandlerActions {
     INFO_WINDOW_CLOSE_CLICK_HANDLER("InfoWindowCloseClickHandler"), //
     INFO_WINDOW_MAXIMIZE_CLICK_HANDLER("InfoWindowMaximizeClickHandler"), //
     INFO_WINDOW_MAXIMIZE_END_HANDLER("InfoWindowMaximizeEndHandler"), //
     INFO_WINDOW_RESTORE_CLICK_HANDLER("InfoWindowRestoreClickHandler"), //
     INFO_WINDOW_RESTORE_END_HANDLER("InfoWindowRestoreEndHandler"), //
-    MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER("MapInfoWindowBeforeCloseHandler"), //                                                                      // 
+    MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER("MapInfoWindowBeforeCloseHandler"), // //
     MAP_INFO_WINDOW_CLOSE_HANDLER("MapInfoWindowCloseHandler"), //
     MAP_INFO_WINDOW_OPEN_HANDLER("MapInfoWindowOpenHandler"), //
     MAP_CLEAR_OVERLAYS_HANDLER("MapClearOverlaysHandler"), //
@@ -97,7 +112,21 @@ public class MapEventDemo extends MapsDemo {
     MAP_REMOVE_OVERLAY_HANDLER("MapRemoveOverlayHandler"), //
     MAP_RIGHT_CLICK_HANDLER("MapRightClickHandler"), //
     MAP_TYPE_CHANGED_HANDLER("MapTypeChangedHandler"), //
-    MAP_ZOOM_END_HANDLER("MapZoomEndHandler"); //
+    MAP_ZOOM_END_HANDLER("MapZoomEndHandler"), //
+    MARKER_CLICK_HANDLER("MarkerClickHandler"), //
+    MARKER_DOUBLE_CLICK_HANDLER("MarkerDoubleClickHandler"), //
+    MARKER_MOUSE_DOWN_HANDLER("MarkerMouseDownHandler"), //
+    MARKER_MOUSE_UP_HANDLER("MarkerMouseUpHandler"), //
+    MARKER_MOUSE_OVER_HANDLER("MarkerMouseOverHandler"), //
+    MARKER_MOUSE_OUT_HANDLER("MarkerMouseOutHandler"), //
+    MARKER_INFO_WINDOW_OPEN_HANDLER("MarkerInfoWindowOpenHandler"), //
+    MARKER_INFO_WINDOW_BEFORECLOSE_HANDLER("MarkerInfoWindowBeforeCloseHandler"), //
+    MARKER_INFO_WINDOW_CLOSE_HANDLER("MarkerInfoWindowCloseHandler"), //
+    MARKER_REMOVE_HANDLER("MarkerRemoveHandler"), //
+    MARKER_DRAG_START_HANDLER("MarkerDragStartHandler"), //
+    MARKER_DRAG_HANDLER("MarkerDragHandler"), //
+    MARKER_DRAG_END_HANDLER("MarkerDragEndHandler"), //
+    MARKER_VISIBILITY_CHANGED_HANDLER("MarkerVisibilityChangedHandler"); //
 
     private final String value;
 
@@ -189,7 +218,7 @@ public class MapEventDemo extends MapsDemo {
     opt.setDraggable(true);
     marker = new Marker(ATLANTA, opt);
 
-    HorizontalPanel hp1 = createActionButtons();
+    Panel hp1 = createActionButtons();
     HorizontalPanel hp2 = createListenerListBox();
 
     // Make a spacer
@@ -245,108 +274,109 @@ public class MapEventDemo extends MapsDemo {
     switch (a) {
       case INFO_WINDOW_CLOSE_CLICK_HANDLER: {
         final InfoWindowCloseClickHandler h = new InfoWindowCloseClickHandler() {
-          
+
           public void onCloseClick(InfoWindowCloseClickEvent event) {
             textBox.setText(textBox.getText() + "onCloseClick()");
           }
-          
+
         };
         map.getInfoWindow().addInfoWindowCloseClickHandler(h);
         removeHandlerButton.addClickListener(new ClickListener() {
-          
+
           public void onClick(Widget sender) {
             map.getInfoWindow().removeInfoWindowCloseClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
-          
+
         });
       }
         break;
-        
-      case INFO_WINDOW_MAXIMIZE_CLICK_HANDLER:  {
+
+      case INFO_WINDOW_MAXIMIZE_CLICK_HANDLER: {
         final InfoWindowMaximizeClickHandler h = new InfoWindowMaximizeClickHandler() {
-          
+
           public void onMaximizeClick(InfoWindowMaximizeClickEvent event) {
             textBox.setText(textBox.getText() + "onMaximizeClick()");
           }
-          
+
         };
         map.getInfoWindow().addInfoWindowMaximizeClickHandler(h);
         removeHandlerButton.addClickListener(new ClickListener() {
-          
+
           public void onClick(Widget sender) {
             map.getInfoWindow().removeInfoWindowMaximizeClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
-          
+
         });
       }
         break;
-        
-      case INFO_WINDOW_MAXIMIZE_END_HANDLER:  {
+
+      case INFO_WINDOW_MAXIMIZE_END_HANDLER: {
         final InfoWindowMaximizeEndHandler h = new InfoWindowMaximizeEndHandler() {
-          
+
           public void onMaximizeEnd(InfoWindowMaximizeEndEvent event) {
             textBox.setText(textBox.getText() + "onMaximizeEnd()");
           }
-          
+
         };
         map.getInfoWindow().addInfoWindowMaximizeEndHandler(h);
         removeHandlerButton.addClickListener(new ClickListener() {
-          
+
           public void onClick(Widget sender) {
             map.getInfoWindow().removeInfoWindowMaximizeEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
-          
+
         });
       }
         break;
-        
-      case INFO_WINDOW_RESTORE_CLICK_HANDLER:  {
+
+      case INFO_WINDOW_RESTORE_CLICK_HANDLER: {
         final InfoWindowRestoreClickHandler h = new InfoWindowRestoreClickHandler() {
-          
+
           public void onRestoreClick(InfoWindowRestoreClickEvent event) {
             textBox.setText(textBox.getText() + "onRestoreClick()");
           }
-          
+
         };
         map.getInfoWindow().addInfoWindowRestoreClickHandler(h);
         removeHandlerButton.addClickListener(new ClickListener() {
-          
+
           public void onClick(Widget sender) {
             map.getInfoWindow().removeInfoWindowRestoreClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
-          
+
         });
       }
         break;
-        
-      case INFO_WINDOW_RESTORE_END_HANDLER:  {
+
+      case INFO_WINDOW_RESTORE_END_HANDLER: {
         final InfoWindowRestoreEndHandler h = new InfoWindowRestoreEndHandler() {
-          
+
           public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
             textBox.setText(textBox.getText() + "onRestoreEnd()");
           }
-          
+
         };
         map.getInfoWindow().addInfoWindowRestoreEndHandler(h);
         removeHandlerButton.addClickListener(new ClickListener() {
-          
+
           public void onClick(Widget sender) {
             map.getInfoWindow().removeInfoWindowRestoreEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
-          
+
         });
       }
         break;
-        
+
       case MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER: {
         final MapInfoWindowBeforeCloseHandler h = new MapInfoWindowBeforeCloseHandler() {
 
-          public void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event) {
+          public void onInfoWindowBeforeClose(
+              MapInfoWindowBeforeCloseEvent event) {
             textBox.setText(textBox.getText() + "onInfoWindowBeforeClose()");
           }
 
@@ -779,7 +809,230 @@ public class MapEventDemo extends MapsDemo {
         });
       }
         break;
+      case MARKER_CLICK_HANDLER: {
 
+        final MarkerClickHandler h = new MarkerClickHandler() {
+
+          public void onClick(MarkerClickEvent e) {
+            textBox.setText(textBox.getText() + "onClick()");
+          }
+        };
+        marker.addMarkerClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerClickHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_DOUBLE_CLICK_HANDLER: {
+
+        final MarkerDoubleClickHandler h = new MarkerDoubleClickHandler() {
+
+          public void onDoubleClick(MarkerDoubleClickEvent e) {
+            textBox.setText(textBox.getText() + "onDoubleClick()");
+          }
+        };
+        marker.addMarkerDoubleClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerDoubleClickHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_MOUSE_DOWN_HANDLER: {
+
+        final MarkerMouseDownHandler h = new MarkerMouseDownHandler() {
+
+          public void onMouseDown(MarkerMouseDownEvent e) {
+            textBox.setText(textBox.getText() + "onMouseDown()");
+          }
+        };
+        marker.addMarkerMouseDownHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerMouseDownHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_MOUSE_UP_HANDLER: {
+
+        final MarkerMouseUpHandler h = new MarkerMouseUpHandler() {
+
+          public void onMouseUp(MarkerMouseUpEvent e) {
+            textBox.setText(textBox.getText() + "onMouseUp()");
+          }
+        };
+        marker.addMarkerMouseUpHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerMouseUpHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_MOUSE_OVER_HANDLER: {
+
+        final MarkerMouseOverHandler h = new MarkerMouseOverHandler() {
+
+          public void onMouseOver(MarkerMouseOverEvent e) {
+            textBox.setText(textBox.getText() + "onMouseOver()");
+          }
+        };
+        marker.addMarkerMouseOverHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerMouseOverHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_MOUSE_OUT_HANDLER: {
+
+        final MarkerMouseOutHandler h = new MarkerMouseOutHandler() {
+
+          public void onMouseOut(MarkerMouseOutEvent e) {
+            textBox.setText(textBox.getText() + "onMouseOut()");
+          }
+        };
+        marker.addMarkerMouseOutHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerMouseOutHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_INFO_WINDOW_OPEN_HANDLER: {
+
+        final MarkerInfoWindowOpenHandler h = new MarkerInfoWindowOpenHandler() {
+
+          public void onInfoWindowOpen(MarkerInfoWindowOpenEvent e) {
+            textBox.setText(textBox.getText() + "onInfoWindowOpen()");
+          }
+        };
+        marker.addMarkerInfoWindowOpenHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerInfoWindowOpenHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_INFO_WINDOW_BEFORECLOSE_HANDLER: {
+
+        final MarkerInfoWindowBeforeCloseHandler h = new MarkerInfoWindowBeforeCloseHandler() {
+
+          public void onInfoWindowBeforeClose(MarkerInfoWindowBeforeCloseEvent e) {
+            textBox.setText(textBox.getText() + "onInfoWindowBeforeClose()");
+          }
+        };
+        marker.addMarkerInfoWindowBeforeCloseHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerInfoWindowBeforeCloseHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_INFO_WINDOW_CLOSE_HANDLER: {
+
+        final MarkerInfoWindowCloseHandler h = new MarkerInfoWindowCloseHandler() {
+
+          public void onInfoWindowClose(MarkerInfoWindowCloseEvent e) {
+            textBox.setText(textBox.getText() + "onInfoWindowClose()");
+          }
+        };
+        marker.addMarkerInfoWindowCloseHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerInfoWindowCloseHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_REMOVE_HANDLER: {
+
+        final MarkerRemoveHandler h = new MarkerRemoveHandler() {
+
+          public void onRemove(MarkerRemoveEvent e) {
+            textBox.setText(textBox.getText() + "onRemove()");
+          }
+        };
+        marker.addMarkerRemoveHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerRemoveHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_DRAG_START_HANDLER: {
+
+        final MarkerDragStartHandler h = new MarkerDragStartHandler() {
+
+          public void onDragStart(MarkerDragStartEvent e) {
+            textBox.setText(textBox.getText() + "onDragStart()");
+          }
+        };
+        marker.addMarkerDragStartHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerDragStartHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_DRAG_HANDLER: {
+
+        final MarkerDragHandler h = new MarkerDragHandler() {
+
+          public void onDrag(MarkerDragEvent e) {
+            textBox.setText(textBox.getText() + "onDrag()");
+          }
+        };
+        marker.addMarkerDragHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerDragHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_DRAG_END_HANDLER: {
+
+        final MarkerDragEndHandler h = new MarkerDragEndHandler() {
+
+          public void onDragEnd(MarkerDragEndEvent e) {
+            textBox.setText(textBox.getText() + "onDragEnd()");
+          }
+        };
+        marker.addMarkerDragEndHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerDragEndHandler(h);
+          }
+        });
+      }
+        break;
+      case MARKER_VISIBILITY_CHANGED_HANDLER: {
+
+        final MarkerVisibilityChangedHandler h = new MarkerVisibilityChangedHandler() {
+
+          public void onVisibilityChanged(MarkerVisibilityChangedEvent e) {
+            textBox.setText(textBox.getText() + "onVisibilityChanged(" + e.isVisible() + ")");
+          }
+        };
+        marker.addMarkerVisibilityChangedHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            marker.removeMarkerVisibilityChangedHandler(h);
+          }
+        });
+      }
+        break;
       default:
         Window.alert("Unhandled HandlerActions case : " + a.valueOf());
     }
@@ -801,9 +1054,13 @@ public class MapEventDemo extends MapsDemo {
   /**
    * Create a panel of buttons to use to perform various actions on the marker.
    */
-  private HorizontalPanel createActionButtons() {
+  private Panel createActionButtons() {
+    VerticalPanel vp = new VerticalPanel();
     HorizontalPanel hp = new HorizontalPanel();
+    hp.setSpacing(10);
 
+    vp.add(hp);
+    
     // Create a button to hide/show the marker
     final Button hideButton = new Button("Hide Marker");
     hideButton.addClickListener(new ClickListener() {
@@ -842,8 +1099,13 @@ public class MapEventDemo extends MapsDemo {
         map.clearOverlays();
       }
     });
+    
     hp.add(clearOverlaysButton);
 
+    hp = new HorizontalPanel();
+    hp.setSpacing(10);
+    vp.add(hp);
+    
     final Button infoWindowButton = new Button("Show InfoWindow");
     infoWindowButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
@@ -855,7 +1117,19 @@ public class MapEventDemo extends MapsDemo {
       }
     });
     hp.add(infoWindowButton);
-
+    
+    final Button mInfoWindowButton = new Button("Marker InfoWindow");
+    mInfoWindowButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        InfoWindow info = map.getInfoWindow();
+        InfoWindowContent content = new InfoWindowContent("Hello Maps!");
+        content.setMaxContent("Hello Maps - more content");
+        content.setMaxTitle("Hello Maps");
+        info.open(marker, content);
+      }
+    });
+    hp.add(mInfoWindowButton);
+    
     final Button mapTypeButton = new Button("Add Map Type");
     mapTypeButton.addClickListener(new ClickListener() {
 
@@ -882,8 +1156,7 @@ public class MapEventDemo extends MapsDemo {
     });
     hp.add(clearTableButton);
 
-    hp.setSpacing(10);
-    return hp;
+    return vp;
   }
 
   /**

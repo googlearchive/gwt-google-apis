@@ -17,6 +17,7 @@ package com.google.gwt.maps;
 
 import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
+import com.google.gwt.maps.client.overlay.MarkerEventsTest;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -31,6 +32,7 @@ public class MapsTestSuite extends TestCase {
     
     suite.addTestSuite(MapWidgetEventsTest.class); 
     suite.addTestSuite(InfoWindowEventsTest.class);
+    suite.addTestSuite(MarkerEventsTest.class);
     return suite;
   }
 }

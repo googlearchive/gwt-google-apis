@@ -96,7 +96,7 @@ public final class Marker extends ConcreteOverlay {
   private ListenerCollection<MarkerClickListener> clickListeners;
   private ListenerCollection<MarkerDragListener> dragListeners;
   private HandlerCollection<MarkerClickHandler> markerClickHandlers;
-  private HandlerCollection<MarkerDoubleClickHandler> markerDoubleClickHandlers;  
+  private HandlerCollection<MarkerDoubleClickHandler> markerDoubleClickHandlers;
   private HandlerCollection<MarkerDragEndHandler> markerDragEndHandlers;
   private HandlerCollection<MarkerDragHandler> markerDragHandlers;
   private HandlerCollection<MarkerDragStartHandler> markerDragStartHandlers;
@@ -147,7 +147,9 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the marker icon was clicked. Notice that this
+   * event will also fire for the map, with the marker passed as an argument to
+   * the event handler.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -162,7 +164,7 @@ public final class Marker extends ConcreteOverlay {
       }
     });
   }
-  
+
   /**
    * Associate a click event listener with this Marker.
    * 
@@ -190,7 +192,9 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the marker icon was double-clicked. Notice that
+   * this event will not fire for the map, because the map centers on
+   * double-click as a hardwired behavior.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -207,7 +211,8 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * If the marker is enabled for dragging, this event is fired when the marker
+   * ceases to be dragged.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -224,7 +229,8 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * If the marker is enabled for dragging, this event is fired when the marker
+   * is being dragged.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -274,7 +280,8 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * If the marker is enabled for dragging, this event is fired when the marker
+   * dragging begins.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -291,7 +298,8 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired before the info window of the map that was opened
+   * through this marker is closed.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -310,7 +318,10 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the info window of the map that was opened through
+   * this marker is closed. This happens when either the info window was closed,
+   * or when it was opened on another marker, or on the map. The handler
+   * {@link MarkerInfoWindowBeforeCloseHandler} is fired before this event.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -329,7 +340,8 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the info window of the map was opened through this
+   * marker.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -341,13 +353,15 @@ public final class Marker extends ConcreteOverlay {
       @Override
       public void callback() {
         MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(Marker.this);
-        handler.onInfoWindowOpen(e);
+          handler.onInfoWindowOpen(e);
       }
     });
   }
 
   /**
-   * 
+   * This event is fired when the DOM "mousedown" event is fired on the marker
+   * icon. Notice that the marker will stop the "mousedown" DOM event, so that
+   * it doesn't cause the map to start dragging.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -405,7 +419,7 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the mouse leaves the area of the marker icon.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -422,7 +436,7 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the mouse enters the area of the marker icon.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -439,7 +453,9 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired for the DOM "mouseup" on the marker. Notice that the
+   * marker will not stop the "mousedown" DOM event, because it will not confuse
+   * the drag handler of the map.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -456,7 +472,9 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the marker is removed from the map, using
+   * {@link com.google.gwt.maps.client.MapWidget#removeOverlay} or
+   * {@link com.google.gwt.maps.client.MapWidget#clearOverlays}.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -473,7 +491,10 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * 
+   * This event is fired when the visibility of the marker is changed (i.e. the
+   * visibility is flipped from visible to hidden or vice-versa). The
+   * <code>visible</code> parameter refers to the state of the marker after
+   * the visibility change has happened.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -691,7 +712,8 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @param handler the handler to remove
    */
-  public void removeMarkerInfoWindowOpenHandler(MarkerInfoWindowOpenHandler handler) {
+  public void removeMarkerInfoWindowOpenHandler(
+      MarkerInfoWindowOpenHandler handler) {
     if (markerInfoWindowOpenHandlers != null) {
       markerInfoWindowOpenHandlers.removeHandler(handler);
     }
@@ -896,7 +918,7 @@ public final class Marker extends ConcreteOverlay {
     maybeInitMarkerDragHandlers();
     markerDragHandlers.trigger();
   }
-  
+
   /**
    * Manually trigger the specified event on this object.
    * 
@@ -1014,7 +1036,7 @@ public final class Marker extends ConcreteOverlay {
    */
   void trigger(MarkerVisibilityChangedEvent event) {
     maybeInitMarkerVisibilityChangeHandlers();
-    markerVisibilityChangedHandlers.trigger();
+    markerVisibilityChangedHandlers.trigger(event.isVisible());
   }
 
   /**
@@ -1127,7 +1149,8 @@ public final class Marker extends ConcreteOverlay {
     }
   }
 
-  /**Lazy init the HandlerCollection.
+  /**
+   * Lazy init the HandlerCollection.
    * 
    */
   private void maybeInitMarkerMouseUpHandlers() {
