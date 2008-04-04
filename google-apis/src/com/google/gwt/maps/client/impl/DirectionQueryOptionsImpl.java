@@ -23,7 +23,8 @@ import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
- * 
+ * Wraps the GDirectionQueryOptions object in the Maps API using JSIO.
+ * It has no constructor, but is instantiated as an object literal.
  */
 @BeanProperties
 public interface DirectionQueryOptionsImpl extends JSFlyweightWrapper {

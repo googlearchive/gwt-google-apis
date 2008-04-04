@@ -34,7 +34,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.user.client.Element;
 
 /**
- * 
+ * Wrapper for the GMap object from the Maps API using JSIO.
  */
 public interface MapImpl extends JSFlyweightWrapper {
 

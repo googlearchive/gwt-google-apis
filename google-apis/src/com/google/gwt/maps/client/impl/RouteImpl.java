@@ -25,7 +25,7 @@ import com.google.gwt.maps.client.geocode.Step;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * Wraps the GRoute object from the Maps API.
+ * Wraps the GRoute object from the Maps API using JSIO.
  */
 public interface RouteImpl extends JSFlyweightWrapper {
 

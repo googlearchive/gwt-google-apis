@@ -30,20 +30,21 @@ import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 
 /**
- * 
+ * Wraps the GGeocoderClient object from the Maps API using JSIO.
  */
 public interface GeocoderImpl extends JSFlyweightWrapper {
 
-  // TODO: this is only used in GeocoderImpl. Where should it be placed?
   /**
-   * 
+   * Provides a callback interface to
+   * {@link GeocoderImpl#getLocations(JavaScriptObject, String, com.google.gwt.maps.client.impl.GeocoderImpl.LocationsCallback)}.
    */
   public abstract static class LocationsCallback extends JSFunction {
     public abstract void callback(Response response);
   }
 
   /**
-   * 
+   * Provides an interface to the object passed to
+   * {@link LocationsCallback#callback(Response)}.
    */
   @BeanProperties
   public static interface Response extends JSWrapper<Response> {
@@ -57,13 +58,14 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
   }
 
   /**
-   * 
+   * Provides an interface to the object passed to
+   * {@link LocationsCallback#callback(Response)}.
    */
   @BeanProperties
   public static interface ResponseStatus extends JSWrapper<ResponseStatus> {
     int getCode();
   }
-  
+
   GeocoderImpl impl = GWT.create(GeocoderImpl.class);
 
   @Constructor("$wnd.GClientGeocoder")

@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client.impl;
 
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -31,70 +30,74 @@ import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Element;
 
-
 /**
- * 
+ * Wrapper for the GEvent class from the Maps API using JSIO. In order to give
+ * type appropriate Java interfaces, this class contains many aliases for the
+ * addListener() JavaScript method and associated callback interfaces.
  */
 @Global("$wnd.GEvent")
 public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   /**
-   * 
+   * Provides a callback interface with a single boolean argument.
    */
   public abstract static class BooleanCallback extends JSFunction {
     public abstract void callback(boolean value);
   }
 
   /**
-   * 
+   * Provides a callback interface with a {@link Bounds} followed by an int
+   * argument.
    */
   public abstract static class BoundsIntCallback extends JSFunction {
     public abstract void callback(Bounds bounds, int value);
   }
   /**
-   * 
+   * Provides a callback interface with two int arguments.
    */
   public abstract static class IntIntCallback extends JSFunction {
     public abstract void callback(int value1, int value2);
   }
 
   /**
-   * 
+   * Provides a callback interface with a {@link LatLng} argument.
    */
   public abstract static class LatLngCallback extends JSFunction {
     public abstract void callback(LatLng latlng);
   }
 
   /**
-   * 
+   * Provides a callback interface with a {@link MapType} argument.
    */
   public abstract static class MapTypeCallback extends JSFunction {
     public abstract void callback(MapType mapType);
   }
 
   /**
-   * 
+   * Provides a callback interface with an {@link Overlay} argument.
    */
   public abstract static class OverlayCallback extends JSFunction {
     public abstract void callback(Overlay overlay);
   }
 
   /**
-   * 
+   * Provides a callback interface with an {@link Overlay} and {@link LatLng}
+   * argument.
    */
   public abstract static class OverlayLatLngCallback extends JSFunction {
     public abstract void callback(Overlay overlay, LatLng latlng);
   }
 
   /**
-   * 
+   * Provides a callback interface with {@link Point}, {@link Element}, and
+   * {@link Overlay} arguments.
    */
   public abstract static class PointElementOverlayCallback extends JSFunction {
     public abstract void callback(Point point, Element element, Overlay overlay);
   }
 
   /**
-   * 
+   * Provides a callback interface that takes no arguments.
    */
   public abstract static class VoidCallback extends JSFunction {
     public abstract void callback();

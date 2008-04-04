@@ -75,10 +75,11 @@ public final class DirectionQueryOptions {
   /**
    * By default, when a Directions object has a map, the map is centered and
    * zoomed to the bounding box of the the directions result. When this option
-   * is set to true, the viewport is left alone for this request.
+   * is set to <code>true</code>, the viewport is left alone for this
+   * request.
    * 
-   * @param preserveViewport pass true to leave alone the viewport (do not
-   *          center).
+   * @param preserveViewport pass <code>true</code> to leave alone the
+   *          viewport (do not center).
    */
   public void setPreserveViewport(boolean preserveViewport) {
     DirectionQueryOptionsImpl.impl.setPreserveViewport(jsoPeer,
@@ -91,8 +92,8 @@ public final class DirectionQueryOptions {
    * override this behavior and retrieve polyline data even when a map is not
    * attached to the Directions object.
    * 
-   * @param retrievePolyline pass true to retrieve polyline data even when a map
-   *          is not attached to the Directions object.
+   * @param retrievePolyline pass <code>true</code> to retrieve polyline data
+   *          even when a map is not attached to the Directions object.
    */
   public void setRetrievePolyline(boolean retrievePolyline) {
     DirectionQueryOptionsImpl.impl.setRetrievePolyline(jsoPeer,
@@ -105,8 +106,8 @@ public final class DirectionQueryOptions {
    * this behavior and retrieve steps data even when a panel is not attached to
    * the Directions object.
    * 
-   * @param retrieveSteps pass true to retrieve steps data even when a panel is
-   *          not attached to the Directions object.
+   * @param retrieveSteps pass <code>true</code> to retrieve steps data even
+   *          when a panel is not attached to the Directions object.
    */
   public void setRetrieveSteps(boolean retrieveSteps) {
     DirectionQueryOptionsImpl.impl.setRetrieveSteps(jsoPeer, retrieveSteps);

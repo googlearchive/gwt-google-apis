@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -49,34 +49,34 @@ public final class Copyright {
   }
 
   /**
-   * Gets the bounds to which this copyright applies.
+   * Returns the bounds to which this copyright applies.
    * 
-   * @return the bounds to which this copyright applies
+   * @return the bounds to which this copyright applies.
    */
   public LatLngBounds getBounds() {
     return CopyrightImpl.impl.getBounds(jsoPeer);
   }
 
   /**
-   * Gets the unique id of this copyright.
+   * Returns the unique id of this copyright.
    * 
-   * @return the unique id of this copyright
+   * @return the unique id of this copyright.
    */
   public int getId() {
     return CopyrightImpl.impl.getId(jsoPeer);
   }
 
   /**
-   * Gets the minimum zoom level at which this copyright displays.
+   * Returns the minimum zoom level at which this copyright displays.
    * 
-   * @return the minimum zoom level at which this copyright displays
+   * @return the minimum zoom level at which this copyright displays.
    */
   public int getMinZoomLevel() {
     return CopyrightImpl.impl.getMinZoomLevel(jsoPeer);
   }
 
   /**
-   * Gets the text of this copyright.
+   * Returns the text of this copyright.
    * 
    * @return the text of the copyright
    */

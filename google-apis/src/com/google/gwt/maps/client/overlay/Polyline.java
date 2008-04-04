@@ -125,4 +125,13 @@ public final class Polyline extends ConcreteOverlay {
       removeListeners.removeListener(listener);
     }
   }
+  
+  // TODO(zundel): Implement getBounds() method. (issue 75)
+  
+  // TODO(zundel): Implement getLenght() method. (issue 75)
+  
+  // TODO(zundel): Implement setVisible(boolean) method. (issue 75)
+  
+  // TODO(zundel): Provide event handlers (issue 75)
+  
 }

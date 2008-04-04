@@ -25,7 +25,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Point;
 
 /**
- * 
+ * Wraps the GBounds object in the Maps API using JSIO.
  */
 @BeanProperties
 public interface BoundsImpl extends JSFlyweightWrapper {

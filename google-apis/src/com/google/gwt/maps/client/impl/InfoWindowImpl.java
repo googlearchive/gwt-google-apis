@@ -26,7 +26,8 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.user.client.Element;
 
 /**
- * 
+ * Provides an interface to the GInfoWindowTab object from the Maps API using
+ * JSIO.
  */
 public interface InfoWindowImpl extends JSFlyweightWrapper {
 

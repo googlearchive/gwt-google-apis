@@ -24,7 +24,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 
 /**
- * 
+ * Wraps the GCopyrightCollection using JSIO.
  */
 public interface CopyrightCollectionImpl extends JSFlyweightWrapper {
 

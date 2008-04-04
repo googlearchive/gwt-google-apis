@@ -22,7 +22,9 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
- * 
+ * Wrapper for the GMarkerManagerOptions object from the Maps API using JSIO.
+ * Note that the Maps API does not provide a constructor for this class.
+ * Instead, it is constructed from an Object literal.
  */
 @BeanProperties
 public interface MarkerManagerOptionsImpl extends JSFlyweightWrapper {

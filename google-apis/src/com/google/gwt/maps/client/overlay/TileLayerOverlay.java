@@ -62,7 +62,7 @@ public class TileLayerOverlay extends ConcreteOverlay {
   /**
    * Shows or hides this overlay.
    * 
-   * @param visible true to show the overlay, false to hide.
+   * @param visible <code>true</code> to show the overlay, <code>false</code> to hide.
    */
   public void setVisible(boolean visible) {
     if (visible) {

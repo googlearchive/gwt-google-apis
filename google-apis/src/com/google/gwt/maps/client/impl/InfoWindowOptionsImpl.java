@@ -25,7 +25,9 @@ import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 
 /**
- * 
+ * Provides an interface to the GInfoWindowsOptions object from the Maps API
+ * using JSIO. Note that there is no provided constructor for this object.
+ * Instead it is build from an Object literal.
  */
 @BeanProperties
 public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
@@ -56,15 +58,20 @@ public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
       JavaScriptObject maximizedTitleWidget);
 
   @FieldName("maxTitle")
-  void setMaxTitleString(JavaScriptObject jsoPeer,
-      String windowMaximizedTitle);
+  void setMaxTitleString(JavaScriptObject jsoPeer, String windowMaximizedTitle);
 
   void setMaxWidth(JavaScriptObject jsoPeer, int maxWidth);
 
   void setNoCloseOnClick(JavaScriptObject jsoPeer, boolean noCloseFlag);
 
+  /**
+   * @deprecated use a GEvent handler instead.
+   */
   void setOnCloseFn(JavaScriptObject jsoPeer, VoidCallback closeFunction);
 
+  /**
+   * @deprecated use a GEvent handler instead.
+   */
   void setOnOpenFn(JavaScriptObject jsoPeer, VoidCallback openFunction);
 
   void setSelectedTab(JavaScriptObject jsoPeer, int tab);

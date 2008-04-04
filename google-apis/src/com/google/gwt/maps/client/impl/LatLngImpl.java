@@ -21,7 +21,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * 
+ * Wrapper for the GLatLng object from the Maps API using JSIO.
  */
 public interface LatLngImpl extends JSFlyweightWrapper {
 

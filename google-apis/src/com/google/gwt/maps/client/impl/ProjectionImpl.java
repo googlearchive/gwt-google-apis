@@ -27,7 +27,8 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Projection;
 
 /**
- * Wrapper for the GProjection class.
+ * Wrapper for the GProjection and GMercatorProjection classes from the Maps API
+ * using JSIO.
  */
 public interface ProjectionImpl extends JSFlyweightWrapper {
 
@@ -45,8 +46,7 @@ public interface ProjectionImpl extends JSFlyweightWrapper {
   @Constructor("$wnd.GMercatorProjection")
   JavaScriptObject constructMercatorProjection(int zoomLevels);
 
-  Point fromLatLngToPixel(JavaScriptObject jsoPeer, LatLng latlng,
-      int zoomLevel);
+  Point fromLatLngToPixel(JavaScriptObject jsoPeer, LatLng latlng, int zoomLevel);
 
   LatLng fromPixelToLatLng(JavaScriptObject jsoPeer, Point point,
       int zoomLevel, boolean unbounded);

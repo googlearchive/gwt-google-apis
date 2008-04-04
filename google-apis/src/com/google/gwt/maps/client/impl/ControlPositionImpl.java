@@ -23,7 +23,7 @@ import com.google.gwt.jsio.client.JSOpaque;
 import com.google.gwt.maps.client.geom.Size;
 
 /**
- * 
+ * Wraps the GControlPosition object in the Maps API using JSIO.
  */
 public interface ControlPositionImpl extends JSFlyweightWrapper {
  

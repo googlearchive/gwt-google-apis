@@ -22,7 +22,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 
 /**
- * 
+ * Wrapper for the GLatLngBounds object from the Maps API using JSIO.
  */
 public interface LatLngBoundsImpl extends JSFlyweightWrapper {
 
