@@ -17,45 +17,32 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.Binding;
 import com.google.gwt.jsio.client.Constructor;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
-import com.google.gwt.maps.client.geocode.GeocodeCache.ConcreteGeocodeCache;
 
 /**
- * Wraps the GGeocodeCache and GFactualGeocodeCache objects from the Maps API
- * using JSIO.
+ * 
  */
-public abstract class GeocodeCacheImpl implements JSFlyweightWrapper {
+public interface GeocodeCacheImpl extends JSFlyweightWrapper {
 
-  public static GeocodeCacheImpl impl = GWT.create(GeocodeCacheImpl.class);
+  GeocodeCacheImpl impl = GWT.create(GeocodeCacheImpl.class);
 
-  /**
-   * This bind function is manual because using \@Binding causes an exception to
-   * be thrown with a MultipleWrapper exception.
-   */
-  public native void bindConcreteGeocodeCache(JavaScriptObject jsoPeer,
-      ConcreteGeocodeCache geocodeCache) /*-{
-    jsoPeer.__gwtPeer = geocodeCache;
-  }-*/;
-  
   @Binding
-  public abstract void bindGeocodeCache(JavaScriptObject jsoPeer, GeocodeCache cache);
+  void bind(JavaScriptObject jsoPeer, GeocodeCache cache);
 
   @Constructor("$wnd.GFactualGeocodeCache")
-  public abstract JavaScriptObject constructFactualGeocodeCache();
+  JavaScriptObject constructFactualGeocodeCache();
 
   @Constructor("$wnd.GGeocodeCache")
-  public abstract JavaScriptObject constructGeocodeCache();
+  JavaScriptObject constructGeocodeCache();
 
-  public abstract JavaScriptObject get(JavaScriptObject cache, String address);
+  boolean isCachable(GeocodeCache cache, JavaScriptObject reply);
 
-  public abstract boolean isCachable(JavaScriptObject cache, JavaScriptObject reply);
+  void put(GeocodeCache cache, String address, JavaScriptObject reply);
 
-  public abstract void put(JavaScriptObject cache, String address, JavaScriptObject reply);
+  void reset(GeocodeCache cache);
 
-  public abstract void reset(JavaScriptObject cache);
-
-  public abstract String toCanonical(JavaScriptObject cache, String address);
+  String toCanonical(GeocodeCache cache, String address);
 }
