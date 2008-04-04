@@ -25,7 +25,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.Point;
 
 /**
- * 
+ * Wrapper for the GTileLayer object from the Maps API using JSIO.
  */
 public interface TileLayerImpl extends JSFlyweightWrapper {
 
@@ -38,8 +38,8 @@ public interface TileLayerImpl extends JSFlyweightWrapper {
   JavaScriptObject construct();
 
   @Constructor("$wnd.GTileLayer")
-  JavaScriptObject construct(CopyrightCollection copyrights,
-      int minResolution, int maxResolution);
+  JavaScriptObject construct(CopyrightCollection copyrights, int minResolution,
+      int maxResolution);
 
   double getOpacity(TileLayer jsoPeer);
 

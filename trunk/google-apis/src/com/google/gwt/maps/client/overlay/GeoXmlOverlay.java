@@ -52,31 +52,31 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
    * @param cb the callback to invoke when loading completes.
    */
   public static void load(final String url, final GeoXmlLoadCallback cb) {
-    
+
     if (url == null) {
       throw new NullPointerException("url parameter must not be null");
     }
     if (cb == null) {
       throw new NullPointerException("callback parameter must not be null");
     }
-    
+
     JSOVoidCallback voidCb = new JSOVoidCallback() {
       @Override
       public void callback() {
         UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-        
+
         if (handler != null) {
           fireLoadCbAndCatch(handler, url, cb);
         } else {
           fireLoadCb(url, cb);
         }
       }
-      
+
       /**
        * Does the work of actual invoking the user's callback code.
        * 
-       * @param url
-       * @param cb
+       * @param url the URL that was passed when the load was initiated.
+       * @param cb the user callback to invoke.
        */
       private void fireLoadCb(String url, GeoXmlLoadCallback cb) {
         // TODO: If this.jsoPeer is null at this point, the outer load() call
@@ -87,26 +87,27 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
         GeoXmlOverlay overlay = null;
         try {
           if (GeoXmlOverlayImpl.impl.loadedCorrectly(storedJso)) {
-             overlay = new GeoXmlOverlay(storedJso);
+            overlay = new GeoXmlOverlay(storedJso);
           }
         } catch (Throwable e) {
           caught = e;
         }
-        
+
         if (caught == null && overlay != null) {
           cb.onSuccess(url, overlay);
         } else {
           cb.onFailure(url, caught);
         }
       }
-      
+
       /**
        * Wraps firing the callback so that an exception handler can be called.
+       * 
        * @param handler the uncaught exception handler to call
        * @param url the url made in the load request
        * @param cb callback to use on success/failure.
        */
-      private void fireLoadCbAndCatch(UncaughtExceptionHandler handler, 
+      private void fireLoadCbAndCatch(UncaughtExceptionHandler handler,
           String url, GeoXmlLoadCallback cb) {
         try {
           fireLoadCb(url, cb);
@@ -118,12 +119,12 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
 
     JavaScriptObject outerJsoPeer = GeoXmlOverlayImpl.impl.constructGeoXmlOverlay(
         url, voidCb);
-    
+
     // TODO: In theory, a fast callback return could cause the callback() method
     // to execute before this method gets called.
     voidCb.setJsoPeer(outerJsoPeer);
-    
-    } // end load()
+
+  } // end load()
 
   /**
    * Creates a new overlay from a GeoRSS XML or KML file.
@@ -136,7 +137,7 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
 
   /**
    * Returns the bounding box of the default viewport. This function should only
-   * be called after the file has been loaded. (Since 2.84)
+   * be called after the file has been loaded.
    * 
    * @return the bounding box of the default viewport.
    */
@@ -156,7 +157,7 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
 
   /**
    * Returns the span of the default viewport as a lat/lng. This function should
-   * only be called after the file has been loaded. (Since 2.84)
+   * only be called after the file has been loaded.
    * 
    * @return the span of the default viewport.
    */
@@ -165,10 +166,10 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
   }
 
   /**
-   * GGeoXml objects may create a tile overlay for optimization purposes in
-   * certain cases. This method returns this tile layer overlay (if available).
-   * Note that the tile overlay may be null if not needed, or if the GGeoXml
-   * file has not yet finished loading. (Since 2.84)
+   * GeoXmlOverlay objects may create a tile overlay for optimization purposes
+   * in certain cases. This method returns this tile layer overlay (if
+   * available). Note that the tile overlay may be <code>null</code> if not
+   * needed, or if the GeoXmlOverlay file has not yet finished loading.
    * 
    * @return a handle to the TileLayerOverlay object
    */
@@ -190,10 +191,11 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
   // method is used to construct, it isn't needed.
 
   /**
-   * Returns true if the GGeoXml object is currently hidden, as changed by the
-   * GGeoXml.hide() method. Otherwise returns false. (Since 2.87)
+   * Returns <code>true</code> if the GeoXmlOverlay object is currently
+   * hidden, as changed by the {@link GeoXmlOverlay#setVisible(boolean)}.
+   * Otherwise returns <code>false</code>.
    * 
-   * @return true if the overlay is currently hidden.
+   * @return <code>true</code> if the overlay is currently hidden.
    */
   public boolean isHidden() {
     return GeoXmlOverlayImpl.impl.isHidden(jsoPeer);
@@ -203,13 +205,12 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
   // factory method is used to construct, it isn't needed.
 
   /**
-   * Shows/Hides the child overlays created by the GGeoXml object if the overlay
-   * is both currently visible and the overlay's supportsHide() method returns
-   * true. Note that this method will trigger the respective visibility changed
-   * event for each child overlay that fires that event (e.g. GMarker.visibility
-   * changed, GGroundOverlay.visibility changed, etc.). If no overlays are
-   * currently visible that return supportsHide() as true, this method has no
-   * effect. (Since 2.87)
+   * Shows/Hides the child overlays created by the GeoXmlOverlay object if the
+   * overlay is both currently visible and the overlay's supportsHide() method
+   * returns <code>true</code>. Note that this method will trigger the
+   * respective visibility changed event for each child overlay that fires that
+   * event. If no overlays are currently visible that return supportsHide() as
+   * <code>true</code>, this method has no effect.
    */
   public void setVisible(boolean visible) {
     if (visible) {
@@ -220,9 +221,9 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
   }
 
   /**
-   * Always returns true. (Since 2.87)
+   * Always returns <code>true</code>.
    * 
-   * @return true
+   * @return <code>true</code>
    */
   public boolean supportsHide() {
     return GeoXmlOverlayImpl.impl.supportsHide(jsoPeer);

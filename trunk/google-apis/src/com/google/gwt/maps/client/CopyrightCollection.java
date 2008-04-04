@@ -67,18 +67,10 @@ public final class CopyrightCollection {
    */
   public void addCopyright(Copyright copyright) {
     CopyrightCollectionImpl.impl.addCopyright(jsoPeer, copyright);
-  }
-
-  // TODO: Implement copyright listener for 'newcopyright' event. See issue 95.
-  public void addCopyrightListener(CopyrightListener listener) {
-    throw new UnsupportedOperationException();
-  }
-
-  public void clearCopyrightListeners() {
-  }
+  }  
 
   /**
-   * Gets the copyright notice for the given viewport.
+   * Returns the copyright notice for the given viewport.
    * 
    * @param bounds the viewport's geographical bounds
    * @param zoomLevel the viewport's zoom level
@@ -104,6 +96,4 @@ public final class CopyrightCollection {
     return copyrights;
   }
 
-  public void removeCopyrightListener(CopyrightListener listener) {
-  }
 }

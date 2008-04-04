@@ -45,6 +45,10 @@ import java.util.Arrays;
  */
 public final class JsUtil {
 
+  /**
+   * Provides type safe access to JavaScript's built-in array to list conversions
+   * using JSIO.
+   */
   static interface ListGenerator extends JSFlyweightWrapper {
     @FieldName("valueOf")
     JSList<InfoWindowTab> asInfoWindowTabList(JavaScriptObject jso);
@@ -141,6 +145,7 @@ public final class JsUtil {
     return list;
   }
 
+  // Utility class only.  Users may not instantiate this class.
   private JsUtil() {
   }
 

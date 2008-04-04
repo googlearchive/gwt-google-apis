@@ -25,7 +25,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.MarkerManagerOptions;
 
 /**
- * 
+ * Wrapper for the GMarkerManager object from the Maps API using JSIO.
  */
 public interface MarkerManagerImpl extends JSFlyweightWrapper {
 

@@ -21,7 +21,8 @@ import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
- * 
+ * Wraps an object returned by GDirections.getDuration() and GStep.getDuration()
+ * in the Maps API using JSIO.
  */
 @BeanProperties
 public interface DurationImpl extends JSFlyweightWrapper {

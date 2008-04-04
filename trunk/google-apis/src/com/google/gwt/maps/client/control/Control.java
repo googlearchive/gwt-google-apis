@@ -63,7 +63,7 @@ public class Control {
 
     /**
      * Returns to the map if the control contains selectable text.
-     * @return true if the control contains selectable text.
+     * @return <code>true</code> if the control contains selectable text.
      */
     public abstract boolean isSelectable();
 

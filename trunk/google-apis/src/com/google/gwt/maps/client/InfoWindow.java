@@ -41,7 +41,7 @@ import java.util.List;
  * The info window looks a little like a comic-book word balloon; it has a
  * content area and a tapered stem, where the tip of the stem is at a specified
  * point on the map. You can see the info window in action by clicking a marker
- * in Google Maps. 
+ * in Google Maps.
  * 
  * @see MapWidget#getInfoWindow()
  */
@@ -136,9 +136,9 @@ public final class InfoWindow {
   }
 
   /**
-   * Returns true if the info window is visible.
+   * Returns <code>true</code> if the info window is visible.
    * 
-   * @return true if the info window is visible
+   * @return <code>true</code> if the info window is visible
    */
   public boolean isVisible() {
     return !InfoWindowImpl.impl.isHidden(jsoPeer);
@@ -211,7 +211,8 @@ public final class InfoWindow {
   /**
    * Shows or hides the info window.
    * 
-   * @param visible true to show the info window, false to hide.
+   * @param visible pass <code>true</code> to show the info window,
+   *          <code>false</code> to hide.
    */
   public void setVisible(boolean visible) {
     if (visible) {
@@ -252,14 +253,20 @@ public final class InfoWindow {
   /**
    * This method implements a chain of listeners for the InfoWindow object
    * instead of just a single callback as provided by the native JavaScript Maps
-   * API. This was done to make the GWT API more intuitive to Java programmers.
-   * 
+   * API. This was done to make the GWT API more intuitive to Java programmers. 
    */
   private void initEventCallbacks(InfoWindowContent content,
       List<InfoWindowListener> listeners) {
     final List<InfoWindowListener> listenerList = new ArrayList<InfoWindowListener>(
         listeners);
 
+    /*
+     * TODO(zundel): The maps API has apparently deprecated the onopenfn and
+     * onclosefn properties. There is an infowindowopen, infowidnowbeforeclose,
+     * infowindowclose on the map and closeclick listener on the InfoWindow that
+     * could be used.
+     */
+    
     // Initialize internal callbacks in InfoWindowOptions that will kick off
     // the list of InfoWindowListeners stored in this object.
     InfoWindowOptionsImpl.impl.setOnCloseFn(content.getOptions(),

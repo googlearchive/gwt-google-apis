@@ -35,7 +35,7 @@ import com.google.gwt.jsio.client.FieldName;
 import com.google.gwt.user.client.Element;
 
 /**
- * 
+ * Wraps the GDirections object in the Maps API using JSIO.
  */
 public interface DirectionsImpl extends JSFlyweightWrapper {
 

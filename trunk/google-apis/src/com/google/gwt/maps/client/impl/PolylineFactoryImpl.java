@@ -21,11 +21,11 @@ import com.google.gwt.jsio.client.Global;
 import com.google.gwt.jsio.client.JSWrapper;
 
 /**
- * 
+ * Wraps the GPolyline fromEncoded() static method from the Maps API using JSIO.
  */
 @Global("$wnd.GPolyline")
 public interface PolylineFactoryImpl extends JSWrapper<PolylineFactoryImpl> {
-  PolylineFactoryImpl impl =  GWT.create(PolylineFactoryImpl.class);
-  
-  JavaScriptObject fromEncoded(JavaScriptObject polylineOptions); 
+  PolylineFactoryImpl impl = GWT.create(PolylineFactoryImpl.class);
+
+  JavaScriptObject fromEncoded(JavaScriptObject polylineOptions);
 }

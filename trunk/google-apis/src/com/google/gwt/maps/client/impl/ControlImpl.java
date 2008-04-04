@@ -23,7 +23,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 
 /**
- * 
+ * Wraps the GControl and its subclasses in the Maps API using JSIO.
  */
 public interface ControlImpl extends JSFlyweightWrapper {
   

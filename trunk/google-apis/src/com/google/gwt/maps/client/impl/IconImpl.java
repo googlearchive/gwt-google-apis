@@ -28,7 +28,7 @@ import com.google.gwt.jsio.client.Global;
 import com.google.gwt.maps.client.overlay.Icon;
 
 /**
- * 
+ * Provides a wrapper for the GIcon class from the Maps API using JSIO.
  */
 @BeanProperties
 public interface IconImpl extends JSFlyweightWrapper {

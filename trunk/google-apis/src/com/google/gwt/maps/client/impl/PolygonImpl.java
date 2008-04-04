@@ -24,7 +24,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.Polygon;
 
 /**
- * 
+ * Wraps the GPolygon class from the Maps API using JSIO. 
  */
 public interface PolygonImpl extends JSFlyweightWrapper {
 

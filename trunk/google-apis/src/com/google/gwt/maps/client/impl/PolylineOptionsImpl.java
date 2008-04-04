@@ -22,15 +22,17 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
- * 
+ * Wraps the GPolylineOptions class from the Maps API using JSIO. The Maps API
+ * does not provide a constructor for this object. Instead, the object is
+ * constructed from a JavaScript Object literal.
  */
 @BeanProperties
 public abstract class PolylineOptionsImpl implements JSFlyweightWrapper {
   public static final PolylineOptionsImpl impl = GWT.create(PolylineOptionsImpl.class);
 
   /**
-   * The Maps API does not provide a GPolylineOptions constructor.  It asvises
-   * to use Object instead.
+   * The Maps API does not provide a GPolylineOptions constructor. It advises to
+   * use Object instead.
    */
   @Constructor("Object")
   public abstract JavaScriptObject construct();

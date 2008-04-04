@@ -22,7 +22,9 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 
 /**
- *
+ * Wrapper for the GMapOptions object from the Maps API using JSIO. Note that
+ * there is no JavaScript constructor for this object. Instead, it is built from
+ * an Object literal.
  */
 @BeanProperties
 public interface MapOptionsImpl extends JSFlyweightWrapper {

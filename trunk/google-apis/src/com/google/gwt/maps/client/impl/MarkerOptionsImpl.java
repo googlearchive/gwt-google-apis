@@ -23,7 +23,9 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.overlay.Icon;
 
 /**
- * 
+ * Wrapper for the GMarkerOptions object from the Maps API using JSIO. The Maps
+ * API does not provide a constructor for this object. Instead, it is
+ * constructed from a JavaScript Object literal.
  */
 @BeanProperties
 public interface MarkerOptionsImpl extends JSFlyweightWrapper {

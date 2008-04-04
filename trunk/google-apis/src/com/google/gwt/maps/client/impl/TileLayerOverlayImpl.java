@@ -24,7 +24,7 @@ import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.Binding;
 
 /**
- * 
+ * Wrapper for the GTileOverlay object from the Maps API using JSIO.
  */
 public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
 
@@ -35,10 +35,10 @@ public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GTileLayerOverlay")
   JavaScriptObject construct(TileLayer tileLayer);
-  
+
   TileLayer getTileLayer(TileLayerOverlay overlay);
-  
+
   void hide(TileLayerOverlay overlay);
-  
+
   void show(TileLayerOverlay overlay);
 }
