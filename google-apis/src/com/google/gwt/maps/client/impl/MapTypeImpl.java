@@ -76,11 +76,7 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
 
   int getMaximumResolution(JavaScriptObject jsoPeer);
 
-  int getMaximumResolution(JavaScriptObject jsoPeer, LatLng latlng);
-
   int getMinimumResolution(JavaScriptObject jsoPeer);
-
-  int getMinimumResolution(JavaScriptObject jsoPeer, LatLng latlng);
 
   @Global("$wnd.G_MOON_ELEVATION_MAP")
   JavaScriptObject getMoonElevationMapType();
@@ -114,7 +110,6 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
       Size viewSize);
 
   String getTextColor(JavaScriptObject jsoPeer);
-
 
   JSList<TileLayer> getTileLayers(JavaScriptObject jsoPeer);
 
