@@ -17,25 +17,31 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.Global;
 import com.google.gwt.jsio.client.JSWrapper;
+import com.google.gwt.jsio.client.Global;
+import com.google.gwt.jsio.client.Imported;
+import com.google.gwt.maps.client.geocode.GeocodeCache;
 
 /**
- * Wraps the prototype object associated with GGeocodeCache from the Maps API
- * using JSIO. This is done to facilitate subclassing GGeocodeCache in Java.
+ * 
  */
-@Global("$wnd.GGeocodeCache.constructor.prototype")
+@Global("$wnd.GGeocodeCache.prototype")
 public interface GeocodeCachePrototype extends JSWrapper<GeocodeCachePrototype> {
 
   GeocodeCachePrototype impl = GWT.create(GeocodeCachePrototype.class);
-  
-  JavaScriptObject get(String address);
-  
-  boolean isCachable(JavaScriptObject reply);
 
-  void put(String address, JavaScriptObject reply);
-  
-  void reset();
-  
-  String toCanonical(String address);
+  @Imported
+  JavaScriptObject get(GeocodeCache instance, String address);
+
+  @Imported
+  boolean isCachable(GeocodeCache instance, JavaScriptObject reply);
+
+  @Imported
+  void put(GeocodeCache instance, String address, JavaScriptObject reply);
+
+  @Imported
+  void reset(GeocodeCache instance);
+
+  @Imported
+  String toCanonical(GeocodeCache instance, String address);
 }
