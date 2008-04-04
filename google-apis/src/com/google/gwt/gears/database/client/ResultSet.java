@@ -65,36 +65,17 @@ public class ResultSet {
     }
   }-*/;
 
-  // returns NaN if this is a string
-  private static native double nativeGetFieldAsDateDouble(JavaScriptObject rsetObj,
+  private static native double nativeGetFieldAsDate(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
     var val = rsetObj.field(fieldIndex);
     if (val == null) {
       return -1;
     } else {
-      if (typeof val == 'string') {
-        return NaN;
-      } else {
-        return Number(val);
-      }
+      var d = new Date(val);
+      return d.getTime();
     }
   }-*/;
-  
-  // Returns the date if it is a string, otherwise null
-  private static native String nativeGetFieldAsDateString(JavaScriptObject rsetObj,
-      int fieldIndex) /*-{
-    var val = rsetObj.field(fieldIndex);
-    if (val == null) {
-      return -1;
-    } else {
-      if (typeof val == 'string') {
-        return (val);
-      } else {
-        return null;
-      }
-    }
-  }-*/;
-  
+
   private static native double nativeGetFieldAsDouble(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
     var val = rsetObj.field(fieldIndex);
@@ -183,13 +164,7 @@ public class ResultSet {
 
   public Date getFieldAsDate(int fieldIndex) throws DatabaseException {
     try {
-      long value;
-      String dateString =  nativeGetFieldAsDateString(rsetObj, fieldIndex);
-      if (dateString != null) {
-        value = Date.parse(dateString);
-      } else {
-        value = (long) nativeGetFieldAsDateDouble(rsetObj, fieldIndex);
-      }
+      long value = (long) nativeGetFieldAsDate(rsetObj, fieldIndex);
       return new Date(value);
     } catch (JavaScriptException ex) {
       throw new DatabaseException(ex.getMessage(), ex);
