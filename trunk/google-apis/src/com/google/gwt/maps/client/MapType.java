@@ -494,17 +494,6 @@ public final class MapType {
   }
 
   /**
-   * Returns the highest zoom level at which this map type is defined for a
-   * given point.
-   * 
-   * @param latlng the point at which to find the maximum resolution
-   * @return the highest zoom level for the point
-   */
-  public int getMaximumResolution(LatLng latlng) {
-    return MapTypeImpl.impl.getMaximumResolution(jsoPeer, latlng);
-  }
-
-  /**
    * Returns the lowest zoom level at which this map type is defined for a given
    * point.
    * 
@@ -515,23 +504,12 @@ public final class MapType {
   }
 
   /**
-   * Returns the lowest zoom level at which this map type is defined for a given
-   * point.
-   * 
-   * @param latlng the point at which to find the minimum resolution
-   * @return the lowest zoom level for the point
-   */
-  public int getMinimumResolution(LatLng latlng) {
-    return MapTypeImpl.impl.getMinimumResolution(jsoPeer, latlng);
-  }
-
-  /**
    * Returns the translated, human-readable string name of the map type.
    * 
    * The name is used as the button label in the
    * {@link com.google.gwt.maps.client.control.MapTypeControl MapTypeControl}.
    * 
-   * @param shortName true to return the abbreviated name
+   * @param shortName <code>true</code> to return the abbreviated name
    * @return the name of the map type
    */
   public String getName(boolean shortName) {
