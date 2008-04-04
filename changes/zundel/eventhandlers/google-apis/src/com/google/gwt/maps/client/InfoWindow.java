@@ -211,29 +211,6 @@ public final class InfoWindow {
   }
 
   /**
-   * Enables maximization of the info window. A maximizable info window expands
-   * to fill most of the map with contents specified via the maxContent and
-   * maxTitle properties of GInfoWindowOptions. The info window must have been
-   * opened with maxContent or maxTitle options in order for enableMaximize() or
-   * {@link InfoWindow#disableMaximize} to have any effect. An info window
-   * opened with maxContent or maxTitle will have maximization enabled by
-   * default.
-   */
-  public void disableMaximize() {
-    InfoWindowImpl.impl.disableMaximize(jsoPeer);
-  }
-
-  /**
-   * Disables maximization of the info window. The infowindow must have been
-   * opened with maxContent or maxTitle options. Note that if the info window is
-   * currently opened, this function will remove the maximize buton but will not
-   * restore the window to its minimized state.
-   */
-  public void enableMaximize() {
-    InfoWindowImpl.impl.enableMaximize(jsoPeer);
-  }
-
-  /**
    * Returns the array of Elements that hold the content of the tabs of this
    * info window.
    * 
@@ -285,7 +262,7 @@ public final class InfoWindow {
   /**
    * Maximizes the infowindow. The infowindow must have been opened with
    * maxContent or maxTitle options, and it must not have had its maximization
-   * disabled through {@link InfoWindow#disableMaximize}
+   * disabled through {@link InfoWindow#setMaximizeEnabled}
    */
   public void maximize() {
     InfoWindowImpl.impl.maximize(jsoPeer);
@@ -365,8 +342,6 @@ public final class InfoWindow {
   public void removeInfoWindowMaximizeClickHandler(
       InfoWindowMaximizeClickHandler handler) {
 
-    assert jsoPeer == MapImpl.impl.getInfoWindow(map);
-
     if (infoWindowMaximizeClickHandlers != null) {
       infoWindowMaximizeClickHandlers.removeHandler(handler);
     }
@@ -385,8 +360,6 @@ public final class InfoWindow {
     }
   }
 
-  // TODO(zundel): Implement reset?
-
   /**
    * Removes a single handler of this map previously added with
    * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}.
@@ -399,6 +372,8 @@ public final class InfoWindow {
       infoWindowRestoreClickHandlers.removeHandler(handler);
     }
   }
+
+  // TODO(zundel): Implement reset?
 
   /**
    * Removes a single handler of this map previously added with
@@ -429,6 +404,26 @@ public final class InfoWindow {
    */
   public void selectTab(int index) {
     InfoWindowImpl.impl.selectTab(jsoPeer, index);
+  }
+
+  /**
+   * Enables or disables maximization of the info window. A maximizable info
+   * window expands to fill most of the map with contents specified via the
+   * maxContent and maxTitle properties of GInfoWindowOptions. The info window
+   * must have been opened with maxContent or maxTitle options in order for this
+   * function to have any effect. An info window opened with maxContent or
+   * maxTitle will have maximization enabled by default.
+   * 
+   * Note that if the info window is currently opened and this method is set to
+   * disable maximizing, this function will remove the maximize buton but will
+   * not restore the window to its minimized state.
+   */
+  public void setMaximizeEnabled(boolean enabled) {
+    if (enabled) {
+      InfoWindowImpl.impl.enableMaximize(jsoPeer);
+    } else {
+      InfoWindowImpl.impl.disableMaximize(jsoPeer);
+    }
   }
 
   /**
