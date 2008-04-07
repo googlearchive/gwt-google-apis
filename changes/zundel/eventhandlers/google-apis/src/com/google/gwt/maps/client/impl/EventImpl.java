@@ -26,6 +26,7 @@ import com.google.gwt.maps.client.Copyright;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.geom.Bounds;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Element;
@@ -83,7 +84,14 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   public abstract static class LatLngCallback extends JSFunction {
     public abstract void callback(LatLng latlng);
   }
-
+  
+  /**
+   * 
+   */
+  public abstract static class LatLngBoundsIntCallback extends JSFunction {
+    public abstract void callback(LatLngBounds bounds, int value);
+  }
+  
   /**
    * 
    */
@@ -149,6 +157,11 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       LatLngCallback handler) {
     return addListener(source, event.value(), handler);
   }
+  
+  public JavaScriptObject addListener(JavaScriptObject source, MapEvent event,
+      LatLngBoundsIntCallback handler) {
+    return addListener(source, event.value(), handler);
+  }
 
   public JavaScriptObject addListener(JavaScriptObject source, MapEvent event,
       MapTypeCallback handler) {
@@ -188,6 +201,9 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
       LatLngCallback handler);
+  
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      LatLngBoundsIntCallback handler);
 
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
       MapTypeCallback handler);
@@ -219,6 +235,9 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       LatLng latlng);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
+      LatLngBounds bounds, int value);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
       MapType type);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
@@ -230,7 +249,11 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Point point, Element elem, Overlay overlay);
 
-  // We don't use this method with the advent of the ListenerCollection.
+  // We don't use this method with the advent of the HandlerCollection.
   // protected abstract void clearListeners(JavaScriptObject source, String
   // event);
+  
+  // We don't use this method with the advent of the HandlerCollection.
+  // protected abstract void clearInstanceListeners(JavaScriptObject source);
+
 }
