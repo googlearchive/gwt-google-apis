@@ -18,11 +18,9 @@ package com.google.gwt.maps.client.overlay;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.PolygonClickHandler;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler;
-import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.PolygonClickHandler.PolygonClickEvent;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler.PolygonRemoveEvent;
-import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler.PolygonVisibilityChangedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
 import com.google.gwt.maps.client.impl.HandlerCollection;
@@ -30,7 +28,6 @@ import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.ListenerCollection;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolygonImpl;
-import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
@@ -56,8 +53,6 @@ public final class Polygon extends ConcreteOverlay {
   }
   private HandlerCollection<PolygonClickHandler> polygonClickHandlers;
   private HandlerCollection<PolygonRemoveHandler> polygonRemoveHandlers;
-  private HandlerCollection<PolygonVisibilityChangedHandler> polygonVisibilityChangedHandlers;
-
   private ListenerCollection<RemoveListener> removeListeners;
 
   public Polygon(LatLng[] points) {
@@ -108,27 +103,6 @@ public final class Polygon extends ConcreteOverlay {
       public void callback() {
         PolygonRemoveEvent e = new PolygonRemoveEvent(Polygon.this);
         handler.onRemove(e);
-      }
-    });
-  }
-
-  /**
-   * This event is fired when the polygon is clicked. Note that this event also
-   * subsequently triggers a "click" event on the map, where the polygon is
-   * passed as the overlay argument within that event
-   * 
-   * @param handler the handler to call when this event fires.
-   */
-  public void addPolygonVisibilityChangedHandler(
-      final PolygonVisibilityChangedHandler handler) {
-    maybeInitPolygonVisibilityChangedHandlers();
-
-    polygonVisibilityChangedHandlers.addHandler(handler, new BooleanCallback() {
-      @Override
-      public void callback(boolean visible) {
-        PolygonVisibilityChangedEvent e = new PolygonVisibilityChangedEvent(
-            Polygon.this, visible);
-        handler.onVisibilityChanged(e);
       }
     });
   }
@@ -193,38 +167,12 @@ public final class Polygon extends ConcreteOverlay {
     }
   }
 
-  /**
-   * Removes a single handler of this map previously added with
-   * {@link Polygon#addPolygonVisibilityChangedHandler(PolygonVisibilityChangedHandler)}.
-   * 
-   * @param handler the handler to remove
-   */
-  public void removePolygonVisibilityChangedHandler(
-      PolygonVisibilityChangedHandler handler) {
-    if (polygonVisibilityChangedHandlers != null) {
-      polygonVisibilityChangedHandlers.removeHandler(handler);
-    }
-  }
-
   public void removeRemoveListener(RemoveListener listener) {
     if (removeListeners != null) {
       removeListeners.removeListener(listener);
     }
   }
   
-  /**
-   * Show or hide the polygon.
-   * 
-   * @param visible true to show the polygon.
-   */
-  public void setVisible(boolean visible) {
-    if (visible) {
-      PolygonImpl.impl.show(jsoPeer);
-    } else {
-      PolygonImpl.impl.hide(jsoPeer);
-    }
-  }
-
   /**
    * Manually trigger the specified event on this object.
    * 
@@ -249,17 +197,7 @@ public final class Polygon extends ConcreteOverlay {
     polygonRemoveHandlers.trigger();
   }
 
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * Note: The trigger() methods are provided for unit testing purposes only.
-   * 
-   * @param event an event to deliver to the handler.
-   */
-  void trigger(PolygonVisibilityChangedEvent event) {
-    maybeInitPolygonVisibilityChangedHandlers();
-    polygonVisibilityChangedHandlers.trigger();
-  }
+
 
   private void maybeInitPolygonClickHandlers() {
     if (polygonClickHandlers == null) {
@@ -274,11 +212,5 @@ public final class Polygon extends ConcreteOverlay {
           jsoPeer, MapEvent.REMOVE);
     }
   }
-
-  private void maybeInitPolygonVisibilityChangedHandlers() {
-    if (polygonVisibilityChangedHandlers == null) {
-      polygonVisibilityChangedHandlers = new HandlerCollection<PolygonVisibilityChangedHandler>(
-          jsoPeer, MapEvent.REMOVE);
-    }
-  }
+  
 }

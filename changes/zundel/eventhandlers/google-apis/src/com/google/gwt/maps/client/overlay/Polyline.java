@@ -18,11 +18,9 @@ package com.google.gwt.maps.client.overlay;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.PolylineClickHandler;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler;
-import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.PolylineClickHandler.PolylineClickEvent;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler.PolylineRemoveEvent;
-import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler.PolylineVisibilityChangedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
 import com.google.gwt.maps.client.impl.HandlerCollection;
@@ -32,7 +30,6 @@ import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolylineFactoryImpl;
 import com.google.gwt.maps.client.impl.PolylineImpl;
 import com.google.gwt.maps.client.impl.PolylineOptionsImpl;
-import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
@@ -81,9 +78,7 @@ public final class Polyline extends ConcreteOverlay {
   }
 
   private HandlerCollection<PolylineClickHandler> polylineClickHandlers;
-
   private HandlerCollection<PolylineRemoveHandler> polylineRemoveHandlers;
-  private HandlerCollection<PolylineVisibilityChangedHandler> polylineVisibilityChangedHandlers;
   private ListenerCollection<RemoveListener> removeListeners;
 
   public Polyline(LatLng[] points) {
@@ -143,28 +138,6 @@ public final class Polyline extends ConcreteOverlay {
         handler.onRemove(e);
       }
     });
-  }
-
-  /**
-   * This event is fired when the polyline is clicked. Note that this event also
-   * subsequently triggers a "click" event on the map, where the polyline is
-   * passed as the overlay argument within that event
-   * 
-   * @param handler the handler to call when this event fires.
-   */
-  public void addPolylineVisibilityChangedHandler(
-      final PolylineVisibilityChangedHandler handler) {
-    maybeInitPolylineVisibilityChangedHandlers();
-
-    polylineVisibilityChangedHandlers.addHandler(handler,
-        new BooleanCallback() {
-          @Override
-          public void callback(boolean visible) {
-            PolylineVisibilityChangedEvent e = new PolylineVisibilityChangedEvent(
-                Polyline.this, visible);
-            handler.onVisibilityChanged(e);
-          }
-        });
   }
 
   public void addRemoveListener(final RemoveListener listener) {
@@ -229,19 +202,6 @@ public final class Polyline extends ConcreteOverlay {
     }
   }
 
-  /**
-   * Removes a single handler of this map previously added with
-   * {@link Polyline#addPolylineVisibilityChangedHandler(PolylineVisibilityChangedHandler)}.
-   * 
-   * @param handler the handler to remove
-   */
-  public void removePolylineVisibilityChangedHandler(
-      PolylineVisibilityChangedHandler handler) {
-    if (polylineVisibilityChangedHandlers != null) {
-      polylineVisibilityChangedHandlers.removeHandler(handler);
-    }
-  }
-
   public void removeRemoveListener(RemoveListener listener) {
     if (removeListeners != null) {
       removeListeners.removeListener(listener);
@@ -285,18 +245,6 @@ public final class Polyline extends ConcreteOverlay {
     polylineRemoveHandlers.trigger();
   }
 
-  /**
-   * Manually trigger the specified event on this object.
-   * 
-   * Note: The trigger() methods are provided for unit testing purposes only.
-   * 
-   * @param event an event to deliver to the handler.
-   */
-  void trigger(PolylineVisibilityChangedEvent event) {
-    maybeInitPolylineVisibilityChangedHandlers();
-    polylineVisibilityChangedHandlers.trigger();
-  }
-
   private void maybeInitPolylineClickHandlers() {
     if (polylineClickHandlers == null) {
       polylineClickHandlers = new HandlerCollection<PolylineClickHandler>(
@@ -307,13 +255,6 @@ public final class Polyline extends ConcreteOverlay {
   private void maybeInitPolylineRemoveHandlers() {
     if (polylineRemoveHandlers == null) {
       polylineRemoveHandlers = new HandlerCollection<PolylineRemoveHandler>(
-          jsoPeer, MapEvent.REMOVE);
-    }
-  }
-
-  private void maybeInitPolylineVisibilityChangedHandlers() {
-    if (polylineVisibilityChangedHandlers == null) {
-      polylineVisibilityChangedHandlers = new HandlerCollection<PolylineVisibilityChangedHandler>(
           jsoPeer, MapEvent.REMOVE);
     }
   }
