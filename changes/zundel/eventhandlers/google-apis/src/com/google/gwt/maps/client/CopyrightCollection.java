@@ -17,10 +17,14 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSList;
-import com.google.gwt.maps.client.event.CopyrightListener;
+import com.google.gwt.maps.client.event.NewCopyrightHandler;
+import com.google.gwt.maps.client.event.NewCopyrightHandler.NewCopyrightEvent;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.CopyrightCollectionImpl;
+import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.JsUtil;
+import com.google.gwt.maps.client.impl.MapEvent;
+import com.google.gwt.maps.client.impl.EventImpl.CopyrightCallback;
 
 /**
  * Manages copyright messages displayed on maps of custom map type. If you don't
@@ -37,6 +41,7 @@ public final class CopyrightCollection {
     return new CopyrightCollection(jsoPeer);
   }
 
+  private HandlerCollection<NewCopyrightHandler> newCopyrightHandlers;
   private final JavaScriptObject jsoPeer;
 
   /**
@@ -55,7 +60,7 @@ public final class CopyrightCollection {
   public CopyrightCollection(String prefix) {
     jsoPeer = CopyrightCollectionImpl.impl.construct(prefix);
   }
-
+  
   private CopyrightCollection(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
@@ -69,12 +74,25 @@ public final class CopyrightCollection {
     CopyrightCollectionImpl.impl.addCopyright(jsoPeer, copyright);
   }
 
-  // TODO: Implement copyright listener for 'newcopyright' event. See issue 95.
-  public void addCopyrightListener(CopyrightListener listener) {
-    throw new UnsupportedOperationException();
-  }
+  /**
+   * Add a handler for "newcopyright" events. This event is fired when a new
+   * copyright was added to this copyright collection.
+   * 
+   * @param handler handler to invoke on mouse click events.
+   */
+  public void addNewCopyrightHandler(
+      final NewCopyrightHandler handler) {
+    maybeInitNewCopyrightHandlers();
 
-  public void clearCopyrightListeners() {
+    newCopyrightHandlers.addHandler(handler,
+        new CopyrightCallback() {
+          @Override
+          public void callback(Copyright copyright) {
+            NewCopyrightEvent e = new NewCopyrightEvent(
+                CopyrightCollection.this, copyright);
+            handler.onNewCopyright(e);
+          }
+        });
   }
 
   /**
@@ -97,13 +115,45 @@ public final class CopyrightCollection {
    * @return the copyrights for the given viewport
    */
   public String[] getCopyrights(LatLngBounds bounds, int zoomLevel) {
-    JSList<String> list = CopyrightCollectionImpl.impl.getCopyrights(jsoPeer, bounds,
-        zoomLevel);
+    JSList<String> list = CopyrightCollectionImpl.impl.getCopyrights(jsoPeer,
+        bounds, zoomLevel);
     String[] copyrights = new String[list.size()];
     JsUtil.toArray(list, copyrights);
     return copyrights;
   }
 
-  public void removeCopyrightListener(CopyrightListener listener) {
+  /**
+   * Removes a single handler of this copyright collection previously added with
+   * {@link CopyrightCollection#addNewCopyrightHandler(NewCopyrightHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeNewCopyrightHandler(
+      NewCopyrightHandler handler) {
+    if (newCopyrightHandlers != null) {
+      newCopyrightHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(NewCopyrightEvent event) {
+    maybeInitNewCopyrightHandlers();
+    newCopyrightHandlers.trigger(event.getCopyright());
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitNewCopyrightHandlers() {
+    if (newCopyrightHandlers == null) {
+      newCopyrightHandlers = new HandlerCollection<NewCopyrightHandler>(
+          jsoPeer, MapEvent.NEWCOPYRIGHT);
+    }
   }
 }

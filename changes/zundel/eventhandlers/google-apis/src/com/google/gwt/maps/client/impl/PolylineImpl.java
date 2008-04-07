@@ -51,4 +51,7 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   boolean isHidden(JavaScriptObject jsoPeer);
 
   void show(JavaScriptObject jsoPeer);
+  
+  boolean supportsHide(JavaScriptObject jsoPeer);
+  
 }

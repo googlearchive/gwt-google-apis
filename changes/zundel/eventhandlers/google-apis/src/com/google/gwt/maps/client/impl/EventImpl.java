@@ -17,9 +17,12 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.jsio.client.Exported;
 import com.google.gwt.jsio.client.Global;
 import com.google.gwt.jsio.client.JSFunction;
 import com.google.gwt.jsio.client.JSWrapper;
+import com.google.gwt.maps.client.Copyright;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.geom.Bounds;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -34,10 +37,24 @@ import com.google.gwt.user.client.Element;
 public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   /**
-   * 
+   * Provides a way to specify a JavaScript function() with a single boolean
+   * argument and handles uncaught exceptions.
    */
   public abstract static class BooleanCallback extends JSFunction {
+
     public abstract void callback(boolean value);
+
+    @Exported
+    public void callbackWrapper(boolean value) {
+      UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(value);
+      } catch (Throwable throwable) {
+        if (handler != null) {
+          handler.onUncaughtException(throwable);
+        }
+      }
+    }
   }
 
   /**
@@ -45,6 +62,13 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class BoundsIntCallback extends JSFunction {
     public abstract void callback(Bounds bounds, int value);
+  }
+
+  /**
+   * 
+   */
+  public abstract static class CopyrightCallback extends JSFunction {
+    public abstract void callback(Copyright value);
   }
   /**
    * 
@@ -89,10 +113,24 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   }
 
   /**
-   * 
+   * Provides a way to specify a JavaScript function() with no
+   * arguments and handles uncaught exceptions.
    */
   public abstract static class VoidCallback extends JSFunction {
+   
     public abstract void callback();
+    
+    @Exported
+    public void callbackWrapper() {
+      UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback();
+      } catch (Throwable throwable) {
+        if (handler != null) {
+          handler.onUncaughtException(throwable);
+        }
+      }
+    }
   }
 
   public static final EventImpl impl = GWT.create(EventImpl.class);
@@ -139,11 +177,11 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   public abstract void removeListener(JavaScriptObject mapEventHandle);
 
-  // We don't use this method with the advent of the ListenerCollection.
-  protected abstract void clearListeners(JavaScriptObject source, String event);
-
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
       BooleanCallback handler);
+
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      CopyrightCallback handler);
 
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
       IntIntCallback handler);
@@ -172,6 +210,9 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       boolean value);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
+      Copyright value);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
       int arg1, int arg2);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
@@ -188,4 +229,8 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Point point, Element elem, Overlay overlay);
+
+  // We don't use this method with the advent of the ListenerCollection.
+  // protected abstract void clearListeners(JavaScriptObject source, String
+  // event);
 }

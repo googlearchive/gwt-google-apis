@@ -16,10 +16,12 @@
 package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.maps.client.Copyright;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
+import com.google.gwt.maps.client.impl.EventImpl.CopyrightCallback;
 import com.google.gwt.maps.client.impl.EventImpl.IntIntCallback;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.MapTypeCallback;
@@ -71,6 +73,18 @@ public class HandlerCollection<E> {
    * @param callback The callback to call when the event fires.
    */
   public void addHandler(E listener, BooleanCallback callback) {
+    JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
+        mapEvent.value(), callback);
+    handlers.add(new HandleContainer<E>(listener, jso));
+  }
+  
+  /**
+   * Add a listener and the event handles associated with it.
+   * 
+   * @param listener The listener to add to the collection
+   * @param callback The callback to call when the event fires.
+   */
+  public void addHandler(E listener, CopyrightCallback callback) {
     JavaScriptObject jso = EventImpl.impl.addListener(jsoPeer,
         mapEvent.value(), callback);
     handlers.add(new HandleContainer<E>(listener, jso));
@@ -202,6 +216,15 @@ public class HandlerCollection<E> {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, arg);
   }
   
+  /**
+   * Manually trigger an event that takes a single boolean argument.
+   * 
+   * @param arg the boolean argument.
+   */
+  public void trigger(Copyright arg) {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value, arg);
+  }
+    
   /**
    * Manually trigger an event that takes two integer arguments.
    * 

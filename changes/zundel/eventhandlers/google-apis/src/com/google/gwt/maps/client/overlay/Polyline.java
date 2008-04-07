@@ -18,9 +18,9 @@ package com.google.gwt.maps.client.overlay;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.PolylineClickHandler;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler;
+import com.google.gwt.maps.client.event.PolylineRemoveHandler.PolylineRemoveEvent;
 import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.PolylineClickHandler.PolylineClickEvent;
-import com.google.gwt.maps.client.event.PolylineRemoveHandler.PolylineRemoveEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.impl.EventImpl;
 import com.google.gwt.maps.client.impl.HandlerCollection;
@@ -222,6 +222,17 @@ public final class Polyline extends ConcreteOverlay {
   }
 
   /**
+   * Returns <code>true</code> if this environment supports the
+   * {@link Polyline#setVisible} method.
+   * 
+   * @return <code>true</code> if setVisible(false) is supported in the
+   *         current environment.
+   */
+  boolean supportsHide() {
+    return PolylineImpl.impl.supportsHide(jsoPeer);
+  }
+
+  /**
    * Manually trigger the specified event on this object.
    * 
    * Note: The trigger() methods are provided for unit testing purposes only.
@@ -258,5 +269,4 @@ public final class Polyline extends ConcreteOverlay {
           jsoPeer, MapEvent.REMOVE);
     }
   }
-
 }

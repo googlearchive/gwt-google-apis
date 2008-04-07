@@ -15,43 +15,43 @@
  */
 package com.google.gwt.maps.client.event;
 
-import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.GroundOverlay;
 
 import java.util.EventObject;
 
 /**
  * Provides an interface to implement in order to receive
- * MapEvent.VISIBILITYCHANGED events from the {@link Marker}.
+ * MapEvent.VISIBILITYCHANGED events from the {@link GroundOverlay}.
  */
-public interface MarkerVisibilityChangedHandler {
+public interface GroundOverlayVisibilityChangedHandler {
 
   /**
    * Encapsulates the arguments for the MapEvent.VISIBILITYCHANGED event on a
-   * {@link Marker}.
+   * {@link GroundOverlay}.
    */
   @SuppressWarnings("serial")
-  class MarkerVisibilityChangedEvent extends EventObject {
+  class GroundOverlayVisibilityChangedEvent extends EventObject {
 
     boolean visible;
 
-    public MarkerVisibilityChangedEvent(Marker source, boolean visible) {
+    public GroundOverlayVisibilityChangedEvent(GroundOverlay source, boolean visible) {
       super(source);
       this.visible = visible;
     }
 
     /**
-     * Returns the instance of the marker that generated this event.
+     * Returns the instance of the ground overlay that generated this event.
      * 
-     * @return the instance of the marker that generated this event.
+     * @return the instance of the ground overlay that generated this event.
      */
-    public Marker getSender() {
-      return (Marker) getSource();
+    public GroundOverlay getSender() {
+      return (GroundOverlay) getSource();
     }
 
     /**
-     * Returns the visible state of the marker.
+     * Returns the visible state of the GroundOverlay.
      * 
-     * @return true if the marker is visible.
+     * @return true if the GroundOverlay is visible.
      */
     public boolean isVisible() {
       return visible;
@@ -60,9 +60,9 @@ public interface MarkerVisibilityChangedHandler {
 
   /**
    * Method to be invoked when a MapEvent.VISIBILITYCHANGED event fires on a
-   * {@link Marker}.
+   * {@link GroundOverlay}.
    * 
    * @param event contains the properties of the event.
    */
-  void onVisibilityChanged(MarkerVisibilityChangedEvent event);
+  void onVisibilityChanged(GroundOverlayVisibilityChangedEvent event);
 }

@@ -20,10 +20,12 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.maps.client.geom.LatLngBounds;
+import com.google.gwt.jsio.client.BeanProperties;
 
 /**
  * Wraps the GCopyright class in the Maps API.
  */
+@BeanProperties
 public interface CopyrightImpl extends JSFlyweightWrapper {
 
   CopyrightImpl impl = GWT.create(CopyrightImpl.class);

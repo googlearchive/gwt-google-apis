@@ -17,12 +17,11 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.geom.LatLngBounds;
-import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.jsio.client.Binding;
 import com.google.gwt.jsio.client.Constructor;
+import com.google.gwt.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 
 /**
@@ -39,10 +38,6 @@ public abstract class OverlayImpl implements JSFlyweightWrapper {
 
   @Binding
   public abstract void bindOverlay(JavaScriptObject jsoPeer, Overlay overlay);
-
-  @Constructor("$wnd.GGroundOverlay")
-  public abstract JavaScriptObject constructGroundOverlay(String imageUrl,
-      LatLngBounds bounds);
 
   @Constructor("$wnd.GOverlay")
   public abstract JavaScriptObject constructOverlay();

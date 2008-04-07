@@ -307,14 +307,13 @@ public class MapWidgetEventsTest extends GWTTestCase {
   }
 
   public void testMapClearOverlayTrigger() {
-
     final MapWidget m = new MapWidget();
     final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    m.addOverlay(marker);
     m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
 
       public void onClearOverlays(MapClearOverlaysEvent event) {
         assertEquals(event.getSender(), m);
-
         finishTest();
       }
 
@@ -615,7 +614,6 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
 
     delayTestFinish(ASYNC_DELAY_MSEC);
-    MapMoveEvent e = new MapMoveEvent(m);
     m.setCenter(end);
   }
 

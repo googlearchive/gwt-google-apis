@@ -33,6 +33,7 @@ public class MapsTestSuite extends TestCase {
     suite.addTestSuite(MapWidgetEventsTest.class); 
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
+
     return suite;
   }
 }

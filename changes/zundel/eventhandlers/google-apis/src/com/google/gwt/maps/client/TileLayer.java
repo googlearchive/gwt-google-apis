@@ -16,11 +16,16 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.jsio.client.impl.Extractor;
-import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.jsio.client.Exported;
 import com.google.gwt.jsio.client.FieldName;
+import com.google.gwt.jsio.client.impl.Extractor;
+import com.google.gwt.maps.client.event.TileLayerNewCopyrightHandler;
+import com.google.gwt.maps.client.event.TileLayerNewCopyrightHandler.TileLayerNewCopyrightEvent;
+import com.google.gwt.maps.client.geom.Point;
+import com.google.gwt.maps.client.impl.HandlerCollection;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.TileLayerImpl;
+import com.google.gwt.maps.client.impl.EventImpl.CopyrightCallback;
 
 /**
  * Implement this class in order to provide custom map tile layers, either
@@ -62,6 +67,7 @@ public abstract class TileLayer {
   }
 
   private final JavaScriptObject jsoPeer;
+  private HandlerCollection<TileLayerNewCopyrightHandler> tileLayerNewCopyrightHandlers;
 
   /**
    * @param copyrights copyrights to use for copyright handling
@@ -85,6 +91,26 @@ public abstract class TileLayer {
     this.jsoPeer = jsoPeer;
   }
 
+  /**
+   * Add a handler for "newcopyright" events. This event is fired when a new
+   * copyright was added to this copyright collection.
+   * 
+   * @param handler handler to invoke on mouse click events.
+   */
+  public void addTileLayerNewCopyrightHandler(
+      final TileLayerNewCopyrightHandler handler) {
+    maybeInitTileLayerNewCopyrightHandlers();
+
+    tileLayerNewCopyrightHandlers.addHandler(handler,
+        new CopyrightCallback() {
+          @Override
+          public void callback(Copyright copyright) {
+            TileLayerNewCopyrightEvent e = new TileLayerNewCopyrightEvent(
+                TileLayer.this, copyright);
+            handler.onNewCopyright(e);
+          }
+        });
+  }
   /**
    * Returns to the map type the highest zoom level of this tile layer.
    * 
@@ -135,5 +161,40 @@ public abstract class TileLayer {
    */
   @Exported
   public abstract boolean isPng();
+
+  /**
+   * Removes a single handler of this tile layer previously added with
+   * {@link TileLayer#addTileLayerNewCopyrightHandler(TileLayerNewCopyrightHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeTileLayerNewCopyrightHandler(
+      TileLayerNewCopyrightHandler handler) {
+    if (tileLayerNewCopyrightHandlers != null) {
+      tileLayerNewCopyrightHandlers.removeHandler(handler);
+    }
+  }
+  
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(TileLayerNewCopyrightEvent event) {
+    maybeInitTileLayerNewCopyrightHandlers();
+    tileLayerNewCopyrightHandlers.trigger(event.getCopyright());
+  }
+  
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitTileLayerNewCopyrightHandlers() {
+    if (tileLayerNewCopyrightHandlers == null) {
+      tileLayerNewCopyrightHandlers = new HandlerCollection<TileLayerNewCopyrightHandler>(
+          jsoPeer, MapEvent.NEWCOPYRIGHT);
+    }
+  }
 
 }

@@ -35,14 +35,15 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 /**
  * This is a map overlay that draws a polygon on the map, using the vector
  * drawing facilities of the browser if they are available, or an image overlay
- * from Google servers otherwise. This is very similar to a {@link com.google.gwt.maps.client.overlay.Polyline},
- * except that you can additionally specify a fill color and opacity.
+ * from Google servers otherwise. This is very similar to a
+ * {@link com.google.gwt.maps.client.overlay.Polyline}, except that you can
+ * additionally specify a fill color and opacity.
  */
 public final class Polygon extends ConcreteOverlay {
 
   /**
-   * Used to create a new Polygon by wrapping an existing GPolygon object.
-   * This method is invoked by the jsio library.
+   * Used to create a new Polygon by wrapping an existing GPolygon object. This
+   * method is invoked by the jsio library.
    * 
    * @param jsoPeer GPolygon object to wrap.
    * @return a new instance of Polygon.
@@ -51,6 +52,7 @@ public final class Polygon extends ConcreteOverlay {
   private static Polygon createPeer(JavaScriptObject jsoPeer) {
     return new Polygon(jsoPeer);
   }
+
   private HandlerCollection<PolygonClickHandler> polygonClickHandlers;
   private HandlerCollection<PolygonRemoveHandler> polygonRemoveHandlers;
   private ListenerCollection<RemoveListener> removeListeners;
@@ -64,11 +66,11 @@ public final class Polygon extends ConcreteOverlay {
     super(PolygonImpl.impl.construct(JsUtil.toJsList(points), strokeColor,
         strokeWeight, strokeOpacity, fillColor, fillOpacity));
   }
-  
+
   private Polygon(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
-  
+
   /**
    * This event is fired when the polygon is clicked. Note that this event also
    * subsequently triggers a "click" event on the map, where the polygon is
@@ -137,6 +139,7 @@ public final class Polygon extends ConcreteOverlay {
 
   /**
    * Returns true if the polygon is visible on the map.
+   * 
    * @return true if the polygon is visible on the map.
    */
   public boolean isVisible() {
@@ -172,7 +175,17 @@ public final class Polygon extends ConcreteOverlay {
       removeListeners.removeListener(listener);
     }
   }
-  
+
+  /**
+   * Returns <code>true</code> if this environment supports the
+   * {@link Polygon#setVisible} method.
+   * 
+   * @return true if setVisible(<code>false</code>) is supported.
+   */
+  public boolean supportsHide() {
+    return PolygonImpl.impl.supportsHide(jsoPeer);
+  }
+
   /**
    * Manually trigger the specified event on this object.
    * 
@@ -197,8 +210,6 @@ public final class Polygon extends ConcreteOverlay {
     polygonRemoveHandlers.trigger();
   }
 
-
-
   private void maybeInitPolygonClickHandlers() {
     if (polygonClickHandlers == null) {
       polygonClickHandlers = new HandlerCollection<PolygonClickHandler>(
@@ -212,5 +223,5 @@ public final class Polygon extends ConcreteOverlay {
           jsoPeer, MapEvent.REMOVE);
     }
   }
-  
+
 }
