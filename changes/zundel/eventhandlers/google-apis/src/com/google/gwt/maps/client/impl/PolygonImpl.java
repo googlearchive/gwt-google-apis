@@ -17,11 +17,10 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.jsio.client.Constructor;
-import com.google.gwt.maps.client.overlay.Polygon;
 
 /**
  * 
@@ -38,7 +37,13 @@ public interface PolygonImpl extends JSFlyweightWrapper {
       String strokeColor, int strokeWeight, double strokeOpacity,
       String fillColor, double fillOpacity);
 
-  LatLng getVertex(Polygon polygon, int index);
+  LatLng getVertex(JavaScriptObject jsoPeer, int index);
 
-  int getVertextCount(Polygon polygon);
+  int getVertextCount(JavaScriptObject jsoPeer);
+  
+  void hide(JavaScriptObject jsoPeer);
+  
+  boolean isHidden(JavaScriptObject jsoPeer);
+  
+  void show(JavaScriptObject jsoPeer);
 }

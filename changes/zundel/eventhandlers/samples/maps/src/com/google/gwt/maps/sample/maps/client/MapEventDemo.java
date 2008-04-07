@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapType;
@@ -62,9 +63,18 @@ import com.google.gwt.maps.client.event.MarkerMouseOverHandler;
 import com.google.gwt.maps.client.event.MarkerMouseUpHandler;
 import com.google.gwt.maps.client.event.MarkerRemoveHandler;
 import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler;
+import com.google.gwt.maps.client.event.PolygonClickHandler;
+import com.google.gwt.maps.client.event.PolygonRemoveHandler;
+import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler;
+import com.google.gwt.maps.client.event.PolylineClickHandler;
+import com.google.gwt.maps.client.event.PolylineRemoveHandler;
+import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
+import com.google.gwt.maps.client.overlay.Polygon;
+import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -91,20 +101,20 @@ public class MapEventDemo extends MapsDemo {
     INFO_WINDOW_MAXIMIZE_END_HANDLER("InfoWindowMaximizeEndHandler"), //
     INFO_WINDOW_RESTORE_CLICK_HANDLER("InfoWindowRestoreClickHandler"), //
     INFO_WINDOW_RESTORE_END_HANDLER("InfoWindowRestoreEndHandler"), //
-    MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER("MapInfoWindowBeforeCloseHandler"), // //
-    MAP_INFO_WINDOW_CLOSE_HANDLER("MapInfoWindowCloseHandler"), //
-    MAP_INFO_WINDOW_OPEN_HANDLER("MapInfoWindowOpenHandler"), //
-    MAP_CLEAR_OVERLAYS_HANDLER("MapClearOverlaysHandler"), //
-    MAP_ADD_MAP_TYPE_HANDLER("MapAddMapTypeHandler"), //
+    MAP_ADD_MAP_TYPE_HANDLER("MapAddMapTypeHandler"), // //
     MAP_ADD_OVERLAY_HANDLER("MapAddOverlayHandler"), //
+    MAP_CLEAR_OVERLAYS_HANDLER("MapClearOverlaysHandler"), //
     MAP_CLICK_HANDLER("MapClickHandler"), //
-    MAP_DOUBLE_CLICK_HANDLER("MapDoubleClickHandler"), // 
+    MAP_DOUBLE_CLICK_HANDLER("MapDoubleClickHandler"), //
     MAP_DRAG_END_HANDLER("MapDragEndHandler"), //
     MAP_DRAG_HANDLER("MapDragHandler"), //
-    MAP_DRAG_START_HANDLER("MapDragStartHandler"), //
-    MAP_MOUSE_OVER_HANDLER("MapMouseOverHandler"), //
+    MAP_DRAG_START_HANDLER("MapDragStartHandler"), // 
+    MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER("MapInfoWindowBeforeCloseHandler"), //
+    MAP_INFO_WINDOW_CLOSE_HANDLER("MapInfoWindowCloseHandler"), //
+    MAP_INFO_WINDOW_OPEN_HANDLER("MapInfoWindowOpenHandler"), //
     MAP_MOUSE_MOVE_HANDLER("MapMouseMoveHandler"), //
     MAP_MOUSE_OUT_HANDLER("MapMouseOutHandler"), //
+    MAP_MOUSE_OVER_HANDLER("MapMouseOverHandler"), //
     MAP_MOVE_END_HANDLER("MapMoveEndHandler"), //
     MAP_MOVE_HANDLER("MapMoveHandler"), //
     MAP_MOVE_START_HANDLER("MapMoveStartHandler"), //
@@ -115,18 +125,24 @@ public class MapEventDemo extends MapsDemo {
     MAP_ZOOM_END_HANDLER("MapZoomEndHandler"), //
     MARKER_CLICK_HANDLER("MarkerClickHandler"), //
     MARKER_DOUBLE_CLICK_HANDLER("MarkerDoubleClickHandler"), //
-    MARKER_MOUSE_DOWN_HANDLER("MarkerMouseDownHandler"), //
-    MARKER_MOUSE_UP_HANDLER("MarkerMouseUpHandler"), //
-    MARKER_MOUSE_OVER_HANDLER("MarkerMouseOverHandler"), //
-    MARKER_MOUSE_OUT_HANDLER("MarkerMouseOutHandler"), //
-    MARKER_INFO_WINDOW_OPEN_HANDLER("MarkerInfoWindowOpenHandler"), //
+    MARKER_DRAG_END_HANDLER("MarkerDragEndHandler"), //
+    MARKER_DRAG_HANDLER("MarkerDragHandler"), //
+    MARKER_DRAG_START_HANDLER("MarkerDragStartHandler"), //
     MARKER_INFO_WINDOW_BEFORECLOSE_HANDLER("MarkerInfoWindowBeforeCloseHandler"), //
     MARKER_INFO_WINDOW_CLOSE_HANDLER("MarkerInfoWindowCloseHandler"), //
+    MARKER_INFO_WINDOW_OPEN_HANDLER("MarkerInfoWindowOpenHandler"), //
+    MARKER_MOUSE_DOWN_HANDLER("MarkerMouseDownHandler"), //
+    MARKER_MOUSE_OUT_HANDLER("MarkerMouseOutHandler"), //
+    MARKER_MOUSE_OVER_HANDLER("MarkerMouseOverHandler"), //
+    MARKER_MOUSE_UP_HANDLER("MarkerMouseUpHandler"), //
     MARKER_REMOVE_HANDLER("MarkerRemoveHandler"), //
-    MARKER_DRAG_START_HANDLER("MarkerDragStartHandler"), //
-    MARKER_DRAG_HANDLER("MarkerDragHandler"), //
-    MARKER_DRAG_END_HANDLER("MarkerDragEndHandler"), //
-    MARKER_VISIBILITY_CHANGED_HANDLER("MarkerVisibilityChangedHandler"); //
+    MARKER_VISIBILITY_CHANGED_HANDLER("MarkerVisibilityChangedHandler"), //
+    POLYGON_CLICK_HANDLER("PolygonClickHandler"), //
+    POLYGON_REMOVE_HANDLER("PolygonRemoveHandler"), //
+    POLYGON_VISIBILITY_CHANGED_HANDLER("PolygonVisibilityChangedHandler"), //
+    POLYLINE_CLICK_HANDLER("PolylineClickHandler"), //
+    POLYLINE_REMOVE_HANDLER("PolylineRemoveHandler"), //
+    POLYLINE_VISIBILITY_CHANGED_HANDLER("PolylineVisibilityChangedHandler"); //
 
     private final String value;
 
@@ -140,6 +156,8 @@ public class MapEventDemo extends MapsDemo {
   }
 
   private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);
+  private static LatLng[] ATLANTA_TRIANGLE1 = new LatLng[4];
+  private static LatLng[] ATLANTA_TRIANGLE2 = new LatLng[4];
 
   private static HTML descHTML = null;
 
@@ -199,11 +217,19 @@ public class MapEventDemo extends MapsDemo {
   private FlexTable handlerTable;
 
   private MapWidget map;
+  // Saves the state of whether the sky map type has been removed.
+  private boolean mapTypeRemoved = false;
   private Marker marker;
   // Saves the state of whether the maker is currently removed from the map
   private boolean markerRemoved = false;
-  // Saves the state of whether the sky map type has been removed.
-  private boolean mapTypeRemoved = false;
+
+  private Polygon polygon;
+  // Saves the state of whether the polygon is currently removed from the map
+  private boolean polygonRemoved = true;
+  private Polyline polyline;
+  // Saves the state of whether the polyline is currently removed from the map
+  private boolean polylineRemoved = true;
+  private boolean firstTime = true;
 
   public MapEventDemo() {
     VerticalPanel vp = new VerticalPanel();
@@ -219,6 +245,7 @@ public class MapEventDemo extends MapsDemo {
     marker = new Marker(ATLANTA, opt);
 
     Panel hp1 = createActionButtons();
+
     HorizontalPanel hp2 = createListenerListBox();
 
     // Make a spacer
@@ -241,6 +268,12 @@ public class MapEventDemo extends MapsDemo {
   @Override
   public void onShow() {
     map.addOverlay(marker);
+    if (firstTime) {
+      computeAtlantaTriangle();
+      polygon = new Polygon(ATLANTA_TRIANGLE1);
+      polyline = new Polyline(ATLANTA_TRIANGLE2);
+      firstTime = false;
+    }
   }
 
   private void addListenerToMarker(HandlerActions a) {
@@ -1022,7 +1055,8 @@ public class MapEventDemo extends MapsDemo {
         final MarkerVisibilityChangedHandler h = new MarkerVisibilityChangedHandler() {
 
           public void onVisibilityChanged(MarkerVisibilityChangedEvent e) {
-            textBox.setText(textBox.getText() + "onVisibilityChanged(" + e.isVisible() + ")");
+            textBox.setText(textBox.getText() + "onVisibilityChanged("
+                + e.isVisible() + ")");
           }
         };
         marker.addMarkerVisibilityChangedHandler(h);
@@ -1033,6 +1067,131 @@ public class MapEventDemo extends MapsDemo {
         });
       }
         break;
+
+      case POLYLINE_CLICK_HANDLER: {
+
+        final PolylineClickHandler h = new PolylineClickHandler() {
+
+          public void onClick(PolylineClickEvent e) {
+            textBox.setText(textBox.getText() + "onClick(" + e.getLatLng()
+                + ")");
+          }
+
+        };
+        polyline.addPolylineClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polyline.removePolylineClickHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYLINE_REMOVE_HANDLER: {
+
+        final PolylineRemoveHandler h = new PolylineRemoveHandler() {
+
+          public void onRemove(PolylineRemoveEvent e) {
+            textBox.setText(textBox.getText() + "onRemove()");
+          }
+
+        };
+        polyline.addPolylineRemoveHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polyline.removePolylineRemoveHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYLINE_VISIBILITY_CHANGED_HANDLER: {
+
+        final PolylineVisibilityChangedHandler h = new PolylineVisibilityChangedHandler() {
+
+          public void onVisibilityChanged(PolylineVisibilityChangedEvent e) {
+            textBox.setText(textBox.getText() + "onVisibilityChanged("
+                + e.isVisible() + ")");
+          }
+
+        };
+        polyline.addPolylineVisibilityChangedHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polyline.removePolylineVisibilityChangedHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYGON_CLICK_HANDLER: {
+
+        final PolygonClickHandler h = new PolygonClickHandler() {
+
+          public void onClick(PolygonClickEvent e) {
+            textBox.setText(textBox.getText() + "onClick(" + e.getLatLng()
+                + ")");
+          }
+
+        };
+        polygon.addPolygonClickHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polygon.removePolygonClickHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYGON_REMOVE_HANDLER: {
+
+        final PolygonRemoveHandler h = new PolygonRemoveHandler() {
+
+          public void onRemove(PolygonRemoveEvent e) {
+            textBox.setText(textBox.getText() + "onRemove()");
+          }
+
+        };
+        polygon.addPolygonRemoveHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polygon.removePolygonRemoveHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYGON_VISIBILITY_CHANGED_HANDLER: {
+
+        final PolygonVisibilityChangedHandler h = new PolygonVisibilityChangedHandler() {
+
+          public void onVisibilityChanged(PolygonVisibilityChangedEvent e) {
+            textBox.setText(textBox.getText() + "onVisibilityChanged("
+                + e.isVisible() + ")");
+          }
+
+        };
+        polygon.addPolygonVisibilityChangedHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polygon.removePolygonVisibilityChangedHandler(h);
+          }
+
+        });
+      }
+        break;
+
       default:
         Window.alert("Unhandled HandlerActions case : " + a.valueOf());
     }
@@ -1051,6 +1210,46 @@ public class MapEventDemo extends MapsDemo {
     handlerTable.setHTML(0, 4, "<b>Remove Listener</b>");
   }
 
+  private void computeAtlantaTriangle() {
+    LatLngBounds bounds = map.getBounds();
+    LatLng center = map.getCenter();
+    LatLng ne = bounds.getNorthEast();
+    LatLng sw = bounds.getSouthWest();
+    GWT.log("ne=" + ne + ", sw=" + sw, null);
+    double vertDelta = ne.getLatitude() - sw.getLatitude();
+    double horizDelta = ne.getLongitude() - sw.getLongitude();
+    double vertGrid = vertDelta / 4.0;
+    double horizGrid = horizDelta / 8.0;
+
+    // A triangle pointing north to the west of the center of the map.
+    ATLANTA_TRIANGLE1[0] = new LatLng(center.getLatitude() + vertGrid,
+        center.getLongitude() - 2 * horizGrid);
+    ATLANTA_TRIANGLE1[1] = new LatLng(center.getLatitude() - vertGrid,
+        center.getLongitude() - 3 * horizGrid);
+    ATLANTA_TRIANGLE1[2] = new LatLng(center.getLatitude() - vertGrid,
+        center.getLongitude() - horizGrid);
+    ATLANTA_TRIANGLE1[3] = ATLANTA_TRIANGLE1[0];
+    
+    GWT.log("1[0] = " + ATLANTA_TRIANGLE1[0], null);
+    GWT.log("1[1] = " + ATLANTA_TRIANGLE1[1], null);
+    GWT.log("1[2] = " + ATLANTA_TRIANGLE1[2], null);
+    GWT.log("1[3] = " + ATLANTA_TRIANGLE1[3], null);
+
+    // A triangle pointing south to the east of the center of the map.
+    ATLANTA_TRIANGLE2[0] = new LatLng(center.getLatitude() - vertGrid,
+        center.getLongitude() + 2 * horizGrid);
+    ATLANTA_TRIANGLE2[1] = new LatLng(center.getLatitude() + vertGrid,
+        center.getLongitude() + 3 * horizGrid);
+    ATLANTA_TRIANGLE2[2] = new LatLng(center.getLatitude() + vertGrid,
+        center.getLongitude() + horizGrid);
+    ATLANTA_TRIANGLE2[3] = ATLANTA_TRIANGLE2[0];
+    
+    GWT.log("2[0] = " + ATLANTA_TRIANGLE2[0], null);
+    GWT.log("2[1] = " + ATLANTA_TRIANGLE2[1], null);
+    GWT.log("2[2] = " + ATLANTA_TRIANGLE2[2], null);
+    GWT.log("2[3] = " + ATLANTA_TRIANGLE2[3], null);
+  }
+
   /**
    * Create a panel of buttons to use to perform various actions on the marker.
    */
@@ -1060,7 +1259,7 @@ public class MapEventDemo extends MapsDemo {
     hp.setSpacing(10);
 
     vp.add(hp);
-    
+
     // Create a button to hide/show the marker
     final Button hideButton = new Button("Hide Marker");
     hideButton.addClickListener(new ClickListener() {
@@ -1093,19 +1292,85 @@ public class MapEventDemo extends MapsDemo {
     });
     hp.add(removeButton);
 
+    // Create a button to hide/show the polygon
+    final Button hidePolygonButton = new Button("Hide Polygon");
+    hidePolygonButton.setEnabled(false);
+    hidePolygonButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        boolean state = !polygon.isVisible();
+        polygon.setVisible(state);
+        if (state) {
+          hidePolygonButton.setText("Hide Polygon");
+        } else {
+          hidePolygonButton.setText("Show Polygon");
+        }
+      }
+    });
+    hp.add(hidePolygonButton);
+
+    // Create a button to remove the polygon from the map.
+    final Button removePolygonButton = new Button("Add Polygon");
+    removePolygonButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        if (!polygonRemoved) {
+          map.removeOverlay(polygon);
+          removePolygonButton.setText("Add Polygon");
+        } else {
+          map.addOverlay(polygon);
+          removePolygonButton.setText("Remove Polygon");
+        }
+        hidePolygonButton.setEnabled(polygonRemoved);
+        polygonRemoved = !polygonRemoved;
+      }
+    });
+    hp.add(removePolygonButton);
+
+    // Create a button to hide/show the polyline
+    final Button hidePolylineButton = new Button("Hide Polyline");
+    hidePolylineButton.setEnabled(false);
+    hidePolylineButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        boolean state = !polyline.isVisible();
+        polyline.setVisible(state);
+        if (state) {
+          hidePolylineButton.setText("Hide Polyline");
+        } else {
+          hidePolylineButton.setText("Show Polyline");
+        }
+      }
+    });
+    hp.add(hidePolylineButton);
+
+    // Create a button to remove the polyline from the map.
+    final Button removePolylineButton = new Button("Add Polyline");
+    removePolylineButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        if (!polylineRemoved) {
+          map.removeOverlay(polyline);
+          removePolylineButton.setText("Add Polyline");
+        } else {
+          map.addOverlay(polyline);
+          removePolylineButton.setText("Remove Polyline");
+        }
+        hidePolylineButton.setEnabled(polylineRemoved);
+        polylineRemoved = !polylineRemoved;
+      }
+    });
+    hp.add(removePolylineButton);
+
     final Button clearOverlaysButton = new Button("Clear Overlays");
     clearOverlaysButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         map.clearOverlays();
       }
     });
-    
+
     hp.add(clearOverlaysButton);
 
     hp = new HorizontalPanel();
     hp.setSpacing(10);
     vp.add(hp);
-    
+
     final Button infoWindowButton = new Button("Show InfoWindow");
     infoWindowButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
@@ -1117,7 +1382,7 @@ public class MapEventDemo extends MapsDemo {
       }
     });
     hp.add(infoWindowButton);
-    
+
     final Button mInfoWindowButton = new Button("Marker InfoWindow");
     mInfoWindowButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
@@ -1129,7 +1394,7 @@ public class MapEventDemo extends MapsDemo {
       }
     });
     hp.add(mInfoWindowButton);
-    
+
     final Button mapTypeButton = new Button("Add Map Type");
     mapTypeButton.addClickListener(new ClickListener() {
 
