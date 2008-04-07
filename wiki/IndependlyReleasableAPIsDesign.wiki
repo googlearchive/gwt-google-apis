@@ -56,3 +56,4 @@ Each API will live in its own directory.  It is assumed that the invoking ant in
   * Make sure that APIs that depend on different versions of JSIO can play nicely with each other.
   * Provide a devdocreader documentation template?
   * Provide template build scripts for new APIs
+  * What should the COPYING files be for each top distro?
