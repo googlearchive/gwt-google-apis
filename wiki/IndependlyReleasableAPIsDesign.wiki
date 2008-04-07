@@ -8,11 +8,23 @@ This document covers the conversion of the Google API Library for GWT from a sin
   * Allow GWT bindings to be developed and released independently.
   * Make the process of developing GWT bindings easier.
 
-= Directory Layout for API source =
+= Directory Layout for the Project as Whole =
+Every API will live in its own directory under the project root.  The directory should have the following layout:
+  * common.ant.xml - Common build rules that APIs can use.
+  * build - APIs will emit their build artifacts into child directories
+  * ajaxsearch
+  * gadgets
+  * gears
+  * maps
+  * ... other APIs
+
+== Directory Layout for Each API ==
+Each API will live in its own directory.  It is assumed that the invoking ant in that directory will produce an image suitable for distribution.  The layout of this directory is assumed to be as follows:
+  * build.xml - This file contains all of the rules needed to produce an image suitable for distribution.
   * distro-source
   * doc
   * eclipse
-  * [gwt bindings source code]
+  * (gwt bindings source code)
   * samples
 
 = Directory Layout for API distribution = 
