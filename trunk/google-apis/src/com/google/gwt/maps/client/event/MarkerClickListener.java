@@ -18,8 +18,10 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.overlay.Marker;
 
 /**
- * 
+ * @deprecated see {@link MarkerClickHandler} and
+ *             {@link MarkerDoubleClickHandler}
  */
+@Deprecated
 public interface MarkerClickListener {
 
   void onClick(Marker sender);

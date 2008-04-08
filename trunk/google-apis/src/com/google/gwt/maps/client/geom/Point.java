@@ -26,13 +26,14 @@ import com.google.gwt.maps.client.impl.PointImpl;
 public final class Point {
 
   // TODO: DELETE ME! (needs to function w/o)
-  private static final Extractor __extractor = new Extractor() {
-    public Object fromJS(JavaScriptObject jso) {
+  @SuppressWarnings("unused")
+  private static final Extractor<Point> __extractor = new Extractor<Point>() {
+    public Point fromJS(JavaScriptObject jso) {
       return createPeer(jso);
     }
 
-    public JavaScriptObject toJS(Object o) {
-      return ((Point) o).jsoPeer;
+    public JavaScriptObject toJS(Point point) {
+      return point.jsoPeer;
     }
   };
 

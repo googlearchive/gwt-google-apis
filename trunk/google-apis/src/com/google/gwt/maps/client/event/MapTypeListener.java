@@ -23,7 +23,11 @@ import com.google.gwt.maps.client.MapWidget;
  * changed.
  * 
  * @see MapWidget#addMapTypeListener(MapTypeListener)
+ * 
+ * @deprecated see {@link MapAddMapTypeHandler}, {@link MapTypeChangedHandler},
+ * and {@link MapRemoveMapTypeHandler} 
  */
+@Deprecated
 public interface MapTypeListener {
 
   void onMapTypeAdded(MapWidget sender, MapType type);

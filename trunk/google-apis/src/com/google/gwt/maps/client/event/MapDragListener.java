@@ -22,7 +22,9 @@ import com.google.gwt.maps.client.MapWidget;
  * on a {@link com.google.gwt.maps.client.MapWidget MapWidget} 
  * 
  * @see MapWidget#addMapDragListener(MapDragListener)
+ * @deprecated
  */
+@Deprecated
 public interface MapDragListener {
 
   /**

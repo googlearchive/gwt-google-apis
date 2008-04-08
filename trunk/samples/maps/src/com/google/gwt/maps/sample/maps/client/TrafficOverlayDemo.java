@@ -16,14 +16,18 @@
 package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.event.TrafficOverlayChangedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.TrafficOverlay;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.Date;
 
 /**
  * The Google Maps API now allows you to add traffic information to your maps.
@@ -90,8 +94,17 @@ public class TrafficOverlayDemo extends MapsDemo {
       }
     });
     panel.add(toggleTraffic);
+    final Label changeLabel = new Label();
+    panel.add(changeLabel);
     initWidget(panel);
     trafficInfo = new TrafficOverlay();
+    trafficInfo.addTrafficOverlayChangedHandler(new TrafficOverlayChangedHandler() {
+
+      public void onChanged(TrafficOverlayChangedEvent event) {
+        changeLabel.setText("Last Changed: " + new Date());
+      }
+      
+    });
   }
 
   @Override

@@ -22,8 +22,9 @@ import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Element;
 
 /**
- * 
+ * @deprecated
  */
+@Deprecated
 public abstract class MapClickListener {
 
   public abstract void onClick(MapWidget sender, Overlay overlay, LatLng point);

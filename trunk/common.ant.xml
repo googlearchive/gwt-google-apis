@@ -118,14 +118,17 @@
               For parallel testing, we must use 'auto' for the port number 
         -->
 	<property name="gwt.junit.port" value="8889" />
-	<property name="gwt.junit.testcase.includes" value="**/*Test.class"/>
+	<property name="gwt.junit.testcase.includes" value="**/*Suite.class"/>
 	
 	<!--
 		Comma delimited list of host and path components on 
                 which to run remote browser testing.
 	-->
 	<property name="gwt.remote.browsers" value="" />
-
+    <condition property="gwt.remote.browsers.specified">
+    	<not><equals arg1="${gwt.remote.browsers}" arg2=""/></not>
+    </condition>
+    
         <!-- Gears support -->
 
         <!-- Currently the test only asks if the host is Windows. A further -->

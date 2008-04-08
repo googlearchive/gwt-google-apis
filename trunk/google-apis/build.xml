@@ -54,7 +54,7 @@
 		</gwt.checkstyle>
 	</target>
 
-	<target name="remoteweb-test" description="Run a remoteweb test at the given host and path">
+	<target name="remoteweb-test" description="Run a remoteweb test at the given host and path" if="gwt.remote.browsers.specified">
 		<echo message="Performing remote browser testing at ${gwt.remote.browsers}" />
 		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -remoteweb ${gwt.remote.browsers}" test.out="${junit.out}/remoteweb" test.cases="default.web.tests" />
 	</target>

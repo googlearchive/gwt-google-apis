@@ -34,10 +34,14 @@ public interface InfoWindowImpl extends JSFlyweightWrapper {
   InfoWindowImpl impl = GWT.create(InfoWindowImpl.class);
 
   @Constructor("$wnd.GInfoWindowTab")
-  JavaScriptObject createInfoWindowTab(String label, String content);
+  JavaScriptObject createInfoWindowTab(String label, Element content);
 
   @Constructor("$wnd.GInfoWindowTab")
-  JavaScriptObject createInfoWindowTab(String label, Element content);
+  JavaScriptObject createInfoWindowTab(String label, String content);
+
+  void disableMaximize(JavaScriptObject jsoPeer);
+
+  void enableMaximize(JavaScriptObject jsoPeer);
 
   JSList<Element> getContentContainers(JavaScriptObject jsoPeer);
 
@@ -51,6 +55,8 @@ public interface InfoWindowImpl extends JSFlyweightWrapper {
 
   boolean isHidden(JavaScriptObject jsoPeer);
 
+  void maximize(JavaScriptObject jsoPeer);
+
   void reset(JavaScriptObject jsoPeer, LatLng point,
       JSList<InfoWindowTab> tabs, Size size);
 
@@ -60,8 +66,9 @@ public interface InfoWindowImpl extends JSFlyweightWrapper {
   void reset(JavaScriptObject jsoPeer, LatLng point,
       JSList<InfoWindowTab> tabs, Size size, Size offset, int selectedTab);
 
+  void restore(JavaScriptObject jsoPeer);
+
   void selectTab(JavaScriptObject jsoPeer, int index);
 
   void show(JavaScriptObject jsoPeer);
-
 }

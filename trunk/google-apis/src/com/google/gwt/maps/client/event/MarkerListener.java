@@ -19,8 +19,9 @@ import com.google.gwt.maps.client.geom.Bounds;
 import com.google.gwt.maps.client.overlay.MarkerManager;
 
 /**
- * 
+ * @deprecated see {@link MarkerManagerChangedHandler}
  */
+@Deprecated
 public interface MarkerListener {
 
   // TODO(samgross): this seems to be the only use of "Bounds" substitute ints?

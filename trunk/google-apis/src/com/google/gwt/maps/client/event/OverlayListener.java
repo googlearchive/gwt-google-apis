@@ -19,9 +19,10 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.overlay.Overlay;
 
 /**
- * 
+ * @deprecated see {@link MapAddOverlayHandler}, {@link MapRemoveOverlayHandler},
+ * and {@link MapClearOverlaysHandler}
  */
-// TODO(samgross): should this be named MapOverlayListener?
+@Deprecated
 public interface OverlayListener {
 
   void onOverlayAdded(MapWidget sender, Overlay overlay);
