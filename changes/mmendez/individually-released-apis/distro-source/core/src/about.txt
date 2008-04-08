@@ -1,0 +1,5 @@
+Google API Library for GWT @GWT_VERSION@
+(c) Copyright Google, Inc. 2007.  All rights reserved.
+Visit Google Code (http://code.google.com/p/gwt-google-apis/).
+
+For source availability and license information see COPYING.
