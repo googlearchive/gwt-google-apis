@@ -34,16 +34,24 @@ public interface PolylineImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GPolyline")
   JavaScriptObject construct(JSList<LatLng> points, String color);
- 
+
   @Constructor("$wnd.GPolyline")
-  JavaScriptObject construct(JSList<LatLng> points, String color,
-      int weight);
-  
+  JavaScriptObject construct(JSList<LatLng> points, String color, int weight);
+
   @Constructor("$wnd.GPolyline")
-  JavaScriptObject construct(JSList<LatLng> points, String color,
-      int weight, double opacity);
+  JavaScriptObject construct(JSList<LatLng> points, String color, int weight,
+      double opacity);
 
   LatLng getVertex(JavaScriptObject jsoPeer, int index);
+
+  int getVertexCount(JavaScriptObject jsoPeer);
+
+  void hide(JavaScriptObject jsoPeer);
+
+  boolean isHidden(JavaScriptObject jsoPeer);
+
+  void show(JavaScriptObject jsoPeer);
   
-  int getVertexCount(JavaScriptObject jsoPeer); 
+  boolean supportsHide(JavaScriptObject jsoPeer);
+  
 }

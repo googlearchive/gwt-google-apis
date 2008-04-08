@@ -26,7 +26,15 @@ import com.google.gwt.maps.client.impl.CopyrightImpl;
  */
 public final class Copyright {
 
-  static Copyright createPeer(JavaScriptObject jsoPeer) {
+  /**
+   * Used to create a new Overlay by wrapping an existing GOverlay object. This
+   * method is invoked by the jsio library.
+   * 
+   * @param jsoPeer GOverlay object to wrap.
+   * @return a new instance of Overlay.
+   */
+  @SuppressWarnings("unused")
+  private static Copyright createPeer(JavaScriptObject jsoPeer) {
     return new Copyright(jsoPeer);
   }
 
@@ -46,6 +54,21 @@ public final class Copyright {
 
   private Copyright(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (obj instanceof Copyright) {
+      Copyright c = (Copyright) obj;
+      if (c.getId() == getId()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -82,5 +105,27 @@ public final class Copyright {
    */
   public String getText() {
     return CopyrightImpl.impl.getText(jsoPeer);
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + getId();
+    result = prime * result
+        + (getBounds() == null ? 0 : getBounds().hashCode());
+    result = prime * result + getMinZoomLevel();
+    result = prime * result + (getText() == null ? 0 : getText().hashCode());
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    StringBuffer b = new StringBuffer();
+    b.append("ID=" + getId());
+    b.append(" : " + (getBounds() == null ? "" : getBounds()));
+    b.append(" : ZOOM=" + getMinZoomLevel());
+    b.append(" : " + (getText() == null ? "" : getText()));
+    return b.toString();
   }
 }

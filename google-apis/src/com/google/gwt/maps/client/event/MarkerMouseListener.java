@@ -18,8 +18,10 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.overlay.Marker;
 
 /**
- * 
+ * @deprecated see {@link MarkerMouseDownHandler}, {@link MarkerMouseOutHandler},
+ * {@link MarkerMouseOverHandler}, and {@link MarkerMouseUpHandler}   
  */
+@Deprecated
 public interface MarkerMouseListener {
 
   void onMouseDown(Marker sender);

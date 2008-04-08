@@ -18,12 +18,17 @@ package com.google.gwt.maps.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.jsio.client.impl.Extractor;
+import com.google.gwt.maps.client.event.MapTypeNewCopyrightHandler;
+import com.google.gwt.maps.client.event.MapTypeNewCopyrightHandler.MapTypeNewCopyrightEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Projection;
 import com.google.gwt.maps.client.geom.Size;
+import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.JsUtil;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MapTypeImpl;
+import com.google.gwt.maps.client.impl.EventImpl.CopyrightCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -95,42 +100,42 @@ public final class MapType {
     return defaultMapTypes;
   }
 
-  /**
-   * Returns a map type that shows transparent street maps over Google Earth
-   * satellite images.
-   * 
-   * @return a map type that shows transparent street maps over Google Earth
-   *         satellite images.
-   */
-  public static MapType getHybridMap() {
-    initMapTypes();
-    return hybridMap;
-  }
 
-  /**
-   * Returns a map type displays a shaded relief map of the surface of Mars.
-   * 
-   * @return a map type displays a shaded relief map of the surface of Mars,
-   *         color-coded by altitude. This map type is not displayed within map
-   *         type controls by default. (Since 2.95)
-   */
-  public static MapType getMarsElevationMap() {
-    initMapTypes();
-    return marsElevationMap;
-  }
+    /**
+     * Returns a map type that shows transparent street maps over Google Earth
+     * satellite images.
+     * 
+     * @return a map type that shows transparent street maps over Google Earth
+     *         satellite images.
+     */
+    public static MapType getHybridMap() {
+      initMapTypes();
+      return hybridMap;
+    }
 
-  /**
-   * Returns a map type displays a shaded infrared map of the surface of Mars.
-   * 
-   * @return a map type displays a shaded infrared map of the surface of Mars,
-   *         where warmer areas appear brighter and colder areas appear darker.
-   *         (Since 2.95)
-   */
-  public static MapType getMarsInfraredMap() {
-    initMapTypes();
-    return marsInfraredMap;
-  }
+    /**
+     * Returns a map type displays a shaded relief map of the surface of Mars.
+     * 
+     * @return a map type displays a shaded relief map of the surface of Mars,
+     *         color-coded by altitude. This map type is not displayed within map
+     *         type controls by default. (Since 2.95)
+     */
+    public static MapType getMarsElevationMap() {
+      initMapTypes();
+      return marsElevationMap;
+    }
 
+    /**
+     * Returns a map type displays a shaded infrared map of the surface of Mars.
+     * 
+     * @return a map type displays a shaded infrared map of the surface of Mars,
+     *         where warmer areas appear brighter and colder areas appear darker.
+     *         (Since 2.95)
+     */
+    public static MapType getMarsInfraredMap() {
+      initMapTypes();
+      return marsInfraredMap;
+    }
   /**
    * Turns G_MARS_MAP_TYPES into an immutable of MapType objects.
    * 
@@ -395,6 +400,8 @@ public final class MapType {
 
   private final JavaScriptObject jsoPeer;
 
+  private HandlerCollection<MapTypeNewCopyrightHandler> mapTypeNewCopyrightHandlers;
+
   /**
    * Creates a new custom map type from the tile layers, projection, and name.
    * 
@@ -426,6 +433,27 @@ public final class MapType {
 
   private MapType(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
+  }
+
+  /**
+   * Add a handler for "newcopyright" events. This event is fired when a new
+   * copyright was added to this copyright collection.
+   * 
+   * @param handler handler to invoke on mouse click events.
+   */
+  public void addMapTypeNewCopyrightHandler(
+      final MapTypeNewCopyrightHandler handler) {
+    maybeInitMapTypeNewCopyrightHandlers();
+
+    mapTypeNewCopyrightHandlers.addHandler(handler,
+        new CopyrightCallback() {
+          @Override
+          public void callback(Copyright copyright) {
+            MapTypeNewCopyrightEvent e = new MapTypeNewCopyrightEvent(
+                MapType.this, copyright);
+            handler.onNewCopyright(e);
+          }
+        });
   }
 
   /**
@@ -529,8 +557,6 @@ public final class MapType {
    * Returns the highest resolution zoom level required to show the given span
    * with the given center point.
    * 
-   * @TODO example, better descriptions
-   * 
    * @param center the center of the viewport
    * @param span the span of the viewport
    * @param viewSize the size of the viewport in pixels
@@ -582,4 +608,38 @@ public final class MapType {
     return MapTypeImpl.impl.getUrlArg(jsoPeer);
   }
 
+  /**
+   * Removes a single handler of this map type previously added with
+   * {@link MapType#addMapTypeNewCopyrightHandler(MapTypeNewCopyrightHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeMapTypeNewCopyrightHandler(
+      MapTypeNewCopyrightHandler handler) {
+    if (mapTypeNewCopyrightHandlers != null) {
+      mapTypeNewCopyrightHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(MapTypeNewCopyrightEvent event) {
+    maybeInitMapTypeNewCopyrightHandlers();
+    mapTypeNewCopyrightHandlers.trigger(event.getCopyright());
+  }
+  
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitMapTypeNewCopyrightHandlers() {
+    if (mapTypeNewCopyrightHandlers == null) {
+      mapTypeNewCopyrightHandlers = new HandlerCollection<MapTypeNewCopyrightHandler>(
+          jsoPeer, MapEvent.NEWCOPYRIGHT);
+    }
+  }
 }

@@ -22,7 +22,11 @@ import com.google.gwt.maps.client.overlay.Marker;
  * on a {@link  com.google.gwt.maps.client.overlay.Marker Marker}.
  * 
  * @see Marker#addMarkerDragListener(MarkerDragListener)
+ * 
+ * @deprecated see {@link MarkerDragHandler}, {@link MarkerDragStartHandler}
+ *             and {@link MarkerDragEndHandler}
  */
+@Deprecated
 public interface MarkerDragListener {
 
   /**

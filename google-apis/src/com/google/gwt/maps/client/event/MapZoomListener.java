@@ -18,8 +18,9 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.MapWidget;
 
 /**
- * 
+ * @deprecated see {@link MapZoomEndHandler}
  */
+@Deprecated
 public interface MapZoomListener {
 
   // TODO(samgross): should this be named onZoomEnd? 

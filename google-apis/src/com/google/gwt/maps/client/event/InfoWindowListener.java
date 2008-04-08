@@ -22,7 +22,11 @@ import com.google.gwt.maps.client.MapWidget;
  * listens to <code>InfoWindow</code> events.
  * 
  * @see MapWidget#addInfoWindowListener(InfoWindowListener)
+ * 
+ * @deprecated see {@link MapInfoWindowCloseHandler} and
+ *             {@link MapInfoWindowBeforeCloseHandler}
  */
+@Deprecated
 public interface InfoWindowListener {
 
   void onInfoWindowClosed(MapWidget sender);

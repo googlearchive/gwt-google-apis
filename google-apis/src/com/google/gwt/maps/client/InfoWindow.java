@@ -17,12 +17,25 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.JSList;
+import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowListener;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
+import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
+import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler.InfoWindowCloseClickEvent;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler.InfoWindowMaximizeClickEvent;
+import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler.InfoWindowMaximizeEndEvent;
+import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler.InfoWindowRestoreClickEvent;
+import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler.InfoWindowRestoreEndEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
+import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.InfoWindowImpl;
 import com.google.gwt.maps.client.impl.InfoWindowOptionsImpl;
 import com.google.gwt.maps.client.impl.JsUtil;
+import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MapImpl;
 import com.google.gwt.maps.client.impl.MarkerImpl;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
@@ -66,6 +79,12 @@ public final class InfoWindow {
     }
   }
 
+  private HandlerCollection<InfoWindowCloseClickHandler> infoWindowCloseClickHandlers;
+  private HandlerCollection<InfoWindowMaximizeClickHandler> infoWindowMaximizeClickHandlers;
+  private HandlerCollection<InfoWindowMaximizeEndHandler> infoWindowMaximizeEndHandlers;
+  private HandlerCollection<InfoWindowRestoreClickHandler> infoWindowRestoreClickHandlers;
+  private HandlerCollection<InfoWindowRestoreEndHandler> infoWindowRestoreEndHandlers;
+
   private final JavaScriptObject jsoPeer;
 
   private final MapWidget map;
@@ -87,6 +106,105 @@ public final class InfoWindow {
   }
 
   /**
+   * This event is fired when the info window close button is clicked. An event
+   * handler for this event can implement to close the info window, by calling
+   * the {@link InfoWindow#close()} method.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowCloseClickHandler(
+      final InfoWindowCloseClickHandler handler) {
+    maybeInitInfoWindowCloseClickHandlers();
+
+    infoWindowCloseClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowCloseClickEvent e = new InfoWindowCloseClickEvent(
+            InfoWindow.this);
+        handler.onCloseClick(e);
+      }
+    });
+  }
+
+  /**
+   * Signals that the info window is about to be maximized.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowMaximizeClickHandler(
+      final InfoWindowMaximizeClickHandler handler) {
+    maybeInitInfoWindowMaximizeClickHandlers();
+
+    infoWindowMaximizeClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowMaximizeClickEvent e = new InfoWindowMaximizeClickEvent(
+            InfoWindow.this);
+        handler.onMaximizeClick(e);
+      }
+    });
+  }
+
+  /**
+   * Signals that the info window is about to be maximized.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowMaximizeEndHandler(
+      final InfoWindowMaximizeEndHandler handler) {
+    maybeInitInfoWindowMaximizeEndHandlers();
+
+    infoWindowMaximizeEndHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowMaximizeEndEvent e = new InfoWindowMaximizeEndEvent(
+            InfoWindow.this);
+        handler.onMaximizeEnd(e);
+      }
+    });
+  }
+
+  /**
+   * Signals that the info window is about to be restored to the non-maximized
+   * state.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowRestoreClickHandler(
+      final InfoWindowRestoreClickHandler handler) {
+    maybeInitInfoWindowRestoreClickHandlers();
+
+    infoWindowRestoreClickHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowRestoreClickEvent e = new InfoWindowRestoreClickEvent(
+            InfoWindow.this);
+        handler.onRestoreClick(e);
+      }
+    });
+  }
+
+  /**
+   * Signals that the info window has completed the restore operation to the
+   * non-maximized state.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addInfoWindowRestoreEndHandler(
+      final InfoWindowRestoreEndHandler handler) {
+    maybeInitInfoWindowRestoreEndHandlers();
+
+    infoWindowRestoreEndHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        InfoWindowRestoreEndEvent e = new InfoWindowRestoreEndEvent(
+            InfoWindow.this);
+        handler.onRestoreEnd(e);
+      }
+    });
+  }
+
+  /**
    * Closes the info window.
    */
   public void close() {
@@ -105,8 +223,6 @@ public final class InfoWindow {
     JsUtil.toArray(elementList, containers);
     return containers;
   }
-
-  // private InfoWindowEventCallbacks eventCallbacks = null;
 
   /**
    * Returns the offset, in pixels, of the tip of the info window from the point
@@ -142,6 +258,15 @@ public final class InfoWindow {
    */
   public boolean isVisible() {
     return !InfoWindowImpl.impl.isHidden(jsoPeer);
+  }
+
+  /**
+   * Maximizes the infowindow. The infowindow must have been opened with
+   * maxContent or maxTitle options, and it must not have had its maximization
+   * disabled through {@link InfoWindow#setMaximizeEnabled}
+   */
+  public void maximize() {
+    InfoWindowImpl.impl.maximize(jsoPeer);
   }
 
   /**
@@ -196,8 +321,82 @@ public final class InfoWindow {
     finishAttach(content);
   }
 
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowCloseClickHandler(
+      InfoWindowCloseClickHandler handler) {
+    if (infoWindowCloseClickHandlers != null) {
+      infoWindowCloseClickHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowMaximizeClickHandler(
+      InfoWindowMaximizeClickHandler handler) {
+
+    if (infoWindowMaximizeClickHandlers != null) {
+      infoWindowMaximizeClickHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowMaximizeEndHandler(
+      InfoWindowMaximizeEndHandler handler) {
+    if (infoWindowMaximizeEndHandlers != null) {
+      infoWindowMaximizeEndHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowRestoreClickHandler(
+      InfoWindowRestoreClickHandler handler) {
+    if (infoWindowRestoreClickHandlers != null) {
+      infoWindowRestoreClickHandlers.removeHandler(handler);
+    }
+  }
+
   // TODO(zundel): Implement reset?
-  
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeInfoWindowRestoreEndHandler(
+      InfoWindowRestoreEndHandler handler) {
+    if (infoWindowRestoreEndHandlers != null) {
+      infoWindowRestoreEndHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Restores the info window to its default (non-maximized) state. The
+   * infowindow must have been opened with maxContent or maxTitle options
+   */
+  public void restore() {
+    InfoWindowImpl.impl.restore(jsoPeer);
+  }
+
   /**
    * Selects the tab with the given index. This has the same effect as clicking
    * on the corresponding tab.
@@ -206,6 +405,26 @@ public final class InfoWindow {
    */
   public void selectTab(int index) {
     InfoWindowImpl.impl.selectTab(jsoPeer, index);
+  }
+
+  /**
+   * Enables or disables maximization of the info window. A maximizable info
+   * window expands to fill most of the map with contents specified via the
+   * maxContent and maxTitle properties of GInfoWindowOptions. The info window
+   * must have been opened with maxContent or maxTitle options in order for this
+   * function to have any effect. An info window opened with maxContent or
+   * maxTitle will have maximization enabled by default.
+   * 
+   * Note that if the info window is currently opened and this method is set to
+   * disable maximizing, this function will remove the maximize buton but will
+   * not restore the window to its minimized state.
+   */
+  public void setMaximizeEnabled(boolean enabled) {
+    if (enabled) {
+      InfoWindowImpl.impl.enableMaximize(jsoPeer);
+    } else {
+      InfoWindowImpl.impl.disableMaximize(jsoPeer);
+    }
   }
 
   /**
@@ -220,6 +439,64 @@ public final class InfoWindow {
     } else {
       InfoWindowImpl.impl.hide(jsoPeer);
     }
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(InfoWindowCloseClickEvent event) {
+    maybeInitInfoWindowCloseClickHandlers();
+    infoWindowCloseClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(InfoWindowMaximizeClickEvent event) {
+    maybeInitInfoWindowMaximizeClickHandlers();
+    infoWindowMaximizeClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(InfoWindowMaximizeEndEvent event) {
+    maybeInitInfoWindowMaximizeEndHandlers();
+    infoWindowMaximizeEndHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(InfoWindowRestoreClickEvent event) {
+    maybeInitInfoWindowRestoreClickHandlers();
+    infoWindowRestoreClickHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(InfoWindowRestoreEndEvent event) {
+    maybeInitInfoWindowRestoreEndHandlers();
+    infoWindowRestoreEndHandlers.trigger();
   }
 
   private void beginAttach(InfoWindowContent content) {
@@ -238,14 +515,13 @@ public final class InfoWindow {
     for (int i = 0; i < contentWidgets.size(); i++) {
       virtualPanel.finishAttach(contentWidgets.get(i));
     }
-    map.addInfoWindowListener(new InfoWindowListener() {
-      public void onInfoWindowClosed(MapWidget sender) {
+    
+    map.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
+     
+      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
         for (int i = 0; i < contentWidgets.size(); i++) {
           virtualPanel.remove(contentWidgets.get(i));
-        }
-      }
-
-      public void onInfoWindowOpened(MapWidget sender) {
+        }        
       }
     });
   }
@@ -254,7 +530,10 @@ public final class InfoWindow {
    * This method implements a chain of listeners for the InfoWindow object
    * instead of just a single callback as provided by the native JavaScript Maps
    * API. This was done to make the GWT API more intuitive to Java programmers. 
+   * 
+   * @deprecated
    */
+  @Deprecated
   private void initEventCallbacks(InfoWindowContent content,
       List<InfoWindowListener> listeners) {
     final List<InfoWindowListener> listenerList = new ArrayList<InfoWindowListener>(
@@ -297,4 +576,53 @@ public final class InfoWindow {
         });
   }
 
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowCloseClickHandlers() {
+    if (infoWindowCloseClickHandlers == null) {
+      infoWindowCloseClickHandlers = new HandlerCollection<InfoWindowCloseClickHandler>(
+          jsoPeer, MapEvent.CLOSECLICK);
+    }
+  }
+
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowMaximizeClickHandlers() {
+    if (infoWindowMaximizeClickHandlers == null) {
+      infoWindowMaximizeClickHandlers = new HandlerCollection<InfoWindowMaximizeClickHandler>(
+          jsoPeer, MapEvent.MAXIMIZECLICK);
+    }
+  }
+
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowMaximizeEndHandlers() {
+    if (infoWindowMaximizeEndHandlers == null) {
+      infoWindowMaximizeEndHandlers = new HandlerCollection<InfoWindowMaximizeEndHandler>(
+          jsoPeer, MapEvent.MAXIMIZEEND);
+    }
+  }
+
+  /**
+   * Lazy init the {@link HandlerCollection}.
+   */
+  private void maybeInitInfoWindowRestoreClickHandlers() {
+    if (infoWindowRestoreClickHandlers == null) {
+      infoWindowRestoreClickHandlers = new HandlerCollection<InfoWindowRestoreClickHandler>(
+          jsoPeer, MapEvent.RESTORECLICK);
+    }
+  }
+
+  /**
+   * Lazy init the HandlerCollection.
+   */
+  private void maybeInitInfoWindowRestoreEndHandlers() {
+    if (infoWindowRestoreEndHandlers == null) {
+      infoWindowRestoreEndHandlers = new HandlerCollection<InfoWindowRestoreEndHandler>(
+          jsoPeer, MapEvent.RESTOREEND);
+    }
+  }
 }
