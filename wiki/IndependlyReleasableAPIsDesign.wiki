@@ -19,7 +19,7 @@ Every API will live in its own directory under the project root.  The root direc
   * ... other APIs
 
 == Directory Layout for Each API ==
-Each API will live in its own directory.  It is assumed that the invoking ant in that directory will produce an image suitable for distribution.  The layout of this directory is assumed to be as follows:
+Each API will live in its own directory under the project directory.  It is assumed that the invoking ant in that directory will produce an image suitable for distribution.  The layout of this directory is assumed to be as follows:
   * build.xml - This file contains all of the rules needed to produce an image suitable for distribution.
   * distro-source - Resource to include in the distribution
   * doc
@@ -27,7 +27,7 @@ Each API will live in its own directory.  It is assumed that the invoking ant in
   * (gwt bindings source code)
   * samples - sample code for the API
 
-= Directory Layout for API distribution =
+= Directory Layout for an API Distribution =
 This is the basic layout for each of the distributable images for an API. 
   * COPYING
   * COPYING.html
