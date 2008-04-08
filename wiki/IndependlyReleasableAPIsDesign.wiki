@@ -26,7 +26,8 @@ Each API will live in its own directory.  It is assumed that the invoking ant in
   * (gwt bindings source code)
   * samples - sample code for the API
 
-= Directory Layout for API distribution (baseline) = 
+= Directory Layout for API distribution =
+This is the basic layout for each of the distributable images for an API. 
   * COPYING
   * COPYING.html
   * about.txt
