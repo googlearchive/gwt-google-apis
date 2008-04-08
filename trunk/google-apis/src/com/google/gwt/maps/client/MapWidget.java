@@ -98,6 +98,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A widget that presents a viewable Google Map to a user.
  * 
@@ -170,6 +173,11 @@ public final class MapWidget extends Composite {
   private ListenerCollection<MapMouseListener> mouseListeners;
   private ListenerCollection<MapMoveListener> moveListeners;
   private ListenerCollection<OverlayListener> overlayListeners;
+  /**
+   * Cache of the map panes returned for this widget.
+   */
+  private Map<MapPaneType, MapPane> panes;
+
   private ListenerCollection<MapZoomListener> zoomListeners;
 
   public MapWidget() {
@@ -1194,7 +1202,22 @@ public final class MapWidget extends Composite {
    * @return the corresponding overlay pane
    */
   public MapPane getPane(MapPaneType type) {
-    return MapPane.getPane(this, type);
+    // lazy init the hash map 
+    if (panes == null) {
+      panes = new HashMap<MapPaneType, MapPane>();
+    }
+
+    // See if we've already created a pane for this layer. Creating the layer
+    // twice will cause GWT to assert on the setElement() call.
+    MapPane found = panes.get(type);
+    if (found != null) {
+      return found;
+    }
+
+    // Create a new pane panel
+    MapPane newPane = MapPane.getPane(this, type);
+    panes.put(type, newPane);
+    return newPane;
   }
 
   /**
@@ -1234,45 +1257,47 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Returns true if continuous smooth zooming is enabled.
+   * Returns <code>true</code> if continuous smooth zooming is enabled.
    * 
-   * @return true if continuous smooth zooming is enabled
+   * @return <code>true</code> if continuous smooth zooming is enabled
    */
   public boolean isContinuousZoomEnabled() {
     return MapImpl.impl.continuousZoomEnabled(jsoPeer);
   }
 
   /**
-   * Returns true if double-click to zoom is enabled.
+   * Returns <code>true</code> if double-click to zoom is enabled.
    * 
-   * @return true if double-click to zoom is enabled
+   * @return <code>true</code> if double-click to zoom is enabled
    */
   public boolean isDoubleClickZoomEnabled() {
     return MapImpl.impl.doubleClickZoomEnabled(jsoPeer);
   }
 
   /**
-   * Returns true if dragging of the map is enabled.
+   * Returns <code>true</code> if dragging of the map is enabled.
    * 
-   * @return true if dragging of the map is enabled
+   * @return <code>true</code> if dragging of the map is enabled
    */
   public boolean isDraggable() {
     return MapImpl.impl.draggingEnabled(jsoPeer);
   }
 
   /**
-   * Returns true if opening info windows is enabled.
+   * Returns <code>true</code> if opening info windows is enabled.
    * 
-   * @return true if opening info windows is enabled
+   * @return <code>true</code> if opening info windows is enabled
    */
   public boolean isInfoWindowEnabled() {
     return MapImpl.impl.infoWindowEnabled(jsoPeer);
   }
 
   /**
-   * Returns true if zooming using a mouse's scroll wheel is enabled.
+   * Returns <code>true</code> if zooming using a mouse's scroll wheel is
+   * enabled.
    * 
-   * @return true if zooming using a mouse's scroll wheel is enabled
+   * @return <code>true</code> if zooming using a mouse's scroll wheel is
+   *         enabled
    */
   public boolean isScrollWheelZoomEnabled() {
     return MapImpl.impl.scrollWheelZoomEnabled(jsoPeer);
@@ -1788,7 +1813,7 @@ public final class MapWidget extends Composite {
    * Enables or disables continuous zooming on supported browsers. Continuous
    * zooming is disabled by default.
    * 
-   * @param enabled true to enable continuous zooming
+   * @param enabled <code>true</code> to enable continuous zooming
    */
   public void setContinuousZoom(boolean enabled) {
     if (enabled) {
@@ -1813,7 +1838,7 @@ public final class MapWidget extends Composite {
    * Enables or disables the double click to zoom functionality. Double-click to
    * zoom is disabled by default.
    * 
-   * @param enabled true to enable double-click to zoom.
+   * @param enabled <code>true</code> to enable double-click to zoom.
    */
   public void setDoubleClickZoom(boolean enabled) {
     if (enabled) {
@@ -1826,7 +1851,7 @@ public final class MapWidget extends Composite {
   /**
    * Sets whether the map is draggable.
    * 
-   * @param draggable true if the map is draggable
+   * @param draggable <code>true</code> if the map is draggable
    */
   public void setDraggable(boolean draggable) {
     if (draggable) {
@@ -1846,7 +1871,7 @@ public final class MapWidget extends Composite {
    * Sets whether info window operations on the map are enabled. Info windows
    * are enabled by default.
    * 
-   * @param enabled true to enable opening info windows
+   * @param enabled <code>true</code> to enable opening info windows
    */
   public void setInfoWindowEnabled(boolean enabled) {
     if (enabled) {
@@ -1860,7 +1885,7 @@ public final class MapWidget extends Composite {
    * Enables zooming using a mouse's scroll wheel. Scroll wheel zoom is disabled
    * by default.
    * 
-   * @param enabled true to enable scroll wheel zooming
+   * @param enabled <code>true</code> to enable scroll wheel zooming
    */
   public void setScrollWheelZoomEnabled(boolean enabled) {
     if (enabled) {

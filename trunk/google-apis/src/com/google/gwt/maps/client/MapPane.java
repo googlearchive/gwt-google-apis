@@ -17,7 +17,6 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.jsio.client.JSOpaque;
 import com.google.gwt.maps.client.impl.MapImpl;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 /**
@@ -27,7 +26,10 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 public final class MapPane extends AbsolutePanel {
 
   /**
-   * Retrieve the specified MapPane. Always creates a new MapPane object
+   * Retrieve the specified MapPane. Always creates a new MapPane object.
+   * 
+   * Note: Do not instantiate more than one MapPane instance per map and layer
+   * combination.
    * 
    * @param map The map to query
    * @param layer The DIV element representing the layer of the map to return.
@@ -38,8 +40,7 @@ public final class MapPane extends AbsolutePanel {
   }
 
   private MapPane(MapWidget map, JSOpaque paneId) {
-    Element mapPaneElement = MapImpl.impl.getPane(map, paneId);
-    setElement(mapPaneElement);
+    super(MapImpl.impl.getPane(map, paneId));
     map.addVirtual(this);
   }
 }
