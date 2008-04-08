@@ -1,6 +1,0 @@
-<project name="database" default="build" basedir=".">
-	<property name="sample.api" value="ajaxsearch"/>
-	<property name="sample.root" value="ajaxsearch" />
-	<property name="sample.module" value="AJAXSearch" />
-	<import file="../common.ant.xml" />
-</project>
