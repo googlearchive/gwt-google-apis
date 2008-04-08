@@ -689,6 +689,7 @@ public final class Marker extends ConcreteOverlay {
    * @param listener drag listener events to remove
    * @deprecated
    */
+  @Deprecated
   public void removeMarkerDragListener(MarkerDragListener listener) {
     if (dragListeners != null) {
       dragListeners.removeListener(listener);
@@ -765,6 +766,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @deprecated
    */
+  @Deprecated
   public void removeMarkerMouseListener(MarkerMouseListener listener) {
     if (mouseListeners != null) {
       mouseListeners.removeListener(listener);
@@ -839,6 +841,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @deprecated
    */
+  @Deprecated
   public void removeRemoveListener(RemoveListener listener) {
     if (removeListeners != null) {
       removeListeners.clearListeners();
@@ -852,6 +855,7 @@ public final class Marker extends ConcreteOverlay {
    * 
    * @deprecated
    */
+  @Deprecated
   public void removeVisibilityListener(VisibilityListener listener) {
     if (visibilityListeners != null) {
       visibilityListeners.removeListener(listener);
