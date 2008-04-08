@@ -20,10 +20,7 @@ import com.google.gwt.jsio.client.JSList;
 import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
-import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
-import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.InfoWindowListener;
-import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -34,6 +31,9 @@ import com.google.gwt.maps.client.event.MapDragEndHandler;
 import com.google.gwt.maps.client.event.MapDragHandler;
 import com.google.gwt.maps.client.event.MapDragListener;
 import com.google.gwt.maps.client.event.MapDragStartHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MapMouseListener;
 import com.google.gwt.maps.client.event.MapMouseMoveHandler;
 import com.google.gwt.maps.client.event.MapMouseOutHandler;
@@ -50,9 +50,6 @@ import com.google.gwt.maps.client.event.MapTypeListener;
 import com.google.gwt.maps.client.event.MapZoomEndHandler;
 import com.google.gwt.maps.client.event.MapZoomListener;
 import com.google.gwt.maps.client.event.OverlayListener;
-import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler.MapInfoWindowBeforeCloseEvent;
-import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler.MapInfoWindowCloseEvent;
-import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler.MapInfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler.MapAddMapTypeEvent;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler.MapAddOverlayEvent;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler.MapClearOverlaysEvent;
@@ -61,6 +58,9 @@ import com.google.gwt.maps.client.event.MapDoubleClickHandler.MapDoubleClickEven
 import com.google.gwt.maps.client.event.MapDragEndHandler.MapDragEndEvent;
 import com.google.gwt.maps.client.event.MapDragHandler.MapDragEvent;
 import com.google.gwt.maps.client.event.MapDragStartHandler.MapDragStartEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowBeforeCloseHandler.MapInfoWindowBeforeCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler.MapInfoWindowCloseEvent;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler.MapInfoWindowOpenEvent;
 import com.google.gwt.maps.client.event.MapMouseMoveHandler.MapMouseMoveEvent;
 import com.google.gwt.maps.client.event.MapMouseOutHandler.MapMouseOutEvent;
 import com.google.gwt.maps.client.event.MapMouseOverHandler.MapMouseOverEvent;
@@ -133,8 +133,8 @@ public final class MapWidget extends Composite {
   }
 
   private static native void nativeUnload() /*-{
-    $wnd.GUnload && $wnd.GUnload();
-  }-*/;
+      $wnd.GUnload && $wnd.GUnload();
+    }-*/;
 
   private ListenerCollection<MapClickListener> clickListeners;
   private ListenerCollection<MapDragListener> dragListeners;
@@ -186,7 +186,7 @@ public final class MapWidget extends Composite {
   public MapWidget(LatLng center, int zoomLevel) {
     this(center, zoomLevel, null, null);
   }
-  
+
   /**
    * Creates a new map widget and sets the view to the specified center point
    * and zoom level. Also, sets the dragging and draggable cursor values. See
@@ -194,9 +194,8 @@ public final class MapWidget extends Composite {
    * 
    * Note: The 'load' event requires that a handler be registered before
    * GMap2.setCenter() is called. Since that method is always called in this
-   * constructor, it isn't clear that gwt-google-apis users needs this
-   * event.
-   *
+   * constructor, it isn't clear that gwt-google-apis users needs this event.
+   * 
    * @param center the geographical point about which to center
    * @param zoomLevel zoomLevel the zoom level
    * @param draggableCursor CSS name of the cursor to display when the map is
@@ -240,8 +239,9 @@ public final class MapWidget extends Composite {
    * Adds a Control's widget to the map.
    * 
    * This method is not intended to be called by the user. To add a custom
-   * control to the map, subclass {@link com.google.gwt.maps.client.control.Control.CustomControl} and implement
-   * the initialize(MapWidget) method.
+   * control to the map, subclass
+   * {@link com.google.gwt.maps.client.control.Control.CustomControl} and
+   * implement the initialize(MapWidget) method.
    * 
    * @param w the control widget to add to the map
    */
@@ -272,9 +272,9 @@ public final class MapWidget extends Composite {
    * This event is fired when the info window closes. The handler
    * {@link MapInfoWindowBeforeCloseHandler} is fired before this event. If a
    * currently open info window is reopened at a different point using another
-   * call to openInfoWindow*(), the handler {@link MapInfoWindowBeforeCloseHandler},
-   * {@link MapInfoWindowCloseHandler} and {@link MapInfoWindowOpenHandler} are fired
-   * in this order
+   * call to openInfoWindow*(), the handler
+   * {@link MapInfoWindowBeforeCloseHandler}, {@link MapInfoWindowCloseHandler}
+   * and {@link MapInfoWindowOpenHandler} are fired in this order
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -927,8 +927,8 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Adds an overlay to the map and fires any
-   * {@link OverlayListener#onOverlayAdded(MapWidget, Overlay)} listeners.
+   * Adds an overlay to the map and fires any registered
+   * {@link MapAddOverlayHandler}.
    * 
    * @param overlay
    */
@@ -1078,8 +1078,7 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Removes all overlay from the map, and fires the
-   * {@link OverlayListener#onOverlaysCleared(MapWidget)} listener.
+   * Removes all overlay from the map, and fires any registered {@link MapClearOverlaysHandler}.
    */
   public void clearOverlays() {
     MapImpl.impl.clearOverlays(jsoPeer);
@@ -1646,8 +1645,7 @@ public final class MapWidget extends Composite {
    * type. The last remaining map type cannot be removed.
    * 
    * This method will update the set of buttons displayed by the {@link Control}
-   * and will fire any
-   * {@link MapTypeListener#onMapTypeRemoved(MapWidget, MapType)} listeners.
+   * and will fire any registered instances of {@link MapRemoveMapTypeHandler}.
    */
   public void removeMapType(MapType type) {
     MapImpl.impl.removeMapType(jsoPeer, type);
@@ -1709,7 +1707,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes the overlay from the map. If the overlay was on the map, it fires
-   * any {@link OverlayListener#onOverlayRemoved(MapWidget, Overlay)} listeners.
+   * any {@link MapRemoveOverlayHandler} handlers.
    * 
    * @param overlay the overlay to remove from the map
    */

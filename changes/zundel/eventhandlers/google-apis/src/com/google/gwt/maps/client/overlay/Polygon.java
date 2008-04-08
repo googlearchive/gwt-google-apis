@@ -178,12 +178,14 @@ public final class Polygon extends ConcreteOverlay {
 
   /**
    * Returns <code>true</code> if this environment supports the
-   * {@link Polygon#setVisible} method.
+   * {@link Polygon#setVisible(boolean)} method.
    * 
    * @return true if setVisible(<code>false</code>) is supported.
    */
   public boolean supportsHide() {
-    return PolygonImpl.impl.supportsHide(jsoPeer);
+    // TODO(zundel): after the polygon hide/show fix is in place (issue 101), uncomment
+    // return PolygonImpl.impl.supportsHide(jsoPeer);
+    return false;
   }
 
   /**

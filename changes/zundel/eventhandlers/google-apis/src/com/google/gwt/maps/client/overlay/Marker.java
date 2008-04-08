@@ -117,9 +117,8 @@ public final class Marker extends ConcreteOverlay {
    * Create a new marker at the specified point using default options. Add the
    * newly created marker to a
    * 
-   * {@link MapWidget} with the
-   *        {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
-   *        method.
+   * {@link com.google.gwt.maps.client.MapWidget} with the
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)} method.
    * 
    * @param point The point to create the new marker.
    */
@@ -131,9 +130,8 @@ public final class Marker extends ConcreteOverlay {
    * Create a new marker at the specified point using the supplied options
    * overrides. Add the newly created marker to a
    * 
-   * {@link MapWidget} with the
-   *        {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
-   *        method.
+   * {@link com.google.gwt.maps.client.MapWidget} with the
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)} method.
    * 
    * @param point The point to create the new marker.
    * @param options Use settings in this object to override the Marker defaults.
@@ -169,7 +167,12 @@ public final class Marker extends ConcreteOverlay {
    * Associate a click event listener with this Marker.
    * 
    * @param listener a click listener
+   * 
+   * @deprecated see {@link Marker#addMarkerClickHandler(MarkerClickHandler)},
+   *             and
+   *             {@link Marker#addMarkerDoubleClickHandler(MarkerDoubleClickHandler)}
    */
+  @Deprecated
   public void addMarkerClickListener(final MarkerClickListener listener) {
     if (clickListeners == null) {
       clickListeners = new ListenerCollection<MarkerClickListener>();
@@ -250,7 +253,12 @@ public final class Marker extends ConcreteOverlay {
    * Associate a drag listener with this Marker.
    * 
    * @param listener a drag event listener
+   * 
+   * @deprecated see {@link Marker#addMarkerDragHandler(MarkerDragHandler)},
+   *             {@link Marker#addMarkerDragStartHandler(MarkerDragStartHandler)},
+   *             {@link Marker#addMarkerDragEndHandler(MarkerDragEndHandler)},
    */
+  @Deprecated
   public void addMarkerDragListener(final MarkerDragListener listener) {
     if (dragListeners == null) {
       dragListeners = new ListenerCollection<MarkerDragListener>();
@@ -353,7 +361,7 @@ public final class Marker extends ConcreteOverlay {
       @Override
       public void callback() {
         MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(Marker.this);
-          handler.onInfoWindowOpen(e);
+        handler.onInfoWindowOpen(e);
       }
     });
   }
@@ -381,7 +389,15 @@ public final class Marker extends ConcreteOverlay {
    * Associate a mouse listener with this Marker.
    * 
    * @param listener a mouse event listener
+   * 
+   * @deprecated see
+   *             {@link Marker#addMarkerMouseDownHandler(MarkerMouseDownHandler)},
+   *             {@link Marker#addMarkerMouseUpHandler(MarkerMouseUpHandler)},
+   *             {@link Marker#addMarkerMouseOverHandler(MarkerMouseOverHandler)}
+   *             and
+   *             {@link Marker#addMarkerMouseOutHandler(MarkerMouseOutHandler)}
    */
+  @Deprecated
   public void addMarkerMouseListener(final MarkerMouseListener listener) {
     if (mouseListeners == null) {
       mouseListeners = new ListenerCollection<MarkerMouseListener>();
@@ -516,7 +532,10 @@ public final class Marker extends ConcreteOverlay {
    * Associate a remove listener with this Marker.
    * 
    * @param listener a remove event listener
+   * 
+   * @deprecated see {@link Marker#addMarkerRemoveHandler(MarkerRemoveHandler)}
    */
+  @Deprecated
   public void addRemoveListener(final RemoveListener listener) {
 
     if (removeListeners == null) {
@@ -537,7 +556,11 @@ public final class Marker extends ConcreteOverlay {
    * Associate the specified listener with this Marker.
    * 
    * @param listener a visibility event listener
+   * 
+   * @deprecated see
+   *             {@link Marker#addMarkerVisibilityChangedHandler(MarkerVisibilityChangedHandler)}
    */
+  @Deprecated
   public void addVisibilityListener(final VisibilityListener listener) {
     if (visibilityListeners == null) {
       visibilityListeners = new ListenerCollection<VisibilityListener>();
@@ -614,7 +637,10 @@ public final class Marker extends ConcreteOverlay {
    * Remove the specified click listener registered with this marker.
    * 
    * @param listener click listener events to remove
+   * 
+   * @deprecated 
    */
+  @Deprecated
   public void removeMarkerClickListener(MarkerClickListener listener) {
     if (clickListeners != null) {
       clickListeners.removeListener(listener);
@@ -661,6 +687,7 @@ public final class Marker extends ConcreteOverlay {
    * Remove the specified drag listener registered with this marker.
    * 
    * @param listener drag listener events to remove
+   * @deprecated
    */
   public void removeMarkerDragListener(MarkerDragListener listener) {
     if (dragListeners != null) {
@@ -735,6 +762,8 @@ public final class Marker extends ConcreteOverlay {
    * Remove a single mouse listener registered with this marker.
    * 
    * @param listener mouse listener to remove
+   * 
+   * @deprecated
    */
   public void removeMarkerMouseListener(MarkerMouseListener listener) {
     if (mouseListeners != null) {
@@ -807,6 +836,8 @@ public final class Marker extends ConcreteOverlay {
    * Remove a single remove listener registered with this marker.
    * 
    * @param listener the remove listener to remove
+   * 
+   * @deprecated
    */
   public void removeRemoveListener(RemoveListener listener) {
     if (removeListeners != null) {
@@ -818,6 +849,8 @@ public final class Marker extends ConcreteOverlay {
    * Remove a single visibility listener registered with this marker.
    * 
    * @param listener visibility listener to remove
+   * 
+   * @deprecated
    */
   public void removeVisibilityListener(VisibilityListener listener) {
     if (visibilityListeners != null) {
@@ -829,7 +862,8 @@ public final class Marker extends ConcreteOverlay {
    * Allow this marker to be dragged. Note: in order for dragging to work, the
    * Marker must be created using the
    * 
-   * {@link MarkerOptions#setDraggable(boolean) option.
+   * {@link MarkerOptions#setDraggable(boolean)} option.
+   * 
    * @param value <code>true</code> to allow the marker to be dragged.
    */
   public void setDraggingEnabled(boolean value) {

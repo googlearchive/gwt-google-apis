@@ -221,7 +221,14 @@ public class InfoWindowContent {
    * pops open or closed. Multiple listeners can be added.
    * 
    * @param l listener to add.
+   * 
+   * @deprecated see {@link InfoWindow#addInfoWindowCloseClickHandler(com.google.gwt.maps.client.event.InfoWindowCloseClickHandler)},
+   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler)},
+   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler)}, 
+   * {@link InfoWindow#addInfoWindowRestoreClickHandler(com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler)} and
+   * {@link InfoWindow#addInfoWindowRestoreEndHandler(com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler)}
    */
+  @Deprecated
   public void addInfoWindowListener(InfoWindowListener l) {
     if (infoWindowListeners == null) {
       infoWindowListeners = new ArrayList<InfoWindowListener>();
@@ -233,7 +240,10 @@ public class InfoWindowContent {
    * Remove any previously added InfoWindowListeners from this content object.
    * This will only affect the object before the content is used to create a
    * particular InfoWindow.
+   * 
+   * @deprecated
    */
+  @Deprecated
   public void removeInfoWindowListeners() {
     infoWindowListeners = null;
   }
@@ -303,6 +313,7 @@ public class InfoWindowContent {
     return content;
   }
 
+  @Deprecated
   protected List<InfoWindowListener> getInfoWindowListeners() {
     return infoWindowListeners;
   }

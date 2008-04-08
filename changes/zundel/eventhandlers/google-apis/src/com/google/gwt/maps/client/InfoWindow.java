@@ -23,6 +23,7 @@ import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler.InfoWindowCloseClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler.InfoWindowMaximizeClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler.InfoWindowMaximizeEndEvent;
@@ -513,15 +514,13 @@ public final class InfoWindow {
     for (int i = 0; i < contentWidgets.size(); i++) {
       virtualPanel.finishAttach(contentWidgets.get(i));
     }
-    // TODO(zundel): modify to use InfoWindowClosedHandler
-    map.addInfoWindowListener(new InfoWindowListener() {
-      public void onInfoWindowClosed(MapWidget sender) {
+    
+    map.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
+     
+      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
         for (int i = 0; i < contentWidgets.size(); i++) {
           virtualPanel.remove(contentWidgets.get(i));
-        }
-      }
-
-      public void onInfoWindowOpened(MapWidget sender) {
+        }        
       }
     });
   }

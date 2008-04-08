@@ -19,8 +19,9 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
- * 
+ * @deprecated
  */
+@Deprecated
 public interface MapMouseListener {
 
   void onMouseMove(MapWidget sender, LatLng latlng);

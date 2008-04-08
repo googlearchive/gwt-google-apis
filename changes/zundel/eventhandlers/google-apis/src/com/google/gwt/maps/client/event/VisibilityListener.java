@@ -18,8 +18,9 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.overlay.Marker;
 
 /**
- * 
+ * @deprecated see {@link MarkerVisibilityChangedHandler}
  */
+@Deprecated
 public interface VisibilityListener {
 
   void onVisibilityChanged(Marker sender, boolean isVisible);

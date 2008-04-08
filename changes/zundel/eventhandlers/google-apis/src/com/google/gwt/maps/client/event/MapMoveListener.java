@@ -18,8 +18,10 @@ package com.google.gwt.maps.client.event;
 import com.google.gwt.maps.client.MapWidget;
 
 /**
- * 
+ * @deprecated see {@link MapMoveHandler}, {@link MapMoveEndHandler}, and
+ *             {@link MapMoveStartHandler}
  */
+@Deprecated
 public interface MapMoveListener {
 
   void onMove(MapWidget sender);
