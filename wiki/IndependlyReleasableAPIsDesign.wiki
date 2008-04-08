@@ -6,12 +6,11 @@ This document covers the conversion of the Google API Library for GWT from a sin
 
 = Goals =
   * Allow GWT bindings to be developed and released independently.
-  * Make the process of developing GWT bindings easier.
 
 = Directory Layout for the Project as Whole =
-Every API will live in its own directory under the project root.  The directory should have the following layout:
+Every API will live in its own directory under the project root.  The root directory should have the following layout:
   * common.ant.xml - Common build rules that APIs can use.
-  * build - APIs will emit their build artifacts into child directories
+  * build - APIs will emit their build artifacts into directories under this location
   * ajaxsearch
   * gadgets
   * gears
@@ -21,13 +20,13 @@ Every API will live in its own directory under the project root.  The directory 
 == Directory Layout for Each API ==
 Each API will live in its own directory.  It is assumed that the invoking ant in that directory will produce an image suitable for distribution.  The layout of this directory is assumed to be as follows:
   * build.xml - This file contains all of the rules needed to produce an image suitable for distribution.
-  * distro-source
+  * distro-source - Resource to include in the distribution
   * doc
-  * eclipse
+  * eclipse - eclipse project files
   * (gwt bindings source code)
-  * samples
+  * samples - sample code for the API
 
-= Directory Layout for API distribution = 
+= Directory Layout for API distribution (baseline) = 
   * COPYING
   * COPYING.html
   * about.txt
@@ -38,7 +37,8 @@ Each API will live in its own directory.  It is assumed that the invoking ant in
   * release_notes.html
   * samples
 
-= Build ant script targets =
+= Build ant script targets for the Project as a Whole =
+A build script will be included at the project root.  Invoking it with any of the standard ant targets will cause that target to be invoked for all APIs. 
   * build (default)
   * checkstyle
   * clean
@@ -48,6 +48,9 @@ Each API will live in its own directory.  It is assumed that the invoking ant in
     * test.hosted
     * test.remoteweb
     * test.web
+
+== Build ant script targets for each API ==
+These are inherited from the top level build script.  These ant script should be able to run independently of the top level ant build script.
 
 = Issue Tracking =
   * Issues should be labeled with an API specific label - maps for JS maps, gears for gears, etc.
