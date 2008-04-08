@@ -47,12 +47,12 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
     @Exported
     public void callbackWrapper(boolean value) {
-      UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
       try {
         callback(value);
-      } catch (Throwable throwable) {
-        if (handler != null) {
-          handler.onUncaughtException(throwable);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
         }
       }
     }
@@ -63,6 +63,18 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class BoundsIntCallback extends JSFunction {
     public abstract void callback(Bounds bounds, int value);
+    
+    @Exported
+    public void callbackWrapper(Bounds bounds, int value) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(bounds, value);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
 
   /**
@@ -70,12 +82,37 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class CopyrightCallback extends JSFunction {
     public abstract void callback(Copyright value);
+    
+    @Exported
+    public void callbackWrapper(Copyright value) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(value);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
+  
   /**
    * 
    */
   public abstract static class IntIntCallback extends JSFunction {
     public abstract void callback(int value1, int value2);
+  
+    @Exported
+    public void callbackWrapper(int value1, int value2) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(value1, value2);
+              } catch (Throwable t) {
+                if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
 
   /**
@@ -83,6 +120,17 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class LatLngCallback extends JSFunction {
     public abstract void callback(LatLng latlng);
+    @Exported
+    public void callbackWrapper(LatLng latlng) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(latlng);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
   
   /**
@@ -90,6 +138,17 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class LatLngBoundsIntCallback extends JSFunction {
     public abstract void callback(LatLngBounds bounds, int value);
+    @Exported
+    public void callbackWrapper(LatLngBounds bounds, int value) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(bounds, value);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
   
   /**
@@ -97,6 +156,18 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class MapTypeCallback extends JSFunction {
     public abstract void callback(MapType mapType);
+  
+    @Exported
+    public void callbackWrapper(MapType mapType) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(mapType);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
 
   /**
@@ -104,6 +175,18 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class OverlayCallback extends JSFunction {
     public abstract void callback(Overlay overlay);
+  
+    @Exported
+    public void callbackWrapper(Overlay overlay) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(overlay);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
 
   /**
@@ -111,6 +194,18 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class OverlayLatLngCallback extends JSFunction {
     public abstract void callback(Overlay overlay, LatLng latlng);
+
+    @Exported
+    public void callbackWrapper(Overlay overlay, LatLng latlng) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(overlay, latlng);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
 
   /**
@@ -118,6 +213,18 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
    */
   public abstract static class PointElementOverlayCallback extends JSFunction {
     public abstract void callback(Point point, Element element, Overlay overlay);
+  
+    @Exported
+    public void callbackWrapper(Point point, Element element, Overlay overlay) {
+      UncaughtExceptionHandler ucHandler = GWT.getUncaughtExceptionHandler();
+      try {
+        callback(point, element, overlay);
+      } catch (Throwable t) {
+        if (ucHandler != null) {
+          ucHandler.onUncaughtException(t);
+        }
+      }
+    }
   }
 
   /**
@@ -255,5 +362,4 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   
   // We don't use this method with the advent of the HandlerCollection.
   // protected abstract void clearInstanceListeners(JavaScriptObject source);
-
 }

@@ -536,14 +536,14 @@ public class MapWidgetEventsTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.setCenter(end);
   }
-  
-   public void testMapMoveStartEvent() {
+
+  public void testMapMoveStartEvent() {
 
     final LatLng start = new LatLng(37.4419, -122.1419);
     final LatLng end = new LatLng(37.45, -122.15);
 
     final MapWidget m = new MapWidget(start, 13);
-    
+
     // Apparently, setting the size is important for the move event.
     m.setSize("300px", "300px");
 
@@ -561,7 +561,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
       }
 
     });
-    
+
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.panTo(end);
   }

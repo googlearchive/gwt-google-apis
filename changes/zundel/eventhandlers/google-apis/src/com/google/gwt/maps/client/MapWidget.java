@@ -240,7 +240,7 @@ public final class MapWidget extends Composite {
    * Adds a Control's widget to the map.
    * 
    * This method is not intended to be called by the user. To add a custom
-   * control to the map, subclass {@link Control.CustomControl} and implement
+   * control to the map, subclass {@link com.google.gwt.maps.client.control.Control.CustomControl} and implement
    * the initialize(MapWidget) method.
    * 
    * @param w the control widget to add to the map

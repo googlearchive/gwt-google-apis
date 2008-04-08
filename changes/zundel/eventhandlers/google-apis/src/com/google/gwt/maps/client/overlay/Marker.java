@@ -117,7 +117,7 @@ public final class Marker extends ConcreteOverlay {
    * Create a new marker at the specified point using default options. Add the
    * newly created marker to a
    * 
-   * @{link MapWidget} with the
+   * {@link MapWidget} with the
    *        {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
    *        method.
    * 
@@ -131,7 +131,7 @@ public final class Marker extends ConcreteOverlay {
    * Create a new marker at the specified point using the supplied options
    * overrides. Add the newly created marker to a
    * 
-   * @{link MapWidget} with the
+   * {@link MapWidget} with the
    *        {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
    *        method.
    * 
@@ -829,7 +829,7 @@ public final class Marker extends ConcreteOverlay {
    * Allow this marker to be dragged. Note: in order for dragging to work, the
    * Marker must be created using the
    * 
-   * @{link MarkerOptions#setDraggable(boolean) option.
+   * {@link MarkerOptions#setDraggable(boolean) option.
    * @param value <code>true</code> to allow the marker to be dragged.
    */
   public void setDraggingEnabled(boolean value) {

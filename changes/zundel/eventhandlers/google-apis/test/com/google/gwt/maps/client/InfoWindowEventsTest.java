@@ -88,7 +88,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
     map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        System.out.println("Maximizing info window");
+        // System.out.println("Maximizing info window");
         info.maximize();
       }
 
@@ -147,7 +147,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
     map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        System.out.println("Maximizing info window");
+        // System.out.println("Maximizing info window");
         info.maximize();
       }
 

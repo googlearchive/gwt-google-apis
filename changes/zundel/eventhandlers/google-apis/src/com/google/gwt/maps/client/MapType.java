@@ -579,8 +579,6 @@ public final class MapType {
    * Returns the highest resolution zoom level required to show the given span
    * with the given center point.
    * 
-   * @TODO example, better descriptions
-   * 
    * @param center the center of the viewport
    * @param span the span of the viewport
    * @param viewSize the size of the viewport in pixels
