@@ -16,8 +16,8 @@
 package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.maps.client.MapPane;
-import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.MapPaneType;
+import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -25,17 +25,17 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This demo shows how to create a custom overlay in the form of a Rectangle
  * and add it to the map.
  */
 public class CustomOverlayDemo extends MapsDemo {
-  private static class Rectangle extends Widget {
+  private static class Rectangle extends AbsolutePanel {
     public Rectangle() {
-      setElement(DOM.createDiv());
+      super(DOM.createDiv());
       DOM.setStyleAttribute(getElement(), "borderStyle", "solid");
     }
 
