@@ -41,9 +41,7 @@
 	</target>
 
 	<target name="test" depends="build" description="Test Google API Library for GWT">
-		<antcall target="-do">
-			<param name="target" value="test" />
-		</antcall>
+		<ant target="test" dir="google-apis" />
 	</target>
 
 	<target name="clean" description="Cleans the entire Google API Library for GWT build">
