@@ -118,7 +118,13 @@
               For parallel testing, we must use 'auto' for the port number 
         -->
 	<property name="gwt.junit.port" value="8889" />
-	<property name="gwt.junit.testcase.includes" value="**/*Suite.class"/>
+
+        <!-- Using suites here might speed up testing, but a trial run -->
+        <!-- found that making the change to use the Suite classes was -->
+        <!-- unreliable.  This is probably because the browser stays   -->
+        <!-- active between the tests and something leftover from a    -->
+        <!-- previous test is getting in the way.                      -->
+	<property name="gwt.junit.testcase.includes" value="**/*Test.class"/>
 	
 	<!--
 		Comma delimited list of host and path components on 
