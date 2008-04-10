@@ -191,6 +191,7 @@
 			<echo message="${javac.out} ${javac.junit.out}" />
 			<junit dir="@{test.out}" fork="yes" printsummary="yes" haltonfailure="true">
 				<jvmarg line="${junit.platform.args}" />
+			        <jvmarg line="-Xmx512m" />
 				<sysproperty key="gwt.args" value="@{test.args}" />
 				<sysproperty key="gwt.devjar" value="${gwt.dev.jar}" />
 				<sysproperty key="java.awt.headless" value="true" />
