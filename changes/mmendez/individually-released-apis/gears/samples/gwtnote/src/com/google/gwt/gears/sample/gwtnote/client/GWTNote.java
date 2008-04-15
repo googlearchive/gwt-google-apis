@@ -29,7 +29,7 @@ public class GWTNote implements EntryPoint {
   private AppController controller = null;
 
   /**
-   * GWT application entry point
+   * GWT application entry point.
    */
   public void onModuleLoad() {
     mainPanel = new RichTextWidget(this);
