@@ -6,42 +6,23 @@
 	<!-- "build" is the default when subprojects are directly targetted -->
 	<property name="target" value="build" />
 
-	<!--
-	<target name="ajaxsearch" description="Build AJAXSearch">
-		<gwt.ant dir="ajaxsearch" />
-	</target>
--->
-
 	<target name="database" description="Build Database">
 		<gwt.ant dir="database" />
 	</target>
 
-	<!--
 	<target name="gwtnote" description="Build GWTNote">
 		<gwt.ant dir="gwtnote" />
-	</target>
-
-	<target name="hellogadgets" description="Build HelloGadgets">
-		<gwt.ant dir="hellogadgets" />
 	</target>
 
 	<target name="managedresourcestore" description="Build ManagedResourceStore">
 		<gwt.ant dir="managedresourcestore" />
 	</target>
 
-	<target name="maps" description="Build Maps">
-		<gwt.ant dir="maps" />
-	</target>
-
 	<target name="resourcestore" description="Build ResourceStore">
 		<gwt.ant dir="resourcestore" />
 	</target>
 
-
-	<target name="-do" depends="database, gwtnote, hellogadgets, managedresourcestore, maps, resourcestore" description="Run all subprojects" />
--->
-
-	<target name="-do" depends="database" description="Run all subprojects" />
+	<target name="-do" depends="database, gwtnote, managedresourcestore, resourcestore" description="Run all subprojects" />
 
 	<target name="build" description="Builds Google API Library for GWT Samples">
 		<antcall target="-do">

@@ -49,6 +49,31 @@
 		</outofdate>
 	</target>
 
+	<macrodef name="launcScriptCreator">
+		<attribute name="platform" />
+		<attribute name="extension" default="" />
+		<sequential>
+			<outofdate>
+				<sourcefiles />
+				<targetfiles>
+					<pathelement location="${samples.scripts}/@{platform}/${sample.main}/${sample.main}-compile@{extension}" />
+					<pathelement location="${samples.scripts}/@{platform}/${sample.main}/${sample.main}-shell@{extension}" />
+				</targetfiles>
+				<sequential>
+					<mkdir dir="${samples.scripts}/@{platform}/${sample.main}" />
+					<java classname="com.google.gwt.user.tools.ApplicationCreator" classpath="${gwt.user.jar}:${gwt.dev.jar}" failonerror="true">
+						<!-- Relative path is important! Paths will be relative in final distro -->
+						<sysproperty key="gwt.devjar" value="../../gwt-dev-@{platform}.jar" />
+						<arg value="-ignore" />
+						<arg value="-out" />
+						<arg file="${samples.scripts}/@{platform}/${sample.main}" />
+						<arg value="com.google.gwt.sample.${sample.package}.client.${sample.main}" />
+					</java>
+				</sequential>
+			</outofdate>
+		</sequential>
+	</macrodef>
+
 	<target name="scripts" description="Create launch scripts">
         <mkdir dir="${sample.build}/launch-scripts" />
         <copy todir="${sample.build}/launch-scripts">
