@@ -22,7 +22,7 @@
 		<gwt.ant dir="gears"/>
 	</target>
 	
-	<target name="samples" depends="gears" description="Build samples">
+	<target name="samples" depends="gears" description="Build Gears samples">
 		<gwt.ant dir="samples" />
 	</target>
 
@@ -34,19 +34,19 @@
 		</antcall>
 	</target>
 
-	<target name="checkstyle" description="Static analysis of Google API Library for GWT source">
+	<target name="checkstyle" description="Static analysis of Gears API Library for GWT source">
 		<antcall target="-do">
 			<param name="target" value="checkstyle" />
 		</antcall>
 	</target>
 
-	<target name="test" depends="build" description="Test Google API Library for GWT">
+	<target name="test" depends="build" description="Test Gears API Library for GWT">
 		<antcall target="-do">
 			<param name="target" value="test" />
 		</antcall>
 	</target>
 
-	<target name="clean" description="Cleans the entire Google API Library for GWT build">
+	<target name="clean" description="Cleans the entire Gears API Library for GWT build">
 		<delete dir="${gwt.build}" />
 	</target>
 </project>
