@@ -58,7 +58,11 @@ These are inherited from the top level build script.  These ant script should be
   * Issues should be labeled with an API specific label - maps for JS maps, gears for gears, etc.
 
 = Open Issues =
-  * Make sure that APIs that depend on different versions of JSIO can play nicely with each other.  Currently, it appears that only AJAX Search and Maps use JSIO.  It is possible that AJAX Search may not technically need JSIO, in which case this may not be a critical problem for the next release.  If it is an issue we can rebase the JSIO classes or we can move them into GWT proper.  (Need to see how this pans out).
   * Provide a devdocreader documentation template?
   * Provide template build scripts for new APIs
   * What should the COPYING files be for each top distro?
+  * Need to provide instructions/script for setting up a template directory for a new project.
+
+= Resolved Issues =
+  * Make sure that APIs that depend on different versions of JSIO can play nicely with each other.  
+    * We chose to rebase (changed the package names) of the JSIO library statically and include the source in the distro.  We will consider build time rebasing or simply using JSIO as a JAR post the milestone.
