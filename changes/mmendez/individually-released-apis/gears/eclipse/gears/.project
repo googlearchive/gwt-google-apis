@@ -24,12 +24,12 @@
 		<link>
 			<name>test</name>
 			<type>2</type>
-			<locationURI>GWT_GOOGLE_APIS_ROOT/gears/gears/test</locationURI>
+			<locationURI>GEARS_API_ROOT/gears/test</locationURI>
 		</link>
 		<link>
 			<name>src</name>
 			<type>2</type>
-			<locationURI>GWT_GOOGLE_APIS_ROOT/gears/gears/src</locationURI>
+			<locationURI>GEARS_API_ROOT/gears/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
