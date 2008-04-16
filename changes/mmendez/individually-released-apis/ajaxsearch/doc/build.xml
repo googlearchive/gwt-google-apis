@@ -12,7 +12,7 @@
 	<!--
 		*** Note that if the API_SOURCE_PATH paths are updated,
 		the fileset dependencies in the outofdate tags in the doc,
-		gears, and javadoc targets must be updated as well.
+		ajaxsearch, and javadoc targets must be updated as well.
 	-->
 	<path id="API_SOURCE_PATH">
 		<pathelement location="${gwt.root}/${api.name}/src" />
@@ -148,7 +148,7 @@
 					<arg value="-sourcepath" />
 					<arg pathref="API_SOURCE_PATH" />
 					<arg value="-examplepackages" />
-					<arg value="com.google.gwt.gears.examples" />
+					<arg value="com.google.gwt.ajaxsearch.examples" />
 					<arg value="-packages" />
 					<arg value="${API_PKGS}" />
 				</java>
