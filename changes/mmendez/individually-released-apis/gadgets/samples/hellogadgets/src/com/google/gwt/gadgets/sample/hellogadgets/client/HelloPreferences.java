@@ -51,14 +51,14 @@ public interface HelloPreferences extends UserPreferences {
   }
 
   @PreferenceAttributes(display_name = "Button text position", default_value = "CENTER")
-  public EnumPreference<ButtonPosition> buttonPosition();
+  EnumPreference<ButtonPosition> buttonPosition();
 
   @PreferenceAttributes(display_name = "Alert prompt", default_value = "Hello, Gadgets!", options = Options.REQUIRED)
-  public StringPreference promptSomethingElse();
+  StringPreference promptSomethingElse();
 
   @PreferenceAttributes(display_name = "Show settings message", default_value = "true")
-  public BooleanPreference showMessage();
+  BooleanPreference showMessage();
 
   @PreferenceAttributes(options = Options.HIDDEN, default_value = "Hello World (GWT)")
-  public StringPreference title();
+  StringPreference title();
 }
