@@ -87,11 +87,11 @@ public class CustomControlDemo extends MapsDemo {
       return value;
     }
   }
+
   private static class ImageZoomControl extends CustomControl {
     public ImageZoomControl() {
       super(new ControlPosition(ControlAnchor.TOP_LEFT, 7, 7));
     }
-
     
     @Override
     protected Widget initialize(final MapWidget map) {
@@ -130,7 +130,6 @@ public class CustomControlDemo extends MapsDemo {
 
       return container;
     }
-
 
     @Override
     public boolean isSelectable() {

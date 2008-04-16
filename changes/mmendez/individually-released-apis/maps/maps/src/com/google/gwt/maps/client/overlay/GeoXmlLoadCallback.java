@@ -16,8 +16,7 @@
 package com.google.gwt.maps.client.overlay;
 
 /**
- * Callback used by the load() factory method of GeoXmlOverlay
- * 
+ * Callback used by the load() factory method of GeoXmlOverlay.
  */
 public abstract class GeoXmlLoadCallback {
   /**

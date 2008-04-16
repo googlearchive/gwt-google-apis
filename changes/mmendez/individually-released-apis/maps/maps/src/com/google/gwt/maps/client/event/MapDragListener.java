@@ -19,7 +19,7 @@ import com.google.gwt.maps.client.MapWidget;
 
 /**
  * DragListener defines the interface for an object that listens to drag events
- * on a {@link com.google.gwt.maps.client.MapWidget MapWidget} 
+ * on a {@link com.google.gwt.maps.client.MapWidget MapWidget}.
  * 
  * @see MapWidget#addMapDragListener(MapDragListener)
  * @deprecated

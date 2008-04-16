@@ -100,7 +100,6 @@ public final class MapType {
     return defaultMapTypes;
   }
 
-
     /**
      * Returns a map type that shows transparent street maps over Google Earth
      * satellite images.

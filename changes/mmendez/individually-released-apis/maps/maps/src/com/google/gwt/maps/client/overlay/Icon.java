@@ -23,7 +23,7 @@ import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.jsio.client.JSList;
 
 /**
- * Wrapper for the Maps API GIcon class
+ * Wrapper for the Maps API GIcon class.
  */
 public final class Icon {
 
