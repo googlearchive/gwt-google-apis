@@ -5,6 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gwt-user"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/gwt-dev-linux"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gwt-dev-mac"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
