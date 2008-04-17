@@ -148,7 +148,7 @@
 					<arg value="-sourcepath" />
 					<arg pathref="API_SOURCE_PATH" />
 					<arg value="-examplepackages" />
-					<arg value="com.google.gwt.gears.examples" />
+					<arg value="com.google.gwt.maps.examples" />
 					<arg value="-packages" />
 					<arg value="${API_PKGS}" />
 				</java>
