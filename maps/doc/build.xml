@@ -26,94 +26,12 @@
 		<pathelement location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
 	</path>
 
-	<!--
-		*** Note that if the DOC_SOURCE_PATH paths are updated,
-		the fileset dependencies in the outofdate tags in the
-		doc target must be updated as well.
-	-->
-	<path id="DOC_SOURCE_PATH">
-		<pathelement location="./src" />
-		<path refid="API_SOURCE_PATH" />
-	</path>
-
 	<path id="DOC_PATH">
 		<pathelement location="./src" />
 		<pathelement location="${gwt.doctool.jar}" />
 		<path path="${java.tools.path}" />
 		<path refid="API_SOURCE_PATH" />
 	</path>
-
-	<target name="doc">
-		<outofdate>
-			<sourcefiles>
-				<fileset dir="${gwt.root}/${api.name}/src">
-					<include name="**/*.java" />
-				</fileset>
-				<fileset dir="${gwt.root}/${api.name}/javadoc">
-					<include name="**/*.java" />
-				</fileset>
-			</sourcefiles>
-			<targetfiles>
-				<!--
-					only checks one output file, will not
-					rebuild other files if this one is up
-					to date
-				-->
-				<pathelement path="${project.build}/gwt-doc.doc.xml" />
-			</targetfiles>
-			<sequential>
-				<java classpathref="DOC_PATH" classname="com.google.doctool.DocTool" fork="yes" failonerror="true">
-					<arg value="doc" />
-					<arg value="gwt-doc" />
-					<arg value="-out" />
-					<arg value="${project.build}" />
-					<arg value="-classpath" />
-					<arg pathref="API_CLASS_PATH" />
-					<arg value="-sourcepath" />
-					<arg pathref="DOC_SOURCE_PATH" />
-					<arg value="-packages" />
-					<arg value="${DOC_PKGS}" />
-				</java>
-			</sequential>
-		</outofdate>
-	</target>
-
-	<target name="google-apis">
-		<outofdate>
-			<sourcefiles>
-				<fileset file="./src/${api.name}.html" />
-				<fileset dir="${gwt.root}/${api.name}/src">
-					<include name="**/*.java" />
-				</fileset>
-				<fileset dir="${gwt.root}/${api.name}/javadoc">
-					<include name="**/*.java" />
-				</fileset>
-			</sourcefiles>
-			<targetfiles>
-				<!--
-					only checks one output file, will not rebuild other files
-					if this one is up to date
-				-->
-				<pathelement path="${project.build}/${api.name}.java.xml" />
-			</targetfiles>
-			<sequential>
-				<java classpathref="DOC_PATH" classname="com.google.doctool.DocTool" fork="yes" failonerror="true">
-					<arg value="java" />
-					<arg value="${api.name}" />
-					<arg value="-out" />
-					<arg value="${project.build}" />
-					<arg value="-overview" />
-					<arg value="./src/gwt-google-apis.html" />
-					<arg value="-classpath" />
-					<arg pathref="API_CLASS_PATH" />
-					<arg value="-sourcepath" />
-					<arg pathref="API_SOURCE_PATH" />
-					<arg value="-packages" />
-					<arg value="${API_PKGS}" />
-				</java>
-			</sequential>
-		</outofdate>
-	</target>
 
 	<target name="javadoc">
 		<outofdate>
@@ -147,8 +65,6 @@
 					<arg pathref="API_CLASS_PATH" />
 					<arg value="-sourcepath" />
 					<arg pathref="API_SOURCE_PATH" />
-					<arg value="-examplepackages" />
-					<arg value="com.google.gwt.maps.examples" />
 					<arg value="-packages" />
 					<arg value="${API_PKGS}" />
 				</java>
