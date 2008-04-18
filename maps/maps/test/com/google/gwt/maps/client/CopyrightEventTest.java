@@ -31,7 +31,7 @@ import com.google.gwt.maps.client.geom.Point;
  * {@link TileLayer}, and {@link MapType} classes.
  * 
  */
-public class CopyrightEventTests extends GWTTestCase {
+public class CopyrightEventTest extends GWTTestCase {
 
   // Length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 5000;

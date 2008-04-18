@@ -15,7 +15,7 @@
  */
 package com.google.gwt.maps;
 
-import com.google.gwt.maps.client.CopyrightEventTests;
+import com.google.gwt.maps.client.CopyrightEventTest;
 import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
 import com.google.gwt.maps.client.overlay.MarkerEventsTest;
@@ -34,7 +34,7 @@ public class MapsTestSuite extends TestCase {
     suite.addTestSuite(MapWidgetEventsTest.class); 
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
-    suite.addTestSuite(CopyrightEventTests.class);
+    suite.addTestSuite(CopyrightEventTest.class);
     
     return suite;
   }
