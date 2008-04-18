@@ -22,6 +22,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>test</name>
+			<type>2</type>
+			<locationURI>MAPS_API_ROOT/maps/test</locationURI>
+		</link>
+		<link>
 			<name>src</name>
 			<type>2</type>
 			<locationURI>MAPS_API_ROOT/maps/src</locationURI>
