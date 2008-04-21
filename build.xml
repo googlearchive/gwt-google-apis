@@ -3,19 +3,19 @@
 	<property name="target" value="build" />
 
 	<target name="ajaxsearch" description="Build AJAX Search">
-		<ant dir="ajaxsearch" inheritall="false" target="${target}" />
+		<ant dir="ajaxsearch" target="${target}" />
 	</target>
 
 	<target name="gadgets" description="Build Gadgets">
-		<ant dir="gadgets" inheritall="false" target="${target}" />
+		<ant dir="gadgets" target="${target}" />
 	</target>
 
 	<target name="gears" description="Build Gears">
-		<ant dir="gears" inheritall="false" target="${target}" />
+		<ant dir="gears" target="${target}" />
 	</target>
 
 	<target name="maps" description="Build Maps">
-		<ant dir="maps" inheritall="false" target="${target}" />
+		<ant dir="maps" target="${target}" />
 	</target>
 
 	<target name="-do" depends="ajaxsearch, gadgets, gears, maps" description="Run all subprojects" />
