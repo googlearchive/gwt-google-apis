@@ -33,9 +33,33 @@
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
-      <p>TODO: Fill me in</p>
-	  <h3>Known Issues</h3>
-	  <ul>
-      <li>TODO: Fill me in</li>
-	  </ul>
-   </body></html>
+       <p> Changes since r41
+       </p>
+       <ul>
+         <li>Added many Maps API features added since 2.83 up to 2.98</li>
+         <li>Updated features now require Java 1.5 and GWT 1.5 or higher.</li>
+         <li>Updated to use Java 1.5 generics, enum types, and annotations</li>
+         <li>Maps project placed in a separate tree so it can be built and distributed independently.</li>
+         <li>New event handling system that models each Maps API with a single Java Event and Handler class.  Existing Listener classes are now deprecated.</li>
+         <li>Added unit tests for event handing</li>
+         <li>Added javadoc comments to all classes.</li>
+         <li>Updated to use JSIO r83</li>
+         <li>Removed use of long values passed via JSNI and JSIO methods.</li>
+         <li>Added styling and documentation to the HelloMaps sample project</li>
+         <li>Added additional features to the HelloMaps sample project, partially as a way to manually test the newly added api features.</li>
+         <li>Changed API to extract constant values from the Maps API instead of hard coding constants in Java.</li>
+         <li>Many issues from the gwt-google-apis.googlecode.com issue tracker have been addressed, all marked as version 1.1_RC.</li>
+       </ul>
+
+         <h3>Known Issues</h3>
+	   <ul>
+             <li>Not all features in the Maps API as of v2.98 are supported. (Tracked under numerous issues.) </li>
+             <li>Geocoding and Directions sometimes result in JavaScript exceptions on Internet Explorer (issue 112)</li>
+  
+             <li>Polygon, Polyline and Overlay classes do not show/hide properly on some browsers (Firefox). (Issue 102.  Maps API issue to be addressed in upcoming release)</li>
+             <li>Polygons that are not filled do not add/remove or deliver events properly (Issue 108. Maps API issue to be addressed in upcoming release.)</li>
+             <li>The ant <code>test</code> target builds the HelloMaps sample multiple times. (issue 110) </li>
+
+	   </ul>
+   </body>
+</html>
