@@ -34,12 +34,22 @@
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
-      <p>TODO: Fill me in</p>
+      <p>(place holder for 1.1)</p>
+	  <h3>Fixed issues</h3>
+	  <ul>
+	  <li>Added method to test for Gears availability. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=1">1</a>)</li>
+	  <li>Updated bundled gears_init.js. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=5">5</a>)</li>
+      <li>Added support for automatic Gears manifest creation. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=6">6</a>)</li>
+      <li>Fixed ResourceStore exceptions to include the JS error messages. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=7">7</a>)</li>
+      <li>ResourceStore URL capture does not work in GWT hosted mode. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=10">10</a>)</li>
+      <li>ResultSet.getFieldAsString is documented to throw a DatabaseException but the exception is missing from the method's declaration. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=68">68</a>)</li>
+      <li>JavaScriptExceptions can escape from the Database constructors. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=69">69</a>)</li>
+      <li>Split these GWT bindings into their own distribution.</li>
+	  </ul>
 	  <h3>Known Issues</h3>
 	  <ul>
-      <li>TODO: Fill me in</li>
+	  	<li>Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin.</li>
 	  </ul>
-	  
 	  <hr/>      
       <a name="Release_Notes_1_0_0"></a>
       <h2>Release Notes for 1.0.0</h2>
