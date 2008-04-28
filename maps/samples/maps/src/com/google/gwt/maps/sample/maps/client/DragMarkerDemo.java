@@ -18,7 +18,8 @@ package com.google.gwt.maps.sample.maps.client;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.event.MarkerDragListener;
+import com.google.gwt.maps.client.event.MarkerDragEndHandler;
+import com.google.gwt.maps.client.event.MarkerDragStartHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
@@ -81,25 +82,20 @@ public class DragMarkerDemo extends MapsDemo {
     options.setDraggable(true);
     final Marker marker = new Marker(map.getCenter(), options);
     final InfoWindow info = map.getInfoWindow();
-
-    marker.addMarkerDragListener(new MarkerDragListener() {
-      boolean created = false;
-
-      public void onDrag(Marker sender) {
-      }
-
-      public void onDragEnd(Marker sender) {
-        if (created) {
-          info.setVisible(true);
-        } else {
+    
+    marker.addMarkerDragEndHandler(new MarkerDragEndHandler(){
+      public void onDragEnd(MarkerDragEndEvent event) {
           info.open(marker, new InfoWindowContent("Just bouncing along..."));
         }
-      }
-
-      public void onDragStart(Marker sender) {
+      
+    });
+    
+    marker.addMarkerDragStartHandler(new MarkerDragStartHandler() {
+      public void onDragStart(MarkerDragStartEvent event) {
         info.setVisible(false);
       }
     });
+    
     map.addOverlay(marker);
   }
 }

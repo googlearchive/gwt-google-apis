@@ -20,7 +20,7 @@ import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
-import com.google.gwt.maps.client.event.MarkerClickListener;
+import com.google.gwt.maps.client.event.MarkerClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
@@ -89,16 +89,15 @@ public class MarkerInfoWindowDemo extends MapsDemo {
 
   private Marker createMarker(LatLng point, final int number) {
     final Marker marker = new Marker(point);
-    marker.addMarkerClickListener(new MarkerClickListener() {
-      public void onClick(Marker sender) {
+    
+    marker.addMarkerClickHandler(new MarkerClickHandler() {
+      public void onClick(MarkerClickEvent event) {
         InfoWindow info = map.getInfoWindow();
         info.open(marker,
             new InfoWindowContent("Marker #<b>" + number + "</b>"));
       }
-
-      public void onDoubleClick(Marker sender) {
-      }
     });
+    
     return marker;
   }
 }

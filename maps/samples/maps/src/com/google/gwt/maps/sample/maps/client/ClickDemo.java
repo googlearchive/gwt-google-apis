@@ -83,9 +83,9 @@ public class ClickDemo extends MapsDemo {
         LatLng point = e.getLatLng();
 
         if (overlay != null && overlay instanceof Marker) {
-          map.removeOverlay(overlay);
+          sender.removeOverlay(overlay);
         } else {
-          map.addOverlay(new Marker(point));
+          sender.addOverlay(new Marker(point));
         }
       }
     });

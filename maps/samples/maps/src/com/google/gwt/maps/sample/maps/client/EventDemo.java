@@ -16,7 +16,7 @@
 package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.event.MapMoveListener;
+import com.google.gwt.maps.client.event.MapMoveEndHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -60,7 +60,7 @@ public class EventDemo extends MapsDemo {
 
       @Override
       public String getName() {
-        return "Event Listeners";
+        return "Event Handlers";
       }
     };
   }
@@ -78,16 +78,13 @@ public class EventDemo extends MapsDemo {
         new Label();
     panel.add(message);
     initWidget(panel);
-    map.addMapMoveListener(new MapMoveListener() {
-      public void onMove(MapWidget sender) {
-      }
-
-      public void onMoveEnd(MapWidget sender) {
+    
+    map.addMapMoveEndHandler(new MapMoveEndHandler() {
+      public void onMoveEnd(MapMoveEndEvent event) {
         message.setText(map.getCenter().toString());
       }
 
-      public void onMoveStart(MapWidget sender) {
-      }
     });
+  
   }
 }
