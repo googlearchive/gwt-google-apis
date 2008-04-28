@@ -19,9 +19,7 @@ import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
-import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -47,7 +45,6 @@ public class InfoWindowDemo extends MapsDemo {
   private static final String TEST_IMAGE = "Test adding an Image";
   private static final String TEST_NO_CLICK = "Test noClick";
   private static final String TEST_TABS = "Test with Tabs";
-  private static final String TEST_INFO_WINDOW_LISTENER = "Test Info Window Listener";
   private static final String TEST_MAP_BLOWUP = "Test Map Blowup Info Window";
 
   private static HTML descHTML = null;
@@ -77,11 +74,7 @@ public class InfoWindowDemo extends MapsDemo {
       + " InfoWindow won't close when you click on the map.</li>\n"
       + "<li><b>"
       + TEST_TABS
-      + "</b>: Create an InfoWindow with three tabs.</li>"
-      + "<li><b>"
-      + TEST_INFO_WINDOW_LISTENER
-      + "</b>: Register two "
-      + "InfoWindowListeners</li>\n"
+      + "</b>: Create an InfoWindow with two tabs.</li>"
       + "<li><b>"
       + TEST_MAP_BLOWUP
       + "</b>: Display a Map Blowup inside an InfoWindow</li>" + "</ol>";
@@ -129,7 +122,6 @@ public class InfoWindowDemo extends MapsDemo {
     actionListBox.addItem(TEST_TABS);
     actionListBox.addItem(TEST_MAX_CONTENT);
     actionListBox.addItem(TEST_MAX_TITLE_CONTENT_WIDGET);
-    actionListBox.addItem(TEST_INFO_WINDOW_LISTENER);
     actionListBox.addItem(TEST_MAP_BLOWUP);
 
     actionListBox.addChangeListener(new ChangeListener() {
@@ -214,10 +206,6 @@ public class InfoWindowDemo extends MapsDemo {
 
       // Display the maximized content using widgets instead of strings.
       content = displayInfoWindowMaxWidget();
-    } else if (selection.equals(TEST_INFO_WINDOW_LISTENER)) {
-
-      // Display listeners when the info window is opened and closed.
-      content = displayInfoWindowWithListeners();
     } else if (selection.equals(TEST_MAP_BLOWUP)) {
 
       // Display a Map Blowup Window
@@ -250,53 +238,11 @@ public class InfoWindowDemo extends MapsDemo {
 
   private InfoWindowContent displayInfoWindowTabs() {
 
-    InfoWindowTab tabs[] = new InfoWindowTab[3];
+    InfoWindowTab tabs[] = new InfoWindowTab[2];
 
     tabs[0] = new InfoWindowTab("Tab 1", "<h1>Tab 1 Content</h1>");
     tabs[1] = new InfoWindowTab("Tab 2", "<h1>Tab 2 Content</h1>");
-    tabs[2] = new InfoWindowTab("Tab 3", "<h1>Tab 3 Content</h1>");
     final InfoWindowContent content = new InfoWindowContent(tabs, 1);
-    return content;
-  }
-
-  /**
-   * Tests the addInfoWindowListener() method in the InfoWindowContent class.
-   * 
-   * @return an newly initialized content object to open an InfoWindow
-   */
-  private InfoWindowContent displayInfoWindowWithListeners() {
-    InfoWindowContent content = new InfoWindowContent(
-        "Expect 2 alerts on open and close.");
-    content.addInfoWindowListener(new InfoWindowListener() {
-      public void onInfoWindowClosed(MapWidget sender) {
-        Window.alert("Closed InfoWindow (1)");
-        if (sender == null) {
-          Window.alert("null Map window!");
-        }
-      }
-
-      public void onInfoWindowOpened(MapWidget sender) {
-        Window.alert("Opened InfoWindow (1)");
-        if (sender == null) {
-          Window.alert("null Map window!");
-        }
-      }
-    });
-    content.addInfoWindowListener(new InfoWindowListener() {
-      public void onInfoWindowClosed(MapWidget sender) {
-        Window.alert("Closed InfoWindow (2)");
-        if (sender == null) {
-          Window.alert("null Map window!");
-        }
-      }
-
-      public void onInfoWindowOpened(MapWidget sender) {
-        Window.alert("Opened InfoWindow (2)");
-        if (sender == null) {
-          Window.alert("null Map window!");
-        }
-      }
-    });
     return content;
   }
 }
