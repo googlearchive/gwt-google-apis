@@ -8,16 +8,19 @@
 
 = Changes Gears API version 0.2 = 
   # New HttpRequest Module API
+    * This only makes sense for workers.  Most likely we would make GWT's RequestBuilder use the Gears XmlHttpRequest object.
   # New Timer Module API
+    * This only makes sense for workers.  Most likely we would make GWT's Timer class rebind to use the Gears internal timer.
   # Update WorkerPool API
-    * Add onerror callback
-    * Add createWorkerFromURL
-    * Add allowCrossOrigin
+    * Add onerror callback - this can only be set from the worker; does not impact the parent thread
+    * Add createWorkerFromURL - 
+    * Add allowCrossOrigin - this can only be called from the worker
     * Update onmessage callback to use the messageObject parameter
   # Update LocalServer API
   # Expose the Factory version property
 
 = Proposed Use Cases =
+  # Declare a worker thread.
   # Create a worker thread from a URL.
   # Allow HttpRequest Module API to be used from a worker thread.
   # Allow the Timer Module API to be used from a worker thread.
