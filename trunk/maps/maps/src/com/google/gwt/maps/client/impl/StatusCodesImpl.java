@@ -16,11 +16,10 @@
 package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.jsio.client.BeanProperties;
 import com.google.gwt.maps.jsio.client.FieldName;
 import com.google.gwt.maps.jsio.client.Global;
-import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
+import com.google.gwt.maps.jsio.client.JSWrapper;
 import com.google.gwt.maps.jsio.client.ReadOnly;
 
 /**
@@ -28,40 +27,37 @@ import com.google.gwt.maps.jsio.client.ReadOnly;
  */
 @ReadOnly
 @BeanProperties
-public interface StatusCodesImpl extends JSFlyweightWrapper {
+@Global("$wnd")
+public interface StatusCodesImpl extends JSWrapper {
   StatusCodesImpl impl = GWT.create(StatusCodesImpl.class);
-  JavaScriptObject obj = impl.construct();
-  
-  @Global("$wnd")
-  JavaScriptObject construct();
   
   @FieldName("G_GEO_BAD_KEY")
-  int getBadKeyCode(JavaScriptObject o);
+  int getBadKeyCode();
   
   @FieldName("G_GEO_BAD_REQUEST")
-  int getBadRequestCode(JavaScriptObject o);
+  int getBadRequestCode();
   
   @FieldName("G_GEO_MISSING_ADDRESS")
-  int getMissingAddressCode(JavaScriptObject o);
+  int getMissingAddressCode();
   
   @FieldName("G_GEO_MISSING_QUERY")
-  int getMissingQueryCode(JavaScriptObject o);
+  int getMissingQueryCode();
   
   @FieldName("G_GEO_SERVER_ERROR")
-  int getServerErrorCode(JavaScriptObject o);
+  int getServerErrorCode();
   
   @FieldName("G_GEO_SUCCESS")
-  int getSuccessCode(JavaScriptObject o);
+  int getSuccessCode();
   
   @FieldName("G_GEO_TOO_MANY_QUERIES")
-  int getTooManyQueriesCode(JavaScriptObject o);
+  int getTooManyQueriesCode();
   
   @FieldName("G_GEO_UNAVAILABLE_ADDRESS")
-  int getUnavailableAddressCode(JavaScriptObject o);
+  int getUnavailableAddressCode();
   
   @FieldName("G_GEO_UNKNOWN_ADDRESS")
-  int getUnknownAddressCode(JavaScriptObject o);
+  int getUnknownAddressCode();
   
   @FieldName("G_GEO_UNKNOWN_DIRECTIONS")
-  int getUnknownDirectionsCode(JavaScriptObject o);
+  int getUnknownDirectionsCode();
 }
