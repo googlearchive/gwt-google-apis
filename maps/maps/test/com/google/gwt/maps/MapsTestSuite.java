@@ -18,6 +18,7 @@ package com.google.gwt.maps;
 import com.google.gwt.maps.client.CopyrightEventTest;
 import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
+import com.google.gwt.maps.client.StatusCodesTest;
 import com.google.gwt.maps.client.overlay.MarkerEventsTest;
 
 import junit.framework.Test;
@@ -30,12 +31,11 @@ import junit.framework.TestSuite;
 public class MapsTestSuite extends TestCase {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Maps API");
-    
     suite.addTestSuite(MapWidgetEventsTest.class); 
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
     suite.addTestSuite(CopyrightEventTest.class);
-    
+    suite.addTestSuite(StatusCodesTest.class);
     return suite;
   }
 }

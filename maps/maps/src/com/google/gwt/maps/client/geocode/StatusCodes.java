@@ -31,49 +31,49 @@ public final class StatusCodes {
    * The given key is either invalid or does not match the domain for which it
    * was given.
    */
-  public static final int BAD_KEY = StatusCodesImpl.impl.getBadKeyCode(StatusCodesImpl.obj);
+  public static final int BAD_KEY = StatusCodesImpl.impl.getBadKeyCode();
 
   /**
    * A directions request could not be successfully parsed.
    */
-  public static final int BAD_REQUEST = StatusCodesImpl.impl.getBadRequestCode(StatusCodesImpl.obj);
+  public static final int BAD_REQUEST = StatusCodesImpl.impl.getBadRequestCode();
 
   /**
    * Synonym for {@link StatusCodes#MISSING_QUERY}.
    */
-  public static final int MISSING_ADDRESS = StatusCodesImpl.impl.getMissingAddressCode(StatusCodesImpl.obj);
+  public static final int MISSING_ADDRESS = StatusCodesImpl.impl.getMissingAddressCode();
 
   /**
    * The HTTP q parameter was either missing or had no value. For geocoding
    * requests, this means that an empty address was specified as input. For
    * directions requests, this means that no query was specified in the input
    */
-  public static final int MISSING_QUERY = StatusCodesImpl.impl.getMissingQueryCode(StatusCodesImpl.obj);
+  public static final int MISSING_QUERY = StatusCodesImpl.impl.getMissingQueryCode();
 
   /**
    * A geocoding or directions request could not be successfully processed, yet
    * the exact reason for the failure is not known.
    */
-  public static final int SERVER_ERROR = StatusCodesImpl.impl.getServerErrorCode(StatusCodesImpl.obj);
+  public static final int SERVER_ERROR = StatusCodesImpl.impl.getServerErrorCode();
 
   /**
    * No errors occurred; the address was successfully parsed and its geocode has
    * been returned.
    */
-  public static final int SUCCESS = StatusCodesImpl.impl.getSuccessCode(StatusCodesImpl.obj);
+  public static final int SUCCESS = StatusCodesImpl.impl.getSuccessCode();
 
   /**
    * The geocode for the given address or the route for the given directions
    * query cannot be returned due to legal or contractual reasons.
    */
-  public static final int UNAVAILABLE_ADDRESS = StatusCodesImpl.impl.getUnavailableAddressCode(StatusCodesImpl.obj);
+  public static final int UNAVAILABLE_ADDRESS = StatusCodesImpl.impl.getUnavailableAddressCode();
 
   /**
    * No corresponding geographic location could be found for the specified
    * address. This may be due to the fact that the address is relatively new, or
    * it may be incorrect.
    */
-  public static final int UNKNOWN_ADDRESS = StatusCodesImpl.impl.getUnknownAddressCode(StatusCodesImpl.obj);
+  public static final int UNKNOWN_ADDRESS = StatusCodesImpl.impl.getUnknownAddressCode();
 
   /**
    * The {@link Directions} object could not compute directions between the
@@ -81,7 +81,7 @@ public final class StatusCodes {
    * available between the two points, or because we do not have data for
    * routing in that region.
    */
-  public static final int UNKNOWN_DIRECTIONS = StatusCodesImpl.impl.getUnknownDirectionsCode(StatusCodesImpl.obj);
+  public static final int UNKNOWN_DIRECTIONS = StatusCodesImpl.impl.getUnknownDirectionsCode();
 
   public static String getName(int statusCode) {
     if (statusCode == BAD_KEY) {
