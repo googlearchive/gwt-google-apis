@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.FormHandler;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormSubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormSubmitEvent;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -67,6 +68,12 @@ public class Geocoder2Demo extends MapsDemo {
       "Domkloster 3, 50667 Köln, Deutschland",
       "Plaza de la Virgen de los Reyes, 41920, Sevilla, España",
       "123 Main St, Googleville"};
+
+  /**
+   * Constant used to layout the preconfigured addresses into a grid using this
+   * number of columns.
+   */
+  private static final int NUM_ADDRESS_COLUMNS = 2;
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -127,6 +134,9 @@ public class Geocoder2Demo extends MapsDemo {
     map.setSize("100%", "480px");
     panel.add(map);
 
+    Grid grid = new Grid((sampleAddresses.length / NUM_ADDRESS_COLUMNS) + 1,
+        NUM_ADDRESS_COLUMNS);
+
     for (int i = 0; i < sampleAddresses.length; i++) {
       final String address = sampleAddresses[i];
       Button link = new Button(address);
@@ -138,8 +148,9 @@ public class Geocoder2Demo extends MapsDemo {
           form.submit();
         }
       });
-      panel.add(link);
+      grid.setWidget(i / NUM_ADDRESS_COLUMNS, i % NUM_ADDRESS_COLUMNS, link);
     }
+    panel.add(grid);
 
     initWidget(panel);
     geocoder = new Geocoder();
