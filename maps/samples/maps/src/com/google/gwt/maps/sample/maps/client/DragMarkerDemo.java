@@ -83,7 +83,7 @@ public class DragMarkerDemo extends MapsDemo {
     final Marker marker = new Marker(map.getCenter(), options);
     final InfoWindow info = map.getInfoWindow();
     
-    marker.addMarkerDragEndHandler(new MarkerDragEndHandler(){
+    marker.addMarkerDragEndHandler(new MarkerDragEndHandler() {
       public void onDragEnd(MarkerDragEndEvent event) {
           info.open(marker, new InfoWindowContent("Just bouncing along..."));
         }

@@ -28,7 +28,7 @@ import com.google.gwt.maps.jsio.client.ReadOnly;
 @ReadOnly
 @BeanProperties
 @Global("$wnd")
-public interface StatusCodesImpl extends JSWrapper {
+public interface StatusCodesImpl extends JSWrapper<StatusCodesImpl> {
   StatusCodesImpl impl = GWT.create(StatusCodesImpl.class);
   
   @FieldName("G_GEO_BAD_KEY")
