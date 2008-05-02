@@ -21,13 +21,22 @@ import com.google.gwt.maps.client.impl.OverlayImpl;
 import com.google.gwt.maps.jsio.client.Exported;
 
 /**
- * TODO: How are events supposed to work with overlays?
+ * TODO(samgross): How are events supposed to work with overlays?
  */
 public abstract class Overlay {
 
   /**
    * This class is used to wrap Overlays written entirely in JavaScript.
+   * 
+   * Note that the "Overlay" class is intended to be a superclass, and thus,
+   * implements its methods on the prototype of the GOverlay object.
+   * ConcreteOverlay is intended to be used when you don't want to subclass
+   * Overlay but use it directly.
    */
+  // TODO(zundel): Does it really work? The Maps code looks like it throws an
+  // exception if you use Overlay directly, and if it was really bound to
+  // Polyline, Marker, ..., it would obliterate their initialize, remove, copy,
+  // and redraw() methods.
   public static class ConcreteOverlay extends Overlay {
     public ConcreteOverlay(JavaScriptObject jsoPeer) {
       super(jsoPeer);
@@ -68,8 +77,8 @@ public abstract class Overlay {
   }-*/;
 
   /**
-   * Used to create a new Overlay by wrapping an existing GOverlay object.
-   * This method is invoked by the jsio library.
+   * Used to create a new Overlay by wrapping an existing GOverlay object. This
+   * method is invoked by the jsio library.
    * 
    * @param jsoPeer GOverlay object to wrap.
    * @return a new instance of Overlay.
@@ -90,15 +99,41 @@ public abstract class Overlay {
     this.jsoPeer = jsoPeer;
   }
 
+  /**
+   * Returns an uninitialized copy of itself that can be added to the map.
+   * 
+   * @return an uninitialized copy of itself that can be added to the map.
+   */
   @Exported
   protected abstract Overlay copy();
 
+  /**
+   * Called by the map after the overlay is added to the map using
+   * {@link MapWidget#addOverlay(Overlay)}. The overlay object can draw itself
+   * into the different panes of the map that can be obtained using
+   * {@link MapWidget#getPane(com.google.gwt.maps.client.MapPaneType)}.
+   * 
+   * @param map The map this overlay has been added to.
+   */
   @Exported
   protected abstract void initialize(MapWidget map);
 
+  /**
+   * Called by the map when the map display has changed.
+   * 
+   * @param force The argument force will be true if the zoom level or the pixel
+   *          offset of the map view has changed, so that the pixel coordinates
+   *          need to be recomputed.
+   */
   @Exported
   protected abstract void redraw(boolean force);
 
+  /**
+   * Called by the map after the overlay is removed from the map using
+   * {@link MapWidget#removeOverlay(Overlay)} or
+   * {@link MapWidget#clearOverlays()}. The overlay must remove itself from the
+   * map panes here.
+   */
   @Exported
   protected abstract void remove();
 

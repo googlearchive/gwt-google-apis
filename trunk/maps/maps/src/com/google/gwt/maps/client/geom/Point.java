@@ -61,16 +61,26 @@ public final class Point {
     return false;
   }
 
+  /**
+   * Returns the X coordinate.
+   * @return the X coordinate.
+   */
   public int getX() {
     return impl.getX(jsoPeer);
   }
-  
+
+  /**
+   * Returns the Y coordinate.
+   * @return the Y coordinate.
+   */
   public int getY() {
     return impl.getY(jsoPeer);
   }
 
   @Override
   public int hashCode() {
+    // Bias the Y coordinate using a prime number (101) so that inverted coordinates
+    // do not hash to the same value.
     return getX() + (101 * getY());
   }
 

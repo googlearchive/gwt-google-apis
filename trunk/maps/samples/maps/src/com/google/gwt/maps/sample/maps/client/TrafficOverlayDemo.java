@@ -113,4 +113,6 @@ public class TrafficOverlayDemo extends MapsDemo {
     map.addOverlay(trafficInfo);
     trafficShown = true;
   }
+  
+  // TODO(zundel): Add handler for event "changed"
 }

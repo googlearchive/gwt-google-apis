@@ -83,8 +83,6 @@ public class EventDemo extends MapsDemo {
       public void onMoveEnd(MapMoveEndEvent event) {
         message.setText(map.getCenter().toString());
       }
-
     });
-  
   }
 }
