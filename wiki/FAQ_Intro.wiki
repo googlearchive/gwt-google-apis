@@ -2,6 +2,5 @@
 
 =Frequently Asked Questions=
 
-
 [FAQ_GettingStarted Getting Started]
-Problems frequently encountered when using the Google API Library for GWT for the first time.
+Questions for first time users of the Google API Library for GWT.
