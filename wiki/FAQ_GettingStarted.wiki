@@ -2,7 +2,7 @@
 
 == What is the Google Web Toolkit? ==
 
-The Google Web Tookit is a framework for developing AJAX applications.  See the Google Code home page for [http://code.google.com/p/google-web-toolkit GWT]
+The Google Web Tookit is a framework for developing AJAX applications.  See the Google Code home page for [http://code.google.com/webtoolkit GWT]
 
 == What is the Google API Library for the Google Web Toolkit? ==
 
