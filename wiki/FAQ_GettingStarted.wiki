@@ -1,12 +1,20 @@
 #summary Getting Started with the GWT Google APIs
 
-== Where do I find the gwt-google-apis download? ==
+== What is the Google Web Toolkit? ==
 
-The home of the project is at [http://code.google.com/p/gwt-google-apis Google Code].  There you will find documentation, source code, and downloads of released versions of the library.
+The Google Web Tookit is a framework for developing AJAX applications.  See the Google Code home page for [http://code.google.com/p/google-web-toolkit GWT]
+
+== What is the Google API Library for the Google Web Toolkit? ==
+
+The gwt-google-apis project is a set of GWT wrappers for other Google APIs that provide a binding between GWT compatible Java code and the JavaScript APIs provided by Google for JavaScript developers.  Although often very similar, the gwt-google-apis binding often diverge from the exact syntax of the JavaScript APIs in order to be more familiar to Java developers.
 
 == What is the licensing for the library? ==
 
 The project is maintained as an open source project and distributed under the Apache 2.0 license.
+
+== Where do I find the gwt-google-apis download? ==
+
+The home of the project is at [http://code.google.com/p/gwt-google-apis Google Code].  There you will find documentation, source code, and downloads of released versions of the library.
 
 == How do I get support for the library? ==
 
@@ -27,6 +35,6 @@ Discussions of the development of the library itself occur on the public [http:/
 
 The Google API Library for Google Web Toolkit is the official set of bindings for Google APIs maintained by Google.  Although Google does not maintain or support these alternate bindings, you are likely to find other users of those libraries on the GWT forum [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].
 
-== How do I get started developing with the API ==
+== How do I get started developing with the API? ==
 
 Check out the [GettingStarted Getting Started] page on the Google Code wiki.
