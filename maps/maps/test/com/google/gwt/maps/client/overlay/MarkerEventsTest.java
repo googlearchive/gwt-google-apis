@@ -28,8 +28,6 @@ import com.google.gwt.maps.client.event.MarkerDragStartHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowBeforeCloseHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler;
-import com.google.gwt.maps.client.event.MarkerManagerChangedHandler;
-import com.google.gwt.maps.client.event.MarkerManagerChangedHandler.MarkerManagerChangedEvent;
 import com.google.gwt.maps.client.event.MarkerMouseDownHandler;
 import com.google.gwt.maps.client.event.MarkerMouseOutHandler;
 import com.google.gwt.maps.client.event.MarkerMouseOverHandler;
@@ -51,7 +49,6 @@ import com.google.gwt.maps.client.event.MarkerMouseUpHandler.MarkerMouseUpEvent;
 import com.google.gwt.maps.client.event.MarkerRemoveHandler.MarkerRemoveEvent;
 import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler.MarkerVisibilityChangedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -470,53 +467,4 @@ public class MarkerEventsTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
     marker.trigger(e);
   }
-  
-  public void testMarkerManagerChangedEvent() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
-    final MarkerManager manager = new MarkerManager(map);
-    
-    manager.addMarkerManagerChangedHandler(new MarkerManagerChangedHandler() {
-
-      public void onChanged(MarkerManagerChangedEvent event) {
-        assertEquals(manager, event.getSender());
-        assertNotNull(event.getBounds());
-        assertEquals(1, event.getMarkerCount());
-        finishTest();
-      }
-      
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    Marker marker = new Marker(atlanta);
-    manager.addMarker(marker, 3);
-  }
-  
-  public void testMarkerManagerChangedTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
-    LatLng atlanta2 = new LatLng(33.7815790, -84.3885580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
-    final MarkerManager manager = new MarkerManager(map);
-    final LatLngBounds bounds = new LatLngBounds(atlanta, atlanta2);
-    
-    manager.addMarkerManagerChangedHandler(new MarkerManagerChangedHandler() {
-
-      public void onChanged(MarkerManagerChangedEvent event) {
-        assertEquals(manager, event.getSender());
-        assertEquals(event.getBounds(), bounds);
-        assertEquals(2, event.getMarkerCount());
-        finishTest();
-      }
-      
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    
-    MarkerManagerChangedEvent e = new MarkerManagerChangedEvent(manager,
-        bounds, 2);
-    manager.trigger(e);
-  }
-
 }

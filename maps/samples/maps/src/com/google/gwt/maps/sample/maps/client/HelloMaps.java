@@ -191,7 +191,6 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     list.addMapsDemo(SimpleDirectionsDemo.init());
     list.addMapsDemo(GeocoderDemo.init());
     list.addMapsDemo(Geocoder2Demo.init());
-    list.addMapsDemo(WeatherMapDemo.init());
   }
 
   private void showInfo() {
