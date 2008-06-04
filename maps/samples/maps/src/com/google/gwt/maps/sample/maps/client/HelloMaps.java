@@ -57,7 +57,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
 
   public void onModuleLoad() {
 
-     if (!Maps.isInstalled()) {
+     if (!Maps.isLoaded()) {
        Window.alert("The Maps API is not installed."
            + "  The <script> tag that loads the Maps API may be missing or your Maps key may be wrong.");
        return;
