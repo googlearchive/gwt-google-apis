@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.geom;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.maps.client.Maps;
 import com.google.gwt.maps.client.impl.LatLngImpl;
 import com.google.gwt.maps.jsio.client.impl.Extractor;
 
@@ -62,6 +63,7 @@ public final class LatLng {
    * @param longitude value between -180 and +180 degrees (wrapped)
    */
   public LatLng(double latitude, double longitude) {
+    Maps.assertLoaded();
     jsoPeer = impl.construct(latitude, longitude);
   }
 
@@ -75,6 +77,7 @@ public final class LatLng {
    * @param unbounded if <code>true</code>, then numbers will not be wrapped or clamped.
    */
   public LatLng(double latitude, double longitude, boolean unbounded) {
+    Maps.assertLoaded();
     jsoPeer = impl.construct(latitude, longitude, unbounded);
   }
 
@@ -83,6 +86,7 @@ public final class LatLng {
    * @param jso object to wrap.
    */
   private LatLng(JavaScriptObject jso) {
+    Maps.assertLoaded();
     this.jsoPeer = jso;
   }
 
