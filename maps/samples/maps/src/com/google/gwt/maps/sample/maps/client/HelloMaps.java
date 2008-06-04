@@ -17,6 +17,7 @@
 package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.maps.client.Maps;
 import com.google.gwt.maps.sample.maps.client.MapsDemo.MapsDemoInfo;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.HistoryListener;
@@ -56,6 +57,12 @@ public class HelloMaps implements EntryPoint, HistoryListener {
 
   public void onModuleLoad() {
 
+     if (!Maps.isInstalled()) {
+       Window.alert("The Maps API is not installed."
+           + "  The <script> tag that loads the Maps API may be missing or your Maps key may be wrong.");
+       return;
+     }
+     
     // Load all the MapsDemos.
     loadMapsDemos();
 

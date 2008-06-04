@@ -117,8 +117,6 @@ public final class MapWidget extends Composite {
     }
   }
 
-  private static final LatLng DEFAULT_CENTER = new LatLng(33.781466, -84.387519);
-
   static {
     Window.addWindowCloseListener(new WindowCloseListener() {
       public void onWindowClosed() {
@@ -181,7 +179,7 @@ public final class MapWidget extends Composite {
   private ListenerCollection<MapZoomListener> zoomListeners;
 
   public MapWidget() {
-    this(DEFAULT_CENTER, 8, null, null);
+    this(null, 1, null, null);
   }
 
   /**
@@ -213,12 +211,16 @@ public final class MapWidget extends Composite {
    */
   public MapWidget(LatLng center, int zoomLevel, String draggableCursor,
       String draggingCursor) {
+    Maps.assertLoaded();
     initWidget(mapContainer);
     JavaScriptObject opts = MapOptionsImpl.impl.construct();
     MapOptionsImpl.impl.setDraggableCursor(opts, draggableCursor);
     MapOptionsImpl.impl.setDraggingCursor(opts, draggingCursor);
     jsoPeer = MapImpl.impl.construct(getElement(), opts);
     MapImpl.impl.bind(jsoPeer, this);
+    if (center == null) {
+      center = new LatLng(0,0);
+    }
     setCenter(center, zoomLevel);
   }
 
@@ -1086,7 +1088,8 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Removes all overlay from the map, and fires any registered {@link MapClearOverlaysHandler}.
+   * Removes all overlay from the map, and fires any registered
+   * {@link MapClearOverlaysHandler}.
    */
   public void clearOverlays() {
     MapImpl.impl.clearOverlays(jsoPeer);
@@ -1202,7 +1205,7 @@ public final class MapWidget extends Composite {
    * @return the corresponding overlay pane
    */
   public MapPane getPane(MapPaneType type) {
-    // lazy init the hash map 
+    // lazy init the hash map
     if (panes == null) {
       panes = new HashMap<MapPaneType, MapPane>();
     }

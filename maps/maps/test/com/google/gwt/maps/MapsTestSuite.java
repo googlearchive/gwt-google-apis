@@ -15,23 +15,28 @@
  */
 package com.google.gwt.maps;
 
+import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.maps.client.CopyrightEventTest;
 import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
+import com.google.gwt.maps.client.MapWidgetTest;
+import com.google.gwt.maps.client.MapsNotInstalledTest;
 import com.google.gwt.maps.client.StatusCodesTest;
 import com.google.gwt.maps.client.overlay.MarkerEventsTest;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * TestSuite for the Gears API.
+ * TestSuite for the Maps API.
  */
-public class MapsTestSuite extends TestCase {
+public class MapsTestSuite extends GWTTestSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Maps API");
-    suite.addTestSuite(MapWidgetEventsTest.class); 
+    suite.addTestSuite(MapWidgetEventsTest.class);
+    suite.addTestSuite(MapsNotInstalledTest.class);
+    suite.addTestSuite(MapWidgetTest.class);
+    // suite.addTestSuite(GeocodeTest.class); // ignore - from another patch
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
     suite.addTestSuite(CopyrightEventTest.class);
