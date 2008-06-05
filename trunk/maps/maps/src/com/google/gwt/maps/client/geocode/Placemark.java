@@ -84,7 +84,9 @@ public final class Placemark {
     if (AdministrativeArea) {
       var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
       var Locality = Area.Locality;
-      var PostalCode = (Locality && Locality.PostalCode) || (Area.PostalCode);
+      var DependentLocality = (Locality && Locality.DependentLocality) || null;
+      var PostalCode = (DependentLocality && DependentLocality.PostalCode) 
+      || (Locality && Locality.PostalCode) || (Area.PostalCode);
       return PostalCode && PostalCode.PostalCodeNumber || null;
     }
     return null;
@@ -95,7 +97,9 @@ public final class Placemark {
     if (AdministrativeArea) {
       var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
       var Locality = Area.Locality;
-      var Thoroughfare = (Locality && Locality.Thoroughfare) || (Area.Thoroughfare);
+      var DependentLocality = (Locality && Locality.DependentLocality) || null;
+      var Thoroughfare = (DependentLocality && DependentLocality.Thoroughfare)  
+        || (Locality && Locality.Thoroughfare) || (Area.Thoroughfare);
       return Thoroughfare && Thoroughfare.ThoroughfareName || null;
     }
     return null;
@@ -110,7 +114,7 @@ public final class Placemark {
     }
     return null;
   }-*/;
-
+  
   private final JavaScriptObject jsoPeer;
 
   private Placemark(JavaScriptObject jsoPeer) {
@@ -164,6 +168,14 @@ public final class Placemark {
     return nativeGetSubAdministrativeArea(jsoPeer);
   }
 
+  /**
+   * Returns the underlying JS object. Useful if you want to manipulate it as a JSON string.
+   * @return the underlying JS object.
+   */
+  public JavaScriptObject getJso() {
+    return jsoPeer;
+  }
+  
   /**
    * Returns the point corresponding to the decoded address.
    * 
