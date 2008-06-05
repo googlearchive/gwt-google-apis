@@ -22,6 +22,7 @@ import com.google.gwt.maps.client.MapWidgetEventsTest;
 import com.google.gwt.maps.client.MapWidgetTest;
 import com.google.gwt.maps.client.MapsNotInstalledTest;
 import com.google.gwt.maps.client.StatusCodesTest;
+import com.google.gwt.maps.client.geocode.GeocodeTest;
 import com.google.gwt.maps.client.overlay.MarkerEventsTest;
 
 import junit.framework.Test;
