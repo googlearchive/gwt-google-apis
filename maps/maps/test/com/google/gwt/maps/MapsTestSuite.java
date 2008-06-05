@@ -36,7 +36,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(MapWidgetEventsTest.class);
     suite.addTestSuite(MapsNotInstalledTest.class);
     suite.addTestSuite(MapWidgetTest.class);
-    // suite.addTestSuite(GeocodeTest.class); // ignore - from another patch
+    suite.addTestSuite(GeocodeTest.class); // ignore - from another patch
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
     suite.addTestSuite(CopyrightEventTest.class);
