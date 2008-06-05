@@ -15,7 +15,9 @@
  */
 package com.google.gwt.maps.client.geocode;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.GeocoderImpl;
@@ -25,7 +27,8 @@ import com.google.gwt.maps.client.impl.GeocoderImpl.Response;
 import com.google.gwt.maps.jsio.client.JSList;
 
 /**
- * 
+ * A class for Geocoding Addresses through Google's Geocoding service over the
+ * Internet.
  */
 public final class Geocoder {
 
@@ -35,7 +38,6 @@ public final class Geocoder {
    * Creates a new instance of a geocoder that talks directly to Google servers.
    * A {@link FactualGeocodeCache} is used for results caching.
    */
-  // TODO(samgross): name: ClientGeocoder or Geocoder?
   public Geocoder() {
     jsoPeer = GeocoderImpl.impl.construct();
   }
@@ -91,9 +93,9 @@ public final class Geocoder {
           @Override
           public void callback(LatLng latlng) {
             if (latlng != null) {
-              callback.onSuccess(latlng);
+              fireLatLng(callback, true, latlng);
             } else {
-              callback.onFailure();
+              fireLatLng(callback, false, null);
             }
           }
         });
@@ -119,9 +121,9 @@ public final class Geocoder {
           JSList<Placemark> placemarkList = response.getPlacemarks();
           Placemark[] placemarks = new Placemark[placemarkList.size()];
           JsUtil.toArray(placemarkList, placemarks);
-          callback.onSuccess(placemarks);
+          fireLocationCb(callback, true, statusCode, placemarks);
         } else {
-          callback.onFailure(statusCode);
+          fireLocationCb(callback, false, statusCode, null);
         }
       }
     });
@@ -171,6 +173,69 @@ public final class Geocoder {
    */
   public void setViewport(LatLngBounds bounds) {
     GeocoderImpl.impl.setViewport(jsoPeer, bounds);
+  }
+
+  /**
+   * Wrapper to invoke LatLngCallbacks surrounded in the UncaughtExceptionHandler.
+   */
+  private void fireLatLng(LatLngCallback cb, boolean success, LatLng point) {
+    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+    if (handler != null) {
+      fireLatLngAndCatch(handler, cb, success, point);
+    } else {
+      fireLatLngImpl(cb, success, point);
+    }
+  }
+
+  private void fireLatLngAndCatch(UncaughtExceptionHandler handler,
+      LatLngCallback cb, boolean success, LatLng point) {
+    try {
+      fireLatLngImpl(cb, success, point);
+    } catch (Throwable e) {
+      handler.onUncaughtException(e);
+    }
+  }
+
+  private void fireLatLngImpl(LatLngCallback cb, boolean success, LatLng point) {
+    // Run the callback's code.
+    if (success) {
+      cb.onSuccess(point);
+    } else {
+      cb.onFailure();
+    }
+  }
+
+  private void fireLocationAndCatch(UncaughtExceptionHandler handler,
+      LocationCallback cb, boolean success, int statusCode,
+      Placemark placemarks[]) {
+    try {
+      fireLocationImpl(cb, success, statusCode, placemarks);
+    } catch (Throwable e) {
+      handler.onUncaughtException(e);
+    }
+  }
+
+  /**
+   * Wrapper to invoke LocationCallbacks surrounded in the UncaughtExceptionHandler.
+   */
+  private void fireLocationCb(LocationCallback cb, boolean success,
+      int statusCode, Placemark placemarks[]) {
+    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+    if (handler != null) {
+      fireLocationAndCatch(handler, cb, success, statusCode, placemarks);
+    } else {
+      fireLocationImpl(cb, success, statusCode, placemarks);
+    }
+  }
+
+  private void fireLocationImpl(LocationCallback cb, boolean success,
+      int statusCode, Placemark placemarks[]) {
+    // Run the callback's code.
+    if (success) {
+      cb.onSuccess(placemarks);
+    } else {
+      cb.onFailure(statusCode);
+    }
   }
 
 }
