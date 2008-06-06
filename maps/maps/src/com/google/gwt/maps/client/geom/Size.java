@@ -56,7 +56,9 @@ public final class Size {
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof Size) {
-      return impl.equals(obj);
+      Size cmp = (Size) obj;
+      return (cmp.getHeight() == getHeight() 
+          && cmp.getWidth() == getWidth());
     }
     return false;
   }

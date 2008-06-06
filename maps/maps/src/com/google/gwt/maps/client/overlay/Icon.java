@@ -34,11 +34,10 @@ public final class Icon {
    * Method used by JSNI to wrap return values from JavaScript method calls.
    * 
    * @param jsoPeer JSO to wrap in an Icon object.
-   * @return a newly created Icon object that waps jsoPeer.
+   * @return a newly created Icon object that wraps jsoPeer.
    */
   static Icon createPeer(JavaScriptObject jsoPeer) {
     Icon icon = new Icon(jsoPeer);
-    IconImpl.impl.bind(jsoPeer, icon);
     return icon;
   }
 
@@ -49,6 +48,8 @@ public final class Icon {
    */
   public Icon() {
     jsoPeer = IconImpl.impl.construct();
+    // Workaround for problem in the Maps API - issue 124
+    setIconAnchor(new Point(0,0));
   }
 
   /**
@@ -67,6 +68,8 @@ public final class Icon {
    */
   public Icon(String imageUrl) {
     jsoPeer = IconImpl.impl.construct(null, imageUrl);
+    // Workaround for problem in the Maps API - issue 124
+    setIconAnchor(new Point(0,0));
   }
 
   /**
@@ -132,7 +135,7 @@ public final class Icon {
    * Returns an array of integers representing the x/y coordinates of the image
    * map we should use to specify the clickable part of the icon image in
    * browsers other than Internet Explorer. See
-   * {@link Icon#getTransparentImageUrl()} for Internet Explorer.
+   * {@link Icon#getTransparentImageURL()} for Internet Explorer.
    * 
    * @return an array of integers representing the x/y coordinates of the image
    *         map we should use to specify the clickable part of the icon image
@@ -228,7 +231,7 @@ public final class Icon {
    *         should be a 24-bit PNG version of the main icon image with 1%
    *         opacity, but the same shape and size as the main icon.
    */
-  public String getTransparentImageUrl() {
+  public String getTransparentImageURL() {
     return IconImpl.impl.getTransparent(jsoPeer);
   }
 
@@ -284,7 +287,7 @@ public final class Icon {
 
   /**
    * Sets the clickable part of the icon image in browsers other than Internet
-   * Explorer. See {@link Icon#setTransparentImageUrl(String)} for Internet
+   * Explorer. See {@link Icon#setTransparentImageURL(String)} for Internet
    * Explorer.
    * 
    * @param imageMap an array of integers representing the x/y coordinates of
@@ -379,7 +382,7 @@ public final class Icon {
    * @param url URL of a virtually transparent version of the foreground icon
    *          image used to capture click events in Internet Explorer.
    */
-  public void setTransparentImageUrl(String url) {
+  public void setTransparentImageURL(String url) {
     IconImpl.impl.setTransparent(jsoPeer, url);
   }
 }
