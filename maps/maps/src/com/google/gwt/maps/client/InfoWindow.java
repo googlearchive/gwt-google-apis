@@ -501,6 +501,9 @@ public final class InfoWindow {
 
   private void beginAttach(InfoWindowContent content) {
     List<Widget> contentWidgets = content.getWidgets();
+    if (content.getMaxContent() != null) {
+      contentWidgets.add(content.getMaxContent());
+    }
     for (int i = 0; i < contentWidgets.size(); i++) {
       virtualPanel.beginAttach(contentWidgets.get(i));
     }
