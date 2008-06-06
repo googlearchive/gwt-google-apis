@@ -150,13 +150,15 @@ public class InfoWindowContent {
 
   private final JavaScriptObject content;
 
+  private List<InfoWindowListener> infoWindowListeners = null;
+
   private final JavaScriptObject options = InfoWindowOptionsImpl.impl.construct();
 
   private final int type;
 
   private final List<Widget> widgets = new ArrayList<Widget>();
 
-  private List<InfoWindowListener> infoWindowListeners = null;
+  private Widget windowMaximizedContent;
 
   /**
    * Create a new InfoWindowContent object given an array of tabs.
@@ -264,6 +266,7 @@ public class InfoWindowContent {
    * @param windowMaximizedContent content to be shown
    */
   public void setMaxContent(Widget windowMaximizedContent) {
+    this.windowMaximizedContent = windowMaximizedContent;
     InfoWindowOptionsImpl.impl.setMaxContentElement(options,
         windowMaximizedContent.getElement());
   }
@@ -328,5 +331,13 @@ public class InfoWindowContent {
 
   protected List<Widget> getWidgets() {
     return widgets;
+  }
+
+  /**
+   * Returns the widget passed to {@link InfoWindowContent#setMaxContent(String)}.
+   * @return the widget passed to {@link InfoWindowContent#setMaxContent(String)}.
+   */
+  Widget getMaxContent() {
+    return windowMaximizedContent;
   }
 }
