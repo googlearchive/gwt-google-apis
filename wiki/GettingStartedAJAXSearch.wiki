@@ -2,4 +2,6 @@
 
 = Using Google AJAX Search in a project =
 
+*TBD*
 
+See [GettingStartedBasic Getting Started].
