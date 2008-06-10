@@ -6,13 +6,13 @@ This section will get you started writing your first Google Gadget.  But before 
 
 == Looking at a Sample Gadget ==
 
-  *TBD*
+  _TBD_
 
   Look at Hello Gadgets: [http://code.google.com/p/gwt-google-apis/source/browse/trunk/gadgets/samples/hellogadgets/src/com/google/gwt/gadgets/sample/hellogadgets/client/HelloGadgets.java HelloGadgets.java]
 
 == Writing a Gadget ==
 
-  *TBD: (FROM JAVADOC)*
+  _TBD: (FROM JAVADOC)_
 
    1. Declare a subtype of Gadget (e.g. public class MyGadget extends Gadget) that is default instantiable.
    2. If the Gadget requires access to features of the container, it should implement any of the NeedsFoo interfaces.
@@ -22,10 +22,10 @@ Access to user preferences is provided through a user-defined subtype of the Use
 
 == Registering your Gadget ==
 
-  *TBD*
+  _TBD_
 
   (Most of this is covered by [http://code.google.com/apis/gadgets/ the Gadgets developer site].)
 
 == Debugging your Gadget in Hosted Mode ==
 
-  *TBD*
+  _TBD_
