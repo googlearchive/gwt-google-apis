@@ -6,7 +6,7 @@ The Google Web Tookit is a framework for developing AJAX applications.  See the 
 
 == What is the Google API Library for the Google Web Toolkit? ==
 
-The gwt-google-apis project is a set of GWT wrappers for other Google APIs that provide a binding between GWT compatible Java code and the JavaScript APIs provided by Google for JavaScript developers.  Although often very similar, the gwt-google-apis binding often diverge from the exact syntax of the JavaScript APIs in order to be more familiar to Java developers.
+The gwt-google-apis project is a set of GWT wrappers for other Google APIs that provide a binding between GWT compatible Java code and the !JavaScript APIs provided by Google for !JavaScript developers.  Although often very similar, the gwt-google-apis binding often diverge from the exact syntax of the !JavaScript APIs in order to be more familiar to Java developers.
 
 == What is the licensing for the library? ==
 
