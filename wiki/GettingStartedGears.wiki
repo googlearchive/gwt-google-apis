@@ -2,4 +2,6 @@
 
 = Using Google Gears in a project =
 
+*TBD*
 
+See [GettingStartedBasic Getting Started].
