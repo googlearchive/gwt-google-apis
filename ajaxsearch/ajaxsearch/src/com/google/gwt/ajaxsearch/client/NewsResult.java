@@ -132,6 +132,7 @@ public class NewsResult extends Result {
     return GnewsResult.IMPL.getUrl(this);
   }
 
+  @Override
   GResult getImpl() {
     return GnewsResult.IMPL;
   }

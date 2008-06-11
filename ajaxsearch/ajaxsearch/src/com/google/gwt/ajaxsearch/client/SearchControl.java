@@ -81,6 +81,7 @@ public class SearchControl extends Composite {
     // Wire up the search callback every time
     SEARCH_CONTROL.setSearchCompleteCallback(this, null,
         new SearchControlCompleteCallback() {
+          @Override
           public void onSearchResult(SearchControl control, Search search) {
             assert control == SearchControl.this;
             for (Result result : search.getResults()) {
@@ -89,9 +90,10 @@ public class SearchControl extends Composite {
           }
         });
 
-    // If no keep label is explicity set, don't bother wiring up the callback.
+    // If no keep label is explicitly set, don't bother wiring up the callback.
     if (options.keepLabel != null) {
       KeepCallback keepCallback = new KeepCallback() {
+        @Override
         public void onKeep(Result result) {
           keepListeners.fireKeep(SearchControl.this, result);
         }
@@ -130,8 +132,9 @@ public class SearchControl extends Composite {
 
   /**
    * Adds a KeepListener to the SearchControl. It is necessary to have set a
-   * keep label by invoking {@link SearchControlOptions#setKeepLabel} in order
-   * to display the keep link on the SearchControl.
+   * keep label by invoking
+   * {@link SearchControlOptions#setKeepLabel(java.lang.String)} in order to
+   * display the keep link on the SearchControl.
    * 
    * @param l A KeepListener that will receive notifications when the user
    *          clicks on a keep link in the SearchControl
@@ -141,7 +144,7 @@ public class SearchControl extends Composite {
   }
 
   /**
-   * Adds a listiner to receive notification of all search results loaded by the
+   * Adds a listener to receive notification of all search results loaded by the
    * SearchControl. A SearchListener added to the SearchControl will receive
    * Result objects from all Search objects added to the SearchControl.
    * 

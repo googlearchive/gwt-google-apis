@@ -73,6 +73,7 @@ public abstract class Search {
     if (listeners == null) {
       listeners = new SearchListenerCollection();
       impl.setSearchCompleteCallback(this, null, new GSearchCompleteCallback() {
+        @Override
         public void onSearchResult() {
           for (Result result : getResults()) {
             listeners.fireResult(Search.this, result);

@@ -131,6 +131,7 @@ public class LocalResult extends Result {
     return GlocalResult.IMPL.getUrl(this);
   }
 
+  @Override
   GResult getImpl() {
     return GlocalResult.IMPL;
   }
