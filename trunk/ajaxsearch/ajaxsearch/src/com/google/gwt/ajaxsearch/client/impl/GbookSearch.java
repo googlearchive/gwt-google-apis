@@ -31,7 +31,10 @@ public interface GbookSearch extends GSearch {
   @Constructor("$wnd.GbookSearch")
   JavaScriptObject construct();
 
+  // Used to clear a restriction
   void setRestriction(Search jso, JSOpaque type);
 
   void setRestriction(Search jso, JSOpaque type, JSOpaque value);
+  
+  void setRestriction(Search jso, JSOpaque type, String value);
 }
