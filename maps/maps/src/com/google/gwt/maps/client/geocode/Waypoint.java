@@ -15,30 +15,14 @@
  */
 package com.google.gwt.maps.client.geocode;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.impl.JsUtil;
-import com.google.gwt.maps.jsio.client.impl.Extractor;
 
 /**
- * This class is used to create an array of arguments to the {@link Geocoder}
+ * This class is used to create an array of arguments to the {@link Directions}
  * class for specifying multi-point directions.
  */
 public final class Waypoint {
-
-  // TODO: DELETE ME! (needs to function w/o)
-  @SuppressWarnings("unused")
-  private static final Extractor<Waypoint> __extractor = new Extractor<Waypoint>() {
-    public Waypoint fromJS(JavaScriptObject jso) {
-      throw new UnsupportedOperationException();
-    }
-
-    public JavaScriptObject toJS(Waypoint o) {
-      return o.jsoPeer;
-    }
-  };
-
-  private final JavaScriptObject jsoPeer;
+  private final String data;
 
   /**
    * Construct a waypoint from a point.
@@ -46,7 +30,7 @@ public final class Waypoint {
    * @param point point that specifies this waypoint.
    */
   public Waypoint(LatLng point) {
-    jsoPeer = JsUtil.asJavaScriptObject(point);
+    data = point.getLatitude() + "," + point.getLongitude();
   }
 
   /**
@@ -55,7 +39,7 @@ public final class Waypoint {
    * @param placemark an address that specifies this waypoint.
    */
   public Waypoint(Placemark placemark) {
-    jsoPeer = JsUtil.asJavaScriptObject(placemark);
+    data = placemark.getAddress();
   }
 
   /**
@@ -64,7 +48,11 @@ public final class Waypoint {
    * @param address an address that specifies this waypoint.
    */
   public Waypoint(String address) {
-    jsoPeer = JsUtil.asJavaScriptObject(address);
+    data = address;
   }
-
+  
+  @Override
+  public String toString() {
+    return data;
+  }
 }

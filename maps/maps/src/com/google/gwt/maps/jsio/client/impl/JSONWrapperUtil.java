@@ -118,16 +118,6 @@ public class JSONWrapperUtil {
      }-*/;
   };
 
-  public static final Extractor<String> STRING_EXTRACTOR = new Extractor<String>() {
-    public native String fromJS(JavaScriptObject obj) /*-{
-     return String(obj);
-     }-*/;
-
-    public native JavaScriptObject toJS(String o) /*-{
-     return new String(o);
-     }-*/;
-  };
-
   public static Boolean createWrapper(boolean b) {
     return Boolean.valueOf(b);
   }
@@ -167,11 +157,11 @@ public class JSONWrapperUtil {
    }
    return x;
    }-*/;
-  
+
   public static native boolean hasField(JavaScriptObject jso, String fieldName) /*-{
     return fieldName in jso;
   }-*/;
-  
+
   /**
    * Utility method for JSWrapper to throw an exception.
    */

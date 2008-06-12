@@ -21,6 +21,7 @@ import com.google.gwt.maps.client.impl.EventImpl;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
+import com.google.gwt.maps.jsio.client.JSList;
 
 // TODO(samgross): note "load", "error", and "addoverlay" semi-documented events
 
@@ -105,7 +106,13 @@ public final class Directions {
   public static void loadFromWaypoints(Waypoint[] waypoints,
       DirectionQueryOptions options, DirectionsCallback callback) {
     JavaScriptObject jsoPeer = createDirections(options);
-    DirectionsImpl.impl.loadFromWaypoints(jsoPeer, JsUtil.toJsList(waypoints),
+    // Coerce the waypoints into the appropriate type to pass down to JavaScript.
+    String [] waypointStrings = new String[waypoints.length];
+    for (int i = 0; i < waypoints.length; ++i) {
+      waypointStrings[i] = waypoints[i].toString();
+    }
+    JSList<String> waypointStringList = JsUtil.toJsList(waypointStrings);
+    DirectionsImpl.impl.loadFromWaypoints(jsoPeer, waypointStringList,
         options);
     if (callback != null) {
       addLoadListener(jsoPeer, callback);
@@ -125,7 +132,7 @@ public final class Directions {
       DirectionsCallback callback) {
     loadFromWaypoints(waypoints, null, callback);
   }
-
+  
   /**
    * Associate a callback with a "load" event. Used to implement
    * DirectionsCallback logic for load() and loadFromWaypoints()

@@ -24,6 +24,7 @@ import com.google.gwt.maps.jsio.client.JSList;
 import com.google.gwt.maps.jsio.client.JSWrapper;
 import com.google.gwt.maps.jsio.client.impl.Extractor;
 import com.google.gwt.maps.jsio.client.impl.JSListWrapper;
+import com.google.gwt.maps.jsio.client.impl.JSStringListWrapper;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
@@ -43,8 +44,12 @@ class JSListFragmentGenerator extends JSWrapperFragmentGenerator {
         "Writing JSNI object creator for "
             + argumentType.getQualifiedSourceName(), null);
 
-//    sw.print("@com.google.gwt.jsio.client.impl.JSListWrapper::create(Lcom/google/gwt/jsio/client/impl/Extractor;)(");
-    sw.print("@" + JSListWrapper.class.getName() + "::create(L" + Extractor.class.getName().replace('.', '/') + ";)(");
+    if (isStringType(context, argumentType)) {
+      sw.print("@" + JSStringListWrapper.class.getName() + "::create()(");
+    } else {
+      sw.print("@" + JSListWrapper.class.getName() + "::create(L"
+          + Extractor.class.getName().replace('.', '/') + ";)(");
+    }
 
     FragmentGenerator fragmentGenerator = context.fragmentGeneratorOracle.findFragmentGenerator(
         logger, typeOracle, argumentType.isClassOrInterface());
@@ -54,8 +59,12 @@ class JSListFragmentGenerator extends JSWrapperFragmentGenerator {
 
     fragmentGenerator.writeExtractorJSNIReference(subParams);
     sw.print(")");
-//    sw.print(".@com.google.gwt.jsio.client.JSWrapper::setJavaScriptObject(Lcom/google/gwt/core/client/JavaScriptObject;)(");
-    sw.print(".@" + JSWrapper.class.getName() + "::setJavaScriptObject(Lcom/google/gwt/core/client/JavaScriptObject;)(");
+    // Can't use fixed names when we have moved the jsio package.
+    // e.g.
+    // .@com.google.gwt.jsio.client.JSWrapper::setJavaScriptObject(Lcom/google/gwt/core/client/JavaScriptObject;)(
+    sw.print(".@"
+        + JSWrapper.class.getName()
+        + "::setJavaScriptObject(Lcom/google/gwt/core/client/JavaScriptObject;)(");
     sw.print(context.parameterName);
     sw.print(")");
   }
@@ -73,9 +82,13 @@ class JSListFragmentGenerator extends JSWrapperFragmentGenerator {
   }
 
   @Override
-  String defaultValue(TypeOracle typeOracle, JType type)
-      throws UnableToCompleteException {
+  String defaultValue(TypeOracle typeOracle, JType type) {
     return "[]";
+  }
+
+  boolean isStringType(FragmentGeneratorContext context, JType typeToTest) {
+    return context.typeOracle.findType(String.class.getName()).equals(
+        typeToTest);
   }
 
   @Override
@@ -88,8 +101,15 @@ class JSListFragmentGenerator extends JSWrapperFragmentGenerator {
     JParameterizedType listType = context.returnType.isParameterized();
     JType argumentType = listType.getTypeArgs()[0];
 
-//    sw.print("@com.google.gwt.jsio.client.impl.JSListWrapper::createExtractor(Lcom/google/gwt/jsio/client/impl/Extractor;)(");
-    sw.print("@" + JSListWrapper.class.getName() + "::createExtractor(L" + Extractor.class.getName().replace('.', '/') + ";)(");
+    if (isStringType(context, argumentType)) {
+      sw.print("@" + JSListWrapper.class.getName() + "::createExtractor()(");
+    } else {
+      // Can't use fixed names when we have moved the jsio package.
+      // e.g.
+      // @com.google.gwt.jsio.client.impl.JSListWrapper::createExtractor(Lcom/google/gwt/jsio/client/impl/Extractor;)(
+      sw.print("@" + JSListWrapper.class.getName() + "::createExtractor(L"
+          + Extractor.class.getName().replace('.', '/') + ";)(");
+    }
 
     FragmentGenerator fragmentGenerator = context.fragmentGeneratorOracle.findFragmentGenerator(
         logger, typeOracle, argumentType.isClassOrInterface());

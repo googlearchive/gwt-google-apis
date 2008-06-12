@@ -48,7 +48,7 @@ public class TaskFactory {
   public static interface Policy {
     /**
      * Specifies the base interface type so that it will be ignored by
-     * {@link #extractMethods()}.
+     * {@link TaskFactory#extractMethods(TreeLogger, TypeOracle, JClassType, com.google.gwt.maps.jsio.rebind.TaskFactory.Policy)}.
      */
     Collection<JMethod> getOperableMethods(TypeOracle oracle, JClassType clazz);
 

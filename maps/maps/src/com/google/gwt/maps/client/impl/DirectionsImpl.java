@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.geocode.Distance;
 import com.google.gwt.maps.client.geocode.Duration;
 import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geocode.Route;
-import com.google.gwt.maps.client.geocode.Waypoint;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
@@ -73,7 +72,7 @@ public interface DirectionsImpl extends JSFlyweightWrapper {
   void load(JavaScriptObject jsoPeer, String query,
       DirectionQueryOptions options);
 
-  void loadFromWaypoints(JavaScriptObject jsoPeer,
-      JSList<Waypoint> waypoints, DirectionQueryOptions options);
+  void loadFromWaypoints(JavaScriptObject jsoPeer, JSList<String> waypoints,
+      DirectionQueryOptions options);
 
 }
