@@ -15,6 +15,7 @@
  */
 package com.google.gwt.ajaxsearch.client;
 
+import com.google.gwt.ajaxsearch.client.impl.BookSearchRestrict;
 import com.google.gwt.ajaxsearch.client.impl.GbookSearch;
 
 /**
@@ -22,16 +23,65 @@ import com.google.gwt.ajaxsearch.client.impl.GbookSearch;
  */
 public class BookSearch extends Search {
   private static final GbookSearch IMPL = GbookSearch.IMPL;
-  
+
   public BookSearch() {
     super(IMPL);
   }
 
+  /**
+   * Remove the restriction of searching a particular library.
+   */
+  public void clearSearchLibrary() {
+    IMPL.setRestriction(this, BookSearchRestrict.USER_LIST.getValue());
+  }
+
+  /**
+   * Clear any previous setting of the search type restriction.
+   */
+  public void clearSearchType() {
+    IMPL.setRestriction(this, BookSearchRestrict.TYPE.getValue());
+  }
+
+  /**
+   * Clears a search restriction.
+   * 
+   * @deprecated use {@link #clearSearchType()} instead.
+   * @param type Sets the kind of restriction.
+   */
   public void setRestriction(RestrictType type) {
     IMPL.setRestriction(this, type.getValue());
   }
 
+  /**
+   * Sets or clears a search restriction.
+   * 
+   * @deprecated use {@link #setSearchType(BookSearchType)} or
+   *             {@link #clearSearchType()} instead.
+   * @param type Sets the kind of restriction.
+   * @param value Sets the value of the restriction (or <code>null</code> to
+   *          clear the restriction)
+   */
+  @Deprecated
   public void setRestriction(RestrictType type, RestrictValue value) {
     IMPL.setRestriction(this, type.getValue(), value.getValue());
+  }
+
+  /**
+   * Restrict the search to a particular library.
+   * 
+   * @param libraryName
+   */
+  public void setSearchLibrary(String libraryName) {
+    IMPL.setRestriction(this, BookSearchRestrict.TYPE.getValue(), libraryName);
+  }
+
+  /**
+   * Restrict the search to a specific type.
+   * 
+   * @param value the type of books to restrict the books to.
+   */
+  public void setSearchType(BookSearchType value) {
+    IMPL.setRestriction(this, BookSearchRestrict.TYPE.getValue(),
+        value.getValue());
   }
 }

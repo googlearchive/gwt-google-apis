@@ -27,8 +27,6 @@ import java.util.List;
  * A News search result.
  */
 public class NewsResult extends Result {
-  public NewsResult() {
-  }
 
   NewsResult(JavaScriptObject obj) {
     super(obj);

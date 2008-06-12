@@ -15,28 +15,28 @@
  */
 package com.google.gwt.ajaxsearch.client.impl;
 
-import com.google.gwt.ajaxsearch.client.Search;
+import com.google.gwt.ajaxsearch.client.ImageSearch;
 import com.google.gwt.ajaxsearch.jsio.client.Constructor;
 import com.google.gwt.ajaxsearch.jsio.client.JSOpaque;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * JSIO Wrapper for GbookSearch.
+ * JSIO wrapper for GimageSearch.
  */
-@Constructor("$wnd.GbookSearch")
-public interface GbookSearch extends GSearch {
-  GbookSearch IMPL = GWT.create(GbookSearch.class);
+@Constructor("$wnd.GimageSearch")
+public interface GimageSearch extends GSearch {
+  GimageSearch IMPL = GWT.create(GimageSearch.class);
 
-  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GbookSearch.RESULT_CLASS");
+  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GimageSearch.RESULT_CLASS");
 
-  @Constructor("$wnd.GbookSearch")
+  @Constructor("$wnd.GimageSearch")
   JavaScriptObject construct();
 
-  // Used to clear a restriction
-  void setRestriction(Search jso, JSOpaque type);
+  void setRestriction(ImageSearch obj, JSOpaque restrictionType);
 
-  void setRestriction(Search jso, JSOpaque type, JSOpaque value);
+  void setRestriction(ImageSearch obj, JSOpaque restrictionType,
+      JSOpaque restrictionValue);
 
-  void setRestriction(Search jso, JSOpaque type, String value);
+  void setSiteRestriction(ImageSearch obj, String site);
 }

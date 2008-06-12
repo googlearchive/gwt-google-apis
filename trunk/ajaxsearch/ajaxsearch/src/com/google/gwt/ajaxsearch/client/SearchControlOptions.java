@@ -42,8 +42,9 @@ public final class SearchControlOptions {
   final Map<Search, GsearcherOptions> searcherOptions = new HashMap<Search, GsearcherOptions>();
 
   /**
-   * The last value set by a call to {@link #setKeepLabel}. It is an Object
-   * because it can be a String or a {@link KeepLabel}.
+   * The last value set by a call to
+   * {@link SearchControlOptions#setKeepLabel(java.lang.String)}. It is an
+   * Object because it can be a String or a {@link KeepLabel}.
    */
   Object keepLabel;
 
@@ -109,6 +110,7 @@ public final class SearchControlOptions {
    * <li>BlogSearch</li>
    * <li>NewsSearch</li>
    * <li>BookSearch</li>
+   * <li>ImageSearch</li>
    * </ol>
    */
   public void addDefaultSearches() {
@@ -118,6 +120,7 @@ public final class SearchControlOptions {
     add(new BlogSearch());
     add(new NewsSearch());
     add(new BookSearch());
+    add(new ImageSearch());
   }
 
   /**

@@ -15,15 +15,30 @@
  */
 package com.google.gwt.ajaxsearch.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+
 import java.util.ArrayList;
 
 /**
  * A specialized List that is used to invoke methods on KeepListeners.
+ * 
+ * On exception, no further listener callbacks will be invoked.
  */
 class KeepListenerCollection extends ArrayList<KeepListener> {
   public void fireKeep(SearchControl control, Result result) {
+    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
     for (KeepListener l : this) {
-      l.onKeep(control, result);
+      if (handler != null) {
+        try {
+          l.onKeep(control, result);
+        } catch (Throwable e) {
+          handler.onUncaughtException(e);
+          break;
+        }
+      } else {
+        l.onKeep(control, result);
+      }
     }
   }
 }

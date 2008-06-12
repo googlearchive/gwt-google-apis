@@ -23,8 +23,6 @@ import com.google.gwt.core.client.JavaScriptObject;
  * Web search results.
  */
 public class WebResult extends Result {
-  public WebResult() {
-  }
 
   WebResult(JavaScriptObject obj) {
     super(obj);

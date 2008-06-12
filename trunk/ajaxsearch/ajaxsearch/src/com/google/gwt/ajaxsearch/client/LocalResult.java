@@ -69,9 +69,6 @@ public class LocalResult extends Result {
     }
   }
 
-  public LocalResult() {
-  }
-
   LocalResult(JavaScriptObject obj) {
     super(obj);
   }

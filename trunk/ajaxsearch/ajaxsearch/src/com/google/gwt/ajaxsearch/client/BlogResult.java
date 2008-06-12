@@ -25,13 +25,11 @@ import java.util.Date;
  * Blog search results.
  */
 public class BlogResult extends Result {
-  public BlogResult() {
-  }
-  
+
   BlogResult(JavaScriptObject obj) {
     super(obj);
   }
-  
+
   public String getAuthor() {
     return GblogResult.IMPL.getAuthor(this);
   }
@@ -59,7 +57,7 @@ public class BlogResult extends Result {
   public String getTitleNoFormatting() {
     return GblogResult.IMPL.getTitleNoFormatting(this);
   }
-  
+
   @Override
   GResult getImpl() {
     return GblogResult.IMPL;

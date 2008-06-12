@@ -24,13 +24,11 @@ import com.google.gwt.user.client.ui.Widget;
  * Book search results.
  */
 public class BookResult extends Result {
-  public BookResult() {
-  }
-  
+
   BookResult(JavaScriptObject obj) {
     super(obj);
   }
-  
+
   public String getAuthors() {
     return GbookResult.IMPL.getAuthors(this);
   }
@@ -62,7 +60,7 @@ public class BookResult extends Result {
   public String getUnescapedUrl() {
     return GbookResult.IMPL.getUnescapedUrl(this);
   }
-  
+
   @Override
   GResult getImpl() {
     return GbookResult.IMPL;

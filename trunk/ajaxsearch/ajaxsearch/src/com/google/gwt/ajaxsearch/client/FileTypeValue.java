@@ -18,22 +18,34 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.ajaxsearch.jsio.client.JSOpaque;
 
 /**
- * Used with {@link BookSearch#setRestriction(RestrictType, RestrictValue)} to
- * control the types of results displayed.
- * 
- * @deprecated see {@link BookSearch#setSearchType(BookSearchType)} and
- *             {@link BookSearchType}
+ * Used with {@link ImageSearch#setFileType(FileTypeValue)} to control the types
+ * of results displayed.
  */
-public enum RestrictValue {
-  @Deprecated
-  FULL_VIEW("FULL_VIEW"), // 
-  @Deprecated
-  ALL("ALL"); //
+public enum FileTypeValue {
+  /**
+   * Restrict to only JPEG images.
+   */
+  JPG("JPG"),
+  
+  /**
+   * Restrict to only PNG images.
+   */
+  PNG("PNG"),
+  
+  /**
+   * Restrict to only GIF images.
+   */
+  GIF("GIF"),
+  
+  /**
+   * Restrict to only BMP images.
+   */
+  BMP("BMP");
 
   private final JSOpaque value;
 
-  private RestrictValue(String type) {
-    value = new JSOpaque("$wnd.GbookSearch.TYPE_" + type + "_BOOKS");
+  private FileTypeValue(String type) {
+    value = new JSOpaque("$wnd.GSearch.FILETYPE_" + type);
   }
 
   JSOpaque getValue() {

@@ -25,13 +25,11 @@ import java.util.Date;
  * Video search result.
  */
 public class VideoResult extends Result {
-  public VideoResult() {
-  }
-  
+
   VideoResult(JavaScriptObject obj) {
     super(obj);
   }
-  
+
   public String getContent() {
     return GvideoResult.IMPL.getContent(this);
   }
@@ -75,7 +73,7 @@ public class VideoResult extends Result {
   public String getUrl() {
     return GvideoResult.IMPL.getUrl(this);
   }
-  
+
   @Override
   GResult getImpl() {
     return GvideoResult.IMPL;

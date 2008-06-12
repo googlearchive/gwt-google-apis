@@ -13,30 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.ajaxsearch.client;
+package com.google.gwt.ajaxsearch.client.impl;
 
 import com.google.gwt.ajaxsearch.jsio.client.JSOpaque;
 
 /**
- * Used with {@link BookSearch#setRestriction(RestrictType, RestrictValue)} to
+ * Used with {@link GbookSearch#setRestriction(ImageSearch, JSOpaque, JSOpaque)}
  * control the types of results displayed.
- * 
- * @deprecated see {@link BookSearch#setSearchType(BookSearchType)} and
- *             {@link BookSearchType}
  */
-public enum RestrictValue {
-  @Deprecated
-  FULL_VIEW("FULL_VIEW"), // 
-  @Deprecated
-  ALL("ALL"); //
+public enum BookSearchRestrict {
+  TYPE("RESTRICT_TYPE"), USER_LIST("USER_LIST");
 
   private final JSOpaque value;
 
-  private RestrictValue(String type) {
-    value = new JSOpaque("$wnd.GbookSearch.TYPE_" + type + "_BOOKS");
+  private BookSearchRestrict(String type) {
+    value = new JSOpaque("$wnd.GSearch." + type);
   }
 
-  JSOpaque getValue() {
+  public JSOpaque getValue() {
     return value;
   }
 }

@@ -18,12 +18,25 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.ajaxsearch.jsio.client.JSOpaque;
 
 /**
- * Used with {@link BookSearch#setRestriction(RestrictType, RestrictValue)} to
+ * Used with {@link BookSearch#setRestriction(RestrictType,RestrictValue)} to
  * restrict the types of media displayed.
+ * 
+ * @deprecated This class is intended for internal library use and is only kept
+ *             public for backwards compatibility with a few deprecated methods
+ *             in {@link BookSearch}. Use
+ *             {@link BookSearch#setSearchType(BookSearchType)} and
+ *             {@link BookSearch#setSearchLibrary(String)} instead.
  */
+@Deprecated
 public enum RestrictType {
-  RESTRICT_TYPE("$wnd.GSearch.RESTRICT_TYPE");
-
+  /**
+   * @deprecated use {@link BookSearch#setSearchType(BookSearchType)}
+   */
+  @Deprecated
+  RESTRICT_TYPE("$wnd.GSearch.RESTRICT_TYPE"), // BookSearch
+  @Deprecated
+  USER_LIST("$wnd.GSearch.USER_LIST"); // BookSearch
+  
   private final JSOpaque value;
 
   private RestrictType(String type) {
