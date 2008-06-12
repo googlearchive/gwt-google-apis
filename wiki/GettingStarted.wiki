@@ -23,9 +23,10 @@ This guide is a tutorial that demonstrates how to integrate the GWT Google APIs 
 
  * [GettingStartedMaps Using Google Maps in a project] A walkthrough of how to use Google Maps in a GWT project.
 
+ * [GettingStartedGadgets Using Google Gadgets in a project] A walkthrough of how to use the Google Gadgets API in a GWT project.
+
  * [GettingStartedGears Using Google Gears in a project] A walkthrough of how to use the Google Gears API in a GWT project.
 
- * [GettingStartedGadgets Using Google Gadgets in a project] A walkthrough of how to use the Google Gadgets API in a GWT project.
 
 = Other Resources =
 
