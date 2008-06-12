@@ -4,6 +4,7 @@
    * [GettingStartedBasic Adding GWT Google APIs to a GWT Project]
    * [GettingStartedAJAXSearch Using Google AJAX Search in a project]
    * [GettingStartedMaps Using Google Maps in a project]
+   * [GettingStartedGadgets Using Google Gadgets in a project]
    * [GettingStartedGears Using Google Gears in a project]
  * [FAQ_Intro FAQ - Introduction]
    * [FAQ_GettingStarted FAQ - Getting Started]
