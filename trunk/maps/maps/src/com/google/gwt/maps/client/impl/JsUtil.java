@@ -20,7 +20,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
 import com.google.gwt.maps.client.geocode.Placemark;
-import com.google.gwt.maps.client.geocode.Waypoint;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
@@ -65,13 +64,13 @@ public final class JsUtil {
     JSList<Point> asPointList(JavaScriptObject jso);
 
     @FieldName("valueOf")
-    JSList<TileLayer> asTileLayerList(JavaScriptObject jso);
+    JSList<String> asStringList(JavaScriptObject jso);
 
     @FieldName("valueOf")
-    JSList<Waypoint> asWaypointList(JavaScriptObject jso);
-
+    JSList<TileLayer> asTileLayerList(JavaScriptObject jso);
+    
     @Constructor("Array")
-    JavaScriptObject newArray();
+    JavaScriptObject newArray();    
   }
 
   private static final ListGenerator lists = GWT.create(ListGenerator.class);
@@ -84,19 +83,15 @@ public final class JsUtil {
     return placemark.@com.google.gwt.maps.client.geocode.Placemark::jsoPeer;
   }-*/;
 
-  public static native JavaScriptObject asJavaScriptObject(String str) /*-{
-    return new String(str);
-  }-*/;
+  public static void toArray(JSList<?> list, Object[] array) {
+    for (int i = 0; i < array.length; i++) {
+      array[i] = list.get(i);
+    }
+  }
 
   public static void toArray(JSList<Integer> list, int[] array) {
     for (int i = 0; i < array.length; i++) {
       array[i] = list.get(i).intValue();
-    }
-  }
-
-  public static void toArray(JSList<?> list, Object[] array) {
-    for (int i = 0; i < array.length; i++) {
-      array[i] = list.get(i);
     }
   }
 
@@ -138,12 +133,11 @@ public final class JsUtil {
     return list;
   }
 
-  public static JSList<Waypoint> toJsList(Waypoint[] array) {
-    JSList<Waypoint> list = lists.asWaypointList(lists.newArray());
+  public static JSList<String> toJsList(String[] array) {
+    JSList<String> list = lists.asStringList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }
-
   // Utility class only.  Users may not instantiate this class.
   private JsUtil() {
   }

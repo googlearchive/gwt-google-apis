@@ -20,7 +20,6 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.maps.jsio.client.impl.JSONWrapperUtil;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
@@ -37,7 +36,7 @@ class StringFragmentGenerator extends FragmentGenerator {
       return isAssignable(oracle, asClass, String.class);
     }
   }
-  
+
   @Override
   void fromJS(FragmentGeneratorContext context)
       throws UnableToCompleteException {
@@ -65,7 +64,7 @@ class StringFragmentGenerator extends FragmentGenerator {
   @Override
   void writeExtractorJSNIReference(FragmentGeneratorContext context) {
     SourceWriter sw = context.sw;
-//    sw.print("@com.google.gwt.jsio.client.impl.JSONWrapperUtil::STRING_EXTRACTOR");
-    sw.print("@" + JSONWrapperUtil.class.getName() + "::STRING_EXTRACTOR");
+    // No need to write a String Extractor - The JavaScriptObject class is not an
+    // appropriate representation
   }
 }

@@ -17,17 +17,15 @@ package com.google.gwt.maps.jsio.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.jsio.client.JSList;
-import com.google.gwt.maps.jsio.client.JSONWrapperException;
 import com.google.gwt.maps.jsio.client.JSWrapper;
 
-import java.util.AbstractList;
-
 /**
- * This an implementation of List that operates directly on JS arrays.
+ * This an implementation of List that operates directly on JS arrays of objects
+ * that can be made into JavaScriptObjects.
  * 
  * @param <T> the type of object stored in the list
  */
-public final class JSListWrapper<T> extends AbstractList<T> implements
+public final class JSListWrapper<T> extends AbstractJSListWrapper<T> implements
     JSList<T>, JSWrapper<JSListWrapper<T>> {
 
   /**
@@ -66,32 +64,9 @@ public final class JSListWrapper<T> extends AbstractList<T> implements
     return new WrappingExtractor<T>(e);
   }
 
-  /**
-   * Used by JSNI code to throw an IndexOutOfBoundsException.
-   */
-  static void throwIndexOutOfBoundsException() {
-    throw new IndexOutOfBoundsException();
-  }
-
   private static native Object getNative(JavaScriptObject array, int index) /*-{
     return Object(array[index]);
   }-*/;
-
-  private static native int sizeNative(JavaScriptObject array) /*-{
-    return array.length;
-  }-*/;
-
-  private static native Object splice(JavaScriptObject array, int from,
-      int length) /*-{
-    return array.splice(from, length);
-  }-*/;
-
-  private static native <T> Object splice(JavaScriptObject array, int index,
-      int length, T value) /*-{
-    return array.splice(index, length, value);
-  }-*/;
-
-  private JavaScriptObject arr;
 
   private final Extractor<T> extractor;
 
@@ -100,6 +75,7 @@ public final class JSListWrapper<T> extends AbstractList<T> implements
     arr = JavaScriptObject.createArray();
   }
 
+  @Override
   public void add(int index, T object) {
     if (index < 0 || index > size()) {
       throw new IndexOutOfBoundsException();
@@ -107,10 +83,7 @@ public final class JSListWrapper<T> extends AbstractList<T> implements
     splice(arr, index, 0, extractor.toJS(object));
   }
 
-  public void clear() {
-    arr = JavaScriptObject.createArray();
-  }
-
+  @Override
   public T get(int index) {
     if (index < 0 || index > size()) {
       throw new IndexOutOfBoundsException();
@@ -128,15 +101,7 @@ public final class JSListWrapper<T> extends AbstractList<T> implements
     return new WrappingExtractor<T>(extractor);
   }
 
-  /**
-   * Return the JSONObject that is backing the wrapper. Modifications to the
-   * returned JSONObject are not required to be correctly reflected in the
-   * source wrapper.
-   */
-  public JavaScriptObject getJavaScriptObject() {
-    return arr;
-  }
-
+  @Override
   public T remove(int index) {
     if (index < 0 || index > size()) {
       throw new IndexOutOfBoundsException();
@@ -150,6 +115,7 @@ public final class JSListWrapper<T> extends AbstractList<T> implements
     }
   }
 
+  @Override
   public T set(int index, T o) {
     if (index < 0 || index > size()) {
       throw new IndexOutOfBoundsException();
@@ -174,18 +140,4 @@ public final class JSListWrapper<T> extends AbstractList<T> implements
     return this;
   }
 
-  /**
-   * Unimplemented.
-   */
-  public void setJSONData(String data) throws JSONWrapperException {
-    throw new JSONWrapperException("Unimplemented");
-  }
-
-  public int size() {
-    return sizeNative(arr);
-  }
-
-  protected void removeRange(int fromIndex, int toIndex) {
-    splice(arr, fromIndex, toIndex - fromIndex);
-  }
 }

@@ -503,7 +503,7 @@ public class JSWrapperGenerator extends Generator {
     sw.println("}");
 
     // Method declaration
-    sw.print("public native " + context.simpleTypeName
+    sw.println("public native " + context.simpleTypeName
         + " setJavaScriptObjectNative(JavaScriptObject obj) /*-{");
     sw.indent();
 
