@@ -208,13 +208,12 @@ function __MODULE_FUNC__() {
   _IG_RegisterOnloadHandler(function() {
     if (!bodyDone) {
       bodyDone = true;
+// __MODULE_STYLES_BEGIN__
+     // Style resources are injected here to prevent operation aborted errors on ie
+// __MODULE_STYLES_END__
       maybeStartModule();
     }
   });
-
-// __MODULE_DEPS_BEGIN__
-  // Module dependencies, such as scripts and css
-// __MODULE_DEPS_END__
 
   if (isHostedMode()) {
     // Set up the globals and execute the hosted mode hook function
@@ -236,7 +235,11 @@ function __MODULE_FUNC__() {
       // intentionally silent on property failure
       return;
     }
-    
+
+// __MODULE_SCRIPTS_BEGIN__
+  // Script resources are injected here
+// __MODULE_SCRIPTS_END__
+   
     // Use the container's caching function if it's available:
     var loadFrom = _IG_GetCachedUrl(base + strongName);
       
