@@ -15,15 +15,30 @@
  */
 package com.google.gwt.ajaxsearch.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+
 import java.util.ArrayList;
 
 /**
  * A specialized List that is used to invoke methods on SearchCallbacks.
+ * 
+ * On exception, no further listener callbacks will be invoked.
  */
 public class SearchListenerCollection extends ArrayList<SearchListener> {
   public void fireResult(Search search, Result result) {
+    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
     for (SearchListener l : this) {
-      l.onSearchResult(search, result);
+      if (handler != null) {
+        try {
+          l.onSearchResult(search, result);
+        } catch (Throwable e) {
+          handler.onUncaughtException(e);
+          break;
+        }
+      } else {
+       l.onSearchResult(search, result);
+      }
     }
   }
 }

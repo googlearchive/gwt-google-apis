@@ -18,22 +18,29 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.ajaxsearch.jsio.client.JSOpaque;
 
 /**
- * Used with {@link BookSearch#setRestriction(RestrictType, RestrictValue)} to
+ * Used with {@link ImageSearch#setSafeSearch(SafeSearchValue)} to
  * control the types of results displayed.
- * 
- * @deprecated see {@link BookSearch#setSearchType(BookSearchType)} and
- *             {@link BookSearchType}
  */
-public enum RestrictValue {
-  @Deprecated
-  FULL_VIEW("FULL_VIEW"), // 
-  @Deprecated
-  ALL("ALL"); //
+public enum SafeSearchValue {
+  /**
+   * Apply strict filtering for both explicit text and explicit images.
+   */
+  STRICT("STRICT"), 
+  
+  /**
+   * Apply filtering for explicit images (the default behavior).
+   */
+  MODERATE("MODERATE"),
+  
+  /**
+   * Do not apply safe search filtering.
+   */
+  OFF("OFF");
 
   private final JSOpaque value;
 
-  private RestrictValue(String type) {
-    value = new JSOpaque("$wnd.GbookSearch.TYPE_" + type + "_BOOKS");
+  private SafeSearchValue(String type) {
+    value = new JSOpaque("$wnd.GSearch.SAFESEARCH_" + type);
   }
 
   JSOpaque getValue() {

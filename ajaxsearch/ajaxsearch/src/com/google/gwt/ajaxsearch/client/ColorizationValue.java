@@ -18,22 +18,30 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.ajaxsearch.jsio.client.JSOpaque;
 
 /**
- * Used with {@link BookSearch#setRestriction(RestrictType, RestrictValue)} to
- * control the types of results displayed.
- * 
- * @deprecated see {@link BookSearch#setSearchType(BookSearchType)} and
- *             {@link BookSearchType}
+ * Used with {@link ImageSearch#setColorization(ColorizationValue)} to control
+ * the types of results displayed.
  */
-public enum RestrictValue {
-  @Deprecated
-  FULL_VIEW("FULL_VIEW"), // 
-  @Deprecated
-  ALL("ALL"); //
+public enum ColorizationValue {
+
+  /**
+   * Restrict to black and white (mono) images.
+   */
+  BLACK_AND_WHITE("BLACK_AND_WHITE"),
+
+  /**
+   * Restrict to grayscale images.
+   */
+  GRAYSCALE("GRAYSCALE"),
+
+  /**
+   * Restrict to color images.
+   */
+  COLOR("COLOR");
 
   private final JSOpaque value;
 
-  private RestrictValue(String type) {
-    value = new JSOpaque("$wnd.GbookSearch.TYPE_" + type + "_BOOKS");
+  private ColorizationValue(String type) {
+    value = new JSOpaque("$wnd.GSearch.COLORIZATION_" + type);
   }
 
   JSOpaque getValue() {

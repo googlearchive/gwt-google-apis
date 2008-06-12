@@ -18,21 +18,22 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.ajaxsearch.jsio.client.JSOpaque;
 
 /**
- * Used with {@link BookSearch#setRestriction(RestrictType, RestrictValue)} to
- * control the types of results displayed.
- * 
- * @deprecated see {@link BookSearch#setSearchType(BookSearchType)} and
- *             {@link BookSearchType}
+ * Used with {@link BookSearch#setSearchType(BookSearchType)} to control the
+ * types of results displayed.
  */
-public enum RestrictValue {
-  @Deprecated
-  FULL_VIEW("FULL_VIEW"), // 
-  @Deprecated
-  ALL("ALL"); //
+public enum BookSearchType {
+  /**
+   * Restrict the results to only "Full View Books".
+   */
+  FULL_VIEW("FULL_VIEW"),
+  /**
+   * Allows the searcher to return all books.
+   */
+  ALL("ALL");
 
   private final JSOpaque value;
 
-  private RestrictValue(String type) {
+  private BookSearchType(String type) {
     value = new JSOpaque("$wnd.GbookSearch.TYPE_" + type + "_BOOKS");
   }
 

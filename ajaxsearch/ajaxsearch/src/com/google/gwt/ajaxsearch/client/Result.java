@@ -18,6 +18,7 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.ajaxsearch.client.impl.GResult;
 import com.google.gwt.ajaxsearch.client.impl.GblogSearch;
 import com.google.gwt.ajaxsearch.client.impl.GbookSearch;
+import com.google.gwt.ajaxsearch.client.impl.GimageSearch;
 import com.google.gwt.ajaxsearch.client.impl.GlocalSearch;
 import com.google.gwt.ajaxsearch.client.impl.GnewsSearch;
 import com.google.gwt.ajaxsearch.client.impl.GvideoSearch;
@@ -67,6 +68,8 @@ public class Result {
       return new BlogResult(obj);
     } else if (GbookSearch.RESULT_CLASS.equals(resultClass)) {
       return new BookResult(obj);
+    } else if (GimageSearch.RESULT_CLASS.equals(resultClass)) {
+      return new ImageResult(obj);
     } else if (GlocalSearch.RESULT_CLASS.equals(resultClass)) {
       return new LocalResult(obj);
     } else if (GnewsSearch.RESULT_CLASS.equals(resultClass)) {
@@ -91,12 +94,12 @@ public class Result {
     return toReturn;
   }
 
-  private final JavaScriptObject jsoPeer;
-
   /**
    * Caches the result from getHtml().
    */
   private Widget htmlWidget;
+
+  private final JavaScriptObject jsoPeer;
 
   public Result() {
     this(GResult.IMPL.construct());
@@ -119,8 +122,20 @@ public class Result {
     }
     return htmlWidget;
   }
-
+  
+  String getHtmlRaw() {
+    return getImpl().getHtml(this).toString();
+  }
+  
   GResult getImpl() {
     return GResult.IMPL;
+  }
+
+  /** 
+   * Returns the underlying JavaScript Object (used for unit testing).
+   * @return the underlying JavaScript Object (used for unit testing).
+   */
+  JavaScriptObject getJso() {
+    return jsoPeer;
   }
 }
