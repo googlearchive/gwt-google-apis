@@ -18,12 +18,15 @@ package com.google.gwt.maps.client.impl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.geom.LatLngBounds;
+import com.google.gwt.maps.client.overlay.PolyEditingOptions;
+import com.google.gwt.maps.client.overlay.PolyStyleOptions;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.jsio.client.JSList;
 
 /**
- * 
+ * Implementation of the GPolyline class using JSIO.
  */
 public interface PolylineImpl extends JSFlyweightWrapper {
 
@@ -42,16 +45,36 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   JavaScriptObject construct(JSList<LatLng> points, String color, int weight,
       double opacity);
 
+  void deleteVertex(JavaScriptObject jsoPeer, int index);
+
+  void disableEditing(JavaScriptObject jsoPeer);
+
+  void enableDrawing(JavaScriptObject jsoPeer);
+
+  void enableDrawing(JavaScriptObject jsoPeer, PolyEditingOptions opts);
+  
+  void enableEditing(JavaScriptObject jsoPeer);
+  
+  void enableEditing(JavaScriptObject jsoPeer, PolyEditingOptions opts);
+
+  LatLngBounds getBounds(JavaScriptObject jsoPeer);
+
+  double getLength(JavaScriptObject jsoPeer);
+
   LatLng getVertex(JavaScriptObject jsoPeer, int index);
 
   int getVertexCount(JavaScriptObject jsoPeer);
 
   void hide(JavaScriptObject jsoPeer);
 
+  void insertVertex(JavaScriptObject jsoPeer, int index, LatLng latlng);
+
   boolean isHidden(JavaScriptObject jsoPeer);
 
+  void setStrokeStyle(JavaScriptObject jsoPeer, PolyStyleOptions style);
+
   void show(JavaScriptObject jsoPeer);
-  
+
   boolean supportsHide(JavaScriptObject jsoPeer);
-  
+
 }

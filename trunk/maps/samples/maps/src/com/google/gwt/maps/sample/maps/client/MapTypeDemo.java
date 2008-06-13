@@ -55,6 +55,7 @@ public class MapTypeDemo extends MapsDemo {
       initListByMapType("", MapType.getDefaultMapTypes());
       List<MapType> tmpTypeList = new ArrayList<MapType>();
       tmpTypeList.add(MapType.getPhysicalMap());
+      tmpTypeList.add(MapType.getEarthMap());
       initListByMapType("", tmpTypeList);
       initListByMapType("Moon: ", MapType.getMoonMapTypes());
       initListByMapType("Mars: ", MapType.getMarsMapTypes());
@@ -83,7 +84,7 @@ public class MapTypeDemo extends MapsDemo {
 
   private static HTML descHTML = null;
 
-  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+  private static final String descString = "<p>Creates a 500 x 500 pixel map viewport centered on Palo Alto, CA USA. "
       + "You should be able to scroll the viewport by clicking and dragging "
       + "with the mouse.</p>\n"
       + "<p>Choose a different item from the drop down menu to see the different map types.</p>\n";
@@ -118,14 +119,15 @@ public class MapTypeDemo extends MapsDemo {
     vertPanel.setStyleName("hm-panel");
 
     map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
-    map.setSize("500px", "300px");
+    map.setSize("500px", "500px");
 
     // Add in all the map types we know about.
     for (MapType mt : MapType.getDefaultMapTypes()) {
       map.addMapType(mt);
     }
     map.addMapType(MapType.getPhysicalMap());
-
+    map.addMapType(MapType.getEarthMap());
+    
     for (MapType mt : MapType.getMoonMapTypes()) {
       map.addMapType(mt);
     }
