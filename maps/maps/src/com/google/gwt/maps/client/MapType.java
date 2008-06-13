@@ -65,6 +65,7 @@ public final class MapType {
   };
 
   private static List<MapType> defaultMapTypes;
+  private static MapType earthMap;
   private static MapType hybridMap;
   private static boolean mapTypesInitialized = false;
   private static MapType marsElevationMap;
@@ -99,6 +100,16 @@ public final class MapType {
     defaultMapTypes = Collections.unmodifiableList(l);
     return defaultMapTypes;
   }
+
+    /**
+     * Returns a map type that shows Google Earth using the browser plugin.
+     * 
+     * @return a map type that shows Google Earth.
+     */
+    public static MapType getEarthMap() {
+      initMapTypes();
+      return earthMap;
+    }
 
     /**
      * Returns a map type that shows transparent street maps over Google Earth
@@ -387,6 +398,7 @@ public final class MapType {
     normalMap = createPeer(MapTypeImpl.impl.getNormalMapType());
     satelliteMap = createPeer(MapTypeImpl.impl.getSatelliteMapType());
     hybridMap = createPeer(MapTypeImpl.impl.getHybridMapType());
+    earthMap = createPeer(MapTypeImpl.impl.getEarthMapType());
     physicalMap = createPeer(MapTypeImpl.impl.getPhysicalMapType());
     moonElevationMap = createPeer(MapTypeImpl.impl.getMoonElevationMapType());
     moonVisibleMap = createPeer(MapTypeImpl.impl.getMoonVisibleMap());

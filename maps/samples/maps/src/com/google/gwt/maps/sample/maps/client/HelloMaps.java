@@ -22,6 +22,7 @@ import com.google.gwt.maps.sample.maps.client.MapsDemo.MapsDemoInfo;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.HistoryListener;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -101,8 +102,12 @@ public class HelloMaps implements EntryPoint, HistoryListener {
             + "demonstrates a particular capability of the Maps support."));
 
     outerPanel.setWidget(1, 0, innerPanel);
-
-    RootPanel.get("hm-map").add(outerPanel);
+    
+    
+    DecoratorPanel decorator = new DecoratorPanel();
+    decorator.add(outerPanel);    
+    
+    RootPanel.get("hm-map").add(decorator);
 
     // Show the initial screen.
     String initToken = History.getToken();
@@ -141,7 +146,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
       History.newItem(info.getName());
     }
 
-    // Display the new MapsDemo and update the disclosure panel.
+    // Display the new MapsDemo and update the description panel.
     innerPanel.add(curMapsDemo);
     outerPanel.setWidget(2, 0, info.getDescriptionHTML());
 
@@ -192,6 +197,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     list.addMapsDemo(CustomMapTypeDemo.init());
     list.addMapsDemo(GroundOverlayDemo.init());
     list.addMapsDemo(CustomOverlayDemo.init());
+    list.addMapsDemo(DrawingOverlayDemo.init());
     list.addMapsDemo(GeoRssOverlayDemo.init());
     list.addMapsDemo(KmlOverlayDemo.init());
     list.addMapsDemo(TrafficOverlayDemo.init());

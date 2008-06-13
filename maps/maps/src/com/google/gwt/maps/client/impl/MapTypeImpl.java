@@ -58,6 +58,9 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   @Global("$wnd.G_DEFAULT_MAP_TYPES")
   JavaScriptObject getDefaultMapTypes();
 
+  @Global("$wnd.G_SATELLITE_3D_MAP")
+  JavaScriptObject getEarthMapType();
+
   String getErrorMessage(JavaScriptObject jsoPeer);
 
   @Global("$wnd.G_HYBRID_MAP")
