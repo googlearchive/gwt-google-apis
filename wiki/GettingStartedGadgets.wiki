@@ -79,21 +79,32 @@ Finally, above the class statement, add an annotation to set the gadget title, a
 @ModulePrefs(title = "SimpleGadget", author = "yournamehere", author_email = "yournamehere@gmail.com")
 }}}
 
+[http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides a few initial preferences values.
 
 _TBD_
+
+
+
+=== Specifying Features ===
+
+If the Gadget requires access to features of the container, it should implement any of the _NeedsFoo_ interfaces, which currently include:
+ 
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/NeedsAnalytics.html NeedsAnalytics]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/NeedsDynamicHeight.html NeedsDynamicHeight]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/NeedsIntrinsics.html NeedsIntrinsics]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/NeedsSetPrefs.html NeedsSetPrefs]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/NeedsSetTitle.html NeedsSetTitle]
+
+
+At runtime, all feature setters will be called strictly before [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)]. The order in which the setters are called is undefined.
 
 
 === Specifing Preferences ===
 
 _TBD_
 
-If the Gadget requires access to features of the container, it should implement any of the NeedsFoo interfaces.
 
-contains information about the gadget such as its title, description, author, and other optional features.
-
-  3. At runtime, all feature setters will be called strictly before init(UserPreferences). The order in which the setters are called is undefined.
-
-Access to user preferences is provided through a user-defined subtype of the UserPreferences interface. Each preference should be defined as a zero-argument method, returning the desired type of UserPreferences.Preference. The Gadget type should be parameterized with the specific UserPreferences subtype, which will be provided to the init(UserPreferences) method. 
+Access to user preferences is provided through a user-defined subtype of the UserPreferences interface. Each preference should be defined as a zero-argument method, returning the desired type of [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.Preference.html UserPreferences.Preference]. The Gadget type should be parameterized with the specific [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subtype, which will be provided to the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)] method. 
 
 
 
