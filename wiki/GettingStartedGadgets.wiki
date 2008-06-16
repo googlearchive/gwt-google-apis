@@ -87,7 +87,7 @@ _TBD_
 
 === Specifying Features ===
 
-If the Gadget requires access to features of the container, it should implement any of the _NeedsFoo_ interfaces, which currently include:
+If the Gadget requires access to features of the container, it should implement any of the _!NeedsFoo_ interfaces, which currently include:
  
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/NeedsAnalytics.html NeedsAnalytics]
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/NeedsDynamicHeight.html NeedsDynamicHeight]
@@ -107,7 +107,19 @@ _TBD_
 Access to user preferences is provided through a user-defined subtype of the UserPreferences interface. Each preference should be defined as a zero-argument method, returning the desired type of [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.Preference.html UserPreferences.Preference]. The Gadget type should be parameterized with the specific [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subtype, which will be provided to the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)] method. 
 
 
+=== Compiling your Gadget ===
 
+Use the SampleGadget-compile shell script to build your project, or use any other method to invoke the GWT compiler on the module `SampleGadget.gwt.xml1.
+
+The output of the compiler will have:
+   * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
+   * A `SampleGadgets.html` file.  This is just a holdover from a regular GWT module and is not used in publishing a gadget (but it can be useful in hosted mode).  
+   * Other resources such as image files.
+   * A `*.xml` file.  This is the gadget specification file that you will need in order to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish your gadget].  It contains:
+       * Information about your gadget specified in `@ModulePrefs` 
+       * Which features your gadget needs, 
+       * A user preference value specification, 
+       * Some !JavaScript code for initializing the Gadget API and loading one of the compiler permutations.
 
 == Registering your Gadget ==
 
