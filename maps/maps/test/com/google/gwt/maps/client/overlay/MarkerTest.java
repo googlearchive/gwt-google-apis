@@ -137,7 +137,7 @@ public class MarkerTest extends GWTTestCase {
     map.setSize("300px", "300px");
 
     Icon ic = new Icon();
-    ic.setImageURL("gnome-fs-home.png");
+    ic.setImageURL("house.png");
     MarkerOptions mo = new MarkerOptions();
     mo.setIcon(ic);
     Marker m = new Marker(new LatLng(33.7814790, -84.3880580), mo);
@@ -170,7 +170,7 @@ public class MarkerTest extends GWTTestCase {
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
 
-    Icon ic = new Icon("gnome-fs-home.png");
+    Icon ic = new Icon("house.png");
     ic.setIconSize(new Size(30, 30));
     MarkerOptions mo = new MarkerOptions();
     mo.setIcon(ic);
