@@ -16,7 +16,6 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.impl.InfoWindowImpl;
 import com.google.gwt.maps.client.impl.InfoWindowOptionsImpl;
 import com.google.gwt.maps.client.impl.JsUtil;
@@ -150,8 +149,6 @@ public class InfoWindowContent {
 
   private final JavaScriptObject content;
 
-  private List<InfoWindowListener> infoWindowListeners = null;
-
   private final JavaScriptObject options = InfoWindowOptionsImpl.impl.construct();
 
   private final int type;
@@ -216,38 +213,6 @@ public class InfoWindowContent {
   private InfoWindowContent(int type) {
     this.content = null;
     this.type = type;
-  }
-
-  /**
-   * Add an InfoWindowListener that will get called back when the info window
-   * pops open or closed. Multiple listeners can be added.
-   * 
-   * @param l listener to add.
-   * 
-   * @deprecated see {@link InfoWindow#addInfoWindowCloseClickHandler(com.google.gwt.maps.client.event.InfoWindowCloseClickHandler)},
-   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler)},
-   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler)}, 
-   * {@link InfoWindow#addInfoWindowRestoreClickHandler(com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler)} and
-   * {@link InfoWindow#addInfoWindowRestoreEndHandler(com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler)}
-   */
-  @Deprecated
-  public void addInfoWindowListener(InfoWindowListener l) {
-    if (infoWindowListeners == null) {
-      infoWindowListeners = new ArrayList<InfoWindowListener>();
-    }
-    infoWindowListeners.add(l);
-  }
-
-  /**
-   * Remove any previously added InfoWindowListeners from this content object.
-   * This will only affect the object before the content is used to create a
-   * particular InfoWindow.
-   * 
-   * @deprecated
-   */
-  @Deprecated
-  public void removeInfoWindowListeners() {
-    infoWindowListeners = null;
   }
 
   /**
@@ -316,11 +281,6 @@ public class InfoWindowContent {
     return content;
   }
 
-  @Deprecated
-  protected List<InfoWindowListener> getInfoWindowListeners() {
-    return infoWindowListeners;
-  }
-
   protected JavaScriptObject getOptions() {
     return options;
   }
@@ -334,8 +294,11 @@ public class InfoWindowContent {
   }
 
   /**
-   * Returns the widget passed to {@link InfoWindowContent#setMaxContent(String)}.
-   * @return the widget passed to {@link InfoWindowContent#setMaxContent(String)}.
+   * Returns the widget passed to
+   * {@link InfoWindowContent#setMaxContent(String)}.
+   * 
+   * @return the widget passed to
+   *         {@link InfoWindowContent#setMaxContent(String)}.
    */
   Widget getMaxContent() {
     return windowMaximizedContent;

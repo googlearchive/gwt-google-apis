@@ -17,24 +17,19 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.MarkerClickHandler;
-import com.google.gwt.maps.client.event.MarkerClickListener;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
 import com.google.gwt.maps.client.event.MarkerDragEndHandler;
 import com.google.gwt.maps.client.event.MarkerDragHandler;
-import com.google.gwt.maps.client.event.MarkerDragListener;
 import com.google.gwt.maps.client.event.MarkerDragStartHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowBeforeCloseHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MarkerMouseDownHandler;
-import com.google.gwt.maps.client.event.MarkerMouseListener;
 import com.google.gwt.maps.client.event.MarkerMouseOutHandler;
 import com.google.gwt.maps.client.event.MarkerMouseOverHandler;
 import com.google.gwt.maps.client.event.MarkerMouseUpHandler;
 import com.google.gwt.maps.client.event.MarkerRemoveHandler;
 import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler;
-import com.google.gwt.maps.client.event.RemoveListener;
-import com.google.gwt.maps.client.event.VisibilityListener;
 import com.google.gwt.maps.client.event.MarkerClickHandler.MarkerClickEvent;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler.MarkerDoubleClickEvent;
 import com.google.gwt.maps.client.event.MarkerDragEndHandler.MarkerDragEndEvent;
@@ -50,9 +45,7 @@ import com.google.gwt.maps.client.event.MarkerMouseUpHandler.MarkerMouseUpEvent;
 import com.google.gwt.maps.client.event.MarkerRemoveHandler.MarkerRemoveEvent;
 import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler.MarkerVisibilityChangedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.impl.EventImpl;
 import com.google.gwt.maps.client.impl.HandlerCollection;
-import com.google.gwt.maps.client.impl.ListenerCollection;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MarkerImpl;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
@@ -86,15 +79,11 @@ public final class Marker extends ConcreteOverlay {
     }
   };
 
-  private static final EventImpl EVENT_IMPL = EventImpl.impl;
-
   static Marker createPeer(JavaScriptObject jsoPeer) {
     return new Marker(jsoPeer);
   }
 
   // Keep track of JSO's registered for each instance of addXXXListener()
-  private ListenerCollection<MarkerClickListener> clickListeners;
-  private ListenerCollection<MarkerDragListener> dragListeners;
   private HandlerCollection<MarkerClickHandler> markerClickHandlers;
   private HandlerCollection<MarkerDoubleClickHandler> markerDoubleClickHandlers;
   private HandlerCollection<MarkerDragEndHandler> markerDragEndHandlers;
@@ -109,9 +98,6 @@ public final class Marker extends ConcreteOverlay {
   private HandlerCollection<MarkerMouseUpHandler> markerMouseUpHandlers;
   private HandlerCollection<MarkerRemoveHandler> markerRemoveHandlers;
   private HandlerCollection<MarkerVisibilityChangedHandler> markerVisibilityChangedHandlers;
-  private ListenerCollection<MarkerMouseListener> mouseListeners;
-  private ListenerCollection<RemoveListener> removeListeners;
-  private ListenerCollection<VisibilityListener> visibilityListeners;
 
   /**
    * Create a new marker at the specified point using default options. Add the
@@ -161,37 +147,6 @@ public final class Marker extends ConcreteOverlay {
         handler.onClick(e);
       }
     });
-  }
-
-  /**
-   * Associate a click event listener with this Marker.
-   * 
-   * @param listener a click listener
-   * 
-   * @deprecated see {@link Marker#addMarkerClickHandler(MarkerClickHandler)},
-   *             and
-   *             {@link Marker#addMarkerDoubleClickHandler(MarkerDoubleClickHandler)}
-   */
-  @Deprecated
-  public void addMarkerClickListener(final MarkerClickListener listener) {
-    if (clickListeners == null) {
-      clickListeners = new ListenerCollection<MarkerClickListener>();
-    }
-    JavaScriptObject[] clickEventHandles = {
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.CLICK, new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onClick(Marker.this);
-          }
-        }),
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DBLCLICK,
-            new VoidCallback() {
-              @Override
-              public void callback() {
-                listener.onDoubleClick(Marker.this);
-              }
-            })};
-    clickListeners.addListener(listener, clickEventHandles);
   }
 
   /**
@@ -247,44 +202,6 @@ public final class Marker extends ConcreteOverlay {
         handler.onDrag(e);
       }
     });
-  }
-
-  /**
-   * Associate a drag listener with this Marker.
-   * 
-   * @param listener a drag event listener
-   * 
-   * @deprecated see {@link Marker#addMarkerDragHandler(MarkerDragHandler)},
-   *             {@link Marker#addMarkerDragStartHandler(MarkerDragStartHandler)},
-   *             {@link Marker#addMarkerDragEndHandler(MarkerDragEndHandler)},
-   */
-  @Deprecated
-  public void addMarkerDragListener(final MarkerDragListener listener) {
-    if (dragListeners == null) {
-      dragListeners = new ListenerCollection<MarkerDragListener>();
-    }
-    JavaScriptObject[] dragEventHandles = {
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAGSTART,
-            new VoidCallback() {
-              @Override
-              public void callback() {
-                listener.onDragStart(Marker.this);
-              }
-            }),
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAG, new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onDrag(Marker.this);
-          }
-        }),
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.DRAGEND,
-            new VoidCallback() {
-              @Override
-              public void callback() {
-                listener.onDragEnd(Marker.this);
-              }
-            })};
-    dragListeners.addListener(listener, dragEventHandles);
   }
 
   /**
@@ -386,55 +303,6 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * Associate a mouse listener with this Marker.
-   * 
-   * @param listener a mouse event listener
-   * 
-   * @deprecated see
-   *             {@link Marker#addMarkerMouseDownHandler(MarkerMouseDownHandler)},
-   *             {@link Marker#addMarkerMouseUpHandler(MarkerMouseUpHandler)},
-   *             {@link Marker#addMarkerMouseOverHandler(MarkerMouseOverHandler)}
-   *             and
-   *             {@link Marker#addMarkerMouseOutHandler(MarkerMouseOutHandler)}
-   */
-  @Deprecated
-  public void addMarkerMouseListener(final MarkerMouseListener listener) {
-    if (mouseListeners == null) {
-      mouseListeners = new ListenerCollection<MarkerMouseListener>();
-    }
-    JavaScriptObject mouseEventHandles[] = {
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEDOWN,
-            new VoidCallback() {
-              @Override
-              public void callback() {
-                listener.onMouseDown(Marker.this);
-              }
-            }),
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEUP,
-            new VoidCallback() {
-              @Override
-              public void callback() {
-                listener.onMouseUp(Marker.this);
-              }
-            }),
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEOVER,
-            new VoidCallback() {
-              @Override
-              public void callback() {
-                listener.onMouseOver(Marker.this);
-              }
-            }),
-        EVENT_IMPL.addListenerVoid(jsoPeer, MapEvent.MOUSEOUT,
-            new VoidCallback() {
-              @Override
-              public void callback() {
-                listener.onMouseOut(Marker.this);
-              }
-            })};
-    mouseListeners.addListener(listener, mouseEventHandles);
-  }
-
-  /**
    * This event is fired when the mouse leaves the area of the marker icon.
    * 
    * @param handler the handler to call when this event fires.
@@ -529,53 +397,6 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * Associate a remove listener with this Marker.
-   * 
-   * @param listener a remove event listener
-   * 
-   * @deprecated see {@link Marker#addMarkerRemoveHandler(MarkerRemoveHandler)}
-   */
-  @Deprecated
-  public void addRemoveListener(final RemoveListener listener) {
-
-    if (removeListeners == null) {
-      removeListeners = new ListenerCollection<RemoveListener>();
-    }
-
-    JavaScriptObject removeEventHandles[] = {EVENT_IMPL.addListenerVoid(
-        jsoPeer, MapEvent.REMOVE, new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onRemove(Marker.this);
-          }
-        })};
-    removeListeners.addListener(listener, removeEventHandles);
-  }
-
-  /**
-   * Associate the specified listener with this Marker.
-   * 
-   * @param listener a visibility event listener
-   * 
-   * @deprecated see
-   *             {@link Marker#addMarkerVisibilityChangedHandler(MarkerVisibilityChangedHandler)}
-   */
-  @Deprecated
-  public void addVisibilityListener(final VisibilityListener listener) {
-    if (visibilityListeners == null) {
-      visibilityListeners = new ListenerCollection<VisibilityListener>();
-    }
-    JavaScriptObject visibilityEventHandles[] = {EVENT_IMPL.addListener(
-        jsoPeer, MapEvent.VISIBILITYCHANGED, new BooleanCallback() {
-          @Override
-          public void callback(boolean isVisible) {
-            listener.onVisibilityChanged(Marker.this, isVisible);
-          }
-        })};
-    visibilityListeners.addListener(listener, visibilityEventHandles);
-  }
-
-  /**
    * @return the current icon used for this Marker.
    */
   public Icon getIcon() {
@@ -634,20 +455,6 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * Remove the specified click listener registered with this marker.
-   * 
-   * @param listener click listener events to remove
-   * 
-   * @deprecated 
-   */
-  @Deprecated
-  public void removeMarkerClickListener(MarkerClickListener listener) {
-    if (clickListeners != null) {
-      clickListeners.removeListener(listener);
-    }
-  }
-
-  /**
    * Removes a single handler of this map previously added with
    * {@link Marker#addMarkerDoubleClickHandler(MarkerDoubleClickHandler)}.
    * 
@@ -680,19 +487,6 @@ public final class Marker extends ConcreteOverlay {
   public void removeMarkerDragHandler(MarkerDragHandler handler) {
     if (markerDragHandlers != null) {
       markerDragHandlers.removeHandler(handler);
-    }
-  }
-
-  /**
-   * Remove the specified drag listener registered with this marker.
-   * 
-   * @param listener drag listener events to remove
-   * @deprecated
-   */
-  @Deprecated
-  public void removeMarkerDragListener(MarkerDragListener listener) {
-    if (dragListeners != null) {
-      dragListeners.removeListener(listener);
     }
   }
 
@@ -760,20 +554,6 @@ public final class Marker extends ConcreteOverlay {
   }
 
   /**
-   * Remove a single mouse listener registered with this marker.
-   * 
-   * @param listener mouse listener to remove
-   * 
-   * @deprecated
-   */
-  @Deprecated
-  public void removeMarkerMouseListener(MarkerMouseListener listener) {
-    if (mouseListeners != null) {
-      mouseListeners.removeListener(listener);
-    }
-  }
-
-  /**
    * Removes a single handler of this map previously added with
    * {@link Marker#addMarkerMouseOutHandler(MarkerMouseOutHandler)}.
    * 
@@ -831,34 +611,6 @@ public final class Marker extends ConcreteOverlay {
       MarkerVisibilityChangedHandler handler) {
     if (markerVisibilityChangedHandlers != null) {
       markerVisibilityChangedHandlers.removeHandler(handler);
-    }
-  }
-
-  /**
-   * Remove a single remove listener registered with this marker.
-   * 
-   * @param listener the remove listener to remove
-   * 
-   * @deprecated
-   */
-  @Deprecated
-  public void removeRemoveListener(RemoveListener listener) {
-    if (removeListeners != null) {
-      removeListeners.clearListeners();
-    }
-  }
-
-  /**
-   * Remove a single visibility listener registered with this marker.
-   * 
-   * @param listener visibility listener to remove
-   * 
-   * @deprecated
-   */
-  @Deprecated
-  public void removeVisibilityListener(VisibilityListener listener) {
-    if (visibilityListeners != null) {
-      visibilityListeners.removeListener(listener);
     }
   }
 
