@@ -30,7 +30,7 @@ public abstract class GeoXmlOverlayImpl extends OverlayImpl {
 
   @SuppressWarnings("hiding")
   public static final GeoXmlOverlayImpl impl = GWT.create(GeoXmlOverlayImpl.class);
-  
+
   @Constructor("$wnd.GGeoXml")
   public abstract JavaScriptObject constructGeoXmlOverlay(String url);
 
@@ -41,23 +41,23 @@ public abstract class GeoXmlOverlayImpl extends OverlayImpl {
   public abstract LatLngBounds getDefaultBounds(JavaScriptObject jsoPeer);
 
   public abstract LatLng getDefaultCenter(JavaScriptObject jsoPeer);
-  
+
   public abstract LatLng getDefaultSpan(JavaScriptObject jsoPeer);
-  
+
   public abstract TileLayerOverlay getTileLayerOverlay(JavaScriptObject jsoPeer);
-  
-  public abstract void gotoDefaultViewport(JavaScriptObject jsoPeer, 
+
+  public abstract void gotoDefaultViewport(JavaScriptObject jsoPeer,
       JavaScriptObject mapWidget);
 
   public abstract boolean hasLoaded(JavaScriptObject jsoPeer);
-  
+
   public abstract void hide(JavaScriptObject jsoPeer);
-  
+
   public abstract boolean isHidden(JavaScriptObject jsoPeer);
-  
-  public abstract boolean loadedCorrectly(JavaScriptObject jsoPeer);
-  
+
+  public abstract Boolean loadedCorrectly(JavaScriptObject jsoPeer);
+
   public abstract void show(JavaScriptObject jsoPeer);
-  
+
   public abstract boolean supportsHide(JavaScriptObject jsoPeer);
 }

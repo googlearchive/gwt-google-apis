@@ -17,7 +17,6 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
-import com.google.gwt.maps.client.event.InfoWindowListener;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
@@ -32,7 +31,6 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.InfoWindowImpl;
-import com.google.gwt.maps.client.impl.InfoWindowOptionsImpl;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MapImpl;
@@ -44,8 +42,6 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -507,10 +503,6 @@ public final class InfoWindow {
     for (int i = 0; i < contentWidgets.size(); i++) {
       virtualPanel.beginAttach(contentWidgets.get(i));
     }
-    List<InfoWindowListener> listeners = content.getInfoWindowListeners();
-    if (listeners != null) {
-      initEventCallbacks(content, listeners);
-    }
   }
 
   private void finishAttach(InfoWindowContent content) {
@@ -527,56 +519,6 @@ public final class InfoWindow {
         }        
       }
     });
-  }
-
-  /**
-   * This method implements a chain of listeners for the InfoWindow object
-   * instead of just a single callback as provided by the native JavaScript Maps
-   * API. This was done to make the GWT API more intuitive to Java programmers. 
-   * 
-   * @deprecated
-   */
-  @Deprecated
-  private void initEventCallbacks(InfoWindowContent content,
-      List<InfoWindowListener> listeners) {
-    final List<InfoWindowListener> listenerList = new ArrayList<InfoWindowListener>(
-        listeners);
-
-    /*
-     * TODO(zundel): The maps API has apparently deprecated the onopenfn and
-     * onclosefn properties. There is an infowindowopen, infowidnowbeforeclose,
-     * infowindowclose on the map and closeclick listener on the InfoWindow that
-     * could be used.
-     */
-    
-    // Initialize internal callbacks in InfoWindowOptions that will kick off
-    // the list of InfoWindowListeners stored in this object.
-    InfoWindowOptionsImpl.impl.setOnCloseFn(content.getOptions(),
-        new VoidCallback() {
-          @Override
-          public void callback() {
-            Iterator<InfoWindowListener> iter = listenerList.iterator();
-            InfoWindowListener cb;
-
-            while (iter.hasNext()) {
-              cb = iter.next();
-              cb.onInfoWindowClosed(map);
-            }
-          }
-        });
-    InfoWindowOptionsImpl.impl.setOnOpenFn(content.getOptions(),
-        new VoidCallback() {
-          @Override
-          public void callback() {
-            Iterator<InfoWindowListener> iter = listenerList.iterator();
-            InfoWindowListener cb;
-
-            while (iter.hasNext()) {
-              cb = iter.next();
-              cb.onInfoWindowOpened(map);
-            }
-          }
-        });
   }
 
   /**

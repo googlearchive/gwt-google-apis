@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.event.PolylineClickHandler;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler;
-import com.google.gwt.maps.client.event.RemoveListener;
 import com.google.gwt.maps.client.event.PolylineCancelLineHandler.PolylineCancelLineEvent;
 import com.google.gwt.maps.client.event.PolylineClickHandler.PolylineClickEvent;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler.PolylineEndLineEvent;
@@ -29,10 +28,8 @@ import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler.PolylineLineU
 import com.google.gwt.maps.client.event.PolylineRemoveHandler.PolylineRemoveEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
-import com.google.gwt.maps.client.impl.EventImpl;
 import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.JsUtil;
-import com.google.gwt.maps.client.impl.ListenerCollection;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolylineFactoryImpl;
 import com.google.gwt.maps.client.impl.PolylineImpl;
@@ -88,8 +85,6 @@ public final class Polyline extends ConcreteOverlay {
   private HandlerCollection<PolylineEndLineHandler> polylineEndLineHandlers;
   private HandlerCollection<PolylineLineUpdatedHandler> polylineLineUpdatedHandlers;
   private HandlerCollection<PolylineRemoveHandler> polylineRemoveHandlers;
-
-  private ListenerCollection<RemoveListener> removeListeners;
 
   public Polyline(LatLng[] points) {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points)));
@@ -204,27 +199,6 @@ public final class Polyline extends ConcreteOverlay {
         handler.onRemove(e);
       }
     });
-  }
-
-  public void addRemoveListener(final RemoveListener listener) {
-    if (removeListeners == null) {
-      removeListeners = new ListenerCollection<RemoveListener>();
-    }
-
-    JavaScriptObject removeEventHandles[] = {EventImpl.impl.addListenerVoid(
-        super.jsoPeer, MapEvent.REMOVE, new VoidCallback() {
-          @Override
-          public void callback() {
-            listener.onRemove(Polyline.this);
-          }
-        })};
-    removeListeners.addListener(listener, removeEventHandles);
-  }
-
-  public void clearRemoveListeners() {
-    if (removeListeners != null) {
-      removeListeners.clearListeners();
-    }
   }
 
   /**
@@ -358,19 +332,14 @@ public final class Polyline extends ConcreteOverlay {
     }
   }
 
-  public void removeRemoveListener(RemoveListener listener) {
-    if (removeListeners != null) {
-      removeListeners.removeListener(listener);
-    }
-  }
-
   /**
    * Allows a user to construct (or modify) a GPolyline object by clicking on
    * additional points on the map. The {@link Polyline} must already be added to
-   * the map via {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)},
-   * even if the polyline is initially unpopulated and contains no vertices.
-   * Each click adds an additional vertex to the polyline chain, and drawing may
-   * be terminated through either a double-click or clicking again on the last
+   * the map via
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}, even if
+   * the polyline is initially unpopulated and contains no vertices. Each click
+   * adds an additional vertex to the polyline chain, and drawing may be
+   * terminated through either a double-click or clicking again on the last
    * point added, at which point an {@link PolylineEndLineEvent} event will be
    * triggered if the polyline was successfully completed; otherwise, a
    * {@link PolylineCancelLineEvent} event will be triggered, but the polyline
