@@ -1,0 +1,30 @@
+#summary A list of tips and lessons learned for creating JavaScript API wrappers for GWT
+
+= Designing JavaScript API Wrappers for GWT =
+
+When creating a wrapper for an existing JavaScript API using the Google Web Toolkit, there are a number of approaches available.  This page will point out some common approaches and some lessons learned over the course of creating wrappers for several APIs.
+
+== Tools for integrating JavaScript with GWT ==
+
+  * !JavaScript Native Interface (JSNI) (_TBD_ link to GWT Dev Guide)
+  * !JavaScript overlays (_TBD_ link to GWT Dev Guide)
+  * [http://code.google.com/p/gwt-api-interop JavaScript InterOp library (JSIO)]
+  * GWT Linker extensions (_TBD_ link to GWT Dev Guide)
+  * GWT Generators (_TBD_ link to GWT Dev Guide)
+  * Script Injection (_TBD_ link to GWT Dev Guide)
+
+== Common Coding Issues ==
+
+  * Getting and setting JavaScript Property values
+  * Passing Arrays back and forth between JavaScript library
+  * Exposing Constant values
+  * Creating a class intended for end developers to subclass and override implementation.
+  * Creating a Java class hierarchy out of a JavaScript class hierarchy.
+  * Passing a callback function to a !JavaScript method.
+
+== Common Design Problems ==
+
+  * Deciding when to omit a feature.
+  * Deciding when to create extra types.
+  * Planning your wrappers for future JS API growth.
+  * Providing access to !JavaScriptObject instances for end developer flexibility.
