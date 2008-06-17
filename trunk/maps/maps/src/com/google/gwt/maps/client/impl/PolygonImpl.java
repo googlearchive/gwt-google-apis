@@ -39,7 +39,7 @@ public interface PolygonImpl extends JSFlyweightWrapper {
 
   LatLng getVertex(JavaScriptObject jsoPeer, int index);
 
-  int getVertextCount(JavaScriptObject jsoPeer);
+  int getVertexCount(JavaScriptObject jsoPeer);
   
   void hide(JavaScriptObject jsoPeer);
   
