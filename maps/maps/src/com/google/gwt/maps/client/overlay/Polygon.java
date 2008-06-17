@@ -57,10 +57,23 @@ public final class Polygon extends ConcreteOverlay {
   private HandlerCollection<PolygonRemoveHandler> polygonRemoveHandlers;
   private ListenerCollection<RemoveListener> removeListeners;
 
+  /**
+   * Create a Polygon from an array of points.
+   * @param points the points to construct the polygon.
+   */
   public Polygon(LatLng[] points) {
     super(PolygonImpl.impl.construct(JsUtil.toJsList(points)));
   }
 
+  /**
+   * Create a polygon from an array of points, specifying optional parameters.
+   * @param points the points to construct the polygon.
+   * @param strokeColor The line color, a string that contains the color in hexadecimal numeric HTML style, i.e. #RRGGBB. 
+   * @param strokeWeight The width of the line in pixels.
+   * @param strokeOpacity The opacity of the line - a value between 0.0 and 1.0.
+   * @param fillColor The fill color, a string that contains the color in hexadecimal numeric HTML style, i.e. #RRGGBB. 
+   * @param fillOpacity The opacity of the fill - a value between 0.0 and 1.0.
+   */
   public Polygon(LatLng[] points, String strokeColor, int strokeWeight,
       double strokeOpacity, String fillColor, double fillOpacity) {
     super(PolygonImpl.impl.construct(JsUtil.toJsList(points), strokeColor,
@@ -129,12 +142,21 @@ public final class Polygon extends ConcreteOverlay {
     }
   }
 
+  /**
+   * Returns the position of the specified vertex in the polygon.
+   * @param index the vertex to return.
+   * @return the position of the specified vertex in the polygon.
+   */
   public LatLng getVertex(int index) {
     return PolygonImpl.impl.getVertex(jsoPeer, index);
   }
 
-  public int getVertextCount() {
-    return PolygonImpl.impl.getVertextCount(jsoPeer);
+  /**
+   * Returns the number of verticies in the polygon.
+   * @return the number of verticies in the polygon.
+   */
+  public int getVertexCount() {
+    return PolygonImpl.impl.getVertexCount(jsoPeer);
   }
 
   /**
