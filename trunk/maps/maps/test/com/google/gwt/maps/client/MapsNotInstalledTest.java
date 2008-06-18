@@ -28,6 +28,13 @@ public class MapsNotInstalledTest extends GWTTestCase {
     return "com.google.gwt.maps.GoogleMapsNotInstalledTest";
   }
 
+  /**
+   * Runs before every test method.
+   */
+   public void gwtSetUp() {
+     TestUtilities.cleanDom();
+   }
+
   public void testAssertLoaded() {
     try {
       Maps.assertLoaded();

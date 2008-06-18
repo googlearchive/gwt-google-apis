@@ -67,6 +67,14 @@ public class CopyrightEventTest extends GWTTestCase {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
+  /**
+   * Runs before every test method.
+   */
+   @Override
+  public void gwtSetUp() {
+     TestUtilities.cleanDom();
+   }
+
   public void testCopyrightCollectionEvent() {
     LatLngBounds bounds = new LatLngBounds(new LatLng(-90.0, -180.0),
         new LatLng(90.0, 180.0));
