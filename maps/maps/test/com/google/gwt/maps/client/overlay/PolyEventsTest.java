@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.maps.client.event.PolylineCancelLineHandler;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler;
@@ -24,12 +25,6 @@ import com.google.gwt.maps.client.event.PolylineCancelLineHandler.PolylineCancel
 import com.google.gwt.maps.client.event.PolylineEndLineHandler.PolylineEndLineEvent;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler.PolylineLineUpdatedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.RootPanel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Tests the events attached to a Polyline and Polygon.
@@ -38,33 +33,16 @@ public class PolyEventsTest extends GWTTestCase {
   // Length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 5000;
 
-  private static native String getNodeName(Element elem) /*-{
-    return (elem.nodeName || "").toLowerCase();
-  }-*/;
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
  /**
-  * Removes all elements in the body, except scripts and iframes.
+  * Runs before every test method.
   */
   public void gwtSetUp() {
-    Element bodyElem = RootPanel.getBodyElement();
-
-    List<Element> toRemove = new ArrayList<Element>();
-    for (int i = 0, n = DOM.getChildCount(bodyElem); i < n; ++i) {
-      Element elem = DOM.getChild(bodyElem, i);
-      String nodeName = getNodeName(elem);
-      if (!"script".equals(nodeName) && !"iframe".equals(nodeName)) {
-        toRemove.add(elem);
-      }
-    }
-
-    for (int i = 0, n = toRemove.size(); i < n; ++i) {
-      DOM.removeChild(bodyElem, toRemove.get(i));
-    }
+    TestUtilities.cleanDom();
   }
 
   /**

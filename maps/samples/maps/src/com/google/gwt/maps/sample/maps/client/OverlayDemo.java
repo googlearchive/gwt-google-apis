@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.sample.maps.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
@@ -156,6 +157,8 @@ public class OverlayDemo extends MapsDemo {
     for (int i = 0; i < NUM_POINTS; i++) {
       points[i] = new LatLng(southWest.getLatitude() + latSpan * Math.random(),
           southWest.getLongitude() + lngSpan * Math.random());
+      GWT.log("points[" + i + "] = " + points[i] + " z-index = "
+          + Marker.getZIndex(points[i].getLatitude()), null);
     }
 
     OverlayDemos selected = OverlayDemos.values()[actionListBox.getSelectedIndex()];

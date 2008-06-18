@@ -87,6 +87,13 @@ public class MapWidgetEventsTest extends GWTTestCase {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
+  /**
+   * Runs before every test method.
+   */
+   public void gwtSetUp() {
+     TestUtilities.cleanDom();
+   }
+
   public void testInfoWindowBeforeCloseEvent() {
     final MapWidget m = new MapWidget();
     m.addInfoWindowBeforeCloseHandler(new MapInfoWindowBeforeCloseHandler() {

@@ -24,8 +24,9 @@ import com.google.gwt.maps.client.MapsNotInstalledTest;
 import com.google.gwt.maps.client.StatusCodesTest;
 import com.google.gwt.maps.client.geocode.GeocodeTest;
 import com.google.gwt.maps.client.overlay.MarkerEventsTest;
-import com.google.gwt.maps.client.overlay.PolyEventsTest;
 import com.google.gwt.maps.client.overlay.MarkerTest;
+import com.google.gwt.maps.client.overlay.OverlayTest;
+import com.google.gwt.maps.client.overlay.PolyEventsTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -43,6 +44,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
     suite.addTestSuite(MarkerTest.class);
+    suite.addTestSuite(OverlayTest.class);
     suite.addTestSuite(CopyrightEventTest.class);
     suite.addTestSuite(StatusCodesTest.class);
     suite.addTestSuite(PolyEventsTest.class);

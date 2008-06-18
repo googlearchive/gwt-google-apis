@@ -49,6 +49,14 @@ public class InfoWindowEventsTest extends GWTTestCase {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
+
+  /**
+   * Runs before every test method.
+   */
+   public void gwtSetUp() {
+     TestUtilities.cleanDom();
+   }
+
   /*
    * Design note: the "closeclick" event doesn't fire through the API. It is for
    * detecting clicks on the close button.

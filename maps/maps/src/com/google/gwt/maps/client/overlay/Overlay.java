@@ -69,10 +69,10 @@ public abstract class Overlay {
    * such that overlays further south are on top of overlays further north, thus
    * creating the 3D appearance of marker overlays.
    * 
-   * @param latitutde
+   * @param latitude the latitude to retrieve the marker z-index for.
    * @return a CSS z-index value
    */
-  public static native int getZIndex(double latitutde) /*-{
+  public static native int getZIndex(double latitude) /*-{
     return $wnd.GOverlay.getZIndex(latitude);
   }-*/;
 
