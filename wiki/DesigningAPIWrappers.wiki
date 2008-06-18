@@ -1,26 +1,70 @@
 #summary A list of tips and lessons learned for creating JavaScript API wrappers for GWT
 
-= Designing JavaScript API Wrappers for GWT =
+= Designing !JavaScript API Wrappers for GWT =
 
 When creating a wrapper for an existing JavaScript API using the Google Web Toolkit, there are a number of approaches available.  This page will point out some common approaches and some lessons learned over the course of creating wrappers for several APIs.
 
-== Tools for integrating JavaScript with GWT ==
+== Tools for integrating !JavaScript with GWT ==
 
   * !JavaScript Native Interface (JSNI) (_TBD_ link to GWT Dev Guide)
-  * !JavaScript overlays (_TBD_ link to GWT Dev Guide)
+
+   JSNI is the most basic way to interact with JavaScript.  It is covered in the Developer's Guide. It is commonly used by many developers.
+
+  * !JavaScriptObject overlays (_TBD_ link to GWT Dev Guide)
+
+   When a JavaScript object is returned from JavaScript into Java, it is declared to be of type !JavaScriptObject.  In GWT 1.5, the compiler now allows you to subclass JavaScriptObject (with some restrictions) and access the object contents using JSNI.  The `this` target is set to be the JavaScriptObject.
+
   * [http://code.google.com/p/gwt-api-interop JavaScript InterOp library (JSIO)]
+
+   The JSIO library is an optional library that provides facilities for different kinds of JavaScript integration. It provides an easy way to construct new JavaScript objects (@Constructor and @Global), create property accessors(!@BeanProperties), set callbacks (!JSFunction), export Java functions onto a JavaScript object (@Exported) and passing arrays back and forth between Java and !JavaScript(JSList).
+
   * GWT Linker extensions (_TBD_ link to GWT Dev Guide)
+
+   Another feature new to GWT 1.5 is the Linker.  This gives application writers control over the way files are created in the linking stage of the GWT output.  In the GWT Gadgets API, for example, the linker is used to create a Gadgets specification file.
+
   * GWT Generators (_TBD_ link to GWT Dev Guide)
-  * Script Injection (_TBD_ link to GWT Dev Guide)
+
+   Generators are used to simplify repetitive tasks.  JSIO uses generators to automatically create temporary files that implement JavaScript wrapper functions in JSNI.
+
+Each tool has its own tradeoffs:
+
+  * JSNI is the most basic method and gives you the most flexibility.  Using JSNI frequently can be tedious and error prone, as you are including more and more JavaScript in the code that will not be subjected to compile time checks.
+  * !JavaScript overlays are very useful when you want to present an API to the user that closely models the JavaScript API.  The compiler can also be very efficient with the code generated from an overlay.
+  * The JSIO library has a number of powerful tools for integrating with JavaScript libraries.  It is used in the [http://code.google.com/p/gwt-google-apis/ GWT Google APIs] binding for [http://code.google.com/apis/mpas Google Maps] and [http://code.google.com/apis/ajax AJAX Search].  One downside is that using JSIO involves importing an extra library into your build environment.  Also keep in mind that the JSIO library is somewhat experimental, and not commonly used by GWT developers.   Try to use !JavaScript overlays where possible.
+  * Writing Generators and Linkers are advanced usage of the GWT library.  Prepare to get dirty reading through the GWT core code learning how to use GWT internals such as the TypeOracle and Artifacts.
 
 == Common Coding Issues ==
 
-  * Getting and setting JavaScript Property values
+  * Accessing JavaScript properties
   * Passing Arrays back and forth between JavaScript library
   * Exposing Constant values
   * Creating a class intended for end developers to subclass and override implementation.
   * Creating a Java class hierarchy out of a JavaScript class hierarchy.
   * Passing a callback function to a !JavaScript method.
+
+=== Accessing JavaScript properties === 
+
+_TBD_
+
+=== Passing Arrays back and forth between JavaScript library ===
+
+_TBD_
+
+=== Exposing Constant values ===
+
+_TBD_
+
+=== Creating a class intended for end developers to subclass and override implementation ===
+
+_TBD_
+
+=== Creating a Java class hierarchy out of a JavaScript class hierarchy ===
+
+_TBD_
+
+=== Passing a callback function to a !JavaScript method ===
+
+_TBD_
 
 == Common Design Problems ==
 
@@ -28,3 +72,5 @@ When creating a wrapper for an existing JavaScript API using the Google Web Tool
   * Deciding when to create extra types.
   * Planning your wrappers for future JS API growth.
   * Providing access to !JavaScriptObject instances for end developer flexibility.
+  * How to write Unit Tests
+  * Hiding the Java/JavaScript integration mechanism.
