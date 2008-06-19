@@ -64,6 +64,11 @@ public class HelloMaps implements EntryPoint, HistoryListener {
        return;
      }
      
+     if (!Maps.isBrowserCompatible()) {
+       Window.alert("The Maps API is not compatible with this browser.");
+       return;
+     }
+     
     // Load all the MapsDemos.
     loadMapsDemos();
 

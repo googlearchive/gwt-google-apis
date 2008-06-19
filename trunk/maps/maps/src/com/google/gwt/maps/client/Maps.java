@@ -33,6 +33,17 @@ public class Maps {
   }
 
   /**
+   * Returns <code>true</code> if the current browser supports the maps API
+   * library.
+   * 
+   * @return <code>true</code> if the current browser supports the maps API
+   *         library.
+   */
+  public static native boolean isBrowserCompatible() /*-{
+    return $wnd.GBrowserIsCompatible();
+  }-*/;
+
+  /**
    * Check for the availability of the Maps API. This means that the Maps API
    * script is loaded and has successfully initialized.
    * 
