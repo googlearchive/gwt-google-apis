@@ -1,0 +1,8 @@
+#summary Class Reference for the APIs
+
+= Class Reference =
+
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/index.html AJAX Search API]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/index.html Gadgets API]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gears/index.html Gears API]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/maps/index.html Maps API]
