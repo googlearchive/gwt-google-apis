@@ -36,6 +36,10 @@ public class MapWidgetTest extends GWTTestCase {
      TestUtilities.cleanDom();
    }
 
+  public void testIsBrowserCompatible() {
+    assertTrue("The MAPS api is not compatible with this browser.", Maps.isBrowserCompatible());
+  }
+  
   public void testIsLoaded() {
     assertTrue("The MAPS api is not properly loaded.", Maps.isLoaded());
   }
