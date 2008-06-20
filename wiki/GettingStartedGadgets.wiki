@@ -4,6 +4,8 @@
 
 This section will get you started writing your first Google Gadget.  But before you start, make sure you are familiar with [http://www.google.com/ig iGoogle] and [http://code.google.com/apis/gadgets/ the Gadgets developer site].
 
+The Google Apis for GWT Gadget support simplifies gadget development by automatically generating a [http://code.google.com/apis/gadgets/docs/legacy/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project.  After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish] your gadget.
+
 == Looking at a Sample Gadget ==
 
 Look at the sample program _Hello Gadgets_ that is shipped with the `gwt-gadgets` distribution
@@ -15,7 +17,7 @@ There are some differences you will notice from a standard GWT project.
   # There is no class that implements the [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/client/EntryPoint.html EntryPoint] interface.
   # The entry point class is a subclass of [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html Gadget].
   # There is an `@ModulePrefs` annotation on the class
-  # Here is a releationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [file:///home/zundel/workspace/gwt-google-apis/trunk/gadgets/build/out/doc/javadoc/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
+  # Here is a relationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [file:///home/zundel/workspace/gwt-google-apis/trunk/gadgets/build/out/doc/javadoc/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
 
 These differences derive from several the fact that a Gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/devguide_landing.html Google Gadget developer's documentation].  To meet this requirement, Gadget support is implemented using a custom [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/ext/Linker.html GWT Linker]. 
 
@@ -79,10 +81,7 @@ Finally, above the class statement, add an annotation to set the gadget title, a
 @ModulePrefs(title = "SimpleGadget", author = "yournamehere", author_email = "yournamehere@gmail.com")
 }}}
 
-[http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides a few initial preferences values.
-
-_TBD_
-
+[http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides attributes to the [http://code.google.com/apis/gadgets/docs/legacy/reference.html#Moduleprefs_Ref  `<ModulePrefs>`] tag in the Gadget Specification.
 
 
 === Specifying Features ===
@@ -99,10 +98,44 @@ If the Gadget requires access to features of the container, it should implement 
 At runtime, all feature setters will be called strictly before [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)]. The order in which the setters are called is undefined.
 
 
-_TBD_ add sample code.
+For example, if you wanted to use the optional feature to set the title dynamically, you would need to inherit the `NeedsSetTitle` interface.
+
+{{{
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+@ModulePrefs(title="Original Title", author="zundel", author_email="zundel@google.com" author = "yournamehere", author_email = "yournamehere@gmail.com)
+public class NeedsSetTitleGadget extends Gadget<UserPreferences> implements
+    NeedsSetTitle {
+  int titleIndex = 0;
+  String[] titles = { "NeedsTitle Example", "Hello World!","Goodbye World!"};
+  SetTitleFeature titleFeature;
+
+  @Override
+  protected void init(UserPreferences preferences) {
+    Button changeTitleButton = new Button("Change Title");
+    changeTitleButton.addClickListener(new ClickListener () {
+
+      public void onClick(Widget sender) {
+        titleFeature.setTitle(titles[titleIndex++ % titles.length]);
+      }
+      
+    });
+   RootPanel.get().add(changeTitleButton);
+  }
+
+  public void initializeFeature(SetTitleFeature feature) {
+    this.titleFeature = feature;
+  }
+}
+}}}
+
+And here is a screenshot of the resulting gadget:
+
+   [http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedGadgets-ChangeTitle.png]
 
 
-=== Specifing Preferences ===
+=== Specifying Preferences ===
 
 The gadget spec allows you to specify user preferences for your gadget.  User preferences allow the gadget container to provide a user interface and storage for parameters used to customize the gadget. 
 
