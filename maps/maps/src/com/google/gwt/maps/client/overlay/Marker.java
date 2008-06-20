@@ -65,7 +65,7 @@ import com.google.gwt.maps.jsio.client.impl.Extractor;
  * the marker. The marker object will fire mouse events and InfoWindow events.
  * 
  */
-public final class Marker extends ConcreteOverlay {
+public class Marker extends ConcreteOverlay {
 
   // TODO: DELETE ME! (needs to function w/o)
   @SuppressWarnings("unused")
