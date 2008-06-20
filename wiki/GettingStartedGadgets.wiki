@@ -104,7 +104,7 @@ For example, if you wanted to use the optional feature to set the title dynamica
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-@ModulePrefs(title="Original Title", author="zundel", author_email="zundel@google.com" author = "yournamehere", author_email = "yournamehere@gmail.com)
+@ModulePrefs(title="Original Title", author = "yournamehere", author_email = "yournamehere@gmail.com")
 public class NeedsSetTitleGadget extends Gadget<UserPreferences> implements
     NeedsSetTitle {
   int titleIndex = 0;
@@ -142,8 +142,88 @@ The gadget spec allows you to specify user preferences for your gadget.  User pr
 In GWT, access to user preferences is provided through a user-defined subtype of the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] interface. Each preference should be defined as a zero-argument method, returning the desired type of [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.Preference.html UserPreferences.Preference Preference]. The Gadget type should be parameterized with the specific [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subtype, which will be provided to the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)] method. 
 
 
-_TBD_ add sample code.
+The following sample code shows how to implement a simple checkbox type of preference.  In this sample, the gadet displays a different menu depending on whether the user checks the _Vegetarian_ checkbox.  First, the custom `UserPreference` subclass:
 
+{{{
+import com.google.gwt.gadgets.client.BooleanPreference;
+import com.google.gwt.gadgets.client.UserPreferences;
+
+public interface MealPreferences extends UserPreferences {
+
+  @PreferenceAttributes(display_name = "Vegetarian", default_value = "false")
+  BooleanPreference noMeat();
+
+}
+}}}
+
+Next, a `Gadget` class that uses the `MealPreferences` class.  The meal choices are displayed in a table - when the user selects a dish, an alert window is opened.
+
+{{{
+import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+@ModulePrefs(title = "MealPreferences Gadget", author = "yournamehere", author_email = "yournamehere@gmail.com")
+public class MealPreferencesGadget extends Gadget<MealPreferences> {
+
+  private String[] meatEntrees = {
+      "steak kabobs", "lamb fricasee", "chicken kiev"};
+  private String[] vegEntrees = {"saag paneer", "baba ganoush", "boca burger"};
+  private String[] dishes;
+
+  @Override
+  protected void init(MealPreferences preferences) {
+    initDishes(preferences);
+
+    // Create a table with a checklist of all available dishes based on the
+    // user's dietary preferences.
+    Panel p = new VerticalPanel();
+    p.setWidth("100%");
+
+    FlexTable ft = new FlexTable();
+
+    int index = 0;
+    for (String dish : dishes) {
+      CheckBox cb = new CheckBox();
+      final String dishCopy = dish;
+      cb.addClickListener(new ClickListener() {
+        public void onClick(Widget sender) {
+          Window.alert("Your order of " + dishCopy + " will be right up.");
+        }
+      });
+      ft.setWidget(index, 0, cb);
+      ft.setHTML(index, 1, dish);
+      index++;
+    }
+    p.add(ft);
+    RootPanel.get().add(p);
+  }
+
+  private void initDishes(MealPreferences preferences) {
+    // Customize the list of dishes to the dining preferences of the user.
+    if (preferences.noMeat().getValue().booleanValue()) {
+      dishes = vegEntrees;
+    } else {
+      dishes = meatEntrees;
+    }
+  }
+}
+}}}
+
+
+Here is a screen shot of the resulting gadget's preferences menu in iGoogle:
+
+   [http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedGadgets-MealPreferences.png]
 
 === Compiling your Gadget ===
 
