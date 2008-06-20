@@ -24,7 +24,7 @@ import com.google.gwt.maps.client.MapsNotInstalledTest;
 import com.google.gwt.maps.client.StatusCodesTest;
 import com.google.gwt.maps.client.geocode.GeocodeTest;
 import com.google.gwt.maps.client.geom.ProjectionTest;
-import com.google.gwt.maps.client.overlay.GeoXmlOverlayTest;
+// import com.google.gwt.maps.client.overlay.GeoXmlOverlayTest;
 import com.google.gwt.maps.client.overlay.MarkerEventsTest;
 import com.google.gwt.maps.client.overlay.MarkerTest;
 import com.google.gwt.maps.client.overlay.OverlayTest;
