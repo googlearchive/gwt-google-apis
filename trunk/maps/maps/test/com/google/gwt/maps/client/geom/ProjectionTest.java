@@ -68,6 +68,32 @@ public class ProjectionTest extends GWTTestCase {
   }
 
   /**
+   * Test calling the MercatorProjection methods.
+   */
+  public void testMercatorProjection() {
+    initTileLayer();
+    MapWidget map = new MapWidget();
+    map.setSize("300px", "300px");
+    Projection projection = new MercatorProjection(20);
+    assertNotNull("new MercatorProjection(20)", projection);
+    MapType mapType = new MapType(new TileLayer[] {tileLayer}, projection,
+        "MyMap");
+    map.addMapType(mapType);
+    RootPanel.get().add(map);
+    map.setZoomLevel(10);
+    map.setCurrentMapType(mapType);
+    
+    // Now try to call some of the MercatorProjection methods directly
+    LatLng lResult = projection.fromPixelToLatLng(new Point(10,10), map.getZoomLevel(), false);
+    assertNotNull("translation from Pixel to LatLng", lResult);
+    Point pResult = projection.fromLatLngToPixel(map.getCenter(), map.getZoomLevel());
+    assertNotNull("translation from LatLng to Pixel", pResult);
+    double dResult = projection.getWrapWidth(map.getZoomLevel());
+    assertTrue("getWrapWidth()", dResult > 0);
+    // Not sure how to test tileCheckRange()
+  }
+
+  /**
    * Create a simple projection and add it to a map.
    */
   public void testProjectionDefault() {
@@ -129,5 +155,4 @@ public class ProjectionTest extends GWTTestCase {
     RootPanel.get().add(map);
     map.setCurrentMapType(mapType);
   }
-
 }
