@@ -19,14 +19,16 @@ There are some differences you will notice from a standard GWT project.
   # There is an `@ModulePrefs` annotation on the class
   # Here is a relationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [file:///home/zundel/workspace/gwt-google-apis/trunk/gadgets/build/out/doc/javadoc/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
 
+
 These differences derive from several the fact that a Gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/devguide_landing.html Google Gadget developer's documentation].  To meet this requirement, Gadget support is implemented using a custom [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/ext/Linker.html GWT Linker]. 
 
 == Writing a Simple Gadget ==
 
-You can start off by generating a project using `projectCreator` and applicationCreator` in the usual way.  Note that this invocation uses the -addToClassPath and -addToModule arguments to add `gwt-gadgets.jar` to the classpath and the `Gadgets.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
+You can start off by generating a project using `projectCreator` and applicationCreator` in the usual way.  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-gadgets.jar` to the classpath and the `Gadgets.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
 
 === Creating a Skeleton Project ===
 {{{
+$PP_OFF
 $ projectCreator -eclipse SimpleGadget -out SimpleGadget \
      -addToClassPath /home/zundel/gadgets/gwt-gadgets.jar
 
@@ -244,11 +246,9 @@ The output of the compiler will have:
 
 == Syndicating your Gadget ==
 
-  (Most of this is covered by [http://code.google.com/apis/gadgets/ the Gadgets developer site].)
-
   For debugging your gadget, register the URL for your gadget spec file (the `.gadget.xml` file created when you compile) using Syndication.  See [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] or search for the Syndication gadget in the iGoogle content directory.  After the URL is registered, you can add it to your iGoogle page, or create a simple host web page using the 'Get the Code' button.
 
-Once your debugging is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory].
+Once your debugging is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory]. 
 
 == Debugging your Gadget in Hosted Mode ==
 

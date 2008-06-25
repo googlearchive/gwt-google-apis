@@ -1,0 +1,13 @@
+#summary Questions about using the Maps API
+
+= Google Maps API =
+
+== I don't see Google Maps method XXX in the API. What should I do? ==
+
+New features are added to the Google Maps API is released every few weeks, so chances are any stable release of these wrappers will have fallen behind by the time you download it.  
+
+First check the [http://code.google.com/p/gwt-google-apis/ gwt-google-apis issue tracker] to see if the method might have been added to the trunk, but not the stable release yet.  If it has, you can download the subversion source, build it with [http://ant.apache.org Apache Ant], and get an updated `gwt-maps.jar`.   Submitting a patch along with your issue is encouraged and appreciated!  See [http://code.google.com/webtoolkit/makinggwtbetter.html Making GWT Better].
+
+
+
+

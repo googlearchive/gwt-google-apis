@@ -4,3 +4,15 @@
 
 [FAQ_GettingStarted Getting Started]
 Questions for first time users of the Google API Library for GWT.
+
+[FAQ_AjaxSearch AJAX Search]
+Questions about the Google AJAX Search wrappers.
+
+[FAQ_Gadgets Gadgets]
+Questions about the Google Gadgets wrappers.
+
+[FAQ_Gears Gears]
+Questions about the Google Gears wrappers.
+
+[FAQ_Maps Maps]
+Questions about the Google Maps wrappers.

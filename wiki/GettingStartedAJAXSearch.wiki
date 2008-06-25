@@ -2,6 +2,74 @@
 
 = Using Google AJAX Search in a project =
 
-*TBD*
+This section describes the basics behind writing a small project that uses Google's AJAX Search library with the [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/ajaxsearch/ AJAX Search developer's site].
 
-See [GettingStartedBasic Getting Started].
+
+The AJAX Search API provides a convenient way to add a pre-packaged search box and display results, or to manipulate search results in a programmatic way. The [http://code.google.com/p/gwt-google-apis gwt-google-api] project bindings allow you to access that API from Java code compiled with the GWT compiler.
+
+== Looking at the AJAX Search Sample ==
+
+Lets start by taking a look at the sample program _AJAXSearch_ that is shipped with the `gwt-ajaxsearch` distribution:
+
+Here are the interesting parts of the application
+
+   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/ajaxsearch/samples/ajaxsearch/src/com/google/gwt/ajaxsearch/sample/ajaxsearch/client/AJAXSearch.java AJAXSearch.java] - Java Source Code
+   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/ajaxsearch/samples/ajaxsearch/src/com/google/gwt/ajaxsearch/sample/ajaxsearch/AJAXSearch.gwt.xml AJAXSearch.gwt.xml] - GWT Module definition w/ API script injected
+
+Note the following:
+
+  # To use this API you must include a `<script>` tag in your module in order to load the api and provide the AJAX Search key.  
+  # You must inherit `com.google.gwt.ajaxsearch.AjaxSearch` in your module definition file.
+
+The sample application performs a few canned searches of different types of searches and sets up some constraints.  If you want to save a particular result, you can press the _save_ link and a new reference will be placed in the left hand column. If you want to change the search term, you can type it in the search box at the top of the page.
+
+  [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch1.png]
+
+You can look at and modify the sample code in the `samples/ajaxsearch` directory after unpacking the distribution.
+
+== Creating a project that uses AJAX Search ==
+
+You can start off by generating a project using `projectCreator` and applicationCreator` in the usual way  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-ajaxsearch.jar` to the classpath and the `AjaxSearch.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
+
+=== Creating a Skeleton Project ===
+
+{{{
+$PP_OFF
+$ projectCreator -eclipse SimpleSearch -out SimpleAXearch \
+     -addToClassPath /home/zundel/ajaxsearch/gwt-ajaxsearch.jar
+Created directory SimpleAXearch/src
+Created directory SimpleAXearch/test
+Created file SimpleAXearch/.project
+Created file SimpleAXearch/.classpath
+
+$ applicationCreator -eclipse SimpleSearch -out SimpleSearch \
+     -addToClassPath /home/zundel/ajaxsearch/gwt-ajaxsearch.jar \
+     -addModule com.google.gwt.ajaxsearch.AjaxSearch com.example.simplesearch.client.SimpleSearch
+Created directory SimpleSearch/src
+Created directory SimpleSearch/src/com/example/simplesearch
+Created directory SimpleSearch/src/com/example/simplesearch/client
+Created directory SimpleSearch/src/com/example/simplesearch/public
+Created file SimpleSearch/src/com/example/simplesearch/SimpleSearch.gwt.xml
+Created file SimpleSearch/src/com/example/simplesearch/public/SimpleSearch.html
+Created file SimpleSearch/src/com/example/simplesearch/public/SimpleSearch.css
+Created file SimpleSearch/src/com/example/simplesearch/client/SimpleSearch.java
+Created file SimpleSearch/SimpleSearch.launch
+Created file SimpleSearch/SimpleSearch-shell
+Created file SimpleSearch/SimpleSearch-compile
+
+}}}
+
+You can compile this project to see if it works.
+
+== Adding a !SearchControl ==
+
+   _TBD_
+
+== Adding a !SearchListener ==
+
+   _TBD_
+
+== Adding a !KeepListener ==
+
+   _TBD_
+
