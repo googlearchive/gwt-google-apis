@@ -16,6 +16,7 @@
 package com.google.gwt.ajaxsearch.sample.ajaxsearch.client;
 
 import com.google.gwt.ajaxsearch.client.ExpandMode;
+import com.google.gwt.ajaxsearch.client.ImageSearch;
 import com.google.gwt.ajaxsearch.client.KeepLabel;
 import com.google.gwt.ajaxsearch.client.KeepListener;
 import com.google.gwt.ajaxsearch.client.LinkTarget;
@@ -116,10 +117,12 @@ public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
     options.add(ws);
     options.add(new NewsSearch());
     options.add(new VideoSearch(), ExpandMode.CLOSED);
+    options.add(new ImageSearch());
     options.setKeepLabel(KeepLabel.SAVE);
     options.setLinkTarget(LinkTarget.BLANK);
 
     SearchControl searchControl = new SearchControl(options);
+   
     searchControl.addKeepListener(this);
     searchControl.addSearchListener(this);
     searchControl.execute("Google Web Toolkit");
