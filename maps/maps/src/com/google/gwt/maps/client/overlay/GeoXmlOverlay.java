@@ -36,6 +36,7 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
    * from the GeoXmlOverlayImpl.impl.construct() call.
    */
   private abstract static class JSOVoidCallback extends VoidCallback {
+    protected boolean missedCb = false;
     protected JavaScriptObject storedJso;
 
     public void setJsoPeer(JavaScriptObject jsoPeer) {
@@ -63,68 +64,85 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
     JSOVoidCallback voidCb = new JSOVoidCallback() {
       @Override
       public void callback() {
-        UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+        // If the storedJso is null at this point, the outer load() call
+        // may not yet have returned (the callback is being called before
+        // constructGeoXmlOverlay() returns.)
 
-        if (handler != null) {
-          fireLoadCbAndCatch(handler, url, cb);
-        } else {
-          fireLoadCb(url, cb);
+        if (storedJso == null) {
+          missedCb = true;
+          return;
         }
-      }
-
-      /**
-       * Does the work of actual invoking the user's callback code.
-       * 
-       * @param url the URL that was passed when the load was initiated.
-       * @param cb the user callback to invoke.
-       */
-      private void fireLoadCb(String url, GeoXmlLoadCallback cb) {
-        // TODO: If this.jsoPeer is null at this point, the outer load() call
-        // may not yet have executed this.setJsoPeer(). Would adding a test
-        // and subsequent DeferredCommand solve this?
-        
-        Throwable caught = null;
-        GeoXmlOverlay overlay = null;
-        try {
-          if (GeoXmlOverlayImpl.impl.loadedCorrectly(storedJso)) {
-            overlay = new GeoXmlOverlay(storedJso);
-          }
-        } catch (Throwable e) {
-          caught = e;
-        }
-
-        if (caught == null && overlay != null) {
-          cb.onSuccess(url, overlay);
-        } else {
-          cb.onFailure(url, caught);
-        }
-      }
-
-      /**
-       * Wraps firing the callback so that an exception handler can be called.
-       * 
-       * @param handler the uncaught exception handler to call
-       * @param url the url made in the load request
-       * @param cb callback to use on success/failure.
-       */
-      private void fireLoadCbAndCatch(UncaughtExceptionHandler handler,
-          String url, GeoXmlLoadCallback cb) {
-        try {
-          fireLoadCb(url, cb);
-        } catch (Throwable e) {
-          handler.onUncaughtException(e);
-        }
+        loadCb(url, cb, storedJso);
       }
     };
 
     JavaScriptObject outerJsoPeer = GeoXmlOverlayImpl.impl.constructGeoXmlOverlay(
         url, voidCb);
 
-    // TODO: In theory, a fast callback return could cause the callback() method
-    // to execute before this method gets called.
     voidCb.setJsoPeer(outerJsoPeer);
 
-  } // end load()
+    // A fast callback return could cause the callback() method
+    // to execute before this method gets called. If the callback couldn't
+    // execute then, invoke it now.
+    if (voidCb.missedCb) {
+      loadCb(url, cb, outerJsoPeer);
+    }
+  }
+
+  /**
+   * Does the work of actual invoking the user's callback code.
+   * 
+   * @param url the URL that was passed when the load was initiated.
+   * @param cb the user callback to invoke.
+   * @param jso the newly constructed GGeoXml instance.
+   */
+  private static void fireLoadCb(String url, GeoXmlLoadCallback cb,
+      JavaScriptObject jso) {
+
+    Throwable caught = null;
+    GeoXmlOverlay overlay = null;
+    try {
+      if (GeoXmlOverlayImpl.impl.loadedCorrectly(jso)) {
+        overlay = new GeoXmlOverlay(jso);
+      }
+    } catch (Throwable e) {
+      caught = e;
+    }
+
+    if (caught == null && overlay != null) {
+      cb.onSuccess(url, overlay);
+    } else {
+      cb.onFailure(url, caught);
+    }
+  }
+
+  /**
+   * Wraps firing the callback so that an exception handler can be called.
+   * 
+   * @param handler the uncaught exception handler to call
+   * @param url the url made in the load request
+   * @param cb callback to use on success/failure. *
+   * @param jso the newly constructed GGeoXml instance.
+   */
+  private static void fireLoadCbAndCatch(UncaughtExceptionHandler handler,
+      String url, GeoXmlLoadCallback cb, JavaScriptObject jso) {
+    try {
+      fireLoadCb(url, cb, jso);
+    } catch (Throwable e) {
+      handler.onUncaughtException(e);
+    }
+  }
+
+  private static void loadCb(String url, GeoXmlLoadCallback cb,
+      JavaScriptObject jso) {
+    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+
+    if (handler != null) {
+      fireLoadCbAndCatch(handler, url, cb, jso);
+    } else {
+      fireLoadCb(url, cb, jso);
+    }
+  }
 
   /**
    * Creates a new overlay from a GeoRSS XML or KML file.
