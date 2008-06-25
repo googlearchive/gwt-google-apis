@@ -16,12 +16,15 @@
 package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.MapTypeControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
+import com.google.gwt.maps.client.overlay.EncodedPolyline;
 import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -47,11 +50,12 @@ import java.util.Comparator;
  */
 public class OverlayDemo extends MapsDemo {
   private enum OverlayDemos {
-
-    TEST_POLYLINE_ENCODED("Display polyline from an encoded string"), TEST_POLYLINE_ONE(
-        "Display a polyline"), TEST_POLYLINE_TRANSPARENT(
-        "Display encoded polyline with default transparency"), TEST_TEN_MARKERS(
-        "Display 10 Random Markers");
+    TEST_POLYGON_ENCODED("Display polygon from an encoded string"), //
+    TEST_POLYLINE_ENCODED("Display polyline from an encoded string"), //
+    TEST_POLYLINE_ONE("Display a polyline"), //
+    TEST_POLYLINE_TRANSPARENT(
+        "Display encoded polyline with default transparency"), // 
+    TEST_TEN_MARKERS("Display 10 Random Markers");
 
     final String value;
 
@@ -205,6 +209,26 @@ public class OverlayDemo extends MapsDemo {
         Polyline pline = Polyline.fromEncoded(ENCODED_POINTS, 32,
             ENCODED_LEVELS, 4);
         map.addOverlay(pline);
+      }
+        break;
+
+      case TEST_POLYGON_ENCODED: {
+        // Add a polygon encoded as a series of polylines.
+        map.setCenter(new LatLng(33.75951619957536, -84.39289301633835), 20);
+        EncodedPolyline[] polylines = new EncodedPolyline[2];
+        polylines[0] = EncodedPolyline.createEncodedPolyline(
+            "au`mEz_bbO?sAbA@?pAcA?", 2, "BBBBB", 1, "#ff0000", 2, 0.9);
+
+        polylines[1] = EncodedPolyline.createEncodedPolyline(
+            "{t`mEt_bbO?eAx@??dAy@?", 2, "BBBBB", 1);
+        polylines[1].setColor("#ff0000");
+        polylines[1].setWeight(2);
+        polylines[1].setOpacity(0.7);
+        
+        Polygon theFountain = Polygon.fromEncoded(polylines, true, "#ff0000",
+            0.2, true);
+        map.addOverlay(theFountain);
+        map.setCurrentMapType(MapType.getHybridMap());
       }
         break;
 
