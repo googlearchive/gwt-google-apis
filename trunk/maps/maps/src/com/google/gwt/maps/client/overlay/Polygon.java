@@ -15,7 +15,9 @@
  */
 package com.google.gwt.maps.client.overlay;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.event.PolygonClickHandler;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler;
 import com.google.gwt.maps.client.event.PolygonClickHandler.PolygonClickEvent;
@@ -39,8 +41,36 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 public final class Polygon extends ConcreteOverlay {
 
   /**
+   * Create a polygon from an array of polylines. Overlapping regions of the
+   * polygons will be transparent.
+   * 
+   * @param polylines array of polylines to use as the outline for the polygon.
+   * @return a new instance of Polygon.
+   */
+  public static Polygon fromEncoded(EncodedPolyline[] polylines) {
+    return new Polygon(nativeFromEncoded(toJsArray(polylines)));
+  }
+
+  /**
+   * Create a polygon from an array of polylines. Overlapping regions of the
+   * polygons will be transparent.
+   * 
+   * @param polylines array of polylines to use as the outline for the polygon.
+   * @param fill whether to fill in the polygon with the specified color.
+   * @param color the color to use for the fill.
+   * @param opacity Opacity to use for the fill.
+   * @param outline <code>true</code>
+   * @return a new instance of Polygon.
+   */
+  public static Polygon fromEncoded(EncodedPolyline[] polylines, boolean fill,
+      String color, double opacity, boolean outline) {
+    return new Polygon(nativeFromEncoded(toJsArray(polylines), fill, color,
+        opacity, outline));
+  }
+
+  /**
    * Used to create a new Polygon by wrapping an existing GPolygon object. This
-   * method is invoked by the jsio library.
+   * method is invoked by the JSIO library.
    * 
    * @param jsoPeer GPolygon object to wrap.
    * @return a new instance of Polygon.
@@ -50,11 +80,52 @@ public final class Polygon extends ConcreteOverlay {
     return new Polygon(jsoPeer);
   }
 
+  /**
+   * This method is a little trick we can use in WebMode. EncodedPolyline is a
+   * JSO subclass, and a JS array is really an object, so this JSNI method
+   * basically just casts the array to a JSO. In Java things are different, so
+   * this trick doesn't work - be sure to surround with a GWT.isScript() test.
+   * 
+   * @param array The array to pass into JavaScript.
+   * @return a JsArray representing the input argument.
+   */
+  private static native JsArray<EncodedPolyline> nativeArrayToJavaScriptObject(
+      EncodedPolyline[] array) /*-{
+    return array;
+  }-*/;
+
+  private static native JavaScriptObject nativeFromEncoded(
+      JsArray<EncodedPolyline> polylinesIn) /*-{
+    return new $wnd.GPolygon.fromEncoded({polylines: polylinesIn});
+  }-*/;
+
+  private static native JavaScriptObject nativeFromEncoded(
+      JsArray<EncodedPolyline> polylinesIn, boolean fillIn, String colorIn,
+      double opacityIn, boolean outlineIn) /*-{
+    return new $wnd.GPolygon.fromEncoded({polylines: polylinesIn, fill: fillIn, color: colorIn, opacity: opacityIn, outline: outlineIn});
+  }-*/;
+
+  private static JsArray<EncodedPolyline> toJsArray(EncodedPolyline[] array) {
+    if (GWT.isScript()) {
+      // This is the most efficient thing to do, and works in web mode
+      return nativeArrayToJavaScriptObject(array);
+    }
+
+    // This is a workaround for hosted mode. Make a copy of the array.
+    JsArray<EncodedPolyline> result = (JsArray<EncodedPolyline>) JavaScriptObject.createArray();
+    for (int i = 0; i < array.length; ++i) {
+      result.set(i, array[i]);
+    }
+    assert (array.length == result.length());
+    return result;
+  }
+
   private HandlerCollection<PolygonClickHandler> polygonClickHandlers;
   private HandlerCollection<PolygonRemoveHandler> polygonRemoveHandlers;
 
   /**
    * Create a Polygon from an array of points.
+   * 
    * @param points the points to construct the polygon.
    */
   public Polygon(LatLng[] points) {
@@ -63,11 +134,14 @@ public final class Polygon extends ConcreteOverlay {
 
   /**
    * Create a polygon from an array of points, specifying optional parameters.
+   * 
    * @param points the points to construct the polygon.
-   * @param strokeColor The line color, a string that contains the color in hexadecimal numeric HTML style, i.e. #RRGGBB. 
+   * @param strokeColor The line color, a string that contains the color in
+   *          hexadecimal numeric HTML style, i.e. #RRGGBB.
    * @param strokeWeight The width of the line in pixels.
    * @param strokeOpacity The opacity of the line - a value between 0.0 and 1.0.
-   * @param fillColor The fill color, a string that contains the color in hexadecimal numeric HTML style, i.e. #RRGGBB. 
+   * @param fillColor The fill color, a string that contains the color in
+   *          hexadecimal numeric HTML style, i.e. #RRGGBB.
    * @param fillOpacity The opacity of the fill - a value between 0.0 and 1.0.
    */
   public Polygon(LatLng[] points, String strokeColor, int strokeWeight,
@@ -120,6 +194,7 @@ public final class Polygon extends ConcreteOverlay {
 
   /**
    * Returns the position of the specified vertex in the polygon.
+   * 
    * @param index the vertex to return.
    * @return the position of the specified vertex in the polygon.
    */
@@ -129,6 +204,7 @@ public final class Polygon extends ConcreteOverlay {
 
   /**
    * Returns the number of verticies in the polygon.
+   * 
    * @return the number of verticies in the polygon.
    */
   public int getVertexCount() {

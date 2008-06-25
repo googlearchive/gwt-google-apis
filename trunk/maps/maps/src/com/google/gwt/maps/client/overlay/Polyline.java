@@ -45,6 +45,10 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  */
 public final class Polyline extends ConcreteOverlay {
 
+  public static Polyline fromEncoded(EncodedPolyline polyline) {
+    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(polyline));
+  }
+  
   public static Polyline fromEncoded(String color, int weight, double opacity,
       String encodedPoints, int zoomFactor, String encodedLevels, int numLevels) {
     JavaScriptObject optionsJso = PolylineOptionsImpl.impl.construct();
@@ -519,4 +523,5 @@ public final class Polyline extends ConcreteOverlay {
           jsoPeer, MapEvent.REMOVE);
     }
   }
+
 }
