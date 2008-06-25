@@ -27,14 +27,17 @@ You can start off by generating a project using `projectCreator` and application
 
 === Creating a Skeleton Project ===
 {{{
-$ projectCreator -eclipse SimpleGadget -out SimpleGadget -addToClassPath /home/zundel/gadgets/gwt-gadgets.jar
+$ projectCreator -eclipse SimpleGadget -out SimpleGadget \
+     -addToClassPath /home/zundel/gadgets/gwt-gadgets.jar
 
 Created directory SimpleGadget/src
 Created directory SimpleGadget/test
 Created file SimpleGadget/.project
 Created file SimpleGadget/.classpath
 
-$ applicationCreator -eclipse SimpleGadget -out SimpleGadget -addToClassPath /home/zundel/gadgets/gwt-gadgets.jar -addModule com.google.gwt.gadgets.Gadgets com.example.simplegadget.client.SimpleGadget
+$ applicationCreator -eclipse SimpleGadget -out SimpleGadget \
+     -addToClassPath /home/zundel/gadgets/gwt-gadgets.jar \
+     -addModule com.google.gwt.gadgets.Gadgets com.example.simplegadget.client.SimpleGadget
 Created directory SimpleGadget/src/com/example/simplegadget
 Created directory SimpleGadget/src/com/example/simplegadget/client
 Created directory SimpleGadget/src/com/example/simplegadget/public
