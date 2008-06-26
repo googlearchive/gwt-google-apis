@@ -15,7 +15,7 @@
  */
 package com.google.gwt.maps.client.geocode;
 
-import com.google.gwt.maps.client.geocode.GeocodeCache.ConcreteGeocodeCache;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
 
 /**
@@ -23,14 +23,46 @@ import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
  * conditions on cached replies. It only caches replies which are very unlikely
  * to change within a short period of time.
  */
-public final class FactualGeocodeCache extends ConcreteGeocodeCache {
+public final class FactualGeocodeCache extends GeocodeCache {
+
+  private JavaScriptObject jsoPeer;
 
   /**
    * Constructs a new cache that only caches replies which are very unlikely to
    * change within a short period of time.
    */
   public FactualGeocodeCache() {
-    super(GeocodeCacheImpl.impl.constructFactualGeocodeCache());
+    this(GeocodeCacheImpl.impl.constructFactualGeocodeCache());
+    // No bind() is needed - you can't extend this object.
   }
 
+  private FactualGeocodeCache(JavaScriptObject jsoPeer) {
+    this.jsoPeer = jsoPeer;
+  }
+
+  /*
+   * Design note: These methods are not exported because that would cause an
+   * infinite loop. These methods are just for developer access to the functions
+   * in the cache, not as a way to extend GeocoderCache functionality. See
+   * {@link AbstractGeocoderCache}.
+   */
+  public JavaScriptObject get(String address) {
+    return GeocodeCacheImpl.impl.get(jsoPeer, address);
+  }
+
+  public boolean isCacheable(JavaScriptObject reply) {
+    return GeocodeCacheImpl.impl.isCachable(jsoPeer, reply);
+  }
+
+  public void put(String address, JavaScriptObject reply) {
+    GeocodeCacheImpl.impl.put(jsoPeer, address, reply);
+  }
+
+  public void reset() {
+    GeocodeCacheImpl.impl.reset(jsoPeer);
+  }
+
+  public String toCanonical(String address) {
+    return GeocodeCacheImpl.impl.toCanonical(jsoPeer, address);
+  }
 }

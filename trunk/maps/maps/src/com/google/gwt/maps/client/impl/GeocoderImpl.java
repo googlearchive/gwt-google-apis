@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.maps.client.geocode.CustomGeocodeCache;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geom.LatLngBounds;
@@ -73,6 +74,9 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GClientGeocoder")
   JavaScriptObject construct(GeocodeCache cache);
+  
+  @Constructor("$wnd.GClientGeocoder")
+  JavaScriptObject construct(CustomGeocodeCache cache);
 
   String getBaseCountryCode(JavaScriptObject jsoPeer);
 

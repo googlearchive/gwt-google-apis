@@ -16,7 +16,7 @@
 package com.google.gwt.maps.client;
 
 /**
- * A collection of static methods and API wide constants
+ * A collection of static methods and API wide constants.
  */
 public class Maps {
 
