@@ -59,7 +59,7 @@ Created file MapsTutorial/.classpath
 
 $ applicationCreator -eclipse MapsTutorial -out MapsTutorial \
      -addToClassPath /usr/local/gwt-maps/gwt-maps.jar \
-     -inheritModule com.google.gwt.maps.GoogleMaps \
+     -addModule com.google.gwt.maps.GoogleMaps \
      com.example.google.gwt.mapstutorial.client.MapsTutorial 
 Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial
 Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/client
