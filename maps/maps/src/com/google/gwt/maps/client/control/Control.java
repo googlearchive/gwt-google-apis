@@ -116,7 +116,7 @@ public class Control {
   /**
    * The JSO being wrapped by this class.
    */
-  private final JavaScriptObject jsoPeer;
+  protected final JavaScriptObject jsoPeer;
 
   /**
    * Constructor for creating a new instance of this class from an existing JSO.
