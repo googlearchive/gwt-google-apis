@@ -18,27 +18,29 @@ package com.google.gwt.maps.client.control;
 import com.google.gwt.maps.client.impl.ControlImpl;
 
 /**
- * Creates a standard map type control for selecting and switching between
- * supported map types via buttons.
+ * Creates a drop-down map type control for switching between supported map
+ * types.
  */
-public final class MapTypeControl extends Control {
+public final class MenuMapTypeControl extends Control {
 
   /**
-   * Create a new standard map type control.
+   * Creates a drop-down map type control for switching between supported map
+   * types.
    */
-  public MapTypeControl() {
-    super(ControlImpl.impl.createMapTypeControl());
+  public MenuMapTypeControl() {
+    super(ControlImpl.impl.createMenuMapTypeControl());
   }
-  
+
   /**
-    * Creates a GMapTypeControl, using the short (alt) names for the map types if
+   * Creates a GMapTypeControl, using the short (alt) names for the map types if
    * <code>useShortNames</code> is set to <code>true</code>, and the long
    * names by default.
    * 
    * @param useShortNames if <code>true</code> then short (alt) names are used
    *          for the map types.
    */
-  public MapTypeControl(boolean useShortNames) {
-    super(ControlImpl.impl.createMapTypeControl(useShortNames));
+  public MenuMapTypeControl(boolean useShortNames) {
+    super(ControlImpl.impl.createMenuMapTypeControl(useShortNames));
   }
+
 }

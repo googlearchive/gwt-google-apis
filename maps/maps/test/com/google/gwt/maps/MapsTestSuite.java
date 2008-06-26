@@ -22,7 +22,7 @@ import com.google.gwt.maps.client.MapWidgetEventsTest;
 import com.google.gwt.maps.client.MapWidgetTest;
 import com.google.gwt.maps.client.MapsNotInstalledTest;
 import com.google.gwt.maps.client.StatusCodesTest;
-// import com.google.gwt.maps.client.control.ControlTest;
+import com.google.gwt.maps.client.control.ControlTest;
 import com.google.gwt.maps.client.geocode.GeocodeTest;
 import com.google.gwt.maps.client.geom.ProjectionTest;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlayTest;
@@ -44,7 +44,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(MapWidgetEventsTest.class);
     suite.addTestSuite(MapsNotInstalledTest.class);
     suite.addTestSuite(MapWidgetTest.class);
-    // suite.addTestSuite(ControlTest.class);
+    suite.addTestSuite(ControlTest.class);
     suite.addTestSuite(GeocodeTest.class);
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);

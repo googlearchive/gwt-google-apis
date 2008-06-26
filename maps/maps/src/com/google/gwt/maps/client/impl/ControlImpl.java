@@ -26,7 +26,7 @@ import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
  * Wraps the GControl and its subclasses in the Maps API using JSIO.
  */
 public interface ControlImpl extends JSFlyweightWrapper {
-  
+
   ControlImpl impl = GWT.create(ControlImpl.class);
 
   @Binding
@@ -41,12 +41,24 @@ public interface ControlImpl extends JSFlyweightWrapper {
   @Constructor("$wnd.GMapTypeControl")
   JavaScriptObject createMapTypeControl();
 
+  @Constructor("$wnd.GMapTypeControl")
+  JavaScriptObject createMapTypeControl(boolean useShortNames);
+
+  @Constructor("$wnd.GMenuMapTypeControl")
+  JavaScriptObject createMenuMapTypeControl();
+
+  @Constructor("$wnd.GMenuMapTypeControl")
+  JavaScriptObject createMenuMapTypeControl(boolean useShortNames);
+
+  @Constructor("$wnd.GOverviewMapControl")
+  JavaScriptObject createOverviewMapControl();
+
   @Constructor("$wnd.GScaleControl")
   JavaScriptObject createScaleControl();
-  
+
   @Constructor("$wnd.GSmallMapControl")
   JavaScriptObject createSmallMapControl();
-  
+
   @Constructor("$wnd.GSmallZoomControl")
   JavaScriptObject createSmallZoomControl();
 }
