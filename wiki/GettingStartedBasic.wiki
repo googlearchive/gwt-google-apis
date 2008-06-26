@@ -22,12 +22,12 @@ you are interested in contributing patches to the library.  See the instructions
 
 == Adding Google APIs to a GWT Project as a library ==
 
-This section describes how to integrate the `gwt-google-apis.jar` library
-with an existing GWT project.
+This section describes how to integrate one of the `gwt-google-apis` JAR files library
+with an existing GWT project.  In this case, we are going to use the `gwt-maps.jar` library as an example.
 
-=== Getting the GWT Google APIs library ===
+=== Getting the GWT Google APIs gwt-maps library ===
 
-You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  
+You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option to see 
 After you download the distribution, uncompress
 it.  Inside the folder you will find a file named
 `gwt-google-apis.jar`. This is the one file you need to integrate the
@@ -45,22 +45,26 @@ _GWT_GOOGLE_APIS_DIR_.
 If you have not yet created a GWT project, create one now.  You can
 use the `applicationCreator` tool, or an IDE plugin, or create a
 project manually.  Essentially, you need to then add the path
-_GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar` to the Java classpath.
+_GWT_GOOGLE_APIS_DIR_`/gwt-maps.jar` to the Java classpath.
 
 
 === Updating <project>-compile and <project>-shell ===
 
-First, create a project with `projectCreator` and `applicationCreator` as shown in the GWT Getting Started tutorial and Developer Guide:
+First, create a project with `projectCreator` and `applicationCreator` as shown in the GWT Getting Started tutorial and Developer Guide.  In the following example, the GWT Google API jar file `gwt-maps.jar` has been unpacked in `/usr/local/gwt-maps`
 
 {{{
 $PP_OFF
-$ projectCreator -eclipse MapsTutorial -out MapsTutorial
+$ projectCreator -eclipse MapsTutorial -out MapsTutorial \
+     -addToClassPath /usr/local/gwt-maps/gwt-maps.jar 
 Created directory MapsTutorial/src
 Created directory MapsTutorial/test
 Created file MapsTutorial/.project
 Created file MapsTutorial/.classpath
 
-$ applicationCreator -out MapsTutorial com.example.google.gwt.mapstutorial.client.MapsTutorial
+$ applicationCreator -eclipse MapsTutorial -out MapsTutorial \
+     -addToClassPath /usr/local/gwt-maps/gwt-maps.jar \
+     -inheritModule com.google.gwt.maps.GoogleMaps \
+     com.example.google.gwt.mapstutorial.client.MapsTutorial 
 Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial
 Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/client
 Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/public
@@ -71,41 +75,7 @@ Created file MapsTutorial/MapsTutorial-shell
 Created file MapsTutorial/MapsTutorial-compile
 }}}
 
-In order to use the  `MapsTutorial-shell` and `MapsTutorial-compile` scripts to launch hosted mode or compile to !JavaScript, you will need to modify them to add _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar` to the classpath.  In the following example, the GWT jar files and GWT Google API jar file have been copied to the same path, `/usr/local/gwt`
-
-Edit `MapsTutorial-shell` in a text editor (such as Notepad or vi) and append the jar file to the `-cp` argument to `java`.
-
-{{{
-$PP_OFF
-#!/bin/sh
-APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-linux-0.0.0/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt-google-apis.jar" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
-}}}
-
-and make a similar change to `MapsTutorial-compile`:
-
-{{{
-$PP_OFF
-#!/bin/sh
-APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt_google_apis.jar" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
-}}}
-
-
-If you use `ant` to build the project, you also need to add gwt-google-apis.jar to the classpath in `MapsTutorial.ant.xml`:
-
-{{{
-$PP_OFF
-  ...
-  <!-- set classpath -->
-  <path id="project.class.path">
-    <pathelement path="${java.class.path}/"/>
-    <pathelement path="/usr/local/gwt/gwt-user.jar"/>
-    <!-- Additional dependencies (such as junit) go here -->
-    <pathelement path="/usr/local/gwt/gwt-google-apis.jar"/>
-  </path>
-  ...
-}}}
+This command sets up a standard project, plus adds the library `/usr/local/gwt-maps/gwt-maps.jar` to the Java classpath for the launch, compile and .and eclipse definitions.
 
 
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` script.  You should see the skeleton project come up:
@@ -122,38 +92,12 @@ Copying all files found on public path
 Compilation succeeded
 }}}
 
-=== Updating Eclipse Build and Launch Configuration ===
-
-If you aren't using Eclipse, skip down to the section named _Testing a Project using a Google API_ below.
-
-If you are using the Eclipse IDE and created your project with `applicationCreator -eclipse`, then you will have a `.project` file and a `MapsTutorial.launch` file in the root of your project.  
-
-Import the project into eclipse using the _File->Import..._ command.
-
-In order to build a project in Eclipse that references the GWT Google APIs, you need to add the `gwt-google-apis.jar` file to the Java build path.  
-
-  1 Make sure your new project is open and select your project in the tree on the left.
-  1 Navigate to  _Project->Properties..._
-  1 Select _Java Build Path_ from the tree on the left.
-  1 Open the _Libraries_ tab.
-  1 Choose the _Add External JARs_ option and add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`
-
-  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic2.png
-
-Next, you need to update the launch configuration.  
-
-  1 Make sure your new project is open.
-  1 Navigate to _Run->Open Run Dialog..._
-  1 In the Run Dialog, open the  _Java Application_ branch in the tree on the left.
-  1 Select your project name (`MapsTutorial` in our example.)
-  1 Open the _Classpath_ tab.  
-  1 Select the _User Entries_ item in the tree.
-  1 Click the _Add External JARs_ button 
-  1 Add the file _GWT_GOOGLE_APIS_DIR_`/gwt-google-apis.jar`.  Make sure that the _!MapsTutorial (default classpath)_ is at the bottom of the list.
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic3.png
 
-    
+Now, replace the contents of your `onModuleLoad()` method in `MapTutorial.java` with some sample maps code.
+
+{{{    
     // Open a map centered on Cawker City, KS USA
     map = new MapWidget(new LatLng(39.509,-98.434), 2);
     map.setSize("500px", "300px");

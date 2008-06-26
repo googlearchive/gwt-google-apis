@@ -17,7 +17,7 @@ There are some differences you will notice from a standard GWT project.
   # There is no class that implements the [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/client/EntryPoint.html EntryPoint] interface.
   # The entry point class is a subclass of [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html Gadget].
   # There is an `@ModulePrefs` annotation on the class
-  # Here is a relationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [file:///home/zundel/workspace/gwt-google-apis/trunk/gadgets/build/out/doc/javadoc/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
+  # Here is a relationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
 
 
 These differences derive from several the fact that a Gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/devguide_landing.html Google Gadget developer's documentation].  To meet this requirement, Gadget support is implemented using a custom [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/ext/Linker.html GWT Linker]. 
@@ -30,7 +30,7 @@ You can start off by generating a project using `projectCreator` and application
 {{{
 $PP_OFF
 $ projectCreator -eclipse SimpleGadget -out SimpleGadget \
-     -addToClassPath /home/zundel/gadgets/gwt-gadgets.jar
+     -addToClassPath /usr/local/gadgets/gwt-gadgets.jar
 
 Created directory SimpleGadget/src
 Created directory SimpleGadget/test
@@ -38,7 +38,7 @@ Created file SimpleGadget/.project
 Created file SimpleGadget/.classpath
 
 $ applicationCreator -eclipse SimpleGadget -out SimpleGadget \
-     -addToClassPath /home/zundel/gadgets/gwt-gadgets.jar \
+     -addToClassPath /usr/local/gadgets/gwt-gadgets.jar \
      -addModule com.google.gwt.gadgets.Gadgets com.example.simplegadget.client.SimpleGadget
 Created directory SimpleGadget/src/com/example/simplegadget
 Created directory SimpleGadget/src/com/example/simplegadget/client

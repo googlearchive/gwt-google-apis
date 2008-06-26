@@ -36,14 +36,14 @@ You can start off by generating a project using `projectCreator` and application
 {{{
 $PP_OFF
 $ projectCreator -eclipse SimpleSearch -out SimpleAXearch \
-     -addToClassPath /home/zundel/ajaxsearch/gwt-ajaxsearch.jar
+     -addToClassPath /usr/local/ajaxsearch/gwt-ajaxsearch.jar
 Created directory SimpleAXearch/src
 Created directory SimpleAXearch/test
 Created file SimpleAXearch/.project
 Created file SimpleAXearch/.classpath
 
 $ applicationCreator -eclipse SimpleSearch -out SimpleSearch \
-     -addToClassPath /home/zundel/ajaxsearch/gwt-ajaxsearch.jar \
+     -addToClassPath /usr/local/ajaxsearch/gwt-ajaxsearch.jar \
      -addModule com.google.gwt.ajaxsearch.AjaxSearch com.example.simplesearch.client.SimpleSearch
 Created directory SimpleSearch/src
 Created directory SimpleSearch/src/com/example/simplesearch

@@ -6,6 +6,8 @@
    * [GettingStartedMaps Using Google Maps in a project]
    * [GettingStartedGadgets Using Google Gadgets in a project]
    * [GettingStartedGears Using Google Gears in a project]
+   * [GettingStartedSource Working with GWT Google APIs source]
  * [Javadoc Class Reference]
  * [FAQ_Intro FAQ - Introduction]
    * [FAQ_GettingStarted FAQ - Getting Started]
+ * [MakingGALGWTBetter Contributing]
