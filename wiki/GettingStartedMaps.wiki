@@ -2,6 +2,45 @@
 
 = Using Google Maps in a project =
 
-*TBD*
+This section describes the Google Maps library [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT) wrapper APIs.  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/maps/ Maps developer's site].
 
-See [GettingStartedBasic Getting Started].
+
+The Google Maps API provides a very rich developer toolkit for manipulating maps.  As such, there are many classes in the wrapper APIs.  
+
+= Creating a Sample Project using Google Maps =
+
+See [GettingStartedBasic Getting Started] for the instructions for creating a small sample project.
+
+= The HelloMaps Demo =
+
+The `gwt-maps` distribution contains a sample project in the `samples` directory that showcases many of the features of the Maps API.  It serves both as a demonstration project and as a test bed for adding features.
+
+= Differences between the Maps API and the GWT wrappers =
+
+== Naming ==
+
+The Maps API prepends all methods with the letter `G`.  The GWT wrappers drop this prefix.
+
+== Event Handling ==
+
+The Maps event handling in JavaScript relies on !JavaScript's dynamic type system.  For Java, we modeled each event as a separate class with accessor methods to retreive the event arguments, and a separate handler class to implement.  This gives a type safe, yet extensible way to handle events.  It also creates a large number of classes and methods on some of the objects - your IDE should help you make quick work of selecting and implementing the appropriate handler classes.
+
+
+== Info Windows ==
+
+In the Maps API, there is a global Info window instance that you retrived from a Map or Marker.  In the `gwt-maps`, InfoWindow objects are created with a reference to the Map or Marker.  Of course, the same underlying api is used, the presentation is just different.
+
+== Subclassing ==
+
+Subclassing in Java and JavaScript has different semantics.  When using GWT to wrap JavaScript, the API author must be careful to preseve the semantics of subclassing (such as the super() method).  In some cases, you will see that a special class has been provided to allow authors to create a subclass.  See _AbstractGeocodeCache_.
+
+You may notice that there are other classes that you would like to subclass that have been marked final.  Often it is because the implications of creating a subclass have not yet been considered.  Consider using composition instead.  If that will not work, please post on the [http://groups.google.com Google-web-toolkit-contributors group] if you find a class marked final that you would like to remove the restriction.
+
+
+== Features ==
+
+The Maps team releases new versions of the Google Maps api every few weeks.  The `gwt-maps` wrapper trails the public release of the Maps APIs and probably won't contain all the features you see on the [http://code.google.com/apis/maps Googl Maps developer site].
+
+== Undocumented Features ==
+
+In general, since the `gwt-maps` api ships with source code, the features you can see are the features you can use.  In general, only the supported, documented features of the Maps API are included in the GWT bindings.
