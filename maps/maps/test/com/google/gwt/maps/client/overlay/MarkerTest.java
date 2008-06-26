@@ -160,6 +160,18 @@ public class MarkerTest extends GWTTestCase {
     RootPanel.get().add(map);
   }
 
+  public void testMarkerGetTitle() {
+    Marker marker = new Marker(new LatLng(0,0));
+    String result = marker.getTitle();
+    assertNull("expected null title", result);
+    
+    MarkerOptions mo = new MarkerOptions();
+    mo.setTitle("Non-null title");
+    marker = new Marker(new LatLng(0,1), mo);
+    result = marker.getTitle();
+    assertNotNull("expected non-null title", result);
+  }
+  
   /**
    * Test of a marker subclass.
    */
