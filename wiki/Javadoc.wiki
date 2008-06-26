@@ -2,7 +2,7 @@
 
 = Class Reference =
 
-  _Based on [http://code.google.com/p/gwt-google-apis/downloads/list?can=1&q=r290 r290] release 290.
+  _Based on [http://code.google.com/p/gwt-google-apis/downloads/list?can=1&q=r290 r290].
 
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/index.html AJAX Search API]
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gadgets/index.html Gadgets API]
