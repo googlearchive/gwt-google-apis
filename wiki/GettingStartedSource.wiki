@@ -4,7 +4,7 @@
 
 This section describes how to integrate your project with the GWT Google APIs project using a checkout of the subversion repository.
 
-If this is your first time setting up a project, you should probably be using the [GettingStartedBasice basic Getting Started] instructions.  These instructions are provided for those that intend to be a contributor to one of the `gwt-google-apis` projects, or need to use the very latest release of the API before a public release.
+If this is your first time setting up a project, you should work through the [GettingStartedBasic basic Getting Started] instructions.  These additional instructions are provided for those that intend to be a contributor to one of the `gwt-google-apis` projects, or need to use the very latest release of the API before a public release.
 
 === Getting the GWT Google APIs source ===
 
@@ -21,14 +21,15 @@ The following example shows a checkout using the command line client on Linux:
 
 {{{
 $PP_OFF
- $ cd /usr/local/src/
- $ svn checkout http://gwt-google-apis.googlecode.com/svn/trunk/ gwt-google-apis
- A    gwt-google-apis/distro-source
- A    gwt-google-apis/distro-source/common.ant.xml
- A    gwt-google-apis/distro-source/core
- A    gwt-google-apis/distro-source/core/src
+ $ mkdir /usr/local/gwt-google-apis
+ $ cd /usr/local/gwt-google-apis/
+ $ svn checkout http://gwt-google-apis.googlecode.com/svn/trunk/ .
+ A    ajaxsearch/distro-source
+ A    ajaxsearch-apis/distro-source/common.ant.xml
+ A    ajaxsearch/distro-source/core
+ A    ajaxsearch/distro-source/core/src
  ...
-Checked out revision 88.
+Checked out revision 330.
 }}}
 
 Remember the path where you performed the checkout.  This documentation will refer to this path as _GWT_GOOGLE_APIS_DIR_.
@@ -66,7 +67,7 @@ First, let's modify the command line script `MapsTutorial-shell` and append the 
 $PP_OFF
 #!/bin/sh
 APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-linux-0.0.0/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt-google-apis/google-apis/src" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
 }}}
 
 Next, make a similar change to the `MapsTutorial-compile` script:
@@ -75,7 +76,7 @@ Next, make a similar change to the `MapsTutorial-compile` script:
 $PP_OFF
 #!/bin/sh
 APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt/gwt-google-apis/google-apis/src" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
 }}}
 
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
@@ -84,13 +85,13 @@ Test to see that hosted mode and web mode work by running the `MapsTutorial-shel
 
   1 Choose _File->Import..._ from the menu bar.
   1 Select _General->Existing Projects into Workspace_
-  1 Browse from _Select root directory_ to the path you checked out from subversion (_GWT_GOOGLE_APIS_DIR_`/eclipse` or `/usr/local/gwt/gwt-google-apis/eclipse` in our example.)
-  1 You should see a project named `gwt-google-apis` on the list.  Make sure it is selected.
+  1 Browse from _Select root directory_ to the path you checked out from subversion (_GWT_GOOGLE_APIS_DIR_`/maps/eclipse` or `/usr/local/gwt/gwt-google-apis/maps/eclipse` in our example.)
+  1 You should see a project named `gwt-maps` on the list.  Make sure it is selected.
   1 Choose _Finish_ to import the project.
 
 You may need to fixup the project's build path.  
 
-  1 Make sure the `gwt-google-apis` project is open and selected in the tree on the left.
+  1 Make sure the `gwt-maps` project is open and selected in the tree on the left.
   1 Navigate to  _Project->Properties...->Java Build Path->Libraries_
   1 Add the `gwt-dev-<arch>.jar` and `gwt-user.jar` libraries to the _Libraries_ tab.
   1 Alternatively, if you have imported the GWT source projects, add the gwt-dev-<arch> and gwt-user projects to the _Projects_ tab.
@@ -107,7 +108,7 @@ After you successfully import the project, you first need to update the !MapsTut
   1 Navigate to  _Project->Properties...
   1 Select _Java Build Path_ in the tree on the left
   1 Open the _Projects_ tab.
-  1 Add the project `gwt-google-apis`.
+  1 Add the project `gwt-maps`.
 
 Next, update the launch configuration.  This will will allow you to launch hosted mode from Eclipse's `Run Dialog...` menu option.  
 
@@ -118,68 +119,10 @@ Next, update the launch configuration.  This will will allow you to launch hoste
  1 Open the Classpath tab.  Select the _User Entries_ item in the tree.
  1 Click the _Advanced..._ button.
  1 Select _Add Folders_ and _OK_.  
- 1 When the file browser appears, select the directory `src` from the `gwt-google-apis` project you created previously.  
+ 1 When the file browser appears, select the directory `src` from the `gwt-maps` project you created previously.  
  1 Use the _Up_ and _Down_ button to move the _src_ folders to the top of the _User Entries_ list.  Make sure that the _!MapsTutorial (default classpath)_ is at the bottom of the list.
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic4.png
 
-== Creating a Small Project using the Google Maps API ==
 
-Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
-
-=== Modify !MapsTutorial.gwt.xml ===
-
-Since this example will use the Google Maps API, we need to modify the default `MapsTutorial.gwt.xml` file in two ways:
-
-  1 Add an `<inherits>` entry to pull in the GWT Google APIs module for Google Maps.
-  1 Add a reference to the Google Maps !JavaScript API.  
-
-Note that in order to use the Maps API, you need to apply for a Google Maps API key.  A key that will work with `localhost` is provided for development purposes, but you will need to apply for your own key to deploy to a website.
-
-{{{
- <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
- <inherits name="com.google.gwt.maps.GoogleMaps" />
-
- <!--
-    If you want to deploy this application outside of localhost,
-    you must obtain a Google Maps API key at:
-    http://www.google.com/apis/maps/signup.html
-    Replace the src attribute below with a URL that contains your key.
-  -->
- <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
-
-}}}
-
-=== Update the HTML host file ===
-
-Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/public/MapsTutorial.html` with a `<div>` tag that we can use for the GWT application.
-
-{{{
-<body>
-
-    <h1>MapsTutorial</h1>
-
-    <div id="mapsTutorial">
-
-</body>
-}}}
-
-=== Add a map object to .java source ===
-
-To complete the `MapsTutorial.java` file, add some imports, a member to store a `MapWidget` instance, and replace the body of the `onModuleLoad()` method. 
-
-{{{
-package com.example.google.gwt.mapstutorial.client;
-
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.maps.client.InfoWindowContent;
-import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
-import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.ui.RootPanel;
-
-public class MapsTutorial implements EntryPoint {
-  private MapWidget map;
-
-  // GWT module entry point method.
-  public void onModuleLoad() {
+Now you are ready to build a project!
