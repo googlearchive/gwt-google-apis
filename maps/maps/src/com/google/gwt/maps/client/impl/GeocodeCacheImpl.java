@@ -17,20 +17,19 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.jsio.client.Binding;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 
 /**
- * 
+ * JSIO Wrapper for the GGeocodeCache class.
  */
 public interface GeocodeCacheImpl extends JSFlyweightWrapper {
 
   GeocodeCacheImpl impl = GWT.create(GeocodeCacheImpl.class);
 
   @Binding
-  void bind(JavaScriptObject jsoPeer, GeocodeCache cache);
+  void bind(JavaScriptObject jsoPeer, ExportedGeocodeCache cache);
 
   @Constructor("$wnd.GFactualGeocodeCache")
   JavaScriptObject constructFactualGeocodeCache();
@@ -38,11 +37,13 @@ public interface GeocodeCacheImpl extends JSFlyweightWrapper {
   @Constructor("$wnd.GGeocodeCache")
   JavaScriptObject constructGeocodeCache();
 
-  boolean isCachable(GeocodeCache cache, JavaScriptObject reply);
+  JavaScriptObject get(JavaScriptObject jsoPeer, String address);
 
-  void put(GeocodeCache cache, String address, JavaScriptObject reply);
+  boolean isCachable(JavaScriptObject jsoPeer, JavaScriptObject reply);
 
-  void reset(GeocodeCache cache);
+  void put(JavaScriptObject jsoPeer, String address, JavaScriptObject reply);
 
-  String toCanonical(GeocodeCache cache, String address);
+  void reset(JavaScriptObject jsoPeer);
+
+  String toCanonical(JavaScriptObject jsoPeer, String address);
 }

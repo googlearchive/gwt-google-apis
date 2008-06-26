@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.client.geocode;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
@@ -34,7 +35,7 @@ public class GeocodeTest extends GWTTestCase {
     final String postalCode;
     final String state;
     final String street;
-    
+
     PlacemarkMock(String addressQuery, String jsonString, String street,
         String city, String postalCode, String county, String state,
         String countryCode) {
@@ -223,5 +224,60 @@ public class GeocodeTest extends GWTTestCase {
       }
     });
     delayTestFinish(ASYNC_DELAY_MSEC * 2);
+  }
+
+  /**
+   * Test subclassing AbstractGeocoderCache.
+   */
+  public void testSubclassGeocoderCache() {
+
+    class MyGeocodeCache extends CustomGeocodeCache {
+      int numTimesGetCalled = 0;
+      int numTimesPutCalled = 0;
+      int numTimesToCanonicalCalled = 0;
+
+      @Override
+      public JavaScriptObject get(String address) {
+        JavaScriptObject result = super.get(address);
+        numTimesGetCalled++;
+        return result;
+      }
+
+      @Override
+      public void put(String address, JavaScriptObject reply) {
+        super.put(address, reply);
+        numTimesPutCalled++;
+      }
+
+      @Override
+      public String toCanonical(String address) {
+        String result = super.toCanonical(address);
+        numTimesToCanonicalCalled++;
+        return result;
+      }
+    }
+
+    /**
+     * Create a Geocoder with the custom GeocodeCache for the cache
+     * implementation.
+     */
+    final String testAddress = goodTestPlacemarks[0].getAddressQuery();
+    final MyGeocodeCache myGeocodeCache = new MyGeocodeCache();
+    Geocoder geocoder = new Geocoder(myGeocodeCache);
+
+    geocoder.getLatLng(testAddress, new LatLngCallback() {
+      public void onFailure() {
+        assertTrue("Geocode of " + testAddress + " failed.", false);
+      }
+
+      public void onSuccess(LatLng point) {
+        assertTrue("get() not called", myGeocodeCache.numTimesGetCalled > 0);
+        assertTrue("put() not called", myGeocodeCache.numTimesPutCalled > 0);
+        assertTrue("toCanonical() not called",
+            myGeocodeCache.numTimesToCanonicalCalled > 0);
+        finishTest();
+      }
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 }

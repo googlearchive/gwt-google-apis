@@ -16,88 +16,75 @@
 package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
-import com.google.gwt.maps.client.impl.GeocodeCachePrototype;
-import com.google.gwt.maps.jsio.client.Exported;
 
 /**
+ * A base class used to represent a client side cache for Geocoder requests.
  * 
- * This class is both functional and a base class so the user can extend it.
+ * This class is a base class but is not intended to be extended directly. For a
+ * functional class that you can also extend, see {@link CustomGeocodeCache}.
  */
-public class GeocodeCache {
+public abstract class GeocodeCache {
 
-  // TODO(zundel): Needs to be modeled after Overlay & ConcreteOverlay
-  // (prototype pattern?)
-
-  static class ConcreteGeocodeCache extends GeocodeCache {
-    public ConcreteGeocodeCache(JavaScriptObject jsoPeer) {
-      super(jsoPeer);
-    }
-
-    @Override
-    public boolean isCacheable(JavaScriptObject reply) {
-      return GeocodeCacheImpl.impl.isCachable(this, reply);
-    }
-
-    @Override
-    public void put(String address, JavaScriptObject reply) {
-      GeocodeCacheImpl.impl.put(this, address, reply);
-    }
-
-    @Override
-    public void reset() {
-      GeocodeCacheImpl.impl.reset(this);
-    }
-
-    @Override
-    public String toCanonical(String address) {
-      return GeocodeCacheImpl.impl.toCanonical(this, address);
-    }
+  @SuppressWarnings("unused")
+  private static GeocodeCache createPeer(JavaScriptObject jsoPeer) {
+    return new CustomGeocodeCache(jsoPeer);
   }
 
-  static GeocodeCache createPeer(JavaScriptObject jsoPeer) {
-    return new ConcreteGeocodeCache(jsoPeer);
+  protected JavaScriptObject jsoPeer;
+
+  protected GeocodeCache() {
   }
 
-  private final JavaScriptObject jsoPeer;
-
-  public GeocodeCache() {
-    jsoPeer = GeocodeCacheImpl.impl.constructGeocodeCache();
-    GeocodeCacheImpl.impl.bind(jsoPeer, this);
-  }
-
-  private GeocodeCache(JavaScriptObject jsoPeer) {
+  protected GeocodeCache(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
 
-  // TODO: get() is too generic. Can we be more specific
-  @Exported
-  public JavaScriptObject get(String address) {
-    return GeocodeCachePrototype.impl.get(this, address);
-  }
+  /**
+   * Returns the reply which was stored under the given address. If no reply was
+   * ever stored for the given address, this method returns <code>null</code>
+   * 
+   * @param address the address used as a key to lookup.
+   * @return the previously cached result.
+   */
+  public abstract JavaScriptObject get(String address);
 
-  // TODO(samgross): cacheable or cachable? I think cacheable is the preferred
-  // spelling,
-  // but, Maps API uses cachable
+  /**
+   * Returns whether or not the given reply should be cached. By default very
+   * rudimentary checks are performed on the reply object. In particular, this
+   * class makes sure that the object is not <code>null</code> and that it has
+   * the name field . This method may be overridden by extending classes to
+   * provide more precise conditions on the reply object.
+   * 
+   * @param reply the reply to test.
+   * @return true if the value can be cached.
+   */
+  public abstract boolean isCacheable(JavaScriptObject reply);
 
-  @Exported
-  public boolean isCacheable(JavaScriptObject reply) {
-    return GeocodeCachePrototype.impl.isCachable(this, reply);
-  }
+  /**
+   * Stores the given reply under the given address. This method calls the
+   * {@link #isCachable} method to verify that the reply may be cached. If it
+   * gets a go-ahead, it caches the reply under the address normalized with the
+   * help of the {@link #toCanoninical} method.
+   * 
+   * @param address the address used in the query.
+   * @param reply the reply value to cache.
+   */
+  public abstract void put(String address, JavaScriptObject reply);
 
-  @Exported
-  public void put(String address, JavaScriptObject reply) {
-    GeocodeCachePrototype.impl.put(this, address, reply);
-  }
+  /**
+   * Purges all replies from the cache. After this method returns, the cache is
+   * empty.
+   */
+  public abstract void reset();
 
-  @Exported
-  public void reset() {
-    GeocodeCachePrototype.impl.reset(this);
-  }
-
-  @Exported
-  public String toCanonical(String address) {
-    return GeocodeCachePrototype.impl.toCanonical(this, address);
-  }
+  /**
+   * Returns what is considered a canonical version of the address. It converts
+   * the address parameter to lower case, replaces commas with spaces and
+   * replaces multiple spaces with one space.
+   * 
+   * @param address the address to convert to canonical form.
+   * @return the address in canonical form.
+   */
+  public abstract String toCanonical(String address);
 
 }
