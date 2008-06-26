@@ -21,6 +21,7 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
+import com.google.gwt.maps.client.control.HierarchicalMapTypeControl;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.Window;
@@ -74,8 +75,9 @@ public class CustomControlDemo extends MapsDemo {
   }
 
   private enum ControlDemos {
-    TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"), TEST_TEXT_CUSTOM_ZOOM_CONTROL(
-        "Use a custom Text Zoom Control");
+    TEST_HIERARCHICAL_CONTROL(
+    "Hierarchical Control"), TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"), TEST_TEXT_CUSTOM_ZOOM_CONTROL(
+            "Use a custom Text Zoom Control");
 
     final String value;
 
@@ -143,6 +145,11 @@ public class CustomControlDemo extends MapsDemo {
     }
 
     @Override
+    public boolean isSelectable() {
+      return false;
+    }
+
+    @Override
     protected Widget initialize(final MapWidget map) {
       Panel container = new FlowPanel();
       Button zoomInButton = new Button("Zoom In");
@@ -164,11 +171,6 @@ public class CustomControlDemo extends MapsDemo {
       container.add(zoomOutButton);
       return container;
     }
-
-    @Override
-    public boolean isSelectable() {
-      return false;
-    }
   }
 
   private static HTML descHTML = null;
@@ -181,6 +183,8 @@ public class CustomControlDemo extends MapsDemo {
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/control-custom.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/control-custom.html</a></p>\n";
+
+  private static HierarchicalMapTypeControl hControl;
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -202,6 +206,21 @@ public class CustomControlDemo extends MapsDemo {
         return "Custom Map Controls";
       }
     };
+  }
+
+  /**
+   * Provide access to the HierarchicalMapTypeControl singleton.
+   * @return
+   */
+  private static HierarchicalMapTypeControl getHierarchicalMapTypeControl() {
+    if (hControl != null) {
+      return hControl;
+    }
+    hControl = new HierarchicalMapTypeControl();
+    hControl.addRelationship(MapType.getNormalMap(), MapType.getMarsVisibleMap(), "Mars visible");
+    hControl.addRelationship(MapType.getNormalMap(), MapType.getMarsInfraredMap(), "Mars infrared");
+    hControl.addRelationship(MapType.getNormalMap(), MapType.getMarsElevationMap(), "Mars elevation", true);
+    return hControl;
   }
 
   private final ListBox actionListBox;
@@ -236,6 +255,9 @@ public class CustomControlDemo extends MapsDemo {
     map.setSize("600px", "400px");
     map.addMapType(MapType.getNormalMap());
     map.addMapType(MapType.getSatelliteMap());
+    map.addMapType(MapType.getMarsVisibleMap());
+    map.addMapType(MapType.getMarsElevationMap());
+    map.addMapType(MapType.getMarsInfraredMap());
     vertPanel.add(map);
 
     initWidget(vertPanel);
@@ -261,6 +283,9 @@ public class CustomControlDemo extends MapsDemo {
         break;
       case TEST_TEXT_CUSTOM_ZOOM_CONTROL:
         currentControl = new TextualZoomControl();
+        break;
+      case TEST_HIERARCHICAL_CONTROL:
+        currentControl = getHierarchicalMapTypeControl();
         break;
       default:
         Window.alert("Unknown selection: " + selected.valueOf());
