@@ -411,6 +411,17 @@ public class Marker extends ConcreteOverlay {
   }
 
   /**
+   * Returns the title of this marker, as set by the constructor via the
+   * {@link MarkerOptions#setTitle(String)} method. Returns <code>null</code>
+   * if no title is passed in.
+   * 
+   * @return  the title of this marker.
+   */
+  public String getTitle() {
+    return MarkerImpl.impl.getTitle(this);
+  }
+
+  /**
    * See if this Marker was created as a draggable marker type, that is, the
    * draggable option was set in MarkerOptions when it was constructed.
    * 

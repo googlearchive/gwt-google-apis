@@ -49,6 +49,8 @@ public interface MarkerImpl extends JSFlyweightWrapper {
 
   LatLng getPoint(Marker marker);
 
+  String getTitle(Marker marker);
+  
   void hide(Marker marker);
 
   boolean isHidden(Marker marker);
