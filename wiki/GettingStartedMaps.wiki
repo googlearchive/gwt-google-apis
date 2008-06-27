@@ -4,7 +4,6 @@
 
 This section describes the Google Maps library [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT) wrapper APIs.  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/maps/ Maps developer's site].
 
-
 The Google Maps API provides a very rich developer toolkit for manipulating maps.  As such, there are many classes in the wrapper APIs.  
 
 = Creating a Sample Project using Google Maps =
@@ -20,6 +19,10 @@ The `gwt-maps` distribution contains a sample project in the `samples` directory
 == Naming ==
 
 The Maps API prepends all methods with the letter `G`.  The GWT wrappers drop this prefix.
+
+== Constant Values ==
+
+In many cases, where the Maps API provides a constant value, the GWT wrappers will provide a class with an accessor method to retrive the value.  This is primarily for run-time efficiency and compact code generation in GWT.  Creating a separate Java constant value would require the constant to be copied at run time.
 
 == Event Handling ==
 

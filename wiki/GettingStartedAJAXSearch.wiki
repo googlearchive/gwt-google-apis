@@ -29,21 +29,21 @@ You can look at and modify the sample code in the `samples/ajaxsearch` directory
 
 == Creating a project that uses AJAX Search ==
 
-You can start off by generating a project using `projectCreator` and applicationCreator` in the usual way  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-ajaxsearch.jar` to the classpath and the `AjaxSearch.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
+You can start off by generating a project using `projectCreator` and `applicationCreator` in the usual way  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-ajaxsearch.jar` to the classpath and the `AjaxSearch.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
 
 === Creating a Skeleton Project ===
 
 {{{
 $PP_OFF
-$ projectCreator -eclipse SimpleSearch -out SimpleAXearch \
-     -addToClassPath /usr/local/ajaxsearch/gwt-ajaxsearch.jar
-Created directory SimpleAXearch/src
-Created directory SimpleAXearch/test
-Created file SimpleAXearch/.project
-Created file SimpleAXearch/.classpath
+$ projectCreator -eclipse SimpleSearch -out SimpleSearch \
+     -addToClassPath /usr/local/gwt-ajaxsearch/gwt-ajaxsearch.jar
+Created directory SimpleSearch/src
+Created directory SimpleSearch/test
+Created file SimpleSearch/.project
+Created file SimpleSearch/.classpath
 
 $ applicationCreator -eclipse SimpleSearch -out SimpleSearch \
-     -addToClassPath /usr/local/ajaxsearch/gwt-ajaxsearch.jar \
+     -addToClassPath /usr/local/gwt-ajaxsearch/gwt-ajaxsearch.jar \
      -addModule com.google.gwt.ajaxsearch.AjaxSearch com.example.simplesearch.client.SimpleSearch
 Created directory SimpleSearch/src
 Created directory SimpleSearch/src/com/example/simplesearch
@@ -56,20 +56,166 @@ Created file SimpleSearch/src/com/example/simplesearch/client/SimpleSearch.java
 Created file SimpleSearch/SimpleSearch.launch
 Created file SimpleSearch/SimpleSearch-shell
 Created file SimpleSearch/SimpleSearch-compile
-
 }}}
 
-You can compile this project to see if it works.
+You can compile this project to see if it works with `SimpleSearch-compile`.
 
-== Adding a !SearchControl ==
+{{{
+$ ./SimpleSearch-compile
+Compiling module com.example.simplesearch.SimpleSearch
+Compilation succeeded
+Linking compilation into ./www/com.example.simplesearch.SimpleSearch
+}}}
 
-   _TBD_
 
-== Adding a !SearchListener ==
+Now, you need to add a reference to the AJAX Search API script in the `SimpleSearch.gwt.xml` file:
 
-   _TBD_
+{{{
+ <!--
+      If you want to deploy this application outside of localhost,
+      you must obtain a Google AJAX Search API key at:
+        http://code.google.com/apis/ajaxsearch/signup.html
+      Replace the string ABC in the src attribute below with the key
+      obtained from the site above.
+     -->
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0;key=ABC"/>
+    
+}}}
 
-== Adding a !KeepListener ==
 
-   _TBD_
+== General API usage ==
+
+To create a search, you must 
+
+# Choose one or more types of searches:  
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/com/google/gwt/ajaxsearch/client/WebSearch.html WebSearch]
+  *  NewsSearch
+  * VideoSearch
+  * ImageSearch
+# Add the search objects to a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/com/google/gwt/ajaxsearch/client/SearchControlOptions.html SearchControlOptions] object
+# Register a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/com/google/gwt/ajaxsearch/client/SearchControlListener SearchControlListener.html] on the SearchControlOptions object
+# Create a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/com/google/gwt/ajaxsearch/client/SearchControl.html SearchControl] object from the `SearchControlOptions`
+# Call the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/com/google/gwt/ajaxsearch/client/SearchControl.html#execute(/java/lang/String)execute] method to specify a search term and start the search .
+
+
+== Adding !SearchControl to the page ==
+
+The API can easily generate a nicely formatted presentation of the results. Here is an example of how to search for both web and image results and present them on the page using the API's built in HTML rendering:
+
+{{{
+import com.google.gwt.ajaxsearch.client.ExpandMode;
+import com.google.gwt.ajaxsearch.client.ImageSearch;
+import com.google.gwt.ajaxsearch.client.ResultSetSize;
+import com.google.gwt.ajaxsearch.client.SearchControl;
+import com.google.gwt.ajaxsearch.client.SearchControlOptions;
+import com.google.gwt.ajaxsearch.client.WebSearch;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootPanel;
+
+public class SimpleSearch implements EntryPoint {
+
+  public void onModuleLoad() {
+
+    SearchControlOptions options = new SearchControlOptions();
+    WebSearch webSearch = new WebSearch();
+    webSearch.setResultSetSize(ResultSetSize.LARGE);
+    options.add(webSearch);
+    ImageSearch imageSearch = new ImageSearch();
+    options.add(imageSearch, ExpandMode.OPEN);
+    final SearchControl control = new SearchControl(options);
+    control.execute("treehouse");
+    RootPanel.get().add(control);
+  }
+}
+}}}
+
+And here is a screen capture of what the results look like running in hosted mode.
+
+  [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch2.png]
+
+
+== Using a !SearchControl with a !SearchListener ==
+
+The following example allows the user to run a search and displays the results in a short table.
+
+{{{
+import com.google.gwt.ajaxsearch.client.Result;
+import com.google.gwt.ajaxsearch.client.Search;
+import com.google.gwt.ajaxsearch.client.SearchControl;
+import com.google.gwt.ajaxsearch.client.SearchControlOptions;
+import com.google.gwt.ajaxsearch.client.SearchListener;
+import com.google.gwt.ajaxsearch.client.WebResult;
+import com.google.gwt.ajaxsearch.client.WebSearch;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+public class SimpleSearch implements EntryPoint {
+  int currentRow;
+  FlexTable resultsTable;
+
+  /**
+   * This is the entry point method.
+   */
+  public void onModuleLoad() {
+
+    resultsTable = new FlexTable();
+    SearchControlOptions options = new SearchControlOptions();
+    
+    WebSearch webSearch = new WebSearch();
+    // Choose no HTML generation for quicker results.
+    webSearch.setNoHtmlGeneration();
+    options.add(webSearch);
+    final SearchControl control = new SearchControl(options);
+    control.addSearchListener(new SearchListener() {
+
+      public void onSearchResult(Search searchIn, Result resultIn) {
+        WebSearch search = (WebSearch) searchIn;
+        WebResult result = (WebResult) resultIn;
+        ++currentRow;
+        
+        resultsTable.setText(currentRow, 0, "" + currentRow);
+        resultsTable.setHTML(currentRow, 1, "<a href=\"" + result.getUrl() + "\">" 
+            + result.getTitle() + "</a>");
+      }
+
+    });
+    final TextBox textBox = new TextBox();
+    textBox.setText("treehouse");
+    Button button = new Button("Run Search");
+    button.addClickListener(new ClickListener() {
+
+      public void onClick(Widget sender) {
+        for (int i = 0 ; resultsTable.getRowCount() > 0; ++i) {
+          resultsTable.removeRow(0);
+        }
+        currentRow = 0;
+        control.execute(textBox.getText());
+      }
+
+    });
+
+    VerticalPanel vp = new VerticalPanel();
+    vp.add(textBox);
+    vp.add(button);
+    vp.add(resultsTable);
+    
+    RootPanel.get().add(vp);
+
+  }
+}
+}}}
+
+
+Here is a screen capture of the resulting application in hosted mode.
+  
+  [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch-nohtml.png]
+
+
+
 
