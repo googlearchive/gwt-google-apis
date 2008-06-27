@@ -21,8 +21,9 @@
       If you want to deploy this application outside of localhost,
       you must obtain a Google AJAX Search API key at:
         http://code.google.com/apis/ajaxsearch/signup.html
-      Replace the src attribute below with a URL that contains your key.
+      Replace the string ABC in the src attribute below with the key
+      obtained from the site above.
      -->
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0"/>
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;key=ABC"/>
     
 </module>
