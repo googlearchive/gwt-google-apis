@@ -1,0 +1,23 @@
+#summary Contributing to the Google API Library for Google Web Toolkit
+
+= Introduction =
+A guide for how to create GWT bindings for JS APIs.
+
+See [??? Making GWT Better] to get started.
+
+* Directory structure conventions
+* package structure
+* Build requirements (ant, GWT_TOOLS)
+   * Required ant targets
+   * Unit tests for wrapped functionality
+   * samples
+* Design Goals:
+   * Take JS constructs & make them easy to use for Java developers (type safe-ness)
+   * Javadoc should stand on its own
+   * Small/Easy to use
+   * Optimizable in terms of resulting code size.  Wrappers should not incur a large runtime cost.
+* [DesigningAPIWrappers Binding design guidelines]
+* Loading Patterns
+   * Put it in API provided module.gwt.xml
+   * Put it in user's .gwt.xml
+   * (need ajaxloader sol'n)
