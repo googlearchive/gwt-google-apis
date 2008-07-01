@@ -19,7 +19,8 @@ import com.google.gwt.ajaxsearch.jsio.client.Exported;
 import com.google.gwt.ajaxsearch.jsio.client.JSFunction;
 
 /**
- * 
+ * Argument passed to
+ * {@link GSearch#setSearchCompleteCallback(com.google.gwt.ajaxsearch.client.Search, com.google.gwt.core.client.JavaScriptObject, GSearchCompleteCallback)}.
  */
 public abstract class GSearchCompleteCallback extends JSFunction {
   @Exported

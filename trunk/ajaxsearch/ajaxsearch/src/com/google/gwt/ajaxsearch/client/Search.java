@@ -65,7 +65,8 @@ public abstract class Search {
 
   /**
    * Add a SearchListener to receive notifications when Results are created
-   * after executing the Search.
+   * after executing the Search. This search will fire when searches created by
+   * {@link Search#execute(String)} complete.
    * 
    * @param l The listener to add
    */
