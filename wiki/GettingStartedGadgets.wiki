@@ -244,9 +244,11 @@ The output of the compiler will have:
        * A user preference value specification, 
        * Some !JavaScript code for initializing the Gadget API and loading one of the compiler permutations.
 
-== Syndicating your Gadget ==
+== Uploading and Syndicating your Gadget ==
 
-  For debugging your gadget, register the URL for your gadget spec file (the `.gadget.xml` file created when you compile) using Syndication.  See [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] or search for the Syndication gadget in the iGoogle content directory.  After the URL is registered, you can add it to your iGoogle page, or create a simple host web page using the 'Get the Code' button.
+First, you should take the output files from the compiler and upload them all to the same directory on a web server.
+
+For debugging your gadget, register the URL for your gadget spec file (the `.gadget.xml` file created when you compile in the place it has been uploaded to) using Syndication.  See [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] or search for the Syndication gadget in the iGoogle content directory.  After the URL is registered, you can add it to your iGoogle page, or create a simple host web page using the 'Get the Code' button.
 
 Once your debugging is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory]. 
 
