@@ -51,5 +51,29 @@ public class AJAXSearchTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
     searchControl.execute("AJAX");
   }
+  
+  /**
+   * Test a listener attached to a Search object.
+   */
+  public void testSearchSearchListener() {
+    SearchControlOptions options = new SearchControlOptions();
+    WebSearch ws = new WebSearch();
+    ws.setResultSetSize(ResultSetSize.SMALL);
+    ws.addSearchListener(new SearchListener() {
+
+      public void onSearchResult(Search search, Result result) {
+        assertNotNull("Simple Image Search: search", search);
+        assertNotNull("Simple Image Search: result", result);
+        assertEquals("Search class name", WebSearch.class.getName(),
+            search.getClass().getName());
+        assertEquals("Result class name", WebResult.class.getName(),
+            result.getClass().getName());
+        finishTest();
+      }
+
+    });
+        delayTestFinish(ASYNC_DELAY_MSEC);
+    ws.execute("AJAX");
+  }
 
 }
