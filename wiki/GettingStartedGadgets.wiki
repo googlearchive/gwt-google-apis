@@ -24,7 +24,7 @@ These differences derive from several the fact that a Gadget must adhere to a sp
 
 == Writing a Simple Gadget ==
 
-You can start off by generating a project using `projectCreator` and applicationCreator` in the usual way.  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-gadgets.jar` to the classpath and the `Gadgets.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
+You can start off by generating a project using `projectCreator` and `applicationCreator` in the usual way.  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-gadgets.jar` to the classpath and the `Gadgets.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
 
 === Creating a Skeleton Project ===
 {{{
@@ -232,7 +232,7 @@ Here is a screen shot of the resulting gadget's preferences menu in iGoogle:
 
 === Compiling your Gadget ===
 
-Use the SampleGadget-compile shell script to build your project, or use any other method to invoke the GWT compiler on the module `SampleGadget.gwt.xml1.
+Use the SampleGadget-compile shell script to build your project, or use any other method to invoke the GWT compiler on the module `SampleGadget.gwt.xml`.
 
 The output of the compiler will have:
    * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
