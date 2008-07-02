@@ -79,6 +79,21 @@ APPDIR=`dirname $0`;
 java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
 }}}
 
+Finally, we need to update the module to include the Maps project module file and the Google Maps API script.  Edit `MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml` and add the following lines:
+
+{{{
+ <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
+ <inherits name="com.google.gwt.maps.GoogleMaps" />
+
+ <!--
+    If you want to deploy this application outside of localhost,
+    you must obtain a Google Maps API key at:
+    http://www.google.com/apis/maps/signup.html
+    Replace the src attribute below with a URL that contains your key.
+  -->
+ <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=???" />
+}}}
+
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
 
 === Import the Eclipse project from the GWT Google APIs source code ===
