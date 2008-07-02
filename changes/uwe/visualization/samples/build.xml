@@ -16,7 +16,9 @@
 
         <!-- temporarily removed targets - until samples are committed -->
 	<!--target name="-do" depends="hellovisualization,myvisualization" description="Run all subprojects" /-->
-	<target name="-do" description="Run all subprojects" />
+	<target name="-do" description="Run all subprojects">
+		<mkdir dir="${project.build}/samples" />
+        </target>
 
 	<target name="build" description="Builds Visualization API Library for GWT Samples">
 		<antcall target="-do">
