@@ -1,0 +1,77 @@
+<project name="doc" default="build" basedir=".">
+	<property name="gwt.root" location=".." />
+	<property name="project.tail" value="doc" />
+	<import file="${gwt.root}/common.ant.xml" />
+
+	<property.ensure name="java.tools.path" location="${java.home}/../lib/tools.jar" unless="build.host.ismac" message="Cannot find ${java.home}/../lib/tools.jar; please use a JDK when building doc rather than a JRE." />
+
+	<property name="API_PKGS" value="com.google.gwt.visualization.client" />
+
+	<property name="api.name" value="visualization" />
+
+	<!--
+		*** Note that if the API_SOURCE_PATH paths are updated,
+		the fileset dependencies in the outofdate tags in the doc,
+		gadgets, and javadoc targets must be updated as well.
+	-->
+	<path id="API_SOURCE_PATH">
+		<pathelement location="${gwt.root}/${api.name}/src" />
+		<pathelement location="${gwt.root}/${api.name}/javadoc" />
+	</path>
+
+	<path id="API_CLASS_PATH">
+		<pathelement location="${gwt.build.lib}/${api.name}.jar" />
+		<pathelement location="${gwt.user.jar}" />
+		<pathelement location="${gwt.dev.jar}" />
+		<pathelement location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
+	</path>
+
+	<path id="DOC_PATH">
+		<pathelement location="./src" />
+		<pathelement location="${gwt.doctool.jar}" />
+		<path path="${java.tools.path}" />
+		<path refid="API_SOURCE_PATH" />
+	</path>
+
+	<target name="javadoc">
+		<outofdate>
+			<sourcefiles>
+				<fileset file="./src/${api.name}.html" />
+				<fileset dir="${gwt.root}/${api.name}/src">
+					<include name="**/*.java" />
+				</fileset>
+				<fileset dir="${gwt.root}/${api.name}/javadoc">
+					<include name="**/*.java" />
+				</fileset>
+			</sourcefiles>
+			<targetfiles>
+				<!--
+					only checks one output file, will not rebuild other
+					files if this one is up to date
+				-->
+				<pathelement path="${project.build}/javadoc/index.html" />
+			</targetfiles>
+			<sequential>
+				<echo>Building javadoc</echo>
+				<java classpathref="DOC_PATH" classname="com.google.doctool.custom.GWTJavaDoclet" fork="yes" failonerror="true">
+					<arg value="-quiet" />
+					<arg value="-source" />
+					<arg value="1.5" />
+					<arg value="-encoding" />
+					<arg value="UTF-8" />
+					<arg value="-d" />
+					<arg value="${project.build}/javadoc" />
+					<arg value="-classpath" />
+					<arg pathref="API_CLASS_PATH" />
+					<arg value="-sourcepath" />
+					<arg pathref="API_SOURCE_PATH" />
+					<arg value="-packages" />
+					<arg value="${API_PKGS}" />
+				</java>
+			</sequential>
+		</outofdate>
+	</target>
+
+	<target name="build" depends="javadoc" />
+</project>
+
