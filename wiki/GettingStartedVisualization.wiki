@@ -1,6 +1,7 @@
 #summary GWT bindings for the Google Visualization API
 
+= Google Visualization API = 
+
 _TBD_
 
-See [http://code.google.com/apis/visualization/ Google Visualization developer's codesite].
-
+For documentation on the Visualization API, see the [http://code.google.com/apis/visualization/ Google Visualization developer's codesite].
