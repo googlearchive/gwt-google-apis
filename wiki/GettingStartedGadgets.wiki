@@ -254,4 +254,15 @@ Once your debugging is complete, you can list your gadget in the [http://code.go
 
 == Debugging your Gadget in Hosted Mode ==
 
-  _TBD_
+Here are the steps to debug your gadget code in Hosted mode:
+
+   1 Compile your gadget.  You can do this by running your gadget in hosted mode and pressing the 'Compile/Browse' button or by invoking the compiler from the command line.  If you followed the instructions above, you should have a shell script named `SimpleGadget-compile`.
+   1 Upload the files output from the compiler a webserver.  
+   1 Publish your gadget (using [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Syndication] is the easiest way)
+   1 Add your gadget to your [http://www.google.com/ig iGoogle] home page.
+   1 Start up hosted mode with the "-noserver" argument.  You can add this argument in to your IDE launch config, or edit `SimpleGadget-shell` and insert the `-noserver` argument after `com.google.gwt.dev.GWTShell`. 
+   1 Type the url `http://www.google.com/igoogle` into the hosted mode browser url window.
+
+Now your gadget client code is running in hosted mode.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch from your IDE with the debugging step.)
+
+  _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
