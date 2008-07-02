@@ -16,7 +16,6 @@
 	-->
 	<path id="API_SOURCE_PATH">
 		<pathelement location="${gwt.root}/${api.name}/src" />
-		<pathelement location="${gwt.root}/${api.name}/javadoc" />
 	</path>
 
 	<path id="API_CLASS_PATH">
@@ -38,9 +37,6 @@
 			<sourcefiles>
 				<fileset file="./src/${api.name}.html" />
 				<fileset dir="${gwt.root}/${api.name}/src">
-					<include name="**/*.java" />
-				</fileset>
-				<fileset dir="${gwt.root}/${api.name}/javadoc">
 					<include name="**/*.java" />
 				</fileset>
 			</sourcefiles>
