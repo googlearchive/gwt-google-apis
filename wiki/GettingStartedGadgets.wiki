@@ -265,4 +265,15 @@ Here are the steps to debug your gadget code in Hosted mode:
 
 Now your gadget client code is running in hosted mode.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch from your IDE with the debugging step.)
 
-  _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
+  _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets and/or your launch configurations to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
+
+  _Note: It is normal to see the following error when debugging a gadget in hosted mode:
+{{{
+[ERROR] Unable to load module entry point class com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets (see associated exception for details)
+java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStart with 1 arguments.
+	at com.google.gwt.dev.shell.moz.LowLevelMoz.invoke(LowLevelMoz.java:132)
+	at com.google.gwt.dev.shell.moz.ModuleSpaceMoz.doInvoke(ModuleSpaceMoz.java:98)
+	at com.google.gwt.dev.shell.ModuleSpace.invokeNative(ModuleSpace.java:434)
+        ...
+}}}
+  This is because there is no entry point in the module to run._
