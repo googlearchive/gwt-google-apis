@@ -18,11 +18,18 @@ package com.google.gwt.maps.client.overlay;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.maps.client.event.PolygonCancelLineHandler;
 import com.google.gwt.maps.client.event.PolygonClickHandler;
+import com.google.gwt.maps.client.event.PolygonEndLineHandler;
+import com.google.gwt.maps.client.event.PolygonLineUpdatedHandler;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler;
+import com.google.gwt.maps.client.event.PolygonCancelLineHandler.PolygonCancelLineEvent;
 import com.google.gwt.maps.client.event.PolygonClickHandler.PolygonClickEvent;
+import com.google.gwt.maps.client.event.PolygonEndLineHandler.PolygonEndLineEvent;
+import com.google.gwt.maps.client.event.PolygonLineUpdatedHandler.PolygonLineUpdatedEvent;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler.PolygonRemoveEvent;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
@@ -120,7 +127,10 @@ public final class Polygon extends ConcreteOverlay {
     return result;
   }
 
+  private HandlerCollection<PolygonCancelLineHandler> polygonCancelLineHandlers;
   private HandlerCollection<PolygonClickHandler> polygonClickHandlers;
+  private HandlerCollection<PolygonEndLineHandler> polygonEndLineHandlers;
+  private HandlerCollection<PolygonLineUpdatedHandler> polygonLineUpdatedHandlers;
   private HandlerCollection<PolygonRemoveHandler> polygonRemoveHandlers;
 
   /**
@@ -150,8 +160,46 @@ public final class Polygon extends ConcreteOverlay {
         strokeWeight, strokeOpacity, fillColor, fillOpacity));
   }
 
+  /**
+   * Create a polygon from an array of points, specifying optional parameters.
+   * 
+   * @param points the points to construct the polygon.
+   * @param strokeColor The line color, a string that contains the color in
+   *          hexadecimal numeric HTML style, i.e. #RRGGBB.
+   * @param strokeWeight The width of the line in pixels.
+   * @param strokeOpacity The opacity of the line - a value between 0.0 and 1.0.
+   * @param fillColor The fill color, a string that contains the color in
+   *          hexadecimal numeric HTML style, i.e. #RRGGBB.
+   * @param fillOpacity The opacity of the fill - a value between 0.0 and 1.0.
+   * @param options additional options
+   */
+  public Polygon(LatLng[] points, String strokeColor, int strokeWeight,
+      double strokeOpacity, String fillColor, double fillOpacity,
+      PolygonOptions options) {
+    super(PolygonImpl.impl.construct(JsUtil.toJsList(points), strokeColor,
+        strokeWeight, strokeOpacity, fillColor, fillOpacity, options));
+  }
+
   private Polygon(JavaScriptObject jsoPeer) {
     super(jsoPeer);
+  }
+
+  /**
+   * This event is fired when the polygon is being edited and the edit is
+   * canceled. See {@link Polygon#setEditingEnabled(boolean)}
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addPolygonCancelLineHandler(final PolygonCancelLineHandler handler) {
+    maybeInitPolygonCancelLineHandlers();
+
+    polygonCancelLineHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        PolygonCancelLineEvent e = new PolygonCancelLineEvent(Polygon.this);
+        handler.onCancel(e);
+      }
+    });
   }
 
   /**
@@ -174,6 +222,43 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   /**
+   * This event is fired when the polygon is being edited and the edit is
+   * completed. See {@link Polygon#setEditingEnabled(boolean)}
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addPolygonEndLineHandler(final PolygonEndLineHandler handler) {
+    maybeInitPolygonEndLineHandlers();
+
+    polygonEndLineHandlers.addHandler(handler, new LatLngCallback() {
+      @Override
+      public void callback(LatLng latlng) {
+        PolygonEndLineEvent e = new PolygonEndLineEvent(Polygon.this, latlng);
+        handler.onEnd(e);
+      }
+    });
+  }
+
+  /**
+   * This event is fired when the polygon has a vertex inserted. See
+   * {@link Polygon#insertVertex(int,LatLng)}
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addPolygonLineUpdatedHandler(
+      final PolygonLineUpdatedHandler handler) {
+    maybeInitPolygonLineUpdatedHandlers();
+
+    polygonLineUpdatedHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        PolygonLineUpdatedEvent e = new PolygonLineUpdatedEvent(Polygon.this);
+        handler.onUpdate(e);
+      }
+    });
+  }
+
+  /**
    * This event is fired when the polygon is removed from the map, using
    * {@link com.google.gwt.maps.client.MapWidget#removeOverlay} or
    * {@link com.google.gwt.maps.client.MapWidget#clearOverlays}.
@@ -190,6 +275,37 @@ public final class Polygon extends ConcreteOverlay {
         handler.onRemove(e);
       }
     });
+  }
+
+  /**
+   * Removes with the given index in the polygon and updates the shape of the
+   * polygon accordingly. The Polygon must already be added to the map via
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}.
+   * 
+   * @param index the index of the vertex to remove.
+   */
+  public void deleteVertex(int index) {
+    PolygonImpl.impl.deleteVertex(jsoPeer, index);
+  }
+
+  /**
+   * Returns the area (in square meters) of the polygon, assuming a spherical
+   * Earth.
+   * 
+   * @return the area (in square meters) of the polygon, assuming a spherical
+   *         Earth.
+   */
+  public double getArea() {
+    return PolygonImpl.impl.getArea(jsoPeer);
+  }
+
+  /**
+   * Returns the bounds for this polygon.
+   * 
+   * @return the bounds for this polygon.
+   */
+  public LatLngBounds getBounds() {
+    return PolygonImpl.impl.getBounds(jsoPeer);
   }
 
   /**
@@ -222,6 +338,18 @@ public final class Polygon extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
+   * {@link Polygon#addPolygonCancelLineHandler(PolygonCancelLineHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removePolygonCancelLineHandler(PolygonCancelLineHandler handler) {
+    if (polygonCancelLineHandlers != null) {
+      polygonCancelLineHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
    * {@link Polygon#addPolygonClickHandler(PolygonClickHandler)}.
    * 
    * @param handler the handler to remove
@@ -229,6 +357,30 @@ public final class Polygon extends ConcreteOverlay {
   public void removePolygonClickHandler(PolygonClickHandler handler) {
     if (polygonClickHandlers != null) {
       polygonClickHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Polygon#addPolygonEndLineHandler(PolygonEndLineHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removePolygonEndLineHandler(PolygonEndLineHandler handler) {
+    if (polygonEndLineHandlers != null) {
+      polygonEndLineHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Polygon#addPolygonLineUpdatedHandler(PolygonLineUpdatedHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removePolygonLineUpdatedHandler(PolygonLineUpdatedHandler handler) {
+    if (polygonLineUpdatedHandlers != null) {
+      polygonLineUpdatedHandlers.removeHandler(handler);
     }
   }
 
@@ -245,6 +397,86 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   /**
+   * Allows a user to construct (or modify) a {@link Polygon} object by clicking
+   * on additional points on the map. The {@link Polygon} must already be added
+   * to the map via
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}, even if
+   * the polygon is initially unpopulated and contains no vertices. Each click
+   * adds an additional vertex to the chain, and drawing may be terminated
+   * through either a double-click or clicking again on the last point added, at
+   * which point an {@link PolygonEndLineEvent} event will be triggered if the
+   * polygon was successfully completed; otherwise, a
+   * {@link PolygonCancelLineEvent} event will be triggered, but the polygon
+   * will not be removed from the map. If modifying an existing {@link Polygon},
+   * vertices are connected from either the starting or ending points of the
+   * existing polygon, specified in the optional {link
+   * {@link PolyEditingOptions#setFromStart(boolean)}.
+   */
+  public void setDrawingEnabled() {
+    PolygonImpl.impl.enableDrawing(jsoPeer);
+  }
+
+  /**
+   * Enable drawing as in {@link Polygon#setDrawingEnabled()} but with control
+   * over the polygon drawing parameters.
+   * 
+   * @param opts parameters for the polygon editing session.
+   */
+  public void setDrawingEnabled(PolyEditingOptions opts) {
+    PolygonImpl.impl.enableDrawing(jsoPeer, opts);
+  }
+
+  /**
+   * Allows modification of an existing {@link Polylgon} chain of points. When
+   * enabled, users may select and drag existing vertices. Unless a vertex limit
+   * less than current number of vertices is specified by
+   * {@link PolyEditingOptions#setMaxVertices(int)}, "ghost" points will also
+   * be added at the midpoints of polyline sections, allowing users to
+   * interpolate new vertices by clicking and dragging these additional
+   * vertices. A {@link PolygonLineUpdatedEvent} event will be triggered
+   * whenever vertex is added or moved.
+   */
+  public void setEditingEnabled(boolean enabled) {
+    if (enabled) {
+      PolygonImpl.impl.enableEditing(jsoPeer);
+    } else {
+      PolygonImpl.impl.disableEditing(jsoPeer);
+    }
+  }
+
+  /**
+   * Enable editing as in {@link Polygone#setEditingEnabled(boolean)}, but with
+   * control over the drawing parameters.
+   * 
+   * @param opts parameters for the editing session.
+   */
+  public void setEditingEnabled(PolyEditingOptions opts) {
+    PolygonImpl.impl.enableEditing(jsoPeer, opts);
+  }
+
+  /**
+   * Changes the style of the polylgon fill. The {@link Polygon} must already be
+   * added to the map via
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
+   * 
+   * @param style options for drawing the polygon fill.
+   */
+  public void setFillStyle(PolyStyleOptions style) {
+    PolygonImpl.impl.setFillStyle(jsoPeer, style);
+  }
+
+  /**
+   * Changes the style of the polylgon outline. The {@link Polygon} must already
+   * be added to the map via
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
+   * 
+   * @param style options for drawing the polygon outline.
+   */
+  public void setStrokeStyle(PolyStyleOptions style) {
+    PolygonImpl.impl.setStrokeStyle(jsoPeer, style);
+  }
+
+  /**
    * Returns <code>true</code> if this environment supports the
    * {@link Polygon#setVisible(boolean)} method.
    * 
@@ -255,6 +487,18 @@ public final class Polygon extends ConcreteOverlay {
     // uncomment
     // return PolygonImpl.impl.supportsHide(jsoPeer);
     return false;
+  }
+
+  /**
+   * Inserts a new point at the given index in the polygon. The {@link Polygon}
+   * must already be added to the map via
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
+   * 
+   * @param index position in the polygon to insert the new point.
+   * @param latlng point to insert into the polygon.
+   */
+  void insertVertex(int index, LatLng latlng) {
+    PolygonImpl.impl.insertVertex(jsoPeer, index, latlng);
   }
 
   /**
@@ -276,15 +520,72 @@ public final class Polygon extends ConcreteOverlay {
    * 
    * @param event an event to deliver to the handler.
    */
+  void trigger(PolygonCancelLineEvent event) {
+    maybeInitPolygonCancelLineHandlers();
+    polygonCancelLineHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(PolygonEndLineEvent event) {
+    maybeInitPolygonEndLineHandlers();
+    polygonEndLineHandlers.trigger(event.getLatLng());
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(PolygonLineUpdatedEvent event) {
+    maybeInitPolygonLineUpdatedHandlers();
+    polygonLineUpdatedHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
   void trigger(PolygonRemoveEvent event) {
     maybeInitPolygonRemoveHandlers();
     polygonRemoveHandlers.trigger();
+  }
+
+  private void maybeInitPolygonCancelLineHandlers() {
+    if (polygonCancelLineHandlers == null) {
+      polygonCancelLineHandlers = new HandlerCollection<PolygonCancelLineHandler>(
+          jsoPeer, MapEvent.CANCELLINE);
+    }
   }
 
   private void maybeInitPolygonClickHandlers() {
     if (polygonClickHandlers == null) {
       polygonClickHandlers = new HandlerCollection<PolygonClickHandler>(
           jsoPeer, MapEvent.CLICK);
+    }
+  }
+
+  private void maybeInitPolygonEndLineHandlers() {
+    if (polygonEndLineHandlers == null) {
+      polygonEndLineHandlers = new HandlerCollection<PolygonEndLineHandler>(
+          jsoPeer, MapEvent.ENDLINE);
+    }
+  }
+
+  private void maybeInitPolygonLineUpdatedHandlers() {
+    if (polygonLineUpdatedHandlers == null) {
+      polygonLineUpdatedHandlers = new HandlerCollection<PolygonLineUpdatedHandler>(
+          jsoPeer, MapEvent.LINEUPDATED);
     }
   }
 

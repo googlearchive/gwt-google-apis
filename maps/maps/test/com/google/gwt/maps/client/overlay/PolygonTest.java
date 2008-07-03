@@ -43,6 +43,38 @@ public class PolygonTest extends GWTTestCase {
   }
 
   /**
+   * Test the getArea() method.
+   */
+  public void testGetArea() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+    Polygon p = new Polygon(points);
+    map.addOverlay(p);
+    RootPanel.get().add(map);
+    double result = p.getArea();
+    assertTrue("non-negative area", result > 0);
+  }
+
+  /**
+   * Test the simple Polygon constructor.
+   */
+  public void testPolygon() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+    Polygon p = new Polygon(points);
+    map.addOverlay(p);
+    RootPanel.get().add(map);
+  }
+
+  /**
    * Tests the fromEncoded() methods.
    */
   public void testPolygonFromEncoded() {
@@ -70,4 +102,70 @@ public class PolygonTest extends GWTTestCase {
 
     RootPanel.get().add(map);
   }
+
+  /**
+   * Test insertVertex() and deleteVerex().
+   */
+  public void testPolygonInsertDelete() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+    Polygon p = new Polygon(points);
+    map.addOverlay(p);
+    RootPanel.get().add(map);
+    p.insertVertex(1, new LatLng(45, 0));
+    p.deleteVertex(3);
+  }
+
+  /**
+   * Test the Polygon constructor with extra args, but not PolygonOptions.
+   */
+  public void testPolygonNoOpts() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+    Polygon p = new Polygon(points, "#ff0000", 3, 1.0, "#0000ff", 0.3);
+    map.addOverlay(p);
+    RootPanel.get().add(map);
+  }
+
+  /**
+   * Test the getVertexCount() method.
+   */
+  public void testPolygonVertexCount() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+    Polygon p = new Polygon(points);
+    map.addOverlay(p);
+    RootPanel.get().add(map);
+    assertEquals("vertex count", 3, p.getVertexCount());
+  }
+
+  /**
+   * Test the Polygon constructor with the PolygonOptions in the constructor.
+   */
+  public void testPolygonWithOptions() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+    PolygonOptions opts = new PolygonOptions();
+    opts.setClickable(false);
+    Polygon p = new Polygon(points, "#ff0000", 3, 1.0, "#0000ff", 0.3, opts);
+    map.addOverlay(p);
+    RootPanel.get().add(map);
+  }
+  
 }

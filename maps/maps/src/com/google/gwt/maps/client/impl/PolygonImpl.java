@@ -18,12 +18,16 @@ package com.google.gwt.maps.client.impl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.geom.LatLngBounds;
+import com.google.gwt.maps.client.overlay.PolyEditingOptions;
+import com.google.gwt.maps.client.overlay.PolyStyleOptions;
+import com.google.gwt.maps.client.overlay.PolygonOptions;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.jsio.client.JSList;
 
 /**
- * Wraps the GPolygon class from the Maps API using JSIO. 
+ * Wraps the GPolygon class from the Maps API using JSIO.
  */
 public interface PolygonImpl extends JSFlyweightWrapper {
 
@@ -33,19 +37,46 @@ public interface PolygonImpl extends JSFlyweightWrapper {
   JavaScriptObject construct(JSList<LatLng> points);
 
   @Constructor("$wnd.GPolygon")
-  JavaScriptObject construct(JSList<LatLng> points,
-      String strokeColor, int strokeWeight, double strokeOpacity,
-      String fillColor, double fillOpacity);
+  JavaScriptObject construct(JSList<LatLng> points, String strokeColor,
+      int strokeWeight, double strokeOpacity, String fillColor,
+      double fillOpacity);
 
+  @Constructor("$wnd.GPolygon")
+  JavaScriptObject construct(JSList<LatLng> points, String strokeColor,
+      int strokeWeight, double strokeOpacity, String fillColor,
+      double fillOpacity, PolygonOptions options);
+
+  void deleteVertex(JavaScriptObject jsoPeer, int index);
+  
+  void disableEditing(JavaScriptObject jsoPeer);
+  
+  void enableDrawing(JavaScriptObject jsoPeer);
+  
+  void enableDrawing(JavaScriptObject jsoPeer, PolyEditingOptions options);
+  
+  void enableEditing(JavaScriptObject jsoPeer);
+  
+  void enableEditing(JavaScriptObject jsoPeer, PolyEditingOptions options);
+  
+  double getArea(JavaScriptObject jsoPeer);
+  
+  LatLngBounds getBounds(JavaScriptObject jsoPeer);
+  
   LatLng getVertex(JavaScriptObject jsoPeer, int index);
 
   int getVertexCount(JavaScriptObject jsoPeer);
-  
+
   void hide(JavaScriptObject jsoPeer);
+
+  void insertVertex(JavaScriptObject jsoPeer, int index, LatLng latlng);
   
   boolean isHidden(JavaScriptObject jsoPeer);
+
+  void setFillStyle(JavaScriptObject jsoPeer, PolyStyleOptions style);
+  
+  void setStrokeStyle(JavaScriptObject jsoPeer, PolyStyleOptions style);
   
   void show(JavaScriptObject jsoPeer);
-  
+
   boolean supportsHide(JavaScriptObject jsoPeer);
 }

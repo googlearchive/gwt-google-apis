@@ -16,15 +16,20 @@
 package com.google.gwt.maps.sample.maps.client;
 
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.event.PolygonCancelLineHandler;
+import com.google.gwt.maps.client.event.PolygonEndLineHandler;
+import com.google.gwt.maps.client.event.PolygonLineUpdatedHandler;
 import com.google.gwt.maps.client.event.PolylineCancelLineHandler;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.PolyEditingOptions;
 import com.google.gwt.maps.client.overlay.PolyStyleOptions;
+import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -76,7 +81,9 @@ public class DrawingOverlayDemo extends MapsDemo {
   private Label message2;
   private double opacity = 1.0;
   private int weight = 1;
+  private boolean fillFlag = false;
   private Polyline lastPolyline = null;
+  private Polygon lastPolygon = null;
   private DialogBox addPolyDialog = null;
 
   public DrawingOverlayDemo() {
@@ -96,7 +103,7 @@ public class DrawingOverlayDemo extends MapsDemo {
     initWidget(panel);
   }
 
-  private void createPoly() {
+  private void createPolyline() {
     PolyStyleOptions style = new PolyStyleOptions(color, weight, opacity);
 
     final Polyline poly = new Polyline(new LatLng[0]);
@@ -104,24 +111,25 @@ public class DrawingOverlayDemo extends MapsDemo {
     map.addOverlay(poly);
     poly.setDrawingEnabled();
     poly.setStrokeStyle(style);
+    message2.setText("");
     poly.addPolylineLineUpdatedHandler(new PolylineLineUpdatedHandler() {
 
       public void onUpdate(PolylineLineUpdatedEvent event) {
-        message2.setText("Line Updated");
+        message2.setText(message2.getText() + " : Line Updated");
       }
     });
 
     poly.addPolylineCancelLineHandler(new PolylineCancelLineHandler() {
 
       public void onCancel(PolylineCancelLineEvent event) {
-        message2.setText("Line Cancelled");
+        message2.setText(message2.getText() + " : Line Canceled");
       }
     });
 
     poly.addPolylineEndLineHandler(new PolylineEndLineHandler() {
 
       public void onEnd(PolylineEndLineEvent event) {
-        message2.setText("Line End at " + event.getLatLng() + ".  Bounds="
+        message2.setText(message2.getText() + " : Line End at " + event.getLatLng() + ".  Bounds="
             + poly.getBounds().getNorthEast() + ","
             + poly.getBounds().getSouthWest() + " length=" + poly.getLength()
             + "m");
@@ -129,7 +137,49 @@ public class DrawingOverlayDemo extends MapsDemo {
     });
   }
 
-  private void editPoly() {
+  private void createPolygon() {
+    PolyStyleOptions style = new PolyStyleOptions(color, weight, opacity);
+
+    final Polygon poly = new Polygon(new LatLng[0], color, weight, opacity,
+        color, fillFlag ? .7 : 0.0);
+    lastPolygon = poly;
+    map.addOverlay(poly);
+    poly.setDrawingEnabled();
+    poly.setStrokeStyle(style);
+    message2.setText("");
+    poly.addPolygonLineUpdatedHandler(new PolygonLineUpdatedHandler() {
+
+      public void onUpdate(PolygonLineUpdatedEvent event) {
+        message2.setText(message2.getText() + " : Polygon Updated");
+      }
+    });
+
+    poly.addPolygonCancelLineHandler(new PolygonCancelLineHandler() {
+
+      public void onCancel(PolygonCancelLineEvent event) {
+        message2.setText(message2.getText() + " : Polygon Cancelled");
+      }
+    });
+
+    poly.addPolygonEndLineHandler(new PolygonEndLineHandler() {
+
+      public void onEnd(PolygonEndLineEvent event) {
+        message2.setText(message2.getText() + " : Polygon End at " + event.getLatLng() + ".  Bounds="
+            + poly.getBounds().getNorthEast() + ","
+            + poly.getBounds().getSouthWest() + " area=" + poly.getArea() + "m");
+      }
+    });
+  }
+
+  private void editPolygon() {
+    if (lastPolygon == null) {
+      return;
+    }
+    // allow up to 10 verticies to exist in the polygon.
+    lastPolygon.setEditingEnabled(new PolyEditingOptions(10));
+  }
+
+  private void editPolyline() {
     if (lastPolyline == null) {
       return;
     }
@@ -147,7 +197,7 @@ public class DrawingOverlayDemo extends MapsDemo {
 
     HorizontalPanel buttonPanel = new HorizontalPanel();
 
-    Button addButton = new Button("Add Polyline");
+    Button addButton = new Button("Draw new object");
     addButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         if (addPolyDialog == null) {
@@ -159,13 +209,21 @@ public class DrawingOverlayDemo extends MapsDemo {
     });
     buttonPanel.add(addButton);
 
-    Button editButton = new Button("Edit Last");
-    editButton.addClickListener(new ClickListener() {
+    Button editPolylineButton = new Button("Edit Last Polyline");
+    editPolylineButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
-        editPoly();
+        editPolyline();
       }
     });
-    buttonPanel.add(editButton);
+    buttonPanel.add(editPolylineButton);
+
+    Button editPolygonButton = new Button("Edit Last Polygon");
+    editPolygonButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        editPolygon();
+      }
+    });
+    buttonPanel.add(editPolygonButton);
 
     p.add(buttonPanel, DockPanel.EAST);
 
@@ -176,9 +234,9 @@ public class DrawingOverlayDemo extends MapsDemo {
 
     DialogBox dialog = new DialogBox();
     dialog.setTitle("Add Polyline");
-    
-    Grid grid = new Grid(2, 3);
-    
+
+    Grid grid = new Grid(2, 4);
+
     VerticalPanel vp = new VerticalPanel();
     grid.setHTML(0, 0, "<b>Opacity</b>");
     // The drop down lists for setting the style
@@ -224,14 +282,36 @@ public class DrawingOverlayDemo extends MapsDemo {
     });
     grid.setWidget(1, 2, colorBox);
 
-    Button addButton = new Button("OK");
-    addButton.addClickListener(new ClickListener() {
+    grid.setHTML(0, 3, "<b>Fill Polygon</b>");
+    final CheckBox fillCheckBox = new CheckBox("");
+    fillCheckBox.addClickListener(new ClickListener() {
+
+      public void onClick(Widget sender) {
+        fillFlag = fillCheckBox.isChecked();
+      }
+
+    });
+    grid.setWidget(1, 3, fillCheckBox);
+
+    Button addPolylineButton = new Button("Make Polyline");
+    addPolylineButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         message1.setText("Opacity=" + opacity + " color=" + color + "weight="
             + weight + "polygon = " + makePolygon + "Center=" + map.getCenter()
             + " zoom=" + map.getZoomLevel());
         addPolyDialog.hide();
-        createPoly();
+        createPolyline();
+      }
+    });
+
+    Button addPolygonButton = new Button("Make Polygon");
+    addPolygonButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        message1.setText("Opacity=" + opacity + " color=" + color + "weight="
+            + weight + "polygon = " + makePolygon + "Center=" + map.getCenter()
+            + " zoom=" + map.getZoomLevel() + "fill=" + fillFlag);
+        addPolyDialog.hide();
+        createPolygon();
       }
     });
 
@@ -241,15 +321,16 @@ public class DrawingOverlayDemo extends MapsDemo {
         addPolyDialog.hide();
       }
     });
-    
+
     HorizontalPanel buttonPanel = new HorizontalPanel();
     buttonPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-    buttonPanel.add(addButton);
+    buttonPanel.add(addPolylineButton);
+    buttonPanel.add(addPolygonButton);
     buttonPanel.add(cancelButton);
     vp.add(grid);
     vp.add(buttonPanel);
     dialog.add(vp);
-    
+
     return dialog;
   }
 }
