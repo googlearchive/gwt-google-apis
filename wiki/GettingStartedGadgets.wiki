@@ -254,6 +254,10 @@ Once your debugging is complete, you can list your gadget in the [http://code.go
 
 == Debugging your Gadget in Hosted Mode ==
 
+The debugging setup for a gadget is a bit more complicated than the usual GWT hosted mode setup.  The complexities have to do with the public nature of gadgets being served from a gadget container, and caching of the Gadget Spec by the gadget container.
+
+=== Bringing up Hosted Mode with -noserver ===
+
 Here are the steps to debug your gadget code in Hosted mode:
 
    1 Compile your gadget.  You can do this by running your gadget in hosted mode and pressing the 'Compile/Browse' button or by invoking the compiler from the command line.  If you followed the instructions above, you should have a shell script named `SimpleGadget-compile`.
@@ -263,7 +267,7 @@ Here are the steps to debug your gadget code in Hosted mode:
    1 Start up hosted mode with the "-noserver" argument.  You can add this argument in to your IDE launch config, or edit `SimpleGadget-shell` and insert the `-noserver` argument after `com.google.gwt.dev.GWTShell`. 
    1 Type the url `http://www.google.com/igoogle` into the hosted mode browser url window.
 
-Now your gadget client code is running in hosted mode.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch from your IDE with the debugging step.)
+Now your gadget client code is running in hosted mode.  
 
   _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets and/or your launch configurations to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
 
@@ -277,3 +281,15 @@ java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStar
         ...
 }}}
   This is because there is no entry point in the module to run._
+
+=== Making changes to and debugging your Java source ===
+
+You can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
+
+=== Caching effects from the Gadget Container ===
+
+One important aspect of the Gadget infrastructure you must be aware of is that Gadget containers, such as iGoogle, are free to cache the Gadget specifications.  In the case of iGoogle, the default caching is one hour.  See FAQ item [http://code.google.com/apis/gadgets/faq.html#CantSeeChanges I updated my gadget, but I can't see my changes. What's going on?]  
+
+As a developer, you can use the [http://code.google.com/apis/gadgets/docs/legacy/tools.html#Dev_Gadget Developer Gadget] on iGoogle to turn off caching for your view of the gadget by un-checking the `Cached` checkbox beside the URL of your Gadget Spec.
+
+For deploying a gadget developed with GWT, the caching by Gadget Containers is a significant issue. If you deploy your GWT application and remove old versions of the compiled program, the cached version of the Gadget spec will still refer to the old (and now deleted) files and end users will experience an outage until the cache is refreshed.  
