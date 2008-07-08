@@ -16,6 +16,7 @@
 package com.google.gwt.gears.offline.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.localserver.LocalServer;
 import com.google.gwt.gears.client.localserver.ManagedResourceStore;
 import com.google.gwt.gears.core.client.GearsException;
@@ -95,9 +96,9 @@ public class Offline {
     }
     assert storeName.length() <= MAX_STORE_NAME_LENGTH;
 
-    LocalServer server = new LocalServer();
-    store = server.createManagedResourceStore(storeName);
-    store.setManifestURL(getManifestUrl());
+    LocalServer server = Factory.getInstance().createLocalServer();
+    store = server.createManagedStore(storeName);
+    store.setManifestUrl(getManifestUrl());
     store.checkForUpdate();
     return store;
   }

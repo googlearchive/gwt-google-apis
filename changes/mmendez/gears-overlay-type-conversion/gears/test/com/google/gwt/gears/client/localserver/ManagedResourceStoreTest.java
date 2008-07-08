@@ -16,7 +16,7 @@
 package com.google.gwt.gears.client.localserver;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.gears.core.client.GearsException;
+import com.google.gwt.gears.client.Factory;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.Timer;
 
@@ -30,27 +30,40 @@ public class ManagedResourceStoreTest extends GWTTestCase {
     return GWT.getModuleBaseURL() + "manifest";
   }
 
+  /**
+   * Test method for {@link ManagedResourceStore#setManifestUrl(String)}.
+   */
+  public void disabledTestSetManifestURLNull() {
+    LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    ManagedResourceStore mrs = ls.createManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    try {
+      mrs.setManifestUrl(null);
+      fail("Expected a NullPointerException");
+    } catch (NullPointerException e) {
+      // Expected to get here
+    }
+  }
+
+  @Override
   public String getModuleName() {
     return "com.google.gwt.gears.Gears";
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#checkForUpdate()}
-   * and
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#getUpdateStatus()}.
-   * 
-   * @throws GearsException
+   * Test method for {@link ManagedResourceStore#checkForUpdate()} and
+   * {@link ManagedResourceStore#getUpdateStatus()}.
    */
-  public void testCheckForUpdate() throws GearsException {
-    final LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    final ManagedResourceStore mrs = ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    mrs.setManifestURL(getTestManifestURL());
+  public void testCheckForUpdate() {
+    final LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    final ManagedResourceStore mrs = ls.createManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    mrs.setManifestUrl(getTestManifestURL());
     mrs.checkForUpdate();
 
     delayTestFinish(5000);
     new Timer() {
+      @Override
       public void run() {
         switch (mrs.getUpdateStatus()) {
           case ManagedResourceStore.UPDATE_CHECKING:
@@ -71,79 +84,62 @@ public class ManagedResourceStoreTest extends GWTTestCase {
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#getCurrentVersion()}.
-   * 
-   * @throws GearsException
+   * Test method for {@link ManagedResourceStore#getCurrentVersion()}.
    */
-  public void testGetCurrentVersion() throws GearsException {
-    final LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    final ManagedResourceStore mrs = ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
+  public void testGetCurrentVersion() {
+    final LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    final ManagedResourceStore mrs = ls.createManagedStore(MANAGED_RESOURCE_STORE_NAME);
     assertEquals("", mrs.getCurrentVersion());
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#getLastErrorMessage()}.
+   * Test method for {@link ManagedResourceStore#getLastErrorMessage()}.
    */
   public void testGetLastErrorMessage() {
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#getName()}.
-   * 
-   * @throws GearsException
+   * Test method for {@link ManagedResourceStore#getName()}.
    */
-  public void testGetName() throws GearsException {
-    LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    ManagedResourceStore mrs = ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
+  public void testGetName() {
+    LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    ManagedResourceStore mrs = ls.createManagedStore(MANAGED_RESOURCE_STORE_NAME);
     assertEquals(MANAGED_RESOURCE_STORE_NAME, mrs.getName());
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#getRequiredCookie()}.
-   * 
-   * @throws GearsException
+   * Test method for {@link ManagedResourceStore#getRequiredCookie()}.
    */
-  public void testGetRequiredCookie() throws GearsException {
-    LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    ManagedResourceStore mrs = ls.createManagedResourceStore(
+  public void testGetRequiredCookie() {
+    LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    ManagedResourceStore mrs = ls.createManagedStore(
         MANAGED_RESOURCE_STORE_NAME, "foo");
     assertEquals("foo", mrs.getRequiredCookie());
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#setManifestURL(java.lang.String)}
-   * and
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#getManifestURL()}.
-   * 
-   * @throws GearsException
+   * Test method for {@link ManagedResourceStore#setManifestUrl(String)} and
+   * {@link ManagedResourceStore#getManifestUrl()}.
    */
-  public void testGetSetManifestUrl() throws GearsException {
-    LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    ManagedResourceStore mrs = ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    mrs.setManifestURL(getTestManifestURL());
-    assertEquals(getTestManifestURL(), mrs.getManifestURL());
+  public void testGetSetManifestUrl() {
+    LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    ManagedResourceStore mrs = ls.createManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    mrs.setManifestUrl(getTestManifestURL());
+    assertEquals(getTestManifestURL(), mrs.getManifestUrl());
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#isEnabled()}
-   * and {@link ManagedResourceStore#setEnabled(boolean)}.
-   * 
-   * @throws GearsException
+   * Test method for {@link ManagedResourceStore#isEnabled()} and
+   * {@link ManagedResourceStore#setEnabled(boolean)}.
    */
-  public void testIsEnabled() throws GearsException {
-    LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    ManagedResourceStore mrs = ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
+  public void testIsEnabled() {
+    LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    ManagedResourceStore mrs = ls.createManagedStore(MANAGED_RESOURCE_STORE_NAME);
     mrs.setEnabled(false);
     assertFalse(mrs.isEnabled());
     mrs.setEnabled(true);
@@ -151,32 +147,12 @@ public class ManagedResourceStoreTest extends GWTTestCase {
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#setManifestUrl(java.lang.String)}.
-   * 
-   * @throws GearsException
+   * Test method for {@link ManagedResourceStore#setManifestUrl(String)}.
    */
-  public void testSetManifestURLEmpty() throws GearsException {
-    LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    ManagedResourceStore mrs = ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    mrs.setManifestURL("");
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.localserver.client.ManagedResourceStore#setManifestUrl(java.lang.String)}.
-   * 
-   * @throws GearsException
-   */
-  public void testSetManifestURLNull() throws GearsException {
-    LocalServer ls = new LocalServer();
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    ManagedResourceStore mrs = ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME);
-    try {
-      mrs.setManifestURL(null);
-    } catch (NullPointerException e) {
-      // Expected to get here
-    }
+  public void testSetManifestURLEmpty() {
+    LocalServer ls = Factory.getInstance().createLocalServer();
+    ls.removeManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    ManagedResourceStore mrs = ls.createManagedStore(MANAGED_RESOURCE_STORE_NAME);
+    mrs.setManifestUrl("");
   }
 }

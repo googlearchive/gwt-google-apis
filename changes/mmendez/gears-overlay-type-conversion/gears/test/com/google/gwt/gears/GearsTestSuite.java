@@ -19,6 +19,7 @@ import com.google.gwt.gears.client.FactoryTest;
 import com.google.gwt.gears.client.database.DatabaseTest;
 import com.google.gwt.gears.client.database.ResultSetTest;
 import com.google.gwt.gears.client.localserver.LocalServerTest;
+import com.google.gwt.gears.client.localserver.ManagedResourceStoreTest;
 import com.google.gwt.gears.client.workerpool.WorkerPoolTest;
 import com.google.gwt.gears.core.client.GearsTest;
 
@@ -38,6 +39,8 @@ public class GearsTestSuite extends TestCase {
     suite.addTestSuite(DatabaseTest.class);
     suite.addTestSuite(ResultSetTest.class);
     suite.addTestSuite(LocalServerTest.class);
+    suite.addTestSuite(ResultSetTest.class);
+    suite.addTestSuite(ManagedResourceStoreTest.class);
     suite.addTestSuite(WorkerPoolTest.class);
 
     return suite;

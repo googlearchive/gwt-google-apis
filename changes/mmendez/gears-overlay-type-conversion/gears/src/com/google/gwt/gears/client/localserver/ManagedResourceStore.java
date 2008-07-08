@@ -44,69 +44,14 @@ import com.google.gwt.core.client.JavaScriptObject;
  * }
  * </code>
  */
-public class ManagedResourceStore {
+public final class ManagedResourceStore extends JavaScriptObject {
   public static final int UPDATE_CHECKING = 1;
 
   public static final int UPDATE_DOWNLOADING = 2;
 
   public static final int UPDATE_FAILED = 3;
 
-  // Status codes reported by getUpdateStatus
   public static final int UPDATE_OK = 0;
-
-  private static native void nativeCheckForUpdate(JavaScriptObject jsStore) /*-{
-    jsStore.checkForUpdate();
-  }-*/;
-
-  private static native String nativeGetCurrentVersion(JavaScriptObject jsStore) /*-{
-    return jsStore.currentVersion == null ? "" : jsStore.currentVersion;
-  }-*/;
-
-  private static native String nativeGetLastErrorMessage(
-      JavaScriptObject jsStore)/*-{
-    var err = jsStore.lastErrorMessage;
-    return err == null ? null : err;
-  }-*/;
-
-  private static native double nativeGetLastUpdateCheckTime(
-      JavaScriptObject jsStore) /*-{
-    return jsStore.lastUpdateCheckTime;
-  }-*/;
-
-  private static native String nativeGetManifestURL(JavaScriptObject jsStore) /*-{
-    return jsStore.manifestUrl == null ? null : jsStore.manifestUrl;
-  }-*/;
-
-  private static native String nativeGetName(JavaScriptObject jsStore) /*-{
-    return jsStore.name == null ? null : jsStore.name;
-  }-*/;
-
-  private static native String nativeGetRequiredCookie(JavaScriptObject jsStore) /*-{
-    return jsStore.requiredCookie == null ? null : jsStore.requiredCookie;
-  }-*/;
-
-  private static native int nativeGetUpdateStatus(JavaScriptObject jsStore) /*-{
-    return jsStore.updateStatus;
-  }-*/;
-
-  private static native boolean nativeIsEnabled(JavaScriptObject jsStore) /*-{
-    return jsStore.enabled;
-  }-*/;
-
-  private static native void nativeSetEnabled(JavaScriptObject jsStore,
-      boolean enabled) /*-{
-    jsStore.enabled = enabled;
-  }-*/;
-
-  private static native void nativeSetManifestURL(JavaScriptObject jsStore,
-      String manifestURL) /*-{
-    jsStore.manifestUrl = manifestURL;
-  }-*/;
-
-  /**
-   * Reference to the ManagedResourceStore JavaScript object provided by Gears.
-   */
-  private JavaScriptObject mgdStore = null;
 
   /**
    * Constructs a ManagedResourceStore object backed by the provided Gears
@@ -114,18 +59,8 @@ public class ManagedResourceStore {
    * 
    * @param jso the object returned from the Gears factory's create method
    */
-  ManagedResourceStore(JavaScriptObject jso) {
-    this.mgdStore = jso;
-  }
-
-  /**
-   * This class requires a Gears managed store to operate.
-   * 
-   * @see #ManagedResourceStore(JavaScriptObject)
-   */
-  @SuppressWarnings("unused")
-  private ManagedResourceStore() {
-    // not default instantiable
+  protected ManagedResourceStore() {
+    // Required for overlay types
   }
 
   /**
@@ -135,9 +70,9 @@ public class ManagedResourceStore {
    * 
    * @see #getUpdateStatus()
    */
-  public void checkForUpdate() {
-    nativeCheckForUpdate(mgdStore);
-  }
+  public native void checkForUpdate() /*-{
+    this.checkForUpdate();
+  }-*/;
 
   /**
    * Fetches the current version of the manifest file associated with this
@@ -145,9 +80,9 @@ public class ManagedResourceStore {
    * 
    * @return the currentVersion
    */
-  public String getCurrentVersion() {
-    return nativeGetCurrentVersion(mgdStore);
-  }
+  public native String getCurrentVersion() /*-{
+    return this.currentVersion;
+  }-*/;
 
   /**
    * Fetches the error most recently reported by this store. This will only be
@@ -155,53 +90,53 @@ public class ManagedResourceStore {
    * 
    * @return the error most recently reported by this store
    */
-  public String getLastErrorMessage() {
-    return nativeGetLastErrorMessage(mgdStore);
-  }
+  public native String getLastErrorMessage() /*-{
+    return this.lastErrorMessage;
+  }-*/;
 
   /**
    * @return the lastUpdateCheckTime
    */
-  public long getLastUpdateCheckTime() {
-    return (long) nativeGetLastUpdateCheckTime(mgdStore);
-  }
+  public native double getLastUpdateCheckTime() /*-{
+    return this.lastUpdateCheckTime;
+  }-*/;
 
   /**
    * @return the URL of the manifest file currently used by this store
    */
-  public String getManifestURL() {
-    return nativeGetManifestURL(mgdStore);
-  }
+  public native String getManifestUrl() /*-{
+    return this.manifestUrl;
+  }-*/;
 
   /**
    * @return the user-defined name of this store
    */
-  public String getName() {
-    return nativeGetName(mgdStore);
-  }
+  public native String getName() /*-{
+    return this.name;
+  }-*/;
 
   /**
    * @return the name of the cookie required by the store, or null if no
    *         required cookie was set
    */
-  public String getRequiredCookie() {
-    return nativeGetRequiredCookie(mgdStore);
-  }
+  public native String getRequiredCookie() /*-{
+    return this.requiredCookie;
+  }-*/;
 
   /**
    * @return the status of the most recent update operation; one of the UPDATE_*
    *         fields
    */
-  public int getUpdateStatus() {
-    return nativeGetUpdateStatus(mgdStore);
-  }
+  public native int getUpdateStatus() /*-{
+    return this.updateStatus;
+  }-*/;
 
   /**
    * @return true if the store is currently enabled, or false if not
    */
-  public boolean isEnabled() {
-    return nativeIsEnabled(mgdStore);
-  }
+  public native boolean isEnabled() /*-{
+    return this.enabled;
+  }-*/;
 
   /**
    * Enables or disables the store. If the store is disabled, it does not serve
@@ -209,22 +144,36 @@ public class ManagedResourceStore {
    * 
    * @param enabled the new state of the store
    */
-  public void setEnabled(boolean enabled) {
-    nativeSetEnabled(mgdStore, enabled);
-  }
+  public native void setEnabled(boolean enabled) /*-{
+    this.enabled = enabled;
+  }-*/;
 
   /**
    * Sets the URL of the manifest file defining the contents of this store.
    * 
-   * @param manifestURL the URL of the manifest file
-   * @throws NullPointerException if <code>manifestURL</code> is
-   *           <code>null</code>
+   * @param manifestUrl the URL of the manifest file
    */
-  public void setManifestURL(String manifestURL) {
-    if (manifestURL == null) {
-      throw new NullPointerException();
-    }
+  public native void setManifestUrl(String manifestUrl) /*-{
+    this.manifestUrl = manifestUrl;
+  }-*/;
 
-    nativeSetManifestURL(mgdStore, manifestURL);
-  }
+  public native void setOnCompleteHandler(
+      ManagedResourceStoreCompleteHandler handler) /*-{
+    this.oncomplete = function(details) {
+      handler.@com.google.gwt.gears.client.localserver.ManagedResourceStoreCompleteHandler::onComplete(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreCompleteHandler$ManagedResourceStoreCompleteEvent;)(details);
+    };
+  }-*/;
+
+  public native void setOnErrorHandler(ManagedResourceStoreErrorHandler handler) /*-{
+    this.onerror = function(error) {
+      handler.@com.google.gwt.gears.client.localserver.ManagedResourceStoreErrorHandler::onError(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreErrorHandler$ManagedResourceStoreErrorEvent;)(details);
+    };
+  }-*/;
+
+  public native void setOnProgressHandler(
+      ManagedResourceStoreProgressHandler handler) /*-{
+    this.oncomplete = function(details) {
+      handler.@com.google.gwt.gears.client.localserver.ManagedResourceStoreProgressHandler::onProgress(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreProgressHandler$ManagedResourceStoreProgressEvent;)(details);
+    };
+  }-*/;
 }

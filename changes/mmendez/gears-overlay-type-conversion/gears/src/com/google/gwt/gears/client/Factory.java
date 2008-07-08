@@ -17,6 +17,7 @@ package com.google.gwt.gears.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.gears.client.database.Database;
+import com.google.gwt.gears.client.localserver.LocalServer;
 
 /**
  * Factory class used to create all other Gears objects.
@@ -26,6 +27,11 @@ public final class Factory extends JavaScriptObject {
    * String used to request a Database instance from Gears.
    */
   public static final String DATABASE = "beta.database";
+
+  /**
+   * String used to request a LocalServer instance from Gears.
+   */
+  public static final String LOCALSERVER = "beta.localserver";
 
   /**
    * Returns the singleton instance of the Factory class or <code>null</code>
@@ -51,17 +57,17 @@ public final class Factory extends JavaScriptObject {
     return create(DATABASE);
   }
 
+  /**
+   * Creates a new {@link LocalServer} instance.
+   * 
+   * @return a new {@link LocalServer} instance
+   */
+  public LocalServer createLocalServer() {
+    return create(LOCALSERVER);
+  }
+
   // TODO: Enable when LocalServer and WorkerPool are converted to
   // overlay types
-  // /**
-  // * Creates a new {@link LocalServer} instance.
-  // *
-  // * @return a new {@link LocalServer} instance
-  // */
-  // public LocalServer createLocalServer() {
-  // return create(LOCALSERVER);
-  // }
-  //
   // /**
   // * Creates a new {@link WorkerPool} instance.
   // *

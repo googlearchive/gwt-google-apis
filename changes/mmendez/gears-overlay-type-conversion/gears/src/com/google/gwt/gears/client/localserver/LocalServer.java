@@ -17,80 +17,35 @@ package com.google.gwt.gears.client.localserver;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.gears.core.client.Gears;
 import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.core.client.impl.GearsImpl;
 
 /**
- * Used to manage the URLs that are served locally. A
- * {@link ManagedResourceStore} is used to capture and manage groups of URLs
- * that are atomically bundled together. A {@link ResourceStore} is used to
- * capture and manage URLs individually, on an ad-hoc basis.
- * 
- * Note that a captured URL is <b>always</b> served locally. That is, Gears's
- * local server does not attempt to detect offline/online state.
+ * A factory and container for the set of {@link ResourceStore}s and
+ * {@link ManagedResourceStore}s your application creates and uses. Use
+ * resource stores to enable your JavaScript application to execute without a
+ * network connection.
  */
-public class LocalServer {
-  /**
-   * Native proxy call to the canServeLocally method on the JavaScript object.
-   * 
-   * @param url
-   * @return
-   */
-  private static native boolean nativeCanServeLocally(JavaScriptObject jso,
-      String url) /*-{
-    return jso.canServeLocally(url);
-  }-*/;
-
-  private static native void nativeRemoveStore(JavaScriptObject server,
-      String name, String requiredCookie) /*-{
-    server.removeStore(name, requiredCookie);
-  }-*/;
-
-  /**
-   * Reference to the local server JavaScript object provided by Gears.
-   */
-  private final JavaScriptObject server;
-
-  /**
-   * Constructs a <code>LocalServer</code> instance.
-   * 
-   * @throws GearsException if the LocalServer object could not be created
-   */
-  public LocalServer() throws GearsException {
-    this(Gears.LOCALSERVER, Gears.GEARS_VERSION);
+public final class LocalServer extends JavaScriptObject {
+  protected LocalServer() {
+    // Required for overlay types
   }
 
   /**
-   * Constructs a <code>LocalServer</code> instance.
-   * 
-   * @throws GearsException if the LocalServer object could not be created
-   */
-  protected LocalServer(String className, String classVersion)
-      throws GearsException {
-    this.server = GearsImpl.create(className, classVersion);
-  }
-
-  /**
-   * Returns <code>true</code> if the URL can be served locally.
+   * Returns <code>true</code> if a request for the URL can be satisfied from
+   * any of the resource stores available, taking into account whether the
+   * containing store is enabled and if its requiredCookie matches. Relative
+   * URLs are interpreted according to the current page location. Returns
+   * <code>true</code> if the URL can be served locally.
    * 
    * @param url the URL to test
-   * @return true if the URL has been captured, false if not
+   * @return <code>true</code> if a request for the URL can be satisfied from
+   *         any of the resource stores available
    * @throws GearsException if the URL is not from the same origin as the
    *           current page
-   * @throws NullPointerException if the <code>url</code> is <code>null</code>
    */
   public boolean canServeLocally(String url) throws GearsException {
-    if (url == null) {
-      throw new NullPointerException();
-    }
-
-    if (url.trim().length() == 0) {
-      throw new IllegalArgumentException();
-    }
-
     try {
-      return nativeCanServeLocally(server, url);
+      return uncheckedCanServeLocally(url);
     } catch (JavaScriptException ex) {
       throw new GearsException(ex.getMessage(), ex);
     }
@@ -99,225 +54,124 @@ public class LocalServer {
   /**
    * Opens an existing {@link ManagedResourceStore} or creates a new one if no
    * such store exists.
-   * 
-   * @param name the user-defined name of the store
-   * @return a <code>ManagedResourceStore</code>
-   * @throws GearsException on any error
    */
-  public ManagedResourceStore createManagedResourceStore(String name)
-      throws GearsException {
-    return createManagedResourceStore(name, null);
-  }
+  public native ManagedResourceStore createManagedStore(String name) /*-{
+    return this.createManagedStore(name);
+  }-*/;
 
   /**
    * Opens an existing {@link ManagedResourceStore} or creates a new one if no
-   * such store exists. Once the store is created, it will only serve pages if a
-   * cookie exists under the value stored in <code>requiredCookie</code>.
+   * such store exists.
    * 
-   * @param name the user-defined name of the store
-   * @param requiredCookie the name of a cookie which must be present for the
-   *          store to serve pages
-   * @return a ManagedResourceStore
-   * @throws GearsException on any error
+   * The combination of name and requiredCookie (along with the domain) identify
+   * a unique store. Expected cookie format is "name=value".
    */
-  public ManagedResourceStore createManagedResourceStore(String name,
-      String requiredCookie) throws GearsException {
-    try {
-      JavaScriptObject jso = nativeCallMethod("createManagedStore", name,
-          requiredCookie);
-      if (jso == null) {
-        return null;
-      }
-      return new ManagedResourceStore(jso);
-    } catch (JavaScriptException e) {
-      throw new GearsException(e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Opens an existing (non-managed/ad-hoc) {@link ResourceStore} or creates a
-   * new one if the store does not exist.
-   * 
-   * @param name the user-defined name of the store
-   * @return a ResourceStore
-   * @throws GearsException on any error
-   */
-  public ResourceStore createResourceStore(String name) throws GearsException {
-    return createResourceStore(name, null);
-  }
-
-  /**
-   * Opens an existing (non-managed/ad-hoc) {@link ResourceStore} or creates a
-   * new one if the store does not exist. Once the store is created, it will
-   * only serve pages if a cookie exists under the value stored in
-   * <code>requiredCookie</code>.
-   * 
-   * @param name the user-defined name of the store
-   * @return a ResourceStore
-   * @throws GearsException on any error
-   */
-  public ResourceStore createResourceStore(String name, String requiredCookie)
-      throws GearsException {
-    try {
-      JavaScriptObject jso = nativeCallMethod("createStore", name,
-          requiredCookie);
-      if (jso == null) {
-        return null;
-      }
-      return new ResourceStore(jso);
-    } catch (JavaScriptException e) {
-      throw new GearsException(e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Opens an existing {@link ManagedResourceStore}.
-   * 
-   * @param name the user-defined name of the store
-   * @return a ManagedResourceStore, or null if the store does not exist
-   * @throws GearsException on any error
-   */
-  public ManagedResourceStore openManagedResourceStore(String name)
-      throws GearsException {
-    return openManagedResourceStore(name, null);
-  }
-
-  /**
-   * Opens an existing {@link ManagedResourceStore}. Once the store is opened,
-   * it will only serve pages if a cookie exists under the value stored in
-   * <code>requiredCookie</code>.
-   * 
-   * @param name the user-defined name of the store
-   * @return a ManagedResourceStore, or null if the store does not exist
-   * @throws GearsException on any error
-   */
-  public ManagedResourceStore openManagedResourceStore(String name,
-      String requiredCookie) throws GearsException {
-    try {
-      JavaScriptObject jso = nativeCallMethod("openManagedStore", name,
-          requiredCookie);
-      if (jso == null) {
-        return null;
-      }
-      return new ManagedResourceStore(jso);
-    } catch (JavaScriptException e) {
-      throw new GearsException(e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Opens an existing (non-managed/ad-hoc) {@link ResourceStore}.
-   * 
-   * @param name the user-defined name of the store
-   * @return a ResourceStore, or null if the store does not exist
-   * @throws GearsException on any error
-   */
-  public ResourceStore openResourceStore(String name) throws GearsException {
-    return openResourceStore(name, null);
-  }
-
-  /**
-   * Opens an existing (non-managed/ad-hoc) {@link ResourceStore}. Once the
-   * store is opened, it will only serve pages if a cookie exists under the
-   * value stored in <code>requiredCookie</code>.
-   * 
-   * @param name the user-defined name of the store
-   * @return a ResourceStore, or null if the store does not exist
-   * @throws GearsException on any error
-   */
-  public ResourceStore openResourceStore(String name, String requiredCookie)
-      throws GearsException {
-    try {
-      JavaScriptObject jso = nativeCallMethod("openStore", name, requiredCookie);
-      if (jso == null) {
-        return null;
-      }
-      return new ResourceStore(jso);
-    } catch (JavaScriptException e) {
-      throw new GearsException(e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Destroys a {@link ManagedResourceStore}.
-   * 
-   * @param name the user-defined name of the store to be removed
-   * @throws GearsException on any error
-   */
-  public void removeManagedResourceStore(String name) throws GearsException {
-    removeManagedResourceStore(name, null);
-  }
-
-  /**
-   * Destroys a {@link ManagedResourceStore}.
-   * 
-   * @param name the user-defined name of the store to be removed
-   * @param requiredCookie the name of a cookie which must be present
-   * @throws GearsException on any error
-   */
-  public void removeManagedResourceStore(String name, String requiredCookie)
-      throws GearsException {
-    try {
-      nativeCallMethod("removeManagedStore", name, requiredCookie);
-    } catch (JavaScriptException e) {
-      throw new GearsException(e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Destroys a (non-managed/ad-hoc) {@link ResourceStore}.
-   * 
-   * @param name the user-defined name of the store to be removed
-   * @throws GearsException on any error
-   */
-  public void removeResourceStore(String name) throws GearsException {
-    removeResourceStore(name, null);
-  }
-
-  /**
-   * Removes a {@link ResourceStore} from this <code>LocalServer</code>.
-   * 
-   * @param name the user-defined name of the store to be removed
-   * @param requiredCookie the name of a cookie which must be present
-   * @throws GearsException on any error
-   */
-  public void removeResourceStore(String name, String requiredCookie)
-      throws GearsException {
-    try {
-      nativeRemoveStore(server, name, requiredCookie);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Returns the JavaScript <code>LocalServer</code> object wrapped by this
-   * instance.
-   * 
-   * @return the JavaScript <code>LocalServer</code> object wrapped by this
-   *         instance
-   */
-  protected final JavaScriptObject getJavaScriptObject() {
-    return server;
-  }
-
-  /**
-   * Common native method used to call other methods. This avoids having a
-   * separate native method for each of the other methods on this class.
-   * 
-   * @param func the name of the function on the JavaScript object to call
-   * @param name the user-defined name of a store
-   * @param requiredCookie the name of a required cookie, or null
-   * @return whatever is returned by the proxied method call
-   * 
-   * TODO(mmendez): explore undefined vs null handling here
-   */
-  private native JavaScriptObject nativeCallMethod(String func, String name,
+  public native ManagedResourceStore createManagedStore(String name,
       String requiredCookie) /*-{
-    if (requiredCookie == null) {
-      return (this.@com.google.gwt.gears.client.localserver.LocalServer::server)[func](name) || null;
-    } else {
-      return (this.@com.google.gwt.gears.client.localserver.LocalServer::server)[func](name, requiredCookie) || null;
-    }
+    return this.createManagedStore(name, requiredCookie);
+  }-*/;
+
+  /**
+   * Opens an existing {@link ResourceStore} or creates a new one if no such
+   * store exists.
+   */
+  public native ResourceStore createStore(String name) /*-{
+    return this.createStore(name);
+  }-*/;
+
+  /**
+   * Opens an existing {@link ResourceStore} or creates a new one if no such
+   * store exists.
+   * 
+   * If a requiredCookie is given, creates a ResourceStore that requires the
+   * cookie to be present in the client in order to serve the contents from the
+   * store. The combination of name and requiredCookie (along with the domain)
+   * identify a unique store. Expected cookie format is "name=value".
+   */
+  public native ResourceStore createStore(String name, String requiredCookie) /*-{
+    return this.createStore(name, requiredCookie);
+  }-*/;
+
+  /**
+   * Opens an existing {@link ManagedResourceStore} or returns <code>null</code>
+   * if no such store exists.
+   */
+  public native ManagedResourceStore openManagedStore(String name) /*-{
+    return this.openManagedStore(name);
+  }-*/;
+
+  /**
+   * Opens an existing {@link ManagedResourceStore} or returns <code>null</code>
+   * if no such store exists.
+   * 
+   * The combination of name and requiredCookie (along with the domain) identify
+   * a unique store. Expected cookie format is "name=value".
+   */
+  public native ManagedResourceStore openManagedStore(String name,
+      String requiredCookie) /*-{
+    return this.openManagedStore(name, requiredCookie);
+  }-*/;
+
+  /**
+   * Opens an existing {@link ResourceStore} or returns <code>null</code> if
+   * no such store exists. If the store was originally created with a
+   * requiredCookie, the same value must be provided in order to open this
+   * {@link ResourceStore}.
+   */
+  public native ResourceStore openStore(String name) /*-{
+    return this.openStore(name);
+  }-*/;
+
+  /**
+   * Opens an existing {@link ResourceStore} or returns <code>null</code> if
+   * no such store exists. If the store was originally created with a
+   * requiredCookie, the same value must be provided in order to open this
+   * {@link ResourceStore}.
+   * 
+   * The combination of name and requiredCookie (along with the domain) identify
+   * a unique store. Expected cookie format is "name=value".
+   */
+  public native ResourceStore openStore(String name, String requiredCookie) /*-{
+    return this.openStore(name, requiredCookie);
+  }-*/;
+
+  /**
+   * Removes a {@link ManagedResourceStore} and all of its contained URLs from
+   * the local cache.
+   */
+  public native void removeManagedStore(String name) /*-{
+    this.removeManagedStore(name);
+  }-*/;
+
+  /**
+   * Removes a {@link ManagedResourceStore} and all of its contained URLs from
+   * the local cache.
+   */
+  public native void removeManagedStore(String name, String requiredCookie) /*-{
+    this.removeManagedStore(name, requiredCookie);
+  }-*/;
+
+  /**
+   * Removes a {@link ResourceStore} and deletes all of its contents.
+   */
+  public native void removeStore(String name) /*-{
+    this.removeStore(name);
+  }-*/;
+
+  /**
+   * Removes a {@link ResourceStore} and deletes all of its contents.
+   */
+  public native void removeStore(String name, String requiredCookie) /*-{
+    this.removeStore(name, requiredCookie);
+  }-*/;
+
+  /**
+   * Native proxy call to the canServeLocally method on the JavaScript object.
+   * 
+   * @param url
+   * @return
+   */
+  private native boolean uncheckedCanServeLocally(String url) /*-{
+    return this.canServeLocally(url);
   }-*/;
 }

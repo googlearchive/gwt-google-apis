@@ -16,351 +16,180 @@
 package com.google.gwt.gears.client.localserver;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.gears.client.impl.Utils;
 
 /**
  * Manages an ad-hoc collection of captured URLs, which can be served locally.
  */
-public class ResourceStore {
-  private static int captureURLs(JavaScriptObject jso, String[] urls,
-      URLCaptureCallback callback) throws GearsException {
-    try {
-      return nativeCaptureURL(jso, urls, callback);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /*
-   * Called from JSNI code.
+public final class ResourceStore extends JavaScriptObject {
+  /**
+   * This method is called from JSNI code.
    */
   @SuppressWarnings("unused")
-  private static void fireURLCaptureCallback(URLCaptureCallback callback,
+  private static void fireUrlCaptureCallback(URLCaptureCallback callback,
+      String url, boolean success, int captureId) {
+    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+    if (handler != null) {
+      fireUrlCaptureCallbackAndCatch(handler, callback, url, success, captureId);
+    } else {
+      fireUrlCaptureCallbackImpl(callback, url, success, captureId);
+    }
+  }
+
+  private static void fireUrlCaptureCallbackAndCatch(
+      UncaughtExceptionHandler handler, URLCaptureCallback callback,
       String url, boolean success, int captureId) {
     try {
-      if (success) {
-        callback.onCaptureSuccess(url, captureId);
-      } else {
-        callback.onCaptureFailure(url, captureId);
-      }
+      fireUrlCaptureCallbackImpl(callback, url, success, captureId);
     } catch (Throwable e) {
-      UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
-      if (ueh != null) {
-        ueh.onUncaughtException(e);
-      }
+      handler.onUncaughtException(e);
     }
   }
 
-  /*
-   * Native proxy methods follow
-   */
-  private static native void nativeAbortCapture(JavaScriptObject rStoreObj,
-      int captureId) /*-{
-    rStoreObj.abortCapture(captureId);
-  }-*/;
+  private static void fireUrlCaptureCallbackImpl(URLCaptureCallback callback,
+      String url, boolean success, int captureId) {
+    if (success) {
+      callback.onCaptureSuccess(url, captureId);
+    } else {
+      callback.onCaptureFailure(url, captureId);
+    }
+  }
 
-  // TODO: Revisit implementing file capture.
-  private static native void nativeCaptureFile(JavaScriptObject rStoreObj,
-      Element element, String url) /*-{
-    return rStoreObj.captureFile(element, url);
+  protected ResourceStore() {
+    // Required for overlay types
+  }
+
+  /**
+   * Aborts the specified capture.
+   */
+  public native void abortCapture(int captureId) /*-{
+    this.abortCapture(captureId);
   }-*/;
 
   /**
-   * Native proxy call to the capture method on the JavaScript object.
+   * Initiates an update that runs asynchronously in the background, and returns
+   * immediately. The return value is a captureId which can be passed to
+   * abortCapture to cancel the update.
    * 
-   * @param urls a list of URLs to capture
-   * @param callback a Java callback object to receive notifications about URLs
-   * @return an ID for the capture operation
+   * Relative URLs are interpreted according to the current page's location.
+   * Upon completion of each URL the callback function is invoked.
+   * 
+   * An additional HTTP header is added when Gears is capturing URLs
+   * X-Gears-Google: 1
    */
-  private static native int nativeCaptureURL(JavaScriptObject rStoreObj,
-      String[] urls, URLCaptureCallback callback) /*-{
-    var newUrls = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(urls);
-    var callbackFunc = function(url, success, captureId) {
-      @com.google.gwt.gears.client.localserver.ResourceStore::fireURLCaptureCallback(Lcom/google/gwt/gears/client/localserver/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
+  public int capture(URLCaptureCallback callback, String... urls) {
+    return capture(callback, Utils.toJavaScriptArray(urls));
+  }
+
+  /**
+   * Captures the contents of the file indicated by the fileInputElement into
+   * the store and associates that content with the given URL. The
+   * fileInputElement argument must be a reference to an <input type=file> HTML
+   * element.
+   */
+  public native void captureFile(Element fileInputElement, String url) /*-{
+    this.captureFile(fileInputElement, url);
+  }-*/;
+
+  /**
+   * Copies a cached URL.
+   */
+  public native void copy(String srcUrl, String destUrl) /*-{
+    this.copy(srcUrl, destUrl);
+  }-*/;
+
+  /**
+   * Returns a {@link FileSubmitter}, which is used to submit URLs that are
+   * contained in this store in HTML form submissions.
+   */
+  public native FileSubmitter createFileSubmitter() /*-{
+    return this.createFileSubmitter();
+  }-*/;
+
+  /**
+   * Returns all HTTP headers associated with the captured URL.
+   */
+  public native String getAllHeaders(String url) /*-{
+    return this.getAllHeaders(url);
+  }-*/;
+
+  /**
+   * Returns the leaf file name associated with url that was previously captured
+   * by calling captureFile. Note that if url was captured by a method other
+   * than calling captureFile then an empty string will be returned and no
+   * exception will be thrown.
+   */
+  public native String getCapturedFileName(String url) /*-{
+    return this.getCapturedFileName(url);
+  }-*/;
+
+  /**
+   * Returns a specific HTTP header associated with the captured URL.
+   */
+  public native String getHeader(String url, String name) /*-{
+    return this.getHeader(url, name);
+  }-*/;
+
+  /**
+   * Returns the name of this store.
+   */
+  public native String getName() /*-{
+    return this.name;
+  }-*/;
+
+  /**
+   * Returns the cookie requirements of the store. For further details see <a
+   * href="http://code.google.com/apis/gears/api_localserver.html#required_cookie">Cookies
+   * and the LocalServer</a>. If the requiredCookie is empty, then resources
+   * within this store are always served locally, provided the store is enabled.
+   */
+  public native String getRequiredCookie() /*-{
+    return this.requiredCookie;
+  }-*/;
+
+  /**
+   * Returns <code>true</code> if the URL is cached in this store.
+   */
+  public native boolean isCaptured(String url) /*-{
+    return this.isCaptured(url);
+  }-*/;
+
+  /**
+   * Returns <code>true</code> if local serving is enabled for this store,
+   * <code>false</code> otherwise.
+   */
+  public native boolean isEnabled() /*-{
+    return this.enabled;
+  }-*/;
+
+  /**
+   * Removes the cached URL from this store.
+   */
+  public native void remove(String url) /*-{
+    this.remove(url);
+  }-*/;
+
+  /**
+   * Renames a URL that is cached in this store.
+   */
+  public native void rename(String srcUrl, String destUrl) /*-{
+    this.rename(srcUrl, destUrl);
+  }-*/;
+
+  /**
+   * Sets the local serving state of this store.
+   */
+  public native void setEnabled(boolean enabled) /*-{
+    this.enabled = enabled;
+  }-*/;
+
+  private native int capture(URLCaptureCallback callback, JavaScriptObject urls) /*-{
+    var jsCallback = function(url, success, captureId) {
+      @com.google.gwt.gears.client.localserver.ResourceStore::fireUrlCaptureCallback(Lcom/google/gwt/gears/client/localserver/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
     };
-    return rStoreObj.capture(newUrls, callbackFunc);
+    return this.capture(urls, jsCallback);
   }-*/;
-
-  private static native void nativeCopyURL(JavaScriptObject rStoreObj,
-      String src, String dest) /*-{
-    rStoreObj.copy(src, dest);
-  }-*/;
-
-  // TODO: Revisit file capture mechanism
-  private static native JavaScriptObject nativeCreateFileSubmitter(
-      JavaScriptObject rStoreObj) /*-{
-    return rStoreObj.createFileSubmitter()();
-  }-*/;
-
-  private static native String nativeGetAllURLHeaders(
-      JavaScriptObject rStoreObj, String url) /*-{
-    var headers = rStoreObj.getAllHeaders(url);
-    return headers == null ? null : headers;
-  }-*/;
-
-  private static native String nativeGetCapturedFileName(
-      JavaScriptObject rStoreObj, String url) /*-{
-    var fileName = rStoreObj.getCapturedFileName(url);
-    return fileName == null ? null : fileName;
-  }-*/;
-
-  private static native String nativeGetCapturedURLHeader(
-      JavaScriptObject rStoreObj, String url, String name) /*-{
-    return rStoreObj.getHeader(url, name);
-  }-*/;
-
-  private static native String nativeGetName(JavaScriptObject rStoreObj) /*-{
-    return rStoreObj.name == null ? null : rStoreObj.name;
-  }-*/;
-
-  private static native String nativeGetRequiredCookie(
-      JavaScriptObject rStoreObj) /*-{
-    return rStoreObj.requiredCookie;
-  }-*/;
-
-  private static native boolean nativeIsEnabled(JavaScriptObject rStoreObj) /*-{
-    return rStoreObj.enabled;
-  }-*/;
-
-  private static native boolean nativeIsURLCaptured(JavaScriptObject rStoreObj,
-      String url) /*-{
-    return rStoreObj.isCaptured(url);
-  }-*/;
-
-  private static native void nativeRemoveURL(JavaScriptObject rStoreObj,
-      String url) /*-{
-    rStoreObj.remove(url);
-  }-*/;
-
-  private static native void nativeRenameURL(JavaScriptObject rStoreObj,
-      String src, String dest) /*-{
-    rStoreObj.rename(src, dest);
-  }-*/;
-
-  private static native void nativeSetEnabled(JavaScriptObject rStoreObj,
-      boolean enabled) /*-{
-    rStoreObj.enabled = enabled;
-  }-*/;
-
-  private static native void nativeSetFileInputElement(
-      JavaScriptObject fileSub, Element element, String url) /*-{
-    fileSub.setFileInputElement(element, url);
-  }-*/;
-
-  /**
-   * Reference to the FileSubmitter JavaScript object provided by Gears.
-   */
-  private JavaScriptObject fileSub = null;
-
-  /**
-   * Reference to the ResourceStore JavaScript object provided by Gears.
-   */
-  private final JavaScriptObject rStoreObj;
-
-  /**
-   * Constructs an instance which wraps a given JavaScript
-   * <code>ResourceStore</code> instance.
-   * 
-   * @param jsDb the object returned from the Gears factory's create method
-   */
-  ResourceStore(JavaScriptObject jso) {
-    rStoreObj = jso;
-  }
-
-  /**
-   * Aborts the capture operation associated with the given
-   * <code>captureId</code>.
-   * 
-   * @param captureId the ID of the capture operation to abort; must have been
-   *          returned by a call to
-   *          {@link #captureURL(String, URLCaptureCallback)} or
-   *          {@link #captureURLs(String[], URLCaptureCallback)}.
-   */
-  public void abortCapture(int captureId) {
-    nativeAbortCapture(rStoreObj, captureId);
-  }
-
-  /**
-   * Initiates an asynchronous background task to capture the indicated URL. The
-   * return value is a captureId which can be passed to abortCapture to cancel
-   * the task. Relative URLs are interpreted according to the current page's
-   * location. Upon completion of the URL the appropriate method on the provided
-   * {@link URLCaptureCallback} is invoked. An additional HTTP header is added
-   * when Gears is capturing URLs: <code>X-Gears-Google: 1</code>
-   * 
-   * @param url the URL to capture
-   * @param callback a callback to be invoked when the URL is captured
-   * @return an opaque ID to for the operation
-   * @throws GearsException if any of the URLs is not from the same origin as
-   *           the current page
-   */
-  public int captureURL(String url, URLCaptureCallback callback)
-      throws GearsException {
-    return captureURLs(rStoreObj, new String[] {url}, callback);
-  }
-
-  /**
-   * Initiates an asynchronous background task to capture the indicated URLs.
-   * The return value is a captureId which can be passed to abortCapture to
-   * cancel the task. Relative URLs are interpreted according to the current
-   * page's location. Upon completion of each URL the appropriate method on the
-   * provided {@link URLCaptureCallback} is invoked. An additional HTTP header
-   * is added when Gears is capturing URLs: <code>X-Gears-Google: 1</code>
-   * 
-   * @param urls a list of URLs to capture
-   * @param callback a callback to be invoked when the URL is captured
-   * @return an opaque ID to for the operation
-   * @throws GearsException if any of the URLs is not from the same origin as
-   *           the current page
-   */
-  public int captureURLs(String[] urls, URLCaptureCallback callback)
-      throws GearsException {
-    return captureURLs(rStoreObj, urls, callback);
-  }
-
-  /**
-   * Copies the data for a given URL to a new name.
-   * 
-   * @param srcUrl the URL whose data is to be replicated
-   * @param destUrl the new URL to contain the replicated data
-   * @throws GearsException if the source or destination URL is not from the
-   *           same origin as the current page
-   */
-  public void copyCapturedURL(String srcUrl, String destUrl)
-      throws GearsException {
-    try {
-      nativeCopyURL(rStoreObj, srcUrl, destUrl);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Returns all HTTP headers associated with the captured url as a single
-   * string.
-   * 
-   * @param capturedURL the URL whose headers are to be fetched
-   * @return the header string in the response that was captured and bound the
-   *         URL
-   * @throws GearsException if the URL is not from the same origin as the
-   *           current page
-   */
-  public String getAllCapturedURLHeaders(String capturedURL)
-      throws GearsException {
-    try {
-      return nativeGetAllURLHeaders(rStoreObj, capturedURL);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Returns the value of an HTTP response header associated with a captured
-   * URL.
-   * 
-   * @param capturedURL the URL whose header is to be retrieved
-   * @param headerName the name of the header to be retrieved
-   * @return the value of the header in the request that captured the URL
-   * @throws GearsException if the URL is not from the same origin as the
-   *           current page
-   */
-  public String getCapturedURLHeaderValue(String capturedURL, String headerName)
-      throws GearsException {
-    try {
-      return nativeGetCapturedURLHeader(rStoreObj, capturedURL, headerName);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Retrieves the user-defined name of this store.
-   * 
-   * @return the name of the store
-   */
-  public String getName() {
-    return nativeGetName(rStoreObj);
-  }
-
-  /**
-   * Retrieves the name of the current cookie required by this store to be
-   * present in the browser.
-   * 
-   * @return the current name of the required cookie, or null
-   */
-  public String getRequiredCookie() {
-    return nativeGetRequiredCookie(rStoreObj);
-  }
-
-  /**
-   * Returns true if the url has been captured.
-   * 
-   * @param url the URL to be tested
-   * @return <code>true</code> if the URL has been captured;
-   *         <code>false</code> otherwise
-   * @throws GearsException if the URL is not from the same origin as the
-   *           current page
-   */
-  public boolean isCapturedURL(String url) throws GearsException {
-    try {
-      return nativeIsURLCaptured(rStoreObj, url);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Checks whether the store is enabled for serving its URLs locally.
-   * 
-   * @return true if the store is enabled, false otherwise
-   */
-  public boolean isEnabled() {
-    return nativeIsEnabled(rStoreObj);
-  }
-
-  /**
-   * Removes the indicated URL from the store.
-   * 
-   * @param url the URL to remove
-   * @throws GearsException if the URL is not from the same origin as the
-   *           current page
-   */
-  public void removeCapturedURL(String url) throws GearsException {
-    try {
-      nativeRemoveURL(rStoreObj, url);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Renames a URL that is cached in the resource store. The data captured for a
-   * given URL will be bound to a new URL, replacing the old one.
-   * 
-   * @param srcURL the URL to be renamed
-   * @param destURL the new URL for which the data will be served
-   * @throws GearsException if the URL is not from the same origin as the
-   *           current page
-   */
-  public void renameCapturedURL(String srcURL, String destURL)
-      throws GearsException {
-    try {
-      nativeRenameURL(rStoreObj, srcURL, destURL);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Enables or disables local serving for the URLs captured in this store.
-   * 
-   * @param enabled the new state of the store
-   */
-  public void setEnabled(boolean enabled) {
-    nativeSetEnabled(rStoreObj, enabled);
-  }
 }
