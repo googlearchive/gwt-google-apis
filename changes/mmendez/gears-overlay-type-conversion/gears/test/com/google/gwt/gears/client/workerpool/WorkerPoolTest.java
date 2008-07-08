@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.client.workerpool.client;
+package com.google.gwt.gears.client.workerpool;
 
 import com.google.gwt.gears.core.client.GearsException;
 import com.google.gwt.junit.client.GWTTestCase;

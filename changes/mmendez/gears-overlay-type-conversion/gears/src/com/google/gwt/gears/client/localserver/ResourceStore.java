@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.client.localserver.client;
+package com.google.gwt.gears.client.localserver;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
@@ -80,7 +80,7 @@ public class ResourceStore {
       String[] urls, URLCaptureCallback callback) /*-{
     var newUrls = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(urls);
     var callbackFunc = function(url, success, captureId) {
-      @com.google.gwt.gears.client.localserver.client.ResourceStore::fireURLCaptureCallback(Lcom/google/gwt/gears/client/localserver/client/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
+      @com.google.gwt.gears.client.localserver.ResourceStore::fireURLCaptureCallback(Lcom/google/gwt/gears/client/localserver/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
     };
     return rStoreObj.capture(newUrls, callbackFunc);
   }-*/;

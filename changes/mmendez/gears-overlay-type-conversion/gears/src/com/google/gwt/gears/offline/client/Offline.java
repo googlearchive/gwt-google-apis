@@ -16,8 +16,8 @@
 package com.google.gwt.gears.offline.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.gears.client.localserver.client.LocalServer;
-import com.google.gwt.gears.client.localserver.client.ManagedResourceStore;
+import com.google.gwt.gears.client.localserver.LocalServer;
+import com.google.gwt.gears.client.localserver.ManagedResourceStore;
 import com.google.gwt.gears.core.client.GearsException;
 
 /**

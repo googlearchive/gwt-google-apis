@@ -16,10 +16,10 @@
 package com.google.gwt.gears;
 
 import com.google.gwt.gears.client.FactoryTest;
-import com.google.gwt.gears.client.database.client.DatabaseTest;
-import com.google.gwt.gears.client.database.client.ResultSetTest;
-import com.google.gwt.gears.client.localserver.client.LocalServerTest;
-import com.google.gwt.gears.client.workerpool.client.WorkerPoolTest;
+import com.google.gwt.gears.client.database.DatabaseTest;
+import com.google.gwt.gears.client.database.ResultSetTest;
+import com.google.gwt.gears.client.localserver.LocalServerTest;
+import com.google.gwt.gears.client.workerpool.WorkerPoolTest;
 import com.google.gwt.gears.core.client.GearsTest;
 
 import junit.framework.Test;

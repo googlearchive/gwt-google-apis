@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.client.workerpool.client;
+package com.google.gwt.gears.client.workerpool;
 
 /**
  * Handler interface for messages sent between JavaScript threads created using
