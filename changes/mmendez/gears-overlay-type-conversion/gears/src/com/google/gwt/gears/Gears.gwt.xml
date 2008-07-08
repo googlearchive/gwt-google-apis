@@ -17,6 +17,7 @@
   <!--
     Configure our source path
   -->
+  <source path='client'/>
   <source path='core/client'/>
   <source path='database/client'/>
   <source path='localserver/client'/>
