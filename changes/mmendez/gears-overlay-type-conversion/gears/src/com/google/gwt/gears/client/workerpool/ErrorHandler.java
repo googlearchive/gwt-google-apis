@@ -13,38 +13,42 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.google.gwt.gears.client.workerpool;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Handler interface for messages sent between JavaScript threads created using
- * the Gears WorkerPool system.
+ * 
  */
-public interface MessageHandler {
+public interface ErrorHandler {
   /**
    * 
    */
-  final class MessageEvent extends JavaScriptObject {
-    protected MessageEvent() {
+  final class ErrorEvent extends JavaScriptObject {
+    protected ErrorEvent() {
       // Required for overlay types
     }
 
-    public native String getBody() /*-{
-      return this.body;
+    public native int getLineNumber() /*-{
+      return this.lineNumber;
     }-*/;
 
-    public native String getOrigin() /*-{
-      return this.origin;
-    }-*/;
-
-    public native double getSender() /*-{
-      return this.sender;
+    public native String getMessage() /*-{
+      return this.message;
     }-*/;
   }
 
   /**
-   * Called when a message has been sent to this thread by another thread.
+   * This callback provides functionality in workers similar to the
+   * window.onerror property. If set, it will be called for any unhandled errors
+   * that occur inside a worker.
+   * 
+   * You can use this callback to implement "last-chance" error handling for
+   * your workers. For example, you could log all unhandled errors into the
+   * Database module.
+   * 
+   * NOTE: This callback can only be set from child workers.
    */
-  void onMessageReceived(MessageEvent event);
+  boolean onError(ErrorEvent errorObject);
 }

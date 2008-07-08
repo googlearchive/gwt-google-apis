@@ -15,155 +15,110 @@
  */
 package com.google.gwt.gears.client.workerpool;
 
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.gears.core.client.Gears;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.core.client.impl.GearsImpl;
 
 /**
- * Used to create and manage JavaScript threads using the Gears WorkerPool
- * system. A WorkerPool represents a group of JavaScript threads. Each thread
- * runs in a separate JavaScript VM, and has an isolated namespace. That is,
- * threads do not have access to any other threads' variables, including their
- * parents'.
- * 
- * WorkerPools can be used to group threads for convenience.
+ * WorkerPool module allows web applications to run JavaScript code in the
+ * background, without blocking the main page's script execution.
  * 
  * Currently this class can only create worker threads out of raw JavaScript
  * code. That is, user code cannot currently create worker bodies from Java
  * code.
  */
-public class WorkerPool {
-  /*
-   * This method is called from JSNI.
-   */
-  @SuppressWarnings("unused")
-  private static void fireOnMessageReceived(WorkerPool pool, String msg,
-      int srcWorkerId) {
-    if (pool.callback != null) {
-      pool.callback.onMessageReceived(msg, srcWorkerId);
-    }
+public final class WorkerPool extends JavaScriptObject {
+  protected WorkerPool() {
+    // Required for overlay types
   }
 
   /**
-   * Native method that calls <code>createWorker</code> on the underlying
-   * <code>pool</code> object. Note that this method can throw an unchecked
-   * JavaScriptException.
-   * 
-   * @param javaScript the JavaScript code to pass into the worker thread
-   * @return the ID of the newly-created thread
+   * A child worker must call this method if it expects to be used across
+   * origins.
    */
-  private static native int nativeCreateWorkerByString(JavaScriptObject pool,
-      String javaScript) /*-{
-    return pool.createWorker(javaScript);
-  }-*/;
-
-  private static native void nativeSendMessage(JavaScriptObject pool,
-      String message, int destWorker) /*-{
-    pool.sendMessage(message, destWorker);
+  public native void allowCrossOrigin() /*-{
+    this.allowCrossOrigin();
   }-*/;
 
   /**
-   * Sets the raw JavaScript onmessage handler to a function which dynamically
-   * dispatches to the current callback object, if one is registered.
+   * Creates a worker from a string of JavaScript code.
    * 
+   * Gears guarantees the code in scriptText will run once before any messages
+   * are delivered. The code must set an onmessage handler during that initial
+   * execution, otherwise the worker will never receive messages.
+   * 
+   * Two global objects are inserted into the namespace of every created worker: •
+   * google.gears.factory - Provides a Factory for the worker. •
+   * google.gears.workerPool - Gives access to the WorkerPool that created the
+   * worker.
+   * 
+   * Worker IDs are guaranteed to be unique values that are never reused within
+   * the same WorkerPool.
+   * 
+   * @return id of the created worker
    */
-  private static native void setOnMessage(WorkerPool workerPool,
-      JavaScriptObject jsPool) /*-{
-    var jPool = workerPool;
-    jsPool.onmessage = function(msg, srcId) {
-      @com.google.gwt.gears.client.workerpool.WorkerPool::fireOnMessageReceived(Lcom/google/gwt/gears/client/workerpool/WorkerPool;Ljava/lang/String;I)(jPool, msg, srcId);
-    }
+  public native int createWorker(String scriptText) /*-{
+    return this.createWorker(scriptText);
   }-*/;
 
   /**
-   * The callback function registered to this worker thread.
+   * Creates a worker using the JavaScript code fetched from a URL
+   * 
+   * Note: If called from a worker, createWorkerFromUrl() always fails today,
+   * due to a technical issue that will be addressed in a future release.
+   * 
+   * Gears guarantees the URL will be fetched and the code returned will run
+   * once before any messages are delivered. The code must set an onmessage
+   * handler during that initial execution, otherwise the worker will never
+   * receive messages.
+   * 
+   * @return id of the created worker
    */
-  private final MessageHandler callback;
+  public native int createWorkerFromUrl(String scriptUrl) /*-{
+    return this.createWorkerFromUrl(scriptUrl);
+  }-*/;
 
   /**
-   * Handle to the native WorkerPool object wrapped by this class.
+   * Sends message to the worker specified by destWorkerId.
+   * 
+   * Messages sent from worker 1 to worker 2 in a particular order will be
+   * received in the same order.
+   * 
+   * Messages can be sent and received only between members of the same
+   * WorkerPool.
+   * 
+   * Messages are copied between workers. Changes to a message received in one
+   * worker will not be reflected in the sending worker.
    */
-  private final JavaScriptObject pool;
+  public native void sendMessage(String message, int destWorkerId) /*-{
+    this.sendMessage(message, destWorkerId);
+  }-*/;
 
   /**
-   * Constructs a WorkerPool object.
+   * Set the {@link ErrorHandler}. This provides functionality in workers
+   * similar to the window.onerror property. If set, it will be called for any
+   * unhandled errors that occur inside a worker.
    * 
-   * @param callback if non-<code>null</code>, the instance which will
-   *          receive messages from threads
+   * You can use this callback to implement "last-chance" error handling for
+   * your workers. For example, you could log all unhandled errors into the
+   * Database module.
    * 
-   * @throws GearsException if the WorkerPool could not be constructed
+   * NOTE: This callback can only be set from child workers.
    */
-  public WorkerPool(MessageHandler callback) throws GearsException {
-    this(callback, Gears.WORKERPOOL, Gears.GEARS_VERSION);
-  }
+  public native void setErrorHandler(ErrorHandler handler) /*-{
+    this.onerror = function(errorObject) {
+      if (handler) {
+        handler.@com.google.gwt.gears.client.workerpool.ErrorHandler::onError(Lcom/google/gwt/gears/client/workerpool/ErrorHandler$ErrorEvent;)(errorObject);
+      }
+    };
+  }-*/;
 
   /**
-   * Constructs a WorkerPool object backed by the provided Gears pool object.
-   * 
-   * @throws GearsException if the WorkerPool could not be constructed
+   * Set the {@link MessageHandler} to call when this worker receives a message.
    */
-  protected WorkerPool(MessageHandler callback, String className,
-      String classVersion) throws GearsException {
-    this.callback = callback;
-    pool = GearsImpl.create(className, classVersion);
-    setOnMessage(this, pool);
-  }
-
-  /**
-   * Creates a JavaScript thread using the JavaScript code stored in
-   * <code>javaScript</code>. The code in <code>javaScript</code> is
-   * guaranteed to complete before this method returns. The code must set an
-   * <code>onmessage</code> handler (though it may be a no-op handler.)
-   * 
-   * @param javaScript the JavaScript code to run in the thread
-   * @return the ID of the newly-created thread
-   * @throws GearsException if the worker could not be created
-   * @throws NullPointerException if the java script string is <code>null</code>
-   */
-  public int createWorkerFromString(String javaScript) throws GearsException {
-    if (javaScript == null) {
-      throw new NullPointerException();
-    }
-
-    try {
-      return nativeCreateWorkerByString(pool, javaScript);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Sends a message with the indicated data to the indicated thread. Messages
-   * can only be sent between members of the same <code>WorkerPool</code>.
-   * 
-   * @param message the data to send
-   * @param destWorker the thread to send the data to
-   * @throws NullPointerException of <code>message</code> is <code>null</code>
-   * @throws GearsException if the <code>message</code> cannot be sent to the
-   *           specified <code>destWorker</code>
-   */
-  public void sendMessage(String message, int destWorker) throws GearsException {
-    if (message == null) {
-      throw new NullPointerException();
-    }
-
-    try {
-      nativeSendMessage(pool, message, destWorker);
-    } catch (JavaScriptException ex) {
-      throw new GearsException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Returns the JavaScript <code>WorkerPool</code> object wrapped by this
-   * instance.
-   * 
-   * @return the JavaScript <code>WorkerPool</code> object wrapped by this
-   *         instance
-   */
-  protected final JavaScriptObject getJavaScriptObject() {
-    return pool;
-  }
+  public native void setMessageHandler(MessageHandler handler) /*-{
+    this.onmessage = function(messageText, senderId, messageObject) {
+      if (handler) {
+        handler.@com.google.gwt.gears.client.workerpool.MessageHandler::onMessageReceived(Lcom/google/gwt/gears/client/workerpool/MessageHandler$MessageEvent;)(messageObject);
+      }
+    };
+  }-*/;
 }

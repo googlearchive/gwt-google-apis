@@ -15,7 +15,7 @@
  */
 package com.google.gwt.gears.client.workerpool;
 
-import com.google.gwt.gears.core.client.GearsException;
+import com.google.gwt.gears.client.Factory;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -28,60 +28,19 @@ public class WorkerPoolTest extends GWTTestCase {
       + "     google.gears.workerPool.sendMessage('done', srcWorkerId);"
       + "  };" + "}" + "workerInit();";
 
-  public String getModuleName() {
-    return "com.google.gwt.gears.Gears";
-  }
-
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#createWorkerFromString(java.lang.String)}
-   * and
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#sendMessage(java.lang.String, int)}.
-   * 
-   * @throws GearsException
+   * Test method for {@link WorkerPool#createWorker(String)}.
    */
-  public void testCreateWorkerFromString() throws GearsException {
-    final WorkerPool wp = new WorkerPool(new MessageHandler() {
-      public void onMessageReceived(String message, int srcWorker) {
-        finishTest();
+  public void disabledTestCreateWorkerFromStringNull() {
+    WorkerPool wp = Factory.getInstance().createWorkerPool();
+    wp.setMessageHandler(new MessageHandler() {
+      public void onMessageReceived(MessageEvent event) {
+        // purposely empty
       }
     });
 
-    int wID = wp.createWorkerFromString(WORKER_JS_SRC);
-    delayTestFinish(5000);
-    wp.sendMessage("stop", wID);
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#createWorkerFromString(java.lang.String)}.
-   * 
-   * @throws GearsException
-   */
-  public void testCreateWorkerFromStringEmpty() throws GearsException {
-    WorkerPool wp = new WorkerPool(new MessageHandler() {
-      public void onMessageReceived(String message, int srcWorker) {
-      }
-    });
-
-    // You can create a worker from an empty string, you just can't sent it a
-    // message.
-    wp.createWorkerFromString("");
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#createWorkerFromString(java.lang.String)}.
-   * 
-   * @throws GearsException
-   */
-  public void testCreateWorkerFromStringNull() throws GearsException {
-    WorkerPool wp = new WorkerPool(new MessageHandler() {
-      public void onMessageReceived(String message, int srcWorker) {
-      }
-    });
     try {
-      int wID = wp.createWorkerFromString(null);
+      int wID = wp.createWorker(null);
       wp.sendMessage("stop", wID);
       fail("Expected a NullPointerException");
     } catch (NullPointerException e) {
@@ -90,112 +49,85 @@ public class WorkerPoolTest extends GWTTestCase {
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#sendMessage(java.lang.String, int)}.
+   * Test method for {@link WorkerPool#sendMessage(String, int)}.
+   */
+  public void disabledTestSendMessageNegativeWorkerID() {
+    WorkerPool wp = Factory.getInstance().createWorkerPool();
+    wp.createWorker(WORKER_JS_SRC);
+    wp.sendMessage("", -2);
+  }
+
+  /**
+   * Test method for {@link WorkerPool#sendMessage(String, int)}.
+   */
+  public void disabledTestSendMessageNull() {
+    WorkerPool wp = Factory.getInstance().createWorkerPool();
+    int workerID = wp.createWorker(WORKER_JS_SRC);
+
+    wp.sendMessage(null, workerID);
+    wp.sendMessage("", -2);
+  }
+
+  @Override
+  public String getModuleName() {
+    return "com.google.gwt.gears.Gears";
+  }
+
+  /**
+   * Test method for {@link WorkerPool#createWorker(String)} and
+   * {@link WorkerPool#sendMessage(String, int)}.
+   */
+  public void testCreateWorkerFromString() {
+    WorkerPool wp = Factory.getInstance().createWorkerPool();
+    wp.setMessageHandler(new MessageHandler() {
+      public void onMessageReceived(MessageEvent event) {
+        finishTest();
+      }
+    });
+
+    int wID = wp.createWorker(WORKER_JS_SRC);
+    delayTestFinish(5000);
+    wp.sendMessage("stop", wID);
+  }
+
+  /**
+   * Test method for {@link WorkerPool#createWorker(String)}.
+   */
+  public void testCreateWorkerFromStringEmpty() {
+    WorkerPool wp = Factory.getInstance().createWorkerPool();
+    wp.setMessageHandler(new MessageHandler() {
+      public void onMessageReceived(MessageEvent event) {
+        // purposely empty
+      }
+    });
+
+    // You can create a worker from an empty string, you just can't sent it a
+    // message.
+    wp.createWorker("");
+  }
+
+  /**
+   * Test method for {@link WorkerPool#sendMessage(String, int)}.
    */
   public void testSendMessage() {
-    try {
-      WorkerPool wp = new WorkerPool(null);
-      int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
-      wp.sendMessage("foo", workerID);
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
+    WorkerPool wp = Factory.getInstance().createWorkerPool();
+    int workerID = wp.createWorker(WORKER_JS_SRC);
+    delayTestFinish(5000);
+    wp.setMessageHandler(new MessageHandler() {
+      public void onMessageReceived(MessageEvent event) {
+        assertEquals("done", event.getBody());
+        finishTest();
+      }
+    });
+    wp.sendMessage("foo", workerID);
   }
 
   /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#sendMessage(java.lang.String, int)}.
+   * Test method for {@link WorkerPool#sendMessage(String, int)}.
    */
   public void testSendMessageEmpty() {
-    try {
-      WorkerPool wp = new WorkerPool(null);
-      int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
-      wp.sendMessage("", workerID);
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#sendMessage(java.lang.String, int)}.
-   * 
-   * @throws GearsException
-   */
-  public void testSendMessageNegativeWorkerID() throws GearsException {
-
-    try {
-      WorkerPool wp = new WorkerPool(null);
-      int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
-      wp.sendMessage("", -2);
-      fail("Expected a GearsException");
-    } catch (GearsException e) {
-      // Expected to get here
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#sendMessage(java.lang.String, int)}.
-   * 
-   * @throws GearsException
-   */
-  public void testSendMessageNull() throws GearsException {
-    WorkerPool wp = new WorkerPool(null);
-    int workerID = wp.createWorkerFromString(WORKER_JS_SRC);
-
-    try {
-      wp.sendMessage(null, workerID);
-    } catch (NullPointerException e) {
-      // Expected to get here
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
-
-    try {
-      wp.sendMessage("", -2);
-    } catch (GearsException e) {
-      // Expected to get here
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#WorkerPool(MessageHandler))}.
-   */
-  public void testWorkerPoolMessageHandler() {
-    WorkerPool wp;
-    try {
-      wp = new WorkerPool(new MessageHandler() {
-        public void onMessageReceived(String message, int srcWorker) {
-          // purposely empty
-        }
-      });
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
-
-    try {
-      wp = new WorkerPool(null);
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#WorkerPool(MessageHandler, String))}.
-   */
-  public void testWorkerPoolMessageHandlerString() {
-    // TODO fill me in
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.workerpool.client.WorkerPool#WorkerPool(MessageHandler,java.lang.String, java.lang.String)}.
-   */
-  public void testWorkerPoolMessageHandlerStringString() {
-    // TODO fill me in
+    WorkerPool wp = Factory.getInstance().createWorkerPool();
+    int workerID = wp.createWorker(WORKER_JS_SRC);
+    wp.sendMessage("", workerID);
   }
 }
