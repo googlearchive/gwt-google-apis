@@ -16,7 +16,7 @@
 
 package com.google.gwt.gears.client.database;
 
-import com.google.gwt.gears.core.client.GearsException;
+import com.google.gwt.gears.client.Factory;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -24,6 +24,24 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class DatabaseTest extends GWTTestCase {
 
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.client.database.Database#execute(java.lang.String) execute(null)}.
+   * 
+   * @throws DatabaseException
+   */
+  public void disabledTestExecuteStringNull() throws DatabaseException {
+    try {
+      Database db = Factory.getInstance().createDatabase();
+      db.open();
+      db.execute(null);
+      fail("Expected GearsException");
+    } catch (NullPointerException e) {
+      // Expected to get here
+    }
+  }
+
+  @Override
   public String getModuleName() {
     return "com.google.gwt.gears.Gears";
   }
@@ -31,40 +49,25 @@ public class DatabaseTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.gears.database.client.Database#close()}.
+   * 
+   * @throws DatabaseException
    */
-  public void testClose() {
-    try {
-      Database db = new Database();
-      db.close();
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.database.client.Database#Database()}.
-   */
-  public void testDatabase() {
-    try {
-      new Database();
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
+  public void testClose() throws DatabaseException {
+    Database db = Factory.getInstance().createDatabase();
+    db.close();
   }
 
   /**
    * Test method for
    * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String) execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)")}.
+   * 
+   * @throws DatabaseException
    */
-  public void testExecuteString() {
-    try {
-      Database db = new Database();
-      ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
-      rs.close();
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
+  public void testExecuteString() throws DatabaseException {
+    Database db = Factory.getInstance().createDatabase();
+    db.open();
+    ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
+    rs.close();
   }
 
   /**
@@ -73,27 +76,11 @@ public class DatabaseTest extends GWTTestCase {
    */
   public void testExecuteStringEmptyString() {
     try {
-      Database db = new Database();
+      Database db = Factory.getInstance().createDatabase();
       db.execute("");
-      fail("Expected a GearsException");
-    } catch (GearsException e) {
+      fail("Expected a DatabaseException");
+    } catch (DatabaseException e) {
       // Expected to get here
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String) execute(null)}.
-   */
-  public void testExecuteStringNull() {
-    try {
-      Database db = new Database();
-      db.execute(null);
-      fail("Expected GearsException");
-    } catch (NullPointerException e) {
-      // Expected to get here
-    } catch (GearsException e) {
-      fail(e.getMessage());
     }
   }
 
@@ -103,49 +90,59 @@ public class DatabaseTest extends GWTTestCase {
    */
   public void testExecuteStringStringArrayEmptyArray() {
     try {
-      Database db = new Database();
+      Database db = Factory.getInstance().createDatabase();
       ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
       rs.close();
       db.execute("insert into Demo values (?, ?)", new String[] {});
-      fail("Expected GearsException");
-    } catch (GearsException e) {
+      fail("Expected a DatabaseException");
+    } catch (DatabaseException e) {
       // Expected to get here
     }
   }
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String, java.lang.String[]) execute("SQL Statement", null)}.
+   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String, java.lang.String[]) execute("SQL Statement ?, ?", new String[]{})}.
+   * 
+   * @throws DatabaseException
    */
-  public void testExecuteStringStringArrayNullArray() {
+  public void testExecuteWithoutEnoughInsuficientArgs() {
     try {
-      Database db = new Database();
+      Database db = Factory.getInstance().createDatabase();
+      db.open();
       ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
       rs.close();
-      db.execute("insert into Demo values (?, ?)", null);
-    } catch (NullPointerException e) {
+      db.execute("insert into Demo values (?, ?)");
+      fail("Expected a DatabaseException");
+    } catch (DatabaseException ex) {
       // Expected to get here
-    } catch (GearsException e) {
-      fail(e.getMessage());
     }
   }
 
   /**
    * Test method for
    * {@link com.google.gwt.gears.database.client.Database#getLastInsertRowId()}.
+   * 
+   * @throws DatabaseException
    */
-  public void testGetLastInsertRowId() {
-    try {
-      Database db = new Database();
-      db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
-      db.execute("insert into Demo values (?, ?)", new String[] {
-          "Hello", Integer.toString((int) System.currentTimeMillis())});
-      int lastInsertRowId = db.getLastInsertRowId();
-      db.execute("insert into Demo values (?, ?)", new String[] {
-          "Hello", Integer.toString((int) System.currentTimeMillis() + 1)});
-      assertTrue(lastInsertRowId < db.getLastInsertRowId());
-    } catch (GearsException e) {
-      fail(e.getMessage());
-    }
+  public void testGetLastInsertRowId() throws DatabaseException {
+    Database db = Factory.getInstance().createDatabase();
+    db.open();
+    db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
+    db.execute("insert into Demo values (?, ?)", new String[] {
+        "Hello", Integer.toString((int) System.currentTimeMillis())});
+    int lastInsertRowId = db.getLastInsertRowId();
+    db.execute("insert into Demo values (?, ?)", new String[] {
+        "Hello", Integer.toString((int) System.currentTimeMillis() + 1)});
+    assertTrue(lastInsertRowId < db.getLastInsertRowId());
+  }
+
+  public void testGetRowsAffected() throws DatabaseException {
+    Database db = Factory.getInstance().createDatabase();
+    db.open();
+    db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
+    db.execute("insert into Demo values (?, ?)", new String[] {
+        "Hello", Integer.toString((int) System.currentTimeMillis())});
+    assertEquals(1, db.getRowsAffected());
   }
 }

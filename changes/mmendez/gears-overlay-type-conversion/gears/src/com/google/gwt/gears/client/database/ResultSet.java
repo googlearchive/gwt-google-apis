@@ -25,110 +25,25 @@ import java.util.Date;
  * <code>ResultSet</code> must have its {@link #close()} called once it is no
  * longer needed.
  */
-public class ResultSet {
-  private static double getFieldAsDouble(JavaScriptObject jso, int fieldIndex)
-      throws DatabaseException {
-    try {
-      return nativeGetFieldAsDouble(jso, fieldIndex);
-    } catch (JavaScriptException ex) {
-      throw new DatabaseException(ex.getMessage(), ex);
-    }
-  }
-
-  private static String getFieldAsString(JavaScriptObject jso, int fieldIndex)
-      throws DatabaseException {
-    try {
-      return nativeGetFieldAsString(jso, fieldIndex);
-    } catch (JavaScriptException ex) {
-      throw new DatabaseException(ex.getMessage(), ex);
-    }
+public final class ResultSet extends JavaScriptObject {
+  protected ResultSet() {
+    // Required for overlay types
   }
 
   /**
-   * Native proxy call to the close method on the JavaScript object.
-   */
-  private static native void nativeClose(JavaScriptObject rsetObj) /*-{
-    rsetObj.close();
-  }-*/;
-
-  private static native char nativeGetFieldAsChar(JavaScriptObject rsetObj,
-      int fieldIndex) /*-{
-    var val = rsetObj.field(fieldIndex);
-    if (val == null) {
-      return 0;
-    }
-
-    if (typeof val == 'string') {
-      return val.charCodeAt(0);
-    } else {
-      return val;
-    }
-  }-*/;
-
-  private static native double nativeGetFieldAsDate(JavaScriptObject rsetObj,
-      int fieldIndex) /*-{
-    var val = rsetObj.field(fieldIndex);
-    if (val == null) {
-      return -1;
-    } else {
-      var d = new Date(val);
-      return d.getTime();
-    }
-  }-*/;
-
-  private static native double nativeGetFieldAsDouble(JavaScriptObject rsetObj,
-      int fieldIndex) /*-{
-    var val = rsetObj.field(fieldIndex);
-    return val == null ? 0 : Number(val);
-  }-*/;
-
-  private static native String nativeGetFieldAsString(JavaScriptObject rsetObj,
-      int fieldIndex) /*-{
-    var val = rsetObj.field(fieldIndex);
-    return val == null ? null : String(val);
-  }-*/;
-
-  private static native int nativeGetFieldCount(JavaScriptObject rsetObj) /*-{
-    return rsetObj.fieldCount();
-  }-*/;
-
-  private static native String nativeGetFieldName(JavaScriptObject rsetObj,
-      int fieldIndex) /*-{
-    return rsetObj.fieldName(fieldIndex);
-  }-*/;
-
-  private static native boolean nativeIsValidRow(JavaScriptObject rsetObj) /*-{
-    return rsetObj.isValidRow();
-  }-*/;
-
-  private static native void nativeNext(JavaScriptObject rsetObj) /*-{
-    rsetObj.next();
-  }-*/;
-
-  /**
-   * Reference to the result set JavaScript object provided by Gears.
-   */
-  private final JavaScriptObject rsetObj;
-
-  /**
-   * Constructs a Database object backed by the provided Gears database object.
+   * Releases the state associated with this {@link ResultSet}.
    * 
-   * @param jsoRSet the object returned from the Gears factory's create method
-   */
-  ResultSet(JavaScriptObject jsoRSet) {
-    rsetObj = jsoRSet;
-  }
-
-  /**
-   * Closes the result set. Destroys the SQL statement that gave rise to this
-   * result set. Calling close() is required. User code must always call close()
-   * when it is finished with any ResultSet.
+   * You are required to call close() when you are finished with any
+   * {@link ResultSet}.
+   * 
+   * Note: there is currently a feature request to have close called
+   * automatically when the result set goes out of scope.
    * 
    * @throws DatabaseException on any error
    */
   public void close() throws DatabaseException {
     try {
-      nativeClose(rsetObj);
+      uncheckedClose();
     } catch (JavaScriptException ex) {
       throw new DatabaseException(ex.getMessage(), ex);
     }
@@ -143,7 +58,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public byte getFieldAsByte(int fieldIndex) throws DatabaseException {
-    return (byte) getFieldAsDouble(rsetObj, fieldIndex);
+    return (byte) getFieldAsDouble(fieldIndex);
   }
 
   /**
@@ -156,7 +71,7 @@ public class ResultSet {
    */
   public char getFieldAsChar(int fieldIndex) throws DatabaseException {
     try {
-      return nativeGetFieldAsChar(rsetObj, fieldIndex);
+      return uncheckedGetFieldAsChar(fieldIndex);
     } catch (JavaScriptException ex) {
       throw new DatabaseException(ex.getMessage(), ex);
     }
@@ -164,7 +79,7 @@ public class ResultSet {
 
   public Date getFieldAsDate(int fieldIndex) throws DatabaseException {
     try {
-      long value = (long) nativeGetFieldAsDate(rsetObj, fieldIndex);
+      long value = (long) uncheckedGetFieldAsDate(fieldIndex);
       return new Date(value);
     } catch (JavaScriptException ex) {
       throw new DatabaseException(ex.getMessage(), ex);
@@ -180,7 +95,11 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public double getFieldAsDouble(int fieldIndex) throws DatabaseException {
-    return getFieldAsDouble(rsetObj, fieldIndex);
+    try {
+      return uncheckedGetFieldAsDouble(fieldIndex);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -192,7 +111,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public float getFieldAsFloat(int fieldIndex) throws DatabaseException {
-    return (float) getFieldAsDouble(rsetObj, fieldIndex);
+    return (float) getFieldAsDouble(fieldIndex);
   }
 
   /**
@@ -204,7 +123,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public int getFieldAsInt(int fieldIndex) throws DatabaseException {
-    return (int) getFieldAsDouble(rsetObj, fieldIndex);
+    return (int) getFieldAsDouble(fieldIndex);
   }
 
   /**
@@ -216,7 +135,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public long getFieldAsLong(int fieldIndex) throws DatabaseException {
-    return (long) getFieldAsDouble(rsetObj, fieldIndex);
+    return (long) getFieldAsDouble(fieldIndex);
   }
 
   /**
@@ -228,7 +147,7 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public short getFieldAsShort(int fieldIndex) throws DatabaseException {
-    return (short) getFieldAsDouble(rsetObj, fieldIndex);
+    return (short) getFieldAsDouble(fieldIndex);
   }
 
   /**
@@ -240,7 +159,11 @@ public class ResultSet {
    * @throws DatabaseException if the <code>fieldIndex</code> is out of range
    */
   public String getFieldAsString(int fieldIndex) throws DatabaseException {
-    return getFieldAsString(rsetObj, fieldIndex);
+    try {
+      return uncheckedGetFieldAsString(fieldIndex);
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getMessage(), ex);
+    }
   }
 
   /**
@@ -248,9 +171,9 @@ public class ResultSet {
    * 
    * @return the number of fields (columns) in this result set
    */
-  public int getFieldCount() {
-    return nativeGetFieldCount(rsetObj);
-  }
+  public native int getFieldCount() /*-{
+    return this.fieldCount();
+  }-*/;
 
   /**
    * Returns the name of the specified field (column) in this result set.
@@ -260,7 +183,7 @@ public class ResultSet {
    */
   public String getFieldName(int fieldIndex) throws DatabaseException {
     try {
-      return nativeGetFieldName(rsetObj, fieldIndex);
+      return uncheckedGetFieldName(fieldIndex);
     } catch (JavaScriptException ex) {
       throw new DatabaseException(ex.getMessage(), ex);
     }
@@ -273,14 +196,58 @@ public class ResultSet {
    * 
    * @return true if there is a valid row containing data, false otherwise
    */
-  public boolean isValidRow() {
-    return nativeIsValidRow(rsetObj);
-  }
+  public native boolean isValidRow() /*-{
+    return this.isValidRow();
+  }-*/;
 
   /**
    * Advances to the next row of the results.
    */
-  public void next() {
-    nativeNext(rsetObj);
-  }
+  public native void next() /*-{
+    this.next();
+  }-*/;
+
+  /**
+   * Native proxy call to the close method on the JavaScript object.
+   */
+  private native void uncheckedClose() /*-{
+    this.close();
+  }-*/;
+
+  private native char uncheckedGetFieldAsChar(int fieldIndex) /*-{
+    var val = this.field(fieldIndex);
+    if (val == null) {
+      return 0;
+    }
+
+    if (typeof val == 'string') {
+      return val.charCodeAt(0);
+    } else {
+      return val;
+    }
+  }-*/;
+
+  private native double uncheckedGetFieldAsDate(int fieldIndex) /*-{
+    var val = this.field(fieldIndex);
+    if (val == null) {
+      return -1;
+    } else {
+      var d = new Date(val);
+      return d.getTime();
+    }
+  }-*/;
+
+  private native double uncheckedGetFieldAsDouble(int fieldIndex) /*-{
+    var val = this.field(fieldIndex);
+    return val == null ? 0 : Number(val);
+  }-*/;
+
+  private native String uncheckedGetFieldAsString(int fieldIndex) /*-{
+    var val = this.field(fieldIndex);
+    return val == null ? null : String(val);
+  }-*/;
+
+  private native String uncheckedGetFieldName(int fieldIndex) /*-{
+    return this.fieldName(fieldIndex);
+  }-*/;
 }

@@ -16,6 +16,7 @@
 
 package com.google.gwt.gears.client.database;
 
+import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.core.client.GearsException;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -67,6 +68,7 @@ public class ResultSetTest extends GWTTestCase {
     }
   }
 
+  @Override
   public String getModuleName() {
     return "com.google.gwt.gears.Gears";
   }
@@ -78,7 +80,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testClose() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
     rs.close();
     try {
@@ -98,7 +101,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsByte() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       byte value = (byte) 220;
       ResultSet rs = createDatabase(db, "number", Byte.toString(value));
@@ -118,11 +122,12 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsChar() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       char value = 'A';
       ResultSet rs = createDatabase(db, "number", Character.toString(value));
-      assertEquals(value, (char) rs.getFieldAsChar(0));
+      assertEquals(value, rs.getFieldAsChar(0));
       rs.close();
     } finally {
       db.close();
@@ -136,7 +141,9 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsDate() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
+
     try {
       Date value = new Date();
       storeAndVerifyDate(db, value, true);
@@ -153,7 +160,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsDouble() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       double value = 3.14;
       ResultSet rs = createDatabase(db, "number", Double.toString(value));
@@ -171,7 +179,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsFloat() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       float value = 3.14F;
       ResultSet rs = createDatabase(db, "number", Double.toString(value));
@@ -189,7 +198,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsInt() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       int value = 42;
       ResultSet rs = createDatabase(db, "number", Integer.toString(value));
@@ -207,7 +217,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsLong() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       long value = 4200;
       ResultSet rs = createDatabase(db, "number", Long.toString(value));
@@ -225,7 +236,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsShort() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       short value = 420;
       ResultSet rs = createDatabase(db, "number", Short.toString(value));
@@ -243,7 +255,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldAsString() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       String value = "foo";
       ResultSet rs = createDatabase(db, "text", value);
@@ -261,7 +274,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldCount() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       String value = "foo";
       ResultSet rs = createDatabase(db, "text", value);
@@ -279,7 +293,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testGetFieldName() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       int value = 22000;
       ResultSet rs = createDatabase(db, "number", Integer.toString(value));
@@ -301,7 +316,8 @@ public class ResultSetTest extends GWTTestCase {
    * @throws GearsException
    */
   public void testNextAndIsValidRow() throws GearsException {
-    Database db = new Database(DB_NAME);
+    Database db = Factory.getInstance().createDatabase();
+    db.open(DB_NAME);
     try {
       String value = "foo";
       ResultSet rs = createDatabase(db, "text", value);

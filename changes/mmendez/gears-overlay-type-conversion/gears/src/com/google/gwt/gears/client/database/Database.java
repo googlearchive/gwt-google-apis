@@ -17,9 +17,7 @@ package com.google.gwt.gears.client.database;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.gears.core.client.Gears;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.core.client.impl.GearsImpl;
+import com.google.gwt.gears.client.impl.Utils;
 
 /**
  * An in-browser SQL database. Gears provides a SQL database using SQLite
@@ -31,164 +29,44 @@ import com.google.gwt.gears.core.client.impl.GearsImpl;
  * implement all those semantics. It may be possible to add a JDBC layer on top
  * of this, but it's unclear whether that would really be useful.
  */
-public class Database {
-
-  private static ResultSet execute(JavaScriptObject jso, String statement,
-      String[] args) throws DatabaseException {
-    try {
-      return new ResultSet(nativeExecute(jso, statement, args));
-    } catch (JavaScriptException ex) {
-      throw new DatabaseException(ex.getMessage(), ex);
-    }
+public final class Database extends JavaScriptObject {
+  protected Database() {
+    // Required for overlay types
   }
 
   /**
-   * Native proxy call to the close method on the JavaScript object.
-   */
-  private static native void nativeClose(JavaScriptObject database) /*-{
-    return database.close();
-  }-*/;
-
-  /**
-   * Native proxy call to the execute method on the JavaScript object.
-   * 
-   * @param statement the SQL statement to execute
-   * @param args arguments to expand, or null if there are none
-   * @return the JavaScript object corresponding to a ResultSet
-   */
-  private static native JavaScriptObject nativeExecute(
-      JavaScriptObject database, String statement, String[] args) /*-{
-    if (args == null) {
-      return database.execute(statement);
-    } else {
-      var newArgs = @com.google.gwt.gears.core.client.impl.GearsImpl::convertToJavaScript([Ljava/lang/String;)(args);
-      return database.execute(statement, newArgs);
-    }
-  }-*/;
-
-  private static native int nativeGetLastInsertRowId(JavaScriptObject database) /*-{
-    return database.lastInsertRowId;
-  }-*/;
-
-  /**
-   * Native proxy call to the open method on the JavaScript object.
-   * 
-   * @param name the name to open, or null
-   */
-  private static native void nativeOpen(JavaScriptObject database, String name) /*-{
-    if (name == null) {
-      return database.open();
-    } else {
-      return database.open(name);
-    }
-  }-*/;
-
-  /**
-   * Reference to the database JavaScript object provided by Gears.
-   */
-  private final JavaScriptObject dbObj;
-
-  /**
-   * Constructs an opened <i>Database</i> object.
-   * 
-   * @throws GearsException if the Database could not be created
-   */
-  public Database() throws GearsException {
-    this(null, Gears.DATABASE, Gears.GEARS_VERSION);
-  }
-
-  /**
-   * Constructs an opened <i>Database</i> object with the specified name.
-   * Passing <code>null</code> for the <code>databaseName</code> is
-   * equivalent to {@link #Database()}.
-   * 
-   * @param databaseName the name of the database or <code>null</code> for an
-   *          unnamed database
-   * 
-   * @throws GearsException if the Database could not be created
-   */
-  public Database(String databaseName) throws GearsException {
-    this(databaseName, Gears.DATABASE, Gears.GEARS_VERSION);
-  }
-
-  /**
-   * Constructs an opened <code>Database</code> instance using the specified
-   * database name, class name and class version.
-   * 
-   * @param databaseName the name of the database if not <code>null</code>
-   * @param className requested class name
-   * @param classVersion requested API version
-   * @throws GearsException if the requested version of the class is not
-   *           available
-   * @throws NullPointerException if the <code>className</code> or the
-   *           <code>classVersion</code> are <code>null</code>.
-   */
-  protected Database(String databaseName, String className, String classVersion)
-      throws GearsException {
-    if (className == null || classVersion == null) {
-      throw new NullPointerException();
-    }
-    dbObj = GearsImpl.create(className, classVersion);
-
-    try {
-      nativeOpen(dbObj, databaseName);
-    } catch (JavaScriptException ex) {
-      throw new DatabaseException(ex.getMessage(), ex);
-    }
-  }
-
-  /**
-   * Closes the currently-opened database table space.
-   * 
-   * @throws DatabaseException on any error
+   * Closes the database connection, if any, currently associated with this
+   * Database instance. Calling Database.close() is not required.
    */
   public void close() throws DatabaseException {
     try {
-      nativeClose(dbObj);
+      uncheckedClose();
     } catch (JavaScriptException ex) {
-      throw new DatabaseException(ex.getMessage(), ex);
+      throw new DatabaseException(ex.getDescription(), ex);
     }
   }
 
   /**
-   * Executes the indicated SQL statement, and returns the results. Note that
-   * the {@link ResultSet} returned must be closed when it is no longer needed.
+   * Executes the specified SQL statement and returns a {@link ResultSet}
+   * containing the results.
    * 
-   * @param statement the SQL statement to run
-   * @return a new ResultSet containing the results; never null
-   * @throws DatabaseException if the statement failed to execute
-   * @throws NullPointerException if <code>statement</code> is
-   *           <code>null</code>
-   */
-  public ResultSet execute(String statement) throws DatabaseException {
-    if (statement == null) {
-      throw new NullPointerException();
-    }
-
-    return execute(dbObj, statement, null);
-  }
-
-  /**
-   * Executes the indicated SQL statement, and returns the results. The
-   * <code>args</code> list may contain values to insert into the SQL
-   * statement. Each "?" character in <code>statement</code> will be replaced
-   * with the corresponding entry in <code>args</code>. Note that the
-   * {@link ResultSet} returned must be closed when it is no longer needed.
+   * Substitute zero or more bind parameters from <code>args</code> into
+   * <code>sqlStatement</code> and execute the resulting SQL statement. There
+   * must be exactly as many items in argArray as their are ? place holders in
+   * sqlStatement. argArray can be omitted if there are no place holders. The
+   * results of executing the statement are returned in a ResultSet.
    * 
-   * @param statement the SQL statement to run
-   * @param args a list of Strings to be inserted into the query template
-   * @return a new ResultSet containing the results; never null
-   * @throws DatabaseException if the statement failed to execute
-   * @throws NullPointerException if either <code>statement</code> or
-   *           <code>args</code> are <code>null</code>
+   * Note that if multiple processes (including Workers) attempt to write to the
+   * database at the same time, one can fail. It is up to the application to
+   * retry in these situations.
    */
-  public ResultSet execute(String statement, String[] args)
+  public ResultSet execute(String sqlStatement, String... args)
       throws DatabaseException {
-    if (statement == null || args == null) {
-      throw new NullPointerException();
+    try {
+      return execute(sqlStatement, Utils.toJavaScriptArray(args));
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getDescription(), ex);
     }
-
-    return execute(dbObj, statement, args);
   }
 
   /**
@@ -198,18 +76,50 @@ public class Database {
    * @return the ID of the last row inserted, or 0 if no rows have been inserted
    *         on this connection
    */
-  public int getLastInsertRowId() {
-    return nativeGetLastInsertRowId(dbObj);
-  }
+  public native int getLastInsertRowId() /*-{
+    return this.lastInsertRowId;
+  }-*/;
 
   /**
-   * Returns the JavaScript <code>Database</code> object wrapped by this
-   * instance.
+   * Returns the number of database rows that were changed, inserted, or deleted
+   * by the most recently completed INSERT, UPDATE, or DELETE statement on this
+   * Database instance.
    * 
-   * @return the JavaScript <code>Database</code> object wrapped by this
-   *         instance
+   * Note that an unconstrained delete of all rows in a table (DELETE FROM
+   * table) will return zero rather than the number of rows that were originally
+   * present in the table; if you need the number of rows, use DELETE FROM table
+   * WHERE 1 instead, though be aware that this is slower than an unconstrained
+   * delete.
+   * 
+   * @return the number of database rows impacted by the last INSERT, UPDATE or *
+   *         DELETE statement on this Database instance
    */
-  protected final JavaScriptObject getJavaScriptObject() {
-    return dbObj;
-  }
+  public native int getRowsAffected() /*-{
+    return this.rowsAffected;
+  }-*/;
+
+  /**
+   * Opens an unnamed database.
+   */
+  public native void open() /*-{
+    this.open();
+  }-*/;
+
+  /**
+   * Opens a database with the specified <code>name</code>. Note that this
+   * name is local to the application's origin.
+   * 
+   * @param name name of the database
+   */
+  public native void open(String name) /*-{
+    this.open(name);
+  }-*/;
+
+  private native ResultSet execute(String sqlStatement, JavaScriptObject args) /*-{
+    return this.execute(sqlStatement, args);
+  }-*/;
+
+  private native void uncheckedClose() /*-{
+    this.close();
+  }-*/;
 }

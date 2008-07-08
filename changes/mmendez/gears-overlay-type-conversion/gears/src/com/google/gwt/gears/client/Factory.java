@@ -16,11 +16,17 @@
 package com.google.gwt.gears.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.gears.client.database.Database;
 
 /**
  * Factory class used to create all other Gears objects.
  */
 public final class Factory extends JavaScriptObject {
+  /**
+   * String used to request a Database instance from Gears.
+   */
+  public static final String DATABASE = "beta.database";
+
   /**
    * Returns the singleton instance of the Factory class or <code>null</code>
    * if Gears is not installed or accessible.
@@ -36,17 +42,17 @@ public final class Factory extends JavaScriptObject {
     // Required for overlay types
   }
 
-  // TODO: Enable when Database, LocalServer and WorkerPool are converted to
+  /**
+   * Creates a new {@link Database} instance.
+   * 
+   * @return a new {@link Database} instance
+   */
+  public Database createDatabase() {
+    return create(DATABASE);
+  }
+
+  // TODO: Enable when LocalServer and WorkerPool are converted to
   // overlay types
-  // /**
-  // * Creates a new {@link Database} instance.
-  // *
-  // * @return a new {@link Database} instance
-  // */
-  // public Database createDatabase() {
-  // return create(DATABASE);
-  // }
-  //
   // /**
   // * Creates a new {@link LocalServer} instance.
   // *
