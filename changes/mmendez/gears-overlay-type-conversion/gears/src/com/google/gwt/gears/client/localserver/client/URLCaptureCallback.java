@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.localserver.client;
+package com.google.gwt.gears.client.localserver.client;
 
 /**
  * A callback class used to receive notification of {@link ResourceStore}

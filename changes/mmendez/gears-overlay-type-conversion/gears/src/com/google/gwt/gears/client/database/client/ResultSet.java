@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.database.client;
+package com.google.gwt.gears.client.database.client;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -57,7 +57,7 @@ public class ResultSet {
     if (val == null) {
       return 0;
     }
-   
+
     if (typeof val == 'string') {
       return val.charCodeAt(0);
     } else {
@@ -79,7 +79,7 @@ public class ResultSet {
   private static native double nativeGetFieldAsDouble(JavaScriptObject rsetObj,
       int fieldIndex) /*-{
     var val = rsetObj.field(fieldIndex);
-    return val == null ? 0 : Number(val); 
+    return val == null ? 0 : Number(val);
   }-*/;
 
   private static native String nativeGetFieldAsString(JavaScriptObject rsetObj,

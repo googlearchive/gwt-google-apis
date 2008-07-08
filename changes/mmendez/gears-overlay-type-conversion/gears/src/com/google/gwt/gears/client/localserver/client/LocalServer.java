@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.localserver.client;
+package com.google.gwt.gears.client.localserver.client;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -315,9 +315,9 @@ public class LocalServer {
   private native JavaScriptObject nativeCallMethod(String func, String name,
       String requiredCookie) /*-{
     if (requiredCookie == null) {
-      return (this.@com.google.gwt.gears.localserver.client.LocalServer::server)[func](name) || null;
+      return (this.@com.google.gwt.gears.client.localserver.client.LocalServer::server)[func](name) || null;
     } else {
-      return (this.@com.google.gwt.gears.localserver.client.LocalServer::server)[func](name, requiredCookie) || null;
+      return (this.@com.google.gwt.gears.client.localserver.client.LocalServer::server)[func](name, requiredCookie) || null;
     }
   }-*/;
 }

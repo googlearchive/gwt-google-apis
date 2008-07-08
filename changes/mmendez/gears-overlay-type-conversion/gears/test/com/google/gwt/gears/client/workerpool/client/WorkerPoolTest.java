@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.workerpool.client;
+package com.google.gwt.gears.client.workerpool.client;
 
 import com.google.gwt.gears.core.client.GearsException;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -64,7 +64,8 @@ public class WorkerPoolTest extends GWTTestCase {
       }
     });
 
-    // You can create a worker from an empty string, you just can't sent it a message.
+    // You can create a worker from an empty string, you just can't sent it a
+    // message.
     wp.createWorkerFromString("");
   }
 

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.gwt.gears.database.client;
+package com.google.gwt.gears.client.database.client;
 
 import com.google.gwt.gears.core.client.GearsException;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -40,25 +40,25 @@ public class ResultSetTest extends GWTTestCase {
     return db.execute("select * from test");
   }
 
-  private static void storeAndVerifyDate(Database db, Date value, 
-      boolean asString)
-      throws DatabaseException {
+  private static void storeAndVerifyDate(Database db, Date value,
+      boolean asString) throws DatabaseException {
 
     String stringValue;
     if (asString) {
       stringValue = value.toString();
     } else {
       stringValue = Long.toString(value.getTime());
-    } 
+    }
 
-    ResultSet rs = createDatabase(db, asString ? "string" : "number", stringValue);
+    ResultSet rs = createDatabase(db, asString ? "string" : "number",
+        stringValue);
     rs.close();
     rs = db.execute("select * from test");
     try {
       Date retrievedDate = rs.getFieldAsDate(0);
       assertEquals(value.toString(), retrievedDate.toString());
       if (!asString) {
-        // The dates will not be equal if we stored them as a string 
+        // The dates will not be equal if we stored them as a string
         // because we loose precision in the milliseconds component.
         assertEquals(value, retrievedDate);
       }

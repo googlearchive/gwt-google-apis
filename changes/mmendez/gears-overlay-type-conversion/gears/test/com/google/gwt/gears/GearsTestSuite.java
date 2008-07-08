@@ -15,11 +15,12 @@
  */
 package com.google.gwt.gears;
 
+import com.google.gwt.gears.client.FactoryTest;
+import com.google.gwt.gears.client.database.client.DatabaseTest;
+import com.google.gwt.gears.client.database.client.ResultSetTest;
+import com.google.gwt.gears.client.localserver.client.LocalServerTest;
+import com.google.gwt.gears.client.workerpool.client.WorkerPoolTest;
 import com.google.gwt.gears.core.client.GearsTest;
-import com.google.gwt.gears.database.client.DatabaseTest;
-import com.google.gwt.gears.database.client.ResultSetTest;
-import com.google.gwt.gears.localserver.client.LocalServerTest;
-import com.google.gwt.gears.workerpool.client.WorkerPoolTest;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -32,12 +33,13 @@ public class GearsTestSuite extends TestCase {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Gears API");
 
+    suite.addTestSuite(FactoryTest.class);
     suite.addTestSuite(GearsTest.class);
     suite.addTestSuite(DatabaseTest.class);
     suite.addTestSuite(ResultSetTest.class);
     suite.addTestSuite(LocalServerTest.class);
     suite.addTestSuite(WorkerPoolTest.class);
-    
+
     return suite;
   }
 }

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.localserver.client;
+package com.google.gwt.gears.client.localserver.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.gears.core.client.Gears;
@@ -32,7 +32,7 @@ public class LocalServerTest extends GWTTestCase {
   }
 
   public String getModuleName() {
-    return "com.google.gwt.gears.localserver.LocalServerTest";
+    return "com.google.gwt.gears.client.localserver.LocalServerTest";
   }
 
   /**
@@ -250,33 +250,37 @@ public class LocalServerTest extends GWTTestCase {
   /**
    * Test method for
    * {@link com.google.gwt.gears.localserver.client.LocalServer#removeManagedResourceStore(java.lang.String, java.lang.String)}.
-   * @throws GearsException 
+   * 
+   * @throws GearsException
    */
-  public void testRemoveManagedResourceStoreStringString() throws GearsException {
+  public void testRemoveManagedResourceStoreStringString()
+      throws GearsException {
     LocalServer ls = new LocalServer();
     ls.createManagedResourceStore(MANAGED_RESOURCE_STORE_NAME, "foo");
-    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME, "foo");    
+    ls.removeManagedResourceStore(MANAGED_RESOURCE_STORE_NAME, "foo");
   }
 
   /**
    * Test method for
    * {@link com.google.gwt.gears.localserver.client.LocalServer#removeResourceStore(java.lang.String)}.
-   * @throws GearsException 
+   * 
+   * @throws GearsException
    */
   public void testRemoveStoreString() throws GearsException {
     LocalServer ls = new LocalServer();
     ls.createResourceStore(RESOURCE_STORE_NAME);
-    ls.removeResourceStore(RESOURCE_STORE_NAME);    
+    ls.removeResourceStore(RESOURCE_STORE_NAME);
   }
 
   /**
    * Test method for
    * {@link com.google.gwt.gears.localserver.client.LocalServer#removeResourceStore(java.lang.String, java.lang.String)}.
-   * @throws GearsException 
+   * 
+   * @throws GearsException
    */
   public void testRemoveStoreStringString() throws GearsException {
     LocalServer ls = new LocalServer();
     ls.createResourceStore(RESOURCE_STORE_NAME, "foo");
-    ls.removeResourceStore(RESOURCE_STORE_NAME, "foo");        
+    ls.removeResourceStore(RESOURCE_STORE_NAME, "foo");
   }
 }

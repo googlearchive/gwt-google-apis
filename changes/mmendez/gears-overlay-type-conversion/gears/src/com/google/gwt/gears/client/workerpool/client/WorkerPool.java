@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.workerpool.client;
+package com.google.gwt.gears.client.workerpool.client;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -73,7 +73,7 @@ public class WorkerPool {
       JavaScriptObject jsPool) /*-{
     var jPool = workerPool;
     jsPool.onmessage = function(msg, srcId) {
-      @com.google.gwt.gears.workerpool.client.WorkerPool::fireOnMessageReceived(Lcom/google/gwt/gears/workerpool/client/WorkerPool;Ljava/lang/String;I)(jPool, msg, srcId);
+      @com.google.gwt.gears.client.workerpool.client.WorkerPool::fireOnMessageReceived(Lcom/google/gwt/gears/client/workerpool/client/WorkerPool;Ljava/lang/String;I)(jPool, msg, srcId);
     }
   }-*/;
 

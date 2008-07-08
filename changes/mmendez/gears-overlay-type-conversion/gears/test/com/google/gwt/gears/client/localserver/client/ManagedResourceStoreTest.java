@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.localserver.client;
+package com.google.gwt.gears.client.localserver.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.gears.core.client.GearsException;
@@ -31,7 +31,7 @@ public class ManagedResourceStoreTest extends GWTTestCase {
   }
 
   public String getModuleName() {
-    return "com.google.gwt.gears.localserver.ManagedResourceStoreTest";
+    return "com.google.gwt.gears.client.localserver.ManagedResourceStoreTest";
   }
 
   /**

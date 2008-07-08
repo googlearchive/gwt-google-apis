@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.gwt.gears.database.client;
+package com.google.gwt.gears.client.database.client;
 
 import com.google.gwt.gears.core.client.GearsException;
 import com.google.gwt.junit.client.GWTTestCase;

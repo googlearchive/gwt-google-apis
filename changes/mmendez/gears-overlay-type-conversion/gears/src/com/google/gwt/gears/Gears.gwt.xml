@@ -19,10 +19,12 @@
   -->
   <source path='client'/>
   <source path='core/client'/>
+<!--   
   <source path='database/client'/>
   <source path='localserver/client'/>
   <source path='workerpool/client'/>
-  
+-->
+
   <!-- Property provider which answers true if Gears is installed -->
   <define-property name="gears.installed" values="false,true"/>
 
