@@ -16,12 +16,13 @@
 package com.google.gwt.gears.sample.gwtnote.client.local;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.database.client.Database;
-import com.google.gwt.gears.database.client.DatabaseException;
-import com.google.gwt.gears.database.client.ResultSet;
-import com.google.gwt.gears.localserver.client.LocalServer;
-import com.google.gwt.gears.localserver.client.ManagedResourceStore;
+import com.google.gwt.gears.client.Factory;
+import com.google.gwt.gears.client.GearsException;
+import com.google.gwt.gears.client.database.Database;
+import com.google.gwt.gears.client.database.DatabaseException;
+import com.google.gwt.gears.client.database.ResultSet;
+import com.google.gwt.gears.client.localserver.LocalServer;
+import com.google.gwt.gears.client.localserver.ManagedResourceStore;
 import com.google.gwt.gears.sample.gwtnote.client.rpc.Note;
 import com.google.gwt.user.client.Timer;
 
@@ -59,7 +60,7 @@ public class GearsHelper {
    */
   public GearsHelper() {
     try {
-      db = new Database();
+      db = Factory.getInstance().createDatabase();
       try {
         db.execute(DB_FETCH_NAMES);
       } catch (GearsException ex) {
@@ -67,9 +68,9 @@ public class GearsHelper {
       }
 
       // initialize the localstore and have it update the manifest
-      localServer = new LocalServer();
-      store = localServer.createManagedResourceStore("GWTGearsNote");
-      store.setManifestURL(GWT.getModuleBaseURL() + "manifest");
+      localServer = Factory.getInstance().createLocalServer();
+      store = localServer.createManagedStore("GWTGearsNote");
+      store.setManifestUrl(GWT.getModuleBaseURL() + "manifest");
       store.checkForUpdate();
       Timer t = new Timer() {
         @Override

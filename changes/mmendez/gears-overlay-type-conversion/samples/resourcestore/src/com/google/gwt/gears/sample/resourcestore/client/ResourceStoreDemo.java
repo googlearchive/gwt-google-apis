@@ -16,10 +16,10 @@
 package com.google.gwt.gears.sample.resourcestore.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.localserver.client.LocalServer;
-import com.google.gwt.gears.localserver.client.ResourceStore;
-import com.google.gwt.gears.localserver.client.URLCaptureCallback;
+import com.google.gwt.gears.client.Factory;
+import com.google.gwt.gears.client.localserver.LocalServer;
+import com.google.gwt.gears.client.localserver.ResourceStore;
+import com.google.gwt.gears.client.localserver.URLCaptureCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -37,7 +37,7 @@ public class ResourceStoreDemo implements EntryPoint {
       getLocationPathName(), "ResourceStoreDemo.css"};
 
   private static native String getLocationPathName() /*-{
-   return $doc.location.href;
+     return $doc.location.href;
    }-*/;
 
   private final HorizontalPanel buttonPanel = new HorizontalPanel();
@@ -87,66 +87,45 @@ public class ResourceStoreDemo implements EntryPoint {
     RootPanel.get().add(buttonPanel);
     RootPanel.get().add(statusLabel);
 
-    try {
-      localServer = new LocalServer();
-    } catch (GearsException e) {
-      statusLabel.setText(e.getMessage());
-    }
+    localServer = Factory.getInstance().createLocalServer();
   }
 
   private void captureUrls() {
     statusLabel.setText("Capturing...");
-    try {
-      int pendingCaptureId = resourceStore.captureURLs(FILES_TO_CAPTURE,
-          new URLCaptureCallback() {
-            @Override
-            public void onCaptureFailure(String url, int captureId) {
-              statusLabel.setText("Failed to capture URL: " + url);
-            }
+    resourceStore.capture(new URLCaptureCallback() {
+      @Override
+      public void onCaptureFailure(String url, int captureId) {
+        statusLabel.setText("Failed to capture URL: " + url);
+      }
 
-            @Override
-            public void onCaptureSuccess(String url, int captureId) {
-              statusLabel.setText("Captured URL: " + url);
-            }
-          });
-    } catch (GearsException e) {
-      statusLabel.setText(e.getMessage());
-    }
+      @Override
+      public void onCaptureSuccess(String url, int captureId) {
+        statusLabel.setText("Captured URL: " + url);
+      }
+    }, FILES_TO_CAPTURE);
   }
 
   private void createResourceStore() {
-    try {
-      resourceStore = localServer.createResourceStore(RESOURCE_STORE_NAME);
-      statusLabel.setText("Created a ResourceStore");
-    } catch (GearsException e) {
-      statusLabel.setText("Failed to create the resource store");
-    }
+    resourceStore = localServer.createStore(RESOURCE_STORE_NAME);
+    statusLabel.setText("Created a ResourceStore");
   }
 
   private void removeStore() {
-    try {
-      if (localServer.openResourceStore(RESOURCE_STORE_NAME) != null) {
-        localServer.removeResourceStore(RESOURCE_STORE_NAME);
-        statusLabel.setText("Removed store '" + RESOURCE_STORE_NAME + "'");
-        resourceStore = null;
-      } else {
-        statusLabel.setText("The store '" + RESOURCE_STORE_NAME
-            + "' does not exist.");
-      }
-    } catch (GearsException e) {
-      statusLabel.setText(e.getMessage());
+    if (localServer.openStore(RESOURCE_STORE_NAME) != null) {
+      localServer.removeStore(RESOURCE_STORE_NAME);
+      statusLabel.setText("Removed store '" + RESOURCE_STORE_NAME + "'");
+      resourceStore = null;
+    } else {
+      statusLabel.setText("The store '" + RESOURCE_STORE_NAME
+          + "' does not exist.");
     }
   }
 
   private void removeURLs() {
-    try {
-      for (int i = 0; i < FILES_TO_CAPTURE.length; ++i) {
-        String url = FILES_TO_CAPTURE[i];
-        resourceStore.removeCapturedURL(url);
-      }
-      statusLabel.setText("Removed URLs from the store");
-    } catch (GearsException e) {
-      statusLabel.setText(e.getMessage());
+    for (int i = 0; i < FILES_TO_CAPTURE.length; ++i) {
+      String url = FILES_TO_CAPTURE[i];
+      resourceStore.remove(url);
     }
+    statusLabel.setText("Removed URLs from the store");
   }
 }
