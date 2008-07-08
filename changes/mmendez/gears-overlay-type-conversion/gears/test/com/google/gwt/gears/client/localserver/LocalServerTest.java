@@ -32,7 +32,7 @@ public class LocalServerTest extends GWTTestCase {
   }
 
   public String getModuleName() {
-    return "com.google.gwt.gears.client.localserver.LocalServerTest";
+    return "com.google.gwt.gears.Gears";
   }
 
   /**

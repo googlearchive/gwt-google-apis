@@ -31,7 +31,7 @@ public class ManagedResourceStoreTest extends GWTTestCase {
   }
 
   public String getModuleName() {
-    return "com.google.gwt.gears.client.localserver.ManagedResourceStoreTest";
+    return "com.google.gwt.gears.Gears";
   }
 
   /**

@@ -47,6 +47,7 @@
   <!--
   	Gears' required JavaScript initialization code.
   -->
-  <public path="core/public"/>
-  <script src="gears_init.js"/>
+  <public path='public'/>
+  <public path='core/public'/>
+  <script src='gears_init.js'/>
 </module>
