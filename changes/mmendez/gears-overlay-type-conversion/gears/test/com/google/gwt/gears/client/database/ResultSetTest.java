@@ -17,7 +17,7 @@
 package com.google.gwt.gears.client.database;
 
 import com.google.gwt.gears.client.Factory;
-import com.google.gwt.gears.core.client.GearsException;
+import com.google.gwt.gears.client.GearsException;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Date;

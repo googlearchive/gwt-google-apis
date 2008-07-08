@@ -15,7 +15,7 @@
  */
 package com.google.gwt.gears.client.database;
 
-import com.google.gwt.gears.core.client.GearsException;
+import com.google.gwt.gears.client.GearsException;
 
 /**
  * Exception class indicating a Gears database-related error.

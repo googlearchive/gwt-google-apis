@@ -17,7 +17,7 @@ package com.google.gwt.gears.client.localserver;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.gears.core.client.GearsException;
+import com.google.gwt.gears.client.GearsException;
 
 /**
  * A factory and container for the set of {@link ResourceStore}s and

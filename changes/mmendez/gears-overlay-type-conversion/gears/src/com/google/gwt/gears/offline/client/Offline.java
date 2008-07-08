@@ -17,9 +17,9 @@ package com.google.gwt.gears.offline.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.gears.client.Factory;
+import com.google.gwt.gears.client.GearsException;
 import com.google.gwt.gears.client.localserver.LocalServer;
 import com.google.gwt.gears.client.localserver.ManagedResourceStore;
-import com.google.gwt.gears.core.client.GearsException;
 
 /**
  * Provides access to a ManagedResourceStore to allow the application to work
