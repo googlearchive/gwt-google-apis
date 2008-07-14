@@ -12,3 +12,4 @@
    * [FAQ_GettingStarted FAQ - Getting Started]
  * [MakingGALGWTBetter Contributing]
  * [APIsComingSoon APIs Coming Soon]
+   * [GettingStartedVisualization Using Google Visualization API]
