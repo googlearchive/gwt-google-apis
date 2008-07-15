@@ -1,0 +1,84 @@
+<project name="template" default="build" basedir=".">
+	<property name="gwt.root" location=".." />
+	<property name="project.tail" value="template" />
+	<import file="${gwt.root}/common.ant.xml" />
+
+	<!--
+		Default hosted mode test cases
+	-->
+	<fileset id="default.hosted.tests" dir="${javac.junit.out}" includes="${gwt.junit.testcase.includes}">
+	</fileset>
+
+	<!--
+		Default web mode test cases
+	-->
+	<fileset id="default.web.tests" dir="${javac.junit.out}" includes="${gwt.junit.testcase.includes}">
+	</fileset>
+
+	<target name="compile" description="Compile all class files">
+		<mkdir dir="${javac.out}" />
+		<gwt.javac>
+			<classpath>
+				<pathelement location="${gwt.dev.jar}" />
+				<pathelement location="${gwt.user.jar}" />
+			</classpath>
+		</gwt.javac>
+	</target>
+
+	<target name="compile.tests" description="Compiles the test code for this project">
+		<mkdir dir="${javac.junit.out}" />
+		<gwt.javac srcdir="test" destdir="${javac.junit.out}">
+			<classpath>
+				<pathelement location="${javac.out}" />
+				<pathelement location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
+				<pathelement location="${gwt.dev.jar}" />
+				<pathelement location="${gwt.user.jar}" />
+			</classpath>
+		</gwt.javac>
+	</target>
+
+	<target name="build" depends="compile" description="Build and package this project">
+		<mkdir dir="${gwt.build.lib}" />
+		<gwt.jar>
+			<fileset dir="src" excludes="**/package.html" />
+			<fileset dir="${javac.out}" />
+		</gwt.jar>
+	</target>
+
+	<target name="checkstyle" depends="compile" description="Static analysis of source">
+		<gwt.checkstyle>
+			<fileset dir="src" />
+		</gwt.checkstyle>
+	</target>
+
+	<target name="remoteweb-test" description="Run a remoteweb test at the given host and path" if="gwt.remote.browsers.specified">
+		<echo message="Performing remote browser testing at ${gwt.remote.browsers}" />
+		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -remoteweb ${gwt.remote.browsers}" test.out="${junit.out}/remoteweb" test.cases="default.web.tests" />
+	</target>
+
+	<target name="test.hosted" depends="compile, compile.tests" description="Run only hosted-mode tests for this project.">
+		<gwt.junit test.args="-port ${gwt.junit.port}" test.out="${junit.out}/${build.host.platform}-hosted-mode" test.cases="default.hosted.tests" />
+	</target>
+
+	<target name="test.web" depends="compile, compile.tests" description="Run only web-mode tests for this project.">
+		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web" test.out="${junit.out}/${build.host.platform}-web-mode" test.cases="default.web.tests" />
+	</target>
+
+	<target name="test" depends="compile, compile.tests" description="Run hosted-mode, web-mode and remoteweb tests for this project.">
+		<!--
+			Run hosted and web mode tests for the platform on which this build
+			is executing
+		-->
+		<parallel threadcount="1">
+			<antcall target="test.hosted" />
+			<antcall target="test.web" />
+			<antcall target="remoteweb-test" />
+		</parallel>
+	</target>
+
+	<target name="clean" description="Cleans this project's intermediate and output files">
+		<delete dir="${project.build}" />
+		<delete file="${project.lib}" />
+	</target>
+
+</project>
