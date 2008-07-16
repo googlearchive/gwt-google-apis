@@ -78,7 +78,7 @@ Now, you need to add a reference to the AJAX Search API script in the `SimpleSea
       Replace the string ABC in the src attribute below with the key
       obtained from the site above.
      -->
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0;key=ABC"/>
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1&amp;key=ABC"/>
     
 }}}
 
@@ -217,7 +217,5 @@ public class SimpleSearch implements EntryPoint {
 Here is a screen capture of the resulting application in hosted mode.
   
   [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch-nohtml.png]
-
-
 
 
