@@ -15,10 +15,20 @@
  */
 package com.google.template.gwt.client;
 
+import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.template.client.Template;
+
 /**
- * Template file for a Google API wrapper for the Google Web Toolkit(GWT)
+ * Tests the Template class.
  */
-public class Template {
-  public Template () {
+public class TemplateTest extends GWTTestCase {
+
+  @Override
+  public String getModuleName() {
+    return "com.google.gwt.template.GoogleTemplate";
+  }
+
+  public void testTemplate() {
+    Template t = new Template();
   }
 }
