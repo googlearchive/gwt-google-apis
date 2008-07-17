@@ -22,6 +22,6 @@
         http://code.google.com/apis/ajaxsearch/signup.html
       Replace the src attribute below with a URL that contains your key.
      -->
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;key=ABQIAAAA7lxkKGKzQfzK1PLeha5vvxRII77nF3p9tM7LktEY_493N8UDkRTBruKtYXhRx3zfrjOBLhR6YL0eyQ"/>
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1&amp;key=ABQIAAAA7lxkKGKzQfzK1PLeha5vvxRII77nF3p9tM7LktEY_493N8UDkRTBruKtYXhRx3zfrjOBLhR6YL0eyQ"/>
     
 </module>

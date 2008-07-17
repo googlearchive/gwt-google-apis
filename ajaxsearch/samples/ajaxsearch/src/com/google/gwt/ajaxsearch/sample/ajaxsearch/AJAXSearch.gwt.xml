@@ -24,6 +24,6 @@
       Replace the string ABC in the src attribute below with the key
       obtained from the site above.
      -->
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;key=ABC"/>
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
     
 </module>
