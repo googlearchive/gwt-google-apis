@@ -18,6 +18,7 @@ package com.google.gwt.ajaxsearch.client;
 import com.google.gwt.ajaxsearch.client.impl.GSearch;
 import com.google.gwt.ajaxsearch.client.impl.GSearchCompleteCallback;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.List;
@@ -27,6 +28,86 @@ import java.util.List;
  * be used only through its concrete subtypes.
  */
 public abstract class Search {
+
+  /**
+   * Tracks the results returned by the search.
+   */
+  public static final class Cursor extends JavaScriptObject {
+
+    protected Cursor() {
+    }
+
+    /**
+     * Returns the index into the pages array of the current set of results. 
+     * 
+     * @return the index into the pages array of the current set of results. 
+     */
+    public native int getCurrentPageIndex() /*-{
+      return this.currentPageIndex;
+    }-*/;
+
+    /**
+     * Returns the estimated number of results.
+     * 
+     * @return the estimated number of results.
+     */
+    public long getEstimatedResultCount() throws NumberFormatException {
+      return Long.valueOf(nativeGetEstimatedResultCount());
+    }
+    /**
+     * Returns a URL that can be used to fetch more results rendered in HTML.
+     * 
+     * @return a URL that can be used to fetch more results rendered in HTML.
+     */
+    public native String getMoreResultsUrl() /*-{
+      return this.moreResultsUrl;
+    }-*/;
+
+    /**
+     * Returns an array of pages of results.
+     * 
+     * @return an array of pages of results.
+     */
+    public native JsArray<Page> getPages() /*-{
+      return this.pages;
+    }-*/;
+
+    private native String nativeGetEstimatedResultCount() /*-{
+      return this.estimatedResultCount;
+    }-*/;
+  }
+
+  /**
+   * Represents one page in a search.
+   */
+  public static final class Page extends JavaScriptObject {
+
+    protected Page() {
+    }
+
+    /**
+     * Returns a text label associated with the entry e.g., "1", "2", "3", or
+     * "4".
+     * 
+     * @return a text label associated with the entry e.g., "1", "2", "3", or
+     *         "4".
+     */
+    public native String getLabel() /*-{
+      return String(this.label);
+    }-*/;
+
+    /**
+     * Returns the value that will be used in the <code>&start</code> URL
+     * argument to request a bundle of results.
+     * 
+     * @return the value that will be used in the <code>&start</code> URL
+     *         argument to request a bundle of results
+     */
+    public native String getStart() /*-{ 
+      return this.start;
+    }-*/;
+  }
+
   /**
    * Unimplemented. Refer to {@link SearchControl#createPeer(JavaScriptObject)}
    * for why this is unimplemented.
@@ -122,6 +203,17 @@ public abstract class Search {
   public Widget getAttribution() {
     return Result.makeWidget(impl.getAttribution(this));
   }
+  
+  /**
+   * After a successful search, this object will be populated. You can retrieve
+   * results from additional pages.
+   * 
+   * @return on success, a valid cursor object. otherwise, returns
+   *         <code>null</code>
+   */
+  public Cursor getCursor() {
+    return (Cursor) impl.getCursor(this);
+  }
 
   /**
    * Retrieve the results from the previously-execute query. The exact types of
@@ -131,6 +223,23 @@ public abstract class Search {
    */
   public List<? extends Result> getResults() {
     return impl.getResults(this);
+  }
+
+  /**
+   * After a search completes, this method allows you to fetch another bundle of
+   * search results. Applications specify which page by using the page argument.
+   * This value is then used to index the array returned by
+   * {@link Cursor#getPages()} which ultimately is used to compute the value of
+   * the <code>&start</code> url argument.
+   * 
+   * @param pageNumber supplies the page number of the results that the
+   *          application wants. This value is range checked relative to the
+   *          <code>.cursor.pages</code> property and no operation is
+   *          performed if the page is out of range or if the underlying
+   *          searcher does not have a cursor property.
+   */
+  public void gotoPage(int pageNumber) {
+    impl.gotoPage(this, pageNumber);
   }
 
   /**
@@ -208,4 +317,5 @@ public abstract class Search {
   public void setUserDefinedLabel(String label) {
     impl.setUserDefinedLabel(this, label);
   }
+
 }

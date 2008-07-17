@@ -44,7 +44,12 @@ public interface GSearch extends JSFlyweightWrapper {
   Element getAttribution(Search jso);
 
   @BeanProperties
+  JavaScriptObject getCursor(Search search);
+
+  @BeanProperties
   JSList<Result> getResults(Search search);
+
+  void gotoPage(Search search, int pageNumber);
 
   void setLinkTarget(Search jso, JSOpaque target);
 
