@@ -1,0 +1,29 @@
+<!--                                                                        -->
+<!-- Copyright 2007 Google Inc.                                             -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
+<!-- may not use this file except in compliance with the License. You may   -->
+<!-- may obtain a copy of the License at                                    -->
+<!--                                                                        -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                             -->
+<!--                                                                        -->
+<!-- Unless required by applicable law or agreed to in writing, software    -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,      -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
+<!-- implied. License for the specific language governing permissions and   -->
+<!-- limitations under the License.                                         -->
+
+<module>
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.ajaxsearch.AjaxSearch"/>
+	<stylesheet src="AJAXSearch.css" />
+	<entry-point class="com.google.gwt.ajaxsearch.sample.ajaxsearch.client.AJAXSearch"/>
+    <!--
+      If you want to deploy this application outside of localhost,
+      you must obtain a Google AJAX Search API key at:
+        http://code.google.com/apis/ajaxsearch/signup.html
+      Replace the string ABC in the src attribute below with the key
+      obtained from the site above.
+     -->
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
+    
+</module>
