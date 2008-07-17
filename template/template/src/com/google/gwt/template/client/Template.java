@@ -13,21 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.template.gwt.client;
-
-import com.google.gwt.junit.client.GWTTestCase;
+package com.google.gwt.template.client;
 
 /**
- * Tests the Template class.
+ * Template file for a Google API wrapper for the Google Web Toolkit(GWT)
  */
-public class TemplateTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.template.gwt.GoogleTemplate";
-  }
-
-  public void testTemplate() {
-    Template t = new Template();
+public class Template {
+  public Template () {
   }
 }
