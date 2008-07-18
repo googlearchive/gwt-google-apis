@@ -13,25 +13,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.ajaxsearch.sample.ajaxsearch.client;
+package com.google.gwt.search.sample.search.client;
 
-import com.google.gwt.ajaxsearch.client.ExpandMode;
-import com.google.gwt.ajaxsearch.client.ImageSearch;
-import com.google.gwt.ajaxsearch.client.KeepLabel;
-import com.google.gwt.ajaxsearch.client.KeepListener;
-import com.google.gwt.ajaxsearch.client.LinkTarget;
-import com.google.gwt.ajaxsearch.client.NewsResult;
-import com.google.gwt.ajaxsearch.client.NewsSearch;
-import com.google.gwt.ajaxsearch.client.Result;
-import com.google.gwt.ajaxsearch.client.ResultSetSize;
-import com.google.gwt.ajaxsearch.client.Search;
-import com.google.gwt.ajaxsearch.client.SearchControl;
-import com.google.gwt.ajaxsearch.client.SearchControlOptions;
-import com.google.gwt.ajaxsearch.client.SearchListener;
-import com.google.gwt.ajaxsearch.client.VideoResult;
-import com.google.gwt.ajaxsearch.client.VideoSearch;
-import com.google.gwt.ajaxsearch.client.WebResult;
-import com.google.gwt.ajaxsearch.client.WebSearch;
+import com.google.gwt.search.client.ExpandMode;
+import com.google.gwt.search.client.ImageSearch;
+import com.google.gwt.search.client.KeepLabel;
+import com.google.gwt.search.client.KeepListener;
+import com.google.gwt.search.client.LinkTarget;
+import com.google.gwt.search.client.NewsResult;
+import com.google.gwt.search.client.NewsSearch;
+import com.google.gwt.search.client.Result;
+import com.google.gwt.search.client.ResultSetSize;
+import com.google.gwt.search.client.Search;
+import com.google.gwt.search.client.SearchControl;
+import com.google.gwt.search.client.SearchControlOptions;
+import com.google.gwt.search.client.SearchListener;
+import com.google.gwt.search.client.VideoResult;
+import com.google.gwt.search.client.VideoSearch;
+import com.google.gwt.search.client.WebResult;
+import com.google.gwt.search.client.WebSearch;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
