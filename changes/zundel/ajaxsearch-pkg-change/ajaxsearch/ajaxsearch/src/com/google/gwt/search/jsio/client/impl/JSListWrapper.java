@@ -44,7 +44,7 @@ public final class JSListWrapper<T> extends AbstractList<T> implements
     }
 
     public native JSListWrapper<T> fromJS(JavaScriptObject obj) /*-{
-      var toReturn = @com.google.gwt.search.jsio.client.impl.JSListWrapper::create(Lcom/google/gwt.search/jsio/client/impl/Extractor;)(
+      var toReturn = @com.google.gwt.search.jsio.client.impl.JSListWrapper::create(Lcom/google/gwt/search/jsio/client/impl/Extractor;)(
       this.@com.google.gwt.search.jsio.client.impl.JSListWrapper.WrappingExtractor::subExtractor);
       toReturn.@com.google.gwt.search.jsio.client.JSWrapper::setJavaScriptObject(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
       return toReturn;

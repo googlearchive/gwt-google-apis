@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.search.sample.search.client;
+package com.google.gwt.search.sample.hellosearch.client;
 
 import com.google.gwt.search.client.ExpandMode;
 import com.google.gwt.search.client.ImageSearch;
@@ -45,9 +45,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * AJAXSearch application.
+ * HelloSearch application.
  */
-public class AJAXSearch implements EntryPoint, KeepListener, SearchListener,
+public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
     WindowResizeListener {
 
   private class GoogleCodeWebSearch extends WebSearch {

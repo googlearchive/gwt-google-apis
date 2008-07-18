@@ -16,7 +16,7 @@
 	<inherits name="com.google.gwt.user.User"/>
 	<inherits name="com.google.gwt.search.AjaxSearch"/>
 	<stylesheet src="AJAXSearch.css" />
-	<entry-point class="com.google.gwt.search.sample.search.client.AJAXSearch"/>
+	<entry-point class="com.google.gwt.search.sample.hellosearch.client.HelloSearch"/>
     <!--
       If you want to deploy this application outside of localhost,
       you must obtain a Google AJAX Search API key at:
