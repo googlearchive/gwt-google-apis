@@ -23,11 +23,34 @@ import com.google.gwt.maps.jsio.client.JSOpaque;
  */
 public enum MapPaneType {
 
-  FLOAT_PANE("$wnd.G_MAP_FLOAT_PANE"), 
+  /**
+   * This pane contains the info window. It is above everything else on the map.
+   */
+  FLOAT_PANE("$wnd.G_MAP_FLOAT_PANE"),
+  /**
+   * This pane contains the shadow of the info window. It is above the
+   * {@link #MARKER_PANE}, so that markers can be in the shadow of the info
+   * window.
+   */
   FLOAT_SHADOW_PANE("$wnd.G_MAP_FLOAT_SHADOW_PANE"),
-  MAP_PANE("$wnd.G_MAP_MAP_PANE"), 
-  MARKER_MOUSE_TARGET_PANE("$wnd.G_MAP_MARKER_MOUSE_TARGET_PANE"), 
-  MARKER_PANE("$wnd.G_MAP_MARKER_PANE"), 
+  /**
+   * This pane is still below the shadows of the markers, directly on top of the
+   * map. It contains for instance the polylines.
+   */
+  MAP_PANE("$wnd.G_MAP_MAP_PANE"),
+  /**
+   * This pane contains transparent elements that receive DOM mouse events for
+   * the markers. Is is above the {@link #FLOAT_SHADOW_PANE}, so that markers
+   * in the shadow of the info window can be clickable.
+   */
+  MARKER_MOUSE_TARGET_PANE("$wnd.G_MAP_MARKER_MOUSE_TARGET_PANE"),
+  /**
+   * This pane contains the markers.
+   */
+  MARKER_PANE("$wnd.G_MAP_MARKER_PANE"),
+  /**
+   * This pane contains the shadows of the markers. It is below the markers.
+   */
   MARKER_SHADOW_PANE("$wnd.G_MAP_MARKER_SHADOW_PANE");
 
   private final JSOpaque value;

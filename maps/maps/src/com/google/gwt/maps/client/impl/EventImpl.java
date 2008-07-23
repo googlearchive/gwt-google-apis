@@ -116,7 +116,7 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   }
 
   /**
-   * Provides a callback interface with a {@link LatLng} argument.
+   * Provides a callback interface with a {@link LatLng} and integer argument.
    */
   public abstract static class LatLngBoundsIntCallback extends JSFunction {
     public abstract void callback(LatLngBounds bounds, int value);
@@ -132,7 +132,7 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   }
 
   /**
-   * 
+   * Provides a callback interface with a {@link LatLng} argument.
    */
   public abstract static class LatLngCallback extends JSFunction {
     public abstract void callback(LatLng latlng);

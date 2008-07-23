@@ -22,7 +22,7 @@ import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 
 /**
- * 
+ * Wrapper for the GTrafficOverlay object from the Maps API using JSIO.
  */
 public interface TrafficOverlayImpl extends JSFlyweightWrapper {
 

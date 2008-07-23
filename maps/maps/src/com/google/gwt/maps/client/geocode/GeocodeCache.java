@@ -62,9 +62,9 @@ public abstract class GeocodeCache {
 
   /**
    * Stores the given reply under the given address. This method calls the
-   * {@link #isCachable} method to verify that the reply may be cached. If it
+   * {@link #isCacheable} method to verify that the reply may be cached. If it
    * gets a go-ahead, it caches the reply under the address normalized with the
-   * help of the {@link #toCanoninical} method.
+   * help of the {@link #toCanonical} method.
    * 
    * @param address the address used in the query.
    * @param reply the reply value to cache.

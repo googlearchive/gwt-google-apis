@@ -74,22 +74,27 @@ public class CustomGeocodeCache extends GeocodeCache {
     this.jsoPeer = jsoPeer;
   }
 
+  @Override
   public JavaScriptObject get(String address) {
     return nativeGet(jsoPeer, address);
   }
 
+  @Override
   public boolean isCacheable(JavaScriptObject reply) {
     return nativeIsCacheable(jsoPeer, reply);
   }
 
+  @Override
   public void put(String address, JavaScriptObject reply) {
     nativePut(jsoPeer, address, reply);
   }
 
+  @Override
   public void reset() {
     nativeReset(jsoPeer);
   }
 
+  @Override
   public String toCanonical(String address) {
     return nativeToCanonical(jsoPeer, address);
   }

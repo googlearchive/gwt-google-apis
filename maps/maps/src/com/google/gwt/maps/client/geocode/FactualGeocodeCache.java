@@ -25,8 +25,6 @@ import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
  */
 public final class FactualGeocodeCache extends GeocodeCache {
 
-  private JavaScriptObject jsoPeer;
-
   /**
    * Constructs a new cache that only caches replies which are very unlikely to
    * change within a short period of time.
@@ -46,22 +44,27 @@ public final class FactualGeocodeCache extends GeocodeCache {
    * in the cache, not as a way to extend GeocoderCache functionality. See
    * {@link AbstractGeocoderCache}.
    */
+  @Override
   public JavaScriptObject get(String address) {
     return GeocodeCacheImpl.impl.get(jsoPeer, address);
   }
 
+  @Override
   public boolean isCacheable(JavaScriptObject reply) {
     return GeocodeCacheImpl.impl.isCachable(jsoPeer, reply);
   }
 
+  @Override
   public void put(String address, JavaScriptObject reply) {
     GeocodeCacheImpl.impl.put(jsoPeer, address, reply);
   }
 
+  @Override
   public void reset() {
     GeocodeCacheImpl.impl.reset(jsoPeer);
   }
 
+  @Override
   public String toCanonical(String address) {
     return GeocodeCacheImpl.impl.toCanonical(jsoPeer, address);
   }
