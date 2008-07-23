@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AJAXSearch</name>
+	<name>Search</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -24,7 +24,7 @@
 		<link>
 			<name>src</name>
 			<type>2</type>
-			<locationURI>AJAXSEARCH_API_ROOT/samples/ajaxsearch/src</locationURI>
+			<locationURI>AJAXSEARCH_API_ROOT/samples/search/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

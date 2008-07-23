@@ -110,7 +110,7 @@
 	<!-- 
 		Refactor this out to common code
 	-->
-	<property name="api.name" value="ajaxsearch" />
+	<property name="api.name" value="search" />
 	<property name="gwt.google.apis.jar"
 		location="${gwt.build.lib}/gwt-${api.name}.jar" />
 

@@ -10,19 +10,19 @@
 	    <gwt.ant dir="build-tools"/>
 	</target>
 		
-	<target name="dist" depends="build-tools, ajaxsearch, doc, samples" description="Run the distributions">
+	<target name="dist" depends="build-tools, search, doc, samples" description="Run the distributions">
 		<gwt.ant dir="distro-source" />
 	</target>
 
-	<target name="doc" depends="ajaxsearch" description="Build doc">
+	<target name="doc" depends="search" description="Build doc">
 		<gwt.ant dir="doc" />
 	</target>
 
-	<target name="ajaxsearch" description="Build AJAX Search Bindings">
-		<gwt.ant dir="ajaxsearch"/>
+	<target name="search" description="Build AJAX Search Bindings">
+		<gwt.ant dir="search"/>
 	</target>
 	
-	<target name="samples" depends="ajaxsearch" description="Build AJAX Search samples">
+	<target name="samples" depends="search" description="Build AJAX Search samples">
 		<gwt.ant dir="samples" />
 	</target>
 
