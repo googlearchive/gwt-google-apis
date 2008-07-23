@@ -30,5 +30,5 @@
     http://www.google.com/apis/maps/signup.html
     Replace the src attribute below with a URL that contains your key.
   -->
-  <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
+  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
 </module>
