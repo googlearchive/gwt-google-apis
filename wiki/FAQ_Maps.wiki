@@ -8,6 +8,6 @@ New features are added to the Google Maps API is released every few weeks, so ch
 
 First check the [http://code.google.com/p/gwt-google-apis/ gwt-google-apis issue tracker] to see if the method might have been added to the trunk, but not the stable release yet.  If it has, you can download the subversion source, build it with [http://ant.apache.org Apache Ant], and get an updated `gwt-maps.jar`.   Submitting a patch along with your issue is encouraged and appreciated!  See [http://code.google.com/webtoolkit/makinggwtbetter.html Making GWT Better].
 
+== Why is there a gwt=1 in the query line on the <script> tag to load the Maps API? ==
 
-
-
+This optional parameter is used by Google to collect data on what percentage of Gooble Maps API traffic is generated from apps built with GWT.
