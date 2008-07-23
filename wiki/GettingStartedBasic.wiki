@@ -108,7 +108,7 @@ Note that in order to use the Maps API, you need to apply for a Google Maps API 
     http://www.google.com/apis/maps/signup.html
     Replace the src attribute below with a URL that contains your key.
   -->
- <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=???" />
+ <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x&amp;key=???" />
 
 }}}
 
