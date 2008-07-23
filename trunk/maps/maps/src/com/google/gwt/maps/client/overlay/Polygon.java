@@ -319,9 +319,9 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   /**
-   * Returns the number of verticies in the polygon.
+   * Returns the number of vertices in the polygon.
    * 
-   * @return the number of verticies in the polygon.
+   * @return the number of vertices in the polygon.
    */
   public int getVertexCount() {
     return PolygonImpl.impl.getVertexCount(jsoPeer);
@@ -427,7 +427,7 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   /**
-   * Allows modification of an existing {@link Polylgon} chain of points. When
+   * Allows modification of an existing {@link Polygon} chain of points. When
    * enabled, users may select and drag existing vertices. Unless a vertex limit
    * less than current number of vertices is specified by
    * {@link PolyEditingOptions#setMaxVertices(int)}, "ghost" points will also
@@ -445,7 +445,7 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   /**
-   * Enable editing as in {@link Polygone#setEditingEnabled(boolean)}, but with
+   * Enable editing as in {@link Polygon#setEditingEnabled(boolean)}, but with
    * control over the drawing parameters.
    * 
    * @param opts parameters for the editing session.

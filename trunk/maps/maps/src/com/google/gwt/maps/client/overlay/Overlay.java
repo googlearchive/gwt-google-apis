@@ -21,7 +21,8 @@ import com.google.gwt.maps.client.impl.OverlayImpl;
 import com.google.gwt.maps.jsio.client.Exported;
 
 /**
- * TODO(samgross): How are events supposed to work with overlays?
+ * The base class for adding objects at a specific position on top of
+ * the map.
  */
 public abstract class Overlay {
 
@@ -33,10 +34,6 @@ public abstract class Overlay {
    * ConcreteOverlay is intended to be used when you don't want to subclass
    * Overlay but use it directly.
    */
-  // TODO(zundel): Does it really work? The Maps code looks like it throws an
-  // exception if you use Overlay directly, and if it was really bound to
-  // Polyline, Marker, ..., it would obliterate their initialize, remove, copy,
-  // and redraw() methods.
   public static class ConcreteOverlay extends Overlay {
     public ConcreteOverlay(JavaScriptObject jsoPeer) {
       super(jsoPeer);

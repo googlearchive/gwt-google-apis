@@ -25,15 +25,9 @@ import com.google.gwt.maps.jsio.client.JSList;
 
 // TODO(samgross): note "load", "error", and "addoverlay" semi-documented events
 
-// TODO(samgross): do we want to create a new GDirections object for every load
-// and provide an asynchronous callback? (zundel): I think we can remove this
-// note as the current implementation is what we want. Results are only valid as
-// long as the GDirections object doesn't have another load().
-
-// TODO(zundel): should status codes be refactored to their own class?
-
 /**
- * 
+ * This class is used to obtain driving directions results and display them on a
+ * map and/or a text panel.
  */
 public final class Directions {
 
@@ -80,8 +74,8 @@ public final class Directions {
   }
 
   /**
-   * Load a new directions query using an array of waypoints as input instead
-   * of a single query string.
+   * Load a new directions query using an array of waypoints as input instead of
+   * a single query string.
    * 
    * @param waypoints an array of waypoints.
    * @param options optional parameters to use with the query.
@@ -94,8 +88,8 @@ public final class Directions {
   }
 
   /**
-   * Load a new directions query using an array of waypoints as input instead
-   * of a single query string.
+   * Load a new directions query using an array of waypoints as input instead of
+   * a single query string.
    * 
    * @param waypoints Array of waypoints.
    * @param options optional parameters to use with the query.
@@ -106,22 +100,22 @@ public final class Directions {
   public static void loadFromWaypoints(Waypoint[] waypoints,
       DirectionQueryOptions options, DirectionsCallback callback) {
     JavaScriptObject jsoPeer = createDirections(options);
-    // Coerce the waypoints into the appropriate type to pass down to JavaScript.
-    String [] waypointStrings = new String[waypoints.length];
+    // Coerce the waypoints into the appropriate type to pass down to
+    // JavaScript.
+    String[] waypointStrings = new String[waypoints.length];
     for (int i = 0; i < waypoints.length; ++i) {
       waypointStrings[i] = waypoints[i].toString();
     }
     JSList<String> waypointStringList = JsUtil.toJsList(waypointStrings);
-    DirectionsImpl.impl.loadFromWaypoints(jsoPeer, waypointStringList,
-        options);
+    DirectionsImpl.impl.loadFromWaypoints(jsoPeer, waypointStringList, options);
     if (callback != null) {
       addLoadListener(jsoPeer, callback);
     }
   }
 
   /**
-   * Load a new directions query using an array of waypoints as input instead
-   * of a single query string.
+   * Load a new directions query using an array of waypoints as input instead of
+   * a single query string.
    * 
    * @param waypoints an array of waypoints.
    * @param callback methods to call when the load() succeeds or fails.
@@ -132,7 +126,7 @@ public final class Directions {
       DirectionsCallback callback) {
     loadFromWaypoints(waypoints, null, callback);
   }
-  
+
   /**
    * Associate a callback with a "load" event. Used to implement
    * DirectionsCallback logic for load() and loadFromWaypoints()
@@ -142,8 +136,8 @@ public final class Directions {
    * @param callback A method to call when the "load" event fires.
    */
   private static void addLoadListener(final JavaScriptObject jsoPeer,
-      final DirectionsCallback callback) {  
-    
+      final DirectionsCallback callback) {
+
     EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.LOAD, new VoidCallback() {
       @Override
       public void callback() {
@@ -156,7 +150,7 @@ public final class Directions {
         }
       }
     });
-    
+
     EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.ERROR, new VoidCallback() {
       @Override
       public void callback() {

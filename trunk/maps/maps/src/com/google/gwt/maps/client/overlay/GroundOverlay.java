@@ -37,8 +37,6 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  *  map.addOverlay(overlay);
  * </pre>
  * 
- * TODO: more complete example
- * 
  * @see com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)
  */
 public final class GroundOverlay extends ConcreteOverlay {

@@ -25,15 +25,31 @@ public class PolyEditingOptions {
 
   private final JavaScriptObject jsoPeer;
 
+  /**
+   * Create a {@link PolyEditingOptions} object using defaults.
+   */
   public PolyEditingOptions() {
     jsoPeer = PolyEditingOptionsImpl.impl.construct();
   }
 
+  /**
+   * Create a {@link PolyEditingOptions} object.
+   * 
+   * @param fromStart specifies whether {@link Polyline#setDrawingEnabled()}
+   *          should add points from the start rather than from the end, which
+   *          is the default.
+   */
   public PolyEditingOptions(boolean fromStart) {
     this();
     setFromStart(fromStart);
   }
 
+  /**
+   * Create a {@link PolyEditingOptions} object.
+   * 
+   * @param maxVerticies specifies the maximum number of vertices permitted for
+   *          this polyline. Once this number is reached, no more may be added
+   */
   public PolyEditingOptions(int maxVerticies) {
     this();
     setMaxVertices(maxVerticies);
@@ -47,7 +63,7 @@ public class PolyEditingOptions {
 
   /**
    * This property specifies whether enableDrawing should add points from the
-   * start rather than from the end, which is the default. 
+   * start rather than from the end, which is the default.
    * 
    * @param fromStart
    */
@@ -57,7 +73,7 @@ public class PolyEditingOptions {
 
   /**
    * This property specifies the maximum number of vertices permitted for this
-   * polyline. Once this number is reached, no more may be added. 
+   * polyline. Once this number is reached, no more may be added.
    * 
    * @param maxVertices the maximum number of vertices permitted.
    */

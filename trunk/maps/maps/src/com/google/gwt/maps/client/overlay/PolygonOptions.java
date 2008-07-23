@@ -34,7 +34,7 @@ public class PolygonOptions {
    * option is true, i.e. if the option is not specified, the polygon will be
    * clickable.
    * 
-   * @param clickable pass <code>flase</code> to make this polygon not clickable.
+   * @param clickable pass <code>false</code> to make this polygon not clickable.
    */
   public void setClickable(boolean clickable) {
     PolygonOptionsImpl.impl.setClickable(jsoPeer, clickable);

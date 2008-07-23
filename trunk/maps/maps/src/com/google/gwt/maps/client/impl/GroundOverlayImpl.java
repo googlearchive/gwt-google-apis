@@ -22,7 +22,7 @@ import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 
 /**
- * 
+ * Creates a binding to the GGroundOverlay class in the Maps API.
  */
 public interface  GroundOverlayImpl extends JSFlyweightWrapper {
 
