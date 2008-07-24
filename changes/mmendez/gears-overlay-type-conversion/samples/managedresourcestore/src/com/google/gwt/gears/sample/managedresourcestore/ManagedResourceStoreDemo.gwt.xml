@@ -22,4 +22,10 @@
   <inherits name='com.google.gwt.gears.Offline' />
   <entry-point
     class='com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemo' />
+    
+  <!-- Rebind the entry point if Gears is not installed -->
+  <replace-with class="com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemoNoGears">
+    <when-type-is class="com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemo"/>
+    <when-property-is name="gears.installed" value="false"/>
+  </replace-with>
 </module>

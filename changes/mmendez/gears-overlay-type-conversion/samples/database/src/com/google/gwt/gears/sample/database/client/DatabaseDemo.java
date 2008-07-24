@@ -42,8 +42,6 @@ public class DatabaseDemo implements EntryPoint {
       new Label(), new Label(), new Label()};
 
   public void onModuleLoad() {
-    assert (Factory.getInstance() != null);
-
     RootPanel rootPanel = RootPanel.get();
     rootPanel.add(input);
     rootPanel.add(button);

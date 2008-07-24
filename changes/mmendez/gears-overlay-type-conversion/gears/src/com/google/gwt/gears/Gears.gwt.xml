@@ -21,17 +21,17 @@
   <property-provider name="gears.installed"><![CDATA[
     // Firefox
     if (typeof GearsFactory != 'undefined') {
-      return true;
+      return "true";
     }
 
     // IE
     try {
       new ActiveXObject('Gears.Factory');
-      return true;
+      return "true";
     } catch (e) {
     }
 
-	return false;
+	return "false";
   ]]></property-provider>
   
   <!--
