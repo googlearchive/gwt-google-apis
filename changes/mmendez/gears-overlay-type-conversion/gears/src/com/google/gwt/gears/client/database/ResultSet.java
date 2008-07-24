@@ -24,6 +24,11 @@ import java.util.Date;
  * Represents the results of executing an SQL statement. A
  * <code>ResultSet</code> must have its {@link #close()} called once it is no
  * longer needed.
+ * 
+ * The {@link ResultSet} class provides methods for getting fields as a
+ * particular type, <code>getFieldAdByte</code>, <code>getFieldAdChar</code>,
+ * etc. These getter methods will attempt to convert the field value into the
+ * requested type, but the overflow behavior is undefined.
  */
 public final class ResultSet extends JavaScriptObject {
   protected ResultSet() {
@@ -36,8 +41,8 @@ public final class ResultSet extends JavaScriptObject {
    * You are required to call close() when you are finished with any
    * {@link ResultSet}.
    * 
-   * Note: there is currently a feature request to have close called
-   * automatically when the result set goes out of scope.
+   * Note: there is currently a feature request against the JavaScript API to
+   * have close called automatically when the result set goes out of scope.
    * 
    * @throws DatabaseException on any error
    */
@@ -77,6 +82,14 @@ public final class ResultSet extends JavaScriptObject {
     }
   }
 
+  /**
+   * Retrieves the value of the field at <code>fieldIndex</code> as a
+   * <code>Date</code>.
+   * 
+   * @param fieldIndex zero-based index of the field
+   * @return the field value as a Date
+   * @throws DatabaseException if the <code>fieldIndex</code> is out of range
+   */
   public Date getFieldAsDate(int fieldIndex) throws DatabaseException {
     try {
       long value = (long) uncheckedGetFieldAsDate(fieldIndex);
