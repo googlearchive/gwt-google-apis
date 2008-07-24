@@ -2,8 +2,8 @@
 	<!-- "build" is the default when subprojects are directly targetted -->
 	<property name="target" value="build" />
 
-	<target name="ajaxsearch" description="Build AJAX Search">
-		<ant dir="ajaxsearch" target="${target}" />
+	<target name="search" description="Build AJAX Search">
+		<ant dir="search" target="${target}" />
 	</target>
 
 	<target name="gadgets" description="Build Gadgets">
@@ -18,7 +18,7 @@
 		<ant dir="maps" target="${target}" />
 	</target>
 
-	<target name="-do" depends="ajaxsearch, gadgets, gears, maps" description="Run all subprojects" />
+	<target name="-do" depends="gadgets, gears, maps, search" description="Run all subprojects" />
 
 	<target name="build" description="Builds all of the APIs that make up the Google API Library for GWT">
 		<antcall target="-do">
