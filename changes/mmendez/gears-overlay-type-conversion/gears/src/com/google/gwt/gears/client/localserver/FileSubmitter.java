@@ -33,18 +33,19 @@ public final class FileSubmitter extends JavaScriptObject {
   }
 
   /**
-   * Prepares the htmlElement to submit the file indicated by url. The
-   * htmlElement must be contained in an html form. When the form is submitted
-   * the file will be included as part of the resulting POST. The url is the
-   * captured resource's key in the originating Store. Relative URLs are
-   * interpreted according to the current page's location. The name attribute of
-   * htmlElement determines the parameter name associated with the uploaded
-   * file.
+   * Prepares the htmlElement to submit the file indicated by <code>url</code>.
+   * The <code>htmlElement</code> must be contained in an html form. When the
+   * form is submitted the file will be included as part of the resulting POST.
+   * The <code>url</code> is the captured resource's key in the originating
+   * Store. Relative URLs are interpreted according to the current page's
+   * location. The name attribute of <code>htmlElement</code> determines the
+   * parameter name associated with the uploaded file.
    * 
    * Due to differences between Firefox and Internet Explorer, this method's
-   * behavior is browser specific. Firefox: The htmlElement must be a reference
-   * to an <input type="file"> element. Internet Explorer: The htmlElement must
-   * NOT be a reference to an <input> of any type.
+   * behavior is browser specific. Firefox: The <code>htmlElement</code> must
+   * be a reference to an &lt;input type="file"&gt; element. Internet Explorer:
+   * The <code>htmlElement</code> must NOT be a reference to an &lt;input&gt;
+   * of any type.
    */
   public native void setFileInputElement(Element htmlElement, String url) /*-{
     this.setFileInputElement(htmlElement, url);
