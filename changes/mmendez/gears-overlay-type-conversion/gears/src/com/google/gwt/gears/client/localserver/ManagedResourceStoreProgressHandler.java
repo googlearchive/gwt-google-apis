@@ -52,7 +52,7 @@ public interface ManagedResourceStoreProgressHandler {
    * Method to be invoked when a {@link ManagedResourceStore} fires it progress
    * event.
    * 
-   * @param error contains the properties of the event
+   * @param event contains the properties of the event
    */
   void onProgress(ManagedResourceStoreProgressEvent event);
 }
