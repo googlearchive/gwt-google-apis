@@ -107,7 +107,7 @@ public final class Factory extends JavaScriptObject {
    * 
    * @param <T> Gears object type to return
    * @param className name of the object to create
-   * @return
+   * @return an instance of the specified Gears object
    */
   private native <T extends JavaScriptObject> T create(String className) /*-{
     return this.create(className);
