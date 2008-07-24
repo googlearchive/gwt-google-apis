@@ -45,10 +45,12 @@ public final class WorkerPool extends JavaScriptObject {
    * are delivered. The code must set an onmessage handler during that initial
    * execution, otherwise the worker will never receive messages.
    * 
-   * Two global objects are inserted into the namespace of every created worker: •
-   * google.gears.factory - Provides a Factory for the worker. •
-   * google.gears.workerPool - Gives access to the WorkerPool that created the
-   * worker.
+   * Two global objects are inserted into the namespace of every created worker:
+   * <ul>
+   * <li>google.gears.factory - Provides a Factory for the worker.</li>
+   * <li>google.gears.workerPool - Gives access to the WorkerPool that created
+   * the worker.</li>
+   * </ul>
    * 
    * Worker IDs are guaranteed to be unique values that are never reused within
    * the same WorkerPool.

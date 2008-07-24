@@ -56,8 +56,6 @@ public final class ManagedResourceStore extends JavaScriptObject {
   /**
    * Constructs a ManagedResourceStore object backed by the provided Gears
    * managed store object.
-   * 
-   * @param jso the object returned from the Gears factory's create method
    */
   protected ManagedResourceStore() {
     // Required for overlay types
