@@ -106,10 +106,10 @@ public class ImageResult extends Result {
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
-   * markup. (e.g., <b>, <i>, etc.)
+   * markup. (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
    * 
    * @return the title, but unlike .title, this property is stripped of html
-   *         markup. (e.g., <b>, <i>, etc.)
+   *         markup. (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
    */
   public String getTitleNoFormatting() {
     return GimageResult.IMPL.getTitleNoFormatting(this);

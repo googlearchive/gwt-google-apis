@@ -6,25 +6,25 @@
 	<!-- "build" is the default when subprojects are directly targetted -->
 	<property name="target" value="build" />
 
-	<target name="hellosearch" description="Build the AJAX Search sample">
+	<target name="hellosearch" description="Build the Search sample">
 		<gwt.ant dir="hellosearch" />
 	</target>
 
 	<target name="-do" depends="hellosearch" description="Run all subprojects" />
 
-	<target name="build" description="Builds AJAX Search API Library for GWT Samples">
+	<target name="build" description="Builds Search API Library for GWT Samples">
 		<antcall target="-do">
 			<param name="target" value="build" />
 		</antcall>
 	</target>
 
-	<target name="checkstyle" description="Static analysis of AJAX Search API Library for GWT source">
+	<target name="checkstyle" description="Static analysis of Search API Library for GWT source">
 		<antcall target="-do">
 			<param name="target" value="checkstyle" />
 		</antcall>
 	</target>
 
-	<target name="test" depends="build" description="Test AJAX Search API Library for GWT">
+	<target name="test" depends="build" description="Test Search API Library for GWT">
 		<antcall target="-do">
 			<param name="target" value="test" />
 		</antcall>

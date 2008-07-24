@@ -18,7 +18,7 @@ package com.google.gwt.search.client;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Some basic tests for the AJAXSearch API.
+ * Some basic tests for the AJAX Search API.
  */
 public class ImageSearchTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
@@ -26,7 +26,7 @@ public class ImageSearchTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.search.AJAXSearchTest";
+    return "com.google.gwt.search.SearchTest";
   }
 
   /**

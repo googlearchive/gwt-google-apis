@@ -66,6 +66,7 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
     if (result instanceof WebResult) {
       WebResult web = (WebResult) result;
       title = web.getTitle();
+      
     } else if (result instanceof NewsResult) {
       NewsResult web = (NewsResult) result;
       title = web.getTitle();

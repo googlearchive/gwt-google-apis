@@ -14,7 +14,7 @@
 
 <module>
 	<inherits name="com.google.gwt.user.User"/>
-	<inherits name="com.google.gwt.search.AjaxSearch"/>
+	<inherits name="com.google.gwt.search.Search"/>
 	
     <!--
       If you want to deploy this application outside of localhost,

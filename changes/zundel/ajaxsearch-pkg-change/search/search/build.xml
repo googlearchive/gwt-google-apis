@@ -1,6 +1,6 @@
-<project name="ajaxsearch" default="build" basedir=".">
+<project name="search" default="build" basedir=".">
 	<property name="gwt.root" location=".." />
-	<property name="project.tail" value="ajaxsearch" />
+	<property name="project.tail" value="search" />
 	<import file="${gwt.root}/common.ant.xml" />
 
 	<!--

@@ -7,12 +7,12 @@
 
 	<property name="API_PKGS" value="com.google.gwt.search.client" />
 
-	<property name="api.name" value="ajaxsearch" />
+	<property name="api.name" value="search" />
 
 	<!--
 		*** Note that if the API_SOURCE_PATH paths are updated,
 		the fileset dependencies in the outofdate tags in the doc,
-		ajaxsearch, and javadoc targets must be updated as well.
+		search, and javadoc targets must be updated as well.
 	-->
 	<path id="API_SOURCE_PATH">
 		<pathelement location="${gwt.root}/${api.name}/src" />

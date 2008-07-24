@@ -18,15 +18,15 @@ package com.google.gwt.search.client;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Some basic tests for the AJAXSearch API.
+ * Some basic tests for the AJAX Search API.
  */
-public class AJAXSearchTest extends GWTTestCase {
+public class SearchTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 15000;
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.search.AJAXSearchTest";
+    return "com.google.gwt.search.SearchTest";
   }
 
   public void testSimpleQuery() {

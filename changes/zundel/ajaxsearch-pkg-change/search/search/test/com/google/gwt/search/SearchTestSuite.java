@@ -15,19 +15,19 @@
  */
 package com.google.gwt.search;
 
-import com.google.gwt.search.client.AJAXSearchTest;
+import com.google.gwt.search.client.SearchTest;
 import com.google.gwt.search.client.ImageSearchTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.TestSuite;
 
 /**
- * Test suite for the AJAXSearch APIs.
+ * Test suite for the AJAX Search APIs.
  */
-public class AjaxSearchTestSuite extends GWTTestSuite {
+public class SearchTestSuite extends GWTTestSuite {
   public static TestSuite suite() {
-  TestSuite suite = new TestSuite("Test for the AJAXSearch API");
-  suite.addTestSuite(AJAXSearchTest.class);
+  TestSuite suite = new TestSuite("Test for the AJAX Search API");
+  suite.addTestSuite(SearchTest.class);
   suite.addTestSuite(ImageSearchTest.class);
   return suite;
   }

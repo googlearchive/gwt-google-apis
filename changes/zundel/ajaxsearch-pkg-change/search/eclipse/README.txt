@@ -2,7 +2,7 @@ Eclipse 3.2.X instructions
 
 ---------- Required Google API Library for GWT variables ---------
 Window->Preferences->General->Workspace->Linked Resources
-Create a variable named "SEARCH_API_ROOT" pointing to a working copy of the http://gwt-google-apis.googlecode.com/svn/trunk/ajaxsearch folder.
+Create a variable named "SEARCH_API_ROOT" pointing to a working copy of the http://gwt-google-apis.googlecode.com/svn/trunk/search folder.
 
 Window->Preferences->Java->Build Path->Classpath Variables
 Create a variable named "GWT_HOME" pointing to a GWT install folder.
