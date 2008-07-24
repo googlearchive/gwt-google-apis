@@ -54,6 +54,9 @@ public final class LocalServer extends JavaScriptObject {
   /**
    * Opens an existing {@link ManagedResourceStore} or creates a new one if no
    * such store exists.
+   * 
+   * @param name of the {@link ManagedResourceStore}
+   * @return {@link ManagedResourceStore} instance
    */
   public native ManagedResourceStore createManagedStore(String name) /*-{
     return this.createManagedStore(name);
@@ -63,8 +66,13 @@ public final class LocalServer extends JavaScriptObject {
    * Opens an existing {@link ManagedResourceStore} or creates a new one if no
    * such store exists.
    * 
-   * The combination of name and requiredCookie (along with the domain) identify
-   * a unique store. Expected cookie format is "name=value".
+   * The combination of <code>name</code> and <code>requiredCookie</code>
+   * (along with the domain) identify a unique store. Expected cookie format is
+   * "name=value".
+   * 
+   * @param name of the {@link ManagedResourceStore}
+   * @param requiredCookie cookie formatted as "name=value"
+   * @return {@link ManagedResourceStore} instance
    */
   public native ManagedResourceStore createManagedStore(String name,
       String requiredCookie) /*-{
@@ -74,6 +82,9 @@ public final class LocalServer extends JavaScriptObject {
   /**
    * Opens an existing {@link ResourceStore} or creates a new one if no such
    * store exists.
+   * 
+   * @param name name of the {@link ResourceStore}
+   * @return {@link ResourceStore} instance
    */
   public native ResourceStore createStore(String name) /*-{
     return this.createStore(name);
@@ -83,10 +94,15 @@ public final class LocalServer extends JavaScriptObject {
    * Opens an existing {@link ResourceStore} or creates a new one if no such
    * store exists.
    * 
-   * If a requiredCookie is given, creates a ResourceStore that requires the
-   * cookie to be present in the client in order to serve the contents from the
-   * store. The combination of name and requiredCookie (along with the domain)
-   * identify a unique store. Expected cookie format is "name=value".
+   * If a <code>requiredCookie</code> is given, creates a ResourceStore that
+   * requires the cookie to be present in the client in order to serve the
+   * contents from the store. The combination of <code>name</code> and
+   * <code>requiredCookie</code> (along with the domain) identify a unique
+   * store. Expected cookie format is "name=value".
+   * 
+   * @param name name of the {@link ResourceStore}
+   * @param requiredCookie cookie formatted as "name=value"
+   * @return {@link ResourceStore} instance
    */
   public native ResourceStore createStore(String name, String requiredCookie) /*-{
     return this.createStore(name, requiredCookie);
@@ -95,6 +111,10 @@ public final class LocalServer extends JavaScriptObject {
   /**
    * Opens an existing {@link ManagedResourceStore} or returns <code>null</code>
    * if no such store exists.
+   * 
+   * @param name name of the {@link ManagedResourceStore}
+   * @return existing {@link ManagedResourceStore} or returns <code>null</code>
+   *         if no such store exists.
    */
   public native ManagedResourceStore openManagedStore(String name) /*-{
     return this.openManagedStore(name);
@@ -106,6 +126,11 @@ public final class LocalServer extends JavaScriptObject {
    * 
    * The combination of name and requiredCookie (along with the domain) identify
    * a unique store. Expected cookie format is "name=value".
+   * 
+   * @param name name of the {@link ManagedResourceStore}
+   * @param requiredCookie cookie formatted as "name=value"
+   * @return existing {@link ManagedResourceStore} or returns <code>null</code>
+   *         if no such store exists.
    */
   public native ManagedResourceStore openManagedStore(String name,
       String requiredCookie) /*-{
@@ -116,7 +141,11 @@ public final class LocalServer extends JavaScriptObject {
    * Opens an existing {@link ResourceStore} or returns <code>null</code> if
    * no such store exists. If the store was originally created with a
    * requiredCookie, the same value must be provided in order to open this
-   * {@link ResourceStore}.
+   * {@link ResourceStore}. *
+   * 
+   * @param name name of the {@link ResourceStore}
+   * @return existing {@link ResourceStore} or returns <code>null</code> if no
+   *         such store exists.
    */
   public native ResourceStore openStore(String name) /*-{
     return this.openStore(name);
@@ -130,6 +159,12 @@ public final class LocalServer extends JavaScriptObject {
    * 
    * The combination of name and requiredCookie (along with the domain) identify
    * a unique store. Expected cookie format is "name=value".
+   * 
+   * @param name name of the {@link ResourceStore}
+   * @param requiredCookie cookie formatted as "name=value"
+   * @return existing {@link ResourceStore} or returns <code>null</code> if no
+   *         such store exists.
+   * 
    */
   public native ResourceStore openStore(String name, String requiredCookie) /*-{
     return this.openStore(name, requiredCookie);
@@ -138,6 +173,8 @@ public final class LocalServer extends JavaScriptObject {
   /**
    * Removes a {@link ManagedResourceStore} and all of its contained URLs from
    * the local cache.
+   * 
+   * @param name name of the {@link ManagedResourceStore} to remove
    */
   public native void removeManagedStore(String name) /*-{
     this.removeManagedStore(name);
@@ -146,6 +183,10 @@ public final class LocalServer extends JavaScriptObject {
   /**
    * Removes a {@link ManagedResourceStore} and all of its contained URLs from
    * the local cache.
+   * 
+   * @param name name of the {@link ManagedResourceStore}
+   * @param requiredCookie cookie formatted as "name=value"
+   * 
    */
   public native void removeManagedStore(String name, String requiredCookie) /*-{
     this.removeManagedStore(name, requiredCookie);
@@ -153,6 +194,8 @@ public final class LocalServer extends JavaScriptObject {
 
   /**
    * Removes a {@link ResourceStore} and deletes all of its contents.
+   * 
+   * @param name name of the {@link ResourceStore}
    */
   public native void removeStore(String name) /*-{
     this.removeStore(name);
@@ -160,6 +203,9 @@ public final class LocalServer extends JavaScriptObject {
 
   /**
    * Removes a {@link ResourceStore} and deletes all of its contents.
+   * 
+   * @param name name of the {@link ResourceStore}
+   * @param requiredCookie cookie formatted as "name=value"
    */
   public native void removeStore(String name, String requiredCookie) /*-{
     this.removeStore(name, requiredCookie);
@@ -167,9 +213,6 @@ public final class LocalServer extends JavaScriptObject {
 
   /**
    * Native proxy call to the canServeLocally method on the JavaScript object.
-   * 
-   * @param url
-   * @return
    */
   private native boolean uncheckedCanServeLocally(String url) /*-{
     return this.canServeLocally(url);
