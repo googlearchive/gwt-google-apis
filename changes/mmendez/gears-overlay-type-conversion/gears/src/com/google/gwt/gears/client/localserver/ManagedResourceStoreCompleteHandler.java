@@ -18,21 +18,35 @@ package com.google.gwt.gears.client.localserver;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * 
+ * Provides an interface to implement in order to receive update complete
+ * events.
  */
 public interface ManagedResourceStoreCompleteHandler {
   /**
-   * 
+   * Encapsulates the arguments to the update complete event.
    */
   final class ManagedResourceStoreCompleteEvent extends JavaScriptObject {
     protected ManagedResourceStoreCompleteEvent() {
       // Required for overlay types
     }
 
+    /**
+     * Returns the new version of the {@link ManagedResourceStore} if the
+     * version changed, empty otherwise.
+     * 
+     * @return the new version of the {@link ManagedResourceStore} if the
+     *         version changed, empty otherwise
+     */
     public native String getNewVersion() /*-{
       return this.newVersion;
     }-*/;
   }
 
+  /**
+   * Method to be invoked when a {@link ManagedResourceStore} fires it update
+   * complete event.
+   * 
+   * @param event contains the properties of the event
+   */
   void onComplete(ManagedResourceStoreCompleteEvent event);
 }

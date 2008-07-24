@@ -18,21 +18,32 @@ package com.google.gwt.gears.client.localserver;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * 
+ * Provides an interface to implement in order to receive update error events.
  */
 public interface ManagedResourceStoreErrorHandler {
   /**
-   * 
+   * Encapsulates the arguments to the update error event.
    */
   final class ManagedResourceStoreErrorEvent extends JavaScriptObject {
     protected ManagedResourceStoreErrorEvent() {
       // Required for overlay types
     }
 
+    /**
+     * Returns the error message associated with the update.
+     * 
+     * @return error message associated with the update
+     */
     public native String getMessage() /*-{
       return this.message;
     }-*/;
   }
 
+  /**
+   * Method to be invoked when a {@link ManagedResourceStore} fires it update
+   * error event.
+   * 
+   * @param error contains the properties of the event
+   */
   void onError(ManagedResourceStoreErrorEvent error);
 }

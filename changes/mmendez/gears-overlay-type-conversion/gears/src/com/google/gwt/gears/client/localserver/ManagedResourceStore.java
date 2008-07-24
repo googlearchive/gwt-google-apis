@@ -45,18 +45,27 @@ import com.google.gwt.core.client.JavaScriptObject;
  * </code>
  */
 public final class ManagedResourceStore extends JavaScriptObject {
+  /**
+   * Gears is checking for a new manifest file.
+   */
   public static final int UPDATE_CHECKING = 1;
 
+  /**
+   * Gears found a new manifest file and is downloading the new resources.
+   */
   public static final int UPDATE_DOWNLOADING = 2;
 
+  /**
+   * The last update to run failed, and the error message is available from
+   * {@link #getLastErrorMessage()}.
+   */
   public static final int UPDATE_FAILED = 3;
 
+  /**
+   * An update is not running. The last update to run succeeded.
+   */
   public static final int UPDATE_OK = 0;
 
-  /**
-   * Constructs a ManagedResourceStore object backed by the provided Gears
-   * managed store object.
-   */
   protected ManagedResourceStore() {
     // Required for overlay types
   }
@@ -73,33 +82,40 @@ public final class ManagedResourceStore extends JavaScriptObject {
   }-*/;
 
   /**
-   * Fetches the current version of the manifest file associated with this
-   * store.
+   * Returns the version of the set of resources that is currently being served
+   * locally, or empty string if no version is currently in use. This value
+   * reflects the <code>version</code> attribute from the manifest file only
+   * after all resources listed in the manifest file have been cached locally.
    * 
-   * @return the currentVersion
+   * @return the current version of empty string if there isn't one
    */
   public native String getCurrentVersion() /*-{
     return this.currentVersion;
   }-*/;
 
   /**
-   * Fetches the error most recently reported by this store. This will only be
-   * useful if {@link #getUpdateStatus()} returns {@link #UPDATE_FAILED}.
+   * Returns the last error message reported by this instance. The return value
+   * is undefined if the value {@link #getUpdateStatus()} is not
+   * {@link #UPDATE_FAILED}.
    * 
-   * @return the error most recently reported by this store
+   * @return the last error message reported by this instance
    */
   public native String getLastErrorMessage() /*-{
     return this.lastErrorMessage;
   }-*/;
 
   /**
-   * @return the lastUpdateCheckTime
+   * Returns the time, in seconds, of the last update.
+   * 
+   * @return the time, in seconds, of the last update
    */
   public native double getLastUpdateCheckTime() /*-{
     return this.lastUpdateCheckTime;
   }-*/;
 
   /**
+   * Returns the URL of the manifest file currently used by this store.
+   * 
    * @return the URL of the manifest file currently used by this store
    */
   public native String getManifestUrl() /*-{
@@ -107,13 +123,17 @@ public final class ManagedResourceStore extends JavaScriptObject {
   }-*/;
 
   /**
-   * @return the user-defined name of this store
+   * Returns the name of this store.
+   * 
+   * @return the name of this store
    */
   public native String getName() /*-{
     return this.name;
   }-*/;
 
   /**
+   * Returns the cookie requirements of this store.
+   * 
    * @return the name of the cookie required by the store, or null if no
    *         required cookie was set
    */
@@ -122,6 +142,8 @@ public final class ManagedResourceStore extends JavaScriptObject {
   }-*/;
 
   /**
+   * Returns the update status value of this store.
+   * 
    * @return the status of the most recent update operation; one of the UPDATE_*
    *         fields
    */
@@ -130,7 +152,11 @@ public final class ManagedResourceStore extends JavaScriptObject {
   }-*/;
 
   /**
-   * @return true if the store is currently enabled, or false if not
+   * Returns <code>true</code> if the store is currently enabled, or
+   * <code>false</code> otherwise.
+   * 
+   * @return <code>true</code> if the store is currently enabled, or
+   *         <code>false</code> otherwise
    */
   public native boolean isEnabled() /*-{
     return this.enabled;
@@ -155,6 +181,19 @@ public final class ManagedResourceStore extends JavaScriptObject {
     this.manifestUrl = manifestUrl;
   }-*/;
 
+  /**
+   * Sets the handler to call when the {@link ManagedResourceStore} completes an
+   * update. Note that updates can be either started explicitly, by calling
+   * {@link #checkForUpdate()}, or implicitly, when resources are served from
+   * the store.
+   * 
+   * An update may or may not result in a new version of the store. If a new
+   * version results, the newVersion property of the details object will contain
+   * the store's new version string.
+   * 
+   * @param handler handler to call when the {@link ManagedResourceStore}
+   *          completes an update
+   */
   public native void setOnCompleteHandler(
       ManagedResourceStoreCompleteHandler handler) /*-{
     this.oncomplete = function(details) {
@@ -162,12 +201,27 @@ public final class ManagedResourceStore extends JavaScriptObject {
     };
   }-*/;
 
+  /**
+   * Sets the handler to call when a {@link ManagedResourceStore} update fails.
+   * 
+   * Note that update failure may occur normally when an application is running
+   * offline, or if the server is down.
+   * 
+   * @param handler the handler to call when a {@link ManagedResourceStore}
+   *          update fails
+   */
   public native void setOnErrorHandler(ManagedResourceStoreErrorHandler handler) /*-{
     this.onerror = function(error) {
       handler.@com.google.gwt.gears.client.localserver.ManagedResourceStoreErrorHandler::onError(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreErrorHandler$ManagedResourceStoreErrorEvent;)(details);
     };
   }-*/;
 
+  /**
+   * Sets the handler to receive update notifications. This event is fired
+   * periodically during a {@link ManagedResourceStore} update.
+   * 
+   * @param handler to receive update notifications
+   */
   public native void setOnProgressHandler(
       ManagedResourceStoreProgressHandler handler) /*-{
     this.oncomplete = function(details) {

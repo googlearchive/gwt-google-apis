@@ -18,25 +18,41 @@ package com.google.gwt.gears.client.localserver;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * 
+ * Provides an interface to implement in order to receive progress events.
  */
 public interface ManagedResourceStoreProgressHandler {
   /**
-   * 
+   * Encapsulates the arguments to the progress event.
    */
   final class ManagedResourceStoreProgressEvent extends JavaScriptObject {
     protected ManagedResourceStoreProgressEvent() {
       // Required for overlay types
     }
 
+    /**
+     * Returns the number of files completed thus far.
+     * 
+     * @return the number of files completed thus far
+     */
     public native double getFilesComplete() /*-{
       return this.filesComplete;
     }-*/;
 
+    /**
+     * Returns the total number of files that need to be captured.
+     * 
+     * @return the total number of files that need to be captured
+     */
     public native double getFilesTotal() /*-{
       return this.filesTotal;
     }-*/;
   }
 
+  /**
+   * Method to be invoked when a {@link ManagedResourceStore} fires it progress
+   * event.
+   * 
+   * @param error contains the properties of the event
+   */
   void onProgress(ManagedResourceStoreProgressEvent event);
 }
