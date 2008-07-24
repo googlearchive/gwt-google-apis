@@ -52,9 +52,10 @@ public final class Database extends JavaScriptObject {
    * 
    * Substitute zero or more bind parameters from <code>args</code> into
    * <code>sqlStatement</code> and execute the resulting SQL statement. There
-   * must be exactly as many items in argArray as their are ? place holders in
-   * sqlStatement. argArray can be omitted if there are no place holders. The
-   * results of executing the statement are returned in a ResultSet.
+   * must be exactly as many items in <code>args</code> as there are ? place
+   * holders in <code>sqlStatement</code>. argArray can be omitted if there
+   * are no place holders. The results of executing the statement are returned
+   * in a ResultSet.
    * 
    * Note that if multiple processes (including Workers) attempt to write to the
    * database at the same time, one can fail. It is up to the application to
