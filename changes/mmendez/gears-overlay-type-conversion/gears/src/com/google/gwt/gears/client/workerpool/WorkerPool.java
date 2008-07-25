@@ -15,7 +15,11 @@
  */
 package com.google.gwt.gears.client.workerpool;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.gears.client.workerpool.WorkerPoolErrorHandler.ErrorEvent;
+import com.google.gwt.gears.client.workerpool.WorkerPoolMessageHandler.MessageEvent;
 
 /**
  * WorkerPool module allows web applications to run JavaScript code in the
@@ -26,6 +30,47 @@ import com.google.gwt.core.client.JavaScriptObject;
  * code.
  */
 public final class WorkerPool extends JavaScriptObject {
+  // Called from JSNI
+  @SuppressWarnings("unused")
+  private static boolean fireOnError(WorkerPoolErrorHandler handler,
+      ErrorEvent event) {
+    if (handler == null) {
+      return false;
+    }
+
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        return handler.onError(event);
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+        return false;
+      }
+    } else {
+      return handler.onError(event);
+    }
+  }
+
+  // Called from JSNI
+  @SuppressWarnings("unused")
+  private static void fireOnMessage(WorkerPoolMessageHandler handler,
+      MessageEvent event) {
+    if (handler == null) {
+      return;
+    }
+
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onMessageReceived(event);
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
+    } else {
+      handler.onMessageReceived(event);
+    }
+  }
+
   protected WorkerPool() {
     // Required for overlay types
   }
@@ -55,6 +100,7 @@ public final class WorkerPool extends JavaScriptObject {
    * Worker IDs are guaranteed to be unique values that are never reused within
    * the same WorkerPool.
    * 
+   * @param scriptText string containing the worker code
    * @return id of the created worker
    */
   public native int createWorker(String scriptText) /*-{
@@ -68,10 +114,11 @@ public final class WorkerPool extends JavaScriptObject {
    * due to a technical issue that will be addressed in a future release.
    * 
    * Gears guarantees the URL will be fetched and the code returned will run
-   * once before any messages are delivered. The code must set an onmessage
-   * handler during that initial execution, otherwise the worker will never
-   * receive messages.
+   * once before any messages are delivered. The code must call
+   * {@link #setMessageHandler(WorkerPoolMessageHandler)} during that initial
+   * execution, otherwise the worker will never receive messages.
    * 
+   * @param scriptUrl URL that contains the worker code
    * @return id of the created worker
    */
   public native int createWorkerFromUrl(String scriptUrl) /*-{
@@ -89,6 +136,9 @@ public final class WorkerPool extends JavaScriptObject {
    * 
    * Messages are copied between workers. Changes to a message received in one
    * worker will not be reflected in the sending worker.
+   * 
+   * @param message message text
+   * @param destWorkerId id of the worker to send the message to
    */
   public native void sendMessage(String message, int destWorkerId) /*-{
     this.sendMessage(message, destWorkerId);
@@ -104,23 +154,23 @@ public final class WorkerPool extends JavaScriptObject {
    * Database module.
    * 
    * NOTE: This callback can only be set from child workers.
+   * 
+   * @param handler handler to be notified of error events
    */
-  public native void setErrorHandler(ErrorHandler handler) /*-{
+  public native void setErrorHandler(WorkerPoolErrorHandler handler) /*-{
     this.onerror = function(errorObject) {
-      if (handler) {
-        handler.@com.google.gwt.gears.client.workerpool.ErrorHandler::onError(Lcom/google/gwt/gears/client/workerpool/ErrorHandler$ErrorEvent;)(errorObject);
-      }
+      return @com.google.gwt.gears.client.workerpool.WorkerPool::fireOnError(Lcom/google/gwt/gears/client/workerpool/WorkerPoolErrorHandler;Lcom/google/gwt/gears/client/workerpool/WorkerPoolErrorHandler$ErrorEvent;)(handler, errorObject);
     };
   }-*/;
 
   /**
    * Set the {@link MessageHandler} to call when this worker receives a message.
+   * 
+   * @param handler handler to be notified of message events
    */
-  public native void setMessageHandler(MessageHandler handler) /*-{
+  public native void setMessageHandler(WorkerPoolMessageHandler handler) /*-{
     this.onmessage = function(messageText, senderId, messageObject) {
-      if (handler) {
-        handler.@com.google.gwt.gears.client.workerpool.MessageHandler::onMessageReceived(Lcom/google/gwt/gears/client/workerpool/MessageHandler$MessageEvent;)(messageObject);
-      }
+      @com.google.gwt.gears.client.workerpool.WorkerPool::fireOnMessage(Lcom/google/gwt/gears/client/workerpool/WorkerPoolMessageHandler;Lcom/google/gwt/gears/client/workerpool/WorkerPoolMessageHandler$MessageEvent;)(handler, messageObject);
     };
   }-*/;
 }

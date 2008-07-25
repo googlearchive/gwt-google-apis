@@ -21,7 +21,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * 
  */
-public interface ErrorHandler {
+public interface WorkerPoolErrorHandler {
   /**
    * 
    */
@@ -30,25 +30,37 @@ public interface ErrorHandler {
       // Required for overlay types
     }
 
+    /**
+     * Returns the JavaScript line number associated with the error.
+     * 
+     * @return the JavaScript line number associated with the error
+     */
     public native int getLineNumber() /*-{
       return this.lineNumber;
     }-*/;
 
+    /**
+     * Returns the message associated with this error.
+     * 
+     * @return the message associated with this error
+     */
     public native String getMessage() /*-{
       return this.message;
     }-*/;
   }
 
   /**
-   * This callback provides functionality in workers similar to the
-   * window.onerror property. If set, it will be called for any unhandled errors
-   * that occur inside a worker.
+   * Method called for any unhandled errors that occur inside of a worker.
    * 
-   * You can use this callback to implement "last-chance" error handling for
-   * your workers. For example, you could log all unhandled errors into the
-   * Database module.
+   * You can use this to implement "last-chance" error handling for your
+   * workers. For example, you could log all unhandled errors into the Database
+   * module.
    * 
    * NOTE: This callback can only be set from child workers.
+   * 
+   * @param errorEvent error event object
+   * @return <code>true</code> to indicate the error was handled, which
+   *         prevents it from bubbling up to the parent
    */
-  boolean onError(ErrorEvent errorObject);
+  boolean onError(ErrorEvent errorEvent);
 }

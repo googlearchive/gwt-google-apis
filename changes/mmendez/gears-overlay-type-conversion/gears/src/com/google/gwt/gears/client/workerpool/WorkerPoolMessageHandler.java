@@ -18,33 +18,54 @@ package com.google.gwt.gears.client.workerpool;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Handler interface for messages sent between JavaScript threads created using
- * the Gears WorkerPool system.
+ * Provides an interface to implement in order to receive message events.
  */
-public interface MessageHandler {
+public interface WorkerPoolMessageHandler {
   /**
-   * 
+   * Encapsulates the arguments of the message event.
    */
   final class MessageEvent extends JavaScriptObject {
     protected MessageEvent() {
       // Required for overlay types
     }
 
+    /**
+     * Returns the body text of the message.
+     * 
+     * @return the body text of the message
+     */
     public native String getBody() /*-{
       return this.body;
     }-*/;
 
+    /**
+     * Returns the sender's origin, represented as a string of the form:
+     * SCHEME://DOMAIN[:PORT].
+     * 
+     * Note that the port is omitted for standard ports (http port 80, https
+     * port 443).
+     * 
+     * @return the sender's origin, represented as a string of the form:
+     *         SCHEME://DOMAIN[:PORT]
+     */
     public native String getOrigin() /*-{
       return this.origin;
     }-*/;
 
-    public native double getSender() /*-{
+    /**
+     * Returns the id of the worker that sent this message.
+     * 
+     * @return the id of the worker that sent this message
+     */
+    public native int getSender() /*-{
       return this.sender;
     }-*/;
   }
 
   /**
-   * Called when a message has been sent to this thread by another thread.
+   * Method to be invoked when a worker receives a message event.
+   * 
+   * @param event contains the properties of the event
    */
   void onMessageReceived(MessageEvent event);
 }
