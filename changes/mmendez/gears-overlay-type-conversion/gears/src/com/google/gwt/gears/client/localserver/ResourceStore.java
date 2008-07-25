@@ -64,6 +64,8 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Aborts the specified capture.
+   * 
+   * @param captureId id of the capture to abort
    */
   public native void abortCapture(int captureId) /*-{
     this.abortCapture(captureId);
@@ -79,16 +81,23 @@ public final class ResourceStore extends JavaScriptObject {
    * 
    * An additional HTTP header is added when Gears is capturing URLs
    * X-Gears-Google: 1
+   * 
+   * @param callback invoked per capture
+   * @param urls set of URLs to capture
+   * @return capture id for capture request
    */
   public int capture(URLCaptureCallback callback, String... urls) {
     return capture(callback, Utils.toJavaScriptArray(urls));
   }
 
   /**
-   * Captures the contents of the file indicated by the fileInputElement into
-   * the store and associates that content with the given URL. The
-   * fileInputElement argument must be a reference to an <input type=file> HTML
-   * element.
+   * Captures the contents of the file indicated by the
+   * <code>fileInputElement</code> into the store and associates that content
+   * with the given URL. The <code>fileInputElement</code> argument must be a
+   * reference to an &lt;input type=file&gt; HTML element.
+   * 
+   * @param fileInputElement element containing the file to capture
+   * @param url URL to associate with the file capture
    */
   public native void captureFile(Element fileInputElement, String url) /*-{
     this.captureFile(fileInputElement, url);
@@ -96,6 +105,9 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Copies a cached URL.
+   * 
+   * @param srcUrl source URL
+   * @param destUrl destination URL
    */
   public native void copy(String srcUrl, String destUrl) /*-{
     this.copy(srcUrl, destUrl);
@@ -104,6 +116,8 @@ public final class ResourceStore extends JavaScriptObject {
   /**
    * Returns a {@link FileSubmitter}, which is used to submit URLs that are
    * contained in this store in HTML form submissions.
+   * 
+   * @return {@link FileSubmitter} instance
    */
   public native FileSubmitter createFileSubmitter() /*-{
     return this.createFileSubmitter();
@@ -111,16 +125,22 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Returns all HTTP headers associated with the captured URL.
+   * 
+   * @param url captured URL
+   * @return all HTTP headers associated with the URL
    */
   public native String getAllHeaders(String url) /*-{
     return this.getAllHeaders(url);
   }-*/;
 
   /**
-   * Returns the leaf file name associated with url that was previously captured
-   * by calling captureFile. Note that if url was captured by a method other
-   * than calling captureFile then an empty string will be returned and no
-   * exception will be thrown.
+   * Returns the leaf file name associated with <code>url</code> that was
+   * previously captured by calling captureFile. Note that if <code>url</code>
+   * was captured by a method other than calling captureFile then an empty
+   * string will be returned and no exception will be thrown.
+   * 
+   * @param url URL whose file name we want
+   * @return leaf file name associated with the URL or an empty if there is none
    */
   public native String getCapturedFileName(String url) /*-{
     return this.getCapturedFileName(url);
@@ -128,6 +148,10 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Returns a specific HTTP header associated with the captured URL.
+   * 
+   * @param url captured URL
+   * @param name HTTP header name
+   * @return HTTP header value
    */
   public native String getHeader(String url, String name) /*-{
     return this.getHeader(url, name);
@@ -135,6 +159,8 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Returns the name of this store.
+   * 
+   * @return name of the this store
    */
   public native String getName() /*-{
     return this.name;
@@ -145,6 +171,8 @@ public final class ResourceStore extends JavaScriptObject {
    * href="http://code.google.com/apis/gears/api_localserver.html#required_cookie">Cookies
    * and the LocalServer</a>. If the requiredCookie is empty, then resources
    * within this store are always served locally, provided the store is enabled.
+   * 
+   * @return required cookie for this store
    */
   public native String getRequiredCookie() /*-{
     return this.requiredCookie;
@@ -152,6 +180,9 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Returns <code>true</code> if the URL is cached in this store.
+   * 
+   * @param url URL to test
+   * @return <code>true</code> if the URL is cached in this store
    */
   public native boolean isCaptured(String url) /*-{
     return this.isCaptured(url);
@@ -160,6 +191,9 @@ public final class ResourceStore extends JavaScriptObject {
   /**
    * Returns <code>true</code> if local serving is enabled for this store,
    * <code>false</code> otherwise.
+   * 
+   * @return <code>true</code> if local serving is enabled for this store,
+   *         <code>false</code> otherwise
    */
   public native boolean isEnabled() /*-{
     return this.enabled;
@@ -167,6 +201,8 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Removes the cached URL from this store.
+   * 
+   * @param url URL to remove
    */
   public native void remove(String url) /*-{
     this.remove(url);
@@ -174,6 +210,9 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Renames a URL that is cached in this store.
+   * 
+   * @param srcUrl source URL
+   * @param destUrl destination URL
    */
   public native void rename(String srcUrl, String destUrl) /*-{
     this.rename(srcUrl, destUrl);
@@ -181,6 +220,9 @@ public final class ResourceStore extends JavaScriptObject {
 
   /**
    * Sets the local serving state of this store.
+   * 
+   * @param enabled <code>true</code> to enable local serving,
+   *          <code>false</code> otherwise
    */
   public native void setEnabled(boolean enabled) /*-{
     this.enabled = enabled;
