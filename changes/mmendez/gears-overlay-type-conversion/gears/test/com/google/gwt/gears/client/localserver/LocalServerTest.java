@@ -76,25 +76,19 @@ public class LocalServerTest extends GWTTestCase {
   public void testCanServeLocallySameOriginURLCaptured() throws GearsException {
     final LocalServer ls = Factory.getInstance().createLocalServer();
     delayTestFinish(5000);
-    String requestedURL = getMyURL();
+    final String requestedURL = getMyURL();
     final ResourceStore rs = ls.createStore(RESOURCE_STORE_NAME);
     rs.remove(requestedURL);
     assertFalse(ls.canServeLocally(requestedURL));
-    rs.capture(new URLCaptureCallback() {
-      @Override
-      public void onCaptureFailure(String url, int captureId) {
-        fail("Could not capture: " + url);
-      }
-
-      @Override
-      public void onCaptureSuccess(String url, int captureId) {
-        boolean failed = true;
+    rs.capture(new ResourceStoreUrlCaptureHandler() {
+      public void onCapture(ResourceStoreUrlCaptureEvent event) {
+        assertTrue(event.isSucceess());
+        assertEquals(requestedURL, event.getUrl());
         try {
-          failed = !ls.canServeLocally(url);
+          assertTrue(ls.canServeLocally(requestedURL));
         } catch (GearsException e) {
-          // we failed, ignore the exception
+          fail(e.getMessage());
         }
-        assertFalse(failed);
         finishTest();
       }
     }, requestedURL);

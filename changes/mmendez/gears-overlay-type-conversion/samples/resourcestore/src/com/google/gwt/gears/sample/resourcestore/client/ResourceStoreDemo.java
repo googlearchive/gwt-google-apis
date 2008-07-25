@@ -19,7 +19,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.localserver.LocalServer;
 import com.google.gwt.gears.client.localserver.ResourceStore;
-import com.google.gwt.gears.client.localserver.URLCaptureCallback;
+import com.google.gwt.gears.client.localserver.ResourceStoreUrlCaptureHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -37,8 +37,8 @@ public class ResourceStoreDemo implements EntryPoint {
       getLocationPathName(), "ResourceStoreDemo.css"};
 
   private static native String getLocationPathName() /*-{
-     return $doc.location.href;
-   }-*/;
+    return $doc.location.href;
+  }-*/;
 
   private final HorizontalPanel buttonPanel = new HorizontalPanel();
   private final Button captureButton = new Button("Capture");
@@ -92,15 +92,13 @@ public class ResourceStoreDemo implements EntryPoint {
 
   private void captureUrls() {
     statusLabel.setText("Capturing...");
-    resourceStore.capture(new URLCaptureCallback() {
-      @Override
-      public void onCaptureFailure(String url, int captureId) {
-        statusLabel.setText("Failed to capture URL: " + url);
-      }
-
-      @Override
-      public void onCaptureSuccess(String url, int captureId) {
-        statusLabel.setText("Captured URL: " + url);
+    resourceStore.capture(new ResourceStoreUrlCaptureHandler() {
+      public void onCapture(ResourceStoreUrlCaptureEvent event) {
+        if (event.isSucceess()) {
+          statusLabel.setText("Captured URL: " + event.getUrl());
+        } else {
+          statusLabel.setText("Failed to capture URL: " + event.getUrl());
+        }
       }
     }, FILES_TO_CAPTURE);
   }

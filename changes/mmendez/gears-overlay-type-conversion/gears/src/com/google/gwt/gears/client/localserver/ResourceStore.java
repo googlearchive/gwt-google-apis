@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * // * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,36 +25,19 @@ import com.google.gwt.gears.client.impl.Utils;
  * Manages an ad-hoc collection of captured URLs, which can be served locally.
  */
 public final class ResourceStore extends JavaScriptObject {
-  /**
-   * This method is called from JSNI code.
-   */
+  // Called from JSNI code.
   @SuppressWarnings("unused")
-  private static void fireUrlCaptureCallback(URLCaptureCallback callback,
-      String url, boolean success, int captureId) {
-    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    if (handler != null) {
-      fireUrlCaptureCallbackAndCatch(handler, callback, url, success, captureId);
+  private static void fireCapture(ResourceStoreUrlCaptureHandler handler,
+      ResourceStoreUrlCaptureHandler.ResourceStoreUrlCaptureEvent event) {
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onCapture(event);
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
     } else {
-      fireUrlCaptureCallbackImpl(callback, url, success, captureId);
-    }
-  }
-
-  private static void fireUrlCaptureCallbackAndCatch(
-      UncaughtExceptionHandler handler, URLCaptureCallback callback,
-      String url, boolean success, int captureId) {
-    try {
-      fireUrlCaptureCallbackImpl(callback, url, success, captureId);
-    } catch (Throwable e) {
-      handler.onUncaughtException(e);
-    }
-  }
-
-  private static void fireUrlCaptureCallbackImpl(URLCaptureCallback callback,
-      String url, boolean success, int captureId) {
-    if (success) {
-      callback.onCaptureSuccess(url, captureId);
-    } else {
-      callback.onCaptureFailure(url, captureId);
+      handler.onCapture(event);
     }
   }
 
@@ -77,7 +60,7 @@ public final class ResourceStore extends JavaScriptObject {
    * abortCapture to cancel the update.
    * 
    * Relative URLs are interpreted according to the current page's location.
-   * Upon completion of each URL the callback function is invoked.
+   * Upon completion of each URL the handler instance is notified.
    * 
    * An additional HTTP header is added when Gears is capturing URLs
    * X-Gears-Google: 1
@@ -86,7 +69,7 @@ public final class ResourceStore extends JavaScriptObject {
    * @param urls set of URLs to capture
    * @return capture id for capture request
    */
-  public int capture(URLCaptureCallback callback, String... urls) {
+  public int capture(ResourceStoreUrlCaptureHandler callback, String... urls) {
     return capture(callback, Utils.toJavaScriptArray(urls));
   }
 
@@ -228,9 +211,10 @@ public final class ResourceStore extends JavaScriptObject {
     this.enabled = enabled;
   }-*/;
 
-  private native int capture(URLCaptureCallback callback, JavaScriptObject urls) /*-{
+  private native int capture(ResourceStoreUrlCaptureHandler callback,
+      JavaScriptObject urls) /*-{
     var jsCallback = function(url, success, captureId) {
-      @com.google.gwt.gears.client.localserver.ResourceStore::fireUrlCaptureCallback(Lcom/google/gwt/gears/client/localserver/URLCaptureCallback;Ljava/lang/String;ZI)(callback,url,success,captureId);
+      @com.google.gwt.gears.client.localserver.ResourceStore::fireCapture(Lcom/google/gwt/gears/client/localserver/ResourceStoreUrlCaptureHandler;Lcom/google/gwt/gears/client/localserver/ResourceStoreUrlCaptureHandler$ResourceStoreUrlCaptureEvent;)(callback,{ url: url, success: success, captureId : captureId });
     };
     return this.capture(urls, jsCallback);
   }-*/;
