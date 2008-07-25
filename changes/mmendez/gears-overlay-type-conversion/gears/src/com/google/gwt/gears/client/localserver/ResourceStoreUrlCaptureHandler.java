@@ -24,7 +24,7 @@ public interface ResourceStoreUrlCaptureHandler {
   /**
    * Encapsulates the arguments to the capture event.
    */
-  class ResourceStoreUrlCaptureEvent extends JavaScriptObject {
+  final class ResourceStoreUrlCaptureEvent extends JavaScriptObject {
     protected ResourceStoreUrlCaptureEvent() {
       // Required for overlay types
     }
