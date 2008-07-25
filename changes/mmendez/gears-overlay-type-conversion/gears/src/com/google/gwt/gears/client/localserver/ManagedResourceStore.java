@@ -15,7 +15,12 @@
  */
 package com.google.gwt.gears.client.localserver;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.gears.client.localserver.ManagedResourceStoreCompleteHandler.ManagedResourceStoreCompleteEvent;
+import com.google.gwt.gears.client.localserver.ManagedResourceStoreErrorHandler.ManagedResourceStoreErrorEvent;
+import com.google.gwt.gears.client.localserver.ManagedResourceStoreProgressHandler.ManagedResourceStoreProgressEvent;
 
 /**
  * Manages a collection of URLs that are updated atomically, as a group. The
@@ -65,6 +70,56 @@ public final class ManagedResourceStore extends JavaScriptObject {
    * An update is not running. The last update to run succeeded.
    */
   public static final int UPDATE_OK = 0;
+
+  // Called from JSNI
+  @SuppressWarnings("unused")
+  private static void fireOnComplete(
+      ManagedResourceStoreCompleteHandler handler,
+      ManagedResourceStoreCompleteEvent event) {
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onComplete(event);
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
+    } else {
+      handler.onComplete(event);
+    }
+  }
+
+  // Called from JSNI
+  @SuppressWarnings("unused")
+  private static void fireOnError(ManagedResourceStoreErrorHandler handler,
+      ManagedResourceStoreErrorEvent event) {
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onError(event);
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
+    } else {
+      handler.onError(event);
+    }
+  }
+
+  // Called from JSNI
+  @SuppressWarnings("unused")
+  private static void fireOnProgress(
+      ManagedResourceStoreProgressHandler handler,
+      ManagedResourceStoreProgressEvent event) {
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onProgress(event);
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
+    } else {
+      handler.onProgress(event);
+    }
+  }
 
   protected ManagedResourceStore() {
     // Required for overlay types
@@ -197,7 +252,7 @@ public final class ManagedResourceStore extends JavaScriptObject {
   public native void setOnCompleteHandler(
       ManagedResourceStoreCompleteHandler handler) /*-{
     this.oncomplete = function(details) {
-      handler.@com.google.gwt.gears.client.localserver.ManagedResourceStoreCompleteHandler::onComplete(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreCompleteHandler$ManagedResourceStoreCompleteEvent;)(details);
+      @com.google.gwt.gears.client.localserver.ManagedResourceStore::fireOnComplete(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreCompleteHandler;Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreCompleteHandler$ManagedResourceStoreCompleteEvent;)(handler, details);
     };
   }-*/;
 
@@ -212,7 +267,7 @@ public final class ManagedResourceStore extends JavaScriptObject {
    */
   public native void setOnErrorHandler(ManagedResourceStoreErrorHandler handler) /*-{
     this.onerror = function(error) {
-      handler.@com.google.gwt.gears.client.localserver.ManagedResourceStoreErrorHandler::onError(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreErrorHandler$ManagedResourceStoreErrorEvent;)(details);
+      @com.google.gwt.gears.client.localserver.ManagedResourceStore::fireOnError(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreErrorHandler;Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreErrorHandler$ManagedResourceStoreErrorEvent;)(handler, error);
     };
   }-*/;
 
@@ -225,7 +280,7 @@ public final class ManagedResourceStore extends JavaScriptObject {
   public native void setOnProgressHandler(
       ManagedResourceStoreProgressHandler handler) /*-{
     this.oncomplete = function(details) {
-      handler.@com.google.gwt.gears.client.localserver.ManagedResourceStoreProgressHandler::onProgress(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreProgressHandler$ManagedResourceStoreProgressEvent;)(details);
+      @com.google.gwt.gears.client.localserver.ManagedResourceStore::fireOnProgress(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreProgressHandler;Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreProgressHandler$ManagedResourceStoreProgressEvent;)(handler, details);
     };
   }-*/;
 }
