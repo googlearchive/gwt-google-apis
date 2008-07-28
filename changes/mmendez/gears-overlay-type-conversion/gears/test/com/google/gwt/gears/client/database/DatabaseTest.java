@@ -26,6 +26,25 @@ public class DatabaseTest extends GWTTestCase {
 
   /**
    * Test method for
+   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String) execute("")}.
+   * 
+   * This causes an "uncatchable" exception in firefox using the Gears plugin
+   * version 0.3.24
+   * 
+   * See http://code.google.com/p/gwt-google-apis/issues/detail?id=120
+   */
+  public void disabledTestExecuteStringEmptyString() {
+    try {
+      Database db = Factory.getInstance().createDatabase();
+      db.execute("");
+      fail("Expected a DatabaseException");
+    } catch (DatabaseException e) {
+      // Expected to get here
+    }
+  }
+
+  /**
+   * Test method for
    * {@link com.google.gwt.gears.client.database.Database#execute(java.lang.String) execute(null)}.
    * 
    * @throws DatabaseException
@@ -37,6 +56,51 @@ public class DatabaseTest extends GWTTestCase {
       db.execute(null);
       fail("Expected GearsException");
     } catch (NullPointerException e) {
+      // Expected to get here
+    }
+  }
+
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String, java.lang.String[]) execute("SQL Statement", new String[]{})}.
+   * 
+   * This causes an "uncatchable" exception in firefox using the Gears plugin
+   * version 0.3.24
+   * 
+   * See http://code.google.com/p/gwt-google-apis/issues/detail?id=120
+   */
+  public void disabledTestExecuteStringStringArrayEmptyArray() {
+    try {
+      Database db = Factory.getInstance().createDatabase();
+      ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
+      rs.close();
+      db.execute("insert into Demo values (?, ?)", new String[] {});
+      fail("Expected a DatabaseException");
+    } catch (DatabaseException e) {
+      // Expected to get here
+    }
+  }
+
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String, java.lang.String[]) execute("SQL Statement ?, ?", new String[]{})}.
+   * 
+   * This causes an "uncatchable" exception in firefox using the Gears plugin
+   * version 0.3.24
+   * 
+   * See http://code.google.com/p/gwt-google-apis/issues/detail?id=120
+   * 
+   * @throws DatabaseException
+   */
+  public void disableTestExecuteWithInsuficientArgs() {
+    try {
+      Database db = Factory.getInstance().createDatabase();
+      db.open();
+      ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
+      rs.close();
+      db.execute("insert into Demo values (?, ?)");
+      fail("Expected a DatabaseException");
+    } catch (DatabaseException ex) {
       // Expected to get here
     }
   }
@@ -68,55 +132,6 @@ public class DatabaseTest extends GWTTestCase {
     db.open();
     ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
     rs.close();
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String) execute("")}.
-   */
-  public void testExecuteStringEmptyString() {
-    try {
-      Database db = Factory.getInstance().createDatabase();
-      db.execute("");
-      fail("Expected a DatabaseException");
-    } catch (DatabaseException e) {
-      // Expected to get here
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String, java.lang.String[]) execute("SQL Statement", new String[]{})}.
-   */
-  public void testExecuteStringStringArrayEmptyArray() {
-    try {
-      Database db = Factory.getInstance().createDatabase();
-      ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
-      rs.close();
-      db.execute("insert into Demo values (?, ?)", new String[] {});
-      fail("Expected a DatabaseException");
-    } catch (DatabaseException e) {
-      // Expected to get here
-    }
-  }
-
-  /**
-   * Test method for
-   * {@link com.google.gwt.gears.database.client.Database#execute(java.lang.String, java.lang.String[]) execute("SQL Statement ?, ?", new String[]{})}.
-   * 
-   * @throws DatabaseException
-   */
-  public void testExecuteWithoutEnoughInsuficientArgs() {
-    try {
-      Database db = Factory.getInstance().createDatabase();
-      db.open();
-      ResultSet rs = db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
-      rs.close();
-      db.execute("insert into Demo values (?, ?)");
-      fail("Expected a DatabaseException");
-    } catch (DatabaseException ex) {
-      // Expected to get here
-    }
   }
 
   /**

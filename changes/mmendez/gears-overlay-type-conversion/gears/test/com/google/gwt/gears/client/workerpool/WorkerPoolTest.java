@@ -33,7 +33,7 @@ public class WorkerPoolTest extends GWTTestCase {
    */
   public void disabledTestCreateWorkerFromStringNull() {
     WorkerPool wp = Factory.getInstance().createWorkerPool();
-    wp.setMessageHandler(new MessageHandler() {
+    wp.setMessageHandler(new WorkerPoolMessageHandler() {
       public void onMessageReceived(MessageEvent event) {
         // purposely empty
       }
@@ -79,7 +79,7 @@ public class WorkerPoolTest extends GWTTestCase {
    */
   public void testCreateWorkerFromString() {
     WorkerPool wp = Factory.getInstance().createWorkerPool();
-    wp.setMessageHandler(new MessageHandler() {
+    wp.setMessageHandler(new WorkerPoolMessageHandler() {
       public void onMessageReceived(MessageEvent event) {
         finishTest();
       }
@@ -95,7 +95,7 @@ public class WorkerPoolTest extends GWTTestCase {
    */
   public void testCreateWorkerFromStringEmpty() {
     WorkerPool wp = Factory.getInstance().createWorkerPool();
-    wp.setMessageHandler(new MessageHandler() {
+    wp.setMessageHandler(new WorkerPoolMessageHandler() {
       public void onMessageReceived(MessageEvent event) {
         // purposely empty
       }
@@ -113,7 +113,7 @@ public class WorkerPoolTest extends GWTTestCase {
     WorkerPool wp = Factory.getInstance().createWorkerPool();
     int workerID = wp.createWorker(WORKER_JS_SRC);
     delayTestFinish(5000);
-    wp.setMessageHandler(new MessageHandler() {
+    wp.setMessageHandler(new WorkerPoolMessageHandler() {
       public void onMessageReceived(MessageEvent event) {
         assertEquals("done", event.getBody());
         finishTest();
