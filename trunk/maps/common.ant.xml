@@ -146,17 +146,6 @@
 	<property name="gwt.junit.port" value="8889" />
 	<property name="gwt.junit.testcase.includes" value="**/*Suite.class" />
 
-	<!--
-		Comma delimited list of host and path components on 
-		which to run remote browser testing.
-	-->
-	<property name="gwt.remote.browsers" value="" />
-	<condition property="gwt.remote.browsers.specified">
-		<not>
-			<equals arg1="${gwt.remote.browsers}" arg2="" />
-		</not>
-	</condition>
-
 	<!-- Pulls in tasks defined in ant-contrib, i.e. foreach -->
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
@@ -172,6 +161,7 @@
 				<propertyref name="gwt.version" />
 				<propertyref name="gwt.junit.port" />
 				<propertyref name="gwt.remote.browsers" />
+				<propertyref name="gwt.selenium.hosts" />
 			</propertyset>
 		</ant>
 	</presetdef>
@@ -202,6 +192,8 @@
 						location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
 					<pathelement
 						location="${gwt.tools.antlib}/ant-junit-1.6.5.jar" />
+					<pathelement 
+						location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar" />
 				</classpath>
 			</taskdef>
 
@@ -231,6 +223,8 @@
 					<pathelement location="${gwt.user.jar}" />
 					<pathelement
 						location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
+                                        <pathelement 
+                                        	location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar" />
 				</classpath>
 
 				<formatter type="plain" />

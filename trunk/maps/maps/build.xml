@@ -51,9 +51,14 @@
 		</gwt.checkstyle>
 	</target>
 
-	<target name="remoteweb-test" description="Run a remoteweb test at the given host and path" if="gwt.remote.browsers.specified">
+	<target name="remoteweb-test" description="Run a remoteweb test at the given host and path" if="gwt.remote.browsers">
 		<echo message="Performing remote browser testing at ${gwt.remote.browsers}" />
 		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -remoteweb ${gwt.remote.browsers}" test.out="${junit.out}/remoteweb" test.cases="default.web.tests" />
+	</target>
+
+	<target name="selenium-test" description="Run a remoteweb test using Selenium RC at the given host and path" if="gwt.selenium.hosts">
+		<echo message="Performing remote browser testing using Selenium RC at ${gwt.selenium.hosts}" />
+		<gwt.junit test.args="-port ${gwt.junit.port} -out www -web -selenium ${gwt.selenium.hosts}" test.out="${junit.out}/selenium" test.cases="default.web.tests" />
 	</target>
 
 	<target name="test.hosted" depends="compile, compile.tests" description="Run only hosted-mode tests for this project.">
@@ -73,6 +78,7 @@
 			<antcall target="test.hosted" />
 			<antcall target="test.web" />
 			<antcall target="remoteweb-test" />
+			<antcall target="selenium-test" />
 		</parallel>
 	</target>
 
