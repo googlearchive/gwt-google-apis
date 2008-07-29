@@ -39,15 +39,15 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class InfoWindowDemo extends MapsDemo {
 
+  private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);
+  private static HTML descHTML = null;
   private static final String TEST_DEFAULT = "Default Info Window";
+  private static final String TEST_IMAGE = "Test adding an Image";
+  private static final String TEST_MAP_BLOWUP = "Test Map Blowup Info Window";
   private static final String TEST_MAX_CONTENT = "Test maxContent";
   private static final String TEST_MAX_TITLE_CONTENT_WIDGET = "Test Maximized with Widgets";
-  private static final String TEST_IMAGE = "Test adding an Image";
   private static final String TEST_NO_CLICK = "Test noClick";
   private static final String TEST_TABS = "Test with Tabs";
-  private static final String TEST_MAP_BLOWUP = "Test Map Blowup Info Window";
-
-  private static HTML descHTML = null;
   private static final String descString = "<h2>InfoWindow Demos</h2>\n"
       + "<p>Tests the InfoWindow APIs</p>" + "<ol>\n" + " <li><b>"
       + TEST_DEFAULT
@@ -101,18 +101,17 @@ public class InfoWindowDemo extends MapsDemo {
       }
     };
   }
+  private final ListBox actionListBox;
+  private InfoWindow info = null;
 
   private final MapWidget map;
-  private final ListBox actionListBox;
-
-  private InfoWindow info = null;
 
   public InfoWindowDemo() {
 
     VerticalPanel vertPanel = new VerticalPanel();
     vertPanel.setStyleName("hm-panel");
 
-    map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    map = new MapWidget(ATLANTA, 13);
     vertPanel.add(map);
 
     actionListBox = new ListBox();

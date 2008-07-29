@@ -65,8 +65,10 @@ import com.google.gwt.maps.client.event.MarkerRemoveHandler;
 import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.PolygonClickHandler;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler;
+import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.PolylineClickHandler;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler;
+import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
@@ -134,11 +136,13 @@ public class MapEventDemo extends MapsDemo {
     MARKER_MOUSE_OVER_HANDLER("MarkerMouseOverHandler"), //
     MARKER_MOUSE_UP_HANDLER("MarkerMouseUpHandler"), //
     MARKER_REMOVE_HANDLER("MarkerRemoveHandler"), //
-    MARKER_VISIBILITY_CHANGED_HANDLER("MarkerVisibilityChangedHandler"),
+    MARKER_VISIBILITY_CHANGED_HANDLER("MarkerVisibilityChangedHandler"), //
     POLYGON_CLICK_HANDLER("PolygonClickHandler"), //
     POLYGON_REMOVE_HANDLER("PolygonRemoveHandler"), //
+    POLYGON_VISIBILITY_CHANGED_HANDLER("PolygonVisibilityChangedHandler"), //
     POLYLINE_CLICK_HANDLER("PolylineClickHandler"), //
-    POLYLINE_REMOVE_HANDLER("PolylineRemoveHandler"); //
+    POLYLINE_REMOVE_HANDLER("PolylineRemoveHandler"), //
+    POLYLINE_VISIBILITY_CHANGED_HANDLER("PolylineVisibilityChangedHandler"); //
 
     private final String value;
 
@@ -1105,6 +1109,27 @@ public class MapEventDemo extends MapsDemo {
       }
         break;
 
+      case POLYLINE_VISIBILITY_CHANGED_HANDLER: {
+
+        final PolylineVisibilityChangedHandler h = new PolylineVisibilityChangedHandler() {
+
+          public void onVisibilityChanged(PolylineVisibilityChangedEvent e) {
+            textBox.setText(textBox.getText() + "onVisibilityChanged("
+                + e.isVisible() + ")");
+          }
+
+        };
+        polyline.addPolylineVisibilityChangedHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polyline.removePolylineVisibilityChangedHandler(h);
+          }
+
+        });
+      }
+        break;
+
       case POLYGON_CLICK_HANDLER: {
 
         final PolygonClickHandler h = new PolygonClickHandler() {
@@ -1140,6 +1165,27 @@ public class MapEventDemo extends MapsDemo {
 
           public void onClick(Widget sender) {
             polygon.removePolygonRemoveHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYGON_VISIBILITY_CHANGED_HANDLER: {
+
+        final PolygonVisibilityChangedHandler h = new PolygonVisibilityChangedHandler() {
+
+          public void onVisibilityChanged(PolygonVisibilityChangedEvent e) {
+            textBox.setText(textBox.getText() + "onVisibilityChanged("
+                + e.isVisible() + ")");
+          }
+
+        };
+        polygon.addPolygonVisibilityChangedHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polygon.removePolygonVisibilityChangedHandler(h);
           }
 
         });
@@ -1183,7 +1229,7 @@ public class MapEventDemo extends MapsDemo {
     ATLANTA_TRIANGLE1[2] = new LatLng(center.getLatitude() - vertGrid,
         center.getLongitude() - horizGrid);
     ATLANTA_TRIANGLE1[3] = ATLANTA_TRIANGLE1[0];
-    
+
     GWT.log("1[0] = " + ATLANTA_TRIANGLE1[0], null);
     GWT.log("1[1] = " + ATLANTA_TRIANGLE1[1], null);
     GWT.log("1[2] = " + ATLANTA_TRIANGLE1[2], null);
@@ -1197,7 +1243,7 @@ public class MapEventDemo extends MapsDemo {
     ATLANTA_TRIANGLE2[2] = new LatLng(center.getLatitude() + vertGrid,
         center.getLongitude() + horizGrid);
     ATLANTA_TRIANGLE2[3] = ATLANTA_TRIANGLE2[0];
-    
+
     GWT.log("2[0] = " + ATLANTA_TRIANGLE2[0], null);
     GWT.log("2[1] = " + ATLANTA_TRIANGLE2[1], null);
     GWT.log("2[2] = " + ATLANTA_TRIANGLE2[2], null);
@@ -1246,6 +1292,22 @@ public class MapEventDemo extends MapsDemo {
     });
     hp.add(removeButton);
 
+    // Create a button to hide/show the polygon
+    final Button hidePolygonButton = new Button("Hide Polygon");
+    hidePolygonButton.setEnabled(false);
+    hidePolygonButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        boolean state = !polygon.isVisible();
+        polygon.setVisible(state);
+        if (state) {
+          hidePolygonButton.setText("Hide Polygon");
+        } else {
+          hidePolygonButton.setText("Show Polygon");
+        }
+      }
+    });
+    hp.add(hidePolygonButton);
+
     // Create a button to remove the polygon from the map.
     final Button removePolygonButton = new Button("Add Polygon");
     removePolygonButton.addClickListener(new ClickListener() {
@@ -1257,6 +1319,7 @@ public class MapEventDemo extends MapsDemo {
           map.addOverlay(polygon);
           removePolygonButton.setText("Remove Polygon");
         }
+        hidePolygonButton.setEnabled(polygonRemoved);
         polygonRemoved = !polygonRemoved;
       }
     });
