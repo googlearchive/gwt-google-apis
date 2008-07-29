@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * On exception, no further listener callbacks will be invoked.
  */
 class KeepListenerCollection extends ArrayList<KeepListener> {
-  public void fireKeep(SearchControl control, Result result) {
+  void fireKeep(SearchControl control, Result result) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
     for (KeepListener l : this) {
       if (handler != null) {

@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * On exception, no further listener callbacks will be invoked.
  */
 public class SearchListenerCollection extends ArrayList<SearchListener> {
-  public void fireResult(Search search, Result result) {
+  void fireResult(Search search, Result result) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
     for (SearchListener l : this) {
       if (handler != null) {
