@@ -68,6 +68,9 @@ public final class ResourceStore extends JavaScriptObject {
    * @param callback invoked per capture
    * @param urls set of URLs to capture
    * @return capture id for capture request
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if any of the URLs
+   *           are not from the same origin as the current page
    */
   public int capture(ResourceStoreUrlCaptureHandler callback, String... urls) {
     return capture(callback, Utils.toJavaScriptArray(urls));
@@ -81,6 +84,10 @@ public final class ResourceStore extends JavaScriptObject {
    * 
    * @param fileInputElement element containing the file to capture
    * @param url URL to associate with the file capture
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the URL is not
+   *           from the same origin as the current page or if the file cannot be
+   *           read
    */
   public native void captureFile(Element fileInputElement, String url) /*-{
     this.captureFile(fileInputElement, url);
@@ -91,6 +98,9 @@ public final class ResourceStore extends JavaScriptObject {
    * 
    * @param srcUrl source URL
    * @param destUrl destination URL
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the source or
+   *           destination URLs are not from the same origin as the current page
    */
   public native void copy(String srcUrl, String destUrl) /*-{
     this.copy(srcUrl, destUrl);
@@ -111,6 +121,9 @@ public final class ResourceStore extends JavaScriptObject {
    * 
    * @param url captured URL
    * @return all HTTP headers associated with the URL
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the URL is not
+   *           from the same origin as the current page
    */
   public native String getAllHeaders(String url) /*-{
     return this.getAllHeaders(url);
@@ -124,6 +137,9 @@ public final class ResourceStore extends JavaScriptObject {
    * 
    * @param url URL whose file name we want
    * @return leaf file name associated with the URL or an empty if there is none
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the URL is not
+   *           from the same origin as the current page
    */
   public native String getCapturedFileName(String url) /*-{
     return this.getCapturedFileName(url);
@@ -135,6 +151,9 @@ public final class ResourceStore extends JavaScriptObject {
    * @param url captured URL
    * @param name HTTP header name
    * @return HTTP header value
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the URL is not
+   *           from the same origin as the current page
    */
   public native String getHeader(String url, String name) /*-{
     return this.getHeader(url, name);
@@ -166,6 +185,9 @@ public final class ResourceStore extends JavaScriptObject {
    * 
    * @param url URL to test
    * @return <code>true</code> if the URL is cached in this store
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the URL is not
+   *           from the same origin as the current page
    */
   public native boolean isCaptured(String url) /*-{
     return this.isCaptured(url);
@@ -186,6 +208,9 @@ public final class ResourceStore extends JavaScriptObject {
    * Removes the cached URL from this store.
    * 
    * @param url URL to remove
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the URL is not
+   *           from the same origin as the current page
    */
   public native void remove(String url) /*-{
     this.remove(url);
@@ -196,6 +221,9 @@ public final class ResourceStore extends JavaScriptObject {
    * 
    * @param srcUrl source URL
    * @param destUrl destination URL
+   * 
+   * @throws com.google.gwt.core.client.JavaScriptException if the source or
+   *           destination URLs are not from the same origin as the current page
    */
   public native void rename(String srcUrl, String destUrl) /*-{
     this.rename(srcUrl, destUrl);
