@@ -43,7 +43,7 @@ public class Query extends JavaScriptObject {
 
   public final native void send(Callback callback) /*-{
     this.send(function(c) {
-      this.@com.google.gwt.visualization.client.Query::onResponseCallback(Lcom/google/visualization/gwt/client/Query$Callback;Lcom/google/visualization/gwt/client/QueryResponse;)(callback, c);
+      @com.google.gwt.visualization.client.Query::onResponseCallback(Lcom/google/gwt/visualization/client/Query$Callback;Lcom/google/gwt/visualization/client/QueryResponse;)(callback, c);
     });
   }-*/;
   
@@ -59,7 +59,7 @@ public class Query extends JavaScriptObject {
     this.setTimeout(seconds);
   }-*/;
 
-  private void fireAndCatch(UncaughtExceptionHandler handler, Callback callback, QueryResponse response) {
+  private static void fireAndCatch(UncaughtExceptionHandler handler, Callback callback, QueryResponse response) {
     try {
       fireImpl(callback, response);
     } catch (Throwable e) {
@@ -67,12 +67,12 @@ public class Query extends JavaScriptObject {
     }
   }
 
-  private void fireImpl(Callback callback, QueryResponse response) {
+  private static void fireImpl(Callback callback, QueryResponse response) {
     callback.onResponse(response);
   }
   
   @SuppressWarnings("unused")
-  private void onResponseCallback(Callback callback, QueryResponse response) {
+  private static void onResponseCallback(Callback callback, QueryResponse response) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
     if (handler != null) {
       fireAndCatch(handler, callback, response);
