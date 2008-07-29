@@ -100,6 +100,7 @@ Note that in order to use the Maps API, you need to apply for a Google Maps API 
 
 {{{
  <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
+ <!-- Added by projectCreator if you use the -addModule argument -->
  <inherits name="com.google.gwt.maps.GoogleMaps" />
 
  <!--
