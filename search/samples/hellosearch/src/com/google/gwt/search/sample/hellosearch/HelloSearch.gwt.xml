@@ -15,7 +15,8 @@
 <module>
 	<inherits name="com.google.gwt.user.User"/>
 	<inherits name="com.google.gwt.search.Search"/>
-	<stylesheet src="HelloSearch.css" />
+	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
 	<entry-point class="com.google.gwt.search.sample.hellosearch.client.HelloSearch"/>
     <!--
       If you want to deploy this application outside of localhost,  you 
