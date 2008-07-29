@@ -15,12 +15,13 @@
  */
 package com.google.gwt.search.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.search.client.impl.GSearchControl;
 import com.google.gwt.search.client.impl.GsearcherOptions;
 import com.google.gwt.search.client.impl.KeepCallback;
 import com.google.gwt.search.client.impl.SearchControlCompleteCallback;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.search.client.impl.SearchStartingCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 
@@ -65,6 +66,12 @@ public class SearchControl extends Composite {
   private final SearchListenerCollection resultListeners = new SearchListenerCollection();
 
   /**
+   * Retains all SearchStartingListeners hat should be notified when the search
+   * begins.
+   */
+  private final SearchStartingListenerCollection startingListeners = new SearchStartingListenerCollection();
+
+  /**
    * Constructs a new SearchControl.
    * 
    * @param options Provides a configuration for displaying and executing the
@@ -89,7 +96,17 @@ public class SearchControl extends Composite {
             }
           }
         });
-
+    
+    // Wire up the search starting callback every time
+    SEARCH_CONTROL.setSearchStartingCallback(this, null,
+        new SearchStartingCallback() {
+          @Override
+          public void onSearchStart(SearchControl control, Search search, String query) {
+            assert control == SearchControl.this;
+            startingListeners.fireResult(control, search, query);
+          }
+        });
+    
     // If no keep label is explicitly set, don't bother wiring up the callback.
     if (options.keepLabel != null) {
       KeepCallback keepCallback = new KeepCallback() {
@@ -156,6 +173,14 @@ public class SearchControl extends Composite {
   }
 
   /**
+   * Adds a listener to inform the search control that the caller would like to
+   * be notified when a search starts.
+   */
+  public void addSearchStartingListener(SearchStartingListener l) {
+    startingListeners.add(l);
+  }
+
+  /**
    * Programmatically execute a query. This allows the control to be seeded with
    * an initial query and search results. Using this method is equivalent to
    * typing a query into the SearchControl and pressing return.
@@ -186,10 +211,16 @@ public class SearchControl extends Composite {
       resultListeners.remove(l);
     }
   }
-
-  void addKeepListenerImpl(KeepListener l) {
-    if (l != null) {
-      keepListeners.add(l);
+  
+  /**
+   * Removes a SearchStaringListener from the SearchControl.
+   * 
+   * @param l The SearchListener to remove
+   */
+  public void removeSearchStartingListener(SearchStartingListener l) {
+    if (startingListeners != null) {
+      startingListeners.remove(l);
     }
   }
+  
 }

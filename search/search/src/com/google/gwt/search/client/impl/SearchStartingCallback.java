@@ -21,7 +21,7 @@ import com.google.gwt.search.jsio.client.Exported;
 import com.google.gwt.search.jsio.client.JSFunction;
 
 /**
- * 
+ * Argument passed to {@link GSearchControl#setSearchStartingCallback(SearchControl, com.google.gwt.core.client.JavaScriptObject, SearchStartingCallback)}.
  */
 public abstract class SearchStartingCallback extends JSFunction {
   @Exported
