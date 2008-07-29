@@ -96,7 +96,7 @@ Since this example will use the Google Maps API, we need to modify the default `
   1 Add an `<inherits>` entry to pull in the GWT Google APIs module for Google Maps.
   1 Add a reference to the Google Maps !JavaScript API.  
 
-Note that in order to use the Maps API, you need to apply for a Google Maps API key.  A key that will work with `localhost` is provided for development purposes, but you will need to apply for your own key to deploy to a website.
+Note that in order to use the Maps API, you need to apply for a Google Maps API key.  Running with no key specified will work with `localhost` for development purposes, but you will need to apply for your own key to deploy to a website.
 
 {{{
  <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
@@ -109,7 +109,10 @@ Note that in order to use the Maps API, you need to apply for a Google Maps API 
     http://www.google.com/apis/maps/signup.html
     Replace the src attribute below with a URL that contains your key.
   -->
- <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x&amp;key=???" />
+ <!-- script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x&amp;key=???" /-->
+
+ <!-- You can run under localhost without a key -->
+ <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x" />
 
 }}}
 
@@ -164,13 +167,6 @@ public class MapsTutorial implements EntryPoint {
 }
 }}}
 
-And to run your project, you will need to include the Maps API script tag in your `MapsTutorial.gwt.xml` file:
-
-{{{
-$PP_OFF
- <!-- Replace the Maps API key with your own -->
- <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=???" />
-}}}
 
 == Run the !MapsTutorial sample project ==
 
