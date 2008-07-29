@@ -25,6 +25,7 @@ import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler.InfoWindowCloseClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler.InfoWindowRestoreEndEvent;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -48,7 +49,6 @@ public class InfoWindowEventsTest extends GWTTestCase {
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
-
 
   /**
    * Runs before every test method.
@@ -96,8 +96,17 @@ public class InfoWindowEventsTest extends GWTTestCase {
     map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        // System.out.println("Maximizing info window");
-        info.maximize();
+        // This timer gives the info window a chance go get going. 
+        // We saw spurious timeouts on this test case before adding the
+        // timer (the value of 300ms may need to be adjusted further.)
+        new Timer() {
+
+          @Override
+          public void run() {
+            info.maximize();
+          }
+          
+        }.schedule(300);
       }
 
     });
