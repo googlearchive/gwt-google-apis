@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.gwt.visualization.client;
+package com.google.visualization.gwt.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -43,7 +43,7 @@ public class Query extends JavaScriptObject {
 
   public final native void send(Callback callback) /*-{
     this.send(function(c) {
-      this.@com.google.gwt.visualization.client.Query::onResponseCallback(Lcom/google/visualization/gwt/client/Query$Callback;Lcom/google/visualization/gwt/client/QueryResponse;)(callback, c);
+      this.@com.google.visualization.gwt.client.Query::onResponseCallback(Lcom/google/visualization/gwt/client/Query$Callback;Lcom/google/visualization/gwt/client/QueryResponse;)(callback, c);
     });
   }-*/;
   
