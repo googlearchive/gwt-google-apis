@@ -15,6 +15,7 @@
  */
 package com.google.gwt.search.sample.hellosearch.client;
 
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.search.client.ExpandMode;
 import com.google.gwt.search.client.ImageSearch;
 import com.google.gwt.search.client.KeepLabel;
@@ -28,11 +29,12 @@ import com.google.gwt.search.client.Search;
 import com.google.gwt.search.client.SearchControl;
 import com.google.gwt.search.client.SearchControlOptions;
 import com.google.gwt.search.client.SearchListener;
+import com.google.gwt.search.client.SearchStartingListener;
 import com.google.gwt.search.client.VideoResult;
 import com.google.gwt.search.client.VideoSearch;
 import com.google.gwt.search.client.WebResult;
 import com.google.gwt.search.client.WebSearch;
-import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.search.client.SearchStartingListener.SearchStartingEvent;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -48,7 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
  * HelloSearch application.
  */
 public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
-    WindowResizeListener {
+    SearchStartingListener {
 
   private class GoogleCodeWebSearch extends WebSearch {
     public GoogleCodeWebSearch() {
@@ -57,6 +59,7 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
       setResultSetSize(ResultSetSize.LARGE);
     }
   }
+
   private VerticalPanel clips = new VerticalPanel();
 
   private HorizontalPanel hp = new HorizontalPanel();
@@ -66,7 +69,7 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
     if (result instanceof WebResult) {
       WebResult web = (WebResult) result;
       title = web.getTitle();
-      
+
     } else if (result instanceof NewsResult) {
       NewsResult web = (NewsResult) result;
       title = web.getTitle();
@@ -98,11 +101,10 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
   }
 
   public void onModuleLoad() {
-    Window.addWindowResizeListener(this);
 
     clips.setWidth("100%");
     clips.addStyleName("clips");
-    
+
     clips.add(new Label("Saved Clippings:"));
 
     SearchControlOptions options = new SearchControlOptions();
@@ -123,27 +125,30 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
     options.setLinkTarget(LinkTarget.BLANK);
 
     SearchControl searchControl = new SearchControl(options);
-   
+
     searchControl.addKeepListener(this);
     searchControl.addSearchListener(this);
+    searchControl.addSearchStartingListener(this);
     searchControl.execute("Google Web Toolkit");
-    
+
     clips.setWidth("200px");
     hp.add(clips);
     hp.add(searchControl);
     RootPanel.get().add(hp, 5, 5);
-    onWindowResized(Window.getClientWidth(), Window.getClientHeight());
+   
   }
 
   /**
-   * This is just to show that the concrete returned types are those defined
-   * in the API.
+   * This is just to show that the concrete returned types are those defined in
+   * the API.
    */
   public void onSearchResult(Search search, Result result) {
     System.out.println("The result is a " + result.getClass().getName());
   }
 
-  public void onWindowResized(int width, int height) {
-    hp.setPixelSize(width - 30, height - 30);
+  public void onSearchStarting(SearchStartingEvent event) {
+    System.out.println("Searching for query: " + event.getQuery() + " : "
+        + event.getSearch().toString());
   }
+
 }

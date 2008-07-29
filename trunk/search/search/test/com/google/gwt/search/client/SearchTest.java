@@ -23,10 +23,58 @@ import com.google.gwt.junit.client.GWTTestCase;
 public class SearchTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 15000;
-
+  static final String QUERY_STRING = "AJAX";
+  
   @Override
   public String getModuleName() {
     return "com.google.gwt.search.SearchTest";
+  }
+
+  /**
+   * Test a listener attached to a Search object.
+   */
+  public void testSearchSearchListener() {
+    SearchControlOptions options = new SearchControlOptions();
+    WebSearch ws = new WebSearch();
+    ws.setResultSetSize(ResultSetSize.SMALL);
+    ws.addSearchListener(new SearchListener() {
+
+      public void onSearchResult(Search search, Result result) {
+        assertNotNull("Simple Image Search: search", search);
+        assertNotNull("Simple Image Search: result", result);
+        assertEquals("Search class name", WebSearch.class.getName(),
+            search.getClass().getName());
+        assertEquals("Result class name", WebResult.class.getName(),
+            result.getClass().getName());
+        finishTest();
+      }
+
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
+    ws.execute(QUERY_STRING);
+  }
+
+  public void testSearchStartingCallback() {
+    SearchControlOptions options = new SearchControlOptions();
+    final WebSearch ws = new WebSearch();
+    ws.setResultSetSize(ResultSetSize.SMALL);
+    options.add(ws);
+    final SearchControl searchControl = new SearchControl(options);
+    searchControl.addSearchStartingListener(new SearchStartingListener() {
+
+      public void onSearchStarting(SearchStartingEvent event) {
+        SearchControl control = event.getSearchControl();
+        Search search = event.getSearch();
+        String query = event.getQuery();
+        assertEquals("getSearchControl()", searchControl, control);
+        assertEquals("getSearch()", ws, search);
+        assertEquals("getQuery()", QUERY_STRING, query);
+        finishTest();
+      }
+
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
+    searchControl.execute(QUERY_STRING);
   }
 
   public void testSimpleQuery() {
@@ -49,31 +97,7 @@ public class SearchTest extends GWTTestCase {
 
     });
     delayTestFinish(ASYNC_DELAY_MSEC);
-    searchControl.execute("AJAX");
-  }
-  
-  /**
-   * Test a listener attached to a Search object.
-   */
-  public void testSearchSearchListener() {
-    SearchControlOptions options = new SearchControlOptions();
-    WebSearch ws = new WebSearch();
-    ws.setResultSetSize(ResultSetSize.SMALL);
-    ws.addSearchListener(new SearchListener() {
-
-      public void onSearchResult(Search search, Result result) {
-        assertNotNull("Simple Image Search: search", search);
-        assertNotNull("Simple Image Search: result", result);
-        assertEquals("Search class name", WebSearch.class.getName(),
-            search.getClass().getName());
-        assertEquals("Result class name", WebResult.class.getName(),
-            result.getClass().getName());
-        finishTest();
-      }
-
-    });
-        delayTestFinish(ASYNC_DELAY_MSEC);
-    ws.execute("AJAX");
+    searchControl.execute(QUERY_STRING);
   }
 
 }
