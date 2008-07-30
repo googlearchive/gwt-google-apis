@@ -30,30 +30,75 @@ public class BlogResult extends Result {
     super(obj);
   }
 
+  /**
+   * Returns the name of the author that wrote the blog post
+   * 
+   * @return the name of the author that wrote the blog post
+   */
   public String getAuthor() {
     return GblogResult.IMPL.getAuthor(this);
   }
 
+  /**
+   * Returns the URL of the blog which contains the post. Typically, this URL is
+   * displayed in green, beneath the blog search result and is linked to the
+   * blog.
+   * 
+   * @return the URL of the blog which contains the post. Typically, this URL is
+   *         displayed in green, beneath the blog search result and is linked to
+   *         the blog.
+   */
   public String getBlogUrl() {
     return GblogResult.IMPL.getBlogUrl(this);
   }
 
+  /**
+   * Returns a snippet of content from the blog post associated with this search
+   * result.
+   * 
+   * @return a snippet of content from the blog post associated with this search
+   *         result.
+   */
   public String getContent() {
     return GblogResult.IMPL.getContent(this);
   }
 
+  /**
+   * Returns the URL to the blog post referenced in this search result.
+   * 
+   * @return the URL to the blog post referenced in this search result.
+   */
   public String getPostUrl() {
     return GblogResult.IMPL.getPostUrl(this);
   }
 
+  /**
+   * Returns the published date (rfc-822 format) of the blog post referenced by
+   * this search result.
+   * 
+   * @return Returns the published date (rfc-822 format) of the blog post
+   *         referenced by this search result.
+   */
   public Date getPublishedDate() {
     return makeDate(GblogResult.IMPL.getPublishedDate(this));
   }
 
+  /**
+   * Returns the title of the blog post returned as a search result.
+   * 
+   * @return the title of the blog post returned as a search result.
+   */
   public String getTitle() {
     return GblogResult.IMPL.getTitle(this);
   }
 
+  /**
+   * Returns the title, but unlike .title, this property is stripped of html
+   * markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
+   * 
+   * @return Returns the title, but unlike .title, this property is stripped of html
+   * markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
+   */
   public String getTitleNoFormatting() {
     return GblogResult.IMPL.getTitleNoFormatting(this);
   }

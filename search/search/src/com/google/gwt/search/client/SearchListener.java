@@ -17,6 +17,7 @@ package com.google.gwt.search.client;
 
 /**
  * Accepts search results.
+ * 
  * @see Search#addSearchListener(SearchListener)
  * @see SearchControl#addSearchListener(SearchListener)
  */

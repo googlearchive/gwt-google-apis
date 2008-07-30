@@ -27,6 +27,13 @@ public class VideoSearch extends Search {
     super(IMPL);
   }
 
+  /**
+   * The default behavior of this searcher is to return results ordered by their
+   * relevance. In some cases, it is useful to see results ordered by date. This
+   * method may be used to change the result order.
+   * 
+   * @param order supplies the desired result order.
+   */
   public void setResultOrder(ResultOrder order) {
     IMPL.setResultOrder(this, order.getValue());
   }

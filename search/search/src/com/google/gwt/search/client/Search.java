@@ -38,9 +38,9 @@ public abstract class Search {
     }
 
     /**
-     * Returns the index into the pages array of the current set of results. 
+     * Returns the index into the pages array of the current set of results.
      * 
-     * @return the index into the pages array of the current set of results. 
+     * @return the index into the pages array of the current set of results.
      */
     public native int getCurrentPageIndex() /*-{
       return this.currentPageIndex;
@@ -54,6 +54,7 @@ public abstract class Search {
     public long getEstimatedResultCount() throws NumberFormatException {
       return Long.valueOf(nativeGetEstimatedResultCount());
     }
+
     /**
      * Returns a URL that can be used to fetch more results rendered in HTML.
      * 
@@ -103,7 +104,7 @@ public abstract class Search {
      * @return the value that will be used in the <code>&start</code> URL
      *         argument to request a bundle of results
      */
-    public native String getStart() /*-{ 
+    public native String getStart() /*-{
       return this.start;
     }-*/;
   }
@@ -203,7 +204,7 @@ public abstract class Search {
   public Widget getAttribution() {
     return Result.makeWidget(impl.getAttribution(this));
   }
-  
+
   /**
    * After a successful search, this object will be populated. You can retrieve
    * results from additional pages.

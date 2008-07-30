@@ -21,7 +21,15 @@ import com.google.gwt.search.jsio.client.JSOpaque;
  * Used by {@link SearchControlOptions#setDrawMode(DrawMode)}.
  */
 public enum DrawMode {
-  LINEAR("LINEAR"), TABBED("TABBED");
+  /**
+   * Specifies linear drawing mode.
+   */
+  LINEAR("LINEAR"),
+  
+  /**
+   * Specifies tabbed drawing mode. 
+   */
+  TABBED("TABBED");
 
   private final JSOpaque value;
 

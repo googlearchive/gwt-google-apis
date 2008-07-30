@@ -27,10 +27,28 @@ public class BlogSearch extends Search {
     super(IMPL);
   }
 
+  /**
+   * The default behavior of this searcher is to return results ordered by their
+   * relevance. In some cases, it is useful to see results ordered by date. This
+   * method may be used to change the result order.
+   * 
+   * @param order the desired result order.
+   */
   public void setResultOrder(ResultOrder order) {
     IMPL.setResultOrder(this, order.getValue());
   }
 
+  /**
+   * This method is used to restrict the set of blog search results returned by
+   * this searcher. To restrict results to all blog results on blogspot.com,
+   * simply call this method with a value of "blogspot.com". To restrict results
+   * to the Nintendo DS blog on Live Journal, simply call with
+   * "http://community.livejournal.com/nintendo_ds/". To clear site
+   * restrictions, pass in a value of null.
+   * 
+   * @param site supplies a site restriction setting e.g., "blogspot.com",
+   *          "http://community.livejournal.com/nintendo_ds/", etc. 
+   */
   public void setSiteRestriction(String site) {
     IMPL.setSiteRestriction(this, site);
   }

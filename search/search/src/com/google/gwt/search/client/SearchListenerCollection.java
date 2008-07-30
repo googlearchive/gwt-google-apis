@@ -37,7 +37,7 @@ public class SearchListenerCollection extends ArrayList<SearchListener> {
           break;
         }
       } else {
-       l.onSearchResult(search, result);
+        l.onSearchResult(search, result);
       }
     }
   }

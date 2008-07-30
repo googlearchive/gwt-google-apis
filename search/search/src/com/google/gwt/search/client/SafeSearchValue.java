@@ -18,20 +18,20 @@ package com.google.gwt.search.client;
 import com.google.gwt.search.jsio.client.JSOpaque;
 
 /**
- * Used with {@link ImageSearch#setSafeSearch(SafeSearchValue)} to
- * control the types of results displayed.
+ * Used with {@link ImageSearch#setSafeSearch(SafeSearchValue)} to control the
+ * types of results displayed.
  */
 public enum SafeSearchValue {
   /**
    * Apply strict filtering for both explicit text and explicit images.
    */
-  STRICT("STRICT"), 
-  
+  STRICT("STRICT"),
+
   /**
    * Apply filtering for explicit images (the default behavior).
    */
   MODERATE("MODERATE"),
-  
+
   /**
    * Do not apply safe search filtering.
    */
