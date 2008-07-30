@@ -38,27 +38,6 @@ public class Query extends JavaScriptObject {
     return new $wnd.google.visualization.Query(dataSource);
   }-*/;
 
-  protected Query() {
-  }
-
-  public final native void send(Callback callback) /*-{
-    this.send(function(c) {
-      @com.google.gwt.visualization.client.Query::onResponseCallback(Lcom/google/gwt/visualization/client/Query$Callback;Lcom/google/gwt/visualization/client/QueryResponse;)(callback, c);
-    });
-  }-*/;
-  
-  public final native void setQuery(String query) /*-{
-    this.setQuery(query);
-  }-*/;
-
-  public final native void setRefreshInterval(int timeInSeconds) /*-{
-    this.setRefreshInterval(timeInSeconds);
-  }-*/;
-
-  public final native void setTimeout(int seconds) /*-{
-    this.setTimeout(seconds);
-  }-*/;
-
   private static void fireAndCatch(UncaughtExceptionHandler handler, Callback callback, QueryResponse response) {
     try {
       fireImpl(callback, response);
@@ -80,4 +59,25 @@ public class Query extends JavaScriptObject {
       fireImpl(callback, response);
     }
   }
+
+  protected Query() {
+  }
+
+  public final native void send(Callback callback) /*-{
+    this.send(function(c) {
+      @com.google.gwt.visualization.client.Query::onResponseCallback(Lcom/google/gwt/visualization/client/Query$Callback;Lcom/google/gwt/visualization/client/QueryResponse;)(callback, c);
+    });
+  }-*/;
+
+  public final native void setQuery(String query) /*-{
+    this.setQuery(query);
+  }-*/;
+
+  public final native void setRefreshInterval(int timeInSeconds) /*-{
+    this.setRefreshInterval(timeInSeconds);
+  }-*/;
+  
+  public final native void setTimeout(int seconds) /*-{
+    this.setTimeout(seconds);
+  }-*/;
 }
