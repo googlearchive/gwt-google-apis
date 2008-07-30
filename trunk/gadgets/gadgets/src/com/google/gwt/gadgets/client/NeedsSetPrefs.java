@@ -22,5 +22,12 @@ import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
  */
 @FeatureName("setprefs")
 public interface NeedsSetPrefs {
+  /**
+   * Entry point that gets called back to handle set preferences feature
+   * initialization.
+   * 
+   * @param feature an instance of the feature to use to invoke feature specific
+   *          methods.
+   */
   void initializeFeature(SetPrefsFeature feature);
 }

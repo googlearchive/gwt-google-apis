@@ -22,5 +22,12 @@ import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
  */
 @FeatureName("analytics")
 public interface NeedsAnalytics {
+  /**
+   * Entry point that gets called back to handle analytics feature
+   * initialization.
+   * 
+   * @param feature an instance of the feature to use to invoke feature specific
+   *          methods.
+   */
   void initializeFeature(AnalyticsFeature feature);
 }

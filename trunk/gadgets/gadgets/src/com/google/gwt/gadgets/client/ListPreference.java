@@ -24,10 +24,23 @@ import com.google.gwt.gadgets.client.UserPreferences.Preference;
  */
 @DataType("list")
 public abstract class ListPreference extends Preference<String[]> {
+  
+  /**
+   * Returns the value of a list preference as a list of strings.
+   * 
+   * @return the value of a list preference as a list of strings.
+   */
+  @Override
   public String[] getValue() {
     return prefs.getString(getName()).split("\\|");
   }
 
+  /**
+   * Set a preference with a list of strings.
+   * 
+   * @param value the list of strings to set.
+   */
+  @Override
   void set(String[] value) {
     JavaScriptObject array = JavaScriptObject.createArray();
     for (String s : value) {

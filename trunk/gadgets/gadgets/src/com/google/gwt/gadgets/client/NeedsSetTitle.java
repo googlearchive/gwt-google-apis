@@ -22,5 +22,13 @@ import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
  */
 @FeatureName("settitle")
 public interface NeedsSetTitle {
+  
+  /**
+   * Entry point that gets called back to handle set title feature
+   * initialization.
+   * 
+   * @param feature an instance of the feature to use to invoke feature specific
+   *          methods.
+   */
   void initializeFeature(SetTitleFeature feature);
 }
