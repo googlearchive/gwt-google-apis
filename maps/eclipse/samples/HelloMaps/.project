@@ -19,12 +19,13 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+		<nature>com.google.gwt.eclipse.plugin.gwtNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
 			<name>src</name>
 			<type>2</type>
-			<locationURI>MAPS_API_ROOT/samples/maps/src</locationURI>
+			<locationURI>MAPS_API_ROOT/samples/hellomaps/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
