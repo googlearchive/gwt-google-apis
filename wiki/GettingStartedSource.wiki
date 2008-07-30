@@ -73,13 +73,13 @@ BUILD SUCCESSFUL
 Total time: 2 minutes 47 seconds
 }}}  
 
-Next,  let's modify the command line script `MapsTutorial-shell` and append the source directory to the `-cp` argument to `java`:
+Next,  let's modify the command line script `MapsTutorial-shell` and append the maps distribution's `src` directory and the `bin` directory of the build output to the `-cp` argument to `java`:
 
 {{{
 $PP_OFF
 #!/bin/sh
 APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src:/usr/local/gwt-google-apis/maps/build/out/maps/bin" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
 }}}
 
 Next, make a similar change to the `MapsTutorial-compile` script:
@@ -88,7 +88,7 @@ Next, make a similar change to the `MapsTutorial-compile` script:
 $PP_OFF
 #!/bin/sh
 APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
+java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src:/usr/local/gwt-google-apis/maps/build/out/maps/bin" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
 }}}
 
 Finally, we need to update the module to include the Maps project module file and the Google Maps API script.  Edit `MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml` and add the following lines:
@@ -109,7 +109,6 @@ Finally, we need to update the module to include the Maps project module file an
  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x" />
 
 }}}
-
 
 
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
