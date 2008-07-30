@@ -53,6 +53,13 @@ public abstract class EnumPreference<E extends Enum<E>> extends Preference<E> {
     String value();
   }
 
+  /**
+   * Set an enum type value. The enum data type is presented in the user
+   * interface as a menu of choices.
+   * 
+   * @param value the enum value to set.
+   */
+  @Override
   void set(E value) {
     prefs.set(getName(), value.name());
   }

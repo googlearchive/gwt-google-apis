@@ -23,10 +23,22 @@ import com.google.gwt.gadgets.client.UserPreferences.Preference;
  */
 @DataType("string")
 public abstract class StringPreference extends Preference<String> {
+  /**
+   * Returns the value of a preference as a string.
+   * 
+   * @return the value of a preference as a string. 
+   */
+  @Override
   public String getValue() {
     return prefs.getString(getName());
   }
 
+  /**
+   * Set the value of a preference as a string.
+   * 
+   *  @param value the value to set.
+   */
+  @Override
   void set(String value) {
     prefs.set(getName(), value);
   }

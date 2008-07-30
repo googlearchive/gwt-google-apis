@@ -23,5 +23,11 @@ import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
  */
 @FeatureName(FeatureName.INTRINSIC)
 public interface NeedsIntrinsics {
+  /**
+   * Entry point that gets called back to handle intrisic features
+   * initialization.
+   * 
+   * @param feature an instance of the feature to use to invoke methods.
+   */
   void initializeFeature(IntrinsicFeature feature);
 }

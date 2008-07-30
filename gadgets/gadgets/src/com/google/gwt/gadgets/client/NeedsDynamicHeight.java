@@ -23,5 +23,13 @@ import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
  */
 @FeatureName("dynamic-height")
 public interface NeedsDynamicHeight {
+  
+  /**
+   * Entry point that gets called back to handle dynamic height feature
+   * initialization.
+   * 
+   * @param feature an instance of the feature to use to invoke feature specific
+   *          methods.
+   */
   void initializeFeature(DynamicHeightFeature feature);
 }

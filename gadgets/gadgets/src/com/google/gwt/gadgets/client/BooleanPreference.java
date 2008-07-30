@@ -23,11 +23,22 @@ import com.google.gwt.gadgets.client.UserPreferences.Preference;
  */
 @DataType("bool")
 public abstract class BooleanPreference extends Preference<Boolean> {
-
+  /**
+   * Returns a boolean value for a preference (shows as a checkbox).
+   * 
+   * @return the value of the preference.
+   */
+  @Override
   public Boolean getValue() {
     return prefs.getBool(getName());
   }
 
+  /**
+   * Provide a boolean value for a preference (shows as a checkbox).
+   * 
+   * @param value the value to set for the preference.
+   */
+  @Override
   void set(Boolean value) {
     prefs.set(getName(), value.toString());
   }
