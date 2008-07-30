@@ -61,7 +61,19 @@ The GWT compiler uses the Java sources, not compiled classes, and expects to fin
 
 `/usr/local/gwt-google-apis`
 
-First, let's modify the command line script `MapsTutorial-shell` and append the source directory to the `-cp` argument to `java`:
+First, you need to build the distribution.  You will need [http://ant.apache.org Apache Ant] and a Java JDK, such as the one available from [http://java.sun.com/ Sun Microsystems].  
+
+{{{
+$PP_OFF
+$ cd /usr/local/gwt-google-apis/trunk
+$ ant
+...
+
+BUILD SUCCESSFUL
+Total time: 2 minutes 47 seconds
+}}}  
+
+Next,  let's modify the command line script `MapsTutorial-shell` and append the source directory to the `-cp` argument to `java`:
 
 {{{
 $PP_OFF
@@ -85,14 +97,20 @@ Finally, we need to update the module to include the Maps project module file an
  <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
  <inherits name="com.google.gwt.maps.GoogleMaps" />
 
- <!--
+  <!--
     If you want to deploy this application outside of localhost,
     you must obtain a Google Maps API key at:
     http://www.google.com/apis/maps/signup.html
     Replace the src attribute below with a URL that contains your key.
   -->
- <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=???" />
+ <!-- script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x&amp;key=???" /-->
+
+ <!-- You can run under localhost without a key -->
+ <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x" />
+
 }}}
+
+
 
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
 
