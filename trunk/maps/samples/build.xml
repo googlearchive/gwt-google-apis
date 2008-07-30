@@ -6,11 +6,11 @@
 	<!-- "build" is the default when subprojects are directly targetted -->
 	<property name="target" value="build" />
 
-	<target name="maps" description="Build the Maps sample">
-		<gwt.ant dir="maps" />
+	<target name="hellomaps" description="Build the HelloMaps sample">
+		<gwt.ant dir="hellomaps" />
 	</target>
 
-	<target name="-do" depends="maps" description="Run all subprojects" />
+	<target name="-do" depends="hellomaps" description="Run all subprojects" />
 
 	<target name="build" description="Builds Maps API Library for GWT Samples">
 		<antcall target="-do">
