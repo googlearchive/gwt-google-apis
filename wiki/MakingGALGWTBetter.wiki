@@ -3,9 +3,73 @@
 = Introduction =
 A guide for how to create GWT bindings for JS APIs.
 
-See [??? Making GWT Better] to get started.
+The Google API Library for GWT is an adjunct project of the [http://code.google.com/webtoolkit Google Web Toolkit].  Both are open source projects maintaned by Google and other developers and follow the same contributor guidelines.  See [http://code.google.com/webtoolkit/makinggwtbetter.html Making GWT Better] to get started.
 
-* Directory structure conventions
+
+==Directory structure conventions==
+
+The following tree structure shows the directory structure of a template gwt-google-apis project:
+
+{{{
+template
+|-- build
+|   |-- dist
+|   |-- lib
+|   `-- out
+|       |-- distro-source
+|       |-- doc
+|       |   `-- javadoc
+|       |-- template
+|       |   |-- bin
+|       |   |-- bin-test
+|       `-- samples
+|           `-- HelloTemplate
+|               |-- bin
+|               |-- launch-scripts
+|               |   |-- linux
+|               |   |-- mac
+|               |   `-- windows
+|               |-- src
+|               `-- www
+|-- build-tools
+|-- distro-source
+|   `-- src
+|-- doc
+|   `-- src
+|-- eclipse
+|   |-- template
+|   |-- samples
+|   |   `-- HelloTemplate
+|   `-- settings
+|       `-- code-style
+|-- template
+|   |-- javadoc
+|   |-- src
+|   `-- test
+`-- samples
+    `-- hellotemplate
+        |-- launch-scripts
+        |   |-- linux
+        |   |-- mac
+        |   `-- windows
+        `-- src
+
+}}}
+
+| `template/` | Root of the project that should be named after the API |
+| `template/build/` | A directory created to hold the results of the build |
+| `template/build-tools/` | An svn external reference to the GWT project's build-tools |
+| `template/distro-source/` | Holds files that will be copied the root of the distribution.|
+| `template/eclipse/` | Sample eclipse projects for the API and all samples. |
+| `template/eclipse/template` | API project. |
+| `template/eclipse/samples/HelloTemplate` | Example code that uses the API project file. |
+| `template/template/` | Top level dirctory for the API code.|
+| `template/template/src/' | Contains the source for the API itself that will be packaged into a .jar. |
+| `template/template/test/' |U nit test source for the API.|
+| `template/samples/' | Example code that exercises the API.|
+| `template/samples/hellotemplate/` | A directory containing one sample.|
+
+
 * package structure
 * Build requirements (ant, GWT_TOOLS)
    * Required ant targets
