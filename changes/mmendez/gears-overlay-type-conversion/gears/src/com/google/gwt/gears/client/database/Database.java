@@ -37,6 +37,8 @@ public final class Database extends JavaScriptObject {
   /**
    * Closes the database connection, if any, currently associated with this
    * Database instance. Calling Database.close() is not required.
+   * 
+   * @throws DatabaseException if an error occurs
    */
   public void close() throws DatabaseException {
     try {
@@ -53,13 +55,19 @@ public final class Database extends JavaScriptObject {
    * Substitute zero or more bind parameters from <code>args</code> into
    * <code>sqlStatement</code> and execute the resulting SQL statement. There
    * must be exactly as many items in <code>args</code> as there are ? place
-   * holders in <code>sqlStatement</code>. argArray can be omitted if there
-   * are no place holders. The results of executing the statement are returned
-   * in a ResultSet.
+   * holders in <code>sqlStatement</code>. <code>args</code> can be omitted
+   * if there are no place holders. The results of executing the statement are
+   * returned in a ResultSet.
    * 
    * Note that if multiple processes (including Workers) attempt to write to the
    * database at the same time, one can fail. It is up to the application to
    * retry in these situations.
+   * 
+   * @param sqlStatement SQL statement to execute; may use '?' place holders
+   * @param args values for the place holders in the <code>sqlStatement</code>
+   * @return {@link ResultSet} associated with the SQL statement
+   * @throws DatabaseException if the SQL statement fails or if multiple Workers
+   *           attempt to write to the database at the same time
    */
   public ResultSet execute(String sqlStatement, String... args)
       throws DatabaseException {
