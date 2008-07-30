@@ -19,11 +19,11 @@ package com.google.gwt.gears.client.workerpool;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * 
+ * Provides an interface to implement in order to receive error events.
  */
 public interface WorkerPoolErrorHandler {
   /**
-   * 
+   * Encapsulates the arguments of the error event.
    */
   final class ErrorEvent extends JavaScriptObject {
     protected ErrorEvent() {
