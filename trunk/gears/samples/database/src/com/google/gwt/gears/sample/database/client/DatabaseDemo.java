@@ -16,11 +16,11 @@
 package com.google.gwt.gears.sample.database.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.gears.core.client.Gears;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.database.client.Database;
-import com.google.gwt.gears.database.client.DatabaseException;
-import com.google.gwt.gears.database.client.ResultSet;
+import com.google.gwt.gears.client.Factory;
+import com.google.gwt.gears.client.GearsException;
+import com.google.gwt.gears.client.database.Database;
+import com.google.gwt.gears.client.database.DatabaseException;
+import com.google.gwt.gears.client.database.ResultSet;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -42,8 +42,6 @@ public class DatabaseDemo implements EntryPoint {
       new Label(), new Label(), new Label()};
 
   public void onModuleLoad() {
-    assert (Gears.isInstalled());
-
     RootPanel rootPanel = RootPanel.get();
     rootPanel.add(input);
     rootPanel.add(button);
@@ -52,7 +50,8 @@ public class DatabaseDemo implements EntryPoint {
     }
 
     try {
-      db = new Database("database-demo");
+      db = Factory.getInstance().createDatabase();
+      db.open("database-demo");
       db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
     } catch (GearsException e) {
       // TODO(mmendez): GearsException should be DatabaseException

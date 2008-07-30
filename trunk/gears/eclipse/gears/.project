@@ -19,6 +19,7 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+		<nature>com.google.gwt.eclipse.plugin.gwtNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
