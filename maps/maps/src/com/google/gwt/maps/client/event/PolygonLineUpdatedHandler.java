@@ -21,13 +21,13 @@ import java.util.EventObject;
 
 /**
  * Provides an interface to implement in order to receive MapEvent.LINEUPDATED events
- * from the {@link polygon}.
+ * from the {@link Polygon}.
  */
 public interface PolygonLineUpdatedHandler {
 
   /**
    * Encapsulates the arguments for the MapEvent.LINEUPDATED event on a
-   * {@link polygon}.
+   * {@link Polygon}.
    */
   @SuppressWarnings("serial")
   class PolygonLineUpdatedEvent extends EventObject {
@@ -48,7 +48,7 @@ public interface PolygonLineUpdatedHandler {
 
   /**
    * Method to be invoked when a MapEvent.LINEUPDATED event fires on a
-   * {@link polygon}.
+   * {@link Polygon}.
    * 
    * @param event contains the properties of the event.
    */
