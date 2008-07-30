@@ -99,7 +99,7 @@ public class Result {
    */
   private Widget htmlWidget;
 
-  private final JavaScriptObject jsoPeer;
+  protected final JavaScriptObject jsoPeer;
 
   public Result() {
     this(GResult.IMPL.construct());
@@ -122,17 +122,18 @@ public class Result {
     }
     return htmlWidget;
   }
-  
+
   String getHtmlRaw() {
     return getImpl().getHtml(this).toString();
   }
-  
+
   GResult getImpl() {
     return GResult.IMPL;
   }
 
-  /** 
+  /**
    * Returns the underlying JavaScript Object (used for unit testing).
+   * 
    * @return the underlying JavaScript Object (used for unit testing).
    */
   JavaScriptObject getJso() {

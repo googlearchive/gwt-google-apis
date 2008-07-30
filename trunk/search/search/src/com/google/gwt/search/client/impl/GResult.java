@@ -30,6 +30,7 @@ import com.google.gwt.user.client.Element;
  */
 @BeanProperties
 public interface GResult extends JSFlyweightWrapper {
+
   GResult IMPL = GWT.create(GResult.class);
 
   @Binding
@@ -43,7 +44,7 @@ public interface GResult extends JSFlyweightWrapper {
    */
   @FieldName("GsearchResultClass")
   String getGsearchResultClass(JavaScriptObject obj);
-
+  
   /**
    * The docs for the JS library indicate that cloneNode() must be invoked on
    * the returned Element before it is used by client code.

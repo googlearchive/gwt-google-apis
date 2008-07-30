@@ -18,7 +18,6 @@ package com.google.gwt.search.client;
 /**
  * Accepts search results.
  * 
- * @see Search#addSearchStartingListener(SearchStartingListener)
  * @see SearchControl#addSearchStartingListener(SearchStartingListener)
  */
 public interface SearchStartingListener {

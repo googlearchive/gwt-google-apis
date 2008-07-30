@@ -22,15 +22,33 @@ import com.google.gwt.search.client.impl.GnewsSearch;
  */
 public class NewsSearch extends Search {
   private static final GnewsSearch IMPL = GnewsSearch.IMPL;
-  
+
   public NewsSearch() {
     super(IMPL);
   }
 
+  /**
+   * The default behavior of this searcher is to return results ordered by their
+   * relevance. In some cases, it is useful to see results ordered by date. This
+   * method may be used to change the result order.
+   * 
+   * @param order supplies the desired result order.
+   */
   public void setResultOrder(ResultOrder order) {
     IMPL.setResultOrder(this, order.getValue());
   }
 
+  /**
+   * This method is used to restrict the set of news search results returned by
+   * this searcher. To restrict results to all news results from the Seattle
+   * Times, simply call this method with a value of "Seattle Times". To restrict
+   * results to results from CNN, simply call with "CNN". The pattern is that
+   * the title of the news source is seperated by either spaces or underscore
+   * (e.g., "_"). To clear site restrictions, pass in a value of null.
+   * 
+   * @param site supplies a site restriction setting e.g., "Seattle Times",
+   *          "CNN", etc.
+   */
   public void setSiteRestriction(String site) {
     IMPL.setSiteRestriction(this, site);
   }
