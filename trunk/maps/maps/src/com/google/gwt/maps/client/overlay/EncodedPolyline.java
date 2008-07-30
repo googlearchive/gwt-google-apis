@@ -20,14 +20,14 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * Represents a polyline entity encoded as a string used to create a polygon.
  * See {@link Polygon#fromEncoded(EncodedPolyline[])} and
- * {@link http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview Polyline Encoding documentation}
+ * <a href="http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview">Polyline Encoding documentation</a>
  * for more details.
  */
 public final class EncodedPolyline extends JavaScriptObject {
 
   /**
    * Create a new encoded polyline. See
-   * {@link http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview Encoded Polylines Documentation}
+   * <a href="http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview">Encoded Polylines Documentation</a>
    * for more details.
    * 
    * @param points a string containing the encoded latitude and longitude
@@ -52,7 +52,7 @@ public final class EncodedPolyline extends JavaScriptObject {
   /**
    * 
    * Create a new encoded polyline. See
-   * {@link http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview Encoded Polylines Documentation}
+   * <a href="http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview">Encoded Polylines Documentation</a>
    * for more details.
    * 
    * @param points a string containing the encoded latitude and longitude
@@ -96,7 +96,7 @@ public final class EncodedPolyline extends JavaScriptObject {
 
   /**
    * Sets the zoom level groups for this polyline. See
-   * {@link http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview Encoded Polylines Documentation}
+   * <a href="http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview">Encoded Polylines Documentation</a>
    * for more details.
    * 
    * @param levelsIn a string containing the encoded polyline zoom level groups.
@@ -128,7 +128,7 @@ public final class EncodedPolyline extends JavaScriptObject {
 
   /**
    * Set the list of encoded latitude and longitude coordinates. See
-   * {@link http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview Encoded Polylines Documentation}
+   * <a href="http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview"> Encoded Polylines Documentation</a>
    * for more details.
    * 
    * @param pointsIn a string containing the encoded latitude and longitude

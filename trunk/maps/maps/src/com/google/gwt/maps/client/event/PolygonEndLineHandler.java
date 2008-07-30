@@ -22,13 +22,13 @@ import java.util.EventObject;
 
 /**
  * Provides an interface to implement in order to receive MapEvent.ENDLINE events
- * from the {@link polygon}.
+ * from the {@link Polygon}.
  */
 public interface PolygonEndLineHandler {
 
   /**
    * Encapsulates the arguments for the MapEvent.ENDLINE event on a
-   * {@link polygon}.
+   * {@link Polygon}.
    */
   @SuppressWarnings("serial")
   class PolygonEndLineEvent extends EventObject {
@@ -60,7 +60,7 @@ public interface PolygonEndLineHandler {
 
   /**
    * Method to be invoked when a MapEvent.ENDLINE event fires on a
-   * {@link polygon}.
+   * {@link Polygon}.
    * 
    * @param event contains the properties of the event.
    */
