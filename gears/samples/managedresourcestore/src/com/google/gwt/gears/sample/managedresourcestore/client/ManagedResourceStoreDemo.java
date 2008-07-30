@@ -16,9 +16,10 @@
 package com.google.gwt.gears.sample.managedresourcestore.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.localserver.client.LocalServer;
-import com.google.gwt.gears.localserver.client.ManagedResourceStore;
+import com.google.gwt.gears.client.Factory;
+import com.google.gwt.gears.client.GearsException;
+import com.google.gwt.gears.client.localserver.LocalServer;
+import com.google.gwt.gears.client.localserver.ManagedResourceStore;
 import com.google.gwt.gears.offline.client.Offline;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
@@ -51,7 +52,7 @@ public class ManagedResourceStoreDemo implements EntryPoint {
 
     // See if we're already running from a ManagedResourceStore
     try {
-      LocalServer server = new LocalServer();
+      LocalServer server = Factory.getInstance().createLocalServer();
 
       // This check to see if the host page can be served locally
       if (server.canServeLocally(Window.Location.getPath())) {
@@ -74,9 +75,9 @@ public class ManagedResourceStoreDemo implements EntryPoint {
     removeManagedResourceStoreButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         try {
-          LocalServer server = new LocalServer();
+          LocalServer server = Factory.getInstance().createLocalServer();
           ManagedResourceStore store = Offline.getManagedResourceStore();
-          server.removeManagedResourceStore(store.getName());
+          server.removeManagedStore(store.getName());
           statusLabel.setText("Removed ManagedResourceStore");
         } catch (GearsException e) {
           statusLabel.setText(e.getMessage());
@@ -94,6 +95,7 @@ public class ManagedResourceStoreDemo implements EntryPoint {
       new Timer() {
         final String oldVersion = managedResourceStore.getCurrentVersion();
 
+        @Override
         public void run() {
           switch (managedResourceStore.getUpdateStatus()) {
             case ManagedResourceStore.UPDATE_OK:

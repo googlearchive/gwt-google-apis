@@ -19,4 +19,10 @@
 	<inherits name='com.google.gwt.gears.Gears'/>
 	
 	<entry-point class='com.google.gwt.gears.sample.database.client.DatabaseDemo'/>
+	
+	<!-- Rebind the entry point if Gears is not installed -->
+	<replace-with class="com.google.gwt.gears.sample.database.client.DatabaseDemoNoGears">
+    	<when-type-is class="com.google.gwt.gears.sample.database.client.DatabaseDemo"/>
+    	<when-property-is name="gears.installed" value="false"/>
+  	</replace-with>
 </module>	

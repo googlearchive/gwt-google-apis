@@ -16,16 +16,17 @@
 package com.google.gwt.gears.offline.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.gears.core.client.GearsException;
-import com.google.gwt.gears.localserver.client.LocalServer;
-import com.google.gwt.gears.localserver.client.ManagedResourceStore;
+import com.google.gwt.gears.client.Factory;
+import com.google.gwt.gears.client.GearsException;
+import com.google.gwt.gears.client.localserver.LocalServer;
+import com.google.gwt.gears.client.localserver.ManagedResourceStore;
 
 /**
- * Provides access to a ManagedResourceStore to allow the application to work
- * offline. In the simplest case, an application developer only needs to invoke
- * {@link #getManagedResourceStore()} in order to allow the application to run
- * offline. In more complicated scenarios, the developer can choose to use
- * {@link #getManifestUrl()} to manually create a ManagedResourceStore.
+ * Provides access to a {@link ManagedResourceStore} to allow the application to
+ * work offline. In the simplest case, an application developer only needs to
+ * invoke {@link #getManagedResourceStore()} in order to allow the application
+ * to run offline. In more complicated scenarios, the developer can choose to
+ * use {@link #getManifestUrl()} to manually create a ManagedResourceStore.
  * <p>
  * A file named <code>GearsManifest.json</code> located in the root of the
  * public path may be used as an optional template for generating the final
@@ -95,9 +96,9 @@ public class Offline {
     }
     assert storeName.length() <= MAX_STORE_NAME_LENGTH;
 
-    LocalServer server = new LocalServer();
-    store = server.createManagedResourceStore(storeName);
-    store.setManifestURL(getManifestUrl());
+    LocalServer server = Factory.getInstance().createLocalServer();
+    store = server.createManagedStore(storeName);
+    store.setManifestUrl(getManifestUrl());
     store.checkForUpdate();
     return store;
   }
@@ -106,6 +107,8 @@ public class Offline {
    * Returns the URL at which the ManagedResourceStore's manifest file can be
    * found. This method can be called by users that wish to manually manage the
    * ManagedResourceStore used by the application.
+   * 
+   * @return URL of the manifest file
    */
   public static String getManifestUrl() {
     return GWT.getModuleBaseURL() + GWT.getModuleName() + ".nocache.manifest";

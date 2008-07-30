@@ -14,36 +14,28 @@
  - the License.
 -->
 <module>
-  <!--
-    Configure our source path
-  -->
-  <source path='core/client'/>
-  <source path='database/client'/>
-  <source path='localserver/client'/>
-  <source path='workerpool/client'/>
-  
-  <!-- Property provider which answers true if Gears is installed -->
+  <!-- Define a property which answers true if Gears is installed -->
   <define-property name="gears.installed" values="false,true"/>
 
+  <!-- Property provider which answers true if Gears is installed -->
   <property-provider name="gears.installed"><![CDATA[
     // Firefox
     if (typeof GearsFactory != 'undefined') {
-      return true;
+      return "true";
     }
 
     // IE
     try {
       new ActiveXObject('Gears.Factory');
-      return true;
+      return "true";
     } catch (e) {
     }
 
-	return false;
+	return "false";
   ]]></property-provider>
   
   <!--
   	Gears' required JavaScript initialization code.
   -->
-  <public path="core/public"/>
-  <script src="gears_init.js"/>
+  <script src='gears_init.js'/>
 </module>
