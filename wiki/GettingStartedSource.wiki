@@ -34,6 +34,24 @@ Checked out revision 330.
 
 Remember the path where you performed the checkout.  This documentation will refer to this path as _GWT_GOOGLE_APIS_DIR_.
 
+You will also need a copy of the GWT tools.  Check that out from the google-web-toolkit project:
+
+{{{
+$PP_OFF
+$ mkdir -p /usr/local/gwt
+$ cd /usr/local/gwt
+$ svn co http://google-web-toolkit.googlecode.com/svn/tools ./tools
+}}}
+
+and then set an environment variable named GWT_TOOLS to point there.
+
+{{{
+$PP_OFF
+$ GWT_TOOLS=/usr/local/gwt/tools
+$ export GWT_TOOLS
+}}}
+
+You will also need GWT_HOME setup to point to a binary build of the GWT distribution.
 
 === Updating <project>-compile and <project>-shell ===
 
