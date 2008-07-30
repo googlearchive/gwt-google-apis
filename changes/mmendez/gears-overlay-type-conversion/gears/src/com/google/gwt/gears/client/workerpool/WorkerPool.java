@@ -145,9 +145,9 @@ public final class WorkerPool extends JavaScriptObject {
   }-*/;
 
   /**
-   * Set the {@link ErrorHandler}. This provides functionality in workers
-   * similar to the window.onerror property. If set, it will be called for any
-   * unhandled errors that occur inside a worker.
+   * Set the {@link WorkerPoolErrorHandler}. This provides functionality in
+   * workers similar to the window.onerror property. If set, it will be called
+   * for any unhandled errors that occur inside a worker.
    * 
    * You can use this callback to implement "last-chance" error handling for
    * your workers. For example, you could log all unhandled errors into the
@@ -164,7 +164,8 @@ public final class WorkerPool extends JavaScriptObject {
   }-*/;
 
   /**
-   * Set the {@link MessageHandler} to call when this worker receives a message.
+   * Set the {@link WorkerPoolMessageHandler} to call when this worker receives
+   * a message.
    * 
    * @param handler handler to be notified of message events
    */
