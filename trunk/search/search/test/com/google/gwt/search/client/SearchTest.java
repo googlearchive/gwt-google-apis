@@ -39,10 +39,13 @@ public class SearchTest extends GWTTestCase {
     local.setResultSetSize(ResultSetSize.SMALL);
     local.setCenterPoint("10 10th Street NW, Atlanta, GA USA");
 
-    local.addSearchListener(new SearchListener() {
+    local.addSearchHandler(new SearchHandler() {
       int resultCount = 0;
 
-      public void onSearchResult(Search search, Result result) {
+      public void onSearchResult(SearchEvent event) {
+        Search search = event.getSearch();
+        Result result = event.getResult();
+        
         resultCount++;
         if (resultCount > 1) {
           return;
@@ -76,14 +79,18 @@ public class SearchTest extends GWTTestCase {
     SearchControlOptions options = new SearchControlOptions();
     WebSearch ws = new WebSearch();
     ws.setResultSetSize(ResultSetSize.SMALL);
-    ws.addSearchListener(new SearchListener() {
+    ws.addSearchHandler(new SearchHandler() {
       int resultCount = 0;
 
-      public void onSearchResult(Search search, Result result) {
+      public void onSearchResult(SearchEvent event) {
+        Search search = event.getSearch();
+        Result result = event.getResult();
+        
         resultCount++;
         if (resultCount > 1) {
           return;
         }
+        
         assertNotNull("Simple Image Search: search", search);
         assertNotNull("Simple Image Search: result", result);
         assertEquals("Search class name", WebSearch.class.getName(),
@@ -103,12 +110,13 @@ public class SearchTest extends GWTTestCase {
     ws.setResultSetSize(ResultSetSize.SMALL);
     options.add(ws);
     final SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchStartingListener(new SearchStartingListener() {
+    searchControl.addSearchStartingHandler(new SearchStartingHandler() {
 
       public void onSearchStarting(SearchStartingEvent event) {
         SearchControl control = event.getSearchControl();
         Search search = event.getSearch();
         String query = event.getQuery();
+        
         assertEquals("getSearchControl()", searchControl, control);
         assertEquals("getSearch()", ws, search);
         assertEquals("getQuery()", QUERY_STRING, query);
@@ -126,10 +134,13 @@ public class SearchTest extends GWTTestCase {
     ws.setResultSetSize(ResultSetSize.SMALL);
     options.add(ws);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchListener(new SearchListener() {
+    searchControl.addSearchHandler(new SearchHandler() {
       int resultCount = 0;
 
-      public void onSearchResult(Search search, Result result) {
+      public void onSearchResult(SearchEvent event) {
+        Search search = event.getSearch();
+        Result result = event.getResult();
+        
         resultCount++;
         if (resultCount > 1) {
           return;

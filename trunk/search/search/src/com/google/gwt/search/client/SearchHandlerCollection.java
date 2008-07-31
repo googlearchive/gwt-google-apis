@@ -17,29 +17,29 @@ package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
-import com.google.gwt.search.client.SearchStartingListener.SearchStartingEvent;
+import com.google.gwt.search.client.SearchHandler.SearchEvent;
 
 import java.util.ArrayList;
 
 /**
- * A specialized List that is used to invoke methods on SearchStartingCallbacks.
+ * A specialized List that is used to invoke methods on {@link SearchHandler}s.
  * 
  * On exception, no further listener callbacks will be invoked.
  */
-public class SearchStartingListenerCollection extends ArrayList<SearchStartingListener> {
-  void fireResult(SearchControl searchControl, Search search, String query) {
+public class SearchHandlerCollection extends ArrayList<SearchHandler> {
+  void fireResult(Search search, Result result) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    SearchStartingListener.SearchStartingEvent ev = new SearchStartingEvent(searchControl, search, query);
-    for (SearchStartingListener l : this) {
+    SearchEvent event = new SearchEvent(search, result);
+    for (SearchHandler l : this) {
       if (handler != null) {
         try {
-          l.onSearchStarting(ev);
+          l.onSearchResult(event);
         } catch (Throwable e) {
           handler.onUncaughtException(e);
           break;
         }
       } else {
-       l.onSearchStarting(ev);
+        l.onSearchResult(event);
       }
     }
   }

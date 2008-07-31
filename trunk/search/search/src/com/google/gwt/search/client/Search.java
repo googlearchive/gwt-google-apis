@@ -129,9 +129,9 @@ public abstract class Search {
   private final JavaScriptObject jsoPeer;
 
   /**
-   * A collection of listeners to notify when the Search receives results.
+   * A collection of handlers to notify when the Search receives results.
    */
-  private SearchListenerCollection listeners;
+  private SearchHandlerCollection handlers;
 
   /**
    * Package-protected constructor to restrict the use of the class outside of
@@ -146,25 +146,25 @@ public abstract class Search {
   }
 
   /**
-   * Add a SearchListener to receive notifications when Results are created
+   * Add a SearchHandler to receive notifications when Results are created
    * after executing the Search. This search will fire when searches created by
    * {@link Search#execute(String)} complete.
    * 
-   * @param l The listener to add
+   * @param handler The handler to add
    */
-  public void addSearchListener(SearchListener l) {
-    if (listeners == null) {
-      listeners = new SearchListenerCollection();
+  public void addSearchHandler(SearchHandler handler) {
+    if (handlers == null) {
+      handlers = new SearchHandlerCollection();
       impl.setSearchCompleteCallback(this, null, new GSearchCompleteCallback() {
         @Override
         public void onSearchResult() {
           for (Result result : getResults()) {
-            listeners.fireResult(Search.this, result);
+            handlers.fireResult(Search.this, result);
           }
         }
       });
     }
-    listeners.add(l);
+    handlers.add(handler);
   }
 
   /**
@@ -248,9 +248,9 @@ public abstract class Search {
    * 
    * @param l The SearchListener to remove
    */
-  public void removeSearchListener(SearchListener l) {
-    if (listeners != null) {
-      listeners.remove(l);
+  public void removeSearchListener(SearchHandler l) {
+    if (handlers != null) {
+      handlers.remove(l);
     }
   }
 
