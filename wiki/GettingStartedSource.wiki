@@ -53,11 +53,26 @@ $ export GWT_TOOLS
 
 You will also need GWT_HOME setup to point to a binary build of the GWT distribution.
 
-=== Updating <project>-compile and <project>-shell ===
+After you have checked out the code from Subversion, you need to build the distribution.  You will need [http://ant.apache.org Apache Ant] and a Java JDK, such as the one available from [http://java.sun.com/ Sun Microsystems].  
 
 {{{
 $PP_OFF
-$  projectCreator -eclipse MapsTutorial -out MapsTutorial
+$ cd /usr/local/gwt-google-apis/
+$ ant
+...
+
+BUILD SUCCESSFUL
+Total time: 2 minutes 47 seconds
+}}}  
+
+
+=== Creating <project>-compile and <project>-shell ===
+
+You can use the `projectCreator` and `applicationCreator` to create a skeleton project to get started.
+
+{{{
+$PP_OFF
+$  projectCreator -eclipse MapsTutorial -out MapsTutorial \
 Created directory MapsTutorial/src
 Created directory MapsTutorial/test
 Created file MapsTutorial/.project
@@ -75,23 +90,8 @@ Created file MapsTutorial/MapsTutorial-shell
 Created file MapsTutorial/MapsTutorial-compile
 }}}
 
-The GWT compiler uses the Java sources, not compiled classes, and expects to find them on the Java class path, so we have to add the checkout source directory to the Java classpath.  In our example, we checked out the `trunk` directory of the GWT Google APIs project into:
 
-`/usr/local/gwt-google-apis`
-
-First, you need to build the distribution.  You will need [http://ant.apache.org Apache Ant] and a Java JDK, such as the one available from [http://java.sun.com/ Sun Microsystems].  
-
-{{{
-$PP_OFF
-$ cd /usr/local/gwt-google-apis/trunk
-$ ant
-...
-
-BUILD SUCCESSFUL
-Total time: 2 minutes 47 seconds
-}}}  
-
-Next,  let's modify the command line script `MapsTutorial-shell` and append the maps distribution's `src` directory and the `bin` directory of the build output to the `-cp` argument to `java`:
+The GWT compiler needs to know about the Java source and compiled Java class files, so let's modify the command line script `MapsTutorial-shell` and append the maps distribution's `src` directory and the `bin` directory of the build output to the `-cp` argument to `java`:
 
 {{{
 $PP_OFF
@@ -125,9 +125,7 @@ Finally, we need to update the module to include the Maps project module file an
 
  <!-- You can run under localhost without a key -->
  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x" />
-
 }}}
-
 
 Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
 
