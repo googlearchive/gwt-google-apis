@@ -133,6 +133,14 @@ Test to see that hosted mode and web mode work by running the `MapsTutorial-shel
 
 === Import the Eclipse project from the GWT Google APIs source code ===
 
+First, you will need to create a Linked Resource found in `eclipse/README.txt`.  For the Maps API, it is named `MAPS_API_ROOT`.  Set this value to the folder that contains the Maps source tree.
+
+  1 Choose Window->Preferences... from the menu bar.
+  1 Chose General->Workspace->Linked Resources from the Preferences dialog
+  1 Create a new Linked Resource named `MAPS_API_ROOT` that points to _GWT_GOOGLE_APIS_DIR _(`/usr/local/gwt-google-apis/maps` in our example.)
+
+Next, you can import the project.
+
   1 Choose _File->Import..._ from the menu bar.
   1 Select _General->Existing Projects into Workspace_
   1 Browse from _Select root directory_ to the path you checked out from subversion (_GWT_GOOGLE_APIS_DIR_`/maps/eclipse` or `/usr/local/gwt/gwt-google-apis/maps/eclipse` in our example.)
