@@ -18,8 +18,8 @@ package com.google.gwt.search.sample.hellosearch.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.search.client.ExpandMode;
 import com.google.gwt.search.client.ImageSearch;
+import com.google.gwt.search.client.KeepHandler;
 import com.google.gwt.search.client.KeepLabel;
-import com.google.gwt.search.client.KeepListener;
 import com.google.gwt.search.client.LinkTarget;
 import com.google.gwt.search.client.NewsResult;
 import com.google.gwt.search.client.NewsSearch;
@@ -28,15 +28,13 @@ import com.google.gwt.search.client.ResultSetSize;
 import com.google.gwt.search.client.Search;
 import com.google.gwt.search.client.SearchControl;
 import com.google.gwt.search.client.SearchControlOptions;
-import com.google.gwt.search.client.SearchListener;
-import com.google.gwt.search.client.SearchStartingListener;
+import com.google.gwt.search.client.SearchHandler;
+import com.google.gwt.search.client.SearchStartingHandler;
 import com.google.gwt.search.client.VideoResult;
 import com.google.gwt.search.client.VideoSearch;
 import com.google.gwt.search.client.WebResult;
 import com.google.gwt.search.client.WebSearch;
-import com.google.gwt.search.client.SearchStartingListener.SearchStartingEvent;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
+import com.google.gwt.search.client.SearchStartingHandler.SearchStartingEvent;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -49,8 +47,8 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * HelloSearch application.
  */
-public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
-    SearchStartingListener {
+public class HelloSearch implements EntryPoint, KeepHandler, SearchHandler,
+    SearchStartingHandler {
 
   private class GoogleCodeWebSearch extends WebSearch {
     public GoogleCodeWebSearch() {
@@ -64,7 +62,10 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
 
   private HorizontalPanel hp = new HorizontalPanel();
 
-  public void onKeep(SearchControl control, final Result result) {
+  public void onKeep(KeepEvent event) {
+    final SearchControl control = event.getSearchControl();
+    final Result result = event.getResult();
+    
     String title;
     if (result instanceof WebResult) {
       WebResult web = (WebResult) result;
@@ -126,9 +127,9 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
 
     SearchControl searchControl = new SearchControl(options);
 
-    searchControl.addKeepListener(this);
-    searchControl.addSearchListener(this);
-    searchControl.addSearchStartingListener(this);
+    searchControl.addKeepHandler(this);
+    searchControl.addSearchHandler(this);
+    searchControl.addSearchStartingHandler(this);
     searchControl.execute("Google Web Toolkit");
 
     clips.setWidth("200px");
@@ -142,7 +143,8 @@ public class HelloSearch implements EntryPoint, KeepListener, SearchListener,
    * This is just to show that the concrete returned types are those defined in
    * the API.
    */
-  public void onSearchResult(Search search, Result result) {
+  public void onSearchResult(SearchEvent event) {
+    Result result = event.getResult();
     System.out.println("The result is a " + result.getClass().getName());
   }
 

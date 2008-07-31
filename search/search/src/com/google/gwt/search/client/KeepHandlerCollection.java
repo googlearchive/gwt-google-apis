@@ -17,27 +17,29 @@ package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.search.client.KeepHandler.KeepEvent;
 
 import java.util.ArrayList;
 
 /**
- * A specialized List that is used to invoke methods on KeepListeners.
+ * A specialized List that is used to invoke methods on {@link KeepHandler}s.
  * 
  * On exception, no further listener callbacks will be invoked.
  */
-class KeepListenerCollection extends ArrayList<KeepListener> {
+class KeepHandlerCollection extends ArrayList<KeepHandler> {
   void fireKeep(SearchControl control, Result result) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    for (KeepListener l : this) {
+    KeepEvent event = new KeepEvent(control, result);
+    for (KeepHandler l : this) {
       if (handler != null) {
         try {
-          l.onKeep(control, result);
+          l.onKeep(event);
         } catch (Throwable e) {
           handler.onUncaughtException(e);
           break;
         }
       } else {
-        l.onKeep(control, result);
+        l.onKeep(event);
       }
     }
   }

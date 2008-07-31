@@ -18,14 +18,14 @@ package com.google.gwt.search.client;
 /**
  * Accepts search results.
  * 
- * @see SearchControl#addSearchStartingListener(SearchStartingListener)
+ * @see SearchControl#addSearchStartingHandler(SearchStartingHandler)
  */
-public interface SearchStartingListener {
+public interface SearchStartingHandler {
 
   /**
    * Container for the arguments to a SearchStarting callback.
    */
-  public class SearchStartingEvent {
+  public static class SearchStartingEvent {
     private String query;
     private Search search;
     private SearchControl searchControl;

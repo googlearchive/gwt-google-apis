@@ -54,22 +54,22 @@ public class SearchControl extends Composite {
   private final JavaScriptObject jsoPeer = SEARCH_CONTROL.construct();
 
   /**
-   * Retains all KeepListeners that should be notified when the user clicks on
+   * Retains all KeepHandlers that should be notified when the user clicks on
    * the "keep" link in the SearchControl.
    */
-  private final KeepListenerCollection keepListeners = new KeepListenerCollection();
+  private final KeepHandlerCollection keepHandlers = new KeepHandlerCollection();
 
   /**
-   * Retains all SearchListeners that should be notified when the SearchControl
+   * Retains all SearchHandlers that should be notified when the SearchControl
    * receives Result.
    */
-  private final SearchListenerCollection resultListeners = new SearchListenerCollection();
+  private final SearchHandlerCollection resultHandlers = new SearchHandlerCollection();
 
   /**
-   * Retains all SearchStartingListeners hat should be notified when the search
+   * Retains all SearchStartingHandlers that should be notified when the search
    * begins.
    */
-  private final SearchStartingListenerCollection startingListeners = new SearchStartingListenerCollection();
+  private final SearchStartingHandlerCollection startingHandlers = new SearchStartingHandlerCollection();
 
   /**
    * Constructs a new SearchControl.
@@ -92,27 +92,28 @@ public class SearchControl extends Composite {
           public void onSearchResult(SearchControl control, Search search) {
             assert control == SearchControl.this;
             for (Result result : search.getResults()) {
-              resultListeners.fireResult(search, result);
+              resultHandlers.fireResult(search, result);
             }
           }
         });
-    
+
     // Wire up the search starting callback every time
     SEARCH_CONTROL.setSearchStartingCallback(this, null,
         new SearchStartingCallback() {
           @Override
-          public void onSearchStart(SearchControl control, Search search, String query) {
+          public void onSearchStart(SearchControl control, Search search,
+              String query) {
             assert control == SearchControl.this;
-            startingListeners.fireResult(control, search, query);
+            startingHandlers.fireResult(control, search, query);
           }
         });
-    
+
     // If no keep label is explicitly set, don't bother wiring up the callback.
     if (options.keepLabel != null) {
       KeepCallback keepCallback = new KeepCallback() {
         @Override
         public void onKeep(Result result) {
-          keepListeners.fireKeep(SearchControl.this, result);
+          keepHandlers.fireKeep(SearchControl.this, result);
         }
       };
 
@@ -148,36 +149,40 @@ public class SearchControl extends Composite {
   }
 
   /**
-   * Adds a KeepListener to the SearchControl. It is necessary to have set a
-   * keep label by invoking
+   * Adds a {@link KeepHandler} to the {@link SearchControl}. It is necessary
+   * to have set a keep label by invoking
    * {@link SearchControlOptions#setKeepLabel(java.lang.String)} in order to
    * display the keep link on the SearchControl.
    * 
-   * @param l A KeepListener that will receive notifications when the user
-   *          clicks on a keep link in the SearchControl
+   * @param handler A {@link KeepHandler} that will receive notifications when
+   *          the user clicks on a keep link in the {@link SearchControl}
    */
-  public void addKeepListener(KeepListener l) {
-    keepListeners.add(l);
+  public void addKeepHandler(KeepHandler handler) {
+    keepHandlers.add(handler);
   }
 
   /**
-   * Adds a listener to receive notification of all search results loaded by the
-   * SearchControl. A SearchListener added to the SearchControl will receive
-   * Result objects from all Search objects added to the SearchControl.
+   * Adds a {@link SearchHandler} to receive notification of all search results
+   * loaded by the SearchControl. A SearchHandler added to the SearchControl
+   * will receive Result objects from all Search objects added to the
+   * SearchControl.
    * 
-   * @param l A SearchListener that will receive notifications when the
-   *          SearchControl has received a Result.
+   * @param handler A {@link SearchHandler} that will receive notifications when
+   *          the SearchControl has received a Result.
    */
-  public void addSearchListener(SearchListener l) {
-    resultListeners.add(l);
+  public void addSearchHandler(SearchHandler handler) {
+    resultHandlers.add(handler);
   }
 
   /**
-   * Adds a listener to inform the search control that the caller would like to
-   * be notified when a search starts.
+   * Adds a {@link SearchStartingHandler} to inform the search control that the
+   * caller would like to be notified when a search starts.
+   * 
+   * @param handler a {@link SearchStartingHandler} that will receive
+   *          notifications when the user invokes a search.
    */
-  public void addSearchStartingListener(SearchStartingListener l) {
-    startingListeners.add(l);
+  public void addSearchStartingHandler(SearchStartingHandler handler) {
+    startingHandlers.add(handler);
   }
 
   /**
@@ -192,35 +197,36 @@ public class SearchControl extends Composite {
   }
 
   /**
-   * Removes a KeepListener from the SearchControl. Removing all KeepListeners
+   * Removes a KeepHandler from the SearchControl. Removing all KeepHandlers
    * will not remove the keep links from the displayed SearchControl.
    * 
-   * @param l The KeepListener to remove
+   * @param handler The KeepHandler to remove
    */
-  public void removeKeepListener(KeepListener l) {
-    keepListeners.remove(l);
+  public void removeKeepHandler(KeepHandler handler) {
+    if (keepHandlers != null) {
+      keepHandlers.remove(handler);
+    }
   }
 
   /**
-   * Removes a SearchListener from the SearchControl.
+   * Removes a SearchHandler from the SearchControl.
    * 
-   * @param l The SearchListener to remove
+   * @param handler The SearchHandler to remove
    */
-  public void removeSearchListener(SearchListener l) {
-    if (resultListeners != null) {
-      resultListeners.remove(l);
+  public void removeSearchHandler(SearchHandler handler) {
+    if (resultHandlers != null) {
+      resultHandlers.remove(handler);
     }
   }
-  
+
   /**
-   * Removes a SearchStaringListener from the SearchControl.
+   * Removes a SearchStaringHandler from the SearchControl.
    * 
-   * @param l The SearchListener to remove
+   * @param handler The SearchStartingHandler to remove
    */
-  public void removeSearchStartingListener(SearchStartingListener l) {
-    if (startingListeners != null) {
-      startingListeners.remove(l);
+  public void removeSearchStartingHandler(SearchStartingHandler handler) {
+    if (startingHandlers != null) {
+      startingHandlers.remove(handler);
     }
   }
-  
 }
