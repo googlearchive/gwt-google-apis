@@ -15,17 +15,19 @@
  */
 package com.google.gwt.search.client.impl;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.search.client.NewsResult;
 import com.google.gwt.search.jsio.client.BeanProperties;
 import com.google.gwt.search.jsio.client.Constructor;
 import com.google.gwt.search.jsio.client.FieldName;
 import com.google.gwt.search.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.search.jsio.client.JSList;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GnewsResult
+ * @see <a
+ *      href="http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GnewsResult">AJAX
+ *      Search API Reference</a>
  */
 @BeanProperties
 public interface GnewsResult extends GResult {
@@ -36,6 +38,7 @@ public interface GnewsResult extends GResult {
    */
   @BeanProperties
   public static interface RelatedStory extends JSFlyweightWrapper {
+    @SuppressWarnings("hiding")
     RelatedStory IMPL = GWT.create(RelatedStory.class);
 
     @Constructor("$wnd.Object")

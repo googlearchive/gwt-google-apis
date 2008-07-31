@@ -21,7 +21,8 @@ import com.google.gwt.search.jsio.client.JSWrapper;
 import com.google.gwt.user.client.Element;
 
 /**
- * Used with {@link GSearchControl#addSearcher(GSearch, GsearcherOptions)}.
+ * Used with
+ * {@link GSearchControl#addSearcher(com.google.gwt.search.client.SearchControl, com.google.gwt.search.client.Search)}.
  */
 @Constructor("$wnd.GsearcherOptions")
 public interface GsearcherOptions extends JSWrapper<GsearcherOptions> {

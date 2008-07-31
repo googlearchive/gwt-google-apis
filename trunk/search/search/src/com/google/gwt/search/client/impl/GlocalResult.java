@@ -24,7 +24,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GlocalResult
+ * @see <a
+ *      href="http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GlocalResult">AJAX
+ *      Search API Reference</a>
  */
 @BeanProperties
 public interface GlocalResult extends GResult {
@@ -35,6 +37,7 @@ public interface GlocalResult extends GResult {
    */
   @BeanProperties
   public interface PhoneNumber extends JSFlyweightWrapper {
+    @SuppressWarnings("hiding")
     PhoneNumber IMPL = GWT.create(PhoneNumber.class);
 
     @Constructor("$wnd.Object")

@@ -20,7 +20,9 @@ import com.google.gwt.search.jsio.client.BeanProperties;
 import com.google.gwt.core.client.GWT;
 
 /**
- * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GvideoResult
+ * @see <a
+ *      href="http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GvideoResult">AJAX
+ *      Search API Reference</a>
  */
 @BeanProperties
 public interface GvideoResult extends GResult {
