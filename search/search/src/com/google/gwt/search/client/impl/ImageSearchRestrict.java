@@ -18,15 +18,13 @@ package com.google.gwt.search.client.impl;
 import com.google.gwt.search.jsio.client.JSOpaque;
 
 /**
- * Used with {@link GimageSearch#setRestriction(ImageSearch, JSOpaque, JSOpaque)}
- * control the types of results displayed.  
+ * Used with
+ * {@link GimageSearch#setRestriction(com.google.gwt.search.client.ImageSearch, JSOpaque, JSOpaque)}
+ * control the types of results displayed.
  */
 public enum ImageSearchRestrict {
-  COLORIZATION ("COLORIZATION"),
-  FILETYPE("FILETYPE"),
-  IMAGESIZE("IMAGESIZE"),
-  IMAGETYPE("IMAGETYPE"),
-  SAFESEARCH("SAFESEARCH");
+  COLORIZATION("COLORIZATION"), FILETYPE("FILETYPE"), IMAGESIZE("IMAGESIZE"), IMAGETYPE(
+      "IMAGETYPE"), SAFESEARCH("SAFESEARCH");
 
   private final JSOpaque value;
 

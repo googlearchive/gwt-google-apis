@@ -21,7 +21,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
 
 /**
- * @see http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GbookResult
+ * @see <a
+ *      href="http://code.google.com/apis/ajaxsearch/documentation/reference.html#_class_GbookResult">AJAX
+ *      Search API Refernece</a>
  */
 @BeanProperties
 public interface GbookResult extends GResult {

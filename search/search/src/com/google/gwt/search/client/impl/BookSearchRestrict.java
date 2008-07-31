@@ -18,7 +18,7 @@ package com.google.gwt.search.client.impl;
 import com.google.gwt.search.jsio.client.JSOpaque;
 
 /**
- * Used with {@link GbookSearch#setRestriction(ImageSearch, JSOpaque, JSOpaque)}
+ * Used with {@link GbookSearch#setRestriction(com.google.gwt.search.client.Search, JSOpaque, JSOpaque)}
  * control the types of results displayed.
  */
 public enum BookSearchRestrict {
