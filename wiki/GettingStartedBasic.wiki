@@ -27,14 +27,15 @@ with an existing GWT project.  In this case, we are going to use the `gwt-maps.j
 
 == Getting the GWT Google APIs gwt-maps library ==
 
-You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option to see 
+You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option to see milestone releases as well as final releases.
 After you download the distribution, uncompress
-it.  Inside the folder you will find a file named
-`gwt-google-apis.jar`. This is the one file you need to integrate the
-APIs with your project. 
+it.  Inside the folder you will find a .jar file named after the name of the library (e.g.
+`gwt-maps.jar`). 
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-maps`.
 
+  _Note: Some releases are marked 'deprecated' by the Google Code download tab,
+even though they are more recent than older versions.  When we create milestone versions, we mark them in this way just to keep unsuspecting users from grabbing a potentially unstable version._
 
 == Creating your project ==
 
