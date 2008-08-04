@@ -19,13 +19,13 @@ This guide is a tutorial that demonstrates how to integrate the GWT Google APIs 
 
  * [GettingStartedBasic Adding GWT Google APIs to a GWT Project] Start here to setup a GWT project.
 
- * [GettingStartedAJAXSearch Using Google AJAX Search in a project] A walkthrough of how to use AJAXSearch in a GWT project.
+ * [AJAXSearchGettingStarted Using Google AJAX Search in a project] A walkthrough of how to use AJAXSearch in a GWT project.
 
- * [GettingStartedMaps Using Google Maps in a project] A walkthrough of how to use Google Maps in a GWT project.
+ * [MapsGettingStarted Using Google Maps in a project] A walkthrough of how to use Google Maps in a GWT project.
 
- * [GettingStartedGadgets Using Google Gadgets in a project] A walkthrough of how to use the Google Gadgets API in a GWT project.
+ * [GadgetsGettingStarted Using Google Gadgets in a project] A walkthrough of how to use the Google Gadgets API in a GWT project.
 
- * [GettingStartedGears Using Google Gears in a project] A walkthrough of how to use the Google Gears API in a GWT project.
+ * [GearsGettingStarted Using Google Gears in a project] A walkthrough of how to use the Google Gears API in a GWT project.
 
  * [GettingStartedSource Using the gwt-google-apis source code] Adding a Google API component to a GWT Project using the gwt-google-apis source code.
 
