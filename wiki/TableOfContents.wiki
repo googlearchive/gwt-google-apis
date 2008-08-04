@@ -3,7 +3,7 @@
  * [MakingGALGWTBetter Contributing]
  * [GettingStarted Getting Started]
    * [GettingStartedBasic Adding GWT Google APIs to a GWT Project]
- * [FAQ_Intro FAQ - Introduction]
+ * [FAQ_Intro FAQs]
    * [FAQ_GettingStarted FAQs]
  * [AJAXSearchIntro AJAX Search]
    * [AJAXSearchGettingStarted Using Google AJAX Search in a project]

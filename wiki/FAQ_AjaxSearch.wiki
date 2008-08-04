@@ -1,7 +1,0 @@
-#summary Questions about using the AJAX Search API
-
-= Google AJAX Search API =
-
-== Using the AJAX Search RESTful interface ==
-
-There is no explicit API support at this time for the AJAXSearch RESTful interface, but you can implement it with a combination of the GWT's `RequestBuilder` class and  and !JavaScript overlays. *TBD need links*

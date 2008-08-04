@@ -4,3 +4,7 @@
 
 These FAQs refer to the Google API Library for GWT bindings for the AJAX Search API.  See also [FAQ_Intro General FAQs] for general FAQs on the Google API Library for GWT.
 
+== Using the AJAX Search RESTful interface ==
+
+There is no explicit API support at this time for the AJAXSearch RESTful interface, but you can implement it with a combination of the GWT's `RequestBuilder` class and  and !JavaScript overlays. *TBD need links*
+

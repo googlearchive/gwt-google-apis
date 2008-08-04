@@ -4,3 +4,6 @@
 
 These FAQs refer to the Google API Library for GWT bindings for the Gears API.  See also [FAQ_Intro General FAQs] for general FAQs on the Google API Library for GWT.
 
+== How do I write worker thread code in GWT ==
+
+The bindings do not support such a way right now, but if you create a GWT module and specify the Single Script linker, you can load the generated script as a public resource using the [file:///home/zundel/workspace/gwt-google-apis/trunk/gears/build/out/doc/javadoc/com/google/gwt/gears/client/workerpool/WorkerPool.html#createWorkerFromUrl(java.lang.String) WorkerPool.createWorkerFromUrl(String)] method.

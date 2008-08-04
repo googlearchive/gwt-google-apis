@@ -1,7 +1,0 @@
-#summary Questions about using the Gadgets API
-
-= Google Gadgets API =
-
-== Why doesn't the sample work in hosted mode? ==
-
-A Gadget must be hosted in a GWT container before it can be run in hosted mode.  See [GettingStartedGadgets Getting Started with Gadgets].
