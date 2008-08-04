@@ -2,6 +2,6 @@
 
 = Maps API = 
 
-   * [GettingStartedMaps Using Google Maps in a GWT project]
+   * [MapsGettingStarted Using Google Maps in a GWT project]
    * [MapsFAQ FAQ]
    * [MapsJavadoc Class Reference]

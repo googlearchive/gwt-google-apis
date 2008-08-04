@@ -2,9 +2,9 @@
 
 == Adding Google APIs to a GWT Project from source ==
 
-This section describes how to integrate your project with the GWT Google APIs project using a checkout of the subversion repository.
+This section describes how to integrate your project with the GWT Google APIs project using a checkout of the subversion repository.  If this is your first time setting up a project, you should work through the [GettingStartedBasic basic Getting Started] instructions.  These additional instructions are provided for those that intend to be a contributor to one of the `gwt-google-apis` projects, or need to use the very latest release of the API before a public release.  
 
-If this is your first time setting up a project, you should work through the [GettingStartedBasic basic Getting Started] instructions.  These additional instructions are provided for those that intend to be a contributor to one of the `gwt-google-apis` projects, or need to use the very latest release of the API before a public release.
+If you find yourself struggling with these instructions, you might want to go back and try ]GettingStartedBasic the basic Getting Started] page, which is sufficient for almost all developers.
 
 === Getting the GWT Google APIs source ===
 

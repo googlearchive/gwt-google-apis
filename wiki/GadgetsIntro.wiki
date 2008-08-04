@@ -2,6 +2,6 @@
 
 = Gadgets API = 
 
-   * [GettingStartedGadgets Using Google Gadgets in a GWT project]
+   * [GadgetsGettingStarted Using Google Gadgets in a GWT project]
    * [GadgetsFAQ FAQ]
    * [GadgetsJavadoc Class Reference]

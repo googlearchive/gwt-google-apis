@@ -13,21 +13,14 @@ capabilities of these Google APIs without having to resort to writing lots
 of integration code using !JavaScript.
 
 
-= Getting Started Tutorials =
+= General Getting Started Tutorials =
 
-This guide is a tutorial that demonstrates how to integrate the GWT Google APIs into your GWT projects.  The tutorials will show step by step how to setup a project and develop sample applications using the Google AJAX Search, Maps, and Gears.
+This guide is a tutorial that demonstrates how to integrate the GWT Google APIs into your GWT projects.  The tutorials will show step by step how to setup a project using the Google Maps API.  
 
  * [GettingStartedBasic Adding GWT Google APIs to a GWT Project] Start here to setup a GWT project.
+ * [GettingStartedSource Using the gwt-google-apis source code] Adding a Google API component to a GWT Project using the gwt-google-apis source code.  These instructions should be used if you intend to contribute to the Google API API Library for GWT project.
 
- * [AJAXSearchGettingStarted Using Google AJAX Search in a project] A walkthrough of how to use AJAXSearch in a GWT project.
-
- * [MapsGettingStarted Using Google Maps in a project] A walkthrough of how to use Google Maps in a GWT project.
-
- * [GadgetsGettingStarted Using Google Gadgets in a project] A walkthrough of how to use the Google Gadgets API in a GWT project.
-
- * [GearsGettingStarted Using Google Gears in a project] A walkthrough of how to use the Google Gears API in a GWT project.
-
- * [GettingStartedSource Using the gwt-google-apis source code] Adding a Google API component to a GWT Project using the gwt-google-apis source code.
+Later in the guide, each individual API has a similar page on how to  develop sample applications using the Google AJAX Search, and Gears, and Gadgets.
 
 = Other Resources =
 
@@ -35,3 +28,13 @@ This guide is a tutorial that demonstrates how to integrate the GWT Google APIs 
  * Each API has a sample project.  They are distributed along with the [http://code.google.com/p/gwt-google-apis/downloads/list production distribution] and are also checked into the project [http://code.google.com/p/gwt-google-apis/source subversion repository.] 
  * The [http://code.google.com/webtoolkit/ Google Web Toolkit] home page has resources for learning and using GWT.
  * Use the [http://groups.google.com/group/Google-Web-Toolkit Google Web Toolkit Group] as a forum for discussions about using the GWT Google APIs.
+
+= See Also =
+
+ * [AJAXSearchGettingStarted Using Google AJAX Search in a project] A walkthrough of how to use AJAXSearch in a GWT project.
+ * [MapsGettingStarted Using Google Maps in a project] A walkthrough of how to use Google Maps in a GWT project.
+ * [GadgetsGettingStarted Using Google Gadgets in a project] A walkthrough of how to use the Google Gadgets API in a GWT project.
+ * [GearsGettingStarted Using Google Gears in a project] A walkthrough of how to use the Google Gears API in a GWT project.
+
+
+

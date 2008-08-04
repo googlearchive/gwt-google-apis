@@ -2,6 +2,6 @@
 
 = Gears API = 
 
-   * [GettingStartedGears Using Google Gears in a Gears project]
+   * [GearsGettingStarted Using Google Gears in a Gears project]
    * [GearsFAQ FAQ]
    * [GearsJavadoc Class Reference]
