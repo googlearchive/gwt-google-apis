@@ -1,6 +1,8 @@
 #summary Table of Contents for GWT Google APIs
  * [Overview Project Overview]
- * [MakingGALGWTBetter Contributing]
+ * [MakingGALGWTBetter Making GALGWT Better]
+   * [TemplateProject Template Project]
+   * [DesigningAPIWrappers Design Considerations]
  * [GettingStarted Getting Started]
    * [GettingStartedBasic Adding GWT Google APIs to a GWT Project]
    * [GettingStartedSource Working with GWT Google APIs source]
