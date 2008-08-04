@@ -1,0 +1,7 @@
+﻿#summary Bindings for the AJAX Search API from Google
+
+= AJAX Search API = 
+
+   * [GettingStartedAJAXSearch Using Google AJAX Search in a GWT project]
+   * [AJAXSearchFAQ FAQ]
+   * [AJAXSearchJavadoc Class Reference]

@@ -1,0 +1,7 @@
+﻿#summary Bindings for the Maps API from Google
+
+= Maps API = 
+
+   * [GettingStartedMaps Using Google Maps in a GWT project]
+   * [MapsFAQ FAQ]
+   * [MapsJavadoc Class Reference]

@@ -1,0 +1,6 @@
+﻿#summary Frequently Asked Questions about the GWT bindings for Gears
+
+= Gears FAQs =
+
+These FAQs refer to the Google API Library for GWT bindings for the Gears API.  See also [FAQ_Intro Genaral FAQs] for general FAQs on the Google API Library for GWT.
+

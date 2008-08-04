@@ -1,0 +1,7 @@
+﻿#summary Bindings for the Gears API from Google
+
+= Gears API = 
+
+   * [GettingStartedGears Using Google Gears in a Gears project]
+   * [GearsFAQ FAQ]
+   * [GearsJavadoc Class Reference]
