@@ -1,4 +1,4 @@
-=summary Making Google API Library for GWT better
+#summary Making Google API Library for GWT better
 
 This section discusses how to contribute new code to the project. 
 
