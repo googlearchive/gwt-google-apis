@@ -1,9 +1,5 @@
 #summary Table of Contents for GWT Google APIs
  * [Overview Project Overview]
- * [MakingGALGWTBetter Making Google API Library for GWT  Better]
-   * [TemplateProject Template Project]
-   * [DesigningAPIWrappers Design Considerations]
-   * [GettingStartedSource Working with GWT Google APIs source]
  * [AJAXSearchIntro AJAX Search]
    * [AJAXSearchGettingStarted Using Google AJAX Search in a project]
    * [AJAXSearchFAQ FAQ]
@@ -24,3 +20,8 @@
    * [MapsJavadoc Class Reference]
  * [APIsComingSoon APIs Coming Soon]
    * [GettingStartedVisualization Using Google Visualization API]
+ * [MakingGALGWTBetter Making Google API Library for GWT  Better]
+   * [APIDesignGoals Design Goal of API bindings]
+   * [TemplateProject Template Project]
+   * [DesigningAPIWrappers Design Considerations]
+   * [GettingStartedSource Working with GWT Google APIs source]

@@ -12,4 +12,4 @@ First check the [http://code.google.com/p/gwt-google-apis/ gwt-google-apis issue
 
 == Why is there a `gwt` in the query line on the <script> tag to load the Maps API? ==
 
-This optional parameter is used by Google to collect data on what percentage of Gooble Maps API traffic is generated from apps built with GWT.
+This optional parameter is used by Google to collect data on what percentage of Google Maps API traffic is generated from apps built with GWT.
