@@ -6,7 +6,7 @@ This section describes the Google Maps library [http://code.google.com/p/google-
 
 The Google Maps API provides a very rich developer toolkit for manipulating maps.  As such, there are many classes in the wrapper APIs.  
 
-= Assumptions =
+== Assumptions ==
  
 This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familiar with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
 

@@ -1,0 +1,6 @@
+#summary Walkthrough of the HelloMaps demo
+
+=  !HelloMaps Demo =
+
+The `gwt-maps` distribution contains a sample project in the `samples` directory that showcases many of the features of the Maps API.  It serves both as a demonstration project and as a test bed for adding features.
+

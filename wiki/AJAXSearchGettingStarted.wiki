@@ -7,6 +7,20 @@ This section describes the basics behind writing a small project that uses Googl
 
 The AJAX Search API provides a convenient way to add a pre-packaged search box and display results, or to manipulate search results in a programmatic way. The [http://code.google.com/p/gwt-google-apis gwt-google-api] project bindings allow you to access that API from Java code compiled with the GWT compiler.
 
+== Assumptions ==
+ 
+This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familiar with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
+
+== Getting the GWT Google APIs gwt-search library ==
+
+You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option and press the _Search_ button to see milestone releases as well as final releases.  After you download the distribution, uncompress
+it.  Inside the folder you will find a .jar file named after the name of the library (e.g.
+`gwt-maps.jar`). 
+
+You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-maps`.
+
+  _Note: Some releases are marked 'deprecated' by the Google Code download tab, even though they are more recent than older versions.  When we create milestone versions, we mark them in this way just to keep unsuspecting users from grabbing a potentially unstable version._
+
 == Looking at the AJAX Search Sample ==
 
 Lets start by taking a look at the sample program _AJAXSearch_ that is shipped with the `gwt-ajaxsearch` distribution:

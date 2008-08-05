@@ -6,6 +6,20 @@ This section will get you started writing your first Google Gadget.  But before 
 
 The Google Apis for GWT Gadget support simplifies gadget development by automatically generating a [http://code.google.com/apis/gadgets/docs/legacy/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project.  After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish] your gadget.
 
+== Assumptions ==
+ 
+This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familiar with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
+
+== Getting the GWT Google APIs gwt-gadgets library ==
+
+You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option and press the _Search_ button to see milestone releases as well as final releases.  After you download the distribution, uncompress
+it.  Inside the folder you will find a .jar file named after the name of the library (e.g.
+`gwt-maps.jar`). 
+
+You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-maps`.
+
+  _Note: Some releases are marked 'deprecated' by the Google Code download tab, even though they are more recent than older versions.  When we create milestone versions, we mark them in this way just to keep unsuspecting users from grabbing a potentially unstable version._
+
 == Looking at a Sample Gadget ==
 
 Look at the sample program _Hello Gadgets_ that is shipped with the `gwt-gadgets` distribution
