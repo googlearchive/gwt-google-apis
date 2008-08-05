@@ -2,7 +2,7 @@
 
 This section discusses how to contribute new code to the project. 
 
-The Google API Library for GWT is an adjunct project of the [http://code.google.com/webtoolkit Google Web Toolkit].  Both are open source projects maintaned by Google and other developers and follow the same contributor guidelines.  See [http://code.google.com/webtoolkit/makinggwtbetter.html Making GWT Better] to get started.  This project provides GWT bindings for Google APIs that have been previously released only as !JavaScript APIs.
+The Google API Library for GWT is an adjunct project of the [http://code.google.com/webtoolkit Google Web Toolkit].  Both are open source projects maintained by Google and other developers and follow the same contributor guidelines.  See [http://code.google.com/webtoolkit/makinggwtbetter.html Making GWT Better] to get started.  This project provides GWT bindings for Google APIs that have been previously released only as !JavaScript APIs.
 
    * [APIDesignGoals Design Goals of API bindings]
    * [TemplateProject Description of a template project.]

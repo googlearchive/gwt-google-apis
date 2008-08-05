@@ -3,5 +3,5 @@
 = AJAX Search API = 
 
    * [AJAXSearchGettingStarted Using Google AJAX Search in a GWT project]
-   * [AJAXSearchFAQ FAQ]
    * [AJAXSearchJavadoc Class Reference]
+   * [AJAXSearchFAQ FAQ]

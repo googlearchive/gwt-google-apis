@@ -3,5 +3,5 @@
 = Gears API = 
 
    * [GearsGettingStarted Using Google Gears in a Gears project]
-   * [GearsFAQ FAQ]
    * [GearsJavadoc Class Reference]
+   * [GearsFAQ FAQ]
