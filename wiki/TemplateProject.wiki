@@ -7,6 +7,7 @@ This page will walk through a template project.  The template project is provide
 The following tree structure shows the directory structure of a template gwt-google-apis project:
 
 {{{
+$PP_OFF
 template
 |-- build
 |   |-- dist
@@ -76,15 +77,15 @@ The convention for sample code is:
 
  `com.google.gwt.`_project name_`.sample.`_sample name_`.client`...
 
-Inside your source code, if you have utility classes or classes needed to bind the JavaScript API to your GWT binding, the convention is to make a subdirectory under `.client` named `.impl`
+Inside your source code, if you have utility classes or classes needed to bind the !JavaScript API to your GWT binding, the convention is to make a subdirectory under `.client` named `.impl`
 
  `com.google.gwt.`_project name_`.client.impl.`...
 
 
-==Loading Patterns==
+== Build requirements == 
 
-   * Put it in API provided module.gwt.xml
-   * Put it in user's .gwt.xml
-   * (need ajaxloader sol'n)
-
-
+   * (ant, GWT_TOOLS)     
+   * Required ant targets
+   * eclipse sample projects  
+   * Unit tests for wrapped functionality
+   * samples

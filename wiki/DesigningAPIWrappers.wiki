@@ -14,9 +14,9 @@ When creating a wrapper for an existing !JavaScript API using the Google Web Too
 
    When a !JavaScript object is returned from !JavaScript into Java, it is declared to be of type !JavaScriptObject.  In GWT 1.5, the compiler now allows you to subclass !JavaScriptObject (with some restrictions) and access the object contents using JSNI.  The `this` target is set to be the !JavaScriptObject.
 
-  * [http://code.google.com/p/gwt-api-interop !JavaScript !InterOp library (JSIO)]
+  * [http://code.google.com/p/gwt-api-interop JavaScript InterOp library (JSIO)]
 
-   The JSIO library is an optional library that provides facilities for different kinds of !JavaScript integration. It provides an easy way to construct new !JavaScript objects (@Constructor and @Global), create property accessors(!@BeanProperties), set callbacks (!JSFunction), export Java functions onto a !JavaScript object (@Exported) and passing arrays back and forth between Java and !JavaScript(JSList).
+   The JSIO library is an optional library that provides facilities for different kinds of !JavaScript integration. It provides an easy way to construct new !JavaScript objects (@Constructor and @Global), create property accessors(@BeanProperties), set callbacks (JSFunction), export Java functions onto a !JavaScript object (@Exported) and passing arrays back and forth between Java and !JavaScript(JSList).
 
   * GWT Linker extensions (_TBD_ link to GWT Dev Guide)
 
@@ -39,22 +39,22 @@ Each tool has its own tradeoffs:
 === Accessing !JavaScript properties === 
 
   * Use JSNI
-  * Use JavaScriptOverlays
-  * Use JSIO Library !@BeanProperties
+  * Use !JavaScriptOverlays
+  * Use JSIO Library @BeanProperties
 
 _TBD_
 
 
 === Passing Arrays back and forth between !JavaScript library ===
   
-  * JsArray class in GWT
+  * !JsArray class in GWT
   * JSArray in JSIO Library
 
 _TBD_
 
 === Exposing Constant values ===
 
-  * Creating a getter using JavaScriptOverlays
+  * Creating a getter using !JavaScriptOverlays
   * Creating a getter using @Global in JSIO Library
   * Static Initializer of a Java constant
 
@@ -81,6 +81,14 @@ _TBD_
 
 _TBD_
 
+==Loading Patterns==
+
+  * Put it in API provided module.gwt.xml
+  * Put it in user's .gwt.xml
+  * (need ajaxloader sol'n)
+
+_TBD_
+
 == Common Design Problems ==
 
   * Deciding when to omit a feature.
@@ -88,4 +96,5 @@ _TBD_
   * Planning your wrappers for future JS API growth.
   * Providing access to !JavaScriptObject instances for end developer flexibility.
   * How to write Unit Tests
-  * Hiding the Java/JavaScript integration mechanism.
+  * Hiding the Java/!JavaScript integration mechanism.
+
