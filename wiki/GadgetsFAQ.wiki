@@ -2,7 +2,8 @@
 
 = Gadgets  FAQs =
 
-These FAQs refer to the Google API Library for GWT bindings for the Gadgets API.  See also [FAQ_Intro General FAQs] for general FAQs on the Google API Library for GWT.
+These FAQs refer to the Google API Library for GWT bindings for the Gadgets API.  See also [Overview Project Overview] for general information on the Google API Library for GWT.
+
 
 == Why doesn't the sample work in hosted mode? ==
 

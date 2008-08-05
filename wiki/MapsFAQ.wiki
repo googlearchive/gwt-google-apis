@@ -2,7 +2,7 @@
 
 = Maps FAQs =
 
-These FAQs refer to the Google API Library for GWT bindings for the Google Maps API.  See also [FAQ_Intro General FAQs] for general FAQs on the Google API Library for GWT.
+These FAQs refer to the Google API Library for GWT bindings for the Google Maps API.  See also [Overview Project Overview] for general information on the Google API Library for GWT.
 
 == I don't see Google Maps method XXX in the API. What should I do? ==
 
