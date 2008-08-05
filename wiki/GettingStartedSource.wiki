@@ -1,10 +1,26 @@
 #summary Adding a Google API component to a GWT Project using the gwt-google-apis source code.
 
+= Using a library or source code =
+
+When you develop code with the GWT Google APIs you have two choices.  You can either use the library from a JAR file, or you can use the library by pointing to a source tree, usually a current version of the library checked out from the Subversion repository.  Which method you choose depends on your development needs.
+
+The production version of the GWT Google APIs is distributed as a
+`.jar` file that is easy to integrate with an existing GWT project.
+Choose the `.jar` file library if you need a stable release of the
+library and do not have a need for a specific pre-release feature.
+
+The latest version of the API source code is also publicly available
+from a [http://subversion.tigris.org/ Subversion] repository hosted by
+[http://code.google.com/ Google Code].  Choose the source code if you
+need to use the latest features and bug fixes by the library, or if
+you are interested in contributing patches to the library. 
+
+
 == Adding Google APIs to a GWT Project from source ==
 
-This section describes how to integrate your project with the GWT Google APIs project using a checkout of the subversion repository.  If this is your first time setting up a project, you should work through the [GettingStartedBasic basic Getting Started] instructions.  These additional instructions are provided for those that intend to be a contributor to one of the `gwt-google-apis` projects, or need to use the very latest release of the API before a public release.  
+This section describes how to integrate your project with the GWT Google APIs project using a checkout of the subversion repository.  If this is your first time setting up a project, you should work through the basic API specific Getting Started instructions.  These additional instructions are provided for those that intend to be a contributor to one of the `gwt-google-apis` projects, or need to use the very latest release of the API before a public release.  
 
-If you find yourself struggling with these instructions, you might want to go back and try ]GettingStartedBasic the basic Getting Started] page, which is sufficient for almost all developers.
+If you find yourself struggling with these instructions, you might want to go back and use one of the API specific Getting Started pages, which is sufficient for almost all developers.
 
 === Getting the GWT Google APIs source ===
 

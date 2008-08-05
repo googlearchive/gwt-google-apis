@@ -3,5 +3,7 @@
 = Maps API = 
 
    * [MapsGettingStarted Using Google Maps in a GWT project]
+   * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
+   * [MapsHelloMaps The HelloMaps demo]
    * [MapsFAQ FAQ]
    * [MapsJavadoc Class Reference]
