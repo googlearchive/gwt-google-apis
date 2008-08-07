@@ -1,9 +1,9 @@
-#summary Support for iGoogle Gadgets / OpenSocial Apps / Google Mapplets
+#summary Support for Gadgets on iGoogle / OpenSocial Apps / Google Mapplets
 #labels Phase-Design
 
 = Introduction =
 
-iGoogle Gadgets, Mapplets, and !OpenSocial apps (collectively referred to as Gadgets) are essentially regular web applications with an additional manifest file designed to run in a container environment.  The goal of the GWT4Gadgets sub-project is to make GWT the easiest way to create and deploy Gadgets.
+Gadgets on iGoogle, Mapplets, and !OpenSocial apps (collectively referred to as gadgets) are essentially regular web applications with an additional manifest file designed to run in a container environment.  The goal of the GWT4Gadgets sub-project is to make GWT the easiest way to create and deploy gadgets.
 
 = Goals =
 
@@ -13,7 +13,7 @@ iGoogle Gadgets, Mapplets, and !OpenSocial apps (collectively referred to as Gad
   * Maximize Gadget performance and minimize impact on the developer's hosts by taking advantage of available caching mechanisms.
 
 = Non-goals =
-  * Make Gadget development exactly like regular GWT development.
+  * Make gadget development exactly like regular GWT development.
     * Specific restrictions, limitations, or alterations to the status quo may be introduced if it makes the 80% case better.
 
 = Punchlist =
