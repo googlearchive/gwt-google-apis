@@ -25,20 +25,32 @@
          }
       </style></head>
 
-   <body>
-      <h1>AJAX Search API Library for GWT Release Notes</h1>
+ <body>
+  <h1>AJAX Search API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
-      </ul>
+ 		    <li><a href="#Release_Notes_r290">r290 (milestone release)</a></li>
+     </ul>
       <hr/>
       <a name="Release_Notes_Current"></a>
-     <h2>Release Notes for @GWT_VERSION@</h2>
-      <p>Initial release.</p>
-      <h3>Fixed Issues</h3>
-	  <ul>
-      <li>Fixed HelloSearch sample crash on OSX. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=12">12</a>)</li>
-	  <li>Fixed crash when using raw searchers. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=32">32</a>)</li>
-	  <li>Split these GWT bindings into their own distribution.</li>
-	  </ul>
-	</body>
+  <h2>Release Notes for @GWT_VERSION@</h2>
+   <h3>Changes since r290</h3>
+   <ul>
+      <li>This library requires GWT 1.5 or later and Java 1.5 or later.</li>
+      <li>Added ImageSearch support.</li>
+      <li>For event handling, removed Listener classes and replaced with
+         Handler classes</li>
+      <li>Added support for the SearchStarting callback.</li>
+      <li>Added support for the <code>cursor</code> property, allowing developers to fetch subsequent pages of results.</li>
+      <li>Renamed package prefix from <code>com.google.gwt.ajaxsearch</code> to <code>com.google.gwt.search</code></li>
+      <li>Renamed sample from AJAXSearch to HelloSearch</li>
+      <li>Fixed other issues noted in the <a href="http://code.google.com/p/gwt-google-apis/issues/list?can=1&q=API%3AAJAX_Search+Milestone%3A1_1_RC">Issue Tracker</a></li>
+      <li>Added unit tests</li>
+      
+   </ul>
+   <hr/>
+  <a name="Release_Notes_r290"></a>
+  <h2>Release Notes for r290 (milestone release)</h2>
+   <h3>Initial release.</h3>
+ </body>
 </html>

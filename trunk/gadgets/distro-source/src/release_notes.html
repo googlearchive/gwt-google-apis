@@ -29,15 +29,25 @@
       <h1>Gadgets API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+		    <li><a href="#Release_Notes_r290">r290 (milestone release)</a></li>
       </ul>
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
-      <p>Initial release.</p>
-	  <h3>Known Issues</h3>
+      <h3>Changes since r290</h3>
+      <ul>
+       <li>This library requires GWT 1.5 or later and Java 1.5 or later.</li>
+       <li>Fixed script and stylesheet injection in gadgets bootstrap.</li>
+       <li>Added xerces library reference for debugging a gadget in hosted mode.</li>
+      </ul>
+      <h3>Known Issues</h3>
 	  <ul>
-      <li>Gadgets with no NeedsXXX interfaces throws NPE in Gadget generator. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=104">104)</a></li>
       <li>Gadgets must be debugged using -noserver and the Gadget must be hosted in a Gadget container like <a href="http://www.google.com/ig">iGoogle</a> or <a href="http://incubator.apache.org/shindig/">Shindig</a>.</li>
+      <li>GWT RPC does not work through iGoogle (issue 154)</li>
 	  </ul>
+     <hr/>
+     <a name="Release_Notes_r290"></a>
+     <h2>Release Notes for r290 (milestone release)</h2>
+      <p>Initial release.</p>
 	</body>
 </html>

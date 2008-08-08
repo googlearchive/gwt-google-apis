@@ -22,6 +22,7 @@
 
 			<!-- samples -->
 			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
+                                <exclude name="samples/GWTNote/**" />
 				<include name="samples/*" />
 				<include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
@@ -29,6 +30,7 @@
 			</tarfileset>
 
 			<tarfileset dir="${gwt.build.out}/samples" mode="755" prefix="${project.distname}/samples">
+                                <exclude name="GWTNote/**" />
 				<include name="*/launch-scripts/*/*" />
 			</tarfileset>
 		</gwt.tgz.cat>
@@ -53,6 +55,7 @@
 
 			<!-- samples -->
 			<zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
+                                <exclude name="samples/GWTNote/**" />
 				<include name="samples/*" />
 				<include name="samples/*/src/**" />
 				<include name="samples/*/bin/**" />
@@ -63,6 +66,7 @@
 				Sample launch scripts.
 			-->
 			<zipfileset dir="${gwt.build.out}/samples" prefix="${project.distname}/samples">
+                                <exclude name="GWTNote/**" />
 				<include name="*/launch-scripts/*/*" />
 			</zipfileset>
 		</zip>
