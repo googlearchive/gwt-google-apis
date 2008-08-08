@@ -87,36 +87,7 @@ Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/publ
 To complete the `GearsDatabaseTutorial.java`, you can replace the `onModuleLoad()` with the following methods that create a database, insert data, and read from a simple database. 
 
 {{{
-package com.example.google.gwt.mapstutorial.client;
-
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.maps.client.InfoWindowContent;
-import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
-import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.ui.RootPanel;
-
-public class MapsTutorial implements EntryPoint {
-  private MapWidget map;
-
-  // GWT module entry point method.
-  public void onModuleLoad() {
-
-    // Open a map centered on Cawker City, KS USA
-    map = new MapWidget(new LatLng(39.509,-98.434), 2);
-    map.setSize("500px", "300px");
-    
-    // Add some controls for the zoom level
-    map.addControl(new LargeMapControl());
-    
-    // Add an info window to highlight a point of interest
-    map.getInfoWindow().open(map.getCenter(), 
-        new InfoWindowContent("World's Largest Ball of Twine"));
-    
-    // Add the map to the HTML host page
-    RootPanel.get("mapsTutorial").add(map);
-  }
-}package com.example.google.gwt.gearsdatabasetutorial.client;
+package com.example.google.gwt.gearsdatabasetutorial.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.gears.client.Factory;
@@ -129,6 +100,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -146,6 +118,8 @@ public class GearsDatabaseTutorial implements EntryPoint {
     try {
       db = Factory.getInstance().createDatabase();
       db.open("gears-database-tutorial");
+      // The 'int' type will store up to 8 byte ints depending on the magnitude of the 
+      // value added.
       db.execute("create table if not exists tutorial (Timestamp int)");
     } catch (GearsException e) {
       Window.alert(e.toString());
@@ -154,7 +128,7 @@ public class GearsDatabaseTutorial implements EntryPoint {
     // Add an entry to the database
     try {
       db.execute("insert into tutorial values (?)", new String[] {
-          Integer.toString((int) System.currentTimeMillis())});
+          Long.toString(System.currentTimeMillis())});
     }
     catch (DatabaseException e) {
       Window.alert(e.toString());
@@ -173,9 +147,11 @@ public class GearsDatabaseTutorial implements EntryPoint {
     }
     
     // Display the list of results in a table
-    Grid grid = new Grid(1, timestamps.size());
+    Grid grid = new Grid(timestamps.size() + 1, 1);
+    grid.setText(0, 0, "Accesses to this Page:");
     for (int row = 0; row < timestamps.size(); ++row) {
-      grid.setText(0, row, timestamps.get(row)); 
+      Date stamp = new Date(Long.valueOf(timestamps.get(row)));
+      grid.setText(row + 1, 0, stamp.toString()); 
     }
 
     RootPanel.get("gearsTutorial").add(grid);
@@ -209,10 +185,8 @@ public class NoGears {
 }
 }}}
 
-== Run the !MapsTutorial sample project ==
+== Run the !GearsDatabaseTutorial sample project ==
 
-Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _!MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
-
-  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic5.png
+Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
 If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.
