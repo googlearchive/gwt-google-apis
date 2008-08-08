@@ -29,13 +29,28 @@
       <h1>Gears API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+		    <li><a href="#Release_Notes_r290">r290 (milestone release)</a></li>
 		    <li><a href="#Release_Notes_1_0_0">1.0.0</a></li>
       </ul>
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
-      <p>(place holder for 1.1)</p>
-	  <h3>Fixed issues</h3>
+      <h3>Changes since r290</h3>
+      <ul>
+       <li>This library requires GWT 1.5 or later and Java 1.5 or later.</li>
+       <li>Refactored API to use GWT 1.5's new JavaScript overlay feature; you must use the Factory class to get Gears class instances.</li>
+       <li>Renamed packages under a common <code>client</code> root.</li>
+       <li>All samples will now rebind their EntryPoints to handle cases where Gears is not installed.</li>
+      </ul>
+      <h3>Known Issues</h3>
+	  <ul>
+	  	<li>Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin.</li>
+	  	<li>Creating a Worker from a GWT module is not supported out-of-the-box.</li>
+	  </ul>
+	  <hr/>
+      <a name="Release_Notes_r290"></a>
+     <h2>Release Notes for r290 (milestone release)</h2>
+      <h3>Changes since 1.0.0</h3>
 	  <ul>
 	  <li>Added method to test for Gears availability. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=1">1</a>)</li>
 	  <li>Updated bundled gears_init.js. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=5">5</a>)</li>
@@ -46,11 +61,7 @@
       <li>JavaScriptExceptions can escape from the Database constructors. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=69">69</a>)</li>
       <li>Split these GWT bindings into their own distribution.</li>
 	  </ul>
-	  <h3>Known Issues</h3>
-	  <ul>
-	  	<li>Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin.</li>
-	  </ul>
-	  <hr/>      
+	  <hr/>
       <a name="Release_Notes_1_0_0"></a>
       <h2>Release Notes for 1.0.0</h2>
       <p>
