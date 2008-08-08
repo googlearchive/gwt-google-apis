@@ -1,4 +1,4 @@
-#summary Using Google Maps in a project
+#summary Using Google Maps in a GWT project
 
 = Using Google Maps in a project =
 
@@ -13,8 +13,7 @@ This guide assumes you are already familiar with using the Google Web Toolkit.  
 == Getting the GWT Google APIs gwt-maps library ==
 
 You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option and press the _Search_ button to see milestone releases as well as final releases.  After you download the distribution, uncompress
-it.  Inside the folder you will find a .jar file named after the name of the library (e.g.
-`gwt-maps.jar`). 
+it.  Inside the folder you will find a .jar file named `gwt-maps.jar`. 
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-maps`.
 
