@@ -14,20 +14,19 @@ This guide assumes you are already familiar with using the Google Web Toolkit.  
 == Getting the GWT Google APIs gwt-search library ==
 
 You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option and press the _Search_ button to see milestone releases as well as final releases.  After you download the distribution, uncompress
-it.  Inside the folder you will find a .jar file named after the name of the library (e.g.
-`gwt-maps.jar`). 
+it.  Inside the folder you will find a .jar file named `gwt-search.jar`. 
 
-You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-maps`.
+You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-search`.
 
   _Note: Some releases are marked 'deprecated' by the Google Code download tab, even though they are more recent than older versions.  When we create milestone versions, we mark them in this way just to keep unsuspecting users from grabbing a potentially unstable version._
 
-== Looking at the AJAX Search Sample ==
+== Looking at the HelloSearch Sample ==
 
-Lets start by taking a look at the sample program _HelloSearch_ that is shipped with the `gwt-search` distribution:
+Lets start by taking a look at the sample program _ !HelloSearch _ that is shipped with the `gwt-search` distribution:
 
 Here are the interesting parts of the application
 
-   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/search/client/HelloSearch.java HelloXSearch.java] - Java Source Code
+   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/search/client/HelloSearch.java HelloSearch.java] - Java Source Code
    * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/hellosearch/HelloSearch.gwt.xml HelloSearch.gwt.xml] - GWT Module definition w/ API script injected
 
 Note the following:
@@ -231,5 +230,3 @@ public class SimpleSearch implements EntryPoint {
 Here is a screen capture of the resulting application in hosted mode.
   
   [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch-nohtml.png]
-
-
