@@ -20,6 +20,9 @@
 	
   <!-- Inherit the Gears Module -->
   <inherits name='com.google.gwt.gears.Gears'/>
+  
+  <!-- Inherit the standard theme -->
+  <inherits name="com.google.gwt.user.theme.standard.Standard"/>
 	
   <!-- Specify the app entry point class.                   -->
   <entry-point class='com.google.gwt.gears.sample.resourcestore.client.ResourceStoreDemo'/>

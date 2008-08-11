@@ -18,6 +18,9 @@
 	<inherits name='com.google.gwt.user.User'/>
 	<inherits name='com.google.gwt.gears.Gears'/>
 	
+	<!-- Inherit the standard theme -->
+	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+	
 	<entry-point class='com.google.gwt.gears.sample.database.client.DatabaseDemo'/>
 	
 	<!-- Rebind the entry point if Gears is not installed -->

@@ -20,6 +20,10 @@
   <!-- The following lines add Google Gears support and automatic offline mode -->
   <inherits name='com.google.gwt.gears.Gears' />
   <inherits name='com.google.gwt.gears.Offline' />
+  
+  <!-- Inherit the standard theme -->
+  <inherits name="com.google.gwt.user.theme.standard.Standard"/>
+  
   <entry-point
     class='com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemo' />
     
