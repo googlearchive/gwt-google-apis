@@ -39,10 +39,10 @@ public class SearchTest extends GWTTestCase {
     local.setResultSetSize(ResultSetSize.SMALL);
     local.setCenterPoint("10 10th Street NW, Atlanta, GA USA");
 
-    local.addSearchHandler(new SearchHandler() {
+    local.addSearchCompleteHandler(new SearchCompleteHandler() {
       int resultCount = 0;
 
-      public void onSearchResult(SearchEvent event) {
+      public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
         
@@ -79,10 +79,10 @@ public class SearchTest extends GWTTestCase {
     SearchControlOptions options = new SearchControlOptions();
     WebSearch ws = new WebSearch();
     ws.setResultSetSize(ResultSetSize.SMALL);
-    ws.addSearchHandler(new SearchHandler() {
+    ws.addSearchCompleteHandler(new SearchCompleteHandler() {
       int resultCount = 0;
 
-      public void onSearchResult(SearchEvent event) {
+      public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
         
@@ -134,10 +134,10 @@ public class SearchTest extends GWTTestCase {
     ws.setResultSetSize(ResultSetSize.SMALL);
     options.add(ws);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchHandler(new SearchHandler() {
+    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
       int resultCount = 0;
 
-      public void onSearchResult(SearchEvent event) {
+      public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
         

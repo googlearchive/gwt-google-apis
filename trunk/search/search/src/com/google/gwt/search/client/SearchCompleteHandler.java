@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,19 +18,19 @@ package com.google.gwt.search.client;
 /**
  * Accepts search results.
  * 
- * @see Search#addSearchHandler(SearchHandler)
- * @see SearchControl#addSearchHandler(SearchHandler)
+ * @see Search#addSearchCompleteHandler(SearchCompleteHandler)
+ * @see SearchControl#addSearchCompleteHandler(SearchCompleteHandler)
  */
-public interface SearchHandler {
+public interface SearchCompleteHandler {
 
   /**
    * A container for arguments of the Search callback.
    */
-  static class SearchEvent {
+  static class SearchCompleteEvent {
     private Search search;
     private Result result;
 
-    SearchEvent(Search search, Result result) {
+    SearchCompleteEvent(Search search, Result result) {
       this.search = search;
       this.result = result;
     }
@@ -60,5 +60,5 @@ public interface SearchHandler {
    * 
    * @param event contains the arguments of the callback.
    */
-  void onSearchResult(SearchEvent event);
+  void onSearchComplete(SearchCompleteEvent event);
 }

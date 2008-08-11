@@ -131,7 +131,7 @@ public abstract class Search {
   /**
    * A collection of handlers to notify when the Search receives results.
    */
-  private SearchHandlerCollection handlers;
+  private SearchCompleteHandlerCollection handlers;
 
   /**
    * Package-protected constructor to restrict the use of the class outside of
@@ -146,15 +146,15 @@ public abstract class Search {
   }
 
   /**
-   * Add a SearchHandler to receive notifications when Results are created
+   * Add a SearchCompleteHandler to receive notifications when Results are created
    * after executing the Search. This search will fire when searches created by
    * {@link Search#execute(String)} complete.
    * 
    * @param handler The handler to add
    */
-  public void addSearchHandler(SearchHandler handler) {
+  public void addSearchCompleteHandler(SearchCompleteHandler handler) {
     if (handlers == null) {
-      handlers = new SearchHandlerCollection();
+      handlers = new SearchCompleteHandlerCollection();
       impl.setSearchCompleteCallback(this, null, new GSearchCompleteCallback() {
         @Override
         public void onSearchResult() {
@@ -244,11 +244,11 @@ public abstract class Search {
   }
 
   /**
-   * Remove a previously-added SearchListener.
+   * Remove a previously-added SearchCompleteHandler.
    * 
-   * @param l The SearchListener to remove
+   * @param l The SearchCompleteHandlerer to remove
    */
-  public void removeSearchListener(SearchHandler l) {
+  public void removeSearchCompleteHandler(SearchCompleteHandler l) {
     if (handlers != null) {
       handlers.remove(l);
     }

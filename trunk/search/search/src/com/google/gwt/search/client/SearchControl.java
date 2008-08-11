@@ -60,10 +60,10 @@ public class SearchControl extends Composite {
   private final KeepHandlerCollection keepHandlers = new KeepHandlerCollection();
 
   /**
-   * Retains all SearchHandlers that should be notified when the SearchControl
+   * Retains all SearchCompleteHandlers that should be notified when the SearchControl
    * receives Result.
    */
-  private final SearchHandlerCollection resultHandlers = new SearchHandlerCollection();
+  private final SearchCompleteHandlerCollection resultHandlers = new SearchCompleteHandlerCollection();
 
   /**
    * Retains all SearchStartingHandlers that should be notified when the search
@@ -162,15 +162,15 @@ public class SearchControl extends Composite {
   }
 
   /**
-   * Adds a {@link SearchHandler} to receive notification of all search results
-   * loaded by the SearchControl. A SearchHandler added to the SearchControl
+   * Adds a {@link SearchCompleteHandler} to receive notification of all search results
+   * loaded by the SearchControl. A SearchCompleteHandler added to the SearchControl
    * will receive Result objects from all Search objects added to the
    * SearchControl.
    * 
-   * @param handler A {@link SearchHandler} that will receive notifications when
+   * @param handler A {@link SearchCompleteHandler} that will receive notifications when
    *          the SearchControl has received a Result.
    */
-  public void addSearchHandler(SearchHandler handler) {
+  public void addSearchCompleteHandler(SearchCompleteHandler handler) {
     resultHandlers.add(handler);
   }
 
@@ -203,30 +203,24 @@ public class SearchControl extends Composite {
    * @param handler The KeepHandler to remove
    */
   public void removeKeepHandler(KeepHandler handler) {
-    if (keepHandlers != null) {
       keepHandlers.remove(handler);
-    }
   }
 
   /**
-   * Removes a SearchHandler from the SearchControl.
+   * Removes a {@link SearchCompleteHandler} from the {@link SearchControl}.
    * 
-   * @param handler The SearchHandler to remove
+   * @param handler The {@link SearchCompleteHandler} to remove
    */
-  public void removeSearchHandler(SearchHandler handler) {
-    if (resultHandlers != null) {
+  public void removeSearchCompleteHandler(SearchCompleteHandler handler) {
       resultHandlers.remove(handler);
-    }
   }
 
   /**
-   * Removes a SearchStaringHandler from the SearchControl.
+   * Removes a {@link SearchStartingHandler} from the SearchControl.
    * 
-   * @param handler The SearchStartingHandler to remove
+   * @param handler The {@link SearchStartingHandler} to remove
    */
   public void removeSearchStartingHandler(SearchStartingHandler handler) {
-    if (startingHandlers != null) {
       startingHandlers.remove(handler);
-    }
   }
 }

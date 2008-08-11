@@ -71,8 +71,8 @@ public class ImageSearchTest extends GWTTestCase {
     imgSearch.setResultSetSize(ResultSetSize.SMALL);
     options.add(imgSearch);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchHandler(new SearchHandler() {
-      public void onSearchResult(SearchEvent event) {
+    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
+      public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
 
@@ -110,8 +110,8 @@ public class ImageSearchTest extends GWTTestCase {
 
     options.add(imgSearch);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchHandler(new SearchHandler() {
-      public void onSearchResult(SearchEvent event) {
+    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
+      public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
 
