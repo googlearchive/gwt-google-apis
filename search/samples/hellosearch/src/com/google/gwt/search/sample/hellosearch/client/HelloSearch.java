@@ -25,16 +25,14 @@ import com.google.gwt.search.client.NewsResult;
 import com.google.gwt.search.client.NewsSearch;
 import com.google.gwt.search.client.Result;
 import com.google.gwt.search.client.ResultSetSize;
-import com.google.gwt.search.client.Search;
+import com.google.gwt.search.client.SearchCompleteHandler;
 import com.google.gwt.search.client.SearchControl;
 import com.google.gwt.search.client.SearchControlOptions;
-import com.google.gwt.search.client.SearchHandler;
 import com.google.gwt.search.client.SearchStartingHandler;
 import com.google.gwt.search.client.VideoResult;
 import com.google.gwt.search.client.VideoSearch;
 import com.google.gwt.search.client.WebResult;
 import com.google.gwt.search.client.WebSearch;
-import com.google.gwt.search.client.SearchStartingHandler.SearchStartingEvent;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -47,7 +45,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * HelloSearch application.
  */
-public class HelloSearch implements EntryPoint, KeepHandler, SearchHandler,
+public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandler,
     SearchStartingHandler {
 
   private class GoogleCodeWebSearch extends WebSearch {
@@ -63,7 +61,6 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchHandler,
   private HorizontalPanel hp = new HorizontalPanel();
 
   public void onKeep(KeepEvent event) {
-    final SearchControl control = event.getSearchControl();
     final Result result = event.getResult();
     
     String title;
@@ -128,7 +125,7 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchHandler,
     SearchControl searchControl = new SearchControl(options);
 
     searchControl.addKeepHandler(this);
-    searchControl.addSearchHandler(this);
+    searchControl.addSearchCompleteHandler(this);
     searchControl.addSearchStartingHandler(this);
     searchControl.execute("Google Web Toolkit");
 
@@ -143,7 +140,7 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchHandler,
    * This is just to show that the concrete returned types are those defined in
    * the API.
    */
-  public void onSearchResult(SearchEvent event) {
+  public void onSearchComplete(SearchCompleteEvent event) {
     Result result = event.getResult();
     System.out.println("The result is a " + result.getClass().getName());
   }
