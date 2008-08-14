@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.overlay.Icon;
 import com.google.gwt.maps.jsio.client.BeanProperties;
-import com.google.gwt.maps.jsio.client.Binding;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.Global;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
@@ -34,9 +33,6 @@ import com.google.gwt.maps.jsio.client.JSList;
 public interface IconImpl extends JSFlyweightWrapper {
 
   IconImpl impl = GWT.create(IconImpl.class);
-
-  @Binding
-  void bind(JavaScriptObject jsoPeer, Icon icon);
 
   @Constructor("$wnd.GIcon")
   JavaScriptObject construct();
