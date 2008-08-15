@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class ResourceStoreDemo implements EntryPoint {
   private static final String RESOURCE_STORE_NAME = "helloworld-store";
   private static final String[] FILES_TO_CAPTURE = {
-      getLocationPathName(), "ResourceStoreDemo.css"};
+      getLocationPathName(), "resource.txt"};
 
   private static native String getLocationPathName() /*-{
     return $doc.location.href;
