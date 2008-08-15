@@ -1404,7 +1404,7 @@ public class MapEventDemo extends MapsDemo {
           mapTypeButton.setText("Remove MapType");
         } else {
           map.removeMapType(MapType.getSkyVisibleMap());
-          removeButton.setText("Add MapType");
+          mapTypeButton.setText("Add MapType");
         }
         mapTypeRemoved = !mapTypeRemoved;
       }
