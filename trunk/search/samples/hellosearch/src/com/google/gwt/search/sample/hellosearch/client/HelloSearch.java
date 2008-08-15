@@ -33,6 +33,8 @@ import com.google.gwt.search.client.VideoResult;
 import com.google.gwt.search.client.VideoSearch;
 import com.google.gwt.search.client.WebResult;
 import com.google.gwt.search.client.WebSearch;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -57,9 +59,9 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
   }
 
   private VerticalPanel clips = new VerticalPanel();
-
   private HorizontalPanel hp = new HorizontalPanel();
-
+  private static final int CLIP_WIDTH = 200;
+  
   public void onKeep(KeepEvent event) {
     final Result result = event.getResult();
     
@@ -99,7 +101,7 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
   }
 
   public void onModuleLoad() {
-
+   
     clips.setWidth("100%");
     clips.addStyleName("clips");
 
@@ -128,12 +130,13 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
     searchControl.addSearchCompleteHandler(this);
     searchControl.addSearchStartingHandler(this);
     searchControl.execute("Google Web Toolkit");
-
-    clips.setWidth("200px");
+    
+    clips.setWidth(CLIP_WIDTH + "px");
     hp.add(clips);
     hp.add(searchControl);
-    RootPanel.get().add(hp, 5, 5);
-   
+    hp.setWidth("100%");
+    
+    RootPanel.get().add(hp);
   }
 
   /**

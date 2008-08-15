@@ -17,6 +17,8 @@
 	<inherits name="com.google.gwt.search.Search"/>
 	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
 
+  <stylesheet src="HelloSearch.css" />
+    
 	<entry-point class="com.google.gwt.search.sample.hellosearch.client.HelloSearch"/>
     <!--
       If you want to deploy this application outside of localhost,  you 
@@ -34,5 +36,5 @@
       recommend you keep this one.)
      -->
     <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
-    
+
 </module>
