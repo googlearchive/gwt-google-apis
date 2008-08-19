@@ -1,41 +1,41 @@
-﻿#summary Overview of the GWT Google APIs project
+﻿#summary Overview of the Google API Libraries for Google Web Toolkit
 
 = Overview =
 
-Using Google APIs you can integrate some of Google's online services such as 
+Using the Google API Libraries you can easily use Google's existing !JavaScript APIs such as the
 [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
 [http://code.google.com/apis/gears/ Gears API],  and 
-[http://code.google.com/apis/gadgets/ Gadgets] into third party websites.  These APIs were originally offered as !JavaScript APIs for web programmers. 
+[http://code.google.com/apis/gadgets/ Gadgets] in your Google Web Toolkit projects.  
 
-The [http://code.google.com/webtoolkit/ Google Web Toolkit] (GWT) brings a new dimension to web programming by offering a way to write a web application in the Java langauge, and deploy it to the web using !JavaScript.  
+The [http://code.google.com/webtoolkit/ Google Web Toolkit] (GWT) brings a new dimension to web programming by offering a way to write an AJAX web application in the Java language, and deploy it to the web using !JavaScript.  
 
-The GWT Google APIs eases integrating existing Google APIs and browser extensions with an application written using GWT.   The API is a set of Java bindings, giving GWT developers easy access to the latest capabilities of Google APIs without having to resort to writing custom integration code using !JavaScript.
+The Google API Libraries for GWT eases integrating existing Google APIs and browser extensions with an application written using GWT.   The libraries provide a set of Java bindings, giving GWT developers easy access to the latest capabilities of Google APIs without having to write custom integration code using !JavaScript.
 
 
 == Licensing ==
 
 The Google APIs for Google Web Toolkit is an open source project under the Apache 2.0 license.
 
-Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation linked to above, including the class reference, is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons] license, and examples are licensed under an [http://www.apache.org/licenses/LICENSE-2.0 Apache license].
+Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation and API reference is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons] license, and examples are licensed under an [http://www.apache.org/licenses/LICENSE-2.0 Apache license].
 
 
 == Downloads ==
 
-The home of the project is at [http://code.google.com/p/gwt-google-apis Google Code].  There you will find documentation, source code, and downloads of released versions of the library.
+The Google API Libraries for GWT project lives on [http://code.google.com/p/gwt-google-apis Google Code].  There you will find documentation, source code, and downloads of released versions of the library.
 
-If you are interested in milestone builds that might be more recent than the latest official release, be sure to select the _All Downloads_ option and press the _Search_ button for more download options.
+If you are interested in milestone builds that might be more recent than the latest official release, see the bottom of the [Downloads downloads] page.
 
-== Support ==
+== Forums ==
 
-Support is provided on the Google Group named [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].
+For questions related to the libraries, please see the Google Group named [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].
 
 == Reporting Bugs ==
 
 First, consult the issue tracker for the project at 
-[http://code.google.com/p/gwt-google-apis Google Code].  If you do not see the bug listed, and are not sure if you've found a bug, consult with [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].  If you are sure you've found a bug,  please file a new issue.  You can follow up with a post to the [http://groups.google.com/group/Google-Web-Toolkit-Contributors Google-Web-Toolkit-Contributors] mailing list if you like.
+[http://code.google.com/p/gwt-google-apis Google Code].  If you do not see the bug listed, and are not sure if you've found a bug, search the [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit groups].  If you are sure you've found a bug,  please file a new issue.  You can follow up with a post to the [http://groups.google.com/group/Google-Web-Toolkit-Contributors Google-Web-Toolkit-Contributors] mailing list if you like.
 
 If you find a bug that matches the problem you describe, make sure to _star_ it by clicking on the star at the upper left of the bug.  This helps us judge how many people are affected by the problem.
 
 == Contributing  to the project ==
 
-Discussions of the development of the library itself occur on the public [http://groups.google.com/group/Google-Web-Toolkit-Contributors Google-Web-Toolkit-Contributors] Google group.  Be sure to read [MakingGALGWTBetter Making Google API Library for GWT Better].
+Discussions of the development of the library itself occur on the public [http://groups.google.com/group/Google-Web-Toolkit-Contributors Google-Web-Toolkit-Contributors] Google group.  Be sure to read [MakingGALGWTBetter Making Google API Libraries for GWT Better].
