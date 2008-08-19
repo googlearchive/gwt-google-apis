@@ -1,0 +1,40 @@
+Currently, released libraries are available for Gears. The most current version is 1.0. Note that prior to version 1.1 of the Gears library (currently a release candidate), the gears distribution was named gwt-google-apis, but only contained bindings for Gears.  [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].
+
+* Gears API Library 1.0 *
+  * [http://gwt-google-apis.googlecode.com/files/gwt-google-apis-1.0.0.tar.gz gwt-google-apis-1.0.0.tar.gz]*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-google-apis-1.0.0.zip gwt-google-apis-1.0.0.zip]*
+  
+----
+
+===Release Candidates===
+A number of additional libraries are now available as Release Candidates and are ready to be taken for a test drive. Note that Release Candidates have not yet been released for production use.
+
+*Gears API Library 1.1 (Release Candidate)*
+  * [http://x gwt-gears-1.1.0.tar.gz]
+  * [http://x gwt-gears-1.1.0.gzip]
+
+*Gadgets API Library 1.0 (Release Candidate)*
+  * [http://x gwt-gadgets-1.0.0.tar.gz]
+  * [http://x gwt-gadgets-1.0.0.gzip]
+
+*Google AJAX Search API Library 1.0 (Release Candidate)*
+  * [http://x gwt-ajaxsearch-1.0.0.tar.gz]
+  * [http://x gwt-ajaxsearch-1.0.0.tar.gzip]
+
+----
+
+===Milestone Builds===
+The following libraries are under active development and available as milestone builds. 
+
+*Google Maps Milestone R290*
+
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-0.0.290.zip gwt-maps-0.0.290.zip ] 
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-0.0.290.tar.gz gwt-maps-0.0.290.tar.gz]
+
+
+
+===Licensing===
+
+The above libraries are licensed under the [http://www.apache.org/licenses/LICENSE-2.0 Apache license Apache 2.0] open source license, which includes limitations of liability and disclaimers of warranty for the product. 
+
+Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation linked to above, including the class reference, is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons license], and examples are licensed under an [http://www.apache.org/licenses/LICENSE-2.0 Apache license].
