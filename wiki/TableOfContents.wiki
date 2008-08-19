@@ -1,4 +1,4 @@
-#summary Table of Contents for GWT Google APIs
+﻿#summary Table of Contents for GWT Google APIs
  * [Overview Project Overview]
  * [AJAXSearchIntro AJAX Search]
    * [AJAXSearchGettingStarted Using Google AJAX Search in a project]
@@ -9,7 +9,7 @@
    * [GadgetsJavadoc Class Reference]
    * [GadgetsFAQ FAQ]
  * [GearsIntro Gears]
-   * [GearsGettingStarted Using Google Gears in a project]
+   * [GearsGettingStarted Using Gears in a project]
       * [GearsTutorialDatabase Database Tutorial]
       * [GearsTutorialLocalServer LocalServer Tutorial]
       * [GearsTutorialOffline Offline Tutorial]

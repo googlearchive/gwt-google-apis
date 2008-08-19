@@ -1,4 +1,4 @@
-#summary Using the Gears Database in a GWT project
+﻿#summary Using the Gears Database in a GWT project
 
 = Creating your project =
 
@@ -58,7 +58,7 @@ Before continuing, make sure you can launch the skeleton project in hosted mode 
 
 == Modify GearsDatabaseTutorial.gwt.xml ==
 
-The Google Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to redirect users when your application detects that the Gears plugin is not available.  You can create a rebind rule in your GWT module that will redirect users to a different page in this instance.
+The Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to redirect users when your application detects that the Gears plugin is not available.  You can create a rebind rule in your GWT module that will redirect users to a different page in this instance.
 
 {{{
   <!-- Rebind the entry point if Gears is not installed -->
@@ -104,7 +104,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * A demonstration of how to use Google Gears' Database feature.
+ * A demonstration of how to use Gears' Database feature.
  */
 public class GearsDatabaseTutorial implements EntryPoint {
   private Database db;
@@ -177,7 +177,7 @@ public class NoGears {
   public void onModuleLoad() {
     RootPanel rootPanel = RootPanel.get();
     rootPanel.add(new HTML(
-        "<font color=\"red\">ERROR: This browser does not support Google Gears. "
+        "<font color=\"red\">ERROR: This browser does not support Gears. "
         + " Please <a href=\"http://gears.google.com/\">install Gears</a> " 
         + "and reload the application.  Note that GWT Gears applications can "
         + "only be debugged in hosted mode on Windows.</font>"));
