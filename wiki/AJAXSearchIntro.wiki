@@ -2,6 +2,6 @@
 
 = AJAX Search API = 
 
-   * [AJAXSearchGettingStarted Getting started with Google AJAX Search]
+   * [AJAXSearchGettingStarted Getting Started with Google AJAX Search]
    * [AJAXSearchJavadoc Class Reference]
    * [AJAXSearchFAQ FAQ]
