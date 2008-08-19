@@ -1,6 +1,6 @@
 #summary Using Google Maps in a GWT project
 
-= Using Google Maps in a project =
+= Getting Started with Google Maps =
 
 This section describes the Google Maps library [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT) wrapper APIs.  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/maps/ Maps developer's site].
 
