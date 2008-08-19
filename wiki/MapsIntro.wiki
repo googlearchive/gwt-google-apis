@@ -2,7 +2,7 @@
 
 = Maps API = 
 
-   * [MapsGettingStarted Using Google Maps in a GWT project]
+   * [MapsGettingStarted Getting Started with Google Maps]
    * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
    * [MapsHelloMaps The HelloMaps demo]
    * [MapsJavadoc Class Reference]
