@@ -2,6 +2,6 @@
 
 = Gears API = 
 
-   * [GearsGettingStarted Using Gears in a GWT project]
+   * [GearsGettingStarted Getting Started with Gears]
    * [GearsJavadoc Class Reference]
    * [GearsFAQ FAQ]
