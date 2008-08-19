@@ -1,6 +1,6 @@
 ﻿#summary Using Gears in a project
 
-= Using Gears in a project =
+= Getting Started with Gears =
 
 This section describes the basics behind writing a small project that uses the Gears Plugin API with the [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/gears/ Gears developer's site].
 
