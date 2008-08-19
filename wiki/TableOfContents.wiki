@@ -1,7 +1,7 @@
 ﻿#summary Table of Contents for GWT Google APIs
  * [Overview Project Overview]
  * [AJAXSearchIntro AJAX Search]
-   * [AJAXSearchGettingStarted Getting Started with Google AJAX Search]
+   * [AJAXSearchGettingStarted Getting Started]
    * [AJAXSearchJavadoc API Reference]
    * [AJAXSearchFAQ FAQs]
  * [GadgetsIntro Gadgets]
