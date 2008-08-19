@@ -1,0 +1,5 @@
+#summary Sample AJAX Search Applications.
+
+= Introduction =
+
+Work in progress.
