@@ -2,14 +2,10 @@
 
 = Overview =
 
-Using the Google API Libraries you can easily use Google's existing !JavaScript APIs such as the
+The Google API Libraries for Google Web Toolkit is a collection of libraries that provide Java language bindings for popular JavaScript APIs such as the
 [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
 [http://code.google.com/apis/gears/ Gears API],  and 
-[http://code.google.com/apis/gadgets/ Gadgets] in your Google Web Toolkit projects.  
-
-The [http://code.google.com/webtoolkit/ Google Web Toolkit] (GWT) brings a new dimension to web programming by offering a way to write an AJAX web application in the Java language, and deploy it to the web using !JavaScript.  
-
-The Google API Libraries for GWT eases integrating existing Google APIs and browser extensions with an application written using GWT.   The libraries provide a set of Java bindings, giving GWT developers easy access to the latest capabilities of Google APIs without having to write custom integration code using !JavaScript.
+[http://code.google.com/apis/gadgets/ Gadgets]. These libraries make it quick and easy for you to use these !JavaScript APIs in your Google Web Toolkit project without having to write custom integration code using !JavaScript.   
 
 
 == Licensing ==
