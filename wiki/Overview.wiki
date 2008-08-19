@@ -15,7 +15,10 @@ The GWT Google APIs eases integrating existing Google APIs and browser extension
 
 == Licensing ==
 
-The project is maintained as an open source project and distributed under the Apache 2.0 license.
+The Google APIs for Google Web Toolkit is an open source project under the Apache 2.0 license.
+
+Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation linked to above, including the class reference, is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons] license, and examples are licensed under an [http://www.apache.org/licenses/LICENSE-2.0 Apache license].
+
 
 == Downloads ==
 
