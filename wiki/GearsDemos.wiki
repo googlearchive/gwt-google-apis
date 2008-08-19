@@ -1,0 +1,24 @@
+﻿#summary Gears Sample Code pointers and walkthroughs
+
+= Gears Demos =
+
+This page will describe the sample code distributed with gwt-gears  in the `samples` directory.
+
+== Database ==
+
+  _TBD: Link to a hosted version of the demo_
+
+  _TBD: walk through the code _
+
+== ManagedResourceStore ==
+
+  _TBD: Link to a hosted version of the demo_
+
+  _TBD: walk through the code _
+
+== ResoureStore ==
+
+  _TBD: Link to a hosted version of the demo_
+
+  _TBD: walk through the code _
+
