@@ -2,4 +2,4 @@
 
 = Sample Applications =
 
-Add link to hosted applications.
+TODO: Add link to hosted applications.
