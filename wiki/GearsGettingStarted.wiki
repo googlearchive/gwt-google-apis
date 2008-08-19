@@ -2,16 +2,15 @@
 
 = Getting Started with Gears =
 
-This section describes the basics behind writing a small project that uses the Gears Plugin API with the [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/gears/ Gears developer's site].
+This section describes the basics behind writing a small project that uses the Gears API with [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, you should be somewhat familiar with the [http://code.google.com/apis/gears/ Gears developer's site].
 
 == Assumptions ==
  
-This guide assumes you are already familiar with using the Google Web Toolkit.  See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familiar with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
+This guide assumes you are already familiar with using Google Web Toolkit. See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familiar with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
 
-== Getting the GWT Google APIs gwt-gears library ==
+== Getting the Google API Libraries for GWT `gwt-gears` library ==
 
-You can download the latest production release of the GWT Google APIs library from the [http://code.google.com/p/gwt-google-apis/downloads/list project download page].  Choose the _All Downloads_ option and press the _Search_ button to see milestone releases as well as final releases.  After you download the distribution, uncompress
-it.  Inside the folder you will find a .jar file named `gwt-maps.jar`. 
+You can download the latest production releases of the libraries from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-gears.jar`. 
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-gears`.
 
