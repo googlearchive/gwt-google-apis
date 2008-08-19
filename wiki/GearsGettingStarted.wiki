@@ -1,4 +1,4 @@
-﻿#summary Using Gears in a project
+﻿#summary Using Gears in a GWT project
 
 = Getting Started with Gears =
 
