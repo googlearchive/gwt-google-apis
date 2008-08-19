@@ -2,4 +2,6 @@
 
 = Sample Applications =
 
-TODO: Add link to hosted applications.
+[AJAXSearchHelloSearchSample HelloSearch Sample]
+
+TODO: Add screen shots, etc?
