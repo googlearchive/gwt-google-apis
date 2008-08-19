@@ -2,7 +2,7 @@
 
 = Getting Started with Gears =
 
-This section describes the basics behind writing a small project that uses the Gears API with [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, you should be somewhat familiar with the [http://code.google.com/apis/gears/ Gears developer's site].
+This guide describes the basics behind writing a small project that uses the Gears API with [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, you should be somewhat familiar with the [http://code.google.com/apis/gears/ Gears developer's site].
 
 == Assumptions ==
  
@@ -14,11 +14,8 @@ You can download the latest production releases of the libraries from the [http:
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-gears`.
 
-  _Note: Some releases are marked 'deprecated' by the Google Code download tab, even though they are more recent than older versions.  When we create milestone versions, we mark them in this way just to keep unsuspecting users from grabbing a potentially unstable version._
 
-== Tutorials ==
-  
-   * [GearsTutorialDatabase Database Tutorial]
-   * [GearsTutorialLocalServer LocalServer Tutorial]
-   * [GearsTutorialOffline Offline Tutorial]
-   * [GearsTutorialWorkerPool WorkerPool Tutorial]
+== Gears Modules and Topics ==
+Gears contains three main modules, [http://code.google.com/apis/gears/api_localserver.html !LocalServer], [http://code.google.com/apis/gears/api_database.html Database], and [http://code.google.com/apis/gears/api_workerpool.html !WorkerPool]. In this guide, we will describe how to use the Database module only, though support exists for !LocalServer and !WorkerPool as well. 
+
+[GearsTutorialDatabase Continue on] to learn how to use the Gears Database Module
