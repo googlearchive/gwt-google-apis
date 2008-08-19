@@ -22,7 +22,7 @@
      * [MapsHelloMaps The HelloMaps demo]
      * [MapsJavadoc Class Reference]
      * [MapsFAQ FAQ]
-   * [GettingStartedVisualization Getting Started (In Progress)] 
+   * [GettingStartedVisualization Visualization] 
  * [MakingGALGWTBetter Making Google API Library for GWT  Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [TemplateProject Template Project]
