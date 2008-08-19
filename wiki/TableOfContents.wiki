@@ -4,6 +4,7 @@
    * [AJAXSearchGettingStarted Getting Started]
    * [AJAXSearchJavadoc API Reference]
    * [AJAXSearchFAQ FAQs]
+   * [AJAXSearchSampleApplications Sample Applications]
  * [GadgetsIntro Gadgets]
    * [GadgetsGettingStarted Using Google Gadgets in a project]
    * [GadgetsJavadoc Class Reference]
