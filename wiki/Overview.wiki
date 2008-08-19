@@ -4,7 +4,6 @@
 
 Using Google APIs you can integrate some of Google's online services such as 
 [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
-[http://code.google.com/apis/maps/ Google Maps API],
 [http://code.google.com/apis/gears/ Gears API],  and 
 [http://code.google.com/apis/gadgets/ Gadgets] into third party websites.  These APIs were originally offered as !JavaScript APIs for web programmers. 
 
