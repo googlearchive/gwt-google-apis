@@ -39,19 +39,6 @@ Copying all files found on public path
 Compilation succeeded
 }}}
 
-
-== Modify !GearsDatabaseTutorial.gwt.xml ==
-
-The Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to redirect users when your application detects that the Gears plugin is not installed or not supported.  You can create a rebind rule in your GWT module that will redirect users to a different page in this instance.
-
-{{{
-  <!-- Rebind the entry point if Gears is not installed -->
-  <replace-with class="com.example.google.gwt.gearsdatabasetutorial.client.NoGears">
-    <when-type-is class="com.example.google.gwt.gearsdatabasetutorial.client.GearsDatabaseTutorial"/>
-    <when-property-is name="gears.installed" value="false"/>
-  </replace-with>
-}}}
-
 == Update the HTML host file ==
 
 Replace the body of the HTML host file `com/example/google/gwt/gearsdatabasetutorial/public/GearsDatabaseTutorial.html` with a `<div>` tag that we can use for the GWT application.
@@ -167,6 +154,18 @@ public class NoGears {
         + "only be debugged in hosted mode on Windows.</font>"));
   }
 }
+}}}
+
+== Modify !GearsDatabaseTutorial.gwt.xml ==
+
+The Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to redirect users when your application detects that the Gears plugin is not installed or not supported.  You can create a rebind rule in your GWT module that will redirect users to a different page in this instance.
+
+{{{
+  <!-- Rebind the entry point if Gears is not installed -->
+  <replace-with class="com.example.google.gwt.gearsdatabasetutorial.client.NoGears">
+    <when-type-is class="com.example.google.gwt.gearsdatabasetutorial.client.GearsDatabaseTutorial"/>
+    <when-property-is name="gears.installed" value="false"/>
+  </replace-with>
 }}}
 
 == Run the !GearsDatabaseTutorial sample project ==
