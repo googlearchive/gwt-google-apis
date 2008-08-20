@@ -1,0 +1,20 @@
+#summary One-sentence summary of this page.
+
+= Google AJAX Search API Library for GWT Release Notes =
+
+==Release Notes for 1.0.0==
+===Changes since r290===
+
+    * This library requires GWT 1.5 or later and Java 1.5 or later.
+    * Added ImageSearch support.
+    * For event handling, removed Listener classes and replaced with Handler classes
+    * Added support for the SearchStarting callback.
+    * Added support for the cursor property, allowing developers to fetch subsequent pages of results.
+    * Renamed package prefix from com.google.gwt.ajaxsearch to com.google.gwt.search
+    * Renamed sample from AJAXSearch to HelloSearch
+    * Fixed other issues noted in the Issue Tracker
+    * Added unit tests
+
+----
+==Release Notes for r290 (milestone release)==
+===Initial release.===
