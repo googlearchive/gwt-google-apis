@@ -67,18 +67,6 @@ TODO: WHERE IN THE FILE. DOES IT MATTER?
 }}}
 
 
-==Choose what type of search to run==
-
-Google AJAX Search offers a few different types of searches:
- * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/BlogSearch.html BlogSearch]
- * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/BookSearch.html BookSearch]
- * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/LocalSearch.html LocalSearch]
- * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/ImageSearch.html ImageSearch]
- * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/NewsSearch.html NewsSearch]
- * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/VideoSearch.html VideoSearch]
- * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/WebSearch.html WebSearch]
-
-
 == Basic steps to use the API ==
 
 The basic steps to use the API are as follows:
