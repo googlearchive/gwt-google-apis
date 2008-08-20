@@ -1,0 +1,5 @@
+com.google.gwt.gears.client
+com.google.gwt.gears.client.database
+com.google.gwt.gears.client.localserver
+com.google.gwt.gears.client.workerpool
+com.google.gwt.gears.offline.client
