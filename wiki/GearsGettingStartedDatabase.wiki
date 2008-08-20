@@ -23,7 +23,7 @@ $ applicationCreator -eclipse GearsDatabaseTutorial \
 }}}
 
 
-You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse. See the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) GWT Developer's Guide] if you need a refresher on how to import your project into Eclipse.
+You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse. 
 
 You should see the skeleton project come up:
 
