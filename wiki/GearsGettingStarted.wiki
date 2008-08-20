@@ -6,7 +6,10 @@ This guide describes the basics behind writing a small project that uses the Gea
 
 == Assumptions ==
  
-This guide assumes you are already familiar with using Google Web Toolkit. See the [http://code.google.com/webtoolkit/overview.html GWT Documentation] to learn how to create a new GWT project.  Make sure you are familiar with the  `applicationCreator` tool to help create new projects and to integrate your project with the Eclipse IDE.  
+  * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
+  * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
+
+
 
 == Getting the Google API Libraries for GWT `gwt-gears` library ==
 
