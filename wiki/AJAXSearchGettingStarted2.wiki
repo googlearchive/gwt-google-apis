@@ -21,7 +21,7 @@ You can either reference the `.jar` file from the folder that you uncompressed t
 
 Start by creating a new GWT project called !SimpleSearch as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
 
-Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-gears/gwt-search.jar` to the Java classpath for the launch, compile and .and eclipse definitions. For the purposes of this example we assume `gwt-search.jar` has been unpacked in `/usr/local/gwt-search` and that you are using the Eclipse IDE.
+Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-gears/gwt-search.jar` to the Java classpath for the launch, compile and and eclipse definitions. For the purposes of this example we assume `gwt-search.jar` has been unpacked in `/usr/local/gwt-search` and that you are using the Eclipse IDE.
 
 We also need to tell the GWT compiler that we are using the Search module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.search.Search` as the module to be inherited. This will place the inheritance entry `Search.gwt.xml` into the generated project file `SimpleSearch.gwt.xml`.
 
@@ -38,7 +38,7 @@ $ applicationCreator -eclipse SimpleSearch -out SimpleSearch \
 }}}
 
 
-You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!SimpleSearch-shell_ from the command line or using the _Run_ configuration from Eclipse. 
+Now you should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!SimpleSearch-shell_ from the command line or using the _Run_ configuration from Eclipse. 
 
 Also test out compilation with the `SimpleSearch-compile` script or the _Compile/Browse_ button in hosted mode
 
