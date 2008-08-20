@@ -1,0 +1,36 @@
+#summary Gears API Library for GWT Release Notes.
+
+= Gears API Library for GWT Release Notes =
+
+==Release Notes for 1.1.0==
+===Changes since r290===
+
+    * This library requires GWT 1.5 or later and Java 1.5 or later.
+    * Refactored API to use GWT 1.5's new JavaScript overlay feature; you must use the Factory class to get Gears class instances.
+    * Renamed packages under a common client root.
+    * All samples will now rebind their EntryPoints to handle cases where Gears is not installed.
+
+===Known Issues===
+
+    * Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin. (issue 11)
+    * Creating a Worker from a GWT module is not supported out-of-the-box.
+
+----
+
+==Release Notes for r290 (milestone release)==
+===Changes since 1.0.0===
+
+    * Added method to test for Gears availability. (issue 1)
+    * Updated bundled gears_init.js. (issue 5)
+    * Added support for automatic Gears manifest creation. (issue 6)
+    * Fixed ResourceStore exceptions to include the JS error messages. (issue 7)
+    * ResourceStore URL capture does not work in GWT hosted mode. (issue 10)
+    * ResultSet.getFieldAsString is documented to throw a DatabaseException but the exception is missing from the method's declaration. (issue 68)
+    * JavaScriptExceptions can escape from the Database constructors. (issue 69)
+    * Split these GWT bindings into their own distribution.
+
+----
+
+==Release Notes for 1.0.0==
+
+===Initial release. ===
