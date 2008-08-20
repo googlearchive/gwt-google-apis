@@ -4,7 +4,7 @@ The Google API Libraries for Google Web Toolkit is a collection of libraries tha
 
 ==Available Libraries===
 ====Gears 1.0 Library====
-  [http://code.google.com/apis/gears/ Gears] is an open source project that enables more powerful web applications by adding new features to web browsers. The Gears 1.0 library is the most current production release and provides support for the Gears !LocalServer, Database, and !WorkerPool. [Downloads Download the Gears 1.0 library].
+  [http://code.google.com/apis/gears/ Gears] is an open source project that enables more powerful web applications by adding new features to web browsers. The Gears 1.0 library is the most current production release and provides support for the Gears !LocalServer, Database, and !WorkerPool. [Downloads Download].
 
 
 
