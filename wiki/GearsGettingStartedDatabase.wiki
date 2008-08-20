@@ -29,7 +29,7 @@ You should see the skeleton project come up:
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic1.png
 
-Also try out the `GearsDatabaseTutorial-compile` script:
+Also test out compilation with the `GearsDatabaseTutorial-compile` script or the _Compile/Browse_ button in hosted mode
 
 {{{
 $PP_OFF
@@ -39,7 +39,6 @@ Copying all files found on public path
 Compilation succeeded
 }}}
 
-Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.
 
 == Modify !GearsDatabaseTutorial.gwt.xml ==
 
