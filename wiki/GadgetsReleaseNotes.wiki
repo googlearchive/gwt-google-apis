@@ -1,0 +1,20 @@
+#summary Gadgets API Library for GWT Release Notes
+
+= Gadgets API Library for GWT Release Notes =
+
+==Release Notes for 1.0.0==
+===Changes since r290===
+
+    * This library requires GWT 1.5 or later and Java 1.5 or later.
+    * Fixed script and stylesheet injection in gadgets bootstrap.
+    * Added xerces library reference for debugging a gadget in hosted mode.
+
+===Known Issues===
+
+    * Gadgets must be debugged using -noserver and the Gadget must be hosted in a Gadget container like [http://www.google.com/ig iGoogle] or [http://incubator.apache.org/shindig/ Shindig].
+    * GWT RPC does not work through iGoogle (issue 154)
+
+----
+==Release Notes for r290 (milestone release)==
+
+===Initial release.===
