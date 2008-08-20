@@ -21,4 +21,4 @@ You can either reference the `.jar` file from the folder that you uncompressed t
 == Gears Modules and Topics ==
 Gears contains three main modules, [http://code.google.com/apis/gears/api_localserver.html LocalServer], [http://code.google.com/apis/gears/api_database.html Database], and [http://code.google.com/apis/gears/api_workerpool.html WorkerPool]. In this guide, we will describe how to use the Database module only, though support exists for LocalServer and WorkerPool as well. 
 
-[GearsTutorialDatabase Continue] to learn how to use the Gears Database Module.
+[GearsGettingStartedDatabase Continue] to learn how to use the Gears Database Module.
