@@ -1,6 +1,6 @@
 #summary Using the Gears Database Module in a GWT project
 
-=Using the Gears Database Moduel in a GWT project=
+=Using the Gears Database Module in a GWT project=
 
 ==Creating a new GWT project==
 
