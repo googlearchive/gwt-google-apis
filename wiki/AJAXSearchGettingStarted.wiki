@@ -4,7 +4,7 @@
 
 The AJAX Search API provides a convenient way to add a pre-packaged search box and display results to a webpage, or to manipulate search results in a programmatic way. The [http://code.google.com/p/gwt-google-apis Google AJAX Search library for GWT] allows you to access the JavaScript API from Java code compiled with the GWT compiler.
 
-This guide describes the basics behind writing a small project that uses Google's AJAX Search library with [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API] developer's site.
+This guide describes the basics behind writing a small project that uses the Google AJAX Search library with [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API] developer's site.
 
 
 == Assumptions ==
@@ -15,34 +15,18 @@ This guide describes the basics behind writing a small project that uses Google'
 
 == Getting the Google AJAX Search Library for GWT ==
 
-You can download the latest production releases of the libraries from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-search.jar`. 
+You can download the latest production release of the library from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-search.jar`. 
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-search`.
 
 
-== Looking at the HelloSearch Sample ==
-
-Lets start by taking a look at the sample program _ !HelloSearch _ that is shipped with the `gwt-search` distribution:
-
-Here are the interesting parts of the application
-
-   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/search/client/HelloSearch.java HelloSearch.java] - Java Source Code
-   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/hellosearch/HelloSearch.gwt.xml HelloSearch.gwt.xml] - GWT Module definition w/ API script injected
-
-Note the following:
-
-  # To use this API you must include a `<script>` tag in your module in order to load the api and provide the AJAX Search key.  
-  # You must inherit `com.google.gwt.search.AjaxSearch` in your module definition file.
-
-The sample application performs a few canned searches of different types of searches and sets up some constraints.  If you want to save a particular result, you can press the _save_ link and a new reference will be placed in the left hand column. If you want to change the search term, you can type it in the search box at the top of the page.
-
-  [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch1.png]
-
-You can look at and modify the sample code in the `samples/search` directory after unpacking the distribution.
-
 == Creating a project that uses AJAX Search ==
 
-You can start off by generating a project using `projectCreator` and `applicationCreator` in the usual way  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-search.jar` to the classpath and the `AjaxSearch.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
+Start by creating a new GWT project called !SimpleSearch as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
+
+Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-gears/gwt-search.jar` to the Java classpath for the launch, compile and .and eclipse definitions. For the purposes of this example we assume `gwt-search.jar` has been unpacked in `/usr/local/gwt-search` and that you are using the Eclipse IDE.
+
+We also use the command line argument `-addToModule` to add the `AjaxSearch.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
 
 === Creating a Skeleton Project ===
 
@@ -94,6 +78,27 @@ Now, you need to add a reference to the AJAX Search API script in the `SimpleSea
     <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1&amp;key=ABC"/>
     
 }}}
+
+
+== Looking at the HelloSearch Sample ==
+
+Lets start by taking a look at the sample program _ !HelloSearch _ that is shipped with the `gwt-search` distribution:
+
+Here are the interesting parts of the application
+
+   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/search/client/HelloSearch.java HelloSearch.java] - Java Source Code
+   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/hellosearch/HelloSearch.gwt.xml HelloSearch.gwt.xml] - GWT Module definition w/ API script injected
+
+Note the following:
+
+  # To use this API you must include a `<script>` tag in your module in order to load the api and provide the AJAX Search key.  
+  # You must inherit `com.google.gwt.search.AjaxSearch` in your module definition file.
+
+The sample application performs a few canned searches of different types of searches and sets up some constraints.  If you want to save a particular result, you can press the _save_ link and a new reference will be placed in the left hand column. If you want to change the search term, you can type it in the search box at the top of the page.
+
+  [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch1.png]
+
+You can look at and modify the sample code in the `samples/search` directory after unpacking the distribution.
 
 
 == General API usage ==
