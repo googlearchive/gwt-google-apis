@@ -11,7 +11,7 @@
    * [GadgetsFAQ FAQ]
  * Gears
    * [GearsGettingStarted Getting Started]
-      * [GearsTutorialDatabase Using the Gears Database]
+      * [GearsGettingStartedDatabase Using the Gears Database]
    * [GearsDemos Gears Sample Code]
    * [GearsJavadoc Class Reference]
    * [GearsFAQ FAQ]
