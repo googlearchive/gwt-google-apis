@@ -4,6 +4,7 @@
    * [AJAXSearchGettingStarted Getting Started]
    * [AJAXSearchSampleApplications Sample Applications]
    * [AJAXSearchJavadoc API Reference]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/release_notes.html 1.0 Release Notes]
    * [AJAXSearchFAQ FAQs]
  * Gadgets
    * [GadgetsGettingStarted Getting Started]
