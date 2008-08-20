@@ -9,12 +9,14 @@
  * Gadgets
    * [GadgetsGettingStarted Getting Started]
    * [GadgetsJavadoc API Reference]
+   * [GadgetsReleaseNotes Release Notes]
    * [GadgetsFAQ FAQs]
  * Gears
    * [GearsGettingStarted Getting Started]
       * [GearsGettingStartedDatabase Using the Gears Database]
    * [GearsDemos Sample Applications]
    * [GearsJavadoc API Reference]
+   * [GearsReleaseNotes Release Notes]
    * [GearsFAQ FAQs]
  * APIs In Progress
    * [MapsIntro Google Maps API]
