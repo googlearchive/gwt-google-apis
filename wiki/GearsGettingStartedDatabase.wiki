@@ -173,7 +173,6 @@ public class NoGears {
 
 Now, you should be able to execute your sample project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
- _ Note: Using hosted mode with the Gears project will only work in
-the Windows OS as of the GWT 1.5 release. _
+ _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
 
 If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.
