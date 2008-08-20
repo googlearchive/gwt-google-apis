@@ -1,7 +1,0 @@
-﻿#summary Bindings for the AJAX Search API from Google
-
-= AJAX Search API = 
-
-   * [AJAXSearchGettingStarted Getting Started with Google AJAX Search]
-   * [AJAXSearchJavadoc Class Reference]
-   * [AJAXSearchFAQ FAQ]

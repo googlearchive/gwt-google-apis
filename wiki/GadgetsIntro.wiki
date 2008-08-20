@@ -1,7 +1,0 @@
-﻿#summary Bindings for the Gadgets API from Google
-
-= Gadgets API = 
-
-   * [GadgetsGettingStarted Using Google Gadgets in a GWT project]
-   * [GadgetsJavadoc Class Reference]
-   * [GadgetsFAQ FAQ]
