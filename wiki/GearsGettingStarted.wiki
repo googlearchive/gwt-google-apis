@@ -11,7 +11,7 @@ This guide describes the basics behind writing a small project that uses the Gea
 
 
 
-== Getting the Google API Libraries for GWT `gwt-gears` library ==
+== Getting the Gears API Library for GWT ==
 
 You can download the latest production releases of the libraries from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-gears.jar`. 
 
