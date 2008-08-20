@@ -23,7 +23,7 @@ $ applicationCreator -eclipse GearsDatabaseTutorial \
 }}}
 
 
-You should now have a standard project set up. Test to see that hosted mode and web mode work by running the `GearsDatabaseTutorial-shell` script.  You should see the skeleton project come up:
+You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse. You should see the skeleton project come up:
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic1.png
 
@@ -37,10 +37,7 @@ Copying all files found on public path
 Compilation succeeded
 }}}
 
-
-= Creating a Small Project  =
-
-Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
+Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.
 
 == Modify GearsDatabaseTutorial.gwt.xml ==
 
