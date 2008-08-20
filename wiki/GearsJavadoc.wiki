@@ -4,4 +4,4 @@
 
   _Based on Subversion revision r373_.
 
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/gears/index.html Gears API]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/index.html Gears API]

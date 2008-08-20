@@ -4,4 +4,4 @@
 
   _Based on Subversion revision r373_.
 
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/ajaxsearch/index.html AJAX Search API]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html AJAX Search API]

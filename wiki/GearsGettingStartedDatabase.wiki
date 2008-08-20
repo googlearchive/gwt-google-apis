@@ -133,7 +133,12 @@ public class GearsDatabaseTutorial implements EntryPoint {
 
 == Create an alternative !EntryPoint ==
 
-This alternative !EntryPoint class is used when the Gears plugin is not detected in the browser.  Save this class as `NoGears.java` in the same package with the `GearsDatabaseTutorial` class.
+The Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to redirect users when your application detects that the Gears plugin is not installed or not supported.  You can create a rebind rule in your GWT module that will redirect users to a different page in this instance.
+
+
+=== Add a new !EntryPoint class ===
+
+The following is an example of an alternative !EntryPoint class is used when the Gears plugin is not detected in the browser.  Save this class as `NoGears.java` in the same package with the `GearsDatabaseTutorial` class.
 
 {{{
 package com.example.google.gwt.gearsdatabasetutorial.client;
@@ -156,9 +161,9 @@ public class NoGears {
 }
 }}}
 
-== Modify !GearsDatabaseTutorial.gwt.xml ==
+=== Modify !GearsDatabaseTutorial.gwt.xml ===
 
-The Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to redirect users when your application detects that the Gears plugin is not installed or not supported.  You can create a rebind rule in your GWT module that will redirect users to a different page in this instance.
+In order to tell the compiler to add logic to the selection script to pull up your rebound entry point, you need to create a [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(DevGuideDeferredBindingReplacement) replace-class-with] rule in your `gwt.xml` module file.  
 
 {{{
   <!-- Rebind the entry point if Gears is not installed -->
@@ -174,4 +179,6 @@ Now, you should be able to execute your sample project in hosted mode by either 
 
  _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
 
-If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.
+If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.
+
+
