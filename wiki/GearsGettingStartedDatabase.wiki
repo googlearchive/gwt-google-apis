@@ -133,8 +133,7 @@ public class GearsDatabaseTutorial implements EntryPoint {
 
 == How to deal with browsers that do not support Gears ==
 
-The Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to redirect users when your application detects that the Gears plugin is not installed or not supported.  You can create a rebind rule in your GWT module that will redirect users to a different page in this instance.
-
+The Gears plugin is a component that must be installed by users and is not supported on all browser configurations.  Thus, you will want to let users know when your application detects that the Gears plugin is not installed or not supported.  You can create a rebind rule in your GWT module that will invoke a different !EntryPoint in this instance.
 
 === Add a new !EntryPoint class ===
 
@@ -181,4 +180,3 @@ Now, you should be able to execute your sample project in hosted mode by either 
 
 If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.
 1
-
