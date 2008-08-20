@@ -144,7 +144,7 @@ public class GearsDatabaseTutorial implements EntryPoint {
 }}}
 
 
-== Create an alternative EntryPoint ==
+== Create an alternative !EntryPoint ==
 
 This alternative !EntryPoint class is used when the Gears plugin is not detected in the browser.  Save this class as `NoGears.java` in the same package with the `GearsDatabaseTutorial` class.
 
@@ -169,9 +169,9 @@ public class NoGears {
 }
 }}}
 
-== Run the GearsDatabaseTutorial sample project ==
+== Run the !GearsDatabaseTutorial sample project ==
 
-Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
+Now, you should be able to execute your sample project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
  _ Note: Using hosted mode with the Gears project will only work in
 the Windows OS as of the GWT 1.5 release. _
