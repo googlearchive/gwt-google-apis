@@ -2,9 +2,9 @@
  * [Overview Project Overview]
  * AJAX Search
    * [AJAXSearchGettingStarted Getting Started]
+   * [AJAXSearchSampleApplications Sample Applications]
    * [AJAXSearchJavadoc API Reference]
    * [AJAXSearchFAQ FAQs]
-   * [AJAXSearchSampleApplications Sample Applications]
  * Gadgets
    * [GadgetsGettingStarted Getting Started]
    * [GadgetsJavadoc API Reference]
@@ -12,14 +12,14 @@
  * Gears
    * [GearsGettingStarted Getting Started]
       * [GearsGettingStartedDatabase Using the Gears Database]
-   * [GearsDemos Gears Sample Code]
+   * [GearsDemos Sample Applications]
    * [GearsJavadoc API Reference]
    * [GearsFAQ FAQs]
  * APIs In Progress
    * [MapsIntro Google Maps API]
      * [MapsGettingStarted GettingStarted]
      * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
-     * [MapsHelloMaps The HelloMaps demo]
+     * [MapsHelloMaps Sample Applications]
      * [MapsJavadoc API Reference]
      * [MapsFAQ FAQs]
    * [GettingStartedVisualization Google Visualization API] 
