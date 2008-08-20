@@ -1,6 +1,8 @@
 #summary Using the Gears Database Module in a GWT project
 
-= Creating a new GWT + Gears Database project =
+=Using the Gears Database Moduel in a GWT project=
+
+==Creating a new GWT project==
 
 Start by creating a new GWT project called !GearsDatabaseTutorial as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
 
