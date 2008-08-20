@@ -7,7 +7,7 @@ Currently, released libraries are available for Gears. The most current version 
 ----
 
 ===Release Candidates===
-A number of additional libraries are now available as Release Candidates and are ready to be taken for a test drive. Note that Release Candidates have not yet been released for production use.
+A number of additional libraries are now available as Release Candidates and are ready to be taken for a test drive. Note that Release Candidates have not yet been released for production use, and rely on [http://code.google.com/webtoolkit/download.html GWT 1.5 RC2] or higher.
 
 *Gears API Library 1.1 (Release Candidate)*
   * [http://x gwt-gears-1.1.0.tar.gz]
