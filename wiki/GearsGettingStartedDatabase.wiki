@@ -6,6 +6,8 @@
 
 Start by creating a new GWT project called !GearsDatabaseTutorial as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
 
+Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-maps/gwt-gears.jar` to the Java classpath for the launch, compile and .and eclipse definitions. Note that for the purposes of this example we assume `gwt-gears.jar` has been unpacked in `/usr/local/gwt-gears` and that you are using the Eclipse IDE.
+
 {{{
 $PP_OFF
 $ projectCreator -eclipse GearsDatabaseTutorial -out GearsDatabaseTutorial \
@@ -20,7 +22,6 @@ $ applicationCreator -eclipse GearsDatabaseTutorial \
      com.example.google.gwt.gearsdatabasetutorial.client.GearsDatabaseTutorial
 }}}
 
-Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-maps/gwt-gears.jar` to the Java classpath for the launch, compile and .and eclipse definitions. Note that for the purposes of this example we assume `gwt-gears.jar` has been unpacked in `/usr/local/gwt-gears` and that you are using the Eclipse IDE.
 
 You should now have a standard project set up. Test to see that hosted mode and web mode work by running the `GearsDatabaseTutorial-shell` script.  You should see the skeleton project come up:
 
