@@ -1,7 +1,8 @@
-﻿#summary Class Reference for the Gears API
+﻿#summary Class Reference for the Gears API Library
 
-= Class Reference =
+= Gears API Class Reference =
 
-  _Based on Subversion revision r373_.
 
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/index.html Gears API]
+|| Browse the [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/index.html Gears API JavaDoc] ||
+
+  _Based on Subversion revision r373_
