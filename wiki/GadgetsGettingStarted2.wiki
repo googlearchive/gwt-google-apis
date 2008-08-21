@@ -158,7 +158,7 @@ java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStar
 
 === Making changes to and debugging your Java source ===
 
-You can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
+For most changes, you can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
 
 === Caching effects from the Gadget container ===
 
