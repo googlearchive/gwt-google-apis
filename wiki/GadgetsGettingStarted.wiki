@@ -19,10 +19,8 @@ This guide will get you started writing your first Gadget.  Before you start, ma
 
 You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-gadgets.jar`. 
 
-You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-gadgets`.
+You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gadgets`.
 
-
-== Looking at a Sample Gadget ==
 == Differences between a standard GWT project and a GWT Gadget project==
 
 Look at the sample program _Hello Gadgets_ that ships with the `gwt-gadgets` distribution
@@ -39,39 +37,32 @@ There are some differences you will notice from a standard GWT project.
 
 These differences derive from the fact that a Gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Google Gadget developer's documentation].  To meet this requirement, Gadget support is implemented using a custom [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/ext/Linker.html GWT Linker]. 
 
-== Writing a Simple Gadget ==
+== Creating a new GWT Project ==
 
-You can start off by generating a project using `projectCreator` and `applicationCreator` in the usual way.  If you've never created a GWT project before, look at the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial].  Note that this invocation uses the `-addToClassPath` and `-addToModule` arguments to add `gwt-gadgets.jar` to the classpath and the `Gadgets.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
+Start by creating a new GWT project called !SimpleGadget as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
 
-=== Creating a Skeleton Project ===
+Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gadgets/gwt-gadgets.jar` to the Java classpath for the launch, compile and and eclipse definitions. For the purposes of this example we assume `gwt-gadgets.jar` has been unpacked in `/usr/local/gadgets` and that you are using the Eclipse IDE.
+
+We also need to tell the GWT compiler that we are using the Gadgets module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.gadgets.Gadgets` as the module to be inherited. This will place the inheritance entry `Gadgets.gwt.xml` into the generated project file `SimpleGadget.gwt.xml`.
+
+
 {{{
 $PP_OFF
 $ projectCreator -eclipse SimpleGadget -out SimpleGadget \
      -addToClassPath /usr/local/gadgets/gwt-gadgets.jar
 
-Created directory SimpleGadget/src
-Created directory SimpleGadget/test
-Created file SimpleGadget/.project
-Created file SimpleGadget/.classpath
 
 $ applicationCreator -eclipse SimpleGadget -out SimpleGadget \
      -addToClassPath /usr/local/gadgets/gwt-gadgets.jar \
      -addModule com.google.gwt.gadgets.Gadgets com.example.simplegadget.client.SimpleGadget
-Created directory SimpleGadget/src/com/example/simplegadget
-Created directory SimpleGadget/src/com/example/simplegadget/client
-Created directory SimpleGadget/src/com/example/simplegadget/public
-Created file SimpleGadget/src/com/example/simplegadget/SimpleGadget.gwt.xml
-Created file SimpleGadget/src/com/example/simplegadget/public/SimpleGadget.html
-Created file SimpleGadget/src/com/example/simplegadget/public/SimpleGadget.css
-Created file SimpleGadget/src/com/example/simplegadget/client/SimpleGadget.java
-Created file SimpleGadget/SimpleGadget.launch
-Created file SimpleGadget/SimpleGadget-shell
-Created file SimpleGadget/SimpleGadget-compile
 }}}
 
-You can compile this project to see if it works, but this project is just a skeleton and will need to be modified to become a Gadget.
 
-=== Modify the Skeleton Project ===
+Now you should now have a standard GWT project set up (though nothing Gadget related other than the library inclusion). Before continuing, make sure you can launch the skeleton project in hosted mode by running _!SimpleSearch-shell_ from the command line. 
+
+If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
+
+=== Modify the Project ===
 
 Start by opening up `SimpleGadget.java` and changing the class declaration to read:
 
@@ -88,7 +79,7 @@ Next, you need to implement the `init(UserPreferences)` method from the `Gadget`
   protected void init(UserPreferences preferences) {
     Button simpleButton = new Button("SimpleGadget");
     simpleButton.addClickListener(new ClickListener() {
-      void onClick(Widget sender) {
+      public void onClick(Widget sender) {
         Window.alert("Hello World!");
       }
     });
@@ -105,10 +96,83 @@ Finally, above the class statement, add an annotation to set the gadget title, a
 
 [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides attributes to the [http://code.google.com/apis/gadgets/docs/legacy/reference.html#Moduleprefs_Ref  `<ModulePrefs>`] tag in the Gadget Specification.
 
+== Compiling your Gadget ==
 
-=== Specifying Features ===
+You now have the basics of a Gadget in place, but there are a few more steps required to run the Gadget in GWT's hosted mode, so first let's compile and deploy what we have to a Gadget container like iGoogle.
 
-If the Gadget requires access to features of the container, it should implement any of the _!NeedsFoo_ interfaces, which currently include:
+Use the `SimpleGadget-compile` shell script to build your project. The output of the compiler will have:
+   * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
+   * A `SampleGadgets.html` file.  This is just a holdover from a regular GWT module and is not used in publishing a gadget (but it can be useful in hosted mode, as we'll see later).  
+   * Other resources such as image files.
+   * A `*.xml` file.  This is the gadget specification file that you will need in order to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish your gadget]. It contains:
+       * Information about your gadget specified in `@ModulePrefs` 
+       * Which features your gadget needs
+       * A user preference value specification 
+       * !JavaScript code for initializing the Gadget API and loading one of the GWT compiler permutations.
+
+== Uploading your Gadget to iGoogle ==
+
+To test our your newly compiled code, take the output files above (located in the `SimpleGadget/www` directory unless you changed GWT's output location) and upload them all to the same directory on a public web server. 
+
+Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in the upper right corner. Click "Add Feed or Gadget" and specify the full URL to the gadget spec file (`com.example.simplegadget.client.SimpleGadget.gadget.xml`) that you uploaded to your server in the previous step. Click "Add" and go back to your iGoogle page. 
+
+Congratulations. Your new (if slightly boring) Gadget should  appear on the page.
+
+
+== Debugging your Gadget in Hosted Mode ==
+
+The debugging setup for a Gadget is a bit more complicated than the usual GWT hosted mode setup.  The complexities have to do with the public nature of Gadget being served from a gadget container, and caching of the Gadget spec by the container.
+
+Here are the steps to debug in Hosted mode:
+   1 Compile your gadget
+   1 Upload the files output from the compiler to a webserver
+   1 Add your gadget to your [http://www.google.com/ig iGoogle] home page
+   1 Start up hosted mode with the "-noserver" argument, specifying the Gadget container as the server
+
+=== Bringing up Hosted Mode with -noserver ===
+
+Because your Gadget needs to be hosted by a container, Hosted Mode requires that it be run with the -noserver option. This tells Hosted Mode to use the Gadget container as the server rather than GWT's built-in server.
+
+If you are using Eclipse, modify the arguments tab in the Run Dialog box. Add `-noserver` in front of the `-out` flag, and replace `com.example.simplegadget.SimpleGadget/SimpleGadget.html` with the URL of the container, in this case `http://www.google.com/ig`
+
+{{{
+  -noserver -out www http://www.google.com/ig
+}}}
+
+If you aren't using Eclipse, edit `SimpleGadget-shell` and add the arguments after `com.google.gwt.dev.GWTShell`. 
+
+Now run your application using Eclipse or `SimpleGadget-shell`, and your gadget client code should now be running in hosted mode.  
+
+  _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets and/or your launch configurations to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
+
+  _Note: It is normal to see the following error when debugging a gadget in hosted mode because there is no entry point in the module to run_:
+{{{
+[ERROR] Unable to load module entry point class com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets (see associated exception for details)
+java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStart with 1 arguments.
+	at com.google.gwt.dev.shell.moz.LowLevelMoz.invoke(LowLevelMoz.java:132)
+	at com.google.gwt.dev.shell.moz.ModuleSpaceMoz.doInvoke(ModuleSpaceMoz.java:98)
+	at com.google.gwt.dev.shell.ModuleSpace.invokeNative(ModuleSpace.java:434)
+        ...
+}}}
+
+
+=== Making changes to and debugging your Java source ===
+
+For most changes, you can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
+
+=== Caching effects from the Gadget container ===
+
+One important aspect of the Gadget infrastructure you must be aware of is that Gadget containers, such as iGoogle, are free to cache the Gadget specifications.  In the case of iGoogle, the default caching is one hour.  See FAQ item [http://code.google.com/apis/gadgets/faq.html#CantSeeChanges I updated my gadget, but I can't see my changes. What's going on?]  
+
+As a developer, you can use the [http://code.google.com/apis/gadgets/docs/legacy/tools.html#Dev_Gadget Developer Gadget] on iGoogle to turn off caching for your view of the gadget by un-checking the `Cached` checkbox beside the URL of your Gadget Spec.
+
+For deploying a gadget developed with GWT, the caching by Gadget Containers is a significant issue. If you deploy your GWT application and remove old versions of the compiled program, the cached version of the Gadget spec will still refer to the old (and now deleted) files and end users will experience an outage until the cache is refreshed.  
+
+
+
+== Adding container features ==
+
+If the Gadget requires access to features of the container, it should implement the appropriate _!NeedsFoo_ interfaces, which currently include:
  
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/NeedsAnalytics.html NeedsAnalytics]
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/NeedsDynamicHeight.html NeedsDynamicHeight]
@@ -120,7 +184,7 @@ If the Gadget requires access to features of the container, it should implement 
 At runtime, all feature setters will be called strictly before [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)]. The order in which the setters are called is undefined.
 
 
-For example, if you wanted to use the optional feature to set the title dynamically, you would need to inherit the `NeedsSetTitle` interface.
+For example, if you wanted to use the optional feature to set the title dynamically, you would need to inherit the `NeedsSetTitle` interface. The following code sets the title of the gadget dynamically. 
 
 {{{
 /**
@@ -152,12 +216,12 @@ public class NeedsSetTitleGadget extends Gadget<UserPreferences> implements
 }
 }}}
 
-And here is a screenshot of the resulting gadget:
+Here's the resulting Gadget:
 
    [http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedGadgets-ChangeTitle.png]
 
 
-=== Specifying Preferences ===
+== Specifying Preferences ==
 
 The gadget spec allows you to specify user preferences for your gadget.  User preferences allow the gadget container to provide a user interface and storage for parameters used to customize the gadget. 
 
@@ -247,75 +311,13 @@ Here is a screen shot of the resulting gadget's preferences menu in iGoogle:
 
    [http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedGadgets-MealPreferences.png]
 
-=== Compiling your Gadget ===
 
-Use the SampleGadget-compile shell script to build your project, or use any other method to invoke the GWT compiler on the module `SampleGadget.gwt.xml`.
+== Syndicating your Gadget ==
 
-The output of the compiler will have:
-   * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
-   * A `SampleGadgets.html` file.  This is just a holdover from a regular GWT module and is not used in publishing a gadget (but it can be useful in hosted mode).  
-   * Other resources such as image files.
-   * A `*.xml` file.  This is the gadget specification file that you will need in order to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish your gadget].  It contains:
-       * Information about your gadget specified in `@ModulePrefs` 
-       * Which features your gadget needs, 
-       * A user preference value specification, 
-       * Some !JavaScript code for initializing the Gadget API and loading one of the compiler permutations.
 
-== Uploading and Syndicating your Gadget ==
+Once your debugging is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory] and syndicate it to any webpage, not just a Gadget container. For more information, see the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] guidelines and documentation. Be sure to note the restrictions on syndicated gadgets, such as the storage of preferences. 
+ 
 
-First, you should take the output files from the compiler and upload them all to the same directory on a web server.
+==Next steps==
 
-For debugging your gadget, register the URL for your gadget spec file (the `.gadget.xml` file created when you compile in the place it has been uploaded to) using Syndication.  See [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] or search for the Syndication gadget in the iGoogle content directory.  After the URL is registered, you can add it to your iGoogle page, or create a simple host web page using the 'Get the Code' button.
-
-Once your debugging is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory]. 
-
-== Debugging your Gadget in Hosted Mode ==
-
-The debugging setup for a gadget is a bit more complicated than the usual GWT hosted mode setup.  The complexities have to do with the public nature of gadgets being served from a gadget container, and caching of the Gadget Spec by the gadget container.
-
-=== Bringing up Hosted Mode with -noserver ===
-
-Here are the steps to debug your gadget code in Hosted mode:
-
-   1 Compile your gadget.  You can do this by running your gadget in hosted mode and pressing the 'Compile/Browse' button or by invoking the compiler from the command line.  If you followed the instructions above, you should have a shell script named `SimpleGadget-compile`.
-   1 Upload the files output from the compiler a webserver.  
-   1 Publish your gadget (using [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Syndication] is the easiest way)
-   1 Add your gadget to your [http://www.google.com/ig iGoogle] home page.
-   1 Start up hosted mode with the "-noserver" argument.  You can add this argument in to your IDE launch config, or edit `SimpleGadget-shell` and insert the `-noserver` argument after `com.google.gwt.dev.GWTShell`. 
-   1 Type the url `http://www.google.com/igoogle` into the hosted mode browser url window.
-
-Now your gadget client code is running in hosted mode.  
-
-  _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets and/or your launch configurations to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
-
-  _Note: It is normal to see the following error when debugging a gadget in hosted mode:
-{{{
-[ERROR] Unable to load module entry point class com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets (see associated exception for details)
-java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStart with 1 arguments.
-	at com.google.gwt.dev.shell.moz.LowLevelMoz.invoke(LowLevelMoz.java:132)
-	at com.google.gwt.dev.shell.moz.ModuleSpaceMoz.doInvoke(ModuleSpaceMoz.java:98)
-	at com.google.gwt.dev.shell.ModuleSpace.invokeNative(ModuleSpace.java:434)
-        ...
-}}}
-  This is because there is no entry point in the module to run._
-
-=== Making changes to and debugging your Java source ===
-
-You can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
-
-=== Caching effects from the Gadget Container ===
-
-One important aspect of the Gadget infrastructure you must be aware of is that Gadget containers, such as iGoogle, are free to cache the Gadget specifications.  In the case of iGoogle, the default caching is one hour.  See FAQ item [http://code.google.com/apis/gadgets/faq.html#CantSeeChanges I updated my gadget, but I can't see my changes. What's going on?]  
-
-As a developer, you can use the [http://code.google.com/apis/gadgets/docs/legacy/tools.html#Dev_Gadget Developer Gadget] on iGoogle to turn off caching for your view of the gadget by un-checking the `Cached` checkbox beside the URL of your Gadget Spec.
-
-For deploying a gadget developed with GWT, the caching by Gadget Containers is a significant issue. If you deploy your GWT application and remove old versions of the compiled program, the cached version of the Gadget spec will still refer to the old (and now deleted) files and end users will experience an outage until the cache is refreshed.  
-
-== Using Eclipse ==
-
-The `projectCreator` task creates an eclipe configuration file to import into your Ecilpse workspace.  
-
-Use the `File-->Import...` command to navigate to the directory where you created the project and import it into the workspace.  Once the project is imported, you will see that the following items have been configured for you:
-
-   * A classpath that contains the `gwt-gadgets.jar` file.
-   * A launch configuration that contains the source directory for your project on your class path.
+For more information what you can do with Gadgets, read the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Gadget documentation] and the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/index.html Gadget Library for GWT class reference].
