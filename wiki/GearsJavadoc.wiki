@@ -3,6 +3,6 @@
 = Gears API Class Reference =
 
 
-|| [Browse the http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/index.html Gears API JavaDoc] ||
+|| [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/index.html Browse the Gears API JavaDoc] ||
 
   _Based on Subversion revision r373_
