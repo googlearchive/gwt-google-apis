@@ -1,7 +1,8 @@
 ﻿#summary Class Reference for the AJAX Search API
 
-= Class Reference =
+= Google Ajax Search API Library Class Reference =
 
-  _Based on Subversion revision r373_.
+  || [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html Browse the Google AJAX Search API Library JavaDoc] ||
 
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html AJAX Search API]
+
+    _Based on Subversion revision r373_
