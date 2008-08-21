@@ -118,8 +118,6 @@ Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in
 
 Congratulations. Your new (if slightly boring) Gadget should  appear on the page.
 
-===INSERT PICTURE OF GADGET HERE===
-
 
 == Debugging your Gadget in Hosted Mode ==
 
@@ -316,38 +314,10 @@ Here is a screen shot of the resulting gadget's preferences menu in iGoogle:
 
 == Syndicating your Gadget ==
 
-First, you should take the output files from the compiler and upload them all to the same directory on a web server.
 
-For debugging your gadget, register the URL for your gadget spec file (the `.gadget.xml` file created when you compile in the place it has been uploaded to) using Syndication.  See [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] or search for the Syndication gadget in the iGoogle content directory.  After the URL is registered, you can add it to your iGoogle page, or create a simple host web page using the 'Get the Code' button.
+Once your debugging is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory] and syndicate it to any webpage, not just a Gadget container. For more information, see the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] guidelines and documentation. Be sure to note the restrictions on syndicated gadgets, such as the storage of preferences. 
+ 
 
-Once your debugging is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory]. 
+==Next steps==
 
-== Debugging your Gadget in Hosted Mode ==
-
-The debugging setup for a gadget is a bit more complicated than the usual GWT hosted mode setup.  The complexities have to do with the public nature of gadgets being served from a gadget container, and caching of the Gadget Spec by the gadget container.
-
-=== Bringing up Hosted Mode with -noserver ===
-
-Here are the steps to debug your gadget code in Hosted mode:
-
-   1 Compile your gadget.  You can do this by running your gadget in hosted mode and pressing the 'Compile/Browse' button or by invoking the compiler from the command line.  If you followed the instructions above, you should have a shell script named `SimpleGadget-compile`.
-   1 Upload the files output from the compiler a webserver.  
-   1 Publish your gadget (using [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Syndication] is the easiest way)
-   1 Add your gadget to your [http://www.google.com/ig iGoogle] home page.
-   1 Start up hosted mode with the "-noserver" argument.  You can add this argument in to your IDE launch config, or edit `SimpleGadget-shell` and insert the `-noserver` argument after `com.google.gwt.dev.GWTShell`. 
-   1 Type the url `http://www.google.com/igoogle` into the hosted mode browser url window.
-
-Now your gadget client code is running in hosted mode.  
-
-  _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets and/or your launch configurations to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
-
-  _Note: It is normal to see the following error when debugging a gadget in hosted mode:
-{{{
-[ERROR] Unable to load module entry point class com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets (see associated exception for details)
-java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStart with 1 arguments.
-	at com.google.gwt.dev.shell.moz.LowLevelMoz.invoke(LowLevelMoz.java:132)
-	at com.google.gwt.dev.shell.moz.ModuleSpaceMoz.doInvoke(ModuleSpaceMoz.java:98)
-	at com.google.gwt.dev.shell.ModuleSpace.invokeNative(ModuleSpace.java:434)
-        ...
-}}}
-  This is because there is no entry point in the module to run._
+For more information what you can do with Gadgets, read the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Gadget documentation] and the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/index.html Gadget Library for GWT class reference].
