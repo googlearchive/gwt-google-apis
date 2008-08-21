@@ -75,17 +75,17 @@ When you go to deploy your application outside of localhost, you will need to ob
 Now that your project is set up, the basic steps to use the API are as follows:
 
   1 Create one or more search objects
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/BlogSearch.html BlogSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/BookSearch.html BookSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/LocalSearch.html LocalSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/ImageSearch.html ImageSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/NewsSearch.html NewsSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/VideoSearch.html VideoSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/WebSearch.html WebSearch]
-  1 Add the search object(s) to a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchControlOptions.html SearchControlOptions] object
-  1 Optionally register a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchListener.html SearchListener] on the !SearchControlOptions object
-  1 Create a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchControl.html SearchControl] object from the `SearchControlOptions`
-  1 Call the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchControl.html#execute(/java/lang/String)execute SearchControl.execute()] method to specify a search term and start the search .
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/BlogSearch.html BlogSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/BookSearch.html BookSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/LocalSearch.html LocalSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/ImageSearch.html ImageSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/NewsSearch.html NewsSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/VideoSearch.html VideoSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/WebSearch.html WebSearch]
+  1 Add the search object(s) to a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/SearchControlOptions.html SearchControlOptions] object
+  1 Optionally register a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/SearchListener.html SearchListener] on the !SearchControlOptions object
+  1 Create a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/SearchControl.html SearchControl] object from the `SearchControlOptions`
+  1 Call the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/SearchControl.html#execute(/java/lang/String)execute SearchControl.execute()] method to specify a search term and start the search .
 
 We'll do just that in the next step. 
 
@@ -122,7 +122,7 @@ Congratulations! You should now have Google AJAX Search working within a GWT app
 
 == Using a !SearchControl with a !SearchListener ==
 
-The Search API is not limited to showing results in just the format above. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchListener SearchListener.html], you can access all the details of the results returned from the search and handle them in a programmatic way.
+The Search API is not limited to showing results in just the format above. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/1.0/search/com/google/gwt/search/client/SearchListener SearchListener.html], you can access all the details of the results returned from the search and handle them in a programmatic way.
 
 Let's now replace the contents of the SimpleSearch class again, this time with the code below.
 
