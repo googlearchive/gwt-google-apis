@@ -12,7 +12,7 @@ The Google API Library for Google Web Toolkit is a collection of libraries that 
 
 The Google API Library for Google Web Toolkit is an open source project under the Apache 2.0 license.
 
-Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation linked to above, including the class reference, is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons license]. Examples are licensed under the [http://www.apache.org/licenses/LICENSE-2.0 Apache 2.0 license].
+Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation linked to above, including the class reference, is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons Attribution 2.5 License]. Examples are licensed under the [http://www.apache.org/licenses/LICENSE-2.0 Apache 2.0 license].
 
 
 == Downloads ==
