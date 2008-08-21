@@ -2,7 +2,6 @@
  * [Overview Project Overview]
  * AJAX Search
    * [AJAXSearchGettingStarted Getting Started]
-   * [AJAXSearchSampleApplications Sample Applications]
    * [AJAXSearchJavadoc API Reference]
    * [AJAXSearchReleaseNotes Release Notes]
    * [AJAXSearchFAQ FAQs]
@@ -14,7 +13,6 @@
  * Gears
    * [GearsGettingStarted Getting Started]
       * [GearsGettingStartedDatabase Using the Gears Database]
-   * [GearsDemos Sample Applications]
    * [GearsJavadoc API Reference]
    * [GearsReleaseNotes Release Notes]
    * [GearsFAQ FAQs]
@@ -26,7 +24,7 @@
      * [MapsJavadoc API Reference]
      * [MapsFAQ FAQs]
    * [GettingStartedVisualization Google Visualization API] 
- * [MakingGALGWTBetter Making Google API Library for GWT  Better]
+ * [MakingGALGWTBetter Making Google API Library Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [TemplateProject Template Project]
    * [DesigningAPIWrappers Design Considerations]
