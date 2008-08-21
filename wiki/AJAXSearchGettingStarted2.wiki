@@ -53,9 +53,9 @@ Linking compilation into ./www/com.example.simplesearch.SimpleSearch
 
 If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
 
-==Add the AJAX Search script tag to your module XML file==
+==Adding the AJAX Search script tag to your module XML file==
 
-Your GWT application will need access to the AJAX Search API, as well as the API key. In order to do this, you must include a <script> tag in your module's `SimpleSearch.gwt.xml` file. Include that line above the automatically generated stylesheet reference.
+Your GWT application will need access to the AJAX Search API, as well as the API key. In order to do this, you must include a <script> tag in your module's `SimpleSearch.gwt.xml` file. Include the script tag shown in your module.xml file above the automatically generated stylesheet reference.
 
 {{{
     <!--
@@ -71,7 +71,7 @@ Your GWT application will need access to the AJAX Search API, as well as the API
     <stylesheet src='SimpleSearch.css' />   
 }}}
 
-When you go to deploy your application outside of localhost, you will need to obtain a Google AJAX Search API key at [http://code.google.com/apis/search/signup.html]. When you do, replace the string `ABC` in the src attribute below with the key obtained from the site above.
+When you go to deploy your application outside of localhost, you will need to obtain a Google AJAX Search API key at [http://code.google.com/apis/search/signup.html]. Replace the string `ABC` in the src attribute below with the key obtained from the site above.
 
 == Basic steps to use the API ==
 
@@ -94,7 +94,7 @@ We'll do just that in the next step.
 
 == Adding a Google AJAX !SearchControl to the page ==
 
-Now that you've seen the general steps to use the API, we'll put them into practice to generate a nicely formatted search box and results using web and image results. Here we use the API's built in HTML rendering.
+Let's create a basic but nicely formatted search box and the corresponding results using web and image results. Here we use the API's built in HTML rendering.
 
 Replace the contents of your `onModuleLoad` method with the following:
 
@@ -127,7 +127,7 @@ Congratulations! You should now have Google AJAX Search working within a GWT app
 
 The Search API is not limited to showing results in just the format above. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchCompleteListener SearchCompleteListener.html], you can access all the details of the results returned from the search and handle them in a programmatic way.
 
-Let's now replace the contents of the !SimpleSearch class again, this time with the code below.
+Replace the contents of the !SimpleSearch class with the code below.
 
 {{{
 public class SimpleSearch implements EntryPoint {
@@ -188,5 +188,6 @@ Here is a screen capture of the resulting application in hosted mode.
   
   [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch-nohtml.png]
 
-
-You should now have the basics of a working application using the Google AJAX Search Library for GWT. For more information on the classes and search options available, see the [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html library class reference] and the [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API Developer's Guide]
+==Next Steps==
+You should now have the basics of a working GWT application using the Google AJAX Search Library.
+For more information on the classes and search options available, see the [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html library class reference] and the [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API Developer's Guide]
