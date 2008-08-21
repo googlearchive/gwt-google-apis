@@ -118,6 +118,47 @@ Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in
 
 Congratulations. Your new (if slightly boring) Gadget should  appear on the page.
 
+===INSERT PICTURE OF GADGET HERE===
+
+
+== Debugging your Gadget in Hosted Mode ==
+
+The debugging setup for a Gadget is a bit more complicated than the usual GWT hosted mode setup.  The complexities have to do with the public nature of Gadget being served from a gadget container, and caching of the Gadget spec by the container.
+
+Here are the steps to debug in Hosted mode:
+   1 Compile your gadget
+   1 Upload the files output from the compiler to a webserver
+   1 Add your gadget to your [http://www.google.com/ig iGoogle] home page
+   1 Start up hosted mode with the "-noserver" argument
+
+=== Bringing up Hosted Mode with -noserver ===
+
+Because your Gadget needs to be hosted by a container, Hosted Mode requires that it be run with the -noserver option. This tells Hosted Mode to use the Gadget container as the server rather than GWT's built-in server.
+
+If you are using Eclipse, modify the arguments tab in the Run Dialog box. Add `-noserver` in front of the `-out` flag, and replace `com.example.simplegadget.SimpleGadget/SimpleGadget.html` with the URL of the container, in this case "http://www.google.com/ig"
+
+{{{
+  -noserver -out www http://www.google.com/ig
+}}}
+
+If you aren't using Eclipse, you can edit `SimpleGadget-shell` and add the above arguments there after `com.google.gwt.dev.GWTShell`. 
+
+Run your application using Eclipse or SimpleGadget-shell, and your gadget client code should now be running in hosted mode.  
+
+  _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets and/or your launch configurations to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
+
+  _Note: It is normal to see the following error when debugging a gadget in hosted mode because there is no entry point in the module to run_:
+{{{
+[ERROR] Unable to load module entry point class com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets (see associated exception for details)
+java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStart with 1 arguments.
+	at com.google.gwt.dev.shell.moz.LowLevelMoz.invoke(LowLevelMoz.java:132)
+	at com.google.gwt.dev.shell.moz.ModuleSpaceMoz.doInvoke(ModuleSpaceMoz.java:98)
+	at com.google.gwt.dev.shell.ModuleSpace.invokeNative(ModuleSpace.java:434)
+        ...
+}}}
+
+
+
 
 === Specifying Features ===
 
