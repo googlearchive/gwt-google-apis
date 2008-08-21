@@ -62,10 +62,10 @@ Your GWT application will need access to the AJAX Search API, as well as the API
       If you want to deploy this application outside of localhost,
       you must obtain a Google AJAX Search API key at:
         http://code.google.com/apis/search/signup.html
-      Replace the string ABC in the src attribute below with the key
+      append &amp;key=ABC to the string below, replacing ABC with the key
       obtained from the site above.
      -->
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1&amp;key=ABC"/>
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
 
     <!-- Specify the application specific style sheet. -->
     <stylesheet src='SimpleSearch.css' />   
@@ -123,11 +123,11 @@ Congratulations! You should now have Google AJAX Search working within a GWT app
   [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch2.png]
 
 
-== Using a !SearchControl with a !SearchListener ==
+== Using a !SearchControl with a !SearchCompleteHandler ==
 
-The Search API is not limited to showing results in just the format above. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchListener SearchListener.html], you can access all the details of the results returned from the search and handle them in a programmatic way.
+The Search API is not limited to showing results in just the format above. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchCompleteListener SearchCompleteListener.html], you can access all the details of the results returned from the search and handle them in a programmatic way.
 
-Let's now replace the contents of the SimpleSearch class again, this time with the code below.
+Let's now replace the contents of the !SimpleSearch class again, this time with the code below.
 
 {{{
 public class SimpleSearch implements EntryPoint {
@@ -144,11 +144,11 @@ public class SimpleSearch implements EntryPoint {
     webSearch.setNoHtmlGeneration();
     options.add(webSearch);
     final SearchControl control = new SearchControl(options);
-    control.addSearchListener(new SearchListener() {
+    control.addSearchCompleteHandler(new SearchCompleteHandler() {
 
-      public void onSearchResult(Search searchIn, Result resultIn) {
-        WebSearch search = (WebSearch) searchIn;
-        WebResult result = (WebResult) resultIn;
+      public void onSearchComplete(SearchCompleteEvent event) {
+        WebSearch search = (WebSearch) event.getSearch();
+        WebResult result = (WebResult) event.getResult();
         ++currentRow;
         
         resultsTable.setText(currentRow, 0, "" + currentRow);
