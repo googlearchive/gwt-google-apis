@@ -158,6 +158,20 @@ java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStar
 }}}
 
 
+=== Making changes to and debugging your Java source ===
+
+You can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
+
+=== Caching effects from the Gadget container ===
+
+One important aspect of the Gadget infrastructure you must be aware of is that Gadget containers, such as iGoogle, are free to cache the Gadget specifications.  In the case of iGoogle, the default caching is one hour.  See FAQ item [http://code.google.com/apis/gadgets/faq.html#CantSeeChanges I updated my gadget, but I can't see my changes. What's going on?]  
+
+As a developer, you can use the [http://code.google.com/apis/gadgets/docs/legacy/tools.html#Dev_Gadget Developer Gadget] on iGoogle to turn off caching for your view of the gadget by un-checking the `Cached` checkbox beside the URL of your Gadget Spec.
+
+For deploying a gadget developed with GWT, the caching by Gadget Containers is a significant issue. If you deploy your GWT application and remove old versions of the compiled program, the cached version of the Gadget spec will still refer to the old (and now deleted) files and end users will experience an outage until the cache is refreshed.  
+
+
+
 == Adding container features ==
 
 If the Gadget requires access to features of the container, it should implement the appropriate _!NeedsFoo_ interfaces, which currently include:
@@ -299,21 +313,8 @@ Here is a screen shot of the resulting gadget's preferences menu in iGoogle:
 
    [http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedGadgets-MealPreferences.png]
 
-=== Compiling your Gadget ===
 
-Use the SampleGadget-compile shell script to build your project, or use any other method to invoke the GWT compiler on the module `SampleGadget.gwt.xml`.
-
-The output of the compiler will have:
-   * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
-   * A `SampleGadgets.html` file.  This is just a holdover from a regular GWT module and is not used in publishing a gadget (but it can be useful in hosted mode).  
-   * Other resources such as image files.
-   * A `*.xml` file.  This is the gadget specification file that you will need in order to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish your gadget].  It contains:
-       * Information about your gadget specified in `@ModulePrefs` 
-       * Which features your gadget needs, 
-       * A user preference value specification, 
-       * Some !JavaScript code for initializing the Gadget API and loading one of the compiler permutations.
-
-== Uploading and Syndicating your Gadget ==
+== Syndicating your Gadget ==
 
 First, you should take the output files from the compiler and upload them all to the same directory on a web server.
 
@@ -350,24 +351,3 @@ java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStar
         ...
 }}}
   This is because there is no entry point in the module to run._
-
-=== Making changes to and debugging your Java source ===
-
-You can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
-
-=== Caching effects from the Gadget Container ===
-
-One important aspect of the Gadget infrastructure you must be aware of is that Gadget containers, such as iGoogle, are free to cache the Gadget specifications.  In the case of iGoogle, the default caching is one hour.  See FAQ item [http://code.google.com/apis/gadgets/faq.html#CantSeeChanges I updated my gadget, but I can't see my changes. What's going on?]  
-
-As a developer, you can use the [http://code.google.com/apis/gadgets/docs/legacy/tools.html#Dev_Gadget Developer Gadget] on iGoogle to turn off caching for your view of the gadget by un-checking the `Cached` checkbox beside the URL of your Gadget Spec.
-
-For deploying a gadget developed with GWT, the caching by Gadget Containers is a significant issue. If you deploy your GWT application and remove old versions of the compiled program, the cached version of the Gadget spec will still refer to the old (and now deleted) files and end users will experience an outage until the cache is refreshed.  
-
-== Using Eclipse ==
-
-The `projectCreator` task creates an eclipe configuration file to import into your Ecilpse workspace.  
-
-Use the `File-->Import...` command to navigate to the directory where you created the project and import it into the workspace.  Once the project is imported, you will see that the following items have been configured for you:
-
-   * A classpath that contains the `gwt-gadgets.jar` file.
-   * A launch configuration that contains the source directory for your project on your class path.
