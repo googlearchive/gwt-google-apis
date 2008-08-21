@@ -2,10 +2,9 @@
 
 = Getting Started with Google AJAX Search =
 
-The AJAX Search API provides a convenient way to add a pre-packaged search box and display results to a webpage, or to manipulate search results in a programmatic way. The [http://code.google.com/p/gwt-google-apis Google AJAX Search library for GWT] allows you to access the JavaScript API from Java code compiled with the GWT compiler.
+The AJAX Search API provides a convenient way to add a pre-packaged search box and display results to a webpage, or to manipulate search results in a programmatic way. The [http://code.google.com/p/gwt-google-apis Google AJAX Search library for GWT] allows you to access this JavaScript API from Java code compiled with the GWT compiler.
 
-This guide describes the basics behind writing a small project that uses the Google AJAX Search library with [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, it would be helpful to become familiar with the [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API] developer's site.
-
+This guide describes the basics of getting the Google AJAX Search Library working in a GWT project. For more information on the functionality provided by the AJAX Search API, see the [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API] developer's guide.
 
 == Assumptions ==
  
@@ -13,126 +12,103 @@ This guide describes the basics behind writing a small project that uses the Goo
   * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
 
 
-== Getting the Google AJAX Search Library for GWT ==
+== Downloading the Google AJAX Search Library for GWT ==
 
-You can download the latest production release of the library from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-search.jar`. 
+You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-search.jar`. 
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-search`.
 
 
-== Creating a project that uses AJAX Search ==
+== Setting up a GWT Project to use the AJAX Search API===
+
+There are three steps required for a GWT project to use the AJAX Search Library. 
+
+   1 Include the library JAR file in the classpath
+   1 Inherit com.google.gwt.search.Search in the module XML definition file. 
+   1 Include a <script> tag in your module in order to load the api and provide the AJAX Search key.
+
+We'll explain each as we set up a new project.
+
+== Create a new GWT Project ==
 
 Start by creating a new GWT project called !SimpleSearch as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
 
-Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-gears/gwt-search.jar` to the Java classpath for the launch, compile and .and eclipse definitions. For the purposes of this example we assume `gwt-search.jar` has been unpacked in `/usr/local/gwt-search` and that you are using the Eclipse IDE.
+Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-gears/gwt-search.jar` to the Java classpath for the launch, compile and and eclipse definitions. For the purposes of this example we assume `gwt-search.jar` has been unpacked in `/usr/local/gwt-search` and that you are using the Eclipse IDE.
 
-We also use the command line argument `-addToModule` to add the `AjaxSearch.gwt.xml` module to be inherited in the generated project `gwt.xml` file.
+We also need to tell the GWT compiler that we are using the Search module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.search.Search` as the module to be inherited. This will place the inheritance entry `Search.gwt.xml` into the generated project file `SimpleSearch.gwt.xml`.
 
-=== Creating a Skeleton Project ===
 
 {{{
 $PP_OFF
 $ projectCreator -eclipse SimpleSearch -out SimpleSearch \
      -addToClassPath /usr/local/gwt-search/gwt-search.jar
-Created directory SimpleSearch/src
-Created directory SimpleSearch/test
-Created file SimpleSearch/.project
-Created file SimpleSearch/.classpath
 
 $ applicationCreator -eclipse SimpleSearch -out SimpleSearch \
      -addToClassPath /usr/local/gwt-search/gwt-search.jar \
-     -addModule com.google.gwt.search.AjaxSearch com.example.simplesearch.client.SimpleSearch
-Created directory SimpleSearch/src
-Created directory SimpleSearch/src/com/example/simplesearch
-Created directory SimpleSearch/src/com/example/simplesearch/client
-Created directory SimpleSearch/src/com/example/simplesearch/public
-Created file SimpleSearch/src/com/example/simplesearch/SimpleSearch.gwt.xml
-Created file SimpleSearch/src/com/example/simplesearch/public/SimpleSearch.html
-Created file SimpleSearch/src/com/example/simplesearch/public/SimpleSearch.css
-Created file SimpleSearch/src/com/example/simplesearch/client/SimpleSearch.java
-Created file SimpleSearch/SimpleSearch.launch
-Created file SimpleSearch/SimpleSearch-shell
-Created file SimpleSearch/SimpleSearch-compile
+     -addModule com.google.gwt.search.Search com.example.simplesearch.client.SimpleSearch
 }}}
 
-You can compile this project to see if it works with `SimpleSearch-compile`.
+
+Now you should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by running _!SimpleSearch-shell_ from the command line. 
+
+Also test out compilation with the `SimpleSearch-compile` script or the _Compile/Browse_ button in hosted mode.
 
 {{{
+$PP_OFF
 $ ./SimpleSearch-compile
 Compiling module com.example.simplesearch.SimpleSearch
 Compilation succeeded
 Linking compilation into ./www/com.example.simplesearch.SimpleSearch
 }}}
 
+If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
 
-Now, you need to add a reference to the AJAX Search API script in the `SimpleSearch.gwt.xml` file:
+==Adding the AJAX Search script tag to your module XML file==
+
+Your GWT application will need access to the AJAX Search API, as well as the API key. In order to do this, you must include a <script> tag in your module's `SimpleSearch.gwt.xml` file. Include the script tag shown in your module.xml file above the automatically generated stylesheet reference.
 
 {{{
     <!--
       If you want to deploy this application outside of localhost,
       you must obtain a Google AJAX Search API key at:
         http://code.google.com/apis/search/signup.html
-      Replace the string ABC in the src attribute below with the key
+      append &amp;key=ABC to the string below, replacing ABC with the key
       obtained from the site above.
      -->
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1&amp;key=ABC"/>
-    
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
+
+    <!-- Specify the application specific style sheet. -->
+    <stylesheet src='SimpleSearch.css' />   
 }}}
 
+When you go to deploy your application outside of localhost, you will need to obtain a Google AJAX Search API key at [http://code.google.com/apis/search/signup.html]. Replace the string `ABC` in the src attribute below with the key obtained from the site above.
 
-== Looking at the HelloSearch Sample ==
+== Basic steps to use the API ==
 
-Lets start by taking a look at the sample program _ !HelloSearch _ that is shipped with the `gwt-search` distribution:
+Now that your project is set up, the basic steps to use the API are as follows:
 
-Here are the interesting parts of the application
+  1 Create one or more search objects
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/BlogSearch.html BlogSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/BookSearch.html BookSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/LocalSearch.html LocalSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/ImageSearch.html ImageSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/NewsSearch.html NewsSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/VideoSearch.html VideoSearch]
+     * [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/WebSearch.html WebSearch]
+  1 Add the search object(s) to a [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchControlOptions.html SearchControlOptions] object
+  1 Optionally register a [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchListener.html SearchListener] on the !SearchControlOptions object
+  1 Create a [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchControl.html SearchControl] object from the `SearchControlOptions`
+  1 Call the [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchControl.html#execute(/java/lang/String)execute SearchControl.execute()] method to specify a search term and start the search .
 
-   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/search/client/HelloSearch.java HelloSearch.java] - Java Source Code
-   * [http://code.google.com/p/gwt-google-apis/source/browse/trunk/search/samples/hellosearch/src/com/google/gwt/search/sample/hellosearch/HelloSearch.gwt.xml HelloSearch.gwt.xml] - GWT Module definition w/ API script injected
+We'll do just that in the next step. 
 
-Note the following:
+== Adding a Google AJAX !SearchControl to the page ==
 
-  # To use this API you must include a `<script>` tag in your module in order to load the api and provide the AJAX Search key.  
-  # You must inherit `com.google.gwt.search.AjaxSearch` in your module definition file.
+Let's create a basic but nicely formatted search box and the corresponding results using web and image results. Here we use the API's built in HTML rendering.
 
-The sample application performs a few canned searches of different types of searches and sets up some constraints.  If you want to save a particular result, you can press the _save_ link and a new reference will be placed in the left hand column. If you want to change the search term, you can type it in the search box at the top of the page.
-
-  [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch1.png]
-
-You can look at and modify the sample code in the `samples/search` directory after unpacking the distribution.
-
-
-== General API usage ==
-
-The basic steps to use the API are as follows
-
-  1 Choose one or more types of searches:  
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/BlogSearch.html BlogSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/BookSearch.html BookSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/LocalSearch.html LocalSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/ImageSearch.html ImageSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/NewsSearch.html NewsSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/VideoSearch.html VideoSearch]
-     * [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/WebSearch.html WebSearch]
-  1 Add the search objects to a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchControlOptions.html SearchControlOptions] object
-  1 Optionally register a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchListener.html SearchListener] on the !SearchControlOptions object
-  1 Create a [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchControl.html SearchControl] object from the `SearchControlOptions`
-  1 Call the [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchControl.html#execute(/java/lang/String)execute SearchControl.execute()] method to specify a search term and start the search .
-
-
-== Adding !SearchControl to the page ==
-
-The API can easily generate a nicely formatted presentation of a search box and the search results. Here is an example of how to search for both web and image results and present them on the page using the API's built in HTML rendering:
+Replace the contents of your `onModuleLoad` method with the following:
 
 {{{
-import com.google.gwt.search.client.ExpandMode;
-import com.google.gwt.search.client.ImageSearch;
-import com.google.gwt.search.client.ResultSetSize;
-import com.google.gwt.search.client.SearchControl;
-import com.google.gwt.search.client.SearchControlOptions;
-import com.google.gwt.search.client.WebSearch;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-
 public class SimpleSearch implements EntryPoint {
 
   public void onModuleLoad() {
@@ -150,34 +126,20 @@ public class SimpleSearch implements EntryPoint {
 }
 }}}
 
-And here is a screen capture of what the results look like running in hosted mode.
+Now save your project and run it in hosted mode. 
+
+Congratulations! You should now have Google AJAX Search working within a GWT application. 
 
   [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch2.png]
 
 
-== Using a !SearchControl with a !SearchListener ==
+== Using a !SearchControl with a !SearchCompleteHandler ==
 
-The Search API is not limited to showing results in this formatted form. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/search/com/google/gwt/search/client/SearchListener SearchListener.html], you can access all the details of the results returned from the search and handle them in a custom way.
+The Search API is not limited to showing results in just the format above. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchCompleteListener SearchCompleteListener.html], you can access all the details of the results returned from the search and handle them in a programmatic way.
 
-The following example allows the user to run a search and displays the results in a short table.
+Replace the contents of the !SimpleSearch class with the code below.
 
 {{{
-import com.google.gwt.search.client.Result;
-import com.google.gwt.search.client.Search;
-import com.google.gwt.search.client.SearchControl;
-import com.google.gwt.search.client.SearchControlOptions;
-import com.google.gwt.search.client.SearchListener;
-import com.google.gwt.search.client.WebResult;
-import com.google.gwt.search.client.WebSearch;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
-
 public class SimpleSearch implements EntryPoint {
   int currentRow;
   FlexTable resultsTable;
@@ -192,11 +154,11 @@ public class SimpleSearch implements EntryPoint {
     webSearch.setNoHtmlGeneration();
     options.add(webSearch);
     final SearchControl control = new SearchControl(options);
-    control.addSearchListener(new SearchListener() {
+    control.addSearchCompleteHandler(new SearchCompleteHandler() {
 
-      public void onSearchResult(Search searchIn, Result resultIn) {
-        WebSearch search = (WebSearch) searchIn;
-        WebResult result = (WebResult) resultIn;
+      public void onSearchComplete(SearchCompleteEvent event) {
+        WebSearch search = (WebSearch) event.getSearch();
+        WebResult result = (WebResult) event.getResult();
         ++currentRow;
         
         resultsTable.setText(currentRow, 0, "" + currentRow);
@@ -236,11 +198,7 @@ Here is a screen capture of the resulting application in hosted mode.
   
   [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch-nohtml.png]
 
-== Using Eclipse ==
+==Next Steps==
+You should now have the basics of a working GWT application using the Google AJAX Search Library.
 
-The `projectCreator` task creates an eclipe configuration file to import into your Ecilpse workspace.  
-
-Use the `File-->Import...` command to navigate to the directory where you created the project and import it into the workspace.  Once the project is imported, you will see that the following items have been configured for you:
-
-   * A classpath that contains the `gwt-search`.jar file.
-   * A launch configuration that contains the source directory for your project on your class path.
+To find out more about what you can do with the API, see the [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html library class reference] and the [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API Developer's Guide]
