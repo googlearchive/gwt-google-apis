@@ -1,7 +1,8 @@
-﻿#summary Class Reference for the Gadgets API
+﻿#summary Class Reference for the Gadgets API Library for GWT
 
-= Class Reference =
+= Gadgets Library Class Reference =
 
-  _Based on Subversion revision r373_.
 
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/index.html Gadgets API]
+|| [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/index.html Browse the Gadgets API JavaDoc]||
+
+  _Based on Subversion revision r373_
