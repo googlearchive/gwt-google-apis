@@ -1,4 +1,4 @@
-#summary Using Google AJAX Search in a project
+﻿#summary Using Google AJAX Search in a project
 
 = Getting Started with Google AJAX Search =
 
@@ -44,11 +44,14 @@ Now you should now have a standard project set up. Before continuing, make sure 
 Also test out compilation with the `SimpleSearch-compile` script or the _Compile/Browse_ button in hosted mode
 
 {{{
+$PP_OFF
 $ ./SimpleSearch-compile
 Compiling module com.example.simplesearch.SimpleSearch
 Compilation succeeded
 Linking compilation into ./www/com.example.simplesearch.SimpleSearch
 }}}
+
+If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
 
 ==Add the AJAX Search script tag to your module XML file==
 
