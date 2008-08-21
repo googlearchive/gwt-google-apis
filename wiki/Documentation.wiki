@@ -1,10 +1,10 @@
 Please visit the [http://code.google.com/docreader/#p(gwt-google-apis)s(gwt-google-apis)t(Overview) Google APIs for GWT documentation] for information on how to use the APIs and for the class library reference (!JavaDoc). 
 
 ===Contributors===
-The Google APIs for Google Web Toolkit is an open source project under the Apache 2.0 license. If you'd like to get involved building support for your favorite Google API, please read the [http://code.google.com/docreader/#p(gwt-google-apis)s(gwt-google-apis)t(MakingGALGWTBetter) Making the Google API Libraries for GWT Better] guide, and then drop a note on the [http://groups.google.com/group/Google-Web-Toolkit-Contributors GWT Contributor Forum]. 
+The Google APIs for Google Web Toolkit is an open source project under the [http://www.apache.org/licenses/LICENSE-2.0 Apache 2.0 license]. If you'd like to get involved building support for your favorite Google API, please read the [http://code.google.com/docreader/#p(gwt-google-apis)s(gwt-google-apis)t(MakingGALGWTBetter) Making the Google API Libraries for GWT Better] guide, and then drop a note on the [http://groups.google.com/group/Google-Web-Toolkit-Contributors GWT Contributor Forum]. 
 
 ===Wiki Doc List===
 For a list of all wiki documents in this project, including design documents for upcoming features, see the [http://code.google.com/p/gwt-google-apis/w/list Wiki document list]
 
 
-Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation linked to above, including the class reference, is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons license], and examples are licensed under an [http://www.apache.org/licenses/LICENSE-2.0 Apache license].
+Except as otherwise [http://code.google.com/policies.html#restrictions noted], the documentation linked to above, including the class reference, is licensed under a [http://creativecommons.org/licenses/by/2.5/ Creative Commons license]. Examples are licensed under the [http://www.apache.org/licenses/LICENSE-2.0 Apache 2.0 license].
