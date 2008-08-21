@@ -96,6 +96,28 @@ Finally, above the class statement, add an annotation to set the gadget title, a
 
 [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides attributes to the [http://code.google.com/apis/gadgets/docs/legacy/reference.html#Moduleprefs_Ref  `<ModulePrefs>`] tag in the Gadget Specification.
 
+=== Compiling your Gadget ===
+
+You now have the basics of a Gadget in place, but there are a few more steps required to run the Gadget in GWT's hosted mode, so first let's compile and deploy what we have to a Gadget container like iGoogle.
+
+Use the `SimpleGadget-compile` shell script to build your project. The output of the compiler will have:
+   * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
+   * A `SampleGadgets.html` file.  This is just a holdover from a regular GWT module and is not used in publishing a gadget (but it can be useful in hosted mode, as we'll see later).  
+   * Other resources such as image files.
+   * A `*.xml` file.  This is the gadget specification file that you will need in order to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish your gadget]. It contains:
+       * Information about your gadget specified in `@ModulePrefs` 
+       * Which features your gadget needs
+       * A user preference value specification 
+       * !JavaScript code for initializing the Gadget API and loading one of the GWT compiler permutations.
+
+== Uploading your Gadget to iGoogle ==
+
+To test our your newly compiled code, take the output files above (located in the `SimpleGadget/www` directory unless you changed GWT's output location) and upload them all to the same directory on a public web server. 
+
+Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in the upper right corner. Click "Add Feed or Gadget" and specify the full URL to the gadget spec file (`com.example.simplegadget.client.SimpleGadget.gadget.xml`) that you uploaded to your server in the previous step. Click "Add" and go back to your iGoogle page. 
+
+Congratulations. Your new (if slightly boring) Gadget should  appear on the page.
+
 
 === Specifying Features ===
 
