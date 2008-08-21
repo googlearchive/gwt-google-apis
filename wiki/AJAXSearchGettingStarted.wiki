@@ -29,7 +29,7 @@ There are three steps required for a GWT project to use the AJAX Search Library.
 
 We'll explain each as we set up a new project.
 
-== Create a new GWT Project ==
+== Creating a new GWT Project ==
 
 Start by creating a new GWT project called !SimpleSearch as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
 
