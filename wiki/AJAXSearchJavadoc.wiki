@@ -2,7 +2,7 @@
 
 = Google Ajax Search API Library Class Reference =
 
-  || [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html Browse the Google AJAX Search API Library JavaDoc] ||
+|| [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/index.html Browse the Google AJAX Search API Library JavaDoc] ||
 
 
-    _Based on Subversion revision r373_
+  _Based on Subversion revision r373_
