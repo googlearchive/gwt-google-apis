@@ -3,7 +3,7 @@
 The Google API Libraries for Google Web Toolkit is a collection of libraries that provide Java language bindings for popular Google !JavaScript APIs. These libraries make it quick and easy for developers to use these Google !JavaScript APIs with Google Web Toolkit. The libraries are supported by the Google Web Toolkit team.
 
 ==Available Libraries===
-====Gears 1.0 Library====
+====[http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.0/index.html Gears 1.0 Library]====
   [http://code.google.com/apis/gears/ Gears] is an open source project that enables more powerful web applications by adding new features to web browsers. The Gears 1.0 library is the most current production release and provides support for the Gears !LocalServer, Database, and !WorkerPool. [Downloads Download].
 
 
