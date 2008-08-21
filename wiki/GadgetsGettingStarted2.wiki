@@ -96,7 +96,7 @@ Finally, above the class statement, add an annotation to set the gadget title, a
 
 [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides attributes to the [http://code.google.com/apis/gadgets/docs/legacy/reference.html#Moduleprefs_Ref  `<ModulePrefs>`] tag in the Gadget Specification.
 
-=== Compiling your Gadget ===
+== Compiling your Gadget ==
 
 You now have the basics of a Gadget in place, but there are a few more steps required to run the Gadget in GWT's hosted mode, so first let's compile and deploy what we have to a Gadget container like iGoogle.
 
@@ -129,21 +129,21 @@ Here are the steps to debug in Hosted mode:
    1 Compile your gadget
    1 Upload the files output from the compiler to a webserver
    1 Add your gadget to your [http://www.google.com/ig iGoogle] home page
-   1 Start up hosted mode with the "-noserver" argument
+   1 Start up hosted mode with the "-noserver" argument, specifying the Gadget container as the server
 
 === Bringing up Hosted Mode with -noserver ===
 
 Because your Gadget needs to be hosted by a container, Hosted Mode requires that it be run with the -noserver option. This tells Hosted Mode to use the Gadget container as the server rather than GWT's built-in server.
 
-If you are using Eclipse, modify the arguments tab in the Run Dialog box. Add `-noserver` in front of the `-out` flag, and replace `com.example.simplegadget.SimpleGadget/SimpleGadget.html` with the URL of the container, in this case "http://www.google.com/ig"
+If you are using Eclipse, modify the arguments tab in the Run Dialog box. Add `-noserver` in front of the `-out` flag, and replace `com.example.simplegadget.SimpleGadget/SimpleGadget.html` with the URL of the container, in this case `http://www.google.com/ig`
 
 {{{
   -noserver -out www http://www.google.com/ig
 }}}
 
-If you aren't using Eclipse, you can edit `SimpleGadget-shell` and add the above arguments there after `com.google.gwt.dev.GWTShell`. 
+If you aren't using Eclipse, edit `SimpleGadget-shell` and add the arguments after `com.google.gwt.dev.GWTShell`. 
 
-Run your application using Eclipse or SimpleGadget-shell, and your gadget client code should now be running in hosted mode.  
+Now run your application using Eclipse or `SimpleGadget-shell`, and your gadget client code should now be running in hosted mode.  
 
   _Note: for pre gwt-gadgets 1.1_RC1 releases, you may need to edit your eclipse project configuration for the gwt-gadgets and/or your launch configurations to reference the library `GWT_TOOLS/lib/xerces/xerces-2_9_1/xercesImpl.jar`_
 
@@ -158,11 +158,9 @@ java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStar
 }}}
 
 
+== Adding container features ==
 
-
-=== Specifying Features ===
-
-If the Gadget requires access to features of the container, it should implement any of the _!NeedsFoo_ interfaces, which currently include:
+If the Gadget requires access to features of the container, it should implement the appropriate _!NeedsFoo_ interfaces, which currently include:
  
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/NeedsAnalytics.html NeedsAnalytics]
   * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/NeedsDynamicHeight.html NeedsDynamicHeight]
@@ -174,7 +172,7 @@ If the Gadget requires access to features of the container, it should implement 
 At runtime, all feature setters will be called strictly before [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)]. The order in which the setters are called is undefined.
 
 
-For example, if you wanted to use the optional feature to set the title dynamically, you would need to inherit the `NeedsSetTitle` interface.
+For example, if you wanted to use the optional feature to set the title dynamically, you would need to inherit the `NeedsSetTitle` interface. The following code sets the title of the gadget dynamically. 
 
 {{{
 /**
@@ -206,12 +204,12 @@ public class NeedsSetTitleGadget extends Gadget<UserPreferences> implements
 }
 }}}
 
-And here is a screenshot of the resulting gadget:
+Here's the resulting Gadget:
 
    [http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedGadgets-ChangeTitle.png]
 
 
-=== Specifying Preferences ===
+== Specifying Preferences ==
 
 The gadget spec allows you to specify user preferences for your gadget.  User preferences allow the gadget container to provide a user interface and storage for parameters used to customize the gadget. 
 
