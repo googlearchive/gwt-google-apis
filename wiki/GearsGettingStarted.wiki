@@ -4,6 +4,8 @@
 
 This guide describes the basics behind writing a small project that uses the Gears API with [http://code.google.com/p/google-web-toolkit Google Web Toolkit] (GWT).  Before working through this guide, you should be somewhat familiar with the [http://code.google.com/apis/gears/ Gears developer's site].
 
+Please note that you currently can only debug Gears in Google Web Toolkit's hosted mode on Windows. Hosted mode debugging will not work on Mac OS X due to GWT's use of Safari as a rendering engine, nor on Linux for similar reasons. However, you may work with the web mode on OS X using Firefox.
+
 == Assumptions ==
  
   * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
