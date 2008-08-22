@@ -32,8 +32,8 @@ public final class VideoResult extends Result {
    * @return YouTube user name of the author of the video, if it is known
    */
   public native String getAuthor() /*-{
-    return this.author;
-  }-*/;
+      return this.author;
+    }-*/;
 
   /**
    * Returns a snippet style description of the video clip.
@@ -41,8 +41,8 @@ public final class VideoResult extends Result {
    * @return a snippet style description of the video clip.
    */
   public native String getContent() /*-{
-    return this.content;
-  }-*/;
+      return this.content;
+    }-*/;
 
   /**
    * Returns the approximate duration, in seconds, of the video.
@@ -57,16 +57,16 @@ public final class VideoResult extends Result {
    * If present, returns the url of the flash version of the video that can be
    * played inline on your page. To play this video simply create and
    * &lt;embed&gt; element on your page using this value as the <code>src</code>
-   * attribute and using <code>application/x-shockwave-flash</code> as the
-   * type attribute. If you want the video to play right away, make sure to
-   * append <code>&autoPlay=true</code> to the url.
+   * attribute and using <code>application/x-shockwave-flash</code> as the type
+   * attribute. If you want the video to play right away, make sure to append
+   * <code>&autoPlay=true</code> to the url.
    * 
    * @return If present, returns the url of the flash version of the video that
    *         can be played inline on your page. Otherwise, returns null.
    */
   public native String getPlayUrl() /*-{
-    return this.playUrl;
-  }-*/;
+      return this.playUrl;
+    }-*/;
 
   /**
    * Returns the published date of the video (rfc-822 format).
@@ -78,8 +78,8 @@ public final class VideoResult extends Result {
   }
 
   public native String getPublishedAsString() /*-{
-    return this.published;
-  }-*/;
+      return this.published;
+    }-*/;
 
   /**
    * Returns the name of the video's publisher, typically displayed in green
@@ -89,17 +89,18 @@ public final class VideoResult extends Result {
    * @return the name of the video's publisher.
    */
   public native String getPublisher() /*-{
-    return this.publisher;
-  }-*/;
+      return this.publisher;
+    }-*/;
 
   /**
-   * Returns the rating of the vidoe on scale of 1 to 5.
+   * Returns the rating of the video on scale of 1 to 5.
    * 
-   * @return rating of the vidoe on scale of 1 to 5
+   * @return rating of the video on scale of 1 to 5. Returns 0 if no rating was
+   *         found.
    */
   public native int getRating() /*-{
-    return Number(this.rating);
-  }-*/;
+      return (this.rating == null ? 0 : Number(this.rating));
+    }-*/;
 
   /**
    * Returns the height in pixels of the video thumbnail.
@@ -107,8 +108,8 @@ public final class VideoResult extends Result {
    * @return the height in pixels of the video thumbnail.
    */
   public native int getTbHeight()/*-{
-    return Number(this.tbHeight);
-  }-*/;
+        return Number(this.tbHeight);
+      }-*/;
 
   /**
    * Returns the url of a thumbnail image which visually represents the video.
@@ -116,8 +117,8 @@ public final class VideoResult extends Result {
    * @return the url of a thumbnail image which visually represents the video.
    */
   public native String getTbUrl() /*-{
-    return this.tbUrl;
-  }-*/;
+      return this.tbUrl;
+    }-*/;
 
   /**
    * Returns the width in pixels of the video thumbnail.
@@ -125,8 +126,8 @@ public final class VideoResult extends Result {
    * @return the width in pixels of the video thumbnail.
    */
   public native int getTbWidth() /*-{
-    return Number(this.tbWidth);
-  }-*/;
+      return Number(this.tbWidth);
+    }-*/;
 
   /**
    * Returns the title of the video result.
@@ -134,8 +135,8 @@ public final class VideoResult extends Result {
    * @return the title of the video result.
    */
   public native String getTitle() /*-{
-    return this.title;
-  }-*/;
+      return this.title;
+    }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -145,8 +146,8 @@ public final class VideoResult extends Result {
    *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
   public native String getTitleNoFormatting() /*-{
-    return this.titleNoFormatting;
-  }-*/;
+      return this.titleNoFormatting;
+    }-*/;
 
   /**
    * Returns the url of a playable version of the video result.
@@ -154,23 +155,24 @@ public final class VideoResult extends Result {
    * @return the url of a playable version of the video result.
    */
   public native String getUrl() /*-{
-    return this.url;
-  }-*/;
+      return this.url;
+    }-*/;
 
   /**
    * Returns the number of plays for this video.
    * 
-   * @return number of plays for this video
+   * @return number of plays for this video. Returns -1 if no count was
+   *         returned.
    */
   public long getViewCount() {
     return Long.parseLong(getViewCountAsString());
   }
 
   private native String getDurationAsString() /*-{
-    return this.duration;
-  }-*/;
+      return this.duration;
+    }-*/;
 
   private native String getViewCountAsString() /*-{
-    return this.viewCount;
-  }-*/;
+      return (this.viewCount == null ? "-1" : this.viewCount);
+    }-*/;
 }
