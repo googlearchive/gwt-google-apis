@@ -17,6 +17,7 @@ package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.search.client.impl.GSearchControl;
 import com.google.gwt.search.client.impl.GsearcherOptions;
 import com.google.gwt.search.client.impl.KeepCallback;
@@ -60,8 +61,8 @@ public class SearchControl extends Composite {
   private final KeepHandlerCollection keepHandlers = new KeepHandlerCollection();
 
   /**
-   * Retains all SearchCompleteHandlers that should be notified when the SearchControl
-   * receives Result.
+   * Retains all SearchCompleteHandlers that should be notified when the
+   * SearchControl receives Result.
    */
   private final SearchCompleteHandlerCollection resultHandlers = new SearchCompleteHandlerCollection();
 
@@ -91,8 +92,9 @@ public class SearchControl extends Composite {
           @Override
           public void onSearchResult(SearchControl control, Search search) {
             assert control == SearchControl.this;
-            for (Result result : search.getResults()) {
-              resultHandlers.fireResult(search, result);
+            JsArray<? extends Result> results = search.getResults();
+            for (int i = 0; i < results.length(); ++i) {
+              resultHandlers.fireResult(search, results.get(i));
             }
           }
         });
@@ -162,13 +164,13 @@ public class SearchControl extends Composite {
   }
 
   /**
-   * Adds a {@link SearchCompleteHandler} to receive notification of all search results
-   * loaded by the SearchControl. A SearchCompleteHandler added to the SearchControl
-   * will receive Result objects from all Search objects added to the
-   * SearchControl.
+   * Adds a {@link SearchCompleteHandler} to receive notification of all search
+   * results loaded by the SearchControl. A SearchCompleteHandler added to the
+   * SearchControl will receive Result objects from all Search objects added to
+   * the SearchControl.
    * 
-   * @param handler A {@link SearchCompleteHandler} that will receive notifications when
-   *          the SearchControl has received a Result.
+   * @param handler A {@link SearchCompleteHandler} that will receive
+   *          notifications when the SearchControl has received a Result.
    */
   public void addSearchCompleteHandler(SearchCompleteHandler handler) {
     resultHandlers.add(handler);
@@ -203,7 +205,7 @@ public class SearchControl extends Composite {
    * @param handler The KeepHandler to remove
    */
   public void removeKeepHandler(KeepHandler handler) {
-      keepHandlers.remove(handler);
+    keepHandlers.remove(handler);
   }
 
   /**
@@ -212,7 +214,7 @@ public class SearchControl extends Composite {
    * @param handler The {@link SearchCompleteHandler} to remove
    */
   public void removeSearchCompleteHandler(SearchCompleteHandler handler) {
-      resultHandlers.remove(handler);
+    resultHandlers.remove(handler);
   }
 
   /**
@@ -221,6 +223,6 @@ public class SearchControl extends Composite {
    * @param handler The {@link SearchStartingHandler} to remove
    */
   public void removeSearchStartingHandler(SearchStartingHandler handler) {
-      startingHandlers.remove(handler);
+    startingHandlers.remove(handler);
   }
 }

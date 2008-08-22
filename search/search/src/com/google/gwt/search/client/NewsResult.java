@@ -15,42 +15,99 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GnewsResult;
-import com.google.gwt.search.jsio.client.impl.Extractor;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * A News search result.
  */
-public class NewsResult extends Result {
+public final class NewsResult extends Result {
 
-  NewsResult(JavaScriptObject obj) {
-    super(obj);
+  /**
+   * 
+   */
+  public static final class Image extends JavaScriptObject {
+    protected Image() {
+      // Required for overlay types
+    }
+
+    /**
+     * Returns the publisher of the news article containing the image. The
+     * suggested user interface is to display this under or in close proximity
+     * to the image, hyper linked through the {@link #getUrl()} property from
+     * above.
+     * 
+     * @return publisher of the news article containing the image
+     */
+    public native String getPublisher() /*-{
+      return this.publisher;
+    }-*/;
+
+    /**
+     * Returns the height of the image. The standard size of this image is 80
+     * pixels wide and 50 pixels tall.
+     * 
+     * @return height of the image
+     */
+    public native int getTbHeight() /*-{
+      return Number(this.tbHeight);
+    }-*/;
+
+    /**
+     * Returns the URL of the image.
+     * 
+     * @return URL of the image
+     */
+    public native String getTbUrl() /*-{
+      return this.tbUrl;
+    }-*/;
+
+    /**
+     * Returns the width of the image. The standard size of this image is 80
+     * pixels wide and 50 pixels tall
+     * 
+     * @return widht of the image
+     */
+    public native int getTbWidth() /*-{
+      return Number(this.tbWidth);
+    }-*/;
+
+    /**
+     * Returns the title of the article associated with the image.
+     * 
+     * @return title of the article associated with the image.
+     */
+    public native String getTitle() /*-{
+      return this.title;
+    }-*/;
+
+    /**
+     * Returns the title of the article associated with the image stripped of
+     * HTML formatting.
+     * 
+     * @return title of the article associated with the image stripped of HTML
+     *         formatting
+     */
+    public native String getTitleNoFormatting() /*-{
+      return this.titleNoFormatting;
+    }-*/;
+
+    /**
+     * Returns the URL of the article that contains this image. The image, when
+     * displayed, would normally link through this URL.
+     */
+    public native String getUrl() /*-{
+      return this.url;
+    }-*/;
   }
-
   /**
    * A news story that is related to a primary NewsResult.
    */
-  public static class RelatedStory {
-    @SuppressWarnings("unused")
-    private static final Extractor<RelatedStory> __extractor = new Extractor<RelatedStory>() {
-      public RelatedStory fromJS(JavaScriptObject jso) {
-        return new RelatedStory(jso);
-      }
-
-      public JavaScriptObject toJS(RelatedStory o) {
-        return o.jsoPeer;
-      }
-    };
-
-    private final JavaScriptObject jsoPeer;
-
-    private RelatedStory(JavaScriptObject jsoPeer) {
-      this.jsoPeer = jsoPeer;
+  public static final class RelatedStory extends JavaScriptObject {
+    protected RelatedStory() {
+      // Required for overlay types
     }
 
     /**
@@ -61,9 +118,9 @@ public class NewsResult extends Result {
      * 
      * @return the location of the news story.
      */
-    public String getLocation() {
-      return GnewsResult.RelatedStory.IMPL.getLocation(this);
-    }
+    public native String getLocation() /*-{
+      return this.location;
+    }-*/;
 
     /**
      * Returns the published date (RFC-822 format) of the news story referenced
@@ -73,26 +130,30 @@ public class NewsResult extends Result {
      *         by this search result.
      */
     public Date getPublishedDate() {
-      return makeDate(GnewsResult.RelatedStory.IMPL.getPublishedDate(this));
+      return makeDate(getPublishedDateAsString());
     }
+
+    public native String getPublishedDateAsString() /*-{
+      return this.publishedDate;
+    }-*/;
 
     /**
      * Returns the name of the publisher of the news story.
      * 
      * @return the name of the publisher of the news story.
      */
-    public String getPublisher() {
-      return GnewsResult.RelatedStory.IMPL.getPublisher(this);
-    }
+    public native String getPublisher() /*-{
+      return this.publisher;
+    }-*/;
 
     /**
      * Returns the title of the news story returned as a search result.
      * 
      * @return the title of the news story returned as a search result.
      */
-    public String getTitle() {
-      return GnewsResult.RelatedStory.IMPL.getTitle(this);
-    }
+    public native String getTitle() /*-{
+      return this.title;
+    }-*/;
 
     /**
      * Returns the title, but unlike .title, this property is stripped of html
@@ -101,27 +162,31 @@ public class NewsResult extends Result {
      * @return the title, but unlike .title, this property is stripped of html
      *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
      */
-    public String getTitleNoFormatting() {
-      return GnewsResult.RelatedStory.IMPL.getTitleNoFormatting(this);
-    }
+    public native String getTitleNoFormatting() /*-{
+      return this.titleNoFormatting;
+    }-*/;
 
     /**
      * Returns the raw URL of the result.
      * 
      * @return the raw URL of the result.
      */
-    public String getUnescapedUrl() {
-      return GnewsResult.RelatedStory.IMPL.getUnescapedUrl(this);
-    }
+    public native String getUnescapedUrl() /*-{
+      return this.unescapedUrl;
+    }-*/;
 
     /**
      * Returns an escaped version of the above URL.
      * 
      * @return an escaped version of the above URL.
      */
-    public String getUrl() {
-      return GnewsResult.RelatedStory.IMPL.getUrl(this);
-    }
+    public native String getUrl() /*-{
+      return this.url;
+    }-*/;
+  }
+
+  protected NewsResult() {
+    // Required for overlay types
   }
 
   /**
@@ -131,9 +196,9 @@ public class NewsResult extends Result {
    * 
    * @return a landing page that points to all of the related stories (or null).
    */
-  public String getClusterUrl() {
-    return GnewsResult.IMPL.getClusterUrl(this);
-  }
+  public native String getClusterUrl() /*-{
+    return this.clusterUrl;
+  }-*/;
 
   /**
    * Returns a snippet of content from the news story associated with this
@@ -142,9 +207,32 @@ public class NewsResult extends Result {
    * @return a snippet of content from the news story associated with this
    *         search result.
    */
-  public String getContent() {
-    return GnewsResult.IMPL.getContent(this);
-  }
+  public native String getContent() /*-{
+    return this.content;
+  }-*/;
+
+  /**
+   * This property is optional. It only appears in a result when the system has
+   * determined that there is a good image that represents the cluster of news
+   * articles related to this result. It's important to note the the image
+   * relates to the cluster of news articles, not just the article that acts as
+   * the primary article for this result. Given this, it's very important for
+   * your related user interface to not mis-represent the image. You must always
+   * display the news source of the article, and the news source of the image as
+   * they are often different. You will notice that on Google News, the image is
+   * displayed off to the side with full attribution to the source, and that
+   * it's hyper-linked to the article associated with the image, not the article
+   * associated with the current result.
+   * 
+   * This property is optional. It does not always exist. It's best to check for
+   * <code>null</code> before using. When the property is present, it contains
+   * the following sub-properties.
+   * 
+   * @return {@link Image} or <code>null</code> if none was provided
+   */
+  public native Image getImage() /*-{
+    return this.image;
+  }-*/;
 
   /**
    * Returns the location of the news story. This is a list of locations in most
@@ -154,9 +242,9 @@ public class NewsResult extends Result {
    * 
    * @return the location of the news story.
    */
-  public String getLocation() {
-    return GnewsResult.IMPL.getLocation(this);
-  }
+  public native String getLocation() /*-{
+    return this.location;
+  }-*/;
 
   /**
    * Returns the published date (RFC-822 format) of the news story referenced by
@@ -166,7 +254,7 @@ public class NewsResult extends Result {
    *         this search result.
    */
   public Date getPublishedDate() {
-    return makeDate(GnewsResult.IMPL.getPublishedDate(this));
+    return makeDate(getPublishedDateAsString());
   }
 
   /**
@@ -174,9 +262,9 @@ public class NewsResult extends Result {
    * 
    * @return the name of the publisher of the news story.
    */
-  public String getPublisher() {
-    return GnewsResult.IMPL.getPublisher(this);
-  }
+  public native String getPublisher() /*-{
+    return this.publisher;
+  }-*/;
 
   /**
    * A List of {@link NewsResult.RelatedStory}. It is only populated in a
@@ -184,18 +272,18 @@ public class NewsResult extends Result {
    * 
    * @return A List of {@link NewsResult.RelatedStory}.
    */
-  public List<RelatedStory> getRelatedStories() {
-    return GnewsResult.IMPL.getRelatedStories(this);
-  }
+  public native JsArray<RelatedStory> getRelatedStories() /*-{
+    return this.relatedStories == null ? [] : this.relatedStories;
+  }-*/;
 
   /**
    * Returns the title of the news story returned as a search result.
    * 
    * @return the title of the news story returned as a search result.
    */
-  public String getTitle() {
-    return GnewsResult.IMPL.getTitle(this);
-  }
+  public native String getTitle() /*-{
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -204,30 +292,29 @@ public class NewsResult extends Result {
    * @return the title, but unlike .title, this property is stripped of html
    *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
-  public String getTitleNoFormatting() {
-    return GnewsResult.IMPL.getTitleNoFormatting(this);
-  }
+  public native String getTitleNoFormatting() /*-{
+    return this.titleNoFormatting;
+  }-*/;
 
   /**
    * Returns the raw URL of the result.
    * 
    * @return the raw URL of the result.
    */
-  public String getUnescapedUrl() {
-    return GnewsResult.IMPL.getUnescapedUrl(this);
-  }
+  public native String getUnescapedUrl() /*-{
+    return this.unescapedUrl;
+  }-*/;
 
   /**
    * Returns an escaped version of the above URL.
    * 
    * @return an escaped version of the above URL.
    */
-  public String getUrl() {
-    return GnewsResult.IMPL.getUrl(this);
-  }
+  public native String getUrl() /*-{
+    return this.url;
+  }-*/;
 
-  @Override
-  GResult getImpl() {
-    return GnewsResult.IMPL;
-  }
+  private native String getPublishedDateAsString() /*-{
+    return this.publishedDate;
+  }-*/;
 }

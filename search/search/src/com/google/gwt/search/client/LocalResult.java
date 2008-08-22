@@ -16,44 +16,26 @@
 package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GlocalResult;
-import com.google.gwt.search.jsio.client.impl.Extractor;
-
-import java.util.List;
+import com.google.gwt.core.client.JsArray;
 
 /**
  * Local search results.
  */
-public class LocalResult extends Result {
+public final class LocalResult extends Result {
   /**
    * A phone number.
    */
-  public static class PhoneNumber {
+  public static final class PhoneNumber extends JavaScriptObject {
     public static final String DATA = "data";
 
     public static final String FAX = "fax";
 
-    // TODO(zundel): should these be expressed to enums?
     public static final String MAIN = "main";
 
     public static final String MOBILE = "mobile";
 
-    @SuppressWarnings("unused")
-    private static final Extractor<PhoneNumber> __extractor = new Extractor<PhoneNumber>() {
-      public PhoneNumber fromJS(JavaScriptObject jso) {
-        return new PhoneNumber(jso);
-      }
-
-      public JavaScriptObject toJS(PhoneNumber o) {
-        return o.jsoPeer;
-      }
-    };
-
-    private final JavaScriptObject jsoPeer;
-
-    private PhoneNumber(JavaScriptObject jsoPeer) {
-      this.jsoPeer = jsoPeer;
+    protected PhoneNumber() {
+      // Required for overlay types
     }
 
     /**
@@ -61,9 +43,9 @@ public class LocalResult extends Result {
      * 
      * @return the phone number as a string.
      */
-    public String getNumber() {
-      return GlocalResult.PhoneNumber.IMPL.getNumber(this);
-    }
+    public native String getNumber() /*-{
+      return this.number;
+    }-*/;
 
     /**
      * Returns the type of phone number. The value be one of "main", "fax",
@@ -71,13 +53,13 @@ public class LocalResult extends Result {
      * 
      * @return the type of phone number.
      */
-    public String getType() {
-      return GlocalResult.PhoneNumber.IMPL.getType(this);
-    }
+    public native String getType() /*-{
+      return this.type;
+    }-*/;
   }
 
-  LocalResult(JavaScriptObject obj) {
-    super(obj);
+  protected LocalResult() {
+    // Required for overlay types
   }
 
   /**
@@ -87,9 +69,20 @@ public class LocalResult extends Result {
    * @return the city name for the result. Note:, in some cases, this property
    *         may be set to "".
    */
-  public String getCity() {
-    return GlocalResult.IMPL.getCity(this);
-  }
+  public native String getCity() /*-{
+    return this.city;
+  }-*/;
+
+  /**
+   * Returns a content snippet associated with the KML result, if this is a
+   * "kml" result. For "local" results, this property is the empty string.
+   * 
+   * @return a content snippet associated with the KML result, if this is a
+   *         "kml" result
+   */
+  public native String getContent() /*-{
+    return this.content;
+  }-*/;
 
   /**
    * Returns a country name for the result. Note:, in some cases, this property
@@ -98,9 +91,9 @@ public class LocalResult extends Result {
    * @return a country name for the result. Note:, in some cases, this property
    *         may be set to "".
    */
-  public String getCountry() {
-    return GlocalResult.IMPL.getCountry(this);
-  }
+  public native String getCountry() /*-{
+    return this.country;
+  }-*/;
 
   /**
    * Returns a URL that can be used to provide driving directions from the
@@ -110,35 +103,35 @@ public class LocalResult extends Result {
    * @return a URL that can be used to provide driving directions from the
    *         center of the set of search results to this search result
    */
-  public String getDdUrl() {
-    return GlocalResult.IMPL.getDdUrl(this);
-  }
+  public native String getDdUrl() /*-{
+    return this.ddUrl;
+  }-*/;
 
   /**
    * Returns a URL that can be used to provide driving directions from a user
-   * specified location to this search result. Note, This
-   * method returns null when no URL is available.
+   * specified location to this search result. Note, This method returns null
+   * when no URL is available.
    * 
    * @return a URL that can be used to provide driving directions from a user
-   *         specified location to this search result. Note, This
-   * method returns null when no URL is available.
+   *         specified location to this search result. Note, This method returns
+   *         null when no URL is available.
    */
-  public String getDdUrlFromHere() {
-    return GlocalResult.IMPL.getDdUrlFromHere(this);
-  }
+  public native String getDdUrlFromHere() /*-{
+    return this.ddUrlFromHere;
+  }-*/;
 
   /**
    * Returns a URL that can be used to provide driving directions from a user
-   * specified location to this search result. Note, This
-   * method returns null when no URL is available.
+   * specified location to this search result. Note, This method returns null
+   * when no URL is available.
    * 
    * @return a URL that can be used to provide driving directions from a user
-   *         specified location to this search result. Note, This
-   * method returns null when no URL is available.
+   *         specified location to this search result. Note, This method returns
+   *         null when no URL is available.
    */
-  public String getDdUrlToHere() {
-    return GlocalResult.IMPL.getDdUrlToHere(this);
-  }
+  public native String getDdUrlToHere() /*-{
+    return this.ddUrlToHere;
+  }-*/;
 
   /**
    * Returns the latitude value of the result.
@@ -146,8 +139,19 @@ public class LocalResult extends Result {
    * @return the latitude value of the result.
    */
   public double getLat() {
-    return Double.parseDouble(GlocalResult.IMPL.getLat(this));
+    return Double.parseDouble(getLatAsString());
   }
+
+  /**
+   * Returns the type of this result which can either be "local" in the case of
+   * a local business listing or "geocode" result or "kml" in the case of a KML
+   * listing.
+   * 
+   * @return type of this result
+   */
+  public native String getListingType() /*-{
+    return this.listingType;
+  }-*/;
 
   /**
    * Returns the longitude value of the result.
@@ -155,7 +159,7 @@ public class LocalResult extends Result {
    * @return the longitude value of the result.
    */
   public double getLng() {
-    return Double.parseDouble(GlocalResult.IMPL.getLng(this));
+    return Double.parseDouble(getLngAsString());
   }
 
   /**
@@ -163,9 +167,9 @@ public class LocalResult extends Result {
    * 
    * @return a list of {@link LocalResult.PhoneNumber}.
    */
-  public List<PhoneNumber> getPhoneNumbers() {
-    return GlocalResult.IMPL.getPhoneNumbers(this);
-  }
+  public native JsArray<PhoneNumber> getPhoneNumbers() /*-{
+    return this.phoneNumbers == null ? [] : this.phoneNumbers;
+  }-*/;
 
   /**
    * Returns a region name for the result (e.g., in the us, this is typically a
@@ -175,9 +179,21 @@ public class LocalResult extends Result {
    * @return a region name for the result (e.g., in the us, this is typically a
    *         state abbreviation, in other regions it might be a province, etc.)
    */
-  public String getRegion() {
-    return GlocalResult.IMPL.getRegion(this);
-  }
+  public native String getRegion() /*-{
+    return this.region;
+  }-*/;
+
+  /**
+   * Returns a url to a static map image representation of the current result.
+   * The image is 150px by 100px tall with a single marker representing the
+   * current location. Expected usage is to hyperlink this image using the url
+   * property.
+   * 
+   * @return url to a static map image representation of the current result
+   */
+  public native String getStaticMapUrl() /*-{
+    return this.staticMapUrl;
+  }-*/;
 
   /**
    * Return the street address and number for the given result. Note:, in some
@@ -186,9 +202,9 @@ public class LocalResult extends Result {
    * 
    * @return the street address and number for the given result.
    */
-  public String getStreetAddress() {
-    return GlocalResult.IMPL.getStreetAddress(this);
-  }
+  public native String getStreetAddress() /*-{
+    return this.streetAddress;
+  }-*/;
 
   /**
    * Returns the title for the result. In some cases, the title and the
@@ -197,9 +213,9 @@ public class LocalResult extends Result {
    * 
    * @return the title for the result.
    */
-  public String getTitle() {
-    return GlocalResult.IMPL.getTitle(this);
-  }
+  public native String getTitle() /*-{
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -208,9 +224,9 @@ public class LocalResult extends Result {
    * @return the title, but unlike .title, this property is stripped of html
    *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
-  public String getTitleNoFormatting() {
-    return GlocalResult.IMPL.getTitleNoFormatting(this);
-  }
+  public native String getTitleNoFormatting() /*-{
+    return this.titleNoFormatting;
+  }-*/;
 
   /**
    * Returns a url to a Google Maps Details page associated with the search
@@ -219,13 +235,16 @@ public class LocalResult extends Result {
    * @return a url to a Google Maps Details page associated with the search
    *         result.
    */
-  public String getUrl() {
-    return GlocalResult.IMPL.getUrl(this);
-  }
+  public native String getUrl() /*-{
+    return this.url;
+  }-*/;
 
-  @Override
-  GResult getImpl() {
-    return GlocalResult.IMPL;
-  }
-  
+  private native String getLatAsString() /*-{
+    return this.lat;
+  }-*/;
+
+  private native String getLngAsString() /*-{
+    return this.lng;
+  }-*/;
+
 }

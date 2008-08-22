@@ -15,17 +15,13 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GwebResult;
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
  * Web search results.
  */
-public class WebResult extends Result {
+public final class WebResult extends Result {
 
-  WebResult(JavaScriptObject obj) {
-    super(obj);
+  protected WebResult() {
+    // Required for overlay types
   }
 
   /**
@@ -38,9 +34,9 @@ public class WebResult extends Result {
    * @return a url to google's cached version of the page responsible for
    *         producing this result.
    */
-  public String getCacheUrl() {
-    return GwebResult.IMPL.getCacheUrl(this);
-  }
+  public native String getCacheUrl() /*-{
+    return this.cacheUrl;
+  }-*/;
 
   /**
    * Returns a brief snippet of information from the page associated with the
@@ -49,18 +45,18 @@ public class WebResult extends Result {
    * @return a brief snippet of information from the page associated with the
    *         search result.
    */
-  public String getContent() {
-    return GwebResult.IMPL.getContent(this);
-  }
+  public native String getContent() /*-{
+    return this.content;
+  }-*/;
 
   /**
    * Returns the title value of the result.
    * 
    * @return the title value of the result.
    */
-  public String getTitle() {
-    return GwebResult.IMPL.getTitle(this);
-  }
+  public native String getTitle() /*-{
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -69,27 +65,27 @@ public class WebResult extends Result {
    * @return the title, but unlike .title, this property is stripped of html
    *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
-  public String getTitleNoFormatting() {
-    return GwebResult.IMPL.getTitleNoFormatting(this);
-  }
+  public native String getTitleNoFormatting() /*-{
+    return this.titleNoFormatting;
+  }-*/;
 
   /**
    * Returns the raw URL of the result.
    * 
    * @return the raw URL of the result.
    */
-  public String getUnescapedUrl() {
-    return GwebResult.IMPL.getUnescapedUrl(this);
-  }
+  public native String getUnescapedUrl() /*-{
+    return this.unescapedUrl;
+  }-*/;
 
   /**
    * Returns an escaped version of the above URL.
    * 
    * @return an escaped version of the above URL.
    */
-  public String getUrl() {
-    return GwebResult.IMPL.getUrl(this);
-  }
+  public native String getUrl() /*-{
+    return this.url;
+  }-*/;
 
   /**
    * Returns shortened version of the URL associated with the result. Typically
@@ -98,12 +94,7 @@ public class WebResult extends Result {
    * @return shortened version of the URL associated with the result. Typically
    *         displayed in green, stripped of a protocol and path.
    */
-  public String getVisibleUrl() {
-    return GwebResult.IMPL.getVisibleUrl(this);
-  }
-
-  @Override
-  GResult getImpl() {
-    return GwebResult.IMPL;
-  }
+  public native String getVisibleUrl() /*-{
+    return this.visibleUrl;
+  }-*/;
 }

@@ -15,29 +15,34 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GvideoResult;
-
 import java.util.Date;
 
 /**
  * Video search result.
  */
-public class VideoResult extends Result {
+public final class VideoResult extends Result {
 
-  VideoResult(JavaScriptObject obj) {
-    super(obj);
+  protected VideoResult() {
+    // Required for overlay types
   }
+
+  /**
+   * Returns the YouTube user name of the author of the video, if it is known.
+   * 
+   * @return YouTube user name of the author of the video, if it is known
+   */
+  public native String getAuthor() /*-{
+    return this.author;
+  }-*/;
 
   /**
    * Returns a snippet style description of the video clip.
    * 
    * @return a snippet style description of the video clip.
    */
-  public String getContent() {
-    return GvideoResult.IMPL.getContent(this);
-  }
+  public native String getContent() /*-{
+    return this.content;
+  }-*/;
 
   /**
    * Returns the approximate duration, in seconds, of the video.
@@ -45,7 +50,7 @@ public class VideoResult extends Result {
    * @return the approximate duration, in seconds, of the video.
    */
   public long getDuration() {
-    return Long.parseLong(GvideoResult.IMPL.getDuration(this));
+    return Long.parseLong(getDurationAsString());
   }
 
   /**
@@ -59,9 +64,9 @@ public class VideoResult extends Result {
    * @return If present, returns the url of the flash version of the video that
    *         can be played inline on your page. Otherwise, returns null.
    */
-  public String getPlayUrl() {
-    return GvideoResult.IMPL.getPlayUrl(this);
-  }
+  public native String getPlayUrl() /*-{
+    return this.playUrl;
+  }-*/;
 
   /**
    * Returns the published date of the video (rfc-822 format).
@@ -69,8 +74,12 @@ public class VideoResult extends Result {
    * @return the published date of the video (rfc-822 format).
    */
   public Date getPublished() {
-    return makeDate(GvideoResult.IMPL.getPublished(this));
+    return makeDate(getPublishedAsString());
   }
+
+  public native String getPublishedAsString() /*-{
+    return this.published;
+  }-*/;
 
   /**
    * Returns the name of the video's publisher, typically displayed in green
@@ -79,45 +88,54 @@ public class VideoResult extends Result {
    * 
    * @return the name of the video's publisher.
    */
-  public String getPublisher() {
-    return GvideoResult.IMPL.getPublisher(this);
-  }
+  public native String getPublisher() /*-{
+    return this.publisher;
+  }-*/;
+
+  /**
+   * Returns the rating of the vidoe on scale of 1 to 5.
+   * 
+   * @return rating of the vidoe on scale of 1 to 5
+   */
+  public native int getRating() /*-{
+    return Number(this.rating);
+  }-*/;
 
   /**
    * Returns the height in pixels of the video thumbnail.
    * 
    * @return the height in pixels of the video thumbnail.
    */
-  public int getTbHeight() {
-    return Integer.parseInt(GvideoResult.IMPL.getTbHeight(this));
-  }
+  public native int getTbHeight()/*-{
+    return Number(this.tbHeight);
+  }-*/;
 
   /**
    * Returns the url of a thumbnail image which visually represents the video.
    * 
    * @return the url of a thumbnail image which visually represents the video.
    */
-  public String getTbUrl() {
-    return GvideoResult.IMPL.getTbUrl(this);
-  }
+  public native String getTbUrl() /*-{
+    return this.tbUrl;
+  }-*/;
 
   /**
    * Returns the width in pixels of the video thumbnail.
    * 
    * @return the width in pixels of the video thumbnail.
    */
-  public int getTbWidth() {
-    return Integer.parseInt(GvideoResult.IMPL.getTbWidth(this));
-  }
+  public native int getTbWidth() /*-{
+    return Number(this.tbWidth);
+  }-*/;
 
   /**
    * Returns the title of the video result.
    * 
    * @return the title of the video result.
    */
-  public String getTitle() {
-    return GvideoResult.IMPL.getTitle(this);
-  }
+  public native String getTitle() /*-{
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -126,21 +144,33 @@ public class VideoResult extends Result {
    * @return the title, but unlike .title, this property is stripped of html
    *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
-  public String getTitleNoFormatting() {
-    return GvideoResult.IMPL.getTitleNoFormatting(this);
-  }
+  public native String getTitleNoFormatting() /*-{
+    return this.titleNoFormatting;
+  }-*/;
 
   /**
    * Returns the url of a playable version of the video result.
    * 
    * @return the url of a playable version of the video result.
    */
-  public String getUrl() {
-    return GvideoResult.IMPL.getUrl(this);
+  public native String getUrl() /*-{
+    return this.url;
+  }-*/;
+
+  /**
+   * Returns the number of plays for this video.
+   * 
+   * @return number of plays for this video
+   */
+  public long getViewCount() {
+    return Long.parseLong(getViewCountAsString());
   }
 
-  @Override
-  GResult getImpl() {
-    return GvideoResult.IMPL;
-  }
+  private native String getDurationAsString() /*-{
+    return this.duration;
+  }-*/;
+
+  private native String getViewCountAsString() /*-{
+    return this.viewCount;
+  }-*/;
 }

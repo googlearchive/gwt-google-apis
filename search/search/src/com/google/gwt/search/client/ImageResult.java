@@ -15,17 +15,13 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GimageResult;
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
  * Image search results.
  */
-public class ImageResult extends Result {
+public final class ImageResult extends Result {
 
-  ImageResult(JavaScriptObject obj) {
-    super(obj);
+  protected ImageResult() {
+    // Required for overlay types
   }
 
   /**
@@ -35,9 +31,9 @@ public class ImageResult extends Result {
    * @return a brief snippet of information from the page associated with the
    *         search result.
    */
-  public String getContent() {
-    return GimageResult.IMPL.getContent(this);
-  }
+  public native String getContent() /*-{
+    return this.content;
+  }-*/;
 
   /**
    * Returns the same information as {@link #getContent()} only stripped of HTML
@@ -46,63 +42,63 @@ public class ImageResult extends Result {
    * @return the same information as {@link #getContent()} only stripped of HTML
    *         formatting.
    */
-  public String getContentNoFormatting() {
-    return GimageResult.IMPL.getContentNoFormatting(this);
-  }
+  public native String getContentNoFormatting() /*-{
+    return this.contentNoFormatting;
+  }-*/;
 
   /**
    * Returns the height of the image in pixels.
    * 
    * @return the height of the image in pixels.
    */
-  public int getHeight() {
-    return Integer.parseInt(GimageResult.IMPL.getHeight(this));
-  }
+  public native int getHeight() /*-{
+    return Number(this.height);
+  }-*/;
 
   /**
    * Returns the URL of the page containing the image.
    * 
    * @return the URL of the page containing the image.
    */
-  public String getOriginalContextUrl() {
-    return GimageResult.IMPL.getOriginalContextUrl(this);
-  }
+  public native String getOriginalContextUrl() /*-{
+    return this.originalContextUrl;
+  }-*/;
 
   /**
    * Returns the height in pixels of the image thumbnail.
    * 
    * @return the height in pixels of the image thumbnail.
    */
-  public int getThumbnailHeight() {
-    return Integer.parseInt(GimageResult.IMPL.getTbHeight(this));
-  }
+  public native int getThumbnailHeight() /*-{
+    return Number(this.tbHeight);
+  }-*/;
 
   /**
    * Returns the URL of a thumbnail image.
    * 
    * @return the URL of a thumbnail image.
    */
-  public String getThumbnailUrl() {
-    return GimageResult.IMPL.getTbUrl(this);
-  }
+  public native String getThumbnailUrl() /*-{
+    return this.tbUrl;
+  }-*/;
 
   /**
    * Returns the width in pixels of the image thumbnail.
    * 
    * @return the width in pixels of the image thumbnail.
    */
-  public int getThumbnailWidth() {
-    return Integer.parseInt(GimageResult.IMPL.getTbWidth(this));
-  }
+  public native int getThumbnailWidth() /*-{
+    return Number(this.tbWidth);
+  }-*/;
 
   /**
    * Returns the title of the image, which is usually the base filename.
    * 
    * @return the title of the image, which is usually the base filename.
    */
-  public String getTitle() {
-    return GimageResult.IMPL.getTitle(this);
-  }
+  public native String getTitle() /*-{
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -111,27 +107,27 @@ public class ImageResult extends Result {
    * @return the title, but unlike .title, this property is stripped of html
    *         markup. (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
    */
-  public String getTitleNoFormatting() {
-    return GimageResult.IMPL.getTitleNoFormatting(this);
-  }
+  public native String getTitleNoFormatting() /*-{
+    return this.titleNoFormatting;
+  }-*/;
 
   /**
    * Returns the raw URL of the image.
    * 
    * @return the raw URL of the image.
    */
-  public String getUnescapedUrl() {
-    return GimageResult.IMPL.getUnescapedUrl(this);
-  }
+  public native String getUnescapedUrl() /*-{
+    return this.unescapedUrl;
+  }-*/;
 
   /**
    * Returns an escaped version of the URL.
    * 
    * @return an escaped version of the URL.
    */
-  public String getUrl() {
-    return GimageResult.IMPL.getUrl(this);
-  }
+  public native String getUrl() /*-{
+    return this.url;
+  }-*/;
 
   /**
    * Returns a shortened version of the URL associated with the result.
@@ -139,21 +135,16 @@ public class ImageResult extends Result {
    * 
    * @return a shortened version of the URL associated with the result.
    */
-  public String getVisibleUrl() {
-    return GimageResult.IMPL.getVisibleUrl(this);
-  }
+  public native String getVisibleUrl() /*-{
+    return this.visibleUrl;
+  }-*/;
 
   /**
    * Returns the width of the image in pixels.
    * 
    * @return the width of the image in pixels.
    */
-  public int getWidth() {
-    return Integer.parseInt(GimageResult.IMPL.getWidth(this));
-  }
-
-  @Override
-  GResult getImpl() {
-    return GimageResult.IMPL;
-  }
+  public native int getWidth() /*-{
+    return Number(this.width);
+  }-*/;
 }

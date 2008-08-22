@@ -15,6 +15,7 @@
  */
 package com.google.gwt.search.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -45,7 +46,7 @@ public class SearchTest extends GWTTestCase {
       public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
-        
+
         resultCount++;
         if (resultCount > 1) {
           return;
@@ -57,7 +58,7 @@ public class SearchTest extends GWTTestCase {
             search.getClass().getName());
         assertEquals("Result class name", LocalResult.class.getName(),
             result.getClass().getName());
-        
+
         LocalResult localResult = (LocalResult) result;
         String ddUrl = localResult.getDdUrl();
         String ddUrlFrom = localResult.getDdUrlFromHere();
@@ -72,9 +73,9 @@ public class SearchTest extends GWTTestCase {
   }
 
   /**
-   * Test a listener attached to a Search object.
+   * Test a Handler attached to a Search object.
    */
-  public void testSearchSearchListener() {
+  public void testSearchSearchHandler() {
 
     SearchControlOptions options = new SearchControlOptions();
     WebSearch ws = new WebSearch();
@@ -85,12 +86,14 @@ public class SearchTest extends GWTTestCase {
       public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
-        
+
         resultCount++;
         if (resultCount > 1) {
           return;
         }
-        
+        JsArray<? extends Result> results = search.getResults();
+        assertNotNull(results);
+
         assertNotNull("Simple Image Search: search", search);
         assertNotNull("Simple Image Search: result", result);
         assertEquals("Search class name", WebSearch.class.getName(),
@@ -104,6 +107,7 @@ public class SearchTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
     ws.execute(QUERY_STRING);
   }
+
   public void testSearchStartingCallback() {
     SearchControlOptions options = new SearchControlOptions();
     final WebSearch ws = new WebSearch();
@@ -116,7 +120,7 @@ public class SearchTest extends GWTTestCase {
         SearchControl control = event.getSearchControl();
         Search search = event.getSearch();
         String query = event.getQuery();
-        
+
         assertEquals("getSearchControl()", searchControl, control);
         assertEquals("getSearch()", ws, search);
         assertEquals("getQuery()", QUERY_STRING, query);
@@ -140,7 +144,7 @@ public class SearchTest extends GWTTestCase {
       public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
         Result result = event.getResult();
-        
+
         resultCount++;
         if (resultCount > 1) {
           return;
@@ -160,4 +164,39 @@ public class SearchTest extends GWTTestCase {
     searchControl.execute(QUERY_STRING);
   }
 
+  /**
+   * Test the getResults() method.
+   */
+  public void testGetResults() {
+
+    SearchControlOptions options = new SearchControlOptions();
+    WebSearch ws = new WebSearch();
+    ws.setResultSetSize(ResultSetSize.SMALL);
+    ws.addSearchCompleteHandler(new SearchCompleteHandler() {
+      int resultCount = 0;
+
+      public void onSearchComplete(SearchCompleteEvent event) {
+        Search search = event.getSearch();
+        Result result = event.getResult();
+
+        resultCount++;
+        if (resultCount > 1) {
+          return;
+        }
+
+        JsArray<? extends Result> results = search.getResults();
+        assertNotNull(results);
+        assertTrue(results.length() > 0);
+        for (int i = 0; i < results.length(); ++i) {
+          Result res = results.get(i);
+          assertNotNull(res);
+        }
+
+        finishTest();
+      }
+
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
+    ws.execute(QUERY_STRING);
+  }
 }

@@ -15,18 +15,16 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GbookResult;
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Book search results.
  */
-public class BookResult extends Result {
+public final class BookResult extends Result {
 
-  BookResult(JavaScriptObject obj) {
-    super(obj);
+  protected BookResult() {
+    // Required for overlay types
   }
 
   /**
@@ -34,36 +32,36 @@ public class BookResult extends Result {
    * 
    * @return the list of authors of the book.
    */
-  public String getAuthors() {
-    return GbookResult.IMPL.getAuthors(this);
-  }
+  public native String getAuthors() /*-{
+    return this.authors;
+  }-*/;
 
   /**
    * Returns the identifier associated with the book. This is typically an ISBN.
    * 
    * @return the identifier associated with the book. This is typically an ISBN.
    */
-  public String getBookId() {
-    return GbookResult.IMPL.getBookId(this);
-  }
+  public native String getBookId() /*-{
+    return this.bookId;
+  }-*/;
 
   /**
    * Returns the number of pages contained within the book.
    * 
    * @return the number of pages contained within the book.
    */
-  public int getPageCount() {
-    return Integer.parseInt(GbookResult.IMPL.getPageCount(this));
-  }
+  public native int getPageCount() /*-{
+    return Number(this.pageCount);
+  }-*/;
 
   /**
    * Returns the year that the book was published.
    * 
    * @return the year that the book was published.
    */
-  public int getPublishedYear() {
-    return Integer.parseInt(GbookResult.IMPL.getPublishedYear(this));
-  }
+  public native int getPublishedYear() /*-{
+    return Number(this.publishedYear);
+  }-*/;
 
   /**
    * Returns an html dom node that represents a thumbnail image of the books
@@ -75,7 +73,7 @@ public class BookResult extends Result {
    *         (using .setNoHtmlGeneration(), this property is not available.
    */
   public Widget getThumbnailHtml() {
-    return makeWidget(GbookResult.IMPL.getThumbnailHtml(this));
+    return makeWidget(getThumbnailHtmlAsElement());
   }
 
   /**
@@ -83,9 +81,9 @@ public class BookResult extends Result {
    * 
    * @return the title of the book.
    */
-  public String getTitle() {
-    return GbookResult.IMPL.getTitle(this);
-  }
+  public native String getTitle() /*-{
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -94,21 +92,29 @@ public class BookResult extends Result {
    * @return the title, but unlike .title, this property is stripped of html
    *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
-  public String getTitleNoFormatting() {
-    return GbookResult.IMPL.getTitleNoFormatting(this);
-  }
+  public native String getTitleNoFormatting() /*-{
+    return this.titleNoFormatting;
+  }-*/;
 
   /**
    * Returns the raw URL of the result.
    * 
    * @return the raw URL of the result.
    */
-  public String getUnescapedUrl() {
-    return GbookResult.IMPL.getUnescapedUrl(this);
-  }
+  public native String getUnescapedUrl() /*-{
+    return this.unescapedUrl;
+  }-*/;
 
-  @Override
-  GResult getImpl() {
-    return GbookResult.IMPL;
-  }
+  /**
+   * Returns an escaped version of the URL.
+   * 
+   * @return an escaped version of the URL.
+   */
+  public native String getUrl() /*-{
+    return this.url;
+  }-*/;
+
+  private native Element getThumbnailHtmlAsElement() /*-{
+    return this.thumbnailHtml;
+  }-*/;
 }
