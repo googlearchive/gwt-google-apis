@@ -7,4 +7,4 @@ These FAQs refer to the Google API Library for GWT bindings for the Gadgets API.
 
 == Why doesn't the sample work in hosted mode? ==
 
-A Gadget must be hosted in a GWT container before it can be run in hosted mode.  See [GadgetsGettingStarted Getting Started with Gadgets].
+A Gadget must be hosted in a Gadget container (such as iGoogle or Apache Shindig) before it can be run in hosted mode.  See [GadgetsGettingStarted Getting Started with Gadgets].
