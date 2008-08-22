@@ -15,13 +15,11 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.search.client.impl.GSearch;
-import com.google.gwt.search.client.impl.GSearchCompleteCallback;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.search.client.impl.GSearch;
+import com.google.gwt.search.client.impl.GSearchCompleteCallback;
 import com.google.gwt.user.client.ui.Widget;
-
-import java.util.List;
 
 /**
  * A base class for various types of Google searches. This class is intended to
@@ -146,9 +144,9 @@ public abstract class Search {
   }
 
   /**
-   * Add a SearchCompleteHandler to receive notifications when Results are created
-   * after executing the Search. This search will fire when searches created by
-   * {@link Search#execute(String)} complete.
+   * Add a SearchCompleteHandler to receive notifications when Results are
+   * created after executing the Search. This search will fire when searches
+   * created by {@link Search#execute(String)} complete.
    * 
    * @param handler The handler to add
    */
@@ -158,8 +156,9 @@ public abstract class Search {
       impl.setSearchCompleteCallback(this, null, new GSearchCompleteCallback() {
         @Override
         public void onSearchResult() {
-          for (Result result : getResults()) {
-            handlers.fireResult(Search.this, result);
+          JsArray<? extends Result> results = getResults();
+          for (int i = 0; i < results.length(); ++i) {
+            handlers.fireResult(Search.this, results.get(i));
           }
         }
       });
@@ -222,7 +221,7 @@ public abstract class Search {
    * 
    * @return A List of {@link Result} objects.
    */
-  public List<? extends Result> getResults() {
+  public JsArray<? extends Result> getResults() {
     return impl.getResults(this);
   }
 

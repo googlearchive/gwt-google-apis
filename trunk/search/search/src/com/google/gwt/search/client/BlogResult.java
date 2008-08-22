@@ -15,29 +15,24 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GblogResult;
-import com.google.gwt.core.client.JavaScriptObject;
-
 import java.util.Date;
 
 /**
  * Blog search results.
  */
-public class BlogResult extends Result {
-
-  BlogResult(JavaScriptObject obj) {
-    super(obj);
+public final class BlogResult extends Result {
+  protected BlogResult() {
+    // Required for overlay types
   }
 
   /**
-   * Returns the name of the author that wrote the blog post
+   * Returns the name of the author that wrote the blog post.
    * 
    * @return the name of the author that wrote the blog post
    */
-  public String getAuthor() {
-    return GblogResult.IMPL.getAuthor(this);
-  }
+  public native String getAuthor()/*-{
+    return this.author;
+  }-*/;
 
   /**
    * Returns the URL of the blog which contains the post. Typically, this URL is
@@ -48,9 +43,9 @@ public class BlogResult extends Result {
    *         displayed in green, beneath the blog search result and is linked to
    *         the blog.
    */
-  public String getBlogUrl() {
-    return GblogResult.IMPL.getBlogUrl(this);
-  }
+  public native String getBlogUrl() /*-{
+    return this.blogUrl;
+  }-*/;
 
   /**
    * Returns a snippet of content from the blog post associated with this search
@@ -59,18 +54,18 @@ public class BlogResult extends Result {
    * @return a snippet of content from the blog post associated with this search
    *         result.
    */
-  public String getContent() {
-    return GblogResult.IMPL.getContent(this);
-  }
+  public native String getContent() /*-{
+    return this.content;
+  }-*/;
 
   /**
    * Returns the URL to the blog post referenced in this search result.
    * 
    * @return the URL to the blog post referenced in this search result.
    */
-  public String getPostUrl() {
-    return GblogResult.IMPL.getPostUrl(this);
-  }
+  public native String getPostUrl() /*-{
+    return this.postUrl;
+  }-*/;
 
   /**
    * Returns the published date (rfc-822 format) of the blog post referenced by
@@ -80,7 +75,7 @@ public class BlogResult extends Result {
    *         referenced by this search result.
    */
   public Date getPublishedDate() {
-    return makeDate(GblogResult.IMPL.getPublishedDate(this));
+    return makeDate(getPublishedDateAsString());
   }
 
   /**
@@ -88,23 +83,22 @@ public class BlogResult extends Result {
    * 
    * @return the title of the blog post returned as a search result.
    */
-  public String getTitle() {
-    return GblogResult.IMPL.getTitle(this);
-  }
+  public native String getTitle() /*-{
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
    * markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    * 
-   * @return Returns the title, but unlike .title, this property is stripped of html
-   * markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
+   * @return Returns the title, but unlike .title, this property is stripped of
+   *         html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
-  public String getTitleNoFormatting() {
-    return GblogResult.IMPL.getTitleNoFormatting(this);
-  }
+  public native String getTitleNoFormatting() /*-{
+    return this.titleNoFormatting;
+  }-*/;
 
-  @Override
-  GResult getImpl() {
-    return GblogResult.IMPL;
-  }
+  private native String getPublishedDateAsString()/*-{
+    return this.publishedDate;
+  }-*/;
 }

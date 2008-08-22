@@ -15,14 +15,14 @@
  */
 package com.google.gwt.search.client.impl;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.search.client.Result;
 import com.google.gwt.search.client.Search;
 import com.google.gwt.search.jsio.client.BeanProperties;
 import com.google.gwt.search.jsio.client.Binding;
 import com.google.gwt.search.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.search.jsio.client.JSList;
 import com.google.gwt.search.jsio.client.JSOpaque;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Element;
 
 /**
@@ -47,7 +47,7 @@ public interface GSearch extends JSFlyweightWrapper {
   JavaScriptObject getCursor(Search search);
 
   @BeanProperties
-  JSList<Result> getResults(Search search);
+  JsArray<Result> getResults(Search search);
 
   void gotoPage(Search search, int pageNumber);
 

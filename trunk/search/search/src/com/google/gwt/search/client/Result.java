@@ -15,15 +15,6 @@
  */
 package com.google.gwt.search.client;
 
-import com.google.gwt.search.client.impl.GResult;
-import com.google.gwt.search.client.impl.GblogSearch;
-import com.google.gwt.search.client.impl.GbookSearch;
-import com.google.gwt.search.client.impl.GimageSearch;
-import com.google.gwt.search.client.impl.GlocalSearch;
-import com.google.gwt.search.client.impl.GnewsSearch;
-import com.google.gwt.search.client.impl.GvideoSearch;
-import com.google.gwt.search.client.impl.GwebSearch;
-import com.google.gwt.search.jsio.client.impl.Extractor;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -35,53 +26,13 @@ import java.util.Date;
 /**
  * The base class from which all search result types derive.
  */
-public class Result {
-  @SuppressWarnings("unused")
-  private static final Extractor<Result> __extractor = new Extractor<Result>() {
-    public Result fromJS(JavaScriptObject jso) {
-      return createPeer(jso);
-    }
-
-    public JavaScriptObject toJS(Result o) {
-      return o.jsoPeer;
-    }
-  };
-
+public class Result extends JavaScriptObject {
   /**
    * Invoke cloneNode on an Element. This needs to be moved into DOM.
    */
   static native Element cloneNode(Element elt) /*-{
     return elt.cloneNode(true);
   }-*/;
-
-  /**
-   * Takes a JSON-style result object and creates a Result of the most specific
-   * subtype to represent it.
-   * 
-   * @param obj the GResult object
-   * @return a subtype of Result
-   */
-  static Result createPeer(JavaScriptObject obj) {
-    String resultClass = GResult.IMPL.getGsearchResultClass(obj);
-
-    if (GblogSearch.RESULT_CLASS.equals(resultClass)) {
-      return new BlogResult(obj);
-    } else if (GbookSearch.RESULT_CLASS.equals(resultClass)) {
-      return new BookResult(obj);
-    } else if (GimageSearch.RESULT_CLASS.equals(resultClass)) {
-      return new ImageResult(obj);
-    } else if (GlocalSearch.RESULT_CLASS.equals(resultClass)) {
-      return new LocalResult(obj);
-    } else if (GnewsSearch.RESULT_CLASS.equals(resultClass)) {
-      return new NewsResult(obj);
-    } else if (GvideoSearch.RESULT_CLASS.equals(resultClass)) {
-      return new VideoResult(obj);
-    } else if (GwebSearch.RESULT_CLASS.equals(resultClass)) {
-      return new WebResult(obj);
-    }
-
-    return new Result(obj);
-  }
 
   @SuppressWarnings("deprecation")
   static Date makeDate(String date) {
@@ -94,20 +45,8 @@ public class Result {
     return toReturn;
   }
 
-  /**
-   * Caches the result from getHtml().
-   */
-  private Widget htmlWidget;
-
-  protected final JavaScriptObject jsoPeer;
-
-  public Result() {
-    this(GResult.IMPL.construct());
-  }
-
-  Result(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
-    getImpl().bind(jsoPeer, this);
+  protected Result() {
+    // Required for overlay types
   }
 
   /**
@@ -116,27 +55,26 @@ public class Result {
    * 
    * @return A Widget that will display the Result's data.
    */
-  public Widget getHtml() {
-    if (htmlWidget == null) {
-      htmlWidget = makeWidget(getImpl().getHtml(this));
+  public final Widget getHtml() {
+    Widget widget = getWidget();
+    if (widget == null) {
+      Element element = getElement();
+      makeWidget(element);
+      setWidget(widget);
     }
-    return htmlWidget;
+
+    return widget;
   }
 
-  String getHtmlRaw() {
-    return getImpl().getHtml(this).toString();
-  }
+  private native Element getElement() /*-{
+    return this.html;
+  }-*/;
 
-  GResult getImpl() {
-    return GResult.IMPL;
-  }
+  private native Widget getWidget() /*-{
+    return this.widget;
+  }-*/;
 
-  /**
-   * Returns the underlying JavaScript Object (used for unit testing).
-   * 
-   * @return the underlying JavaScript Object (used for unit testing).
-   */
-  JavaScriptObject getJso() {
-    return jsoPeer;
-  }
+  private native void setWidget(Widget widget) /*-{
+    this.widget = widget;
+  }-*/;
 }
