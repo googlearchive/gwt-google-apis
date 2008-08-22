@@ -2,6 +2,6 @@
 
 = Sample Applications =
 
-[AJAXSearchHelloSearchSample HelloSearch Sample]
+[http://gwt.google.com/samples/HelloSearch-1.0.0/HelloSearch.html HelloSearch Sample]
 
-TODO: Add screen shots, etc?
+   [http://gwt-google-apis.googlecode.com/svn/wiki/HelloSearch-Sample2.png]
