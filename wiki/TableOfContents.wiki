@@ -28,4 +28,4 @@
    * [APIDesignGoals Design Goal of API bindings]
    * [TemplateProject Template Project]
    * [DesigningAPIWrappers Design Considerations]
-   * [GettingStartedSource Working with GWT Google APIs source]
+   * [GettingStartedSource Working with source]
