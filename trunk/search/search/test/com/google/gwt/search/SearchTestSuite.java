@@ -15,9 +15,14 @@
  */
 package com.google.gwt.search;
 
-import com.google.gwt.search.client.SearchTest;
-import com.google.gwt.search.client.ImageSearchTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
+import com.google.gwt.search.client.BlogSearchTest;
+import com.google.gwt.search.client.BookSearchTest;
+import com.google.gwt.search.client.ImageSearchTest;
+import com.google.gwt.search.client.LocalSearchTest;
+import com.google.gwt.search.client.NewsSearchTest;
+import com.google.gwt.search.client.SearchTest;
+import com.google.gwt.search.client.VideoSearchTest;
 
 import junit.framework.TestSuite;
 
@@ -26,9 +31,14 @@ import junit.framework.TestSuite;
  */
 public class SearchTestSuite extends GWTTestSuite {
   public static TestSuite suite() {
-  TestSuite suite = new TestSuite("Test for the AJAX Search API");
-  suite.addTestSuite(SearchTest.class);
-  suite.addTestSuite(ImageSearchTest.class);
-  return suite;
+    TestSuite suite = new TestSuite("Test for the AJAX Search API");
+    suite.addTestSuite(SearchTest.class);
+    suite.addTestSuite(ImageSearchTest.class);
+    suite.addTestSuite(BlogSearchTest.class);
+    suite.addTestSuite(BookSearchTest.class);
+    suite.addTestSuite(LocalSearchTest.class);
+    suite.addTestSuite(NewsSearchTest.class);
+    suite.addTestSuite(VideoSearchTest.class);
+    return suite;
   }
 }
