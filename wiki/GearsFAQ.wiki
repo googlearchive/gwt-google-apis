@@ -3,7 +3,7 @@
 = Gears FAQs =
 
 These FAQs refer to the Google API Library for GWT bindings for the Gears API.  
-See also [Overview Project Overview] for general information on the Google API Library for GWT.
+See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
 
 == How do I write worker thread code in GWT ==
 
