@@ -1,1 +1,1 @@
-Google API Libraries for Google Web Toolkit
+Google API Libraries for GWT
