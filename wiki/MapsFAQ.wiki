@@ -17,3 +17,12 @@ This optional parameter is used by Google to collect data on what percentage of 
 == What about the Mapitz and other Maps bindings? ==
 
 The Google API Library for Google Web Toolkit is the official set of bindings for Google APIs maintained by Google.  Other developers have made available APIs that give an interface to the Google Maps API or other similar functionality through GWT.  Although Google does not maintain or support these alternate bindings, you are likely to find other users of those libraries on the GWT forum [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].
+
+== How do I get the latest version of the API from Subversion? ==
+
+Building your own gwt-maps.jar from the latest source isn't too hard.  You will
+need the 1.5 or 1.6 version of the JDK, the Apache Ant utility and a
+Subversion client.  Download the code from the subversion using 'svn co
+http://gwt-google-apis.googlecode.com/svn/trunk trunk', then
+run 'ant' on the top level file.  The gwt-maps library will build and
+end up under `maps/build/lib/gwt-maps.jar`
