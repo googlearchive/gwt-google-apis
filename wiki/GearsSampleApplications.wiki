@@ -2,6 +2,6 @@
 
 [http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo Sample]
 
-[http://gwt.google.com/samples/ManagedResourceStore-1.1.0/ManagedResourceStore.html ManagedResourceStore Sample]
+[http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html ManagedResourceStore Sample]
 
-[http://gwt.google.com/samples/ResourceStore-1.1.0/ResourceStore.html ResourceStore Sample]
+[http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore Sample]
