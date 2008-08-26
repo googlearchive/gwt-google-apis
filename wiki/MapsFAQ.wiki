@@ -21,8 +21,17 @@ The Google API Library for Google Web Toolkit is the official set of bindings fo
 == How do I get the latest version of the API from Subversion? ==
 
 Building your own gwt-maps.jar from the latest source isn't too hard.  You will
-need the 1.5 or 1.6 version of the JDK, the Apache Ant utility and a
-Subversion client.  Download the code from the subversion using 'svn co
-http://gwt-google-apis.googlecode.com/svn/trunk trunk', then
-run 'ant' on the top level file.  The gwt-maps library will build and
-end up under `maps/build/lib/gwt-maps.jar`
+need the following software:
+   * The 1.5 or 1.6 version of the [http://java.sun.com JDK]
+   * The [http://ant.apache.org Apache Ant] utility (version 1.7.1 or greater) 
+   * A [http://subversion.tigris.org Subversion] client.  
+
+Once you have the above software installed, follow these steps:
+
+   # Download the code from the subversion repository. If you are using the command line tool, use the command: `svn co http://gwt-google-apis.googlecode.com/svn/trunk trunk`
+   # Download the tools directory from the Google Web Toolkit repository.  If you are using the command line tool, use the command: `svn co http://google-web-toolkit.googlecode.com/svn/tools tools`
+   # Set the environment variable `GWT_TOOLS` to point to the directory where you checked out the tools distribution.
+   # Set the environment variable `GWT_HOME` to point to a binary distribution of GWT downloaded from the [http://code.google.com/webtoolkit GWT project site].
+   # Run `ant` on the top level file.  The `gwt-maps` library will build along with the other libraries. 
+
+The `gwt-maps.jar` file should end up under `maps/build/lib/gwt-maps.jar`.
