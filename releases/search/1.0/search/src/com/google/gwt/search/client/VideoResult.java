@@ -32,8 +32,8 @@ public final class VideoResult extends Result {
    * @return YouTube user name of the author of the video, if it is known
    */
   public native String getAuthor() /*-{
-      return this.author;
-    }-*/;
+    return this.author;
+  }-*/;
 
   /**
    * Returns a snippet style description of the video clip.
@@ -41,8 +41,8 @@ public final class VideoResult extends Result {
    * @return a snippet style description of the video clip.
    */
   public native String getContent() /*-{
-      return this.content;
-    }-*/;
+    return this.content;
+  }-*/;
 
   /**
    * Returns the approximate duration, in seconds, of the video.
@@ -65,8 +65,8 @@ public final class VideoResult extends Result {
    *         can be played inline on your page. Otherwise, returns null.
    */
   public native String getPlayUrl() /*-{
-      return this.playUrl;
-    }-*/;
+    return this.playUrl;
+  }-*/;
 
   /**
    * Returns the published date of the video (rfc-822 format).
@@ -78,8 +78,8 @@ public final class VideoResult extends Result {
   }
 
   public native String getPublishedAsString() /*-{
-      return this.published;
-    }-*/;
+    return this.published;
+  }-*/;
 
   /**
    * Returns the name of the video's publisher, typically displayed in green
@@ -89,18 +89,21 @@ public final class VideoResult extends Result {
    * @return the name of the video's publisher.
    */
   public native String getPublisher() /*-{
-      return this.publisher;
-    }-*/;
+    return this.publisher;
+  }-*/;
 
   /**
-   * Returns the rating of the video on scale of 1 to 5.
+   * Returns the rating of the video on scale of 1 to 5. Before calling this
+   * method, call {@link #hasRating()} to see if the <code>rating</code>
+   * property exists in the Result object.
    * 
-   * @return rating of the video on scale of 1 to 5. Returns 0 if no rating was
-   *         found.
+   * @return rating of the video on scale of 1 to 5. Return is undefined if no
+   *         rating was found.
    */
-  public native int getRating() /*-{
-      return (this.rating == null ? 0 : Number(this.rating));
-    }-*/;
+  public int getRating() {
+    assert hasRating() : "Check to see that the property exists with hasRating() before calling getRating()";
+    return nativeGetRating();
+  }
 
   /**
    * Returns the height in pixels of the video thumbnail.
@@ -108,8 +111,8 @@ public final class VideoResult extends Result {
    * @return the height in pixels of the video thumbnail.
    */
   public native int getTbHeight()/*-{
-        return Number(this.tbHeight);
-      }-*/;
+    return Number(this.tbHeight);
+  }-*/;
 
   /**
    * Returns the url of a thumbnail image which visually represents the video.
@@ -117,8 +120,8 @@ public final class VideoResult extends Result {
    * @return the url of a thumbnail image which visually represents the video.
    */
   public native String getTbUrl() /*-{
-      return this.tbUrl;
-    }-*/;
+    return this.tbUrl;
+  }-*/;
 
   /**
    * Returns the width in pixels of the video thumbnail.
@@ -126,8 +129,8 @@ public final class VideoResult extends Result {
    * @return the width in pixels of the video thumbnail.
    */
   public native int getTbWidth() /*-{
-      return Number(this.tbWidth);
-    }-*/;
+    return Number(this.tbWidth);
+  }-*/;
 
   /**
    * Returns the title of the video result.
@@ -135,8 +138,8 @@ public final class VideoResult extends Result {
    * @return the title of the video result.
    */
   public native String getTitle() /*-{
-      return this.title;
-    }-*/;
+    return this.title;
+  }-*/;
 
   /**
    * Returns the title, but unlike .title, this property is stripped of html
@@ -146,8 +149,8 @@ public final class VideoResult extends Result {
    *         markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.).
    */
   public native String getTitleNoFormatting() /*-{
-      return this.titleNoFormatting;
-    }-*/;
+    return this.titleNoFormatting;
+  }-*/;
 
   /**
    * Returns the url of a playable version of the video result.
@@ -155,24 +158,49 @@ public final class VideoResult extends Result {
    * @return the url of a playable version of the video result.
    */
   public native String getUrl() /*-{
-      return this.url;
-    }-*/;
+    return this.url;
+  }-*/;
 
   /**
-   * Returns the number of plays for this video.
+   * Returns the number of plays for this video. Before calling this method,
+   * call {@link #hasViewCount()} to see if the <code>viewCount</code> property
+   * exists in the Result object.
    * 
-   * @return number of plays for this video. Returns -1 if no count was
-   *         returned.
+   * @return number of plays for this video. Return is undefined if the property
+   *         does not exist in the Result object.
    */
   public long getViewCount() {
+    assert hasViewCount() : "Check to see that the property exists with hasViewCount() before calling getViewCount()";
     return Long.parseLong(getViewCountAsString());
   }
 
+  /**
+   * Checks to see if the <code>rating</code> property is set in this object.
+   * 
+   * @return true if the <code>rating</code> property exists.
+   */
+  public native boolean hasRating() /*-{
+    return this.rating == undefined ? false : true;
+  }-*/;
+
+  /**
+   * Checks to see if the <code>viewCount</code> property is set in this object.
+   * 
+   * @return true if the <code>viewCount</code> property exists.
+   */
+  public native boolean hasViewCount() /*-{
+    return (this.viewCount == null ? false : true);
+  }-*/;
+
   private native String getDurationAsString() /*-{
-      return this.duration;
-    }-*/;
+    return this.duration;
+  }-*/;
 
   private native String getViewCountAsString() /*-{
-      return (this.viewCount == null ? "-1" : this.viewCount);
-    }-*/;
+    return this.viewCount;
+  }-*/;
+
+  private native int nativeGetRating() /*-{
+    return (this.rating == null ? 0 : Number(this.rating));
+  }-*/;
 }
