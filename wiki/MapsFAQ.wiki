@@ -22,6 +22,7 @@ The Google API Library for Google Web Toolkit is the official set of bindings fo
 
 Building your own gwt-maps.jar from the latest source isn't too hard.  You will
 need the following software:
+
    * The 1.5 or 1.6 version of the [http://java.sun.com JDK]
    * The [http://ant.apache.org Apache Ant] utility (version 1.7.1 or greater) 
    * A [http://subversion.tigris.org Subversion] client.  
@@ -35,3 +36,18 @@ Once you have the above software installed, follow these steps:
    # Run `ant` on the top level file.  The `gwt-maps` library will build along with the other libraries. 
 
 The `gwt-maps.jar` file should end up under `maps/build/lib/gwt-maps.jar`.
+
+== Why is my map showing up very small or not at all? ==
+
+By default, the map does not have a CSS width and height set.  You must use `MapWidget.setSize()`, `MapWidget.setWidth()`, `MapWidget.setHeight()` or style with `width` and `height` CSS properties of the map widget.  
+
+If you wish to scale to the size of the container, make sure you adjust the size of your outer containing panel or widget and use `setSize()` with a percentage.  The following example will create a map that fills the width of the browser and is 500 pixels tall:
+
+{{{
+   AbsolutePanel panel = new AbsolutePanel();
+   panel.setSize("100%","500px");
+   MapWidget myMap = new MapWidget();
+   map.setSize("100%", "100%");
+   panel.add(map);
+   RootPanel.add(panel);
+}}}
