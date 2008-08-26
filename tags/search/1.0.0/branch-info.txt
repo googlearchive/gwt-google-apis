@@ -1,0 +1,6 @@
+branch-info.txt for gwt-google-apis AJAX Search 1.1 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/search/1.1/ was created (r714) as a straight copy from /trunk/@r713
