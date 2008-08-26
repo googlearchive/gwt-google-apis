@@ -1,0 +1,7 @@
+#summary Sample applications distributed with Gears
+
+[http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo Sample]
+
+[http://gwt.google.com/samples/ManagedResourceStore-1.1.0/ManagedResourceStore.html ManagedResourceStore Sample]
+
+[http://gwt.google.com/samples/ResourceStore-1.1.0/ResourceStore.html ResourceStore Sample]
