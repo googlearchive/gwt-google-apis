@@ -308,10 +308,9 @@ public class GadgetGenerator extends Generator {
           Element require = (Element) modulePrefs.appendChild(d.createElement("Require"));
           require.setAttribute("feature", feature);
         }
-      }
-
-      GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
+        GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
           name.requirements());
+      }
     }
 
     // The Gadget linker will fill in the bootstrap
