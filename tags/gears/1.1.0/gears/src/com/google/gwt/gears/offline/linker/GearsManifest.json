@@ -1,0 +1,5 @@
+// Automatically generated Google Gears manifest
+{"betaManifestVersion" : 1,
+ "version" : "__VERSION__",
+ "entries" : [__ENTRIES__]
+}
