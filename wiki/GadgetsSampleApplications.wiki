@@ -1,5 +1,7 @@
 #summary Demo applications distributed with the gwt-gadgets distribution.
 
+   [http://gwt-google-apis.googlecode.com/svn/wiki/HelloGadgets-1.png]
+
 On iGoogle, choose the _Add Stuff..._ link on the top right of the main page, then on the bottom left of the next page, choose the _Add Feed or Url_ link.  When the dialog comes up,  add the following url:
 
 `http://gwt.google.com/samples/HelloGadgets-1.0.0/gadget.xml`
