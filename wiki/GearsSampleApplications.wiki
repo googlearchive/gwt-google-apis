@@ -1,7 +1,15 @@
 #summary Sample applications distributed with Gears
 
-[http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo Sample]
+   [http://gwt-google-apis.googlecode.com/svn/wiki/Database-1.png]
 
-[http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html ManagedResourceStore Sample]
 
-[http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore Sample]
+Run the [http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo Sample].
+
+   [http://gwt-google-apis.googlecode.com/svn/wiki/ManagedResourceStore-1.png]
+
+Run the [http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html ManagedResourceStore Sample]
+
+
+   [http://gwt-google-apis.googlecode.com/svn/wiki/ResourceStore-1.png]
+
+Run the [http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore Sample]
