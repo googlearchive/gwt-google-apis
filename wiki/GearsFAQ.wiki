@@ -5,6 +5,10 @@
 These FAQs refer to the Google API Library for GWT bindings for the Gears API.  
 See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
 
-== How do I write worker thread code in GWT ==
+== How do I write worker thread code in GWT? ==
 
 The bindings do not support such a way right now, but if you create a GWT module and specify the Single Script linker, you can load the generated script as a public resource using the [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/com/google/gwt/gears/client/workerpool/WorkerPool.html#createWorkerFromUrl(java.lang.String) WorkerPool.createWorkerFromUrl(String)] method.
+
+== Why do the samples that use !LocalServer fail when I run them using a file:// URL? ==
+
+This is a constraint of the Gears plugin.  Run them using the Compile/Browse from hosted mode or by copying the files to be served from a web server to run the samples locally.
