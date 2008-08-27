@@ -59,7 +59,7 @@ public class Result extends JavaScriptObject {
     Widget widget = getWidget();
     if (widget == null) {
       Element element = getElement();
-      makeWidget(element);
+      widget = makeWidget(element);
       setWidget(widget);
     }
 
