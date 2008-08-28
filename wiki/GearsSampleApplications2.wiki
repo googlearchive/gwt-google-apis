@@ -1,13 +1,10 @@
 #summary Sample applications distributed with Gears
 
-   [http://gwt-google-apis.googlecode.com/svn/wiki/Database-2.png]
+Try 1:looks ugly if stretched horizontally
 
-Run the [http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo Sample].
+||  [http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo Sample] [http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html http://gwt-google-apis.googlecode.com/svn/wiki/Database-2.png] || [http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html ManagedResourceStore Sample] [http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html http://gwt-google-apis.googlecode.com/svn/wiki/ManagedResourceStore-2.png]  ||[http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore Sample]  [http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html http://gwt-google-apis.googlecode.com/svn/wiki/ResourceStore-2.png] ||
 
-   [http://gwt-google-apis.googlecode.com/svn/wiki/ManagedResourceStore-2.png]
-
-Run the [http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html ManagedResourceStore Sample]
-
-   [http://gwt-google-apis.googlecode.com/svn/wiki/ResourceStore-2.png]
-
-Run the [http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore Sample]
+Try 2: looks ugly... period.
+||  [http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo Sample] [http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html http://gwt-google-apis.googlecode.com/svn/wiki/Database-2.png] || 
+|| [http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html ManagedResourceStore Sample] [http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html http://gwt-google-apis.googlecode.com/svn/wiki/ManagedResourceStore-2.png]  ||
+|| [http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore Sample]  [http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html http://gwt-google-apis.googlecode.com/svn/wiki/ResourceStore-2.png] ||
