@@ -17,16 +17,19 @@ package com.google.gwt.gears.sample.database.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.gears.client.Factory;
-import com.google.gwt.gears.client.GearsException;
 import com.google.gwt.gears.client.database.Database;
 import com.google.gwt.gears.client.database.DatabaseException;
 import com.google.gwt.gears.client.database.ResultSet;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.KeyboardListener;
+import com.google.gwt.user.client.ui.KeyboardListenerAdapter;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -34,7 +37,8 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class DatabaseDemo implements EntryPoint {
 
-  private final Button button = new Button("Add");
+  private final Button addButton = new Button("Add");
+  private final Button clearButton = new Button("Clear Database");
   private Database db;
   private final TextBox input = new TextBox();
 
@@ -42,45 +46,74 @@ public class DatabaseDemo implements EntryPoint {
       new Label(), new Label(), new Label()};
 
   public void onModuleLoad() {
-    RootPanel rootPanel = RootPanel.get();
-    rootPanel.add(input);
-    rootPanel.add(button);
+    VerticalPanel outerPanel = new VerticalPanel();
+    outerPanel.getElement().getStyle().setPropertyPx("margin", 15);    
+    
+    HorizontalPanel textAndButtonsPanel = new HorizontalPanel();
+    textAndButtonsPanel.add(input);
+    textAndButtonsPanel.add(addButton);
+    textAndButtonsPanel.add(clearButton);
+    outerPanel.add(textAndButtonsPanel);
+    
     for (int i = 0; i < labels.length; ++i) {
-      rootPanel.add(labels[i]);
+      outerPanel.add(labels[i]);
     }
 
+    // Create the database if it doesn't exist.
     try {
       db = Factory.getInstance().createDatabase();
       db.open("database-demo");
       db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
-    } catch (GearsException e) {
-      // TODO(mmendez): GearsException should be DatabaseException
+    } catch (DatabaseException e) {
       Window.alert(e.toString());
     }
 
-    // TODO(mmendez): should we add a keyboard listener to trap the enter key?
-    button.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
-        try {
-          String phrase = input.getText();
-          if (phrase.length() > 0) {
-            db.execute("insert into Demo values (?, ?)", new String[] {
-                phrase, Integer.toString((int) System.currentTimeMillis())});
-            displayRecentPhrases();
-          }
-        } catch (DatabaseException e) {
-          Window.alert(e.toString());
+    input.addKeyboardListener(new KeyboardListenerAdapter() {
+      @Override
+      public void onKeyDown(Widget sender, char keyCode, int modifiers) {
+        if (keyCode == KeyboardListener.KEY_ENTER) {
+          insertPhrase();
         }
       }
     });
 
+    addButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        insertPhrase();
+      }
+    });
+
+    clearButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        clearPhrases();
+        displayRecentPhrases();
+      }
+    });
+    
+    RootPanel.get("demo").add(outerPanel);
     displayRecentPhrases();
   }
-
-  void displayRecentPhrases() {
+  
+  /**
+   * Remove all phrases from the database.
+   */
+  private void clearPhrases() {
+    try {
+      db.execute("delete from Demo");
+    } catch (DatabaseException e) {
+      Window.alert(e.toString());
+    }
+  }
+  
+  /**
+   * Fill the labels with the phrases from the database.
+   */
+  private void displayRecentPhrases() {
     try {
       ResultSet rs = db.execute("select * from Demo order by Timestamp desc");
-      for (int i = 0; rs.isValidRow(); ++i, rs.next()) {
+      int i;
+     
+      for (i = 0; rs.isValidRow(); ++i, rs.next()) {
         if (i < labels.length) {
           labels[i].setText(rs.getFieldAsString(0));
         } else {
@@ -88,7 +121,28 @@ public class DatabaseDemo implements EntryPoint {
               new String[] {rs.getFieldAsString(1)});
         }
       }
+      // If a phrase has been removed, clear the label.
+      for (; i < labels.length; i++) {
+        labels[i].setText("");
+      }
       rs.close();
+    } catch (DatabaseException e) {
+      Window.alert(e.toString());
+    }
+  }
+
+  /**
+   * Add a new phrase to the database.
+   */
+  private void insertPhrase() {
+    try {
+      String phrase = input.getText();
+      if (phrase.length() > 0) {
+        db.execute("insert into Demo values (?, ?)", new String[] {
+            phrase, Long.toString(System.currentTimeMillis())});
+        displayRecentPhrases();
+        input.setText("");
+      }
     } catch (DatabaseException e) {
       Window.alert(e.toString());
     }
