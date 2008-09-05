@@ -2,7 +2,7 @@
 
 = Sample Applications =
 
-   [http://gwt-google-apis.googlecode.com/svn/wiki/HelloSearch-1.png]
+   [http://gwt-google-apis.googlecode.com/svn/wiki/HelloSearch-2.png]
 
 Run the [http://gwt.google.com/samples/HelloSearch-1.0.0/HelloSearch.html HelloSearch Sample]
 
