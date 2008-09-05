@@ -23,6 +23,7 @@ import com.google.gwt.gears.client.database.ResultSet;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.KeyboardListenerAdapter;
@@ -65,7 +66,9 @@ public class DatabaseDemo implements EntryPoint {
       db.open("database-demo");
       db.execute("create table if not exists Demo (Phrase varchar(255), Timestamp int)");
     } catch (DatabaseException e) {
-      Window.alert(e.toString());
+      RootPanel.get("demo").add(new HTML("Error opening or creating database: <font color=\"red\">" + e.toString() + "</font>"));
+      // Fatal error.  Do not build the interface.
+      return;
     }
 
     input.addKeyboardListener(new KeyboardListenerAdapter() {
