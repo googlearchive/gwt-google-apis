@@ -20,16 +20,17 @@ import com.google.gwt.maps.client.geom.LatLng;
 
 /**
  * This class represents a JSON result returned from the Google Geocoding
- * service.
+ * service. This object contains an address encoded in eXtensible Address
+ * Language(xAL) from <a href="http://www.oasis-open.org">OASIS</a>.
  */
 public final class Placemark extends JavaScriptObject {
 
   /**
-   *  A protected constructor is required for JS overlays.
+   * A protected constructor is required for JS overlays.
    */
   protected Placemark() {
   }
-  
+
   /**
    * An attribute indicating how accurately the Google servers were able to
    * geocode the given address.
@@ -37,8 +38,8 @@ public final class Placemark extends JavaScriptObject {
    * @return one of the integer values defined in GeoAddressAccuracy
    */
   public native int getAccuracy() /*-{
-     return this.AddressDetails.Accuracy;
-   }-*/;
+    return this.AddressDetails.Accuracy;
+  }-*/;
 
   /**
    * Returns the entire address for this result.
@@ -47,8 +48,8 @@ public final class Placemark extends JavaScriptObject {
    *         including city, state, postal code and country.
    */
   public native String getAddress() /*-{
-     return this.address;
-   }-*/;
+    return this.address;
+  }-*/;
 
   /**
    * The xAL field for "AdministrativeArea", often referred to as 'state'.
@@ -56,9 +57,9 @@ public final class Placemark extends JavaScriptObject {
    * @return the name of the administrative area.
    */
   public native String getAdministrativeArea() /*-{
-     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
-     return AdministrativeArea && AdministrativeArea.AdministrativeAreaName || null;
-   }-*/;
+    var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
+    return AdministrativeArea && AdministrativeArea.AdministrativeAreaName || null;
+  }-*/;
 
   /**
    * xAL field for "LocalityName" returned by the query.
@@ -88,13 +89,13 @@ public final class Placemark extends JavaScriptObject {
   }
 
   public native String getLocality() /*-{
-     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
-     if (AdministrativeArea) {
-       var Locality = (AdministrativeArea.SubAdministrativeArea || AdministrativeArea).Locality;
-       return Locality && Locality.LocalityName || null;
-     }
-     return null;
-   }-*/;
+    var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
+    if (AdministrativeArea) {
+      var Locality = (AdministrativeArea.SubAdministrativeArea || AdministrativeArea).Locality;
+      return Locality && Locality.LocalityName || null;
+    }
+    return null;
+  }-*/;
 
   /**
    * Returns the point corresponding to the decoded address.
@@ -111,17 +112,17 @@ public final class Placemark extends JavaScriptObject {
    * @return the postal code to use with the address.
    */
   public native String getPostalCode() /*-{
-     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
-     if (AdministrativeArea) {
-       var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
-       var Locality = Area.Locality;
-       var DependentLocality = (Locality && Locality.DependentLocality) || null;
-       var PostalCode = (DependentLocality && DependentLocality.PostalCode) 
-       || (Locality && Locality.PostalCode) || (Area.PostalCode);
-       return PostalCode && PostalCode.PostalCodeNumber || null;
-     }
-     return null;
-   }-*/;
+    var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
+    if (AdministrativeArea) {
+      var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
+      var Locality = Area.Locality;
+      var DependentLocality = (Locality && Locality.DependentLocality) || null;
+      var PostalCode = (DependentLocality && DependentLocality.PostalCode) 
+      || (Locality && Locality.PostalCode) || (Area.PostalCode);
+      return PostalCode && PostalCode.PostalCodeNumber || null;
+    }
+    return null;
+  }-*/;
 
   /**
    * The xAL field for "AdministrativeArea".
@@ -138,17 +139,17 @@ public final class Placemark extends JavaScriptObject {
    * @return the name of the street.
    */
   public native String getStreet() /*-{
-     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
-     if (AdministrativeArea) {
-       var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
-       var Locality = Area.Locality;
-       var DependentLocality = (Locality && Locality.DependentLocality) || null;
-       var Thoroughfare = (DependentLocality && DependentLocality.Thoroughfare)  
-         || (Locality && Locality.Thoroughfare) || (Area.Thoroughfare);
-       return Thoroughfare && Thoroughfare.ThoroughfareName || null;
-     }
-     return null;
-   }-*/;
+    var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
+    if (AdministrativeArea) {
+      var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
+      var Locality = Area.Locality;
+      var DependentLocality = (Locality && Locality.DependentLocality) || null;
+      var Thoroughfare = (DependentLocality && DependentLocality.Thoroughfare)  
+        || (Locality && Locality.Thoroughfare) || (Area.Thoroughfare);
+      return Thoroughfare && Thoroughfare.ThoroughfareName || null;
+    }
+    return null;
+  }-*/;
 
   /**
    * The xAL field for "SubAdministrativeAreaName", often called "county".
@@ -156,19 +157,19 @@ public final class Placemark extends JavaScriptObject {
    * @return the name of the sub-administrative area
    */
   public native String getSubAdministrativeArea() /*-{
-     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
-     if (AdministrativeArea) {
-       var SubAdministrativeArea = AdministrativeArea.SubAdministrativeArea;
-       return SubAdministrativeArea && SubAdministrativeArea.SubAdministrativeAreaName || null;
-     }
-     return null;
-   }-*/;
+    var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
+    if (AdministrativeArea) {
+      var SubAdministrativeArea = AdministrativeArea.SubAdministrativeArea;
+      return SubAdministrativeArea && SubAdministrativeArea.SubAdministrativeAreaName || null;
+    }
+    return null;
+  }-*/;
 
   private native double nativeGetLat() /*-{
-     return this.Point.coordinates[1];
-   }-*/;
+    return this.Point.coordinates[1];
+  }-*/;
 
   private native double nativeGetLng() /*-{
-     return this.Point.coordinates[0];
-   }-*/;
+    return this.Point.coordinates[0];
+  }-*/;
 }
