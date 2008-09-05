@@ -23,6 +23,8 @@ import com.google.gwt.maps.client.geocode.DirectionResults;
 import com.google.gwt.maps.client.geocode.Directions;
 import com.google.gwt.maps.client.geocode.DirectionsCallback;
 import com.google.gwt.maps.client.geocode.DirectionsPanel;
+import com.google.gwt.maps.client.geocode.Placemark;
+import com.google.gwt.maps.client.geocode.Route;
 import com.google.gwt.maps.client.geocode.StatusCodes;
 import com.google.gwt.maps.client.geocode.Waypoint;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -30,6 +32,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+
+import java.util.List;
 
 /**
  * This demo extends the simple demo, by adding waypoints to the requested
@@ -130,6 +134,15 @@ public class RoutedDirectionsDemo extends MapsDemo {
 
       public void onSuccess(DirectionResults result) {
         GWT.log("Successfully loaded directions.", null);
+        
+        // A little exercise of the route API
+        List<Route> routes = result.getRoutes();
+        for (Route r : routes) {
+          Placemark start = r.getStartGeocode();
+          GWT.log("start of route: " + start.getAddress(), null);
+          Placemark end = r.getEndGeocode();
+          GWT.log("end of route: " + end.getAddress(), null);
+        }
       }
     });
   }

@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.geocode.CustomGeocodeCache;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.client.geocode.Placemark;
@@ -27,7 +28,6 @@ import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.FieldName;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.jsio.client.JSFunction;
-import com.google.gwt.maps.jsio.client.JSList;
 import com.google.gwt.maps.jsio.client.JSWrapper;
 
 /**
@@ -52,7 +52,7 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
     String getName();
 
     @FieldName("Placemark")
-    JSList<Placemark> getPlacemarks();
+    JsArray<Placemark> getPlacemarks();
 
     @FieldName("Status")
     ResponseStatus getStatus();

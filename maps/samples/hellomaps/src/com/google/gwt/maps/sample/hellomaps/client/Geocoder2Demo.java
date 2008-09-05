@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
@@ -163,8 +164,8 @@ public class Geocoder2Demo extends MapsDemo {
         Window.alert("Sorry, we were unable to geocode that address");
       }
 
-      public void onSuccess(Placemark[] locations) {
-        Placemark place = locations[0];
+      public void onSuccess(JsArray<Placemark> locations) {
+        Placemark place = locations.get(0);
         Marker marker = new Marker(place.getPoint());
         map.addOverlay(marker);
         String message = place.getAddress() + "<br>" + "<b>Country code:</b> "
