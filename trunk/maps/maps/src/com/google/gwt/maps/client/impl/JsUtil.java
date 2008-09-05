@@ -80,7 +80,7 @@ public final class JsUtil {
   }-*/;
 
   public static native JavaScriptObject asJavaScriptObject(Placemark placemark) /*-{
-    return placemark.@com.google.gwt.maps.client.geocode.Placemark::jsoPeer;
+    return placemark;
   }-*/;
 
   public static void toArray(JSList<?> list, Object[] array) {

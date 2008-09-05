@@ -15,6 +15,8 @@
  */
 package com.google.gwt.maps.client.geocode;
 
+import com.google.gwt.core.client.JsArray;
+
 /**
  * Used as an argument for the getLocations() method in
  * {@link com.google.gwt.maps.client.geocode.Geocoder#getLocations(String, LocationCallback)}.
@@ -34,5 +36,5 @@ public interface LocationCallback {
    * 
    * @param locations an array of Placemarks that match the query.
    */
-  void onSuccess(Placemark[] locations);
+  void onSuccess(JsArray<Placemark> locations);
 }

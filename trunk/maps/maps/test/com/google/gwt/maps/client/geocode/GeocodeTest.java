@@ -16,6 +16,7 @@
 package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
@@ -89,7 +90,7 @@ public class GeocodeTest extends GWTTestCase {
       JSONObject obj = v.isObject();
       assertNotNull("Couldn't JSON parse an object from : " + addressQuery
           + " : \n" + jsonString);
-      Placemark place = Placemark.createPeer(obj.getJavaScriptObject());
+      Placemark place = (Placemark) obj.getJavaScriptObject();
       comparePlacemark(place);
     }
   }
@@ -218,10 +219,10 @@ public class GeocodeTest extends GWTTestCase {
             + statusCode + " : " + StatusCodes.getName(statusCode), false);
       }
 
-      public void onSuccess(Placemark[] locations) {
+      public void onSuccess(JsArray<Placemark> locations) {
         assertTrue("length of locations expected to be > 0",
-            locations.length > 0);
-        goodTestPlacemarks[0].comparePlacemark(locations[0]);
+            locations.length() > 0);
+        goodTestPlacemarks[0].comparePlacemark(locations.get(0));
         finishTest();
       }
     });

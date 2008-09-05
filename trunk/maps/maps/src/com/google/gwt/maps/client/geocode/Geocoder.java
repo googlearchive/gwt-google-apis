@@ -17,14 +17,13 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.GeocoderImpl;
-import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.GeocoderImpl.LocationsCallback;
 import com.google.gwt.maps.client.impl.GeocoderImpl.Response;
-import com.google.gwt.maps.jsio.client.JSList;
 
 /**
  * A class for Geocoding Addresses through Google's Geocoding service over the
@@ -79,8 +78,8 @@ public final class Geocoder {
    * Sends a request to Google servers to geocode the specified address. If the
    * address was successfully located, the user-specified callback function is
    * invoked with a LatLng point. Otherwise, the callback function is given a
-   * <code>null</code> point. In case of ambiguous addresses, only the point
-   * for the best match is passed to the callback function.
+   * <code>null</code> point. In case of ambiguous addresses, only the point for
+   * the best match is passed to the callback function.
    * 
    * @param address the address to search for.
    * @param callback methods to call when the query returns.
@@ -118,9 +117,7 @@ public final class Geocoder {
       public void callback(Response response) {
         int statusCode = response.getStatus().getCode();
         if (statusCode == StatusCodes.SUCCESS) {
-          JSList<Placemark> placemarkList = response.getPlacemarks();
-          Placemark[] placemarks = new Placemark[placemarkList.size()];
-          JsUtil.toArray(placemarkList, placemarks);
+          JsArray<Placemark> placemarks = response.getPlacemarks();
           fireLocationCb(callback, true, statusCode, placemarks);
         } else {
           fireLocationCb(callback, false, statusCode, null);
@@ -176,7 +173,8 @@ public final class Geocoder {
   }
 
   /**
-   * Wrapper to invoke LatLngCallbacks surrounded in the UncaughtExceptionHandler.
+   * Wrapper to invoke LatLngCallbacks surrounded in the
+   * UncaughtExceptionHandler.
    */
   private void fireLatLng(LatLngCallback cb, boolean success, LatLng point) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
@@ -207,7 +205,7 @@ public final class Geocoder {
 
   private void fireLocationAndCatch(UncaughtExceptionHandler handler,
       LocationCallback cb, boolean success, int statusCode,
-      Placemark placemarks[]) {
+      JsArray<Placemark> placemarks) {
     try {
       fireLocationImpl(cb, success, statusCode, placemarks);
     } catch (Throwable e) {
@@ -216,10 +214,11 @@ public final class Geocoder {
   }
 
   /**
-   * Wrapper to invoke LocationCallbacks surrounded in the UncaughtExceptionHandler.
+   * Wrapper to invoke LocationCallbacks surrounded in the
+   * UncaughtExceptionHandler.
    */
   private void fireLocationCb(LocationCallback cb, boolean success,
-      int statusCode, Placemark placemarks[]) {
+      int statusCode, JsArray<Placemark> placemarks) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
     if (handler != null) {
       fireLocationAndCatch(handler, cb, success, statusCode, placemarks);
@@ -229,7 +228,7 @@ public final class Geocoder {
   }
 
   private void fireLocationImpl(LocationCallback cb, boolean success,
-      int statusCode, Placemark placemarks[]) {
+      int statusCode, JsArray<Placemark> placemarks) {
     // Run the callback's code.
     if (success) {
       cb.onSuccess(placemarks);
