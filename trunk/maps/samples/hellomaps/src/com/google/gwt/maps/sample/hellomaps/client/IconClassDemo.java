@@ -88,8 +88,8 @@ public class IconClassDemo extends MapsDemo {
     baseIcon.setShadowURL("http://www.google.com/mapfiles/shadow50.png");
     baseIcon.setIconSize(new Size(20, 34));
     baseIcon.setShadowSize(new Size(37, 34));
-    baseIcon.setIconAnchor(new Point(9, 34));
-    baseIcon.setInfoWindowAnchor(new Point(9, 2));
+    baseIcon.setIconAnchor(Point.newInstance(9, 34));
+    baseIcon.setInfoWindowAnchor(Point.newInstance(9, 2));
     // TOOD(sgross): undocumented?
     // baseIcon.setInfoShadowAnchor(new GPoint(18, 25));
   }
