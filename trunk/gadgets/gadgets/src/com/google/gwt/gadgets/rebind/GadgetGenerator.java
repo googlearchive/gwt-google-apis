@@ -27,6 +27,7 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.gadgets.client.GadgetFeature;
+import com.google.gwt.gadgets.client.Gadget.InjectContent;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 import com.google.gwt.gadgets.client.UserPreferences.DataType;
@@ -43,6 +44,10 @@ import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -285,7 +290,8 @@ public class GadgetGenerator extends Generator {
     }
 
     // Write out the UserPref tags
-    JClassType preferenceType = typeOracle.findType(Preference.class.getName().replace('$', '.'));
+    JClassType preferenceType = typeOracle.findType(Preference.class.getName().replace(
+        '$', '.'));
     assert preferenceType != null;
 
     JClassType prefsType = GadgetUtils.getUserPrefsType(logger, typeOracle,
@@ -308,17 +314,29 @@ public class GadgetGenerator extends Generator {
           Element require = (Element) modulePrefs.appendChild(d.createElement("Require"));
           require.setAttribute("feature", feature);
         }
-      }
-
-      GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
+        GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
           name.requirements());
+      }
+    }
+    // Inject additional hand-written content into the gadget's XML file.
+    StringBuilder contentToInject = new StringBuilder();
+    // Get additional prefs annotation, where the file for injection is
+    // specified.
+    InjectContent injectContent = type.getAnnotation(InjectContent.class);
+    if (injectContent != null) {
+      String[] injectionFiles = injectContent.files();
+      for (String filename : injectionFiles) {
+        if (filename != "") {
+          contentToInject.append(readFileToInject(logger, type, filename));
+        }
+      }
     }
 
     // The Gadget linker will fill in the bootstrap
     // <content type="html">
     Element content = (Element) module.appendChild(d.createElement("Content"));
     content.setAttribute("type", "html");
-    content.appendChild(d.createCDATASection("__BOOTSTRAP__"));
+    content.appendChild(d.createCDATASection(contentToInject + "__BOOTSTRAP__"));
 
     serializer.write(d, output);
   }
@@ -330,5 +348,51 @@ public class GadgetGenerator extends Generator {
           null);
       throw new UnableToCompleteException();
     }
+  }
+
+  /**
+   * Reads the file for injection from the classpath and returns its contents.
+   * 
+   * @param logger For logging.
+   * @param gadgetClass The main gadget class that contained the annotation.
+   *          This class should be in a '*.client' package.
+   * @param filename The path filename of the file to inject. If the name does
+   *          not start with a '/', it is assumed to be relative to the same
+   *          package as the gadgetClass.
+   * @return The contents of the file or an empty string, if an error occurred
+   */
+  String readFileToInject(TreeLogger logger, JClassType gadgetClass,
+      String filename) throws UnableToCompleteException {
+    StringBuilder buffer = new StringBuilder();
+    String packageName = gadgetClass.getPackage().getName();
+    String pathToFile;
+    // If the filename starts with a '/' it is assumed to be the name of a
+    // resource on the classpath.
+    if (filename.startsWith("/")) {
+      pathToFile = filename.substring(1);
+    } else {
+      pathToFile = packageName.replace(".", "/") + "/" + filename;
+    }
+    // Try to read the file for injection from the same .
+    try {
+      ClassLoader loader = getClass().getClassLoader();
+      InputStream is = loader.getResourceAsStream(pathToFile);
+      if (is == null) {
+        logger.branch(TreeLogger.ERROR, "Unable to read injection file from '"
+            + pathToFile);
+        throw new UnableToCompleteException();
+      }
+      BufferedReader reader = new BufferedReader(new InputStreamReader(is,
+          "UTF-8"));
+      String line;
+      while ((line = reader.readLine()) != null) {
+        buffer.append(line + "\n");
+      }
+    } catch (IOException e) {
+      logger.branch(TreeLogger.ERROR, "Unable to read injection file from '"
+          + pathToFile, e);
+      throw new UnableToCompleteException();
+    }
+    return buffer.toString();
   }
 }

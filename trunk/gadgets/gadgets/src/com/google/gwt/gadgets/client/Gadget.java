@@ -214,6 +214,19 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
     int width() default 320;
   }
 
+  /**
+   * Enables developers to define hand-written content that is injected into the
+   * gadget manifest file.
+   */
+  @Target(ElementType.TYPE)
+  public @interface InjectContent {
+    /**
+     * A list of file names whose content will be concatenated and included in the Gadget XML file's
+     * CDATA section.
+     */
+    String[] files() default "";
+  }
+
   protected Gadget() {
   }
 
