@@ -87,8 +87,8 @@ public class IconDemo extends MapsDemo {
     icon.setShadowURL("http://labs.google.com/ridefinder/images/mm_20_shadow.png");
     icon.setIconSize(new Size(12, 20));
     icon.setShadowSize(new Size(22, 20));
-    icon.setIconAnchor(new Point(6, 20));
-    icon.setInfoWindowAnchor(new Point(5, 1));
+    icon.setIconAnchor(Point.newInstance(6, 20));
+    icon.setInfoWindowAnchor(Point.newInstance(5, 1));
 
     // Add 10 markers to the map at random locations
     LatLngBounds bounds = map.getBounds();
