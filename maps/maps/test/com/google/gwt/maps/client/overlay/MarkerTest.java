@@ -119,7 +119,7 @@ public class MarkerTest extends GWTTestCase {
 
     Icon ic = new Icon();
     ic.setImageURL("house.png");
-    MarkerOptions mo = new MarkerOptions();
+    MarkerOptions mo = MarkerOptions.newInstance();
     mo.setIcon(ic);
     Marker m = new Marker(new LatLng(33.7814790, -84.3880580), mo);
     map.addOverlay(m);
@@ -136,7 +136,7 @@ public class MarkerTest extends GWTTestCase {
 
     Icon ic = new Icon(Icon.DEFAULT_ICON);
     ic.setIconSize(new Size(30, 30));
-    MarkerOptions mo = new MarkerOptions();
+    MarkerOptions mo = MarkerOptions.newInstance();
     mo.setIcon(ic);
     Marker m = new Marker(new LatLng(33.7814790, -84.3880580), mo);
     map.addOverlay(m);
@@ -153,7 +153,7 @@ public class MarkerTest extends GWTTestCase {
 
     Icon ic = new Icon("house.png");
     ic.setIconSize(new Size(30, 30));
-    MarkerOptions mo = new MarkerOptions();
+    MarkerOptions mo = MarkerOptions.newInstance();
     mo.setIcon(ic);
     Marker m = new Marker(new LatLng(33.7814790, -84.3880580), mo);
     map.addOverlay(m);
@@ -165,7 +165,7 @@ public class MarkerTest extends GWTTestCase {
     String result = marker.getTitle();
     assertNull("expected null title", result);
     
-    MarkerOptions mo = new MarkerOptions();
+    MarkerOptions mo = MarkerOptions.newInstance();
     mo.setTitle("Non-null title");
     marker = new Marker(new LatLng(0,1), mo);
     result = marker.getTitle();
