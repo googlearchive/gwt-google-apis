@@ -3,4 +3,13 @@ Tracks interactions between this branch and other branches.
 See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
 
 Copies:
-/releases/gadgets/1.1/ was created (r714) as a straight copy from /trunk/@r713
+/releases/gadgets/1.0/ was created (r714) as a straight copy from /trunk/@r713
+
+Merges:
+/releases/gadgets/1.0@714:758 was merged (r???) into trunk/
+---> The next merge into trunk will be 758:???
+
+Changes in this branch (excluding changes to this file itself:
+- Fixed the samples' online documentation link. (r718)
+- Fixes an NPE triggered when a Gadget subclass implements a non-feature interface.(r724)
+- Adds an annotation to inject handwritten content into the gadget spec.(r755)
