@@ -767,7 +767,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     Marker marker = new Marker(new LatLng(12.34, -22.2));
-    MapRightClickEvent e = new MapRightClickEvent(m, new Point(101, 222),
+    MapRightClickEvent e = new MapRightClickEvent(m, Point.newInstance(101, 222),
         m.getElement(), marker);
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);

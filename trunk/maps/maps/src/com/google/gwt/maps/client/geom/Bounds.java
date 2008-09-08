@@ -16,8 +16,8 @@
 package com.google.gwt.maps.client.geom;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.impl.BoundsImpl;
-import com.google.gwt.maps.client.impl.JsUtil;
 
 /**
  * Represents a rectangular bound. A Bounds is defined by minimum and maximum X
@@ -37,8 +37,8 @@ public final class Bounds {
    * 
    * @param points
    */
-  public Bounds(Point[] points) {
-    jsoPeer = BoundsImpl.impl.construct(JsUtil.toJsList(points));
+  public Bounds(JsArray<Point> points) {
+    jsoPeer = BoundsImpl.impl.construct(points);
   }
 
   /**
@@ -81,8 +81,12 @@ public final class Bounds {
    * @return a new bounds object that encloses the previous bounds plus the
    *         supplied point.
    */
+  @SuppressWarnings("unchecked")
   public Bounds extend(Point point) {
-    Point pointArgs[] = {this.getUpperLeft(), this.getLowerRight()};
+    JsArray<Point> pointArgs = (JsArray<Point>) JavaScriptObject.createArray();
+    pointArgs.set(0, this.getUpperLeft());
+    pointArgs.set(1, this.getLowerRight());
+
     // The JavaScript API enlarges the existing Bounds object. This API creates
     // a new object, so we need to clone this Bounds instance first.
     Bounds b = new Bounds(pointArgs);

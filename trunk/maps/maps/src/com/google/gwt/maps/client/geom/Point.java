@@ -15,78 +15,42 @@
  */
 package com.google.gwt.maps.client.geom;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.PointImpl;
-import com.google.gwt.maps.jsio.client.impl.Extractor;
 
 /**
+ * A Point represents a point on the map by its pixel coordinates. It doesn't
+ * represent a point on the earth by its geographical coordinates.
+ * Geographical coordinates are now represented by {@link LatLng}.
+ * 
+ * In the Google Maps coordinate system, the x coordinate increases to the
+ * right, and the y coordinate increases downwards, though you may use Point
+ * coordinates however you wish.
  * 
  */
-public final class Point {
+public class Point extends JavaScriptObject {
 
-  // TODO: DELETE ME! (needs to function w/o)
-  @SuppressWarnings("unused")
-  private static final Extractor<Point> __extractor = new Extractor<Point>() {
-    public Point fromJS(JavaScriptObject jso) {
-      return createPeer(jso);
-    }
-
-    public JavaScriptObject toJS(Point point) {
-      return point.jsoPeer;
-    }
-  };
-
-  private static final PointImpl impl = GWT.create(PointImpl.class);
-
-  static Point createPeer(JavaScriptObject jso) {
-    return new Point(jso);
-  }
-
-  private final JavaScriptObject jsoPeer;
-
-  public Point(int x, int y) {
-    jsoPeer = impl.construct(x, y);
-  }
-
-  private Point(JavaScriptObject jso) {
-    this.jsoPeer = jso;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof Point) {
-      return impl.equals(jsoPeer, (Point) obj);
-    }
-    return false;
+  public static native Point newInstance(int x, int y) /*-{
+    return new $wnd.GPoint(x,y);
+  }-*/;
+  
+  protected Point() {
   }
 
   /**
    * Returns the X coordinate.
+   * 
    * @return the X coordinate.
    */
-  public int getX() {
-    return impl.getX(jsoPeer);
-  }
+  public final native int getX() /*-{
+    return this.x;
+  }-*/;
 
   /**
    * Returns the Y coordinate.
+   * 
    * @return the Y coordinate.
    */
-  public int getY() {
-    return impl.getY(jsoPeer);
-  }
-
-  @Override
-  public int hashCode() {
-    // Bias the Y coordinate using a prime number (101) so that inverted coordinates
-    // do not hash to the same value.
-    return getX() + (101 * getY());
-  }
-
-  @Override
-  public String toString() {
-    return impl.toString(jsoPeer);
-  }
-
+  public final native int getY() /*-{
+    return this.y;
+  }-*/;
 }

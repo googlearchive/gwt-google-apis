@@ -84,7 +84,7 @@ public class ProjectionTest extends GWTTestCase {
     map.setCurrentMapType(mapType);
     
     // Now try to call some of the MercatorProjection methods directly
-    LatLng lResult = projection.fromPixelToLatLng(new Point(10,10), map.getZoomLevel(), false);
+    LatLng lResult = projection.fromPixelToLatLng(Point.newInstance(10,10), map.getZoomLevel(), false);
     assertNotNull("translation from Pixel to LatLng", lResult);
     Point pResult = projection.fromLatLngToPixel(map.getCenter(), map.getZoomLevel());
     assertNotNull("translation from LatLng to Pixel", pResult);
@@ -123,7 +123,7 @@ public class ProjectionTest extends GWTTestCase {
       public Point fromLatLngToPixel(LatLng latlng, int zoomLevel) {
         assertNotNull(latlng);
         assertTrue("zoomLevel > 0", zoomLevel > 0);
-        return new Point(1, 1);
+        return Point.newInstance(1, 1);
       }
 
       @Override
