@@ -240,7 +240,7 @@ public class MapEventDemo extends MapsDemo {
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
 
-    MarkerOptions opt = new MarkerOptions();
+    MarkerOptions opt = MarkerOptions.newInstance();
     opt.setDraggable(true);
     marker = new Marker(ATLANTA, opt);
 

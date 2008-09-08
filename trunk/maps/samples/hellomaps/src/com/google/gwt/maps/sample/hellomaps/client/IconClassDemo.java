@@ -120,7 +120,7 @@ public class IconClassDemo extends MapsDemo {
     final char letter = (char) ('A' + index);
     Icon icon = new Icon(baseIcon);
     icon.setImageURL("http://www.google.com/mapfiles/marker" + letter + ".png");
-    MarkerOptions options = new MarkerOptions();
+    MarkerOptions options = MarkerOptions.newInstance();
     options.setIcon(icon);
     final Marker marker = new Marker(point, options);
 

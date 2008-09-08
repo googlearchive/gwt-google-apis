@@ -78,7 +78,7 @@ public class DragMarkerDemo extends MapsDemo {
   public void onShow() {
     map.clearOverlays();
 
-    MarkerOptions options = new MarkerOptions();
+    MarkerOptions options = MarkerOptions.newInstance();
     options.setDraggable(true);
     final Marker marker = new Marker(map.getCenter(), options);
     final InfoWindow info = map.getInfoWindow();

@@ -101,7 +101,7 @@ public final class Icon {
   public String getDragCrossImageUrl() {
     return IconImpl.impl.getDragCrossImage(jsoPeer);
   }
-
+  
   /**
    * Returns the pixel size of the cross image when an icon is dragged.
    * 
@@ -384,5 +384,10 @@ public final class Icon {
    */
   public void setTransparentImageURL(String url) {
     IconImpl.impl.setTransparent(jsoPeer, url);
+  }
+
+  // Temporary method until this class is converted to a JS overlay
+  JavaScriptObject getJavaScriptObject() {
+    return jsoPeer;
   }
 }
