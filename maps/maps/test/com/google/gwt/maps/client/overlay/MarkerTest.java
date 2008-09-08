@@ -50,7 +50,7 @@ public class MarkerTest extends GWTTestCase {
   public void testIconAccessors() {
     Icon ic = new Icon();
 
-    Point pointA = new Point(10, 20);
+    Point pointA = Point.newInstance(10, 20);
     ic.setDragCrossAnchor(pointA);
     assertEquals("DragCrossAnchor", pointA, ic.getDragCrossAnchor());
 
@@ -62,7 +62,7 @@ public class MarkerTest extends GWTTestCase {
     ic.setDragCrossSize(size1);
     assertEquals("DragCrossSize", size1, ic.getDragCrossSize());
 
-    Point pointB = new Point(20, 30);
+    Point pointB = Point.newInstance(20, 30);
     ic.setIconAnchor(pointB);
     assertEquals("IconAnchor", pointB, ic.getIconAnchor());
 
@@ -81,7 +81,7 @@ public class MarkerTest extends GWTTestCase {
     ic.setImageURL(dummyImage);
     assertEquals("ImageURL", dummyImage, ic.getImageURL());
 
-    Point pointC = new Point(100, 20);
+    Point pointC = Point.newInstance(100, 20);
     ic.setInfoWindowAnchor(pointC);
     assertEquals("InfoWindowAnchor", pointC, ic.getInfoWindowAnchor());
 

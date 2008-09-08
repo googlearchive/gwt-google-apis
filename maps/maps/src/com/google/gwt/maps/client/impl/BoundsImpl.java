@@ -17,12 +17,12 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.geom.Bounds;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.jsio.client.BeanProperties;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.maps.jsio.client.JSList;
 
 /**
  * Wraps the GBounds object in the Maps API using JSIO.
@@ -33,7 +33,7 @@ public interface BoundsImpl extends JSFlyweightWrapper {
   BoundsImpl impl = GWT.create(BoundsImpl.class);
 
   @Constructor("$wnd.GBounds")
-  JavaScriptObject construct(JSList<Point> points);
+  JavaScriptObject construct(JsArray<Point> points);
 
   boolean containsBounds(JavaScriptObject jsoPeer, Bounds other);
 

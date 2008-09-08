@@ -49,7 +49,7 @@ public final class Icon {
   public Icon() {
     jsoPeer = IconImpl.impl.construct();
     // Workaround for problem in the Maps API - issue 124
-    setIconAnchor(new Point(0,0));
+    setIconAnchor(Point.newInstance(0,0));
   }
 
   /**
@@ -69,7 +69,7 @@ public final class Icon {
   public Icon(String imageUrl) {
     jsoPeer = IconImpl.impl.construct(null, imageUrl);
     // Workaround for problem in the Maps API - issue 124
-    setIconAnchor(new Point(0,0));
+    setIconAnchor(Point.newInstance(0,0));
   }
 
   /**

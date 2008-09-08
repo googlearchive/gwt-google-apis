@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
 import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.FieldName;
@@ -59,9 +58,6 @@ public final class JsUtil {
 
     @FieldName("valueOf")
     JSList<Marker> asMarkerList(JavaScriptObject jso);
-
-    @FieldName("valueOf")
-    JSList<Point> asPointList(JavaScriptObject jso);
 
     @FieldName("valueOf")
     JSList<String> asStringList(JavaScriptObject jso);
@@ -117,12 +113,6 @@ public final class JsUtil {
 
   public static JSList<Marker> toJsList(Marker[] array) {
     JSList<Marker> list = lists.asMarkerList(lists.newArray());
-    list.addAll(Arrays.asList(array));
-    return list;
-  }
-
-  public static JSList<Point> toJsList(Point[] array) {
-    JSList<Point> list = lists.asPointList(lists.newArray());
     list.addAll(Arrays.asList(array));
     return list;
   }
