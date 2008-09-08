@@ -16,24 +16,38 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.MarkerOptionsImpl;
 
 /**
  * Instances of this class are used in the {@link Marker} constructor
  * <code>options</code> argument.
  */
-public final class MarkerOptions {
+public final class MarkerOptions extends JavaScriptObject {
 
-  private final JavaScriptObject jsoPeer;
-
-  public MarkerOptions() {
-    jsoPeer = MarkerOptionsImpl.impl.construct();
+  public static MarkerOptions newInstance() {
+    return (MarkerOptions) createObject();
   }
 
-  public MarkerOptions(Icon icon) {
-    this();
-    setIcon(icon);
+  public static MarkerOptions newInstance(Icon icon) {
+    MarkerOptions options = newInstance();
+    options.setIcon(icon);
+    return options;
   }
+
+  /**
+   * JavaScript overlays require a protected constructor.
+   */
+  protected MarkerOptions() {
+  }
+
+  /**
+   * Auto-pan the map as you drag the marker near the edge. If the marker is
+   * draggable the default value for this option is <true>true</true>.
+   * 
+   * @param autoPan <code>true</code> to turn on auto pan.
+   */
+  public native void setAutoPan(boolean autoPan) /*-{
+   this.autoPan = autoPan;
+   }-*/;
 
   /**
    * When finishing dragging, this number is used to define the acceleration
@@ -43,9 +57,9 @@ public final class MarkerOptions {
    * @param bounceGravity number used to define the acceleration rate of the
    *          marker during the bounce.
    */
-  public void setBounceGravity(double bounceGravity) {
-    MarkerOptionsImpl.impl.setBounceGravity(jsoPeer, bounceGravity);
-  }
+  public native void setBounceGravity(double bounceGravity) /*-{
+     this.bounceGravity = bounceGravity;
+   }-*/;
 
   /**
    * Toggles whether or not the marker should bounce up and down after it
@@ -53,21 +67,21 @@ public final class MarkerOptions {
    * 
    * @param bouncy <code>true</code> to set the marker to be bouncy.
    */
-  public void setBouncy(boolean bouncy) {
-    MarkerOptionsImpl.impl.setBouncy(jsoPeer, bouncy);
-  }
+  public native void setBouncy(boolean bouncy) /*-{
+     this.bouncy = bouncy;
+   }-*/;
 
   /**
    * Toggles whether or not the marker is clickable. Markers that are not
    * clickable or draggable are inert, consume less resources and do not respond
-   * to any events. The default value for this option is <code>true</code>,
-   * i.e. if the option is not specified, the marker will be clickable.
+   * to any events. The default value for this option is <code>true</code>, i.e.
+   * if the option is not specified, the marker will be clickable.
    * 
    * @param clickable whether or not the marker is clickable.
    */
-  public void setClickable(boolean clickable) {
-    MarkerOptionsImpl.impl.setClickable(jsoPeer, clickable);
-  }
+  public native void setClickable(boolean clickable) /*-{
+     this.clickable = clickable;
+   }-*/;
 
   /**
    * When dragging markers normally, the marker floats up and away from the
@@ -75,12 +89,12 @@ public final class MarkerOptions {
    * and moves the cross downwards instead. The default value for this option is
    * false.
    * 
-   * @param dragCrossMove set to <code>true</code> to keep the marker
-   *          underneath the cursor when dragged.
+   * @param dragCrossMove set to <code>true</code> to keep the marker underneath
+   *          the cursor when dragged.
    */
-  public void setDragCrossMove(boolean dragCrossMove) {
-    MarkerOptionsImpl.impl.setDragCrossMove(jsoPeer, dragCrossMove);
-  }
+  public native void setDragCrossMove(boolean dragCrossMove) /*-{
+     this.dragCrossMove = dragCrossMove;
+   }-*/;
 
   /**
    * Toggles whether or not the marker will be draggable by users. Markers set
@@ -91,9 +105,9 @@ public final class MarkerOptions {
    * 
    * @param draggable whether or not the marker will be draggable by users.
    */
-  public void setDraggable(boolean draggable) {
-    MarkerOptionsImpl.impl.setDraggable(jsoPeer, draggable);
-  }
+  public native void setDraggable(boolean draggable) /*-{
+     this.draggable = draggable;
+   }-*/;
 
   /**
    * Chooses the Icon for this class. If not specified,
@@ -102,7 +116,8 @@ public final class MarkerOptions {
    * @param icon sets the icon for this class.
    */
   public void setIcon(Icon icon) {
-    MarkerOptionsImpl.impl.setIcon(jsoPeer, icon);
+    // Once Icon becomes a JSO subclass, we can make this a native method.
+    nativeSetIcon(icon.getJavaScriptObject());
   }
 
   /**
@@ -111,7 +126,11 @@ public final class MarkerOptions {
    * 
    * @param title a string to set as the tooltip on the marker.
    */
-  public void setTitle(String title) {
-    MarkerOptionsImpl.impl.setTitle(jsoPeer, title);
-  }
+  public native void setTitle(String title) /*-{
+     this.title = title;
+   }-*/;
+
+  private native void nativeSetIcon(JavaScriptObject icon) /*-{
+     this.icon = icon;
+   }-*/;
 }

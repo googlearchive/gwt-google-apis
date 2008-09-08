@@ -96,7 +96,7 @@ public class IconDemo extends MapsDemo {
     LatLng northEast = bounds.getNorthEast();
     double lngSpan = northEast.getLongitude() - southWest.getLongitude();
     double latSpan = northEast.getLatitude() - southWest.getLatitude();
-    MarkerOptions options = new MarkerOptions();
+    MarkerOptions options = MarkerOptions.newInstance();
     options.setIcon(icon);
     for (int i = 0; i < 10; i++) {
       LatLng point = new LatLng(southWest.getLatitude() + latSpan
