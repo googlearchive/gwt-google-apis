@@ -15,65 +15,70 @@
  */
 package com.google.gwt.maps.client.geocode;
 
-import com.google.gwt.maps.client.impl.StatusCodesImpl;
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * Result status codes for the Google Geocoding service.
  */
-public final class StatusCodes {
+public final class StatusCodes extends JavaScriptObject {
 
   /*
    * Design note: This was not implemented as an enum because we feel that the
    * Maps API might return new status codes in the future.
    */
-  
+
   /**
    * The given key is either invalid or does not match the domain for which it
    * was given.
    */
-  public static final int BAD_KEY = StatusCodesImpl.impl.getBadKeyCode();
+  public static final int BAD_KEY = getBadKeyCode();
 
   /**
    * A directions request could not be successfully parsed.
    */
-  public static final int BAD_REQUEST = StatusCodesImpl.impl.getBadRequestCode();
+  public static final int BAD_REQUEST = getBadRequestCode();
 
   /**
    * Synonym for {@link StatusCodes#MISSING_QUERY}.
    */
-  public static final int MISSING_ADDRESS = StatusCodesImpl.impl.getMissingAddressCode();
+  public static final int MISSING_ADDRESS = getMissingAddressCode();
 
   /**
    * The HTTP q parameter was either missing or had no value. For geocoding
    * requests, this means that an empty address was specified as input. For
    * directions requests, this means that no query was specified in the input
    */
-  public static final int MISSING_QUERY = StatusCodesImpl.impl.getMissingQueryCode();
+  public static final int MISSING_QUERY = getMissingQueryCode();
 
   /**
    * A geocoding or directions request could not be successfully processed, yet
    * the exact reason for the failure is not known.
    */
-  public static final int SERVER_ERROR = StatusCodesImpl.impl.getServerErrorCode();
+  public static final int SERVER_ERROR = getServerErrorCode();
 
   /**
    * No errors occurred; the address was successfully parsed and its geocode has
    * been returned.
    */
-  public static final int SUCCESS = StatusCodesImpl.impl.getSuccessCode();
+  public static final int SUCCESS = getSuccessCode();
 
+  /**
+   * The given key has gone over the requests limit in the 24 hour period.
+   */
+  public static final int TOO_MANY_QUERIES = getTooManyQueriesCode();
+  
   /**
    * The geocode for the given address or the route for the given directions
    * query cannot be returned due to legal or contractual reasons.
    */
-  public static final int UNAVAILABLE_ADDRESS = StatusCodesImpl.impl.getUnavailableAddressCode();
+  public static final int UNAVAILABLE_ADDRESS = getUnavailableAddressCode();
 
   /**
    * No corresponding geographic location could be found for the specified
    * address. This may be due to the fact that the address is relatively new, or
    * it may be incorrect.
    */
-  public static final int UNKNOWN_ADDRESS = StatusCodesImpl.impl.getUnknownAddressCode();
+  public static final int UNKNOWN_ADDRESS = getUnknownAddressCode();
 
   /**
    * The {@link Directions} object could not compute directions between the
@@ -81,9 +86,15 @@ public final class StatusCodes {
    * available between the two points, or because we do not have data for
    * routing in that region.
    */
-  public static final int UNKNOWN_DIRECTIONS = StatusCodesImpl.impl.getUnknownDirectionsCode();
+  public static final int UNKNOWN_DIRECTIONS = getUnknownDirectionsCode();
 
   public static String getName(int statusCode) {
+    /* 
+     * It would be nice to make this a switch statement, but two of the values
+     * currently map to the same numeric constant.
+     *
+     * MISSING_QUERY and MISSING_ADDRESS both map to 601.
+     */
     if (statusCode == BAD_KEY) {
       return "BAD_KEY";
     } else if (statusCode == BAD_REQUEST) {
@@ -107,7 +118,47 @@ public final class StatusCodes {
     }
   }
 
-  // This class is not meant to be instantiated by end users.
-  private StatusCodes() {
+  private static native int getBadKeyCode() /*-{
+    return $wnd.G_GEO_BAD_KEY;
+  }-*/;
+
+  private static native int getBadRequestCode() /*-{
+    return $wnd.G_GEO_BAD_REQUEST;
+  }-*/;
+
+  private static native int getMissingAddressCode() /*-{
+    return $wnd.G_GEO_MISSING_ADDRESS;
+  }-*/;
+
+  private static native int getMissingQueryCode() /*-{
+    return $wnd.G_GEO_MISSING_QUERY;
+  }-*/;
+
+  private static native int getServerErrorCode() /*-{
+    return $wnd.G_GEO_SERVER_ERROR;
+  }-*/;
+
+  private static native int getSuccessCode() /*-{
+    return $wnd.G_GEO_SUCCESS;
+  }-*/;
+
+  private static native int getTooManyQueriesCode() /*-{
+    return $wnd.G_GEO_TOO_MANY_QUERIES;
+  }-*/;
+
+  private static native int getUnavailableAddressCode() /*-{
+    return $wnd.G_GEO_UNAVAILABLE_ADDRESS;
+  }-*/;
+
+  private static native int getUnknownAddressCode() /*-{
+    return $wnd.G_GEO_UNKNOWN_ADDRESS;
+  }-*/;
+
+  private static native int getUnknownDirectionsCode() /*-{
+    return $wnd.G_GEO_UNKNOWN_DIRECTIONS;
+  }-*/;
+
+  protected StatusCodes() {
+    // Required for JS overlays
   }
 }
