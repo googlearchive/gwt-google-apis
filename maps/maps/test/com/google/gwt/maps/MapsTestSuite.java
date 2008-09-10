@@ -62,7 +62,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(StatusCodesTest.class);
     suite.addTestSuite(PolyEventsTest.class);
     suite.addTestSuite(ProjectionTest.class);
-    suite.addTestSuite(BoundsTest.class);
+    //suite.addTestSuite(BoundsTest.class);
     suite.addTestSuite(MinimumMapVersionTest.class);
     return suite;
   }
