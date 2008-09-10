@@ -17,7 +17,6 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.impl.RouteImpl;
 
 /**
  * Created by the {@link Directions} class to store information about a single
@@ -26,21 +25,10 @@ import com.google.gwt.maps.client.impl.RouteImpl;
  */
 // TODO(zundel): Should we provide a List to access the steps in the route? This
 // would be consistent with our implementation in {@link DirectionsResult}.
-public final class Route {
+public class Route extends JavaScriptObject {
 
-  static Route createPeer(JavaScriptObject jsoPeer) {
-    return new Route(jsoPeer);
-  }
-
-  private final JavaScriptObject jsoPeer;
-
-  /**
-   * Construct a Route by wrapping an existing GRoute JavaScript object.
-   * 
-   * @param jsoPeer the JavaScriptObject to wrap.
-   */
-  private Route(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+  protected Route() {
+    // Required for JavaScript overlays
   }
 
   /**
@@ -48,18 +36,20 @@ public final class Route {
    * 
    * @return the total distance of this route.
    */
-  public Distance getDistance() {
-    return RouteImpl.impl.getDistance(jsoPeer);
-  }
+  public final native Distance getDistance() /*-{
+    // TODO(zundel): won't work until Distance is converted to a JS overlay
+    return this.getDistance();
+  }-*/;
 
   /**
    * Returns the total estimated time of this route.
    * 
    * @return the total estimated time of this route.
    */
-  public Duration getDuration() {
-    return RouteImpl.impl.getDuration(jsoPeer);
-  }
+  public final native Duration getDuration() /*-{
+    // TODO(zundel): won't work until Duration is converted to a JS overlay
+    return this.getDuration();
+  }-*/;
 
   /**
    * Returns the ending point of this route.
@@ -68,9 +58,9 @@ public final class Route {
    * 
    * @see Route#getEndLatLng()
    */
-  public Placemark getEndGeocode() {
-    return RouteImpl.impl.getEndGeocode(jsoPeer);
-  }
+  public final native Placemark getEndGeocode() /*-{
+    return this.getEndGeocode();
+  }-*/;
 
   /**
    * Returns a {@link LatLng} object for the last point along the polyline for
@@ -82,18 +72,19 @@ public final class Route {
    * 
    * @return the last point along the polyline for this route.
    */
-  public LatLng getEndLatLng() {
-    return RouteImpl.impl.getEndLatLng(jsoPeer);
-  }
+  public final native LatLng getEndLatLng() /*-{
+    // TODO(zundel): This method will not work until LatLng is converted to a JSO
+    return this.getEndLatLng();
+  }-*/;
 
   /**
    * Returns the number of steps in this route.
    * 
    * @return the number of steps in this route.
    */
-  public int getNumSteps() {
-    return RouteImpl.impl.getNumSteps(jsoPeer);
-  }
+  public final native int getNumSteps() /*-{
+    return this.getNumSteps();
+  }-*/;
 
   /**
    * Returns the starting point of this route.
@@ -102,9 +93,9 @@ public final class Route {
    * 
    * @see Route#getEndLatLng()
    */
-  public Placemark getStartGeocode() {
-    return RouteImpl.impl.getStartGeocode(jsoPeer);
-  }
+  public final native Placemark getStartGeocode() /*-{
+    return this.getStartGeocode();
+  }-*/;
 
   /**
    * Returns the Step object for the ith step in this route.
@@ -113,9 +104,9 @@ public final class Route {
    * @param index The index of the step to return in the route
    * @return the Step object for the ith step in this route
    */
-  public Step getStep(int index) {
-    return RouteImpl.impl.getStep(jsoPeer, index);
-  }
+  public final native Step getStep(int index) /*-{
+    return this.getStep(index);
+  }-*/;
 
   /**
    * Returns an HTML snippet containing a summary of the distance and time for
@@ -124,7 +115,7 @@ public final class Route {
    * @return an HTML snippet containing a summary of the distance and time for
    *         this route.
    */
-  public String getSummaryHtml() {
-    return RouteImpl.impl.getSummaryHtml(jsoPeer);
-  }
+  public final native String getSummaryHtml() /*-{
+    return this.getSummaryHtml();
+  }-*/;
 }
