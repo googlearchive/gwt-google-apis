@@ -82,11 +82,11 @@ public class IconDemo extends MapsDemo {
     map.clearOverlays();
 
     // Create our "tiny" marker icon
-    Icon icon = new Icon(
+    Icon icon = Icon.newInstance(
         "http://labs.google.com/ridefinder/images/mm_20_red.png");
     icon.setShadowURL("http://labs.google.com/ridefinder/images/mm_20_shadow.png");
-    icon.setIconSize(new Size(12, 20));
-    icon.setShadowSize(new Size(22, 20));
+    icon.setIconSize(Size.newInstance(12, 20));
+    icon.setShadowSize(Size.newInstance(22, 20));
     icon.setIconAnchor(Point.newInstance(6, 20));
     icon.setInfoWindowAnchor(Point.newInstance(5, 1));
 
