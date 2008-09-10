@@ -84,10 +84,10 @@ public class IconClassDemo extends MapsDemo {
 
     // Create a base icon for all of our markers that specifies the
     // shadow, icon dimensions, etc.
-    baseIcon = new Icon();
+    baseIcon = Icon.newInstance();
     baseIcon.setShadowURL("http://www.google.com/mapfiles/shadow50.png");
-    baseIcon.setIconSize(new Size(20, 34));
-    baseIcon.setShadowSize(new Size(37, 34));
+    baseIcon.setIconSize(Size.newInstance(20, 34));
+    baseIcon.setShadowSize(Size.newInstance(37, 34));
     baseIcon.setIconAnchor(Point.newInstance(9, 34));
     baseIcon.setInfoWindowAnchor(Point.newInstance(9, 2));
     // TOOD(sgross): undocumented?
@@ -118,7 +118,7 @@ public class IconClassDemo extends MapsDemo {
   private Marker createMarker(LatLng point, int index) {
     // Create a lettered icon for this point using our icon class
     final char letter = (char) ('A' + index);
-    Icon icon = new Icon(baseIcon);
+    Icon icon = Icon.newInstance(baseIcon);
     icon.setImageURL("http://www.google.com/mapfiles/marker" + letter + ".png");
     MarkerOptions options = MarkerOptions.newInstance();
     options.setIcon(icon);
