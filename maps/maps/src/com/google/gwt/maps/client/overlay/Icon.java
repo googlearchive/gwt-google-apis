@@ -16,69 +16,56 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Size;
-import com.google.gwt.maps.client.impl.IconImpl;
-import com.google.gwt.maps.client.impl.JsUtil;
-import com.google.gwt.maps.jsio.client.JSList;
 
 /**
  * Wrapper for the Maps API GIcon class, which is like a marker, but allows you
  * to change the shape and other properties.
  */
-public final class Icon {
+public class Icon extends JavaScriptObject {
 
-  public static final Icon DEFAULT_ICON = createPeer(IconImpl.impl.getDefaultIcon());
+  public static final Icon DEFAULT_ICON = getDefaultIcon();
 
+  public static native Icon getDefaultIcon() /*-{
+    return $wnd.G_DEFAULT_ICON;
+  }-*/;
+  
   /**
-   * Method used by JSNI to wrap return values from JavaScript method calls.
+   * Construct a new Icon object.
    * 
-   * @param jsoPeer JSO to wrap in an Icon object.
-   * @return a newly created Icon object that wraps jsoPeer.
-   */
-  static Icon createPeer(JavaScriptObject jsoPeer) {
-    Icon icon = new Icon(jsoPeer);
-    return icon;
-  }
-
-  private final JavaScriptObject jsoPeer;
-
-  /**
-   * Construct a new, empty icon.
-   */
-  public Icon() {
-    jsoPeer = IconImpl.impl.construct();
+   */  
+  public static native Icon newInstance() /*-{
+    var icon = new $wnd.GIcon();
     // Workaround for problem in the Maps API - issue 124
-    setIconAnchor(Point.newInstance(0,0));
-  }
-
+    icon.iconAnchor = new $wnd.GPoint(0,0);
+    return icon;
+  }-*/;
+  
   /**
    * Construct an icon from an existing Icon object.
    * 
    * @param icon the object to copy.
-   */
-  public Icon(Icon icon) {
-    jsoPeer = IconImpl.impl.construct(icon);
-  }
+   */  
+  public static native Icon newInstance(Icon icon) /*-{
+    return new $wnd.GIcon(icon); 
+  }-*/;
 
   /**
    * Construct an icon from an image loaded from a URL.
    * 
    * @param imageUrl a URL to the image to use for the icon.
    */
-  public Icon(String imageUrl) {
-    jsoPeer = IconImpl.impl.construct(null, imageUrl);
+  public static native Icon newInstance(String imageUrl) /*-{
+    var icon = new $wnd.GIcon(null, imageUrl);
     // Workaround for problem in the Maps API - issue 124
-    setIconAnchor(Point.newInstance(0,0));
-  }
-
-  /**
-   * Internal constructor - build an Icon from an existing JSO.
-   * 
-   * @param jsoPeer
-   */
-  private Icon(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+    icon.iconAnchor = new $wnd.GPoint(0,0);
+    return icon;
+  }-*/;
+  
+  protected Icon() {
+    // Protected constructor required from JS overlays
   }
 
   /**
@@ -89,27 +76,27 @@ public final class Icon {
    *         {@link Icon#getIconAnchor()}) of the cross image when an icon is
    *         dragged.
    */
-  public Point getDragCrossAnchor() {
-    return IconImpl.impl.getDragCrossAnchor(jsoPeer);
-  }
+  public final native Point getDragCrossAnchor() /*-{
+    return this.dragCrossAnchor;
+  }-*/;
 
   /**
    * Returns the cross image URL when an icon is dragged.
    * 
    * @return the cross image URL when an icon is dragged.
    */
-  public String getDragCrossImageUrl() {
-    return IconImpl.impl.getDragCrossImage(jsoPeer);
-  }
+  public final native String getDragCrossImageUrl() /*-{
+    return this.dragCrossImage;
+  }-*/;
   
   /**
    * Returns the pixel size of the cross image when an icon is dragged.
    * 
    * @return the pixel size of the cross image when an icon is dragged.
    */
-  public Size getDragCrossSize() {
-    return IconImpl.impl.getDragCrossSize(jsoPeer);
-  }
+  public final native Size getDragCrossSize() /*-{
+    return this.dragCrossSize;
+  }-*/;
 
   /**
    * Returns the pixel coordinate relative to the top left corner of the icon
@@ -118,18 +105,18 @@ public final class Icon {
    * @return the pixel coordinate relative to the top left corner of the icon
    *         image at which this icon is anchored to the map.
    */
-  public Point getIconAnchor() {
-    return IconImpl.impl.getIconAnchor(jsoPeer);
-  }
+  public final native Point getIconAnchor() /*-{
+    return this.iconAnchor;
+  }-*/;
 
   /**
    * Returns the pixel size of the foreground image of the icon.
    * 
    * @return the pixel size of the foreground image of the icon.
    */
-  public Size getIconSize() {
-    return IconImpl.impl.getIconSize(jsoPeer);
-  }
+  public final native Size getIconSize() /*-{
+    return this.iconSize;
+  }-*/;
 
   /**
    * Returns an array of integers representing the x/y coordinates of the image
@@ -141,10 +128,26 @@ public final class Icon {
    *         map we should use to specify the clickable part of the icon image
    *         in browsers other than Internet Explorer.
    */
-  public int[] getImageMap() {
-    JSList<Integer> imageMap = IconImpl.impl.getImageMap(jsoPeer);
-    int[] returnValue = new int[imageMap.size()];
-    JsUtil.toArray(imageMap, returnValue);
+  public final native JsArrayInteger getImageMap() /*-{
+    return this.imageMap;
+  }-*/;
+ 
+  /**
+   * Returns an array of integers representing the x/y coordinates of the image
+   * map we should use to specify the clickable part of the icon image in
+   * browsers other than Internet Explorer. See
+   * {@link Icon#getTransparentImageURL()} for Internet Explorer.
+   * 
+   * @return an array of integers representing the x/y coordinates of the image
+   *         map we should use to specify the clickable part of the icon image
+   *         in browsers other than Internet Explorer.
+   */
+  public final int[] getImageMapArray() {
+    JsArrayInteger imageMap = getImageMap();
+    int[] returnValue = new int[imageMap.length()];
+    for (int i = 0; i < imageMap.length(); i++) {
+      returnValue[i] = imageMap.get(i);
+    }
     return returnValue;
   }
 
@@ -153,9 +156,9 @@ public final class Icon {
    * 
    * @return the foreground image URL of the icon.
    */
-  public String getImageURL() {
-    return IconImpl.impl.getImage(jsoPeer);
-  }
+  public final native String getImageURL() /*-{
+    return this.image;
+  }-*/;
 
   /**
    * Returns the pixel coordinate relative to the top left corner of the icon
@@ -164,9 +167,9 @@ public final class Icon {
    * @return the pixel coordinate relative to the top left corner of the icon
    *         image at which the info window is anchored to this icon.
    */
-  public Point getInfoWindowAnchor() {
-    return IconImpl.impl.getInfoWindowAnchor(jsoPeer);
-  }
+  public final native Point getInfoWindowAnchor() /*-{
+    return this.infoWindowAnchor;
+  }-*/;
 
   /**
    * Returns the distance in pixels in which a marker will visually "rise"
@@ -175,9 +178,9 @@ public final class Icon {
    * @return the distance in pixels in which a marker will visually "rise"
    *         vertically when dragged.
    */
-  public int getMaxHeight() {
-    return IconImpl.impl.getMaxHeight(jsoPeer);
-  }
+  public final native int getMaxHeight() /*-{
+    return this.maxHeight;
+  }-*/;
 
   /**
    * Returns the URL of the foreground icon image used for printed maps in
@@ -187,9 +190,9 @@ public final class Icon {
    * 
    * @return the URL used for printing this icon in Mozilla.
    */
-  public String getMozPrintImageURL() {
-    return IconImpl.impl.getMozPrintImage(jsoPeer);
-  }
+  public final native String getMozPrintImageURL() /*-{
+    return this.mozPrintImage;
+  }-*/;
 
   /**
    * Returns the URL of the foreground icon image used for printed maps. It must
@@ -198,27 +201,27 @@ public final class Icon {
    * @return the URL of the foreground icon image used for printed maps. It must
    *         be the same size as the main icon image given by image.
    */
-  public String getPrintImageURL() {
-    return IconImpl.impl.getPrintImage(jsoPeer);
-  }
+  public final native String getPrintImageURL() /*-{
+    return this.printImage;
+  }-*/;
 
   /**
    * Returns the pixel size of the shadow image.
    * 
    * @return the pixel size of the shadow image.
    */
-  public Size getShadowSize() {
-    return IconImpl.impl.getShadowSize(jsoPeer);
-  }
+  public final native Size getShadowSize() /*-{
+    return this.shadowSize;
+  }-*/;
 
   /**
    * Returns the shadow image URL of the icon.
    * 
    * @return the shadow image URL of the icon.
    */
-  public String getShadowURL() {
-    return IconImpl.impl.getShadow(jsoPeer);
-  }
+  public final native String getShadowURL() /*-{
+    return this.shadow;
+  }-*/;
 
   /**
    * Returns the URL of a virtually transparent version of the foreground icon
@@ -231,9 +234,9 @@ public final class Icon {
    *         should be a 24-bit PNG version of the main icon image with 1%
    *         opacity, but the same shape and size as the main icon.
    */
-  public String getTransparentImageURL() {
-    return IconImpl.impl.getTransparent(jsoPeer);
-  }
+  public final native String getTransparentImageURL() /*-{
+    return this.transparent;
+  }-*/;
 
   /**
    * Sets the pixel coordinate offsets relative to the the value
@@ -243,27 +246,27 @@ public final class Icon {
    *          {@link Icon#getIconAnchor()}) of the cross image when an icon is
    *          dragged.
    */
-  public void setDragCrossAnchor(Point anchor) {
-    IconImpl.impl.setDragCrossAnchor(jsoPeer, anchor);
-  }
+  public final native void setDragCrossAnchor(Point anchor) /*-{
+    this.dragCrossAnchor = anchor;
+  }-*/;
 
   /**
    * Sets the cross image URL when an icon is dragged.
    * 
    * @param url the cross image URL when an icon is dragged.
    */
-  public void setDragCrossImageURL(String url) {
-    IconImpl.impl.setDragCrossImage(jsoPeer, url);
-  }
+  public final native void setDragCrossImageURL(String url) /*-{
+    this.dragCrossImage = url;
+  }-*/;
 
   /**
    * Sets the pixel size of the cross image when an icon is dragged.
    * 
    * @param size the pixel size of the cross image when an icon is dragged.
    */
-  public void setDragCrossSize(Size size) {
-    IconImpl.impl.setDragCrossSize(jsoPeer, size);
-  }
+  public final native void setDragCrossSize(Size size) /*-{
+    this.dragCrossSize = size;
+  }-*/;
 
   /**
    * Sets the pixel coordinate relative to the top left corner of the icon image
@@ -272,17 +275,34 @@ public final class Icon {
    * @param anchor the pixel coordinate relative to the top left corner of the
    *          icon image at which this icon is anchored to the map.
    */
-  public void setIconAnchor(Point anchor) {
-    IconImpl.impl.setIconAnchor(jsoPeer, anchor);
-  }
+  public final native void setIconAnchor(Point anchor) /*-{
+    this.iconAnchor = anchor;
+  }-*/;
 
   /**
    * Sets the pixel size of the foreground image of the icon.
    * 
    * @param size The pixel size of the foreground image of the icon.
    */
-  public void setIconSize(Size size) {
-    IconImpl.impl.setIconSize(jsoPeer, size);
+  public final native void setIconSize(Size size) /*-{
+    this.iconSize = size;
+  }-*/;
+
+  /**
+   * Sets the clickable part of the icon image in browsers other than Internet
+   * Explorer. See {@link Icon#setTransparentImageURL(String)} for Internet
+   * Explorer.
+   * 
+   * @param imageMap an array of integers representing the x/y coordinates of
+   *          the image map we should use to specify the clickable part of the
+   *          icon image in browsers other than Internet Explorer.
+   */
+  public final void setImageMap(int[] imageMap) {
+    JsArrayInteger array = (JsArrayInteger) createArray();
+    for (int i = 0; i < imageMap.length; i++) {
+      array.set(i, imageMap[i]);
+    }
+    setImageMap(array);
   }
 
   /**
@@ -294,18 +314,18 @@ public final class Icon {
    *          the image map we should use to specify the clickable part of the
    *          icon image in browsers other than Internet Explorer.
    */
-  public void setImageMap(int[] imageMap) {
-    IconImpl.impl.setImageMap(jsoPeer, JsUtil.toJsList(imageMap));
-  }
+  public final native void setImageMap(JsArrayInteger imageMap) /*-{
+    this.imageMap = imageMap;
+  }-*/;
 
   /**
    * Sets the foreground image URL of the icon.
    * 
    * @param url the foreground image URL of the icon.
    */
-  public void setImageURL(String url) {
-    IconImpl.impl.setImage(jsoPeer, url);
-  }
+  public final native void setImageURL(String url) /*-{
+    this.image = url;
+  }-*/;
 
   /**
    * Sets the pixel coordinate relative to the top left corner of the icon image
@@ -314,9 +334,9 @@ public final class Icon {
    * @param anchor the pixel coordinate relative to the top left corner of the
    *          icon image at which the info window is anchored to this icon.
    */
-  public void setInfoWindowAnchor(Point anchor) {
-    IconImpl.impl.setInfoWindowAnchor(jsoPeer, anchor);
-  }
+  public final native void setInfoWindowAnchor(Point anchor) /*-{
+    this.infoWindowAnchor = anchor;
+  }-*/;
 
   /**
    * Sets the distance in pixels in which a marker will visually "rise"
@@ -325,9 +345,9 @@ public final class Icon {
    * @param height the distance in pixels in which a marker will visually "rise"
    *          vertically when dragged.
    */
-  public void setMaxHeight(int height) {
-    IconImpl.impl.setMaxHeight(jsoPeer, height);
-  }
+  public final native void setMaxHeight(int height) /*-{
+    this.maxHeight = height;
+  }-*/;
 
   /**
    * Sets the URL of the foreground icon image used for printed maps in
@@ -338,9 +358,9 @@ public final class Icon {
    * @param url the URL of the foreground icon image used for printed maps in
    *          Firefox/Mozilla.
    */
-  public void setMozPrintImageURL(String url) {
-    IconImpl.impl.setMozPrintImage(jsoPeer, url);
-  }
+  public final native void setMozPrintImageURL(String url) /*-{
+    this.mozPrintImage = url;
+  }-*/;
 
   /**
    * Sets the URL of the foreground icon image used for printed maps. It must be
@@ -348,27 +368,27 @@ public final class Icon {
    * 
    * @param url the URL of the foreground icon image used for printed maps.
    */
-  public void setPrintImageURL(String url) {
-    IconImpl.impl.setPrintImage(jsoPeer, url);
-  }
+  public final native void setPrintImageURL(String url) /*-{
+    this.printImage = url;
+  }-*/;
 
   /**
    * Sets the pixel size of the shadow image.
    * 
    * @param size the pixel size of the shadow image.
    */
-  public void setShadowSize(Size size) {
-    IconImpl.impl.setShadowSize(jsoPeer, size);
-  }
+  public final native void setShadowSize(Size size) /*-{
+    this.shadowSize = size;
+  }-*/;
 
   /**
    * Sets the shadow image URL of the icon.
    * 
    * @param url the shadow image URL of the icon.
    */
-  public void setShadowURL(String url) {
-    IconImpl.impl.setShadow(jsoPeer, url);
-  }
+  public final native void setShadowURL(String url) /*-{
+    this.shadow = url;
+  }-*/;
 
   /**
    * The URL of a virtually transparent version of the foreground icon image
@@ -382,12 +402,7 @@ public final class Icon {
    * @param url URL of a virtually transparent version of the foreground icon
    *          image used to capture click events in Internet Explorer.
    */
-  public void setTransparentImageURL(String url) {
-    IconImpl.impl.setTransparent(jsoPeer, url);
-  }
-
-  // Temporary method until this class is converted to a JS overlay
-  JavaScriptObject getJavaScriptObject() {
-    return jsoPeer;
-  }
+  public final native void setTransparentImageURL(String url) /*-{
+    this.transparent = url;
+  }-*/;
 }

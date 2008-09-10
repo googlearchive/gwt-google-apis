@@ -15,24 +15,14 @@
  */
 package com.google.gwt.maps.client.geom;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.SizeImpl;
 
 /**
  * A Size represents the size in pixels of a rectangular area of the map. The
  * size object has two parameters, width and height. Width is a difference in
  * the x-coordinate; height is a difference in the y-coordinate, of points.
  */
-public final class Size {
-
-  private static final SizeImpl impl = GWT.create(SizeImpl.class);
-
-  static Size createPeer(JavaScriptObject jso) {
-    return new Size(jso);
-  }
-
-  private final JavaScriptObject jsoPeer;
+public class Size extends JavaScriptObject {
 
   /**
    * Construct a new Size object.
@@ -40,27 +30,12 @@ public final class Size {
    * @param width Width is a difference in the x-coordinate.
    * @param height height is a difference in the y-coordinate, of points.
    */
-  public Size(int width, int height) {
-    jsoPeer = impl.construct(width, height);
-  }
-
-  /**
-   * Wrap an existing GSize object.
-   * 
-   * @param jso the JavaScriptObject to wrap.
-   */
-  private Size(JavaScriptObject jso) {
-    this.jsoPeer = jso;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof Size) {
-      Size cmp = (Size) obj;
-      return (cmp.getHeight() == getHeight() 
-          && cmp.getWidth() == getWidth());
-    }
-    return false;
+  public static native Size newInstance(int width, int height) /*-{
+    return new $wnd.GSize(width, height);
+  }-*/;
+  
+  protected Size() {
+    // Protected constructor required for a JS overlay
   }
 
   /**
@@ -68,27 +43,17 @@ public final class Size {
    * 
    * @return the height parameter.
    */
-  public int getHeight() {
-    return impl.getHeight(jsoPeer);
-  }
+  public final native int getHeight() /*-{
+    return this.height;
+  }-*/;
 
   /**
    * Returns the width parameter.
    * 
    * @return the width parameter.
    */
-  public int getWidth() {
-    return impl.getWidth(jsoPeer);
-  }
-
-  @Override
-  public int hashCode() {
-    return getWidth() + (101 * getHeight());
-  }
-
-  @Override
-  public String toString() {
-    return impl.toString(jsoPeer);
-  }
+  public final native int getWidth() /*-{
+    return this.width;
+  }-*/;
 
 }

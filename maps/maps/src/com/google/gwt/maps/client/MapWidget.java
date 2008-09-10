@@ -906,7 +906,7 @@ public final class MapWidget extends Composite {
    * @param dy the number of pixels to pan up
    */
   public void panBy(int dx, int dy) {
-    MapImpl.impl.panBy(jsoPeer, new Size(dx, dy));
+    MapImpl.impl.panBy(jsoPeer, Size.newInstance(dx, dy));
   }
 
   /**
