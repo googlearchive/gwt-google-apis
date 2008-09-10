@@ -115,10 +115,9 @@ public final class MarkerOptions extends JavaScriptObject {
    * 
    * @param icon sets the icon for this class.
    */
-  public void setIcon(Icon icon) {
-    // Once Icon becomes a JSO subclass, we can make this a native method.
-    nativeSetIcon(icon.getJavaScriptObject());
-  }
+  public native void setIcon(Icon icon) /*-{
+    this.icon = icon;
+  }-*/;
 
   /**
    * This string will appear as tooltip on the marker, i.e. it will work just as
@@ -128,9 +127,5 @@ public final class MarkerOptions extends JavaScriptObject {
    */
   public native void setTitle(String title) /*-{
      this.title = title;
-   }-*/;
-
-  private native void nativeSetIcon(JavaScriptObject icon) /*-{
-     this.icon = icon;
    }-*/;
 }

@@ -42,11 +42,11 @@ public final class ControlPosition {
    * @param anchor specifies which corner of the screen the X and Y offsets are
    *          computed from.
    * @param offsetX number of horizontal pixels offset from the corner.
-   * @param offsetY number of vertical pixels offset from teh corner.
+   * @param offsetY number of vertical pixels offset from the corner.
    */
   public ControlPosition(ControlAnchor anchor, int offsetX, int offsetY) {
-    jsoPeer = ControlPositionImpl.impl.construct(anchor.getValue(), new Size(
-        offsetX, offsetY));
+    jsoPeer = ControlPositionImpl.impl.construct(anchor.getValue(),
+        Size.newInstance(offsetX, offsetY));
   }
 
   /**
