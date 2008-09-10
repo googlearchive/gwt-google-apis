@@ -85,13 +85,13 @@ public class PolygonTest extends GWTTestCase {
     map.setCurrentMapType(MapType.getHybridMap());
 
     EncodedPolyline[] polylines = new EncodedPolyline[2];
-    polylines[0] = EncodedPolyline.createEncodedPolyline(
+    polylines[0] = EncodedPolyline.newInstance(
         "{t`mEt_bbO?eAx@??dAy@?", 2, "BBBBB", 1);
     polylines[0].setColor("#ff00ff");
     polylines[0].setWeight(2);
     polylines[0].setOpacity(0.7);
 
-    polylines[1] = EncodedPolyline.createEncodedPolyline(
+    polylines[1] = EncodedPolyline.newInstance(
         "au`mEz_bbO?sAbA@?pAcA?", 2, "BBBBB", 1, "#0000ff", 2, 0.9);
 
     Polygon theFountain = Polygon.fromEncoded(polylines, true, "#ff0000", 0.3,
@@ -161,8 +161,24 @@ public class PolygonTest extends GWTTestCase {
     new LatLng(45, 45), //
         new LatLng(45, -45), //
         new LatLng(0, 0)};
-    PolygonOptions opts = new PolygonOptions();
+    PolygonOptions opts = PolygonOptions.newInstance();
     opts.setClickable(false);
+    Polygon p = new Polygon(points, "#ff0000", 3, 1.0, "#0000ff", 0.3, opts);
+    map.addOverlay(p);
+    RootPanel.get().add(map);
+  }
+
+  /**
+   * Test the Polygon constructor with the PolygonOptions in the constructor.
+   */
+  public void testPolygonWithOptionsClickable() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+    PolygonOptions opts = PolygonOptions.newInstance(false);
     Polygon p = new Polygon(points, "#ff0000", 3, 1.0, "#0000ff", 0.3, opts);
     map.addOverlay(p);
     RootPanel.get().add(map);

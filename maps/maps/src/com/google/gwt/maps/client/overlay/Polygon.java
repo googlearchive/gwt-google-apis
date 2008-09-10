@@ -115,6 +115,7 @@ public final class Polygon extends ConcreteOverlay {
     return new $wnd.GPolygon.fromEncoded({polylines: polylinesIn, fill: fillIn, color: colorIn, opacity: opacityIn, outline: outlineIn});
   }-*/;
 
+  @SuppressWarnings("unchecked")
   private static JsArray<EncodedPolyline> toJsArray(EncodedPolyline[] array) {
     if (GWT.isScript()) {
       // This is the most efficient thing to do, and works in web mode

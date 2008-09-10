@@ -30,6 +30,16 @@ public final class EncodedPolyline extends JavaScriptObject {
    * <a href="http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview">Encoded Polylines Documentation</a>
    * for more details.
    * 
+   */
+  public static EncodedPolyline newInstance() {
+    return (EncodedPolyline) JavaScriptObject.createObject();
+  }
+  
+  /**
+   * Create a new encoded polyline. See
+   * <a href="http://code.google.com/apis/maps/documentation/overlays.html#Polylines_Overview">Encoded Polylines Documentation</a>
+   * for more details.
+   * 
    * @param points a string containing the encoded latitude and longitude
    *          coordinates.
    * @param zoomFactor the magnification between adjacent sets of zoom levels in
@@ -39,7 +49,7 @@ public final class EncodedPolyline extends JavaScriptObject {
    *          passed to {@link #setLevels(String)}.
    * @return a new encoded polyline object.
    */
-  public static EncodedPolyline createEncodedPolyline(String points,
+  public static EncodedPolyline newInstance(String points,
       int zoomFactor, String levels, int numLevels) {
     EncodedPolyline enc = (EncodedPolyline) JavaScriptObject.createObject();
     enc.setPoints(points);
@@ -69,10 +79,10 @@ public final class EncodedPolyline extends JavaScriptObject {
    * @param opacity a number between 0 and 1.0 where 1.0 is totally opaque.
    * @return a new encoded polyline object.
    */
-  public static EncodedPolyline createEncodedPolyline(String points,
+  public static EncodedPolyline newInstance(String points,
       int zoomFactor, String levels, int numLevels, String color, int weight,
       double opacity) {
-    EncodedPolyline enc = createEncodedPolyline(points, zoomFactor, levels,
+    EncodedPolyline enc = newInstance(points, zoomFactor, levels,
         numLevels);
     enc.setColor(color);
     enc.setWeight(weight);

@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.maps.client.overlay.EncodedPolyline;
 import com.google.gwt.maps.jsio.client.Global;
 import com.google.gwt.maps.jsio.client.JSWrapper;
 
@@ -27,5 +28,5 @@ import com.google.gwt.maps.jsio.client.JSWrapper;
 public interface PolylineFactoryImpl extends JSWrapper<PolylineFactoryImpl> {
   PolylineFactoryImpl impl = GWT.create(PolylineFactoryImpl.class);
 
-  JavaScriptObject fromEncoded(JavaScriptObject polylineOptions);
+  JavaScriptObject fromEncoded(EncodedPolyline polylineOptions);
 }

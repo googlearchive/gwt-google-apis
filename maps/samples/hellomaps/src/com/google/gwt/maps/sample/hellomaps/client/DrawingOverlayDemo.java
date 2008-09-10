@@ -104,7 +104,7 @@ public class DrawingOverlayDemo extends MapsDemo {
   }
 
   private void createPolyline() {
-    PolyStyleOptions style = new PolyStyleOptions(color, weight, opacity);
+    PolyStyleOptions style = PolyStyleOptions.newInstance(color, weight, opacity);
 
     final Polyline poly = new Polyline(new LatLng[0]);
     lastPolyline = poly;
@@ -138,7 +138,7 @@ public class DrawingOverlayDemo extends MapsDemo {
   }
 
   private void createPolygon() {
-    PolyStyleOptions style = new PolyStyleOptions(color, weight, opacity);
+    PolyStyleOptions style = PolyStyleOptions.newInstance(color, weight, opacity);
 
     final Polygon poly = new Polygon(new LatLng[0], color, weight, opacity,
         color, fillFlag ? .7 : 0.0);
