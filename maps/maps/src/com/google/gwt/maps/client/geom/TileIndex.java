@@ -25,7 +25,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class TileIndex extends JavaScriptObject {
 
   /**
-   * Construct a new TileIndex instance.  This is a representation of the Maps API GPoint object used for {@link TileLayer} operations.
+   * Construct a new TileIndex instance.  This is a representation of the Maps API GPoint object used for {@link com.google.gwt.maps.client.TileLayer} operations.
    * @param x the x coordinate
    * @param y the y coordinate
    * @return a new instance of a TileIndex option 
