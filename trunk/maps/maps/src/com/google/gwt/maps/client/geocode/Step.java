@@ -17,69 +17,60 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.impl.StepImpl;
 
 /**
  * Created by the Directions object to store information about a single step
  * within a route in a directions result. Clients can not directly create
  * objects of this class.
  */
-public final class Step {
+public class Step extends JavaScriptObject {
 
-  /**
-   * Construct a new instance of a Step object by wrapping an existing GStep
-   * JavaScriptObject.
-   * 
-   * @param jsoPeer the object to wrap
-   * @return The wrapped object.
-   */
-  static Step createPeer(JavaScriptObject jsoPeer) {
-    return new Step(jsoPeer);
-  }
-
-  private final JavaScriptObject jsoPeer;
-
-  private Step(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+  protected Step() {
+    // Required for JavaScript overlay types
   }
 
   /**
    * Returns an HTML string containing the description of this step.
+   * 
    * @return an HTML string containing the description of this step.
    */
-  public String getDescriptionHtml() {
-    return StepImpl.impl.getDescriptionHtml(jsoPeer);
-  }
+  public final native String getDescriptionHtml() /*-{
+    return this.getDescriptionHtml();
+  }-*/;
 
   /**
-   * Returns the total distance of this step. 
-   * @return the total distance of this step. 
+   * Returns the total distance of this step.
+   * 
+   * @return the total distance of this step.
    */
-  public Distance getDistance() {
-    return StepImpl.impl.getDistance(jsoPeer);
-  }
+  public final native Distance getDistance() /*-{
+    return this.getDistance();
+  }-*/;
 
   /**
    * Returns the total time of this step.
+   * 
    * @return the total time of this step.
    */
-  public Duration getDuration() {
-    return StepImpl.impl.getDuration(jsoPeer);
-  }
-  
+  public final native Duration getDuration() /*-{
+    return this.getDuration();
+  }-*/;
+
   /**
    * Returns the first point along the polyline for this step.
+   * 
    * @return the first point along the polyline for this step.
    */
-  public LatLng getLatLng() {
-    return StepImpl.impl.getLatLng(jsoPeer);
-  }
+  public final native LatLng getLatLng() /*-{
+    return this.getLatLng();
+  }-*/;
 
   /**
    * Returns the index of the first point along the polyline for this step.
+   * 
    * @return the index of the first point along the polyline for this step.
    */
-  public int getPolylineIndex() {
-    return StepImpl.impl.getPolylineIndex(jsoPeer);
-  }
+  public final native int getPolylineIndex() /*-{
+    return this.getPolylineIndex();
+  }-*/;
 }
