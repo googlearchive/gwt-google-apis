@@ -16,27 +16,45 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.PolygonOptionsImpl;
 
 /**
  * Options to pass to the {@link Polygon} constructor.
  */
-public class PolygonOptions {
+public class PolygonOptions extends JavaScriptObject {
 
-  private final JavaScriptObject jsoPeer;
-  
-  public PolygonOptions() {
-    jsoPeer = PolygonOptionsImpl.impl.construct();
+  /**
+   * Returns a new instance of the PolygonOptions object.
+   * 
+   * @param clickable pass <code>false</code> to make this polygon ignore
+   *          clicks.
+   * @return a new instance of the PolygonOptions object.
+   */
+  public static native PolygonOptions newInstance(boolean clickable) /*-{
+    return {"clickable":clickable};
+  }-*/;
+
+  /**
+   * Returns a new instance of the PolygonOptions object.
+   * 
+   * @return a new instance of the PolygonOptions object.
+   */
+  public static PolygonOptions newInstance() {
+    return (PolygonOptions) createObject();
   }
-  
+
+  protected PolygonOptions() {
+    // Protected constructor required for JS overlays.
+  }
+
   /**
    * Toggles whether or not the polygon is clickable. The default value for this
    * option is true, i.e. if the option is not specified, the polygon will be
    * clickable.
    * 
-   * @param clickable pass <code>false</code> to make this polygon not clickable.
+   * @param clickable pass <code>false</code> to make this polygon not
+   *          clickable.
    */
-  public void setClickable(boolean clickable) {
-    PolygonOptionsImpl.impl.setClickable(jsoPeer, clickable);
-  }
+  public final native void setClickable(boolean clickable) /*-{
+    this.clickable = clickable;
+  }-*/;
 }

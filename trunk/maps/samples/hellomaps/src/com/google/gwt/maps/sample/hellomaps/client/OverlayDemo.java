@@ -216,10 +216,10 @@ public class OverlayDemo extends MapsDemo {
         // Add a polygon encoded as a series of polylines.
         map.setCenter(new LatLng(33.75951619957536, -84.39289301633835), 20);
         EncodedPolyline[] polylines = new EncodedPolyline[2];
-        polylines[0] = EncodedPolyline.createEncodedPolyline(
+        polylines[0] = EncodedPolyline.newInstance(
             "au`mEz_bbO?sAbA@?pAcA?", 2, "BBBBB", 1, "#ff0000", 2, 0.9);
 
-        polylines[1] = EncodedPolyline.createEncodedPolyline(
+        polylines[1] = EncodedPolyline.newInstance(
             "{t`mEt_bbO?eAx@??dAy@?", 2, "BBBBB", 1);
         polylines[1].setColor("#ff0000");
         polylines[1].setWeight(2);

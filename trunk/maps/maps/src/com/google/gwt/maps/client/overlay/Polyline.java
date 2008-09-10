@@ -35,7 +35,6 @@ import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolylineFactoryImpl;
 import com.google.gwt.maps.client.impl.PolylineImpl;
-import com.google.gwt.maps.client.impl.PolylineOptionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
@@ -54,25 +53,25 @@ public final class Polyline extends ConcreteOverlay {
 
   public static Polyline fromEncoded(String color, int weight, double opacity,
       String encodedPoints, int zoomFactor, String encodedLevels, int numLevels) {
-    JavaScriptObject optionsJso = PolylineOptionsImpl.impl.construct();
-    PolylineOptionsImpl.impl.setColor(optionsJso, color);
-    PolylineOptionsImpl.impl.setWeight(optionsJso, weight);
-    PolylineOptionsImpl.impl.setOpacity(optionsJso, opacity);
-    PolylineOptionsImpl.impl.setPoints(optionsJso, encodedPoints);
-    PolylineOptionsImpl.impl.setZoomFactor(optionsJso, zoomFactor);
-    PolylineOptionsImpl.impl.setLevels(optionsJso, encodedLevels);
-    PolylineOptionsImpl.impl.setNumLevels(optionsJso, numLevels);
-    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(optionsJso));
+    EncodedPolyline encoded = EncodedPolyline.newInstance();
+    encoded.setColor(color);
+    encoded.setWeight(weight);
+    encoded.setOpacity(opacity);
+    encoded.setPoints(encodedPoints);
+    encoded.setZoomFactor(zoomFactor);
+    encoded.setLevels(encodedLevels);
+    encoded.setNumLevels(numLevels);
+    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(encoded));
   }
 
   public static Polyline fromEncoded(String encodedPoints, int zoomFactor,
       String encodedLevels, int numLevels) {
-    JavaScriptObject optionsJso = PolylineOptionsImpl.impl.construct();
-    PolylineOptionsImpl.impl.setPoints(optionsJso, encodedPoints);
-    PolylineOptionsImpl.impl.setZoomFactor(optionsJso, zoomFactor);
-    PolylineOptionsImpl.impl.setLevels(optionsJso, encodedLevels);
-    PolylineOptionsImpl.impl.setNumLevels(optionsJso, numLevels);
-    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(optionsJso));
+    EncodedPolyline encoded = EncodedPolyline.newInstance();
+    encoded.setPoints(encodedPoints);
+    encoded.setZoomFactor(zoomFactor);
+    encoded.setLevels(encodedLevels);
+    encoded.setNumLevels(numLevels);
+    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(encoded));
   }
 
   /**
@@ -110,6 +109,8 @@ public final class Polyline extends ConcreteOverlay {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight,
         opacity));
   }
+  
+  // TODO(zundel): public Polyline (LatLng[] points, PolylineOptions options)
 
   private Polyline(JavaScriptObject jsoPeer) {
     super(jsoPeer);
