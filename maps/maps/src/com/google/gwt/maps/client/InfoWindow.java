@@ -22,6 +22,7 @@ import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
 import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler.InfoWindowCloseClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler.InfoWindowMaximizeClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler.InfoWindowMaximizeEndEvent;
@@ -57,14 +58,12 @@ import java.util.List;
 public final class InfoWindow {
 
   private static class VirtualPanel extends ComplexPanel {
-    public void beginAttach(Widget w) {
+
+    public void attach(Widget w) {
       // Detach new child.
       w.removeFromParent();
       // Logical attach.
       getChildren().add(w);
-    }
-
-    public void finishAttach(Widget w) {
       // Adopt.
       adopt(w);
     }
@@ -75,6 +74,26 @@ public final class InfoWindow {
     }
   }
 
+  /**
+   * Handlers that cover attaching and removing widgets from the virtual panels
+   * created above.
+   */
+  private MapInfoWindowOpenHandler attachInfoWindowOpenHandler;
+  private MapInfoWindowCloseHandler attachMapInfoWindowCloseHandler;
+  private InfoWindowMaximizeEndHandler attachMaximizeEndHandler;
+  private InfoWindowRestoreEndHandler attachRestoreEndHandler;
+
+  /**
+   * Private copies of the widgets passed in from InfoWindowContent. Make copies
+   * so that an unsuspecting user doesn't overwrite this information.
+   */
+  private Widget contentMaxWidget;
+  private List<Widget> contentWidgets;
+  private boolean contentWidgetsAttached;
+
+  /**
+   * Tracks handlers attached to this InfoWindow instance.
+   */
   private HandlerCollection<InfoWindowCloseClickHandler> infoWindowCloseClickHandlers;
   private HandlerCollection<InfoWindowMaximizeClickHandler> infoWindowMaximizeClickHandlers;
   private HandlerCollection<InfoWindowMaximizeEndHandler> infoWindowMaximizeEndHandlers;
@@ -82,13 +101,14 @@ public final class InfoWindow {
   private HandlerCollection<InfoWindowRestoreEndHandler> infoWindowRestoreEndHandlers;
 
   private final JavaScriptObject jsoPeer;
-
   private final MapWidget map;
 
   /**
-   * The virtual panel is used as a point to attach.
+   * Virtual Panels used as a point to attach the maximized/restored state
+   * widgets. This plugs the widget into the GWT Event system.
    */
-  private final VirtualPanel virtualPanel = new VirtualPanel();
+  private final VirtualPanel virtualMaximizedPanel = new VirtualPanel();
+  private final VirtualPanel virtualRestoredPanel = new VirtualPanel();
 
   /**
    * Package-private constructor to prevent instantiation from outside of the
@@ -275,7 +295,8 @@ public final class InfoWindow {
    *          InfoWindow.
    */
   public void open(LatLng point, InfoWindowContent content) {
-    beginAttach(content);
+    addAttachHandlers(content);
+
     switch (content.getType()) {
       case InfoWindowContent.TYPE_ELEMENT:
         MapImpl.impl.openInfoWindow(map, point, content.getContent(),
@@ -289,7 +310,6 @@ public final class InfoWindow {
         MapImpl.impl.showMapBlowup(map, point, content.getOptions());
         break;
     }
-    finishAttach(content);
   }
 
   /**
@@ -300,7 +320,8 @@ public final class InfoWindow {
    *          InfoWindow.
    */
   public void open(Marker marker, InfoWindowContent content) {
-    beginAttach(content);
+    addAttachHandlers(content);
+
     switch (content.getType()) {
       case InfoWindowContent.TYPE_ELEMENT:
         MarkerImpl.impl.openInfoWindow(marker, content.getContent(),
@@ -314,12 +335,12 @@ public final class InfoWindow {
         MarkerImpl.impl.showMapBlowup(marker, content.getOptions());
         break;
     }
-    finishAttach(content);
   }
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)}.
+   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -332,7 +353,8 @@ public final class InfoWindow {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)}.
+   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -346,7 +368,8 @@ public final class InfoWindow {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)}.
+   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -359,7 +382,8 @@ public final class InfoWindow {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}.
+   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -370,11 +394,10 @@ public final class InfoWindow {
     }
   }
 
-  // TODO(zundel): Implement reset?
-
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)}.
+   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -387,7 +410,8 @@ public final class InfoWindow {
 
   /**
    * Restores the info window to its default (non-maximized) state. The
-   * infowindow must have been opened with maxContent or maxTitle options
+   * {@link InfoWindow} must have been opened with maxContent or maxTitle
+   * options
    */
   public void restore() {
     InfoWindowImpl.impl.restore(jsoPeer);
@@ -403,6 +427,8 @@ public final class InfoWindow {
     InfoWindowImpl.impl.selectTab(jsoPeer, index);
   }
 
+  // TODO(zundel): Implement reset?
+
   /**
    * Enables or disables maximization of the info window. A maximizable info
    * window expands to fill most of the map with contents specified via the
@@ -412,7 +438,7 @@ public final class InfoWindow {
    * maxTitle will have maximization enabled by default.
    * 
    * Note that if the info window is currently opened and this method is set to
-   * disable maximizing, this function will remove the maximize buton but will
+   * disable maximizing, this function will remove the maximize button but will
    * not restore the window to its minimized state.
    */
   public void setMaximizeEnabled(boolean enabled) {
@@ -495,30 +521,108 @@ public final class InfoWindow {
     infoWindowRestoreEndHandlers.trigger();
   }
 
-  private void beginAttach(InfoWindowContent content) {
-    List<Widget> contentWidgets = content.getWidgets();
-    if (content.getMaxContent() != null) {
-      contentWidgets.add(content.getMaxContent());
-    }
-    for (int i = 0; i < contentWidgets.size(); i++) {
-      virtualPanel.beginAttach(contentWidgets.get(i));
-    }
+  /**
+   * Adds handlers that take care of attaching and detaching widgets from the
+   * hierarchy.
+   * 
+   * @param content contains the widgets to attach/detach.
+   */
+  private void addAttachHandlers(InfoWindowContent content) {
+
+    // Make a private copy of the widgets passed in from the content object
+    // so no one can pull the rug out from under our attach handlers.
+    contentWidgets = content.getWidgets();
+    contentMaxWidget = content.getMaxContent();
+
+    attachInfoWindowOpenHandler = new MapInfoWindowOpenHandler() {
+
+      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+        attach();
+      }
+
+    };
+    map.addInfoWindowOpenHandler(attachInfoWindowOpenHandler);
+
+    addMaxContentHandlers();
+    addCloseHandler();
   }
 
-  private void finishAttach(InfoWindowContent content) {
-    final List<Widget> contentWidgets = content.getWidgets();
-    for (int i = 0; i < contentWidgets.size(); i++) {
-      virtualPanel.finishAttach(contentWidgets.get(i));
-    }
-    
-    map.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
-     
+  /**
+   * Removes the handlers used to attach / detach widgets.
+   */
+  private void addCloseHandler() {
+
+    attachMapInfoWindowCloseHandler = new MapInfoWindowCloseHandler() {
+
       public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
-        for (int i = 0; i < contentWidgets.size(); i++) {
-          virtualPanel.remove(contentWidgets.get(i));
-        }        
+
+        if (contentWidgetsAttached) {
+          removeContentWidgets();
+          contentWidgetsAttached = false;
+        }
+        if (attachRestoreEndHandler != null) {
+          removeInfoWindowRestoreEndHandler(attachRestoreEndHandler);
+          attachRestoreEndHandler = null;
+        }
+        if (attachMaximizeEndHandler != null) {
+          removeInfoWindowMaximizeEndHandler(attachMaximizeEndHandler);
+          attachMaximizeEndHandler = null;
+        }
+        if (attachInfoWindowOpenHandler != null) {
+          map.removeInfoWindowOpenHandler(attachInfoWindowOpenHandler);
+          attachInfoWindowOpenHandler = null;
+        }
+
+        // Remove this handler too.
+        if (attachMapInfoWindowCloseHandler != null) {
+          map.removeInfoWindowCloseHandler(attachMapInfoWindowCloseHandler);
+          attachMapInfoWindowCloseHandler = null;
+        }
       }
-    });
+
+    };
+    map.addInfoWindowCloseHandler(attachMapInfoWindowCloseHandler);
+  }
+
+  /**
+   * When the info window is maximized and restored, the widgets need to be
+   * detached and re-attached from the 2 virtual panels, as they are detached
+   * and re-attached to the DOM.
+   */
+  private void addMaxContentHandlers() {
+    if (contentMaxWidget == null) {
+      return;
+    }
+
+    attachMaximizeEndHandler = new InfoWindowMaximizeEndHandler() {
+      public void onMaximizeEnd(InfoWindowMaximizeEndEvent event) {
+        removeContentWidgets();
+        virtualMaximizedPanel.attach(contentMaxWidget);
+        contentWidgetsAttached = false;
+      }
+    };
+    addInfoWindowMaximizeEndHandler(attachMaximizeEndHandler);
+
+    attachRestoreEndHandler = new InfoWindowRestoreEndHandler() {
+
+      public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
+        virtualMaximizedPanel.remove(contentMaxWidget);
+        contentWidgetsAttached = false;
+        attach();
+      }
+    };
+    addInfoWindowRestoreEndHandler(attachRestoreEndHandler);
+  }
+
+  /**
+   * Run the attach step (must be done after elements are actually attached
+   * to the DOM).
+   */
+  private void attach() {
+    for (int i = 0; i < contentWidgets.size(); i++) {
+      virtualRestoredPanel.attach(contentWidgets.get(i));
+    }
+    contentWidgetsAttached = true;
   }
 
   /**
@@ -568,6 +672,12 @@ public final class InfoWindow {
     if (infoWindowRestoreEndHandlers == null) {
       infoWindowRestoreEndHandlers = new HandlerCollection<InfoWindowRestoreEndHandler>(
           jsoPeer, MapEvent.RESTOREEND);
+    }
+  }
+
+  private void removeContentWidgets() {
+    for (int i = 0; i < contentWidgets.size(); i++) {
+      virtualRestoredPanel.remove(contentWidgets.get(i));
     }
   }
 }
