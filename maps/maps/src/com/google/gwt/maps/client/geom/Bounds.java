@@ -17,92 +17,74 @@ package com.google.gwt.maps.client.geom;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.maps.client.impl.BoundsImpl;
 
 /**
  * Represents a rectangular bound. A Bounds is defined by minimum and maximum X
  * and Y coordinates on a plane.
  * 
  */
-public final class Bounds {
-
-  static Bounds createPeer(JavaScriptObject jsoPeer) {
-    return new Bounds(jsoPeer);
-  }
-
-  private final JavaScriptObject jsoPeer;
+public class Bounds extends JavaScriptObject {
 
   /**
    * A Bounds is defined by minimum and maximum X and Y coordinates on a plane.
    * 
    * @param points
    */
-  public Bounds(JsArray<Point> points) {
-    jsoPeer = BoundsImpl.impl.construct(points);
+  public static final native Bounds newInstance(JsArray<Point> points) /*-{
+    return new $wnd.GBounds(points);
+  }-*/;
+
+  public static final native Bounds newInstance(int minX, int minY, int maxX,
+      int maxY) /*-{
+    return new $wnd.GBounds([ new $wnd.GPoint(minX, minY), 
+      new $wnd.GPoint(maxX, maxY)]);
+  }-*/;
+
+  protected Bounds() {
+    // A protected constructor is required in a JS overlay.
   }
 
   /**
-   * Wrap an existing GBounds object.
-   * 
-   * @param jsoPeer object to wrap.
-   */
-  private Bounds(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
-  }
-
-  /**
-   * Returns <code>true</code> if the passed rectangular area is entirely contained in this
-   * rectangular area.
+   * Returns <code>true</code> if the passed rectangular area is entirely
+   * contained in this rectangular area.
    * 
    * @param other the bound to compare.
-   * @return <code>true</code> if the passed rectangular area is entirely contained in this
-   *         rectangular area.
+   * @return <code>true</code> if the passed rectangular area is entirely
+   *         contained in this rectangular area.
    */
-  public boolean containsBounds(Bounds other) {
-    return BoundsImpl.impl.containsBounds(jsoPeer, other);
-  }
+  public final native boolean containsBounds(Bounds other) /*-{
+    return this.containsBounds(other);
+  }-*/;
 
   /**
-   * Returns <code>true</code> if the rectangular area (inclusively) contains the pixel
-   * coordinates.
+   * Returns <code>true</code> if the rectangular area (inclusively) contains
+   * the pixel coordinates.
    * 
    * @param p the point to compare.
-   * @return <code>true</code> if the rectangular area (inclusively) contains the pixel
-   *         coordinates.
+   * @return <code>true</code> if the rectangular area (inclusively) contains
+   *         the pixel coordinates.
    */
-  public boolean containsPoint(Point p) {
-    return BoundsImpl.impl.containsPoint(jsoPeer, p);
-  }
+  public final native boolean containsPoint(Point p) /*-{
+    return this.containsPoint(p);
+  }-*/;
 
   /**
    * Enlarges this box so that the point is also contained in this box.
    * 
    * @param point the point to add to the bound.
-   * @return a new bounds object that encloses the previous bounds plus the
-   *         supplied point.
    */
-  @SuppressWarnings("unchecked")
-  public Bounds extend(Point point) {
-    JsArray<Point> pointArgs = (JsArray<Point>) JavaScriptObject.createArray();
-    pointArgs.set(0, this.getUpperLeft());
-    pointArgs.set(1, this.getLowerRight());
-
-    // The JavaScript API enlarges the existing Bounds object. This API creates
-    // a new object, so we need to clone this Bounds instance first.
-    Bounds b = new Bounds(pointArgs);
-    BoundsImpl.impl.extend(b.jsoPeer, point);
-    
-    return b;
-  }
+  public final native void extend(Point point) /*-{
+    return this.extend(point);
+  }-*/;
 
   /**
    * Returns the pixel coordinates of the center of the rectangular area.
    * 
    * @return the pixel coordinates of the center of the rectangular area.
    */
-  public Point getCenter() {
-    return BoundsImpl.impl.mid(jsoPeer);
-  }
+  public final native Point getCenter() /*-{
+    return this.mid();
+  }-*/;
 
   /**
    * Returns the pixel coordinates of the lower right corner of the rectangular
@@ -111,45 +93,45 @@ public final class Bounds {
    * @return the pixel coordinates of the lower right corner of the rectangular
    *         area.
    */
-  public Point getLowerRight() {
-    return BoundsImpl.impl.max(jsoPeer);
-  }
+  public final native Point getLowerRight() /*-{
+    return this.max();
+  }-*/;
 
   /**
    * Returns the x coordinate of the right edge of the rectangle.
    * 
    * @return the x coordinate of the right edge of the rectangle.
    */
-  public int getMaxX() {
-    return BoundsImpl.impl.getMaxX(jsoPeer);
-  }
+  public final native int getMaxX() /*-{
+    return this.maxX;
+  }-*/;
 
   /**
    * Returns the y coordinate of the bottom edge of the rectangle.
    * 
    * @return the y coordinate of the bottom edge of the rectangle.
    */
-  public int getMaxY() {
-    return BoundsImpl.impl.getMaxY(jsoPeer);
-  }
+  public final native int getMaxY() /*-{
+    return this.maxY;
+  }-*/;
 
   /**
    * Returns the x coordinate of the left edge of the rectangle.
    * 
    * @return the x coordinate of the left edge of the rectangle.
    */
-  public int getMinX() {
-    return BoundsImpl.impl.getMinX(jsoPeer);
-  }
+  public final native int getMinX() /*-{
+    return this.minX;
+  }-*/;
 
   /**
    * Returns the y coordinate of the top edge of the rectangle.
    * 
    * @return the y coordinate of the top edge of the rectangle.
    */
-  public int getMinY() {
-    return BoundsImpl.impl.getMinY(jsoPeer);
-  }
+  public final native int getMinY() /*-{
+    return this.minY;
+  }-*/;
 
   /**
    * Returns the pixel coordinates of the upper left corner of the rectangular
@@ -158,12 +140,8 @@ public final class Bounds {
    * @return the pixel coordinates of the upper left corner of the rectangular
    *         area.
    */
-  public Point getUpperLeft() {
-    return BoundsImpl.impl.min(jsoPeer);
-  }
+  public final native Point getUpperLeft() /*-{
+    return this.min();
+  }-*/;
 
-  @Override
-  public String toString() {
-    return BoundsImpl.impl.toString(jsoPeer);
-  }
 }
