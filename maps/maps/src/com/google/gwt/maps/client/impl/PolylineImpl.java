@@ -21,6 +21,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.PolyEditingOptions;
 import com.google.gwt.maps.client.overlay.PolyStyleOptions;
+import com.google.gwt.maps.client.overlay.PolylineOptions;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.jsio.client.JSList;
@@ -45,6 +46,10 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   JavaScriptObject construct(JSList<LatLng> points, String color, int weight,
       double opacity);
 
+  @Constructor("$wnd.GPolyline")
+  JavaScriptObject construct(JSList<LatLng> points, String color, int weight,
+      double opacity, PolylineOptions options);
+  
   void deleteVertex(JavaScriptObject jsoPeer, int index);
 
   void disableEditing(JavaScriptObject jsoPeer);

@@ -26,6 +26,7 @@ import com.google.gwt.maps.client.overlay.EncodedPolyline;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.client.overlay.Polyline;
+import com.google.gwt.maps.client.overlay.PolylineOptions;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.HTML;
@@ -52,6 +53,7 @@ public class OverlayDemo extends MapsDemo {
   private enum OverlayDemos {
     TEST_POLYGON_ENCODED("Display polygon from an encoded string"), //
     TEST_POLYLINE_ENCODED("Display polyline from an encoded string"), //
+    TEST_POLYLINE_GEODESIC("Display a geodesic polyline from Zurich to NYC"), //
     TEST_POLYLINE_ONE("Display a polyline"), //
     TEST_POLYLINE_TRANSPARENT(
         "Display encoded polyline with default transparency"), // 
@@ -202,7 +204,16 @@ public class OverlayDemo extends MapsDemo {
         map.addOverlay(pline);
       }
         break;
-
+      case TEST_POLYLINE_GEODESIC: {
+        LatLng nycToZurich[] = {new LatLng(40.75, -73.90), // New York
+            new LatLng(47.3, 8.5) // Zurich
+        };
+        map.setCenter(new LatLng(40, -25), 2);
+        Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
+            PolylineOptions.newInstance(false, true));
+        map.addOverlay(pline);
+      }
+        break;
       case TEST_POLYLINE_TRANSPARENT: {
         // Add a polyline with transparency
         map.setCenter(new LatLng(40.71213418976525, -73.96785736083984), 15);
@@ -216,15 +227,15 @@ public class OverlayDemo extends MapsDemo {
         // Add a polygon encoded as a series of polylines.
         map.setCenter(new LatLng(33.75951619957536, -84.39289301633835), 20);
         EncodedPolyline[] polylines = new EncodedPolyline[2];
-        polylines[0] = EncodedPolyline.newInstance(
-            "au`mEz_bbO?sAbA@?pAcA?", 2, "BBBBB", 1, "#ff0000", 2, 0.9);
+        polylines[0] = EncodedPolyline.newInstance("au`mEz_bbO?sAbA@?pAcA?", 2,
+            "BBBBB", 1, "#ff0000", 2, 0.9);
 
-        polylines[1] = EncodedPolyline.newInstance(
-            "{t`mEt_bbO?eAx@??dAy@?", 2, "BBBBB", 1);
+        polylines[1] = EncodedPolyline.newInstance("{t`mEt_bbO?eAx@??dAy@?", 2,
+            "BBBBB", 1);
         polylines[1].setColor("#ff0000");
         polylines[1].setWeight(2);
         polylines[1].setOpacity(0.7);
-        
+
         Polygon theFountain = Polygon.fromEncoded(polylines, true, "#ff0000",
             0.2, true);
         map.addOverlay(theFountain);
