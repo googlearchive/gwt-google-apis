@@ -16,7 +16,6 @@
 package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.DurationImpl;
 
 /**
  * An object returned by
@@ -25,31 +24,27 @@ import com.google.gwt.maps.client.impl.DurationImpl;
  * time (in seconds), and a string containing a localized string representation
  * of the time.
  */
-public final class Duration {
+public class Duration extends JavaScriptObject {
 
-  static Duration createPeer(JavaScriptObject jsoPeer) {
-    return new Duration(jsoPeer);
-  }
-
-  private final JavaScriptObject jsoPeer;
-
-  protected Duration(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+  protected Duration() {
+    // Protected constructor required for JavaScript overlays
   }
 
   /**
    * Returns a string containing a localized string representation of the time.
+   * 
    * @return a string containing a localized string representation of the time.
    */
-  public String inLocalizedUnits() {
-    return DurationImpl.impl.getHtml(jsoPeer);
-  }
+  public final native String inLocalizedUnits() /*-{
+    return this.html;
+  }-*/;
 
   /**
    * Returns a number indicating the numeric value of the time (in seconds).
+   * 
    * @return a number indicating the numeric value of the time (in seconds).
    */
-  public int inSeconds() {
-    return DurationImpl.impl.getSeconds(jsoPeer);
-  }
+  public final native int inSeconds() /*-{
+    return this.seconds;
+  }-*/;
 }

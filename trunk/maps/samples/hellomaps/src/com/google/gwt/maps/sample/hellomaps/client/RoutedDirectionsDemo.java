@@ -41,7 +41,7 @@ import java.util.List;
  * 
  * For full documentation of the various objects, methods and events in the
  * Directions API package, consult the API Reference at
- * {@link http://code.google.com/apis/maps }
+ * {@link "http://code.google.com/apis/maps"}
  */
 public class RoutedDirectionsDemo extends MapsDemo {
   private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);

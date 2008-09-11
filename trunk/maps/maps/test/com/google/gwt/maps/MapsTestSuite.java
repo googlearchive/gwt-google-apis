@@ -23,8 +23,9 @@ import com.google.gwt.maps.client.MapWidgetTest;
 import com.google.gwt.maps.client.MapsNotInstalledTest;
 import com.google.gwt.maps.client.StatusCodesTest;
 import com.google.gwt.maps.client.control.ControlTest;
+import com.google.gwt.maps.client.geocode.DirectionsTest;
 import com.google.gwt.maps.client.geocode.GeocodeTest;
-// import com.google.gwt.maps.client.geom.BoundsTest;
+import com.google.gwt.maps.client.geom.BoundsTest;
 import com.google.gwt.maps.client.geom.ProjectionTest;
 import com.google.gwt.maps.client.impl.MinimumMapVersionTest;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlayTest;
@@ -50,6 +51,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(MapWidgetTest.class);
     suite.addTestSuite(ControlTest.class);
     suite.addTestSuite(GeocodeTest.class);
+    suite.addTestSuite(DirectionsTest.class);
     suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
     suite.addTestSuite(MarkerTest.class);
@@ -62,7 +64,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(StatusCodesTest.class);
     suite.addTestSuite(PolyEventsTest.class);
     suite.addTestSuite(ProjectionTest.class);
-    // suite.addTestSuite(BoundsTest.class);
+    suite.addTestSuite(BoundsTest.class);
     suite.addTestSuite(MinimumMapVersionTest.class);
     return suite;
   }
