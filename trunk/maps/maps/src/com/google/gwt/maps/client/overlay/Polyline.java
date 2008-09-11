@@ -33,7 +33,6 @@ import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
-import com.google.gwt.maps.client.impl.PolylineFactoryImpl;
 import com.google.gwt.maps.client.impl.PolylineImpl;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
@@ -47,10 +46,31 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  */
 public final class Polyline extends ConcreteOverlay {
 
+  /**
+   * Create a polyline from an encoded string. Details of the encoding is
+   * described on the Google Maps developer web site.
+   * 
+   * @param polyline An object containing all the information for the new
+   *          polyline.
+   * @return a new Polyline constructed from the object.
+   */
   public static Polyline fromEncoded(EncodedPolyline polyline) {
-    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(polyline));
+    return new Polyline(nativeFromEncoded(polyline));
   }
 
+  /**
+   * Create a polyline from an encoded string. Details of the encoding is
+   * described on the Google Maps developer web site.
+   * 
+   * @param color See {@link EncodedPolyline#setColor(String)}
+   * @param weight See {@link EncodedPolyline#setWeight(int)}
+   * @param opacity See {@link EncodedPolyline#setOpacity(double)}
+   * @param encodedPoints See {@link EncodedPolyline#setPoints(String)}
+   * @param zoomFactor See {@link EncodedPolyline#setZoomFactor(int)}
+   * @param encodedLevels See {@link EncodedPolyline#setLevels(String)}
+   * @param numLevels See {@link EncodedPolyline#setNumLevels(int)}
+   * @return a new Polyline constructed from the string.
+   */
   public static Polyline fromEncoded(String color, int weight, double opacity,
       String encodedPoints, int zoomFactor, String encodedLevels, int numLevels) {
     EncodedPolyline encoded = EncodedPolyline.newInstance();
@@ -61,9 +81,19 @@ public final class Polyline extends ConcreteOverlay {
     encoded.setZoomFactor(zoomFactor);
     encoded.setLevels(encodedLevels);
     encoded.setNumLevels(numLevels);
-    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(encoded));
+    return new Polyline(nativeFromEncoded(encoded));
   }
 
+  /**
+   * Create a polyline from an encoded string. Details of the encoding is
+   * described on the Google Maps developer web site.
+   * 
+   * @param encodedPoints See {@link EncodedPolyline#setPoints(String)}
+   * @param zoomFactor See {@link EncodedPolyline#setZoomFactor(int)}
+   * @param encodedLevels See {@link EncodedPolyline#setLevels(String)}
+   * @param numLevels See {@link EncodedPolyline#setNumLevels(int)}
+   * @return a new Polyline constructed from the string.
+   */
   public static Polyline fromEncoded(String encodedPoints, int zoomFactor,
       String encodedLevels, int numLevels) {
     EncodedPolyline encoded = EncodedPolyline.newInstance();
@@ -71,7 +101,7 @@ public final class Polyline extends ConcreteOverlay {
     encoded.setZoomFactor(zoomFactor);
     encoded.setLevels(encodedLevels);
     encoded.setNumLevels(numLevels);
-    return new Polyline(PolylineFactoryImpl.impl.fromEncoded(encoded));
+    return new Polyline(nativeFromEncoded(encoded));
   }
 
   /**
@@ -86,6 +116,10 @@ public final class Polyline extends ConcreteOverlay {
     return new Polyline(jsoPeer);
   }
 
+  private static native JavaScriptObject nativeFromEncoded(JavaScriptObject jso) /*-{
+      return $wnd.GPolyline.fromEncoded(jso);  
+    }-*/;
+
   private HandlerCollection<PolylineCancelLineHandler> polylineCancelLineHandlers;
   private HandlerCollection<PolylineClickHandler> polylineClickHandlers;
   private HandlerCollection<PolylineEndLineHandler> polylineEndLineHandlers;
@@ -93,24 +127,69 @@ public final class Polyline extends ConcreteOverlay {
   private HandlerCollection<PolylineRemoveHandler> polylineRemoveHandlers;
   private HandlerCollection<PolylineVisibilityChangedHandler> polylineVisibilityChangedHandlers;
 
+  /**
+   * Create a new polyline.
+   * 
+   * @param points An array of points to use as verticies for the Polyline.
+   */
   public Polyline(LatLng[] points) {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points)));
   }
 
+  /**
+   * Create a new polyline.
+   * 
+   * @param points An array of points to use as verticies for the Polyline.
+   * @param color color a string that contains a hexadecimal numeric HTML style,
+   *          i.e. #RRGGBB
+   */
   public Polyline(LatLng[] points, String color) {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color));
   }
 
+  /**
+   * Create a new polyline.
+   * 
+   * @param points An array of points to use as verticies for the Polyline.
+   * @param color a string that contains a hexadecimal numeric HTML style, i.e.
+   *          #RRGGBB
+   * @param weight the width of the line in pixels. opacity is a number between
+   *          0 and 1.
+   */
   public Polyline(LatLng[] points, String color, int weight) {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight));
   }
 
+  /**
+   * Create a new polyline.
+   * 
+   * @param points An array of points to use as verticies for the Polyline.
+   * @param color a string that contains a hexadecimal numeric HTML style, i.e.
+   *          #RRGGBB
+   * @param weight the width of the line in pixels. opacity is a number between
+   *          0 and 1.
+   * @param opacity a number between 0 and 1.0 where 1.0 is totally opaque.
+   */
   public Polyline(LatLng[] points, String color, int weight, double opacity) {
     super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight,
         opacity));
   }
-  
-  // TODO(zundel): public Polyline (LatLng[] points, PolylineOptions options)
+
+  /**
+   * Create a new polyline.
+   * 
+   * @param points An array of points to use as verticies for the Polyline.
+   * @param color a string that contains a hexadecimal numeric HTML style, i.e.
+   *          #RRGGBB
+   * @param weight the width of the line in pixels. opacity is a number between
+   *          0 and 1.
+   * @param opacity a number between 0 and 1.0 where 1.0 is totally opaque.
+   */
+  public Polyline(LatLng[] points, String color, int weight, double opacity,
+      PolylineOptions options) {
+    super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight,
+        opacity, options));
+  }
 
   private Polyline(JavaScriptObject jsoPeer) {
     super(jsoPeer);

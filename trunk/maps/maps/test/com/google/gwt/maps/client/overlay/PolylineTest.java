@@ -77,7 +77,7 @@ public class PolylineTest extends GWTTestCase {
   /**
    * Tests the fromEncoded() methods.
    */
-  public void testpolylineFromEncoded() {
+  public void testPolylineFromEncoded() {
     MapWidget map = new MapWidget(new LatLng(33.75951619957536,
         -84.39289301633835), 20);
     map.setSize("500px", "400px");
@@ -85,32 +85,32 @@ public class PolylineTest extends GWTTestCase {
     map.setCurrentMapType(MapType.getHybridMap());
 
     EncodedPolyline[] polylines = new EncodedPolyline[2];
-    polylines[0] = EncodedPolyline.newInstance(
-        "{t`mEt_bbO?eAx@??dAy@?", 2, "BBBBB", 1);
+    polylines[0] = EncodedPolyline.newInstance("{t`mEt_bbO?eAx@??dAy@?", 2,
+        "BBBBB", 1);
     polylines[0].setColor("#ff00ff");
     polylines[0].setWeight(2);
     polylines[0].setOpacity(0.7);
 
-    polylines[1] = EncodedPolyline.newInstance(
-        "au`mEz_bbO?sAbA@?pAcA?", 2, "BBBBB", 1, "#0000ff", 2, 0.9);
+    polylines[1] = EncodedPolyline.newInstance("au`mEz_bbO?sAbA@?pAcA?", 2,
+        "BBBBB", 1, "#0000ff", 2, 0.9);
 
     Polyline p0 = Polyline.fromEncoded(polylines[0]);
     int vertexCount = p0.getVertexCount();
     assertEquals("vertex count", vertexCount, 5);
     assertTrue("length > 0", p0.getLength() > 0);
-    
+
     Polyline p1 = Polyline.fromEncoded(polylines[1]);
     vertexCount = p1.getVertexCount();
     assertEquals("vertex count", vertexCount, 5);
     assertTrue("length > 0", p1.getLength() > 0);
-    
+
     RootPanel.get().add(map);
   }
 
   /**
    * Test insertVertex() and deleteVerex().
    */
-  public void testpolylineInsertDelete() {
+  public void testPolylineInsertDelete() {
     MapWidget map = new MapWidget(new LatLng(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
@@ -127,7 +127,7 @@ public class PolylineTest extends GWTTestCase {
   /**
    * Test the polyline constructor with extra args, but not polylineOptions.
    */
-  public void testpolylineNoOpts() {
+  public void testPolylineNoOpts() {
     MapWidget map = new MapWidget(new LatLng(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
@@ -140,9 +140,25 @@ public class PolylineTest extends GWTTestCase {
   }
 
   /**
+   * Test the constructor using the PolylineOptions argument.
+   */
+  public void testPolylineOptions() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng nycToZurich[] = {new LatLng(40.75, -73.90), // New York
+        new LatLng(47.3, 8.5) // Zurich
+    };
+    map.setCenter(new LatLng(40, -25), 2);
+    Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
+        PolylineOptions.newInstance(false, true));
+    map.addOverlay(pline);
+    RootPanel.get().add(map);
+  }
+
+  /**
    * Test the getVertexCount() method.
    */
-  public void testpolylineVertexCount() {
+  public void testPolylineVertexCount() {
     MapWidget map = new MapWidget(new LatLng(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
