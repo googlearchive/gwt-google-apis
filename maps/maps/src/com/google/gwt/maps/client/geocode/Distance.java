@@ -16,7 +16,6 @@
 package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.DistanceImpl;
 
 /**
  * The object contains two fields: a number called indicating the numeric value
@@ -24,16 +23,10 @@ import com.google.gwt.maps.client.impl.DistanceImpl;
  * representation of the distance in the units that are predominant in the
  * starting country of this set of directions.
  */
-public final class Distance {
+public class Distance extends JavaScriptObject {
 
-  static Distance createPeer(JavaScriptObject jsoPeer) {
-    return new Distance(jsoPeer);
-  }
-
-  private final JavaScriptObject jsoPeer;
-
-  private Distance(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+  protected Distance() {
+    // Protected constructor required for JS overlay.
   }
 
   /**
@@ -43,15 +36,16 @@ public final class Distance {
    * @return the distance in the units that are predominant in the starting
    *         country of this set of directions.
    */
-  public String inLocalizedUnits() {
-    return DistanceImpl.impl.getHtml(jsoPeer);
-  }
+  public final native String inLocalizedUnits() /*-{
+    return this.html;
+  }-*/;
 
   /**
    * Returns the distance measured in meters.
+   * 
    * @return the distance measured in meters.
    */
-  public int inMeters() {
-    return DistanceImpl.impl.getMeters(jsoPeer);
-  }
+  public final native double inMeters() /*-{
+    return this.meters;
+  }-*/;
 }

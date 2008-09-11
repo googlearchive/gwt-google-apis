@@ -37,6 +37,7 @@ public class MarkerTest extends GWTTestCase {
   /**
    * Runs before each test method.
    */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
   }

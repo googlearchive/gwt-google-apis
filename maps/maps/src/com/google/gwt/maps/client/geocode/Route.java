@@ -37,7 +37,6 @@ public class Route extends JavaScriptObject {
    * @return the total distance of this route.
    */
   public final native Distance getDistance() /*-{
-    // TODO(zundel): won't work until Distance is converted to a JS overlay
     return this.getDistance();
   }-*/;
 
@@ -47,7 +46,6 @@ public class Route extends JavaScriptObject {
    * @return the total estimated time of this route.
    */
   public final native Duration getDuration() /*-{
-    // TODO(zundel): won't work until Duration is converted to a JS overlay
     return this.getDuration();
   }-*/;
 
