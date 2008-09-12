@@ -171,18 +171,18 @@ public class PolylineTest extends GWTTestCase {
    * Test the setEditngEnabled() method.
    */
   public void testPolylineSetEditingOptions() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
 
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
 
     Polyline p = new Polyline(points);
     map.addOverlay(p);
     p.setEditingEnabled(true);
-    
+
     p = new Polyline(points);
     map.addOverlay(p);
     p.setEditingEnabled(false);
