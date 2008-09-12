@@ -70,7 +70,7 @@ public class IconDemo extends MapsDemo {
   private MapWidget map;
 
   public IconDemo() {
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
     map.addControl(new SmallMapControl());
@@ -99,7 +99,7 @@ public class IconDemo extends MapsDemo {
     MarkerOptions options = MarkerOptions.newInstance();
     options.setIcon(icon);
     for (int i = 0; i < 10; i++) {
-      LatLng point = new LatLng(southWest.getLatitude() + latSpan
+      LatLng point = LatLng.newInstance(southWest.getLatitude() + latSpan
           * Math.random(), southWest.getLongitude() + lngSpan * Math.random());
 
       map.addOverlay(new Marker(point, options));

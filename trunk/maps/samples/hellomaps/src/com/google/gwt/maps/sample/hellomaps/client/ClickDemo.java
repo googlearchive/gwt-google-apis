@@ -69,7 +69,7 @@ public class ClickDemo extends MapsDemo {
   private final MapWidget map;
 
   public ClickDemo() {
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
 

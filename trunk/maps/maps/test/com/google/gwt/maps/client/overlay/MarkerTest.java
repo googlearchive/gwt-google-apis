@@ -43,13 +43,13 @@ public class MarkerTest extends GWTTestCase {
   }
 
   public void testMarkerGetTitle() {
-    Marker marker = new Marker(new LatLng(0,0));
+    Marker marker = new Marker(LatLng.newInstance(0,0));
     String result = marker.getTitle();
     assertNull("expected null title", result);
     
     MarkerOptions mo = MarkerOptions.newInstance();
     mo.setTitle("Non-null title");
-    marker = new Marker(new LatLng(0,1), mo);
+    marker = new Marker(LatLng.newInstance(0,1), mo);
     result = marker.getTitle();
     assertNotNull("expected non-null title", result);
   }
@@ -69,7 +69,7 @@ public class MarkerTest extends GWTTestCase {
 
     final String marker1Text = "Marker One";
 
-    MyMarker marker1 = new MyMarker(new LatLng(1, 1), marker1Text);
+    MyMarker marker1 = new MyMarker(LatLng.newInstance(1, 1), marker1Text);
     marker1.addMarkerClickHandler(new MarkerClickHandler() {
 
       public void onClick(MarkerClickEvent event) {

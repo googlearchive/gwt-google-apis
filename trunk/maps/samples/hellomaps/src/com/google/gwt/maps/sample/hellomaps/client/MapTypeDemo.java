@@ -118,7 +118,7 @@ public class MapTypeDemo extends MapsDemo {
     VerticalPanel vertPanel = new VerticalPanel();
     vertPanel.setStyleName("hm-panel");
 
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "500px");
 
     // Add in all the map types we know about.

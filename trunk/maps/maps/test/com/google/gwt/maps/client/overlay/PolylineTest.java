@@ -46,12 +46,12 @@ public class PolylineTest extends GWTTestCase {
    * Test the getArea() method.
    */
   public void testGetLength() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polyline p = new Polyline(points);
     map.addOverlay(p);
     RootPanel.get().add(map);
@@ -63,12 +63,12 @@ public class PolylineTest extends GWTTestCase {
    * Test the simple polyline constructor.
    */
   public void testPolyline() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polyline p = new Polyline(points);
     map.addOverlay(p);
     RootPanel.get().add(map);
@@ -90,7 +90,7 @@ public class PolylineTest extends GWTTestCase {
    * Tests the fromEncoded() methods.
    */
   public void testPolylineFromEncoded() {
-    MapWidget map = new MapWidget(new LatLng(33.75951619957536,
+    MapWidget map = new MapWidget(LatLng.newInstance(33.75951619957536,
         -84.39289301633835), 20);
     map.setSize("500px", "400px");
     map.addMapType(MapType.getHybridMap());
@@ -123,16 +123,16 @@ public class PolylineTest extends GWTTestCase {
    * Test insertVertex() and deleteVerex().
    */
   public void testPolylineInsertDelete() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polyline p = new Polyline(points);
     map.addOverlay(p);
     RootPanel.get().add(map);
-    p.insertVertex(1, new LatLng(45, 0));
+    p.insertVertex(1, LatLng.newInstance(45, 0));
     p.deleteVertex(3);
   }
 
@@ -140,12 +140,12 @@ public class PolylineTest extends GWTTestCase {
    * Test the polyline constructor with extra args, but not polylineOptions.
    */
   public void testPolylineNoOpts() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polyline p = new Polyline(points, "#ff0000", 3, 1.0);
     map.addOverlay(p);
     RootPanel.get().add(map);
@@ -155,12 +155,12 @@ public class PolylineTest extends GWTTestCase {
    * Test the constructor using the PolylineOptions argument.
    */
   public void testPolylineOptions() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
-    LatLng nycToZurich[] = {new LatLng(40.75, -73.90), // New York
-        new LatLng(47.3, 8.5) // Zurich
+    LatLng nycToZurich[] = {LatLng.newInstance(40.75, -73.90), // New York
+        LatLng.newInstance(47.3, 8.5) // Zurich
     };
-    map.setCenter(new LatLng(40, -25), 2);
+    map.setCenter(LatLng.newInstance(40, -25), 2);
     Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
         PolylineOptions.newInstance(false, true));
     map.addOverlay(pline);
@@ -214,12 +214,12 @@ public class PolylineTest extends GWTTestCase {
    * Test the getVertexCount() method.
    */
   public void testPolylineVertexCount() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polyline p = new Polyline(points);
     map.addOverlay(p);
     RootPanel.get().add(map);

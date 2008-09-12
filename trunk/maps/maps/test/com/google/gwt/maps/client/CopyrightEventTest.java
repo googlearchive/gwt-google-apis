@@ -76,8 +76,8 @@ public class CopyrightEventTest extends GWTTestCase {
    }
 
   public void testCopyrightCollectionEvent() {
-    LatLngBounds bounds = new LatLngBounds(new LatLng(-90.0, -180.0),
-        new LatLng(90.0, 180.0));
+    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0, -180.0),
+        LatLng.newInstance(90.0, 180.0));
     final CopyrightCollection collection = new CopyrightCollection();
     final Copyright copyright = new Copyright(3452981, bounds, 3, "2008 Google");
     collection.addNewCopyrightHandler(new NewCopyrightHandler() {
@@ -94,8 +94,8 @@ public class CopyrightEventTest extends GWTTestCase {
   }
 
   public void testCopyrightCollectionTrigger() {
-    LatLngBounds bounds = new LatLngBounds(new LatLng(-90.0, -180.0),
-        new LatLng(90.0, 180.0));
+    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0, -180.0),
+        LatLng.newInstance(90.0, 180.0));
     final CopyrightCollection collection = new CopyrightCollection();
     final Copyright copyright = new Copyright(3432241, bounds, 3, "2008 Google");
     collection.addNewCopyrightHandler(new NewCopyrightHandler() {
@@ -115,8 +115,8 @@ public class CopyrightEventTest extends GWTTestCase {
   
 //  public void testMapTypeEvent() {
 //    MapWidget map = new MapWidget();
-//    LatLngBounds bounds = new LatLngBounds(new LatLng(-90.0, -180.0),
-//        new LatLng(90.0, 180.0));
+//    LatLngBounds bounds = new LatLngBounds(LatLng.newInstance(-90.0, -180.0),
+//        LatLng.newInstance(90.0, 180.0));
 //    final Copyright copyright = new Copyright(83432, bounds, 3, "2008 Google");
 //    final Copyright copyright2 = new Copyright(17324, bounds, 2, "2007-2008 Google");
 //    CopyrightCollection collection = new CopyrightCollection();
@@ -143,8 +143,8 @@ public class CopyrightEventTest extends GWTTestCase {
   
   public void testMapTypeTrigger() {
     final MapType mapType = MapType.getNormalMap();
-    LatLngBounds bounds = new LatLngBounds(new LatLng(-90.0, -180.0),
-        new LatLng(90.0, 180.0));
+    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0, -180.0),
+        LatLng.newInstance(90.0, 180.0));
     final Copyright copyright = new Copyright(123432, bounds, 3, "2008 Google");
 
     mapType.addMapTypeNewCopyrightHandler(new MapTypeNewCopyrightHandler() {
@@ -164,8 +164,8 @@ public class CopyrightEventTest extends GWTTestCase {
   
 //  public void testTileLayerEvent() {
 //    MapWidget map = new MapWidget();
-//    LatLngBounds bounds = new LatLngBounds(new LatLng(-90.0, -180.0),
-//        new LatLng(90.0, 180.0));
+//    LatLngBounds bounds = new LatLngBounds(LatLng.newInstance(-90.0, -180.0),
+//        LatLng.newInstance(90.0, 180.0));
 //    final Copyright copyright = new Copyright(43432, bounds, 3, "2008 Google");
 //    final Copyright copyright2 = new Copyright(77324, bounds, 2, "2007-2008 Google");
 //    CopyrightCollection collection = new CopyrightCollection();
@@ -181,8 +181,8 @@ public class CopyrightEventTest extends GWTTestCase {
 //  }
   
   public void testTileLayerTrigger() {
-    LatLngBounds bounds = new LatLngBounds(new LatLng(-90.0, -180.0),
-        new LatLng(90.0, 180.0));
+    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0, -180.0),
+        LatLng.newInstance(90.0, 180.0));
     final Copyright copyright = new Copyright(123432, bounds, 3, "2008 Google");
     CopyrightCollection collection = new CopyrightCollection();
     collection.addCopyright(copyright);

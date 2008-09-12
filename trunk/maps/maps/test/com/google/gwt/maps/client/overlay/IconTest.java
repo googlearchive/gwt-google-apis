@@ -124,7 +124,7 @@ public class IconTest extends GWTTestCase {
    * Test the default Icon() constructor.
    */
   public void testIconDefaultConstructor() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
 
@@ -132,7 +132,7 @@ public class IconTest extends GWTTestCase {
     ic.setImageURL("house.png");
     MarkerOptions mo = MarkerOptions.newInstance();
     mo.setIcon(ic);
-    Marker m = new Marker(new LatLng(33.7814790, -84.3880580), mo);
+    Marker m = new Marker(LatLng.newInstance(33.7814790, -84.3880580), mo);
     map.addOverlay(m);
     RootPanel.get().add(map);
   }
@@ -141,7 +141,7 @@ public class IconTest extends GWTTestCase {
    * Test the Icon(Icon) constructor.
    */
   public void testIconFromDefault() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
 
@@ -149,7 +149,7 @@ public class IconTest extends GWTTestCase {
     ic.setIconSize(Size.newInstance(30, 30));
     MarkerOptions mo = MarkerOptions.newInstance();
     mo.setIcon(ic);
-    Marker m = new Marker(new LatLng(33.7814790, -84.3880580), mo);
+    Marker m = new Marker(LatLng.newInstance(33.7814790, -84.3880580), mo);
     map.addOverlay(m);
     RootPanel.get().add(map);
   }
@@ -158,7 +158,7 @@ public class IconTest extends GWTTestCase {
    * Test the Icon(String) constructor.
    */
   public void testIconFromURL() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
 
@@ -166,7 +166,7 @@ public class IconTest extends GWTTestCase {
     ic.setIconSize(Size.newInstance(30, 30));
     MarkerOptions mo = MarkerOptions.newInstance();
     mo.setIcon(ic);
-    Marker m = new Marker(new LatLng(33.7814790, -84.3880580), mo);
+    Marker m = new Marker(LatLng.newInstance(33.7814790, -84.3880580), mo);
     map.addOverlay(m);
     RootPanel.get().add(map);
   }

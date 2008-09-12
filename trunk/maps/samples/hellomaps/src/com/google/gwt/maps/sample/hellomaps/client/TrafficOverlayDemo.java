@@ -79,7 +79,7 @@ public class TrafficOverlayDemo extends MapsDemo {
   public TrafficOverlayDemo() {
     Panel panel = new FlowPanel();
 
-    map = new MapWidget(new LatLng(40.652513, -73.936615), 12);
+    map = new MapWidget(LatLng.newInstance(40.652513, -73.936615), 12);
     map.setSize("640px", "480px");
     panel.add(map);
     Button toggleTraffic = new Button("Toggle Traffic");

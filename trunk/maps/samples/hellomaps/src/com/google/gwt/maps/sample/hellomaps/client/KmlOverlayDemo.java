@@ -82,7 +82,7 @@ public class KmlOverlayDemo extends MapsDemo {
 
   public KmlOverlayDemo() {
     Panel panel = new FlowPanel();
-    map = new MapWidget(new LatLng(41.875696, -87.624207), 11);
+    map = new MapWidget(LatLng.newInstance(41.875696, -87.624207), 11);
     map.setSize("640px", "480px");
     map.addControl(new LargeMapControl());
     panel.add(map);

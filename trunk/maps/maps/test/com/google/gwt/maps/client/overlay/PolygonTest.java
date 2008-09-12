@@ -46,12 +46,12 @@ public class PolygonTest extends GWTTestCase {
    * Test the getArea() method.
    */
   public void testGetArea() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polygon p = new Polygon(points);
     map.addOverlay(p);
     RootPanel.get().add(map);
@@ -63,12 +63,12 @@ public class PolygonTest extends GWTTestCase {
    * Test the simple Polygon constructor.
    */
   public void testPolygon() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polygon p = new Polygon(points);
     map.addOverlay(p);
     RootPanel.get().add(map);
@@ -78,7 +78,7 @@ public class PolygonTest extends GWTTestCase {
    * Tests the fromEncoded() methods.
    */
   public void testPolygonFromEncoded() {
-    MapWidget map = new MapWidget(new LatLng(33.75951619957536,
+    MapWidget map = new MapWidget(LatLng.newInstance(33.75951619957536,
         -84.39289301633835), 20);
     map.setSize("500px", "400px");
     map.addMapType(MapType.getHybridMap());
@@ -107,16 +107,16 @@ public class PolygonTest extends GWTTestCase {
    * Test insertVertex() and deleteVerex().
    */
   public void testPolygonInsertDelete() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polygon p = new Polygon(points);
     map.addOverlay(p);
     RootPanel.get().add(map);
-    p.insertVertex(1, new LatLng(45, 0));
+    p.insertVertex(1, LatLng.newInstance(45, 0));
     p.deleteVertex(3);
   }
 
@@ -124,12 +124,12 @@ public class PolygonTest extends GWTTestCase {
    * Test the Polygon constructor with extra args, but not PolygonOptions.
    */
   public void testPolygonNoOpts() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polygon p = new Polygon(points, "#ff0000", 3, 1.0, "#0000ff", 0.3);
     map.addOverlay(p);
     RootPanel.get().add(map);
@@ -139,12 +139,12 @@ public class PolygonTest extends GWTTestCase {
    * Test the getVertexCount() method.
    */
   public void testPolygonVertexCount() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     Polygon p = new Polygon(points);
     map.addOverlay(p);
     RootPanel.get().add(map);
@@ -155,12 +155,12 @@ public class PolygonTest extends GWTTestCase {
    * Test the Polygon constructor with the PolygonOptions in the constructor.
    */
   public void testPolygonWithOptions() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     PolygonOptions opts = PolygonOptions.newInstance();
     opts.setClickable(false);
     Polygon p = new Polygon(points, "#ff0000", 3, 1.0, "#0000ff", 0.3, opts);
@@ -172,12 +172,12 @@ public class PolygonTest extends GWTTestCase {
    * Test the Polygon constructor with the PolygonOptions in the constructor.
    */
   public void testPolygonWithOptionsClickable() {
-    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
     map.setSize("500px", "400px");
     LatLng[] points = { // 
-    new LatLng(45, 45), //
-        new LatLng(45, -45), //
-        new LatLng(0, 0)};
+    LatLng.newInstance(45, 45), //
+        LatLng.newInstance(45, -45), //
+        LatLng.newInstance(0, 0)};
     PolygonOptions opts = PolygonOptions.newInstance(false);
     Polygon p = new Polygon(points, "#ff0000", 3, 1.0, "#0000ff", 0.3, opts);
     map.addOverlay(p);

@@ -60,7 +60,7 @@ public class DragCursorDemo extends MapsDemo {
   private final MapWidget map;
 
   public DragCursorDemo() {
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13, "crosshair", "text");
+    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13, "crosshair", "text");
     map.setSize("500px", "300px");
     initWidget(map);
   }

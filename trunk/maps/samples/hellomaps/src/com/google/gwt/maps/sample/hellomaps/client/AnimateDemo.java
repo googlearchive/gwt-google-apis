@@ -64,9 +64,9 @@ public class AnimateDemo extends MapsDemo {
 
   private MapWidget map;
 
-  private final LatLng start = new LatLng(37.4419, -122.1419);
+  private final LatLng start = LatLng.newInstance(37.4419, -122.1419);
 
-  private final LatLng end = new LatLng(37.4569, -122.1569);
+  private final LatLng end = LatLng.newInstance(37.4569, -122.1569);
 
   public AnimateDemo() {
     map = new MapWidget(start, 13);

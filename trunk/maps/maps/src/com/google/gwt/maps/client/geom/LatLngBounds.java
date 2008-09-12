@@ -15,37 +15,21 @@
  */
 package com.google.gwt.maps.client.geom;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.LatLngBoundsImpl;
 
 /**
  * Represents a rectangle in geographical coordinates, including one that
  * crosses the 180 degrees meridian.
  */
-public final class LatLngBounds {
-
-  private static final LatLngBoundsImpl impl = GWT.create(LatLngBoundsImpl.class);
-
-  /**
-   * Wraps an existing GLatLngBounds JavaScriptObject.
-   * 
-   * @param jsoPeer the object to wrap.
-   * @return a new instance of a LatLngBounds object
-   */
-  static LatLngBounds createPeer(JavaScriptObject jsoPeer) {
-    return new LatLngBounds(jsoPeer);
-  }
-
-  private final JavaScriptObject jsoPeer;
+public class LatLngBounds extends JavaScriptObject {
 
   /**
    * Construct a new LatLngBounds object. The bounds will be the maximum for the
    * map.
    */
-  public LatLngBounds() {
-    jsoPeer = impl.construct();
-  }
+  public static native LatLngBounds newInstance() /*-{
+    return new $wnd.GLatLngBounds;
+  }-*/;
 
   /**
    * Construct a new LatLngBounds object by specifying two opposite corners.
@@ -53,31 +37,29 @@ public final class LatLngBounds {
    * @param southWest the south-west corner of the bounds to create.
    * @param northEast the north-east corner of the bounds to create.
    */
-  public LatLngBounds(LatLng southWest, LatLng northEast) {
-    jsoPeer = impl.construct(southWest, northEast);
-  }
+  public static native LatLngBounds newInstance(LatLng southWest,
+      LatLng northEast) /*-{
+    return new $wnd.GLatLngBounds(southWest, northEast);
+  }-*/;
 
-  /**
-   * Create a new LatLngBounds object by wrapping an existing GLatLngBounds
-   * JavaScript object.
-   * 
-   * @param jsoPeer object to wrap.
-   */
-  private LatLngBounds(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+  protected LatLngBounds() {
+    // Protected constructor required for JavaScript overlay
   }
 
   /**
    * Tests the specified point to see if it is contained within the range of
    * this bounds object.
    * 
+   * @deprecated See {@link #containsLatLng(LatLng)}
    * @param coordinate point to compare.
    * @return <code>true</code> if the specified point is contained within the
    *         range of this bounds object.
+   * 
    */
-  public boolean contains(LatLng coordinate) {
-    return impl.contains(jsoPeer, coordinate);
-  }
+  @Deprecated
+  public final native boolean contains(LatLng coordinate) /*-{
+    return this.contains(coordinate);
+  }-*/;
 
   /**
    * Returns <code>true</code> if the passed rectangle is contained within
@@ -87,17 +69,21 @@ public final class LatLngBounds {
    * @return <code>true</code> if the geographical coordinates of the bounds
    *         lie within this rectangle.
    */
-  public boolean containsBounds(LatLngBounds other) {
-    return impl.containsBounds(jsoPeer, other);
-  }
+  public final native boolean containsBounds(LatLngBounds other) /*-{
+    return this.containsBounds(other);
+  }-*/;
 
-  @Override
-  public boolean equals(Object other) {
-    if (other instanceof LatLngBounds) {
-      return impl.equals(jsoPeer, (LatLngBounds) other);
-    }
-    return false;
-  }
+  /**
+   * Returns true iff the geographical coordinates of the point lie within this
+   * rectangle.
+   * 
+   * @param coordinate point to compare
+   * @return <code>true</code> if the geographical coordinates of the point
+   *         lie within this rectangle.
+   */
+  public final native boolean containsLatLng(LatLng coordinate) /*-{
+    return this.containsLatLng(coordinate);
+  }-*/;
 
   /**
    * Returns a new rectangle such that it contains the given point. In longitude
@@ -106,45 +92,37 @@ public final class LatLngBounds {
    * 
    * @param coordinate coordinate to use in creating the new LatLngBounds
    *          object.
-   * @return a new rectangle such that it contains the given point.
    */
-  public LatLngBounds extend(LatLng coordinate) {
-    LatLngBounds extended = new LatLngBounds(getSouthWest(), getNorthEast());
-    impl.extend(extended.jsoPeer, coordinate);
-    return extended;
-  }
+  public final native void extend(LatLng coordinate) /*-{
+    this.extend(coordinate);
+  }-*/;
 
   /**
    * Returns the point at the center of the rectangle.
    * 
    * @return the point at the center of the rectangle.
    */
-  public LatLng getCenter() {
-    return impl.getCenter(jsoPeer);
-  }
+  public final native LatLng getCenter() /*-{
+    return this.getCenter();
+  }-*/;
 
   /**
    * Returns the point at the north-east corner of the rectangle.
    * 
    * @return the point at the north-east corner of the rectangle.
    */
-  public LatLng getNorthEast() {
-    return impl.getNorthEast(jsoPeer);
-  }
+  public final native LatLng getNorthEast() /*-{
+    return this.getNorthEast();
+  }-*/;
 
   /**
    * Returns the point at the south-west corner of the rectangle.
    * 
    * @return the point at the south-west corner of the rectangle.
    */
-  public LatLng getSouthWest() {
-    return impl.getSouthWest(jsoPeer);
-  }
-
-  @Override
-  public int hashCode() {
-    return getNorthEast().hashCode() ^ (37 * getSouthWest().hashCode());
-  }
+  public final native LatLng getSouthWest() /*-{
+    return this.getSouthWest();
+  }-*/;
 
   /**
    * Returns <code>true</code> if the specified rectangle intersects this
@@ -154,18 +132,18 @@ public final class LatLngBounds {
    * @return <code>true</code> if the specified rectangle intersects this
    *         rectangle.
    */
-  public boolean intersects(LatLngBounds other) {
-    return impl.intersects(jsoPeer, other);
-  }
+  public final native boolean intersects(LatLngBounds other) /*-{
+    return this.intersects(other);
+  }-*/;
 
   /**
    * Returns <code>true</code> if this rectangle is empty.
    * 
    * @return <code>true</code> if this rectangle is empty.
    */
-  public boolean isEmpty() {
-    return impl.isEmpty(jsoPeer);
-  }
+  public final native boolean isEmpty() /*-{
+    return this.isEmpty();
+  }-*/;
 
   /**
    * Returns
@@ -175,9 +153,9 @@ public final class LatLngBounds {
    * @return <code>true</code> if this rectangle extends from the south pole to the north
    *         pole.
    */
-  public boolean isFullLatitude() {
-    return impl.isFullLat(jsoPeer);
-  }
+  public final native boolean isFullLatitude() /*-{
+    return this.isFullLat();
+  }-*/;
 
   /**
    * Returns <code>true</code> if this rectangle extends fully around the
@@ -186,16 +164,16 @@ public final class LatLngBounds {
    * @return <code>true</code> if this rectangle extends fully around the
    *         earth in the longitude direction.
    */
-  public boolean isFullLongitude() {
-    return impl.isFullLng(jsoPeer);
-  }
+  public final native boolean isFullLongitude() /*-{
+    return this.isFullLng();
+  }-*/;
 
   /**
    * Returns a LatLng whose coordinates represent the size of this rectangle.
    * 
    * @return a LatLng whose coordinates represent the size of this rectangle.
    */
-  public LatLng toSpan() {
-    return impl.toSpan(jsoPeer);
-  }
+  public final native LatLng toSpan() /*-{
+    return this.toSpan();
+  }-*/;
 }

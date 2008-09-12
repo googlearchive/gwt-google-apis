@@ -50,7 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class GeocoderDemo extends MapsDemo {
 
-  private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);
+  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790, -84.3880580);
 
   private static HTML descHTML = null;
   private static final String descString = "<p>Creates a 500 x 300 pixel map "

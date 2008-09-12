@@ -31,7 +31,6 @@ import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler.Polylin
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.HandlerCollection;
-import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolylineImpl;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
@@ -133,7 +132,7 @@ public final class Polyline extends ConcreteOverlay {
    * @param points An array of points to use as verticies for the Polyline.
    */
   public Polyline(LatLng[] points) {
-    super(PolylineImpl.impl.construct(JsUtil.toJsList(points)));
+    super(PolylineImpl.impl.construct(LatLng.toJsArray(points)));
   }
 
   /**
@@ -144,7 +143,7 @@ public final class Polyline extends ConcreteOverlay {
    *          i.e. #RRGGBB
    */
   public Polyline(LatLng[] points, String color) {
-    super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color));
+    super(PolylineImpl.impl.construct(LatLng.toJsArray(points), color));
   }
 
   /**
@@ -157,7 +156,7 @@ public final class Polyline extends ConcreteOverlay {
    *          0 and 1.
    */
   public Polyline(LatLng[] points, String color, int weight) {
-    super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight));
+    super(PolylineImpl.impl.construct(LatLng.toJsArray(points), color, weight));
   }
 
   /**
@@ -171,7 +170,7 @@ public final class Polyline extends ConcreteOverlay {
    * @param opacity a number between 0 and 1.0 where 1.0 is totally opaque.
    */
   public Polyline(LatLng[] points, String color, int weight, double opacity) {
-    super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight,
+    super(PolylineImpl.impl.construct(LatLng.toJsArray(points), color, weight,
         opacity));
   }
 
@@ -187,7 +186,7 @@ public final class Polyline extends ConcreteOverlay {
    */
   public Polyline(LatLng[] points, String color, int weight, double opacity,
       PolylineOptions options) {
-    super(PolylineImpl.impl.construct(JsUtil.toJsList(points), color, weight,
+    super(PolylineImpl.impl.construct(LatLng.toJsArray(points), color, weight,
         opacity, options));
   }
 

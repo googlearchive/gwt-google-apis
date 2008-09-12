@@ -19,8 +19,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
-import com.google.gwt.maps.client.geocode.Placemark;
-import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.FieldName;
@@ -54,9 +52,6 @@ public final class JsUtil {
     JSList<Integer> asIntegerList(JavaScriptObject jso);
 
     @FieldName("valueOf")
-    JSList<LatLng> asLatLngList(JavaScriptObject jso);
-
-    @FieldName("valueOf")
     JSList<Marker> asMarkerList(JavaScriptObject jso);
 
     @FieldName("valueOf")
@@ -70,14 +65,6 @@ public final class JsUtil {
   }
 
   private static final ListGenerator lists = GWT.create(ListGenerator.class);
-
-  public static native JavaScriptObject asJavaScriptObject(LatLng latlng) /*-{
-    return latlng.@com.google.gwt.maps.client.geom.LatLng::jsoPeer;
-  }-*/;
-
-  public static native JavaScriptObject asJavaScriptObject(Placemark placemark) /*-{
-    return placemark;
-  }-*/;
 
   public static void toArray(JSList<?> list, Object[] array) {
     for (int i = 0; i < array.length; i++) {
@@ -102,12 +89,6 @@ public final class JsUtil {
     for (int i = 0; i < array.length; i++) {
       list.add(new Integer(array[i]));
     }
-    return list;
-  }
-
-  public static JSList<LatLng> toJsList(LatLng[] array) {
-    JSList<LatLng> list = lists.asLatLngList(lists.newArray());
-    list.addAll(Arrays.asList(array));
     return list;
   }
 

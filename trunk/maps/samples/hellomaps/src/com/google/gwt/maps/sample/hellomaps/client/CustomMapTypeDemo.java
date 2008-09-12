@@ -73,12 +73,12 @@ public class CustomMapTypeDemo extends MapsDemo {
     VerticalPanel vertPanel = new VerticalPanel();
     vertPanel.setStyleName("hm-panel");
 
-    map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
     map.setSize("500px", "450px");
 
     CopyrightCollection myCopyright = new CopyrightCollection("");
-    myCopyright.addCopyright(new Copyright(1, new LatLngBounds(new LatLng(34,
-        -81), new LatLng(36, -79)), 10, ""));
+    myCopyright.addCopyright(new Copyright(1, LatLngBounds.newInstance(LatLng.newInstance(34,
+        -81), LatLng.newInstance(36, -79)), 10, ""));
     TileLayer tileLayer = new TileLayer(myCopyright, 10, 18) {
       @Override
       public double getOpacity() {

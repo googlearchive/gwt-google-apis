@@ -32,36 +32,40 @@ public class MapWidgetTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
-   public void gwtSetUp() {
-     TestUtilities.cleanDom();
-   }
+  public void gwtSetUp() {
+    TestUtilities.cleanDom();
+  }
 
   public void testIsBrowserCompatible() {
-    assertTrue("The MAPS api is not compatible with this browser.", Maps.isBrowserCompatible());
+    assertTrue("The MAPS api is not compatible with this browser.",
+        Maps.isBrowserCompatible());
   }
-  
+
   public void testIsLoaded() {
     assertTrue("The MAPS api is not properly loaded.", Maps.isLoaded());
   }
 
   public void testMapWidgetCursors() {
-    MapWidget m = new MapWidget(new LatLng(0, 80), 4, "wait", "help");
+    MapWidget m = new MapWidget(LatLng.newInstance(0, 80), 4, "wait", "help");
     RootPanel.get().add(m);
-    assertEquals("Center didn't match.", m.getCenter(), new LatLng(0,80));
+    assertTrue("Center didn't match.", m.getCenter().isEquals(
+        LatLng.newInstance(0, 80)));
     assertEquals("Zoom level didn't match.", m.getZoomLevel(), 4);
   }
 
   public void testMapWidgetDefault() {
     MapWidget m = new MapWidget();
     RootPanel.get().add(m);
-    assertEquals("Center didn't match.", m.getCenter(), new LatLng(0,0));
-    assertEquals("Zoom level didn't match.", m.getZoomLevel(), 1);    
+    assertTrue("Center didn't match.", m.getCenter().isEquals(
+        LatLng.newInstance(0, 0)));
+    assertEquals("Zoom level didn't match.", m.getZoomLevel(), 1);
   }
 
   public void testMapWidgetLatLngZoom() {
-    MapWidget m = new MapWidget(new LatLng(45, 45), 8);
+    MapWidget m = new MapWidget(LatLng.newInstance(45, 45), 8);
     RootPanel.get().add(m);
-    assertEquals("Center didn't match.", m.getCenter(), new LatLng(45,45));
-    assertEquals("Zoom level didn't match.", m.getZoomLevel(), 8);    
+    assertTrue("Center didn't match.", m.getCenter().isEquals(
+        LatLng.newInstance(45, 45)));
+    assertEquals("Zoom level didn't match.", m.getZoomLevel(), 8);
   }
 }

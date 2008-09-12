@@ -63,7 +63,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
    */
   
   public void testInfoWindowCloseClickTrigger() {
-    final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -83,7 +83,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   }
 
   public void testInfoWindowMaximizeClickEvent() {
-    final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
     map.setSize("300px", "300px");
 
     RootPanel.get().add(map);
@@ -126,7 +126,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // TODO(zundel): JavaScript failure inside maps API. Filed bug w/ maps team.
 
   // public void testInfoWindowMaximizeClickTrigger() {
-  // final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580),
+  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580),
   // 13);
   // map.setSize("300px", "300px");
   //
@@ -152,7 +152,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowMaximizeEndEvent() {
-    final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -184,7 +184,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // TODO(zundel): Javascript failure inside maps API. Filed bug w/ maps team.
 
   // public void testInfoWindowMaximizeEndTrigger() {
-  // final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580),
+  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580),
   // 13);
   // map.setSize("300px", "300px");
   // RootPanel.get().add(map);
@@ -209,7 +209,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowRestoreClickEvent() {
-    final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -241,7 +241,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // TODO(zundel): Javascript failure inside maps API. Filed bug w/ maps team.
 
   // public void testInfoWindowRestoreClickTrigger() {
-  // final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580),
+  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580),
   // 13);
   // map.setSize("300px", "300px");
   // RootPanel.get().add(map);
@@ -266,7 +266,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowRestoreEndEvent() {
-    final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -296,7 +296,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   }
 
   public void testInfoWindowRestoreEndTrigger() {
-    final MapWidget map = new MapWidget(new LatLng(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 

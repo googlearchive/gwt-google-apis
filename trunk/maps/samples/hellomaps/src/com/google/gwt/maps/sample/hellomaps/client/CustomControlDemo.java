@@ -251,7 +251,7 @@ public class CustomControlDemo extends MapsDemo {
     horizPanel.setSpacing(10);
     vertPanel.add(horizPanel);
 
-    map = new MapWidget(new LatLng(37.441944, -122.141944), 13);
+    map = new MapWidget(LatLng.newInstance(37.441944, -122.141944), 13);
     map.setSize("600px", "400px");
     map.addMapType(MapType.getNormalMap());
     map.addMapType(MapType.getSatelliteMap());
