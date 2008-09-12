@@ -33,7 +33,6 @@ import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler.PolygonV
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.HandlerCollection;
-import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.PolygonImpl;
 import com.google.gwt.maps.client.impl.EventImpl.BooleanCallback;
@@ -144,7 +143,7 @@ public final class Polygon extends ConcreteOverlay {
    * @param points the points to construct the polygon.
    */
   public Polygon(LatLng[] points) {
-    super(PolygonImpl.impl.construct(JsUtil.toJsList(points)));
+    super(PolygonImpl.impl.construct(LatLng.toJsArray(points)));
   }
 
   /**
@@ -161,7 +160,7 @@ public final class Polygon extends ConcreteOverlay {
    */
   public Polygon(LatLng[] points, String strokeColor, int strokeWeight,
       double strokeOpacity, String fillColor, double fillOpacity) {
-    super(PolygonImpl.impl.construct(JsUtil.toJsList(points), strokeColor,
+    super(PolygonImpl.impl.construct(LatLng.toJsArray(points), strokeColor,
         strokeWeight, strokeOpacity, fillColor, fillOpacity));
   }
 
@@ -181,7 +180,7 @@ public final class Polygon extends ConcreteOverlay {
   public Polygon(LatLng[] points, String strokeColor, int strokeWeight,
       double strokeOpacity, String fillColor, double fillOpacity,
       PolygonOptions options) {
-    super(PolygonImpl.impl.construct(JsUtil.toJsList(points), strokeColor,
+    super(PolygonImpl.impl.construct(LatLng.toJsArray(points), strokeColor,
         strokeWeight, strokeOpacity, fillColor, fillOpacity, options));
   }
 

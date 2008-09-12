@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.PolyEditingOptions;
@@ -24,7 +25,6 @@ import com.google.gwt.maps.client.overlay.PolyStyleOptions;
 import com.google.gwt.maps.client.overlay.PolygonOptions;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.maps.jsio.client.JSList;
 
 /**
  * Wraps the GPolygon class from the Maps API using JSIO.
@@ -34,15 +34,15 @@ public interface PolygonImpl extends JSFlyweightWrapper {
   PolygonImpl impl = GWT.create(PolygonImpl.class);
 
   @Constructor("$wnd.GPolygon")
-  JavaScriptObject construct(JSList<LatLng> points);
+  JavaScriptObject construct(JsArray<LatLng> points);
 
   @Constructor("$wnd.GPolygon")
-  JavaScriptObject construct(JSList<LatLng> points, String strokeColor,
+  JavaScriptObject construct(JsArray<LatLng> points, String strokeColor,
       int strokeWeight, double strokeOpacity, String fillColor,
       double fillOpacity);
 
   @Constructor("$wnd.GPolygon")
-  JavaScriptObject construct(JSList<LatLng> points, String strokeColor,
+  JavaScriptObject construct(JsArray<LatLng> points, String strokeColor,
       int strokeWeight, double strokeOpacity, String fillColor,
       double fillOpacity, PolygonOptions options);
 

@@ -72,7 +72,7 @@ public class EventDemo extends MapsDemo {
     Panel panel =
         new FlowPanel();
     map =
-        new MapWidget(new LatLng(37.4419, -122.1419), 13);
+        new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     map.addControl(new SmallMapControl());
     panel.add(map);

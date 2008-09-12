@@ -69,7 +69,7 @@ public class GroundOverlayDemo extends MapsDemo {
 
   public GroundOverlayDemo() {
     VerticalPanel vp = new VerticalPanel();
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     vp.add(map);
     vp.setSpacing(10);
     map.setSize("300px", "500px");
@@ -101,9 +101,9 @@ public class GroundOverlayDemo extends MapsDemo {
       double latDelta = (northEast.getLatitude() - southWest.getLatitude()) / 4;
 
       // generate bounds that covers center map with half the width and height
-      LatLngBounds rectBounds = new LatLngBounds(new LatLng(
+      LatLngBounds rectBounds = LatLngBounds.newInstance(LatLng.newInstance(
           southWest.getLatitude() + latDelta, southWest.getLongitude()
-              + lngDelta), new LatLng(northEast.getLatitude() - latDelta,
+              + lngDelta), LatLng.newInstance(northEast.getLatitude() - latDelta,
           northEast.getLongitude() - lngDelta));
       groundOverlay = new GroundOverlay("boot.jpg", rectBounds);
       groundOverlay.addGroundOverlayVisibilityChangedHandler(new GroundOverlayVisibilityChangedHandler() {

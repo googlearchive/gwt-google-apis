@@ -189,7 +189,7 @@ public class MinimumMapVersionTest extends GWTTestCase {
       @Override
       public LatLng fromPixelToLatLng(Point point, int zoomLevel,
           boolean unbounded) {
-        return new LatLng(0, 0);
+        return LatLng.newInstance(0, 0);
       }
 
       @Override

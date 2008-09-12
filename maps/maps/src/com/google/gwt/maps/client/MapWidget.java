@@ -199,7 +199,7 @@ public final class MapWidget extends Composite {
     jsoPeer = MapImpl.impl.construct(getElement(), opts);
     MapImpl.impl.bind(jsoPeer, this);
     if (center == null) {
-      center = new LatLng(0, 0);
+      center = LatLng.newInstance(0, 0);
     }
     setCenter(center, zoomLevel);
   }

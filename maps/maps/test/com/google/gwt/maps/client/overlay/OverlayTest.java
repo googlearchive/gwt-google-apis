@@ -39,7 +39,7 @@ public class OverlayTest extends GWTTestCase {
   }
 
   public void testOverlayZIndex() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     double result1 = Overlay.getZIndex(atlanta.getLatitude());
     assertTrue("expected non-zero value", result1 != 0.0);
     double result2 = Overlay.getZIndex(atlanta.getLatitude() + 1);

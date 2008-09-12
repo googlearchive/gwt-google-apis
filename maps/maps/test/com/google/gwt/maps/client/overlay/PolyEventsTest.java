@@ -71,7 +71,7 @@ public class PolyEventsTest extends GWTTestCase {
   public void testPolylineEndLineTrigger() {
     final MapWidget m = new MapWidget();
     final Polyline polyline = setupPolyline(m);
-    final LatLng testLatLng = new LatLng(31,32);
+    final LatLng testLatLng = LatLng.newInstance(31,32);
     
     m.addOverlay(polyline);
     polyline.setDrawingEnabled();
@@ -108,7 +108,7 @@ public class PolyEventsTest extends GWTTestCase {
   }
 
   private Polyline setupPolyline(MapWidget m) {
-    m.setCenter(new LatLng(37.4569, -122.1569));
+    m.setCenter(LatLng.newInstance(37.4569, -122.1569));
     m.setZoomLevel(8);
 
     LatLng[] polylinePoints = new LatLng[2];

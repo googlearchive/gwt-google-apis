@@ -50,7 +50,7 @@ public class MapsNotInstalledTest extends GWTTestCase {
 
   public void testLatLngNotLoaded() {
     try {
-      LatLng l = new LatLng(45, 45);
+      LatLng l = LatLng.newInstance(45, 45);
       assertNull("did not expect initialization to succeed", l);
       assertTrue("Expected an exception", false);
     } catch (RuntimeException ex) {

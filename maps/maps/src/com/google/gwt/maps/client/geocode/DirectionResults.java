@@ -125,6 +125,7 @@ public final class DirectionResults {
    * 
    * @return the Polyline object associated with the entire directions response.
    */
+  // TODO(zundel): this method fails with a CastClassException from the generated JSIO method DirectionsImplImpl.getPolyline()
   public Polyline getPolyline() {
     return DirectionsImpl.impl.getPolyline(jsoPeer);
   }

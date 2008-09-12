@@ -44,18 +44,18 @@ import java.util.List;
  * {@link "http://code.google.com/apis/maps"}
  */
 public class RoutedDirectionsDemo extends MapsDemo {
-  private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);
+  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790, -84.3880580);
   // Points of interest along the map.
-  private static final LatLng STONE_MOUNTAIN_PARK = new LatLng(
+  private static final LatLng STONE_MOUNTAIN_PARK = LatLng.newInstance(
       33.80653802509606, -84.15252685546875);
   // Cyclorama
-  private static final LatLng CYCLORAMA = new LatLng(33.741185330333956,
+  private static final LatLng CYCLORAMA = LatLng.newInstance(33.741185330333956,
       -84.35834884643555);
   // Georgia Aquarium
-  private static final LatLng GEORGIA_AQUARIUM = new LatLng(33.761443931868925,
+  private static final LatLng GEORGIA_AQUARIUM = LatLng.newInstance(33.761443931868925,
       -84.39432263374329);
   // Underground Atlanta
-  private static final LatLng UNDERGROUND_ATLANTA = new LatLng(
+  private static final LatLng UNDERGROUND_ATLANTA = LatLng.newInstance(
       33.75134645137294, -84.39026713371277);
   // The Dwarf House Restaurant in Hapeville
   private static final String DWARF_HOUSE = "461 N Central Ave Hapeville, GA";

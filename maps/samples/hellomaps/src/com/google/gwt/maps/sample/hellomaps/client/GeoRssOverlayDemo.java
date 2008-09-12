@@ -85,7 +85,7 @@ public class GeoRssOverlayDemo extends MapsDemo {
   public GeoRssOverlayDemo() {
     Panel panel = new FlowPanel();
 
-    map = new MapWidget(new LatLng(49.496675, -102.65625), 3);
+    map = new MapWidget(LatLng.newInstance(49.496675, -102.65625), 3);
     map.setSize("640px", "480px");
     map.addControl(new LargeMapControl());
     panel.add(map);

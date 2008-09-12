@@ -26,6 +26,8 @@ import com.google.gwt.maps.client.control.ControlTest;
 import com.google.gwt.maps.client.geocode.DirectionsTest;
 import com.google.gwt.maps.client.geocode.GeocodeTest;
 import com.google.gwt.maps.client.geom.BoundsTest;
+import com.google.gwt.maps.client.geom.LatLngBoundsTest;
+import com.google.gwt.maps.client.geom.LatLngTest;
 import com.google.gwt.maps.client.geom.ProjectionTest;
 import com.google.gwt.maps.client.impl.MinimumMapVersionTest;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlayTest;
@@ -63,6 +65,8 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(CopyrightEventTest.class);
     suite.addTestSuite(StatusCodesTest.class);
     suite.addTestSuite(PolyEventsTest.class);
+    suite.addTestSuite(LatLngTest.class);
+    suite.addTestSuite(LatLngBoundsTest.class);
     suite.addTestSuite(ProjectionTest.class);
     suite.addTestSuite(BoundsTest.class);
     suite.addTestSuite(MinimumMapVersionTest.class);

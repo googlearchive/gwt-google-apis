@@ -24,7 +24,7 @@ import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * Tests the Overlay class.
+ * Tests the Projection classes.
  */
 public class ProjectionTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
@@ -131,7 +131,7 @@ public class ProjectionTest extends GWTTestCase {
           boolean unbounded) {
         assertNotNull(point);
         assertTrue("zoomLevel > 0", zoomLevel > 0);
-        return new LatLng(45, 45);
+        return LatLng.newInstance(45, 45);
       }
 
       @Override

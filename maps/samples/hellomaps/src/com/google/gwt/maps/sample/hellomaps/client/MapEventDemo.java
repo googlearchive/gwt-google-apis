@@ -155,7 +155,7 @@ public class MapEventDemo extends MapsDemo {
     }
   }
 
-  private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);
+  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790, -84.3880580);
   private static LatLng[] ATLANTA_TRIANGLE1 = new LatLng[4];
   private static LatLng[] ATLANTA_TRIANGLE2 = new LatLng[4];
 
@@ -1222,11 +1222,11 @@ public class MapEventDemo extends MapsDemo {
     double horizGrid = horizDelta / 8.0;
 
     // A triangle pointing north to the west of the center of the map.
-    ATLANTA_TRIANGLE1[0] = new LatLng(center.getLatitude() + vertGrid,
+    ATLANTA_TRIANGLE1[0] = LatLng.newInstance(center.getLatitude() + vertGrid,
         center.getLongitude() - 2 * horizGrid);
-    ATLANTA_TRIANGLE1[1] = new LatLng(center.getLatitude() - vertGrid,
+    ATLANTA_TRIANGLE1[1] = LatLng.newInstance(center.getLatitude() - vertGrid,
         center.getLongitude() - 3 * horizGrid);
-    ATLANTA_TRIANGLE1[2] = new LatLng(center.getLatitude() - vertGrid,
+    ATLANTA_TRIANGLE1[2] = LatLng.newInstance(center.getLatitude() - vertGrid,
         center.getLongitude() - horizGrid);
     ATLANTA_TRIANGLE1[3] = ATLANTA_TRIANGLE1[0];
 
@@ -1236,11 +1236,11 @@ public class MapEventDemo extends MapsDemo {
     GWT.log("1[3] = " + ATLANTA_TRIANGLE1[3], null);
 
     // A triangle pointing south to the east of the center of the map.
-    ATLANTA_TRIANGLE2[0] = new LatLng(center.getLatitude() - vertGrid,
+    ATLANTA_TRIANGLE2[0] = LatLng.newInstance(center.getLatitude() - vertGrid,
         center.getLongitude() + 2 * horizGrid);
-    ATLANTA_TRIANGLE2[1] = new LatLng(center.getLatitude() + vertGrid,
+    ATLANTA_TRIANGLE2[1] = LatLng.newInstance(center.getLatitude() + vertGrid,
         center.getLongitude() + 3 * horizGrid);
-    ATLANTA_TRIANGLE2[2] = new LatLng(center.getLatitude() + vertGrid,
+    ATLANTA_TRIANGLE2[2] = LatLng.newInstance(center.getLatitude() + vertGrid,
         center.getLongitude() + horizGrid);
     ATLANTA_TRIANGLE2[3] = ATLANTA_TRIANGLE2[0];
 

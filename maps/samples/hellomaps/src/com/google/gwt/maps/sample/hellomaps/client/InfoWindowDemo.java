@@ -39,7 +39,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class InfoWindowDemo extends MapsDemo {
 
-  private static final LatLng ATLANTA = new LatLng(33.7814790, -84.3880580);
+  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790, -84.3880580);
   private static HTML descHTML = null;
   private static final String TEST_DEFAULT = "Default Info Window";
   private static final String TEST_IMAGE = "Test adding an Image";

@@ -259,7 +259,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
   public void testMapAddOverlayEvent() {
     final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
     m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
 
       public void onAddOverlay(MapAddOverlayEvent event) {
@@ -276,7 +276,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
   public void testMapAddOverlayTrigger() {
     final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
     m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
 
       public void onAddOverlay(MapAddOverlayEvent event) {
@@ -298,7 +298,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
    */
   public void testMapClearOverlayEvent() {
     final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
     m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
 
       public void onClearOverlays(MapClearOverlaysEvent event) {
@@ -315,7 +315,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
   public void testMapClearOverlayTrigger() {
     final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
     m.addOverlay(marker);
     m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
 
@@ -355,8 +355,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    Marker marker = new Marker(new LatLng(12.34, -22.2));
-    MapClickEvent e = new MapClickEvent(m, marker, new LatLng(10.1, 12.2));
+    Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
+    MapClickEvent e = new MapClickEvent(m, marker, LatLng.newInstance(10.1, 12.2));
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
@@ -380,7 +380,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    MapDoubleClickEvent e = new MapDoubleClickEvent(m, new LatLng(10.1, 12.2));
+    MapDoubleClickEvent e = new MapDoubleClickEvent(m, LatLng.newInstance(10.1, 12.2));
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
@@ -454,7 +454,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
    */
   public void testMapMouseMoveTrigger() {
     final MapWidget m = new MapWidget();
-    final LatLng latlng = new LatLng(1.0, 2.0);
+    final LatLng latlng = LatLng.newInstance(1.0, 2.0);
 
     m.addMapMouseMoveHandler(new MapMouseMoveHandler() {
 
@@ -477,7 +477,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
    */
   public void testMapMouseOutTrigger() {
     final MapWidget m = new MapWidget();
-    final LatLng latlng = new LatLng(1.0, 2.0);
+    final LatLng latlng = LatLng.newInstance(1.0, 2.0);
 
     m.addMapMouseOutHandler(new MapMouseOutHandler() {
 
@@ -502,7 +502,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
    */
   public void testMapMouseOverTrigger() {
     final MapWidget m = new MapWidget();
-    final LatLng latlng = new LatLng(1.0, 2.0);
+    final LatLng latlng = LatLng.newInstance(1.0, 2.0);
 
     m.addMapMouseOverHandler(new MapMouseOverHandler() {
 
@@ -522,7 +522,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
   }
 
   public void testMapMoveEndEvent() {
-    final LatLng end = new LatLng(37.4569, -122.1569);
+    final LatLng end = LatLng.newInstance(37.4569, -122.1569);
     final MapWidget m = new MapWidget();
 
     /*
@@ -546,8 +546,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
   public void testMapMoveStartEvent() {
 
-    final LatLng start = new LatLng(37.4419, -122.1419);
-    final LatLng end = new LatLng(37.45, -122.15);
+    final LatLng start = LatLng.newInstance(37.4419, -122.1419);
+    final LatLng end = LatLng.newInstance(37.45, -122.15);
 
     final MapWidget m = new MapWidget(start, 13);
 
@@ -599,8 +599,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
   }
 
   public void testMapMoveEvent() {
-    final LatLng start = new LatLng(37.4419, -122.1419);
-    final LatLng end = new LatLng(37.4569, -122.1569);
+    final LatLng start = LatLng.newInstance(37.4419, -122.1419);
+    final LatLng end = LatLng.newInstance(37.4569, -122.1569);
 
     final MapWidget m = new MapWidget(start, 13);
 
@@ -706,7 +706,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
    */
   public void testMapRemoveOverlayEvent() {
     final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
     m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
 
       public void onRemoveOverlay(MapRemoveOverlayEvent event) {
@@ -725,7 +725,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
   public void testMapRemoveOverlayTrigger() {
 
     final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(new LatLng(0.0, 0.0));
+    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
     m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
 
       public void onRemoveOverlay(MapRemoveOverlayEvent event) {
@@ -766,7 +766,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    Marker marker = new Marker(new LatLng(12.34, -22.2));
+    Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
     MapRightClickEvent e = new MapRightClickEvent(m, Point.newInstance(101, 222),
         m.getElement(), marker);
     delayTestFinish(ASYNC_DELAY_MSEC);
@@ -775,7 +775,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
   public void testMapZoomEndEvent() {
 
-    final MapWidget m = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    final MapWidget m = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
 
     m.addMapZoomEndHandler(new MapZoomEndHandler() {
 

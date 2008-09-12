@@ -15,44 +15,15 @@
  */
 package com.google.gwt.maps.client.geom;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.Maps;
-import com.google.gwt.maps.client.impl.LatLngImpl;
-import com.google.gwt.maps.jsio.client.impl.Extractor;
+import com.google.gwt.core.client.JsArray;
 
 /**
  * A geographical point represented by a latitude and a longitude.
  * 
  * Instances of this class are immutable.
  */
-public final class LatLng {
-
-  // TODO: DELETE ME! (needs to function w/o)
-  @SuppressWarnings("unused")
-  private static final Extractor<LatLng> __extractor = new Extractor<LatLng>() {
-    public LatLng fromJS(JavaScriptObject jso) {
-      return createPeer(jso);
-    }
-
-    public JavaScriptObject toJS(LatLng o) {
-      return o.jsoPeer;
-    }
-  };
-
-  private static final LatLngImpl impl = GWT.create(LatLngImpl.class);
-
-  /**
-   * Wrap an existing GLatLng.
-   * 
-   * @param jso the object to wrap
-   * @return a newly created LatLng that wraps the GLatLng JavaScript object.
-   */
-  static LatLng createPeer(JavaScriptObject jso) {
-    return new LatLng(jso);
-  }
-
-  private final JavaScriptObject jsoPeer;
+public class LatLng extends JavaScriptObject {
 
   /**
    * Create a new point. latitude will be clamped to lie between -90 degrees and
@@ -62,10 +33,10 @@ public final class LatLng {
    * @param latitude value between -90 and +90 degrees (clamped)
    * @param longitude value between -180 and +180 degrees (wrapped)
    */
-  public LatLng(double latitude, double longitude) {
-    Maps.assertLoaded();
-    jsoPeer = impl.construct(latitude, longitude);
-  }
+  public static native LatLng newInstance(double latitude, double longitude) /*-{
+    @com.google.gwt.maps.client.Maps::assertLoaded()();
+    return new $wnd.GLatLng(latitude, longitude);
+  }-*/;
 
   /**
    * Create a new point. latitude will be clamped to lie between -90 degrees and
@@ -74,42 +45,63 @@ public final class LatLng {
    * 
    * @param latitude value between -90 and +90 degrees (clamped)
    * @param longitude value between -180 and +180 degrees (wrapped)
-   * @param unbounded if <code>true</code>, then numbers will not be wrapped or clamped.
+   * @param unbounded if <code>true</code>, then numbers will not be wrapped
+   *          or clamped.
    */
-  public LatLng(double latitude, double longitude, boolean unbounded) {
-    Maps.assertLoaded();
-    jsoPeer = impl.construct(latitude, longitude, unbounded);
-  }
+  public static native LatLng newInstance(double latitude, double longitude,
+      boolean unbounded) /*-{
+    @com.google.gwt.maps.client.Maps::assertLoaded()();
+    return new $wnd.GLatLng(latitude, longitude, unbounded);
+  }-*/;
 
   /**
-   * Create a new object from an existing java script object.
-   * @param jso object to wrap.
+   * Convenience routine for creating a JsArray from Java array of LatLng values.
+   * 
+   * @param points A Java array of LatLng values
+   * @return A JavaScript array of LatLng values
    */
-  private LatLng(JavaScriptObject jso) {
-    Maps.assertLoaded();
-    this.jsoPeer = jso;
+  @SuppressWarnings("unchecked")
+  public static JsArray<LatLng> toJsArray(LatLng[] points) {
+    JsArray<LatLng> result = (JsArray<LatLng>) createArray();
+    for (int i = 0; i < points.length; i++) {
+      result.set(i, points[i]);
+    }
+    return result;
   }
+
+  protected LatLng() {
+    // Protected constructor required for JavaScript overlays.
+  }
+  
+  /**
+   * Returns the distance from another LatLng in meters.
+   * 
+   * By default, this distance is calculated given the default equatorial earth
+   * radius of 6378137 meters. This measurement can be off by as much as 0.3%
+   * since the Earth is approximated as a sphere. See
+   * {@link #distanceFrom(LatLng, double)}.
+   * 
+   * @param other point to measure distance to
+   * @return the distance computed between the two points
+   */
+  public final native double distanceFrom(LatLng other) /*-{
+    return this.distanceFrom(other);
+  }-*/;
 
   /**
    * Returns the distance from another LatLng in meters.
    * 
-   * This measurement can be off by as much as 0.3% since the Earth is
-   * approximated as a sphere.
+   * By default, this distance is calculated given the default equatorial earth
+   * radius of 6378137 meters. The earth is approximated as a sphere, hence the
+   * distance could be off as much as 0.3%, especially in the polar extremes.
    * 
-   * @param other
+   * @param other point to measure distance to
+   * @param radius alternative radius value to use.
    * @return the distance computed between the two points
    */
-  public double distanceFrom(LatLng other) {
-    return impl.distanceFrom(jsoPeer, other);
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other instanceof LatLng) {
-      return impl.equals(jsoPeer, (LatLng) other);
-    }
-    return false;
-  }
+  public final native double distanceFrom(LatLng other, double radius) /*-{
+    return this.distanceFrom(other, radius);
+  }-*/;
 
   /**
    * Returns the latitude coordinate of this point in degrees as a number
@@ -117,9 +109,9 @@ public final class LatLng {
    * 
    * @return the latitude coordinate of this point in degrees.
    */
-  public double getLatitude() {
-    return impl.lat(jsoPeer);
-  }
+  public final native double getLatitude() /*-{
+    return this.lat();
+  }-*/;
 
   /**
    * Returns the latitude coordinate of this point in radians as a number
@@ -127,19 +119,19 @@ public final class LatLng {
    * 
    * @return the latitude coordinate of this point in radians
    */
-  public double getLatitudeRadians() {
-    return impl.latRadians(jsoPeer);
-  }
-
+  public final native double getLatitudeRadians() /*-{
+    return this.latRadians();
+  }-*/;
+  
   /**
    * Returns the longitude coordinate of this point in degrees as a number
    * between -180 and 180.
    * 
    * @return the longitude coordinate of this point in degrees.
    */
-  public double getLongitude() {
-    return impl.lng(jsoPeer);
-  }
+  public final native double getLongitude() /*-{
+    return this.lng();
+  }-*/;
 
   /**
    * Returns the longitude coordinate of this point in radians as a number
@@ -147,20 +139,28 @@ public final class LatLng {
    * 
    * @return the longitude coordinate of this point in degrees.
    */
-  public double getLongitudeRadians() {
-    return impl.lngRadians(jsoPeer);
-  }
+  public final native double getLongitudeRadians() /*-{
+    return this.lngRadians();
+  }-*/;
 
-  @Override
-  public int hashCode() {
-    return ((int) getLatitude() * 1000000)
-        ^ (19 * (int) getLongitude() * 1000000);
-  }
+  /**
+   * Does what equals() ought to do, but we are constrained by the JS overlay rules.
+   * @param other a point to compare
+   * @return <code>true</code> if the latitude and longitude match.
+   */
+  public final native boolean isEquals(LatLng other) /*-{
+     return this.equals(other);
+  }-*/;
 
-  @Override
-  public String toString() {
-    return impl.toString(jsoPeer);
-  }
+  /**
+   * Returns a string that represents this point in a format suitable for use as
+   * a URL parameter value.
+   * 
+   * @return a URL-safe string that represents this point
+   */
+  public final native String toUrlValue() /*-{
+    return this.toUrlValue();
+  }-*/;
 
   /**
    * Returns a string that represents this point in a format suitable for use as
@@ -172,7 +172,7 @@ public final class LatLng {
    * @param precision the precision in number of digits
    * @return a URL-safe string that represents this point
    */
-  public String toUrlValue(int precision) {
-    return impl.toUrlValue(jsoPeer, precision);
-  }
+  public final native String toUrlValue(int precision) /*-{
+    return this.toUrlValue(precision);
+  }-*/;
 }

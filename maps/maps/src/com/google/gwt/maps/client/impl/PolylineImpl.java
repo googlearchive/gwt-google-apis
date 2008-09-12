@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.PolyEditingOptions;
@@ -24,7 +25,6 @@ import com.google.gwt.maps.client.overlay.PolyStyleOptions;
 import com.google.gwt.maps.client.overlay.PolylineOptions;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.maps.jsio.client.JSList;
 
 /**
  * Implementation of the GPolyline class using JSIO.
@@ -34,20 +34,20 @@ public interface PolylineImpl extends JSFlyweightWrapper {
   PolylineImpl impl = GWT.create(PolylineImpl.class);
 
   @Constructor("$wnd.GPolyline")
-  JavaScriptObject construct(JSList<LatLng> points);
+  JavaScriptObject construct(JsArray<LatLng> points);
 
   @Constructor("$wnd.GPolyline")
-  JavaScriptObject construct(JSList<LatLng> points, String color);
+  JavaScriptObject construct(JsArray<LatLng> points, String color);
 
   @Constructor("$wnd.GPolyline")
-  JavaScriptObject construct(JSList<LatLng> points, String color, int weight);
+  JavaScriptObject construct(JsArray<LatLng> points, String color, int weight);
 
   @Constructor("$wnd.GPolyline")
-  JavaScriptObject construct(JSList<LatLng> points, String color, int weight,
+  JavaScriptObject construct(JsArray<LatLng> points, String color, int weight,
       double opacity);
 
   @Constructor("$wnd.GPolyline")
-  JavaScriptObject construct(JSList<LatLng> points, String color, int weight,
+  JavaScriptObject construct(JsArray<LatLng> points, String color, int weight,
       double opacity, PolylineOptions options);
   
   void deleteVertex(JavaScriptObject jsoPeer, int index);

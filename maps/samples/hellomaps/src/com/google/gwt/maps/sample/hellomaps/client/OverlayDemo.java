@@ -134,7 +134,7 @@ public class OverlayDemo extends MapsDemo {
 
     vertPanel.add(horizPanel);
 
-    map = new MapWidget(new LatLng(37.4419, -122.1419), 13);
+    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
@@ -161,7 +161,7 @@ public class OverlayDemo extends MapsDemo {
     LatLng[] points = new LatLng[NUM_POINTS];
 
     for (int i = 0; i < NUM_POINTS; i++) {
-      points[i] = new LatLng(southWest.getLatitude() + latSpan * Math.random(),
+      points[i] = LatLng.newInstance(southWest.getLatitude() + latSpan * Math.random(),
           southWest.getLongitude() + lngSpan * Math.random());
       GWT.log("points[" + i + "] = " + points[i] + " z-index = "
           + Marker.getZIndex(points[i].getLatitude()), null);
@@ -198,17 +198,17 @@ public class OverlayDemo extends MapsDemo {
 
       case TEST_POLYLINE_ENCODED: {
         // Add a polyline encoded in a string
-        map.setCenter(new LatLng(40.71213418976525, -73.96785736083984), 15);
+        map.setCenter(LatLng.newInstance(40.71213418976525, -73.96785736083984), 15);
         Polyline pline = Polyline.fromEncoded("#3333cc", 10, 1.0,
             ENCODED_POINTS, 32, ENCODED_LEVELS, 4);
         map.addOverlay(pline);
       }
         break;
       case TEST_POLYLINE_GEODESIC: {
-        LatLng nycToZurich[] = {new LatLng(40.75, -73.90), // New York
-            new LatLng(47.3, 8.5) // Zurich
+        LatLng nycToZurich[] = {LatLng.newInstance(40.75, -73.90), // New York
+            LatLng.newInstance(47.3, 8.5) // Zurich
         };
-        map.setCenter(new LatLng(40, -25), 2);
+        map.setCenter(LatLng.newInstance(40, -25), 2);
         Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
             PolylineOptions.newInstance(false, true));
         map.addOverlay(pline);
@@ -216,7 +216,7 @@ public class OverlayDemo extends MapsDemo {
         break;
       case TEST_POLYLINE_TRANSPARENT: {
         // Add a polyline with transparency
-        map.setCenter(new LatLng(40.71213418976525, -73.96785736083984), 15);
+        map.setCenter(LatLng.newInstance(40.71213418976525, -73.96785736083984), 15);
         Polyline pline = Polyline.fromEncoded(ENCODED_POINTS, 32,
             ENCODED_LEVELS, 4);
         map.addOverlay(pline);
@@ -225,7 +225,7 @@ public class OverlayDemo extends MapsDemo {
 
       case TEST_POLYGON_ENCODED: {
         // Add a polygon encoded as a series of polylines.
-        map.setCenter(new LatLng(33.75951619957536, -84.39289301633835), 20);
+        map.setCenter(LatLng.newInstance(33.75951619957536, -84.39289301633835), 20);
         EncodedPolyline[] polylines = new EncodedPolyline[2];
         polylines[0] = EncodedPolyline.newInstance("au`mEz_bbO?sAbA@?pAcA?", 2,
             "BBBBB", 1, "#ff0000", 2, 0.9);

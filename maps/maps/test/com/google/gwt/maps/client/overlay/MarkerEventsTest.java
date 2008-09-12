@@ -76,7 +76,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerClickTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -98,7 +98,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerDoubleClickTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -117,7 +117,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerDragEndTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -136,7 +136,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerDragStartTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -155,7 +155,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerDragTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -174,7 +174,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
   
   public void testMarkerInfoWindowBeforeCloseEvent() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -205,7 +205,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
   
   public void testMarkerInfoWindowBeforeCloseTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -225,7 +225,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
   
   public void testMarkerInfoWindowCloseEvent() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -254,7 +254,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
   
   public void testMarkerInfoWindowCloseTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -273,7 +273,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
   
   public void testMarkerInfoWindowOpenEvent() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
 
@@ -296,7 +296,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerInfoWindowOpenTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -315,7 +315,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerMouseDownTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -334,7 +334,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerMouseOutTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -353,7 +353,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerMouseOverTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -372,7 +372,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerMouseUpTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -391,7 +391,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerRemoveEvent() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -409,7 +409,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
   
   public void testMarkerRemoveTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -428,7 +428,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
 
   public void testMarkerVisibilityChangedEvent() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
@@ -448,7 +448,7 @@ public class MarkerEventsTest extends GWTTestCase {
   }
   
   public void testMarkerVisibilityChangedTrigger() {
-    LatLng atlanta = new LatLng(33.7814790, -84.3880580);
+    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     final MapWidget map = new MapWidget(atlanta, 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);

@@ -103,7 +103,7 @@ public final class Placemark extends JavaScriptObject {
    * @return the point corresponding to the decoded address.
    */
   public LatLng getPoint() {
-    return new LatLng(nativeGetLat(), nativeGetLng());
+    return LatLng.newInstance(nativeGetLat(), nativeGetLng());
   }
 
   /**

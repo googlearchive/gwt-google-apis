@@ -131,7 +131,7 @@ public class Geocoder2Demo extends MapsDemo {
     });
     panel.add(form);
 
-    map = new MapWidget(new LatLng(34, 0), 1);
+    map = new MapWidget(LatLng.newInstance(34, 0), 1);
     map.setSize("100%", "480px");
     panel.add(map);
 

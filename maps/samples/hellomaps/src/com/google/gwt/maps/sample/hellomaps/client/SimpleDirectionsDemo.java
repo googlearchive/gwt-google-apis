@@ -137,7 +137,7 @@ public class SimpleDirectionsDemo extends MapsDemo {
     grid.getCellFormatter().setWidth(0, 1, "24%");
     grid.getCellFormatter().setVerticalAlignment(0, 1,
         HasVerticalAlignment.ALIGN_TOP);
-    map = new MapWidget(new LatLng(42.351505, -71.094455), 15);
+    map = new MapWidget(LatLng.newInstance(42.351505, -71.094455), 15);
     map.setHeight("480px");
     grid.setWidget(0, 0, map);
     DirectionsPanel directionsPanel = new DirectionsPanel();

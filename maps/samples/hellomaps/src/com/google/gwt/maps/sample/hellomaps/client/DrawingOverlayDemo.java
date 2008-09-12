@@ -89,7 +89,7 @@ public class DrawingOverlayDemo extends MapsDemo {
   public DrawingOverlayDemo() {
 
     // Go to Paris
-    map = new MapWidget(new LatLng(48.859068, 2.344894), 12);
+    map = new MapWidget(LatLng.newInstance(48.859068, 2.344894), 12);
     map.setSize("500px", "400px");
 
     VerticalPanel panel = new VerticalPanel();
@@ -262,7 +262,9 @@ public class DrawingOverlayDemo extends MapsDemo {
     weightBox.addChangeListener(new ChangeListener() {
       public void onChange(Widget sender) {
         String val = weightBox.getItemText(weightBox.getSelectedIndex());
-        weight = Integer.parseInt(val.replace(" pixels", ""));
+        val = val.replace(" pixel","");
+        val = val.replace("s","");
+        weight = Integer.parseInt(val);
       }
     });
     grid.setWidget(1, 1, weightBox);
@@ -277,7 +279,7 @@ public class DrawingOverlayDemo extends MapsDemo {
     colorBox.addItem("#FF00FF violet");
     colorBox.addChangeListener(new ChangeListener() {
       public void onChange(Widget sender) {
-        color = colorBox.getItemText(colorBox.getSelectedIndex());
+        color = colorBox.getItemText(colorBox.getSelectedIndex()).substring(0,7);
       }
     });
     grid.setWidget(1, 2, colorBox);
@@ -296,8 +298,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     Button addPolylineButton = new Button("Make Polyline");
     addPolylineButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
-        message1.setText("Opacity=" + opacity + " color=" + color + "weight="
-            + weight + "polygon = " + makePolygon + "Center=" + map.getCenter()
+        message1.setText("opacity=" + opacity + " color=" + color + " weight="
+            + weight + " polygon=" + makePolygon + " center=" + map.getCenter()
             + " zoom=" + map.getZoomLevel());
         addPolyDialog.hide();
         createPolyline();
