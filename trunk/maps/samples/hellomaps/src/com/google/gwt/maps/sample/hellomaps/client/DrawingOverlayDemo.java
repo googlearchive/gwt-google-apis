@@ -175,16 +175,16 @@ public class DrawingOverlayDemo extends MapsDemo {
     if (lastPolygon == null) {
       return;
     }
-    // allow up to 10 verticies to exist in the polygon.
-    lastPolygon.setEditingEnabled(new PolyEditingOptions(10));
+    // allow up to 10 vertices to exist in the polygon.
+    lastPolygon.setEditingEnabled(PolyEditingOptions.newInstance(10));
   }
 
   private void editPolyline() {
     if (lastPolyline == null) {
       return;
     }
-    // allow up to 10 verticies to exist in the line.
-    lastPolyline.setEditingEnabled(new PolyEditingOptions(10));
+    // allow up to 10 vertices to exist in the line.
+    lastPolyline.setEditingEnabled(PolyEditingOptions.newInstance(10));
   }
 
   /**

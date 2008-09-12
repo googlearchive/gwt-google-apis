@@ -283,9 +283,10 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   /**
-   * This event is fired when the polygon is clicked. Note that this event also+   * subsequently triggers a "click" event on the map, where the polygon is
+   * This event is fired when the polygon is clicked. Note that this event also
+   * subsequently triggers a "click" event on the map, where the polygon is
    * passed as the overlay argument within that event
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addPolygonVisibilityChangedHandler(
@@ -420,11 +421,12 @@ public final class Polygon extends ConcreteOverlay {
       polygonRemoveHandlers.removeHandler(handler);
     }
   }
-  
+
   /**
    * Removes a single handler of this map previously added with
-   * {@link Polygon#addPolygonVisibilityChangedHandler(PolygonVisibilityChangedHandler)}.
-   *
+   * {@link Polygon#addPolygonVisibilityChangedHandler(PolygonVisibilityChangedHandler)}
+   * .
+   * 
    * @param handler the handler to remove
    */
   public void removePolygonVisibilityChangedHandler(
@@ -468,11 +470,15 @@ public final class Polygon extends ConcreteOverlay {
    * Allows modification of an existing {@link Polygon} chain of points. When
    * enabled, users may select and drag existing vertices. Unless a vertex limit
    * less than current number of vertices is specified by
-   * {@link PolyEditingOptions#setMaxVertices(int)}, "ghost" points will also
-   * be added at the midpoints of polyline sections, allowing users to
-   * interpolate new vertices by clicking and dragging these additional
-   * vertices. A {@link PolygonLineUpdatedEvent} event will be triggered
-   * whenever vertex is added or moved.
+   * {@link PolyEditingOptions#setMaxVertices(int)}, "ghost" points will also be
+   * added at the midpoints of polyline sections, allowing users to interpolate
+   * new vertices by clicking and dragging these additional vertices. A
+   * {@link PolygonLineUpdatedEvent} event will be triggered whenever vertex is
+   * added or moved.
+   * 
+   * Note, you must add the polyline to the map before enabling editing.
+   * 
+   * @param enabled <code>true</code> to turn on editing of this polyline.
    */
   public void setEditingEnabled(boolean enabled) {
     if (enabled) {
@@ -486,6 +492,8 @@ public final class Polygon extends ConcreteOverlay {
    * Enable editing as in {@link Polygon#setEditingEnabled(boolean)}, but with
    * control over the drawing parameters.
    * 
+   * Note, you must add the polyline to the map before enabling editing.
+   * 
    * @param opts parameters for the editing session.
    */
   public void setEditingEnabled(PolyEditingOptions opts) {
@@ -493,7 +501,7 @@ public final class Polygon extends ConcreteOverlay {
   }
 
   /**
-   * Changes the style of the polylgon fill. The {@link Polygon} must already be
+   * Changes the style of the polygon fill. The {@link Polygon} must already be
    * added to the map via
    * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
    * 
@@ -516,14 +524,14 @@ public final class Polygon extends ConcreteOverlay {
 
   /**
    * Show or hide the polygon.
-   *
+   * 
    * @param visible true to show the polygon.
    */
   public void setVisible(boolean visible) {
     if (visible) {
       PolygonImpl.impl.show(jsoPeer);
     } else {
-       PolygonImpl.impl.hide(jsoPeer);
+      PolygonImpl.impl.hide(jsoPeer);
     }
   }
 
@@ -534,7 +542,7 @@ public final class Polygon extends ConcreteOverlay {
    * @return true if setVisible(<code>false</code>) is supported.
    */
   public boolean supportsHide() {
-   return PolygonImpl.impl.supportsHide(jsoPeer);
+    return PolygonImpl.impl.supportsHide(jsoPeer);
   }
 
   /**
@@ -596,12 +604,12 @@ public final class Polygon extends ConcreteOverlay {
     maybeInitPolygonLineUpdatedHandlers();
     polygonLineUpdatedHandlers.trigger();
   }
-  
+
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(PolygonVisibilityChangedEvent event) {
@@ -655,7 +663,7 @@ public final class Polygon extends ConcreteOverlay {
           jsoPeer, MapEvent.REMOVE);
     }
   }
-  
+
   private void maybeInitPolygonVisibilityChangedHandlers() {
     if (polygonVisibilityChangedHandlers == null) {
       polygonVisibilityChangedHandlers = new HandlerCollection<PolygonVisibilityChangedHandler>(

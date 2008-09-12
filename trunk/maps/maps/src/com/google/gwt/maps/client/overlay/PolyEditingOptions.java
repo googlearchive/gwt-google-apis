@@ -16,20 +16,18 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.impl.PolyEditingOptionsImpl;
 
 /**
- * Options to pass to the {@link Polyline} editing routines.
+ * Options to pass to the {@link Polyline#setDrawingEnabled()} editing routines.
  */
-public class PolyEditingOptions {
-
-  private final JavaScriptObject jsoPeer;
+public class PolyEditingOptions extends JavaScriptObject {
 
   /**
-   * Create a {@link PolyEditingOptions} object using defaults.
+   * Create a new {@link PolyEditingOptions} object. 
+   * @return a new {@link PolyEditingOptions} object.
    */
-  public PolyEditingOptions() {
-    jsoPeer = PolyEditingOptionsImpl.impl.construct();
+  public static PolyEditingOptions newInstance() {
+    return (PolyEditingOptions) createObject();
   }
 
   /**
@@ -38,38 +36,51 @@ public class PolyEditingOptions {
    * @param fromStart specifies whether {@link Polyline#setDrawingEnabled()}
    *          should add points from the start rather than from the end, which
    *          is the default.
+   * @return a new {@link PolyEditingOptions} object.
    */
-  public PolyEditingOptions(boolean fromStart) {
-    this();
-    setFromStart(fromStart);
-  }
+  public static native PolyEditingOptions newInstance(boolean fromStart) /*-{
+    return {"fromStart":fromStart};
+  }-*/;
 
   /**
    * Create a {@link PolyEditingOptions} object.
    * 
-   * @param maxVerticies specifies the maximum number of vertices permitted for
+   * @param maxVertices specifies the maximum number of vertices permitted for
    *          this polyline. Once this number is reached, no more may be added
+   * @return a new {@link PolyEditingOptions} object.
    */
-  public PolyEditingOptions(int maxVerticies) {
-    this();
-    setMaxVertices(maxVerticies);
-  }
+  public static native PolyEditingOptions newInstance(int maxVertices) /*-{
+    return {"maxVertices":maxVertices};
+  }-*/;
+  
+  /**
+   * Create a {@link PolyEditingOptions} object.
+   * 
+   * @param fromStart specifies whether {@link Polyline#setDrawingEnabled()}
+   *          should add points from the start rather than from the end, which
+   *          is the default.
+   * @param maxVertices specifies the maximum number of vertices permitted for
+   *          this polyline. Once this number is reached, no more may be added
+   * @return a new {@link PolyEditingOptions} object.
+   */
+  public static native PolyEditingOptions newInstance(int maxVertices, boolean fromStart) /*-{
+    return {"fromStart":fromStart, "maxVertices":maxVertices};
+  }-*/;
 
-  public PolyEditingOptions(int maxVerticies, boolean fromStart) {
-    this();
-    setMaxVertices(maxVerticies);
-    setFromStart(fromStart);
+  protected PolyEditingOptions() {
+    // Protected constructor required for JavaScript overlays.
   }
-
   /**
    * This property specifies whether enableDrawing should add points from the
    * start rather than from the end, which is the default.
    * 
-   * @param fromStart
+   * @param fromStart specifies whether {@link Polyline#setDrawingEnabled()}
+   *          should add points from the start rather than from the end, which
+   *          is the default.
    */
-  public void setFromStart(boolean fromStart) {
-    PolyEditingOptionsImpl.impl.setFromStart(jsoPeer, fromStart);
-  }
+  public final native void setFromStart(boolean fromStart) /*-{
+    this.fromStart = fromStart;
+  }-*/;
 
   /**
    * This property specifies the maximum number of vertices permitted for this
@@ -77,7 +88,7 @@ public class PolyEditingOptions {
    * 
    * @param maxVertices the maximum number of vertices permitted.
    */
-  public void setMaxVertices(int maxVertices) {
-    PolyEditingOptionsImpl.impl.setMaxVertices(jsoPeer, maxVertices);
-  }
+  public final native void setMaxVertices(int maxVertices) /*-{
+    this.maxVertices = maxVertices;
+  }-*/;
 }

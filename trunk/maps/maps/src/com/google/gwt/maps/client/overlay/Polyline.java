@@ -489,11 +489,15 @@ public final class Polyline extends ConcreteOverlay {
    * Allows modification of an existing {@link Polyline} chain of points. When
    * enabled, users may select and drag existing vertices. Unless a vertex limit
    * less than current number of vertices is specified by
-   * {@link PolyEditingOptions#setMaxVertices(int)}, "ghost" points will also
-   * be added at the midpoints of polyline sections, allowing users to
-   * interpolate new vertices by clicking and dragging these additional
-   * vertices. A {@link PolylineLineUpdatedEvent} event will be triggered
-   * whenever vertex is added or moved.
+   * {@link PolyEditingOptions#setMaxVertices(int)}, "ghost" points will also be
+   * added at the midpoints of polyline sections, allowing users to interpolate
+   * new vertices by clicking and dragging these additional vertices. A
+   * {@link PolylineLineUpdatedEvent} event will be triggered whenever vertex is
+   * added or moved.
+   * 
+   * Note, you must add the polyline to the map before enabling editing.
+   * 
+   * @param enabled <code>true</code> to turn on editing of this polyline.
    */
   public void setEditingEnabled(boolean enabled) {
     if (enabled) {
@@ -506,6 +510,8 @@ public final class Polyline extends ConcreteOverlay {
   /**
    * Enable editing as in {@link Polyline#setEditingEnabled(boolean)}, but with
    * control over the polyline drawing parameters.
+   * 
+   * Note, you must add the polyline to the map before enabling editing.
    * 
    * @param opts parameters for the polyline editing session.
    */
