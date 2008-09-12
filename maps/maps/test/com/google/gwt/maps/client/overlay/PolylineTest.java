@@ -74,6 +74,18 @@ public class PolylineTest extends GWTTestCase {
     RootPanel.get().add(map);
   }
 
+  public void testPolylineEditingOptions() {
+    PolyEditingOptions opts;
+    opts = PolyEditingOptions.newInstance();
+    assertNotNull(opts);
+    opts = PolyEditingOptions.newInstance(true);
+    assertNotNull(opts);
+    opts = PolyEditingOptions.newInstance(100);
+    assertNotNull(opts);
+    opts = PolyEditingOptions.newInstance(100, true);
+    assertNotNull(opts);
+  }
+
   /**
    * Tests the fromEncoded() methods.
    */
@@ -152,6 +164,49 @@ public class PolylineTest extends GWTTestCase {
     Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
         PolylineOptions.newInstance(false, true));
     map.addOverlay(pline);
+    RootPanel.get().add(map);
+  }
+
+  /**
+   * Test the setEditngEnabled() method.
+   */
+  public void testPolylineSetEditingOptions() {
+    MapWidget map = new MapWidget(new LatLng(0, 0), 3);
+    map.setSize("500px", "400px");
+
+    LatLng[] points = { // 
+    new LatLng(45, 45), //
+        new LatLng(45, -45), //
+        new LatLng(0, 0)};
+
+    Polyline p = new Polyline(points);
+    map.addOverlay(p);
+    p.setEditingEnabled(true);
+    
+    p = new Polyline(points);
+    map.addOverlay(p);
+    p.setEditingEnabled(false);
+
+    p = new Polyline(points);
+    map.addOverlay(p);
+    p.setEditingEnabled(PolyEditingOptions.newInstance(false));
+
+    p = new Polyline(points);
+    map.addOverlay(p);
+    p.setEditingEnabled(PolyEditingOptions.newInstance(true));
+
+    p = new Polyline(points);
+    map.addOverlay(p);
+    p.setEditingEnabled(PolyEditingOptions.newInstance(100));
+
+    p = new Polyline(points);
+    map.addOverlay(p);
+    p.setEditingEnabled(PolyEditingOptions.newInstance(5, true));
+
+    p = new Polyline(points);
+    map.addOverlay(p);
+    p.setEditingEnabled(PolyEditingOptions.newInstance(7, false));
+
     RootPanel.get().add(map);
   }
 
