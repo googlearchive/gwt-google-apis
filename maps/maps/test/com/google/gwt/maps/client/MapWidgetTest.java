@@ -17,12 +17,16 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Tests for the MapWidget and related classes.
  */
 public class MapWidgetTest extends GWTTestCase {
+  // length of time to wait for asynchronous test to complete.
+  static final int ASYNC_DELAY_MSEC = 5000;
 
   @Override
   public String getModuleName() {
@@ -51,6 +55,7 @@ public class MapWidgetTest extends GWTTestCase {
     assertTrue("Center didn't match.", m.getCenter().isEquals(
         LatLng.newInstance(0, 80)));
     assertEquals("Zoom level didn't match.", m.getZoomLevel(), 4);
+    RootPanel.get().add(m);
   }
 
   public void testMapWidgetDefault() {
@@ -67,5 +72,24 @@ public class MapWidgetTest extends GWTTestCase {
     assertTrue("Center didn't match.", m.getCenter().isEquals(
         LatLng.newInstance(45, 45)));
     assertEquals("Zoom level didn't match.", m.getZoomLevel(), 8);
+  }
+
+  public void testMapWidgetCloseInfoWindow() {
+    LatLng center = LatLng.newInstance(0, 0);
+    final MapWidget map = new MapWidget(center, 1);
+    map.setSize("300px", "300px");
+    RootPanel.get().add(map);
+    InfoWindowContent content = new InfoWindowContent("<i>Hello World!</i>");
+    InfoWindow info = map.getInfoWindow();
+    info.open(center, content);
+    DeferredCommand.addCommand(new Command() {
+
+      public void execute() {
+        map.closeInfoWindow();
+        finishTest();
+      }
+
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 }

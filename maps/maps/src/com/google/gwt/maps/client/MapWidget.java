@@ -124,8 +124,8 @@ public final class MapWidget extends Composite {
   }
 
   private static native void nativeUnload() /*-{
-      $wnd.GUnload && $wnd.GUnload();
-    }-*/;
+    $wnd.GUnload && $wnd.GUnload();
+  }-*/;
 
   private HandlerCollection<MapInfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
   private HandlerCollection<MapInfoWindowCloseHandler> infoWindowCloseHandlers;
@@ -152,6 +152,7 @@ public final class MapWidget extends Composite {
   private HandlerCollection<MapRightClickHandler> mapRightClickHandlers;
   private HandlerCollection<MapTypeChangedHandler> mapTypeChangedHandlers;
   private HandlerCollection<MapZoomEndHandler> mapZoomEndHandlers;
+  private InfoWindow infoWindow;
 
   /**
    * Cache of the map panes returned for this widget.
@@ -688,6 +689,13 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Close the currently open {@link InfoWindow}.
+   */
+  public void closeInfoWindow() {
+    MapImpl.impl.closeInfoWindow(jsoPeer);
+  }
+
+  /**
    * Computes the geographical coordinates from pixel coordinates in the div
    * that holds the draggable map. You need this when you implement interaction
    * with custom overlays.
@@ -767,13 +775,13 @@ public final class MapWidget extends Composite {
    * 
    * There is only one info window per map.
    * 
-   * TODO(samgross): assign the info window to an instance field so that there
-   * is only one instance per map.
-   * 
    * @return the info window associated with the map.
    */
   public InfoWindow getInfoWindow() {
-    return new InfoWindow(this);
+    if (infoWindow == null) {
+      infoWindow = new InfoWindow(this);
+    }
+    return infoWindow;
   }
 
   /**
@@ -942,7 +950,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)}.
+   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */

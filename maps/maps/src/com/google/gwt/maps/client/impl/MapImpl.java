@@ -59,14 +59,15 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void clearOverlays(JavaScriptObject jsoPeer);
 
+  void closeInfoWindow(JavaScriptObject jsoPeer);
+  
   void closeInfoWindow(MapWidget map);
 
   @Constructor("$wnd.GMap2")
   JavaScriptObject construct(Element container);
 
   @Constructor("$wnd.GMap2")
-  JavaScriptObject construct(Element container,
-      JavaScriptObject mapOptions);
+  JavaScriptObject construct(Element container, JavaScriptObject mapOptions);
 
   boolean continuousZoomEnabled(JavaScriptObject jsoPeer);
 
@@ -134,7 +135,7 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void openInfoWindow(MapWidget map, LatLng point, JavaScriptObject content,
       JavaScriptObject options);
-  
+
   void openInfoWindow(MapWidget map, LatLng point, String content,
       JavaScriptObject options);
 
@@ -163,8 +164,7 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom);
 
-  void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom,
-      MapType type);
+  void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom, MapType type);
 
   void setMapType(JavaScriptObject jsoPeerPeer, MapType type);
 
