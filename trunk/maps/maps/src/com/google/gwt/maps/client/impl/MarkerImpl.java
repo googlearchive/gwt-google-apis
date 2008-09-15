@@ -31,6 +31,8 @@ public interface MarkerImpl extends JSFlyweightWrapper {
 
   MarkerImpl impl = GWT.create(MarkerImpl.class);
 
+  void closeInfoWindow(Marker marker);
+
   @Constructor("$wnd.GMarker")
   JavaScriptObject construct(LatLng point);
 
@@ -47,14 +49,17 @@ public interface MarkerImpl extends JSFlyweightWrapper {
 
   Icon getIcon(Marker marker);
 
+  LatLng getLatLng(Marker marker);
+
+  @Deprecated
   LatLng getPoint(Marker marker);
 
   String getTitle(Marker marker);
-  
+
   void hide(Marker marker);
 
   boolean isHidden(Marker marker);
-  
+
   void openInfoWindow(Marker marker, JavaScriptObject content,
       JavaScriptObject options);
 
@@ -62,10 +67,15 @@ public interface MarkerImpl extends JSFlyweightWrapper {
       JavaScriptObject options);
 
   void setImage(Marker marker, String url);
-  
+
+  void setLatLng(Marker marker, LatLng point);
+
+  @Deprecated
   void setPoint(Marker marker, LatLng point);
-  
+
   void show(Marker marker);
-  
+
+  void showMapBlowup(Marker marker);
+
   void showMapBlowup(Marker marker, JavaScriptObject options);
 }
