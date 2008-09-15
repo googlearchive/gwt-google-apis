@@ -16,6 +16,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.event.MarkerClickHandler;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
 import com.google.gwt.maps.client.event.MarkerDragEndHandler;
@@ -70,9 +71,9 @@ public class Marker extends ConcreteOverlay {
   // TODO: DELETE ME! (needs to function w/o)
   @SuppressWarnings("unused")
   private static final Extractor<Marker> __extractor = new Extractor<Marker>() {
-    public Marker fromJS(JavaScriptObject jso) {
-      throw new UnsupportedOperationException();
-    }
+    public native Marker fromJS(JavaScriptObject jso) /*-{
+      return jso.__gwtPeer == null ? null : jso.__gwtPeer;
+    }-*/;
 
     public JavaScriptObject toJS(Marker o) {
       return o.jsoPeer;
@@ -377,8 +378,8 @@ public class Marker extends ConcreteOverlay {
   /**
    * This event is fired when the visibility of the marker is changed (i.e. the
    * visibility is flipped from visible to hidden or vice-versa). The
-   * <code>visible</code> parameter refers to the state of the marker after
-   * the visibility change has happened.
+   * <code>visible</code> parameter refers to the state of the marker after the
+   * visibility change has happened.
    * 
    * @param handler the handler to call when this event fires.
    */
@@ -397,6 +398,13 @@ public class Marker extends ConcreteOverlay {
   }
 
   /**
+   * Closes the info window only if it belongs to this marker.
+   */
+  public void closeInfoWindow() {
+    MarkerImpl.impl.closeInfoWindow(this);
+  }
+
+  /**
    * @return the current icon used for this Marker.
    */
   public Icon getIcon() {
@@ -404,18 +412,30 @@ public class Marker extends ConcreteOverlay {
   }
 
   /**
+   * Returns the geographical coordinates at which this marker is anchored, as
+   * set by the constructor or by {@link #setLatLng(LatLng)}.
+   * 
+   * @return the geographical coordinates at which this marker is anchored.
+   */
+  public LatLng getLatLng() {
+    return MarkerImpl.impl.getLatLng(this);
+  }
+
+  /**
+   * @deprecated
    * @return the current position of this Marker.
    */
+  @Deprecated
   public LatLng getPoint() {
     return MarkerImpl.impl.getPoint(this);
   }
 
   /**
    * Returns the title of this marker, as set by the constructor via the
-   * {@link MarkerOptions#setTitle(String)} method. Returns <code>null</code>
-   * if no title is passed in.
+   * {@link MarkerOptions#setTitle(String)} method. Returns <code>null</code> if
+   * no title is passed in.
    * 
-   * @return  the title of this marker.
+   * @return the title of this marker.
    */
   public String getTitle() {
     return MarkerImpl.impl.getTitle(this);
@@ -425,8 +445,8 @@ public class Marker extends ConcreteOverlay {
    * See if this Marker was created as a draggable marker type, that is, the
    * draggable option was set in MarkerOptions when it was constructed.
    * 
-   * @return <code>true</code> if the marker was initialized as a draggable
-   *         type of marker
+   * @return <code>true</code> if the marker was initialized as a draggable type
+   *         of marker
    */
   public boolean isDraggable() {
     return MarkerImpl.impl.draggable(this);
@@ -446,8 +466,9 @@ public class Marker extends ConcreteOverlay {
   }
 
   /**
-   * @return returns <code>true</code> if the marker is currently visible on
-   *         the map
+   * Returns <code>true</code> if the marker is currently visible on the map.
+   * 
+   * @return <code>true</code> if the marker is currently visible on the map.
    */
   public boolean isVisible() {
     return !MarkerImpl.impl.isHidden(this);
@@ -515,7 +536,8 @@ public class Marker extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link Marker#addMarkerInfoWindowBeforeCloseHandler(MarkerInfoWindowBeforeCloseHandler)}.
+   * {@link Marker#addMarkerInfoWindowBeforeCloseHandler(MarkerInfoWindowBeforeCloseHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -528,7 +550,8 @@ public class Marker extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link Marker#addMarkerInfoWindowCloseHandler(MarkerInfoWindowCloseHandler)}.
+   * {@link Marker#addMarkerInfoWindowCloseHandler(MarkerInfoWindowCloseHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -614,7 +637,8 @@ public class Marker extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link Marker#addMarkerVisibilityChangedHandler(MarkerVisibilityChangedHandler)}.
+   * {@link Marker#addMarkerVisibilityChangedHandler(MarkerVisibilityChangedHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -651,10 +675,22 @@ public class Marker extends ConcreteOverlay {
   }
 
   /**
+   * Sets the geographical coordinates of the point at which this marker is
+   * anchored.
+   * 
+   * @param point the geographical coordinates at which this marker is anchored.
+   */
+  public void setLatLng(LatLng point) {
+    MarkerImpl.impl.setLatLng(this, point);
+  }
+
+  /**
    * Move the marker to the specified point.
    * 
+   * @deprecated
    * @param point position to move the marker to.
    */
+  @Deprecated
   public void setPoint(LatLng point) {
     MarkerImpl.impl.setPoint(this, point);
   }
@@ -670,6 +706,26 @@ public class Marker extends ConcreteOverlay {
     } else {
       MarkerImpl.impl.hide(this);
     }
+  }
+
+  /**
+   * Opens the map info window over the icon of the marker.
+   */
+  public void showMapBlowup() {
+    MarkerImpl.impl.showMapBlowup(this);
+  }
+
+  /**
+   * Opens the map info window over the icon of the marker. The content of the
+   * info window is a closeup map around the marker position. Only options
+   * <code>zoomLevel</code> and <code>mapType</code> in the InfoWindowContent
+   * are applicable.
+   * 
+   * @param content overridden settings of <code>zoomLevel</code> or
+   *          <code>mapType</code>
+   */
+  public void showMapBlowup(InfoWindowContent content) {
+    MarkerImpl.impl.showMapBlowup(this, content.getOptions());
   }
 
   /**
