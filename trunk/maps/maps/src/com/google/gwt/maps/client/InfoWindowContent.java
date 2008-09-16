@@ -216,6 +216,17 @@ public class InfoWindowContent {
   }
 
   /**
+   * Returns the underlying GInfoWindowOptions object constructed from the
+   * building of this InfoWindowContent object.
+   * 
+   * @return the underlying GInfoWindowOptions object constructed from the
+   *         building of this InfoWindowContent object.
+   */
+  public JavaScriptObject getOptions() {
+    return options;
+  }
+
+  /**
    * Specifies content to be shown when the InfoWindow is maximized.
    * 
    * @param windowMaximizedContent content to be shown
@@ -266,12 +277,12 @@ public class InfoWindowContent {
 
   /**
    * Indicates whether or not the info window should close for a click on the
-   * map that was not on a marker. If set to <code>true</code>, the info
-   * window will not close when the map is clicked. The default value is
+   * map that was not on a marker. If set to <code>true</code>, the info window
+   * will not close when the map is clicked. The default value is
    * <code>false</code>
    * 
-   * @param noCloseFlag Pass <code>true</code> to leave the window open when
-   *          the map is clicked.
+   * @param noCloseFlag Pass <code>true</code> to leave the window open when the
+   *          map is clicked.
    */
   public void setNoCloseOnClick(boolean noCloseFlag) {
     InfoWindowOptionsImpl.impl.setNoCloseOnClick(options, noCloseFlag);
@@ -279,10 +290,6 @@ public class InfoWindowContent {
 
   protected JavaScriptObject getContent() {
     return content;
-  }
-
-  protected JavaScriptObject getOptions() {
-    return options;
   }
 
   protected int getType() {
