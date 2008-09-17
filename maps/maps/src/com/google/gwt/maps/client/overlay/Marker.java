@@ -72,7 +72,10 @@ public class Marker extends ConcreteOverlay {
   @SuppressWarnings("unused")
   private static final Extractor<Marker> __extractor = new Extractor<Marker>() {
     public native Marker fromJS(JavaScriptObject jso) /*-{
-      return jso.__gwtPeer == null ? null : jso.__gwtPeer;
+      if (jso.__gwtPeer == null) {
+        return @com.google.gwt.maps.client.overlay.Marker::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(jso);
+      }
+      return  jso.__gwtPeer;
     }-*/;
 
     public JavaScriptObject toJS(Marker o) {

@@ -17,6 +17,10 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.Polyline;
+
+import java.util.List;
 
 /**
  * Tests for the geocoding service and supporting classes.
@@ -58,9 +62,12 @@ public class DirectionsTest extends GWTTestCase {
         assertNotNull("result.getMarkers()", result.getMarkers());
         assertNotNull("result.getRoutes()", result.getRoutes());
         assertNotNull("result.getSummaryHtml()", result.getSummaryHtml());
-// TODO(zundel): this call fails with a ClassCastException from the generated JSIO method DirectionsImplImpl.getPolyline()
-//        Polyline p = result.getPolyline();
-//        assertNotNull("polyline", p);
+        Polyline p = result.getPolyline();
+        assertNotNull("polyline", p);
+        List<Marker> markers = result.getMarkers();
+        assertNotNull("markers", markers);
+        assertNotNull("markers.get(0)", markers.get(0));
+        assertNotNull("markers.get(1)", markers.get(1));
         finishTest();
       }
     });
