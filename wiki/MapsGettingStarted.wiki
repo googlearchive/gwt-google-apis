@@ -29,40 +29,40 @@ First, create a project with `projectCreator` and `applicationCreator` as shown 
 
 {{{
 $PP_OFF
-$ projectCreator -eclipse MapsTutorial -out MapsTutorial \
+$ projectCreator -eclipse SimpleMaps -out SimpleMaps \
      -addToClassPath /usr/local/gwt-maps/gwt-maps.jar 
-Created directory MapsTutorial/src
-Created directory MapsTutorial/test
-Created file MapsTutorial/.project
-Created file MapsTutorial/.classpath
+Created directory SimpleMaps/src
+Created directory SimpleMaps/test
+Created file SimpleMaps/.project
+Created file SimpleMaps/.classpath
 
-$ applicationCreator -eclipse MapsTutorial -out MapsTutorial \
+$ applicationCreator -eclipse SimpleMaps -out SimpleMaps \
      -addToClassPath /usr/local/gwt-maps/gwt-maps.jar \
      -addModule com.google.gwt.maps.GoogleMaps \
-     com.example.google.gwt.mapstutorial.client.MapsTutorial 
-Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial
-Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/client
-Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/public
-Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml
-Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/public/MapsTutorial.html
-Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/client/MapsTutorial.java
-Created file MapsTutorial/MapsTutorial-shell
-Created file MapsTutorial/MapsTutorial-compile
+     com.example.google.gwt.mapstutorial.client.SimpleMaps 
+Created directory SimpleMaps/src/com/example/google/gwt/mapstutorial
+Created directory SimpleMaps/src/com/example/google/gwt/mapstutorial/client
+Created directory SimpleMaps/src/com/example/google/gwt/mapstutorial/public
+Created file SimpleMaps/src/com/example/google/gwt/mapstutorial/SimpleMaps.gwt.xml
+Created file SimpleMaps/src/com/example/google/gwt/mapstutorial/public/SimpleMaps.html
+Created file SimpleMaps/src/com/example/google/gwt/mapstutorial/client/SimpleMaps.java
+Created file SimpleMaps/SimpleMaps-shell
+Created file SimpleMaps/SimpleMaps-compile
 }}}
 
 This command sets up a standard project, plus adds the library `/usr/local/gwt-maps/gwt-maps.jar` to the Java classpath for the launch, compile and .and eclipse definitions.
 
 
-Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` script.  You should see the skeleton project come up:
+Test to see that hosted mode and web mode work by running the `SimpleMaps-shell` script.  You should see the skeleton project come up:
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic1.png
 
-Also try out the `MapsTutorial-compile` script:
+Also try out the `SimpleMaps-compile` script:
 
 {{{
 $PP_OFF
-$ ./MapsTutorial-compile
-Compiling into ./www/com.example.google.gwt.mapstutorial.MapsTutorial
+$ ./SimpleMaps-compile
+Compiling into ./www/com.example.google.gwt.mapstutorial.SimpleMaps
 Copying all files found on public path
 Compilation succeeded
 }}}
@@ -70,11 +70,11 @@ Compilation succeeded
 
 = Creating a Small Project using the Google Maps API =
 
-Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
+Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!SimpleMaps-shell_ from the command line or using the _Run_ configuration from Eclipse.  Make sure you test the _Compile/Browse_ button in hosted mode as well.  If you encounter any problems, read back over the previous instructions.  If you still need help, try searching and/or posting to the Google-Web-Toolkit group.
 
-== Modify !MapsTutorial.gwt.xml ==
+== Modify !SimpleMaps.gwt.xml ==
 
-Since this example will use the Google Maps API, we need to modify the default `MapsTutorial.gwt.xml` file in two ways:
+Since this example will use the Google Maps API, we need to modify the default `SimpleMaps.gwt.xml` file in two ways:
 
   1 Add an `<inherits>` entry to pull in the GWT Google APIs module for Google Maps.
   1 Add a reference to the Google Maps !JavaScript API.  
@@ -101,12 +101,12 @@ Note that in order to use the Maps API, you need to apply for a Google Maps API 
 
 == Update the HTML host file ==
 
-Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/public/MapsTutorial.html` with a `<div>` tag that we can use for the GWT application.
+Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/public/SimpleMaps.html` with a `<div>` tag that we can use for the GWT application.
 
 {{{
 <body>
 
-    <h1>MapsTutorial</h1>
+    <h1>SimpleMaps</h1>
 
     <div id="mapsTutorial">
 
@@ -115,7 +115,7 @@ Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/publ
 
 == Add a map object to .java source ==
 
-To complete the `MapsTutorial.java` file, add some imports, a member to store a `MapWidget` instance, and replace the body of the `onModuleLoad()` method. 
+To complete the `SimpleMaps.java` file, add some imports, a member to store a `MapWidget` instance, and replace the body of the `onModuleLoad()` method. 
 
 {{{
 package com.example.google.gwt.mapstutorial.client;
@@ -127,7 +127,7 @@ import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class MapsTutorial implements EntryPoint {
+public class SimpleMaps implements EntryPoint {
   private MapWidget map;
 
   // GWT module entry point method.
@@ -151,9 +151,9 @@ public class MapsTutorial implements EntryPoint {
 }}}
 
 
-== Run the !MapsTutorial sample project ==
+== Run the !SimpleMaps sample project ==
 
-Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _!MapsTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
+Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _!SimpleMaps-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic5.png
 
