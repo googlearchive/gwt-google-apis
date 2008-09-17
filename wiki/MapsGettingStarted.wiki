@@ -81,6 +81,8 @@ Since this example will use the Google Maps API, we need to modify the default `
 
 Note that in order to use the Maps API, you need to apply for a Google Maps API key.  Running with no key specified will work with `localhost` for development purposes, but you will need to apply for your own key to deploy to a website.
 
+Edit `src/com/example/google/gwt/mapstutorial/SimpleMaps.gwt.xml` and add the following lines:
+
 {{{
  <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
  <!-- Added by projectCreator if you use the -addModule argument -->
@@ -101,21 +103,21 @@ Note that in order to use the Maps API, you need to apply for a Google Maps API 
 
 == Update the HTML host file ==
 
-Replace the body of the HTML host file `com/example/google/gwt/mapstutorial/public/SimpleMaps.html` with a `<div>` tag that we can use for the GWT application.
+Replace the body of the HTML host file `src/com/example/google/gwt/mapstutorial/public/SimpleMaps.html` with a `<div>` tag that we can use for the GWT application.
 
 {{{
 <body>
 
     <h1>SimpleMaps</h1>
 
-    <div id="mapsTutorial">
+    <div id="mapsTutorial"></div>
 
 </body>
 }}}
 
 == Add a map object to .java source ==
 
-To complete the `SimpleMaps.java` file, add some imports, a member to store a `MapWidget` instance, and replace the body of the `onModuleLoad()` method. 
+To complete the `src/com/example/google/gwt/mapstutorial/client/SimpleMaps.java` file, add some imports, a member to store a `MapWidget` instance, and replace the body of the `onModuleLoad()` method. 
 
 {{{
 package com.example.google.gwt.mapstutorial.client;
@@ -125,6 +127,7 @@ import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class SimpleMaps implements EntryPoint {
@@ -132,14 +135,18 @@ public class SimpleMaps implements EntryPoint {
 
   // GWT module entry point method.
   public void onModuleLoad() {
-
+    LatLng cawkerCity = LatLng.newInstance(39.509,-98.434);
     // Open a map centered on Cawker City, KS USA
-    map = new MapWidget(new LatLng(39.509,-98.434), 2);
+
+    map = new MapWidget(cawkerCity, 2);
     map.setSize("500px", "300px");
     
     // Add some controls for the zoom level
     map.addControl(new LargeMapControl());
     
+    // Add a marker
+    map.addOverlay(new Marker(cawkerCity));
+
     // Add an info window to highlight a point of interest
     map.getInfoWindow().open(map.getCenter(), 
         new InfoWindowContent("World's Largest Ball of Twine"));
