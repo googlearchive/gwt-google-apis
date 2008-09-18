@@ -16,6 +16,6 @@ This is an example of how to use the ManagedResourceStore with a Gears manifest 
 
 ===[http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore]===
 
-   [http://gwt-google-apis.googlecode.com/svn/wiki/ResourceStore-2.png]
+[http://gwt-google-apis.googlecode.com/svn/wiki/ResourceStore-2.png]
 
 This is an example of how to use the ResourceStore class.
