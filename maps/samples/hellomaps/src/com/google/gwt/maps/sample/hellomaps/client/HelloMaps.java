@@ -58,17 +58,17 @@ public class HelloMaps implements EntryPoint, HistoryListener {
 
   public void onModuleLoad() {
 
-     if (!Maps.isLoaded()) {
-       Window.alert("The Maps API is not installed."
-           + "  The <script> tag that loads the Maps API may be missing or your Maps key may be wrong.");
-       return;
-     }
-     
-     if (!Maps.isBrowserCompatible()) {
-       Window.alert("The Maps API is not compatible with this browser.");
-       return;
-     }
-     
+    if (!Maps.isLoaded()) {
+      Window.alert("The Maps API is not installed."
+          + "  The <script> tag that loads the Maps API may be missing or your Maps key may be wrong.");
+      return;
+    }
+
+    if (!Maps.isBrowserCompatible()) {
+      Window.alert("The Maps API is not compatible with this browser.");
+      return;
+    }
+
     // Load all the MapsDemos.
     loadMapsDemos();
 
@@ -107,11 +107,10 @@ public class HelloMaps implements EntryPoint, HistoryListener {
             + "demonstrates a particular capability of the Maps support."));
 
     outerPanel.setWidget(1, 0, innerPanel);
-    
-    
+
     DecoratorPanel decorator = new DecoratorPanel();
-    decorator.add(outerPanel);    
-    
+    decorator.add(outerPanel);
+
     RootPanel.get("hm-map").add(decorator);
 
     // Show the initial screen.
@@ -210,6 +209,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     list.addMapsDemo(RoutedDirectionsDemo.init());
     list.addMapsDemo(GeocoderDemo.init());
     list.addMapsDemo(Geocoder2Demo.init());
+    list.addMapsDemo(EarthPluginDemo.init());
   }
 
   private void showInfo() {
