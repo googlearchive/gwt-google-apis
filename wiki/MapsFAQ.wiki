@@ -2,21 +2,17 @@
 
 = Maps FAQs =
 
-These FAQs refer to the Google API Library for GWT bindings for the Google Maps API.  See also [Overview Project Overview] for general information on the Google API Library for GWT.
+These FAQs refer to the Google Maps Library for GWT.  See the [Overview Project Overview] for general information on the Google Maps Library for GWT.
 
 == I don't see Google Maps method XXX in the API. What should I do? ==
 
-New features are added to the Google Maps API is released every few weeks, so chances are any stable release of these wrappers will have fallen behind by the time you download it.  
+New features are added to the Google Maps API often. The newest features of the JavaScript Maps API may not yet be present in the latest stable release of the GWT library bindings.  
 
 First check the [http://code.google.com/p/gwt-google-apis/ gwt-google-apis issue tracker] to see if the method might have been added to the trunk, but not the stable release yet.  If it has, you can download the subversion source, build it with [http://ant.apache.org Apache Ant], and get an updated `gwt-maps.jar`.   Submitting a patch along with your issue is encouraged and appreciated!  See [http://code.google.com/webtoolkit/makinggwtbetter.html Making GWT Better].
 
-== Why is there a `gwt` in the query line on the <script> tag to load the Maps API? ==
-
-This optional parameter is used by Google to collect data on what percentage of Google Maps API traffic is generated from apps built with GWT.
-
 == What about the Mapitz and other Maps bindings? ==
 
-The Google API Library for Google Web Toolkit is the official set of bindings for Google APIs maintained by Google.  Other developers have made available APIs that give an interface to the Google Maps API or other similar functionality through GWT.  Although Google does not maintain or support these alternate bindings, you are likely to find other users of those libraries on the GWT forum [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].
+The Google API Libraries for Google Web Toolkit is the official set of bindings for Google APIs maintained by Google.  Other developers have made available APIs that give an interface to the Google Maps API or other similar functionality through GWT.  Although Google does not maintain or support these alternate bindings, you are likely to find other users of those libraries on the GWT forum [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].
 
 == How do I get the latest version of the API from Subversion? ==
 
