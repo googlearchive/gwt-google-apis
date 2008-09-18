@@ -20,12 +20,16 @@ import com.google.gwt.maps.client.event.PolylineCancelLineHandler;
 import com.google.gwt.maps.client.event.PolylineClickHandler;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOutHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOverHandler;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler;
 import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.PolylineCancelLineHandler.PolylineCancelLineEvent;
 import com.google.gwt.maps.client.event.PolylineClickHandler.PolylineClickEvent;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler.PolylineEndLineEvent;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler.PolylineLineUpdatedEvent;
+import com.google.gwt.maps.client.event.PolylineMouseOutHandler.PolylineMouseOutEvent;
+import com.google.gwt.maps.client.event.PolylineMouseOverHandler.PolylineMouseOverEvent;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler.PolylineRemoveEvent;
 import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler.PolylineVisibilityChangedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -116,13 +120,15 @@ public final class Polyline extends ConcreteOverlay {
   }
 
   private static native JavaScriptObject nativeFromEncoded(JavaScriptObject jso) /*-{
-      return $wnd.GPolyline.fromEncoded(jso);  
-    }-*/;
+    return $wnd.GPolyline.fromEncoded(jso);
+  }-*/;
 
   private HandlerCollection<PolylineCancelLineHandler> polylineCancelLineHandlers;
   private HandlerCollection<PolylineClickHandler> polylineClickHandlers;
   private HandlerCollection<PolylineEndLineHandler> polylineEndLineHandlers;
   private HandlerCollection<PolylineLineUpdatedHandler> polylineLineUpdatedHandlers;
+  private HandlerCollection<PolylineMouseOutHandler> polylineMouseOutHandlers;
+  private HandlerCollection<PolylineMouseOverHandler> polylineMouseOverHandlers;
   private HandlerCollection<PolylineRemoveHandler> polylineRemoveHandlers;
   private HandlerCollection<PolylineVisibilityChangedHandler> polylineVisibilityChangedHandlers;
 
@@ -190,7 +196,7 @@ public final class Polyline extends ConcreteOverlay {
         opacity, options));
   }
 
-  private Polyline(JavaScriptObject jsoPeer) {
+  Polyline(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 
@@ -265,6 +271,40 @@ public final class Polyline extends ConcreteOverlay {
       public void callback() {
         PolylineLineUpdatedEvent e = new PolylineLineUpdatedEvent(Polyline.this);
         handler.onUpdate(e);
+      }
+    });
+  }
+
+  /**
+   * This event is fired when the mouse moves out of a polyline.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addPolylineMouseOutHandler(final PolylineMouseOutHandler handler) {
+    maybeInitPolylineMouseOutHandlers();
+
+    polylineMouseOutHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        PolylineMouseOutEvent e = new PolylineMouseOutEvent(Polyline.this);
+        handler.onMouseOut(e);
+      }
+    });
+  }
+
+  /**
+   * This event is fired when the mouse moves over a polyline.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addPolylineMouseOverHandler(final PolylineMouseOverHandler handler) {
+    maybeInitPolylineMouseOverHandlers();
+
+    polylineMouseOverHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        PolylineMouseOverEvent e = new PolylineMouseOverEvent(Polyline.this);
+        handler.onMouseOver(e);
       }
     });
   }
@@ -431,6 +471,30 @@ public final class Polyline extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
+   * {@link Polyline#addPolylineMouseOutHandler(PolylineMouseOutHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removePolylineMouseOutHandler(PolylineMouseOutHandler handler) {
+    if (polylineMouseOutHandlers != null) {
+      polylineMouseOutHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Polyline#addPolylineMouseOverHandler(PolylineMouseOverHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removePolylineMouseOverHandler(PolylineMouseOverHandler handler) {
+    if (polylineMouseOverHandlers != null) {
+      polylineMouseOverHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
    * {@link Polyline#addPolylineRemoveHandler(PolylineRemoveHandler)}.
    * 
    * @param handler the handler to remove
@@ -443,7 +507,8 @@ public final class Polyline extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link Polyline#addPolylineVisibilityChangedHandler(PolylineVisibilityChangedHandler)}.
+   * {@link Polyline#addPolylineVisibilityChangedHandler(PolylineVisibilityChangedHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -465,8 +530,8 @@ public final class Polyline extends ConcreteOverlay {
    * point added, at which point an {@link PolylineEndLineEvent} event will be
    * triggered if the polyline was successfully completed; otherwise, a
    * {@link PolylineCancelLineEvent} event will be triggered, but the polyline
-   * will not be removed from the map. If modifying an existing {@link Polyline},
-   * vertices are connected from either the starting or ending points of the
+   * will not be removed from the map. If modifying an existing {@link Polyline}
+   * , vertices are connected from either the starting or ending points of the
    * existing polyline, specified in the optional {link
    * {@link PolyEditingOptions#setFromStart(boolean)}.
    */
@@ -546,8 +611,8 @@ public final class Polyline extends ConcreteOverlay {
    * Returns <code>true</code> if this environment supports the
    * {@link Polyline#setVisible} method.
    * 
-   * @return <code>true</code> if setVisible(false) is supported in the
-   *         current environment.
+   * @return <code>true</code> if setVisible(false) is supported in the current
+   *         environment.
    */
   public boolean supportsHide() {
     return PolylineImpl.impl.supportsHide(jsoPeer);
@@ -608,6 +673,30 @@ public final class Polyline extends ConcreteOverlay {
    * 
    * @param event an event to deliver to the handler.
    */
+  void trigger(PolylineMouseOutEvent event) {
+    maybeInitPolylineMouseOutHandlers();
+    polylineMouseOutHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(PolylineMouseOverEvent event) {
+    maybeInitPolylineMouseOverHandlers();
+    polylineMouseOverHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
   void trigger(PolylineRemoveEvent event) {
     maybeInitPolylineRemoveHandlers();
     polylineRemoveHandlers.trigger();
@@ -650,6 +739,20 @@ public final class Polyline extends ConcreteOverlay {
     if (polylineLineUpdatedHandlers == null) {
       polylineLineUpdatedHandlers = new HandlerCollection<PolylineLineUpdatedHandler>(
           jsoPeer, MapEvent.LINEUPDATED);
+    }
+  }
+
+  private void maybeInitPolylineMouseOutHandlers() {
+    if (polylineMouseOutHandlers == null) {
+      polylineMouseOutHandlers = new HandlerCollection<PolylineMouseOutHandler>(
+          jsoPeer, MapEvent.MOUSEOUT);
+    }
+  }
+
+  private void maybeInitPolylineMouseOverHandlers() {
+    if (polylineMouseOverHandlers == null) {
+      polylineMouseOverHandlers = new HandlerCollection<PolylineMouseOverHandler>(
+          jsoPeer, MapEvent.MOUSEOVER);
     }
   }
 

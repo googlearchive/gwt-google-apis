@@ -22,12 +22,16 @@ import com.google.gwt.maps.client.event.PolygonCancelLineHandler;
 import com.google.gwt.maps.client.event.PolygonClickHandler;
 import com.google.gwt.maps.client.event.PolygonEndLineHandler;
 import com.google.gwt.maps.client.event.PolygonLineUpdatedHandler;
+import com.google.gwt.maps.client.event.PolygonMouseOutHandler;
+import com.google.gwt.maps.client.event.PolygonMouseOverHandler;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler;
 import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.PolygonCancelLineHandler.PolygonCancelLineEvent;
 import com.google.gwt.maps.client.event.PolygonClickHandler.PolygonClickEvent;
 import com.google.gwt.maps.client.event.PolygonEndLineHandler.PolygonEndLineEvent;
 import com.google.gwt.maps.client.event.PolygonLineUpdatedHandler.PolygonLineUpdatedEvent;
+import com.google.gwt.maps.client.event.PolygonMouseOutHandler.PolygonMouseOutEvent;
+import com.google.gwt.maps.client.event.PolygonMouseOverHandler.PolygonMouseOverEvent;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler.PolygonRemoveEvent;
 import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler.PolygonVisibilityChangedEvent;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -134,6 +138,8 @@ public final class Polygon extends ConcreteOverlay {
   private HandlerCollection<PolygonClickHandler> polygonClickHandlers;
   private HandlerCollection<PolygonEndLineHandler> polygonEndLineHandlers;
   private HandlerCollection<PolygonLineUpdatedHandler> polygonLineUpdatedHandlers;
+  private HandlerCollection<PolygonMouseOutHandler> polygonMouseOutHandlers;
+  private HandlerCollection<PolygonMouseOverHandler> polygonMouseOverHandlers;
   private HandlerCollection<PolygonRemoveHandler> polygonRemoveHandlers;
   private HandlerCollection<PolygonVisibilityChangedHandler> polygonVisibilityChangedHandlers;
 
@@ -184,7 +190,7 @@ public final class Polygon extends ConcreteOverlay {
         strokeWeight, strokeOpacity, fillColor, fillOpacity, options));
   }
 
-  private Polygon(JavaScriptObject jsoPeer) {
+  Polygon(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 
@@ -258,6 +264,40 @@ public final class Polygon extends ConcreteOverlay {
       public void callback() {
         PolygonLineUpdatedEvent e = new PolygonLineUpdatedEvent(Polygon.this);
         handler.onUpdate(e);
+      }
+    });
+  }
+
+  /**
+   * This event is fired when the mouse moves out of a polygon.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addPolygonMouseOutHandler(final PolygonMouseOutHandler handler) {
+    maybeInitPolygonMouseOutHandlers();
+
+    polygonMouseOutHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        PolygonMouseOutEvent e = new PolygonMouseOutEvent(Polygon.this);
+        handler.onMouseOut(e);
+      }
+    });
+  }
+
+  /**
+   * This event is fired when the mouse moves over a polygon.
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addPolygonMouseOverHandler(final PolygonMouseOverHandler handler) {
+    maybeInitPolygonMouseOverHandlers();
+
+    polygonMouseOverHandlers.addHandler(handler, new VoidCallback() {
+      @Override
+      public void callback() {
+        PolygonMouseOverEvent e = new PolygonMouseOverEvent(Polygon.this);
+        handler.onMouseOver(e);
       }
     });
   }
@@ -406,6 +446,30 @@ public final class Polygon extends ConcreteOverlay {
   public void removePolygonLineUpdatedHandler(PolygonLineUpdatedHandler handler) {
     if (polygonLineUpdatedHandlers != null) {
       polygonLineUpdatedHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Polygon#addPolygonMouseOutHandler(PolygonMouseOutHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removePolygonMouseOutHandler(PolygonMouseOutHandler handler) {
+    if (polygonMouseOutHandlers != null) {
+      polygonMouseOutHandlers.removeHandler(handler);
+    }
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link Polygon#addPolygonMouseOverHandler(PolygonMouseOverHandler)}.
+   * 
+   * @param handler the handler to remove
+   */
+  public void removePolygonMouseOverHandler(PolygonMouseOverHandler handler) {
+    if (polygonMouseOverHandlers != null) {
+      polygonMouseOverHandlers.removeHandler(handler);
     }
   }
 
@@ -563,9 +627,9 @@ public final class Polygon extends ConcreteOverlay {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(PolygonClickEvent event) {
-    maybeInitPolygonClickHandlers();
-    polygonRemoveHandlers.trigger(event.getLatLng());
+  void trigger(PolygonCancelLineEvent event) {
+    maybeInitPolygonCancelLineHandlers();
+    polygonCancelLineHandlers.trigger();
   }
 
   /**
@@ -575,9 +639,9 @@ public final class Polygon extends ConcreteOverlay {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(PolygonCancelLineEvent event) {
-    maybeInitPolygonCancelLineHandlers();
-    polygonCancelLineHandlers.trigger();
+  void trigger(PolygonClickEvent event) {
+    maybeInitPolygonClickHandlers();
+    polygonRemoveHandlers.trigger(event.getLatLng());
   }
 
   /**
@@ -611,9 +675,21 @@ public final class Polygon extends ConcreteOverlay {
    * 
    * @param event an event to deliver to the handler.
    */
-  void trigger(PolygonVisibilityChangedEvent event) {
-    maybeInitPolygonVisibilityChangedHandlers();
-    polygonVisibilityChangedHandlers.trigger();
+  void trigger(PolygonMouseOutEvent event) {
+    maybeInitPolygonMouseOutHandlers();
+    polygonMouseOutHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(PolygonMouseOverEvent event) {
+    maybeInitPolygonMouseOverHandlers();
+    polygonMouseOverHandlers.trigger();
   }
 
   /**
@@ -626,6 +702,18 @@ public final class Polygon extends ConcreteOverlay {
   void trigger(PolygonRemoveEvent event) {
     maybeInitPolygonRemoveHandlers();
     polygonRemoveHandlers.trigger();
+  }
+
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(PolygonVisibilityChangedEvent event) {
+    maybeInitPolygonVisibilityChangedHandlers();
+    polygonVisibilityChangedHandlers.trigger();
   }
 
   private void maybeInitPolygonCancelLineHandlers() {
@@ -653,6 +741,20 @@ public final class Polygon extends ConcreteOverlay {
     if (polygonLineUpdatedHandlers == null) {
       polygonLineUpdatedHandlers = new HandlerCollection<PolygonLineUpdatedHandler>(
           jsoPeer, MapEvent.LINEUPDATED);
+    }
+  }
+
+  private void maybeInitPolygonMouseOutHandlers() {
+    if (polygonMouseOutHandlers == null) {
+      polygonMouseOutHandlers = new HandlerCollection<PolygonMouseOutHandler>(
+          jsoPeer, MapEvent.MOUSEOUT);
+    }
+  }
+
+  private void maybeInitPolygonMouseOverHandlers() {
+    if (polygonMouseOverHandlers == null) {
+      polygonMouseOverHandlers = new HandlerCollection<PolygonMouseOverHandler>(
+          jsoPeer, MapEvent.MOUSEOVER);
     }
   }
 
