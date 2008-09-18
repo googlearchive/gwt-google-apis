@@ -64,9 +64,13 @@ import com.google.gwt.maps.client.event.MarkerMouseUpHandler;
 import com.google.gwt.maps.client.event.MarkerRemoveHandler;
 import com.google.gwt.maps.client.event.MarkerVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.PolygonClickHandler;
+import com.google.gwt.maps.client.event.PolygonMouseOutHandler;
+import com.google.gwt.maps.client.event.PolygonMouseOverHandler;
 import com.google.gwt.maps.client.event.PolygonRemoveHandler;
 import com.google.gwt.maps.client.event.PolygonVisibilityChangedHandler;
 import com.google.gwt.maps.client.event.PolylineClickHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOutHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOverHandler;
 import com.google.gwt.maps.client.event.PolylineRemoveHandler;
 import com.google.gwt.maps.client.event.PolylineVisibilityChangedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -140,9 +144,13 @@ public class MapEventDemo extends MapsDemo {
     POLYGON_CLICK_HANDLER("PolygonClickHandler"), //
     POLYGON_REMOVE_HANDLER("PolygonRemoveHandler"), //
     POLYGON_VISIBILITY_CHANGED_HANDLER("PolygonVisibilityChangedHandler"), //
+    POLYGON_MOUSEOUT_HANDLER("PolygonMouseOutHandler"), //
+    POLYGON_MOUSEOVER_HANDLER("PolygonMouseOverHandler"), //
     POLYLINE_CLICK_HANDLER("PolylineClickHandler"), //
     POLYLINE_REMOVE_HANDLER("PolylineRemoveHandler"), //
-    POLYLINE_VISIBILITY_CHANGED_HANDLER("PolylineVisibilityChangedHandler"); //
+    POLYLINE_VISIBILITY_CHANGED_HANDLER("PolylineVisibilityChangedHandler"), //
+    POLYLINE_MOUSEOUT_HANDLER("PolylineMouseOutHandler"), //
+    POLYLINE_MOUSEOVER_HANDLER("PolylineMouseOverHandler"); //
 
     private final String value;
 
@@ -155,7 +163,8 @@ public class MapEventDemo extends MapsDemo {
     }
   }
 
-  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790, -84.3880580);
+  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790,
+      -84.3880580);
   private static LatLng[] ATLANTA_TRIANGLE1 = new LatLng[4];
   private static LatLng[] ATLANTA_TRIANGLE2 = new LatLng[4];
 
@@ -1130,6 +1139,46 @@ public class MapEventDemo extends MapsDemo {
       }
         break;
 
+      case POLYLINE_MOUSEOUT_HANDLER: {
+
+        final PolylineMouseOutHandler h = new PolylineMouseOutHandler() {
+
+          public void onMouseOut(PolylineMouseOutEvent e) {
+            textBox.setText(textBox.getText() + "onMouseOut()");
+          }
+
+        };
+        polyline.addPolylineMouseOutHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polyline.removePolylineMouseOutHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYLINE_MOUSEOVER_HANDLER: {
+
+        final PolylineMouseOverHandler h = new PolylineMouseOverHandler() {
+
+          public void onMouseOver(PolylineMouseOverEvent e) {
+            textBox.setText(textBox.getText() + "onMouseOver()");
+          }
+
+        };
+        polyline.addPolylineMouseOverHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polyline.removePolylineMouseOverHandler(h);
+          }
+
+        });
+      }
+        break;
+
       case POLYGON_CLICK_HANDLER: {
 
         final PolygonClickHandler h = new PolygonClickHandler() {
@@ -1186,6 +1235,46 @@ public class MapEventDemo extends MapsDemo {
 
           public void onClick(Widget sender) {
             polygon.removePolygonVisibilityChangedHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYGON_MOUSEOUT_HANDLER: {
+
+        final PolygonMouseOutHandler h = new PolygonMouseOutHandler() {
+
+          public void onMouseOut(PolygonMouseOutEvent e) {
+            textBox.setText(textBox.getText() + "onMouseOut()");
+          }
+
+        };
+        polygon.addPolygonMouseOutHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polygon.removePolygonMouseOutHandler(h);
+          }
+
+        });
+      }
+        break;
+
+      case POLYGON_MOUSEOVER_HANDLER: {
+
+        final PolygonMouseOverHandler h = new PolygonMouseOverHandler() {
+
+          public void onMouseOver(PolygonMouseOverEvent e) {
+            textBox.setText(textBox.getText() + "onMouseOver()");
+          }
+
+        };
+        polygon.addPolygonMouseOverHandler(h);
+        removeHandlerButton.addClickListener(new ClickListener() {
+
+          public void onClick(Widget sender) {
+            polygon.removePolygonMouseOverHandler(h);
           }
 
         });

@@ -21,15 +21,19 @@ import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.maps.client.event.PolylineCancelLineHandler;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOutHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOverHandler;
 import com.google.gwt.maps.client.event.PolylineCancelLineHandler.PolylineCancelLineEvent;
 import com.google.gwt.maps.client.event.PolylineEndLineHandler.PolylineEndLineEvent;
 import com.google.gwt.maps.client.event.PolylineLineUpdatedHandler.PolylineLineUpdatedEvent;
+import com.google.gwt.maps.client.event.PolylineMouseOutHandler.PolylineMouseOutEvent;
+import com.google.gwt.maps.client.event.PolylineMouseOverHandler.PolylineMouseOverEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
  * Tests the events attached to a Polyline and Polygon.
  */
-public class PolyEventsTest extends GWTTestCase {
+public class PolylineEventsTest extends GWTTestCase {
   // Length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 5000;
 
@@ -41,6 +45,7 @@ public class PolyEventsTest extends GWTTestCase {
  /**
   * Runs before every test method.
   */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
   }
@@ -106,6 +111,44 @@ public class PolyEventsTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
     polyline.trigger(new PolylineLineUpdatedEvent(polyline));
   }
+  
+  /**
+   * Test the "mouseout" event using a trigger.
+   */
+  public void testPolylineMouseOut() {
+    final MapWidget m = new MapWidget();
+    final Polyline polyline = setupPolyline(m);
+    m.addOverlay(polyline);
+    polyline.addPolylineMouseOutHandler(new PolylineMouseOutHandler() {
+
+      @Override
+      public void onMouseOut(PolylineMouseOutEvent event) {
+        finishTest();
+      }
+      
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);    
+    polyline.trigger(new PolylineMouseOutEvent(polyline));
+  }
+  
+  /**
+   * Test the "mouseover" event using a trigger.
+   */
+  public void testPolylineMouseOver() {
+    final MapWidget m = new MapWidget();
+    final Polyline polyline = setupPolyline(m);
+    m.addOverlay(polyline);
+    polyline.addPolylineMouseOverHandler(new PolylineMouseOverHandler() {
+
+      @Override
+      public void onMouseOver(PolylineMouseOverEvent event) {
+        finishTest();
+      }
+      
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);    
+    polyline.trigger(new PolylineMouseOverEvent(polyline));
+  }  
 
   private Polyline setupPolyline(MapWidget m) {
     m.setCenter(LatLng.newInstance(37.4569, -122.1569));
