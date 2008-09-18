@@ -121,7 +121,6 @@ public class PolylineEventsTest extends GWTTestCase {
     m.addOverlay(polyline);
     polyline.addPolylineMouseOutHandler(new PolylineMouseOutHandler() {
 
-      @Override
       public void onMouseOut(PolylineMouseOutEvent event) {
         finishTest();
       }
@@ -140,7 +139,6 @@ public class PolylineEventsTest extends GWTTestCase {
     m.addOverlay(polyline);
     polyline.addPolylineMouseOverHandler(new PolylineMouseOverHandler() {
 
-      @Override
       public void onMouseOver(PolylineMouseOverEvent event) {
         finishTest();
       }
