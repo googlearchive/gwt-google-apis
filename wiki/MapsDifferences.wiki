@@ -9,7 +9,7 @@ The Maps API prepends all methods with the letter `G`.  The GWT wrappers drop th
 
 == Constant Values ==
 
-In many cases, where the Maps API provides a constant value, the GWT wrappers will provide a class with an accessor method to retrive the value.  This is primarily for run-time efficiency and compact code generation in GWT.  Creating a separate Java constant value would require the constant to be copied at run time.
+In many cases, where the Maps API provides a constant value, the GWT wrappers will provide a class with an accessor method to retrieve the value.  This is primarily for run-time efficiency and compact code generation in GWT.  Creating a separate Java constant value would require the constant to be copied at run time.
 
 == Event Handling ==
 
