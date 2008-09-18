@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.client.overlay;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -26,6 +27,15 @@ public class OverlayTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 5000;
 
+  static native JavaScriptObject nativeCreatePolygon(LatLng p1, LatLng p2,
+      LatLng p3) /*-{
+    return new $wnd.GPolygon([p1,p2,p3]);
+  }-*/;
+
+  static native JavaScriptObject nativeCreatePolyline(LatLng p1, LatLng p2) /*-{
+    return new $wnd.GPolyline([p1,p2]);
+  }-*/;
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
@@ -34,8 +44,24 @@ public class OverlayTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
+  }
+
+  public void testIsPolygon() {
+    Overlay o = Overlay.createPeer(nativeCreatePolygon(
+        LatLng.newInstance(0, 0), LatLng.newInstance(1, 1), LatLng.newInstance(
+            2, 0)));
+    assertFalse("overlay instanceof Polyline", o instanceof Polyline);
+    assertTrue("overlay instanceof Polygon", o instanceof Polygon);
+  }
+
+  public void testIsPolyline() {
+    Overlay o = Overlay.createPeer(nativeCreatePolyline(
+        LatLng.newInstance(0, 0), LatLng.newInstance(1, 1)));
+    assertTrue("overlay instanceof Polyline", o instanceof Polyline);
+    assertFalse("overlay instanceof Polygon", o instanceof Polygon);
   }
 
   public void testOverlayZIndex() {
@@ -46,5 +72,5 @@ public class OverlayTest extends GWTTestCase {
     assertTrue("expected non-zero value", result2 != 0.0);
     assertTrue("expected result1 > result2 ", result1 > result2);
   }
-  
+
 }

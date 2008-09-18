@@ -114,8 +114,7 @@ public final class Polyline extends ConcreteOverlay {
    * @param jsoPeer GPolyline object to wrap.
    * @return a new instance of Polyline.
    */
-  @SuppressWarnings("unused")
-  private static Polyline createPeer(JavaScriptObject jsoPeer) {
+  static Polyline createPeer(JavaScriptObject jsoPeer) {
     return new Polyline(jsoPeer);
   }
 

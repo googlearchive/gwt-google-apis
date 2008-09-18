@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
@@ -38,6 +37,7 @@ import com.google.gwt.maps.client.impl.MapImpl;
 import com.google.gwt.maps.client.impl.MarkerImpl;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 import com.google.gwt.maps.jsio.client.JSList;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
@@ -55,7 +55,7 @@ import java.util.List;
  * 
  * @see MapWidget#getInfoWindow()
  */
-public final class InfoWindow {
+public final class InfoWindow extends ConcreteOverlay {
 
   private static class VirtualPanel extends ComplexPanel {
 
@@ -100,7 +100,6 @@ public final class InfoWindow {
   private HandlerCollection<InfoWindowRestoreClickHandler> infoWindowRestoreClickHandlers;
   private HandlerCollection<InfoWindowRestoreEndHandler> infoWindowRestoreEndHandlers;
 
-  private final JavaScriptObject jsoPeer;
   private final MapWidget map;
 
   /**
@@ -117,8 +116,8 @@ public final class InfoWindow {
    * @param map the map to which this InfoWindow belongs.
    */
   InfoWindow(MapWidget map) {
+    super(MapImpl.impl.getInfoWindow(map));
     this.map = map;
-    jsoPeer = MapImpl.impl.getInfoWindow(map);
   }
 
   /**

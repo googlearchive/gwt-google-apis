@@ -37,7 +37,7 @@ public class TileLayerOverlay extends ConcreteOverlay {
     return overlay;
   }
   
-  private TileLayerOverlay(JavaScriptObject jso) {
+  TileLayerOverlay(JavaScriptObject jso) {
     super(jso);
   }
   

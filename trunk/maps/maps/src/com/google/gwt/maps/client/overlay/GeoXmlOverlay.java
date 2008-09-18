@@ -149,7 +149,7 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
    * 
    * @param jsoPeer Create an instance of GeoXmlOverlay from an existing JSO
    */
-  private GeoXmlOverlay(JavaScriptObject jsoPeer) {
+  GeoXmlOverlay(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 

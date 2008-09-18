@@ -56,7 +56,7 @@ public final class GroundOverlay extends ConcreteOverlay {
     super(GroundOverlayImpl.impl.construct(imageUrl, bounds));
   }
 
-  private GroundOverlay(JavaScriptObject jsoPeer) {
+  GroundOverlay(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
   /**
