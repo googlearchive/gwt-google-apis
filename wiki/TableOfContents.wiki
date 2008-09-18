@@ -22,6 +22,7 @@
      * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
      * [MapsHelloMaps Sample Applications]
      * [MapsJavadoc API Reference]
+     * [MapsReleaseNotes Release Notes]
      * [MapsFAQ FAQs]
    * [GettingStartedVisualization Google Visualization API] 
  * [MakingGALGWTBetter Making Google API Libraries Better]
