@@ -130,7 +130,7 @@ public class Marker extends ConcreteOverlay {
     super(MarkerImpl.impl.construct(point, options));
   }
 
-  private Marker(JavaScriptObject jsoPeer) {
+  Marker(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 

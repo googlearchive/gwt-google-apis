@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.client.overlay;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.event.TrafficOverlayChangedHandler;
 import com.google.gwt.maps.client.event.TrafficOverlayChangedHandler.TrafficOverlayChangedEvent;
 import com.google.gwt.maps.client.impl.HandlerCollection;
@@ -48,39 +49,49 @@ public final class TrafficOverlay extends ConcreteOverlay {
     super(TrafficOverlayImpl.impl.construct());
   }
 
-  /**
-     *
-     *  This event is fired when the state of traffic data changes within the current viewport. This event may be fired either when moving the map between areas with and without traffic data or when the addition of a {@link TrafficOverlay}  to the map results in traffic data appearing within the current viewport.
+  TrafficOverlay(JavaScriptObject jsoPeer) {
+    super(jsoPeer);
+  }
 
-     *
-     * @param handler the handler to call when this event fires.
-     */
-    public void addTrafficOverlayChangedHandler(
-        final TrafficOverlayChangedHandler handler) {
-      maybeInitTrafficOverlayChangedHandlers();
-
-      trafficOverlayChangedHandlers.addHandler(handler,
-          new BooleanCallback() {
-            @Override
-            public void callback(boolean trafficInView) {
-              TrafficOverlayChangedEvent e = new TrafficOverlayChangedEvent(
-                  TrafficOverlay.this, trafficInView);
-              handler.onChanged(e);
-            }
-          });
-    }
   /**
-     * Removes a single handler of this map previously added with
-     * {@link TrafficOverlay#addTrafficOverlayChangedHandler(TrafficOverlayChangedHandler)}.
-     * 
-     * @param handler the handler to remove
-     */
-    public void removeTrafficOverlayHandler(TrafficOverlayChangedHandler handler) {
-      if (trafficOverlayChangedHandlers != null) {
-        trafficOverlayChangedHandlers.removeHandler(handler);
+   * 
+   * This event is fired when the state of traffic data changes within the
+   * current viewport. This event may be fired either when moving the map
+   * between areas with and without traffic data or when the addition of a
+   * {@link TrafficOverlay} to the map results in traffic data appearing within
+   * the current viewport.
+   * 
+   * 
+   * @param handler the handler to call when this event fires.
+   */
+  public void addTrafficOverlayChangedHandler(
+      final TrafficOverlayChangedHandler handler) {
+    maybeInitTrafficOverlayChangedHandlers();
+
+    trafficOverlayChangedHandlers.addHandler(handler, new BooleanCallback() {
+      @Override
+      public void callback(boolean trafficInView) {
+        TrafficOverlayChangedEvent e = new TrafficOverlayChangedEvent(
+            TrafficOverlay.this, trafficInView);
+        handler.onChanged(e);
       }
+    });
+  }
+
+  /**
+   * Removes a single handler of this map previously added with
+   * {@link TrafficOverlay#addTrafficOverlayChangedHandler(TrafficOverlayChangedHandler)}
+   * .
+   * 
+   * @param handler the handler to remove
+   */
+  public void removeTrafficOverlayHandler(TrafficOverlayChangedHandler handler) {
+    if (trafficOverlayChangedHandlers != null) {
+      trafficOverlayChangedHandlers.removeHandler(handler);
     }
-   /**
+  }
+
+  /**
    * Shows or hides this overlay.
    * 
    * @param visible <code>true</code> to show the overlay, false to hide.
@@ -88,23 +99,23 @@ public final class TrafficOverlay extends ConcreteOverlay {
   public void setVisible(boolean visible) {
     TrafficOverlayImpl.impl.setVisible(this, visible);
   }
-    
-    /**
-     * Manually trigger the specified event on this object.
-     * 
-     * Note: The trigger() methods are provided for unit testing purposes only.
-     * 
-     * @param event an event to deliver to the handler.
-     */
-    void trigger(TrafficOverlayChangedEvent event) {
-      maybeInitTrafficOverlayChangedHandlers();
-      trafficOverlayChangedHandlers.trigger(event.isTrafficInView());
-    }
 
-    private void maybeInitTrafficOverlayChangedHandlers() {
-      if (trafficOverlayChangedHandlers == null) {
-        trafficOverlayChangedHandlers = new HandlerCollection<TrafficOverlayChangedHandler>(
-            jsoPeer, MapEvent.CHANGED);
-      }
+  /**
+   * Manually trigger the specified event on this object.
+   * 
+   * Note: The trigger() methods are provided for unit testing purposes only.
+   * 
+   * @param event an event to deliver to the handler.
+   */
+  void trigger(TrafficOverlayChangedEvent event) {
+    maybeInitTrafficOverlayChangedHandlers();
+    trafficOverlayChangedHandlers.trigger(event.isTrafficInView());
+  }
+
+  private void maybeInitTrafficOverlayChangedHandlers() {
+    if (trafficOverlayChangedHandlers == null) {
+      trafficOverlayChangedHandlers = new HandlerCollection<TrafficOverlayChangedHandler>(
+          jsoPeer, MapEvent.CHANGED);
     }
+  }
 }

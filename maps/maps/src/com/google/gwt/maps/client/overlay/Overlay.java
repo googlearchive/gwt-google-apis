@@ -21,8 +21,7 @@ import com.google.gwt.maps.client.impl.OverlayImpl;
 import com.google.gwt.maps.jsio.client.Exported;
 
 /**
- * The base class for adding objects at a specific position on top of
- * the map.
+ * The base class for adding objects at a specific position on top of the map.
  */
 public abstract class Overlay {
 
@@ -80,10 +79,68 @@ public abstract class Overlay {
    * @param jsoPeer GOverlay object to wrap.
    * @return a new instance of Overlay.
    */
-  @SuppressWarnings("unused")
-  private static Overlay createPeer(JavaScriptObject jsoPeer) {
+  static Overlay createPeer(JavaScriptObject jsoPeer) {
+    if (nativeIsMarker(jsoPeer)) {
+      return new Marker(jsoPeer);
+    } else if (nativeIsPolyline(jsoPeer)) {
+      return new Polyline(jsoPeer);
+    } else if (nativeIsPolygon(jsoPeer)) {
+      return new Polygon(jsoPeer);
+    } else if (nativeIsGroundOverlay(jsoPeer)) {
+      return new GroundOverlay(jsoPeer);
+    } else if (nativeIsGeoXmlOverlay(jsoPeer)) {
+      return new GeoXmlOverlay(jsoPeer);
+    } else if (nativeIsTileLayerOverlay(jsoPeer)) {
+      return new TileLayerOverlay(jsoPeer);
+    } else if (nativeIsTrafficOverlay(jsoPeer)) {
+      return new TrafficOverlay(jsoPeer);
+    } else if (nativeIsInfoWindow(jsoPeer)) {
+      // We should never get to this code as MapWidget calls getInfoWindow()
+      // in its constructor, so all InfoWindow instances should already be
+      // bound.
+      throw new UnsupportedOperationException(
+          "Can't create InfoWindow object from JavaScriptObject.");
+    }
     return new ConcreteOverlay(jsoPeer);
   }
+
+  private static native boolean nativeIsGeoXmlOverlay(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GGeoXmlOverlay);
+  }-*/;
+
+  private static native boolean nativeIsGroundOverlay(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GGroundOverlay);
+  }-*/;
+
+  private static native boolean nativeIsInfoWindow(JavaScriptObject jsoPeer) /*-{
+    // The instanceof test won't work, because $wnd.GInfoWindow has no constructor.
+    // Let's see if it quacks like a duck (has similar member functions)...
+    if (!jsoPeer.selectTab || !jsoPeer.getTabs || !jsoPeer.getPixelOffset) {
+      return false;
+    }  
+    return true;
+  }-*/;
+
+  private static native boolean nativeIsMarker(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GMarker);
+  }-*/;
+
+  private static native boolean nativeIsPolygon(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GPolygon);
+  }-*/;
+
+  private static native boolean nativeIsPolyline(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GPolyline);
+  }-*/;
+
+  private static native boolean nativeIsTileLayerOverlay(
+      JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GTileLayerOverlay);
+  }-*/;
+
+  private static native boolean nativeIsTrafficOverlay(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GTrafficOverlay);
+  }-*/;
 
   protected final JavaScriptObject jsoPeer;
 
@@ -133,5 +190,4 @@ public abstract class Overlay {
    */
   @Exported
   protected abstract void remove();
-
 }

@@ -88,8 +88,7 @@ public final class Polygon extends ConcreteOverlay {
    * @param jsoPeer GPolygon object to wrap.
    * @return a new instance of Polygon.
    */
-  @SuppressWarnings("unused")
-  private static Polygon createPeer(JavaScriptObject jsoPeer) {
+  static Polygon createPeer(JavaScriptObject jsoPeer) {
     return new Polygon(jsoPeer);
   }
 

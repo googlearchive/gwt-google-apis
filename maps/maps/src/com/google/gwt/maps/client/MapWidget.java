@@ -203,6 +203,8 @@ public final class MapWidget extends Composite {
       center = LatLng.newInstance(0, 0);
     }
     setCenter(center, zoomLevel);
+    // Initialize the InfoWindow instance for this map.
+    getInfoWindow();
   }
 
   /**
