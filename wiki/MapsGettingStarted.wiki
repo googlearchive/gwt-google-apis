@@ -2,15 +2,15 @@
 
 = Getting Started with Google Maps =
 
-The Google Maps API provides convenient JavaScript APIs which allow you to add mapping functionality to your application. The [http://code.google.com/p/gwt-google-apis Google Maps library for GWT] allows you to access these JavaScript APIs from Java code compiled with the GWT compiler.
+The Google Maps API provides a convenient JavaScript API which allows you to add mapping functionality to your application. The [http://code.google.com/p/gwt-google-apis Google Maps library for GWT] allows you to access this JavaScript API from Java code compiled with the GWT compiler.
 
 This guide describes the basics of getting the Google Maps Library working in a GWT project. For more information on the functionality provided by the API itself, see the [http://code.google.com/apis/maps/ Google Maps API] developer's guide.
 
 
 == Assumptions ==
  
-* You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
-* You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
+  * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
+  * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
 
 
 == Downloading the Google Maps Library for GWT ==
@@ -143,7 +143,7 @@ public class SimpleMaps implements EntryPoint {
 
 == Run the !SimpleMaps sample project ==
 
-Now, you should be able to execute your sample project in hosted mode by  launch the skeleton project in hosted mode by either running _!SimpleMaps-shell_ from the command line or using the _Run_ configuration from Eclipse.  
+Now you should be able to execute your sample project in hosted mode by either running _!SimpleMaps-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
   http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic5.png
 
