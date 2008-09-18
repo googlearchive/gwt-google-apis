@@ -1,15 +1,15 @@
 #summary Differences between the Maps JavaScript API and the GWT Wrappers
 
 
-= Differences between the Maps API and the GWT wrappers =
+= Differences between the JavaScript Maps API and the Maps API Library for Google Web Toolkit =
 
 == Naming ==
 
-The Maps API prepends all methods with the letter `G`.  The GWT wrappers drop this prefix.
+The Maps API prepends all methods with the letter `G`.  The GWT library drop this prefix.
 
 == Constant Values ==
 
-In many cases, where the Maps API provides a constant value, the GWT wrappers will provide a class with an accessor method to retrieve the value.  This is primarily for run-time efficiency and compact code generation in GWT.  Creating a separate Java constant value would require the constant to be copied at run time.
+In many cases, where the Maps API provides a constant value, the GWT library will provide a class with an accessor method to retrieve the value.  This is primarily for run-time efficiency and compact code generation in GWT.  Creating a separate Java constant value would require the constant to be copied at run time.
 
 == Event Handling ==
 
@@ -33,6 +33,3 @@ The GWT wrappers use a concept known as !JavaScript overlay types to represent a
 
 The Maps team releases new versions of the Google Maps api every few weeks.  The `gwt-maps` wrapper trails the public release of the Maps APIs and probably won't contain all the features you see on the [http://code.google.com/apis/maps Google Maps developer site].
 
-== Undocumented Features ==
-
-In general, since the `gwt-maps` api ships with source code, the features you can see are the features you can use.  In general, only the supported, documented features of the Maps API are included in the GWT bindings.
