@@ -77,6 +77,8 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void disableDragging(JavaScriptObject jsoPeer);
 
+  void disableGoogleBar(JavaScriptObject jsoPeer);
+
   void disableInfoWindow(JavaScriptObject jsoPeer);
 
   void disableScrollWheelZoom(JavaScriptObject jsoPeer);
@@ -90,6 +92,8 @@ public interface MapImpl extends JSFlyweightWrapper {
   void enableDoubleClickZoom(JavaScriptObject jsoPeer);
 
   void enableDragging(JavaScriptObject jsoPeer);
+  
+  void enableGoogleBar(JavaScriptObject jsoPeer);
 
   void enableInfoWindow(JavaScriptObject jsoPeer);
 
@@ -110,6 +114,8 @@ public interface MapImpl extends JSFlyweightWrapper {
   LatLng getCenter(JavaScriptObject jsoPeer);
 
   MapType getCurrentMapType(JavaScriptObject jsoPeerPeer);
+
+  void getEarthInstance(JavaScriptObject jsoPeer, JavaScriptObject jsoCallback);
 
   JavaScriptObject getInfoWindow(MapWidget map);
 

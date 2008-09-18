@@ -15,10 +15,14 @@
  */
 package com.google.gwt.maps.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
+import com.google.gwt.maps.client.event.EarthInstanceHandler;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -41,6 +45,7 @@ import com.google.gwt.maps.client.event.MapRemoveOverlayHandler;
 import com.google.gwt.maps.client.event.MapRightClickHandler;
 import com.google.gwt.maps.client.event.MapTypeChangedHandler;
 import com.google.gwt.maps.client.event.MapZoomEndHandler;
+import com.google.gwt.maps.client.event.EarthInstanceHandler.EarthInstanceEvent;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler.MapAddMapTypeEvent;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler.MapAddOverlayEvent;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler.MapClearOverlaysEvent;
@@ -123,10 +128,54 @@ public final class MapWidget extends Composite {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * Performs the actual callback when getting the earth instance. This method
+   * is invoked by the JavaScript function passed to
+   * GMap2.getEarthInstance(callback). Implementation is in GWT Java rather than
+   * JSNI to simplify the code.
+   * 
+   * @param handler the {@link EarthInstanceHandler} to invoke.
+   * @param mapWidget the map to add this earth handler to.
+   * @param earthInstance the potential Earth object, or null if the earth
+   *          instance failed to initialize
+   */
+  @SuppressWarnings("unused")
+  private static void earthInstanceCallback(
+      EarthInstanceHandler earthInstanceHandler, MapWidget mapWidget,
+      JavaScriptObject earthInstance) {
+    EarthInstanceEvent event = new EarthInstanceEvent(mapWidget, earthInstance);
+
+    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
+    if (handler != null) {
+      try {
+        earthInstanceHandler.onEarthInstance(event);
+      } catch (JavaScriptException e) {
+        handler.onUncaughtException(e);
+      }
+    } else {
+      earthInstanceHandler.onEarthInstance(event);
+    }
+  }
+
+  /**
+   * Returns a JavaScript function suitable for passing to
+   * GMap2.getEarthInstance(callback) via the MapWidgetImpl JSFlyweightWrapper.
+   * 
+   * @param handler the EarthInstanceHandler to invoke
+   * @return the JavaScript callback function
+   */
+  private static native JavaScriptObject getEarthInstanceCB(
+      EarthInstanceHandler handler, MapWidget mapWidget)/*-{
+    return function(object) {
+      @com.google.gwt.maps.client.MapWidget::earthInstanceCallback(Lcom/google/gwt/maps/client/event/EarthInstanceHandler;Lcom/google/gwt/maps/client/MapWidget;Lcom/google/gwt/core/client/JavaScriptObject;)(handler, mapWidget, object);
+    };
+  }-*/;
+
   private static native void nativeUnload() /*-{
     $wnd.GUnload && $wnd.GUnload();
   }-*/;
 
+  private InfoWindow infoWindow;
   private HandlerCollection<MapInfoWindowBeforeCloseHandler> infoWindowBeforeCloseHandlers;
   private HandlerCollection<MapInfoWindowCloseHandler> infoWindowCloseHandlers;
   private HandlerCollection<MapInfoWindowOpenHandler> infoWindowOpenHandlers;
@@ -152,7 +201,6 @@ public final class MapWidget extends Composite {
   private HandlerCollection<MapRightClickHandler> mapRightClickHandlers;
   private HandlerCollection<MapTypeChangedHandler> mapTypeChangedHandlers;
   private HandlerCollection<MapZoomEndHandler> mapZoomEndHandlers;
-  private InfoWindow infoWindow;
 
   /**
    * Cache of the map panes returned for this widget.
@@ -773,6 +821,18 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Asynchronously retrieves the Earth instance, initializing it if necessary.
+   * On success, the event will contain an initialized Earth Plugin object. On
+   * failure, the Earth Plugin object will be null.
+   * 
+   * @param handler the {@link EarthInstanceHandler} to invoke on initialization
+   *          or failure
+   */
+  public void getEarthInstance(EarthInstanceHandler handler) {
+    MapImpl.impl.getEarthInstance(jsoPeer, getEarthInstanceCB(handler, this));
+  }
+
+  /**
    * Gets the info window associated with the map.
    * 
    * There is only one info window per map.
@@ -1344,6 +1404,21 @@ public final class MapWidget extends Composite {
       MapImpl.impl.enableDragging(jsoPeer);
     } else {
       MapImpl.impl.disableDragging(jsoPeer);
+    }
+  }
+
+  /**
+   * Enables or disables the GoogleBar, an integrated search control, to the
+   * map. When enabled, this control takes the place of the default Powered By
+   * Google logo. Note that this control is not enabled by default.
+   * 
+   * @param enabled pass <code>true</code> to enable the Googlebar.
+   */
+  public void setGoogleBarEnabled(boolean enabled) {
+    if (enabled) {
+      MapImpl.impl.enableGoogleBar(jsoPeer);
+    } else {
+      MapImpl.impl.disableGoogleBar(jsoPeer);
     }
   }
 
