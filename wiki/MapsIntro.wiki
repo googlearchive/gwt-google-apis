@@ -1,9 +1,0 @@
-﻿#summary Bindings for the Maps API from Google
-
-= Maps API = 
-
-   * [MapsGettingStarted Getting Started with Google Maps]
-   * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
-   * [MapsHelloMaps The HelloMaps demo]
-   * [MapsJavadoc Class Reference]
-   * [MapsFAQ FAQ]
