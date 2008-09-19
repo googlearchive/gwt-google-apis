@@ -17,7 +17,7 @@ The Maps event handling in !JavaScript relies on !JavaScript's dynamic type syst
 
 == Subclassing ==
 
-Subclassing in Java and !JavaScript has different semantics.  When using GWT to wrap !JavaScript, the API author must be careful to preseve the semantics of subclassing (such as the super() method).  In some cases, you will see that a special class has been provided to allow authors to create a subclass.  See [http://gwt-google-apis.googlecode.com/svn/javadoc/1.1/maps/com/google/gwt/maps/client/geocode/CustomGeocodeCache.html CustomGeocodeCache].
+Subclassing in Java and !JavaScript has different semantics.  When using GWT to wrap !JavaScript, the API author must be careful to preseve the semantics of subclassing (such as the super() method).  In some cases, you will see that a special class has been provided to allow authors to create a subclass.  See [http://gwt-google-apis.googlecode.com/svn/javadoc/maps/1.0/com/google/gwt/maps/client/geocode/CustomGeocodeCache.html CustomGeocodeCache].
 
 You may notice that there are other classes that you would like to subclass that have been marked final.  Often it is because the implications of creating a subclass have not yet been considered.  Consider using composition instead.  If that will not work, please post on the [http://groups.google.com Google-web-toolkit-contributors group] if you find a class marked final that you would like to remove the restriction.
 
