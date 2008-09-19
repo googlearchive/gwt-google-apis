@@ -3,27 +3,31 @@
  * AJAX Search
    * [AJAXSearchGettingStarted Getting Started]
    * [AJAXSearchJavadoc API Reference]
+   * [AJAXSearchSampleApplications Sample Applications]
    * [AJAXSearchReleaseNotes Release Notes]
    * [AJAXSearchFAQ FAQs]
  * Gadgets
    * [GadgetsGettingStarted Getting Started]
    * [GadgetsJavadoc API Reference]
+   * [GadgetsSampleApplications Sample Applications]
    * [GadgetsReleaseNotes Release Notes]
    * [GadgetsFAQ FAQs]
  * Gears
    * [GearsGettingStarted Getting Started]
       * [GearsGettingStartedDatabase Using the Gears Database]
    * [GearsJavadoc API Reference]
+   * [GearsSampleApplications Sample Applications]
    * [GearsReleaseNotes Release Notes]
    * [GearsFAQ FAQs]
+
+ * Maps
+   * [MapsGettingStarted GettingStarted]
+   * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
+   * [MapsSampleApplications Sample Applications]
+   * [MapsJavadoc API Reference]
+   * [MapsReleaseNotes Release Notes]
+   * [MapsFAQ FAQs]
  * APIs In Progress
-   * [MapsIntro Google Maps API]
-     * [MapsGettingStarted GettingStarted]
-     * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
-     * [MapsHelloMaps Sample Applications]
-     * [MapsJavadoc API Reference]
-     * [MapsReleaseNotes Release Notes]
-     * [MapsFAQ FAQs]
    * [GettingStartedVisualization Google Visualization API] 
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
