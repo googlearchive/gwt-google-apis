@@ -1,0 +1,6 @@
+com.google.gwt.maps.client
+com.google.gwt.maps.client.control
+com.google.gwt.maps.client.event
+com.google.gwt.maps.client.geocode
+com.google.gwt.maps.client.geom
+com.google.gwt.maps.client.overlay
