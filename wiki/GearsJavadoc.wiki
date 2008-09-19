@@ -1,4 +1,4 @@
-﻿#summary Class Reference for the Gears API Library
+#summary Class Reference for the Gears API Library
 
 = Gears API Class Reference =
 
