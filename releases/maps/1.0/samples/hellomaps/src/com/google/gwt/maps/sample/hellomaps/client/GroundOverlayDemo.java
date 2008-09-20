@@ -36,7 +36,7 @@ public class GroundOverlayDemo extends MapsDemo {
 
   private static HTML descHTML = null;
 
-  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA.</p>"
+  private static final String descString = "<p>Creates a map viewport centered on Palo Alto, CA USA.</p>"
       + "<p>Draws a ground overlay at the center of the maps window with an image of a boot.</p>\n";
 
   public static MapsDemoInfo init() {
@@ -72,7 +72,7 @@ public class GroundOverlayDemo extends MapsDemo {
     map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     vp.add(map);
     vp.setSpacing(10);
-    map.setSize("300px", "500px");
+    map.setSize("500px", "500px");
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
     
