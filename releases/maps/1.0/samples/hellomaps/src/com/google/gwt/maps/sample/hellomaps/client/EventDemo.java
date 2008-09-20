@@ -61,7 +61,7 @@ public class EventDemo extends MapsDemo {
 
       @Override
       public String getName() {
-        return "Event Handlers";
+        return "Simple Event Handler Demo";
       }
     };
   }
