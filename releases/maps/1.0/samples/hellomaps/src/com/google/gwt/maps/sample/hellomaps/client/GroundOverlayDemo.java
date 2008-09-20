@@ -81,6 +81,11 @@ public class GroundOverlayDemo extends MapsDemo {
     hideButton.addClickListener(new ClickListener() {
 
       public void onClick(Widget sender) {
+        if (groundOverlay.isVisible()) {
+          hideButton.setText("Show");
+        } else {
+          hideButton.setText("Hide");
+        }
         groundOverlay.setVisible(!groundOverlay.isVisible());
       }
 
