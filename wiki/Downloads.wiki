@@ -22,18 +22,16 @@ A number of additional libraries are now available as Release Candidates and are
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.0.tar.gz gwt-search-1.0.0.tar.gz]
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.0.zip gwt-search-1.0.0.zip]
 
+*Google Maps API Library 1.0 (Release Candidate)*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.0.tar.gz gwt-maps-1.0.0.tar.gz]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.0.zip gwt-maps-1.0.0.zip]
+
 ----
 
 ===Milestone Builds===
 The following libraries are under active development and available as milestone builds. 
 
-*Google Maps Milestone R290*
-
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-0.0.290.tar.gz gwt-maps-0.0.290.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-0.0.290.zip gwt-maps-0.0.290.zip ] 
-
-
-
+   * (None available at this time)
 
 ===Licensing===
 
