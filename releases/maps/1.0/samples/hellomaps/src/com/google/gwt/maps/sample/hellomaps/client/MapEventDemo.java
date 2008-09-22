@@ -203,7 +203,7 @@ public class MapEventDemo extends MapsDemo {
       + "<p>Below the action buttons there is a table of all handlers that "
       + "  have been added.  Each entry contains the following items:</p>\n"
       + "<ul>\n"
-      + "<li><b>ID</b> A unique ID for each handlerer.</li>\n"
+      + "<li><b>ID</b> A unique ID for each handler.</li>\n"
       + "<li><b>Type</b> The type of handler.</li>\n"
       + "<li><b>Events</b> A textbox that shows events as they happen.</li>"
       + "<li><b>Clear Text</b> A button that clears the <b>Events</b> textbox.</li>"

@@ -52,7 +52,7 @@ public class DrawingOverlayDemo extends MapsDemo {
       + "<p>You can create lines or polygons on the map by clicking the <i>Draw New Object</i> button. "
       + "The resulting dialog box allows you to control the properties of the object to draw."
       + "You can edit the last line you created by clicking the <i>Edit Polyline</i> button, or "
-      + "the last polygon you crated by clicking the <i>Edit Polygon</i> button.</p>";
+      + "the last polygon you created by clicking the <i>Edit Polygon</i> button.</p>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
