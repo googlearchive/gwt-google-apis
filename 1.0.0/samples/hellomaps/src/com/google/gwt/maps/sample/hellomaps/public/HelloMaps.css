@@ -1,0 +1,15 @@
+/* Add some space between the outside browser window and the blue border */
+h2 {
+ font-stretch: narrower;
+  font-weight: 500;
+  margin: 4px;
+}
+
+#hm-map {
+  margin: 10px;
+}
+
+/* Add some space between the blue border and the interior stuff */
+.hm-outerpanel {
+	margin: 10px;
+}
