@@ -36,7 +36,7 @@ public class EarthPluginDemo extends MapsDemo {
 
   private static final String descString = "<p>"
       + "Creates a 500 x 500 pixel map viewport centered on the Googleplex in Mountain View, CA USA. "
-      + "Click the button to invoke the Google Earth plugin (not available on all browsers.)</p>";
+      + "Attempts to invoke the Google Earth plugin (not available on all browsers.)</p>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
