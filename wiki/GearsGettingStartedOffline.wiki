@@ -15,7 +15,8 @@ $ projectCreator -eclipse GearsOfflineTutorial -out GearsOfflineTutorial \
 }}}
 
 {{{
-$ applicationCreator -eclipse GearsOfflineTutorial \ 
+$PP_OFF
+$ applicationCreator -eclipse GearsOfflineTutorial \
      -out GearsOfflineTutorial \
      -addToClassPath /usr/local/gwt-gears/gwt-gears.jar \
      -addModule com.google.gwt.gears.Offline \
@@ -61,25 +62,121 @@ To complete the `GearsOfflineTutorial.java`, you can replace the `onModuleLoad()
 package com.example.google.gwt.gearsdatabasetutorial.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.gears.client.Factory;
+import com.google.gwt.gears.client.GearsException;
+import com.google.gwt.gears.client.localserver.LocalServer;
+import com.google.gwt.gears.client.localserver.ManagedResourceStore;
+import com.google.gwt.gears.offline.client.Offline;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A demonstration of how to use Gears' Database feature.
+ * Tutorial for using Google Gears Offline support
  */
 public class GearsOfflineTutorial implements EntryPoint {
-  private Database db;
-  
-  /**
-   * Each time the application is reloaded, a new entry will be added to the database.
-   */
+
+  private final Button createManagedResourceStoreButton = new Button(
+      "Go Offline");
+
+  private final Button removeManagedResourceStoreButton = new Button(
+      "Remove Offline Store");
+
+  private final Label statusLabel = new Label();
+
   public void onModuleLoad() {
-    Button button = new Button("Go Offline");
-    RootPanel.get("gearsTutorial").add(button);
+    
+    VerticalPanel vpanel = new VerticalPanel();
+    vpanel.setSpacing(5);
+    vpanel.getElement().getStyle().setPropertyPx("margin", 20);
+    RootPanel.get().add(vpanel);
+    HorizontalPanel hpanel = new HorizontalPanel();
+    vpanel.add(hpanel);
+    vpanel.add(statusLabel);
+
+    // Draw a different interface if the application can be served offline.
+    try {
+      LocalServer server = Factory.getInstance().createLocalServer();
+      hpanel.add(createManagedResourceStoreButton);
+      // This check to see if the host page can be served locally
+      if (server.canServeLocally(Window.Location.getPath())) {
+        createManagedResourceStoreButton.setText("Refresh Manifest");
+        // Include a resource the needs to be added to the manifest
+        HTML iframe = new HTML("<iframe src=\"iframe.html\"></iframe>");
+        vpanel.add(iframe);
+        // Give the user an opportunity to delete the managed resource store
+        hpanel.add(removeManagedResourceStoreButton);
+      }
+    } catch (GearsException ex) {
+      Window.alert("Exception: " + ex);
+      return;
+    }
+
+    createManagedResourceStoreButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        statusLabel.setText("Starting update");
+        createManagedResourceStore();
+      }
+    });
+
+    removeManagedResourceStoreButton.addClickListener(new ClickListener() {
+      public void onClick(Widget sender) {
+        try {
+          LocalServer server = Factory.getInstance().createLocalServer();
+          ManagedResourceStore store = Offline.getManagedResourceStore();
+          server.removeManagedStore(store.getName());
+          statusLabel.setText("Removed ManagedResourceStore. Please refresh the page to see the changes.");
+        } catch (GearsException e) {
+          statusLabel.setText(e.getMessage());
+        }
+      }
+    });
+  }
+
+  private void createManagedResourceStore() {
+    try {
+      final ManagedResourceStore managedResourceStore = Offline.getManagedResourceStore();
+
+      new Timer() {
+        final String oldVersion = managedResourceStore.getCurrentVersion();
+        String transferringData = "Transferring data";
+
+        @Override
+        public void run() {
+          switch (managedResourceStore.getUpdateStatus()) {
+            case ManagedResourceStore.UPDATE_OK:
+              if (managedResourceStore.getCurrentVersion().equals(oldVersion)) {
+                statusLabel.setText("No update was available.");
+              } else {
+                statusLabel.setText("Update to "
+                    + managedResourceStore.getCurrentVersion()
+                    + " was completed.  Please refresh the page to see the changes.");
+              }
+              break;
+            case ManagedResourceStore.UPDATE_CHECKING:
+            case ManagedResourceStore.UPDATE_DOWNLOADING:
+              transferringData += ".";
+              statusLabel.setText(transferringData);
+              schedule(500);
+              break;
+            case ManagedResourceStore.UPDATE_FAILED:
+              statusLabel.setText(managedResourceStore.getLastErrorMessage());
+              break;
+          }
+        }
+      }.schedule(500);
+
+    } catch (GearsException e) {
+      statusLabel.setText("");
+      Window.alert(e.getMessage());
+    }
   }
 }
 }}}
@@ -131,6 +228,8 @@ In order to tell the compiler to add logic to the selection script to pull up yo
 Now, you should be able to execute your sample project in hosted mode by either running _!GearsOfflineTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
  _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
+
+ _ Note: The Offline support from Gears will not work with a URL tht begins with `file:///`, so upload your project to a web server to test offline support._
 
 If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.
 1
