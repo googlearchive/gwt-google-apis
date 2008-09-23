@@ -183,13 +183,13 @@ public class GearsOfflineTutorial implements EntryPoint {
 }
 }}}
 
-This demo first displays a button to create a ManagedResourceStore using the Offline class.  Once the button is presses, the update process begins.  When all files are downloaded and available in offline mode, you'll be prompted to refresh the application (using the browser's refresh button.)  You can also disconnect the network to show that the operations are occuring locally.
+This demo first displays a button to create a ManagedResourceStore using the Offline class.  Once the button is presses, the update process begins.  When all files are downloaded and available in offline mode, you'll be prompted to refresh the application (using the browser's refresh button.)  You can also disconnect the network to show that the operations are occurring locally.
 
-  http://gwt-google-apis.googlecode.com/svn/wiki/GearsGettingStarted1.png
+  http://gwt-google-apis.googlecode.com/svn/wiki/GearsOfflineGettingStarted1.png
 
 After the resources are loaded into the ManagedResourceStore, an HTML iframe is loaded from the public path and added to the page.   Also, the buttons change to allow you to attempt to update or to remove the store.  
 
-  http://gwt-google-apis.googlecode.com/svn/wiki/GearsGettingStarted2.png
+  http://gwt-google-apis.googlecode.com/svn/wiki/GearsOfflineGettingStarted2.png
 
 == How to deal with browsers that do not support Gears ==
 
@@ -238,7 +238,7 @@ Now, you should be able to execute your sample project in hosted mode by either 
 
  _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
 
- _ Note: The Offline support from Gears will not work with a URL tht begins with `file:///`, so upload your project to a web server to test offline support._
+ _ Note: The Offline support from Gears will not work with a URL that begins with `file:///`, so upload your project to a web server to test offline support._
 
 If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.
 1
