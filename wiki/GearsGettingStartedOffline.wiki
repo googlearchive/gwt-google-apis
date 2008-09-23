@@ -20,7 +20,7 @@ $ applicationCreator -eclipse GearsOfflineTutorial \
      -out GearsOfflineTutorial \
      -addToClassPath /usr/local/gwt-gears/gwt-gears.jar \
      -addModule com.google.gwt.gears.Offline \
-     com.example.google.gwt.gearsdatabasetutorial.client.GearsOfflineTutorial
+     com.example.google.gwt.gearsofflinetutorial.client.GearsOfflineTutorial
 }}}
 
 
@@ -42,7 +42,7 @@ Compilation succeeded
 
 == Update the HTML host file ==
 
-Replace the body of the HTML host file `com/example/google/gwt/gearsdatabasetutorial/public/GearsOfflineTutorial.html` with a `<div>` tag that we can use for the GWT application.
+Replace the body of the HTML host file `com/example/google/gwt/gearsofflinetutorial/public/GearsOfflineTutorial.html` with a `<div>` tag that we can use for the GWT application.
 
 {{{
 <body>
@@ -54,9 +54,11 @@ Replace the body of the HTML host file `com/example/google/gwt/gearsdatabasetuto
 </body>
 }}}
 
-== Use a Database object in the  .java source ==
+== Use a Offline object in the  .java source ==
 
-To complete the `GearsOfflineTutorial.java`, you can replace the `onModuleLoad()` with the following methods that create a database, insert data, and read from a simple database. 
+The [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/com/google/gwt/gears/offline/client/Offline.html Offline] class provides a convenient way to generate a Gears manifest file.  It works by using a custom GWT linker to track all the generated !JavaScript files as well as resources on the public path.
+
+To complete the `GearsOfflineTutorial.java`, you can replace the `onModuleLoad()` with the following methods that create a [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/com/google/gwt/gears/client/localserver/ManagedResourceStore.html ManagedResourceStore] using the Offline object.
 
 {{{
 package com.example.google.gwt.gearsdatabasetutorial.client;
@@ -95,7 +97,7 @@ public class GearsOfflineTutorial implements EntryPoint {
     
     VerticalPanel vpanel = new VerticalPanel();
     vpanel.setSpacing(5);
-    vpanel.getElement().getStyle().setPropertyPx("margin", 20);
+    vpanel.getElement().getStyle().setPropertyPx("margin", 10);
     RootPanel.get().add(vpanel);
     HorizontalPanel hpanel = new HorizontalPanel();
     vpanel.add(hpanel);
@@ -181,6 +183,13 @@ public class GearsOfflineTutorial implements EntryPoint {
 }
 }}}
 
+This demo first displays a button to create a ManagedResourceStore using the Offline class.  Once the button is presses, the update process begins.  When all files are downloaded and available in offline mode, you'll be prompted to refresh the application (using the browser's refresh button.)  You can also disconnect the network to show that the operations are occuring locally.
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/GearsGettingStarted1.png
+
+After the resources are loaded into the ManagedResourceStore, an HTML iframe is loaded from the public path and added to the page.   Also, the buttons change to allow you to attempt to update or to remove the store.  
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/GearsGettingStarted2.png
 
 == How to deal with browsers that do not support Gears ==
 
