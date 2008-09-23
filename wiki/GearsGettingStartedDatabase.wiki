@@ -4,7 +4,7 @@
 
 ==Creating a new GWT project==
 
-Start by creating a new GWT project called !GearsDatabaseTutorial as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
+Start by creating a new GWT project called !GearsDatabaseTutorial as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial]. 
 
 Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-gears/gwt-gears.jar` to the Java classpath for the launch, compile and .and eclipse definitions. Note that for the purposes of this example we assume `gwt-gears.jar` has been unpacked in `/usr/local/gwt-gears` and that you are using the Eclipse IDE.
 
@@ -34,7 +34,7 @@ Also test out compilation with the `GearsDatabaseTutorial-compile` script or the
 {{{
 $PP_OFF
 $ ./GearsDatabaseTutorial-compile
-Compiling into ./www/com.example.google.gwt.gearsstutorial.GearsTutorial
+Compiling into ./www/com.example.google.gwt.gearsstutorial.GearsDatabaseTutorial
 Copying all files found on public path
 Compilation succeeded
 }}}
