@@ -1,4 +1,4 @@
-#summary Sample applications distributed with Gadgets
+﻿#summary Sample applications distributed with gwt-gadgets
 
 = Gadgets Library Example =
 

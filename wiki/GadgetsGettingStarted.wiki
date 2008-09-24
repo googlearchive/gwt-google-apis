@@ -1,12 +1,12 @@
-#summary How to write and debug a Gadget using GWT
+﻿#summary How to write and debug a Gadget using GWT
 
 = Getting Started with Gadgets and GWT =
 
-The Gadget Library for GWT simplifies gadget development by automatically generating a [http://code.google.com/apis/gadgets/docs/legacy/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project.  After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish] your gadget.
+The gadgets library for GWT simplifies gadget development by automatically generating a [http://code.google.com/apis/gadgets/docs/legacy/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project.  After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish] your gadget.
 
-Please note that the Gadget Library currently only supports the legacy Gadgets API based on the _IG_... namespace.
+Please note that the gadget library currently only supports the legacy gadgets API based on the _IG_... namespace.
 
-This guide will get you started writing your first Gadget.  Before you start, make sure you are familiar with [http://www.google.com/ig iGoogle] and the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Gadgets developer site].
+This guide will get you started writing your first gadget.  Before you start, make sure you are familiar with [http://www.google.com/ig iGoogle] and the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html gadgets developer site].
 
 
 == Assumptions ==
@@ -15,13 +15,13 @@ This guide will get you started writing your first Gadget.  Before you start, ma
   * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
 
 
-== Downloading the Gadget Library for GWT ==
+== Downloading the gadget library for GWT ==
 
 You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-gadgets.jar`. 
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gadgets`.
 
-== Differences between a standard GWT project and a GWT Gadget project==
+== Differences between a standard GWT project and a GWT gadget project==
 
 Look at the sample program _Hello Gadgets_ that ships with the `gwt-gadgets` distribution
 
@@ -35,7 +35,7 @@ There are some differences you will notice from a standard GWT project.
   # There is a relationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.0/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
 
 
-These differences derive from the fact that a Gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Google Gadget developer's documentation].  To meet this requirement, Gadget support is implemented using a custom [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/ext/Linker.html GWT Linker]. 
+These differences derive from the fact that a gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html gadget developer's documentation].  To meet this requirement, gadget support is implemented using a custom [http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/ext/Linker.html GWT Linker]. 
 
 == Creating a new GWT Project ==
 
@@ -43,7 +43,7 @@ Start by creating a new GWT project called !SimpleGadget as described in the [ht
 
 Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gadgets/gwt-gadgets.jar` to the Java classpath for the launch, compile and and eclipse definitions. For the purposes of this example we assume `gwt-gadgets.jar` has been unpacked in `/usr/local/gadgets` and that you are using the Eclipse IDE.
 
-We also need to tell the GWT compiler that we are using the Gadgets module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.gadgets.Gadgets` as the module to be inherited. This will place the inheritance entry `Gadgets.gwt.xml` into the generated project file `SimpleGadget.gwt.xml`.
+We also need to tell the GWT compiler that we are using the gwt-gadgets module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.gadgets.Gadgets` as the module to be inherited. This will place the inheritance entry `Gadgets.gwt.xml` into the generated project file `SimpleGadget.gwt.xml`.
 
 
 {{{

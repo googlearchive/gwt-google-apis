@@ -1,4 +1,4 @@
-#summary Gadgets API Library for GWT Release Notes
+﻿#summary Gadgets API Library for GWT Release Notes
 
 = Gadgets API Library for GWT Release Notes =
 
@@ -6,13 +6,13 @@
 ===Changes since r290===
 
     * This library requires GWT 1.5 or later and Java 1.5 or later.
-    * This release supports the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Legacy Gadget API].
+    * This release supports the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Legacy gadget API].
     * Fixed script and stylesheet injection in gadgets bootstrap.
     * Added xerces library reference for debugging a gadget in hosted mode.
 
 ===Known Issues===
 
-    * Gadgets must be debugged using -noserver and the Gadget must be hosted in a Gadget container like [http://www.google.com/ig iGoogle] or [http://incubator.apache.org/shindig/ Shindig].
+    * Gadgets must be debugged using -noserver and the gadget must be hosted in a gadget container like [http://www.google.com/ig iGoogle] or [http://incubator.apache.org/shindig/ Shindig].
     * GWT RPC does not work through iGoogle (issue 154)
 
 ----

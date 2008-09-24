@@ -1,8 +1,8 @@
-﻿#summary Frequently Asked Questions about the GWT bindings for Gadgets
+﻿#summary Frequently Asked Questions about the GWT bindings for gadgets
 
 = Gadgets  FAQs =
 
-These FAQs refer to the Google API Library for GWT bindings for the Gadgets API.  See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
+These FAQs refer to the Google API Library for GWT bindings for the gadgets API.  See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
 
 
 == Why doesn't the sample work in hosted mode? ==
@@ -35,7 +35,7 @@ Then, on the server side of the connection, there is a second problem to address
   }
 }}}
 
-For a Gadget, override this method in your implementation of `RemoteServiceServlet` and implement it as:
+For a gadget, override this method in your implementation of `RemoteServiceServlet` and implement it as:
 
 {{{
   protected String readContent(HttpServletRequest request)
