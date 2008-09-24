@@ -10,7 +10,11 @@
 		<gwt.ant dir="hellogadgets" />
 	</target>
 
-	<target name="-do" depends="hellogadgets" description="Run all subprojects" />
+	<target name="gadgetrpc" description="Build GadgetRPC">
+		<gwt.ant dir="gadgetrpc" />
+	</target>
+
+	<target name="-do" depends="hellogadgets,gadgetrpc" description="Run all subprojects" />
 
 	<target name="build" description="Builds Gadgets API Library for GWT Samples">
 		<antcall target="-do">
