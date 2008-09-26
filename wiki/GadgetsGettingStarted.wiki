@@ -67,6 +67,9 @@ If you are using the Eclipse IDE, now would be a good time to import your new pr
 Start by opening up `SimpleGadget.java` and changing the class declaration to read:
 
 {{{
+import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.UserPreferences;
+
    public class SimpleGadget extends Gadget<UserPreferences> 
 }}}
 

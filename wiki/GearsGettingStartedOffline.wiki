@@ -42,7 +42,7 @@ Compilation succeeded
 
 == Update the HTML host file ==
 
-Replace the body of the HTML host file `com/example/google/gwt/gearsofflinetutorial/public/GearsOfflineTutorial.html` with a `<div>` tag that we can use for the GWT application.
+Replace the body of the HTML host file `com/example/google/gwt/gearsofflinetutorial/public/Gearsofflinetutorial.html` with a `<div>` tag that we can use for the GWT application.
 
 {{{
 <body>
@@ -58,7 +58,7 @@ Replace the body of the HTML host file `com/example/google/gwt/gearsofflinetutor
 
 The [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/com/google/gwt/gears/offline/client/Offline.html Offline] class provides a convenient way to generate a Gears manifest file.  It works by using a custom GWT linker to track all the generated !JavaScript files as well as resources on the public path.
 
-To complete the `GearsOfflineTutorial.java`, you can replace the `onModuleLoad()` with the following methods that create a [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/com/google/gwt/gears/client/localserver/ManagedResourceStore.html ManagedResourceStore] using the Offline object.
+To complete the `com/example/google/gwt/gearsofflinetutorial/client/GearsOfflineTutorial.java`, you can replace the `onModuleLoad()` with the following methods that create a [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/com/google/gwt/gears/client/localserver/ManagedResourceStore.html ManagedResourceStore] using the Offline object.
 
 {{{
 package com.example.google.gwt.gearsdatabasetutorial.client;
@@ -181,6 +181,20 @@ public class GearsOfflineTutorial implements EntryPoint {
     }
   }
 }
+}}}
+
+The other part of this demo is a separate `HTML` file that is stored in `com/example/google/gwt/gearsofflinetutorial/public/iframe.html`
+
+{{{
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ </head>
+ <body>
+  <h1>Offline Data</h1>
+  This file is being served from the offline store.
+ </body>
+</html>
 }}}
 
 This demo first displays a button to create a ManagedResourceStore using the Offline class.  Once the button is presses, the update process begins.  When all files are downloaded and available in offline mode, you'll be prompted to refresh the application (using the browser's refresh button.)  You can also disconnect the network to show that the operations are occurring locally.
