@@ -132,7 +132,7 @@ public class SimpleMaps implements EntryPoint {
 
     // Add an info window to highlight a point of interest
     map.getInfoWindow().open(map.getCenter(), 
-        new InfoWindowContent("World's Largest Ball of Twine"));
+        new InfoWindowContent("World's Largest Ball of Sisal Twine"));
     
     // Add the map to the HTML host page
     RootPanel.get("mapsTutorial").add(map);
