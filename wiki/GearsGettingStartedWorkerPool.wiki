@@ -15,7 +15,7 @@ $ projectCreator -eclipse GearsWorkerPoolTutorial -out GearsWorkerPoolTutorial \
 
 {{{
 $PP_OFF
-$ applicationCreator -eclipse GearsWorkerPoolTutorial \ 
+$ applicationCreator -eclipse GearsWorkerPoolTutorial \
      -out GearsWorkerPoolTutorial \
      -addToClassPath /usr/local/gwt-gears/gwt-gears.jar \
      -addModule com.google.gwt.gears.Gears \
@@ -37,7 +37,9 @@ $ ./GearsWorkerPoolTutorial-compile
 Compiling into ./www/com.example.google.gwt.mapstutorial.MapsTutorial
 Copying all files found on public path
 Compilation succeeded
-}}}You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!GearsWorkerPoolTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse. 
+}}}
+
+You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!GearsWorkerPoolTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse. 
 
 You should see the skeleton project come up:
 
