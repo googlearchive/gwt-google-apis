@@ -179,4 +179,3 @@ Now, you should be able to execute your sample project in hosted mode by either 
  _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
 
 If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.
-1
