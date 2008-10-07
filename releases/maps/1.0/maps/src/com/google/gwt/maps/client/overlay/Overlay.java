@@ -88,7 +88,7 @@ public abstract class Overlay {
       return new Polygon(jsoPeer);
     } else if (nativeIsGroundOverlay(jsoPeer)) {
       return new GroundOverlay(jsoPeer);
-    } else if (nativeIsGeoXmlOverlay(jsoPeer)) {
+    } else if (nativeIsGeoXml(jsoPeer)) {
       return new GeoXmlOverlay(jsoPeer);
     } else if (nativeIsTileLayerOverlay(jsoPeer)) {
       return new TileLayerOverlay(jsoPeer);
@@ -104,8 +104,8 @@ public abstract class Overlay {
     return new ConcreteOverlay(jsoPeer);
   }
 
-  private static native boolean nativeIsGeoXmlOverlay(JavaScriptObject jsoPeer) /*-{
-    return (jsoPeer instanceof $wnd.GGeoXmlOverlay);
+  private static native boolean nativeIsGeoXml(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GGeoXml);
   }-*/;
 
   private static native boolean nativeIsGroundOverlay(JavaScriptObject jsoPeer) /*-{
