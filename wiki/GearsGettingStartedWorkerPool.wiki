@@ -182,7 +182,7 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
 
 And here is what the above application looks like when run:
 
- [http://gwt-google-apis.googlecode.com/svn/wiki/GearsGettingStartedWorkerPool1.png]
+ http://gwt-google-apis.googlecode.com/svn/wiki/GearsWorkerPoolGettingStarted1.png
 
 == A simple !JavaScript worker ==
 
