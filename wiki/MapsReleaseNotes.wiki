@@ -6,7 +6,7 @@
 ===Changes since r290===
 
    * This library requires GWT 1.5 or later and Java 1.5 or later. 
-   * This library requires the use of the Google Maps API 2.113 or later. 
+   * This library requires the use of the Google Maps API 2.118 or later. 
    * Removed Listener classes for events that were previously deprecated. Each removed class has an equivalent Handler class. 
    * Changed many classes to be subclasses of JavaScriptObject (JavaScript overlay types). This means that you can no longer use new to construct many types - you must use the factory method Type.newInstance() instead. 
    * Fixed problems initializing constants on IE6/7 in Hosted Mode. 
