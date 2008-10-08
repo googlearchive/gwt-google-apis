@@ -82,7 +82,7 @@ public class LocalServerTest extends GWTTestCase {
     assertFalse(ls.canServeLocally(requestedURL));
     rs.capture(new ResourceStoreUrlCaptureHandler() {
       public void onCapture(ResourceStoreUrlCaptureEvent event) {
-        assertTrue(event.isSucceess());
+        assertTrue(event.isSuccess());
         assertEquals(requestedURL, event.getUrl());
         try {
           assertTrue(ls.canServeLocally(requestedURL));
