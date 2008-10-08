@@ -94,7 +94,7 @@ public class ResourceStoreDemo implements EntryPoint {
     statusLabel.setText("Capturing...");
     resourceStore.capture(new ResourceStoreUrlCaptureHandler() {
       public void onCapture(ResourceStoreUrlCaptureEvent event) {
-        if (event.isSucceess()) {
+        if (event.isSuccess()) {
           statusLabel.setText("Captured URL: " + event.getUrl());
         } else {
           statusLabel.setText("Failed to capture URL: " + event.getUrl());
