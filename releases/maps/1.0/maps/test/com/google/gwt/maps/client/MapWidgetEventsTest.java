@@ -347,6 +347,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
         Marker marker = (Marker) o;
         assertTrue(marker.getPoint().getLatitude() == 12.34);
         assertTrue(marker.getPoint().getLongitude() == -22.2);
+        assertTrue(marker.getLatLng().getLatitude() == 12.34);
+        assertTrue(marker.getLatLng().getLongitude() == -22.2);
         assertNotNull("point is null", p);
         assertTrue(p.getLatitude() == 10.1);
         assertTrue(p.getLongitude() == 12.2);
