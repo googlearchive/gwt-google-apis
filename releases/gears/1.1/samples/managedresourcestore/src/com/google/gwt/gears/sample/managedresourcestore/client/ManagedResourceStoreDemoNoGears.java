@@ -25,8 +25,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class ManagedResourceStoreDemoNoGears implements EntryPoint {
   public void onModuleLoad() {
-    RootPanel rootPanel = RootPanel.get();
-    rootPanel.add(new HTML(
+    RootPanel.get("demo").add(new HTML(
         "<font color=\"red\">ERROR: This browser does not support Google Gears.  Please install Gears and reload the application.  Note that GWT Gears applications can only be debugged in hosted mode on Windows.</font>"));
   }
 }
