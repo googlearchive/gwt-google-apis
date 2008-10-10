@@ -2,7 +2,15 @@
 
 = Google AJAX Search API Library for GWT Release Notes =
 
-==Release Notes for 1.0.0==
+==Release Notes for 1.0.1==
+===Changes since 1.0.0===
+
+   * Added an overload to LocalSearch.setCenterPoint() to accept a LatLng object from the Maps API.
+   * Corrected a problem where the widget returned from getHtml() was always null.
+   * Updated the VideoResult class to add hasRating() and hasViewCount() methods.
+
+----
+==Release Notes for 1.0.0 (release candidate)==
 ===Changes since r290===
 
     * This library requires GWT 1.5 or later and Java 1.5 or later.
