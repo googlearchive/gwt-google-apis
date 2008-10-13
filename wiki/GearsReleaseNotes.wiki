@@ -2,19 +2,29 @@
 
 = Gears API Library for GWT Release Notes =
 
-==Release Notes for 1.1.0==
-===Changes since r290===
+==Release Notes for 1.1.1==
+===Changes since 1.1.0==
 
-    * This library requires GWT 1.5 or later and Java 1.5 or later.
-    * Refactored API to use GWT 1.5's new JavaScript overlay feature; you must use the Factory class to get Gears class instances.
-    * Renamed packages under a common client root.
-    * All samples will now rebind their EntryPoints to handle cases where Gears is not installed.
+    * Updated gears_init.js to add support for Gears under Webkit
+    * Messages from workers can now be Objects, primitives, or arrays
+    * Updated the samples to take care of a few cosmetic issues
+    * Added WorkerPoolDemo sample
 
 ===Known Issues===
 
     * Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin. (issue 11)
     * Creating a Worker from a GWT module is not supported out-of-the-box.
     * GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X. As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.
+
+----
+
+==Release Notes for 1.1.0 (release candidate)==
+===Changes since r290===
+
+    * This library requires GWT 1.5 or later and Java 1.5 or later.
+    * Refactored API to use GWT 1.5's new JavaScript overlay feature; you must use the Factory class to get Gears class instances.
+    * Renamed packages under a common client root.
+    * All samples will now rebind their EntryPoints to handle cases where Gears is not installed.
 
 ----
 
