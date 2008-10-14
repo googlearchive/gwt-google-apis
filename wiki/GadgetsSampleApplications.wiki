@@ -11,7 +11,3 @@ On iGoogle, choose the _Add Stuff..._ link on the top right of the main page, th
   `http://gwt.google.com/samples/HelloGadgets-1.0.0/gadget.xml`
 
 Select `OK` to add the gadget to your home page.
-
-
-
-<wiki:gadget url="http://gwt.google.com/samples/GadgetRPC-1.0.1/com.google.gwt.gadgets.sample.gadgetrpc.client.GadgetRPC.gadget.xml" border="1">
