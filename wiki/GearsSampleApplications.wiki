@@ -2,20 +2,26 @@
 
 = Gears Library Examples =
 
-===[http://gwt.google.com/samples/DatabaseDemo-1.1.0/DatabaseDemo.html DatabaseDemo]===
+===[http://gwt.google.com/samples/DatabaseDemo-1.1.1/DatabaseDemo.html DatabaseDemo]===
 	
 [http://gwt-google-apis.googlecode.com/svn/wiki/Database-2.png]
 
 This example demonstrates how to use the Gears Database API to save the last three entries into the text box. Note that the entries are preserved across browser restarts. 
 
-===[http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.0/ManagedResourceStoreDemo.html ManagedResourceStore]===
+===[http://gwt.google.com/samples/ManagedResourceStoreDemo-1.1.1/ManagedResourceStoreDemo.html ManagedResourceStoreDemo]===
 
 [http://gwt-google-apis.googlecode.com/svn/wiki/ManagedResourceStore-2.png]
 
 This is an example of how to use the ManagedResourceStore with a Gears manifest that was automatically created by the Offline module.
 
-===[http://gwt.google.com/samples/ResourceStoreDemo-1.1.0/ResourceStoreDemo.html ResourceStore]===
+===[http://gwt.google.com/samples/ResourceStoreDemo-1.1.1/ResourceStoreDemo.html ResourceStoreDemo]===
 
 [http://gwt-google-apis.googlecode.com/svn/wiki/ResourceStore-2.png]
 
 This is an example of how to use the ResourceStore class.
+
+===[http://gwt.google.com/samples/WorkerPoolDemo-1.1.1/WorkerPoolDemo.html WorkerPoolDemo]===
+
+[http://gwt-google-apis.googlecode.com/svn/wiki/WorkerPool-2.png]
+
+This is an example of how to use the WorkerPool class.
