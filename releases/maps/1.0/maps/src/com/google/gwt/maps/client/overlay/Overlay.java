@@ -84,16 +84,17 @@ public abstract class Overlay {
       return new Marker(jsoPeer);
     } else if (nativeIsPolyline(jsoPeer)) {
       return new Polyline(jsoPeer);
-    } else if (nativeIsPolygon(jsoPeer)) {
-      return new Polygon(jsoPeer);
+    } else if (nativeIsGeoXml(jsoPeer)) {
+      // this test must preceed isGroundOverlay
+      return new GeoXmlOverlay(jsoPeer);
     } else if (nativeIsGroundOverlay(jsoPeer)) {
       return new GroundOverlay(jsoPeer);
-    } else if (nativeIsGeoXml(jsoPeer)) {
-      return new GeoXmlOverlay(jsoPeer);
     } else if (nativeIsTileLayerOverlay(jsoPeer)) {
       return new TileLayerOverlay(jsoPeer);
     } else if (nativeIsTrafficOverlay(jsoPeer)) {
       return new TrafficOverlay(jsoPeer);
+    } else if (nativeIsPolygon(jsoPeer)) {
+      return new Polygon(jsoPeer);
     } else if (nativeIsInfoWindow(jsoPeer)) {
       // We should never get to this code as MapWidget calls getInfoWindow()
       // in its constructor, so all InfoWindow instances should already be
@@ -104,12 +105,35 @@ public abstract class Overlay {
     return new ConcreteOverlay(jsoPeer);
   }
 
+  /**
+   * Workaround for instanceof test failing in JavaScript for some overlay types.  
+   * JS Maps API bug: internal ref 1431785
+   * 
+   * @param jsoPeer the object being tested.
+   * @param prototype the prototype of the type to compare it to.
+   * @return true if all properties in the prototype are found in the object's prototype.
+   */
+  private static native boolean isSameDuckType(JavaScriptObject jsoPeer, JavaScriptObject prototype) /*-{
+  for (var prop in prototype) {
+      if (!(prop in jsoPeer)) {
+        return false;
+      }
+     }
+     return true;
+  }-*/;
+  
   private static native boolean nativeIsGeoXml(JavaScriptObject jsoPeer) /*-{
-    return (jsoPeer instanceof $wnd.GGeoXml);
+    // JS Maps API bug: internal ref 1431785
+    // return (jsoPeer instanceof $wnd.GGeoXml);
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GGeoXml.prototype);
   }-*/;
 
   private static native boolean nativeIsGroundOverlay(JavaScriptObject jsoPeer) /*-{
-    return (jsoPeer instanceof $wnd.GGroundOverlay);
+    // JS Maps API bug: internal ref 1431785
+    // return (jsoPeer instanceof $wnd.GGroundOverlay);
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GGroundOverlay.prototype);
   }-*/;
 
   private static native boolean nativeIsInfoWindow(JavaScriptObject jsoPeer) /*-{
@@ -130,7 +154,10 @@ public abstract class Overlay {
   }-*/;
 
   private static native boolean nativeIsPolyline(JavaScriptObject jsoPeer) /*-{
-    return (jsoPeer instanceof $wnd.GPolyline);
+    // JS Maps API bug: internal ref 1431785
+    // return (jsoPeer instanceof $wnd.GPolyline);
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GPolyline.prototype);
   }-*/;
 
   private static native boolean nativeIsTileLayerOverlay(
@@ -139,7 +166,10 @@ public abstract class Overlay {
   }-*/;
 
   private static native boolean nativeIsTrafficOverlay(JavaScriptObject jsoPeer) /*-{
-    return (jsoPeer instanceof $wnd.GTrafficOverlay);
+    // JS Maps API bug: internal ref 1431785
+    // return (jsoPeer instanceof $wnd.GTrafficOverlay);
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GTrafficOverlay.prototype);
   }-*/;
 
   protected final JavaScriptObject jsoPeer;

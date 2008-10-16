@@ -74,58 +74,92 @@ public class OverlayTest extends GWTTestCase {
 
   public void testIsGeoXmlOverlay() {
     Overlay o = Overlay.createPeer(nativeCreateGeoXml("geoxml-test.html"));
+    assertFalse("overlay instanceof Marker", o instanceof Marker);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
-    assertTrue("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);
+    assertFalse("overlay instanceof TileLayerOverlay",
+        o instanceof TileLayerOverlay);
+    assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
+    assertTrue("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
   }
 
   public void testIsGroundOverlay() {
     Overlay o = Overlay.createPeer(nativeCreateGroundOverlay("spots.png",
         LatLngBounds.newInstance(LatLng.newInstance(0, 0), LatLng.newInstance(
             1, 1))));
+    assertFalse("overlay instanceof Marker", o instanceof Marker);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
     assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);
+    assertFalse("overlay instanceof TileLayerOverlay",
+        o instanceof TileLayerOverlay);
     assertTrue("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
+    assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
   }
 
   public void testIsmarker() {
     Overlay o = Overlay.createPeer(nativeCreateMarker(LatLng.newInstance(0, 0)));
     assertTrue("overlay instanceof Marker", o instanceof Marker);
+    assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
+    assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
+    assertFalse("overlay instanceof TileLayerOverlay",
+        o instanceof TileLayerOverlay);
+    assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
   }
 
   public void testIsPolygon() {
     Overlay o = Overlay.createPeer(nativeCreatePolygon(
         LatLng.newInstance(0, 0), LatLng.newInstance(1, 1), LatLng.newInstance(
             2, 0)));
+    assertFalse("overlay instanceof Marker", o instanceof Marker);
+    assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
+    assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
+    assertFalse("overlay instanceof TileLayerOverlay",
+        o instanceof TileLayerOverlay);
+    assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
     assertTrue("overlay instanceof Polygon", o instanceof Polygon);
   }
 
   public void testIsPolyline() {
     Overlay o = Overlay.createPeer(nativeCreatePolyline(
         LatLng.newInstance(0, 0), LatLng.newInstance(1, 1)));
+    assertFalse("overlay instanceof Marker", o instanceof Marker);
+    assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
+    assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertTrue("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
+    assertFalse("overlay instanceof TileLayerOverlay",
+        o instanceof TileLayerOverlay);
+    assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
   }
 
   public void testIsTileLayerOverlay() {
     Overlay o = Overlay.createPeer(nativeCreateTileLayerOverlay());
     assertTrue("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
+    assertFalse("overlay instanceof Marker", o instanceof Marker);
+    assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
+    assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
+    assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
   }
 
   public void testIsTrafficOverlay() {
     Overlay o = Overlay.createPeer(nativeCreateTrafficOverlay());
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
+    assertFalse("overlay instanceof Marker", o instanceof Marker);
+    assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
+    assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
     assertTrue("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
+    assertFalse("overlay instanceof TileLayerOverlay",
+        o instanceof TileLayerOverlay);
   }
 
   public void testOverlayZIndex() {
