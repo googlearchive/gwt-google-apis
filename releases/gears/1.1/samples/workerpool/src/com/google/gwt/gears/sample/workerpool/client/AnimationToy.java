@@ -29,7 +29,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A class that creates a little animation window.
- *
  */
 public class AnimationToy extends Composite {
 
@@ -59,7 +58,7 @@ public class AnimationToy extends Composite {
       this.radius = radius;
       this.centerX = this.centerY = radius + 10;
     }
-    
+
     @Override
     protected void onComplete() {
       super.onComplete();
@@ -151,7 +150,7 @@ public class AnimationToy extends Composite {
    * Initialize this example.
    */
   private Widget initialize() {
-    
+
     // Create a new panel
     absolutePanel = new AbsolutePanel();
 
@@ -170,7 +169,6 @@ public class AnimationToy extends Composite {
     absolutePanelWrapper.add(absolutePanel);
 
     // Add the components to a panel and return it
-    absolutePanelWrapper.setSpacing(10);
     absolutePanelWrapper.add(createOptionsBar());
 
     // Create the custom animation
@@ -179,9 +177,9 @@ public class AnimationToy extends Composite {
     // Set the start position of the widgets
     animation.onComplete();
 
-    absolutePanel.setSize((animation.centerX * 2 + 20) + "px", 
-        (animation.centerY * 2 + 20) + "px");
-    absolutePanel.getElement().getStyle().setPropertyPx("margin-left", 40);
+    absolutePanel.setSize((animation.centerX * 2 + 10) + "px",
+        (animation.centerY * 2 + 10) + "px");
+
     // Return the layout
     return absolutePanelWrapper;
   }
@@ -199,7 +197,7 @@ public class AnimationToy extends Composite {
     optionsBar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 
     // Add a title
-    optionsBar.add(new HTML("<b>Play with Animation</b>"));
+    optionsBar.add(new HTML("<b>Animate Logos</b>"));
 
     // Add start button
     startButton = new Button("Start");

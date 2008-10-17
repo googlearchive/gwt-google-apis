@@ -21,6 +21,7 @@ import com.google.gwt.gears.client.workerpool.WorkerPool;
 import com.google.gwt.gears.client.workerpool.WorkerPoolMessageHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DecoratorPanel;
@@ -40,14 +41,15 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
     PiSpigot.Callback {
-  private static final String INTERACTION_DESC = "Notice how the browser "
-    + "freezes during the synchronous calculation, but you can interact with "
-    + "the animation above while the calculation using "
-    + "WorkerPool is running.<br>" 
-    + "<i>Note: In hosted mode, this demo works only on Windows</i>";
-  
+  private static final String INTERACTION_DESC = "<p>Notice how the browser "
+      + "freezes during the synchronous calculation and some browsers alert with "
+      + "a slow script warning.  During the WorkerPool calculation you can "
+      + "interact with the animation and see the results updated interactively.</p>"
+      + "<p><i>Note: In hosted mode, this demo works only on Windows</i></p>";
+
   Button startStopButton = new Button("Start");
-  private RadioButton asyncCalc = new RadioButton("calcGroup", "Asynchronous (WorkerPool) code");
+  private RadioButton asyncCalc = new RadioButton("calcGroup",
+      "Asynchronous (WorkerPool) code");
   private boolean calculationInProgress = false;
   private int currentRow = 0;
   private SimplePanel htmlGoesHere = new SimplePanel();
@@ -56,10 +58,11 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
   private int primeWorkerId;
   private long startTime;
   private Label statusLabel = new Label();
-  private RadioButton syncCalc = new RadioButton("calcGroup", "Synchronous code");
+  private RadioButton syncCalc = new RadioButton("calcGroup",
+      "Synchronous code");
   private VerticalPanel vp = new VerticalPanel();
   private WorkerPool workerPool = null;
-  
+
   /**
    * Callback from PiSpigot class.
    */
@@ -90,11 +93,9 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
 
   public void onModuleLoad() {
 
-    vp.getElement().getStyle().setPropertyPx("margin", 20);
+    vp.setSpacing(10);
     vp.add(buildControlPanel());
     vp.add(statusLabel);
-    statusLabel.getElement().getStyle().setPropertyPx("margin-top", 10);
-    statusLabel.getElement().getStyle().setPropertyPx("margin-bottom", 10);
 
     HorizontalPanel digitPanel = new HorizontalPanel();
     digitPanel.add(new HTML("<h1>3.</h1>"));
@@ -108,7 +109,6 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
   private Widget buildControlPanel() {
     VerticalPanel outerPanel = new VerticalPanel();
     DecoratorPanel tableWrapper = new DecoratorPanel();
-    tableWrapper.getElement().getStyle().setPropertyPx("margin-top", 10);
     FlexTable resultTable = new FlexTable();
 
     numDigitsListBox.addItem("1,000", "1000");
@@ -159,12 +159,15 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
     buildControlPanelRow(resultTable, "", startStopButton);
     tableWrapper.setWidget(resultTable);
 
+    // Position the Animation so that it looks centered. 
     Widget toy = new AnimationToy();
-    toy.getElement().getStyle().setPropertyPx("padding", 10);
-    outerPanel.add(toy);
+    AbsolutePanel toyWrapper = new AbsolutePanel();
+    toyWrapper.setSize("450px", "210px");
+    toyWrapper.add(toy, 70, 0);
+    outerPanel.add(toyWrapper);
+    
     HTML desc = new HTML(INTERACTION_DESC);
     desc.setWidth("450px");
-    desc.getElement().getStyle().setPropertyPx("margin-bottom", 10);
     outerPanel.add(desc);
     outerPanel.add(tableWrapper);
     return outerPanel;
