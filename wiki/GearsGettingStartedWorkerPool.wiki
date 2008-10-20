@@ -1,7 +1,8 @@
 #summary Using the Gears WorkerPool in a GWT project
 
-= Creating a new GWT project =
+=Using the Gears Offline Module in a GWT project=
 
+==Creating a new GWT project==
 
 Start by creating a new GWT project called !GearsWorkerPoolTutorial as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial]. 
 
