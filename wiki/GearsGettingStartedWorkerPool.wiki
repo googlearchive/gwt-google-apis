@@ -47,7 +47,7 @@ Compilation succeeded
 
 == Update the HTML host file ==
 
-Replace the body of the HTML host file `com/example/google/gwt/gearsworkerpooltutorial/public/GearsWorkerPoolTutorial.html` with a `<div>` tag that we can use for the GWT application.
+Replace the body of the HTML host file `src/com/example/google/gwt/gearsworkerpooltutorial/public/GearsWorkerPoolTutorial.html` with a `<div>` tag that we can use for the GWT application.
 
 {{{
 <body>
@@ -61,7 +61,7 @@ Replace the body of the HTML host file `com/example/google/gwt/gearsworkerpooltu
 
 == Use a !WorkerPool object in the  .java source ==
 
-Replace the body of the of the sample .java file `com/example/google/gwt/gearsworkerpooltutorial/client/GearsWorkerPoolTutorial.java` with the following:
+Replace the body of the of the sample .java file `src/com/example/google/gwt/gearsworkerpooltutorial/client/GearsWorkerPoolTutorial.java` with the following:
 
 {{{
 package com.example.google.gwt.gearsworkerpooltutorial.client;
