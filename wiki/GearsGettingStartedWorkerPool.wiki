@@ -216,7 +216,7 @@ function doWork(message) {
        busyVar = "garbage" + busyCounter;
     }
     var now = new Date();
-    if (now.getTime() - start.getTime(/ /> 5000) {
+    if (now.getTime() - start.getTime() > 5000) {
 	break;
     }
   }
