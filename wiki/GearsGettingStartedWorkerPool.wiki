@@ -23,7 +23,7 @@ $ applicationCreator -eclipse GearsWorkerPoolTutorial \
      com.example.google.gwt.gearsworkerpooltutorial.client.GearsWorkerPoolTutorial
 }}}
 
-You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running _!GearsWorkerPoolTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse. 
+You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running `GearsWorkerPoolTutorial-shell` from the command line or using the _Run_ configuration from Eclipse. 
 
 You should see the skeleton project come up:
 
@@ -121,7 +121,11 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
       }
     });
 
-    // Perform some simulated work asynchronously
+    /*
+     * Perform some simulated work asynchronously.
+     * This will load the code for the worker from a file named 'worker.js'
+     * in the ../public directory.
+     */
     workerPoolButton.addClickListener(new ClickListener() {
       public void onClick(Widget w) {
         if (wp == null) {
@@ -130,6 +134,7 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
           workerId = wp.createWorkerFromUrl("worker.js");
         }
         logMessage("Starting Asynchronous...");
+        // The worker will start calculating when it receives this message.
         wp.sendMessage("Asynchronous", workerId);
       }
     });
@@ -180,10 +185,6 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
   }
 }
 }}}
-
-And here is what the above application looks like when run:
-
- http://gwt-google-apis.googlecode.com/svn/wiki/GearsWorkerPoolGettingStarted1.png
 
 == A simple !JavaScript worker ==
 
@@ -261,5 +262,10 @@ In order to tell the compiler to add logic to the selection script to pull up yo
 Now, you should be able to execute your sample project in hosted mode by either running _!GearsWorkerPoolTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
  _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
+
+
+And here is what the tutorial application looks like when run:
+
+ http://gwt-google-apis.googlecode.com/svn/wiki/GearsWorkerPoolGettingStarted1.png
 
 If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.
