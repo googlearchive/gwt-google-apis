@@ -32,7 +32,7 @@ public class Visualization<E extends AbstractDrawOptions> extends JavaScriptObje
    * 
    * @param data The DataTable with the data.
    */
-  public final native void draw(DataTable data) /*-{
+  public final native void draw(AbstractDataTable data) /*-{
     this.draw(data, {});
   }-*/;
   
@@ -42,7 +42,7 @@ public class Visualization<E extends AbstractDrawOptions> extends JavaScriptObje
    * @param data The DataTable with the data.
    * @param options The options for drawing this visualization.
    */
-  public final native void draw(DataTable data, E options) /*-{
+  public final native void draw(AbstractDataTable data, E options) /*-{
     this.draw(data, options);
   }-*/;
 }

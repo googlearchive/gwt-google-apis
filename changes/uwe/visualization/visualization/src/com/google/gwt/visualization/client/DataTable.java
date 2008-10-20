@@ -15,8 +15,6 @@
  */
 package com.google.gwt.visualization.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import java.util.Date;
 
 /**
@@ -26,22 +24,7 @@ import java.util.Date;
  *      href="http://code.google.com/apis/visualization/documentation/reference.html#DataTable">
  *      DataTable API Reference</a>
  */
-public class DataTable extends JavaScriptObject {
-
-  /**
-   * The type of a column.
-   */
-  public enum ColumnType {
-    BOOLEAN, DATE, DATETIME, NUMBER, STRING, TIMEOFDAY;
-
-    static ColumnType getColumnTypeFromString(String parameter) {
-      return ColumnType.valueOf(parameter.toUpperCase());
-    }
-
-    String getParameter() {
-      return name().toLowerCase();
-    }
-  }
+public class DataTable extends AbstractDataTable {
 
   public static native DataTable create() /*-{
     return new $wnd.google.visualization.DataTable();
@@ -68,59 +51,6 @@ public class DataTable extends JavaScriptObject {
 
   public final native int addRows(int number) /*-{
     return this.addRows(number);
-  }-*/;
-
-  public final native String getColumnId(int columnIndex) /*-{
-    return this.getColumnId(columnIndex);
-  }-*/;
-
-  public final native String getColumnLabel(int columnIndex) /*-{
-    return this.getColumnLabel(columnIndex);
-  }-*/;
-
-  public final native String getColumnPattern(int columnIndex) /*-{
-    return this.getColumnPattern(columnIndex);
-  }-*/;
-
-  public final native Range getColumnRange(int columnIndex) /*-{
-    return this.getColumnRange(columnIndex);
-  }-*/;
-
-  public final ColumnType getColumnType(int columnIndex) {
-    return ColumnType.getColumnTypeFromString(getColumnTypeAsString(columnIndex));
-  }
-
- public final native String getFormattedValue(int rowIndex, int columnIndex)/*-{
-    return this.getFormattedValue(rowIndex, columnIndex);
-  }-*/;
-
-  public final native int getNumberOfColumns() /*-{
-    return this.getNumberOfColumns();
-  }-*/;
-
-  public final native int getNumberOfRows() /*-{
-    return this.getNumberOfRows();
-  }-*/;
-
-  public final native String getProperty(int rowIndex, int columnIndex,
-      String name) /*-{
-    return this.getProperty(rowIndex, columnIndex, name);
-  }-*/;
-
-  public final Date getValueDate(int rowIndex, int columnIndex) {
-    return new Date(getValueTimevalue(rowIndex, columnIndex));
-  }
-
-  public final native double getValueDouble(int rowIndex, int columnIndex) /*-{
-    return this.getValue(rowIndex, columnIndex);
-  }-*/;
-
-  public final native int getValueInt(int rowIndex, int columnIndex) /*-{
-    return this.getValue(rowIndex, columnIndex);
-  }-*/;
-
-  public final native String getValueString(int rowIndex, int columnIndex) /*-{
-    return this.getValue(rowIndex, columnIndex);
   }-*/;
   
   public final void insertColumn(int columnIndex, ColumnType type) {
@@ -269,14 +199,6 @@ public class DataTable extends JavaScriptObject {
 
   private native int addColumn(String type, String label, String id) /*-{
     return this.addColumn(type, label, id);
-  }-*/;
-  
-  private native String getColumnTypeAsString(int columnIndex)/*-{
-    return this.getColumnType(columnIndex);
-  }-*/;
-
-  private native int getValueTimevalue(int rowIndex, int columnIndex) /*-{
-    return this.getValue(rowIndex, columnIndex).getTime();
   }-*/;
   
   private native void insertColumn(int columnIndex, String type) /*-{
