@@ -1,6 +1,6 @@
 #summary Using the Gears WorkerPool in a GWT project
 
-=Using the Gears Offline Module in a GWT project=
+=Using the Gears WorkerPool Module in a GWT project=
 
 ==Creating a new GWT project==
 
@@ -24,6 +24,12 @@ $ applicationCreator -eclipse GearsWorkerPoolTutorial \
 }}}
 
 You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running `GearsWorkerPoolTutorial-shell` from the command line or using the _Run_ configuration from Eclipse. 
+
+{{{
+$PP_OFF
+$ cd GearsWorkerPoolTutorial
+$ ./GearsWorkerPoolTutorial-shell
+}}}
 
 You should see the skeleton project come up:
 
@@ -55,7 +61,11 @@ Replace the body of the HTML host file `com/example/google/gwt/gearsworkerpooltu
 
 == Use a !WorkerPool object in the  .java source ==
 
+Replace the body of the of the sample .java file `com/example/google/gwt/gearsworkerpooltutorial/client/GearsWorkerPoolTutorial.java` with the following:
+
 {{{
+package com.example.google.gwt.gearsworkerpooltutorial.client;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.workerpool.WorkerPool;
@@ -90,8 +100,8 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
         grid,
         "Run Computation:",
         syncButton,
-        "<i>Note the synchronous computation blocks UI "
-            + "interaction( and may even cause an 'unresponsive script' warning</i>");
+        "<i>Note the synchronous computation blocks UI interaction and may even "
+            + "cause an 'unresponsive script' warning on some browsers.</i>");
     addRow(grid, "", workerPoolButton,
         "<i>But you can still interact while the asynchronous "
             + "computation runs in a JavaScript worker</i>");
