@@ -576,9 +576,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
 
-    m.panTo(end);
-
     delayTestFinish(ASYNC_DELAY_MSEC);
+    m.panTo(end);
   }
 
   public void testMapMoveEndTrigger() {
