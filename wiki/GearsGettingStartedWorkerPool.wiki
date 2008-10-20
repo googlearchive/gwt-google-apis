@@ -198,7 +198,7 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
 
 == A simple !JavaScript worker ==
 
-Save the following file as `com/example/google/gwt/gearsworkerpooltutorial/public/worker.js`.  This worker just echoes the message back to the sender with a message... after waiting for a few seconds.
+Save the following file as `src/com/example/google/gwt/gearsworkerpooltutorial/public/worker.js`.  This worker just echoes the message back to the sender with a message... after waiting for a few seconds.
 
 {{{
 // worker.js A simple Gears WorkerPool demo
