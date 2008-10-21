@@ -15,12 +15,15 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -231,7 +234,27 @@ public class InfoWindowDemo extends MapsDemo {
     final InfoWindowContent content = new InfoWindowContent(
         "There's more to see (hit the maximize button)");
     content.setMaxTitle(new HTML("<i>Maximized Italic Boots</i>"));
-    content.setMaxContent(new Image("boot.jpg"));
+    VerticalPanel panel = new VerticalPanel();
+    panel.add(new Image("boot.jpg"));
+    Button b = new Button("Click for Message");
+    final Label l = new Label();
+    HorizontalPanel hp = new HorizontalPanel();
+    hp.add(b);
+    hp.add(l);
+    l.getElement().getStyle().setPropertyPx("margin", 7);
+    b.addClickListener(new ClickListener() {
+      public void onClick(Widget w) {
+        GWT.log("Got click in maximized window.", null);
+        if (l.getText().equals("")) {
+          l.setText("Hello World!");
+        } else {
+          l.setText("");
+        }
+      }
+    });
+    panel.add(hp);
+    panel.setSpacing(10);
+    content.setMaxContent(panel);
     return content;
   }
 
