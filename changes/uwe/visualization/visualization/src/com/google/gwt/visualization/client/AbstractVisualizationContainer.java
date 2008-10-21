@@ -68,6 +68,15 @@ public abstract class AbstractVisualizationContainer<T extends Visualization<E>,
   }
 
   /**
+   * Draws the visualization.
+   * 
+   * @param dataTable the data table.
+   */
+  public void draw(AbstractDataTable dataTable) {
+    visualization.draw(dataTable, null);
+  }
+
+  /**
    * This method creates the Visualization. 
    * @param elem parent element of the visualization.
    * @return the visualization.
