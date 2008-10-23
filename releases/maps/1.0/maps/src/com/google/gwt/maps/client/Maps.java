@@ -33,6 +33,15 @@ public class Maps {
   }
 
   /**
+   * Return the Maps API Version currently loaded.
+   * 
+   * @return the Maps API Version currently loaded.
+   */
+  public static native String getVersion() /*-{
+    return $wnd.G_API_VERSION;
+  }-*/;
+
+  /**
    * Returns <code>true</code> if the current browser supports the maps API
    * library.
    * 
