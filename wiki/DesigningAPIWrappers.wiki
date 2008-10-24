@@ -78,7 +78,7 @@ _TBD_
   * Problem: Handling exceptions w/in callbacks in Hosted Mode
   * JSIO JSFunction
   * Using a JSNI Method containing a closure for the callback, then delegating to a Java static method.
-
+  
 _TBD_
 
 ==Loading Patterns==
@@ -89,6 +89,28 @@ _TBD_
 
 _TBD_
 
+==Modelling JS functions with optional arguments==
+
+For optional arguments, the usual approach is to create overloads for each
+additional parameter.  If a JavaScript method had a signature where
+all three arguments were optional, as follows:
+
+{{{
+  getPermission(siteName?, imageUrl?, extraMessage?)
+}}}
+
+The Java accessors to this method could be modeled as four overloaded methods:
+
+{{{
+ public native boolean getPermission()
+ public native boolean getPermission(String siteName)
+ public native boolean getPermission(String siteName, String
+imageUrl)
+ public native boolean getPermission(String siteName, String
+imageUrl, String extraMessage)
+}}}
+
+
 == Common Design Problems ==
 
   * Deciding when to omit a feature.
@@ -97,4 +119,3 @@ _TBD_
   * Providing access to !JavaScriptObject instances for end developer flexibility.
   * How to write Unit Tests
   * Hiding the Java/!JavaScript integration mechanism.
-
