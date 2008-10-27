@@ -15,50 +15,17 @@
  */
 package com.google.gwt.gadgets.sample.hellogadgets.client;
 
-import com.google.gwt.gadgets.client.BooleanPreference;
-import com.google.gwt.gadgets.client.EnumPreference;
 import com.google.gwt.gadgets.client.StringPreference;
 import com.google.gwt.gadgets.client.UserPreferences;
-import com.google.gwt.gadgets.client.EnumPreference.EnumDisplayValue;
 import com.google.gwt.gadgets.client.UserPreferences.PreferenceAttributes.Options;
 
 /**
  * The preferences for the HelloWorld Gadget.
  */
 public interface HelloPreferences extends UserPreferences {
-  /**
-   * The horizontal alignment of the button.
-   */
-  public static enum ButtonPosition {
-    @EnumDisplayValue("Left")
-    LEFT("left"),
-
-    @EnumDisplayValue("Center")
-    CENTER("center"),
-
-    @EnumDisplayValue("Right")
-    RIGHT("right");
-
-    private final String align;
-
-    private ButtonPosition(String align) {
-      this.align = align;
-    }
-
-    public String getAlign() {
-      return align;
-    }
-  }
-
-  @PreferenceAttributes(display_name = "Button text position", default_value = "CENTER")
-  EnumPreference<ButtonPosition> buttonPosition();
-
-  @PreferenceAttributes(display_name = "Alert prompt", default_value = "Hello, Gadgets!", options = Options.REQUIRED)
+  
+  @PreferenceAttributes(display_name = "Alert prompt", //
+      default_value = "Hello, Gadgets!", //
+      options = Options.REQUIRED)
   StringPreference promptSomethingElse();
-
-  @PreferenceAttributes(display_name = "Show settings message", default_value = "true")
-  BooleanPreference showMessage();
-
-  @PreferenceAttributes(options = Options.HIDDEN, default_value = "Hello World (GWT)")
-  StringPreference title();
 }
