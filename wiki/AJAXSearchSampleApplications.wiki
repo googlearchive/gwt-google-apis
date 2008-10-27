@@ -2,7 +2,7 @@
 
 = AJAX Search Example =
 
-=== [http://gwt.google.com/samples/HelloSearch-1.0.0/HelloSearch.html HelloSearch]===
+=== [http://gwt.google.com/samples/HelloSearch-1.0.1/HelloSearch.html HelloSearch]===
 
  [http://gwt-google-apis.googlecode.com/svn/wiki/HelloSearch-2.png]
 
