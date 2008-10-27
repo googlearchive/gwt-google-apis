@@ -74,10 +74,10 @@ Your GWT application will need access to the Maps API, as well as the API key. I
     http://www.google.com/apis/maps/signup.html
     Replace the src attribute below with a URL that contains your key.
   -->
- <!-- script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x&amp;key=???" /-->
+ <!-- script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;key=???" /-->
 
- <!-- You can run under localhost without a key -->
- <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x" />
+ <!-- You can usually run under localhost without a key -->
+ <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2" />
 
 }}}
 
