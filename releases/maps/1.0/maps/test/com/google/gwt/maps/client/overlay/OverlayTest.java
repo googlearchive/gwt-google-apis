@@ -80,6 +80,7 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
     assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
+    assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertTrue("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
   }
 
@@ -97,7 +98,7 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
   }
 
-  public void testIsmarker() {
+  public void testIsMarker() {
     Overlay o = Overlay.createPeer(nativeCreateMarker(LatLng.newInstance(0, 0)));
     assertTrue("overlay instanceof Marker", o instanceof Marker);
     assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
