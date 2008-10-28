@@ -52,7 +52,7 @@ public interface ResourceStoreUrlCaptureHandler {
      * 
      * @return <code>true</code> if the capture succeeded
      */
-    public native boolean isSucceess() /*-{
+    public native boolean isSuccess() /*-{
       return this.success;
     }-*/;
   }

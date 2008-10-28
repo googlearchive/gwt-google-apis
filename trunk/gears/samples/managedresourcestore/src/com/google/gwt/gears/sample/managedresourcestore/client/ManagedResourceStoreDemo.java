@@ -46,7 +46,8 @@ public class ManagedResourceStoreDemo implements EntryPoint {
 
   public void onModuleLoad() {
     HorizontalPanel hpanel = new HorizontalPanel();
-    RootPanel.get().add(hpanel);
+    hpanel.setSpacing(10);
+    RootPanel.get("demo").add(hpanel);
 
     hpanel.add(createManagedResourceStoreButton);
 
@@ -78,7 +79,9 @@ public class ManagedResourceStoreDemo implements EntryPoint {
           LocalServer server = Factory.getInstance().createLocalServer();
           ManagedResourceStore store = Offline.getManagedResourceStore();
           server.removeManagedStore(store.getName());
-          statusLabel.setText("Removed ManagedResourceStore");
+          statusLabel.setText("Removed ManagedResourceStore.  Press Refresh to see Online version.");
+          createManagedResourceStoreButton.setEnabled(false);
+          removeManagedResourceStoreButton.setEnabled(false);
         } catch (GearsException e) {
           statusLabel.setText(e.getMessage());
         }
@@ -105,6 +108,7 @@ public class ManagedResourceStoreDemo implements EntryPoint {
                 statusLabel.setText("Update to "
                     + managedResourceStore.getCurrentVersion()
                     + " was completed.  Please refresh the page to see the changes.");
+                createManagedResourceStoreButton.setEnabled(false);
               }
               break;
             case ManagedResourceStore.UPDATE_CHECKING:

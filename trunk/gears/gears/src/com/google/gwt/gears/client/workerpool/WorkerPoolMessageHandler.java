@@ -16,6 +16,11 @@
 package com.google.gwt.gears.client.workerpool;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayBoolean;
+import com.google.gwt.core.client.JsArrayInteger;
+import com.google.gwt.core.client.JsArrayNumber;
+import com.google.gwt.core.client.JsArrayString;
 
 /**
  * Provides an interface to implement in order to receive message events.
@@ -30,11 +35,104 @@ public interface WorkerPoolMessageHandler {
     }
 
     /**
-     * Returns the body text of the message.
+     * Returns the body text of the message as a String. Boxed strings
+     * (String()) are not supported by Gears.
      * 
-     * @return the body text of the message
+     * @return the body of the message
      */
     public native String getBody() /*-{
+      return String(this.body);
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a JsArray.
+     * 
+     * No type conversions are performed. If the message is not an Array type,
+     * the method may throw a JavaScriptException in hosted mode.
+     * 
+     * @return the body of the message
+     */
+    public native JsArray<?> getBodyArray() /*-{
+      return this.body;
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a JsArrayBoolean.
+     * 
+     * No type conversions are performed. If the message is not an Array type,
+     * the method may throw a JavaScriptException in hosted mode.
+     * 
+     * @return the body of the message
+     */
+    public native JsArrayBoolean getBodyArrayBoolean() /*-{
+      return this.body;
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a JsArrayInteger.
+     * 
+     * No type conversions are performed. If the message is not an Array type,
+     * the method may throw a JavaScriptException in hosted mode.
+     * 
+     * @return the body of the message
+     */
+    public native JsArrayInteger getBodyArrayInteger() /*-{
+      return this.body;
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a JsArrayNumber.
+     * 
+     * No type conversions are performed. If the message is not an Array type,
+     * the method may throw a JavaScriptException in hosted mode.
+     * 
+     * @return the body of the message
+     */
+    public native JsArrayNumber getBodyArrayNumber() /*-{
+      return this.body;
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a JsArrayString.
+     * 
+     * No type conversions are performed. If the message is not an Array type,
+     * the method may throw a JavaScriptException in hosted mode.
+     * 
+     * @return the body of the message
+     */
+    public native JsArrayString getBodyArrayString() /*-{
+      return this.body;
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a boolean.
+     * 
+     * @return the body of the message as a boolean.
+     */
+    public native boolean getBodyBoolean() /*-{
+      return Boolean(this.body);
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a double. Boxed numbers
+     * (Number()) are not supported by Gears.
+     * 
+     * @return the body of the message as a double.
+     */
+    public native double getBodyNumber() /*-{
+      return Number(this.body);
+    }-*/;
+
+    /**
+     * Returns the body text of the message as a JavaScriptObject
+     * 
+     * No type conversions are performed and Gears does not support Boxed types.
+     * If the message is not really an Object, the code will fail with a
+     * JavaScriptException in hosted mode.
+     * 
+     * @return the body of the message
+     */
+    public native JavaScriptObject getBodyObject() /*-{
       return this.body;
     }-*/;
 
@@ -59,6 +157,42 @@ public interface WorkerPoolMessageHandler {
      */
     public native int getSender() /*-{
       return this.sender;
+    }-*/;
+
+    /**
+     * Returns <code>true</code> if the message body is a Boolean value.
+     * 
+     * @return <code>true</code> if the message body is a Boolean value.
+     */
+    public native boolean isMessageBoolean() /*-{
+      return (typeof this.body) == "boolean";
+    }-*/;
+
+    /**
+     * Returns <code>true</code> if the message body is a Number value.
+     * 
+     * @return <code>true</code> if the message body is a Number value.
+     */
+    public native boolean isMessageNumber() /*-{
+      return (typeof this.body) == "number";
+    }-*/;
+
+    /**
+     * Returns <code>true</code> if the message body is a Object value.
+     * 
+     * @return <code>true</code> if the message body is a Object value.
+     */
+    public native boolean isMessageObject() /*-{
+      return (typeof this.body) == "object";
+    }-*/;
+
+    /**
+     * Returns <code>true</code> if the message body is a String value.
+     * 
+     * @return <code>true</code> if the message body is a String value.
+     */
+    public native boolean isMessageString() /*-{
+      return (typeof this.body) == "string";
     }-*/;
   }
 
