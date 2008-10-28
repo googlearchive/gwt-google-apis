@@ -13,19 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gadgets.sample.hellogadgets.client;
+package com.google.gwt.gadgets.sample.gadgetrpc.client;
 
-import com.google.gwt.gadgets.client.StringPreference;
-import com.google.gwt.gadgets.client.UserPreferences;
-import com.google.gwt.gadgets.client.UserPreferences.PreferenceAttributes.Options;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
- * The preferences for the HelloWorld Gadget.
+ * A Sample RPC Interface to demonstrate RPC usage with Gadgets.
  */
-public interface HelloPreferences extends UserPreferences {
-  
-  @PreferenceAttributes(display_name = "Alert prompt", //
-      default_value = "Hello, Gadgets!", //
-      options = Options.REQUIRED)
-  StringPreference promptSomethingElse();
+@RemoteServiceRelativePath("GadgetRPC")
+public interface GadgetService extends RemoteService {
+  ServerInfo getServerInfo();
 }
