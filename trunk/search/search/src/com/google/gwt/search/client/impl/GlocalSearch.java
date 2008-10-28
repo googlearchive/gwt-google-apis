@@ -24,17 +24,15 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  */
 public interface GlocalSearch extends GSearch {
-  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GlocalSearch.RESULT_CLASS");
   GlocalSearch IMPL = GWT.create(GlocalSearch.class);
+  JSOpaque RESULT_CLASS = new JSOpaque("$wnd.GlocalSearch.RESULT_CLASS");
 
   @Constructor("$wnd.GlocalSearch")
   JavaScriptObject construct();
 
-  // XXX Possible integration with Maps API. Consider code bloat before adding
-  // public void setCenterPoint(GMap point);
-  // public void setCenterPoint(GPoint point);
+   void setAddressLookupMode(Search jso, JSOpaque mode);
 
-  void setAddressLookupMode(Search jso, JSOpaque mode);
-
+  void setCenterPoint(Search jso, JavaScriptObject point);
+  
   void setCenterPoint(Search jso, String point);
 }

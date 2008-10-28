@@ -135,6 +135,7 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
     hp.add(clips);
     hp.add(searchControl);
     hp.setWidth("100%");
+    hp.getElement().getStyle().setPropertyPx("margin", 15);
     
     RootPanel.get().add(hp);
   }
