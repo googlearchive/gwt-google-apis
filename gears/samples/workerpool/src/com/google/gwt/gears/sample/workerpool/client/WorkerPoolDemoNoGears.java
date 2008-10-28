@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gears.sample.managedresourcestore.client;
+package com.google.gwt.gears.sample.workerpool.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.HTML;
@@ -23,9 +23,12 @@ import com.google.gwt.user.client.ui.RootPanel;
  * This {@link EntryPoint} will receive control if Gears is not available on the
  * browser that will run the application.
  */
-public class ManagedResourceStoreDemoNoGears implements EntryPoint {
+public class WorkerPoolDemoNoGears implements EntryPoint {
   public void onModuleLoad() {
-    RootPanel.get("demo").add(new HTML(
-        "<font color=\"red\">ERROR: This browser does not support Google Gears.  Please install Gears and reload the application.  Note that GWT Gears applications can only be debugged in hosted mode on Windows.</font>"));
+    RootPanel rootPanel = RootPanel.get("demo");
+    rootPanel.add(new HTML(
+        "<font color=\"red\">ERROR: This browser does not support Google Gears."
+        + "  Please install Gears and reload the application."
+        + "  Note that GWT Gears applications can only be debugged in hosted mode on Windows.</font>"));
   }
 }

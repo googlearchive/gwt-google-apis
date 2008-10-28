@@ -137,6 +137,63 @@ public final class WorkerPool extends JavaScriptObject {
    * Messages are copied between workers. Changes to a message received in one
    * worker will not be reflected in the sending worker.
    * 
+   * @param message message to send to the worker.
+   * @param destWorkerId id of the worker to send the message to
+   */
+  public native void sendMessage(boolean message, int destWorkerId) /*-{
+    this.sendMessage(message, destWorkerId);
+  }-*/;
+
+  /**
+   * Sends message to the worker specified by destWorkerId.
+   * 
+   * Messages sent from worker 1 to worker 2 in a particular order will be
+   * received in the same order.
+   * 
+   * Messages can be sent and received only between members of the same
+   * WorkerPool.
+   * 
+   * Messages are copied between workers. Changes to a message received in one
+   * worker will not be reflected in the sending worker.
+   * 
+   * @param message message to send to the worker.
+   * @param destWorkerId id of the worker to send the message to
+   */
+  public native void sendMessage(double message, int destWorkerId) /*-{
+    this.sendMessage(message, destWorkerId);
+  }-*/;
+
+  /**
+   * Sends message to the worker specified by destWorkerId.
+   * 
+   * Messages sent from worker 1 to worker 2 in a particular order will be
+   * received in the same order.
+   * 
+   * Messages can be sent and received only between members of the same
+   * WorkerPool.
+   * 
+   * Messages are copied between workers. Changes to a message received in one
+   * worker will not be reflected in the sending worker.
+   * 
+   * @param messageObj message to send to the worker.
+   * @param destWorkerId id of the worker to send the message to
+   */
+  public native void sendMessage(JavaScriptObject messageObj, int destWorkerId) /*-{
+    this.sendMessage(messageObj, destWorkerId);
+  }-*/;
+
+  /**
+   * Sends message to the worker specified by destWorkerId.
+   * 
+   * Messages sent from worker 1 to worker 2 in a particular order will be
+   * received in the same order.
+   * 
+   * Messages can be sent and received only between members of the same
+   * WorkerPool.
+   * 
+   * Messages are copied between workers. Changes to a message received in one
+   * worker will not be reflected in the sending worker.
+   * 
    * @param message message text
    * @param destWorkerId id of the worker to send the message to
    */

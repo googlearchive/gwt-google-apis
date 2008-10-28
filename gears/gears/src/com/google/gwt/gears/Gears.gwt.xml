@@ -24,11 +24,16 @@
       return "true";
     }
 
-    // IE
     try {
+      // IE
       new ActiveXObject('Gears.Factory');
       return "true";
     } catch (e) {
+      // Safari
+      if ((typeof navigator.mimeTypes != 'undefined')
+           && navigator.mimeTypes["application/x-googlegears"]) {
+        return "true";
+      }
     }
 
 	return "false";
