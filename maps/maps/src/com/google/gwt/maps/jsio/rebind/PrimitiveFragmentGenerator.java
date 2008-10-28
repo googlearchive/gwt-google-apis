@@ -52,15 +52,21 @@ class PrimitiveFragmentGenerator extends FragmentGenerator {
     context.parentLogger.branch(TreeLogger.DEBUG,
         "Building primitive value getter statement", null);
     SourceWriter sw = context.sw;
-
-    sw.print(context.parameterName);
+    String argName = context.parameterName;
+    JPrimitiveType primitiveType = context.returnType.isPrimitive();
+    // Map boolean values that are undefined or null to false
+    if (primitiveType != null && primitiveType.equals(JPrimitiveType.BOOLEAN)) {
+      sw.print("!!" + argName);
+    } else {
+      sw.print(argName);
+    }
   }
-  
+
   @Override
   boolean isIdentity() {
     return true;
   }
-  
+
   @Override
   void toJS(FragmentGeneratorContext context) throws UnableToCompleteException {
     context.parentLogger.branch(TreeLogger.DEBUG,

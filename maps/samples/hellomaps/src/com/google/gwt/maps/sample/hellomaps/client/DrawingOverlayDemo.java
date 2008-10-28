@@ -43,14 +43,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Demonstrates editable/drawable polylines.
+ * Demonstrates editable/drawable polylines/polygons.
  */
 public class DrawingOverlayDemo extends MapsDemo {
   private static HTML descHTML = null;
   private static final String descString = "<p>Creates a map"
       + " centered on Paris, France.</p>"
-      + "<p>You can create lines on the map by clicking the <i>AddPolyline</i> button."
-      + "  You can edit the last line you created by clicking the <i>Edit</i> button.</p>";
+      + "<p>You can create lines or polygons on the map by clicking the <i>Draw New Object</i> button. "
+      + "The resulting dialog box allows you to control the properties of the object to draw."
+      + "You can edit the last line you created by clicking the <i>Edit Polyline</i> button, or "
+      + "the last polygon you created by clicking the <i>Edit Polygon</i> button.</p>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -85,6 +87,8 @@ public class DrawingOverlayDemo extends MapsDemo {
   private Polyline lastPolyline = null;
   private Polygon lastPolygon = null;
   private DialogBox addPolyDialog = null;
+  private Button editPolylineButton = new Button("Edit Last Polyline");
+  private Button editPolygonButton = new Button("Edit Last Polygon");
 
   public DrawingOverlayDemo() {
 
@@ -205,11 +209,17 @@ public class DrawingOverlayDemo extends MapsDemo {
         }
         addPolyDialog.center();
         addPolyDialog.show();
+        if (lastPolygon != null) {
+          lastPolygon.setEditingEnabled(false);
+        }
+        if (lastPolyline != null) {
+          lastPolyline.setEditingEnabled(false);
+        }
       }
     });
     buttonPanel.add(addButton);
-
-    Button editPolylineButton = new Button("Edit Last Polyline");
+    
+    editPolylineButton.setEnabled(false);
     editPolylineButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         editPolyline();
@@ -217,7 +227,7 @@ public class DrawingOverlayDemo extends MapsDemo {
     });
     buttonPanel.add(editPolylineButton);
 
-    Button editPolygonButton = new Button("Edit Last Polygon");
+    editPolygonButton.setEnabled(false);
     editPolygonButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         editPolygon();
@@ -303,6 +313,7 @@ public class DrawingOverlayDemo extends MapsDemo {
             + " zoom=" + map.getZoomLevel());
         addPolyDialog.hide();
         createPolyline();
+        editPolylineButton.setEnabled(true);
       }
     });
 
@@ -314,6 +325,7 @@ public class DrawingOverlayDemo extends MapsDemo {
             + " zoom=" + map.getZoomLevel() + "fill=" + fillFlag);
         addPolyDialog.hide();
         createPolygon();
+        editPolygonButton.setEnabled(true);
       }
     });
 

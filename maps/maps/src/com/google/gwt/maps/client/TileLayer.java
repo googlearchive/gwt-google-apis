@@ -66,7 +66,7 @@ public abstract class TileLayer {
     };
   }
 
-  private final JavaScriptObject jsoPeer;
+  protected final JavaScriptObject jsoPeer;
   private HandlerCollection<TileLayerNewCopyrightHandler> tileLayerNewCopyrightHandlers;
 
   /**
@@ -87,7 +87,7 @@ public abstract class TileLayer {
    * 
    * @param jsoPeer object to wrap.
    */
-  private TileLayer(JavaScriptObject jsoPeer) {
+  protected TileLayer(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
 

@@ -113,6 +113,8 @@ public final class StatusCodes extends JavaScriptObject {
       return "UNKNOWN_ADDRESS";
     } else if (statusCode == UNKNOWN_DIRECTIONS) {
       return "UNKNOWN_DIRECTIONS";
+    } else if (statusCode == TOO_MANY_QUERIES) {
+      return "TOO_MANY_QUERIES";
     } else {
       return "UNKNOWN_STATUS: " + statusCode;
     }

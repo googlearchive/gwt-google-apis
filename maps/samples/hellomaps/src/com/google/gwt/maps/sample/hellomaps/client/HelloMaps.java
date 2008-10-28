@@ -172,7 +172,8 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     }
 
     outerPanel.setWidget(4, 0, new HTML("<h5> See source in "
-        + strippedClassName + "</h5>"));
+        + strippedClassName + "</h5><h5>Maps API version: " + Maps.getVersion()
+        + "</h5>"));
 
     curMapsDemo.onShow();
   }

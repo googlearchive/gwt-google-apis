@@ -90,9 +90,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
-   public void gwtSetUp() {
-     TestUtilities.cleanDom();
-   }
+  public void gwtSetUp() {
+    TestUtilities.cleanDom();
+  }
 
   public void testInfoWindowBeforeCloseEvent() {
     final MapWidget m = new MapWidget();
@@ -347,6 +347,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
         Marker marker = (Marker) o;
         assertTrue(marker.getPoint().getLatitude() == 12.34);
         assertTrue(marker.getPoint().getLongitude() == -22.2);
+        assertTrue(marker.getLatLng().getLatitude() == 12.34);
+        assertTrue(marker.getLatLng().getLongitude() == -22.2);
         assertNotNull("point is null", p);
         assertTrue(p.getLatitude() == 10.1);
         assertTrue(p.getLongitude() == 12.2);
@@ -356,7 +358,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
-    MapClickEvent e = new MapClickEvent(m, marker, LatLng.newInstance(10.1, 12.2));
+    MapClickEvent e = new MapClickEvent(m, marker, LatLng.newInstance(10.1,
+        12.2));
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
@@ -380,7 +383,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     });
     RootPanel.get().add(m);
-    MapDoubleClickEvent e = new MapDoubleClickEvent(m, LatLng.newInstance(10.1, 12.2));
+    MapDoubleClickEvent e = new MapDoubleClickEvent(m, LatLng.newInstance(10.1,
+        12.2));
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
@@ -526,9 +530,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
     final MapWidget m = new MapWidget();
 
     /*
-     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
-     * implicit in. Call now so that first move event won't get in the way of
-     * the test.
+     * The Move event gets called on setCenter(). There is a setCenter() call
+     * implicit in the MapWidget() constructor. Add to the map now so that first
+     * move event won't get in the way of the test.
      */
     RootPanel.get().add(m);
 
@@ -544,6 +548,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.setCenter(end);
   }
 
+  /**
+   * Live test of the MapMoveStart event. On Safari2/Mac this test times out.
+   */
   public void testMapMoveStartEvent() {
 
     final LatLng start = LatLng.newInstance(37.4419, -122.1419);
@@ -555,9 +562,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
     m.setSize("300px", "300px");
 
     /*
-     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
-     * implicit in. Call now so that first move event won't get in the way of
-     * the test.
+     * The MoveStart event gets called on setCenter(). There is a setCenter()
+     * call implicit in the MapWidget() constructor. Add to the map now so that
+     * first move event won't get in the way of the test.
      */
     RootPanel.get().add(m);
 
@@ -578,8 +585,8 @@ public class MapWidgetEventsTest extends GWTTestCase {
 
     /*
      * The MoveEnd event gets called on setCenter(). There is a setCenter() call
-     * implicit in. Call now so that first move event won't get in the way of
-     * the test.
+     * implicit in the MapWidget constructor. Add to the map now so that first
+     * move event won't get in the way of the test.
      */
     RootPanel.get().add(m);
 
@@ -605,9 +612,9 @@ public class MapWidgetEventsTest extends GWTTestCase {
     final MapWidget m = new MapWidget(start, 13);
 
     /*
-     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
-     * implicit in. Call now so that first move event won't get in the way of
-     * the test.
+     * The Move event gets called on setCenter(). There is a setCenter() call
+     * implicit in the MapWidget() constructor. Add to the map now so that first
+     * move event won't get in the way of the test.
      */
     RootPanel.get().add(m);
 
@@ -767,15 +774,16 @@ public class MapWidgetEventsTest extends GWTTestCase {
     });
     RootPanel.get().add(m);
     Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
-    MapRightClickEvent e = new MapRightClickEvent(m, Point.newInstance(101, 222),
-        m.getElement(), marker);
+    MapRightClickEvent e = new MapRightClickEvent(m,
+        Point.newInstance(101, 222), m.getElement(), marker);
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }
 
   public void testMapZoomEndEvent() {
 
-    final MapWidget m = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
+    final MapWidget m = new MapWidget(LatLng.newInstance(37.4419, -122.1419),
+        13);
 
     m.addMapZoomEndHandler(new MapZoomEndHandler() {
 

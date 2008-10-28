@@ -40,13 +40,42 @@ public class MapWidgetTest extends GWTTestCase {
     TestUtilities.cleanDom();
   }
 
+  public void testGetVersion() {
+    String version = Maps.getVersion();
+    /* This will print on the console in hosted mode tests only and be
+     * ignored for web mode tests.  It is used for investigating and generating
+     * bug reports when regression tests fail.
+     */
+    System.out.println("Maps API version: " + version);
+    assertNotNull("Maps version", version);
+  }
+
   public void testIsBrowserCompatible() {
     assertTrue("The MAPS api is not compatible with this browser.",
         Maps.isBrowserCompatible());
   }
-
+  
   public void testIsLoaded() {
     assertTrue("The MAPS api is not properly loaded.", Maps.isLoaded());
+  }
+
+  public void testMapWidgetCloseInfoWindow() {
+    LatLng center = LatLng.newInstance(0, 0);
+    final MapWidget map = new MapWidget(center, 1);
+    map.setSize("300px", "300px");
+    RootPanel.get().add(map);
+    InfoWindowContent content = new InfoWindowContent("<i>Hello World!</i>");
+    InfoWindow info = map.getInfoWindow();
+    info.open(center, content);
+    DeferredCommand.addCommand(new Command() {
+
+      public void execute() {
+        map.closeInfoWindow();
+        finishTest();
+      }
+
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 
   public void testMapWidgetCursors() {
@@ -72,24 +101,5 @@ public class MapWidgetTest extends GWTTestCase {
     assertTrue("Center didn't match.", m.getCenter().isEquals(
         LatLng.newInstance(45, 45)));
     assertEquals("Zoom level didn't match.", m.getZoomLevel(), 8);
-  }
-
-  public void testMapWidgetCloseInfoWindow() {
-    LatLng center = LatLng.newInstance(0, 0);
-    final MapWidget map = new MapWidget(center, 1);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
-    InfoWindowContent content = new InfoWindowContent("<i>Hello World!</i>");
-    InfoWindow info = map.getInfoWindow();
-    info.open(center, content);
-    DeferredCommand.addCommand(new Command() {
-
-      public void execute() {
-        map.closeInfoWindow();
-        finishTest();
-      }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 }

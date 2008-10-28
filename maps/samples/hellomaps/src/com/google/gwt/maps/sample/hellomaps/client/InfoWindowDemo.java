@@ -15,12 +15,15 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -49,7 +52,7 @@ public class InfoWindowDemo extends MapsDemo {
   private static final String TEST_NO_CLICK = "Test noClick";
   private static final String TEST_TABS = "Test with Tabs";
   private static final String descString = "<h2>InfoWindow Demos</h2>\n"
-      + "<p>Tests the InfoWindow APIs</p>" + "<ol>\n" + " <li><b>"
+      + "<p>Tests the InfoWindow APIs</p>" + "<ul>\n" + " <li><b>"
       + TEST_DEFAULT
       + "</b>: Display an info window with a tree widget in "
       + "the center of the current viewport.  Click on the map outside the "
@@ -57,14 +60,6 @@ public class InfoWindowDemo extends MapsDemo {
       + "Equivalent to Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/map-infowindow.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/map-infowindow.html</a></li>"
-      + "<li><b>"
-      + TEST_MAX_CONTENT
-      + "</b>: Add a Maximized Title and Content to "
-      + "the InfoWindow</li>\n"
-      + "<li><b>"
-      + TEST_MAX_TITLE_CONTENT_WIDGET
-      + "</b>: Instead of text, use widgets"
-      + "for the title and content when maximized.</li>\n"
       + "<li><b>"
       + TEST_IMAGE
       + "</b>: Use an image in the main InfoWindow.</li>"
@@ -76,8 +71,16 @@ public class InfoWindowDemo extends MapsDemo {
       + TEST_TABS
       + "</b>: Create an InfoWindow with two tabs.</li>"
       + "<li><b>"
+      + TEST_MAX_CONTENT
+      + "</b>: Add a Maximized Title and Content to "
+      + "the InfoWindow</li>\n"
+      + "<li><b>"
+      + TEST_MAX_TITLE_CONTENT_WIDGET
+      + "</b>: Instead of text, use widgets"
+      + "for the title and content when maximized.</li>\n"
+      + "<li><b>"
       + TEST_MAP_BLOWUP
-      + "</b>: Display a Map Blowup inside an InfoWindow</li>" + "</ol>";
+      + "</b>: Display a Map Blowup inside an InfoWindow</li>" + "</ul>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -231,7 +234,27 @@ public class InfoWindowDemo extends MapsDemo {
     final InfoWindowContent content = new InfoWindowContent(
         "There's more to see (hit the maximize button)");
     content.setMaxTitle(new HTML("<i>Maximized Italic Boots</i>"));
-    content.setMaxContent(new Image("boot.jpg"));
+    VerticalPanel panel = new VerticalPanel();
+    panel.add(new Image("boot.jpg"));
+    Button b = new Button("Click for Message");
+    final Label l = new Label();
+    HorizontalPanel hp = new HorizontalPanel();
+    hp.add(b);
+    hp.add(l);
+    l.getElement().getStyle().setPropertyPx("margin", 7);
+    b.addClickListener(new ClickListener() {
+      public void onClick(Widget w) {
+        GWT.log("Got click in maximized window.", null);
+        if (l.getText().equals("")) {
+          l.setText("Hello World!");
+        } else {
+          l.setText("");
+        }
+      }
+    });
+    panel.add(hp);
+    panel.setSpacing(10);
+    content.setMaxContent(panel);
     return content;
   }
 
