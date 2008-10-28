@@ -78,6 +78,7 @@ public class BoundsTest extends GWTTestCase {
   }
   
   public void testNewInstance() {
+    @SuppressWarnings("unused")
     Bounds b = Bounds.newInstance(0,0,45,45);
   }
   
@@ -86,6 +87,7 @@ public class BoundsTest extends GWTTestCase {
     JsArray<Point> points = (JsArray<Point>) Point.createArray();
     points.set(0, Point.newInstance(0, 0));
     points.set(1, Point.newInstance(45, 45));
+    @SuppressWarnings("unused")
     Bounds b = Bounds.newInstance(points);
   }
 }

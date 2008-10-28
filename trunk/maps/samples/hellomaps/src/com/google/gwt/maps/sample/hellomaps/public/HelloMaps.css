@@ -1,15 +1,9 @@
+/* Add some space between the outside browser window and the blue border */
 h2 {
-	font-stretch: narrower;
-	font-weight: 500;
+ font-stretch: narrower;
+  font-weight: 500;
   margin: 4px;
 }
-
-.hm-title {
-  font-size: 2em; 
-  display: inline;	
-}
-
-/* Add some space between the outside browser window and the blue border */
 
 #hm-map {
   margin: 10px;

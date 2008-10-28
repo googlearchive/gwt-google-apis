@@ -51,13 +51,12 @@ import java.util.Comparator;
  */
 public class OverlayDemo extends MapsDemo {
   private enum OverlayDemos {
-    TEST_POLYGON_ENCODED("Display polygon from an encoded string"), //
-    TEST_POLYLINE_ENCODED("Display polyline from an encoded string"), //
-    TEST_POLYLINE_GEODESIC("Display a geodesic polyline from Zurich to NYC"), //
-    TEST_POLYLINE_ONE("Display a polyline"), //
-    TEST_POLYLINE_TRANSPARENT(
-        "Display encoded polyline with default transparency"), // 
-    TEST_TEN_MARKERS("Display 10 Random Markers");
+    TEST_POLYGON_ENCODED("Display Polygon from an encoded string"), //
+    TEST_POLYLINE_ENCODED("Display Polyline from an encoded string"), //
+    TEST_POLYLINE_ENCODED_TRANSPARENT("Display Polyline from an encoded string with default transparency"), //
+    TEST_POLYLINE_GEODESIC("Display a geodesic Polyline from Zurich to NYC"), //
+    TEST_POLYLINE_ONE("Display a Polyline"), // 
+    TEST_TEN_MARKERS("Display ten Random Markers");
 
     final String value;
 
@@ -71,11 +70,18 @@ public class OverlayDemo extends MapsDemo {
   }
 
   private static HTML descHTML = null;
-  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
+  private static final String descString = "<p>Creates a 500 x 300 pixel map viewport. "
       + "You should be able to scroll the viewport by clicking and dragging "
       + "with the mouse.</p>\n"
-      + "<p>You should see a purple polyline with multiple segments "
-      + "(The vertices are randomly generated).</p>"
+      + "<ul>"
+      + "<li><b>Display Polygon from an encoded string</b> Traces the outline of the Centennial Olympic Park fountain in Atlanta, GA USA.</li>\n"
+      + "<li><b>Display Polyline from an encoded string</b> Traces a route across a bridge that is 100% opaque.</li>\n"
+      + "<li><b>Display Polyline from an encoded string with default transparency</b> Similar to the previous demo, but the transparency of the line is set to the default.</li>"      
+      + "<li><b>Display a geodesic Polyline from Zurich to NYC</b> A line that follows the curve of the earth.</li>"      
+      + "<li><b>Display a Polyline</b> You should see a purple polyline with multiple segments "
+      + "(The vertices are randomly generated).</li>\n"
+      + "<li><b>Display ten random Markers</b> Ten Markers are placed at random points in the viewport.</li>"
+      + "</ul>"
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/polyline-simple.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/polyline-simple.html</a></p>\n";
@@ -214,7 +220,7 @@ public class OverlayDemo extends MapsDemo {
         map.addOverlay(pline);
       }
         break;
-      case TEST_POLYLINE_TRANSPARENT: {
+      case TEST_POLYLINE_ENCODED_TRANSPARENT: {
         // Add a polyline with transparency
         map.setCenter(LatLng.newInstance(40.71213418976525, -73.96785736083984), 15);
         Polyline pline = Polyline.fromEncoded(ENCODED_POINTS, 32,

@@ -22,6 +22,8 @@ import com.google.gwt.maps.client.event.InfoWindowRestoreClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowRestoreEndHandler;
 import com.google.gwt.maps.client.event.MapInfoWindowCloseHandler;
 import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowCloseHandler;
+import com.google.gwt.maps.client.event.MarkerInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler.InfoWindowCloseClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler.InfoWindowMaximizeClickEvent;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler.InfoWindowMaximizeEndEvent;
@@ -78,8 +80,6 @@ public final class InfoWindow extends ConcreteOverlay {
    * Handlers that cover attaching and removing widgets from the virtual panels
    * created above.
    */
-  private MapInfoWindowOpenHandler attachInfoWindowOpenHandler;
-  private MapInfoWindowCloseHandler attachMapInfoWindowCloseHandler;
   private InfoWindowMaximizeEndHandler attachMaximizeEndHandler;
   private InfoWindowRestoreEndHandler attachRestoreEndHandler;
 
@@ -89,7 +89,8 @@ public final class InfoWindow extends ConcreteOverlay {
    */
   private Widget contentMaxWidget;
   private List<Widget> contentWidgets;
-  private boolean contentWidgetsAttached;
+  private boolean contentWidgetsAttached = false;
+  private boolean contentMaxWidgetAttached = false;
 
   /**
    * Tracks handlers attached to this InfoWindow instance.
@@ -294,7 +295,7 @@ public final class InfoWindow extends ConcreteOverlay {
    *          InfoWindow.
    */
   public void open(LatLng point, InfoWindowContent content) {
-    addAttachHandlers(content);
+    addMapAttachHandlers(content);
 
     switch (content.getType()) {
       case InfoWindowContent.TYPE_ELEMENT:
@@ -319,7 +320,7 @@ public final class InfoWindow extends ConcreteOverlay {
    *          InfoWindow.
    */
   public void open(Marker marker, InfoWindowContent content) {
-    addAttachHandlers(content);
+    addMarkerAttachHandlers(marker, content);
 
     switch (content.getType()) {
       case InfoWindowContent.TYPE_ELEMENT:
@@ -338,8 +339,7 @@ public final class InfoWindow extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)}
-   * .
+   * {@link InfoWindow#addInfoWindowCloseClickHandler(InfoWindowCloseClickHandler)} .
    * 
    * @param handler the handler to remove
    */
@@ -352,8 +352,7 @@ public final class InfoWindow extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)}
-   * .
+   * {@link InfoWindow#addInfoWindowMaximizeClickHandler(InfoWindowMaximizeClickHandler)} .
    * 
    * @param handler the handler to remove
    */
@@ -367,8 +366,7 @@ public final class InfoWindow extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)}
-   * .
+   * {@link InfoWindow#addInfoWindowMaximizeEndHandler(InfoWindowMaximizeEndHandler)} .
    * 
    * @param handler the handler to remove
    */
@@ -381,8 +379,7 @@ public final class InfoWindow extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)}
-   * .
+   * {@link InfoWindow#addInfoWindowRestoreClickHandler(InfoWindowRestoreClickHandler)} .
    * 
    * @param handler the handler to remove
    */
@@ -395,8 +392,7 @@ public final class InfoWindow extends ConcreteOverlay {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)}
-   * .
+   * {@link InfoWindow#addInfoWindowRestoreEndHandler(InfoWindowRestoreEndHandler)} .
    * 
    * @param handler the handler to remove
    */
@@ -526,61 +522,89 @@ public final class InfoWindow extends ConcreteOverlay {
    * 
    * @param content contains the widgets to attach/detach.
    */
-  private void addAttachHandlers(InfoWindowContent content) {
+  private void addMapAttachHandlers(InfoWindowContent content) {
 
     // Make a private copy of the widgets passed in from the content object
     // so no one can pull the rug out from under our attach handlers.
     contentWidgets = content.getWidgets();
     contentMaxWidget = content.getMaxContent();
 
-    attachInfoWindowOpenHandler = new MapInfoWindowOpenHandler() {
+    MapInfoWindowOpenHandler openHandler = new MapInfoWindowOpenHandler() {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        attach();
+        // Make sure this callback is invoked only once.
+        event.getSender().removeInfoWindowOpenHandler(this);
+        attachContentWidgets();
       }
 
     };
-    map.addInfoWindowOpenHandler(attachInfoWindowOpenHandler);
+    map.addInfoWindowOpenHandler(openHandler);
 
     addMaxContentHandlers();
-    addCloseHandler();
+    MapInfoWindowCloseHandler closeHandler = new MapInfoWindowCloseHandler() {
+
+      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
+        event.getSender().removeInfoWindowCloseHandler(this);
+        doCloseHandler(null);
+      }
+    };
+    map.addInfoWindowCloseHandler(closeHandler);
+  }
+
+  /**
+   * Adds handlers that take care of attaching and detaching widgets from the
+   * hierarchy.
+   * 
+   * @param content contains the widgets to attach/detach.
+   */
+  private void addMarkerAttachHandlers(final Marker marker,
+      InfoWindowContent content) {
+
+    // Make a private copy of the widgets passed in from the content object
+    // so no one can pull the rug out from under our attach handlers.
+    contentWidgets = content.getWidgets();
+    contentMaxWidget = content.getMaxContent();
+
+    MarkerInfoWindowOpenHandler openHandler = new MarkerInfoWindowOpenHandler() {
+
+      public void onInfoWindowOpen(MarkerInfoWindowOpenEvent event) {
+        // Make sure this callback is invoked only once.
+        event.getSender().removeMarkerInfoWindowOpenHandler(this);
+        attachContentWidgets();
+      }
+
+    };
+    marker.addMarkerInfoWindowOpenHandler(openHandler);
+
+    addMaxContentHandlers();
+    MarkerInfoWindowCloseHandler closeHandler = new MarkerInfoWindowCloseHandler() {
+
+      public void onInfoWindowClose(MarkerInfoWindowCloseEvent event) {
+        event.getSender().removeMarkerInfoWindowCloseHandler(this);
+        doCloseHandler(marker);
+      }
+    };
+    marker.addMarkerInfoWindowCloseHandler(closeHandler);
   }
 
   /**
    * Removes the handlers used to attach / detach widgets.
    */
-  private void addCloseHandler() {
-
-    attachMapInfoWindowCloseHandler = new MapInfoWindowCloseHandler() {
-
-      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
-
-        if (contentWidgetsAttached) {
-          removeContentWidgets();
-          contentWidgetsAttached = false;
-        }
-        if (attachRestoreEndHandler != null) {
-          removeInfoWindowRestoreEndHandler(attachRestoreEndHandler);
-          attachRestoreEndHandler = null;
-        }
-        if (attachMaximizeEndHandler != null) {
-          removeInfoWindowMaximizeEndHandler(attachMaximizeEndHandler);
-          attachMaximizeEndHandler = null;
-        }
-        if (attachInfoWindowOpenHandler != null) {
-          map.removeInfoWindowOpenHandler(attachInfoWindowOpenHandler);
-          attachInfoWindowOpenHandler = null;
-        }
-
-        // Remove this handler too.
-        if (attachMapInfoWindowCloseHandler != null) {
-          map.removeInfoWindowCloseHandler(attachMapInfoWindowCloseHandler);
-          attachMapInfoWindowCloseHandler = null;
-        }
-      }
-
-    };
-    map.addInfoWindowCloseHandler(attachMapInfoWindowCloseHandler);
+  private void doCloseHandler(Marker marker) {
+    if (contentWidgetsAttached) {
+      removeContentWidgets();
+    }
+    if (contentMaxWidgetAttached) {
+      removeMaxContentWidget();
+    }
+    if (attachRestoreEndHandler != null) {
+      removeInfoWindowRestoreEndHandler(attachRestoreEndHandler);
+      attachRestoreEndHandler = null;
+    }
+    if (attachMaximizeEndHandler != null) {
+      removeInfoWindowMaximizeEndHandler(attachMaximizeEndHandler);
+      attachMaximizeEndHandler = null;
+    }
   }
 
   /**
@@ -593,35 +617,47 @@ public final class InfoWindow extends ConcreteOverlay {
       return;
     }
 
-    attachMaximizeEndHandler = new InfoWindowMaximizeEndHandler() {
-      public void onMaximizeEnd(InfoWindowMaximizeEndEvent event) {
-        removeContentWidgets();
-        virtualMaximizedPanel.attach(contentMaxWidget);
-        contentWidgetsAttached = false;
-      }
-    };
-    addInfoWindowMaximizeEndHandler(attachMaximizeEndHandler);
+    if (attachMaximizeEndHandler == null) {
+      attachMaximizeEndHandler = new InfoWindowMaximizeEndHandler() {
 
-    attachRestoreEndHandler = new InfoWindowRestoreEndHandler() {
+        public void onMaximizeEnd(InfoWindowMaximizeEndEvent event) {
+          removeContentWidgets();
+          attachMaxContentWidget();
+        }
+      };
+      addInfoWindowMaximizeEndHandler(attachMaximizeEndHandler);
+    }
 
-      public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
-        virtualMaximizedPanel.remove(contentMaxWidget);
-        contentWidgetsAttached = false;
-        attach();
-      }
-    };
-    addInfoWindowRestoreEndHandler(attachRestoreEndHandler);
+    if (attachRestoreEndHandler == null) {
+      attachRestoreEndHandler = new InfoWindowRestoreEndHandler() {
+
+        public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
+          removeMaxContentWidget();
+          attachContentWidgets();
+        }
+      };
+      addInfoWindowRestoreEndHandler(attachRestoreEndHandler);
+    }
   }
 
   /**
-   * Run the attach step (must be done after elements are actually attached
-   * to the DOM).
+   * Run the attach step (must be done after elements are actually attached to
+   * the DOM).
    */
-  private void attach() {
-    for (int i = 0; i < contentWidgets.size(); i++) {
-      virtualRestoredPanel.attach(contentWidgets.get(i));
+  private void attachContentWidgets() {
+    if (!contentWidgetsAttached) {
+      for (int i = 0; i < contentWidgets.size(); i++) {
+        virtualRestoredPanel.attach(contentWidgets.get(i));
+      }
+      contentWidgetsAttached = true;
     }
-    contentWidgetsAttached = true;
+  }
+
+  private void attachMaxContentWidget() {
+    if (!contentMaxWidgetAttached) {
+      virtualMaximizedPanel.attach(contentMaxWidget);
+      contentMaxWidgetAttached = true;
+    }
   }
 
   /**
@@ -675,8 +711,18 @@ public final class InfoWindow extends ConcreteOverlay {
   }
 
   private void removeContentWidgets() {
-    for (int i = 0; i < contentWidgets.size(); i++) {
-      virtualRestoredPanel.remove(contentWidgets.get(i));
+    if (contentWidgetsAttached) {
+      contentWidgetsAttached = false;
+      for (int i = 0; i < contentWidgets.size(); i++) {
+        virtualRestoredPanel.remove(contentWidgets.get(i));
+      }
+    }
+  }
+
+  private void removeMaxContentWidget() {
+    if (contentMaxWidgetAttached) {
+      contentMaxWidgetAttached = false;
+      virtualMaximizedPanel.remove(contentMaxWidget);
     }
   }
 }

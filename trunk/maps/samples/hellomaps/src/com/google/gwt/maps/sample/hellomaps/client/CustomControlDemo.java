@@ -24,6 +24,7 @@ import com.google.gwt.maps.client.control.ControlPosition;
 import com.google.gwt.maps.client.control.HierarchicalMapTypeControl;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Button;
@@ -75,9 +76,9 @@ public class CustomControlDemo extends MapsDemo {
   }
 
   private enum ControlDemos {
-    TEST_HIERARCHICAL_CONTROL(
-    "Hierarchical Control"), TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"), TEST_TEXT_CUSTOM_ZOOM_CONTROL(
-            "Use a custom Text Zoom Control");
+    TEST_HIERARCHICAL_CONTROL("Hierarchical Control"), // 
+    TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"), // 
+    TEST_TEXT_CUSTOM_ZOOM_CONTROL("Use a custom Text Zoom Control");
 
     final String value;
 
@@ -94,7 +95,7 @@ public class CustomControlDemo extends MapsDemo {
     public ImageZoomControl() {
       super(new ControlPosition(ControlAnchor.TOP_LEFT, 7, 7));
     }
-    
+
     @Override
     protected Widget initialize(final MapWidget map) {
       ControlImageBundle imgBundle = GWT.create(ControlImageBundle.class);
@@ -176,11 +177,19 @@ public class CustomControlDemo extends MapsDemo {
   private static HTML descHTML = null;
 
   private static final String descString = ""
-      + "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. "
-      + "The standard zoom in and zoom out controls have been replaced with a "
-      + "custom control in the form of two boxes with the text 'Zoom In' and 'Zoom Out' "
-      + "at the upper left of the map.</p>\n"
-      + "<p>Equivalent to the Maps JavaScript API Example: "
+      + "<p>Creates a 500 x 300 pixel map viewport centered on Palo Alto, CA USA. </p>"
+      + "<ul>\n"
+      + "<li><b>Hierarchical Control</b> A control provided by the API that allows the "
+      + "user to change the map type using a drop down menu of checkboxes."
+      + "</li>\n"
+      + "<li><b>Image Zoom Control</b> The standard controls have been replaced with clickable "
+      + "images for zooming in and our or changing the map type from satellite to road map."
+      + "</li>"
+      + "<li><b>Text Zoom Control</b> The standard zoom in and zoom out controls have been replaced with a "
+      + "custom control in the form of two boxes with the text <i>Zoom In</i> and <i>Zoom Out</i> "
+      + "at the upper left of the map.</li>\n"
+      + "</ul>\n"
+      + "<p>See also the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/control-custom.html\">"
       + "http://code.google.com/apis/maps/documentation/examples/control-custom.html</a></p>\n";
 
@@ -210,16 +219,20 @@ public class CustomControlDemo extends MapsDemo {
 
   /**
    * Provide access to the HierarchicalMapTypeControl singleton.
-   * @return
+   * 
+   * @return an instance of the control is created if necessary. 
    */
   private static HierarchicalMapTypeControl getHierarchicalMapTypeControl() {
     if (hControl != null) {
       return hControl;
     }
     hControl = new HierarchicalMapTypeControl();
-    hControl.addRelationship(MapType.getNormalMap(), MapType.getMarsVisibleMap(), "Mars visible");
-    hControl.addRelationship(MapType.getNormalMap(), MapType.getMarsInfraredMap(), "Mars infrared");
-    hControl.addRelationship(MapType.getNormalMap(), MapType.getMarsElevationMap(), "Mars elevation", true);
+    hControl.addRelationship(MapType.getNormalMap(),
+        MapType.getMarsVisibleMap(), "Mars visible");
+    hControl.addRelationship(MapType.getNormalMap(),
+        MapType.getMarsInfraredMap(), "Mars infrared");
+    hControl.addRelationship(MapType.getNormalMap(),
+        MapType.getMarsElevationMap(), "Mars elevation", true);
     return hControl;
   }
 
@@ -252,7 +265,7 @@ public class CustomControlDemo extends MapsDemo {
     vertPanel.add(horizPanel);
 
     map = new MapWidget(LatLng.newInstance(37.441944, -122.141944), 13);
-    map.setSize("600px", "400px");
+    map.setSize("500px", "300px");
     map.addMapType(MapType.getNormalMap());
     map.addMapType(MapType.getSatelliteMap());
     map.addMapType(MapType.getMarsVisibleMap());
@@ -260,8 +273,13 @@ public class CustomControlDemo extends MapsDemo {
     map.addMapType(MapType.getMarsInfraredMap());
     vertPanel.add(map);
 
+    new Timer() { 
+      public void run() {
+        displayCustomControl();
+      }
+    }.schedule(250);
+
     initWidget(vertPanel);
-    displayCustomControl();
   }
 
   /**

@@ -175,27 +175,41 @@ public class MapEventDemo extends MapsDemo {
       + "Atlanta, GA USA.</p>\n"
       + "<p>Displays a draggable marker and various controls to exercise "
       + "event handling.</p>\n"
-      + "<ul>\n <li><b>Hide/Show Marker</b> button alternately hides and "
-      + "shows the marker which triggers the MarkerVisibilityListener.</li>\n"
+      + "<ul>"
+      + " <li><b>Hide/Show Marker</b> button alternately hides and "
+      + "shows the marker.</li>\n"
       + " <li><b>Remove/Add Marker</b> button alternately removes and adds "
-      + "the marker to the map which triggers the removeListener.</li>\n"
-      + " <li><b>Enable/Disable Dragging</b> turns dragging on and off "
-      + "on the marker.  Dragging must be enabled to trigger the DragListener.</li>\n"
+      + "the marker to the map.</li>\n"
+      + " <li><b>Hide/Show Polyline</b> button alternately hides and "
+      + "shows the polyline.</li>\n"
+      + " <li><b>Remove/Add Polyline</b> button alternately removes and adds "
+      + "the polyline to the map.</li>\n"
+      + " <li><b>Hide/Show Polygon</b> button alternately hides and "
+      + "shows the polygon.</li>\n"
+      + " <li><b>Remove/Add Polygon</b> button alternately removes and adds "
+      + "the polygon to the map.</li>\n"
+      + " <li><b>Clear Overlays</b> Remove all overlays from the map.  "
+      + "<i>Note: after calling this method, the other buttons may be in an invalid state.</i></li>\n"
+      + "</ul>\n"
+      + "<ul>\n"
+      + " <li><b>Show Info Window</b> pops up the info window</li>\n"    
+      + " <li><b>Marker Info Window</b> pops up the info window on the marker</li>\n"
+      + " <li><b>Add/Remove Map Type</b> adds/removes a map type from the map.</li>\n"
       + " <li><b>Clear Table</b> Remove all entries from the table below.</li>\n"
-      + " <li><b>Add Listener</b> Adds a listener of the type "
+      + " <li><b>Add Handler</b> Adds an event handler of the type "
       + "specified in the listbox.  This will create a new entry in the table "
-      + "to monitor and control the listener.</li>\n"
-      + " <li><b>Clear Listeners of this Type</b> Clears all listeners of the"
-      + "  type specified in the listbox.</li>\n"
+      + "to monitor and control the handler.</li>\n"
       + "</ul>"
-      + "<p>Below the action buttons there is a table of all listeners that "
+      + "<p>Below the action buttons there is a table of all handlers that "
       + "  have been added.  Each entry contains the following items:</p>\n"
       + "<ul>\n"
-      + "<li><b>ID</b> A unique ID for each listener.</li>\n"
-      + "<li><b>Type</b> The type of listener.</li>\n"
+      + "<li><b>ID</b> A unique ID for each handler.</li>\n"
+      + "<li><b>Type</b> The type of handler.</li>\n"
       + "<li><b>Events</b> A textbox that shows events as they happen.</li>"
       + "<li><b>Clear Text</b> A button that clears the <b>Events</b> textbox.</li>"
-      + "<li><b>Remove Listener</b> Remove this specific listener instance."
+      + "<li><b>Remove Handler</b> Remove this specific handler instance.  Note: "
+      + "this leaves the entry in place so that you can see that the event no longer "
+      + "fires the handlers."
       + "</ul>\n";
 
   // A unique number assigned to each new listener added.
@@ -297,7 +311,7 @@ public class MapEventDemo extends MapsDemo {
     final TextBox textBox = new TextBox();
     textBox.setReadOnly(true);
     textBox.setSize("30em", "1em");
-    handlerTable.setWidget(rowNumber, 3, textBox);
+    handlerTable.setWidget(rowNumber, 2, textBox);
 
     Button clearButton = new Button("Clear Text");
     clearButton.addClickListener(new ClickListener() {
@@ -307,10 +321,10 @@ public class MapEventDemo extends MapsDemo {
       }
 
     });
-    handlerTable.setWidget(rowNumber, 4, clearButton);
+    handlerTable.setWidget(rowNumber, 3, clearButton);
 
     Button removeHandlerButton = new Button("Remove Handler");
-    handlerTable.setWidget(rowNumber, 5, removeHandlerButton);
+    handlerTable.setWidget(rowNumber, 4, removeHandlerButton);
 
     // Add event specific handlers
     switch (a) {
@@ -1295,8 +1309,6 @@ public class MapEventDemo extends MapsDemo {
     handlerTable.setHTML(0, 0, "<b>ID</b>");
     handlerTable.setHTML(0, 1, "<b>Type</b>");
     handlerTable.setHTML(0, 2, "<b>Events</b>");
-    handlerTable.setHTML(0, 3, "<b>Clear Text</b>");
-    handlerTable.setHTML(0, 4, "<b>Remove Listener</b>");
   }
 
   private void computeAtlantaTriangle() {

@@ -1,0 +1,10 @@
+branch-info.txt for gwt-google-apis Maps 1.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/maps/1.0/ was created (r808) as a straight copy from /trunk/@r807
+
+Merges:
+
+Changes in this branch (excluding changes to this file itself):

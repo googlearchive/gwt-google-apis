@@ -1,5 +1,5 @@
 @if "%GWT_HOME%"=="" goto needGWTHome
-@java -Xmx128m -cp "%~dp0\..\..\src;%~dp0\..\..\bin;%GWT_HOME%\gwt-user.jar;%GWT_HOME%\gwt-dev-windows.jar;..\..\..\..\gwt-maps.jar" com.google.gwt.dev.GWTShell -out "%~dp0\..\..\www" %* com.google.gwt.maps.sample.hellomaps.HelloMaps/HelloMaps.html
+@java -Xmx256m -cp "%~dp0\..\..\src;%~dp0\..\..\bin;%GWT_HOME%\gwt-user.jar;%GWT_HOME%\gwt-dev-windows.jar;..\..\..\..\gwt-maps.jar" com.google.gwt.dev.GWTShell -out "%~dp0\..\..\www" %* com.google.gwt.maps.sample.hellomaps.HelloMaps/HelloMaps.html
 @exit /B %ERRORLEVEL%
 
 :needGWTHome

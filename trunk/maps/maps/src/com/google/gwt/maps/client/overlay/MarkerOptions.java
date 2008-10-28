@@ -21,7 +21,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * Instances of this class are used in the {@link Marker} constructor
  * <code>options</code> argument.
  */
-public final class MarkerOptions extends JavaScriptObject {
+public class MarkerOptions extends JavaScriptObject {
 
   public static MarkerOptions newInstance() {
     return (MarkerOptions) createObject();
@@ -45,7 +45,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * 
    * @param autoPan <code>true</code> to turn on auto pan.
    */
-  public native void setAutoPan(boolean autoPan) /*-{
+  public final native void setAutoPan(boolean autoPan) /*-{
    this.autoPan = autoPan;
    }-*/;
 
@@ -57,7 +57,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * @param bounceGravity number used to define the acceleration rate of the
    *          marker during the bounce.
    */
-  public native void setBounceGravity(double bounceGravity) /*-{
+  public final native void setBounceGravity(double bounceGravity) /*-{
      this.bounceGravity = bounceGravity;
    }-*/;
 
@@ -67,7 +67,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * 
    * @param bouncy <code>true</code> to set the marker to be bouncy.
    */
-  public native void setBouncy(boolean bouncy) /*-{
+  public final native void setBouncy(boolean bouncy) /*-{
      this.bouncy = bouncy;
    }-*/;
 
@@ -79,7 +79,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * 
    * @param clickable whether or not the marker is clickable.
    */
-  public native void setClickable(boolean clickable) /*-{
+  public final native void setClickable(boolean clickable) /*-{
      this.clickable = clickable;
    }-*/;
 
@@ -92,7 +92,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * @param dragCrossMove set to <code>true</code> to keep the marker underneath
    *          the cursor when dragged.
    */
-  public native void setDragCrossMove(boolean dragCrossMove) /*-{
+  public final native void setDragCrossMove(boolean dragCrossMove) /*-{
      this.dragCrossMove = dragCrossMove;
    }-*/;
 
@@ -105,7 +105,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * 
    * @param draggable whether or not the marker will be draggable by users.
    */
-  public native void setDraggable(boolean draggable) /*-{
+  public final native void setDraggable(boolean draggable) /*-{
      this.draggable = draggable;
    }-*/;
 
@@ -115,7 +115,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * 
    * @param icon sets the icon for this class.
    */
-  public native void setIcon(Icon icon) /*-{
+  public final native void setIcon(Icon icon) /*-{
     this.icon = icon;
   }-*/;
 
@@ -125,7 +125,7 @@ public final class MarkerOptions extends JavaScriptObject {
    * 
    * @param title a string to set as the tooltip on the marker.
    */
-  public native void setTitle(String title) /*-{
+  public final native void setTitle(String title) /*-{
      this.title = title;
    }-*/;
 }

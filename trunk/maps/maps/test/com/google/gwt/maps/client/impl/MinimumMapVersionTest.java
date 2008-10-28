@@ -95,12 +95,14 @@ public class MinimumMapVersionTest extends GWTTestCase {
   }
 
   public void testConcreteOverlayImpl() {
+    @SuppressWarnings("unused")
     ConcreteOverlay concreteOverlay = new ConcreteOverlay(
         nativeMakeConcreteOverlay());
   }
 
   public void testControl() {
     ControlPosition pos = new ControlPosition(ControlAnchor.BOTTOM_LEFT, 0, 0);
+    @SuppressWarnings("unused")
     CustomControl c = new CustomControl(pos) {
 
       @Override
@@ -135,10 +137,12 @@ public class MinimumMapVersionTest extends GWTTestCase {
           return result;
         }
       }
+    @SuppressWarnings("unused")
     MyGeocodeCache customGc = new MyGeocodeCache();
   }
 
   public void testMapImpl() {
+    @SuppressWarnings("unused")
     MapWidget w = new MapWidget();
   }
 
@@ -146,15 +150,18 @@ public class MinimumMapVersionTest extends GWTTestCase {
     initTileLayer();
     TileLayer[] layers = new TileLayer[1];
     layers[0] = tileLayer;
+    @SuppressWarnings("unused")
     MapType t = new MapType(layers, new MercatorProjection(1),
         "versionTestLayer");
   }
 
   public void testMercatorProjection() {
+    @SuppressWarnings("unused")
     MercatorProjection m = new MercatorProjection(2);
   }
 
   public void testOverlayImpl() {
+    @SuppressWarnings("unused")
     Overlay o = new Overlay() {
 
       @Override
@@ -179,6 +186,7 @@ public class MinimumMapVersionTest extends GWTTestCase {
 
   public void testProjection() {
     initTileLayer();
+    @SuppressWarnings("unused")
     Projection projection = new Projection() {
 
       @Override
@@ -206,6 +214,7 @@ public class MinimumMapVersionTest extends GWTTestCase {
 
   public void testTileLayerOverlay() {
     initTileLayer();
+    @SuppressWarnings("unused")
     TileLayerOverlay overlay = new TileLayerOverlay(tileLayer);
   }
 

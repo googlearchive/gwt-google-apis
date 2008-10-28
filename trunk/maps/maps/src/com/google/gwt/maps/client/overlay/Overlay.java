@@ -24,7 +24,10 @@ import com.google.gwt.maps.jsio.client.Exported;
  * The base class for adding objects at a specific position on top of the map.
  */
 public abstract class Overlay {
-
+  // internal ref 1431785
+  // Delayed loading of parts of the Maps API fools the instanceof test
+  private static boolean useDuckTypes = nativeCmpGeoXmltoGroundOverlay();
+  
   /**
    * This class is used to wrap Overlays written entirely in JavaScript.
    * 
@@ -61,6 +64,58 @@ public abstract class Overlay {
   }
 
   /**
+   * Used to create a new Overlay by wrapping an existing GOverlay object. This
+   * method is invoked by the jsio library.
+   * 
+   * @param jsoPeer GOverlay object to wrap.
+   * @return a new instance of Overlay.
+   */
+  static Overlay createPeer(JavaScriptObject jsoPeer) {
+    
+    if (nativeIsMarker(jsoPeer)) {
+      return new Marker(jsoPeer);
+    } else if (nativeIsTileLayerOverlay(jsoPeer)) {
+      return new TileLayerOverlay(jsoPeer);
+    }
+    
+    if (useDuckTypes) {
+        // Now, perform DuckType tests.  internal ref 1431785
+      if (nativeIsPolylineDuck(jsoPeer)) {
+        return new Polyline(jsoPeer);
+      } else if (nativeIsTrafficOverlayDuck(jsoPeer)) {
+        return new TrafficOverlay(jsoPeer);
+      } else if (nativeIsPolygonDuck(jsoPeer)) {
+        return new Polygon(jsoPeer);
+      } else if (nativeIsGeoXmlDuck(jsoPeer)) {
+        return new GeoXmlOverlay(jsoPeer);
+      } else if (nativeIsGroundOverlayDuck(jsoPeer)) {
+        return new GroundOverlay(jsoPeer);
+      }
+    } else {  
+      if (nativeIsGeoXml(jsoPeer)) {
+        return new GeoXmlOverlay(jsoPeer);        
+      } else if (nativeIsTrafficOverlay(jsoPeer)) {
+        return new TrafficOverlay(jsoPeer);
+      } else if (nativeIsGroundOverlay(jsoPeer)) {
+        return new GroundOverlay(jsoPeer);
+      } else if (nativeIsPolyline(jsoPeer)) {
+        return new Polyline(jsoPeer);
+      } else if (nativeIsPolygon(jsoPeer)) {
+        return new Polygon(jsoPeer);
+      }
+    }
+    
+    if (nativeIsInfoWindow(jsoPeer)) {
+      // We should never get to this code as MapWidget calls getInfoWindow()
+      // in its constructor, so all InfoWindow instances should already be
+      // bound.
+      throw new UnsupportedOperationException(
+          "Can't create InfoWindow object from JavaScriptObject.");
+    }
+    return new ConcreteOverlay(jsoPeer);
+  }
+
+  /**
    * Returns a CSS z-index value for a given latitude. It computes a z index
    * such that overlays further south are on top of overlays further north, thus
    * creating the 3D appearance of marker overlays.
@@ -73,43 +128,56 @@ public abstract class Overlay {
   }-*/;
 
   /**
-   * Used to create a new Overlay by wrapping an existing GOverlay object. This
-   * method is invoked by the jsio library.
+   * Workaround for instanceof test failing in JavaScript for some overlay
+   * types. JS Maps API bug: internal ref 1431785
    * 
-   * @param jsoPeer GOverlay object to wrap.
-   * @return a new instance of Overlay.
+   * @param jsoPeer the object being tested.
+   * @param prototype the prototype of the type to compare it to.
+   * @return true if all properties in the prototype are found in the object's
+   *         prototype.
    */
-  static Overlay createPeer(JavaScriptObject jsoPeer) {
-    if (nativeIsMarker(jsoPeer)) {
-      return new Marker(jsoPeer);
-    } else if (nativeIsPolyline(jsoPeer)) {
-      return new Polyline(jsoPeer);
-    } else if (nativeIsPolygon(jsoPeer)) {
-      return new Polygon(jsoPeer);
-    } else if (nativeIsGroundOverlay(jsoPeer)) {
-      return new GroundOverlay(jsoPeer);
-    } else if (nativeIsGeoXmlOverlay(jsoPeer)) {
-      return new GeoXmlOverlay(jsoPeer);
-    } else if (nativeIsTileLayerOverlay(jsoPeer)) {
-      return new TileLayerOverlay(jsoPeer);
-    } else if (nativeIsTrafficOverlay(jsoPeer)) {
-      return new TrafficOverlay(jsoPeer);
-    } else if (nativeIsInfoWindow(jsoPeer)) {
-      // We should never get to this code as MapWidget calls getInfoWindow()
-      // in its constructor, so all InfoWindow instances should already be
-      // bound.
-      throw new UnsupportedOperationException(
-          "Can't create InfoWindow object from JavaScriptObject.");
-    }
-    return new ConcreteOverlay(jsoPeer);
-  }
+  @SuppressWarnings("unused")
+  private static native boolean isSameDuckType(JavaScriptObject jsoPeer,
+      JavaScriptObject prototype) /*-{
+    for (var prop in prototype) {
+        if (!(prop in jsoPeer)) {
+          return false;
+        }
+       }
+       return true;
+  }-*/;
 
-  private static native boolean nativeIsGeoXmlOverlay(JavaScriptObject jsoPeer) /*-{
-    return (jsoPeer instanceof $wnd.GGeoXmlOverlay);
+  /*
+   * This odd test checks to see if the instanceof test is working properly. 
+   * If this returns <code>true</code>, the test is faulty and a workaround must
+   * be used.
+   * 
+   * internal ref 1431785
+   */
+  private static native boolean nativeCmpGeoXmltoGroundOverlay() /*-{
+    var tmp = new $wnd.GGroundOverlay();
+    return tmp instanceof $wnd.GGeoXml;
+  }-*/;
+
+  private static native boolean nativeIsGeoXml(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GGeoXml);
+  }-*/;
+
+  private static native boolean nativeIsGeoXmlDuck(JavaScriptObject jsoPeer) /*-{
+    // JS Maps API bug: internal ref 1431785
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GGeoXml.prototype);
   }-*/;
 
   private static native boolean nativeIsGroundOverlay(JavaScriptObject jsoPeer) /*-{
     return (jsoPeer instanceof $wnd.GGroundOverlay);
+  }-*/;
+
+  private static native boolean nativeIsGroundOverlayDuck(
+      JavaScriptObject jsoPeer) /*-{
+    // JS Maps API bug: internal ref 1431785
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GGroundOverlay.prototype);
   }-*/;
 
   private static native boolean nativeIsInfoWindow(JavaScriptObject jsoPeer) /*-{
@@ -128,9 +196,22 @@ public abstract class Overlay {
   private static native boolean nativeIsPolygon(JavaScriptObject jsoPeer) /*-{
     return (jsoPeer instanceof $wnd.GPolygon);
   }-*/;
+  
+  private static native boolean nativeIsPolygonDuck(JavaScriptObject jsoPeer) /*-{
+    // JS Maps API bug: internal ref 1431785
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GPolygon.prototype);
+    
+  }-*/;  
 
   private static native boolean nativeIsPolyline(JavaScriptObject jsoPeer) /*-{
     return (jsoPeer instanceof $wnd.GPolyline);
+  }-*/;
+
+  private static native boolean nativeIsPolylineDuck(JavaScriptObject jsoPeer) /*-{
+    // JS Maps API bug: internal ref 1431785
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GPolyline.prototype);
   }-*/;
 
   private static native boolean nativeIsTileLayerOverlay(
@@ -140,6 +221,13 @@ public abstract class Overlay {
 
   private static native boolean nativeIsTrafficOverlay(JavaScriptObject jsoPeer) /*-{
     return (jsoPeer instanceof $wnd.GTrafficOverlay);
+  }-*/;
+
+  private static native boolean nativeIsTrafficOverlayDuck(
+      JavaScriptObject jsoPeer) /*-{
+    // JS Maps API bug: internal ref 1431785
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GTrafficOverlay.prototype);
   }-*/;
 
   protected final JavaScriptObject jsoPeer;
