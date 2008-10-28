@@ -7,3 +7,24 @@ Copies:
 
 Merges:
 /trunk c747 was merged (r749) into this branch
+/releases/gers/1.1@713:950 was merged (r951) into trunk/gears
+---> The next merge into trunk will be 950:????
+
+Changes in this branch (excluding changes to this file itself:
+ - Updated the gears_init.js file for Webkit (r725)
+ - Merged gears database demo into the 1.1 branch (r749)
+ - Merged trunk r747 into this branch (r750)
+ - Replace the body of the app with an error message on error to DB (r752)
+ - Package level summary javadoc information (r773)
+ - Corrects a typo in a method name (issue 183) (r872)
+ - Further fix followon to r872 (r874)
+ - Adds WorkerPoolDemo (r875)
+ - Pretties up the sample for ManagedResourceStoreDemo (r876)
+ - Pretties up the sample for ResourceStoreDemo (r877)
+ - Update the Database demo (r880)
+ - Updated release notes (r885)
+ - Add support for message types other than string (r899)
+ - Formatting fix for release notes (r901)
+ - Updated links to new demos (r902)
+ - Moved 'Known Issues' up to current release notes block (r909)
+ - Pretties up the sample for WorkerPoolDemo (r910)
