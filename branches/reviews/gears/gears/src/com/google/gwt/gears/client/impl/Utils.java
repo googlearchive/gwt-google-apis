@@ -33,4 +33,15 @@ public class Utils {
     }
     return array;
   }
+  
+  /**
+   * Converts a JavaScript array of strings to a Java array of strings.
+   */
+  public static String[] toJavaArray(JsArrayString jsArray) {
+    String[] urls = new String[jsArray.length()];
+    for (int i = 0; i < jsArray.length(); i++) {
+        urls[i] = jsArray.get(i);
+    }
+    return urls;
+  }
 }
