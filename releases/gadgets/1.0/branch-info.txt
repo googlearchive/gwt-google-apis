@@ -6,8 +6,9 @@ Copies:
 /releases/gadgets/1.0/ was created (r714) as a straight copy from /trunk/@r713
 
 Merges:
-/releases/gadgets/1.0@714:758 was merged (r???) into trunk/
----> The next merge into trunk will be 758:???
+/releases/gadgets/1.0@714:758 was merged (r759?) into trunk/gadgets
+/releases/gadgets/1.0@758:947 was merged (r948) into trunk/gadgets
+---> The next merge into trunk will be 947:???
 
 Changes in this branch (excluding changes to this file itself:
 - Fixed the samples' online documentation link. (r718)
