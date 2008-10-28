@@ -17,6 +17,9 @@ package com.google.gwt.gears.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.gears.client.database.Database;
+import com.google.gwt.gears.client.desktop.Desktop;
+import com.google.gwt.gears.client.geolocation.Geolocation;
+import com.google.gwt.gears.client.httprequest.HttpRequest;
 import com.google.gwt.gears.client.localserver.LocalServer;
 import com.google.gwt.gears.client.workerpool.WorkerPool;
 
@@ -38,6 +41,21 @@ public final class Factory extends JavaScriptObject {
    * String used to request a Database instance from Gears.
    */
   public static final String WORKERPOOL = "beta.workerpool";
+
+  /**
+   * String used to request an HttpRequest instance from Gears
+   */
+  public static final String HTTPREQUEST = "beta.httprequest";
+
+  /**
+   * String used to request an Desktop instance from Gears
+   */
+  private static final String DESKTOP = "beta.desktop";
+
+  /**
+   * String used to request an Geolocation instance from Gears
+   */
+  private static final String GEOLOCATION = "beta.geolocation";
 
   /**
    * Returns the singleton instance of the Factory class or <code>null</code>
@@ -79,6 +97,33 @@ public final class Factory extends JavaScriptObject {
    */
   public WorkerPool createWorkerPool() {
     return create(WORKERPOOL);
+  }
+
+  /**
+     * Creates a new {@link HttpRequest} instance.
+     * 
+     * @return a new {@link HttpRequest} instance
+     */
+  public HttpRequest createHttpRequest() {
+    return create(HTTPREQUEST);
+  }
+  
+  /**
+   * Creates a new {@link Desktop} instance.
+   * 
+   * @return a new {@link Desktop} instance
+   */
+  public Desktop createDesktop() {
+    return create(DESKTOP);
+  }
+
+  /**
+   * Creates a new {@link Geolocation} instance.
+   * 
+   * @return a new {@link Geolocation} instance
+   */
+  public Geolocation createGeolocation() {
+    return create(GEOLOCATION);
   }
 
   /**
