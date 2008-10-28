@@ -14,3 +14,10 @@ Changes in this branch (excluding changes to this file itself:
 - Fixed the samples' online documentation link. (r718)
 - Fixes an NPE triggered when a Gadget subclass implements a non-feature interface.(r724)
 - Adds an annotation to inject handwritten content into the gadget spec.(r755)
+- New GadgetRPC project configuration (r853)
+- Adds a sample Gadget the performs RPC. (r879)
+- Fixed typo in module path in GadgetRPC-compile script. (r898)
+- Updated links to new demos (r902)
+- Eclipse project settings were left out of Gadget RPC commit. (r903)
+- Fixes problem with hosted mode debugging (issue 199) (r924)
+- Replace HelloGadget Demo to look like applicationCreator skeleton
