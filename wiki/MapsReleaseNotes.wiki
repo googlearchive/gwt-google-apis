@@ -2,7 +2,21 @@
 
 = Google Maps API Library for GWT Release Notes =
 
-==Release Notes for 1.0.0==
+==Release Notes for 1.0.1==
+===Changes since 1.0.0 (release candidate)===
+
+   * Corrected Projection subclassing issue in Hosted mode. (issue 180)
+   * Allow MarkerOptions and TileLayer to be subclassed or extended.
+   * Corrected the Overlay createPeer() method to construct the proper type (used when accessing an Overlay instance from an event.)
+   * Additional patches needed to correct problems with putting Widgets in infowindows (issues 156,181)
+   * Maps API samples set the Maps version to v=2 instead of v=2.x.  The experimental version showed compatibility problems.
+   * Other issues as noted in the [http://code.google.com/p/gwt-google-apis/issues/list issue tracker]
+
+=== Known Issues ===
+   * Not all features in the Maps API are supported. The Maps API is constantly evolving. 
+
+----
+==Release Notes for 1.0.0 (release candidate)==
 ===Changes since r290===
 
    * This library requires GWT 1.5 or later and Java 1.5 or later. 
@@ -18,8 +32,6 @@
    * Fixed GeocodeCache subclassing issues. 
    * Added many unit tests. 
    * Fixed many other issues noted in the [http://code.google.com/p/gwt-google-apis/issues/list Issue Tracker]. 
-=== Known Issues ===
-   * Not all features in the Maps API are supported. The Maps API is constantly evolving. 
  
 ----
 ==Release Notes for r290 (milestone release)==
