@@ -13,19 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gadgets.sample.hellogadgets.client;
+package com.google.gwt.gadgets.sample.gadgetrpc.client;
 
-import com.google.gwt.gadgets.client.StringPreference;
+import com.google.gwt.gadgets.client.BooleanPreference;
 import com.google.gwt.gadgets.client.UserPreferences;
-import com.google.gwt.gadgets.client.UserPreferences.PreferenceAttributes.Options;
 
 /**
- * The preferences for the HelloWorld Gadget.
+ * Values the user can change using the preferences interface on the gadget.
  */
-public interface HelloPreferences extends UserPreferences {
-  
-  @PreferenceAttributes(display_name = "Alert prompt", //
-      default_value = "Hello, Gadgets!", //
-      options = Options.REQUIRED)
-  StringPreference promptSomethingElse();
+public interface GadgetRPCPreferences extends UserPreferences {
+    @PreferenceAttributes(display_name = "Used Cached XHR methods", default_value = "true")
+    BooleanPreference useCachedXHR();
 }

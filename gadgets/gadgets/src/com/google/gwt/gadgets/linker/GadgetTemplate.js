@@ -73,7 +73,7 @@ function __MODULE_FUNC__() {
   function maybeStartModule() {
     // TODO: it may not be necessary to check gwtOnLoad here.
     if (gwtOnLoad && bodyDone) {
-      gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base);
+      gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base, "1.5");
     }
   }
 
@@ -223,7 +223,7 @@ function __MODULE_FUNC__() {
     $wnd.$moduleBase = base;
     $wnd.__gwt_getProperty = computePropValue;
     $wnd.__gwt_initHandlers = __MODULE_FUNC__.__gwt_initHandlers;
-    external.gwtOnLoad($wnd, $wnd.$moduleName);
+    external.gwtOnLoad($wnd, $wnd.$moduleName, "1.5");
   } else {
     // Otherwise, inject the permutation
     var strongName;
