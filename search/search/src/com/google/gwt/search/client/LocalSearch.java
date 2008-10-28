@@ -15,6 +15,7 @@
  */
 package com.google.gwt.search.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.search.client.impl.GlocalSearch;
 
 /**
@@ -34,16 +35,28 @@ public class LocalSearch extends Search {
    * suppose the searcher is centered in Santa Barbara, CA and the user is
    * searching for "Cava". With co-mingled results, the first search result is
    * actually an address match against "Cava Close, Aberdeen City, AB15 UK". The
-   * second result is "Cava Restaurant &amp; Bar". Using this method, applications
-   * are able to disable and enable address lookup producing either strictly
-   * search results, or address lookup results co-mingled with search results.
-   * In this case, if address lookup is disabled, the first result would be
-   * "Cava Restaurant &amp; Bar".
+   * second result is "Cava Restaurant &amp; Bar". Using this method,
+   * applications are able to disable and enable address lookup producing either
+   * strictly search results, or address lookup results co-mingled with search
+   * results. In this case, if address lookup is disabled, the first result
+   * would be "Cava Restaurant &amp; Bar".
    * 
    * @param mode Supplies the desired address lookup mode.
    */
   public void setAddressLookupMode(AddressLookupMode mode) {
     IMPL.setAddressLookupMode(this, mode.getValue());
+  }
+
+  /**
+   * This method establishes a center point that is used to scope search
+   * results. You can pass a GLatLng or GMap2 object created by the Google Maps API.
+   * If you are using the gwt-maps project, pass an instance of the LatLng class.
+   * 
+   * @param point Supply either a GLatLng object or a GMap2 object from the
+   *          Google Maps API.  
+   */
+  public void setCenterPoint(JavaScriptObject point) {
+    IMPL.setCenterPoint(this, point);
   }
 
   /**

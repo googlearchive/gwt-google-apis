@@ -69,11 +69,16 @@ public class VideoSearchTest extends GWTTestCase {
         assertNotNull("getPublisedAsString()",
             videoResult.getPublishedAsString());
         assertNotNull("getPublisher()", videoResult.getPublisher());
-        assertTrue("getRating()", videoResult.getRating() >= 0);
+        if (videoResult.hasRating()) {
+          assertTrue("getRating() <= 0", videoResult.getRating() > 0);
+          assertTrue("getRating() > 5", videoResult.getRating() <= 5);
+        }
         assertTrue("getTbHeight()", videoResult.getTbHeight() > 0);
         assertTrue("getTbWidth()", videoResult.getTbWidth() > 0);
         assertNotNull("getTbUrl()", videoResult.getTbUrl());
-        assertTrue("getViewCount()", videoResult.getViewCount() >= -1);
+        if (videoResult.hasViewCount()) {
+          assertTrue("getViewCount()", videoResult.getViewCount() >= 0);
+        }
 
         assertNotNull("getTitle()", videoResult.getTitle());
         assertNotNull("getTitleNoFormatting()",
