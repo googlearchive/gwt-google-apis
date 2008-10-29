@@ -28,7 +28,7 @@ public class LatLngBounds extends JavaScriptObject {
    * map.
    */
   public static native LatLngBounds newInstance() /*-{
-    return new $wnd.GLatLngBounds;
+    return new $wnd.GLatLngBounds();
   }-*/;
 
   /**

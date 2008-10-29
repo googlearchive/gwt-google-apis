@@ -128,6 +128,8 @@ public class LatLngBoundsTest extends GWTTestCase {
   public void testNewInstance() {
     LatLngBounds bounds = LatLngBounds.newInstance();
     assertNotNull(bounds);
+    assertNotNull(bounds.getCenter());
+    
     bounds = LatLngBounds.newInstance(LatLng.newInstance(0, 0),
         LatLng.newInstance(45, 45));
     assertNotNull(bounds);
