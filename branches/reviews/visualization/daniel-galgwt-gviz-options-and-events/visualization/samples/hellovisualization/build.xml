@@ -1,0 +1,6 @@
+<project name="database" default="build" basedir=".">
+	<property name="sample.api" value="visualization"/>
+	<property name="sample.root" value="hellovisualization" />
+	<property name="sample.module" value="HelloVisualization" />
+	<import file="../common.ant.xml" />
+</project>
