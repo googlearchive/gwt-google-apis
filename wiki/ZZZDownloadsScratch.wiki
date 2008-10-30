@@ -30,7 +30,7 @@ The following libraries are under active development and available as milestone 
 
 ===Older Releases===
 
-The Gears 1.0 library is compatible with the GWT 1.4 release.
+The Gears 1.0 library is compatible with the GWT 1.4 release.  Note that prior to version 1.1 of the Gears library (currently a release candidate), the gears distribution was named gwt-google-apis, but only contained bindings for Gears.
 
 * Gears API Library 1.0 *
   * *[http://gwt-google-apis.googlecode.com/files/gwt-google-apis-1.0.0.tar.gz gwt-google-apis-1.0.0.tar.gz]*
