@@ -1,3 +1,5 @@
+# Scratchpad for the 'Downloads' wiki page
+
 Currently, released libraries are available for the following APIs.  [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].
 
 *Gears API Library 1.1*
