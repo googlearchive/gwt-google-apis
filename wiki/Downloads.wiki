@@ -1,4 +1,4 @@
-Currently, released libraries are available for the following APIs.  [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].
+Currently, released libraries are available for the following APIs.  These APIs require [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.  [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].  
 
 *Gears API Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.1.1.tar.gz gwt-gears-1.1.1.tar.gz]
