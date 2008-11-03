@@ -16,33 +16,10 @@
 package com.google.gwt.visualization.client;
 
 /**
- * Selectable supports selecting rows/columns.
- *
+ * A marker interface that marks visualizations as supporting selection
+ * and the select event.  It might have been nice to have some characteristic
+ * methods in the interface instead of just having the marker, but
+ * Visualization extends JavaScriptObject, and subclasses of JavaScriptObjects
+ * may not implement interfaces with methods.
  */
-public interface Selectable {
-  
-  /**
-   * Callback for selecting a row/column. 
-   */
-  public interface SelectCallback {
-    void onSelect(Visualization<? extends AbstractDrawOptions> visualization);
-  }
- 
-  /**
-   * Add a selection listener.
-   * @param callback
-   */
-  void addListener(SelectCallback callback);
-  
-  /**
-   * Get the selection.
-   * @return the selection.
-   */
-  Selection getSelection();
-  
-  /**
-   * Set the selection.
-   * @param sel the new selection.
-   */
-  void setSelection(Selection sel);
-}
+public interface Selectable {}

@@ -32,13 +32,13 @@ import com.google.gwt.visualization.client.PieChart;
 import com.google.gwt.visualization.client.PieChartWidget;
 import com.google.gwt.visualization.client.Query;
 import com.google.gwt.visualization.client.QueryResponse;
+import com.google.gwt.visualization.client.SelectListener;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.Table;
 import com.google.gwt.visualization.client.TableWidget;
 import com.google.gwt.visualization.client.Visualization;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.Query.Callback;
-import com.google.gwt.visualization.client.Selectable.SelectCallback;
 
 
 /**
@@ -163,11 +163,13 @@ class VisualizationDemo implements EntryPoint {
         options.setShowRowNumber(true);
         chart.draw(response.getDataTable(), options);
         
-        chart.addListener(new SelectCallback() {
+        final Table viz = chart.getVisualization();
+        
+        viz.addSelectListener(new SelectListener() {
 
           public void onSelect(Visualization<? extends AbstractDrawOptions> visualization) {
             StringBuffer b = new StringBuffer();
-            Selection s = chart.getSelection();
+            Selection s = viz.getSelection();
             for (int i = 0; i < s.getLength(); ++i) {
               if (s.isCell(i)) {
                 b.append(" cell ");
