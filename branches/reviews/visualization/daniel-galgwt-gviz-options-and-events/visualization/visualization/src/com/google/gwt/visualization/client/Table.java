@@ -61,25 +61,34 @@ public class Table extends Visualization<Table.DrawOptions>
     protected DrawOptions() {
     }
     
-    public final void setAllowHtml(boolean allowHtml) {
-      setOption("allowHtml", allowHtml);
-    }
+    public final native void setAllowHtml(boolean allowHtml) /*-{
+      this.allowHtml = allowHtml;
+    }-*/;
 
-    public final void setPageSize(int pageSize) {
-      setOption("pageSize", pageSize);
-    }
+    public final native void setPageSize(int pageSize) /*-{
+      this.pageSize = pageSize;
+    }-*/;
+    
 
-    public final void setShowRowNumber(boolean showRowNumber) {
-      setOption("showRowNumber", showRowNumber);
-    }
+    public final native void setShowRowNumber(boolean showRowNumber) /*-{
+      this.showRowNumber = showRowNumber;
+    }-*/;
     
     public final void setPage(Policy policy) {
-      setOption("page", policy.toString());
+      setPage(policy.toString());
+    }
+
+    public final void setSort(Policy policy) {
+      setSort(policy.toString());
     }
     
-    public final void setSort(Policy policy) {
-      setOption("sort", policy.toString());
-    }
+    private final native void setPage(String page) /*-{
+      this.page = page;
+    }-*/;
+    
+    private final native void setSort(String sort) /*-{
+      this.sort = sort;
+    }-*/;
   }
   
   abstract public class PageListener extends Listener {

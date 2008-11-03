@@ -20,7 +20,6 @@ package com.google.gwt.visualization.client;
  * and the select event.  It might have been nice to have some characteristic
  * methods in the interface instead of just having the marker, but
  * Visualization extends JavaScriptObject, and subclasses of JavaScriptObjects
- * may not implement interfaces with methods.  This is a rule of the GWT
- * compiler and I'm sure there is a good reason for it.
+ * may not implement interfaces with methods.
  */
 public interface Selectable {}

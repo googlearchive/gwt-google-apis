@@ -13,32 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * DrawOptions stores the options for drawing the visualization.
- * 
+ * Color specification for DrawOptions.  Color-related draw options often 
+ * accept either the name of the color as a string, or the detailed color
+ * specification as implemented by the following class.
  */
-public abstract class AbstractDrawOptions extends JavaScriptObject {
-
-  protected AbstractDrawOptions() {
+public class Color extends JavaScriptObject {
+  protected Color() {
   }
-
-  public final native void setOption(String option, boolean value) /*-{
-    this[option] = value;
+  
+  public static Color create() {
+    return JavaScriptObject.createObject().cast();
+  }
+  
+  public final native void setStroke(String stroke) /*-{
+    this.stroke = stroke;
   }-*/;
-
-  public final native void setOption(String option, double value) /*-{
-    this[option] = value;
+  
+  public final native void setFill(String fill) /*-{
+    this.fill = fill;
   }-*/;
-
-  public final native void setOption(String option, int value) /*-{
-    this[option] = value;
-  }-*/;
-
-  public final native void setOption(String option, Object value) /*-{
-    this[option] = value;
+  
+  public final native void setStrokeSize(int strokeSize) /*-{
+    this.strokeSize = strokeSize;
   }-*/;
 }
