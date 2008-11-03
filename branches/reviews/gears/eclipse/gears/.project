@@ -23,14 +23,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>test</name>
-			<type>2</type>
-			<locationURI>GEARS_API_ROOT/gears/test</locationURI>
-		</link>
-		<link>
 			<name>src</name>
 			<type>2</type>
 			<locationURI>GEARS_API_ROOT/gears/src</locationURI>
+		</link>
+		<link>
+			<name>test</name>
+			<type>2</type>
+			<locationURI>GEARS_API_ROOT/gears/test</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
