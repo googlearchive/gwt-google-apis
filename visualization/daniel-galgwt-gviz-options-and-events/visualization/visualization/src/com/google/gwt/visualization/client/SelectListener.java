@@ -15,30 +15,15 @@
  */
 package com.google.gwt.visualization.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
- * DrawOptions stores the options for drawing the visualization.
- * 
+ * A listener to select events.  Select events are common events that are
+ * supported by many different visualizations.
  */
-public abstract class AbstractDrawOptions extends JavaScriptObject {
-
-  protected AbstractDrawOptions() {
+abstract public class SelectListener extends Listener {
+  abstract public void onSelect(Visualization<?> viz);
+  
+  @Override
+  protected void onEvent(Visualization<?> visualization, Properties event) {
+    onSelect(visualization);
   }
-
-  public final native void setOption(String option, boolean value) /*-{
-    this[option] = value;
-  }-*/;
-
-  public final native void setOption(String option, double value) /*-{
-    this[option] = value;
-  }-*/;
-
-  public final native void setOption(String option, int value) /*-{
-    this[option] = value;
-  }-*/;
-
-  public final native void setOption(String option, Object value) /*-{
-    this[option] = value;
-  }-*/;
 }

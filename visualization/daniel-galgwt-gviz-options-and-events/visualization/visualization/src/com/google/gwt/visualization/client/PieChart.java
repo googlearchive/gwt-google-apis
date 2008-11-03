@@ -67,82 +67,86 @@ public class PieChart extends Visualization<PieChart.DrawOptions>
     protected DrawOptions() {
     }
     
-    public final void setBackgroundColor(String color) {
-      setOption("backgroundColor", color);
-    }
+    public final native void setBackgroundColor(String color) /*-{
+      this.backgroundColor = color;
+    }-*/;
     
-    public final void setBackgroundColor(Color color) {
-      setOption("backgroundColor", color);
-    }
+    public final native void setBackgroundColor(Color color) /*-{
+      this.backgroundColor = color;
+    }-*/;
     
-    public final void setLegendBackgroundColor(String color) {
-      setOption("legendBackgroundColor", color);
-    }
+    public final native void setLegendBackgroundColor(String color) /*-{
+      this.legendBackgroundColor = color;
+    }-*/;
     
-    public final void setLegendBackgroundColor(Color color) {
-      setOption("legendBackgroundColor", color);
-    }
+    public final native void setLegendBackgroundColor(Color color) /*-{
+      this.legendBackgroundColor = color;
+    }-*/;
     
-    public final void setLegendTextColor(String color) {
-      setOption("legendTextColor", color);
-    }
+    public final native void setLegendTextColor(String color) /*-{
+      this.legendTextColor = color;
+    }-*/;
     
-    public final void setLegendTextColor(Color color) {
-      setOption("legendTextColor", color);
-    }
+    public final native void setLegendTextColor(Color color) /*-{
+      this.legendTextColor = color;
+    }-*/;
     
-    public final void setBorderColor(String color) {
-      setOption("borderColor", color);
-    }
+    public final native void setBorderColor(String color) /*-{
+      this.borderColor = color;
+    }-*/;
     
-    public final void setFocusBorderColor(Color color) {
-      setOption("focusBorderColor", color);
-    }
+    public final native void setBorderColor(Color color) /*-{
+      this.borderColor = color;
+    }-*/;
     
-    public final void setFocusBorderColor(String color) {
-      setOption("focusBorderColor", color);
-    }
+    public final native void setFocusBorderColor(Color color) /*-{
+      this.focusBorderColor = color;
+    }-*/;
     
-    public final void setBorderColor(Color color) {
-      setOption("borderColor", color);
-    }
+    public final native void setFocusBorderColor(String color) /*-{
+      this.focusBorderColor = color;
+    }-*/;
     
-    public final void setColors(String[] colors) {
-      setOption("colors", colors);
-    }
+    public final native void setColors(String[] colors) /*-{
+      this.colors = colors;
+    }-*/;
     
-    public final void setHeight(int height) {
-      setOption("height", height);
-    }
+    public final native void setHeight(int height) /*-{
+      this.height = height;
+    }-*/;
     
-    public final void setWidth(int width) {
-      setOption("width", width);
-    }
+    public final native void setWidth(int width) /*-{
+      this.width = width;
+    }-*/;
     
-    public final void setTitle(String title) {
-      setOption("title", title);
-    }
+    public final native void setTitle(String title) /*-{
+      this.title = title;
+    }-*/;
     
-    public final void setTitleColor(String color) {
-      setOption("titleColor", color);
-    }
+    public final native void setTitleColor(String color) /*-{
+      this.titleColor = color;
+    }-*/;
     
-    public final void setTitleColor(Color color) {
-      setOption("titleColor", color);
-    }
+    public final native void setTitleColor(Color color) /*-{
+      this.titleColor = color;
+    }-*/;
 
-    public final void set3D(boolean enable3D) {
-      setOption("is3D", enable3D);
-    }
+    public final native void set3D(boolean enable3D) /*-{
+      this.enable3D = enable3D;
+    }-*/;
     
     public final void setLegend(LegendPosition position) {
-      setOption("legend", position.toString());
+      setLegend(position.toString());
     }
 
     public final void setSize(int width, int height) {
       setWidth(width);
       setHeight(height);
     }
+    
+    private final native void setLegend(String legend) /*-{
+      this.legend = legend;
+    }-*/;
   }
 
   public static native PieChart create(Element parent) /*-{
