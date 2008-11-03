@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -13,30 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Name/value map with additional properties.
+ * Color specification for DrawOptions.  Color-related draw options often 
+ * accept either the name of the color as a string, or the detailed color
+ * specification as implemented by the following class.
  */
-public class Properties extends JavaScriptObject {
-  protected Properties() {
+public class Color extends JavaScriptObject {
+  protected Color() {
   }
-
-  public final native double getDouble(String name) /*-{
-    return this[name];
-  }-*/;
-
-  public final native int getInt(String name) /*-{
-    return this[name];
-  }-*/;
-
-  public final native boolean getBoolean(String name) /*-{
-    return this[name];
+  
+  public static Color create() {
+    return JavaScriptObject.createObject().cast();
+  }
+  
+  public final native void setStroke(String stroke) /*-{
+    this.stroke = stroke;
   }-*/;
   
-  public final native String getString(String name) /*-{
-    return this[name];
+  public final native void setFill(String fill) /*-{
+    this.fill = fill;
+  }-*/;
+  
+  public final native void setStrokeSize(int strokeSize) /*-{
+    this.strokeSize = strokeSize;
   }-*/;
 }

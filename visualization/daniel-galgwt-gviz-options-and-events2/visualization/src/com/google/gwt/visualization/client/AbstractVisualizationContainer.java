@@ -86,7 +86,7 @@ public abstract class AbstractVisualizationContainer<T extends Visualization<E>,
   /**
    * @return the visualization object.
    */
-  protected T getVisualization() {
+  public T getVisualization() {
     return visualization;
   }
 

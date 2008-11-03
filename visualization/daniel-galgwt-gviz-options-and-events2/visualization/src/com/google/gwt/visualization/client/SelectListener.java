@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -15,28 +15,15 @@
  */
 package com.google.gwt.visualization.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
- * Name/value map with additional properties.
+ * A listener to select events.  Select events are common events that are
+ * supported by many different visualizations.
  */
-public class Properties extends JavaScriptObject {
-  protected Properties() {
-  }
-
-  public final native double getDouble(String name) /*-{
-    return this[name];
-  }-*/;
-
-  public final native int getInt(String name) /*-{
-    return this[name];
-  }-*/;
-
-  public final native boolean getBoolean(String name) /*-{
-    return this[name];
-  }-*/;
+abstract public class SelectListener extends Listener {
+  abstract public void onSelect(Visualization<?> viz);
   
-  public final native String getString(String name) /*-{
-    return this[name];
-  }-*/;
+  @Override
+  protected void onEvent(Visualization<?> visualization, Properties event) {
+    onSelect(visualization);
+  }
 }
