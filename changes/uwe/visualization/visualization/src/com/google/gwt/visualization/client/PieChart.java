@@ -144,7 +144,7 @@ public class PieChart extends Visualization<PieChart.DrawOptions>
       this.titleColor = color;
     }-*/;
 
-    public native void setWidth(int width) /*-{
+    public final native void setWidth(int width) /*-{
       this.width = width;
     }-*/;
     

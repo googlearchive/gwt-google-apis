@@ -167,9 +167,11 @@ class VisualizationDemo implements EntryPoint {
         
         viz.addSelectListener(new SelectListener() {
 
-          public void onSelect(Visualization<? extends AbstractDrawOptions> visualization) {
+          @Override
+          public void onSelect(Visualization<?> viz) {
             StringBuffer b = new StringBuffer();
-            Selection s = viz.getSelection();
+            Table table = (Table) viz;
+            Selection s = table.getSelection();
             for (int i = 0; i < s.getLength(); ++i) {
               if (s.isCell(i)) {
                 b.append(" cell ");
@@ -184,7 +186,7 @@ class VisualizationDemo implements EntryPoint {
                 b.append(s.getColumn(i));
               }
             }
-            label.setText("selection changed " + b.toString());
+            label.setText("selection changed " + b.toString()); 
           }
         });
       }
