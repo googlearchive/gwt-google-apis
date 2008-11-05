@@ -48,7 +48,7 @@ public class DataView extends AbstractDataTable {
       array.set(i, columnIndices[i]);
     }
     setColumns(array);
-  };
+  }
   
   private native void setColumns(JsArrayInteger columnIndices) /*-{
     this.setColumns(columnIndices);

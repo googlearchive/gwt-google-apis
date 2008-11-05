@@ -61,6 +61,15 @@ public abstract class AbstractVisualizationContainer<T extends Visualization<E>,
    * Draws the visualization.
    * 
    * @param dataTable the data table.
+   */
+  public void draw(AbstractDataTable dataTable) {
+    visualization.draw(dataTable, null);
+  }
+
+  /**
+   * Draws the visualization.
+   * 
+   * @param dataTable the data table.
    * @param options the options for drawing the visualization.
    */
   public void draw(AbstractDataTable dataTable, E options) {
@@ -68,12 +77,10 @@ public abstract class AbstractVisualizationContainer<T extends Visualization<E>,
   }
 
   /**
-   * Draws the visualization.
-   * 
-   * @param dataTable the data table.
+   * @return the visualization object.
    */
-  public void draw(AbstractDataTable dataTable) {
-    visualization.draw(dataTable, null);
+  public T getVisualization() {
+    return visualization;
   }
 
   /**
@@ -82,13 +89,6 @@ public abstract class AbstractVisualizationContainer<T extends Visualization<E>,
    * @return the visualization.
    */
   protected abstract T create(Element elem);
-
-  /**
-   * @return the visualization object.
-   */
-  protected T getVisualization() {
-    return visualization;
-  }
 
   @Override
   protected void onLoad() {

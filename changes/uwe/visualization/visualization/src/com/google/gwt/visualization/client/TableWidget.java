@@ -23,8 +23,7 @@ import com.google.gwt.visualization.client.Table.DrawOptions;
  * 
  *
  */
-public class TableWidget extends AbstractVisualizationContainer<Table, DrawOptions> 
-    implements Selectable {
+public class TableWidget extends AbstractVisualizationContainer<Table, DrawOptions> {
 
   /**
    * Creates a table visualization widget. Call draw() to render it.
@@ -40,27 +39,6 @@ public class TableWidget extends AbstractVisualizationContainer<Table, DrawOptio
    */
   public TableWidget(DataTable data, DrawOptions options) {
     super(data, options);
-  }
-
-  /** 
-   * {@inheritDoc} 
-   */
-  public void addListener(SelectCallback callback) {
-   getVisualization().addListener(callback);
-  }
-
-  /** 
-   * {@inheritDoc} 
-   */
-  public Selection getSelection() {
-    return getVisualization().getSelection();
-  }
-
-  /** 
-   * {@inheritDoc} 
-   */
-  public void setSelection(Selection sel) {
-    getVisualization().setSelection(sel);
   }
 
   @Override

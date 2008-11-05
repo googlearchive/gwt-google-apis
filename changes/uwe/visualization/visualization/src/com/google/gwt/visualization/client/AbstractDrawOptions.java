@@ -16,12 +16,21 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 
 /**
  * DrawOptions stores the options for drawing the visualization.
  * 
  */
 public abstract class AbstractDrawOptions extends JavaScriptObject {
+
+  public static JsArrayString createJsArray(String[] strings) {
+    JsArrayString result = JsArrayString.createArray().cast();
+    for (int i = 0; i < strings.length; i++) {
+      result.set(i, strings[i]);
+    }
+    return result;
+  }
 
   protected AbstractDrawOptions() {
   }
@@ -33,11 +42,11 @@ public abstract class AbstractDrawOptions extends JavaScriptObject {
   public final native void setOption(String option, double value) /*-{
     this[option] = value;
   }-*/;
-
+  
   public final native void setOption(String option, int value) /*-{
     this[option] = value;
   }-*/;
-
+  
   public final native void setOption(String option, String value) /*-{
     this[option] = value;
   }-*/;

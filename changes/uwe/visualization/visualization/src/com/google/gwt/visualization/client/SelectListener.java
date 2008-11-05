@@ -16,12 +16,14 @@
 package com.google.gwt.visualization.client;
 
 /**
- * A marker interface that marks visualizations as supporting selection
- * and the select event.  It might have been nice to have some characteristic
- * methods in the interface instead of just having the marker, but
- * Visualization extends JavaScriptObject, and subclasses of JavaScriptObjects
- * may not implement interfaces with methods.
+ * A listener to select events.  Select events are common events that are
+ * supported by many different visualizations.
  */
-public interface Selectable {
+public abstract class SelectListener extends Listener {
+  public abstract void onSelect(Visualization<?> viz);
   
+  @Override
+  protected void onEvent(Visualization<?> visualization, Properties event) {
+    onSelect(visualization);
+  }
 }

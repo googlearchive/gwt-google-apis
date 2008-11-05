@@ -17,7 +17,6 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.visualization.client.Selectable.SelectCallback;
 
 /**
  * 
@@ -27,7 +26,8 @@ import com.google.gwt.visualization.client.Selectable.SelectCallback;
  *      href="http://code.google.com/apis/visualization/documentation/gallery/table.html">
  *      Table Visualization Reference</a>
  */
-public class Table extends Visualization<Table.DrawOptions> {
+public class Table extends Visualization<Table.DrawOptions> 
+    implements Selectable {
 
   /**
    * Options for drawing the table visualization.
@@ -35,26 +35,86 @@ public class Table extends Visualization<Table.DrawOptions> {
    */
   public static class DrawOptions extends AbstractDrawOptions {
     
-    public static DrawOptions create() {
+    /**
+     * A parameter passed to several of the setters.
+     */
+    public static enum Policy {
+      DISABLE, ENABLE, EVENT;
+      
+      @Override
+      public String toString() {
+        switch (this) {
+          case ENABLE:
+            return "enable";
+          case EVENT:
+            return "event";
+          case DISABLE:
+            return "disable";
+          default:
+            // unreachable
+            throw new RuntimeException();
+        }
+      }
+    }
+    
+    public static final DrawOptions create() {
       return JavaScriptObject.createObject().cast();
     }
 
     protected DrawOptions() {
     }
     
-    // TODO(umaurer): add support for all options
-    
     public final native void setAllowHtml(boolean allowHtml) /*-{
       this.allowHtml = allowHtml;
     }-*/;
 
+    public final void setPage(Policy policy) {
+      setPage(policy.toString());
+    }
+    
     public final native void setPageSize(int pageSize) /*-{
       this.pageSize = pageSize;
     }-*/;
-
-    public final native void setShowRowNumber(boolean showRowNumber) /*-{ 
+    
+    public final native void setShowRowNumber(boolean showRowNumber) /*-{
       this.showRowNumber = showRowNumber;
     }-*/;
+
+    public final void setSort(Policy policy) {
+      setSort(policy.toString());
+    }
+    
+    private native void setPage(String page) /*-{
+      this.page = page;
+    }-*/;
+    
+    private native void setSort(String sort) /*-{
+      this.sort = sort;
+    }-*/;
+  }
+  
+  /**
+   * A listener for page events.
+   */
+  public abstract class PageListener extends Listener {
+    public abstract void onPage(int page);
+    
+    @Override
+    protected void onEvent(Visualization<?> visualization, Properties event) {
+      onPage(event.getInt("page"));
+    }
+  }
+  
+  /**
+   * A listener for sort events.
+   */
+  public abstract class SortListener extends Listener {
+    public abstract void onSort(int column, boolean ascending);
+    
+    @Override
+    protected void onEvent(Visualization<?> visualization, Properties event) {
+      onSort(event.getInt("column"), event.getBoolean("ascending"));
+    }
   }
   
   public static native Table create(Element parent) /*-{
@@ -63,9 +123,17 @@ public class Table extends Visualization<Table.DrawOptions> {
 
   protected Table() {
   }
+  
+  public final void addPageListener(PageListener listener) {
+    Listener.addListener(this, "page", listener);
+  }
+  
+  public final void addSelectListener(SelectListener listener) {
+    SelectionHelper.addSelectListener(this, listener);
+  }
 
-  public final void addListener(SelectCallback callback) {
-    SelectionHelper.addListener(this, callback);
+  public final void addSortListener(SortListener listener) {
+    Listener.addListener(this, "sort", listener);
   }
 
   public final Selection getSelection() {

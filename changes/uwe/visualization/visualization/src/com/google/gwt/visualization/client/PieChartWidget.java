@@ -23,9 +23,7 @@ import com.google.gwt.visualization.client.PieChart.DrawOptions;
  * This widget shows a pie chart visualization. 
  *
  */
-public class PieChartWidget extends AbstractVisualizationContainer<PieChart, DrawOptions> 
-    implements Selectable {
-
+public class PieChartWidget extends AbstractVisualizationContainer<PieChart, DrawOptions> {
   /**
    * Creates a pie chart widget. Call draw() to render it.
    */
@@ -42,27 +40,6 @@ public class PieChartWidget extends AbstractVisualizationContainer<PieChart, Dra
     super(data, options);
   }
   
-  /** 
-   * {@inheritDoc} 
-   */
-  public void addListener(SelectCallback callback) {
-   getVisualization().addListener(callback);
-  }
-  
-  /** 
-   * {@inheritDoc} 
-   */
-  public Selection getSelection() {
-    return getVisualization().getSelection();
-  }
-  
-  /** 
-   * {@inheritDoc} 
-   */
-  public void setSelection(Selection sel) {
-    getVisualization().setSelection(sel);
-  }
-
   @Override
   protected PieChart create(Element elem) {
     return PieChart.create(elem);

@@ -15,53 +15,24 @@
  */
 package com.google.gwt.visualization.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
-import com.google.gwt.visualization.client.Selectable.SelectCallback;
-
 /**
  * SelectionHelper implements selection related functions.
  *
  */
 public class SelectionHelper {
-
-  public static final native void addListener(Visualization<?> visualization, final SelectCallback callback) /*-{
-    $wnd.google.visualization.events.addListener(visualization, 'select', function() {
-      @com.google.gwt.visualization.client.SelectionHelper::onSelectCallback(Lcom/google/gwt/visualization/client/Visualization;Lcom/google/gwt/visualization/client/Selectable$SelectCallback;)(visualization, callback);
-    });
-  }-*/;
+  public static void addSelectListener(Visualization<?> viz,  
+                                       SelectListener listener) {
+    Listener.addListener(viz, "select", listener);
+  }
   
-  public static final native Selection getSelection(Visualization<?> visualization) /*-{
+  public static final native Selection getSelection(Selectable visualization) /*-{
     return visualization.getSelection();
   }-*/;
 
-  public static final native void setSelection(Visualization<?> visualization, Selection sel) /*-{
+  public static final native void setSelection(Selectable visualization, Selection sel) /*-{
     visualization.setSelection(sel);
   }-*/;
   
-  private static void fireAndCatch(UncaughtExceptionHandler handler,
-      Visualization<? extends AbstractDrawOptions> visualization, SelectCallback callback) {
-    try {
-      fireImpl(visualization, callback);
-    } catch (Throwable e) {
-      handler.onUncaughtException(e);
-    }
-  }
-
-  private static void fireImpl(Visualization<?> visualization, SelectCallback callback) {
-    callback.onSelect(visualization);
-  }
-  
-  @SuppressWarnings("unused")
-  private static void onSelectCallback(Visualization<?> visualization, SelectCallback callback) {
-    UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    if (handler != null) {
-      fireAndCatch(handler, visualization, callback);
-    } else {
-      fireImpl(visualization, callback);
-    }
-  }
-
   protected SelectionHelper() {
   }
 }
