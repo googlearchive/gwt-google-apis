@@ -24,7 +24,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class Selection extends JavaScriptObject {
   protected Selection() {
   }
-
+  
   /**
    * @param i the index of the selection.
    * @return the column of the i'th selection. Only call this if the selection

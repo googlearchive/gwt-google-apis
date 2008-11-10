@@ -20,13 +20,31 @@ import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
  * SelectionHelper implements selection related functions.
- *
+ * 
  */
 public class SelectionHelper {
   public static void addSelectHandler(Visualization<?> viz, SelectHandler handler) {
     Handler.addHandler(viz, "select", handler);
   }
-  
+
+  /**
+   * Create a selection with one entry.
+   * 
+   * @param row row index or null.
+   * @param column column index or null.
+   * @return a Selection object.
+   */
+  public static final Selection createSelection(Integer row, Integer column) {
+    Selection sel = createSelection();
+    if (row != null) {
+      setSelectionRow(sel, 0, row);
+    }
+    if (column != null) {
+      setSelectionColumn(sel, 0, column);
+    }
+    return sel;
+  };
+
   public static final native Selection getSelection(Selectable visualization) /*-{
     return visualization.getSelection();
   }-*/;
@@ -34,7 +52,19 @@ public class SelectionHelper {
   public static final native void setSelection(Selectable visualization, Selection sel) /*-{
     visualization.setSelection(sel);
   }-*/;
-  
+
+  private static native Selection createSelection() /*-{
+    return [ {"row" : null, "column" : null} ];
+  }-*/;
+
+  private static native void setSelectionColumn(Selection sel, int i, int column) /*-{
+    sel[i].column = column;
+  }-*/;
+
+  private static native void setSelectionRow(Selection sel, int i, int row) /*-{
+    sel[i].row = row;
+  }-*/;
+
   protected SelectionHelper() {
   }
 }
