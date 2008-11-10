@@ -15,14 +15,16 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.SelectHandler;
+
 /**
  * SelectionHelper implements selection related functions.
  *
  */
 public class SelectionHelper {
-  public static void addSelectListener(Visualization<?> viz,  
-                                       SelectListener listener) {
-    Listener.addListener(viz, "select", listener);
+  public static void addSelectHandler(Visualization<?> viz, SelectHandler handler) {
+    Handler.addHandler(viz, "select", handler);
   }
   
   public static final native Selection getSelection(Selectable visualization) /*-{

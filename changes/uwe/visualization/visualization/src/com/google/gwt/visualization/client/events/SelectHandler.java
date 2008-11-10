@@ -13,17 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.visualization.client;
+package com.google.gwt.visualization.client.events;
+
+import com.google.gwt.visualization.client.Properties;
 
 /**
- * A listener to select events.  Select events are common events that are
+ * A handler for select events.  Select events are common events that are
  * supported by many different visualizations.
  */
-public abstract class SelectListener extends Listener {
-  public abstract void onSelect(Visualization<?> viz);
+public abstract class SelectHandler extends Handler {
+  /**
+   * The select event is fired when the user selects data displayed in the
+   * visualization.  The SelectEvent class is a placeholder.
+   */
+  public static class SelectEvent {
+  } 
+  
+  public abstract void onSelect(SelectEvent event);
   
   @Override
-  protected void onEvent(Visualization<?> visualization, Properties event) {
-    onSelect(visualization);
+  protected void onEvent(Properties properties) {
+    onSelect(new SelectEvent());
   }
 }

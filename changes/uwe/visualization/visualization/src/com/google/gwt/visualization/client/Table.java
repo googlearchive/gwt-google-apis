@@ -17,6 +17,10 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.PageHandler;
+import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.events.SortHandler;
 
 /**
  * 
@@ -92,31 +96,7 @@ public class Table extends Visualization<Table.DrawOptions>
       this.sort = sort;
     }-*/;
   }
-  
-  /**
-   * A listener for page events.
-   */
-  public abstract class PageListener extends Listener {
-    public abstract void onPage(int page);
-    
-    @Override
-    protected void onEvent(Visualization<?> visualization, Properties event) {
-      onPage(event.getInt("page"));
-    }
-  }
-  
-  /**
-   * A listener for sort events.
-   */
-  public abstract class SortListener extends Listener {
-    public abstract void onSort(int column, boolean ascending);
-    
-    @Override
-    protected void onEvent(Visualization<?> visualization, Properties event) {
-      onSort(event.getInt("column"), event.getBoolean("ascending"));
-    }
-  }
-  
+
   public static native Table create(Element parent) /*-{
     return new $wnd.google.visualization.Table(parent);
   }-*/;
@@ -124,16 +104,16 @@ public class Table extends Visualization<Table.DrawOptions>
   protected Table() {
   }
   
-  public final void addPageListener(PageListener listener) {
-    Listener.addListener(this, "page", listener);
+  public final void addPageListener(PageHandler listener) {
+    Handler.addHandler(this, "page", listener);
   }
   
-  public final void addSelectListener(SelectListener listener) {
-    SelectionHelper.addSelectListener(this, listener);
+  public final void addSelectHandler(SelectHandler handler) {
+    SelectionHelper.addSelectHandler(this, handler);
   }
 
-  public final void addSortListener(SortListener listener) {
-    Listener.addListener(this, "sort", listener);
+  public final void addSortListener(SortHandler listener) {
+    Handler.addHandler(this, "sort", listener);
   }
 
   public final Selection getSelection() {

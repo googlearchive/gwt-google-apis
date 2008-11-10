@@ -25,20 +25,18 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.DataView;
 import com.google.gwt.visualization.client.PieChart;
 import com.google.gwt.visualization.client.PieChartWidget;
 import com.google.gwt.visualization.client.Query;
 import com.google.gwt.visualization.client.QueryResponse;
-import com.google.gwt.visualization.client.SelectListener;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.Table;
 import com.google.gwt.visualization.client.TableWidget;
-import com.google.gwt.visualization.client.Visualization;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.Query.Callback;
+import com.google.gwt.visualization.client.events.SelectHandler;
 
 
 /**
@@ -165,12 +163,11 @@ class VisualizationDemo implements EntryPoint {
         
         final Table viz = chart.getVisualization();
         
-        viz.addSelectListener(new SelectListener() {
-
+        viz.addSelectHandler(new SelectHandler() {
           @Override
-          public void onSelect(Visualization<?> viz) {
+          public void onSelect(SelectEvent event) {
             StringBuffer b = new StringBuffer();
-            Table table = (Table) viz;
+            Table table = viz;
             Selection s = table.getSelection();
             for (int i = 0; i < s.getLength(); ++i) {
               if (s.isCell(i)) {
