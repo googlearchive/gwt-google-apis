@@ -15,7 +15,7 @@
 
 Using the packages property, specify the names of visualizations you want to use in your page.  Support for some visualizations is included in the GWT Visualization API.  If you want to use a visualization that is currently unsupported, it's easy to write your own wrapper.
 
-The first script tag loads the google.load function, which lets you load individual Google APIs. Then, <verbatim>google.load("visualization", "1", {packages: ["piechart"])</verbatim> loads Version 1 of the Visualization API, and the pie chart package. Currently the Visualization API is in Version 1. Newer versions may be available in the future.
+The first script tag loads the google.load function, which lets you load individual Google APIs. Then, {{{ google.load("visualization", "1", {packages: ["piechart"]) }}} loads Version 1 of the Visualization API, and the pie chart package. Currently the Visualization API is in Version 1. Newer versions may be available in the future.
 
 To load more than one visualization package, provide the list of the visualizations you require:
 
