@@ -215,6 +215,6 @@ public class DataTable extends AbstractDataTable {
   }-*/;
 
   private native void setValueDate(int rowIndex, int columnIndex, int value) /*-{
-    this.setValue(rowIndex, columnIndex, new Date(value));
+    this.setValue(rowIndex, columnIndex, new $wnd.Date(value));
   }-*/;
 }
