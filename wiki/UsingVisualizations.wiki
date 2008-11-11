@@ -93,7 +93,7 @@ To see what this looks like, just add a "new Activities()" to a gwt panel.
 
 == Creating Draw Options ==
 
-In GWT GViz, each visualization has its own Options class.  These classes are subclasses of JavaScriptObject, so they are created with the static method Options.create().  The properties of the Options class for each visualization correspond to the supported names and value types defined in the GViz documentation of each specific visualization.
+In GWT GViz, each visualization has its own Options class.  These classes are subclasses of <NOP>JavaScriptObject</NOP>, so they are created with the static method Options.create().  The properties of the Options class for each visualization correspond to the supported names and value types defined in the GViz documentation of each specific visualization.
 
 {{{
   private Options createOptions() {
