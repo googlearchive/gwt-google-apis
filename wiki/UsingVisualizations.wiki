@@ -130,6 +130,16 @@ For all visualizations, the data is created using the DataTable class or the Dat
   }
 }}}
 
+== Creating a DataView ==
+
+To provide a read-only view of a DataTable, you can bind a DataView to your DataTable and call Visualization.draw() with the DataView.  DataView also allows you to expose a subset of columns and show columns in a different order.
+
+{{{
+  DataView view = DataView.create(table);
+  view.setColumns(new Integer[]{3, 2});
+  viz.draw(view, options);
+}}}
+
 == Creating a SelectHandler ==
 
 Handlers are created for visualizations very similarly to how listeners are created for widgets.  Visualizations define "addXXXHandler" methods that take a handler for some event.  Many visualizations support the SelectHandler/SelectEvent.
