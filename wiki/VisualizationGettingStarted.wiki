@@ -1,0 +1,13 @@
+#summary Getting Started Using the Google Visualization API with GWT
+
+= Getting Started with Visualizations =
+
+== Getting the Visualization API Library for GWT ==
+
+You can download the latest production releases of the libraries from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-visualization.jar`. 
+
+You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-visualization`.
+
+== Visualization Topics ==
+
+With the GWT visualizations API, you can do three things: you can [http://code.google.com/p/gwt-google-apis/wiki/UsingVisualizations use visualizations], wrap new visualizations for use in GWT code, and expose visualizations written in GWT to javascript users of the Google Visualization API.
