@@ -27,16 +27,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.DataView;
-import com.google.gwt.visualization.client.PieChart;
-import com.google.gwt.visualization.client.PieChartWidget;
 import com.google.gwt.visualization.client.Query;
 import com.google.gwt.visualization.client.QueryResponse;
 import com.google.gwt.visualization.client.Selection;
-import com.google.gwt.visualization.client.Table;
-import com.google.gwt.visualization.client.TableWidget;
+import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.Query.Callback;
 import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.visualizations.PieChart;
+import com.google.gwt.visualization.client.visualizations.Table;
 
 
 /**
@@ -84,14 +83,14 @@ class VisualizationDemo implements EntryPoint {
     Panel flowPanel = new FlowPanel();
     panel.add(flowPanel);
     flowPanel.add(new Label("Original DataTable:"));
-    TableWidget chart = new TableWidget();
+    VisualizationWidget<Table, Table.DrawOptions> chart = Table.createWidget();
     flowPanel.add(chart);
     chart.draw(table);
     
     flowPanel = new FlowPanel();
     flowPanel.add(new Label("DataView with columns 2 and 1:"));
     /* create a view on this table, with columns 2 and 1 */
-    TableWidget viewChart = new TableWidget();
+    VisualizationWidget<Table, Table.DrawOptions> viewChart = Table.createWidget();
     DataView view = DataView.create(table);
     view.setColumns(new int[] {2, 1});
     flowPanel.add(viewChart);
@@ -125,12 +124,12 @@ class VisualizationDemo implements EntryPoint {
 
     /* create pie chart */
     
-    PieChart.DrawOptions options = PieChart.DrawOptions.create();
+    PieChart.Options options = PieChart.Options.create();
     options.setWidth(400);
     options.setHeight(240);
     options.set3D(true);
     options.setTitle("My Daily Activities");
-    return new PieChartWidget(data, options);
+    return PieChart.createWidget(data, options);
   }
 
   /**
@@ -154,15 +153,15 @@ class VisualizationDemo implements EntryPoint {
               + response.getDetailedMessage());
           return;
         }
-        
-        final TableWidget chart = new TableWidget();
+
+        VisualizationWidget<Table, Table.DrawOptions> chart = Table.createWidget();
         panel.add(chart);
         Table.DrawOptions options = Table.DrawOptions.create();
         options.setShowRowNumber(true);
         chart.draw(response.getDataTable(), options);
         
         final Table viz = chart.getVisualization();
-        
+
         viz.addSelectHandler(new SelectHandler() {
           @Override
           public void onSelect(SelectEvent event) {

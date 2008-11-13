@@ -13,10 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.visualization.client;
+package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.visualization.client.AbstractDataTable;
+import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.Selectable;
+import com.google.gwt.visualization.client.Selection;
+import com.google.gwt.visualization.client.SelectionHelper;
+import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.PageHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
@@ -24,7 +31,10 @@ import com.google.gwt.visualization.client.events.SortHandler;
 
 /**
  * 
- * Table visualization.
+ * Table visualization.  May be loaded by calling: 
+ * <code>
+ * google.load("visualization", "1", {packages:["table"]});
+ * </code>
  * 
  * @see <a
  *      href="http://code.google.com/apis/visualization/documentation/gallery/table.html">
@@ -96,10 +106,24 @@ public class Table extends Visualization<Table.DrawOptions>
       this.sort = sort;
     }-*/;
   }
-
+  
   public static native Table create(Element parent) /*-{
     return new $wnd.google.visualization.Table(parent);
   }-*/;
+  
+  public static VisualizationWidget<Table, DrawOptions> 
+  createWidget(AbstractDataTable data, DrawOptions options) {
+    Element div = DOM.createDiv();
+    Table viz = create(div);
+    return new VisualizationWidget<Table, DrawOptions>(div, viz, data, 
+        options);
+  }
+  
+  public static VisualizationWidget<Table, DrawOptions> createWidget() {
+    Element div = DOM.createDiv();
+    Table viz = create(div);
+    return new VisualizationWidget<Table, DrawOptions>(div, viz);
+  }
 
   protected Table() {
   }

@@ -13,17 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.visualization.client;
+package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.visualization.client.AbstractDataTable;
+import com.google.gwt.visualization.client.AbstractDrawOptions;
 
 /**
  * A Visualization object can draw a DataTable.
  * @param <E> The options for drawing this visualization.
  *
  */
-public class Visualization<E extends AbstractDrawOptions> extends JavaScriptObject {
-
+public class Visualization<E extends AbstractDrawOptions>   
+extends JavaScriptObject {
   protected Visualization() {
   }
 

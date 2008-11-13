@@ -17,7 +17,6 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JsArrayInteger;
 
-
 /**
  * This class represents the DataView.
  * 

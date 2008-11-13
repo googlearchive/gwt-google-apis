@@ -16,43 +16,45 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.visualization.client.visualizations.Visualization;
 
 /**
+ * Intended to hold a single visualization. This class is a base class for
+ * visualization widgets.
  * 
- * Intended to hold a single visualization. This class is a base class for visualization widgets.
- * 
- * @param <T> visualization class
- * @param <E> draw options for this class
+ * @param <VisualizationType> visualization class
+ * @param <OptionsType> draw options for this class
  * 
  */
-public abstract class AbstractVisualizationContainer<T extends Visualization<E>, E extends AbstractDrawOptions>
+public class VisualizationWidget<VisualizationType extends Visualization<OptionsType>, OptionsType extends AbstractDrawOptions>
     extends Widget {
-  private DataTable dataTable = null;
-  private Element elem;
-  private E options = null;
-  private T visualization = null;
+  private AbstractDataTable dataTable = null;
+  private OptionsType options = null;
+  private VisualizationType visualization = null;
 
   /**
    * This constructor will not automatically draw the visualization.
+   * 
+   * @param visualization The visualization to be displayed in the widget.
    */
-  public AbstractVisualizationContainer() {
-    elem = DOM.createDiv();
+  public VisualizationWidget(Element elem, VisualizationType visualization) {
     setElement(elem);
     setStyleName("gwt-viz-container");
-    visualization = create(elem);
+    this.visualization = visualization;
   }
 
   /**
    * This constructor will automatically draw the visualization with the
    * provided dataTable and options.
    * 
+   * @param visualization the visualization to be displayed in the widget.
    * @param dataTable the data table.
    * @param options the options for drawing the visualization.
    */
-  public AbstractVisualizationContainer(DataTable dataTable, E options) {
-    this();
+  public VisualizationWidget(Element elem, VisualizationType visualization,
+      AbstractDataTable dataTable, OptionsType options) {
+    this(elem, visualization);
     this.options = options;
     this.dataTable = dataTable;
   }
@@ -72,23 +74,16 @@ public abstract class AbstractVisualizationContainer<T extends Visualization<E>,
    * @param dataTable the data table.
    * @param options the options for drawing the visualization.
    */
-  public void draw(AbstractDataTable dataTable, E options) {
+  public void draw(AbstractDataTable dataTable, OptionsType options) {
     visualization.draw(dataTable, options);
   }
 
   /**
    * @return the visualization object.
    */
-  public T getVisualization() {
+  public VisualizationType getVisualization() {
     return visualization;
   }
-
-  /**
-   * This method creates the Visualization. 
-   * @param elem parent element of the visualization.
-   * @return the visualization.
-   */
-  protected abstract T create(Element elem);
 
   @Override
   protected void onLoad() {

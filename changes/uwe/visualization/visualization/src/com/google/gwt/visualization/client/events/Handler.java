@@ -18,7 +18,7 @@ package com.google.gwt.visualization.client.events;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.visualization.client.Properties;
-import com.google.gwt.visualization.client.Visualization;
+import com.google.gwt.visualization.client.visualizations.Visualization;
 
 /**
  * The base class for visualization event handlers.

@@ -17,6 +17,7 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.visualizations.Visualization;
 
 /**
  * SelectionHelper implements selection related functions.
@@ -43,7 +44,7 @@ public class SelectionHelper {
       setSelectionColumn(sel, 0, column);
     }
     return sel;
-  };
+  }
 
   public static final native Selection getSelection(Selectable visualization) /*-{
     return visualization.getSelection();
