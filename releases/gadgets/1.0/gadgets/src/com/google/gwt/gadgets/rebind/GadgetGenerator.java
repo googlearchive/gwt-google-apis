@@ -28,6 +28,7 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.gadgets.client.GadgetFeature;
 import com.google.gwt.gadgets.client.Gadget.InjectContent;
+import com.google.gwt.gadgets.client.Gadget.InjectModulePrefs;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 import com.google.gwt.gadgets.client.UserPreferences.DataType;
@@ -39,10 +40,13 @@ import com.google.gwt.user.rebind.SourceWriter;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -51,7 +55,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.io.Writer;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Write the top layer in the Gadget bootstrap sandwich and generate a stub
@@ -278,7 +287,10 @@ public class GadgetGenerator extends Generator {
 
     // Root elements
     Element module = (Element) d.appendChild(d.createElement("Module"));
+
     Element modulePrefs = (Element) module.appendChild(d.createElement("ModulePrefs"));
+
+    addInjectedModulePrefs(logger, type, modulePrefs);
 
     // Write out the ModulePrefs tag
     ModulePrefs prefs = type.getAnnotation(ModulePrefs.class);
@@ -315,22 +327,10 @@ public class GadgetGenerator extends Generator {
           require.setAttribute("feature", feature);
         }
         GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
-          name.requirements());
+            name.requirements());
       }
     }
-    // Inject additional hand-written content into the gadget's XML file.
-    StringBuilder contentToInject = new StringBuilder();
-    // Get additional prefs annotation, where the file for injection is
-    // specified.
-    InjectContent injectContent = type.getAnnotation(InjectContent.class);
-    if (injectContent != null) {
-      String[] injectionFiles = injectContent.files();
-      for (String filename : injectionFiles) {
-        if (filename != "") {
-          contentToInject.append(readFileToInject(logger, type, filename));
-        }
-      }
-    }
+    String contentToInject = getInjectedContent(logger, type);
 
     // The Gadget linker will fill in the bootstrap
     // <content type="html">
@@ -351,6 +351,85 @@ public class GadgetGenerator extends Generator {
   }
 
   /**
+   * Inject additional hand-written XML into the gadget's XML file. Get the @InjectModulePrefs
+   * annotation, where the file for injection is specified and add it as a child
+   * of the modlePrefs element.
+   * 
+   * @param logger for logging errors
+   * @param type the Gadget subclass we are generating code for
+   * @param modulePrefs Element in the gadget speck representing
+   *          &lt;ModulePrefs&gt;
+   */
+  private void addInjectedModulePrefs(TreeLogger logger, JClassType type,
+      Element modulePrefs) throws UnableToCompleteException {
+
+    InjectModulePrefs injectContent = type.getAnnotation(InjectModulePrefs.class);
+    if (injectContent != null) {
+      String[] injectionFiles = injectContent.files();
+      for (String filename : injectionFiles) {
+        DocumentBuilder builder;
+        Document parsedDoc;
+        try {
+          builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        } catch (ParserConfigurationException ex) {
+          logger.log(TreeLogger.ERROR, "Error creating XML parser", ex);
+          throw new UnableToCompleteException();
+        }
+        if (filename != "") {
+
+          try {
+            InputSource source = new InputSource();
+            source.setCharacterStream(new StringReader(readFileToInject(logger,
+                type, filename)));
+            parsedDoc = builder.parse(source);
+          } catch (IOException ex) {
+            logger.log(TreeLogger.ERROR,
+                "Error reading file with injected ModulePrefs content: "
+                    + filename, ex);
+            throw new UnableToCompleteException();
+          } catch (SAXException ex) {
+            logger.log(TreeLogger.ERROR,
+                "Error parsing file with injected ModulePrefs content: "
+                    + filename, ex);
+            throw new UnableToCompleteException();
+          }
+          Element element = parsedDoc.getDocumentElement();
+          Node adoptedNode = modulePrefs.getOwnerDocument().importNode(element,
+              true);
+          modulePrefs.appendChild(adoptedNode);
+        }
+      }
+    }
+  }
+
+  /**
+   * Inject additional hand-written JavaScript to be written into the gadget's
+   * XML file in the &lt;Content&gt; section.
+   * 
+   * @param logger for logging errors
+   * @param type the Gadget subclass we are generating code for
+   * @return the string of all files annotated in the @InjectContent annotation.
+   * @throws UnableToCompleteException
+   */
+  private String getInjectedContent(TreeLogger logger, JClassType type)
+      throws UnableToCompleteException {
+    // Inject additional hand-written content into the gadget's XML file.
+    StringBuilder contentToInject = new StringBuilder();
+    // Get additional prefs annotation, where the file for injection is
+    // specified.
+    InjectContent injectContent = type.getAnnotation(InjectContent.class);
+    if (injectContent != null) {
+      String[] injectionFiles = injectContent.files();
+      for (String filename : injectionFiles) {
+        if (filename != "") {
+          contentToInject.append(readFileToInject(logger, type, filename));
+        }
+      }
+    }
+    return contentToInject.toString();
+  }
+
+  /**
    * Reads the file for injection from the classpath and returns its contents.
    * 
    * @param logger For logging.
@@ -361,7 +440,7 @@ public class GadgetGenerator extends Generator {
    *          package as the gadgetClass.
    * @return The contents of the file or an empty string, if an error occurred
    */
-  String readFileToInject(TreeLogger logger, JClassType gadgetClass,
+  private String readFileToInject(TreeLogger logger, JClassType gadgetClass,
       String filename) throws UnableToCompleteException {
     StringBuilder buffer = new StringBuilder();
     String packageName = gadgetClass.getPackage().getName();

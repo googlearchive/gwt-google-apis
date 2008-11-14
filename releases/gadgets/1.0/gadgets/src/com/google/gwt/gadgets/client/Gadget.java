@@ -95,8 +95,8 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
     String author_location() default "";
 
     /**
-     * For the <a href="http://google.com/ig/authors">authors</a> page, a URL
-     * to a photo (70x100 PNG format preferred, but JPG/GIF are also supported).
+     * For the <a href="http://google.com/ig/authors">authors</a> page, a URL to
+     * a photo (70x100 PNG format preferred, but JPG/GIF are also supported).
      */
     String author_photo() default "";
 
@@ -115,8 +115,8 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * Optional string that provides the title that should be displayed for your
      * gadget in the content directory. Should contain only the literal text to
      * be displayed, not <a
-     * href="http://code.google.com/apis/gadgets/docs/legacy/basic.html#UP_MP">user
-     * preference substitution variables</a>. This is because the content
+     * href="http://code.google.com/apis/gadgets/docs/legacy/basic.html#UP_MP"
+     * >user preference substitution variables</a>. This is because the content
      * directory displays a static view of your gadget, and therefore can't
      * perform the necessary substitution to produce a reasonable title. For
      * example, if your gadget's title is "Friends for __UP_name__", the
@@ -152,24 +152,24 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * the preferred format, though GIF and JPG are also acceptable. Gadget
      * screenshots should be 280 pixels wide. The height of the screenshot
      * should be the "natural" height of the gadget when it's in use. For more
-     * discussion of screenshot guidelines, see <a
-     * href="http://code.google.com/apis/gadgets/docs/legacy/publish.html#Submitting">Publishing
-     * to the Content Directory</a>.
+     * discussion of screenshot guidelines, see <a href=
+     * "http://code.google.com/apis/gadgets/docs/legacy/publish.html#Submitting"
+     * >Publishing to the Content Directory</a>.
      */
     String screenshot() default "";
 
     /**
      * Optional boolean that provides vertical and/or horizontal scrollbars if
-     * the content exceeds the space provided. If <code>false</code>, then
-     * the content is clipped to the height and width provided (not that width
-     * is not configurable).
+     * the content exceeds the space provided. If <code>false</code>, then the
+     * content is clipped to the height and width provided (not that width is
+     * not configurable).
      */
     boolean scrolling() default false;
 
     /**
      * Optional boolean that specifies whether users can add a gadget multiple
-     * times from a directory. The default is <code>true</code>, meaning that
-     * by default, gadgets can only be added once. Directories can handle this
+     * times from a directory. The default is <code>true</code>, meaning that by
+     * default, gadgets can only be added once. Directories can handle this
      * attribute however they choose. For example, the content directory handles
      * <code>singleton="true"</code> by graying out and displaying the text
      * "Added" for gadgets that have already been added. Note that changes to
@@ -186,9 +186,9 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * image on a public web site that is not blocked by robots.txt. PNG is the
      * preferred format, though GIF and JPG are also acceptable. Gadget
      * thumbnails should be 120x60 pixels. For more discussion of thumbnail
-     * guidelines, see <a
-     * href="http://code.google.com/apis/gadgets/docs/legacy/publish.html#Submitting">Publishing
-     * to the Content Directory.</a>
+     * guidelines, see <a href=
+     * "http://code.google.com/apis/gadgets/docs/legacy/publish.html#Submitting"
+     * >Publishing to the Content Directory.</a>
      */
     String thumbnail() default "";
 
@@ -221,8 +221,21 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
   @Target(ElementType.TYPE)
   public @interface InjectContent {
     /**
-     * A list of file names whose content will be concatenated and included in the Gadget XML file's
-     * CDATA section.
+     * A list of file names whose content will be concatenated and included in
+     * the Gadget XML file's CDATA section.
+     */
+    String[] files() default "";
+  }
+
+  /**
+   * Enables developers to define hand-written content for the ModulePrefs
+   * section of the gadget manifset file.
+   */
+  @Target(ElementType.TYPE)
+  public @interface InjectModulePrefs {
+    /**
+     * A list of file names whose content will be concatenated and included in
+     * the Gadget XML file's ModulePrefs section.
      */
     String[] files() default "";
   }
