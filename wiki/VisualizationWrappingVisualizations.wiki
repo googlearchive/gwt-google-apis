@@ -1,0 +1,212 @@
+#summary Wrapping a Visualization in GWT
+
+= Visualizations and Wrappers =
+
+In order to use a visualization in a GWT project, the visualization needs a GWT "wrapper" class.  Many wrapper classes are included in the GWT Visualization API, such as Pie Chart, Bar Chart, etc.  If you want to use a visualization that does not yet have a GWT wrapper, it's easy to write your own.  
+
+This document does not deal with supporting events; that subject is treated in a separate document.
+
+Let's look at the wrapper for the Motion Chart visualization.
+
+= Hello, Motion Chart =
+
+{{{
+/*
+ * Copyright 2008 Google Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.google.gwt.visualization.client.visualizations;
+
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.visualization.client.AbstractDataTable;
+import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.VisualizationWidget;
+
+public class MotionChart extends Visualization<MotionChart.Options> {
+  public static class Options extends AbstractDrawOptions {
+    public static Options create() {
+      return JavaScriptObject.createObject().cast();
+    }
+
+    protected Options() {
+    }
+
+    public final native void setHeight(int height) /*-{
+      this.height = height;
+    }-*/;
+
+    public final native void setWidth(int width) /*-{
+      this.width = width;
+    }-*/;
+  }
+
+  public static native MotionChart create(Element parent) /*-{
+    return new $wnd.google.visualization.MotionChart(parent);
+  }-*/;
+  
+  public static VisualizationWidget<MotionChart, Options> 
+  createWidget(AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    MotionChart viz = create(div);
+    return new VisualizationWidget<MotionChart, Options>(div, viz, data, 
+        options);
+  }
+  
+  public static VisualizationWidget<MotionChart, Options> createWidget() {
+    Element div = DOM.createDiv();
+    MotionChart viz = create(div);
+    return new VisualizationWidget<MotionChart, Options>(div, viz);
+  }
+  
+  protected MotionChart() {
+  }
+}
+}}}
+
+= Extending Visualization =
+
+Visualization wrappers must extend the class Vizualization<E extends AbstractDrawOptions>.  E is a class that defines the draw options that can be used with this visualization.  The wrappers provided by the GWT Visualization API follow the convention of defining an inner class called Options, and extending Visualization<XXX.Options>.  It is also possible to parameterize Visualization with a top-level class.
+
+Because Visualization is a subclass of JavaScriptObject, the wrapper class must have a protected constructor, and a static create() method.  The create() method should be JSNI that calls the constructor function of the underlying visualization class, for example:
+
+{{{
+  public static native MotionChart create(Element parent) /*-{
+    return new $wnd.google.visualization.MotionChart(parent);
+  }-*/;
+}}}
+
+= The Options Class =
+
+The options class does not need to be an inner class, but it does need to extend AbstractDrawOptions.  AbstractDrawOptions itself extends [http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/client/JavaScriptObject.html JavaScriptObject], so it must have an empty, protected constructor, and it must have a static create() method that returns an instance of Options (that is, an instance of the draw options class, whatever you are calling it).  The Options class should not have any declared fields.
+
+= Options Class Setters =
+
+The options class should have a setter method for each draw option that the visualization supports.  It's a good idea to write these setters in JSNI.  Say that the visualization supports an option called "width" which should be an integer.  The JSNI method would look like:
+
+{{{
+    public final native void setWidth(int width) /*-{
+      this.width = width;
+    }-*/;
+}}}
+
+This is very straightforward for options that expect integers, strings, and booleans, which is the common case ("doubles" are easy too).  It's a bit trickier when options expect arrays or complex java script objects, so I will deal with that later.
+
+In the common case of options that expect simple types, it is also possible to write the setter in pure Java, by calling AbstractDrawOptions.setOption().  However, this is somewhat inefficient.
+
+= The createWidget() Methods =
+
+The Visualization class, and the wrapper classes that extend Visualization, are subclasses of JavaScriptObject, and thus they are not subclasses of Widget.  GWT UI code usually deals in Widgets, for example, when building a GWT UI, you add Widgets to Panels.  The GWT Visualization API provides a VisualizationWidget class, which is a Widget that displays a Visualization.  The convention of wrappers provided by the GWT visualization API is to provide createWidget methods, making it easier for a user to instantiate a widget displaying the visualization.  For example:
+
+{{{
+  public static VisualizationWidget<MotionChart, Options> 
+  createWidget(AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    MotionChart viz = create(div);
+    return new VisualizationWidget<MotionChart, Options>(div, viz, data, 
+        options);
+  }
+  
+  public static VisualizationWidget<MotionChart, Options> createWidget() {
+    Element div = DOM.createDiv();
+    MotionChart viz = create(div);
+    return new VisualizationWidget<MotionChart, Options>(div, viz);
+  }
+}}}
+
+This code is pretty much the same for any wrapper -- just s/MotionChart/MyWrapper.
+
+= Options with Exotic Types =
+
+Writing Options class setters when the visualization option expects an array or a complex JavaScript object requires some extra steps.  The JSNI looks the same, but you have to be careful to get the type of the parameter correct.  Let's look at JavaScript objects first, then arrays.
+
+== Complex JavaScript Option Types ==
+
+If the option expects a complex JavaScript object, the parameter type should be a subclass of JavaScriptObject.  The best way to go is to write your own subclass of JavaScriptObject with getters, setters (implemented in JSNI) that reflect the expected structure of the JavaScript object.  A good example is the Color class from the GWT Visualization API:
+
+{{{
+/*
+ * Copyright 2008 Google Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+package com.google.gwt.visualization.client;
+
+import com.google.gwt.core.client.JavaScriptObject;
+
+/**
+ * Color specification for DrawOptions.  Color-related draw options often 
+ * accept either the name of the color as a string, or the detailed color
+ * specification as implemented by the following class.
+ */
+public class Color extends JavaScriptObject {
+  public static Color create() {
+    return JavaScriptObject.createObject().cast();
+  }
+  
+  protected Color() {
+  }
+  
+  public final native void setFill(String fill) /*-{
+    this.fill = fill;
+  }-*/;
+  
+  public final native void setStroke(String stroke) /*-{
+    this.stroke = stroke;
+  }-*/;
+  
+  public final native void setStrokeSize(int strokeSize) /*-{
+    this.strokeSize = strokeSize;
+  }-*/;
+}
+}}}
+
+Compare this Java code to the specification of the [http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Configuration_Options backgroundColor option], one of the options that expects an object of this type:
+
+May be one of the following options:
+
+    * A string with color supported by HTML, for example 'red' or '#00cc00'
+    * An object with properties stroke fill and strokeSize. stroke and fill should be a string with a color. strokeSize is a number. For example: {backgroundColor: {stroke:'black', fill:'#eee', strokeSize: 1}. To use just fill, without a stroke, use stroke:null, strokeSize: 0.
+
+Like all instantiable subclasses of JavaScriptObject, Color has a protected constructor and a static create() method.  Color also has setters very similar to the setters of the Options class.
+
+== Array Option Types ==
+
+When a visualization option expects an array, the parameter type should be one of [http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/client/package-summary.html the GWT JsArray] classes: JsArray, JsArrayBoolean, JsArrayInteger, JsArrayNumber, and JsArrayString.  For example:
+
+{{{
+  public final native void setColors(JsArrayString colors) /*-{
+    this.colors = colors;
+  }-*/;
+}}}
+
+It's easy to offer your users a more Java-like varargs interface as well, using the AbstractDrawOptions.createJsArray() methods, for example:
+
+{{{
+  public final void setColors(String... colors) {
+    setColors(createJsArray(colors));
+  }
+}}}
