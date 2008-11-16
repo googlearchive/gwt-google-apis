@@ -10,4 +10,4 @@ You can either reference the `.jar` file from the folder that you uncompressed t
 
 == Visualization Topics ==
 
-With the GWT visualizations API, you can do three things: you can [http://code.google.com/p/gwt-google-apis/wiki/UsingVisualizations use visualizations], wrap new visualizations for use in GWT code, and expose visualizations written in GWT to javascript users of the Google Visualization API.
+With the GWT visualizations API, you can do three things: you can [http://code.google.com/p/gwt-google-apis/wiki/UsingVisualizations use visualizations], [http://code.google.com/p/gwt-google-apis/w/list wrap new visualizations] for use in GWT code, and expose visualizations written in GWT to javascript users of the Google Visualization API.
