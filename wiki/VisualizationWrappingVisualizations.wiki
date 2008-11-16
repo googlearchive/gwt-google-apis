@@ -134,7 +134,7 @@ Writing Options class setters when the visualization option expects an array or 
 
 == Complex JavaScript Option Types ==
 
-If the option expects a complex JavaScript object, the parameter type should be a subclass of JavaScriptObject.  The best way to go is to write your own subclass of JavaScriptObject with getters, setters (implemented in JSNI) that reflect the expected structure of the JavaScript object.  A good example is the Color class from the GWT Visualization API:
+If the option expects a complex JavaScript object, the parameter type should be a subclass of JavaScriptObject.  The best way to go is to write your own subclass of JavaScriptObject with setters (implemented in JSNI) that reflect the expected structure of the JavaScript object.  A good example is the Color class from the GWT Visualization API:
 
 {{{
 /*
