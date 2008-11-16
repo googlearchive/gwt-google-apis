@@ -102,6 +102,8 @@ The options class should have a setter method for each draw option that the visu
     }-*/;
 }}}
 
+(Note that methods of JavaScriptObject subclasses should generally be final.)
+
 This is very straightforward for options that expect integers, strings, and booleans, which is the common case ("doubles" are easy too).  It's a bit trickier when options expect arrays or complex java script objects, so I will deal with that later.
 
 In the common case of options that expect simple types, it is also possible to write the setter in pure Java, by calling AbstractDrawOptions.setOption().  However, this is somewhat inefficient.
