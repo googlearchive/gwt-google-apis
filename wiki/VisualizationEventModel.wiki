@@ -101,7 +101,7 @@ The event handler class should declare an abstract method for callers to overrid
 
 == Implementing the onEvent() Method ==
 
-The event handler class must override the method Handler.onEvent().  onEvent() is called when the event is fired.  The idea of the onEvent() method is to convert a Properties object, which is an "untyped" map of Strings to values, into the fully typed event data structure.  The implementation of onEvent() should extract the event properties from the Properties object, construct an event object with the event properties, and call an "on event" method with the event object.  For example:
+The event handler class must override the method Handler.onEvent().  onEvent() is called when the event is fired.  The idea of the onEvent() method is to convert a Properties object, which is an "untyped" map of Strings to values, into the fully typed event data structure.  The implementation of onEvent() should extract the event properties from the Properties object, construct an event object with the event properties, and call the event callback method with the event object.  For example:
 
 {{{
   @Override
