@@ -2,7 +2,7 @@
 
 = Visualizations and Wrappers =
 
-In order to use a visualization in a GWT project, the visualization needs a GWT "wrapper" class.  Many wrapper classes are included in the GWT Visualization API, such as Pie Chart, Bar Chart, etc.  If you want to use a visualization that does not yet have a GWT wrapper, it's easy to write your own.  
+In order to use a visualization in a GWT project, the visualization needs a GWT "wrapper" class.  Many wrapper classes are included in the GWT Visualization API, such as PieChart, BarChart, etc.  If you want to use a visualization that does not yet have a GWT wrapper, it's easy to write your own.  
 
 This document does not deal with supporting events; that subject is treated in a separate document.
 
