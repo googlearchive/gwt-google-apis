@@ -195,7 +195,7 @@ Like all instantiable subclasses of JavaScriptObject, Color has a protected cons
 
 == Array Option Types ==
 
-When a visualization option expects an array, the parameter type should be one of [http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/client/package-summary.html the GWT JsArray] classes: JsArray, JsArrayBoolean, JsArrayInteger, JsArrayNumber, and JsArrayString.  For example:
+When a visualization option expects an array, the parameter type should be one of [http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/core/client/package-summary.html the GWT JsArray classes]: JsArray, JsArrayBoolean, JsArrayInteger, JsArrayNumber, and JsArrayString.  For example:
 
 {{{
   public final native void setColors(JsArrayString colors) /*-{
