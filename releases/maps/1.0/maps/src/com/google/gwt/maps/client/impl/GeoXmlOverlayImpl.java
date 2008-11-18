@@ -28,7 +28,6 @@ import com.google.gwt.maps.jsio.client.Constructor;
  */
 public abstract class GeoXmlOverlayImpl extends OverlayImpl {
 
-  @SuppressWarnings("hiding")
   public static final GeoXmlOverlayImpl impl = GWT.create(GeoXmlOverlayImpl.class);
 
   @Constructor("$wnd.GGeoXml")

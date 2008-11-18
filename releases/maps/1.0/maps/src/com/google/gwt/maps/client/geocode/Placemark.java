@@ -23,7 +23,7 @@ import com.google.gwt.maps.client.geom.LatLng;
  * service. This object contains an address encoded in eXtensible Address
  * Language(xAL) from <a href="http://www.oasis-open.org">OASIS</a>.
  */
-public final class Placemark extends JavaScriptObject {
+public class Placemark extends JavaScriptObject {
 
   /**
    * A protected constructor is required for JS overlays.
@@ -37,7 +37,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return one of the integer values defined in GeoAddressAccuracy
    */
-  public native int getAccuracy() /*-{
+  public final native int getAccuracy() /*-{
     return this.AddressDetails.Accuracy;
   }-*/;
 
@@ -47,7 +47,7 @@ public final class Placemark extends JavaScriptObject {
    * @return a nicely formatted and properly capitalized version of the address
    *         including city, state, postal code and country.
    */
-  public native String getAddress() /*-{
+  public final native String getAddress() /*-{
     return this.address;
   }-*/;
 
@@ -56,7 +56,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the name of the administrative area.
    */
-  public native String getAdministrativeArea() /*-{
+  public final native String getAdministrativeArea() /*-{
     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
     return AdministrativeArea && AdministrativeArea.AdministrativeAreaName || null;
   }-*/;
@@ -66,7 +66,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the name of the city for the address.
    */
-  public String getCity() {
+  public final String getCity() {
     return getLocality();
   }
 
@@ -75,7 +75,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return a two letter country code for the address.
    */
-  public native String getCountry() /*-{
+  public final native String getCountry() /*-{
     return this.AddressDetails.Country.CountryNameCode;
   }-*/;
 
@@ -84,11 +84,11 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the name of the county
    */
-  public String getCounty() {
+  public final String getCounty() {
     return getSubAdministrativeArea();
   }
 
-  public native String getLocality() /*-{
+  public final native String getLocality() /*-{
     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
     if (AdministrativeArea) {
       var Locality = (AdministrativeArea.SubAdministrativeArea || AdministrativeArea).Locality;
@@ -102,7 +102,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the point corresponding to the decoded address.
    */
-  public LatLng getPoint() {
+  public final LatLng getPoint() {
     return LatLng.newInstance(nativeGetLat(), nativeGetLng());
   }
 
@@ -111,7 +111,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the postal code to use with the address.
    */
-  public native String getPostalCode() /*-{
+  public final native String getPostalCode() /*-{
     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
     if (AdministrativeArea) {
       var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
@@ -129,7 +129,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the name of the state.
    */
-  public String getState() {
+  public final String getState() {
     return getAdministrativeArea();
   }
 
@@ -138,7 +138,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the name of the street.
    */
-  public native String getStreet() /*-{
+  public final native String getStreet() /*-{
     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
     if (AdministrativeArea) {
       var Area = AdministrativeArea.SubAdministrativeArea || AdministrativeArea;
@@ -156,7 +156,7 @@ public final class Placemark extends JavaScriptObject {
    * 
    * @return the name of the sub-administrative area
    */
-  public native String getSubAdministrativeArea() /*-{
+  public final native String getSubAdministrativeArea() /*-{
     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
     if (AdministrativeArea) {
       var SubAdministrativeArea = AdministrativeArea.SubAdministrativeArea;

@@ -37,7 +37,12 @@ public class TileLayerOverlay extends ConcreteOverlay {
     return overlay;
   }
   
-  TileLayerOverlay(JavaScriptObject jso) {
+  /**
+   * Create this overlay from an existing JavaScriptObject instance.
+   * 
+   * @param jsoPeer an existing JavaScriptObject instance.
+   */
+  protected TileLayerOverlay(JavaScriptObject jso) {
     super(jso);
   }
   

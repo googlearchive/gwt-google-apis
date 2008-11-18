@@ -51,7 +51,18 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  * {@link com.google.gwt.maps.client.overlay.Polyline}, except that you can
  * additionally specify a fill color and opacity.
  */
-public final class Polygon extends ConcreteOverlay {
+public class Polygon extends ConcreteOverlay {
+
+  /**
+   * Used to create a new Polygon by wrapping an existing GPolygon object. This
+   * method is invoked by the JSIO library.
+   * 
+   * @param jsoPeer GPolygon object to wrap.
+   * @return a new instance of Polygon.
+   */
+  public static Polygon createPeer(JavaScriptObject jsoPeer) {
+    return new Polygon(jsoPeer);
+  }
 
   /**
    * Create a polygon from an array of polylines. Overlapping regions of the
@@ -79,17 +90,6 @@ public final class Polygon extends ConcreteOverlay {
       String color, double opacity, boolean outline) {
     return new Polygon(nativeFromEncoded(toJsArray(polylines), fill, color,
         opacity, outline));
-  }
-
-  /**
-   * Used to create a new Polygon by wrapping an existing GPolygon object. This
-   * method is invoked by the JSIO library.
-   * 
-   * @param jsoPeer GPolygon object to wrap.
-   * @return a new instance of Polygon.
-   */
-  static Polygon createPeer(JavaScriptObject jsoPeer) {
-    return new Polygon(jsoPeer);
   }
 
   /**
@@ -188,8 +188,13 @@ public final class Polygon extends ConcreteOverlay {
     super(PolygonImpl.impl.construct(LatLng.toJsArray(points), strokeColor,
         strokeWeight, strokeOpacity, fillColor, fillOpacity, options));
   }
-
-  Polygon(JavaScriptObject jsoPeer) {
+  
+  /**
+   * Create this polygon from an existing JavaScriptObject instance.
+   * 
+   * @param jsoPeer an existing JavaScriptObject instance.
+   */
+  protected Polygon(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 
