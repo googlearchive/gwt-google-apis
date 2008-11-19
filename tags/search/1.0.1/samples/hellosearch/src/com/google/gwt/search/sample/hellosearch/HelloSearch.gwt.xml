@@ -1,0 +1,40 @@
+<!--                                                                        -->
+<!-- Copyright 2008 Google Inc.                                             -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
+<!-- may not use this file except in compliance with the License. You may   -->
+<!-- may obtain a copy of the License at                                    -->
+<!--                                                                        -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                             -->
+<!--                                                                        -->
+<!-- Unless required by applicable law or agreed to in writing, software    -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,      -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
+<!-- implied. License for the specific language governing permissions and   -->
+<!-- limitations under the License.                                         -->
+
+<module>
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.search.Search"/>
+	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+  <stylesheet src="HelloSearch.css" />
+    
+	<entry-point class="com.google.gwt.search.sample.hellosearch.client.HelloSearch"/>
+    <!--
+      If you want to deploy this application outside of localhost,  you 
+      may want to obtain an API key at:
+      
+        http://code.google.com/apis/ajaxsearch/signup.html
+      
+      You do not need a key to use this API. Using a key in your application/site 
+      is completely optional. However, it is useful to have one for notification
+      about problems with your site from Google.
+     
+      After you obtain a valid key, append "&amp;key=ABC" to the string below,
+      where "ABC" is the key you are given.  Note that the beginning of the 
+      URL may be different from the one presented on the signup page.  (We
+      recommend you keep this one.)
+     -->
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
+
+</module>

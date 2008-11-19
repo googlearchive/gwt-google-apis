@@ -1,0 +1,18 @@
+branch-info.txt for gwt-google-apis AJAX Search 1.1 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/search/1.0/ was created (r714) as a copy from /trunk/search/@r713
+
+Merges:
+/releases/search/1.0/@713:941 was merged (r942) into /trunk/search/
+-> The next merge into trunk will be r941:????
+
+Changes in this branch (excluding changes to this file itself):
+ - Branch created (r713)
+ - Added hasRating() and hasViewCount() methods to VideoResult (r735)
+ - Corrected a problem where getHtml() always returned null (r737)
+ - Added overload to LocalSearch.setCenterPoint() to accept a JSO (r800)
+ - JSIO update to coerce undefined when used in boolean parameters (r860)
+ - Updated release notes for 1.0.1 release (r881) 
