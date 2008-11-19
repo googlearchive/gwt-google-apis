@@ -241,7 +241,11 @@ function __MODULE_FUNC__() {
 // __MODULE_SCRIPTS_END__
    
     // Use the container's caching function if it's available:
-    var loadFrom = _IG_GetCachedUrl(base + strongName);
+    var fullName = base + strongName;
+    if (fullName.search("\.cache\.js$") < 0) {
+    	fullName = fullName.concat(".cache.js");
+    }
+    var loadFrom = _IG_GetCachedUrl(fullName);
       
     $doc.write('<script src="' + loadFrom + '"></script>');
   }
