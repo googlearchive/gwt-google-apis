@@ -8,7 +8,8 @@ Copies:
 Merges:
 /releases/gadgets/1.0@714:758 was merged (r759?) into trunk/gadgets
 /releases/gadgets/1.0@758:947 was merged (r948) into trunk/gadgets
----> The next merge into trunk will be 947:???
+/releases/gadgets/1.0@947:1011 was merged (r1012) into trunk/gadgets
+---> The next merge into trunk will be 1011:???
 
 Changes in this branch (excluding changes to this file itself:
 - Fixed the samples' online documentation link. (r718)
@@ -21,3 +22,4 @@ Changes in this branch (excluding changes to this file itself:
 - Eclipse project settings were left out of Gadget RPC commit. (r903)
 - Fixes problem with hosted mode debugging (issue 199) (r924)
 - Replace HelloGadget Demo to look like applicationCreator skeleton
+- Update linker template for 1.6 (strips .cache.js from strongName)
