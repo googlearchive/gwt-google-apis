@@ -88,6 +88,11 @@ public class StatusCodes extends JavaScriptObject {
    */
   public static final int UNKNOWN_DIRECTIONS = getUnknownDirectionsCode();
 
+  /**
+   * Something went wrong inside the API itself.
+   */
+  public static final int API_ERROR = 9999;
+ 
   public static final String getName(int statusCode) {
     /* 
      * It would be nice to make this a switch statement, but two of the values
