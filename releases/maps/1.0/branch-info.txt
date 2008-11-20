@@ -7,7 +7,8 @@ Copies:
 
 Merges:
 /releases/maps/1.0/@808:943 was merged (r946) into /trunk/maps
--> The next merge into trunk will be r943:????
+/releases/maps/1.0/@944:1029 was merged (r1030) into /trunk/maps
+-> The next merge into trunk will be r1029:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -43,3 +44,7 @@ Changes in this branch (excluding changes to this file itself):
  - Further fix to the Overlay class createPeer() method to detect problem with API & conditionally use workaround. (r936)
  - Bump maximum memory for launch scripts. (r940)
  - Update release notes (r943)
+ - LatLngBounds.newInstance()was missing parenthesis inside the JSNI method. (r958)
+ - Fixes issue 206 Allow Marker to be subclassed with an externally provided JSO. (r1010)
+ - Defensive programming around the GDirections.getStatus() method. Sometimes
+it is returning null.(r1027, r1029)
