@@ -20,7 +20,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * Result status codes for the Google Geocoding service.
  */
-public final class StatusCodes extends JavaScriptObject {
+public class StatusCodes extends JavaScriptObject {
 
   /*
    * Design note: This was not implemented as an enum because we feel that the
@@ -88,7 +88,12 @@ public final class StatusCodes extends JavaScriptObject {
    */
   public static final int UNKNOWN_DIRECTIONS = getUnknownDirectionsCode();
 
-  public static String getName(int statusCode) {
+  /**
+   * Something went wrong inside the API itself.
+   */
+  public static final int API_ERROR = 9999;
+ 
+  public static final String getName(int statusCode) {
     /* 
      * It would be nice to make this a switch statement, but two of the values
      * currently map to the same numeric constant.
@@ -115,6 +120,8 @@ public final class StatusCodes extends JavaScriptObject {
       return "UNKNOWN_DIRECTIONS";
     } else if (statusCode == TOO_MANY_QUERIES) {
       return "TOO_MANY_QUERIES";
+    } else if (statusCode == API_ERROR) {
+      return "API_ERROR";      
     } else {
       return "UNKNOWN_STATUS: " + statusCode;
     }

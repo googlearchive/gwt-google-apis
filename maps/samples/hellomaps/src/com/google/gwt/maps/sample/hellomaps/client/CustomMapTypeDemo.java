@@ -39,8 +39,8 @@ public class CustomMapTypeDemo extends MapsDemo {
   private static HTML descHTML = null;
   private static final String descString = "<h2>Custom MapType Demo</h2>\n"
       + "<p>Tests the MapType and TileLayer APIs</p>"
-      + "<p>You should see a <i>MyMap</i> button on the upper right of"
-      + "the map that shows crosses on a grey background when pressed."
+      + "<p>You should see a <i>MyMap</i> button on the upper right of "
+      + "the map that shows crosses on a grey background when pressed. "
       + "</p>";
 
   public static MapsDemoInfo init() {

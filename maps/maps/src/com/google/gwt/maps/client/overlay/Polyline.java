@@ -47,7 +47,18 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  * drawing facilities of the browser if they are available, or an image overlay
  * from Google servers otherwise.
  */
-public final class Polyline extends ConcreteOverlay {
+public class Polyline extends ConcreteOverlay {
+
+  /**
+   * Used to create a new Polyline by wrapping an existing GPolyline object.
+   * This method is invoked by the jsio library.
+   * 
+   * @param jsoPeer GPolyline object to wrap.
+   * @return a new instance of Polyline.
+   */
+  public static Polyline createPeer(JavaScriptObject jsoPeer) {
+    return new Polyline(jsoPeer);
+  }
 
   /**
    * Create a polyline from an encoded string. Details of the encoding is
@@ -105,17 +116,6 @@ public final class Polyline extends ConcreteOverlay {
     encoded.setLevels(encodedLevels);
     encoded.setNumLevels(numLevels);
     return new Polyline(nativeFromEncoded(encoded));
-  }
-
-  /**
-   * Used to create a new Polyline by wrapping an existing GPolyline object.
-   * This method is invoked by the jsio library.
-   * 
-   * @param jsoPeer GPolyline object to wrap.
-   * @return a new instance of Polyline.
-   */
-  static Polyline createPeer(JavaScriptObject jsoPeer) {
-    return new Polyline(jsoPeer);
   }
 
   private static native JavaScriptObject nativeFromEncoded(JavaScriptObject jso) /*-{
@@ -195,7 +195,12 @@ public final class Polyline extends ConcreteOverlay {
         opacity, options));
   }
 
-  Polyline(JavaScriptObject jsoPeer) {
+  /**
+   * Create this polyline from an existing JavaScriptObject instance.
+   * 
+   * @param jsoPeer an existing JavaScriptObject instance.
+   */
+  protected Polyline(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 

@@ -41,7 +41,7 @@ public class ClickDemo extends MapsDemo {
   private static HTML descHTML = null;
   private static final String descString = "<p>Creates a 500 x 300 "
       + "pixel map viewport centered on Palo Alto, CA USA. " + "</p>\n"
-      + "<p>Each time the mouse is clicked in this demo, a new marker is"
+      + "<p>Each time the mouse is clicked in this demo, a new marker is "
       + "placed on the map at the point there the click event occurred.</p>";
 
   public static MapsDemoInfo init() {

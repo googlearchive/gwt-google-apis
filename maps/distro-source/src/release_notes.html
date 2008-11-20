@@ -29,10 +29,27 @@
       <h1>Maps API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+		    <li><a href="#Release_Notes_1_0_0">1.0.0 (release candidate)</a></li>
 		    <li><a href="#Release_Notes_r290">r290 (milestone release)</a></li>      </ul>
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
+       <h3>Changes since 1.0.0 (release candidate)</h3>
+        <ul>
+         <li> Corrected Projection subclassing issue in Hosted mode. (issue 180)</li>
+         <li> Allow MarkerOptions and TileLayer to be subclassed or extended.</li>
+         <li> Corrected the Overlay createPeer() method to construct the proper type (used when accessing an Overlay instance from an event.)</li>
+         <li> Additional patches needed to correct problems with putting Widgets in infowindows (issues 156,181)</li>
+         <li> Maps API samples set the Maps version to v=2 instead of v=2.x.  The experimental version showed compatibility problems.</li>
+         <li> Other issues as noted in the <a href="http://code.google.com/p/gwt-google-apis/issues/list">issue tracker</a></li>
+        </ul>
+       <h3>Known Issues</h3>
+	<ul>
+         <li>Not all features in the Maps API are supported.  The Maps API is constantly evolving.</li>
+	</ul>
+       <hr/>
+      <a name="Release_Notes_1_0_0"></a>
+     <h2>Release Notes for 1.0.0 (release candidate)</h2>
        <h3>Changes since r290</h3>
        <ul>
          <li>This library requires GWT 1.5 or later and Java 1.5 or later.</li>
@@ -49,10 +66,6 @@
          <li>Added many unit tests.</li>
          <li>Fixed many other issues noted in the <a href="http://code.google.com/p/gwt-google-apis/issues/list?can=1&q=API%3AMaps+Milestone%3A1_0_RC">Issue Tracker</a>.</li>
        </ul>
-       <h3>Known Issues</h3>
-	   <ul>
-             <li>Not all features in the Maps API are supported.  The Maps API is constantly evolving.</li>
-	   </ul>
        <hr/>
       <a name="Release_Notes_r290"></a>
      <h2>Release Notes for r290 (milestone release)</h2>

@@ -47,7 +47,7 @@ public abstract class TileLayer {
     }
   };
 
-  static TileLayer createPeer(JavaScriptObject jsoPeer) {
+  public static TileLayer createPeer(JavaScriptObject jsoPeer) {
     return new TileLayer(jsoPeer) {
       @Override
       public double getOpacity() {

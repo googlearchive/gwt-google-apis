@@ -39,9 +39,9 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  * 
  * @see com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)
  */
-public final class GroundOverlay extends ConcreteOverlay {
+public class GroundOverlay extends ConcreteOverlay {
 
-  static GroundOverlay createPeer(JavaScriptObject jsoPeer) {
+  public static GroundOverlay createPeer(JavaScriptObject jsoPeer) {
     return new GroundOverlay(jsoPeer);
   }
   private HandlerCollection<GroundOverlayVisibilityChangedHandler> groundOverlayVisibilityChangedHandlers;
