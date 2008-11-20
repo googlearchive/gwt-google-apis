@@ -35,17 +35,17 @@ import com.google.gwt.visualization.client.VisualizationWidget;
  *      href="http://code.google.com/apis/visualization/documentation/gallery/gauge.html">
  *      Gauge Visualization Reference</a>
  */
-public class Gauge extends Visualization<Gauge.DrawOptions> {
+public class Gauge extends Visualization<Gauge.Options> {
   /**
    * Options for drawing the chart.
    * 
    */
-  public static class DrawOptions extends AbstractDrawOptions {    
-    public static DrawOptions create() {
+  public static class Options extends AbstractDrawOptions {    
+    public static Options create() {
       return JavaScriptObject.createObject().cast();
     }
 
-    protected DrawOptions() {
+    protected Options() {
     }
     
     public final native void setGaugeRange(int min, int max) /*-{
@@ -98,18 +98,18 @@ public class Gauge extends Visualization<Gauge.DrawOptions> {
     return new $wnd.google.visualization.Gauge(parent);
   }-*/;
   
-  public static VisualizationWidget<Gauge, DrawOptions> 
-  createWidget(AbstractDataTable data, DrawOptions options) {
+  public static VisualizationWidget<Gauge, Options> 
+  createWidget(AbstractDataTable data, Options options) {
     Element div = DOM.createDiv();
     Gauge viz = create(div);
-    return new VisualizationWidget<Gauge, DrawOptions>(div, viz, data, 
+    return new VisualizationWidget<Gauge, Options>(div, viz, data, 
         options);
   }
   
-  public static VisualizationWidget<Gauge, DrawOptions> createWidget() {
+  public static VisualizationWidget<Gauge, Options> createWidget() {
     Element div = DOM.createDiv();
     Gauge viz = create(div);
-    return new VisualizationWidget<Gauge, DrawOptions>(div, viz);
+    return new VisualizationWidget<Gauge, Options>(div, viz);
   }
 
   protected Gauge() {

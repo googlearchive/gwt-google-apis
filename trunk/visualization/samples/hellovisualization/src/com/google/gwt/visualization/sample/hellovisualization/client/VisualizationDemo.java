@@ -36,6 +36,7 @@ import com.google.gwt.visualization.client.Query.Callback;
 import com.google.gwt.visualization.client.events.SelectHandler;
 import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.Table;
+import com.google.gwt.visualization.client.visualizations.Table.Options;
 
 
 /**
@@ -83,14 +84,14 @@ class VisualizationDemo implements EntryPoint {
     Panel flowPanel = new FlowPanel();
     panel.add(flowPanel);
     flowPanel.add(new Label("Original DataTable:"));
-    VisualizationWidget<Table, Table.DrawOptions> chart = Table.createWidget();
+    VisualizationWidget<Table, Options> chart = Table.createWidget();
     flowPanel.add(chart);
     chart.draw(table);
     
     flowPanel = new FlowPanel();
     flowPanel.add(new Label("DataView with columns 2 and 1:"));
     /* create a view on this table, with columns 2 and 1 */
-    VisualizationWidget<Table, Table.DrawOptions> viewChart = Table.createWidget();
+    VisualizationWidget<Table, Options> viewChart = Table.createWidget();
     DataView view = DataView.create(table);
     view.setColumns(new int[] {2, 1});
     flowPanel.add(viewChart);
@@ -154,9 +155,9 @@ class VisualizationDemo implements EntryPoint {
           return;
         }
 
-        VisualizationWidget<Table, Table.DrawOptions> chart = Table.createWidget();
+        VisualizationWidget<Table, Options> chart = Table.createWidget();
         panel.add(chart);
-        Table.DrawOptions options = Table.DrawOptions.create();
+        Options options = Table.Options.create();
         options.setShowRowNumber(true);
         chart.draw(response.getDataTable(), options);
         
