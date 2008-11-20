@@ -93,6 +93,48 @@ public final class Factory extends JavaScriptObject {
   }-*/;
 
   /**
+   * Lets a site manually trigger the Gears security dialog, with UI customizations.
+   * 
+   * @param siteName Friendly name of the site requesting permission.
+   * @param imageUrl URL of a .png file to display in the dialog.
+   * @param extraMessage Site-specific text to display to users in the security dialog. 
+   * @return Indicates whether the site has permission to use Gears.
+   */
+  public native boolean getPermission(String siteName, String imageUrl, String extraMessage) /*-{
+    return this.getPermission(siteName, imageUrl, extraMessage);
+  }-*/;
+
+  /**
+   * Lets a site manually trigger the Gears security dialog, with UI customizations.
+   * 
+   * @param siteName Friendly name of the site requesting permission.
+   * @param imageUrl URL of a .png file to display in the dialog.
+   * @return Indicates whether the site has permission to use Gears.
+   */
+  public native boolean getPermission(String siteName, String imageUrl) /*-{
+    return this.getPermission(siteName, imageUrl);
+  }-*/;
+
+  /**
+   * Lets a site manually trigger the Gears security dialog, with UI customizations.
+   * 
+   * @param siteName Friendly name of the site requesting permission.
+   * @return Indicates whether the site has permission to use Gears.
+   */
+  public native boolean getPermission(String siteName) /*-{
+    return this.getPermission(siteName);
+  }-*/;
+
+  /**
+   * Lets a site manually trigger the Gears security dialog, without UI customizations.
+   * 
+   * @return Indicates whether the site has permission to use Gears.
+   */
+  public native boolean getPermission() /*-{
+    return this.getPermission();
+  }-*/;
+
+  /**
    * Returns the version of Gears installed, as a string of the form
    * Major.Minor.Build.Patch (e.g., '0.10.2.0').
    * 
@@ -100,6 +142,13 @@ public final class Factory extends JavaScriptObject {
    */
   public native String getVersion() /*-{
     return this.version;
+  }-*/;
+
+  /**
+   * @return true if the site already has permission to use Gears.
+   */
+  public native boolean hasPermission() /*-{
+    return this.hasPermission;
   }-*/;
 
   /**
