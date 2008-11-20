@@ -279,7 +279,7 @@ public final class ManagedResourceStore extends JavaScriptObject {
    */
   public native void setOnProgressHandler(
       ManagedResourceStoreProgressHandler handler) /*-{
-    this.oncomplete = function(details) {
+    this.progress = function(details) {
       @com.google.gwt.gears.client.localserver.ManagedResourceStore::fireOnProgress(Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreProgressHandler;Lcom/google/gwt/gears/client/localserver/ManagedResourceStoreProgressHandler$ManagedResourceStoreProgressEvent;)(handler, details);
     };
   }-*/;
