@@ -20,6 +20,7 @@ import com.google.gwt.maps.client.impl.DirectionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
+import com.google.gwt.maps.client.impl.DirectionsImpl.Status;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.jsio.client.JSList;
 
@@ -141,7 +142,11 @@ public final class Directions {
     EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.LOAD, new VoidCallback() {
       @Override
       public void callback() {
-        int statusCode = DirectionsImpl.impl.getStatusCode(jsoPeer);
+        Status status = DirectionsImpl.impl.getStatus(jsoPeer);
+        int statusCode = StatusCodes.API_ERROR;
+        if (status != null) {
+          statusCode = status.getCode();
+        }
         if (statusCode == StatusCodes.SUCCESS) {
           DirectionResults result = new DirectionResults(jsoPeer);
           callback.onSuccess(result);
@@ -154,7 +159,11 @@ public final class Directions {
     EventImpl.impl.addListenerVoid(jsoPeer, MapEvent.ERROR, new VoidCallback() {
       @Override
       public void callback() {
-        int statusCode = DirectionsImpl.impl.getStatusCode(jsoPeer);
+        Status status = DirectionsImpl.impl.getStatus(jsoPeer);
+        int statusCode = StatusCodes.API_ERROR;
+        if (status != null) {
+          statusCode = status.getCode();
+        }
         callback.onFailure(statusCode);
       }
     });

@@ -115,6 +115,8 @@ public class StatusCodes extends JavaScriptObject {
       return "UNKNOWN_DIRECTIONS";
     } else if (statusCode == TOO_MANY_QUERIES) {
       return "TOO_MANY_QUERIES";
+    } else if (statusCode == API_ERROR) {
+      return "API_ERROR";      
     } else {
       return "UNKNOWN_STATUS: " + statusCode;
     }
