@@ -96,7 +96,7 @@ public class GeocodeTest extends GWTTestCase {
   }
 
   // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
+  static final int ASYNC_DELAY_MSEC = 10000;
 
   static final PlacemarkMock[] goodTestPlacemarks = {
       new PlacemarkMock(
@@ -155,7 +155,7 @@ public class GeocodeTest extends GWTTestCase {
         finishTest();
       }
     });
-    delayTestFinish(ASYNC_DELAY_MSEC);
+    delayTestFinish(ASYNC_DELAY_MSEC * 2);
   }
 
   /**
@@ -175,7 +175,7 @@ public class GeocodeTest extends GWTTestCase {
         assertTrue("Geocode of " + badTestAddress + " failed.", false);
       }
     });
-    delayTestFinish(ASYNC_DELAY_MSEC);
+    delayTestFinish(ASYNC_DELAY_MSEC * 2);
   }
 
   /**
