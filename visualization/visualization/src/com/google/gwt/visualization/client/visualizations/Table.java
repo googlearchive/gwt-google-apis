@@ -40,14 +40,14 @@ import com.google.gwt.visualization.client.events.SortHandler;
  *      href="http://code.google.com/apis/visualization/documentation/gallery/table.html">
  *      Table Visualization Reference</a>
  */
-public class Table extends Visualization<Table.DrawOptions> 
+public class Table extends Visualization<Table.Options> 
     implements Selectable {
 
   /**
    * Options for drawing the table visualization.
    * 
    */
-  public static class DrawOptions extends AbstractDrawOptions {
+  public static class Options extends AbstractDrawOptions {
     
     /**
      * A parameter passed to several of the setters.
@@ -71,11 +71,11 @@ public class Table extends Visualization<Table.DrawOptions>
       }
     }
     
-    public static final DrawOptions create() {
+    public static final Options create() {
       return JavaScriptObject.createObject().cast();
     }
 
-    protected DrawOptions() {
+    protected Options() {
     }
     
     public final native void setAllowHtml(boolean allowHtml) /*-{
@@ -111,18 +111,18 @@ public class Table extends Visualization<Table.DrawOptions>
     return new $wnd.google.visualization.Table(parent);
   }-*/;
   
-  public static VisualizationWidget<Table, DrawOptions> 
-  createWidget(AbstractDataTable data, DrawOptions options) {
+  public static VisualizationWidget<Table, Options> 
+  createWidget(AbstractDataTable data, Options options) {
     Element div = DOM.createDiv();
     Table viz = create(div);
-    return new VisualizationWidget<Table, DrawOptions>(div, viz, data, 
+    return new VisualizationWidget<Table, Options>(div, viz, data, 
         options);
   }
   
-  public static VisualizationWidget<Table, DrawOptions> createWidget() {
+  public static VisualizationWidget<Table, Options> createWidget() {
     Element div = DOM.createDiv();
     Table viz = create(div);
-    return new VisualizationWidget<Table, DrawOptions>(div, viz);
+    return new VisualizationWidget<Table, Options>(div, viz);
   }
 
   protected Table() {

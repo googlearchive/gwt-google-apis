@@ -167,7 +167,7 @@ public class DataTable extends AbstractDataTable {
   }-*/;
 
   public final void setValue(int rowIndex, int columnIndex, Date date) {
-    setValueDate(rowIndex, columnIndex, (int) date.getTime());
+    setValueDate(rowIndex, columnIndex, date.getTime());
   }
 
   public final native void setValue(int rowIndex, int columnIndex, double value) /*-{
@@ -214,7 +214,7 @@ public class DataTable extends AbstractDataTable {
     return this.insertColumn(columnIndex, type, label, id);
   }-*/;
 
-  private native void setValueDate(int rowIndex, int columnIndex, int value) /*-{
+  private native void setValueDate(int rowIndex, int columnIndex, double value) /*-{
     this.setValue(rowIndex, columnIndex, new $wnd.Date(value));
   }-*/;
 }
