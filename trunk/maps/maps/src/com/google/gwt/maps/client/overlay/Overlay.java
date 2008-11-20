@@ -70,7 +70,7 @@ public abstract class Overlay {
    * @param jsoPeer GOverlay object to wrap.
    * @return a new instance of Overlay.
    */
-  static Overlay createPeer(JavaScriptObject jsoPeer) {
+  public static Overlay createPeer(JavaScriptObject jsoPeer) {
     
     if (nativeIsMarker(jsoPeer)) {
       return new Marker(jsoPeer);

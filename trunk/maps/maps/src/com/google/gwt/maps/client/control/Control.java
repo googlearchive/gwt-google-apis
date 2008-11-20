@@ -63,6 +63,7 @@ public class Control {
 
     /**
      * Returns to the map if the control contains selectable text.
+     * 
      * @return <code>true</code> if the control contains selectable text.
      */
     public abstract boolean isSelectable();
@@ -109,7 +110,7 @@ public class Control {
    * @param jsoPeer
    * @return a new instance of control
    */
-  static Control createPeer(JavaScriptObject jsoPeer) {
+  public static Control createPeer(JavaScriptObject jsoPeer) {
     return new Control(jsoPeer);
   }
 

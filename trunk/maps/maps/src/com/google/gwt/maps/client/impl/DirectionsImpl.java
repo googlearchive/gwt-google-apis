@@ -26,9 +26,7 @@ import com.google.gwt.maps.client.geocode.Route;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
-import com.google.gwt.maps.jsio.client.BeanProperties;
 import com.google.gwt.maps.jsio.client.Constructor;
-import com.google.gwt.maps.jsio.client.FieldName;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 import com.google.gwt.maps.jsio.client.JSList;
 import com.google.gwt.user.client.Element;
@@ -37,6 +35,18 @@ import com.google.gwt.user.client.Element;
  * Wraps the GDirections object in the Maps API using JSIO.
  */
 public interface DirectionsImpl extends JSFlyweightWrapper {
+
+  /**
+   * Return object from getStatus().
+   */
+  public static class Status extends JavaScriptObject {
+    protected Status() {
+    }
+
+    public final native int getCode() /*-{
+      return this.code;
+    }-*/;
+  }
 
   DirectionsImpl impl = GWT.create(DirectionsImpl.class);
 
@@ -63,9 +73,7 @@ public interface DirectionsImpl extends JSFlyweightWrapper {
 
   Route getRoute(JavaScriptObject jsoPeer, int i);
 
-  @BeanProperties
-  @FieldName("getStatus().code")
-  int getStatusCode(JavaScriptObject jsoPeer);
+  Status getStatus(JavaScriptObject jsoPeer);
 
   String getSummaryHtml(JavaScriptObject jsoPeer);
 

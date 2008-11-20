@@ -339,6 +339,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     final MapWidget m = new MapWidget();
     m.addMapClickHandler(new MapClickHandler() {
 
+      @SuppressWarnings("deprecation")
       public void onClick(MapClickEvent event) {
         Overlay o = event.getOverlay();
         LatLng p = event.getLatLng();
@@ -756,6 +757,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     final MapWidget m = new MapWidget();
     m.addMapRightClickHandler(new MapRightClickHandler() {
 
+      @SuppressWarnings("deprecation")
       public void onRightClick(MapRightClickEvent event) {
         assertEquals(event.getSender(), m);
         Point p = event.getPoint();

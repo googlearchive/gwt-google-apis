@@ -83,7 +83,7 @@ public class Marker extends ConcreteOverlay {
     }
   };
 
-  static Marker createPeer(JavaScriptObject jsoPeer) {
+  public static Marker createPeer(JavaScriptObject jsoPeer) {
     return new Marker(jsoPeer);
   }
 
@@ -129,8 +129,13 @@ public class Marker extends ConcreteOverlay {
   public Marker(LatLng point, MarkerOptions options) {
     super(MarkerImpl.impl.construct(point, options));
   }
-
-  Marker(JavaScriptObject jsoPeer) {
+  
+  /**
+   * Create this marker from an existing JavaScriptObject instance.
+   * 
+   * @param jsoPeer an existing JavaScriptObject instance.
+   */
+  protected Marker(JavaScriptObject jsoPeer) {
     super(jsoPeer);
   }
 

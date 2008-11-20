@@ -18,6 +18,7 @@ package com.google.gwt.maps.jsio.client;
 /**
  * A generic Exception base class for JSWrapper operations.
  */
+@SuppressWarnings("serial")
 public class JSONWrapperException extends Exception {
   public JSONWrapperException() {
   }

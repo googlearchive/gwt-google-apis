@@ -21,7 +21,7 @@ import com.google.gwt.maps.client.geom.LatLng;
  * This class is used to create an array of arguments to the {@link Directions}
  * class for specifying multi-point directions.
  */
-public final class Waypoint {
+public class Waypoint {
   private final String data;
 
   /**
