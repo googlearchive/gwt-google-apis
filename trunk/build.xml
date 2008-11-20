@@ -18,7 +18,11 @@
 		<ant dir="maps" target="${target}" />
 	</target>
 
-	<target name="-do" depends="gadgets, gears, maps, search" description="Run all subprojects" />
+	<target name="visualization" description="Build Visualization">
+		<ant dir="visualization" target="${target}" />
+	</target>
+
+	<target name="-do" depends="gadgets, gears, maps, search, visualization" description="Run all subprojects" />
 
 	<target name="build" description="Builds all of the APIs that make up the Google API Library for GWT">
 		<antcall target="-do">
