@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class DirectionsTest extends GWTTestCase {
   // Length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
+  static final int ASYNC_DELAY_MSEC = 10000;
 
   @Override
   public String getModuleName() {
@@ -71,6 +71,6 @@ public class DirectionsTest extends GWTTestCase {
         finishTest();
       }
     });
-    delayTestFinish(ASYNC_DELAY_MSEC);
+    delayTestFinish(ASYNC_DELAY_MSEC * 2);
   }
 }
