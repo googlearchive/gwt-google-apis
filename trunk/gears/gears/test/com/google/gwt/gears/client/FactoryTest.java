@@ -81,4 +81,12 @@ public class FactoryTest extends GWTTestCase {
     Factory factory = Factory.getInstance();
     assertNotNull("Factory.getVersion() was null", factory.getVersion());
   }
+  
+  /**
+   * Test Method for {@link com.google.gwt.gears.client.Factory#hasPermission()}.
+   */
+  public void testHasPermission() {
+    Factory factory = Factory.getInstance();
+    assertTrue("Factory.hasPermission() was false", factory.hasPermission());
+  }
 }
