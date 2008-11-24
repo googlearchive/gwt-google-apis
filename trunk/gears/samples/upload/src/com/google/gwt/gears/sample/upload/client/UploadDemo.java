@@ -75,7 +75,7 @@ public class UploadDemo implements EntryPoint {
       public void onClick(Widget sender) {
         Desktop desktop = factory.createDesktop();
         desktop.openFiles(new OpenFilesHandler() {
-          @Override
+
           public void onOpenFiles(OpenFilesEvent event) {
             File[] files = event.getFiles();
             selected.setText(files[0].getName());
