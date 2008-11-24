@@ -103,6 +103,8 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   LatLng fromDivPixelToLatLng(JavaScriptObject jsoPeer, Point pixel);
 
+  Point fromLatLngToContainerPixel(JavaScriptObject jsoPeer, LatLng latlng);
+  
   Point fromLatLngToDivPixel(JavaScriptObject jsoPeer, LatLng latlng);
 
   LatLngBounds getBounds(JavaScriptObject jsoPeer);
