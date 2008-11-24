@@ -720,13 +720,23 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Notifies the map of a change of the size of its container. Call this method
-   * after the size of the container DOM object has changed, so that the map can
-   * adjust itself to fit the new size.
+   * Notifies the map of a change of the size of its container.
    */
   public void checkResize() {
-    LatLng center = getCenter();
     MapImpl.impl.checkResize(jsoPeer);
+  }
+
+  /**
+   * Notifies the map of a change in the size of its container and moves to the
+   * center of the map. Call this method after the size of the container DOM
+   * object has changed, so that the map can adjust itself to fit the new size.
+   *
+   * Note: This call may cause problems with the Maps API if called during
+   * a Zoom or other transition.
+   */
+  public void checkResizeAndCenter() {
+    LatLng center = getCenter();
+    checkResize();
     setCenter(center);
   }
 
@@ -1012,8 +1022,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)}
-   * .
+   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)} .
    * 
    * @param handler the handler to remove
    */
