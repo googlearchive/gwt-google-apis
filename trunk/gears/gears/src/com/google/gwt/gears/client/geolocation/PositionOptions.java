@@ -19,29 +19,48 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.gears.client.impl.Utils;
 
+/**
+ * Encapsulates some optional arguments to make a new Geolocation service call.
+ */
 public final class PositionOptions extends JavaScriptObject {
-
-  protected PositionOptions() {
-    // required for overlay types
-  }
 
   public static PositionOptions create() {
     return JavaScriptObject.createObject().cast();
   }
 
+  protected PositionOptions() {
+    // required for overlay types
+  }
+
   /**
-   * Optional, requests the most accurate possible results. This may result in
-   * slower response times or increased battery consumption. Also, there is no
-   * guarantee that the device will be able to provide more accurate results
-   * than if this flag is not specified. The default value is false.
+   * Gets the language in which the address (if requested) should be returned.
    * 
-   * @param enabled
-   *          If true, request the most accurate possible results
-   * @return this instance
+   * @return the language in which the address (if requested) should be returned
    */
-  public native PositionOptions setHighAccuracy(boolean enabled)/*-{
-    this.enableHighAccuracy = enabled;
-    return this;
+  public native PositionOptions getGearsAddressLanguage()/*-{
+    return this.gearsAddressLanguage;
+  }-*/;
+
+  /**
+   * Gets the list of URLs to contact to convert geolocation signals into
+   * positions.
+   * 
+   * @return the list of URLs to contact to convert geolocation signals into
+   *         positions
+   */
+  public String[] getGearsLocationProviderUrls() {
+    return Utils.toJavaArray(nativeGetGearsLocationProviderUrls());
+  }
+
+  /**
+   * Gets whether reverse geocoded address information is returned as part of
+   * the position data.
+   * 
+   * @return <code>true</code> if reverse geocoded address information is returned as part of
+   *         the position data.
+   */
+  public native String getGearsRequestAddress()/*-{
+    return this.gearsRequestAddress;
   }-*/;
 
   /**
@@ -54,32 +73,6 @@ public final class PositionOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * Optional, requests reverse geocoded address information as part of the
-   * position data. Reverse geocoding is not performed if this flag is not
-   * specified or if it is set to false.
-   * 
-   * @param requestAddress
-   *          If true, requests reverse geocoded address information as part of
-   *          the position data
-   * @return this instance
-   */
-  public native PositionOptions setGearsRequestAddress(boolean requestAddress)/*-{
-    this.gearsRequestAddress = requestAddress;
-    return this;
-  }-*/;
-
-  /**
-   * Gets whether reverse geocoded address information is returned as part of
-   * the position data
-   * 
-   * @return True if reverse geocoded address information is returned as part of
-   *         the position data
-   */
-  public native String getGearsRequestAddress()/*-{
-    return this.gearsRequestAddress;
-  }-*/;
-
-  /**
    * Optional, specifies the language in which the address (if requested) should
    * be returned. Specify the language in accordance with RFC 3066, en-GB for
    * British English for example.
@@ -87,26 +80,12 @@ public final class PositionOptions extends JavaScriptObject {
    * If this is not specified, the address is provided in the default language
    * of the location provider used to perform the reverse geocoding.
    * 
-   * @param addressLanguage
-   *          the language in which the address (if requested) should be
-   *          returned
+   * @param addressLanguage the language in which the address (if requested)
+   *          should be returned
    * @return this instance
    */
   public native PositionOptions setGearsAddressLanguage(String addressLanguage)/*-{
     this.gearsAddressLanguage = addressLanguage;
-  }-*/;
-
-  /**
-   * Gets the language in which the address (if requsted) should be returned
-   * 
-   * @return the language in which the address (if requsted) should be returned
-   */
-  public native PositionOptions getGearsAddressLanguage()/*-{
-    return this.gearsAddressLanguage;
-  }-*/;
-
-  private native void setGearsLocationProviderUrls(JavaScriptObject urls)/*-{
-    this.gearsLocationProviderUrls = urls;
   }-*/;
 
   /**
@@ -116,8 +95,23 @@ public final class PositionOptions extends JavaScriptObject {
    * a single Google-implemented service. The array can also be cleared, or set
    * to null, so that no location providers are used.
    * 
-   * @param urls
-   *          one or more URLs to contact to convert geolocation signals into
+   * @param urls one or more URLs to contact to convert geolocation signals into
+   *          positions
+   * @return this instance
+   */
+  public native PositionOptions setGearsLocationProviderUrls(JsArrayString urls)/*-{
+    this.gearsLocationProviderUrls = urls;
+    return this;
+  }-*/;
+
+  /**
+   * Optional, specifies one or more URLs to contact to convert geolocation
+   * signals into positions. Note that these must be complete URLs which include
+   * the scheme, e.g. http://gears.mylocationprovider.com. If unset, defaults to
+   * a single Google-implemented service. The array can also be cleared, or set
+   * to null, so that no location providers are used.
+   * 
+   * @param urls one or more URLs to contact to convert geolocation signals into
    *          positions
    * @return this instance
    */
@@ -126,18 +120,35 @@ public final class PositionOptions extends JavaScriptObject {
     return this;
   }
 
-  private native JsArrayString getGearsLocationProviderUrls0()/*-{
-    return this.gearsLocationProviderUrls;
+  /**
+   * Optional, requests reverse geocoded address information as part of the
+   * position data. Reverse geocoding is not performed if this flag is not
+   * specified or if it is set to false.
+   * 
+   * @param requestAddress If true, requests reverse geocoded address
+   *          information as part of the position data
+   * @return this instance
+   */
+  public native PositionOptions setGearsRequestAddress(boolean requestAddress)/*-{
+    this.gearsRequestAddress = requestAddress;
+    return this;
   }-*/;
 
   /**
-   * Gets the list of URLs to contact to convert geolocation signals into
-   * positions.
+   * Optional, requests the most accurate possible results. This may result in
+   * slower response times or increased battery consumption. Also, there is no
+   * guarantee that the device will be able to provide more accurate results
+   * than if this flag is not specified. The default value is false.
    * 
-   * @return the list of URLs to contact to convert geolocation signals into
-   *         positions
+   * @param enabled If true, request the most accurate possible results
+   * @return this instance
    */
-  public String[] getGearsLocationProviderUrls() {
-    return Utils.toJavaArray(getGearsLocationProviderUrls0());
-  }
+  public native PositionOptions setHighAccuracy(boolean enabled)/*-{
+    this.enableHighAccuracy = enabled;
+    return this;
+  }-*/;
+
+  private native JsArrayString nativeGetGearsLocationProviderUrls()/*-{
+    return this.gearsLocationProviderUrls;
+  }-*/;
 }

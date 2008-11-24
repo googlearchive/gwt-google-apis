@@ -18,19 +18,13 @@ package com.google.gwt.gears.client.desktop;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.gears.client.blob.Blob;
 
+/**
+ * An object that represents a file on disk.
+ */
 public final class File extends JavaScriptObject {
   protected File() {
     // required for overlay types
   }
-
-  /**
-   * Gets the name of the file, excluding the path.
-   * 
-   * @return the name of the file, excluding the path
-   */
-  public native String getName()/*-{
-    return this.name;
-  }-*/;
 
   /**
    * Gets the contents of the file.
@@ -39,5 +33,14 @@ public final class File extends JavaScriptObject {
    */
   public native Blob getBlob()/*-{
     return this.blob;
+  }-*/;
+
+  /**
+   * Gets the name of the file, excluding the path.
+   * 
+   * @return the name of the file, excluding the path
+   */
+  public native String getName()/*-{
+    return this.name;
   }-*/;
 }

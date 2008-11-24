@@ -17,6 +17,10 @@ package com.google.gwt.gears.client.geolocation;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * An object representing an address returned from the Geolocation service.
+ *
+ */
 public final class Address extends JavaScriptObject {
 
   protected Address() {
@@ -24,65 +28,20 @@ public final class Address extends JavaScriptObject {
   }
 
   /**
-   * Gets the building's street number.
-   * 
-   * @return the building's street number.
-   */
-  public native String getStreetNumber()/*-{
-    return this.streetNumber;
-  }-*/;
-
-  /**
-   * Gets the street name
-   * 
-   * @return the street name
-   */
-  public native String getStreet()/*-{
-    return this.street;
-  }-*/;
-
-  /**
-   * Gets the premises, e.g. building name.
-   * 
-   * @return the premises, e.g. building name.
-   */
-  public native String getPremises()/*-{
-    return this.premises;
-  }-*/;
-
-  /**
    * Gets the city name.
    * 
    * @return the city name
    */
-  public native String getCity()/*-{
+  public native String getCity() /*-{
     return this.city;
   }-*/;
 
   /**
-   * Gets the county name.
-   * 
-   * @return the county name
-   */
-  public native String getCounty()/*-{
-    return this.county;
-  }-*/;
-
-  /**
-   * Gets the region, e.g. a state in the US.
-   * 
-   * @return the region, e.g. a state in the US.
-   */
-  public native String getRegion()/*-{
-    return this.region;
-  }-*/;
-
-  /**
-   * Gets the country
+   * Gets the country.
    * 
    * @return the country
    */
-  public native String getCountry()/*-{
+  public native String getCountry() /*-{
     return this.country;
   }-*/;
 
@@ -91,8 +50,17 @@ public final class Address extends JavaScriptObject {
    * 
    * @return the country code (ISO 3166-1).
    */
-  public native String getCountryCode()/*-{
+  public native String getCountryCode() /*-{
     return this.countryCode;
+  }-*/;
+
+  /**
+   * Gets the county name.
+   * 
+   * @return the county name.
+   */
+  public native String getCounty() /*-{
+    return this.county;
   }-*/;
 
   /**
@@ -102,17 +70,43 @@ public final class Address extends JavaScriptObject {
    * @return the Postal code. This is the zip code in the US and postcode in the
    *         UK.
    */
-  public native String getPostalCode()/*-{
+  public native String getPostalCode() /*-{
     return this.postalCode;
   }-*/;
 
-  public String format() {
-    StringBuffer buf = new StringBuffer();
-    buf.append(getPremises()).append("\n");
-    buf.append(getStreetNumber()).append(" ").append(getStreet()).append("\n");
-    buf.append(getCity()).append(", ").append(getRegion()).append("\n");
-    buf.append(getPostalCode()).append("\n");
-    buf.append(getCountry()).append("\n");
-    return buf.toString();
-  }
+  /**
+   * Gets the premises, e.g. building name.
+   * 
+   * @return the premises, e.g. building name.
+   */
+  public native String getPremises() /*-{
+    return this.premises;
+  }-*/;
+
+  /**
+   * Gets the region, e.g. a state in the US.
+   * 
+   * @return the region, e.g. a state in the US.
+   */
+  public native String getRegion() /*-{
+    return this.region;
+  }-*/;
+
+  /**
+   * Gets the street name.
+   * 
+   * @return the street name
+   */
+  public native String getStreet() /*-{
+    return this.street;
+  }-*/;
+
+  /**
+   * Gets the building's street number.
+   * 
+   * @return the building's street number.
+   */
+  public native String getStreetNumber() /*-{
+    return this.streetNumber;
+  }-*/;
 }

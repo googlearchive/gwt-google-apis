@@ -20,20 +20,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 
 /**
- * 
+ * A utility class for moving arrays between Java and JavaScript.
  */
 public class Utils {
-  /**
-   * Converts a Java array of strings to a JavaScript array of strings.
-   */
-  public static JavaScriptObject toJavaScriptArray(String[] elements) {
-    JsArrayString array = JavaScriptObject.createArray().cast();
-    for (int i = 0; i < elements.length; ++i) {
-      array.set(i, elements[i]);
-    }
-    return array;
-  }
-  
   /**
    * Converts a JavaScript array of strings to a Java array of strings.
    */
@@ -43,5 +32,16 @@ public class Utils {
         urls[i] = jsArray.get(i);
     }
     return urls;
+  }
+  
+  /**
+   * Converts a Java array of strings to a JavaScript array of strings.
+   */
+  public static JsArrayString toJavaScriptArray(String[] elements) {
+    JsArrayString array = JavaScriptObject.createArray().cast();
+    for (int i = 0; i < elements.length; ++i) {
+      array.set(i, elements[i]);
+    }
+    return array;
   }
 }

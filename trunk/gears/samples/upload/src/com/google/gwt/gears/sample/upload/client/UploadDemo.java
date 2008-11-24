@@ -21,19 +21,18 @@ import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.blob.Blob;
 import com.google.gwt.gears.client.desktop.Desktop;
 import com.google.gwt.gears.client.desktop.File;
-import com.google.gwt.gears.client.desktop.OpenFilesCallback;
+import com.google.gwt.gears.client.desktop.OpenFilesHandler;
 import com.google.gwt.gears.client.httprequest.HttpRequest;
 import com.google.gwt.gears.client.httprequest.ProgressEvent;
 import com.google.gwt.gears.client.httprequest.ProgressHandler;
 import com.google.gwt.gears.client.httprequest.RequestCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -75,8 +74,10 @@ public class UploadDemo implements EntryPoint {
     browse.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         Desktop desktop = factory.createDesktop();
-        desktop.openFiles(new OpenFilesCallback() {
-          public void filesOpened(File[] files) {
+        desktop.openFiles(new OpenFilesHandler() {
+          @Override
+          public void onOpenFiles(OpenFilesEvent event) {
+            File[] files = event.getFiles();
             selected.setText(files[0].getName());
             selectedFile = files[0].getBlob();
             upload.setEnabled(true);

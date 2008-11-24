@@ -18,6 +18,7 @@ package com.google.gwt.gears.client.geolocation;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.gears.client.geolocation.PositionHandler.PositionEvent;
 
 /**
  * The Geolocation API enables a web application to obtain a user's geographical
@@ -57,9 +58,104 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
  */
 public final class Geolocation extends JavaScriptObject {
 
+  // Called from JSNI
+  @SuppressWarnings("unused")
+  private static void firePositionError(PositionHandler handler,
+      PositionError error) {
+    if (handler == null) {
+      return;
+    }
+
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onPosition(new PositionEvent(error));
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
+    } else {
+      handler.onPosition(new PositionEvent(error));
+    }
+  }
+
+  // Called from JSNI
+  @SuppressWarnings("unused")
+  private static void firePositionSuccess(PositionHandler handler,
+      Position position) {
+    if (handler == null) {
+      return;
+    }
+
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onPosition(new PositionEvent(position));
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
+    } else {
+      handler.onPosition(new PositionEvent(position));
+    }
+  }
+
   protected Geolocation() {
     // required for overlay types
   }
+
+  /**
+   * Stop watching the current position.
+   * 
+   * @param watchId the identifier of the watch to stop
+   */
+  public native void clearWatch(int watchId) /*-{
+    this.clearWatch(watchId);
+  }-*/;
+
+  /**
+   * Obtains a new position. A @{link {@link PositionEvent} will be passed to
+   * the supplied handler when the operation completes. If successful, the event
+   * will contain the current {@link Position}. If none of the location
+   * providers find a good fix, a {@link PositionError} will describe the
+   * result.
+   * 
+   * @param handler the {@link PositionHandler handler} which will receive a
+   *          {@link PositionEvent} when the operation completes.
+   */
+  public native void getCurrentPosition(PositionHandler handler) /*-{
+    this.getCurrentPosition(
+      function(position) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/Position;)(handler, position);
+      }, 
+      function(error) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/PositionError;)(handler, error);
+      }
+    );
+  }-*/;
+
+  /**
+   * Obtains a new position. A @{link {@link PositionEvent} will be passed to
+   * the supplied handler when the operation completes. If successful, the event
+   * will contain the current {@link Position}. If none of the location
+   * providers find a good fix, a {@link PositionError} will describe the
+   * result.
+   * 
+   * @param handler the {@link PositionHandler handler} which will receive a
+   *          {@link PositionEvent} when the operation completes.
+   * @param options specifies the {@link PositionOptions options} to use for
+   *          this request
+   */
+  public native void getCurrentPosition(PositionHandler handler,
+      PositionOptions options) /*-{
+    this.getCurrentPosition(
+      function(position) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/Position;)(handler, position);
+      }, 
+      function(error) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/PositionError;)(handler, error);
+      },
+      options
+    );
+  }-*/;
 
   /**
    * Gets the last known position, or null if there is no last known position.
@@ -68,124 +164,8 @@ public final class Geolocation extends JavaScriptObject {
    * 
    * @return The last known position, or null if there is no last known position
    */
-  public native Position getLastPosition()/*-{
+  public native Position getLastPosition() /*-{
     return this.lastPosition;
-  }-*/;
-
-  /**
-   * Obtains a new position. Obtains a new position. If successful, the success
-   * callback function is called exactly once with a good position. If none of
-   * the location providers find a good fix, the error callback is called
-   * exactly once with an error message unless you have passed null for
-   * errorCallback.
-   * 
-   * @param callback
-   *          a {@link PositionCallback callback} which will receive the
-   *          {@link Position} if available, or a {@link PositionError} if none
-   *          of the location providers find a good fix
-   */
-  public native void getCurrentPosition(PositionCallback callback)/*-{
-    this.getCurrentPosition(
-      function(position) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/Position;)(callback, position);
-      }, 
-      function(error) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/PositionError;)(callback, error);
-      }
-    );
-  }-*/;
-
-  /**
-   * Obtains a new position. Obtains a new position. If successful, the success
-   * callback function is called exactly once with a good position. If none of
-   * the location providers find a good fix, the error callback is called
-   * exactly once with an error message.
-   * 
-   * @param callback
-   *          a {@link PositionCallback callback} which will receive the
-   *          {@link Position} if available, or a {@link PositionError} if none
-   *          of the location providers find a good fix
-   * @param options
-   *          specifies the {@link PositionOptions options} to use for this
-   *          request
-   */
-  public native void getCurrentPosition(PositionCallback callback,
-      PositionOptions options)/*-{
-    this.getCurrentPosition(
-      function(position) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/Position;)(callback, position);
-      }, 
-      function(error) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/PositionError;)(callback, error);
-      },
-      options
-    );
-  }-*/;
-
-  /**
-   * Repeatedly obtains a new position. The success callback function is called
-   * as soon as a good position is available, or whenever the position changes
-   * significantly, subject to a maximum callback frequency. The error callback
-   * is called if a fatal error occurs which will prevent a position fix from
-   * ever being obtained by this watch.
-   * 
-   * @param callback
-   *          a {@link PositionCallback callback} which will receive the
-   *          {@link Position} when available and whenever the position changes
-   *          significantly, or a {@link PositionError} if errors prevent a
-   *          position fix from ever being obtained by this watch.
-   * @return A unique watch identifier
-   */
-  public native int watchPosition(PositionCallback callback)/*-{
-    return this.watchPosition(
-      function(position) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/Position;)(callback, position);
-      }, 
-      function(error) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/PositionError;)(callback, error);
-      }
-    );
-  }-*/;
-
-  /**
-   * Repeatedly obtains a new position. The success callback function is called
-   * as soon as a good position is available, or whenever the position changes
-   * significantly, subject to a maximum callback frequency. The error callback
-   * is called if a fatal error occurs which will prevent a position fix from
-   * ever being obtained by this watch.
-   * 
-   * @param successCallback
-   *          a {@link SuccessCallback callback} which will receive the Position
-   *          when available and whenever the position changes significantly
-   * @param errorCallback
-   *          an {@link ErrorCallback callback} which will be invoked if errors
-   *          prevent a position fix from ever being obtained by this watch.
-   * @param options
-   *          specifies the {@link PositionOptions options} to use for this
-   *          request
-   * @return A unique watch identifier
-   */
-  public native int watchPosition(PositionCallback callback,
-      PositionOptions options)/*-{
-    return this.watchPosition(
-      function(position) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/Position;)(callback, position);
-      }, 
-      function(error) {
-        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionCallback;Lcom/google/gwt/gears/client/geolocation/PositionError;)(callback, error);
-      },
-      options
-    );
-  }-*/;
-
-  /**
-   * Stop watching the current position
-   * 
-   * @param watchId
-   *          the identifier of the watch to stop
-   */
-  public native void clearWatch(int watchId)/*-{
-    this.clearWatch(watchId);
   }-*/;
 
   /**
@@ -197,7 +177,7 @@ public final class Geolocation extends JavaScriptObject {
    * @return true if the site has permission to access the user's location
    *         through Gears
    */
-  public native boolean getPermission()/*-{
+  public native boolean getPermission() /*-{
     return this.getPermission();
   }-*/;
 
@@ -207,12 +187,11 @@ public final class Geolocation extends JavaScriptObject {
    * It is always safe to call this function; it will return immediately if the
    * site already has permission to access the user's location through Gears.
    * 
-   * @param siteName
-   *          friendly name of the site requesting permission
+   * @param siteName friendly name of the site requesting permission
    * @return true if the site has permission to access the user's location
    *         through Gears
    */
-  public native boolean getPermission(String siteName)/*-{
+  public native boolean getPermission(String siteName) /*-{
     return this.getPermission(siteName);
   }-*/;
 
@@ -222,14 +201,12 @@ public final class Geolocation extends JavaScriptObject {
    * It is always safe to call this function; it will return immediately if the
    * site already has permission to access the user's location through Gears.
    * 
-   * @param siteName
-   *          friendly name of the site requesting permission
-   * @param imageUrl
-   *          URL of a .png file to display in the dialog
+   * @param siteName friendly name of the site requesting permission
+   * @param imageUrl URL of a .png file to display in the dialog
    * @return true if the site has permission to access the user's location
    *         through Gears
    */
-  public native boolean getPermission(String siteName, String imageUrl)/*-{
+  public native boolean getPermission(String siteName, String imageUrl) /*-{
     return this.getPermission(siteName, imageUrl);
   }-*/;
 
@@ -239,57 +216,69 @@ public final class Geolocation extends JavaScriptObject {
    * It is always safe to call this function; it will return immediately if the
    * site already has permission to access the user's location through Gears.
    * 
-   * @param siteName
-   *          friendly name of the site requesting permission
-   * @param imageUrl
-   *          URL of a .png file to display in the dialog
-   * @param extraMessage
-   *          a site-specific text to display to users in the security dialog
+   * @param siteName friendly name of the site requesting permission
+   * @param imageUrl URL of a .png file to display in the dialog
+   * @param extraMessage a site-specific text to display to users in the
+   *          security dialog
    * @return true if the site has permission to access the user's location
    *         through Gears
    */
   public native boolean getPermission(String siteName, String imageUrl,
-      String extraMessage)/*-{
+      String extraMessage) /*-{
     return this.getPermission(siteName, imageUrl, extraMessage);
   }-*/;
 
-  // Called from JSNI
-  @SuppressWarnings("unused")
-  private static void firePositionSuccess(PositionCallback callback,
-      Position position) {
-    if (callback == null) {
-      return;
-    }
-
-    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
-    if (ueh != null) {
-      try {
-        callback.onSuccess(position);
-      } catch (Throwable e) {
-        ueh.onUncaughtException(e);
+  /**
+   * Repeatedly obtains a new position. If successful, a {@link PositionEvent}
+   * will be supplied containing the current position as soon a fix is available
+   * and whenever the position changes significantly, subject to a maximum
+   * callback frequency. If there is a fatal error which would prevent a fix
+   * from ever being obtained a single {@link PositionEvent} will be fired
+   * containing the {@link PositionError} describing the problem.
+   * 
+   * @param handler a {@link PositionHandler handler} which will receive
+   *          {@link PositionEvent events} when a position update is available,
+   *          or if any errors prevent a position fix from ever being obtained
+   *          by this watch.
+   * @return A unique watch identifier
+   */
+  public native int watchPosition(PositionHandler handler) /*-{
+    return this.watchPosition(
+      function(position) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/Position;)(handler, position);
+      }, 
+      function(error) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/PositionError;)(handler, error);
       }
-    } else {
-      callback.onSuccess(position);
-    }
-  }
+    );
+  }-*/;
 
-  // Called from JSNI
-  @SuppressWarnings("unused")
-  private static void firePositionError(PositionCallback callback,
-      PositionError error) {
-    if (callback == null) {
-      return;
-    }
-
-    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
-    if (ueh != null) {
-      try {
-        callback.onError(error);
-      } catch (Throwable e) {
-        ueh.onUncaughtException(e);
-      }
-    } else {
-      callback.onError(error);
-    }
-  }
+  /**
+   * Repeatedly obtains a new position. If successful, a {@link PositionEvent}
+   * will be supplied containing the current position as soon a fix is available
+   * and whenever the position changes significantly, subject to a maximum
+   * callback frequency. If there is a fatal error which would prevent a fix
+   * from ever being obtained a single {@link PositionEvent} will be fired
+   * containing the {@link PositionError} describing the problem.
+   * 
+   * @param handler a {@link PositionHandler handler} which will receive
+   *          {@link PositionEvent events} when available and whenever the
+   *          position changes significantly, or if any errors prevent a
+   *          position fix from ever being obtained by this watch.
+   * @param options specifies the {@link PositionOptions options} to use for
+   *          this request
+   * @return A unique watch identifier
+   */
+  public native int watchPosition(PositionHandler handler,
+      PositionOptions options) /*-{
+    return this.watchPosition(
+      function(position) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionSuccess(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/Position;)(handler, position);
+      }, 
+      function(error) {
+        @com.google.gwt.gears.client.geolocation.Geolocation::firePositionError(Lcom/google/gwt/gears/client/geolocation/PositionHandler;Lcom/google/gwt/gears/client/geolocation/PositionError;)(handler, error);
+      },
+      options
+    );
+  }-*/;
 }

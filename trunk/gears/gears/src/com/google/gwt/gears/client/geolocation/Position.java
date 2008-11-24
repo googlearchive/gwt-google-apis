@@ -15,35 +15,18 @@
  */
 package com.google.gwt.gears.client.geolocation;
 
-import java.util.Date;
-
 import com.google.gwt.core.client.JavaScriptObject;
 
+import java.util.Date;
+
+/**
+ * An object representing a position returned from the Geolocation service.
+ */
 public final class Position extends JavaScriptObject {
 
   protected Position() {
     // required for overlay types
   }
-
-  /**
-   * Gets the latitude in degrees using the World Geodetic System 1984 (WGS84)
-   * datum.
-   * 
-   * @return the latitude in degrees using the World Geodetic System 1984
-   *         (WGS84) datum
-   */
-  public native double getLatitude()/*-{
-    return this.latitude;
-  }-*/;
-
-  /**
-   * Gets the longitude in degrees (WGS84 datum).
-   * 
-   * @return the longitude in degrees (WGS84 datum).
-   */
-  public native double getLongitude()/*-{
-    return this.longitude;
-  }-*/;
 
   /**
    * Gets the horizontal accuracy of the position in meters, or null if not
@@ -52,7 +35,7 @@ public final class Position extends JavaScriptObject {
    * @return the horizontal accuracy of the position in meters, or null if not
    *         available
    */
-  public native double getAccuracy()/*-{
+  public native double getAccuracy() /*-{
     return this.accuracy;
   }-*/;
 
@@ -61,7 +44,7 @@ public final class Position extends JavaScriptObject {
    * 
    * @return the height in meters (WGS84 datum), or null if not available.
    */
-  public native double getAltitude()/*-{
+  public native double getAltitude() /*-{
     return this.altitude;
   }-*/;
 
@@ -72,12 +55,37 @@ public final class Position extends JavaScriptObject {
    * @return the vertical accuracy of the position in meters, or null if not
    *         available.
    */
-  public native double getAltitudeAccuracy()/*-{
+  public native double getAltitudeAccuracy() /*-{
     return this.altitudeAccuracy;
   }-*/;
 
-  private native double getTimestamp0()/*-{
-    return this.timestamp.getTime();
+  /**
+   * Gets the reverse-geocoded {@link Address}, if requested and available.
+   * 
+   * @return the reverse-geocoded {@link Address}, if requested and available.
+   */
+  public native Address getGearsAddress() /*-{
+    return this.gearsAddress;
+  }-*/;
+
+  /**
+   * Gets the latitude in degrees using the World Geodetic System 1984 (WGS84)
+   * datum.
+   * 
+   * @return the latitude in degrees using the World Geodetic System 1984
+   *         (WGS84) datum
+   */
+  public native double getLatitude() /*-{
+    return this.latitude;
+  }-*/;
+
+  /**
+   * Gets the longitude in degrees (WGS84 datum).
+   * 
+   * @return the longitude in degrees (WGS84 datum).
+   */
+  public native double getLongitude() /*-{
+    return this.longitude;
   }-*/;
 
   /**
@@ -89,12 +97,7 @@ public final class Position extends JavaScriptObject {
     return new Date((long) getTimestamp0());
   }
 
-  /**
-   * Gets the reverse-geocoded {@link Address}, if requested and available.
-   * 
-   * @return the reverse-geocoded {@link Address}, if requested and available.
-   */
-  public native Address getGearsAddress()/*-{
-    return this.gearsAddress;
+  private native double getTimestamp0() /*-{
+    return this.timestamp.getTime();
   }-*/;
 }

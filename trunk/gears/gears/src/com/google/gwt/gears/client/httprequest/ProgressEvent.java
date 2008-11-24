@@ -1,8 +1,7 @@
 /*
  * Copyright 2008 Google Inc.
  * 
- * Licensed uimport com.google.gwt.core.client.JavaScriptObject;
-; you may not
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
  * 
@@ -18,18 +17,21 @@ package com.google.gwt.gears.client.httprequest;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * Encapsulates the information associated with an upload in progress.
+ */
 public final class ProgressEvent extends JavaScriptObject {
 
   protected ProgressEvent() {
     // Required for overlay types
   }
 
-  public native int getTotal()/*-{
-    return this.total;
-  }-*/;
-
   public native int getLoaded()/*-{
     return this.loaded;
+  }-*/;
+
+  public native int getTotal()/*-{
+    return this.total;
   }-*/;
 
   public native int isLengthComputable()/*-{

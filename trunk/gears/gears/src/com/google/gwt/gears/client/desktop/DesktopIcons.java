@@ -17,19 +17,38 @@ package com.google.gwt.gears.client.desktop;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ *  Represents a Desktop Icon that can be created to launch a browser App.
+ *
+ */
 public final class DesktopIcons extends JavaScriptObject {
-  protected DesktopIcons() {
-    // required for overlay types
-  }
-
   public static DesktopIcons create() {
     DesktopIcons icons = JavaScriptObject.createObject().cast();
     return icons;
+  }
+
+  protected DesktopIcons() {
+    // required for overlay types
   };
 
   /**
    * Sets a relative or absolute URL of a PNG-formatted image with dimensions of
-   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data
+   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data.
+   * <p>
+   * Relative URLs are resolved using the caller's locationURL
+   * 
+   * @param url
+   *          URL of a PNG-formatted image with dimensions of 16x16 pixels
+   * @return this instance
+   */
+  public native DesktopIcons set128x128(String url)/*-{
+    this['128x128'] = url;
+    return this;
+  }-*/;
+
+  /**
+   * Sets a relative or absolute URL of a PNG-formatted image with dimensions of
+   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data.
    * <p>
    * Relative URLs are resolved using the caller's locationURL
    * 
@@ -44,7 +63,7 @@ public final class DesktopIcons extends JavaScriptObject {
 
   /**
    * Sets a relative or absolute URL of a PNG-formatted image with dimensions of
-   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data
+   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data.
    * <p>
    * Relative URLs are resolved using the caller's locationURL
    * 
@@ -59,7 +78,7 @@ public final class DesktopIcons extends JavaScriptObject {
 
   /**
    * Sets a relative or absolute URL of a PNG-formatted image with dimensions of
-   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data
+   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data.
    * <p>
    * Relative URLs are resolved using the caller's locationURL
    * 
@@ -69,21 +88,6 @@ public final class DesktopIcons extends JavaScriptObject {
    */
   public native DesktopIcons set48x48(String url)/*-{
     this['48x48'] = url;
-    return this;
-  }-*/;
-
-  /**
-   * Sets a relative or absolute URL of a PNG-formatted image with dimensions of
-   * 16x16 pixels, or a data:// URL containing base64-encoded PNG data
-   * <p>
-   * Relative URLs are resolved using the caller's locationURL
-   * 
-   * @param url
-   *          URL of a PNG-formatted image with dimensions of 16x16 pixels
-   * @return this instance
-   */
-  public native DesktopIcons set128x128(String url)/*-{
-    this['128x128'] = url;
     return this;
   }-*/;
 }
