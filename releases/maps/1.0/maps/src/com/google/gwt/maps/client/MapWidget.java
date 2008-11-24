@@ -1528,7 +1528,7 @@ public final class MapWidget extends Composite {
   @Override
   protected void onAttach() {
     super.onAttach();
-    checkResize();
+    checkResizeAndCenter();
   }
 
   /**
