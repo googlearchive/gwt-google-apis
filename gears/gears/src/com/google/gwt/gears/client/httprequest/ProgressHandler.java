@@ -15,6 +15,9 @@
  */
 package com.google.gwt.gears.client.httprequest;
 
+/**
+ * Fires as data is transferred.
+ */
 public interface ProgressHandler {
 
   /**
@@ -23,5 +26,5 @@ public interface ProgressHandler {
    * @param event
    *          An event describing the progress of the transfer
    */
-  public void onProgress(ProgressEvent event);
+  void onProgress(ProgressEvent event);
 }

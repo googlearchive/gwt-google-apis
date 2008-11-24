@@ -19,23 +19,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 
+/**
+ * Used for monitoring the progress of an upload. 
+ */
 public final class HttpRequestUpload extends JavaScriptObject {
-
-  protected HttpRequestUpload() {
-    // required for overlay types
-  }
-
-  /**
-   * Sets an event handler that fires as PUT or POST data is uploaded.
-   * 
-   * @param handler
-   *          an event handler that fires as PUT or POST data is uploaded.
-   */
-  public native void setProgressHandler(ProgressHandler handler) /*-{
-     this.onprogress = function(progressObject) {
-       @com.google.gwt.gears.client.httprequest.HttpRequestUpload::fireOnProgress(Lcom/google/gwt/gears/client/httprequest/ProgressHandler;Lcom/google/gwt/gears/client/httprequest/ProgressEvent;)(handler, progressObject);
-     };
-   }-*/;
 
   // Called from JSNI
   @SuppressWarnings("unused")
@@ -56,4 +43,20 @@ public final class HttpRequestUpload extends JavaScriptObject {
       handler.onProgress(event);
     }
   }
+
+  protected HttpRequestUpload() {
+    // required for overlay types
+  }
+
+  /**
+   * Sets an event handler that fires as PUT or POST data is uploaded.
+   * 
+   * @param handler
+   *          an event handler that fires as PUT or POST data is uploaded.
+   */
+  public native void setProgressHandler(ProgressHandler handler) /*-{
+     this.onprogress = function(progressObject) {
+       @com.google.gwt.gears.client.httprequest.HttpRequestUpload::fireOnProgress(Lcom/google/gwt/gears/client/httprequest/ProgressHandler;Lcom/google/gwt/gears/client/httprequest/ProgressEvent;)(handler, progressObject);
+     };
+   }-*/;
 }

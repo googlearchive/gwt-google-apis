@@ -18,8 +18,13 @@ package com.google.gwt.gears.client.desktop;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.gears.client.impl.Utils;
 
+/**
+ * A class that encapsulates the options to the
+ * {@link Desktop#openFiles(OpenFilesHandler, OpenFilesOptions)} method.
+ * 
+ */
 public final class OpenFilesOptions extends JavaScriptObject {
-  
+
   public static OpenFilesOptions create() {
     return JavaScriptObject.createObject().cast();
   }
@@ -27,22 +32,6 @@ public final class OpenFilesOptions extends JavaScriptObject {
   protected OpenFilesOptions() {
     // required for overlay types
   }
-  
-  /**
-   * By default, the user may select multiple files. If true, the user is
-   * limited to selecting only one file.
-   * 
-   * @param singleFile If true, the user may select only a single file
-   * @return this instance
-   */
-  public native OpenFilesOptions setSingleFile(boolean singleFile)/*-{
-    this.singleFile = singleFile;
-    return this;
-  }-*/;
-
-  private native void setFilter(JavaScriptObject filter)/*-{
-    this.filter = filter;
-  }-*/;
 
   /**
    * By default, all files on the local disk are selectable. If a filter is
@@ -58,4 +47,20 @@ public final class OpenFilesOptions extends JavaScriptObject {
     this.setFilter(Utils.toJavaScriptArray(filter));
     return this;
   }
+
+  /**
+   * By default, the user may select multiple files. If true, the user is
+   * limited to selecting only one file.
+   * 
+   * @param singleFile If true, the user may select only a single file
+   * @return this instance
+   */
+  public native OpenFilesOptions setSingleFile(boolean singleFile)/*-{
+    this.singleFile = singleFile;
+    return this;
+  }-*/;
+
+  private native void setFilter(JavaScriptObject filter)/*-{
+    this.filter = filter;
+  }-*/;
 }

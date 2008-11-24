@@ -20,142 +20,11 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.gears.client.blob.Blob;
 
+/**
+ * The HttpRequest API implements a subset of the W3C XmlHttpRequest
+ * specification, and makes it available in both workers and the main HTML page.
+ */
 public final class HttpRequest extends JavaScriptObject {
-
-  protected HttpRequest() {
-    // Required for overlay types
-  }
-
-  /**
-   * Specifies the method and URL of a request.
-   * 
-   * @param method
-   *          a value of "GET", "POST", "HEAD" or another HTTP method listed in
-   *          the W3C specification
-   * @param url
-   *          either a relative or complete URL which must be from the same
-   *          origin as the current context
-   */
-  public native void open(String method, String url)/*-{
-    this.open(method, url);
-  }-*/;
-
-  /**
-   * Adds the header to the set of HTTP headers to be sent.
-   * 
-   * @param name
-   *          the HTTP header to set
-   * @param value
-   *          the value of the header
-   */
-  public native void setRequestHeader(String name, String value)/*-{
-    this.setRequestHeader(name, value);
-  }-*/;
-
-  /**
-   * Sends the request.
-   */
-  public native void send()/*-{
-    this.send(callback);
-  }-*/;
-
-  /**
-   * Sends the request.
-   * 
-   * @param callback
-   *          an event handler that fires as response data is downloaded.
-   */
-  public void send(RequestCallback callback) {
-    setCallback(callback);
-    send();
-  };
-
-  /**
-   * Sends the request.
-   * 
-   * @param postData
-   *          String to be sent as the body of a POST or PUT request
-   */
-  public native void send(String postData)/*-{
-    this.send(postData);
-  }-*/;
-
-  /**
-   * Sends the request.
-   * 
-   * @param postData
-   *          String to be sent as the body of a POST or PUT request
-   * @param callback
-   *          an event handler that fires as response data is downloaded.
-   */
-  public void send(String postData, RequestCallback callback) {
-    setCallback(callback);
-    send(postData);
-  };
-
-  /**
-   * Sends the request.
-   * 
-   * @param postData
-   *          {@link Blob} to be sent as the body of a POST or PUT request
-   * @param callback
-   *          an event handler that fires as response data is downloaded.
-   */
-  public void send(Blob postData, RequestCallback callback) {
-    setCallback(callback);
-    send(postData);
-  };
-
-  /**
-   * Sends the request.
-   * 
-   * @param postData
-   *          {@link Blob} to be sent as the body of a POST or PUT request
-   */
-  public native void send(Blob postData)/*-{
-    this.send(postData);
-  }-*/;
-
-  /**
-   * Cancels the request.
-   */
-  public native void abort()/*-{
-    this.abort();
-  }-*/;
-
-  /**
-   * Returns the value of a specific HTTP header in the server response.
-   * 
-   * @param name
-   *          the name of the header value to return
-   * @return the value of the header
-   */
-  public native String getResponseHeader(String name)/*-{
-    return this.getResponseHeader(name);
-  }-*/;
-
-  /**
-   * Returns a string containing the entire set of HTTP headers in the server
-   * response.
-   * 
-   * @return a string containing the entire set of HTTP headers in the server
-   *         response.
-   */
-  public native String getAllResponseHeaders()/*-{
-    return this.getAllResponseHeaders();
-  }-*/;
-
-  /**
-   * Sets an event handler that fires as response data is downloaded.
-   * 
-   * @param handler
-   *          an event handler that fires as response data is downloaded.
-   */
-  public native void setProgressHandler(ProgressHandler handler) /*-{
-    this.onprogress = function(progressEvent) {
-      @com.google.gwt.gears.client.httprequest.HttpRequest::fireOnProgress(Lcom/google/gwt/gears/client/httprequest/ProgressHandler;Lcom/google/gwt/gears/client/httprequest/ProgressEvent;)(handler, progressEvent);
-    };
-  }-*/;
 
   // Called from JSNI
   @SuppressWarnings("unused")
@@ -177,8 +46,55 @@ public final class HttpRequest extends JavaScriptObject {
     }
   }
 
+  /*
+   * Method called when the JavaScript XmlHttpRequest object's readyState
+   * reaches 4 (LOADED).
+   * 
+   * NOTE: this method is called from JSNI
+   */
+  @SuppressWarnings("unused")
+  private static void fireRequestComplete(RequestCallback handler,
+      HttpRequest request) {
+    if (handler == null) {
+      return;
+    }
+
+    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
+    if (ueh != null) {
+      try {
+        handler.onResponseReceived(request);
+      } catch (Throwable e) {
+        ueh.onUncaughtException(e);
+      }
+    } else {
+      handler.onResponseReceived(request);
+    }
+  }
+
+  protected HttpRequest() {
+    // Required for overlay types
+  }
+
   /**
-   * Returns the state of the request:
+   * Cancels the request.
+   */
+  public native void abort()/*-{
+    this.abort();
+  }-*/;
+
+  /**
+   * Returns a string containing the entire set of HTTP headers in the server
+   * response.
+   * 
+   * @return a string containing the entire set of HTTP headers in the server
+   *         response.
+   */
+  public native String getAllResponseHeaders()/*-{
+    return this.getAllResponseHeaders();
+  }-*/;;
+
+  /**
+   * Returns the state of the request.
    * <table>
    * <tr>
    * <td>0</td>
@@ -209,49 +125,6 @@ public final class HttpRequest extends JavaScriptObject {
   }-*/;
 
   /**
-   * Sets an event handler that fires as response data is downloaded.
-   * 
-   * @param handler
-   *          an event handler that fires as response data is downloaded.
-   */
-  public native void setCallback(RequestCallback handler) /*-{
-    var request = this;
-    this.onreadystatechange = function() {
-      if (request.readyState == 4) {
-        @com.google.gwt.gears.client.httprequest.HttpRequest::fireRequestComplete(Lcom/google/gwt/gears/client/httprequest/RequestCallback;Lcom/google/gwt/gears/client/httprequest/HttpRequest;)(handler, request);
-      }
-      request.onreadystatechange = null;
-      request.onprogress = null;
-      request.upload.onprogress = null;
-    };
-  }-*/;
-
-  /*
-   * Method called when the JavaScript XmlHttpRequest object's readyState
-   * reaches 4 (LOADED).
-   * 
-   * NOTE: this method is called from JSNI
-   */
-  @SuppressWarnings("unused")
-  private static void fireRequestComplete(RequestCallback handler,
-      HttpRequest request) {
-    if (handler == null) {
-      return;
-    }
-
-    UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
-    if (ueh != null) {
-      try {
-        handler.onResponseReceived(request);
-      } catch (Throwable e) {
-        ueh.onUncaughtException(e);
-      }
-    } else {
-      handler.onResponseReceived(request);
-    }
-  }
-
-  /**
    * Returns the response body as a {@link Blob}. This property can be read when
    * the request is in the Complete state.
    * 
@@ -259,7 +132,17 @@ public final class HttpRequest extends JavaScriptObject {
    */
   public native Blob getResponseBlob()/*-{
     return this.responseBlob;
-  }-*/;
+  }-*/;;
+
+  /**
+   * Returns the value of a specific HTTP header in the server response.
+   * 
+   * @param name the name of the header value to return
+   * @return the value of the header
+   */
+  public native String getResponseHeader(String name)/*-{
+    return this.getResponseHeader(name);
+  }-*/;;
 
   /**
    * Returns the response body as a string. This property can be read when the
@@ -301,6 +184,115 @@ public final class HttpRequest extends JavaScriptObject {
    */
   public native HttpRequestUpload getUpload()/*-{
     return this.upload;
+  }-*/;
+
+  /**
+   * Specifies the method and URL of a request.
+   * 
+   * @param method a value of "GET", "POST", "HEAD" or another HTTP method
+   *          listed in the W3C specification
+   * @param url either a relative or complete URL which must be from the same
+   *          origin as the current context
+   */
+  public native void open(String method, String url)/*-{
+    this.open(method, url);
+  }-*/;
+
+  /**
+   * Sends the request.
+   */
+  public native void send()/*-{
+    this.send(callback);
+  }-*/;
+
+  /**
+   * Sends the request.
+   * 
+   * @param postData {@link Blob} to be sent as the body of a POST or PUT
+   *          request
+   */
+  public native void send(Blob postData)/*-{
+    this.send(postData);
+  }-*/;
+
+  /**
+   * Sends the request.
+   * 
+   * @param postData {@link Blob} to be sent as the body of a POST or PUT
+   *          request
+   * @param callback an event handler that fires as response data is downloaded.
+   */
+  public void send(Blob postData, RequestCallback callback) {
+    setCallback(callback);
+    send(postData);
+  }
+
+  /**
+   * Sends the request.
+   * 
+   * @param callback an event handler that fires as response data is downloaded.
+   */
+  public void send(RequestCallback callback) {
+    setCallback(callback);
+    send();
+  }
+
+  /**
+   * Sends the request.
+   * 
+   * @param postData String to be sent as the body of a POST or PUT request
+   */
+  public native void send(String postData)/*-{
+    this.send(postData);
+  }-*/;
+
+  /**
+   * Sends the request.
+   * 
+   * @param postData String to be sent as the body of a POST or PUT request
+   * @param callback an event handler that fires as response data is downloaded.
+   */
+  public void send(String postData, RequestCallback callback) {
+    setCallback(callback);
+    send(postData);
+  }
+
+  /**
+   * Sets an event handler that fires as response data is downloaded.
+   * 
+   * @param handler an event handler that fires as response data is downloaded.
+   */
+  public native void setCallback(RequestCallback handler) /*-{
+    var request = this;
+    this.onreadystatechange = function() {
+      if (request.readyState == 4) {
+        @com.google.gwt.gears.client.httprequest.HttpRequest::fireRequestComplete(Lcom/google/gwt/gears/client/httprequest/RequestCallback;Lcom/google/gwt/gears/client/httprequest/HttpRequest;)(handler, request);
+      }
+      request.onreadystatechange = null;
+      request.onprogress = null;
+      request.upload.onprogress = null;
+    };
+  }-*/;
+
+  /**
+   * Sets an event handler that fires as response data is downloaded.
+   * 
+   * @param handler an event handler that fires as response data is downloaded.
+   */
+  public native void setProgressHandler(ProgressHandler handler) /*-{
+    this.onprogress = function(progressEvent) {
+      @com.google.gwt.gears.client.httprequest.HttpRequest::fireOnProgress(Lcom/google/gwt/gears/client/httprequest/ProgressHandler;Lcom/google/gwt/gears/client/httprequest/ProgressEvent;)(handler, progressEvent);
+    };
+  }-*/;
+
+  /**
+   * Adds the header to the set of HTTP headers to be sent.
+   * 
+   * @param name the HTTP header to set
+   * @param value the value of the header
+   */
+  public native void setRequestHeader(String name, String value)/*-{
+    this.setRequestHeader(name, value);
   }-*/;
 
 }

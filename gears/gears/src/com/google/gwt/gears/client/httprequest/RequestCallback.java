@@ -15,6 +15,10 @@
  */
 package com.google.gwt.gears.client.httprequest;
 
+/**
+ * Called when a pending {@link com.google.gwt.http.client.Request} completes
+ * normally.
+ */
 public interface RequestCallback {
   /**
    * Called when a pending {@link com.google.gwt.http.client.Request} completes
@@ -23,9 +27,6 @@ public interface RequestCallback {
    * 
    * @param request
    *          the object that generated this event
-   * @param response
-   *          an instance of the {@link com.google.gwt.http.client.Response}
-   *          class
    */
   void onResponseReceived(HttpRequest request);
 }

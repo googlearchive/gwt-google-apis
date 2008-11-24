@@ -15,6 +15,26 @@
  */
 package com.google.gwt.gears.client.desktop;
 
-public interface OpenFilesCallback {
-  public void filesOpened(File[] files);
+/**
+ * A callback that asynchronously returns a list of open files.
+ */
+public interface OpenFilesHandler {
+
+  /**
+   * Encapsulates the parameters to the openFiles event.
+   *
+   */
+  static class OpenFilesEvent {
+    private File[] files;
+
+    OpenFilesEvent(File[] files) {
+      this.files = files;
+    }
+
+    public File[] getFiles() {
+      return this.files;
+    }
+  }
+
+  void onOpenFiles(OpenFilesEvent event);
 }

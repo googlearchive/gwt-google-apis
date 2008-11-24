@@ -33,6 +33,11 @@ public final class Factory extends JavaScriptObject {
   public static final String DATABASE = "beta.database";
 
   /**
+   * String used to request an HttpRequest instance from Gears.
+   */
+  public static final String HTTPREQUEST = "beta.httprequest";
+
+  /**
    * String used to request a LocalServer instance from Gears.
    */
   public static final String LOCALSERVER = "beta.localserver";
@@ -43,17 +48,12 @@ public final class Factory extends JavaScriptObject {
   public static final String WORKERPOOL = "beta.workerpool";
 
   /**
-   * String used to request an HttpRequest instance from Gears
-   */
-  public static final String HTTPREQUEST = "beta.httprequest";
-
-  /**
-   * String used to request an Desktop instance from Gears
+   * String used to request an Desktop instance from Gears.
    */
   private static final String DESKTOP = "beta.desktop";
 
   /**
-   * String used to request an Geolocation instance from Gears
+   * String used to request an Geolocation instance from Gears.
    */
   private static final String GEOLOCATION = "beta.geolocation";
 
@@ -82,33 +82,6 @@ public final class Factory extends JavaScriptObject {
   }
 
   /**
-   * Creates a new {@link LocalServer} instance.
-   * 
-   * @return a new {@link LocalServer} instance
-   */
-  public LocalServer createLocalServer() {
-    return create(LOCALSERVER);
-  }
-
-  /**
-   * Creates a new {@link WorkerPool} instance.
-   * 
-   * @return a new {@link WorkerPool} instance
-   */
-  public WorkerPool createWorkerPool() {
-    return create(WORKERPOOL);
-  }
-
-  /**
-     * Creates a new {@link HttpRequest} instance.
-     * 
-     * @return a new {@link HttpRequest} instance
-     */
-  public HttpRequest createHttpRequest() {
-    return create(HTTPREQUEST);
-  }
-  
-  /**
    * Creates a new {@link Desktop} instance.
    * 
    * @return a new {@link Desktop} instance
@@ -127,6 +100,33 @@ public final class Factory extends JavaScriptObject {
   }
 
   /**
+     * Creates a new {@link HttpRequest} instance.
+     * 
+     * @return a new {@link HttpRequest} instance
+     */
+  public HttpRequest createHttpRequest() {
+    return create(HTTPREQUEST);
+  }
+  
+  /**
+   * Creates a new {@link LocalServer} instance.
+   * 
+   * @return a new {@link LocalServer} instance
+   */
+  public LocalServer createLocalServer() {
+    return create(LOCALSERVER);
+  }
+
+  /**
+   * Creates a new {@link WorkerPool} instance.
+   * 
+   * @return a new {@link WorkerPool} instance
+   */
+  public WorkerPool createWorkerPool() {
+    return create(WORKERPOOL);
+  }
+
+  /**
    * Returns a description of the build of Gears installed. This string is
    * purely informational. Application developers should not rely on the format
    * of data returned. The contents and layout may change over time.
@@ -138,15 +138,22 @@ public final class Factory extends JavaScriptObject {
   }-*/;
 
   /**
+   * Lets a site manually trigger the Gears security dialog, without UI customizations.
+   * 
+   * @return Indicates whether the site has permission to use Gears.
+   */
+  public native boolean getPermission() /*-{
+    return this.getPermission();
+  }-*/;
+
+  /**
    * Lets a site manually trigger the Gears security dialog, with UI customizations.
    * 
    * @param siteName Friendly name of the site requesting permission.
-   * @param imageUrl URL of a .png file to display in the dialog.
-   * @param extraMessage Site-specific text to display to users in the security dialog. 
    * @return Indicates whether the site has permission to use Gears.
    */
-  public native boolean getPermission(String siteName, String imageUrl, String extraMessage) /*-{
-    return this.getPermission(siteName, imageUrl, extraMessage);
+  public native boolean getPermission(String siteName) /*-{
+    return this.getPermission(siteName);
   }-*/;
 
   /**
@@ -164,19 +171,12 @@ public final class Factory extends JavaScriptObject {
    * Lets a site manually trigger the Gears security dialog, with UI customizations.
    * 
    * @param siteName Friendly name of the site requesting permission.
+   * @param imageUrl URL of a .png file to display in the dialog.
+   * @param extraMessage Site-specific text to display to users in the security dialog. 
    * @return Indicates whether the site has permission to use Gears.
    */
-  public native boolean getPermission(String siteName) /*-{
-    return this.getPermission(siteName);
-  }-*/;
-
-  /**
-   * Lets a site manually trigger the Gears security dialog, without UI customizations.
-   * 
-   * @return Indicates whether the site has permission to use Gears.
-   */
-  public native boolean getPermission() /*-{
-    return this.getPermission();
+  public native boolean getPermission(String siteName, String imageUrl, String extraMessage) /*-{
+    return this.getPermission(siteName, imageUrl, extraMessage);
   }-*/;
 
   /**
@@ -190,7 +190,9 @@ public final class Factory extends JavaScriptObject {
   }-*/;
 
   /**
-   * @return true if the site already has permission to use Gears.
+   * Returns <code>true</code> if the site already has permission to use Gears.
+   * 
+   * @return <code>true</code> if the site already has permission to use Gears.
    */
   public native boolean hasPermission() /*-{
     return this.hasPermission;

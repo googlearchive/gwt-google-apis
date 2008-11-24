@@ -17,6 +17,9 @@ package com.google.gwt.gears.client.geolocation;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * Arguments returned when a Geolocation fails. 
+ */
 public final class PositionError extends JavaScriptObject {
 
   protected PositionError() {
