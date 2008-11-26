@@ -40,7 +40,7 @@ Each tool has its own tradeoffs:
 
   * Use JSNI
   * Use !JavaScriptOverlays
-  * Use JSIO Library @BeanProperties
+  * Use JSIO Library @BeanProperties - From a performance perspective, is almost always preferable to use an overlay type or JSNI methods instead.
 
 _TBD_
 
@@ -48,7 +48,9 @@ _TBD_
 === Passing Arrays back and forth between !JavaScript library ===
   
   * !JsArray class in GWT
-  * JSArray in JSIO Library
+The JsArray class is a set of wrappers around the !JavaScript Array class.  There are separate class names for different primitive JavaScript types.  JsArray types will compile into native JavaScript arrays.  Note that in hosted mode, your code will have to cross the JSNI boundary every time it needs access the array, which may cause performance issues when debugging.
+
+  * JSArray in JSIO Library - If you are already using JSIO this class can help you manage migrating arrays between Java and JavaScript.
 
 _TBD_
 
