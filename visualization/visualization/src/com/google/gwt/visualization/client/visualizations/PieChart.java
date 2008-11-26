@@ -100,6 +100,11 @@ implements Selectable {
     return SelectionHelper.getSelection(this);
   }
 
+  /**
+   * Note: this method requires that the visualization already be added to the DOM.
+   * 
+   * @param sel selection to set on the PieChart.
+   */
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
