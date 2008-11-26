@@ -16,6 +16,7 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JsArrayInteger;
+import static com.google.gwt.visualization.client.AbstractDrawOptions.createJsArray;
 
 /**
  * This class represents the DataView.
@@ -25,7 +26,6 @@ import com.google.gwt.core.client.JsArrayInteger;
  *      DataView API Reference</a>
  */
 public class DataView extends AbstractDataTable {
-
   public static native DataView create(DataTable table) /*-{
     return new $wnd.google.visualization.DataView(table);
   }-*/;
@@ -42,14 +42,10 @@ public class DataView extends AbstractDataTable {
   }-*/;
   
   public final void setColumns(int[] columnIndices) {
-    JsArrayInteger array = (JsArrayInteger) createArray();
-    for (int i = 0; i < columnIndices.length; i++) {
-      array.set(i, columnIndices[i]);
-    }
-    setColumns(array);
+    setColumns(createJsArray(columnIndices));
   }
   
-  private native void setColumns(JsArrayInteger columnIndices) /*-{
+  public final native void setColumns(JsArrayInteger columnIndices) /*-{
     this.setColumns(columnIndices);
   }-*/;
 }

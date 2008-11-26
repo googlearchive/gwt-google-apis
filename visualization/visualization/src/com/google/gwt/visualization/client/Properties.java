@@ -17,6 +17,8 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+import java.util.Date;
+
 /**
  * Name/value map with additional properties.
  */
@@ -27,6 +29,10 @@ public class Properties extends JavaScriptObject {
   public final native boolean getBoolean(String name) /*-{
     return this[name];
   }-*/;
+  
+  public final Date getDate(String name) {
+    return new Date((int) getDateDouble(name));
+  }
 
   public final native double getDouble(String name) /*-{
     return this[name];
@@ -38,5 +44,9 @@ public class Properties extends JavaScriptObject {
   
   public final native String getString(String name) /*-{
     return this[name];
+  }-*/;
+
+  private final native double getDateDouble(String name) /*-{
+    return this[name].getTime();
   }-*/;
 }
