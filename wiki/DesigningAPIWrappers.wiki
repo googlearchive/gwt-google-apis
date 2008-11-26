@@ -77,10 +77,19 @@ _TBD_
 
 === Passing a callback function to a !JavaScript method ===
 
-  * Problem: Handling exceptions w/in callbacks in Hosted Mode
-  * JSIO JSFunction
+There are several considerations for implementing JavaScript callbacks in GWT:
+  1) Handling exceptions w/in callbacks in Hosted Mode requires that you wrap the invocation of the callback with a try/catch block and delegate exceptions to an UncaughtExceptionHandler.
+  1) Callback parameter signatures in !JavaScript may change and be backward compatible with !JavaScript client code, but not with the Java wrappers.
+
   * Using a JSNI Method containing a closure for the callback, then delegating to a Java static method.
+
+
+
+  * JSIO JSFunction - Very convenient for defining callbacks.
+
+
   
+
 _TBD_
 
 ==Loading Patterns==
