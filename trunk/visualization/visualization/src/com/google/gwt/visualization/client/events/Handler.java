@@ -15,8 +15,7 @@
  */
 package com.google.gwt.visualization.client.events;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.visualization.client.ExceptionHelper;
 import com.google.gwt.visualization.client.Properties;
 import com.google.gwt.visualization.client.visualizations.Visualization;
 
@@ -35,24 +34,14 @@ public abstract class Handler {
   }-*/;
 
   @SuppressWarnings("unused")
-  private static void onCallback(Handler eventHandler, Properties properties) {
-    UncaughtExceptionHandler exceptionHandler = 
-        GWT.getUncaughtExceptionHandler();
-    if (exceptionHandler != null) {
-      eventHandler.fireAndCatch(exceptionHandler, properties);
-    } else {
-      eventHandler.onEvent(properties);
-    }
+  private static void onCallback(final Handler handler, 
+                                 final Properties properties) {
+    ExceptionHelper.runProtected(new Runnable() {
+      public void run() {
+        handler.onEvent(properties);
+      }
+    });
   }
   
   protected abstract void onEvent(Properties properties);
-  
-  private void fireAndCatch(UncaughtExceptionHandler exceptionHandler, 
-                            Properties properties) {
-    try {
-      onEvent(properties);
-    } catch (Throwable e) {
-      exceptionHandler.onUncaughtException(e);
-    }
-  }
 }

@@ -128,16 +128,16 @@ public class Table extends Visualization<Table.Options>
   protected Table() {
   }
   
-  public final void addPageListener(PageHandler listener) {
-    Handler.addHandler(this, "page", listener);
+  public final void addPageHandler(PageHandler handler) {
+    Handler.addHandler(this, "page", handler);
   }
   
   public final void addSelectHandler(SelectHandler handler) {
     SelectionHelper.addSelectHandler(this, handler);
   }
 
-  public final void addSortListener(SortHandler listener) {
-    Handler.addHandler(this, "sort", listener);
+  public final void addSortHandler(SortHandler handler) {
+    Handler.addHandler(this, "sort", handler);
   }
 
   public final Selection getSelection() {

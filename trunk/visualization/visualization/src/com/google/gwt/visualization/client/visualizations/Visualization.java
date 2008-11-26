@@ -16,6 +16,8 @@
 package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 
@@ -26,6 +28,31 @@ import com.google.gwt.visualization.client.AbstractDrawOptions;
  */
 public class Visualization<E extends AbstractDrawOptions>   
 extends JavaScriptObject {
+  /**
+   * Create a div with the given width and height.
+   * 
+   * @param width The desired width.
+   * @param height The desierd height.
+   * @return An HTML <div> Element.
+   */
+  public static Element createDiv(int width, int height) {
+    Element result = DOM.createDiv();
+    setSize(result, width, height);
+    return result;
+  }
+  
+  /**
+   * Set the size of a div element by setting the style attribute.
+   * 
+   * @param div An HTML <div> Element.
+   * @param width The desired width.
+   * @param height The desierd height.
+   */
+  public static void setSize(Element div, int width, int height) {
+    div.getStyle().setPropertyPx("width", width);
+    div.getStyle().setPropertyPx("height", height);
+  }
+  
   protected Visualization() {
   }
 
