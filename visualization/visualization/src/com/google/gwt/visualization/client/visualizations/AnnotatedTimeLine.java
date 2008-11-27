@@ -61,7 +61,7 @@ extends Visualization<AnnotatedTimeLine.Options> {
           return "newRow";
         default:
           // unreachable
-          assert(false);
+          assert false;
       }
       // unreachable
       return null;

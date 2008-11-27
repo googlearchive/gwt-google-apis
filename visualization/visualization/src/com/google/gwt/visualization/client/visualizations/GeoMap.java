@@ -37,15 +37,15 @@ public class GeoMap extends Visualization<GeoMap.Options> {
    */
   public static enum DataMode {
     /**
-     * Color regions inside the map according to the number given.
-     */
-    REGIONS, 
-    
-    /**
      * Put markers on the map, changing size and color according to the
      * number given.
      */
-    MARKERS
+    MARKERS, 
+    
+    /**
+     * Color regions inside the map according to the number given.
+     */
+    REGIONS
   }
 
   /**
@@ -60,18 +60,18 @@ public class GeoMap extends Visualization<GeoMap.Options> {
     protected Options() {
     }
 
-    public final native void setOnLoadCallback(Runnable callback) /*-{
-      this.callback = function() {
-        @com.google.gwt.visualization.client.ExceptionHelper::runProtected(Ljava/lang/Runnable;)(callback);
-      }
-    }-*/;
-
     public final void setDataMode(DataMode mode) {
       setDataMode(mode.name().toLowerCase());
     }
 
     public final native void setHeight(int height) /*-{
       this.height = height + 'px';
+    }-*/;
+
+    public final native void setOnLoadCallback(Runnable callback) /*-{
+      this.callback = function() {
+        @com.google.gwt.visualization.client.ExceptionHelper::runProtected(Ljava/lang/Runnable;)(callback);
+      }
     }-*/;
 
     public final native void setRegion(String region) /*-{
