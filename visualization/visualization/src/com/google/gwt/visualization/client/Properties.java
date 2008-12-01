@@ -46,7 +46,7 @@ public class Properties extends JavaScriptObject {
     return this[name];
   }-*/;
 
-  private final native double getDateDouble(String name) /*-{
+  private native double getDateDouble(String name) /*-{
     return this[name].getTime();
   }-*/;
 }

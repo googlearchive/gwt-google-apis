@@ -23,16 +23,16 @@ import com.google.gwt.visualization.client.AbstractDrawOptions;
 
 /**
  * A Visualization object can draw a DataTable.
+ * 
  * @param <E> The options for drawing this visualization.
- *
  */
-public class Visualization<E extends AbstractDrawOptions>   
-extends JavaScriptObject {
+public class Visualization<E extends AbstractDrawOptions> extends
+    JavaScriptObject {
   /**
    * Create a div with the given width and height.
    * 
    * @param width The desired width.
-   * @param height The desierd height.
+   * @param height The desired height.
    * @return An HTML <div> Element.
    */
   public static Element createDiv(int width, int height) {
@@ -40,7 +40,7 @@ extends JavaScriptObject {
     setSize(result, width, height);
     return result;
   }
-  
+
   /**
    * Set the size of a div element by setting the style attribute.
    * 
@@ -52,7 +52,7 @@ extends JavaScriptObject {
     div.getStyle().setPropertyPx("width", width);
     div.getStyle().setPropertyPx("height", height);
   }
-  
+
   protected Visualization() {
   }
 
@@ -64,7 +64,7 @@ extends JavaScriptObject {
   public final native void draw(AbstractDataTable data) /*-{
     this.draw(data, {});
   }-*/;
-  
+
   /**
    * Draws the visualization.
    * 

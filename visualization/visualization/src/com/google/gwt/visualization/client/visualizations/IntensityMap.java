@@ -28,20 +28,15 @@ import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
- * A visualizations that highlights regions on a map, such as countries or 
- * states, based on the values provided for each region.  May be loaded by 
- * calling: 
- * <code>
- * google.load("visualization", "1", {packages:["intensitymap"]});
- * </code>
+ * A visualizations that highlights regions on a map, such as countries or
+ * states, based on the values provided for each region.
  * 
  * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/intensitymap.html">
- *      Intensity Map Visualization Reference</a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/intensitymap.html"
+ *      > Intensity Map Visualization Reference</a>
  */
-public class IntensityMap extends Visualization<IntensityMap.Options> 
-implements Selectable {
+public class IntensityMap extends Visualization<IntensityMap.Options> implements
+    Selectable {
   /**
    * Options for drawing the chart.
    * 
@@ -69,50 +64,52 @@ implements Selectable {
     public final void setReqion(Region region) {
       setRegion(region.name().toLowerCase());
     }
-    
+
     public final native void setShowOneTab(boolean show) /*-{
       this.showOneTab = show;
     }-*/;
-    
+
     public final void setSize(int width, int height) {
       setWidth(width);
       setHeight(height);
     }
-    
+
     public final native void setWidth(int width) /*-{
       this.width = width;
     }-*/;
-    
+
     private native void setRegion(String region) /*-{
       this.region = region;
     }-*/;
   }
 
   /**
-   * Argument to {@link IntensityMap.Options#setReqion(Region)} 
+   * Argument to {@link IntensityMap.Options#setReqion(Region)}
    */
   public static enum Region {
     AFRICA, ASIA, EUROPE, MIDDLE_EAST, SOUTH_AMERICA, USA, WORLD
   }
-  
+
+  public static final String PACKAGE = "intensitymap";
+
   public static native IntensityMap create(Element parent) /*-{
     return new $wnd.google.visualization.IntensityMap(parent);
   }-*/;
-  
+
   public static VisualizationWidget<IntensityMap, Options> createWidget() {
     Element div = DOM.createDiv();
     IntensityMap viz = create(div);
     return new VisualizationWidget<IntensityMap, Options>(div, viz);
   }
-  
-  public static VisualizationWidget<IntensityMap, Options> 
-  createWidget(AbstractDataTable data, Options options) {
+
+  public static VisualizationWidget<IntensityMap, Options> createWidget(
+      AbstractDataTable data, Options options) {
     Element div = DOM.createDiv();
     IntensityMap viz = create(div);
-    return new VisualizationWidget<IntensityMap, Options>(div, viz, data, 
+    return new VisualizationWidget<IntensityMap, Options>(div, viz, data,
         options);
   }
-  
+
   protected IntensityMap() {
   }
 

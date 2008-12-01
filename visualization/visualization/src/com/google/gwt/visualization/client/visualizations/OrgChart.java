@@ -27,18 +27,17 @@ import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
- * Organization Chart visualization. May be loaded by calling: 
- * <code>
+ * Organization Chart visualization. May be loaded by calling: <code>
  * google.load("visualization", "1", {packages:["orgchart"]});
  * </code>
  * 
  * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/orgchart.html">
- *      Organization Chart Visualization Reference</a>
+ * @see <a href=
+ *      "http://code.google.com/apis/visualization/documentation/gallery/orgchart.html"
+ *      > Organization Chart Visualization Reference</a>
  */
-public class OrgChart extends Visualization<OrgChart.Options> 
-implements Selectable {
+public class OrgChart extends Visualization<OrgChart.Options> implements
+    Selectable {
   /**
    * Options for drawing the chart.
    * 
@@ -58,12 +57,12 @@ implements Selectable {
     public final void setSize(Size size) {
       setSize(size.name().toLowerCase());
     }
-    
+
     private native void setSize(String size) /*-{
       this.size = size;
     }-*/;
   }
-  
+
   /**
    * Argument to {@link OrgChart.Options#setSize(Size)}
    */
@@ -71,24 +70,25 @@ implements Selectable {
     LARGE, MEDIUM, SMALL
   }
 
+  public static final String PACKAGE = "orgchart";
+
   public static native OrgChart create(Element parent) /*-{
     return new $wnd.google.visualization.OrgChart(parent);
   }-*/;
-  
+
   public static VisualizationWidget<OrgChart, Options> createWidget() {
     Element div = DOM.createDiv();
     OrgChart viz = create(div);
     return new VisualizationWidget<OrgChart, Options>(div, viz);
   }
-  
-  public static VisualizationWidget<OrgChart, Options> 
-  createWidget(AbstractDataTable data, Options options) {
+
+  public static VisualizationWidget<OrgChart, Options> createWidget(
+      AbstractDataTable data, Options options) {
     Element div = DOM.createDiv();
     OrgChart viz = create(div);
-    return new VisualizationWidget<OrgChart, Options>(div, viz, data, 
-        options);
+    return new VisualizationWidget<OrgChart, Options>(div, viz, data, options);
   }
-  
+
   protected OrgChart() {
   }
 

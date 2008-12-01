@@ -29,24 +29,20 @@ import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
  * 
- * Classic Pie Chart visualization.   May be loaded by calling: 
- * <code>
- * google.load("visualization", "1", {packages:["piechart"]});
- * </code>
+ * Classic Pie Chart visualization.
  * 
- * 
- * @see <a href= 
+ * @see <a href=
  *      "http://code.google.com/apis/visualization/documentation/gallery/piechart.html"
  *      >Pie Chart Visualization Reference</a>
  */
-public class PieChart extends Visualization<PieChart.Options> 
-implements Selectable {
+public class PieChart extends Visualization<PieChart.Options> implements
+    Selectable {
   /**
    * Options for drawing the pie chart.
    * 
    */
   public static class Options extends CommonOptions {
-    
+
     public static Options create() {
       return JavaScriptObject.createObject().cast();
     }
@@ -58,35 +54,35 @@ implements Selectable {
       this.is3D = enable3D;
     }-*/;
   }
-  
+
   /**
    * Specifies where to put the legend in the visualization.
    */
   public static class PieLegendPosition extends LegendPosition {
-    public static final PieLegendPosition LABEL = 
-      new PieLegendPosition("label");
-    
+    public static final PieLegendPosition LABEL = new PieLegendPosition("label");
+
     protected PieLegendPosition(String name) {
       super(name);
     }
   }
 
+  public static final String PACKAGE = "piechart";
+
   public static native PieChart create(Element parent) /*-{
     return new $wnd.google.visualization.PieChart(parent);
   }-*/;
-  
+
   public static VisualizationWidget<PieChart, Options> createWidget() {
     Element div = DOM.createDiv();
     PieChart viz = create(div);
     return new VisualizationWidget<PieChart, Options>(div, viz);
   }
-  
-  public static VisualizationWidget<PieChart, Options> 
-  createWidget(AbstractDataTable data, Options options) {
+
+  public static VisualizationWidget<PieChart, Options> createWidget(
+      AbstractDataTable data, Options options) {
     Element div = DOM.createDiv();
     PieChart viz = create(div);
-    return new VisualizationWidget<PieChart, Options>(div, viz, data, 
-        options);
+    return new VisualizationWidget<PieChart, Options>(div, viz, data, options);
   }
 
   protected PieChart() {
@@ -101,7 +97,8 @@ implements Selectable {
   }
 
   /**
-   * Note: this method requires that the visualization already be added to the DOM.
+   * Note: this method requires that the visualization already be added to the
+   * DOM.
    * 
    * @param sel selection to set on the PieChart.
    */

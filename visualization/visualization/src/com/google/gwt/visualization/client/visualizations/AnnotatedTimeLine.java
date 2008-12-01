@@ -34,10 +34,9 @@ import java.sql.Date;
  * 
  * 
  * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html"
- *      > Annotated Time Line Visualization Reference</a>
+ * > Annotated Timeline Visualization Reference. </a>
  */
-public class AnnotatedTimeLine 
-extends Visualization<AnnotatedTimeLine.Options> {
+public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> {
   /**
    * Where to put the colored legend with respect to the date.
    */
@@ -45,8 +44,8 @@ extends Visualization<AnnotatedTimeLine.Options> {
     /**
      * Put the colored legend on the same row as the date.
      */
-    SAME_ROW, 
-    
+    SAME_ROW,
+
     /**
      * Put the colored legend on a new row.
      */
@@ -172,29 +171,29 @@ extends Visualization<AnnotatedTimeLine.Options> {
   /**
    * Scale type for the timeline.
    * 
-   * When ALLFIXED or ALLMAXIMIZE are used, it makes sense to set the 
-   * scaleColumns option as well, otherwise some of the series will be 
-   * displayed in a scale that is not the displayed one.
+   * When ALLFIXED or ALLMAXIMIZE are used, it makes sense to set the
+   * scaleColumns option as well, otherwise some of the series will be displayed
+   * in a scale that is not the displayed one.
    */
   public static enum ScaleType {
     /**
-     * Set the range of the values axis to be from 0 to the maximal value
-     * in the input DataTable.
+     * Set the range of the values axis to be from 0 to the maximal value in the
+     * input DataTable.
      */
-    FIXED, 
-    
+    FIXED,
+
     /**
      * Set the range of the values axis to be from the minimal value in the
      * input DataTable to the maximal value in the input DataTable.
      */
-    MAXIMIZE, 
-    
+    MAXIMIZE,
+
     /**
      * Set the range of the values axis to be from 0 to the maximal value in
      * each series.
      */
-    ALLFIXED, 
-    
+    ALLFIXED,
+
     /**
      * Set the range of the values axis to be from the minimal value of each
      * series to the maximal value of each series.
@@ -211,21 +210,22 @@ extends Visualization<AnnotatedTimeLine.Options> {
      * Makes the application hide everything behind it on the page.
      */
     OPAQUE,
-    
+
     /**
-     * Plays the application in its own rectangular window on a web page.
-     * WINDOW indicates that the Flash application has no interaction with HTML
-     * layers and is always the topmost item.
+     * Plays the application in its own rectangular window on a web page. WINDOW
+     * indicates that the Flash application has no interaction with HTML layers
+     * and is always the topmost item.
      */
-    WINDOW, 
-    
+    WINDOW,
+
     /**
-     * Makes the background of the HTML page show through all the
-     * transparent portions of the application and can slow animation 
-     * performance.
+     * Makes the background of the HTML page show through all the transparent
+     * portions of the application and can slow animation performance.
      */
     TRANSPARENT
   }
+
+  public static final String PACKAGE = "annotatedtimeline";
 
   public static native AnnotatedTimeLine create(Element parent) /*-{
     return new $wnd.google.visualization.AnnotatedTimeLine(parent);
@@ -248,7 +248,7 @@ extends Visualization<AnnotatedTimeLine.Options> {
 
   protected AnnotatedTimeLine() {
   }
-  
+
   public final void addRangeChangeHandler(RangeChangeHandler handler) {
     Handler.addHandler(this, "rangeChange", handler);
   }

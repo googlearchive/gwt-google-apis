@@ -28,18 +28,15 @@ import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
  * 
- * Area Chart visualization.  Like a line chart with the area under the line
- * filled in.  May be loaded by calling: 
- * <code>
- * google.load("visualization", "1", {packages:["areachart"]});
- * </code>
- * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/areachart.html">
- *      Area Chart Visualization Reference</a>
+ * Area Chart visualization. Like a line chart with the area under the line
+ * filled in. 
+ *
+ * @see <a href=
+ *      "http://code.google.com/apis/visualization/documentation/gallery/areachart.html"
+ *      >Area Chart Visualization Reference</a>
  */
-public class AreaChart extends Visualization<AreaChart.Options> 
-    implements Selectable {
+public class AreaChart extends Visualization<AreaChart.Options> implements
+    Selectable {
   /**
    * Options for drawing the area chart.
    * 
@@ -51,41 +48,42 @@ public class AreaChart extends Visualization<AreaChart.Options>
 
     protected Options() {
     }
-    
+
     public final native void setLineSize(int size) /*-{
       this.lineSize = size;
     }-*/;
-    
+
     public final native void setPointSize(int size) /*-{
       this.pointSize = size;
     }-*/;
-    
+
     public final native void setStacked(boolean stacked) /*-{
       this.isStacked = stacked;
     }-*/;
   }
 
+  public static final String PACKAGE = "areachart";
+
   public static native AreaChart create(Element parent) /*-{
     return new $wnd.google.visualization.AreaChart(parent);
   }-*/;
-  
-  public static VisualizationWidget<AreaChart, Options> 
-  createWidget(AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    AreaChart viz = create(div);
-    return new VisualizationWidget<AreaChart, Options>(div, viz, data, 
-        options);
-  }
-  
+
   public static VisualizationWidget<AreaChart, Options> createWidget() {
     Element div = DOM.createDiv();
     AreaChart viz = create(div);
     return new VisualizationWidget<AreaChart, Options>(div, viz);
   }
-  
+
+  public static VisualizationWidget<AreaChart, Options> createWidget(
+      AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    AreaChart viz = create(div);
+    return new VisualizationWidget<AreaChart, Options>(div, viz, data, options);
+  }
+
   protected AreaChart() {
   }
-  
+
   public final void addSelectHandler(SelectHandler handler) {
     SelectionHelper.addSelectHandler(this, handler);
   }
