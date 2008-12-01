@@ -24,9 +24,6 @@ import com.google.gwt.visualization.client.VisualizationWidget;
 /**
  * Geomap visualization. Kind of like a cross between Map and IntensityMap.
  * 
- * You need to load the Google Maps API with a valid Maps key in order to use
- * this visualization. 
- * 
  * @see <a href=
  *      "http://code.google.com/apis/visualization/documentation/gallery/geomap.html"
  *      >GeoMap Visualization Reference</a>
@@ -37,11 +34,11 @@ public class GeoMap extends Visualization<GeoMap.Options> {
    */
   public static enum DataMode {
     /**
-     * Put markers on the map, changing size and color according to the
-     * number given.
+     * Put markers on the map, changing size and color according to the number
+     * given.
      */
-    MARKERS, 
-    
+    MARKERS,
+
     /**
      * Color regions inside the map according to the number given.
      */
@@ -66,7 +63,7 @@ public class GeoMap extends Visualization<GeoMap.Options> {
 
     public final native void setHeight(int height) /*-{
       this.height = height + 'px';
-    }-*/;
+     }-*/;
 
     public final native void setOnLoadCallback(Runnable callback) /*-{
       this.callback = function() {
@@ -96,6 +93,8 @@ public class GeoMap extends Visualization<GeoMap.Options> {
     }-*/;
   }
 
+  public static final String PACKAGE = "geomap";
+
   public static native GeoMap create(Element parent) /*-{
     return new $wnd.google.visualization.GeoMap(parent);
   }-*/;
@@ -113,7 +112,7 @@ public class GeoMap extends Visualization<GeoMap.Options> {
     GeoMap viz = create(div);
     return new VisualizationWidget<GeoMap, Options>(div, viz);
   }
-
+  
   protected GeoMap() {
   }
 }

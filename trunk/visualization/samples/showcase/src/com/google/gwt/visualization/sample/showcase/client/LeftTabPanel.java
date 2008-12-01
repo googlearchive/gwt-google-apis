@@ -43,9 +43,13 @@ public class LeftTabPanel extends Composite {
     Widget getWidget();
   }
   
-  public static void setWidget(SimplePanel simple, WidgetProvider provider) {
+  private static void setWidget(SimplePanel simple, WidgetProvider provider) {
     simple.clear();
     simple.add(provider.getWidget());
+  }
+  
+  public void setWidget(WidgetProvider provider) {
+    setWidget(right, provider);
   }
   
   private HorizontalPanel main = new HorizontalPanel();
@@ -86,6 +90,5 @@ public class LeftTabPanel extends Composite {
    cogs.put(title, cog);
     TreeItem item = new TreeItem(title);
     leftTree.addItem(item);
-    setWidget(right, cog);
   }
 }

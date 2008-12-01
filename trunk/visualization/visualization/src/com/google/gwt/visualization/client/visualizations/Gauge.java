@@ -24,92 +24,88 @@ import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.VisualizationWidget;
 
 /**
- * Visualization showing a gauge with a dial for each value. May be loaded by 
- * calling: 
- * <code>
- * google.load("visualization", "1", {packages:["gauge"]});
- * </code>
+ * Visualization showing a gauge with a dial for each value.
  * 
- * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/gauge.html">
- *      Gauge Visualization Reference</a>
+ * @see <a href=
+ *      "http://code.google.com/apis/visualization/documentation/gallery/gauge.html"
+ *      > Gauge Visualization Reference</a>
  */
 public class Gauge extends Visualization<Gauge.Options> {
   /**
    * Options for drawing the chart.
    * 
    */
-  public static class Options extends AbstractDrawOptions {    
+  public static class Options extends AbstractDrawOptions {
     public static Options create() {
       return JavaScriptObject.createObject().cast();
     }
 
     protected Options() {
     }
-    
+
     public final native void setGaugeRange(int min, int max) /*-{
       this.min = min;
       this.max = max;
     }-*/;
-    
+
     public final native void setGreenRange(int from, int to) /*-{
       this.greenFrom = from;
       this.greenTo = to;
     }-*/;
-    
+
     public final native void setHeight(int height) /*-{
       this.height = height;
     }-*/;
-    
+
     public final void setMajorTicks(String... labels) {
       setMajorTicks(createJsArray(labels));
     }
-    
+
     public final native void setMinorTicks(int numberOfTicks) /*-{
       this.minorTicks = numberOfTicks;
-    }-*/;
-    
+     }-*/;
+
     public final native void setRedRange(int from, int to) /*-{
       this.redFrom = from;
       this.redTo = to;
     }-*/;
-    
+
     public final void setSize(int width, int height) {
       setWidth(width);
       setHeight(height);
     }
-    
+
     public final native void setWidth(int width) /*-{
       this.width = width;
     }-*/;
-    
+
     public final native void setYellowRange(int from, int to) /*-{
       this.yellowFrom = from;
       this.yellowTo = to;
     }-*/;
-    
+
     private native void setMajorTicks(JsArrayString labels) /*-{
       this.majorTicks = labels;
-    }-*/; 
+    }-*/;
   }
+
+  public static final String PACKAGE = "gauge";
 
   public static native Gauge create(Element parent) /*-{
     return new $wnd.google.visualization.Gauge(parent);
   }-*/;
-  
-  public static VisualizationWidget<Gauge, Options> 
-  createWidget(AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    Gauge viz = create(div);
-    return new VisualizationWidget<Gauge, Options>(div, viz, data, 
-        options);
-  }
-  
+
   public static VisualizationWidget<Gauge, Options> createWidget() {
     Element div = DOM.createDiv();
     Gauge viz = create(div);
     return new VisualizationWidget<Gauge, Options>(div, viz);
+  }
+
+  public static VisualizationWidget<Gauge, Options> createWidget(
+      AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    Gauge viz = create(div);
+    return new VisualizationWidget<Gauge, Options>(div, viz, data, options);
   }
 
   protected Gauge() {

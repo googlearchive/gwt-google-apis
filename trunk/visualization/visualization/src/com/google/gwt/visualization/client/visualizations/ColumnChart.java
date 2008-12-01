@@ -28,23 +28,18 @@ import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
  * 
- * Visualization displaying vertical bars for the values.  May be loaded by 
- * calling: 
- * <code>
- * google.load("visualization", "1", {packages:["columnchart"]});
- * </code>
+ * Visualization displaying vertical bars for the values.
  * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/columnchart.html">
- *      Column Chart Visualization Reference</a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/columnchart.html"
+ *      > Column Chart Visualization Reference</a>
  */
-public class ColumnChart extends Visualization<ColumnChart.Options> 
-implements Selectable {
+public class ColumnChart extends Visualization<ColumnChart.Options> implements
+    Selectable {
   /**
    * Options for drawing the chart.
    * 
    */
-  public static class Options extends CommonChartOptions  {
+  public static class Options extends CommonChartOptions {
     public static Options create() {
       return JavaScriptObject.createObject().cast();
     }
@@ -55,30 +50,32 @@ implements Selectable {
     public final native void set3D(boolean enable3D) /*-{
       this.is3D = enable3D;
     }-*/;
-    
+
     public final native void setStacked(boolean stacked) /*-{
       this.isStacked = stacked;
     }-*/;
   }
-  
+
+  public static final String PACKAGE = "columnchart";
+
   public static native ColumnChart create(Element parent) /*-{
     return new $wnd.google.visualization.ColumnChart(parent);
   }-*/;
-  
-  public static VisualizationWidget<ColumnChart, Options> 
-  createWidget(AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    ColumnChart viz = create(div);
-    return new VisualizationWidget<ColumnChart, Options>(div, viz, data, 
-        options);
-  }
-  
+
   public static VisualizationWidget<ColumnChart, Options> createWidget() {
     Element div = DOM.createDiv();
     ColumnChart viz = create(div);
     return new VisualizationWidget<ColumnChart, Options>(div, viz);
   }
-  
+
+  public static VisualizationWidget<ColumnChart, Options> createWidget(
+      AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    ColumnChart viz = create(div);
+    return new VisualizationWidget<ColumnChart, Options>(div, viz, data,
+        options);
+  }
+
   protected ColumnChart() {
   }
 

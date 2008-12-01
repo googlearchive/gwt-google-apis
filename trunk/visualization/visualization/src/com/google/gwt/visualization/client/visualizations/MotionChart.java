@@ -23,19 +23,12 @@ import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.VisualizationWidget;
 
 /**
- * Motion Chart visualization. Note that this chart does not work when loading 
- * the HTML from a local file. It works only when loading the HTML from a web 
+ * Motion Chart visualization. Note that this chart does not work when loading
+ * the HTML from a local file. It works only when loading the HTML from a web
  * server.
  * 
- * The visualization package name is "motionchart", as in:
- * <code>
- * google.load("visualization", "1", {packages:["motionchart"]});
- * </code>
- * 
- * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/motionchart.html">
- *      Motion Chart Visualization Reference</a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/motionchart.html"
+ *      > Motion Chart Visualization Reference</a>
  */
 public class MotionChart extends Visualization<MotionChart.Options> {
   /**
@@ -64,24 +57,26 @@ public class MotionChart extends Visualization<MotionChart.Options> {
     }-*/;
   }
 
+  public static final String PACKAGE = "motionchart";
+
   public static native MotionChart create(Element parent) /*-{
     return new $wnd.google.visualization.MotionChart(parent);
   }-*/;
-  
-  public static VisualizationWidget<MotionChart, Options> 
-  createWidget(AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    MotionChart viz = create(div);
-    return new VisualizationWidget<MotionChart, Options>(div, viz, data, 
-        options);
-  }
-  
+
   public static VisualizationWidget<MotionChart, Options> createWidget() {
     Element div = DOM.createDiv();
     MotionChart viz = create(div);
     return new VisualizationWidget<MotionChart, Options>(div, viz);
   }
-  
+
+  public static VisualizationWidget<MotionChart, Options> createWidget(
+      AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    MotionChart viz = create(div);
+    return new VisualizationWidget<MotionChart, Options>(div, viz, data,
+        options);
+  }
+
   protected MotionChart() {
   }
 }

@@ -18,8 +18,8 @@ package com.google.gwt.visualization.sample.showcase.client;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
-import com.google.gwt.visualization.client.visualizations.Map;
-import com.google.gwt.visualization.client.visualizations.Map.Options;
+import com.google.gwt.visualization.client.visualizations.MapVisualization;
+import com.google.gwt.visualization.client.visualizations.MapVisualization.Options;
 
 /**
  * Demo for Map visualization.
@@ -32,7 +32,7 @@ public class MapDemo implements LeftTabPanel.WidgetProvider {
     options.setEnableScrollWheel(true);
     options.setLineColor("pink");
     options.setLineWidth(5);
-    options.setMapType(Map.Type.HYBRID);
+    options.setMapType(MapVisualization.Type.HYBRID);
     options.setShowLine(true);
     options.setShowTip(true);
 
@@ -54,7 +54,7 @@ public class MapDemo implements LeftTabPanel.WidgetProvider {
     data.setCell(3, 1, -122.1731);
     data.setCell(3, 2, "Shopping");
     
-    widget = Map.createWidget(data, options, 400, 300);
+    widget = MapVisualization.createWidget(data, options, 400, 300);
   }
 
   public Widget getWidget() {

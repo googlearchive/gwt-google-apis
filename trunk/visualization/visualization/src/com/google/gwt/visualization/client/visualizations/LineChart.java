@@ -27,19 +27,16 @@ import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
- * Visualization that plots the data points on a coordinate plane and 
- * draws a line between the points.  May be loaded by calling:
- * <code>
- * google.load("visualization", "1", {packages:["linechart"]});
- * </code>
+ * Visualization that plots the data points on a coordinate plane and draws a
+ * line between the points. 
  * 
  * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/linechart.html">
- *      Line Chart Visualization Reference</a>
+ * @see <a href=
+ *      "http://code.google.com/apis/visualization/documentation/gallery/linechart.html"
+ *      > Line Chart Visualization Reference</a>
  */
-public class LineChart extends Visualization<LineChart.Options> 
-    implements Selectable {
+public class LineChart extends Visualization<LineChart.Options> implements
+    Selectable {
   /**
    * Options for drawing the chart.
    * 
@@ -51,41 +48,42 @@ public class LineChart extends Visualization<LineChart.Options>
 
     protected Options() {
     }
-    
+
     public final native void setLineSize(int size) /*-{
       this.lineSize = size;
     }-*/;
-    
+
     public final native void setPointSize(int size) /*-{
       this.pointSize = size;
     }-*/;
-    
+
     public final native void setSmoothLine(boolean smooth) /*-{
       this.smoothLine = smooth;
     }-*/;
   }
 
+  public static final String PACKAGE = "linechart";
+
   public static native LineChart create(Element parent) /*-{
     return new $wnd.google.visualization.LineChart(parent);
   }-*/;
-  
-  public static VisualizationWidget<LineChart, Options> 
-  createWidget(AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    LineChart viz = create(div);
-    return new VisualizationWidget<LineChart, Options>(div, viz, data, 
-        options);
-  }
-  
+
   public static VisualizationWidget<LineChart, Options> createWidget() {
     Element div = DOM.createDiv();
     LineChart viz = create(div);
     return new VisualizationWidget<LineChart, Options>(div, viz);
   }
-  
+
+  public static VisualizationWidget<LineChart, Options> createWidget(
+      AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    LineChart viz = create(div);
+    return new VisualizationWidget<LineChart, Options>(div, viz, data, options);
+  }
+
   protected LineChart() {
   }
-  
+
   public final void addSelectHandler(SelectHandler handler) {
     SelectionHelper.addSelectHandler(this, handler);
   }

@@ -28,19 +28,14 @@ import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
  * 
- * Line Chart visualization.  Like "connect the dots" without connecting the
- * dots.  May be loaded by calling: 
- * <code>
- * google.load("visualization", "1", {packages:["scatterchart"]});
- * </code>
+ * Scatter Chart visualization. Like "connect the dots" without connecting the
+ * dots. 
  * 
- * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/scatterchart.html">
- *      Scatter Chart Visualization Reference</a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/scatterchart.html"
+ *      > Scatter Chart Visualization Reference</a>
  */
-public class ScatterChart extends Visualization<ScatterChart.Options> 
-    implements Selectable {
+public class ScatterChart extends Visualization<ScatterChart.Options> implements
+    Selectable {
   /**
    * Options for drawing the chart.
    * 
@@ -52,37 +47,39 @@ public class ScatterChart extends Visualization<ScatterChart.Options>
 
     protected Options() {
     }
-    
+
     public final native void setLineSize(int size) /*-{
       this.lineSize = size;
     }-*/;
-    
+
     public final native void setPointSize(int size) /*-{
       this.pointSize = size;
     }-*/;
   }
 
+  public static final String PACKAGE = "scatterchart";
+
   public static native ScatterChart create(Element parent) /*-{
     return new $wnd.google.visualization.ScatterChart(parent);
   }-*/;
-  
-  public static VisualizationWidget<ScatterChart, Options> 
-  createWidget(AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    ScatterChart viz = create(div);
-    return new VisualizationWidget<ScatterChart, Options>(div, viz, data, 
-        options);
-  }
-  
+
   public static VisualizationWidget<ScatterChart, Options> createWidget() {
     Element div = DOM.createDiv();
     ScatterChart viz = create(div);
     return new VisualizationWidget<ScatterChart, Options>(div, viz);
   }
-  
+
+  public static VisualizationWidget<ScatterChart, Options> createWidget(
+      AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    ScatterChart viz = create(div);
+    return new VisualizationWidget<ScatterChart, Options>(div, viz, data,
+        options);
+  }
+
   protected ScatterChart() {
   }
-  
+
   public final void addSelectHandler(SelectHandler handler) {
     SelectionHelper.addSelectHandler(this, handler);
   }

@@ -31,30 +31,26 @@ import com.google.gwt.visualization.client.events.SortHandler;
 
 /**
  * 
- * Table visualization.  May be loaded by calling: 
- * <code>
- * google.load("visualization", "1", {packages:["table"]});
- * </code>
+ * Table visualization. 
  * 
- * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/table.html">
- *      Table Visualization Reference</a>
+ * @see <a href=
+ *      "http://code.google.com/apis/visualization/documentation/gallery/table.html"
+ *      > Table Visualization Reference</a>
  */
-public class Table extends Visualization<Table.Options> 
-    implements Selectable {
+public class Table extends Visualization<Table.Options> implements Selectable {
 
   /**
    * Options for drawing the table visualization.
    * 
    */
   public static class Options extends AbstractDrawOptions {
-    
+
     /**
      * A parameter passed to several of the setters.
      */
     public static enum Policy {
       DISABLE, ENABLE, EVENT;
-      
+
       @Override
       public String toString() {
         switch (this) {
@@ -70,14 +66,14 @@ public class Table extends Visualization<Table.Options>
         }
       }
     }
-    
+
     public static final Options create() {
       return JavaScriptObject.createObject().cast();
     }
 
     protected Options() {
     }
-    
+
     public final native void setAllowHtml(boolean allowHtml) /*-{
       this.allowHtml = allowHtml;
     }-*/;
@@ -85,11 +81,11 @@ public class Table extends Visualization<Table.Options>
     public final void setPage(Policy policy) {
       setPage(policy.toString());
     }
-    
+
     public final native void setPageSize(int pageSize) /*-{
       this.pageSize = pageSize;
     }-*/;
-    
+
     public final native void setShowRowNumber(boolean showRowNumber) /*-{
       this.showRowNumber = showRowNumber;
     }-*/;
@@ -97,41 +93,42 @@ public class Table extends Visualization<Table.Options>
     public final void setSort(Policy policy) {
       setSort(policy.toString());
     }
-    
+
     private native void setPage(String page) /*-{
       this.page = page;
     }-*/;
-    
+
     private native void setSort(String sort) /*-{
       this.sort = sort;
     }-*/;
   }
-  
+
+  public static final String PACKAGE = "table";
+
   public static native Table create(Element parent) /*-{
     return new $wnd.google.visualization.Table(parent);
   }-*/;
-  
-  public static VisualizationWidget<Table, Options> 
-  createWidget(AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    Table viz = create(div);
-    return new VisualizationWidget<Table, Options>(div, viz, data, 
-        options);
-  }
-  
+
   public static VisualizationWidget<Table, Options> createWidget() {
     Element div = DOM.createDiv();
     Table viz = create(div);
     return new VisualizationWidget<Table, Options>(div, viz);
   }
 
+  public static VisualizationWidget<Table, Options> createWidget(
+      AbstractDataTable data, Options options) {
+    Element div = DOM.createDiv();
+    Table viz = create(div);
+    return new VisualizationWidget<Table, Options>(div, viz, data, options);
+  }
+
   protected Table() {
   }
-  
+
   public final void addPageHandler(PageHandler handler) {
     Handler.addHandler(this, "page", handler);
   }
-  
+
   public final void addSelectHandler(SelectHandler handler) {
     SelectionHelper.addSelectHandler(this, handler);
   }

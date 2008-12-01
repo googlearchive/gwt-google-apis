@@ -36,7 +36,7 @@ import com.google.gwt.visualization.client.events.SelectHandler;
  *      "http://code.google.com/apis/visualization/documentation/gallery/map.html"
  *      >Map Visualization Reference</a>
  */
-public class Map extends Visualization<Map.Options> implements Selectable {
+public class MapVisualization extends Visualization<MapVisualization.Options> implements Selectable {
   /**
    * Options for drawing the chart.
    * 
@@ -85,25 +85,27 @@ public class Map extends Visualization<Map.Options> implements Selectable {
     NORMAL, SATELLITE, HYBRID
   }
 
-  public static native Map create(Element parent) /*-{
+  public static final String PACKAGE = "map";
+
+  public static native MapVisualization create(Element parent) /*-{
     return new $wnd.google.visualization.Map(parent);
   }-*/;
 
-  public static VisualizationWidget<Map, Options> createWidget(
+  public static VisualizationWidget<MapVisualization, Options> createWidget(
       AbstractDataTable data, Options options, int width, int height) {
     Element div = createDiv(width, height);
-    Map viz = create(div);
-    return new VisualizationWidget<Map, Options>(div, viz, data, options);
+    MapVisualization viz = create(div);
+    return new VisualizationWidget<MapVisualization, Options>(div, viz, data, options);
   }
 
-  public static VisualizationWidget<Map, Options> createWidget(int width,
+  public static VisualizationWidget<MapVisualization, Options> createWidget(int width,
       int height) {
     Element div = createDiv(width, height);
-    Map viz = create(div);
-    return new VisualizationWidget<Map, Options>(div, viz);
+    MapVisualization viz = create(div);
+    return new VisualizationWidget<MapVisualization, Options>(div, viz);
   }
 
-  protected Map() {
+  protected MapVisualization() {
   }
 
   public final void addSelectHandler(SelectHandler handler) {

@@ -19,8 +19,23 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.visualization.client.AjaxLoader;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
+import com.google.gwt.visualization.client.visualizations.AreaChart;
+import com.google.gwt.visualization.client.visualizations.BarChart;
+import com.google.gwt.visualization.client.visualizations.ColumnChart;
+import com.google.gwt.visualization.client.visualizations.Gauge;
+import com.google.gwt.visualization.client.visualizations.GeoMap;
+import com.google.gwt.visualization.client.visualizations.IntensityMap;
+import com.google.gwt.visualization.client.visualizations.LineChart;
+import com.google.gwt.visualization.client.visualizations.MapVisualization;
+import com.google.gwt.visualization.client.visualizations.MotionChart;
+import com.google.gwt.visualization.client.visualizations.OrgChart;
+import com.google.gwt.visualization.client.visualizations.PieChart;
+import com.google.gwt.visualization.client.visualizations.ScatterChart;
+import com.google.gwt.visualization.client.visualizations.Table;
 
 
 /**
@@ -28,34 +43,41 @@ import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
  */
 class Showcase implements EntryPoint {
   public void onModuleLoad() {
-    final VerticalPanel vp  = new VerticalPanel();
-    vp.getElement().getStyle().setPropertyPx("margin", 15); 
-    RootPanel.get().add(vp);
-    vp.add(new HTML("The following visualizations are included in the GWT " +
-    		"Visualization API in the package " +
-    		"<tt>com.google.gwt.visualization.client.visualizations</tt>.  " +
-    		"For a full listing of visualizations available in GWT, see <a href=" + 
-    		'"' + 
-    		"http://code.google.com/apis/visualization/documentation/gallery.html" + 
-    		'"' + 
-    		">the Google Visualization API</a>."));
-    LeftTabPanel tabby = new LeftTabPanel();
-    vp.add(tabby);
-    tabby.add(new AnnotatedDemo(), "AnnotatedTimeLine");
-    tabby.add(new AreaDemo(), "AreaChart");
-    tabby.add(new BarDemo(), "BarChart");
-    tabby.add(new ColumnDemo(), "ColumnChart");
-    tabby.add(new GaugeDemo(), "Gauge");
-    tabby.add(new IntensityDemo(), "IntensityMap");
-    tabby.add(new LineDemo(), "LineChart");
-    tabby.add(new MotionDemo(), "MotionChart");
-    tabby.add(new OrgDemo(), "OrgChart");
-    tabby.add(new PieDemo(), "PieChart");
-    tabby.add(new ScatterDemo(), "ScatterChart");
-    tabby.add(new TableDemo(), "Table");
-    // TODO: add map demos
-    // tabby.add(new GeoDemo(), "Geo Map");
-    // tabby.add(new MapDemo(), "Map");
+    AjaxLoader.loadVisualizationApi(new Runnable(){
+      public void run() {
+        final VerticalPanel vp = new VerticalPanel();
+        vp.getElement().getStyle().setPropertyPx("margin", 15);
+        RootPanel.get().add(vp);
+        vp.add(new HTML(
+            "The following visualizations are included in the GWT "
+                + "Visualization API in the package "
+                + "<tt>com.google.gwt.visualization.client.visualizations</tt>.  "
+                + "For a full listing of visualizations available in GWT, see <a href="
+                + '"'
+                + "http://code.google.com/apis/visualization/documentation/gallery.html"
+                + '"' + ">the Google Visualization API</a>."));
+        LeftTabPanel tabby = new LeftTabPanel();
+        vp.add(tabby);
+        AnnotatedDemo annotatedWidget = new AnnotatedDemo();
+        tabby.add(annotatedWidget, "AnnotatedTimeLine");
+        tabby.add(new AreaDemo(), "AreaChart");
+        tabby.add(new BarDemo(), "BarChart");
+        tabby.add(new ColumnDemo(), "ColumnChart");
+        tabby.add(new GaugeDemo(), "Gauge");
+        tabby.add(new GeoDemo(), "Geo Map");
+        tabby.add(new IntensityDemo(), "IntensityMap");
+        tabby.add(new LineDemo(), "LineChart");
+        tabby.add(new MapDemo(), "Map");
+        tabby.add(new MotionDemo(), "MotionChart");
+        tabby.add(new OrgDemo(), "OrgChart");
+        tabby.add(new PieDemo(), "PieChart");
+        tabby.add(new ScatterDemo(), "ScatterChart");
+        tabby.add(new TableDemo(), "Table");
+        tabby.setWidget(annotatedWidget);
+      }}, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE, 
+      ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE, IntensityMap.PACKAGE,
+      LineChart.PACKAGE, MapVisualization.PACKAGE, MotionChart.PACKAGE, OrgChart.PACKAGE, 
+      PieChart.PACKAGE, ScatterChart.PACKAGE, Table.PACKAGE);
   }
 
   static DataTable getDailyActivities() {
