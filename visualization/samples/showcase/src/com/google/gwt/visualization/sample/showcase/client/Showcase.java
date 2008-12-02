@@ -42,8 +42,47 @@ import com.google.gwt.visualization.client.visualizations.Table;
  * Google Visualization API in GWT demo.
  */
 class Showcase implements EntryPoint {
+  static DataTable getCompanyPerformance() {
+    DataTable data = DataTable.create();
+    data.addColumn(ColumnType.STRING, "Year");
+    data.addColumn(ColumnType.NUMBER, "Sales");
+    data.addColumn(ColumnType.NUMBER, "Expenses");
+    data.addRows(4);
+    data.setValue(0, 0, "2004");
+    data.setValue(0, 1, 1000);
+    data.setValue(0, 2, 400);
+    data.setValue(1, 0, "2005");
+    data.setValue(1, 1, 1170);
+    data.setValue(1, 2, 460);
+    data.setValue(2, 0, "2006");
+    data.setValue(2, 1, 660);
+    data.setValue(2, 2, 1120);
+    data.setValue(3, 0, "2007");
+    data.setValue(3, 1, 1030);
+    data.setValue(3, 2, 540);
+    return data;
+  }
+
+  static DataTable getDailyActivities() {
+    DataTable data = DataTable.create();
+    data.addColumn(ColumnType.STRING, "Task");
+    data.addColumn(ColumnType.NUMBER, "Hours per Day");
+    data.addRows(5);
+    data.setValue(0, 0, "Work");
+    data.setValue(0, 1, 11);
+    data.setValue(1, 0, "Eat");
+    data.setValue(1, 1, 2);
+    data.setValue(2, 0, "Commute");
+    data.setValue(2, 1, 2);
+    data.setValue(3, 0, "Watch TV");
+    data.setValue(3, 1, 2);
+    data.setValue(4, 0, "Sleep");
+    data.setValue(4, 1, 7);
+    return data;
+  }
+
   public void onModuleLoad() {
-    AjaxLoader.loadVisualizationApi(new Runnable(){
+    AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
         final VerticalPanel vp = new VerticalPanel();
         vp.getElement().getStyle().setPropertyPx("margin", 15);
@@ -78,44 +117,5 @@ class Showcase implements EntryPoint {
       ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE, IntensityMap.PACKAGE,
       LineChart.PACKAGE, MapVisualization.PACKAGE, MotionChart.PACKAGE, OrgChart.PACKAGE, 
       PieChart.PACKAGE, ScatterChart.PACKAGE, Table.PACKAGE);
-  }
-
-  static DataTable getDailyActivities() {
-    DataTable data = DataTable.create();
-    data.addColumn(ColumnType.STRING, "Task");
-    data.addColumn(ColumnType.NUMBER, "Hours per Day");
-    data.addRows(5);
-    data.setValue(0, 0, "Work");
-    data.setValue(0, 1, 11);
-    data.setValue(1, 0, "Eat");
-    data.setValue(1, 1, 2);
-    data.setValue(2, 0, "Commute");
-    data.setValue(2, 1, 2);
-    data.setValue(3, 0, "Watch TV");
-    data.setValue(3, 1, 2);
-    data.setValue(4, 0, "Sleep");
-    data.setValue(4, 1, 7);
-    return data;
-  }
-
-  static DataTable getCompanyPerformance() {
-    DataTable data = DataTable.create();
-    data.addColumn(ColumnType.STRING, "Year");
-    data.addColumn(ColumnType.NUMBER, "Sales");
-    data.addColumn(ColumnType.NUMBER, "Expenses");
-    data.addRows(4);
-    data.setValue(0, 0, "2004");
-    data.setValue(0, 1, 1000);
-    data.setValue(0, 2, 400);
-    data.setValue(1, 0, "2005");
-    data.setValue(1, 1, 1170);
-    data.setValue(1, 2, 460);
-    data.setValue(2, 0, "2006");
-    data.setValue(2, 1, 660);
-    data.setValue(2, 2, 1120);
-    data.setValue(3, 0, "2007");
-    data.setValue(3, 1, 1030);
-    data.setValue(3, 2, 540);
-    return data;
   }
 }

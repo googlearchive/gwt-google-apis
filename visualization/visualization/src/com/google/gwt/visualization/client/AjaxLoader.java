@@ -22,10 +22,15 @@ import com.google.gwt.core.client.JsArrayString;
  * A wrapper for the google Ajax loader.
  */
 public class AjaxLoader {
+  public static native void loadApi(String api, String version, 
+      JavaScriptObject settings) /*-{
+    $wnd.google.load(api, version, settings);
+  }-*/;
+  
   public static void loadVisualizationApi(Runnable onLoad, String... packages) {
     loadVisualizationApi("1", onLoad, AbstractDrawOptions.createJsArray(packages));
   }
-  
+
   public static void loadVisualizationApi(String version, Runnable onLoad,
       JsArrayString packages) {
     loadApi("visualization", version, createSettings(onLoad, packages));
@@ -36,16 +41,11 @@ public class AjaxLoader {
     loadVisualizationApi(version, onLoad, AbstractDrawOptions.createJsArray(packages));
   }
 
-  public static native void loadApi(String api, String version, 
-      JavaScriptObject settings) /*-{
-    $wnd.google.load(api, version, settings);
-  }-*/;
-
   private static native JavaScriptObject createSettings(Runnable onLoad, 
       JsArrayString packages) /*-{
     var callback = function() {
       @com.google.gwt.visualization.client.ExceptionHelper::runProtected(Ljava/lang/Runnable;)(onLoad);
     }
-  	return {'callback' : callback, 'packages' : packages};
+    return {'callback' : callback, 'packages' : packages};
   }-*/;
 }
