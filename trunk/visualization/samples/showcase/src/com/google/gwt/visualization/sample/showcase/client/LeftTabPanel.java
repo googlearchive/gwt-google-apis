@@ -30,33 +30,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A panel with a tree on the left and a display case on the right.  Selecting
- * a tree item displays the analogous widget.
+ * A panel with a tree on the left and a display case on the right. Selecting a
+ * tree item displays the analogous widget.
  */
 public class LeftTabPanel extends Composite {
   /**
-   * Allows the caller to pass in objects that will create new widgets
-   * every time a link is clicked, to work around the issue that some 
-   * visualizations become invalid when they are removed from a panel.
+   * Allows the caller to pass in objects that will create new widgets every
+   * time a link is clicked, to work around the issue that some visualizations
+   * become invalid when they are removed from a panel.
    */
   public interface WidgetProvider {
     Widget getWidget();
   }
-  
+
   private static void setWidget(SimplePanel simple, WidgetProvider provider) {
     simple.clear();
     simple.add(provider.getWidget());
   }
-  
-  public void setWidget(WidgetProvider provider) {
-    setWidget(right, provider);
-  }
-  
-  private HorizontalPanel main = new HorizontalPanel();
-  private VerticalPanel left = new VerticalPanel();
-  private Tree leftTree = new Tree();
-  private Map<String, WidgetProvider> cogs = new HashMap<String, WidgetProvider>();
-  private SimplePanel right = new SimplePanel();
+
+  private final Map<String, WidgetProvider> cogs = new HashMap<String, WidgetProvider>();
+  private final VerticalPanel left = new VerticalPanel();
+  private final Tree leftTree = new Tree();
+  private final HorizontalPanel main = new HorizontalPanel();
+  private final SimplePanel right = new SimplePanel();
 
   public LeftTabPanel() {
     initWidget(main);
@@ -68,7 +64,7 @@ public class LeftTabPanel extends Composite {
     Style rightStyle = right.getElement().getStyle();
     rightStyle.setPropertyPx("margin", 5);
     decorator.add(right);
-    
+
     main.add(decorator);
     leftTree.addTreeListener(new TreeListener() {
 
@@ -82,13 +78,17 @@ public class LeftTabPanel extends Composite {
       public void onTreeItemStateChanged(TreeItem item) {
         // nop
       }
-      
+
     });
   }
-  
+
   public void add(final WidgetProvider cog, String title) {
-   cogs.put(title, cog);
+    cogs.put(title, cog);
     TreeItem item = new TreeItem(title);
     leftTree.addItem(item);
+  }
+
+  public void setWidget(WidgetProvider provider) {
+    setWidget(right, provider);
   }
 }
