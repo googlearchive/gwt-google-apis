@@ -25,7 +25,7 @@ import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.RangeChangeHandler;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Annotated timeline visualization. May be loaded by calling: <code>
