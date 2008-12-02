@@ -21,7 +21,6 @@
    * [GearsSampleApplications Sample Applications]
    * [GearsReleaseNotes Release Notes]
    * [GearsFAQ FAQs]
-
  * Maps
    * [MapsGettingStarted GettingStarted]
    * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
@@ -29,6 +28,8 @@
    * [MapsJavadoc API Reference]
    * [MapsReleaseNotes Release Notes]
    * [MapsFAQ FAQs]
+ * Visualization
+   * Coming Soon
  * APIs In Progress
    * [GettingStartedVisualization Google Visualization API] 
  * [MakingGALGWTBetter Making Google API Libraries Better]
