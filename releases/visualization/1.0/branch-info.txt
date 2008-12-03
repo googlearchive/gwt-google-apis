@@ -1,0 +1,13 @@
+branch-info.txt for gwt-google-apis Visualization 1.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/visualization/1.0/ was created (r1069) as a straight copy from /trunk/maps/@r1069
+
+Merges:
+/releases/maps/1.0/@XXX:YYY was merged (rZZZ) into /trunk/visualization
+-> The next merge into trunk will be r1069:????
+
+Changes in this branch (excluding changes to this file itself):
+ - Branch created (r1069)
