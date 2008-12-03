@@ -16,6 +16,7 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.visualizations.Visualization;
 

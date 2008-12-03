@@ -15,7 +15,6 @@
  */
 package com.google.gwt.visualization.client;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.visualizations.Gauge;
@@ -23,9 +22,7 @@ import com.google.gwt.visualization.client.visualizations.Gauge;
 /**
  * Tests for the Gauge class.
  */
-public class GaugeTest extends GWTTestCase {
-  public static final int ASYNC_DELAY_MS = 5000;
-
+public class GaugeTest extends VisualizationTest {
   @Override
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
@@ -36,32 +33,36 @@ public class GaugeTest extends GWTTestCase {
    * the Visualization API has been correctly loaded (see ajax_loader.html).
    */
   public void testASimpleGauge() {
-    assertTrue("ajax_loader.html wasn't called", nativeIsJunitHtmlCalled());
-    assertTrue("AJAX API hasn't completed loading",
-        nativeIsVisualizationAPILoaded());
+    loadApi(new Runnable(){
 
-    DataTable data = makeDataTable();
-    Gauge.Options options = Gauge.Options.create();
-    options.setSize(600,200);
-    RootPanel.get().add(Gauge.createWidget(data, options));
+      public void run() {
+        DataTable data = makeDataTable();
+        Gauge.Options options = Gauge.Options.create();
+        options.setSize(600,200);
+        RootPanel.get().add(Gauge.createWidget(data, options));
+      }});
   }
 
   /**
    * Tests the options that are peculiar to the Gauge.Options class.
    */
   public void testGaugeOptions() {
-    Gauge.Options options = Gauge.Options.create();
-    options.setGaugeRange(0,100);
-    options.setGreenRange(0,25);
-    options.setHeight(200);
-    options.setMajorTicks("OK", "WARM", "HOT");
-    options.setMinorTicks(2);
-    options.setRedRange(50, 100);
-    options.setSize(600, 200);
-    options.setWidth(600);
-    options.setYellowRange(25,50);
-    DataTable data = makeDataTable();
-    RootPanel.get().add(Gauge.createWidget(data, options));
+    loadApi(new Runnable(){
+
+      public void run() {
+        Gauge.Options options = Gauge.Options.create();
+        options.setGaugeRange(0,100);
+        options.setGreenRange(0,25);
+        options.setHeight(200);
+        options.setMajorTicks("OK", "WARM", "HOT");
+        options.setMinorTicks(2);
+        options.setRedRange(50, 100);
+        options.setSize(600, 200);
+        options.setWidth(600);
+        options.setYellowRange(25,50);
+        DataTable data = makeDataTable();
+        RootPanel.get().add(Gauge.createWidget(data, options));
+      }});
   }
 
   /**
@@ -82,11 +83,8 @@ public class GaugeTest extends GWTTestCase {
     return data;
   }
 
-  private native boolean nativeIsJunitHtmlCalled() /*-{
-    return $wnd.ajax_loader_called ? true: false;
-  }-*/;
-
-  private native boolean nativeIsVisualizationAPILoaded() /*-{
-    return $wnd.visualization_api_loaded ? true: false;
-  }-*/;
+  @Override
+  protected String getVisualizationPackage() {
+    return Gauge.PACKAGE;
+  }
 }

@@ -61,7 +61,7 @@ public class IntensityMap extends Visualization<IntensityMap.Options> implements
       this.height = height;
     }-*/;
 
-    public final void setReqion(Region region) {
+    public final void setRegion(Region region) {
       setRegion(region.name().toLowerCase());
     }
 
@@ -84,7 +84,7 @@ public class IntensityMap extends Visualization<IntensityMap.Options> implements
   }
 
   /**
-   * Argument to {@link IntensityMap.Options#setReqion(Region)}
+   * Argument to {@link IntensityMap.Options#setRegion(Region)}
    */
   public static enum Region {
     AFRICA, ASIA, EUROPE, MIDDLE_EAST, SOUTH_AMERICA, USA, WORLD

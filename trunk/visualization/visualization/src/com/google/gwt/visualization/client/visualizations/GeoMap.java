@@ -65,12 +65,6 @@ public class GeoMap extends Visualization<GeoMap.Options> {
       this.height = height + 'px';
      }-*/;
 
-    public final native void setOnLoadCallback(Runnable callback) /*-{
-      this.callback = function() {
-        @com.google.gwt.visualization.client.ExceptionHelper::runProtected(Ljava/lang/Runnable;)(callback);
-      }
-    }-*/;
-
     public final native void setRegion(String region) /*-{
       this.region = region;
     }-*/;

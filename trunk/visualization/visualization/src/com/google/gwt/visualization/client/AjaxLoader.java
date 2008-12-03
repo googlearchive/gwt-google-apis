@@ -33,6 +33,8 @@ public class AjaxLoader {
 
   public static void loadVisualizationApi(String version, Runnable onLoad,
       JsArrayString packages) {
+    // TODO: map which packages have already been loaded, so that we can
+    // call the loader only when necessary
     loadApi("visualization", version, createSettings(onLoad, packages));
   }
 
