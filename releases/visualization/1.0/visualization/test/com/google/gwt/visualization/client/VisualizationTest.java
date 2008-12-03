@@ -23,6 +23,14 @@ import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
  */
 public class VisualizationTest extends GWTTestCase {
   public static final int ASYNC_DELAY_MS = 10 * 1000;
+  
+  /**
+   * Extracts the value of a named parameter from a URL query string.
+   * 
+   * @param url the URL to extract the parameter from
+   * @param name the name of the parameter
+   * @return the value of the parameter
+   */
   public static native String getParameter(String url, String name) /*-{
     var spec = "[\\?&]" + name + "=([^&#]*)";
     var regex = new RegExp(spec);

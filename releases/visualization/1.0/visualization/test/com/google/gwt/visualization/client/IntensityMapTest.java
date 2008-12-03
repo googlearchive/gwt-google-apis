@@ -16,6 +16,7 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
@@ -117,13 +118,17 @@ public class IntensityMapTest extends VisualizationTest {
         options.setColors("green", "yellow");
         widget = IntensityMap.createWidget(createIntensityTable(), options);
         RootPanel.get().add(widget);
-        assertEquals("f0f0f0%2Cffffff%2C008000", getParameter(widget, "chco"));
+        assertEquals("failed to find expected parameter in url:"
+            + getUrl(widget), "f0f0f0%2Cffffff%2C008000", getParameter(widget,
+            "chco"));
 
         options = Options.create();
         options.setColors("red", "blue");
         widget = IntensityMap.createWidget(createIntensityTable(), options);
         RootPanel.get().add(widget);
-        assertEquals("f0f0f0%2Cffffff%2Cff0000", getParameter(widget, "chco"));
+        assertEquals("failed to find expected parameter in url:"
+            + getUrl(widget), "f0f0f0%2Cffffff%2Cff0000", getParameter(widget,
+            "chco"));
       }
     });
   }
@@ -163,9 +168,10 @@ public class IntensityMapTest extends VisualizationTest {
         widget = IntensityMap.createWidget(createSingleTab(), options);
         RootPanel.get().add(widget);
         grandson = widget.getElement().getFirstChildElement().getFirstChildElement();
-        assertEquals("div".toUpperCase(), grandson.getTagName().toUpperCase());
-        assertEquals("google-visualization-intensitymap-map",
-            grandson.getAttribute("class"));
+        assertEquals("Expected a DIV element for grandchild of widget",
+            "div".toUpperCase(), grandson.getTagName().toUpperCase());
+        assertEquals("The grandchild has an unexpected class name",
+            "google-visualization-intensitymap-map", grandson.getClassName());
 
         options = Options.create();
         options.setShowOneTab(true);
@@ -212,10 +218,14 @@ public class IntensityMapTest extends VisualizationTest {
   }
 
   private String getParameter(Widget cog, String name) {
+    return getParameter(getUrl(cog), name);
+  }
+
+  private String getUrl(Widget cog) {
     Element div = cog.getElement();
     Element background = div.getElementsByTagName("div").getItem(2);
-    String style = background.getAttribute("style");
-    String url = style.split("\\(")[1].split("\\)")[0];
-    return getParameter(url, name);
+    Style style = background.getStyle();
+    String styleUrl = style.getProperty("background");
+    return styleUrl.split("\\(")[1].split("\\)")[0];
   }
 }
