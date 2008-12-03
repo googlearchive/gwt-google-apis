@@ -24,10 +24,6 @@ import com.google.gwt.visualization.client.visualizations.LineChart.Options;
  * Tests for the LineChart class.
  */
 public class LineChartTest extends VisualizationTest {
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.visualization.VisualizationTest";
-  }
   
   public void testLineChart() {
     loadApi(new Runnable() {

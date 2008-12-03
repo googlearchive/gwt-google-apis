@@ -17,56 +17,34 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
-import com.google.gwt.visualization.client.visualizations.Gauge;
+import com.google.gwt.visualization.client.visualizations.MotionChart;
 
 /**
- * Tests for the Gauge class.
+ * Tests for the MotionChart class.
+ * 
+ * Note that only one instance of MotionChart is allowed at a time, which kind of restricts this unit test.
  */
-public class GaugeTest extends VisualizationTest {
- 
-
+public class MotionChartTest extends VisualizationTest {
+  
   /**
-   * This test case will try creating a simple Gauge. It first asserts that the
-   * Visualization API has been correctly loaded (see ajax_loader.html).
+   * This test case will try creating a simple MotionChart. It first asserts
+   * that the Visualization API has been correctly loaded (see
+   * ajax_loader.html).
    */
-  public void testASimpleGauge() {
+  public void testASimpleMotionChart() {
     loadApi(new Runnable() {
-
       public void run() {
         DataTable data = makeDataTable();
-        Gauge.Options options = Gauge.Options.create();
+        MotionChart.Options options = MotionChart.Options.create();
         options.setSize(600, 200);
-        RootPanel.get().add(Gauge.createWidget(data, options));
+        RootPanel.get().add(MotionChart.createWidget(data, options));        
       }
     });
   }
-
-  /**
-   * Tests the options that are peculiar to the Gauge.Options class.
-   */
-  public void testGaugeOptions() {
-    loadApi(new Runnable() {
-
-      public void run() {
-        Gauge.Options options = Gauge.Options.create();
-        options.setGaugeRange(0, 100);
-        options.setGreenRange(0, 25);
-        options.setHeight(200);
-        options.setMajorTicks("OK", "WARM", "HOT");
-        options.setMinorTicks(2);
-        options.setRedRange(50, 100);
-        options.setSize(600, 200);
-        options.setWidth(600);
-        options.setYellowRange(25, 50);
-        DataTable data = makeDataTable();
-        RootPanel.get().add(Gauge.createWidget(data, options));
-      }
-    });
-  }
-
+  
   @Override
   protected String getVisualizationPackage() {
-    return Gauge.PACKAGE;
+    return MotionChart.PACKAGE;
   }
 
   /**

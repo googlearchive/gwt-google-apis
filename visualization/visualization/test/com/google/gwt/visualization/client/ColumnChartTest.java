@@ -24,11 +24,7 @@ import com.google.gwt.visualization.client.visualizations.ColumnChart.Options;
  * Tests for the ColumnChart class.
  */
 public class ColumnChartTest extends VisualizationTest {
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.visualization.VisualizationTest";
-  }
-
+ 
   public void testColumnChart() {
     loadApi(new Runnable() {
       public void run() {
