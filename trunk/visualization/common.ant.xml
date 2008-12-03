@@ -144,7 +144,7 @@
 		For parallel testing, we must use 'auto' for the port number 
 	-->
 	<property name="gwt.junit.port" value="8889" />
-	<property name="gwt.junit.testcase.includes" value="**/*Test.class" />
+	<property name="gwt.junit.testcase.includes" value="**/*Suite.class" />
 
 	<!--
 		Comma delimited list of host and path components on 
