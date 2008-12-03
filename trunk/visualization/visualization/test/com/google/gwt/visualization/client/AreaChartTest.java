@@ -24,10 +24,6 @@ import com.google.gwt.visualization.client.visualizations.AreaChart.Options;
  * Tests for the AreaChart class.
  */
 public class AreaChartTest extends VisualizationTest {
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.visualization.VisualizationTest";
-  }
 
   public void testAreaChart() {
     loadApi(new Runnable() {

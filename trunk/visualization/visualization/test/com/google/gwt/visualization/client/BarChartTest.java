@@ -24,10 +24,6 @@ import com.google.gwt.visualization.client.visualizations.BarChart.Options;
  * Tests for the BarChart class.
  */
 public class BarChartTest extends VisualizationTest {
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.visualization.VisualizationTest";
-  }
 
   public void testBarChart() {
     loadApi(new Runnable() {
