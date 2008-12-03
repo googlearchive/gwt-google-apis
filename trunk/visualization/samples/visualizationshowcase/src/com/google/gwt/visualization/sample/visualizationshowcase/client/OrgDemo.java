@@ -39,15 +39,15 @@ public class OrgDemo implements LeftTabPanel.WidgetProvider {
     data.addColumn(ColumnType.STRING, "Name");
     data.addColumn(ColumnType.STRING, "Manager");
     data.addRows(5);
-    data.setCell(0, 0, "Mike");
-    data.setCell(1, 0, "Jim");
-    data.setCell(1, 1, "Mike");
-    data.setCell(2, 0, "Alice");
-    data.setCell(2, 1, "Mike");
-    data.setCell(3, 0, "Bob");
-    data.setCell(3, 1, "Jim");
-    data.setCell(4, 0, "Carol");
-    data.setCell(4, 1, "Bob");
+    data.setValue(0, 0, "Mike");
+    data.setValue(1, 0, "Jim");
+    data.setValue(1, 1, "Mike");
+    data.setValue(2, 0, "Alice");
+    data.setValue(2, 1, "Mike");
+    data.setValue(3, 0, "Bob");
+    data.setValue(3, 1, "Jim");
+    data.setValue(4, 0, "Carol");
+    data.setValue(4, 1, "Bob");
     
     VisualizationWidget<OrgChart, OrgChart.Options> widget = 
       OrgChart.createWidget(data, options);

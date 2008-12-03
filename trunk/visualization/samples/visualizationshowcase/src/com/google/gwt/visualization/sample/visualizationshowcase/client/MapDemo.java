@@ -41,18 +41,18 @@ public class MapDemo implements LeftTabPanel.WidgetProvider {
     data.addColumn(ColumnType.NUMBER, "Lon");
     data.addColumn(ColumnType.STRING, "Name");
     data.addRows(4);
-    data.setCell(0, 0, 37.4232);
-    data.setCell(0, 1, -122.0853);
-    data.setCell(0, 2, "Work");
-    data.setCell(1, 0, 37.4289);
-    data.setCell(1, 1, -122.1697);
-    data.setCell(1, 2, "University");
-    data.setCell(2, 0, 37.6153);
-    data.setCell(2, 1, -122.3900);
-    data.setCell(2, 2, "Airport");
-    data.setCell(3, 0, 37.4422);
-    data.setCell(3, 1, -122.1731);
-    data.setCell(3, 2, "Shopping");
+    data.setValue(0, 0, 37.4232);
+    data.setValue(0, 1, -122.0853);
+    data.setValue(0, 2, "Work");
+    data.setValue(1, 0, 37.4289);
+    data.setValue(1, 1, -122.1697);
+    data.setValue(1, 2, "University");
+    data.setValue(2, 0, 37.6153);
+    data.setValue(2, 1, -122.3900);
+    data.setValue(2, 2, "Airport");
+    data.setValue(3, 0, 37.4422);
+    data.setValue(3, 1, -122.1731);
+    data.setValue(3, 2, "Shopping");
     
     widget = MapVisualization.createWidget(data, options, 400, 300);
   }
