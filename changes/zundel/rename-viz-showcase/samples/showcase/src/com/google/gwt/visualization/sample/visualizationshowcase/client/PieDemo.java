@@ -13,35 +13,38 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.visualization.sample.showcase.client;
+package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationWidget;
-import com.google.gwt.visualization.client.visualizations.ColumnChart;
-import com.google.gwt.visualization.client.visualizations.ColumnChart.Options;
+import com.google.gwt.visualization.client.visualizations.PieChart;
+import com.google.gwt.visualization.client.visualizations.PieChart.Options;
 
 /**
- * Demo for ColumnDemo visualization.
+ * Demo for PieChart visualization.
  */
-public class ColumnDemo implements LeftTabPanel.WidgetProvider {
+public class PieDemo implements LeftTabPanel.WidgetProvider {
   public Widget getWidget() {
-    VerticalPanel result = new VerticalPanel();
-    Options options = Options.create();
-    options.setHeight(240);
-    options.setTitle("Company Performance");
-    options.setWidth(400);
-    options.set3D(true);
-    
-    DataTable data = Showcase.getCompanyPerformance();
+    /* create a datatable */
+    DataTable data = Showcase.getDailyActivities();
 
-    VisualizationWidget<ColumnChart, ColumnChart.Options> widget = 
-      ColumnChart.createWidget(data, options);
-    ColumnChart viz = widget.getVisualization();
+    /* create pie chart */
+    PieChart.Options options = PieChart.Options.create();
+    options.setWidth(400);
+    options.setHeight(240);
+    options.set3D(true);
+    options.setTitle("My Daily Activities");
+    
+    VisualizationWidget<PieChart, Options> widget = 
+      PieChart.createWidget(data, options);
+    PieChart viz = widget.getVisualization();
     Label status = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
+    
+    VerticalPanel result = new VerticalPanel();
     result.add(status);
     result.add(widget);
     return result;

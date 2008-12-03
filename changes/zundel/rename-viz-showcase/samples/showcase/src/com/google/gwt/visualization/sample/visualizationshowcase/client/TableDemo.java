@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.visualization.sample.showcase.client;
+package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Label;
