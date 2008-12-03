@@ -23,10 +23,10 @@ import com.google.gwt.visualization.client.visualizations.PieChart;
  * Tests for the PieChart class.
  */
 public class PieChartTest extends VisualizationTest {
-  // TODO: research the failure and reenable.  this is apparently a gviz
+  // TODO: research the failure and reenable. this is apparently a gviz
   // bug.
   public void dontTestPieChartSelection() {
-    AjaxLoader.loadVisualizationApi(new Runnable(){
+    AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
         DataTable data = createDailyActivities();
 
@@ -45,7 +45,8 @@ public class PieChartTest extends VisualizationTest {
           public void onSelect(SelectEvent event) {
             assertNotNull(event);
             Selection s = viz.getSelection();
-            assertEquals("Expected 1 element in the selection", 1, s.getLength());
+            assertEquals("Expected 1 element in the selection", 1,
+                s.getLength());
             assertEquals("Expected row 1 to be selected", 1, s.getRow(0));
             assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
             finishTest();
@@ -64,13 +65,9 @@ public class PieChartTest extends VisualizationTest {
         assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
         // Trigger a selection callback
         triggerSelection(viz, s);
-      }}, PieChart.PACKAGE);
+      }
+    }, PieChart.PACKAGE);
     delayTestFinish(ASYNC_DELAY_MS);
-  }
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.visualization.VisualizationTest";
   }
 
   /**
@@ -78,7 +75,7 @@ public class PieChartTest extends VisualizationTest {
    * the Visualization API has been correctly loaded (see ajax_loader.html).
    */
   public void testASimplePieChart() {
-    loadApi(new Runnable(){
+    loadApi(new Runnable() {
       public void run() {
         DataTable data = createDailyActivities();
 
@@ -87,7 +84,8 @@ public class PieChartTest extends VisualizationTest {
         options.setWidth(400);
         options.setHeight(240);
         RootPanel.get().add(PieChart.createWidget(data, options));
-      }});
+      }
+    });
   }
 
   /**
@@ -102,7 +100,7 @@ public class PieChartTest extends VisualizationTest {
    * Tests setting a selection object.
    */
   public void testPieChartSetSelection() {
-    loadApi(new Runnable(){
+    loadApi(new Runnable() {
       public void run() {
         DataTable data = createDailyActivities();
 
@@ -117,11 +115,12 @@ public class PieChartTest extends VisualizationTest {
         Selection s = SelectionHelper.createSelection(1, 0);
 
         RootPanel.get().add(widget);
-        
+
         // Note: viz.setSelection() will fail if the visualization has not been
         // added to the DOM.
         viz.setSelection(s);
-      }});
+      }
+    });
   }
 
   @Override

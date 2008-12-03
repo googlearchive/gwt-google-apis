@@ -33,7 +33,7 @@ public class GaugeTest extends VisualizationTest {
    * the Visualization API has been correctly loaded (see ajax_loader.html).
    */
   public void testASimpleGauge() {
-    loadApi(new Runnable(){
+    loadApi(new Runnable() {
 
       public void run() {
         DataTable data = makeDataTable();
@@ -47,7 +47,7 @@ public class GaugeTest extends VisualizationTest {
    * Tests the options that are peculiar to the Gauge.Options class.
    */
   public void testGaugeOptions() {
-    loadApi(new Runnable(){
+    loadApi(new Runnable() {
 
       public void run() {
         Gauge.Options options = Gauge.Options.create();
@@ -63,6 +63,10 @@ public class GaugeTest extends VisualizationTest {
         DataTable data = makeDataTable();
         RootPanel.get().add(Gauge.createWidget(data, options));
       }});
+  }
+
+  protected String getVisualizationPackage() {
+    return Gauge.PACKAGE;
   }
 
   /**
@@ -81,10 +85,5 @@ public class GaugeTest extends VisualizationTest {
     data.setValue(2, 0, "Haba–ero");
     data.setValue(2, 1, 99);
     return data;
-  }
-
-  @Override
-  protected String getVisualizationPackage() {
-    return Gauge.PACKAGE;
   }
 }

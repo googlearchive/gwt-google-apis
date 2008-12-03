@@ -30,11 +30,7 @@ import java.util.Date;
  * Tests for the AnnotatedTimeLine class.
  */
 public class AnnotatedTimeLineTest extends VisualizationTest {
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.visualization.VisualizationTest";
-  }
-  
+ 
   public void testAnnotatedTimeLine() {
     loadApi(new Runnable() {
       @SuppressWarnings("deprecation")
@@ -52,103 +48,117 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setMin(-1);
         options.setZoomEndTime(new Date(109, 1, 1));
         options.setZoomStartTime(new Date(107, 1, 1));
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-      }});
+      }
+    });
   }
-  
+
   public void testLegend() {
     loadApi(new Runnable() {
       @SuppressWarnings("deprecation")
       public void run() {
         Widget widget;
         Options options;
-        
+
         options = Options.create();
         options.setLegendPosition(AnnotatedLegendPosition.NEW_ROW);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setLegendPosition(AnnotatedLegendPosition.SAME_ROW);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-      }});
+      }
+    });
   }
-  
+
   public void testScaleType() {
     loadApi(new Runnable() {
       @SuppressWarnings("deprecation")
       public void run() {
         Widget widget;
         Options options;
-        
+
         options = Options.create();
         options.setScaleType(ScaleType.ALLFIXED);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setScaleType(ScaleType.ALLMAXIMIZE);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setScaleType(ScaleType.FIXED);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setScaleType(ScaleType.MAXIMIZE);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-      }});
+      }
+    });
   }
-  
+
   public void testWindowMode() {
     loadApi(new Runnable() {
       @SuppressWarnings("deprecation")
       public void run() {
         Widget widget;
         Options options;
-        
+
         options = Options.create();
         options.setWindowMode(WindowMode.OPAQUE);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setWindowMode(WindowMode.TRANSPARENT);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setWindowMode(WindowMode.WINDOW);
-        
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(), options, 400, 400);
+
+        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+            options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
-      }});
+      }
+    });
   }
-  
+
   @Override
   protected String getVisualizationPackage() {
     return AnnotatedTimeLine.PACKAGE;
@@ -157,7 +167,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
   @SuppressWarnings("deprecation")
   private AbstractDataTable createAnnotatedDataTable() {
     int year, month, day;
-    
+
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.DATE, "Date");
     data.addColumn(ColumnType.NUMBER, "Sold Pencils");
@@ -189,7 +199,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
     data.setValue(5, 0, new Date(year = 2008 - 1900, month = 1, day = 6));
     data.setValue(5, 1, 33322);
     data.setValue(5, 4, 39463);
-    
+
     return data;
   }
 }
