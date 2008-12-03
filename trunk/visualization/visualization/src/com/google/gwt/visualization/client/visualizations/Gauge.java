@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.VisualizationWidget;
 
 /**
@@ -58,7 +59,7 @@ public class Gauge extends Visualization<Gauge.Options> {
     }-*/;
 
     public final void setMajorTicks(String... labels) {
-      setMajorTicks(createJsArray(labels));
+      setMajorTicks(ArrayHelper.createJsArray(labels));
     }
 
     public final native void setMinorTicks(int numberOfTicks) /*-{

@@ -28,7 +28,7 @@ public class AjaxLoader {
   }-*/;
   
   public static void loadVisualizationApi(Runnable onLoad, String... packages) {
-    loadVisualizationApi("1", onLoad, AbstractDrawOptions.createJsArray(packages));
+    loadVisualizationApi("1", onLoad, ArrayHelper.createJsArray(packages));
   }
 
   public static void loadVisualizationApi(String version, Runnable onLoad,
@@ -40,7 +40,7 @@ public class AjaxLoader {
 
   public static void loadVisualizationApi(String version, Runnable onLoad,
       String... packages) {
-    loadVisualizationApi(version, onLoad, AbstractDrawOptions.createJsArray(packages));
+    loadVisualizationApi(version, onLoad, ArrayHelper.createJsArray(packages));
   }
 
   private static native JavaScriptObject createSettings(Runnable onLoad, 

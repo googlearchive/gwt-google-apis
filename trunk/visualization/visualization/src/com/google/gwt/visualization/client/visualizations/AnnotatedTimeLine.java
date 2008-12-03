@@ -21,6 +21,7 @@ import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.RangeChangeHandler;
@@ -96,7 +97,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     }-*/;
 
     public final void setColors(String... colors) {
-      setColors(createJsArray(colors));
+      setColors(ArrayHelper.createJsArray(colors));
     }
 
     public final native void setDisplayAnnotations(boolean display) /*-{
@@ -124,7 +125,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     }-*/;
 
     public final void setScaleColumns(int... scaleColumns) {
-      setScaleColumns(createJsArray(scaleColumns));
+      setScaleColumns(ArrayHelper.createJsArray(scaleColumns));
     }
 
     public final native void setScaleColumns(JsArrayInteger scaleColumns) /*-{

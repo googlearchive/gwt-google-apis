@@ -15,6 +15,8 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JsArrayInteger;
+
 import java.util.Date;
 
 /**
@@ -87,62 +89,54 @@ public class DataTable extends AbstractDataTable {
     this.removeRows(rowIndex, numberOfRows);
   }-*/;
 
-  public final native void setCell(int rowIndex, int columnIndex, boolean value) /*-{
-    this.setCell(rowIndex, columnIndex, value);
-  }-*/;
-
-  public final native void setCell(int rowIndex, int columnIndex,
-      boolean value, String formattedValue) /*-{
-    this.setCell(rowIndex, columnIndex, value, formattedValue);
-  }-*/;
-
   public final native void setCell(int rowIndex, int columnIndex,
       boolean value, String formattedValue, Properties properties) /*-{
     this.setCell(rowIndex, columnIndex, value, formattedValue, properties);
   }-*/;
-
-  public final native void setCell(int rowIndex, int columnIndex, double value) /*-{
-    this.setCell(rowIndex, columnIndex, value);
-  }-*/;
-
-  public final native void setCell(int rowIndex, int columnIndex, double value,
-      String formattedValue) /*-{
-    this.setCell(rowIndex, columnIndex, value, formattedValue);
-  }-*/;
-
+  
+  public final void setCell(int rowIndex, int columnIndex, Date value,
+      String formattedValue, Properties properties) {
+    if (value == null) {
+      setCellNull(rowIndex, columnIndex, formattedValue, properties);
+    } else {
+      setCellDate(rowIndex, columnIndex, value.getTime(), formattedValue, 
+          properties);
+    }
+  }
+  
   public final native void setCell(int rowIndex, int columnIndex, double value,
       String formattedValue, Properties properties) /*-{
     this.setCell(rowIndex, columnIndex, value, formattedValue, properties);
   }-*/;
-
-  public final native void setCell(int rowIndex, int columnIndex, int value) /*-{
-    this.setCell(rowIndex, columnIndex, value);
-  }-*/;
-
-  public final native void setCell(int rowIndex, int columnIndex, int value,
-      String formattedValue) /*-{
-    this.setCell(rowIndex, columnIndex, value, formattedValue);
-  }-*/;
-
+  
   public final native void setCell(int rowIndex, int columnIndex, int value,
       String formattedValue, Properties properties) /*-{
     this.setCell(rowIndex, columnIndex, value, formattedValue, properties);
   }-*/;
-
-  public final native void setCell(int rowIndex, int columnIndex, String value) /*-{
-    this.setCell(rowIndex, columnIndex, value);
-  }-*/;
-
-  public final native void setCell(int rowIndex, int columnIndex, String value,
-      String formattedValue) /*-{
-    this.setCell(rowIndex, columnIndex, value, formattedValue);
-  }-*/;
-
+  
   public final native void setCell(int rowIndex, int columnIndex, String value,
       String formattedValue, Properties properties) /*-{
     this.setCell(rowIndex, columnIndex, value, formattedValue, properties);
   }-*/;
+  
+  public final void setCell(int rowIndex, int columnIndex, TimeOfDay value,
+      String formattedValue, Properties properties) {
+    if (value == null) {
+      setCellNull(rowIndex, columnIndex, formattedValue, properties);
+    } else {
+      int[] integers = new int[] {value.getHour(), value.getMinute(), 
+          value.getSecond(), value.getMillisecond()};
+      setCell(rowIndex, columnIndex, 
+          ArrayHelper.createJsArray(integers), 
+          formattedValue, properties);
+    }
+  }
 
+  public final native void setCellNull(int rowIndex, int columnIndex,
+      String formattedValue, Properties properties) /*-{
+    this.setCell(rowIndex, columnIndex, null, formattedValue, properties);
+  }-*/;
+  
   public final native void setColumnLabel(int columnIndex, String label) /*-{
     this.setColumnLabel(columnIndex, label);
   }-*/;
@@ -165,9 +159,13 @@ public class DataTable extends AbstractDataTable {
   public final native void setValue(int rowIndex, int columnIndex, boolean value) /*-{
     this.setValue(rowIndex, columnIndex, value);
   }-*/;
-
+  
   public final void setValue(int rowIndex, int columnIndex, Date date) {
-    setValueDate(rowIndex, columnIndex, date.getTime());
+    if (date == null) {
+      setValueNull(rowIndex, columnIndex);
+    } else {
+      setValueDate(rowIndex, columnIndex, date.getTime());
+    }
   }
 
   public final native void setValue(int rowIndex, int columnIndex, double value) /*-{
@@ -178,17 +176,23 @@ public class DataTable extends AbstractDataTable {
     this.setValue(rowIndex, columnIndex, value);
   }-*/;
 
-  public final native void setValue(int rowIndex, int columnIndex, int hour,
-      int minute, int second, int millis) /*-{
-    this.setValue(rowIndex, columnIndex, [ hour, minute, second, millis ]);
-  }-*/;
-
   public final native void setValue(int rowIndex, int columnIndex, String value) /*-{
     this.setValue(rowIndex, columnIndex, value);
   }-*/;
-  
-  // TODO: add sort, getSortedRows and getValue for timeofday 
 
+  public final void setValue(int rowIndex, int columnIndex, TimeOfDay value) {
+    if (value == null) {
+      setValueNull(rowIndex, columnIndex);
+    } else {
+      setValue(rowIndex, columnIndex, value.getHour(), value.getMinute(), 
+          value.getSecond(), value.getMillisecond());
+    }
+  }
+
+  public final native void setValueNull(int rowIndex, int columnIndex) /*-{
+    this.setValue(rowIndex, columnIndex, null);
+  }-*/;
+  
   private native int addColumn(String type) /*-{
     return this.addColumn(type);
   }-*/;
@@ -201,17 +205,35 @@ public class DataTable extends AbstractDataTable {
     return this.addColumn(type, label, id);
   }-*/;
   
+  // TODO: add sort, getSortedRows and getValue for timeofday 
+
   private native void insertColumn(int columnIndex, String type) /*-{
     return this.insertColumn(columnIndex, type);
   }-*/;
-  
+
   private native void insertColumn(int columnIndex, String type, String label) /*-{
     return this.insertColumn(columnIndex, type, label);
   }-*/;
-  
+
   private native void insertColumn(int columnIndex, String type, String label,
       String id) /*-{
     return this.insertColumn(columnIndex, type, label, id);
+  }-*/;
+  
+  private native void setCell(int rowIndex, int columnIndex, 
+      JsArrayInteger value,
+      String formattedValue, Properties properties) /*-{
+    this.setCell(rowIndex, columnIndex, value, formattedValue, properties);
+  }-*/;
+  
+  private native void setCellDate(int rowIndex, int columnIndex, double value,
+      String formattedValue, Properties properties) /*-{
+    this.setCell(rowIndex, columnIndex, new $wnd.Date(value), formattedValue, properties);
+  }-*/;
+  
+  private native void setValue(int rowIndex, int columnIndex, int hour,
+      int minute, int second, int millis) /*-{
+    this.setValue(rowIndex, columnIndex, new $wnd.Array(hour, minute, second, millis));
   }-*/;
 
   private native void setValueDate(int rowIndex, int columnIndex, double value) /*-{
