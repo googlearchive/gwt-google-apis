@@ -22,6 +22,7 @@ import com.google.gwt.visualization.client.AreaChartTest;
 import com.google.gwt.visualization.client.BarChartTest;
 import com.google.gwt.visualization.client.ColumnChartTest;
 import com.google.gwt.visualization.client.CommonOptionsTest;
+import com.google.gwt.visualization.client.DataTableTest;
 import com.google.gwt.visualization.client.GaugeTest;
 import com.google.gwt.visualization.client.GeoMapTest;
 import com.google.gwt.visualization.client.IntensityMapTest;
@@ -49,6 +50,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(BarChartTest.class);
     suite.addTestSuite(ColumnChartTest.class);
     suite.addTestSuite(CommonOptionsTest.class);
+    suite.addTestSuite(DataTableTest.class);
     suite.addTestSuite(GaugeTest.class);
     suite.addTestSuite(GeoMapTest.class);
     suite.addTestSuite(IntensityMapTest.class);
