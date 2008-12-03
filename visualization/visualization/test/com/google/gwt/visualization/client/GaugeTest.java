@@ -65,6 +65,7 @@ public class GaugeTest extends VisualizationTest {
       }});
   }
 
+  @Override
   protected String getVisualizationPackage() {
     return Gauge.PACKAGE;
   }

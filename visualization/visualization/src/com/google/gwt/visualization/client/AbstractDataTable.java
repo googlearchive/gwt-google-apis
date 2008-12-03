@@ -16,6 +16,9 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayInteger;
+import com.google.gwt.core.client.JsArrayNumber;
+import com.google.gwt.visualization.client.TimeOfDay.BadTimeException;
 
 import java.util.Date;
 
@@ -83,27 +86,76 @@ public class AbstractDataTable extends JavaScriptObject {
     return this.getProperty(rowIndex, columnIndex, name);
   }-*/;
 
+  public final native boolean getValueBoolean(int rowIndex, int columnIndex) /*-{
+    return this.getValue(rowIndex, columnIndex);
+  }-*/;
+  
   public final Date getValueDate(int rowIndex, int columnIndex) {
-    return new Date(getValueTimevalue(rowIndex, columnIndex));
+    JsArrayNumber timevalue = getValueTimevalue(rowIndex, columnIndex);
+    if (timevalue.length() == 0) {
+      return null;
+    } else {
+      return new Date((long) timevalue.get(0));
+    }
   }
-
+  
   public final native double getValueDouble(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
   }-*/;
-
+  
   public final native int getValueInt(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
   }-*/;
-
+  
   public final native String getValueString(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
+  }-*/;
+
+  public final TimeOfDay getValueTimeOfDay(int rowIndex, int columnIndex) {
+    TimeOfDay result = new TimeOfDay();
+    JsArrayInteger jsArray = getValueArrayInteger(rowIndex, columnIndex);
+    try {
+      result.setHour(jsArray.get(0));
+      result.setMinute(jsArray.get(1));
+      result.setSecond(jsArray.get(2));
+      result.setMillisecond(jsArray.get(3));
+    } catch (BadTimeException e) {
+      // this should never happen, because setValue should catch an invalid
+      // time of day
+      throw new RuntimeException("Invalid time of day.");
+    }
+    return result;
+  }
+  
+  public final native boolean isValueNull(int rowIndex, int columnIndex) /*-{
+    return this.getValue(rowIndex, columnIndex) == null;
   }-*/;
   
   private native String getColumnTypeAsString(int columnIndex)/*-{
     return this.getColumnType(columnIndex);
   }-*/;
 
-  private native int getValueTimevalue(int rowIndex, int columnIndex) /*-{
-    return this.getValue(rowIndex, columnIndex).getTime();
+  private native JsArrayInteger getValueArrayInteger(int rowIndex, int columnIndex) /*-{
+    return this.getValue(rowIndex, columnIndex);
+  }-*/;
+
+  /**
+   * Private jsni to access date value which may be null.
+   * 
+   * @param rowIndex The row.
+   * @param columnIndex The column.
+   * @return An array with 1 or 0 elements. 1 element indicates a non-null
+   * value, and 0 elements indicates a null value.  This is a jsni hack.  Can't 
+   * return double because the return type may be null.  Can't return
+   * Double because the behavior of trying to autobox a jsni "number" is
+   * undefined.
+   */
+  private native JsArrayNumber getValueTimevalue(int rowIndex, int columnIndex) /*-{
+    var value = this.getValue(rowIndex, columnIndex);
+    if (value == null) {
+      return [];
+    } else {
+      return [value.getTime()];
+    }
   }-*/;
 }

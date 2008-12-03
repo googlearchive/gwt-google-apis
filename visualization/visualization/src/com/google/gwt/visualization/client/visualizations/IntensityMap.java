@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
@@ -54,7 +55,7 @@ public class IntensityMap extends Visualization<IntensityMap.Options> implements
     }-*/;
 
     public final void setColors(String... colors) {
-      setColors(createJsArray(colors));
+      setColors(ArrayHelper.createJsArray(colors));
     }
 
     public final native void setHeight(int height) /*-{
