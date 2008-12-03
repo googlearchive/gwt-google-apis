@@ -16,6 +16,7 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.PieChart.Options;
@@ -26,6 +27,34 @@ import com.google.gwt.visualization.client.visualizations.PieChart.PieLegendPosi
  * viz that uses CommonOptions rather than its subclass, CommonChartOptions.
  */
 public class CommonOptionsTest extends VisualizationTest {
+  public void testOptions() {
+    loadApi(new Runnable() {
+      public void run() {
+        DataTable data = createDailyActivities();
+
+        // Create a minimal pie chart.
+        PieChart.Options options = PieChart.Options.create();
+        options.setHeight(400);
+        options.setWidth(400);
+        options.setBackgroundColor("pink");
+        options.setBorderColor("pink");
+        options.setColors("pink", "black", "white");
+        options.setFocusBorderColor("pink");
+        options.setLegendBackgroundColor("pink");
+        options.setLegendTextColor("pink");
+        options.setTitle("My Daily Activities");
+        options.setTitleColor("pink");
+        
+        VisualizationWidget<PieChart, Options> widget = PieChart.createWidget(
+            data, options);
+        RootPanel.get().add(widget);
+        Element div = widget.getElement();
+        // assert that the div's first child is an iframe
+        IFrameElement.as(div.getFirstChildElement());  
+      }
+    });
+  }
+  
   public void testHeight() {
     loadApi(new Runnable() {
       public void run() {
@@ -93,19 +122,6 @@ public class CommonOptionsTest extends VisualizationTest {
         assertEquals("400", iframe.getAttribute("width"));
       }
     });
-  }
-
-  protected DataTable createDataTable() {
-    return createDailyActivities();
-  }
-
-  protected Options createOptions() {
-    return Options.create();
-  }
-
-  protected VisualizationWidget<PieChart, Options> createWidget(DataTable data,
-      Options options) {
-    return PieChart.createWidget(data, options);
   }
 
   @Override

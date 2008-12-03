@@ -21,6 +21,7 @@ import com.google.gwt.visualization.client.AnnotatedTimeLineTest;
 import com.google.gwt.visualization.client.AreaChartTest;
 import com.google.gwt.visualization.client.BarChartTest;
 import com.google.gwt.visualization.client.ColumnChartTest;
+import com.google.gwt.visualization.client.CommonChartOptionsTest;
 import com.google.gwt.visualization.client.CommonOptionsTest;
 import com.google.gwt.visualization.client.GaugeTest;
 import com.google.gwt.visualization.client.GeoMapTest;
@@ -28,8 +29,10 @@ import com.google.gwt.visualization.client.IntensityMapTest;
 import com.google.gwt.visualization.client.LineChartTest;
 import com.google.gwt.visualization.client.MapVisualizationTest;
 import com.google.gwt.visualization.client.MotionChartTest;
+import com.google.gwt.visualization.client.OrgChartTest;
 import com.google.gwt.visualization.client.PieChartTest;
 import com.google.gwt.visualization.client.ScatterChartTest;
+import com.google.gwt.visualization.client.TableTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -48,6 +51,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(AreaChartTest.class);
     suite.addTestSuite(BarChartTest.class);
     suite.addTestSuite(ColumnChartTest.class);
+    suite.addTestSuite(CommonChartOptionsTest.class);
     suite.addTestSuite(CommonOptionsTest.class);
     suite.addTestSuite(GaugeTest.class);
     suite.addTestSuite(GeoMapTest.class);
@@ -55,8 +59,10 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(LineChartTest.class);
     suite.addTestSuite(MapVisualizationTest.class);
     suite.addTestSuite(MotionChartTest.class);
+    suite.addTestSuite(OrgChartTest.class);
     suite.addTestSuite(PieChartTest.class);
     suite.addTestSuite(ScatterChartTest.class);
+    suite.addTestSuite(TableTest.class);
     return suite;
   }
 }
