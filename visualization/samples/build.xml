@@ -14,11 +14,11 @@
 		<gwt.ant dir="hellovisualization" />
 	</target>
 
-	<target name="showcase" description="Build the Visualization showcase sample">
-		<gwt.ant dir="showcase" />
+	<target name="visualizationshowcase" description="Build the Visualization showcase sample">
+		<gwt.ant dir="visualizationshowcase" />
 	</target>
 
-	<target name="-do" depends="customvisualization,hellovisualization,showcase" description="Run all subprojects" />
+	<target name="-do" depends="customvisualization,hellovisualization,visualizationshowcase" description="Run all subprojects" />
 
 	<target name="build" description="Builds Visualization API Library for GWT Samples">
 		<antcall target="-do">
