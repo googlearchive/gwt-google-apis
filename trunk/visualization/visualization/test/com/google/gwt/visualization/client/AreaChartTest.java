@@ -28,7 +28,7 @@ public class AreaChartTest extends VisualizationTest {
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
   }
-  
+
   public void testAreaChart() {
     loadApi(new Runnable() {
       public void run() {
@@ -41,9 +41,10 @@ public class AreaChartTest extends VisualizationTest {
         options.setStacked(false);
         widget = AreaChart.createWidget(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
-      }});
+      }
+    });
   }
-  
+
   @Override
   protected String getVisualizationPackage() {
     return AreaChart.PACKAGE;

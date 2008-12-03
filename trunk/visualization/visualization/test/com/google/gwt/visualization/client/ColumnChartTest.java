@@ -28,7 +28,7 @@ public class ColumnChartTest extends VisualizationTest {
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
   }
-  
+
   public void testColumnChart() {
     loadApi(new Runnable() {
       public void run() {
@@ -40,9 +40,10 @@ public class ColumnChartTest extends VisualizationTest {
         options.setStacked(false);
         widget = ColumnChart.createWidget(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
-      }});
+      }
+    });
   }
-  
+
   @Override
   protected String getVisualizationPackage() {
     return ColumnChart.PACKAGE;

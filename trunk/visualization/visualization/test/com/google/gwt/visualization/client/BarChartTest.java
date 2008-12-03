@@ -28,7 +28,7 @@ public class BarChartTest extends VisualizationTest {
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
   }
-  
+
   public void testBarChart() {
     loadApi(new Runnable() {
       public void run() {
@@ -40,9 +40,10 @@ public class BarChartTest extends VisualizationTest {
         options.setStacked(false);
         widget = BarChart.createWidget(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
-      }});
+      }
+    });
   }
-  
+
   @Override
   protected String getVisualizationPackage() {
     return BarChart.PACKAGE;

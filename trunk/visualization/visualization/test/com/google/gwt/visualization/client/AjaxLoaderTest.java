@@ -17,30 +17,36 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+/**
+ * Tests the AjaxLoader class.
+ */
 public class AjaxLoaderTest extends GWTTestCase {
   public static final int ASYNC_DELAY_MS = 5000;
-  
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
   }
 
   public void testLoad() {
-    AjaxLoader.loadVisualizationApi(new Runnable(){
+    AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
         finishTest();
-      }});
+      }
+    });
     delayTestFinish(ASYNC_DELAY_MS);
   }
 
   public void testReload() {
-    AjaxLoader.loadVisualizationApi(new Runnable(){
+    AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
-        AjaxLoader.loadVisualizationApi(new Runnable(){
+        AjaxLoader.loadVisualizationApi(new Runnable() {
           public void run() {
             finishTest();
-          }});
-      }});
+          }
+        });
+      }
+    });
     delayTestFinish(ASYNC_DELAY_MS);
   }
 }

@@ -24,11 +24,7 @@ import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
  * Tests for the ScatterChart class.
  */
 public class ScatterChartTest extends VisualizationTest {
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.visualization.VisualizationTest";
-  }
-  
+
   public void testScatterChart() {
     loadApi(new Runnable() {
       public void run() {
@@ -40,9 +36,10 @@ public class ScatterChartTest extends VisualizationTest {
         options.setPointSize(5);
         widget = ScatterChart.createWidget(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
-      }});
+      }
+    });
   }
-  
+
   @Override
   protected String getVisualizationPackage() {
     return ScatterChart.PACKAGE;
