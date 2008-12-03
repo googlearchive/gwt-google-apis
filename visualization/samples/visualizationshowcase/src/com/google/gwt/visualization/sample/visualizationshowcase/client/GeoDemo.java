@@ -15,7 +15,6 @@
  */
 package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
@@ -29,11 +28,6 @@ public class GeoDemo implements LeftTabPanel.WidgetProvider {
   public Widget getWidget() {
     Options options = Options.create();
     options.setDataMode(GeoMap.DataMode.REGIONS);
-    options.setOnLoadCallback(new Runnable() {
-      public void run() {
-        Window.alert("geo map loaded successfully");
-      }
-    });
     options.setHeight(600);
     options.setWidth(450);
     options.setShowLegend(false);
