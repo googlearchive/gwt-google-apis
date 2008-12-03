@@ -26,9 +26,15 @@ import com.google.gwt.visualization.client.AbstractVisualization.VisualizationFa
  */
 class CustomVisualizationEntryPoint implements EntryPoint {
   
+  private static native void callOnLoadCallback(String name) /*-{
+    if ($wnd.onLoadCallback != undefined) {
+      $wnd.onLoadCallback(name);
+    } 
+  }-*/;
+  
   public CustomVisualizationEntryPoint() {
   }
-  
+
   public void onModuleLoad() {
     
     // Register the visualization
@@ -42,10 +48,4 @@ class CustomVisualizationEntryPoint implements EntryPoint {
     
     callOnLoadCallback(GWT.getModuleName());
   }
-
-  private static native void callOnLoadCallback(String name) /*-{
-    if ($wnd.onLoadCallback != undefined) {
-    	$wnd.onLoadCallback(name);
-    } 
-  }-*/;
 }
