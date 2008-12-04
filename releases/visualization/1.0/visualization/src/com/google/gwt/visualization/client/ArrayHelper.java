@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayBoolean;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.JsArrayNumber;
@@ -29,6 +30,7 @@ public class ArrayHelper {
     for (int i = 0; i < bits.length; i++) {
       result.set(i, bits[i]);
     }
+    nativePatchConstructorForSafari(result);
     return result;
   }
 
@@ -37,6 +39,7 @@ public class ArrayHelper {
     for (int i = 0; i < integers.length; i++) {
       result.set(i, integers[i]);
     }
+    nativePatchConstructorForSafari(result);
     return result;
   }
 
@@ -45,6 +48,7 @@ public class ArrayHelper {
     for (int i = 0; i < numbers.length; i++) {
       result.set(i, numbers[i]);
     }
+    nativePatchConstructorForSafari(result);
     return result;
   }
 
@@ -53,7 +57,18 @@ public class ArrayHelper {
     for (int i = 0; i < strings.length; i++) {
       result.set(i, strings[i]);
     }
+    nativePatchConstructorForSafari(result);
     return result;
   }
+
+  /**
+   * This is a fixup for the constructor used to address issue 219 - Safari bug
+   * in comparing Date & Array constructors.
+   * 
+   * @param result
+   */
+  private static native void nativePatchConstructorForSafari(JavaScriptObject result) /*-{
+    result.constructor = $wnd.Array;
+  }-*/;
 
 }
