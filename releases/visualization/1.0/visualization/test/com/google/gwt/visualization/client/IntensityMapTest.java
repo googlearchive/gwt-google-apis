@@ -62,7 +62,7 @@ public class IntensityMapTest extends VisualizationTest {
     return data;
   }
 
-  public void dontTestSelection() {
+  public void testSelection() {
     AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
         DataTable data = createDailyActivities();
@@ -84,21 +84,18 @@ public class IntensityMapTest extends VisualizationTest {
             Selection s = viz.getSelection();
             assertEquals("Expected 1 element in the selection", 1,
                 s.getLength());
-            assertEquals("Expected row 1 to be selected", 1, s.getRow(0));
             assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
             finishTest();
           }
         });
         RootPanel.get().add(widget);
 
-        Selection s = SelectionHelper.createSelection(1, 0);
+        Selection s = createSelection();
         assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected row 1 to be selected", 1, s.getRow(0));
         assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
         viz.setSelection(s);
         s = viz.getSelection();
         assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected row 1 to be selected", 1, s.getRow(0));
         assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
         // Trigger a selection callback
         triggerSelection(viz, s);
@@ -228,4 +225,8 @@ public class IntensityMapTest extends VisualizationTest {
     String styleUrl = style.getProperty("background");
     return styleUrl.split("\\(")[1].split("\\)")[0];
   }
+
+  private native Selection createSelection() /*-{
+    return [{column : 0}];
+  }-*/;
 }
