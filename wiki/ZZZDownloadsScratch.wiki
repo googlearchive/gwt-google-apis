@@ -1,6 +1,4 @@
-#summary Scratchpad for the 'Downloads' wiki page
-
-Currently, released libraries are available for the following APIs.  [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].
+Currently, released libraries are available for the following APIs.  These APIs require [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.  [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].  
 
 *Gears API Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.1.1.tar.gz gwt-gears-1.1.1.tar.gz]
@@ -13,15 +11,19 @@ Currently, released libraries are available for the following APIs.  [http://cod
 *Google AJAX Search API Library 1.0*
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.1.tar.gz gwt-search-1.0.1.tar.gz]
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.1.zip gwt-search-1.0.1.zip]
+
+*Google Maps API Library 1.0 (Release Candidate)*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.2.tar.gz gwt-maps-1.0.2.tar.gz]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.2.zip gwt-maps-1.0.2.zip]
  
 ----
 
 ===Release Candidates===
 A number of additional libraries are now available as Release Candidates and are ready to be taken for a test drive. Note that Release Candidates have not yet been released for production use, and rely on [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.
 
-*Google Maps API Library 1.0 (Release Candidate)*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.1.tar.gz gwt-maps-1.0.1.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.1.zip gwt-maps-1.0.1.zip]
+*Google Visualization API Library 1.0 (Release Candidate)*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.0.tar.gz gwt-visualization-1.0.0.tar.gz]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.0.zip gwt-visualization-1.0.0.zip]
 
 ----
 
