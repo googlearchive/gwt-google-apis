@@ -17,7 +17,7 @@ Note that these versions rely on [http://code.google.com/webtoolkit/download.htm
 ====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=AJAXSearchGettingStarted Google AJAX Search 1.0 Library]====
   The [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API] lets you put Google Search in your web pages, including Web, Local, and Multimedia searches. This library allows you to access that API from Java code compiled with the GWT compiler. 
 
-====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=MapsSearchGettingStarted Google Maps 1.0 Library]====
+====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=MapsGettingStarted Google Maps 1.0 Library]====
 The [http://code.google.com/apis/maps/ Google Maps API] library provides a way to access the Google Maps API from a GWT project without having to write additional !JavaScript code.  The library gives you full control using the standard Maps components such as !InfoWindows, Markers, !MapTypes, and Geocoding.  You can even use advanced features such as adding GWT widgets to the Map, creating custom overlays, custom map types, and other components.
 
 ==Release Candidates==
