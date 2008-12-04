@@ -18,6 +18,7 @@ package com.google.gwt.visualization.sample.hellovisualization.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -139,9 +140,10 @@ class VisualizationDemo implements EntryPoint {
    * @return panel with a table.
    */
   private Widget createTable() {
+    final String noSelectionString = "<i>No rows selected.</i>";
     final Panel panel = new FlowPanel();
-    final Label label = new Label("no selection");
-    panel.add(new Label("Table visualization with selection."));
+    final HTML label = new HTML(noSelectionString);
+    panel.add(new HTML("<h2>Table visualization with selection support</h2>"));
     panel.add(label);
     // Read data from spreadsheet
     String dataUrl = "http://spreadsheets.google.com/tq?key=prll1aQH05yQqp_DKPP9TNg&pub=1";
@@ -183,7 +185,11 @@ class VisualizationDemo implements EntryPoint {
                 b.append(s.getColumn(i));
               }
             }
-            label.setText("selection changed " + b.toString()); 
+            if (b.length() == 0) {
+              label.setHTML(noSelectionString);
+            } else {
+              label.setHTML("<i>Selection changed to" + b.toString() + "<i>");
+            }
           }
         });
       }
