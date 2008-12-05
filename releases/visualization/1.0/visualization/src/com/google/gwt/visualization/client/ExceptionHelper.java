@@ -34,4 +34,8 @@ public abstract class ExceptionHelper {
       runnable.run();
     }
   }
+  
+  private ExceptionHelper() {
+    // do not instantiate
+  }
 }

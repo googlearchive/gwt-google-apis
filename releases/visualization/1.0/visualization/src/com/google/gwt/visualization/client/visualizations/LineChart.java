@@ -17,13 +17,11 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.CommonChartOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -64,24 +62,12 @@ public class LineChart extends Visualization<LineChart.Options> implements
 
   public static final String PACKAGE = "linechart";
 
-  public static native LineChart create(Element parent) /*-{
-    return new $wnd.google.visualization.LineChart(parent);
-  }-*/;
-
-  public static VisualizationWidget<LineChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    LineChart viz = create(div);
-    return new VisualizationWidget<LineChart, Options>(div, viz);
+  public LineChart() {
+    super();
   }
 
-  public static VisualizationWidget<LineChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    LineChart viz = create(div);
-    return new VisualizationWidget<LineChart, Options>(div, viz, data, options);
-  }
-
-  protected LineChart() {
+  public LineChart(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -95,4 +81,9 @@ public class LineChart extends Visualization<LineChart.Options> implements
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.LineChart(parent);
+  }-*/;
 }

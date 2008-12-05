@@ -27,7 +27,7 @@ public abstract class SortHandler extends Handler {
   public class SortEvent {
     private int column;
     private boolean ascending;
-    
+
     public SortEvent(boolean ascending, int column) {
       this.ascending = ascending;
       this.column = column;
@@ -41,9 +41,9 @@ public abstract class SortHandler extends Handler {
       return ascending;
     }
   }
-  
+
   public abstract void onSort(SortEvent event);
-  
+
   @Override
   protected void onEvent(Properties event) {
     boolean ascending = event.getBoolean("ascending");

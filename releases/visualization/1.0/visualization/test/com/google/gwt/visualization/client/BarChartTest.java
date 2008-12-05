@@ -34,7 +34,7 @@ public class BarChartTest extends VisualizationTest {
         options.setHeight(400);
         options.set3D(true);
         options.setStacked(false);
-        widget = BarChart.createWidget(createCompanyPerformance(), options);
+        widget = new BarChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });

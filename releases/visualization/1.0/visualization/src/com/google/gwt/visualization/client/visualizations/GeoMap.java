@@ -19,7 +19,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
-import com.google.gwt.visualization.client.VisualizationWidget;
 
 /**
  * Geomap visualization. Kind of like a cross between Map and IntensityMap.
@@ -89,24 +88,17 @@ public class GeoMap extends Visualization<GeoMap.Options> {
 
   public static final String PACKAGE = "geomap";
 
-  public static native GeoMap create(Element parent) /*-{
+  public GeoMap(AbstractDataTable data, Options options, int width, int height) 
+  {
+    super(data, options, width, height);
+  }
+
+  public GeoMap(int width, int height) {
+    super(width, height);
+  }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
     return new $wnd.google.visualization.GeoMap(parent);
   }-*/;
-
-  public static VisualizationWidget<GeoMap, Options> createWidget(
-      AbstractDataTable data, Options options, int width, int height) {
-    Element div = createDiv(width, height);
-    GeoMap viz = create(div);
-    return new VisualizationWidget<GeoMap, Options>(div, viz, data, options);
-  }
-
-  public static VisualizationWidget<GeoMap, Options> createWidget(int width,
-      int height) {
-    Element div = createDiv(width, height);
-    GeoMap viz = create(div);
-    return new VisualizationWidget<GeoMap, Options>(div, viz);
-  }
-  
-  protected GeoMap() {
-  }
 }

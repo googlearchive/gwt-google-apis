@@ -17,9 +17,10 @@
 package com.google.gwt.visualization.client;
 
 /**
- * Specifies where to put the legend in the visualization.  Not using enum
- * because I need to be able to create subclasses, for instance, 
- * {@link com.google.gwt.visualization.client.visualizations.PieChart.PieLegendPosition}.  
+ * Specifies where to put the legend in the visualization. Not using enum
+ * because I need to be able to create subclasses, for instance,
+ * {@link com.google.gwt.visualization.client.visualizations.PieChart.PieLegendPosition}
+ * .
  */
 public class LegendPosition {
   public static final LegendPosition BOTTOM = new LegendPosition("bottom");
@@ -27,13 +28,13 @@ public class LegendPosition {
   public static final LegendPosition NONE = new LegendPosition("none");
   public static final LegendPosition RIGHT = new LegendPosition("right");
   public static final LegendPosition TOP = new LegendPosition("top");
-  
+
   private final String name;
-  
+
   protected LegendPosition(String name) {
     this.name = name;
   }
-  
+
   @Override
   public String toString() {
     return name;

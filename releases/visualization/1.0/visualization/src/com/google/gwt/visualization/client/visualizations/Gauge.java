@@ -18,11 +18,9 @@ package com.google.gwt.visualization.client.visualizations;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.ArrayHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 
 /**
  * Visualization showing a gauge with a dial for each value.
@@ -92,23 +90,16 @@ public class Gauge extends Visualization<Gauge.Options> {
 
   public static final String PACKAGE = "gauge";
 
-  public static native Gauge create(Element parent) /*-{
+  public Gauge() {
+    super();
+  }
+
+  public Gauge(AbstractDataTable data, Options options) {
+    super(data, options);
+  }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
     return new $wnd.google.visualization.Gauge(parent);
   }-*/;
-
-  public static VisualizationWidget<Gauge, Options> createWidget() {
-    Element div = DOM.createDiv();
-    Gauge viz = create(div);
-    return new VisualizationWidget<Gauge, Options>(div, viz);
-  }
-
-  public static VisualizationWidget<Gauge, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    Gauge viz = create(div);
-    return new VisualizationWidget<Gauge, Options>(div, viz, data, options);
-  }
-
-  protected Gauge() {
-  }
 }

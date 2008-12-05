@@ -62,48 +62,6 @@ public class IntensityMapTest extends VisualizationTest {
     return data;
   }
 
-  public void testSelection() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
-      public void run() {
-        DataTable data = createDailyActivities();
-
-        // Create a minimal pie chart.
-        IntensityMap.Options options = IntensityMap.Options.create();
-        options.setWidth(400);
-        options.setHeight(240);
-        VisualizationWidget<IntensityMap, IntensityMap.Options> widget = IntensityMap.createWidget(
-            data, options);
-        final IntensityMap viz = widget.getVisualization();
-
-        // Add a selection handler
-        viz.addSelectHandler(new SelectHandler() {
-
-          @Override
-          public void onSelect(SelectEvent event) {
-            assertNotNull(event);
-            Selection s = viz.getSelection();
-            assertEquals("Expected 1 element in the selection", 1,
-                s.getLength());
-            assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
-            finishTest();
-          }
-        });
-        RootPanel.get().add(widget);
-
-        Selection s = createSelection();
-        assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
-        viz.setSelection(s);
-        s = viz.getSelection();
-        assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
-        // Trigger a selection callback
-        triggerSelection(viz, s);
-      }
-    }, IntensityMap.PACKAGE);
-    delayTestFinish(ASYNC_DELAY_MS);
-  }
-
   public void testColors() {
     loadApi(new Runnable() {
 
@@ -113,7 +71,7 @@ public class IntensityMapTest extends VisualizationTest {
 
         options = Options.create();
         options.setColors("green", "yellow");
-        widget = IntensityMap.createWidget(createIntensityTable(), options);
+        widget = new IntensityMap(createIntensityTable(), options);
         RootPanel.get().add(widget);
         assertEquals("failed to find expected parameter in url:"
             + getUrl(widget), "f0f0f0%2Cffffff%2C008000", getParameter(widget,
@@ -121,7 +79,7 @@ public class IntensityMapTest extends VisualizationTest {
 
         options = Options.create();
         options.setColors("red", "blue");
-        widget = IntensityMap.createWidget(createIntensityTable(), options);
+        widget = new IntensityMap(createIntensityTable(), options);
         RootPanel.get().add(widget);
         assertEquals("failed to find expected parameter in url:"
             + getUrl(widget), "f0f0f0%2Cffffff%2Cff0000", getParameter(widget,
@@ -139,50 +97,56 @@ public class IntensityMapTest extends VisualizationTest {
 
         options = Options.create();
         options.setRegion(Region.WORLD);
-        widget = IntensityMap.createWidget(createAsia(), options);
+        widget = new IntensityMap(createAsia(), options);
         RootPanel.get().add(widget);
         assertEquals("world", getParameter(widget, "chl"));
 
         options = Options.create();
         options.setRegion(Region.ASIA);
-        widget = IntensityMap.createWidget(createAsia(), options);
+        widget = new IntensityMap(createAsia(), options);
         RootPanel.get().add(widget);
         assertEquals("asia", getParameter(widget, "chl"));
       }
     });
   }
 
-  public void testShowOneTab() {
-    loadApi(new Runnable() {
-
+  public void testSelection() {
+    AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
-        Widget widget;
-        Options options;
-        Element grandson;
+        DataTable data = createDailyActivities();
 
-        options = Options.create();
-        options.setShowOneTab(false);
-        widget = IntensityMap.createWidget(createSingleTab(), options);
-        RootPanel.get().add(widget);
-        grandson = widget.getElement().getFirstChildElement().getFirstChildElement();
-        assertEquals("Expected a DIV element for grandchild of widget",
-            "div".toUpperCase(), grandson.getTagName().toUpperCase());
-        assertEquals("The grandchild has an unexpected class name",
-            "google-visualization-intensitymap-map", grandson.getClassName());
+        // Create a minimal pie chart.
+        IntensityMap.Options options = IntensityMap.Options.create();
+        options.setWidth(400);
+        options.setHeight(240);
+        final IntensityMap viz = new IntensityMap(data, options);
 
-        options = Options.create();
-        options.setShowOneTab(true);
-        widget = IntensityMap.createWidget(createSingleTab(), options);
-        RootPanel.get().add(widget);
-        System.out.println(widget.getElement().getString());
-        // grandson =
-        // widget.getElement().getFirstChildElement().getFirstChildElement();
-        // assertEquals("table".toUpperCase(),
-        // grandson.getTagName().toUpperCase());
-        // assertEquals("google-visualization-intensitymap-tab-table",
-        // grandson.getAttribute("class"));
+        // Add a selection handler
+        viz.addSelectHandler(new SelectHandler() {
+
+          @Override
+          public void onSelect(SelectEvent event) {
+            assertNotNull(event);
+            Selection s = viz.getSelection();
+            assertEquals("Expected 1 element in the selection", 1,
+                s.getLength());
+            assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
+            finishTest();
+          }
+        });
+        RootPanel.get().add(viz);
+        Selection s = createSelection();
+        assertEquals("Expected 1 element in the selection", 1, s.getLength());
+        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
+        viz.setSelection(s);
+        s = viz.getSelection();
+        assertEquals("Expected 1 element in the selection", 1, s.getLength());
+        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
+        // Trigger a selection callback
+        triggerSelection(viz, s);
       }
-    });
+    }, IntensityMap.PACKAGE);
+    delayTestFinish(ASYNC_DELAY_MS);
   }
 
   @Override
@@ -214,6 +178,10 @@ public class IntensityMapTest extends VisualizationTest {
     return data;
   }
 
+  private native Selection createSelection() /*-{
+    return [{column : 0}];
+  }-*/;
+
   private String getParameter(Widget cog, String name) {
     return getParameter(getUrl(cog), name);
   }
@@ -225,8 +193,4 @@ public class IntensityMapTest extends VisualizationTest {
     String styleUrl = style.getProperty("background");
     return styleUrl.split("\\(")[1].split("\\)")[0];
   }
-
-  private native Selection createSelection() /*-{
-    return [{column : 0}];
-  }-*/;
 }

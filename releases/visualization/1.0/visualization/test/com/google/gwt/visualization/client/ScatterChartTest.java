@@ -34,7 +34,7 @@ public class ScatterChartTest extends VisualizationTest {
         options.setHeight(400);
         options.setLineSize(2);
         options.setPointSize(5);
-        widget = ScatterChart.createWidget(createCompanyPerformance(), options);
+        widget = new ScatterChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });

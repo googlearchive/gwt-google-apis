@@ -123,7 +123,7 @@ public class VisualizationTest extends GWTTestCase {
    * @param viz - the Visualization to trigger the event on
    * @param selection - a selection object.
    */
-  protected native void triggerSelection(Selectable viz, Selection selection) /*-{
-    $wnd.google.visualization.events.trigger(viz, 'select', selection);
-  }-*/;
+  protected void triggerSelection(Selectable viz, Selection selection) {
+    SelectionHelper.triggerSelection(viz, selection);
+  }
 }

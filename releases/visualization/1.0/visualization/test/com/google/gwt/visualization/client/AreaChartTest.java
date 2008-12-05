@@ -35,7 +35,7 @@ public class AreaChartTest extends VisualizationTest {
         options.setLineSize(2);
         options.setPointSize(5);
         options.setStacked(false);
-        widget = AreaChart.createWidget(createCompanyPerformance(), options);
+        widget = new AreaChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });

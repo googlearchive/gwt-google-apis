@@ -18,6 +18,7 @@ package com.google.gwt.visualization.client;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.PieChart.Options;
 import com.google.gwt.visualization.client.visualizations.PieChart.PieLegendPosition;
@@ -45,8 +46,7 @@ public class CommonOptionsTest extends VisualizationTest {
         options.setTitle("My Daily Activities");
         options.setTitleColor("pink");
         
-        VisualizationWidget<PieChart, Options> widget = PieChart.createWidget(
-            data, options);
+        Widget widget = new PieChart(data, options);
         RootPanel.get().add(widget);
         Element div = widget.getElement();
         // assert that the div's first child is an iframe
@@ -63,8 +63,7 @@ public class CommonOptionsTest extends VisualizationTest {
         // Create a minimal pie chart.
         PieChart.Options options = PieChart.Options.create();
         options.setHeight(400);
-        VisualizationWidget<PieChart, Options> widget = PieChart.createWidget(
-            data, options);
+        Widget widget = new PieChart(data, options);
         RootPanel.get().add(widget);
         Element div = widget.getElement();
         Element iframe = div.getFirstChildElement();
@@ -81,27 +80,27 @@ public class CommonOptionsTest extends VisualizationTest {
 
         options = Options.create();
         options.setLegend(LegendPosition.BOTTOM);
-        RootPanel.get().add(PieChart.createWidget(data, options));
+        RootPanel.get().add(new PieChart(data, options));
 
         options = Options.create();
         options.setLegend(LegendPosition.TOP);
-        RootPanel.get().add(PieChart.createWidget(data, options));
+        RootPanel.get().add(new PieChart(data, options));
 
         options = Options.create();
         options.setLegend(LegendPosition.LEFT);
-        RootPanel.get().add(PieChart.createWidget(data, options));
+        RootPanel.get().add(new PieChart(data, options));
 
         options = Options.create();
         options.setLegend(LegendPosition.RIGHT);
-        RootPanel.get().add(PieChart.createWidget(data, options));
+        RootPanel.get().add(new PieChart(data, options));
 
         options = Options.create();
         options.setLegend(LegendPosition.NONE);
-        RootPanel.get().add(PieChart.createWidget(data, options));
+        RootPanel.get().add(new PieChart(data, options));
 
         options = Options.create();
         options.setLegend(PieLegendPosition.LABEL);
-        RootPanel.get().add(PieChart.createWidget(data, options));
+        RootPanel.get().add(new PieChart(data, options));
       }
     });
   }
@@ -114,8 +113,7 @@ public class CommonOptionsTest extends VisualizationTest {
         // Create a minimal pie chart.
         PieChart.Options options = PieChart.Options.create();
         options.setWidth(400);
-        VisualizationWidget<PieChart, Options> widget = PieChart.createWidget(
-            data, options);
+        Widget widget = new PieChart(data, options);
         RootPanel.get().add(widget);
         Element div = widget.getElement();
         Element iframe = div.getFirstChildElement();

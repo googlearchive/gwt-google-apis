@@ -19,10 +19,10 @@ package com.google.gwt.visualization.client;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Common options used by most charts from Google that feature an axis. 
+ * Common options used by most charts from Google that feature an axis.
  * 
  */
-public class CommonChartOptions extends CommonOptions {  
+public class CommonChartOptions extends CommonOptions {
   public static CommonOptions create() {
     return JavaScriptObject.createObject().cast();
   }

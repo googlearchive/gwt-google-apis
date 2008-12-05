@@ -29,7 +29,7 @@ public class Properties extends JavaScriptObject {
   public final native boolean getBoolean(String name) /*-{
     return this[name];
   }-*/;
-  
+
   public final Date getDate(String name) {
     return new Date((int) getDateDouble(name));
   }
@@ -41,7 +41,7 @@ public class Properties extends JavaScriptObject {
   public final native int getInt(String name) /*-{
     return this[name];
   }-*/;
-  
+
   public final native String getString(String name) /*-{
     return this[name];
   }-*/;

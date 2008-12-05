@@ -19,15 +19,15 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.visualizations.PieChart;
-import com.google.gwt.visualization.client.visualizations.PieChart.Options;
 
 /**
  * Demo for PieChart visualization.
  */
 public class PieDemo implements LeftTabPanel.WidgetProvider {
   public Widget getWidget() {
+    VerticalPanel result = new VerticalPanel();
+    
     /* create a datatable */
     DataTable data = Showcase.getDailyActivities();
 
@@ -37,16 +37,12 @@ public class PieDemo implements LeftTabPanel.WidgetProvider {
     options.setHeight(240);
     options.set3D(true);
     options.setTitle("My Daily Activities");
-    
-    VisualizationWidget<PieChart, Options> widget = 
-      PieChart.createWidget(data, options);
-    PieChart viz = widget.getVisualization();
+
+    PieChart viz = new PieChart(data, options);
     Label status = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
-    
-    VerticalPanel result = new VerticalPanel();
     result.add(status);
-    result.add(widget);
+    result.add(viz);
     return result;
   }
 }

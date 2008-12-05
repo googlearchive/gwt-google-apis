@@ -37,7 +37,6 @@ import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.ScatterChart;
 import com.google.gwt.visualization.client.visualizations.Table;
 
-
 /**
  * Google Visualization API in GWT demo.
  */
@@ -82,40 +81,43 @@ class Showcase implements EntryPoint {
   }
 
   public void onModuleLoad() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
-      public void run() {
-        final VerticalPanel vp = new VerticalPanel();
-        vp.getElement().getStyle().setPropertyPx("margin", 15);
-        RootPanel.get().add(vp);
-        vp.add(new HTML(
-            "The following visualizations are included in the GWT "
-                + "Visualization API in the package "
-                + "<tt>com.google.gwt.visualization.client.visualizations</tt>.  "
-                + "For a full listing of visualizations available in GWT, see <a href="
-                + '"'
-                + "http://code.google.com/apis/visualization/documentation/gallery.html"
-                + '"' + ">the Google Visualization API</a>."));
-        LeftTabPanel tabby = new LeftTabPanel();
-        vp.add(tabby);
-        AnnotatedDemo annotatedWidget = new AnnotatedDemo();
-        tabby.add(annotatedWidget, "AnnotatedTimeLine");
-        tabby.add(new AreaDemo(), "AreaChart");
-        tabby.add(new BarDemo(), "BarChart");
-        tabby.add(new ColumnDemo(), "ColumnChart");
-        tabby.add(new GaugeDemo(), "Gauge");
-        tabby.add(new GeoDemo(), "Geo Map");
-        tabby.add(new IntensityDemo(), "IntensityMap");
-        tabby.add(new LineDemo(), "LineChart");
-        tabby.add(new MapDemo(), "Map");
-        tabby.add(new MotionDemo(), "MotionChart");
-        tabby.add(new OrgDemo(), "OrgChart");
-        tabby.add(new PieDemo(), "PieChart");
-        tabby.add(new ScatterDemo(), "ScatterChart");
-        tabby.add(new TableDemo(), "Table");
-        tabby.setWidget(annotatedWidget);
-      }}, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE, 
-      ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE, IntensityMap.PACKAGE,
-      LineChart.PACKAGE, MapVisualization.PACKAGE, MotionChart.PACKAGE, OrgChart.PACKAGE, 
-      PieChart.PACKAGE, ScatterChart.PACKAGE, Table.PACKAGE);
+    AjaxLoader.loadVisualizationApi(
+        new Runnable() {
+          public void run() {
+            final VerticalPanel vp = new VerticalPanel();
+            vp.getElement().getStyle().setPropertyPx("margin", 15);
+            RootPanel.get().add(vp);
+            vp.add(new HTML(
+                "The following visualizations are included in the GWT "
+                    + "Visualization API in the package "
+                    + "<tt>com.google.gwt.visualization.client.visualizations</tt>.  "
+                    + "For a full listing of visualizations available in GWT, see <a href="
+                    + '"'
+                    + "http://code.google.com/apis/visualization/documentation/gallery.html"
+                    + '"' + ">the Google Visualization API</a>."));
+            LeftTabPanel tabby = new LeftTabPanel();
+            vp.add(tabby);
+            AnnotatedDemo annotatedWidget = new AnnotatedDemo();
+            tabby.add(annotatedWidget, "AnnotatedTimeLine");
+            tabby.add(new AreaDemo(), "AreaChart");
+            tabby.add(new BarDemo(), "BarChart");
+            tabby.add(new ColumnDemo(), "ColumnChart");
+            tabby.add(new GaugeDemo(), "Gauge");
+            tabby.add(new GeoDemo(), "Geo Map");
+            tabby.add(new IntensityDemo(), "IntensityMap");
+            tabby.add(new LineDemo(), "LineChart");
+            tabby.add(new MapDemo(), "Map");
+            tabby.add(new MotionDemo(), "MotionChart");
+            tabby.add(new OrgDemo(), "OrgChart");
+            tabby.add(new PieDemo(), "PieChart");
+            tabby.add(new ScatterDemo(), "ScatterChart");
+            tabby.add(new TableDemo(), "Table");
+            tabby.setWidget(annotatedWidget);
+          }
+        }, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE,
+        ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE,
+        IntensityMap.PACKAGE, LineChart.PACKAGE, MapVisualization.PACKAGE,
+        MotionChart.PACKAGE, OrgChart.PACKAGE, PieChart.PACKAGE,
+        ScatterChart.PACKAGE, Table.PACKAGE);
   }
 }

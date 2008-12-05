@@ -36,7 +36,7 @@ public class GaugeTest extends VisualizationTest {
         DataTable data = makeDataTable();
         Gauge.Options options = Gauge.Options.create();
         options.setSize(600, 200);
-        RootPanel.get().add(Gauge.createWidget(data, options));
+        RootPanel.get().add(new Gauge(data, options));
       }
     });
   }
@@ -59,7 +59,7 @@ public class GaugeTest extends VisualizationTest {
         options.setWidth(600);
         options.setYellowRange(25, 50);
         DataTable data = makeDataTable();
-        RootPanel.get().add(Gauge.createWidget(data, options));
+        RootPanel.get().add(new Gauge(data, options));
       }
     });
   }

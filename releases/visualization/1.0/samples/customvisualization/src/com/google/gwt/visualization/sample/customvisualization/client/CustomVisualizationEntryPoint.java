@@ -25,27 +25,27 @@ import com.google.gwt.visualization.client.AbstractVisualization.VisualizationFa
  * 
  */
 class CustomVisualizationEntryPoint implements EntryPoint {
-  
+
   private static native void callOnLoadCallback(String name) /*-{
     if ($wnd.onLoadCallback != undefined) {
       $wnd.onLoadCallback(name);
-    } 
+    }
   }-*/;
-  
+
   public CustomVisualizationEntryPoint() {
   }
 
   public void onModuleLoad() {
-    
+
     // Register the visualization
-    AbstractVisualization.registerVisualization("CustomVisualization", 
+    AbstractVisualization.registerVisualization("CustomVisualization",
         new VisualizationFactory() {
-      
-      public AbstractVisualization<?> create() {
-        return new CustomVisualization();
-      }
-    });
-    
+
+          public AbstractVisualization<?> create() {
+            return new CustomVisualization();
+          }
+        });
+
     callOnLoadCallback(GWT.getModuleName());
   }
 }

@@ -49,7 +49,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setZoomEndTime(new Date(109, 1, 1));
         options.setZoomStartTime(new Date(107, 1, 1));
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -59,7 +59,6 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
 
   public void testLegend() {
     loadApi(new Runnable() {
-      @SuppressWarnings("deprecation")
       public void run() {
         Widget widget;
         Options options;
@@ -67,7 +66,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setLegendPosition(AnnotatedLegendPosition.NEW_ROW);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -75,7 +74,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setLegendPosition(AnnotatedLegendPosition.SAME_ROW);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -85,7 +84,6 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
 
   public void testScaleType() {
     loadApi(new Runnable() {
-      @SuppressWarnings("deprecation")
       public void run() {
         Widget widget;
         Options options;
@@ -93,7 +91,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setScaleType(ScaleType.ALLFIXED);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -101,7 +99,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setScaleType(ScaleType.ALLMAXIMIZE);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -109,7 +107,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setScaleType(ScaleType.FIXED);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -117,7 +115,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setScaleType(ScaleType.MAXIMIZE);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -127,7 +125,6 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
 
   public void testWindowMode() {
     loadApi(new Runnable() {
-      @SuppressWarnings("deprecation")
       public void run() {
         Widget widget;
         Options options;
@@ -135,7 +132,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setWindowMode(WindowMode.OPAQUE);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -143,7 +140,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setWindowMode(WindowMode.TRANSPARENT);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -151,7 +148,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options = Options.create();
         options.setWindowMode(WindowMode.WINDOW);
 
-        widget = AnnotatedTimeLine.createWidget(createAnnotatedDataTable(),
+        widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
             options, 400, 400);
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
@@ -166,6 +163,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
 
   @SuppressWarnings("deprecation")
   private AbstractDataTable createAnnotatedDataTable() {
+    @SuppressWarnings("unused")
     int year, month, day;
 
     DataTable data = DataTable.create();

@@ -53,7 +53,7 @@ public class IntensityDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(4, 1, 187);
     data.setValue(4, 2, 8514877);
     
-    widget = IntensityMap.createWidget(data, options);
+    widget = new IntensityMap(data, options);
   }
 
   public Widget getWidget() {

@@ -22,23 +22,23 @@ import com.google.gwt.visualization.client.Properties;
  */
 public abstract class PageHandler extends Handler {
   /**
-   * This event is fired when the user clicks a button to change the 
-   * current page on the visualization, such as "next" or "back".
+   * This event is fired when the user clicks a button to change the current
+   * page on the visualization, such as "next" or "back".
    */
   public class PageEvent {
     private int page;
-    
+
     public PageEvent(int page) {
       this.page = page;
     }
-    
+
     public int getPage() {
       return page;
     }
   }
-  
+
   public abstract void onPage(PageEvent event);
-  
+
   @Override
   protected void onEvent(Properties properties) {
     onPage(new PageEvent(properties.getInt("page")));

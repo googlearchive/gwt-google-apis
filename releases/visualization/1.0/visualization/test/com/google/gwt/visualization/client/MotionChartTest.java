@@ -37,7 +37,7 @@ public class MotionChartTest extends VisualizationTest {
         DataTable data = makeDataTable();
         MotionChart.Options options = MotionChart.Options.create();
         options.setSize(600, 200);
-        RootPanel.get().add(MotionChart.createWidget(data, options));        
+        RootPanel.get().add(new MotionChart(data, options));        
       }
     });
   }

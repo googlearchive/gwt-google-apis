@@ -24,7 +24,13 @@ import com.google.gwt.visualization.client.visualizations.Visualization;
  * 
  */
 public class SelectionHelper {
-  public static void addSelectHandler(Visualization<?> viz, SelectHandler handler) {
+  public static <E extends Visualization<?>> void addSelectHandler(
+      E viz, SelectHandler handler) {
+    Handler.addHandler(viz, "select", handler);
+  }
+
+  public static <E extends AbstractVisualization<?>> void addSelectHandler(
+      E viz, SelectHandler handler) {
     Handler.addHandler(viz, "select", handler);
   }
 
@@ -46,12 +52,19 @@ public class SelectionHelper {
     return sel;
   }
 
-  public static final native Selection getSelection(Selectable visualization) /*-{
-    return visualization.getSelection();
+  public static final native Selection getSelection(Selectable viz) /*-{
+    var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
+    return jso.getSelection();
   }-*/;
 
-  public static final native void setSelection(Selectable visualization, Selection sel) /*-{
-    visualization.setSelection(sel);
+  public static final native void setSelection(Selectable viz, Selection sel) /*-{
+    var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
+    jso.setSelection(sel);
+  }-*/;
+
+  public static native void triggerSelection(Selectable viz, Selection selection) /*-{
+    var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
+    $wnd.google.visualization.events.trigger(jso, 'select', selection);
   }-*/;
 
   private static native Selection createSelection() /*-{
