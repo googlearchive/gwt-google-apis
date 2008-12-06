@@ -32,11 +32,11 @@ public abstract class AbstractDrawOptions extends JavaScriptObject {
   public final native void setOption(String option, double value) /*-{
     this[option] = value;
   }-*/;
-  
+
   public final native void setOption(String option, int value) /*-{
     this[option] = value;
   }-*/;
-  
+
   public final native void setOption(String option, String value) /*-{
     this[option] = value;
   }-*/;

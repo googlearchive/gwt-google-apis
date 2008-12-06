@@ -17,13 +17,11 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.PageHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
@@ -105,24 +103,12 @@ public class Table extends Visualization<Table.Options> implements Selectable {
 
   public static final String PACKAGE = "table";
 
-  public static native Table create(Element parent) /*-{
-    return new $wnd.google.visualization.Table(parent);
-  }-*/;
-
-  public static VisualizationWidget<Table, Options> createWidget() {
-    Element div = DOM.createDiv();
-    Table viz = create(div);
-    return new VisualizationWidget<Table, Options>(div, viz);
+  public Table() {
+    super();
   }
 
-  public static VisualizationWidget<Table, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    Table viz = create(div);
-    return new VisualizationWidget<Table, Options>(div, viz, data, options);
-  }
-
-  protected Table() {
+  public Table(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addPageHandler(PageHandler handler) {
@@ -144,4 +130,9 @@ public class Table extends Visualization<Table.Options> implements Selectable {
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.Table(parent);
+  }-*/;
 }

@@ -35,7 +35,7 @@ public class PieChartTest extends VisualizationTest {
         PieChart.Options options = PieChart.Options.create();
         options.setWidth(400);
         options.setHeight(240);
-        RootPanel.get().add(PieChart.createWidget(data, options));
+        RootPanel.get().add(new PieChart(data, options));
       }
     });
   }

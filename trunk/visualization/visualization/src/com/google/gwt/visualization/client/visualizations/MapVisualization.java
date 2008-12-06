@@ -22,7 +22,6 @@ import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -87,25 +86,13 @@ public class MapVisualization extends Visualization<MapVisualization.Options> im
 
   public static final String PACKAGE = "map";
 
-  public static native MapVisualization create(Element parent) /*-{
-    return new $wnd.google.visualization.Map(parent);
-  }-*/;
-
-  public static VisualizationWidget<MapVisualization, Options> createWidget(
-      AbstractDataTable data, Options options, int width, int height) {
-    Element div = createDiv(width, height);
-    MapVisualization viz = create(div);
-    return new VisualizationWidget<MapVisualization, Options>(div, viz, data, options);
-  }
-
-  public static VisualizationWidget<MapVisualization, Options> createWidget(int width,
+  public MapVisualization(AbstractDataTable data, Options options, int width, 
       int height) {
-    Element div = createDiv(width, height);
-    MapVisualization viz = create(div);
-    return new VisualizationWidget<MapVisualization, Options>(div, viz);
+    super(data, options, width, height);
   }
 
-  protected MapVisualization() {
+  public MapVisualization(int width, int height) {
+    super(width, height);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -119,4 +106,9 @@ public class MapVisualization extends Visualization<MapVisualization.Options> im
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.Map(parent);
+  }-*/;
 }

@@ -18,6 +18,7 @@ package com.google.gwt.visualization.sample.hellovisualization.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -30,7 +31,6 @@ import com.google.gwt.visualization.client.DataView;
 import com.google.gwt.visualization.client.Query;
 import com.google.gwt.visualization.client.QueryResponse;
 import com.google.gwt.visualization.client.Selection;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.Query.Callback;
 import com.google.gwt.visualization.client.events.SelectHandler;
@@ -84,14 +84,14 @@ class VisualizationDemo implements EntryPoint {
     Panel flowPanel = new FlowPanel();
     panel.add(flowPanel);
     flowPanel.add(new Label("Original DataTable:"));
-    VisualizationWidget<Table, Options> chart = Table.createWidget();
+    Table chart = new Table();
     flowPanel.add(chart);
     chart.draw(table);
     
     flowPanel = new FlowPanel();
     flowPanel.add(new Label("DataView with columns 2 and 1:"));
     /* create a view on this table, with columns 2 and 1 */
-    VisualizationWidget<Table, Options> viewChart = Table.createWidget();
+    Table viewChart = new Table();
     DataView view = DataView.create(table);
     view.setColumns(new int[] {2, 1});
     flowPanel.add(viewChart);
@@ -130,7 +130,7 @@ class VisualizationDemo implements EntryPoint {
     options.setHeight(240);
     options.set3D(true);
     options.setTitle("My Daily Activities");
-    return PieChart.createWidget(data, options);
+    return new PieChart(data, options);
   }
 
   /**
@@ -139,9 +139,10 @@ class VisualizationDemo implements EntryPoint {
    * @return panel with a table.
    */
   private Widget createTable() {
+    final String noSelectionString = "<i>No rows selected.</i>";
     final Panel panel = new FlowPanel();
-    final Label label = new Label("no selection");
-    panel.add(new Label("Table visualization with selection."));
+    final HTML label = new HTML(noSelectionString);
+    panel.add(new HTML("<h2>Table visualization with selection support</h2>"));
     panel.add(label);
     // Read data from spreadsheet
     String dataUrl = "http://spreadsheets.google.com/tq?key=prll1aQH05yQqp_DKPP9TNg&pub=1";
@@ -155,13 +156,11 @@ class VisualizationDemo implements EntryPoint {
           return;
         }
 
-        VisualizationWidget<Table, Options> chart = Table.createWidget();
-        panel.add(chart);
+        final Table viz = new Table();
+        panel.add(viz);
         Options options = Table.Options.create();
         options.setShowRowNumber(true);
-        chart.draw(response.getDataTable(), options);
-        
-        final Table viz = chart.getVisualization();
+        viz.draw(response.getDataTable(), options);
 
         viz.addSelectHandler(new SelectHandler() {
           @Override
@@ -183,7 +182,11 @@ class VisualizationDemo implements EntryPoint {
                 b.append(s.getColumn(i));
               }
             }
-            label.setText("selection changed " + b.toString()); 
+            if (b.length() == 0) {
+              label.setHTML(noSelectionString);
+            } else {
+              label.setHTML("<i>Selection changed to" + b.toString() + "<i>");
+            }
           }
         });
       }

@@ -19,7 +19,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.visualizations.OrgChart;
 import com.google.gwt.visualization.client.visualizations.OrgChart.Options;
@@ -49,13 +48,11 @@ public class OrgDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(4, 0, "Carol");
     data.setValue(4, 1, "Bob");
     
-    VisualizationWidget<OrgChart, OrgChart.Options> widget = 
-      OrgChart.createWidget(data, options);
-    OrgChart viz = widget.getVisualization();
+    OrgChart viz = new OrgChart(data, options);
     Label status = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
     panel.add(status);
-    panel.add(widget);
+    panel.add(viz);
   }
 
   public Widget getWidget() {

@@ -17,10 +17,8 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
-import com.google.gwt.visualization.client.VisualizationWidget;
 
 /**
  * Motion Chart visualization. Note that this chart does not work when loading
@@ -59,24 +57,16 @@ public class MotionChart extends Visualization<MotionChart.Options> {
 
   public static final String PACKAGE = "motionchart";
 
-  public static native MotionChart create(Element parent) /*-{
+  public MotionChart() {
+    super();
+  }
+
+  public MotionChart(AbstractDataTable data, Options options) {
+    super(data, options);
+  }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
     return new $wnd.google.visualization.MotionChart(parent);
   }-*/;
-
-  public static VisualizationWidget<MotionChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    MotionChart viz = create(div);
-    return new VisualizationWidget<MotionChart, Options>(div, viz);
-  }
-
-  public static VisualizationWidget<MotionChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    MotionChart viz = create(div);
-    return new VisualizationWidget<MotionChart, Options>(div, viz, data,
-        options);
-  }
-
-  protected MotionChart() {
-  }
 }

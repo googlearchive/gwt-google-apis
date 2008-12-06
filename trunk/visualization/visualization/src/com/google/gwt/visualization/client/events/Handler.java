@@ -15,6 +15,8 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.visualization.client.AbstractVisualization;
 import com.google.gwt.visualization.client.ExceptionHelper;
 import com.google.gwt.visualization.client.Properties;
 import com.google.gwt.visualization.client.visualizations.Visualization;
@@ -23,15 +25,25 @@ import com.google.gwt.visualization.client.visualizations.Visualization;
  * The base class for visualization event handlers.
  */
 public abstract class Handler {
-  public static native void addHandler(Visualization<?> viz, 
-                                       String eventName, 
-                                       Handler handler) /*-{
+  private static native void addHandler(JavaScriptObject jso, String eventName, Handler handler) /*-{
     var callback = function(event) {
       @com.google.gwt.visualization.client.events.Handler::onCallback(Lcom/google/gwt/visualization/client/events/Handler;Lcom/google/gwt/visualization/client/Properties;)
           (handler, event);
     };
-    $wnd.google.visualization.events.addListener(viz, eventName, callback);
+    $wnd.google.visualization.events.addListener(jso, eventName, callback);
   }-*/;
+  
+  public static void addHandler(Visualization<?> viz,
+      String eventName, 
+      Handler handler) {
+    addHandler(viz.getJso(), eventName, handler);
+  }
+  
+  public static void addHandler(AbstractVisualization<?> viz,
+      String eventName, 
+      Handler handler) {
+    addHandler(viz.getJso(), eventName, handler);
+  }
 
   @SuppressWarnings("unused")
   private static void onCallback(final Handler handler, 

@@ -17,13 +17,11 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -72,24 +70,12 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
 
   public static final String PACKAGE = "orgchart";
 
-  public static native OrgChart create(Element parent) /*-{
-    return new $wnd.google.visualization.OrgChart(parent);
-  }-*/;
-
-  public static VisualizationWidget<OrgChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    OrgChart viz = create(div);
-    return new VisualizationWidget<OrgChart, Options>(div, viz);
+  public OrgChart() {
+    super();
   }
 
-  public static VisualizationWidget<OrgChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    OrgChart viz = create(div);
-    return new VisualizationWidget<OrgChart, Options>(div, viz, data, options);
-  }
-
-  protected OrgChart() {
+  public OrgChart(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -103,4 +89,9 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.OrgChart(parent);
+  }-*/;
 }

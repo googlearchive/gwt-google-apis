@@ -17,13 +17,11 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.CommonChartOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -64,24 +62,12 @@ public class AreaChart extends Visualization<AreaChart.Options> implements
 
   public static final String PACKAGE = "areachart";
 
-  public static native AreaChart create(Element parent) /*-{
-    return new $wnd.google.visualization.AreaChart(parent);
-  }-*/;
-
-  public static VisualizationWidget<AreaChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    AreaChart viz = create(div);
-    return new VisualizationWidget<AreaChart, Options>(div, viz);
+  public AreaChart() {
+    super();
   }
 
-  public static VisualizationWidget<AreaChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    AreaChart viz = create(div);
-    return new VisualizationWidget<AreaChart, Options>(div, viz, data, options);
-  }
-
-  protected AreaChart() {
+  public AreaChart(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -95,4 +81,9 @@ public class AreaChart extends Visualization<AreaChart.Options> implements
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.AreaChart(parent);
+  }-*/;
 }

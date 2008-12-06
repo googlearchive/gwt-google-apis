@@ -33,6 +33,7 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
 
   @SuppressWarnings("deprecation")
   public AnnotatedDemo() {
+    @SuppressWarnings("unused")
     int year, month, day;
 
     Options options = Options.create();
@@ -73,7 +74,7 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(5, 1, 33322);
     data.setValue(5, 4, 39463);
 
-    widget = AnnotatedTimeLine.createWidget(data, options, 700, 240);
+    widget = new AnnotatedTimeLine(data, options, 700, 240);
   }
 
   public Widget getWidget() {

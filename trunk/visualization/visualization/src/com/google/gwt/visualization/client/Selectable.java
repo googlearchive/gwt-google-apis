@@ -15,21 +15,13 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.visualization.client.events.SelectHandler;
+
 /**
- * A marker interface that marks visualizations as supporting selection and the
- * select event. It might have been nice to have some characteristic methods in
- * the interface instead of just having the marker, but Visualization extends
- * JavaScriptObject, and subclasses of JavaScriptObjects may not implement
- * interfaces with methods.
+ * A selectable visualization.
  */
 public interface Selectable {
-  /**
-   * The SelectionMethods interface can be implemented to provide the selection
-   * methods in Java classes which do not extend JavaScriptObject.
-   */
-  public interface SelectionMethods extends Selectable {
-    Selection getSelection();
-
-    void setSelection(Selection selection);
-  }
+  void addSelectHandler(SelectHandler handler);
+  Selection getSelection();
+  void setSelection(Selection sel);
 }

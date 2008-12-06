@@ -19,7 +19,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.visualizations.AreaChart;
 import com.google.gwt.visualization.client.visualizations.AreaChart.Options;
 
@@ -36,13 +35,11 @@ public class AreaDemo implements LeftTabPanel.WidgetProvider {
     
     DataTable data = Showcase.getCompanyPerformance();
 
-    VisualizationWidget<AreaChart, AreaChart.Options> widget = 
-      AreaChart.createWidget(data, options);
-    AreaChart viz = widget.getVisualization();
+    AreaChart viz = new AreaChart(data, options);
     Label status = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
     result.add(status);
-    result.add(widget);
+    result.add(viz);
     return result;
   }
 }

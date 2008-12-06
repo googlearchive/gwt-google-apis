@@ -17,13 +17,11 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.CommonChartOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -58,25 +56,12 @@ public class ColumnChart extends Visualization<ColumnChart.Options> implements
 
   public static final String PACKAGE = "columnchart";
 
-  public static native ColumnChart create(Element parent) /*-{
-    return new $wnd.google.visualization.ColumnChart(parent);
-  }-*/;
-
-  public static VisualizationWidget<ColumnChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    ColumnChart viz = create(div);
-    return new VisualizationWidget<ColumnChart, Options>(div, viz);
+  public ColumnChart() {
+    super();
   }
 
-  public static VisualizationWidget<ColumnChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    ColumnChart viz = create(div);
-    return new VisualizationWidget<ColumnChart, Options>(div, viz, data,
-        options);
-  }
-
-  protected ColumnChart() {
+  public ColumnChart(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -90,4 +75,9 @@ public class ColumnChart extends Visualization<ColumnChart.Options> implements
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.ColumnChart(parent);
+  }-*/;
 }

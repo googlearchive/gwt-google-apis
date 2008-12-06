@@ -44,6 +44,6 @@ public class GeoDemo implements LeftTabPanel.WidgetProvider {
     dataTable.setValue(5, 0, "France");
     dataTable.setValue(6, 0, "RU");
     
-    return GeoMap.createWidget(dataTable, options, 400, 300);
+    return new GeoMap(dataTable, options, 400, 300);
   }
 }

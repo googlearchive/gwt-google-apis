@@ -19,6 +19,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * Range with min/max value.
+ * 
  * @see DataTable#getColumnRange(int)
  */
 public class Range extends JavaScriptObject {

@@ -17,6 +17,7 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.events.SelectHandler;
 import com.google.gwt.visualization.client.visualizations.OrgChart;
 import com.google.gwt.visualization.client.visualizations.OrgChart.Options;
@@ -37,7 +38,7 @@ public class OrgChartTest extends VisualizationTest {
         Widget widget;
         Options options = Options.create();
         options.setAllowHtml(true);
-        widget = OrgChart.createWidget(createCompanyPerformance(), options);
+        widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
       }
@@ -47,13 +48,9 @@ public class OrgChartTest extends VisualizationTest {
   public void testSelection() {
     AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
-        DataTable data = createDailyActivities();
-  
         // Create a minimal pie chart.
         OrgChart.Options options = OrgChart.Options.create();
-        VisualizationWidget<OrgChart, OrgChart.Options> widget = OrgChart.createWidget(
-            data, options);
-        final OrgChart viz = widget.getVisualization();
+        final OrgChart viz = new OrgChart(createDataTable(), options);
   
         // Add a selection handler
         viz.addSelectHandler(new SelectHandler() {
@@ -69,7 +66,7 @@ public class OrgChartTest extends VisualizationTest {
             finishTest();
           }
         });
-        RootPanel.get().add(widget);
+        RootPanel.get().add(viz);
   
         Selection s = SelectionHelper.createSelection(1, 0);
         assertEquals("Expected 1 element in the selection", 1, s.getLength());
@@ -95,19 +92,19 @@ public class OrgChartTest extends VisualizationTest {
         
         options = Options.create();
         options.setSize(Size.SMALL);
-        widget = OrgChart.createWidget(createCompanyPerformance(), options);
+        widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
         
         options = Options.create();
         options.setSize(Size.MEDIUM);
-        widget = OrgChart.createWidget(createCompanyPerformance(), options);
+        widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
         
         options = Options.create();
         options.setSize(Size.LARGE);
-        widget = OrgChart.createWidget(createCompanyPerformance(), options);
+        widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
       }
@@ -117,5 +114,22 @@ public class OrgChartTest extends VisualizationTest {
   @Override
   protected String getVisualizationPackage() {
     return OrgChart.PACKAGE;
+  }
+
+  private AbstractDataTable createDataTable() {
+    DataTable data = DataTable.create();
+    data.addColumn(ColumnType.STRING, "Name");
+    data.addColumn(ColumnType.STRING, "Manager");
+    data.addRows(5);
+    data.setValue(0, 0, "Mike");
+    data.setValue(1, 0, "Jim");
+    data.setValue(1, 1, "Mike");
+    data.setValue(2, 0, "Alice");
+    data.setValue(2, 1, "Mike");
+    data.setValue(3, 0, "Bob");
+    data.setValue(3, 1, "Jim");
+    data.setValue(4, 0, "Carol");
+    data.setValue(4, 1, "Bob");
+    return data;
   }
 }

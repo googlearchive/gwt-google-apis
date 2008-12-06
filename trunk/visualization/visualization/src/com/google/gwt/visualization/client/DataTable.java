@@ -228,15 +228,24 @@ public class DataTable extends AbstractDataTable {
   
   private native void setCellDate(int rowIndex, int columnIndex, double value,
       String formattedValue, Properties properties) /*-{
-    this.setCell(rowIndex, columnIndex, new $wnd.Date(value), formattedValue, properties);
+    var newDate = new $wnd.Date(value);
+    // Safari bug: see issue 219
+    newDate.constructor = $wnd.Date;
+    this.setCell(rowIndex, columnIndex, newDate, formattedValue, properties);
   }-*/;
   
   private native void setValue(int rowIndex, int columnIndex, int hour,
       int minute, int second, int millis) /*-{
-    this.setValue(rowIndex, columnIndex, new $wnd.Array(hour, minute, second, millis));
+    var newArray = new $wnd.Array(hour, minute, second, millis);
+    // Safari bug: see issue 219
+    newArray.constructor = $wnd.Array;    
+    this.setValue(rowIndex, columnIndex, newArray);
   }-*/;
 
   private native void setValueDate(int rowIndex, int columnIndex, double value) /*-{
-    this.setValue(rowIndex, columnIndex, new $wnd.Date(value));
+    var newDate = new $wnd.Date(value);
+    // Safari bug: see issue 219
+    newDate.constructor = $wnd.Date;
+    this.setValue(rowIndex, columnIndex, newDate);
   }-*/;
 }
