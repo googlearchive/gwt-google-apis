@@ -17,13 +17,11 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.CommonChartOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -59,25 +57,12 @@ public class ScatterChart extends Visualization<ScatterChart.Options> implements
 
   public static final String PACKAGE = "scatterchart";
 
-  public static native ScatterChart create(Element parent) /*-{
-    return new $wnd.google.visualization.ScatterChart(parent);
-  }-*/;
-
-  public static VisualizationWidget<ScatterChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    ScatterChart viz = create(div);
-    return new VisualizationWidget<ScatterChart, Options>(div, viz);
+  public ScatterChart() {
+    super();
   }
 
-  public static VisualizationWidget<ScatterChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    ScatterChart viz = create(div);
-    return new VisualizationWidget<ScatterChart, Options>(div, viz, data,
-        options);
-  }
-
-  protected ScatterChart() {
+  public ScatterChart(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -91,4 +76,9 @@ public class ScatterChart extends Visualization<ScatterChart.Options> implements
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.ScatterChart(parent);
+  }-*/;
 }

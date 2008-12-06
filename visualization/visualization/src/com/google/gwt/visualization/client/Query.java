@@ -22,13 +22,16 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 
 /**
  * Represents a query that is sent to a data source.
- * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#Query"> Query API Reference</a>
+ * 
+ * @see <a
+ *      href="http://code.google.com/apis/visualization/documentation/reference.html#Query">
+ *      Query API Reference</a>
  */
 public class Query extends JavaScriptObject {
 
   /**
    * Callback for sending a query.
-   *  
+   * 
    */
   public interface Callback {
     void onResponse(QueryResponse response);
@@ -38,7 +41,8 @@ public class Query extends JavaScriptObject {
     return new $wnd.google.visualization.Query(dataSource);
   }-*/;
 
-  private static void fireAndCatch(UncaughtExceptionHandler handler, Callback callback, QueryResponse response) {
+  private static void fireAndCatch(UncaughtExceptionHandler handler,
+      Callback callback, QueryResponse response) {
     try {
       fireImpl(callback, response);
     } catch (Throwable e) {
@@ -49,9 +53,10 @@ public class Query extends JavaScriptObject {
   private static void fireImpl(Callback callback, QueryResponse response) {
     callback.onResponse(response);
   }
-  
+
   @SuppressWarnings("unused")
-  private static void onResponseCallback(Callback callback, QueryResponse response) {
+  private static void onResponseCallback(Callback callback,
+      QueryResponse response) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
     if (handler != null) {
       fireAndCatch(handler, callback, response);
@@ -76,7 +81,7 @@ public class Query extends JavaScriptObject {
   public final native void setRefreshInterval(int timeInSeconds) /*-{
     this.setRefreshInterval(timeInSeconds);
   }-*/;
-  
+
   public final native void setTimeout(int seconds) /*-{
     this.setTimeout(seconds);
   }-*/;

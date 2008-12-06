@@ -17,13 +17,11 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.CommonChartOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -59,24 +57,12 @@ public class BarChart extends Visualization<BarChart.Options> implements
 
   public static final String PACKAGE = "barchart";
 
-  public static native BarChart create(Element parent) /*-{
-   return new $wnd.google.visualization.BarChart(parent);
-  }-*/;
-
-  public static VisualizationWidget<BarChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    BarChart viz = create(div);
-    return new VisualizationWidget<BarChart, Options>(div, viz);
+  public BarChart() {
+    super();
   }
 
-  public static VisualizationWidget<BarChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    BarChart viz = create(div);
-    return new VisualizationWidget<BarChart, Options>(div, viz, data, options);
-  }
-
-  protected BarChart() {
+  public BarChart(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -90,4 +76,9 @@ public class BarChart extends Visualization<BarChart.Options> implements
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+   return new $wnd.google.visualization.BarChart(parent);
+  }-*/;
 }

@@ -18,14 +18,12 @@ package com.google.gwt.visualization.client.visualizations;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -93,25 +91,12 @@ public class IntensityMap extends Visualization<IntensityMap.Options> implements
 
   public static final String PACKAGE = "intensitymap";
 
-  public static native IntensityMap create(Element parent) /*-{
-    return new $wnd.google.visualization.IntensityMap(parent);
-  }-*/;
-
-  public static VisualizationWidget<IntensityMap, Options> createWidget() {
-    Element div = DOM.createDiv();
-    IntensityMap viz = create(div);
-    return new VisualizationWidget<IntensityMap, Options>(div, viz);
+  public IntensityMap() {
+    super();
   }
 
-  public static VisualizationWidget<IntensityMap, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    IntensityMap viz = create(div);
-    return new VisualizationWidget<IntensityMap, Options>(div, viz, data,
-        options);
-  }
-
-  protected IntensityMap() {
+  public IntensityMap(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -125,4 +110,9 @@ public class IntensityMap extends Visualization<IntensityMap.Options> implements
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.IntensityMap(parent);
+  }-*/;
 }

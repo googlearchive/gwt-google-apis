@@ -18,7 +18,6 @@ package com.google.gwt.visualization.sample.visualizationshowcase.client;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
-import com.google.gwt.visualization.client.SelectionHelper;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 
@@ -26,7 +25,6 @@ import com.google.gwt.visualization.client.events.SelectHandler;
  * Demo for SelectHandler that can be applied to any Selectable visualization.
  */
 class SelectionDemo extends SelectHandler {
-  @SuppressWarnings("unused")
   private final Selectable viz;
   private final Label label;
 
@@ -57,6 +55,6 @@ class SelectionDemo extends SelectHandler {
   }
 
   private Selection getSelection() {
-    return SelectionHelper.getSelection(viz);
+    return viz.getSelection();
   }
 }

@@ -69,7 +69,7 @@ public class AbstractDataTable extends JavaScriptObject {
     return ColumnType.getColumnTypeFromString(getColumnTypeAsString(columnIndex));
   }
 
- public final native String getFormattedValue(int rowIndex, int columnIndex)/*-{
+  public final native String getFormattedValue(int rowIndex, int columnIndex) /*-{
     return this.getFormattedValue(rowIndex, columnIndex);
   }-*/;
 
@@ -89,7 +89,7 @@ public class AbstractDataTable extends JavaScriptObject {
   public final native boolean getValueBoolean(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
   }-*/;
-  
+
   public final Date getValueDate(int rowIndex, int columnIndex) {
     JsArrayNumber timevalue = getValueTimevalue(rowIndex, columnIndex);
     if (timevalue.length() == 0) {
@@ -98,15 +98,15 @@ public class AbstractDataTable extends JavaScriptObject {
       return new Date((long) timevalue.get(0));
     }
   }
-  
+
   public final native double getValueDouble(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
   }-*/;
-  
+
   public final native int getValueInt(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
   }-*/;
-  
+
   public final native String getValueString(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
   }-*/;
@@ -126,16 +126,17 @@ public class AbstractDataTable extends JavaScriptObject {
     }
     return result;
   }
-  
+
   public final native boolean isValueNull(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex) == null;
   }-*/;
-  
+
   private native String getColumnTypeAsString(int columnIndex)/*-{
     return this.getColumnType(columnIndex);
   }-*/;
 
-  private native JsArrayInteger getValueArrayInteger(int rowIndex, int columnIndex) /*-{
+  private native JsArrayInteger getValueArrayInteger(int rowIndex,
+      int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex);
   }-*/;
 
@@ -145,10 +146,10 @@ public class AbstractDataTable extends JavaScriptObject {
    * @param rowIndex The row.
    * @param columnIndex The column.
    * @return An array with 1 or 0 elements. 1 element indicates a non-null
-   * value, and 0 elements indicates a null value.  This is a jsni hack.  Can't 
-   * return double because the return type may be null.  Can't return
-   * Double because the behavior of trying to autobox a jsni "number" is
-   * undefined.
+   *         value, and 0 elements indicates a null value. This is a jsni hack.
+   *         Can't return double because the return type may be null. Can't
+   *         return Double because the behavior of trying to autobox a jsni
+   *         "number" is undefined.
    */
   private native JsArrayNumber getValueTimevalue(int rowIndex, int columnIndex) /*-{
     var value = this.getValue(rowIndex, columnIndex);

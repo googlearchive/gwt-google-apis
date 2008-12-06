@@ -36,7 +36,7 @@ public class GaugeDemo implements LeftTabPanel.WidgetProvider {
 
     DataTable data = Showcase.getDailyActivities();
     
-    widget = Gauge.createWidget(data, options);
+    widget = new Gauge(data, options);
   }
 
   public Widget getWidget() {

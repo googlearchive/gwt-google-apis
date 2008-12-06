@@ -18,16 +18,17 @@ package com.google.gwt.visualization.client.visualizations;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 
 /**
  * A Visualization object can draw a DataTable.
  * 
- * @param <E> The options for drawing this visualization.
+ * @param <OptionsType> The options for drawing this visualization.
  */
-public class Visualization<E extends AbstractDrawOptions> extends
-    JavaScriptObject {
+public abstract class Visualization<OptionsType extends AbstractDrawOptions> extends
+    Widget {
   /**
    * Create a div with the given width and height.
    * 
@@ -40,7 +41,6 @@ public class Visualization<E extends AbstractDrawOptions> extends
     setSize(result, width, height);
     return result;
   }
-
   /**
    * Set the size of a div element by setting the style attribute.
    * 
@@ -52,8 +52,36 @@ public class Visualization<E extends AbstractDrawOptions> extends
     div.getStyle().setPropertyPx("width", width);
     div.getStyle().setPropertyPx("height", height);
   }
+  
+  private AbstractDataTable dataTable;
+  private OptionsType options;
+  private JavaScriptObject jso;
 
-  protected Visualization() {
+  public Visualization() {
+    Element div = DOM.createDiv();
+    jso = createJso(div);
+    setElement(div);
+    setStyleName("gwt-viz-container");
+  }
+
+  public Visualization(AbstractDataTable data, OptionsType options) {
+    this();
+    this.options = options;
+    this.dataTable = data;
+  }
+
+  public Visualization(AbstractDataTable data, OptionsType options, int width, 
+      int height) {
+    this(width, height);
+    this.options = options;
+    this.dataTable = data;
+  }
+
+  public Visualization(int width, int height) {
+    Element div = createDiv(width, height);
+    jso = createJso(div);
+    setElement(div);
+    setStyleName("gwt-viz-container");
   }
 
   /**
@@ -62,7 +90,7 @@ public class Visualization<E extends AbstractDrawOptions> extends
    * @param data The DataTable with the data.
    */
   public final native void draw(AbstractDataTable data) /*-{
-    this.draw(data, {});
+    this.@com.google.gwt.visualization.client.visualizations.Visualization::jso.draw(data, {});
   }-*/;
 
   /**
@@ -71,7 +99,37 @@ public class Visualization<E extends AbstractDrawOptions> extends
    * @param data The DataTable with the data.
    * @param options The options for drawing this visualization.
    */
-  public final native void draw(AbstractDataTable data, E options) /*-{
-    this.draw(data, options);
+  public final native void draw(AbstractDataTable data, OptionsType options) /*-{
+    this.@com.google.gwt.visualization.client.visualizations.Visualization::jso.draw(data, options);
   }-*/;
+
+  /**
+   * Note: calling this method should not usually be necessary except by 
+   * subclasses.  If you need to call it, make sure you know what you're
+   * doing.
+   * @return The underlying JavaScriptObject representing the JavaScript
+   * implementation of the visualization.
+   */
+  public JavaScriptObject getJso() {
+    return jso;
+  }
+
+  /**
+   * Creates an instance of the underlying JavaScriptObject for this
+   * visualization.  Subclasses must override this with JSNI that calls the
+   * JavaScript constructor for their visualization.
+   * 
+   * @param div  The container for the visualization.
+   * @return The underlying JavaScriptObject for the visualization.
+   */
+  protected abstract JavaScriptObject createJso(Element div);
+
+  @Override
+  protected void onLoad() {
+    if (dataTable != null && options != null) {
+      draw(dataTable, options);
+      dataTable = null;
+      options = null;
+    }
+  }
 }

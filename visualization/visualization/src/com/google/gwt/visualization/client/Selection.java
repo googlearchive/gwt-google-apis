@@ -24,7 +24,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class Selection extends JavaScriptObject {
   protected Selection() {
   }
-  
+
   /**
    * @param i the index of the selection.
    * @return the column of the i'th selection. Only call this if the selection
@@ -43,8 +43,8 @@ public class Selection extends JavaScriptObject {
 
   /**
    * @param i the index of the selection.
-   * @return the row of the i'th selection. Only call this if the selection
-   *         is either a row or a cell.
+   * @return the row of the i'th selection. Only call this if the selection is
+   *         either a row or a cell.
    */
   public final native int getRow(int i) /*-{
     return this[i].row;

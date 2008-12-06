@@ -19,7 +19,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.visualization.client.Selectable.SelectionMethods;
 
 /**
  * AbstractVisualization implementations can draw a visualization.
@@ -67,7 +66,7 @@ public abstract class AbstractVisualization<E extends AbstractDrawOptions> exten
     RootPanel.get(container.getId()).add(visualization);
 
     // Register optional methods.
-    if (visualization instanceof SelectionMethods) {
+    if (visualization instanceof Selectable) {
       registerSelectFunctions(jsVisualization);
     }
     return visualization;
@@ -79,10 +78,10 @@ public abstract class AbstractVisualization<E extends AbstractDrawOptions> exten
 
   private static native void registerSelectFunctions(JavaScriptObject jso) /*-{
     jso.getSelection = function() {
-      return this.gwt_vis.@com.google.gwt.visualization.client.Selectable$SelectionMethods::getSelection()();
+      return this.gwt_vis.@com.google.gwt.visualization.client.Selectable::getSelection()();
     }
     jso.setSelection = function(selection) {
-      this.gwt_vis.@com.google.gwt.visualization.client.Selectable$SelectionMethods::setSelection(Lcom/google/gwt/visualization/client/Selection;)(selection);
+      this.gwt_vis.@com.google.gwt.visualization.client.Selectable::setSelection(Lcom/google/gwt/visualization/client/Selection;)(selection);
     }
   }-*/;
 
@@ -104,5 +103,16 @@ public abstract class AbstractVisualization<E extends AbstractDrawOptions> exten
    */
   public void fireSelectionEvent() {
     fireSelectionEvent(this.jsVisualization);
+  }
+
+  /**
+   * Note: calling this method should not usually be necessary except by 
+   * subclasses.  If you need to call it, make sure you know what you're
+   * doing.
+   * @return The underlying JavaScriptObject representing the JavaScript
+   * implementation of the visualization.
+   */
+  public JavaScriptObject getJso() {
+    return jsVisualization;
   }
 }

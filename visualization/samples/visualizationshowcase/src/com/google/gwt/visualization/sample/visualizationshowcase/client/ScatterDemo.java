@@ -19,7 +19,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.visualizations.ScatterChart;
 import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
 
@@ -28,22 +27,20 @@ import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
  */
 public class ScatterDemo implements LeftTabPanel.WidgetProvider {
   public Widget getWidget() {
+    VerticalPanel result = new VerticalPanel();
+    
     Options options = Options.create();
     options.setHeight(240);
     options.setTitle("My Daily Activities");
     options.setWidth(400);
 
     DataTable data = Showcase.getDailyActivities();
-    
-    VisualizationWidget<ScatterChart, ScatterChart.Options> widget = 
-      ScatterChart.createWidget(data, options);
-    ScatterChart viz = widget.getVisualization();
+
+    ScatterChart viz = new ScatterChart(data, options);
     Label status = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
-    
-    VerticalPanel result = new VerticalPanel();
     result.add(status);
-    result.add(widget);
+    result.add(viz);
     return result;
   }
 }

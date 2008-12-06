@@ -35,7 +35,7 @@ public class LineChartTest extends VisualizationTest {
         options.setLineSize(2);
         options.setPointSize(5);
         options.setSmoothLine(true);
-        widget = LineChart.createWidget(createCompanyPerformance(), options);
+        widget = new LineChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }});
   }

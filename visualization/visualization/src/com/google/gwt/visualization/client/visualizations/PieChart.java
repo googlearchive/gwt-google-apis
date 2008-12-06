@@ -17,14 +17,12 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.CommonOptions;
 import com.google.gwt.visualization.client.LegendPosition;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -68,24 +66,12 @@ public class PieChart extends Visualization<PieChart.Options> implements
 
   public static final String PACKAGE = "piechart";
 
-  public static native PieChart create(Element parent) /*-{
-    return new $wnd.google.visualization.PieChart(parent);
-  }-*/;
-
-  public static VisualizationWidget<PieChart, Options> createWidget() {
-    Element div = DOM.createDiv();
-    PieChart viz = create(div);
-    return new VisualizationWidget<PieChart, Options>(div, viz);
+  public PieChart() {
+    super();
   }
 
-  public static VisualizationWidget<PieChart, Options> createWidget(
-      AbstractDataTable data, Options options) {
-    Element div = DOM.createDiv();
-    PieChart viz = create(div);
-    return new VisualizationWidget<PieChart, Options>(div, viz, data, options);
-  }
-
-  protected PieChart() {
+  public PieChart(AbstractDataTable data, Options options) {
+    super(data, options);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -96,13 +82,12 @@ public class PieChart extends Visualization<PieChart.Options> implements
     return SelectionHelper.getSelection(this);
   }
 
-  /**
-   * Note: this method requires that the visualization already be added to the
-   * DOM.
-   * 
-   * @param sel selection to set on the PieChart.
-   */
   public final void setSelection(Selection sel) {
     SelectionHelper.setSelection(this, sel);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.PieChart(parent);
+  }-*/;
 }

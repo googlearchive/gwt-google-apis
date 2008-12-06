@@ -33,6 +33,7 @@ public class MotionDemo implements LeftTabPanel.WidgetProvider {
   
   @SuppressWarnings("deprecation")
   public MotionDemo() {
+    @SuppressWarnings("unused")
     int year, month, day;
 
     Options options = Options.create();
@@ -83,7 +84,7 @@ public class MotionDemo implements LeftTabPanel.WidgetProvider {
     }
 
     
-    widget = MotionChart.createWidget(data, options);
+    widget = new MotionChart(data, options);
   }
   
   public Widget getWidget() {

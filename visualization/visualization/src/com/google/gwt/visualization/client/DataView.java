@@ -39,11 +39,11 @@ public class DataView extends AbstractDataTable {
   public final native int getViewColumnIndex(int tableColumnIndex) /*-{
     return this.getViewColumnIndex(tableColumnIndex);
   }-*/;
-  
+
   public final void setColumns(int[] columnIndices) {
     setColumns(ArrayHelper.createJsArray(columnIndices));
   }
-  
+
   public final native void setColumns(JsArrayInteger columnIndices) /*-{
     this.setColumns(columnIndices);
   }-*/;

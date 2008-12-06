@@ -24,29 +24,29 @@ import java.util.Date;
  */
 public abstract class RangeChangeHandler extends Handler {
   /**
-   * This event is fired when the user changes the date range of the 
+   * This event is fired when the user changes the date range of the
    * visualization.
    */
   public class RangeChangeEvent {
     private Date from;
     private Date to;
-    
+
     public RangeChangeEvent(Date from, Date to) {
       this.from = from;
       this.to = to;
     }
-    
+
     public Date getFrom() {
       return from;
     }
-    
+
     public Date getTo() {
       return to;
     }
   }
-  
+
   public abstract void onRangeChange(RangeChangeEvent event);
-  
+
   @Override
   protected void onEvent(Properties properties) {
     Date from = properties.getDate("from");

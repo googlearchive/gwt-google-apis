@@ -24,8 +24,6 @@ import com.google.gwt.visualization.client.visualizations.MapVisualization.Type;
  * Tests for the Map visualization class.
  */
 public class MapVisualizationTest extends VisualizationTest {
-  public static final int ASYNC_DELAY_MS = 5000;
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.visualization.MapVisualizationTest";
@@ -40,8 +38,7 @@ public class MapVisualizationTest extends VisualizationTest {
       public void run() {
         MapVisualization.Options options = MapVisualization.Options.create();
         DataTable data = makeDataTable();
-        RootPanel.get().add(
-            MapVisualization.createWidget(data, options, 300, 300));
+        RootPanel.get().add(new MapVisualization(data, options, 300, 300));
       }
     });
   }
@@ -60,8 +57,7 @@ public class MapVisualizationTest extends VisualizationTest {
         options.setShowLine(true);
         options.setShowTip(true);
         DataTable data = makeDataTable();
-        RootPanel.get().add(
-            MapVisualization.createWidget(data, options, 300, 300));
+        RootPanel.get().add(new MapVisualization(data, options, 300, 300));
       }
     });
   }

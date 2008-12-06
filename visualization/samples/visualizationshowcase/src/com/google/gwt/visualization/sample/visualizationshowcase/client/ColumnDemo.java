@@ -19,7 +19,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.ColumnChart.Options;
 
@@ -37,13 +36,11 @@ public class ColumnDemo implements LeftTabPanel.WidgetProvider {
     
     DataTable data = Showcase.getCompanyPerformance();
 
-    VisualizationWidget<ColumnChart, ColumnChart.Options> widget = 
-      ColumnChart.createWidget(data, options);
-    ColumnChart viz = widget.getVisualization();
+    ColumnChart viz = new ColumnChart(data, options);
     Label status = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
     result.add(status);
-    result.add(widget);
+    result.add(viz);
     return result;
   }
 }

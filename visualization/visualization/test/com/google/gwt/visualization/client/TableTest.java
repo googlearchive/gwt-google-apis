@@ -39,19 +39,19 @@ public class TableTest extends VisualizationTest {
         
         options = Options.create();
         options.setPage(Policy.DISABLE);
-        widget = Table.createWidget(createCompanyPerformance(), options);
+        widget = new Table(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
         
         options = Options.create();
         options.setPage(Policy.ENABLE);
-        widget = Table.createWidget(createCompanyPerformance(), options);
+        widget = new Table(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
         
         options = Options.create();
         options.setPage(Policy.EVENT);
-        widget = Table.createWidget(createCompanyPerformance(), options);
+        widget = new Table(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
       }
@@ -61,13 +61,9 @@ public class TableTest extends VisualizationTest {
   public void testSelection() {
     AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
-        DataTable data = createDailyActivities();
-  
         // Create a minimal pie chart.
         Table.Options options = Table.Options.create();
-        VisualizationWidget<Table, Table.Options> widget = Table.createWidget(
-            data, options);
-        final Table viz = widget.getVisualization();
+        final Table viz = new Table(createCompanyPerformance(), options);
   
         // Add a selection handler
         viz.addSelectHandler(new SelectHandler() {
@@ -83,7 +79,7 @@ public class TableTest extends VisualizationTest {
             finishTest();
           }
         });
-        RootPanel.get().add(widget);
+        RootPanel.get().add(viz);
   
         Selection s = SelectionHelper.createSelection(1, 0);
         assertEquals("Expected 1 element in the selection", 1, s.getLength());
@@ -109,19 +105,19 @@ public class TableTest extends VisualizationTest {
         
         options = Options.create();
         options.setSort(Policy.DISABLE);
-        widget = Table.createWidget(createCompanyPerformance(), options);
+        widget = new Table(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
         
         options = Options.create();
         options.setSort(Policy.ENABLE);
-        widget = Table.createWidget(createCompanyPerformance(), options);
+        widget = new Table(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
         
         options = Options.create();
         options.setSort(Policy.EVENT);
-        widget = Table.createWidget(createCompanyPerformance(), options);
+        widget = new Table(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
       }
@@ -136,7 +132,7 @@ public class TableTest extends VisualizationTest {
         options.setAllowHtml(true);
         options.setPageSize(3);
         options.setShowRowNumber(true);
-        widget = Table.createWidget(createCompanyPerformance(), options);
+        widget = new Table(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
       }

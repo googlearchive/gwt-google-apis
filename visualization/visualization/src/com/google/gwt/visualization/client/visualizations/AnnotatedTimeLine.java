@@ -22,7 +22,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.ArrayHelper;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.RangeChangeHandler;
 
@@ -228,29 +227,21 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
 
   public static final String PACKAGE = "annotatedtimeline";
 
-  public static native AnnotatedTimeLine create(Element parent) /*-{
-    return new $wnd.google.visualization.AnnotatedTimeLine(parent);
-  }-*/;
-
-  public static VisualizationWidget<AnnotatedTimeLine, Options> createWidget(
-      AbstractDataTable data, Options options, int width, int height) {
-    Element div = createDiv(width, height);
-    AnnotatedTimeLine viz = create(div);
-    return new VisualizationWidget<AnnotatedTimeLine, Options>(div, viz, data,
-        options);
+  public AnnotatedTimeLine(AbstractDataTable data, Options options, int width, 
+      int height) {
+    super(data, options, width, height);
   }
 
-  public static VisualizationWidget<AnnotatedTimeLine, Options> createWidget(
-      int width, int height) {
-    Element div = createDiv(width, height);
-    AnnotatedTimeLine viz = create(div);
-    return new VisualizationWidget<AnnotatedTimeLine, Options>(div, viz);
-  }
-
-  protected AnnotatedTimeLine() {
+  public AnnotatedTimeLine(int width, int height) {
+    super(width, height);
   }
 
   public final void addRangeChangeHandler(RangeChangeHandler handler) {
     Handler.addHandler(this, "rangeChange", handler);
   }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.AnnotatedTimeLine(parent);
+  }-*/;
 }

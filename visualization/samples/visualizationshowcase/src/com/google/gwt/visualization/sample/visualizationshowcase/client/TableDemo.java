@@ -22,7 +22,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.Query;
 import com.google.gwt.visualization.client.QueryResponse;
-import com.google.gwt.visualization.client.VisualizationWidget;
 import com.google.gwt.visualization.client.Query.Callback;
 import com.google.gwt.visualization.client.visualizations.Table;
 
@@ -45,17 +44,14 @@ public class TableDemo implements LeftTabPanel.WidgetProvider {
           return;
         }
 
-        VisualizationWidget<Table, Table.Options> widget = 
-          Table.createWidget();
+        Table viz = new Table();
         Table.Options options = Table.Options.create();
         options.setShowRowNumber(true);
-        widget.draw(response.getDataTable(), options);
-
-        Table viz = widget.getVisualization();
+        viz.draw(response.getDataTable(), options);
         Label status = new Label();
         viz.addSelectHandler(new SelectionDemo(viz, status));
         panel.add(status);
-        panel.add(widget);
+        panel.add(viz);
       }
     });
   }

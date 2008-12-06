@@ -34,7 +34,7 @@ public class ColumnChartTest extends VisualizationTest {
         options.setHeight(400);
         options.set3D(true);
         options.setStacked(false);
-        widget = ColumnChart.createWidget(createCompanyPerformance(), options);
+        widget = new ColumnChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });

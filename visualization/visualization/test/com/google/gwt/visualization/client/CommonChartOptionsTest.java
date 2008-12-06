@@ -18,8 +18,8 @@ package com.google.gwt.visualization.client;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.visualizations.AreaChart;
-import com.google.gwt.visualization.client.visualizations.AreaChart.Options;
 
 /**
  * Tests for the CommonOptions class. Uses AreaChart, a typical client of
@@ -41,8 +41,7 @@ public class CommonChartOptionsTest extends VisualizationTest {
         options.setTitleX(5);
         options.setTitleY(5);
         
-        VisualizationWidget<AreaChart, Options> widget = AreaChart.createWidget(
-            data, options);
+        Widget widget = new AreaChart(data, options);
         RootPanel.get().add(widget);
         Element div = widget.getElement();
         // assert that the div's first child is an iframe

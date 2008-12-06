@@ -22,16 +22,18 @@ import com.google.gwt.user.client.ui.TableListener;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.AbstractVisualization;
+import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.SelectionHelper;
-import com.google.gwt.visualization.client.Selectable.SelectionMethods;
+import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
  * A Google Visualization written in GWT.
  * 
  */
-class CustomVisualization extends AbstractVisualization<CustomVisualization.CustomVisualizationDrawOptions> 
-    implements SelectionMethods {
+class CustomVisualization 
+    extends AbstractVisualization<CustomVisualization.CustomVisualizationDrawOptions> 
+    implements Selectable {
   
   /**
    * Drawing options supported by this visualization. 
@@ -56,6 +58,10 @@ class CustomVisualization extends AbstractVisualization<CustomVisualization.Cust
   public CustomVisualization() {
     initWidget(grid);
   }
+  
+  public void addSelectHandler(SelectHandler handler) {
+    SelectionHelper.addSelectHandler(this, handler);
+  } 
   
   @Override
   public void draw(AbstractDataTable dataTable, CustomVisualizationDrawOptions options) {
@@ -83,8 +89,8 @@ class CustomVisualization extends AbstractVisualization<CustomVisualization.Cust
         CustomVisualization.this.fireSelectionEvent();
       }
     });
-  } 
-  
+  }
+
   public Selection getSelection() {
     return SelectionHelper.createSelection(selectedRow, selectedColumn);
   }

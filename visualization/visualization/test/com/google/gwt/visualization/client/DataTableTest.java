@@ -75,6 +75,8 @@ public class DataTableTest extends VisualizationTest {
         data.setValue(0, 0, (Date) null);
         assertNull(data.getValueDate(0, 0));
         assertTrue(data.isValueNull(0, 0));
+        data.setCell(0, 0, date, null, null);
+        assertEquals(date, data.getValueDate(0, 0));
       }
     });
   }
