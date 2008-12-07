@@ -74,7 +74,7 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(5, 1, 33322);
     data.setValue(5, 4, 39463);
 
-    widget = new AnnotatedTimeLine(data, options, 700, 240);
+    widget = new AnnotatedTimeLine(data, options, "700px", "240px");
   }
 
   public Widget getWidget() {

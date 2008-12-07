@@ -15,6 +15,7 @@
 <module>
   <inherits name="com.google.gwt.user.User" />
   <inherits name="com.google.gwt.visualization.Visualization" />
+  <inherits name="com.google.gwt.user.theme.standard.Standard"/>
       
   <source path="client" />
   <entry-point class="com.google.gwt.visualization.sample.customvisualization.client.CustomVisualizationEntryPoint" />

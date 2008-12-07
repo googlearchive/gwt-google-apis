@@ -35,7 +35,8 @@ import com.google.gwt.visualization.client.events.SelectHandler;
  *      "http://code.google.com/apis/visualization/documentation/gallery/map.html"
  *      >Map Visualization Reference</a>
  */
-public class MapVisualization extends Visualization<MapVisualization.Options> implements Selectable {
+public class MapVisualization extends Visualization<MapVisualization.Options>
+    implements Selectable {
   /**
    * Options for drawing the chart.
    * 
@@ -81,18 +82,31 @@ public class MapVisualization extends Visualization<MapVisualization.Options> im
    * The type of map to use.
    */
   public static enum Type {
-    NORMAL, SATELLITE, HYBRID
+    HYBRID, NORMAL, SATELLITE
   }
 
   public static final String PACKAGE = "map";
 
-  public MapVisualization(AbstractDataTable data, Options options, int width, 
-      int height) {
-    super(data, options, width, height);
+  /**
+   * 
+   * @param width the CSS specifier for the width of the visualization
+   * @param height the CSS specifier for the height of the visualization
+   */  
+  public MapVisualization(String width, String height) {
+    super();
+    setSize(width, height);
   }
 
-  public MapVisualization(int width, int height) {
-    super(width, height);
+  /**
+   * 
+   * @param data data to visualize
+   * @param options Optional parameters for the visualization
+   * @param width the CSS specifier for the width of the visualization
+   * @param height the CSS specifier for the height of the visualization
+   */
+  public MapVisualization(AbstractDataTable data, Options options, String width, String height) {
+    super(data, options);
+    setSize(width, height);
   }
 
   public final void addSelectHandler(SelectHandler handler) {

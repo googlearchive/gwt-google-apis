@@ -54,7 +54,7 @@ public class MapDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(3, 1, -122.1731);
     data.setValue(3, 2, "Shopping");
     
-    widget = new MapVisualization(data, options, 400, 300);
+    widget = new MapVisualization(data, options, "400px", "300px");
   }
 
   public Widget getWidget() {

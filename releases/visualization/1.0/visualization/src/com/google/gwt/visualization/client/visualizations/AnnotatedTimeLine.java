@@ -227,13 +227,26 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
 
   public static final String PACKAGE = "annotatedtimeline";
 
-  public AnnotatedTimeLine(AbstractDataTable data, Options options, int width, 
-      int height) {
-    super(data, options, width, height);
+  /**
+   * 
+   * @param width the CSS specifier for the width of the visualization
+   * @param height the CSS specifier for the height of the visualization
+   */
+  public AnnotatedTimeLine(String width, String height) {
+    super();
+    setSize(width, height);
   }
-
-  public AnnotatedTimeLine(int width, int height) {
-    super(width, height);
+  
+  /**
+   * 
+   * @param data data to visualize
+   * @param options Optional parameters for the visualization
+   * @param width the CSS specifier for the width of the visualization
+   * @param height the CSS specifier for the height of the visualization
+   */
+  public AnnotatedTimeLine(AbstractDataTable data, Options options, String width, String height) {
+    super(data, options);
+    setSize(width, height);
   }
 
   public final void addRangeChangeHandler(RangeChangeHandler handler) {

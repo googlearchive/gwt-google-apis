@@ -35,7 +35,9 @@ public class GeoMapTest extends VisualizationTest {
         GeoMap.Options options = GeoMap.Options.create();
         DataTable data = makeDataTable();
         options.setRegion("world");
-        RootPanel.get().add(new GeoMap(data, options, 300, 300));
+        GeoMap geoMap = new GeoMap(data, options);
+        geoMap.setSize("300px", "300px");
+        RootPanel.get().add(geoMap);
       }
     });
   }
@@ -54,7 +56,8 @@ public class GeoMapTest extends VisualizationTest {
         options.setRegion("world");
 
         DataTable data = makeDataTable();
-        RootPanel.get().add(new GeoMap(data, options, 300, 300));
+        GeoMap geoMap = new GeoMap(data, options);
+        RootPanel.get().add(geoMap);
       }
     });
   }

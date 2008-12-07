@@ -50,7 +50,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setZoomStartTime(new Date(107, 1, 1));
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
       }
@@ -67,7 +67,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setLegendPosition(AnnotatedLegendPosition.NEW_ROW);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
 
@@ -75,7 +75,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setLegendPosition(AnnotatedLegendPosition.SAME_ROW);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
       }
@@ -92,7 +92,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setScaleType(ScaleType.ALLFIXED);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
 
@@ -100,7 +100,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setScaleType(ScaleType.ALLMAXIMIZE);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
 
@@ -108,7 +108,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setScaleType(ScaleType.FIXED);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
 
@@ -116,7 +116,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setScaleType(ScaleType.MAXIMIZE);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
       }
@@ -133,7 +133,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setWindowMode(WindowMode.OPAQUE);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
 
@@ -141,7 +141,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setWindowMode(WindowMode.TRANSPARENT);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
 
@@ -149,7 +149,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         options.setWindowMode(WindowMode.WINDOW);
 
         widget = new AnnotatedTimeLine(createAnnotatedDataTable(),
-            options, 400, 400);
+            options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
       }

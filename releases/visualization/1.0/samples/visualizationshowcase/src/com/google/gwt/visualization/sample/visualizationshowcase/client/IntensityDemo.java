@@ -29,8 +29,6 @@ public class IntensityDemo implements LeftTabPanel.WidgetProvider {
   
   public IntensityDemo() {
     Options options = Options.create();
-    options.setHeight(300);
-    options.setWidth(600);
 
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.STRING, "", "Country");
