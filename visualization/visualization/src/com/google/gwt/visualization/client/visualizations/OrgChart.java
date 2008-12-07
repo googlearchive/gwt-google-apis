@@ -16,12 +16,12 @@
 package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
-import com.google.gwt.visualization.client.SelectionHelper;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -79,15 +79,15 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
   }
 
   public final void addSelectHandler(SelectHandler handler) {
-    SelectionHelper.addSelectHandler(this, handler);
+    Selection.addSelectHandler(this, handler);
   }
 
-  public final Selection getSelection() {
-    return SelectionHelper.getSelection(this);
+  public final JsArray<Selection> getSelections() {
+    return Selection.getSelections(this);
   }
 
-  public final void setSelection(Selection sel) {
-    SelectionHelper.setSelection(this, sel);
+  public final void setSelections(JsArray<Selection> sel) {
+    Selection.setSelections(this, sel);
   }
 
   @Override

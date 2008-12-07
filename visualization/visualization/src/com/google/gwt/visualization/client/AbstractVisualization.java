@@ -78,10 +78,10 @@ public abstract class AbstractVisualization<E extends AbstractDrawOptions> exten
 
   private static native void registerSelectFunctions(JavaScriptObject jso) /*-{
     jso.getSelection = function() {
-      return this.gwt_vis.@com.google.gwt.visualization.client.Selectable::getSelection()();
+      return this.gwt_vis.@com.google.gwt.visualization.client.Selectable::getSelections()();
     }
     jso.setSelection = function(selection) {
-      this.gwt_vis.@com.google.gwt.visualization.client.Selectable::setSelection(Lcom/google/gwt/visualization/client/Selection;)(selection);
+      this.gwt_vis.@com.google.gwt.visualization.client.Selectable::setSelections(Lcom/google/gwt/core/client/JsArray;)(selection);
     }
   }-*/;
 

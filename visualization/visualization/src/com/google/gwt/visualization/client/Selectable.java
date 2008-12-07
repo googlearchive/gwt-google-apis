@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -22,6 +23,6 @@ import com.google.gwt.visualization.client.events.SelectHandler;
  */
 public interface Selectable {
   void addSelectHandler(SelectHandler handler);
-  Selection getSelection();
-  void setSelection(Selection sel);
+  JsArray<Selection> getSelections();
+  void setSelections(JsArray<Selection> sel);
 }
