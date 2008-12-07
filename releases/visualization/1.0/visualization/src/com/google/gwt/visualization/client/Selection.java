@@ -16,63 +16,93 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.visualizations.Visualization;
 
 /**
  * Selection stores information about the current selection.
  * 
  */
 public class Selection extends JavaScriptObject {
+  public static <E extends AbstractVisualization<?>> void addSelectHandler(
+      E viz, SelectHandler handler) {
+    Handler.addHandler(viz, "select", handler);
+  }
+  
+  public static <E extends Visualization<?>> void addSelectHandler(
+      E viz, SelectHandler handler) {
+    Handler.addHandler(viz, "select", handler);
+  }
+  
+  public static native Selection createCellSelection(int row, int column) /*-{
+    return {'row' : row, 'column' : column};
+  }-*/;
+  
+  public static native Selection createColumnSelection(int i) /*-{
+    return {'column' : i};
+  }-*/;
+
+  public static native Selection createRowSelection(int i) /*-{
+    return {'row' : i};
+  }-*/;
+
+  public static final native JsArray<Selection> getSelections(Selectable viz) /*-{
+    var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
+    return jso.getSelection();
+  }-*/;
+
+  public static final native void setSelections(Selectable viz, JsArray<Selection> sel) /*-{
+    var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
+    jso.setSelection(sel);
+  }-*/;
+
+  public static native void triggerSelection(Selectable viz, JsArray<Selection> selection) /*-{
+    var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
+    $wnd.google.visualization.events.trigger(jso, 'select', selection);
+  }-*/;
+
   protected Selection() {
   }
 
   /**
-   * @param i the index of the selection.
-   * @return the column of the i'th selection. Only call this if the selection
+   * @return the column of the selection. Only call this if the selection
    *         is either a column or a cell.
    */
-  public final native int getColumn(int i) /*-{
-    return this[i].column;
+  public final native int getColumn() /*-{
+    return this.column;
   }-*/;
 
   /**
-   * @return number of items that are selected
-   */
-  public final native int getLength() /*-{
-    return this.length;
-  }-*/;
-
-  /**
-   * @param i the index of the selection.
-   * @return the row of the i'th selection. Only call this if the selection is
+   * @return the row of the selection. Only call this if the selection is
    *         either a row or a cell.
    */
-  public final native int getRow(int i) /*-{
-    return this[i].row;
+  public final native int getRow() /*-{
+    return this.row;
   }-*/;
 
   /**
-   * 
-   * @param i the index of the selection.
-   * @return true if the i'th selection is a cell.
+   * @return <code>true</code> if the selection is a cell, 
+   * otherwise <code>false</code>.
    */
-  public final native boolean isCell(int i) /*-{
-    return (this[i].row && this[i].column) ? true : false;
+  public final native boolean isCell() /*-{
+    return (this.row && this.column) ? true : false;
   }-*/;
 
   /**
-   * 
-   * @param i the index of the selection.
-   * @return true if the i'th selection is a column.
+   * @return <code>true</code> if the selection is a column, 
+   * otherwise <code>false</code>.
    */
-  public final native boolean isColumn(int i) /*-{
-    return (this[i].column && this[i].row == undefined) ? true : false;
+  public final native boolean isColumn() /*-{
+    return (this.column && this.row == undefined) ? true : false;
   }-*/;
 
   /**
-   * @param i the index of the selection.
-   * @return true if the i'th selection is a row.
+   * @return <code>true</code> if the selection is a row, 
+   * otherwise <code>false</code>.
    */
-  public final native boolean isRow(int i) /*-{
-    return (this[i].column == undefined && this[i].row) ? true : false;
+  public final native boolean isRow() /*-{
+    return (this.column == undefined && this.row) ? true : false;
   }-*/;
 }

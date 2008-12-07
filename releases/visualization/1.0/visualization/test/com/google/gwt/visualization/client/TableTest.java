@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.events.SelectHandler;
@@ -71,25 +72,26 @@ public class TableTest extends VisualizationTest {
           @Override
           public void onSelect(SelectEvent event) {
             assertNotNull(event);
-            Selection s = viz.getSelection();
+            JsArray<Selection> s = viz.getSelections();
             assertEquals("Expected 1 element in the selection", 1,
-                s.getLength());
-            assertEquals("Expected row 1 to be selected", 1, s.getRow(0));
-            assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
+                s.length());
+            assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
+            assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
             finishTest();
           }
         });
         RootPanel.get().add(viz);
   
-        Selection s = SelectionHelper.createSelection(1, 0);
-        assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected row 1 to be selected", 1, s.getRow(0));
-        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
-        viz.setSelection(s);
-        s = viz.getSelection();
-        assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected row 1 to be selected", 1, s.getRow(0));
-        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
+        JsArray<Selection> s = 
+          ArrayHelper.toJsArray(Selection.createCellSelection(1, 0));
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        viz.setSelections(s);
+        s = viz.getSelections();
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
         // Trigger a selection callback
         triggerSelection(viz, s);
       }

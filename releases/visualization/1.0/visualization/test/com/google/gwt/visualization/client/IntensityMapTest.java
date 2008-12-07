@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -60,6 +61,46 @@ public class IntensityMapTest extends VisualizationTest {
     data.setValue(4, 0, "BR");
     data.setValue(4, 1, 187);
     return data;
+  }
+
+  public void testSelection() {
+    AjaxLoader.loadVisualizationApi(new Runnable() {
+      public void run() {
+        DataTable data = createDailyActivities();
+
+        // Create a minimal pie chart.
+        IntensityMap.Options options = IntensityMap.Options.create();
+        options.setWidth(400);
+        options.setHeight(240);
+        final IntensityMap viz = new IntensityMap(data, options);
+
+        // Add a selection handler
+        viz.addSelectHandler(new SelectHandler() {
+
+          @Override
+          public void onSelect(SelectEvent event) {
+            assertNotNull(event);
+            JsArray<Selection> s = viz.getSelections();
+            assertEquals("Expected 1 element in the selection", 1,
+                s.length());
+            assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+            finishTest();
+          }
+        });
+        RootPanel.get().add(viz);
+        JsArray<Selection> s = 
+            ArrayHelper.toJsArray(Selection.createColumnSelection(0));
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        viz.setSelections(s);
+        s = viz.getSelections();
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        // Trigger a selection callback
+        triggerSelection(viz, s);
+      }
+    }, IntensityMap.PACKAGE);
+    delayTestFinish(ASYNC_DELAY_MS);
   }
 
   public void testColors() {
@@ -110,45 +151,6 @@ public class IntensityMapTest extends VisualizationTest {
     });
   }
 
-  public void testSelection() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
-      public void run() {
-        DataTable data = createDailyActivities();
-
-        // Create a minimal pie chart.
-        IntensityMap.Options options = IntensityMap.Options.create();
-        options.setWidth(400);
-        options.setHeight(240);
-        final IntensityMap viz = new IntensityMap(data, options);
-
-        // Add a selection handler
-        viz.addSelectHandler(new SelectHandler() {
-
-          @Override
-          public void onSelect(SelectEvent event) {
-            assertNotNull(event);
-            Selection s = viz.getSelection();
-            assertEquals("Expected 1 element in the selection", 1,
-                s.getLength());
-            assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
-            finishTest();
-          }
-        });
-        RootPanel.get().add(viz);
-        Selection s = createSelection();
-        assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
-        viz.setSelection(s);
-        s = viz.getSelection();
-        assertEquals("Expected 1 element in the selection", 1, s.getLength());
-        assertEquals("Expected column 0 to be selected", 0, s.getColumn(0));
-        // Trigger a selection callback
-        triggerSelection(viz, s);
-      }
-    }, IntensityMap.PACKAGE);
-    delayTestFinish(ASYNC_DELAY_MS);
-  }
-
   @Override
   protected String getVisualizationPackage() {
     return IntensityMap.PACKAGE;
@@ -177,10 +179,6 @@ public class IntensityMapTest extends VisualizationTest {
     data.setValue(4, 2, 8514877);
     return data;
   }
-
-  private native Selection createSelection() /*-{
-    return [{column : 0}];
-  }-*/;
 
   private String getParameter(Widget cog, String name) {
     return getParameter(getUrl(cog), name);

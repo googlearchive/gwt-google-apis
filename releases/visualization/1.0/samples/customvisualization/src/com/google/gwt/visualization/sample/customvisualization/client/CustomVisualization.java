@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.sample.customvisualization.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.SourcesTableEvents;
@@ -22,9 +23,9 @@ import com.google.gwt.user.client.ui.TableListener;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.AbstractVisualization;
+import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
-import com.google.gwt.visualization.client.SelectionHelper;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -52,16 +53,12 @@ class CustomVisualization
   }
   
   private final FlexTable grid = new FlexTable();
-  private int selectedColumn = 0;
-  private int selectedRow = 0;
+  private Integer selectedColumn;
+  private Integer selectedRow;
   
   public CustomVisualization() {
     initWidget(grid);
   }
-  
-  public void addSelectHandler(SelectHandler handler) {
-    SelectionHelper.addSelectHandler(this, handler);
-  } 
   
   @Override
   public void draw(AbstractDataTable dataTable, CustomVisualizationDrawOptions options) {
@@ -91,11 +88,15 @@ class CustomVisualization
     });
   }
 
-  public Selection getSelection() {
-    return SelectionHelper.createSelection(selectedRow, selectedColumn);
+  public JsArray<Selection> getSelections() {
+    return ArrayHelper.toJsArray(Selection.createCellSelection(selectedRow, selectedColumn));
   }
 
-  public void setSelection(Selection sel) {
+  public void setSelections(JsArray<Selection> sel) {
     Window.alert("selection changed");
+  }
+
+  public void addSelectHandler(SelectHandler handler) {
+    Selection.addSelectHandler(this, handler);
   }
 }

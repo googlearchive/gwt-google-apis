@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 
@@ -121,9 +122,9 @@ public class VisualizationTest extends GWTTestCase {
    * Google Visualization API documentation</a> .
    * 
    * @param viz - the Visualization to trigger the event on
-   * @param selection - a selection object.
+   * @param s - a selection object.
    */
-  protected void triggerSelection(Selectable viz, Selection selection) {
-    SelectionHelper.triggerSelection(viz, selection);
+  protected void triggerSelection(Selectable viz, JsArray<Selection> s) {
+    Selection.triggerSelection(viz, s);
   }
 }
