@@ -16,6 +16,7 @@
 package com.google.gwt.visualization.sample.hellovisualization.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -167,19 +168,19 @@ class VisualizationDemo implements EntryPoint {
           public void onSelect(SelectEvent event) {
             StringBuffer b = new StringBuffer();
             Table table = viz;
-            Selection s = table.getSelection();
-            for (int i = 0; i < s.getLength(); ++i) {
-              if (s.isCell(i)) {
+            JsArray<Selection> s = table.getSelections();
+            for (int i = 0; i < s.length(); ++i) {
+              if (s.get(i).isCell()) {
                 b.append(" cell ");
-                b.append(s.getRow(i));
+                b.append(s.get(i).getRow());
                 b.append(":");
-                b.append(s.getColumn(i));
-              } else if (s.isRow(i)) {
+                b.append(s.get(i).getColumn());
+              } else if (s.get(i).isRow()) {
                 b.append(" row ");
-                b.append(s.getRow(i));
+                b.append(s.get(i).getRow());
               } else {
                 b.append(" column ");
-                b.append(s.getColumn(i));
+                b.append(s.get(i).getColumn());
               }
             }
             if (b.length() == 0) {

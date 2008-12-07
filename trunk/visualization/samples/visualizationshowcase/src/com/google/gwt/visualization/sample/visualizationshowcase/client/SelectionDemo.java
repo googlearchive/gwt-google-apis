@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
@@ -36,25 +37,25 @@ class SelectionDemo extends SelectHandler {
   @Override
   public void onSelect(SelectEvent event) {
     StringBuffer b = new StringBuffer();
-    Selection s = getSelection();
-    for (int i = 0; i < s.getLength(); ++i) {
-      if (s.isCell(i)) {
+    JsArray<Selection> s = getSelections();
+    for (int i = 0; i < s.length(); ++i) {
+      if (s.get(i).isCell()) {
         b.append(" cell ");
-        b.append(s.getRow(i));
+        b.append(s.get(i).getRow());
         b.append(":");
-        b.append(s.getColumn(i));
-      } else if (s.isRow(i)) {
+        b.append(s.get(i).getColumn());
+      } else if (s.get(i).isRow()) {
         b.append(" row ");
-        b.append(s.getRow(i));
+        b.append(s.get(i).getRow());
       } else {
         b.append(" column ");
-        b.append(s.getColumn(i));
+        b.append(s.get(i).getColumn());
       }
     }
     label.setText("selection changed " + b.toString()); 
   }
 
-  private Selection getSelection() {
-    return viz.getSelection();
+  private JsArray<Selection> getSelections() {
+    return viz.getSelections();
   }
 }

@@ -16,6 +16,7 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayBoolean;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.JsArrayNumber;
@@ -34,6 +35,15 @@ public class ArrayHelper {
     return result;
   }
 
+  public static JsArrayNumber createJsArray(double... numbers) {
+    JsArrayNumber result = JsArrayNumber.createArray().cast();
+    for (int i = 0; i < numbers.length; i++) {
+      result.set(i, numbers[i]);
+    }
+    nativePatchConstructorForSafari(result);
+    return result;
+  }
+
   public static JsArrayInteger createJsArray(int[] integers) {
     JsArrayInteger result = JsArrayInteger.createArray().cast();
     for (int i = 0; i < integers.length; i++) {
@@ -43,19 +53,19 @@ public class ArrayHelper {
     return result;
   }
 
-  public static JsArrayNumber createJsArray(double[] numbers) {
-    JsArrayNumber result = JsArrayNumber.createArray().cast();
-    for (int i = 0; i < numbers.length; i++) {
-      result.set(i, numbers[i]);
+  public static JsArrayString createJsArray(String... strings) {
+    JsArrayString result = JsArrayString.createArray().cast();
+    for (int i = 0; i < strings.length; i++) {
+      result.set(i, strings[i]);
     }
     nativePatchConstructorForSafari(result);
     return result;
   }
 
-  public static JsArrayString createJsArray(String... strings) {
-    JsArrayString result = JsArrayString.createArray().cast();
-    for (int i = 0; i < strings.length; i++) {
-      result.set(i, strings[i]);
+  public static <J extends JavaScriptObject> JsArray<J> toJsArray(J... objects) {
+    JsArray<J> result = JsArray.createArray().cast();
+    for (int i = 0; i < objects.length; i++) {
+      result.set(i, objects[i]);
     }
     nativePatchConstructorForSafari(result);
     return result;
