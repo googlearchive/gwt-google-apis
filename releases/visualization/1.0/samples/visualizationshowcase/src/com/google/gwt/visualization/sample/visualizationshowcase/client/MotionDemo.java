@@ -17,6 +17,9 @@ package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
@@ -30,9 +33,19 @@ import java.util.Date;
  */
 public class MotionDemo implements LeftTabPanel.WidgetProvider {
   private Widget widget;
-  
+
   @SuppressWarnings("deprecation")
   public MotionDemo() {
+    
+    String protocol = Window.Location.getProtocol();
+    if (protocol.startsWith("file")) {
+      widget = new HTML("<font color=\"blue\"><i>Note: Protocol is: " + protocol
+          + ".  Note that this visualization does not work when loading the HTML from "
+          + "a local file. It works only when loading the HTML from a "
+          + "web server. </i></font>");
+      return;
+    }
+    
     @SuppressWarnings("unused")
     int year, month, day;
 
@@ -83,10 +96,9 @@ public class MotionDemo implements LeftTabPanel.WidgetProvider {
       GWT.log("Error creating data table - Date bug on mac?", ex);
     }
 
-    
     widget = new MotionChart(data, options);
   }
-  
+
   public Widget getWidget() {
     return widget;
   }
