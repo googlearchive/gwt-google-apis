@@ -87,7 +87,7 @@ public class Selection extends JavaScriptObject {
    * otherwise <code>false</code>.
    */
   public final native boolean isCell() /*-{
-    return (this.row && this.column) ? true : false;
+    return typeof this.row == 'number' && typeof this.column == 'number';
   }-*/;
 
   /**
@@ -95,7 +95,7 @@ public class Selection extends JavaScriptObject {
    * otherwise <code>false</code>.
    */
   public final native boolean isColumn() /*-{
-    return (this.column && this.row == undefined) ? true : false;
+    return typeof this.row != 'number' && typeof this.column == 'number';
   }-*/;
 
   /**
@@ -103,6 +103,6 @@ public class Selection extends JavaScriptObject {
    * otherwise <code>false</code>.
    */
   public final native boolean isRow() /*-{
-    return (this.column == undefined && this.row) ? true : false;
+    return typeof this.row == 'number' && typeof this.column != 'number';
   }-*/;
 }
