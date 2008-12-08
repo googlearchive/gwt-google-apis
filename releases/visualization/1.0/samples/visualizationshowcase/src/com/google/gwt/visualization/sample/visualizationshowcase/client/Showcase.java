@@ -85,7 +85,7 @@ class Showcase implements EntryPoint {
         new Runnable() {
           public void run() {
             final VerticalPanel vp = new VerticalPanel();
-            vp.getElement().getStyle().setPropertyPx("margin", 15);
+            vp.setSpacing(15);
             RootPanel.get().add(vp);
             vp.add(new HTML(
                 "The following visualizations are included in the GWT "
