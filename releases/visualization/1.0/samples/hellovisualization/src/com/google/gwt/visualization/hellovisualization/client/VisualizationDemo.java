@@ -50,8 +50,6 @@ class VisualizationDemo implements EntryPoint {
   public void onModuleLoad() {
     final VerticalPanel vp  = new VerticalPanel();
     vp.getElement().getStyle().setPropertyPx("margin", 15); 
-    vp.setWidth("100%");
-    vp.setHeight(Window.getClientHeight() + "px");
     RootPanel.get().add(vp);
     vp.add(new Label("Google Visualization with GWT demo."));
     vp.add(tabPanel);
