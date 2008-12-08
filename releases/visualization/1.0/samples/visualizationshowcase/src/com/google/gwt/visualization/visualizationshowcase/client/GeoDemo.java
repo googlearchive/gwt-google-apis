@@ -28,7 +28,7 @@ public class GeoDemo implements LeftTabPanel.WidgetProvider {
   public Widget getWidget() {
     Options options = Options.create();
     options.setDataMode(GeoMap.DataMode.REGIONS);
-    options.setHeight(600);
+    options.setHeight(300);
     options.setWidth(450);
     options.setShowLegend(false);
     options.setRegion("world");
@@ -45,7 +45,6 @@ public class GeoDemo implements LeftTabPanel.WidgetProvider {
     dataTable.setValue(6, 0, "RU");
     
     GeoMap geo = new GeoMap(dataTable, options);
-    geo.setSize("100%", "100%");
     return geo;
   }
 }

@@ -26,19 +26,21 @@ public class SelectionTest extends GWTTestCase {
     return "com.google.gwt.visualization.VisualizationTest";
   }
   
-  public void testRow() {
+  public void testCell() {
     Selection selection;
-        
-    selection = Selection.createRowSelection(0);
-    assertTrue(selection.isRow());
-    assertFalse(selection.isCell());
+    
+    selection = Selection.createCellSelection(0, 0);
+    assertTrue(selection.isCell());
     assertFalse(selection.isColumn());
+    assertFalse(selection.isRow());
+    assertEquals(0, selection.getColumn());
     assertEquals(0, selection.getRow());
     
-    selection = Selection.createRowSelection(1);
-    assertTrue(selection.isRow());
-    assertFalse(selection.isCell());
+    selection = Selection.createCellSelection(1, 1);
+    assertTrue(selection.isCell());
     assertFalse(selection.isColumn());
+    assertFalse(selection.isRow());
+    assertEquals(1, selection.getColumn());
     assertEquals(1, selection.getRow());
   }
 
@@ -58,21 +60,19 @@ public class SelectionTest extends GWTTestCase {
     assertEquals(1, selection.getColumn());
   }
 
-  public void testCell() {
+  public void testRow() {
     Selection selection;
-    
-    selection = Selection.createCellSelection(0, 0);
-    assertTrue(selection.isCell());
+        
+    selection = Selection.createRowSelection(0);
+    assertTrue(selection.isRow());
+    assertFalse(selection.isCell());
     assertFalse(selection.isColumn());
-    assertFalse(selection.isRow());
-    assertEquals(0, selection.getColumn());
     assertEquals(0, selection.getRow());
     
-    selection = Selection.createCellSelection(1, 1);
-    assertTrue(selection.isCell());
+    selection = Selection.createRowSelection(1);
+    assertTrue(selection.isRow());
+    assertFalse(selection.isCell());
     assertFalse(selection.isColumn());
-    assertFalse(selection.isRow());
-    assertEquals(1, selection.getColumn());
     assertEquals(1, selection.getRow());
   }
 }
