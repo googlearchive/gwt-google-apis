@@ -32,71 +32,75 @@ import com.google.gwt.visualization.client.events.SelectHandler;
  * A Google Visualization written in GWT.
  * 
  */
-class CustomVisualization 
-    extends AbstractVisualization<CustomVisualization.CustomVisualizationDrawOptions> 
+class CustomVisualization extends
+    AbstractVisualization<CustomVisualization.CustomVisualizationDrawOptions>
     implements Selectable {
-  
+
   /**
-   * Drawing options supported by this visualization. 
+   * Drawing options supported by this visualization.
    */
-  public static class CustomVisualizationDrawOptions extends AbstractDrawOptions {
+  public static class CustomVisualizationDrawOptions extends
+      AbstractDrawOptions {
     protected CustomVisualizationDrawOptions() {
     }
-    
+
     public final native String getBackgroundColor() /*-{
       return this.backgroundColor || "white";
     }-*/;
-    
+
     public final native void setBackgroundColor(String color) /*-{
       this.backgroundColor = color;
     }-*/;
   }
-  
+
   private final FlexTable grid = new FlexTable();
   private Integer selectedColumn;
   private Integer selectedRow;
-  
+
   public CustomVisualization() {
     initWidget(grid);
   }
-  
+
+  public void addSelectHandler(SelectHandler handler) {
+    Selection.addSelectHandler(this, handler);
+  }
+
   @Override
-  public void draw(AbstractDataTable dataTable, CustomVisualizationDrawOptions options) {
+  public void draw(AbstractDataTable dataTable,
+      CustomVisualizationDrawOptions options) {
     grid.clear();
     // Apply the drawing options
     if (options != null) {
-      grid.getElement().getStyle().setProperty("backgroundColor", options.getBackgroundColor());
+      grid.getElement().getStyle().setProperty("backgroundColor",
+          options.getBackgroundColor());
     }
-         
+
     for (int c = 0; c < dataTable.getNumberOfColumns(); c++) {
-      grid.setHTML(0, c,"<b>" + dataTable.getColumnLabel(c) + "</b>");
+      grid.setHTML(0, c, "<b>" + dataTable.getColumnLabel(c) + "</b>");
     }
-    
+
     for (int r = 0; r < dataTable.getNumberOfRows(); r++) {
       for (int c = 0; c < dataTable.getNumberOfColumns(); c++) {
         grid.setText(r + 1, c, dataTable.getFormattedValue(r, c));
-      } 
+      }
     }
     // handle selection
     grid.addTableListener(new TableListener() {
 
       public void onCellClicked(SourcesTableEvents sender, int row, int cell) {
         selectedColumn = cell;
-        selectedRow = row - 1;   // -1 because of the title row
+        selectedRow = row - 1; // -1 because of the title row
         CustomVisualization.this.fireSelectionEvent();
       }
     });
   }
 
   public JsArray<Selection> getSelections() {
-    return ArrayHelper.toJsArray(Selection.createCellSelection(selectedRow, selectedColumn));
+    return ArrayHelper.toJsArray(Selection.createCellSelection(selectedRow,
+        selectedColumn));
   }
 
   public void setSelections(JsArray<Selection> sel) {
     Window.alert("selection changed");
-  }
-
-  public void addSelectHandler(SelectHandler handler) {
-    Selection.addSelectHandler(this, handler);
   }
 }
