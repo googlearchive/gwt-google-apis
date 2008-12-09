@@ -8,7 +8,8 @@ Copies:
 Merges:
 /trunk/visualization@1069:1089 was merged (r1090) into /releases/maps/1.0
 /releases/maps/1.0/@1069:1093 was merged (r1094) into /trunk/visualization
--> The next merge into trunk will be r1069:????
+/releases/maps/1.0@1093:1124 was merged (r1127) into /trunk/visualization
+-> The next merge into trunk will be r1124:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r1069)
@@ -21,3 +22,15 @@ Changes in this branch (excluding changes to this file itself):
  - Fixed links in docs to samples (r1087)
  - Merged back some unit tests accidentally committed to trunk (r1091)
  - Refactored Visualization to derive from Widget (r1093)
+ - Displays a message for file: URLs in the MotionDemo (r1098)
+ - Updates the Showcase to look better and adds size requirements to some visualizations (r1100)
+ - Merged in change accidentally committed to trunk (r1101)
+ - Polish added to CustomVisualization - 15px margin (r1104)
+ - Updated index.html to get rid of space beneath 'Samples' heading (r1105)
+ - Adds sapcing between the text at the top of Showcase and the tab panel. (r1106)
+ - Updated .classpath - accidentally got checked in with mac dev environment set (r1107)
+ - Selection bug fix and test cases (r1108)
+ - Shortened samples package name to work around Windows path length limitations (r1109)
+ - Corrected the GeoDemo to not have a huge blank area outside the map.  Corrected checktyle errors (sorting and organizing imports) (r1110)
+ - Fixes a glitch in the vertical layout on Chrome for HelloVisualization. (r1111)
+
