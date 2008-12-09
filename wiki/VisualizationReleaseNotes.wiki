@@ -14,5 +14,5 @@
    * Online documentation includes a tutorial, support tracker and javadoc
 
 === Known Issues ===
+
    * Linux hosted mode will not display visualizations that use svg or flash to render.  This will be addressed in upcoming releases of GWT with a revamped hosted mode.
-   * In Safari, using the Date type in a DataTable causes an exception to be thrown.  See [http://code.google.com/p/gwt-google-apis/issues/detail?id=219 issue 219]
