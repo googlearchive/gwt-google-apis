@@ -38,8 +38,6 @@
    * [VisualizationSampleApplications Sample Applications]
    * [VisualizationReleaseNotes Release Notes]
    * [VisualizationFAQ FAQs]
- * APIs In Progress
-   * [GettingStartedVisualization Google Visualization API] 
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [TemplateProject Template Project]
