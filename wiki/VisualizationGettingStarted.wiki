@@ -326,7 +326,7 @@ A data table can also be obtained from a data source that has been configured to
     });
 }}}
 
-  [http://gwt-google-apis.googlecode.com/svn/wiki/SimpleViz-2.png]
+  [http://gwt-google-apis.googlecode.com/svn/wiki/SimpleVizQuery-2.png]
  
 === Creating a !SelectHandler ===
 
