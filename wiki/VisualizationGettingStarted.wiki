@@ -301,8 +301,8 @@ To provide a read-only view of a !DataTable, you can bind a [http://code.google.
 A data table can also be obtained from a data source that has been configured to operate with Google Visualizations (for example, Google Spreadsheets), using the [http://code.google.com/p/gwt-google-apis/source/browse/trunk/visualization/visualization/src/com/google/gwt/visualization/client/Query.java Query] class.  The `Query.send()` method takes a `Query.Callback` object that specifies what to do with the !QueryResponse.  If the !QueryResponse is not an error, you can call `QueryResponse.getDataTable()` and use the resulting !DataTable to draw the visualization. For example:
 
 {{{
-    String dataUrl = "http://spreadsheets.google.com/" + 
-        "tq?" + "key=prll1aQH05yQqp_DKPP9TNg" + "&pub=1";
+    String dataUrl = "http://spreadsheets.google.com/tq?"
+      + "key=pWiorx-0l9mwIuwX5CbEALA&range=A1:B12&gid=0&headers=-1";
 
     // Create a query to go to the above URL.
     Query query = Query.create(dataUrl);
@@ -326,6 +326,8 @@ A data table can also be obtained from a data source that has been configured to
     });
 }}}
 
+  [http://gwt-google-apis.googlecode.com/svn/wiki/SimpleViz-2.png]
+ 
 === Creating a !SelectHandler ===
 
 Handlers are created for visualizations very similarly to how listeners are created for widgets.  Visualizations define "addXXXHandler" methods that take a handler for some event.  Many visualizations support !SelectHandler and !SelectEvent. Here is an example of a !SelectHandler implementation:
