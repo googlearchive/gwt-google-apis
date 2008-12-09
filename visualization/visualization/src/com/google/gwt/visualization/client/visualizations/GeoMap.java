@@ -62,7 +62,11 @@ public class GeoMap extends Visualization<GeoMap.Options> {
 
     public final native void setHeight(int height) /*-{
       this.height = height + 'px';
-     }-*/;
+    }-*/;
+
+    public final native void setHeight(String height) /*-{
+      this.height = height;
+    }-*/;
 
     public final native void setRegion(String region) /*-{
       this.region = region;
@@ -77,8 +81,17 @@ public class GeoMap extends Visualization<GeoMap.Options> {
       setHeight(height);
     }
 
+    public final void setSize(String width, String height) {
+      setWidth(width);
+      setHeight(height);
+    }
+
     public final native void setWidth(int width) /*-{
       this.width = width + 'px';
+    }-*/;
+
+    public final native void setWidth(String width) /*-{
+      this.width = width;
     }-*/;
 
     private native void setDataMode(String mode) /*-{
@@ -88,13 +101,16 @@ public class GeoMap extends Visualization<GeoMap.Options> {
 
   public static final String PACKAGE = "geomap";
 
-  public GeoMap(AbstractDataTable data, Options options, int width, int height) 
-  {
-    super(data, options, width, height);
+  public GeoMap() {
+    super();
+    // Setting size makes  a big difference for this visualization.
+    setSize("100%", "100%");   
   }
 
-  public GeoMap(int width, int height) {
-    super(width, height);
+  public GeoMap(AbstractDataTable data, Options options) {
+    super(data, options);
+    // Setting size makes  a big difference for this visualization.
+    setSize("100%", "100%");
   }
 
   @Override

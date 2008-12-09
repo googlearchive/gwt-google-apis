@@ -38,7 +38,9 @@ public class MapVisualizationTest extends VisualizationTest {
       public void run() {
         MapVisualization.Options options = MapVisualization.Options.create();
         DataTable data = makeDataTable();
-        RootPanel.get().add(new MapVisualization(data, options, 300, 300));
+        MapVisualization mapViz = new MapVisualization(data, options, "400px",
+            "400px");
+        RootPanel.get().add(mapViz);
       }
     });
   }
@@ -57,16 +59,18 @@ public class MapVisualizationTest extends VisualizationTest {
         options.setShowLine(true);
         options.setShowTip(true);
         DataTable data = makeDataTable();
-        RootPanel.get().add(new MapVisualization(data, options, 300, 300));
+        MapVisualization mapViz = new MapVisualization(data, options, "400px",
+            "400px");
+        RootPanel.get().add(mapViz);
       }
     });
   }
-  
+
   @Override
   protected String getVisualizationPackage() {
     return MapVisualization.PACKAGE;
   }
-  
+
   /**
    * A support method used by several test cases to create a simple DataTable.
    */
