@@ -1,4 +1,4 @@
-#summary GWT Visualization questions that are asked frequently.  Very frequently.
+﻿#summary GWT Visualization questions that are asked frequently.  Very frequently.
 
 = Visualization FAQs = 
 
@@ -8,7 +8,7 @@
 For general questions about the Visualization API for GWT, first try the 
 [http://groups.google.com/group/google-visualization-api Google Visualization API] Google group.  Make sure to mention that you are using the GWT wrappers for the project.
 
-Another place you can to for help is the [http://groups.google.com/group/gwt-google-api GWT-Google-Apis] group, which is the forum for the developers of the GWT wrappers for all Google APIs.  You can also try the [http://groups.google.com/group/gwt-google-api Google-Web-Toolkit] group which is the main public forum for GWT. 
+Another place you can to for help is the [http://groups.google.com/group/gwt-google-apis GWT-Google-Apis] group, which is the forum for the developers of the GWT wrappers for all Google APIs.  You can also try the [http://groups.google.com/group/gwt-google-api Google-Web-Toolkit] group which is the main public forum for GWT. 
   
 == What should I do if I think I've found a bug? ==
 
