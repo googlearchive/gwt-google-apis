@@ -11,6 +11,7 @@ In order to use a visualization in a GWT project, the visualization needs a GWT 
   * [http://code.google.com/apis/visualization/documentation/gallery/geomap.html GeoMap]
   * [http://code.google.com/apis/visualization/documentation/gallery/intensitymap.html IntensityMap]
   * [http://code.google.com/apis/visualization/documentation/gallery/linechart.html LineChart]
+  * [http://code.google.com/apis/visualization/documentation/gallery/map.html MapVisualization]
   * [http://code.google.com/apis/visualization/documentation/gallery/motionchart.html MotionChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/orgchart.html OrgChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/piechart.html PieChart]
