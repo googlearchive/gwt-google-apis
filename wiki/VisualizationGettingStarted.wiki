@@ -58,7 +58,7 @@ If you are using the Eclipse IDE, now would be a good time to import your new pr
 
 ==Adding the Visualization Script Tag to your HTML Page==
 
-Your GWT application will need access to the Google !JavaScript Visualization API. In order to do this, you must include two additional script tags in your application's `SimpleViz.html` file. Include the following script tags above the reference to your GWT module.
+Your GWT application will need access to the Google !JavaScript Visualization API. In order to do this, you must include an additional script tag in your application's `SimpleViz.html` file. Include the following script tags above the reference to your GWT module.
 
 {{{
     <!--                                           -->
@@ -75,9 +75,16 @@ Your GWT application will need access to the Google !JavaScript Visualization AP
   </head>
 }}}
 
-_Note: Some visualizations may require loading an additional script._
+Some visualizations may require loading an additional script, for instance, the !MapVisualization requires loading the Google Maps API with a script tag like the following:
 
-= A Simple Visualization =
+{{{
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABCDEFG"></script>
+}}}
+
+(Where the key "ABCDEFG" is replaced by your Google API key.)  Please see the [http://code.google.com/apis/visualization/documentation/gallery.html
+documentation] for each visualization for additional loading instructions.  
+
+== A Simple Visualization ==
 
 Replace the contents of !SimpleViz.java with the following:
 
@@ -132,19 +139,39 @@ public class SimpleViz implements EntryPoint {
     return new SelectHandler() {
       @Override
       public void onSelect(SelectEvent event) {
+        String message = "";
+        
         // May be multiple selections.
         JsArray<Selection> selections = chart.getSelections();
 
-        // Get the first selection; ignore the rest.
-        Selection selection = selections.get(0);
+        for (int i = 0; i < selections.length(); i++) {
+          // add a new line for each selection
+          message += i == 0 ? "" : "\n";
+          
+          Selection selection = selections.get(i);
 
-        // isRow() returns true if an entire row has been selected.
-        if (selection.isRow()) {
-          int rowNumber = selection.getRow();
-          Window.alert("row " + rowNumber + " selected");
-        } else {
-          Window.alert("Please select a row.");
+          if (selection.isCell()) {
+            // isCell() returns true if a cell has been selected.
+            
+            // getRow() returns the row number of the selected cell.
+            int row = selection.getRow();
+            // getColumn() returns the column number of the selected cell.
+            int column = selection.getColumn();
+            message += "cell " + row + ":" + column + " selected";
+          } else if (selection.isRow()) {
+            // isRow() returns true if an entire row has been selected.
+            
+            // getRow() returns the row number of the selected row.
+            int row = selection.getRow();
+            message += "row " + row + " selected";
+          } else {
+            // unreachable
+            message += "Pie chart selections should be either row selections or cell selections.";
+            message += "  Other visualizations support column selections as well.";
+          }
         }
+        
+        Window.alert(message);
       }
     };
   }
@@ -173,7 +200,7 @@ _Note: Of course, you can run your visualizations in GWT hosted mode as well, bu
 
 Let's take a closer look at !SimpleViz.
 
-== Calling the Ajax Loader ==
+=== Calling the Ajax Loader ===
 
 In order to load the Google Visualization API into your GWT module, you need to invoke the Google Ajax Loader.  This is done with the static methods of the !AjaxLoader class.  To load the API, you need to provide a Java Runnable object to be executed when the API is loaded, along with a list of visualizations to be loaded.  Visualizations provided by Google come with a constant named `PACKAGE` that should be used in order to load them.  For example:
 
@@ -222,7 +249,7 @@ options.setOption("nlives", 10);
 
 === Creating a !DataTable ===
 
-For all visualizations, the data is created using the [http://code.google.com/apis/visualization/documentation/reference.html#DataTable `DataTable`] class or the [http://code.google.com/apis/visualization/documentation/reference.html#DataView `DataView`] class. A !DataTable is a two dimensional table with rows and columns and cells. As with the Options classes, the `DataTable` class is a subclass of `JavaScriptObject`, so new instances are created by calling the static method `DataTable.create()`.  Each column has a data type defined by the `DataTable.ColumnType` enum. 
+For all visualizations, the data is created using the [http://code.google.com/apis/visualization/documentation/reference.html#DataTable DataTable] class or the [http://code.google.com/apis/visualization/documentation/reference.html#DataView DataView] class. A !DataTable is a two dimensional table with rows and columns and cells. As with the Options classes, the `DataTable` class is a subclass of `JavaScriptObject`, so new instances are created by calling the static method `DataTable.create()`.  Each column has a data type defined by the `DataTable.ColumnType` enum. 
 
 {{{
   private AbstractDataTable createTable() {
@@ -288,7 +315,7 @@ A data table can also be obtained from a data source that has been configured to
           DataTable data = response.getDataTable();
 
           // Create the Options object.
-          Options options = Options.create();
+          Options options = createOptions();
 
           // Create a PieChart and add it to a panel.
           panel.add(new PieChart(data, options));
@@ -306,19 +333,39 @@ Handlers are created for visualizations very similarly to how listeners are crea
     return new SelectHandler() {
       @Override
       public void onSelect(SelectEvent event) {
+        String message = "";
+        
         // May be multiple selections.
         JsArray<Selection> selections = chart.getSelections();
 
-        // Get the first selection; ignore the rest.
-        Selection selection = selections.get(0);
+        for (int i = 0; i < selections.length(); i++) {
+          // add a new line for each selection
+          message += i == 0 ? "" : "\n";
+          
+          Selection selection = selections.get(i);
 
-        // isRow() returns true if an entire row has been selected.
-        if (selection.isRow()) {
-          int rowNumber = selection.getRow();
-          Window.alert("row " + rowNumber + " selected");
-        } else {
-          Window.alert("Please select a row.");
+          if (selection.isCell()) {
+            // isCell() returns true if a cell has been selected.
+            
+            // getRow() returns the row number of the selected cell.
+            int row = selection.getRow();
+            // getColumn() returns the column number of the selected cell.
+            int column = selection.getColumn();
+            message += "cell " + row + ":" + column + " selected";
+          } else if (selection.isRow()) {
+            // isRow() returns true if an entire row has been selected.
+            
+            // getRow() returns the row number of the selected row.
+            int row = selection.getRow();
+            message += "row " + row + " selected";
+          } else {
+            // unreachable
+            message += "Pie chart selections should be either row selections or cell selections.";
+            message += "  Other visualizations support column selections as well.";
+          }
         }
+        
+        Window.alert(message);
       }
     };
   }
