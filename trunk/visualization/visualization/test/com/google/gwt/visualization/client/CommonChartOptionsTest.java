@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.visualizations.AreaChart;
 
 /**
- * Tests for the CommonOptions class. Uses AreaChart, a typical client of
+ * Tests for the CommonChartOptions class. Uses AreaChart, a typical client of
  * CommonChartOptions.
  */
 public class CommonChartOptionsTest extends VisualizationTest {

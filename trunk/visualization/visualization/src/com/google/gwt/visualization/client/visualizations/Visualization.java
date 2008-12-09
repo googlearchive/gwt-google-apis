@@ -70,20 +70,6 @@ public abstract class Visualization<OptionsType extends AbstractDrawOptions> ext
     this.dataTable = data;
   }
 
-  public Visualization(AbstractDataTable data, OptionsType options, int width, 
-      int height) {
-    this(width, height);
-    this.options = options;
-    this.dataTable = data;
-  }
-
-  public Visualization(int width, int height) {
-    Element div = createDiv(width, height);
-    jso = createJso(div);
-    setElement(div);
-    setStyleName("gwt-viz-container");
-  }
-
   /**
    * Draws the visualization.
    * 

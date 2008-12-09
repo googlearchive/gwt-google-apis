@@ -33,6 +33,7 @@ import com.google.gwt.visualization.client.MotionChartTest;
 import com.google.gwt.visualization.client.OrgChartTest;
 import com.google.gwt.visualization.client.PieChartTest;
 import com.google.gwt.visualization.client.ScatterChartTest;
+import com.google.gwt.visualization.client.SelectionTest;
 import com.google.gwt.visualization.client.TableTest;
 
 import junit.framework.Test;
@@ -63,6 +64,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(MotionChartTest.class);
     suite.addTestSuite(OrgChartTest.class);
     suite.addTestSuite(PieChartTest.class);
+    suite.addTestSuite(SelectionTest.class);
     suite.addTestSuite(ScatterChartTest.class);
     suite.addTestSuite(TableTest.class);
     return suite;
