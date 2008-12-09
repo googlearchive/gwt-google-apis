@@ -1,4 +1,4 @@
-#summary Wrapping a Visualization in GWT
+﻿#summary Wrapping a Visualization in GWT
 
 = Visualizations and Wrappers =
 
@@ -7,7 +7,7 @@ In order to use a visualization in a GWT project, the visualization needs a GWT 
   * [http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html AnnotatedTimeLine]
   * [http://code.google.com/apis/visualization/documentation/gallery/areachart.html AreaChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/barchart.html BarChart], [http://code.google.com/apis/visualization/documentation/gallery/columnchart.html ColumnChart]
-  * [http://code.google.com/apis/visualization/documentation/gallery/guage.html Gauge]
+  * [http://code.google.com/apis/visualization/documentation/gallery/gauge.html Gauge]
   * [http://code.google.com/apis/visualization/documentation/gallery/geomap.html GeoMap]
   * [http://code.google.com/apis/visualization/documentation/gallery/intensitymap.html IntensityMap]
   * [http://code.google.com/apis/visualization/documentation/gallery/linechart.html LineChart]
