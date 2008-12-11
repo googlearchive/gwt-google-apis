@@ -52,6 +52,11 @@ public final class GadgetLinker extends XSLinker {
       }
     }
 
+    if (manifestArtifact == null) {
+      logger.log(TreeLogger.ERROR, "No gadget manifest found in ArtifactSet.");
+      throw new UnableToCompleteException();
+    }
+
     return super.link(logger, context, toLink);
   }
 
@@ -59,6 +64,7 @@ public final class GadgetLinker extends XSLinker {
   protected EmittedArtifact emitSelectionScript(TreeLogger logger,
       LinkerContext context, ArtifactSet artifacts)
       throws UnableToCompleteException {
+
     logger = logger.branch(TreeLogger.DEBUG, "Building gadget manifest", null);
 
     String bootstrap = "<script>"
@@ -67,6 +73,7 @@ public final class GadgetLinker extends XSLinker {
 
     // Read the content
     StringBuffer manifest = new StringBuffer();
+
     try {
       BufferedReader in = new BufferedReader(new InputStreamReader(
           manifestArtifact.getContents(logger)));
