@@ -8,7 +8,8 @@ Copies:
 Merges:
 /trunk c747 was merged (r749) into this branch
 /releases/gers/1.1@713:950 was merged (r951) into trunk/gears
----> The next merge into trunk will be 950:????
+/releases/gers/1.1@950:1133 was merged (r1134) into trunk/gears
+---> The next merge into trunk will be 1133:????
 
 Changes in this branch (excluding changes to this file itself:
  - Updated the gears_init.js file for Webkit (r725)
@@ -28,3 +29,5 @@ Changes in this branch (excluding changes to this file itself:
  - Updated links to new demos (r902)
  - Moved 'Known Issues' up to current release notes block (r909)
  - Pretties up the sample for WorkerPoolDemo (r910)
+ - Duplicate closing html tag caused javadoc error (r956)
+ - Fix for issue 214 - assigned callback to wrong property in ManagedResourceStore. (r214)
