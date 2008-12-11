@@ -19,16 +19,16 @@ import com.google.gwt.gadgets.client.UserPreferences.PreferenceAttributes.Option
 
 /**
  * UserPreferences required for a Gadget Ads.
- * 
- * @author nivco@google.com (Nicolas Garnier)
  */
 public interface AdsUserPreferences extends UserPreferences {
 
-  @PreferenceAttributes(display_name = "clickurl", default_value = "",
+  @PreferenceAttributes(display_name = "clickurl", //
+      default_value = "", //
       options = Options.HIDDEN)
   StringPreference clickurl();
-  
-  @PreferenceAttributes(display_name = "aiturl", default_value = "",
+
+  @PreferenceAttributes(display_name = "aiturl", //
+      default_value = "", //
       options = Options.HIDDEN)
   StringPreference aiturl();
 
