@@ -120,9 +120,12 @@ public class GadgetGenerator extends Generator {
 
       sw.println("private native void nativeInit() /*-{");
       sw.indent();
-      for (JClassType interfaceType : sourceType.getImplementedInterfaces()) {
-        generateFeatureInitializer(logger, typeOracle, sw, sourceType,
-            interfaceType);
+      // Looking at the superclass in case any Features are needed there.
+      for (JClassType currentClass = sourceType; currentClass != null; currentClass = currentClass.getSuperclass()) {
+        for (JClassType interfaceType : currentClass.getImplementedInterfaces()) {
+          generateFeatureInitializer(logger, typeOracle, sw, sourceType,
+              interfaceType);
+        }
       }
       sw.outdent();
       sw.println("}-*/;");
@@ -313,24 +316,28 @@ public class GadgetGenerator extends Generator {
       configurePreferenceElement(logger, d, userPref, preferenceType, m);
     }
 
+    String contentToInject = "";
+    
     // Add required features to the manifest
     // <require feature="someFeature" />
-    for (JClassType interfaceType : type.getImplementedInterfaces()) {
-      FeatureName name = interfaceType.getAnnotation(FeatureName.class);
-      if (name != null) {
-        for (String feature : name.value()) {
-          // Skip features defined to be implicitly available in the container
-          if (FeatureName.INTRINSIC.equals(feature)) {
-            continue;
+    for (JClassType currentClass = type; currentClass != null; currentClass = currentClass.getSuperclass()) {
+      for (JClassType interfaceType : currentClass.getImplementedInterfaces()) {
+        FeatureName name = interfaceType.getAnnotation(FeatureName.class);
+        if (name != null) {
+          for (String feature : name.value()) {
+            // Skip features defined to be implicitly available in the container
+            if (FeatureName.INTRINSIC.equals(feature)) {
+              continue;
+            }
+            Element require = (Element) modulePrefs.appendChild(d.createElement("Require"));
+            require.setAttribute("feature", feature);
           }
-          Element require = (Element) modulePrefs.appendChild(d.createElement("Require"));
-          require.setAttribute("feature", feature);
+          GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
+              name.requirements());
         }
-        GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
-            name.requirements());
       }
+      contentToInject += getInjectedContent(logger, currentClass);
     }
-    String contentToInject = getInjectedContent(logger, type);
 
     // The Gadget linker will fill in the bootstrap
     // <content type="html">
@@ -351,9 +358,10 @@ public class GadgetGenerator extends Generator {
   }
 
   /**
-   * Inject additional hand-written XML into the gadget's XML file. Get the @InjectModulePrefs
-   * annotation, where the file for injection is specified and add it as a child
-   * of the modlePrefs element.
+   * Inject additional hand-written XML into the gadget's XML file. Get the
+   * 
+   * @InjectModulePrefs annotation, where the file for injection is specified
+   *                    and add it as a child of the modlePrefs element.
    * 
    * @param logger for logging errors
    * @param type the Gadget subclass we are generating code for
@@ -408,7 +416,8 @@ public class GadgetGenerator extends Generator {
    * 
    * @param logger for logging errors
    * @param type the Gadget subclass we are generating code for
-   * @return the string of all files annotated in the @InjectContent annotation.
+   * @return the string of all files annotated in the
+   * @InjectContent annotation.
    * @throws UnableToCompleteException
    */
   private String getInjectedContent(TreeLogger logger, JClassType type)
