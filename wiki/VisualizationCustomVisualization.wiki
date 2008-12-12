@@ -190,4 +190,4 @@ This can be done by adding this line the [http://code.google.com/p/gwt-google-ap
 }}}
 
 =Links=
-  * The [http://code.google.com/p/gwt-google-apis/source/browse/trunk/visualization/samples/customvisualization/src/com/google/gwt/visualization/sample/customvisualization/ source code of this example]
+  * The [http://code.google.com/p/gwt-google-apis/source/browse/trunk/visualization/samples/customvisualization/src/com/google/gwt/visualization/customvisualization/ source code of this example]
