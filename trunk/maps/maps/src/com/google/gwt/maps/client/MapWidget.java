@@ -720,13 +720,23 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Notifies the map of a change of the size of its container. Call this method
-   * after the size of the container DOM object has changed, so that the map can
-   * adjust itself to fit the new size.
+   * Notifies the map of a change of the size of its container.
    */
   public void checkResize() {
-    LatLng center = getCenter();
     MapImpl.impl.checkResize(jsoPeer);
+  }
+
+  /**
+   * Notifies the map of a change in the size of its container and moves to the
+   * center of the map. Call this method after the size of the container DOM
+   * object has changed, so that the map can adjust itself to fit the new size.
+   *
+   * Note: This call may cause problems with the Maps API if called during
+   * a Zoom or other transition.
+   */
+  public void checkResizeAndCenter() {
+    LatLng center = getCenter();
+    checkResize();
     setCenter(center);
   }
 
@@ -759,8 +769,10 @@ public final class MapWidget extends Composite {
 
   /**
    * Computes the geographical coordinates from pixel coordinates in the div
-   * that holds the draggable map. You need this when you implement interaction
-   * with custom overlays.
+   * that holds the draggable map. This may be helpful for when you implement
+   * interaction with custom overlays that don't extend the {@link Overlay}
+   * interface. If this doesn't give you the expected output, try
+   * {@link #convertContainerPixelToLatLng(Point)} instead.
    * 
    * @param pixel point on the map to convert to Lat/Lng
    * @return a set of converted coordinates
@@ -770,8 +782,21 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Converts from geographical coordinates to the pixel coordinates used by the
-   * current projection.
+   * Computes the pixel coordinates of the given geographical point in the DOM
+   * element that contains the map on the page.
+   * 
+   * @param latlng the geographical coordinates
+   * @return the corresponding projection pixel
+   */
+  public Point convertLatLngToContainerPixel(LatLng latlng) {
+    return MapImpl.impl.fromLatLngToContainerPixel(jsoPeer, latlng);
+  }
+
+  /**
+   * Computes the pixel coordinates of the given geographical point in the DOM
+   * element that holds the draggable map. You need this method to position a
+   * custom overlay when you implement the GOverlay.redraw() method for a custom
+   * overlay.
    * 
    * @param latlng the geographical coordinates
    * @return the corresponding projection pixel
@@ -1012,8 +1037,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)}
-   * .
+   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)} .
    * 
    * @param handler the handler to remove
    */
@@ -1504,7 +1528,7 @@ public final class MapWidget extends Composite {
   @Override
   protected void onAttach() {
     super.onAttach();
-    checkResize();
+    checkResizeAndCenter();
   }
 
   /**
