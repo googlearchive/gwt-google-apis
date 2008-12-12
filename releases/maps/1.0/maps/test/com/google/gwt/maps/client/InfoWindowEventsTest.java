@@ -44,7 +44,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class InfoWindowEventsTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
   static final int ASYNC_DELAY_MSEC = 5000; // 5 seconds
-
+  
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
@@ -53,17 +53,18 @@ public class InfoWindowEventsTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
-   public void gwtSetUp() {
-     TestUtilities.cleanDom();
-   }
+  public void gwtSetUp() {
+    TestUtilities.cleanDom();
+  }
 
   /*
    * Design note: the "closeclick" event doesn't fire through the API. It is for
    * detecting clicks on the close button.
    */
-  
+
   public void testInfoWindowCloseClickTrigger() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+        -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -83,7 +84,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   }
 
   public void testInfoWindowMaximizeClickEvent() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+        -84.3880580), 13);
     map.setSize("300px", "300px");
 
     RootPanel.get().add(map);
@@ -96,7 +98,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
     map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        // This timer gives the info window a chance go get going. 
+        // This timer gives the info window a chance go get going.
         // We saw spurious timeouts on this test case before adding the
         // timer (the value of 300ms may need to be adjusted further.)
         new Timer() {
@@ -105,7 +107,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
           public void run() {
             info.maximize();
           }
-          
+
         }.schedule(300);
       }
 
@@ -126,7 +128,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // TODO(zundel): JavaScript failure inside maps API. Filed bug w/ maps team.
 
   // public void testInfoWindowMaximizeClickTrigger() {
-  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580),
+  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+  // -84.3880580),
   // 13);
   // map.setSize("300px", "300px");
   //
@@ -152,7 +155,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowMaximizeEndEvent() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+        -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -184,7 +188,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // TODO(zundel): Javascript failure inside maps API. Filed bug w/ maps team.
 
   // public void testInfoWindowMaximizeEndTrigger() {
-  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580),
+  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+  // -84.3880580),
   // 13);
   // map.setSize("300px", "300px");
   // RootPanel.get().add(map);
@@ -209,7 +214,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowRestoreClickEvent() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+        -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -217,13 +223,22 @@ public class InfoWindowEventsTest extends GWTTestCase {
     InfoWindowContent content = new InfoWindowContent("HelloMaps!");
     content.setMaxContent("Hello Again Maps!");
     content.setMaxTitle("Hello Maps Maximized");
+
     // Handler to maximize the info window as soon as it opens.
     map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        info.maximize();
-        info.restore();
-      }
+        new Timer() {
+          public void run() {
+            info.maximize();
+            new Timer() {
+              public void run() {
+                info.restore();
+              }
+            }.schedule(1000);
+          }
+        }.schedule(300);
+      };
 
     });
     info.addInfoWindowRestoreClickHandler(new InfoWindowRestoreClickHandler() {
@@ -241,7 +256,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // TODO(zundel): Javascript failure inside maps API. Filed bug w/ maps team.
 
   // public void testInfoWindowRestoreClickTrigger() {
-  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580),
+  // final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+  // -84.3880580),
   // 13);
   // map.setSize("300px", "300px");
   // RootPanel.get().add(map);
@@ -266,7 +282,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowRestoreEndEvent() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+        -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
@@ -278,8 +295,16 @@ public class InfoWindowEventsTest extends GWTTestCase {
     map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        info.maximize();
-        info.restore();
+        new Timer() {
+          public void run() {
+            info.maximize();
+            new Timer() {
+              public void run() {
+                info.restore();
+              }
+            }.schedule(1000);
+          }
+        }.schedule(300);
       }
 
     });
@@ -296,7 +321,8 @@ public class InfoWindowEventsTest extends GWTTestCase {
   }
 
   public void testInfoWindowRestoreEndTrigger() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790, -84.3880580), 13);
+    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+        -84.3880580), 13);
     map.setSize("300px", "300px");
     RootPanel.get().add(map);
 
