@@ -9,7 +9,8 @@ Merges:
 /releases/maps/1.0/@808:943 was merged (r946) into /trunk/maps
 /releases/maps/1.0/@944:1029 was merged (r1030) into /trunk/maps
 /releases/maps/1.0/@1029:1141 was merged (r1142) into /trunk/maps
--> The next merge into trunk will be r1141:????
+/releases/maps/1.0/@1041:1145 was merged (r1146) into /trunk/maps
+-> The next merge into trunk will be r1145:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -53,3 +54,4 @@ it is returning null.(r1027, r1029)
  - Added alternative conversion of LatLng to pixels.(r1034)
  - Fixed build break in MapWidget.onAttach().(r1035)
  - Updated release notes.(r1089)
+ - Fix unit test that was causing build break on IE.(r1141)
