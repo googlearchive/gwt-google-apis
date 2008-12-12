@@ -8,7 +8,8 @@ Copies:
 Merges:
 /releases/maps/1.0/@808:943 was merged (r946) into /trunk/maps
 /releases/maps/1.0/@944:1029 was merged (r1030) into /trunk/maps
--> The next merge into trunk will be r1029:????
+/releases/maps/1.0/@1029:1141 was merged (r1142) into /trunk/maps
+-> The next merge into trunk will be r1141:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -48,3 +49,7 @@ Changes in this branch (excluding changes to this file itself):
  - Fixes issue 206 Allow Marker to be subclassed with an externally provided JSO. (r1010)
  - Defensive programming around the GDirections.getStatus() method. Sometimes
 it is returning null.(r1027, r1029)
+ - Removed setCenter() from MapWidget.checkResize() (issue216).(r1033)
+ - Added alternative conversion of LatLng to pixels.(r1034)
+ - Fixed build break in MapWidget.onAttach().(r1035)
+ - Updated release notes.(r1089)
