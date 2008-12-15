@@ -266,8 +266,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchActivitiesRequest(Id idSpec,
       Map<ActivityRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchActivitiesRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), paramsObj);
+    return this.newFetchActivitiesRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), params);
   }-*/;
 
 
@@ -290,8 +289,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchPeopleRequest(Id idSpec,
       Map<PeopleRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchPeopleRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), paramsObj);
+    return this.newFetchPeopleRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), params);
   }-*/;
 
   /**
@@ -315,8 +313,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchPeopleRequest(Array<Id> idSpec,
       Map<PeopleRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchPeopleRequest(id, paramsObj);
+    return this.newFetchPeopleRequest(id, params);
   }-*/;
 
   /**
@@ -373,8 +370,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchPersonAppDataRequest(Id idSpec, String key,
       Map<DataRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchPersonAppDataRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), key, paramsObj);
+    return this.newFetchPersonAppDataRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), key, params);
   }-*/;
 
   /**
@@ -387,8 +383,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchPersonAppDataRequest(Array<Id> idSpec, String key,
       Map<DataRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchPersonAppDataRequest(idSpec, key, paramsObj);
+    return this.newFetchPersonAppDataRequest(idSpec, key, params);
   }-*/;
 
   /**
@@ -401,8 +396,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchPersonAppDataRequest(Id idSpec, Array<String> keys,
       Map<DataRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchPersonAppDataRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), keys, paramsObj);
+    return this.newFetchPersonAppDataRequest(idSpec.@com.google.gwt.opensocial.client.DataRequest.Id::toString()(), keys, params);
   }-*/;
 
   /**
@@ -416,8 +410,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchPersonAppDataRequest(Array<Id> idSpec,
       Array<String> keys, Map<DataRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchPersonAppDataRequest(idSpec, keys, paramsObj);
+    return this.newFetchPersonAppDataRequest(idSpec, keys, params);
   }-*/;
 
   /**
@@ -441,8 +434,7 @@ public class DataRequest extends JavaScriptObject {
    */
   public final native DataRequestItem newFetchPersonRequest(Id idSpec,
       Map<PeopleRequestFields, Object> params) /*-{
-    var paramsObj = params.@com.google.gwt.opensocial.client.util.Map::toJavaScript()();
-    return this.newFetchPersonRequest(idSpec, paramsObj);
+    return this.newFetchPersonRequest(idSpec, params);
   }-*/;
 
 
@@ -495,7 +487,7 @@ public class DataRequest extends JavaScriptObject {
    *        the server
    */
   public final native void send(OneArgumentFunction<DataResponse> callback)/*-{
-    var nativeCallback=function(response) {
+    var nativeCallback = function(response) {
       callback.@com.google.gwt.opensocial.client.OneArgumentFunction<DataResponse>::run(Lcom/google/gwt/opensocial/client/DataResponse;)(response);
     }
     this.send(nativeCallback);
