@@ -31,7 +31,7 @@ public class Properties extends JavaScriptObject {
   }-*/;
 
   public final Date getDate(String name) {
-    return new Date((int) getDateDouble(name));
+    return new Date((long) getDateDouble(name));
   }
 
   public final native double getDouble(String name) /*-{

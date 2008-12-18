@@ -62,7 +62,6 @@ public class TableTest extends VisualizationTest {
   public void testSelection() {
     AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
-        // Create a minimal pie chart.
         Table.Options options = Table.Options.create();
         final Table viz = new Table(createCompanyPerformance(), options);
   

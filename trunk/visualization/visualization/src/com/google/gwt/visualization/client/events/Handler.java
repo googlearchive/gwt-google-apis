@@ -15,8 +15,6 @@
  */
 package com.google.gwt.visualization.client.events;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.visualization.client.AbstractVisualization;
 import com.google.gwt.visualization.client.ExceptionHelper;
 import com.google.gwt.visualization.client.Properties;
 import com.google.gwt.visualization.client.visualizations.Visualization;
@@ -24,26 +22,22 @@ import com.google.gwt.visualization.client.visualizations.Visualization;
 /**
  * The base class for visualization event handlers.
  */
-public abstract class Handler {
-  private static native void addHandler(JavaScriptObject jso, String eventName, Handler handler) /*-{
+public abstract class Handler {  
+  /**
+   * Add a Handler to a visualization.
+   * 
+   * @param viz a Visualization supporting the given event.
+   * @param eventName The name of the event.
+   * @param handler A Handler to add.
+   */
+  public static native void addHandler(Visualization<?> viz, String eventName, Handler handler) /*-{
+    var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
     var callback = function(event) {
       @com.google.gwt.visualization.client.events.Handler::onCallback(Lcom/google/gwt/visualization/client/events/Handler;Lcom/google/gwt/visualization/client/Properties;)
           (handler, event);
     };
     $wnd.google.visualization.events.addListener(jso, eventName, callback);
   }-*/;
-  
-  public static void addHandler(Visualization<?> viz,
-      String eventName, 
-      Handler handler) {
-    addHandler(viz.getJso(), eventName, handler);
-  }
-  
-  public static void addHandler(AbstractVisualization<?> viz,
-      String eventName, 
-      Handler handler) {
-    addHandler(viz.getJso(), eventName, handler);
-  }
 
   @SuppressWarnings("unused")
   private static void onCallback(final Handler handler, 
@@ -55,5 +49,12 @@ public abstract class Handler {
     });
   }
   
+  /**
+   * This method should be overridden by event-specific Handler subclasses.
+   * The subclass should extract the event properties (if any), create a GWT
+   * Event bean object, and pass it to the event-specific callback.
+   * 
+   * @param properties The JavaScriptObject containing data about the event.
+   */
   protected abstract void onEvent(Properties properties);
 }

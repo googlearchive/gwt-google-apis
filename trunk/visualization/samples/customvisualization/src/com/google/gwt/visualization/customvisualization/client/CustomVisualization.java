@@ -27,6 +27,7 @@ import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.events.SelectHandler.SelectEvent;
 
 /**
  * A Google Visualization written in GWT.
@@ -61,8 +62,13 @@ class CustomVisualization extends
     initWidget(grid);
   }
 
-  public void addSelectHandler(SelectHandler handler) {
-    Selection.addSelectHandler(this, handler);
+  public void addSelectHandler(final SelectHandler handler) {
+    grid.addTableListener(new TableListener() {
+      public void onCellClicked(SourcesTableEvents sender, int row, int cell) {
+        selectedColumn = cell;
+        selectedRow = row - 1; // -1 because of the title row
+        handler.onSelect(new SelectEvent());
+      }});
   }
 
   @Override

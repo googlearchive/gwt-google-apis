@@ -32,7 +32,6 @@ import com.google.gwt.visualization.client.ArrayHelper;
 public class Gauge extends Visualization<Gauge.Options> {
   /**
    * Options for drawing the chart.
-   * 
    */
   public static class Options extends AbstractDrawOptions {
     public static Options create() {
@@ -42,11 +41,23 @@ public class Gauge extends Visualization<Gauge.Options> {
     protected Options() {
     }
 
+    /**
+     * Set the range of values for the Gauge.
+     * 
+     * @param min The minimum value shown on the Gauge.
+     * @param max The maximum value shown on the Gauge.
+     */
     public final native void setGaugeRange(int min, int max) /*-{
       this.min = min;
       this.max = max;
     }-*/;
 
+    /**
+     * Set the range of values to be highlighted in green.
+     * 
+     * @param from The value where the green highlighting should start.
+     * @param to The value where the green highlighting should end.
+     */
     public final native void setGreenRange(int from, int to) /*-{
       this.greenFrom = from;
       this.greenTo = to;
@@ -64,6 +75,12 @@ public class Gauge extends Visualization<Gauge.Options> {
       this.minorTicks = numberOfTicks;
      }-*/;
 
+    /**
+     * Set the range of values to be highlighted in red.
+     * 
+     * @param from The value where the red highlighting should start.
+     * @param to The value where the red highlighting should end.
+     */
     public final native void setRedRange(int from, int to) /*-{
       this.redFrom = from;
       this.redTo = to;
@@ -78,6 +95,12 @@ public class Gauge extends Visualization<Gauge.Options> {
       this.width = width;
     }-*/;
 
+    /**
+     * Set the range of values to be highlighted in yellow.
+     * 
+     * @param from The value where the yellow highlighting should start.
+     * @param to The value where the yellow highlighting should end.
+     */
     public final native void setYellowRange(int from, int to) /*-{
       this.yellowFrom = from;
       this.yellowTo = to;
