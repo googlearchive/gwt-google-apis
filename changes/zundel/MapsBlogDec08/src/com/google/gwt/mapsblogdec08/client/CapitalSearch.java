@@ -35,6 +35,7 @@ import com.google.gwt.search.client.ResultSetSize;
 import com.google.gwt.search.client.SafeSearchValue;
 import com.google.gwt.search.client.SearchCompleteHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -56,6 +57,7 @@ import java.util.List;
  */
 public class CapitalSearch extends Composite {
   private Geocoder geocoder = new Geocoder();
+  private SuggestBox suggest = new SuggestBox(new CapitalSuggestOracle());
 
   /**
    * An object to cold contents of the database (and also happens to be an
@@ -124,6 +126,7 @@ public class CapitalSearch extends Composite {
 
     public void onSearchComplete(SearchCompleteEvent event) {
       ImageResult result = (ImageResult) event.getResult();
+
       marker = new Marker(point);
       String lat = fmtDoubleLatLng(point.getLatitude());
       String lng = fmtDoubleLatLng(point.getLongitude());
@@ -139,11 +142,12 @@ public class CapitalSearch extends Composite {
 
         public void onClick(MarkerClickEvent event) {
           map.getInfoWindow().open(point, content);
+          suggest.setText("");
         }
       });
       map.addOverlay(marker);
       map.getInfoWindow().open(marker, content);
-
+      suggest.setText("");
     }
   }
 
@@ -168,7 +172,7 @@ public class CapitalSearch extends Composite {
   private class SearchControl extends Control.CustomControl {
 
     protected SearchControl() {
-      super(new ControlPosition(ControlAnchor.TOP_RIGHT, 60, 5));
+      super(new ControlPosition(ControlAnchor.TOP_RIGHT, 5, 5));
     }
 
     @Override
@@ -178,9 +182,8 @@ public class CapitalSearch extends Composite {
 
     @Override
     protected Widget initialize(final MapWidget map) {
-      SuggestBox suggest = new SuggestBox(new CapitalSuggestOracle());
       suggest.setLimit(10);
-      
+
       VerticalPanel panel = new VerticalPanel();
       panel.add(new Label("Search for a world capital:"));
       panel.getElement().getStyle().setProperty("backgroundColor", "#FFFFFF");
@@ -195,7 +198,11 @@ public class CapitalSearch extends Composite {
         }
       });
       panel.add(suggest);
-      return panel;
+
+      // Work around a safari issue - wrap the panel in an AbsolutePanel.
+      AbsolutePanel outerPanel = new AbsolutePanel();
+      outerPanel.add(panel);
+      return outerPanel;
     }
   }
 
@@ -394,7 +401,7 @@ public class CapitalSearch extends Composite {
       new CapitalSuggestion("Turkmenistan", "Ashgabat"),
       new CapitalSuggestion("Tuvalu", "Vaiaku village, Funafuti province"),
       new CapitalSuggestion("Uganda", "Kampala"),
-      new CapitalSuggestion("Ukraine", "Kyiv"),
+      new CapitalSuggestion("Ukraine", "Kiev"),
       new CapitalSuggestion("United Arab Emirates", "Abu Dhabi"),
       new CapitalSuggestion("United Kingdom", "London"),
       new CapitalSuggestion("United States of America", "Washington D.C."),

@@ -17,6 +17,7 @@ package com.google.gwt.mapsblogdec08.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -43,28 +44,34 @@ public class MapsBlogDec08 implements EntryPoint {
 
   // GWT module entry point method.
   public void onModuleLoad() {
-    app.setSize("600px", "350px");
 
     // Setup a disclosure panel on the left to browse the different
     // presentations
-    leftPanel.setSize("150px", "325px");
+    leftPanel.setSize("125px", "400px");
     leftPanel.add(new HTML(
-    "Type in the SuggestBox control to search for a world capital."),
-    "Capital Finder");
+        "Type in the SuggestBox control to search for a world capital."),
+        "Capital Finder");
     leftPanel.add(new HTML("<p>A demonstration of using "
         + "polyline, directions and infowindows in Maps, "
         + "combined with a custom control and sprite images.</p>"),
         "Retreat Ideas");
-    leftPanel.add(new HTML("<p>Some of the source code for this application"),
-        "Source Code.</p> <a href=\"http://gwt-google-apis.google.com/svn/changes/zundel/MapsBlogDec08/\">Full Source</a>");
+    leftPanel.add(
+        new HTML(
+            "<p>Some of the source code for this application."
+                + "</p>"
+                + "<a href=\"http://code.google.com/p/gwt-google-apis/source/browse/#svn/changes/zundel/MapsBlogDec08/src/com/google/gwt/mapsblogdec08/client/\">Full source</a>" + " is available on Google Code."),
+        "Source Code");
 
     app.add(leftPanel, DockPanel.WEST);
 
-    mainPanel.setSize("450px", "325px");
+    mainPanel.setSize("550px", "400px");
     app.add(mainPanel, DockPanel.CENTER);
-
+    app.getElement().getStyle().setPropertyPx("margin", 7);
     // mainPanel.add(retreat);
-    RootPanel.get("mapsBlog").add(app);
+    DecoratorPanel decorator = new DecoratorPanel();
+    decorator.add(app);
+    
+    RootPanel.get("mapsBlog").add(decorator);
   }
 
   private void showPanel(int index) {

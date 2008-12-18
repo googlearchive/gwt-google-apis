@@ -54,7 +54,7 @@ public class SourceCode extends Composite {
   private Panel makePanel(TextResource textResource) {
     VerticalPanel outerPanel = new VerticalPanel();
     ScrollPanel panel = new ScrollPanel();
-    panel.setSize("430px", "285px");
+    panel.setSize("530px", "360px");
     HTML html = new HTML(procSource(textResource.getText()));
     html.getElement().getStyle().setProperty("fontSize", "small");
     panel.add(html);

@@ -16,6 +16,7 @@
 package com.google.gwt.mapsblogdec08.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
@@ -35,10 +36,12 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.maps.client.overlay.PolylineOptions;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -71,7 +74,7 @@ public class RetreatPresentation extends Composite {
     ListBox listBox = new ListBox();
 
     protected BlogControl() {
-      super(new ControlPosition(ControlAnchor.TOP_RIGHT, 20, 40));
+      super(new ControlPosition(ControlAnchor.TOP_RIGHT, 5, 40));
     }
 
     @Override
@@ -88,8 +91,9 @@ public class RetreatPresentation extends Composite {
       VerticalPanel panel = new VerticalPanel();
       panel.add(new Label("Where should we hold the Geo-GWT Retreat?"));
       panel.add(listBox);
-      panel.getElement().getStyle().setProperty("backgroundColor", "#FFFFFF");
-      panel.getElement().getStyle().setProperty("border", "solid #666666 1px");
+      Style panelStyle = panel.getElement().getStyle();
+      panelStyle.setProperty("backgroundColor", "#FFFFFF");
+      panelStyle.setProperty("border", "solid #666666 1px");
       panel.setSpacing(5);
       panel.setWidth("110px");
       listBox.addItem("Select Venue:");
@@ -111,7 +115,11 @@ public class RetreatPresentation extends Composite {
           }
         }
       });
-      return panel;
+      
+      // Work around a safari issue - wrap the panel in an AbsolutePanel.
+      AbsolutePanel outerPanel = new AbsolutePanel();
+      outerPanel.add(panel);
+      return outerPanel;
     }
   }
 
@@ -129,8 +137,13 @@ public class RetreatPresentation extends Composite {
       151.1986541748047);
   private final LatLng tasmanianDevilPark = LatLng.newInstance(-43.084937,
       147.896919);
+  private final Image cachedImage;
 
   public RetreatPresentation() {
+    // Pre-load the images
+    cachedImage = images.babsonGlobe().createImage();
+    Image.prefetch(cachedImage.getUrl());
+    
     // Open a map centered on Cawker City, KS USA
     map = new MapWidget(cawkerCity, 2);
     map.setSize("100%", "100%");
@@ -140,12 +153,14 @@ public class RetreatPresentation extends Composite {
     map.addMapType(MapType.getHybridMap());
     map.setCurrentMapType(MapType.getHybridMap());
 
+    initWidget(map);
+    
     // Add some controls for the zoom level
     map.addControl(new SmallMapControl());
     map.addControl(new MapTypeControl());
     map.addControl(new BlogControl());
     
-    initWidget(map);
+    
   };
 
   /**
