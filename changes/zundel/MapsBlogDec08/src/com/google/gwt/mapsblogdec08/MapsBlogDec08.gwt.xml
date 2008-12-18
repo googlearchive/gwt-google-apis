@@ -1,0 +1,28 @@
+<module>
+
+      <!-- Inherit the core Web Toolkit stuff.                        -->
+      <inherits name='com.google.gwt.user.User'/>
+	
+      <!-- Inherit the default GWT style sheet.  You can change       -->
+      <!-- the theme of your GWT application by uncommenting          -->
+      <!-- any one of the following lines.                            -->
+      <!--  <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+      <inherits name='com.google.gwt.user.theme.chrome.Chrome'/>
+      <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+
+      <!-- Other module inherits                                      -->
+      <inherits name="com.google.gwt.maps.GoogleMaps" />
+      <inherits name="com.google.gwt.search.Search" />
+      <inherits name="com.google.gwt.libideas.ImmutableResources" />
+
+      <!-- You can usually run under localhost without a key -->
+      <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2" />
+      <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
+  
+      <!-- Specify the app entry point class.                         -->
+      <entry-point class='com.google.gwt.mapsblogdec08.client.MapsBlogDec08'/>
+    
+      <!-- Specify the application specific style sheet.              -->
+      <stylesheet src='MapsBlogDec08.css' />
+	
+</module>
