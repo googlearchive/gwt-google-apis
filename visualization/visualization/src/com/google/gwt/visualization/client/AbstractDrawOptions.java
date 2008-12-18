@@ -18,8 +18,11 @@ package com.google.gwt.visualization.client;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * DrawOptions stores the options for drawing the visualization.
- * 
+ * Abstract base class for all draw options.  Provides methods for setting
+ * options with arbitrary names.  If options are added to a Google 
+ * Visualization that are not yet supported by the GWT wrapper for that
+ * visualization, the caller can call these "unstructured" methods to set
+ * the new option.
  */
 public abstract class AbstractDrawOptions extends JavaScriptObject {
   protected AbstractDrawOptions() {
@@ -34,6 +37,10 @@ public abstract class AbstractDrawOptions extends JavaScriptObject {
   }-*/;
 
   public final native void setOption(String option, int value) /*-{
+    this[option] = value;
+  }-*/;
+
+  public final native void setOption(String option, JavaScriptObject value) /*-{
     this[option] = value;
   }-*/;
 

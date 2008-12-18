@@ -23,44 +23,79 @@ import com.google.gwt.visualization.client.visualizations.Visualization;
 
 /**
  * Selection stores information about the current selection.
- * 
  */
 public class Selection extends JavaScriptObject {
-  public static <E extends AbstractVisualization<?>> void addSelectHandler(
-      E viz, SelectHandler handler) {
+  /**
+   * Add a SelectHandler to an AbstractVisualization.
+   * @param viz An AbstractVisualization that implements Selectable.
+   * @param handler The SelectHandler to add.
+   */
+  public static <E extends Visualization<?>, Selectable> void addSelectHandler(E viz, SelectHandler handler) {
     Handler.addHandler(viz, "select", handler);
   }
   
-  public static <E extends Visualization<?>> void addSelectHandler(
-      E viz, SelectHandler handler) {
-    Handler.addHandler(viz, "select", handler);
-  }
-  
+  /**
+   * Create a selection that specifies a row and a column.
+   * 
+   * @param row the row of the selection.
+   * @param column The column of the selection.
+   * @return A selection that specifies a row and a column.
+   */
   public static native Selection createCellSelection(int row, int column) /*-{
     return {'row' : row, 'column' : column};
   }-*/;
-  
+
+  /**
+   * Create a selection with a null row.
+   * 
+   * @param i The column of the selection.
+   * @return A selection with a null row.
+   */
   public static native Selection createColumnSelection(int i) /*-{
     return {'column' : i};
   }-*/;
 
+  /**
+   * Create a selection with a null column.
+   * 
+   * @param i The row of the selection.
+   * @return A selection with a null column.
+   */
   public static native Selection createRowSelection(int i) /*-{
     return {'row' : i};
   }-*/;
 
-  public static final native JsArray<Selection> getSelections(Selectable viz) /*-{
+  /**
+   * Get the Selections that are currently selected.
+   * 
+   * @param viz A Selectable visualization.
+   * @return A JsArray of Selections.
+   */
+  public static final native <E extends Visualization<?>, Selectable> JsArray<Selection> getSelections(E viz) /*-{
     var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
     return jso.getSelection();
   }-*/;
 
-  public static final native void setSelections(Selectable viz, JsArray<Selection> sel) /*-{
+  /**
+   * Set the selections that will be selected.
+   * 
+   * @param viz A Selectable visualization.
+   * @param selections The Selections that will be selected.
+   */
+  public static final native <E extends Visualization<?>, Selectable> void setSelections(E viz, JsArray<Selection> selections) /*-{
     var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
-    jso.setSelection(sel);
+    jso.setSelection(selections);
   }-*/;
 
-  public static native void triggerSelection(Selectable viz, JsArray<Selection> selection) /*-{
+  /**
+   * Trigger a select event.
+   * 
+   * @param viz A Selectable visualization.
+   * @param selections The selections that will be selected.
+   */
+  public static native <E extends Visualization<?>, Selectable> void triggerSelection(E viz, JsArray<Selection> selections) /*-{
     var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
-    $wnd.google.visualization.events.trigger(jso, 'select', selection);
+    $wnd.google.visualization.events.trigger(jso, 'select', selections);
   }-*/;
 
   protected Selection() {

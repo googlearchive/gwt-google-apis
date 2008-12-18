@@ -22,7 +22,7 @@ import com.google.gwt.visualization.client.Properties;
  */
 public abstract class SortHandler extends Handler {
   /**
-   * This event is trigger when the user clicks on a column heading.
+   * This event is triggered when the user clicks on a column heading.
    */
   public class SortEvent {
     private int column;

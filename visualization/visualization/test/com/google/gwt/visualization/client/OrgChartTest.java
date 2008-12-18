@@ -49,7 +49,6 @@ public class OrgChartTest extends VisualizationTest {
   public void testSelection() {
     AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
-        // Create a minimal pie chart.
         OrgChart.Options options = OrgChart.Options.create();
         final OrgChart viz = new OrgChart(createDataTable(), options);
   
