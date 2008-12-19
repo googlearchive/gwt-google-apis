@@ -18,7 +18,6 @@ package com.google.gwt.maps.client.geocode;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.overlay.Marker;
-import com.google.gwt.maps.client.overlay.Polyline;
 
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class DirectionsTest extends GWTTestCase {
     DirectionsPanel directionsPanel = new DirectionsPanel();
     DirectionQueryOptions opts = new DirectionQueryOptions(map, directionsPanel);
     String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
-        + "to: 1600 amphitheatre mtn view ca";
+        + "to: 1600 amphitheatre mtn view ca USA";
     Directions.load(query, opts, new DirectionsCallback() {
 
       public void onFailure(int statusCode) {
@@ -59,16 +58,113 @@ public class DirectionsTest extends GWTTestCase {
             result.getDuration().inSeconds() > 0);
         assertNotNull("Duration.inLocalizedUnits",
             result.getDuration().inLocalizedUnits());
-        assertNotNull("result.getMarkers()", result.getMarkers());
         assertNotNull("result.getRoutes()", result.getRoutes());
         assertNotNull("result.getSummaryHtml()", result.getSummaryHtml());
-        Polyline p = result.getPolyline();
-        assertNotNull("polyline", p);
+        assertNotNull("polyline", result.getPolyline());
+        assertNotNull("result.getPlacemarks()", result.getPlacemarks());
         List<Marker> markers = result.getMarkers();
         assertNotNull("markers", markers);
         assertNotNull("markers.get(0)", markers.get(0));
         assertNotNull("markers.get(1)", markers.get(1));
         finishTest();
+      }
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
+  }
+
+  public void testDirectionsNoPanel() {
+    MapWidget map = new MapWidget();
+    DirectionQueryOptions opts = new DirectionQueryOptions(map);
+    String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
+        + "to: 1600 amphitheatre mtn view ca USA";
+    Directions.load(query, opts, new DirectionsCallback() {
+
+      public void onFailure(int statusCode) {
+        fail("Query failed with status: " + statusCode + " "
+            + StatusCodes.getName(statusCode));
+      }
+
+      public void onSuccess(DirectionResults result) {
+        assertNotNull("CopyrightHtml", result.getCopyrightsHtml());
+        assertNotNull("Distance", result.getDistance());
+        assertTrue("Distance.inMeters() > 0",
+            result.getDistance().inMeters() > 0);
+        assertNotNull("Distance.inLocalizedUnits",
+            result.getDistance().inLocalizedUnits());
+        assertNotNull("Duration", result.getDuration());
+        assertTrue("Duration.inSeconds() > 0",
+            result.getDuration().inSeconds() > 0);
+        assertNotNull("Duration.inLocalizedUnits",
+            result.getDuration().inLocalizedUnits());
+        assertNotNull("result.getRoutes()", result.getRoutes());
+        assertNotNull("result.getSummaryHtml()", result.getSummaryHtml());
+        assertNotNull("polyline", result.getPolyline());
+        assertNotNull("result.getPlacemarks()", result.getPlacemarks());
+        List<Marker> markers = result.getMarkers();
+        assertNotNull("markers", markers);
+        assertNotNull("markers.get(0)", markers.get(0));
+        assertNotNull("markers.get(1)", markers.get(1));
+        finishTest();
+      }
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
+  }
+
+  public void testDirectionsNoMap() {
+    String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
+        + "to: 1600 amphitheatre mtn view ca USA";
+
+    Directions.load(query, new DirectionsCallback() {
+
+      public void onFailure(int statusCode) {
+        fail("Query failed with status: " + statusCode + " "
+            + StatusCodes.getName(statusCode));
+      }
+
+      public void onSuccess(DirectionResults result) {
+        assertNotNull("CopyrightHtml", result.getCopyrightsHtml());
+        assertNotNull("Distance", result.getDistance());
+        assertTrue("Distance.inMeters() > 0",
+            result.getDistance().inMeters() > 0);
+        assertNotNull("Distance.inLocalizedUnits",
+            result.getDistance().inLocalizedUnits());
+        assertNotNull("Duration", result.getDuration());
+        assertTrue("Duration.inSeconds() > 0",
+            result.getDuration().inSeconds() > 0);
+        assertNotNull("Duration.inLocalizedUnits",
+            result.getDuration().inLocalizedUnits());
+        List<Marker> markers = result.getMarkers();
+        assertNotNull("markers", markers);
+        assertNotNull("markers.get(0)", markers.get(0));
+        assertNotNull("markers.get(1)", markers.get(1));
+        assertNotNull("result.getRoutes()", result.getRoutes());
+        assertNotNull("result.getPlacemarks()", result.getPlacemarks());
+        assertNotNull("result.getSummaryHtml()", result.getSummaryHtml());
+
+        // Some items are not retrieved if not specified in DirectionsOptions()
+        assertNull("polyline", result.getPolyline());
+
+        finishTest();
+      }
+    });
+
+    delayTestFinish(ASYNC_DELAY_MSEC);
+  }
+
+  public void testFailedDirections() {
+    MapWidget map = new MapWidget();
+    DirectionsPanel directionsPanel = new DirectionsPanel();
+    DirectionQueryOptions opts = new DirectionQueryOptions(map, directionsPanel);
+    String query = "from: 1000 Baloney St NW, Atlantis, XY USA "
+        + "to: 160000 amphibian street absolutelynowhere SB USA";
+    Directions.load(query, opts, new DirectionsCallback() {
+
+      public void onFailure(int statusCode) {
+        finishTest();
+      }
+
+      public void onSuccess(DirectionResults result) {
+        fail("Query suceeded when it should have failed.");
       }
     });
     delayTestFinish(ASYNC_DELAY_MSEC);
