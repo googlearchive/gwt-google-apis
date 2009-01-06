@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Roughly replicates a FORM upload using Gears.
+ * Roughly replicates a FORM upload using Gears.O
  * <p>
  * When the user clicks the Browse button, the Desktop.openFiles method is
  * invoked allowing the user to select a file. The selection is saved as a Blob
@@ -53,9 +53,9 @@ public class UploadDemo implements EntryPoint {
    */
   public void onModuleLoad() {
     root = RootPanel.get();
-    
+
     final Button browse = new Button("Browse");
-    
+
     final Button upload = new Button("Upload");
     upload.setEnabled(false);
 
@@ -64,13 +64,13 @@ public class UploadDemo implements EntryPoint {
 
     final SimplePanel progressInner = new SimplePanel();
     progressInner.addStyleName("progressInner");
-    
+
     final SimplePanel progressGauge = new SimplePanel();
     progressGauge.addStyleName("progressGauge");
     progressGauge.add(progressInner);
 
     final HTML result = new HTML();
-    
+
     browse.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         Desktop desktop = factory.createDesktop();
@@ -94,13 +94,12 @@ public class UploadDemo implements EntryPoint {
 
         request.setCallback(new RequestCallback() {
           public void onResponseReceived(HttpRequest request) {
-              String msg = request.getStatus() + " " + request.getStatusText();
-              if (request.getStatus() != 200) {
-                  result.setHTML("<p style=\"color:red\">" + msg + "</p>");
-              }
-              else {
-                  result.setHTML("<p style=\"color:green\">" + msg + "</p>");
-              }
+            String msg = request.getStatus() + " " + request.getStatusText();
+            if (request.getStatus() != 200) {
+              result.setHTML("<p style=\"color:red\">" + msg + "</p>");
+            } else {
+              result.setHTML("<p style=\"color:green\">" + msg + "</p>");
+            }
           }
         });
 
@@ -113,7 +112,6 @@ public class UploadDemo implements EntryPoint {
         request.send(selectedFile);
       }
     });
-    
 
     HorizontalPanel inputPanel = new HorizontalPanel();
     inputPanel.add(selected);
