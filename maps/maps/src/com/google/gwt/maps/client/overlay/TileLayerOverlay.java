@@ -76,4 +76,8 @@ public class TileLayerOverlay extends ConcreteOverlay {
       TileLayerOverlayImpl.impl.hide(this);
     }
   }
+  
+  public void refresh() {
+      TileLayerOverlayImpl.impl.refresh(this);
+  }
 }
