@@ -41,4 +41,6 @@ public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
   void hide(TileLayerOverlay overlay);
 
   void show(TileLayerOverlay overlay);
+  
+  void refresh(TileLayerOverlay overlay);
 }
