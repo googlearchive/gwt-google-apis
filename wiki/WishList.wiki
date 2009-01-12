@@ -4,43 +4,44 @@ Last Updated January 12, 2009
 
 = Wish List =
 
-Potential contributors have asked how they can get involved with the Google API Libraries for GWT project.  We are soliciting contributions of all shapes and sizes for the libraries.  Remember, that all contributions must follow the guidelines of the [] 
+Potential contributors have asked how they can get involved with the Google API Libraries for GWT project.  We are soliciting contributions of all shapes and sizes for the libraries.  
 
+Remember, that all contributions must follow the guidelines of the [MakingGALGWTBetter Making Google API Libraries for GWT Better] page.  Specifically keep in mind that all contributions will go through a code review process before they are incorporated, so you will be expected to respond to review comments and resubmit patches as a part of the process.
 
-The following items were gleaned from the issue tracker and informal requests on the mailing list.
+The following items were gleaned from the issue tracker and informal requests on the mailing list.  Please post to the [http://groups.google.com/group/gwt-google-apis Google API Libraries for GWT] Google Group if you have suggestions for new ideas you would like to see included in this list.  If there is an issue in the issue tracker for an idea, you can vote for an idea by clicking on the star icon at the top of the issue.
 
 == In progress ==
 
-  | *Project* | *Primary Contact* |
-  | Open Social support | Sascha Haeberling |
-  | Open Social Gadget Support | Sascha Haeberling |
-  | AJAX Translation | Goutham Bhat |
-  | Migrating AJAX Loader into a standalone project | Alex Rudnik |
+|| *Project* || *Primary Contact* ||
+|| Open Social support || Sascha Haeberling ||
+|| Open Social Gadget Support || Sascha Haeberling ||
+|| AJAX Translation || Alex Rudnik, Goutham Bhat ||
+|| Migrating AJAX Loader into a standalone project || Alex Rudnik ||
 
 
 == Large Effort Projects ==
 
   These projects will take a lot of planning and a large time commitment.
 
-  | *Project* | *Primary Contact* |
-  | GData: Add support for the GData library| _none_ |
-  | AJAX Feed API: [http://code.google.com/p/gwt-google-apis/issues/detail?id=25 Issue 25] Add support for the AJAX Feed Library | _none_ |
+|| *Project* || *Primary Contact* ||
+|| GData: Add support for the GData library || _none_ ||
+|| AJAX Feed API: [http://code.google.com/p/gwt-google-apis/issues/detail?id=25 Issue 25] Add support for the AJAX Feed Library || _none_ ||
 
 
 == Medium Effort Projects ==
 
 
-  | *Project* | *Primary Contact* |
-  | Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=231 Issue 231] Add support for the open source Marker Manager (Maps API) | _none_ |
-  | Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=228 Issue 228] Google Maps StreetView support | _none_ |
-  | Gadgets: [http://code.google.com/p/gwt-google-apis/issues/detail?id=176 Issue 176] Allow GWT themes to work with Gadgets | _none_ |
-  | AJAX Search: Add support for the [http://code.google.com/apis/ajaxsearch/documentation/#fonje AJAX Search RESTful API] | _none_ |
+|| *Project* || *Primary Contact* ||
+|| Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=231 Issue 231] Add support for the open source Marker Manager (Maps API) || _none_ ||
+|| Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=228 Issue 228] Google Maps StreetView support || _none_ ||
+|| Gadgets: [http://code.google.com/p/gwt-google-apis/issues/detail?id=176 Issue 176] Allow GWT themes to work with Gadgets || _none_ ||
+|| AJAX Search: Add support for the [http://code.google.com/apis/ajaxsearch/documentation/#fonje AJAX Search RESTful API] || _none_ ||
 
 
 == Small Effort Projects ==
 
   Remember, it's not the size that counts!
 
-  | *Project* | *Primary Contact* |
-  | Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=155 Issue 155] Add LocalSearch support | _none_ |
-  | AJAX Search: Issues [http://code.google.com/p/gwt-google-apis/issues/detail?id=33 Issue 33], [http://code.google.com/p/gwt-google-apis/issues/detail?id=34 Issue 34], [http://code.google.com/p/gwt-google-apis/issues/detail?id=35 Issue 35] Adding features to AJAX Search. | _none_ |
+|| *Project* || *Primary Contact* ||
+|| Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=155 Issue 155] Add LocalSearch support || _none_ ||
+|| AJAX Search: Issues [http://code.google.com/p/gwt-google-apis/issues/detail?id=33 Issue 33], [http://code.google.com/p/gwt-google-apis/issues/detail?id=34 Issue 34], [http://code.google.com/p/gwt-google-apis/issues/detail?id=35 Issue 35] Adding features to AJAX Search. || _none_ ||
