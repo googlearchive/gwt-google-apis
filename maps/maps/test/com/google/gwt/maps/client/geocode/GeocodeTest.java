@@ -65,7 +65,8 @@ public class GeocodeTest extends GWTTestCase {
       String cmpPostalCode = place.getPostalCode();
       assertNotNull("PostalCode", cmpPostalCode);
       String cmpCounty = place.getCounty();
-      // assertNotNull("County", place.getCounty());  // Started to fail on 8/29/08
+      // assertNotNull("County", place.getCounty()); // Started to fail on
+      // 8/29/08
       String cmpState = place.getState();
       assertNotNull("State", cmpState);
       String cmpCountryCode = place.getCountry();
@@ -106,7 +107,8 @@ public class GeocodeTest extends GWTTestCase {
       new PlacemarkMock(
           "Domkloster 3, 50667 Köln, Deutschland", //  
           "{\"id\":\"p1\", \"address\":\"Domkloster, 50667 Altstadt-Nord, K�ln, Germany\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"DE\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"Nordrhein-Westfalen\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"K�ln\", \"Locality\":{\"LocalityName\":\"K�ln\", \"DependentLocality\":{\"DependentLocalityName\":\"Altstadt-Nord\", \"Thoroughfare\":{\"ThoroughfareName\":\"Domkloster\"}, \"PostalCode\":{\"PostalCodeNumber\":\"50667\"}}}}}}, \"Accuracy\":6}, \"Point\":{\"coordinates\":[6.956613,50.940872,0]}}", // Cologne
-          "Domkloster", "K�ln", "50667", "K�ln", "Nordrhein-Westfalen", "DE"),
+          "Domkloster", "K�ln", "50667", "K�ln", "Nordrhein-Westfalen",
+          "DE"),
       new PlacemarkMock(
           "4141 Avenue Pierre-De-Coubertin, Montréal, QC, Canada",
           "{\"id\":\"p1\", \"address\":\"4141 Rue Pierre-de-Coubertin, Montr�al, QC, Canada\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"CA\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"QC\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Communaut�-Urbaine-de-Montr�al\", \"Locality\":{\"LocalityName\":\"Montr�al\", \"Thoroughfare\":{\"ThoroughfareName\":\"4141 Rue Pierre-de-Coubertin\"}, \"PostalCode\":{\"PostalCodeNumber\":\"H1V\"}}}}}, \"Accuracy\":8}, \"Point\":{\"coordinates\":[-73.550814,45.555154,0]}}",
@@ -279,6 +281,41 @@ public class GeocodeTest extends GWTTestCase {
         assertTrue("toCanonical() not called",
             myGeocodeCache.numTimesToCanonicalCalled > 0);
         finishTest();
+      }
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
+  }
+
+  public void testReverseGeocoder() {
+    // Somewhere in Berlin, Germany (DE)
+    final LatLng testPoint = LatLng.newInstance(52.51622, 13.39782);
+    Geocoder geocoder = new Geocoder();
+    geocoder.getLocations(testPoint, new LocationCallback() {
+
+      public void onFailure(int statusCode) {
+        assertTrue("Reverse Geocode of " + testPoint + " failed with status "
+            + statusCode + ": " + StatusCodes.getName(statusCode), false);
+      }
+
+      public void onSuccess(JsArray<Placemark> locations) {
+        boolean resultFound = false;
+        for (int i = 0; i < locations.length(); ++i) {
+          Placemark location = locations.get(i);
+          
+          if (location.getCity() != null && location.getCity().equals("Berlin")) {
+            finishTest();
+          }
+
+          resultFound = true;
+        }
+        if (resultFound) {
+          // The location did not return 'Berlin' as the city, but this could be
+          // because the locale spells the city name a different way. At least
+          // we got a result - consider the test successful.
+          finishTest();
+        }
+        assertTrue("Reverse Geocode of " + testPoint
+            + " failed with no results.", false);
       }
     });
     delayTestFinish(ASYNC_DELAY_MSEC);

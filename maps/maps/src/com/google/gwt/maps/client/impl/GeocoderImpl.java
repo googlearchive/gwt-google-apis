@@ -21,6 +21,7 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.geocode.CustomGeocodeCache;
 import com.google.gwt.maps.client.geocode.GeocodeCache;
 import com.google.gwt.maps.client.geocode.Placemark;
+import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 import com.google.gwt.maps.jsio.client.BeanProperties;
@@ -86,6 +87,9 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
       LatLngCallback callback);
 
   void getLocations(JavaScriptObject jsoPeer, String address,
+      LocationsCallback callback);
+
+  void getLocations(JavaScriptObject jsoPeer, LatLng point,
       LocationsCallback callback);
 
   LatLngBounds getViewport(JavaScriptObject jsoPeer);
