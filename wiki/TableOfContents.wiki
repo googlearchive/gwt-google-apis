@@ -42,4 +42,5 @@
    * [APIDesignGoals Design Goal of API bindings]
    * [TemplateProject Template Project]
    * [DesigningAPIWrappers Design Considerations]
-   * [GettingStartedSource Working with source]#summary Table of Contents for staging Visualization docs.
+   * [GettingStartedSource Working with source]
+   * [WishList Wish List for Contributions]
