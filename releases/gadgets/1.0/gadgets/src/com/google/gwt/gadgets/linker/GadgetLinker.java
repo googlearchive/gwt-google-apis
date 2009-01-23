@@ -69,7 +69,8 @@ public final class GadgetLinker extends XSLinker {
 
     String bootstrap = "<script>"
         + context.optimizeJavaScript(logger, generateSelectionScript(logger,
-            context, artifacts)) + "</script>";
+            context, artifacts)) + "</script>\n" 
+        + "<div id=\"__gwt_gadget_content_div\"></div>";
 
     // Read the content
     StringBuffer manifest = new StringBuffer();
