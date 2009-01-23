@@ -81,7 +81,7 @@ Your GWT application will need access to the AJAX Search API, as well as the API
     <stylesheet src='SimpleSearch.css' />   
 }}}
 
-When you go to deploy your application outside of localhost, you will need to obtain a Google AJAX Search API key at [http://code.google.com/apis/search/signup.html]. Replace the string `ABC` in the src attribute below with the key obtained from the site above.
+You can obtain a Google AJAX Search API key at [http://code.google.com/apis/ajaxsearch/signup.html]. Replace the string `ABC` in the src attribute below with the key obtained from the site above.
 
 == Basic steps to use the API ==
 
