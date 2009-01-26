@@ -1,0 +1,6 @@
+<project name="managedresourcestore" default="build" basedir=".">
+	<property name="sample.api" value="gears"/>
+	<property name="sample.root" value="managedresourcestore" />
+	<property name="sample.module" value="ManagedResourceStoreDemo" />
+	<import file="../common.ant.xml" />
+</project>

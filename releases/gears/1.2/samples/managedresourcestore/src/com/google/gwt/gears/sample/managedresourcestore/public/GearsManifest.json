@@ -1,0 +1,18 @@
+// This is an example of a custom manifest
+{"betaManifestVersion" : 1,
+  "version" : "__VERSION__",
+  "entries" : [
+    // The following line will be automatically expanded
+    __ENTRIES__,
+    //         ^--- This comma is necessary because we have entries below
+    
+    // Make the "directory" url redirect to the host page
+    { "url" : ".", "redirect" : "ManagedResourceStoreDemo.html" },
+    
+    // This is a custom entry showing how to use an offline-only host page.
+    // The filter directive could be placed anywhere in the file
+    // @filter ManagedResourceStoreDemo.html
+    { "url": "ManagedResourceStoreDemo.html",
+      "src": "ManagedResourceStoreDemo_offline.html" }
+  ]
+}
