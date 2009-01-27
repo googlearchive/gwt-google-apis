@@ -9,7 +9,8 @@ Merges:
 /trunk/visualization@1069:1089 was merged (r1090) into /releases/maps/1.0
 /releases/maps/1.0/@1069:1093 was merged (r1094) into /trunk/visualization
 /releases/maps/1.0@1093:1124 was merged (r1127) into /trunk/visualization
--> The next merge into trunk will be r1124:????
+/releases/maps/1.0@1124:1136 was merged (r1177) into /trunk/visualization
+-> The next merge into trunk will be r1136:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r1069)
@@ -33,4 +34,4 @@ Changes in this branch (excluding changes to this file itself):
  - Shortened samples package name to work around Windows path length limitations (r1109)
  - Corrected the GeoDemo to not have a huge blank area outside the map.  Corrected checktyle errors (sorting and organizing imports) (r1110)
  - Fixes a glitch in the vertical layout on Chrome for HelloVisualization. (r1111)
-
+ - Add missing javadoc and adds a timer around the build (r1136)
