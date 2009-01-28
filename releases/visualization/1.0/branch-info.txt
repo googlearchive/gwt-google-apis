@@ -10,7 +10,8 @@ Merges:
 /releases/maps/1.0/@1069:1093 was merged (r1094) into /trunk/visualization
 /releases/maps/1.0@1093:1124 was merged (r1127) into /trunk/visualization
 /releases/maps/1.0@1124:1136 was merged (r1177) into /trunk/visualization
--> The next merge into trunk will be r1136:????
+/releases/maps/1.0@1136:1184 was merged (r1185) into /trunk/visualization
+-> The next merge into trunk will be r1184:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r1069)
@@ -35,3 +36,4 @@ Changes in this branch (excluding changes to this file itself):
  - Corrected the GeoDemo to not have a huge blank area outside the map.  Corrected checktyle errors (sorting and organizing imports) (r1110)
  - Fixes a glitch in the vertical layout on Chrome for HelloVisualization. (r1111)
  - Add missing javadoc and adds a timer around the build (r1136)
+ - Fixed JavaScript dates in Properties class & JSE in Selection methods that supported AbstractVisualization (r1153)
