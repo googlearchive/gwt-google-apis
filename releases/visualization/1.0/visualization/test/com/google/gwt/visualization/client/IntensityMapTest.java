@@ -67,8 +67,6 @@ public class IntensityMapTest extends VisualizationTest {
     AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
         DataTable data = createDailyActivities();
-
-        // Create a minimal pie chart.
         IntensityMap.Options options = IntensityMap.Options.create();
         options.setWidth(400);
         options.setHeight(240);

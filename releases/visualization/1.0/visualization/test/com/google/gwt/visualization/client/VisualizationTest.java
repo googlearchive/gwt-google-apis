@@ -18,6 +18,7 @@ package com.google.gwt.visualization.client;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.visualizations.Visualization;
 
 /**
  * A base class to support testing the visualization API that requires loading.
@@ -124,7 +125,7 @@ public class VisualizationTest extends GWTTestCase {
    * @param viz - the Visualization to trigger the event on
    * @param s - a selection object.
    */
-  protected void triggerSelection(Selectable viz, JsArray<Selection> s) {
+  protected <E extends Visualization<?>, Selectable>void triggerSelection(E viz, JsArray<Selection> s) {
     Selection.triggerSelection(viz, s);
   }
 }

@@ -23,14 +23,19 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>test</name>
+			<name>showcase</name>
 			<type>2</type>
-			<locationURI>VISUALIZATION_API_ROOT/visualization/test</locationURI>
+			<location>/usr/local/google/home/zundel/workspace/gwt-google-apis/trunk/visualization/samples/showcase/src</location>
 		</link>
 		<link>
 			<name>src</name>
 			<type>2</type>
 			<locationURI>VISUALIZATION_API_ROOT/visualization/src</locationURI>
+		</link>
+		<link>
+			<name>test</name>
+			<type>2</type>
+			<locationURI>VISUALIZATION_API_ROOT/visualization/test</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

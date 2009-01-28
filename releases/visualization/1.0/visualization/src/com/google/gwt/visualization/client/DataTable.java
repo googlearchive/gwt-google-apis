@@ -132,6 +132,15 @@ public class DataTable extends AbstractDataTable {
     }
   }
 
+  /**
+   * Set the value of a cell to null.
+   * 
+   * @param rowIndex The index of the row.
+   * @param columnIndex The index of the column.
+   * @param formattedValue The desired String representation of null, such as
+   * "", "null", "nil", "N/A", "none", etc.
+   * @param properties
+   */
   public final native void setCellNull(int rowIndex, int columnIndex,
       String formattedValue, Properties properties) /*-{
     this.setCell(rowIndex, columnIndex, null, formattedValue, properties);
@@ -189,7 +198,13 @@ public class DataTable extends AbstractDataTable {
     }
   }
 
-  public final native void setValueNull(int rowIndex, int columnIndex) /*-{
+  /**
+   * Set the value of a cell to null.
+   * 
+   * @param rowIndex The index of the row.
+   * @param columnIndex The index of the column.
+   */
+  final native void setValueNull(int rowIndex, int columnIndex) /*-{
     this.setValue(rowIndex, columnIndex, null);
   }-*/;
   

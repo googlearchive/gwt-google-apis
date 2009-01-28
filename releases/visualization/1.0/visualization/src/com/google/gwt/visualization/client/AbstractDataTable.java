@@ -37,10 +37,21 @@ public class AbstractDataTable extends JavaScriptObject {
   public enum ColumnType {
     BOOLEAN, DATE, DATETIME, NUMBER, STRING, TIMEOFDAY;
 
+    /**
+     * Get a ColumnType enum value from the String representation.
+     * 
+     * @param parameter A String corresponding to a ColumnType enum value.
+     * @return a ColumnType enum value corresponding to the given String.
+     */
     static ColumnType getColumnTypeFromString(String parameter) {
       return ColumnType.valueOf(parameter.toUpperCase());
     }
 
+    /**
+     * Get the String representation of the ColumnType.
+     * 
+     * @return the String representation of the ColumnType.
+     */
     String getParameter() {
       return name().toLowerCase();
     }
@@ -127,6 +138,15 @@ public class AbstractDataTable extends JavaScriptObject {
     return result;
   }
 
+  /**
+   * Check if the value in a cell is null.  Helpful for columns with primitive
+   * types such as number and boolean.
+   * 
+   * @param rowIndex The index of the row.
+   * @param columnIndex The index of the column.
+   * @return <code>true</code> if the value in the cell at rowIndex, 
+   * columnIndex is null, otherwise <code>false</code>.
+   */
   public final native boolean isValueNull(int rowIndex, int columnIndex) /*-{
     return this.getValue(rowIndex, columnIndex) == null;
   }-*/;
