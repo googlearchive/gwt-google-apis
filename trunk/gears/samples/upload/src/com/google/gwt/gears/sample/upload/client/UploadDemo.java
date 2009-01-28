@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Roughly replicates a FORM upload using Gears.O
+ * Roughly replicates a FORM upload using Gears.
  * <p>
  * When the user clicks the Browse button, the Desktop.openFiles method is
  * invoked allowing the user to select a file. The selection is saved as a Blob
