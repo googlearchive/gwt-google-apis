@@ -1,0 +1,12 @@
+branch-info.txt for gwt-google-apis Gears 1.2 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/gears/1.2/ was created (r1176) as a straight copy from /trunk/@r1175
+
+Merges:
+/releases/gears/1.2/@1176:1180 was merged (r1182) into trunk/gears
+---> The next merge into trunk will be 1180:????
+
+Changes in this branch (excluding changes to this file itself:
