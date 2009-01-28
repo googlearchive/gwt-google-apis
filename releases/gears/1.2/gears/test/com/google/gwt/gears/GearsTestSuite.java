@@ -33,8 +33,11 @@ public class GearsTestSuite extends TestCase {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Gears API");
 
-    suite.addTestSuite(FactoryTest.class);
     suite.addTestSuite(DatabaseTest.class);
+    // FactoryTest.hasPermission() fails without presenting a dialog.  This makes
+    // it difficult to actually grant permission during unit tests!  Moved after 
+    // another test to workaround.
+    suite.addTestSuite(FactoryTest.class);
     suite.addTestSuite(ResultSetTest.class);
     suite.addTestSuite(LocalServerTest.class);
     suite.addTestSuite(ResultSetTest.class);
