@@ -10,7 +10,10 @@ Merges:
 /releases/maps/1.0/@1069:1093 was merged (r1094) into /trunk/visualization
 /releases/maps/1.0@1093:1124 was merged (r1127) into /trunk/visualization
 /releases/maps/1.0@1124:1136 was merged (r1177) into /trunk/visualization
-/releases/maps/1.0@1136:1184 was merged (r1185) into /trunk/visualization
+/trunk/visualization@1136:1184 was merged (r1185) into /releases/maps/1.0
+/releases/maps/1.0@1136:1184 was merged (r1189) into /trunk/visualization
+/releases/maps/1.0@1185:1189 was merged (r1190) into /trunk/visualization
+
 -> The next merge into trunk will be r1184:????
 
 Changes in this branch (excluding changes to this file itself):
@@ -37,3 +40,5 @@ Changes in this branch (excluding changes to this file itself):
  - Fixes a glitch in the vertical layout on Chrome for HelloVisualization. (r1111)
  - Add missing javadoc and adds a timer around the build (r1136)
  - Fixed JavaScript dates in Properties class & JSE in Selection methods that supported AbstractVisualization (r1153)
+ - Fixed a build break in the AnnotatedTimeLineTest (r1179)
+ - Added release notes for 1.0.1 (r1188)
