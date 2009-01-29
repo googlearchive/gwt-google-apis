@@ -9,8 +9,9 @@ Merges:
 /releases/maps/1.0/@808:943 was merged (r946) into /trunk/maps
 /releases/maps/1.0/@944:1029 was merged (r1030) into /trunk/maps
 /releases/maps/1.0/@1029:1141 was merged (r1142) into /trunk/maps
-/releases/maps/1.0/@1041:1145 was merged (r1146) into /trunk/maps
--> The next merge into trunk will be r1145:????
+/trunk/maps@1041:1145 was merged (r1146) into /releases/maps/1.0
+/trunk/maps@1147:1168 was merged (r1191) into /releases/maps/1.0
+-> The next merge into trunk will be r1190:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -55,3 +56,5 @@ it is returning null.(r1027, r1029)
  - Fixed build break in MapWidget.onAttach().(r1035)
  - Updated release notes.(r1089)
  - Fix unit test that was causing build break on IE.(r1141)
+ - Adds the tileLayerOverlay.reset() method. (r1162)
+ - Add support for reverse geocoding to the Geocoder class (r1168)

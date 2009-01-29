@@ -127,6 +127,31 @@ public final class Geocoder {
   }
 
   /**
+   * Sends a request to Google servers to reverse geocode the specified point. A
+   * reply that contains status code, and if successful, one or more
+   * {@link Placemark} objects, is passed to the user-specified callback
+   * function. The callback function may determine the reasons for failure by
+   * examining the code value of the Status field.
+   * 
+   * @param point the point to search for.
+   * @param callback methods to call when the query returns.
+   */
+  public void getLocations(LatLng point, final LocationCallback callback) {
+    GeocoderImpl.impl.getLocations(jsoPeer, point, new LocationsCallback() {
+      @Override
+      public void callback(Response response) {
+        int statusCode = response.getStatus().getCode();
+        if (statusCode == StatusCodes.SUCCESS) {
+          JsArray<Placemark> placemarks = response.getPlacemarks();
+          fireLocationCb(callback, true, statusCode, placemarks);
+        } else {
+          fireLocationCb(callback, false, statusCode, null);
+        }
+      }
+    });
+  }
+
+  /**
    * Returns the viewport for magnifying geocoding results within that geocoder.
    * 
    * @return the viewport for magnifying geocoding results within that geocoder.

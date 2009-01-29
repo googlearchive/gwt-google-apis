@@ -38,21 +38,21 @@ public class TileLayerOverlay extends ConcreteOverlay {
   }
   
   /**
-   * Create this overlay from an existing JavaScriptObject instance.
-   * 
-   * @param jsoPeer an existing JavaScriptObject instance.
-   */
-  protected TileLayerOverlay(JavaScriptObject jso) {
-    super(jso);
-  }
-  
-  /**
    * Creates a tile layer overlay from the given tile layer.
    * 
    * @param tileLayer
    */
   public TileLayerOverlay(TileLayer tileLayer) {
     super(TileLayerOverlayImpl.impl.construct(tileLayer));
+  }
+  
+  /**
+   * Create this overlay from an existing JavaScriptObject instance.
+   * 
+   * @param jsoPeer an existing JavaScriptObject instance.
+   */
+  protected TileLayerOverlay(JavaScriptObject jso) {
+    super(jso);
   }
 
   /**
@@ -64,6 +64,10 @@ public class TileLayerOverlay extends ConcreteOverlay {
     return TileLayerOverlayImpl.impl.getTileLayer(this);
   }
 
+  public void refresh() {
+      TileLayerOverlayImpl.impl.refresh(this);
+  }
+  
   /**
    * Shows or hides this overlay.
    * 
