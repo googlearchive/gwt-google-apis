@@ -11,7 +11,8 @@ Merges:
 /releases/maps/1.0/@1029:1141 was merged (r1142) into /trunk/maps
 /trunk/maps@1041:1145 was merged (r1146) into /releases/maps/1.0
 /trunk/maps@1147:1168 was merged (r1191) into /releases/maps/1.0
--> The next merge into trunk will be r1190:????
+/releases/maps/1.0/@1157 was merged (r1192) into /trunk/maps
+-> The next merge into trunk will be r1157:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
