@@ -53,10 +53,16 @@ public class AdsManagerTest extends GWTTestCase {
   }
   
   public void testAdsManagerOpts() {
-    AdsManagerOptions options = AdsManagerOptions.newInstance().setChannel(2).setMaxAdsOnMap(10).setMinZoomLevel(7);
-    assertEquals("Channel", 2, options.getChannel());
-    assertEquals("MaxAdsOnMap", 10, options.getMaxAdsOnMap());
-    assertEquals("MinZoomLevel", 7, options.getMinZoomLevel());
+    AdsManagerOptions options = AdsManagerOptions.newInstance().setMaxAdsOnMap(2);
+    assertEquals("MaxAdsOnMap 2", 2, options.getMaxAdsOnMap());
+    options.setMaxAdsOnMap(10).setMinZoomLevel(7).setChannel(3);    
+    assertEquals("MinZoomLevel 2", 7, options.getMinZoomLevel());
+    assertEquals("MaxAdsOnMap 2", 10, options.getMaxAdsOnMap());
+    assertEquals("Channel 2", 3, options.getChannel());
+    options.setChannel(2);
+    assertEquals("Channel 3", 2, options.getChannel());
+    assertEquals("MinZoomLevel 3", 7, options.getMinZoomLevel());
+    assertEquals("MaxAdsOnMap 3", 10, options.getMaxAdsOnMap());
   }
   
   public void testAdsManagerWithOpts() {

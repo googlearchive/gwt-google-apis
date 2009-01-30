@@ -31,9 +31,10 @@ public class AdsManager extends JavaScriptObject {
     /**
      * Create a new AdsManagerOptions instance.
      */
-    public static AdsManagerOptions newInstance() {
-      return JavaScriptObject.createObject().cast();
-    }
+    public static native AdsManagerOptions newInstance() /*-{
+      var result = new $wnd.Object(); 
+      return result;
+    }-*/;
 
     protected AdsManagerOptions() {
       // Protected or private constructor required for JavaScriptObject
@@ -46,12 +47,12 @@ public class AdsManager extends JavaScriptObject {
      * optional feature that AdSense publishers can use to track ad revenue from
      * multiple sources.
      * 
-     * @param channel The AdSense channel number.
+     * @param channelIn The AdSense channel number.
      * @return this AdsManagerOption object, for convenience when using the
      *         Builder pattern.
      */
-    public final native AdsManagerOptions setChannel(int channel) /*-{
-      this.channel = channel;
+    public final native AdsManagerOptions setChannel(int channelIn) /*-{
+      this.channel = channelIn;
       return this;
     }-*/;
 
