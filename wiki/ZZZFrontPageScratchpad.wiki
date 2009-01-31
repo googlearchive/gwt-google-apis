@@ -1,5 +1,3 @@
-#summary Scratchpad for the project home page
-
 =Google API Libraries for Google Web Toolkit=
 
 The Google API Libraries for Google Web Toolkit is a collection of libraries that provide Java language bindings for popular Google !JavaScript APIs. These libraries make it quick and easy for developers to use these Google !JavaScript APIs with Google Web Toolkit. The libraries are supported by the Google Web Toolkit team.
@@ -21,11 +19,14 @@ Note that these versions rely on [http://code.google.com/webtoolkit/download.htm
 ====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=MapsGettingStarted Google Maps 1.0 Library]====
   The [http://code.google.com/apis/maps/ Google Maps API] library provides a way to access the Google Maps API from a GWT project without having to write additional !JavaScript code.  The library gives you full control using the standard Maps components such as !InfoWindows, Markers, !MapTypes, and Geocoding.  You can even use advanced features such as adding GWT widgets to the Map, creating custom overlays, custom map types, and other components.
 
+====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=Visualization Google Visualization 1.0 Library]====
+  The [http://code.google.com/apis/visualization/ Google Visualization API] library enables you to expose your own data, stored on any data-store that is connected to the web, as a Visualization compliant datasource.  Some of the visualizations supported by this release candidate library include the [http://code.google.com/apis/visualization/documentation/gallery/piechart.html Google Piechart], [http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html Google Annotated Timeline] and [http://code.google.com/apis/visualization/documentation/gallery/geomap.html Google GeoMap]. For a full list of visualizations with GWT wrappers you can refer to the [http://code.google.com/apis/visualization/documentation/gallery.html Google Visualization Gallery]. 
+
 ==Release Candidates==
 Release Candidates for the following libraries are now available and ready to be taken for a test drive. Note that these versions rely on [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.
 
-====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=Visualization Google Visualization 1.0 Library (Release Candidate)]====
-  The [http://code.google.com/apis/visualization/ Google Visualization API] library allows you to enables you to expose your own data, stored on any data-store that is connected to the web, as a Visualization compliant datasource.  Some of the visualizations supported by this release candidate library include the [http://code.google.com/apis/visualization/documentation/gallery/piechart.html Google Piechart], [http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html Google Annotated Timeline] and Google !GeoMap. For a full list of visualizations with GWT wrappers you can refer to the [http://code.google.com/apis/visualization/documentation/gallery.html Google Visualization Gallery]. 
+====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=GearsGettingStarted Gears 1.2 Library]====
+  Version 1.2 of the Gears API library for GWT adds support for Gelocation and Blob support which are new in Gears 0.4.  
 
 ==Under Development==
 Please see the [Downloads download page] for milestone builds of other libraries. 
