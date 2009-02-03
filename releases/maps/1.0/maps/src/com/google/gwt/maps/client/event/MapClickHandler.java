@@ -23,8 +23,20 @@ import java.util.EventObject;
 
 /**
  * Provides an interface to implement in order to receive click events from the
- * {@link MapWidget}. Note that this event fired twice when the user intends to
- * send a double click.
+ * {@link MapWidget}.
+ * 
+ * This event is fired when the user clicks on the map with the mouse. A click
+ * event passes different arguments based on the context of the click, and
+ * whether or not the click occured on a clickable overlay. If the click does
+ * not occur on a clickable overlay, the overlay argument is null and the latlng
+ * argument contains the geographical coordinates of the point that was clicked.
+ * If the user clicks on an overlay that is clickable (such as a GMarker,
+ * GPolygon, GPolyline, or GInfoWindow), the overlay argument contains the
+ * overlay object.  In addition, a click event is then also fired on the
+ * overlay itself.
+ * 
+ * Also note that this event fired twice when the user intends to send
+ * a double click.  The MapDoubleClickHandler will also be fired in this case.
  */
 public interface MapClickHandler {
 
