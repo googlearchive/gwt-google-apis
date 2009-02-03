@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.linker.XSLinker;
+import com.google.gwt.dev.About;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -69,7 +70,7 @@ public final class GadgetLinker extends XSLinker {
 
     String bootstrap = "<script>"
         + context.optimizeJavaScript(logger, generateSelectionScript(logger,
-            context, artifacts)) + "</script>\n" 
+            context, artifacts)) + "</script>\n"
         + "<div id=\"__gwt_gadget_content_div\"></div>";
 
     // Read the content
@@ -114,6 +115,19 @@ public final class GadgetLinker extends XSLinker {
           + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+_IG_GetCachedUrl('"
           + scriptUrl + "') + '\\\"></script>');\n" + "  }\n";
     }
+  }
+
+  @Override
+  protected String generateSelectionScript(TreeLogger logger,
+      LinkerContext context, ArtifactSet artifacts)
+      throws UnableToCompleteException {
+    StringBuffer scriptContents = new StringBuffer(
+        super.generateSelectionScript(logger, context, artifacts));
+    // Add a substitution for the GWT major release number. e.g. "1.6"
+    String gwtVersions[] = About.GWT_VERSION_NUM.split("\\.");
+    replaceAll(scriptContents, "__GWT_MAJOR_VERSION__", gwtVersions[0] + "."
+        + gwtVersions[1]);
+    return scriptContents.toString();
   }
 
   @Override

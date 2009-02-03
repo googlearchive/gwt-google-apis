@@ -78,13 +78,13 @@ function __MODULE_FUNC__() {
       if (isHostedMode()) {
         // Kicks off hosted mode
         try {
-          external.gwtOnLoad($wnd, '__MODULE_NAME__', "1.5");
+          external.gwtOnLoad($wnd, '__MODULE_NAME__', '__GWT_MAJOR_VERSION__');
         } catch (e) {
           $wnd.alert("external.gwtOnLoad failed: " + e);
         };
       } else if (gwtOnLoad) {
         // Start the compiled permutation
-        gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base, "1.5");
+        gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base, '__GWT_MAJOR_VERSION__');
       }
     }
   }
@@ -240,7 +240,7 @@ function __MODULE_FUNC__() {
       $stats && $stats({moduleName:$moduleName, subSystem:'startup', evtGroup:'moduleStartup', millis:(new Date()).getTime(), type:'onModuleLoadStart', className:className});
     };
     $wnd.onunload = function() {
-      external.gwtOnLoad($wnd, null, "1.5");
+      external.gwtOnLoad($wnd, null, '__GWT_MAJOR_VERSION__');
     };
   } else {
     // Otherwise, inject the permutation
