@@ -46,4 +46,5 @@ The following items were gleaned from the issue tracker and informal requests on
 || *Project* || *Primary Contact* ||
 || Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=155 Issue 155] Add LocalSearch support || _none_ ||
 || AJAX Search: Issues [http://code.google.com/p/gwt-google-apis/issues/detail?id=33 Issue 33], [http://code.google.com/p/gwt-google-apis/issues/detail?id=34 Issue 34], [http://code.google.com/p/gwt-google-apis/issues/detail?id=35 Issue 35] Adding features to AJAX Search. || _none_ ||
+|| AJAX Search: [http://googlenewsblog.blogspot.com/2009/02/adding-google-news-to-your-site.html News element] || _none_ ||
 || Maps: Add missing any of the missing features after API rev 2.118 || _none_ ||
