@@ -17,7 +17,7 @@ Select `OK` to add the gadget to your home page.
 Other gadgets you can try:
 
    * An example of how to use GWT RPC with a gadget.
-  `http://gwt.google.com/samples/HelloGadgets-1.0.2/com.google.gwt.gadgets.sample.gadgetrpc.client.GadgetRPC.gadget.xml`
+  `http://gwt.google.com/samples/GadgetRPC-1.0.2/com.google.gwt.gadgets.sample.gadgetrpc.client.GadgetRPC.gadget.xml`
 
    * An example of how to host an Ad in a gadget written with GWT.
   `http://gwt.google.com/samples/BasicGadgetAds-1.0.2/com.google.gwt.gadgets.sample.basicgadgetads.client.BasicGadgetAds.gadget.xml`
