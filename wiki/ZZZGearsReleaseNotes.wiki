@@ -16,7 +16,7 @@
 
 ===Known Issues in 1.1.1===
 
-    * Gears applications can only be debugged using GWT's hosted mode on Windows or Mac; the Linux hosted mode platform does not support the Gears plugin. (issue 11)
+    * Gears applications can only be debugged using GWT's hosted mode on Windows; other hosted mode platforms do not support the Gears plugin. (issue 11)
     * Creating a Worker from a GWT module is not supported out-of-the-box.
     * GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X. As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.
 
