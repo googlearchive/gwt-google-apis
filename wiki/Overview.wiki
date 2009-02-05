@@ -36,4 +36,4 @@ If you find a bug that matches the problem you describe, make sure to _star_ it 
 
 == Contributing  to the project ==
 
-Discussions of the development of the libraries themselves occur on the public [http://groups.google.com/group/Google-Web-Toolkit-Contributors Google-Web-Toolkit-Contributors] Google group.  Be sure to read [MakingGALGWTBetter Making Google API Libraries for GWT Better].
+Discussions of the development of the libraries themselves occur on the public [http://groups.google.com/group/GWT-Google-Apis GWT-Google-Apis] Google group.  Be sure to read [MakingGALGWTBetter Making Google API Libraries for GWT Better].
