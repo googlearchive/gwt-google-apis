@@ -49,3 +49,7 @@ For a gadget, override this method in your implementation of `RemoteServiceServl
 The GWT themes include references to resources such as images through URLs.  Since those resources' URLs are not properly re-written to go through the gadget container's proxy, the gadget ends up trying to fetch them from the gadget container instead of the server where your gadget is hosted.
 
 One solution, as shown in the HelloGadgets sample, is to manually copy the stylesheet rules that you need for your gadget into a single .css file.  Translate any relative URLs into fully qualified URLs.  You will need to insure that the server hosting these resources is capable of handling the full load of the gadget, as this bypasses the gadget container's proxy and you lose the benefits of its cache.
+
+== I am using GWT 1.6 and having trouble with problems parsing XML or the Xerces library ==
+
+New features in 1.6 have included multiple versions of the Xerces library.  Try using the `gwt-gadgets-noredist.jar` jar file instead of `gwt-gears.jar` (new in the gwt-gadgets-1.0.2 release).  The `-noredist.jar` version does not include any extra library classes outside of the `com.google.gwt.gears` package.
