@@ -4,6 +4,14 @@
 
 These FAQs refer to the Google Maps Library for GWT.  See the [Overview Project Overview] for general information on the Google Maps Library for GWT.
 
+== Where can I go for more help using the Maps API for GWT? ==
+
+Besides this User Guide, there are three Google groups you can search and post to:
+
+  * [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit]: the forum for all users of the Google Web Toolkit.
+  * [http://groups.google.com/group/gwt-google-apis GWT-Google-Apis]: a group used by contributors to the GWT bindings for the Maps API.  Use this list for bug reports or discussion about the development of new features.
+  * [http://groups.google.com/group/Google-Maps-API Google Maps API]: a group used for users of the Maps JavaScript API.  Search this group to find known issues and solutions with the Maps API in general.  Be sure to read their posting guidelines before writing to the list.  There is lots of traffic to this list and in general they will point GWT users to one of the first 2 lists unless the problem can be reproduced in plain hand-written JavaScript.
+
 == I don't see Google Maps method XXX in the API. What should I do? ==
 
 New features are added to the Google Maps API often. The newest features of the JavaScript Maps API may not yet be present in the latest stable release of the GWT library bindings.  
