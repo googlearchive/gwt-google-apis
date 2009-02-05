@@ -50,4 +50,4 @@ If you wish to scale to the size of the container, make sure you adjust the size
 
 == I'm using localhost, why am I seeing a dialog asking for a key? ==
 
-Passing no key to the Maps API usually works for developing on the local machine, but you may need to create a key for localhost:<port> at the [http://code.google.com/apis/maps/signup.html Maps developer web site.]
+Passing no key to the Maps API usually works for developing on the local machine, but you may need to create a key for localhost:`<port>` at the [http://code.google.com/apis/maps/signup.html Maps developer web site.]
