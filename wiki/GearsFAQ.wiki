@@ -12,3 +12,7 @@ The bindings do not support such a way right now, but if you create a GWT module
 == Why do the samples that use !LocalServer fail when I run them using a file:// URL? ==
 
 This is a constraint of the Gears plugin.  Run them using the Compile/Browse from hosted mode or by copying the files to be served from a web server to run the samples locally.
+
+== Why do the Gears samples fail in Hosted mode under Mac and Linux? ==
+
+As of GWT 1.6, the hosted mode browsers under Mac & Linux are not compatible with the Gears plugin.  In upcoming releases of GWT, changes to hosted mode (Out of Process Hosted Mode) will allow debugging with Gears. 
