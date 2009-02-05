@@ -4,7 +4,9 @@
 
 The Google API Libraries for Google Web Toolkit is a collection of libraries that provide Java language bindings for popular JavaScript APIs such as the
 [http://code.google.com/apis/ajaxsearch/ Google AJAX Search API], 
-[http://code.google.com/apis/gears/ Gears API],  and 
+[http://code.google.com/apis/gears/ Gears API],
+[http://code.google.com/apis/maps/ Maps API],  
+[http://code.google.com/apis/visualization/ Visualization API], and 
 [http://code.google.com/apis/gadgets/ Gadgets]. These libraries make it quick and easy for you to use these !JavaScript APIs in your Google Web Toolkit project without having to write custom integration code using !JavaScript.   
 
 
