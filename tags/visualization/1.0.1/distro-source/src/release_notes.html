@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>Google Visualization API Library for GWT Release Notes</title>
+      
+      <style>
+         body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            font-size: small;
+            margin: 20px;
+         }
+
+         li {
+            margin-bottom: 0.5em;
+         }
+
+         li div {
+            margin-top: 0.2em;
+         }
+
+         code {
+            font-size: medium;
+         }
+      </style></head>
+
+   <body>
+      <h1>Google Visualization API Library for GWT Release Notes</h1>
+      <ul>
+		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+		    <li><a href="#Release_Notes_1_0_0">1.0.0 (milestone)</a></li>      </ul>
+      <hr/>
+      <a name="Release_Notes_Current"></a>
+     <h2>Release Notes for @GWT_VERSION@</h2>
+      <h3>Changes since 1.0.0</h3>
+       <ul>
+        <li>Adds some missing javadoc annotations and packages to the build</li>
+        <li>Fixes a bug where JavaScript dates were not being correctly converted to Java dates in the Properties class</li>
+        <li>Fixed a bug in Selection methods that supported AbstractVisualization</li>
+       </ul>
+      <a name="Release_Notes_1_0_0"></a>
+     <h2>ReleaseNotes for 1.0.0 (Release Candidate)</h2>
+       <ul>
+         <li>Contains bindings for 14 popular visualizations authored by Google</li>
+         <li>Provides a convenience library to load visualizations using the AJAX Loader</li>
+         <li>Distributed with sample code for using existing visualizations</li>
+         <li>Libraries and sample code for creating your own visualization in GWT are included</li>
+         <li>Includes base classes that can be re-used to create bindings for other Visualizations</li>
+         <li>Javadoc is bundled with the distribution</li>
+         <li>Online documentation includes a tutorial, support tracker and javadoc </li>
+       </ul>
+      <h3>Known Issues</h3>
+       <ul>
+         <li>Linux hosted mode will not display visualizations that use SVG or Flash to render.  This will be addressed in upcoming releases of GWT with a revamped hosted mode</li>
+       </ul>
+  </body>
+</html>
