@@ -27,19 +27,19 @@ import com.google.gwt.gears.client.geolocation.PositionHandler.PositionEvent;
  * The Geolocation API enables a web application to:
  * <ul>
  * <li>Obtain the user's current position, using the
- * {@link #getCurrentPosition(PositionCallback) getCurrentPosition} method
+ * {@link #getCurrentPosition(PositionHandler) getCurrentPosition} method
  * <li>Watch the user's position as it changes over time, using the
- * {@link #watchPosition(PositionCallback) watchPosition} method
+ * {@link #watchPosition(PositionHandler) watchPosition} method
  * <li>Quickly and cheaply obtain the user's last known position, using the
- * {@link #lastPosition} property
+ * {@link #getlastPosition} property
  * </ul>
  * <p>
  * The Geolocation API provides the best estimate of the user's position using a
  * number of sources (called location providers). These providers may be onboard
  * (GPS for example) or server-based (a network location provider). The
- * {@link #getCurrentPosition(PositionCallback, PositionOptions)
+ * {@link #getCurrentPosition(PositionHandler, PositionOptions)
  * getCurrentPosition} and
- * {@link #watchPosition(PositionCallback, PositionOptions) watchPosition}
+ * {@link #watchPosition(PositionHandler, PositionOptions) watchPosition}
  * methods accept a parameter of type {@link PositionOptions} which lets you
  * specify which location providers to use.
  * <p>
