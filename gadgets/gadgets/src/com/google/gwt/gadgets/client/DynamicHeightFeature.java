@@ -15,6 +15,8 @@
  */
 package com.google.gwt.gadgets.client;
 
+import com.google.gwt.user.client.ui.RootPanel;
+
 /**
  * Provides access to the dynamic height feature.
  */
@@ -23,9 +25,21 @@ public class DynamicHeightFeature implements GadgetFeature {
   }
 
   /**
-   * Causes the Gadget to be resized.
+   * Causes the Gadget to be resized.  Make sure you have added your
+   * content to the RootPanel returned by {@link #getContentDiv()}.
    */
   public native void adjustHeight() /*-{
     $wnd._IG_AdjustIFrameHeight();
   }-*/;
+
+  /**
+   * Use this method to retrieve the RootPanel to attach all gadget content to
+   * when using DynamicHeight.
+   * 
+   * @return a pointer to a panel that will allow your gadget to be resizable
+   *         when you add content here.
+   */
+  public RootPanel getContentDiv() {
+    return RootPanel.get("__gwt_gadget_content_div");
+  }
 }

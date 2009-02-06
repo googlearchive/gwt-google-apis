@@ -5,7 +5,7 @@
 
 	<property.ensure name="java.tools.path" location="${java.home}/../lib/tools.jar" unless="build.host.ismac" message="Cannot find ${java.home}/../lib/tools.jar; please use a JDK when building doc rather than a JRE." />
 
-	<property name="API_PKGS" value="com.google.gwt.gadgets.client" />
+	<property name="API_PKGS" value="com.google.gwt.gadgets.client:com.google.gwt.gadgets.client.ui" />
 
 	<property name="api.name" value="gadgets" />
 

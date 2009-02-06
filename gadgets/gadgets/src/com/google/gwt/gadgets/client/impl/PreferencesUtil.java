@@ -32,6 +32,11 @@ public class PreferencesUtil extends JavaScriptObject {
   public final native boolean getBool(String name) /*-{
     return this.getBool(name) || false;
   }-*/;
+  
+  public final native String getMsg(String name) /*-{
+    var maybeString = this.getMsg(name);
+    return maybeString == undefined ? null : maybeString;
+  }-*/;
 
   public final native String getString(String name) /*-{
     var maybeString = this.getString(name);

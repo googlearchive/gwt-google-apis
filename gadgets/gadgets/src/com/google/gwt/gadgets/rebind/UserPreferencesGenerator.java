@@ -72,7 +72,8 @@ public class UserPreferencesGenerator extends Generator {
 
     // If an implementation already exists, we don't need to do any work
     if (out != null) {
-      JClassType preferenceType = typeOracle.findType(Preference.class.getName().replace('$', '.'));
+      JClassType preferenceType = typeOracle.findType(
+          Preference.class.getName().replace('$', '.'));
       assert preferenceType != null;
 
       // We really use a SourceWriter since it's convenient
@@ -80,8 +81,14 @@ public class UserPreferencesGenerator extends Generator {
 
       for (JMethod m : sourceType.getOverridableMethods()) {
         JClassType extendsPreferenceType = m.getReturnType().isClassOrInterface();
-        if (extendsPreferenceType == null
-            || !preferenceType.isAssignableFrom(extendsPreferenceType)) {
+        if (extendsPreferenceType == null) {
+          logger.log(TreeLogger.ERROR, "Return type of " + m.getName()
+              + " is not a class or interface (must be assignable to "
+              + preferenceType.getName() + ").", null);
+          throw new UnableToCompleteException();
+        }
+
+        if (!preferenceType.isAssignableFrom(extendsPreferenceType)) {
           logger.log(TreeLogger.ERROR, "Cannot assign "
               + extendsPreferenceType.getQualifiedSourceName() + " to "
               + preferenceType.getQualifiedSourceName(), null);

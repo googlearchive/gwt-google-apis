@@ -20,6 +20,8 @@ function __MODULE_FUNC__() {
   // Cache symbols locally for good obfuscation
   var $wnd = window
   ,$doc = document
+  
+  // A variable to access functions in hosted mode
   ,external = $wnd.external
   
   // These variables gate calling gwtOnLoad; all must be true to start
@@ -44,6 +46,7 @@ function __MODULE_FUNC__() {
   // Error functions.  Default unset in compiled mode, may be set by meta props.
   ,onLoadErrorFunc, propertyErrorFunc
   
+  ,$stats = $wnd.__gwtStatsEvent ? function(a) {return $wnd.__gwtStatsEvent(a);} : null
   ; // end of global vars
 
   // ------------------ TRUE GLOBALS ------------------
@@ -71,9 +74,18 @@ function __MODULE_FUNC__() {
   // the specified module to be cranked up.
   //
   function maybeStartModule() {
-    // TODO: it may not be necessary to check gwtOnLoad here.
-    if (gwtOnLoad && bodyDone) {
-      gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base, "1.5");
+    if (bodyDone) {
+      if (isHostedMode()) {
+        // Kicks off hosted mode
+        try {
+          external.gwtOnLoad($wnd, '__MODULE_NAME__', '__GWT_MAJOR_VERSION__');
+        } catch (e) {
+          $wnd.alert("external.gwtOnLoad failed: " + e);
+        };
+      } else if (gwtOnLoad) {
+        // Start the compiled permutation
+        gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base, '__GWT_MAJOR_VERSION__');
+      }
     }
   }
 
@@ -129,6 +141,43 @@ function __MODULE_FUNC__() {
     }
   }
 
+  
+  /**
+   * Gadget iframe URLs are generated with the locale in the URL as a
+   *  lang/country parameter pair (e.g. lang=en&country=US) in lieu of the
+   *  single locale parameter.
+   * ($wnd.__gwt_Locale is read by the property provider in I18N.gwt.xml)
+   */
+  function setLocale() {
+    var args = $wnd.location.search;
+    var lang = extractFromQueryStr(args, "lang");
+    if (lang != null) {
+      country = extractFromQueryStr(args, "country");
+      if (country != null) {      
+	    $wnd.__gwt_Locale = lang + "_" + country;
+      } else {
+        $wnd.__gwt_Locale = lang;
+      }
+    }
+  }
+  
+  /**
+   * Returns the value of a named parameter in the URL query string.
+   */
+  function extractFromQueryStr(args, argName) {
+    var start = args.indexOf(argName + "=");
+    if (start < 0) {
+      return undefined; 
+    }
+    var value = args.substring(start);
+    var valueBegin = value.indexOf("=") + 1;
+    var valueEnd = value.indexOf("&");
+    if (valueEnd == -1) {
+        valueEnd = value.length;
+    }
+    return value.substring(valueBegin, valueEnd);
+  }
+   
   /**
    * Determines whether or not a particular property value is allowed. Called by
    * property providers.
@@ -191,7 +240,7 @@ function __MODULE_FUNC__() {
   // Called when the compiled script identified by moduleName is done loading.
   //
   __MODULE_FUNC__.onScriptLoad = function(gwtOnLoadFunc) {
-    // remove this whole function from the global namespace to allow GC
+    // Remove this whole function from the global namespace to allow GC
     __MODULE_FUNC__ = null;
     gwtOnLoad = gwtOnLoadFunc;
     maybeStartModule();
@@ -202,6 +251,7 @@ function __MODULE_FUNC__() {
   // do it early for compile/browse rebasing
   computeScriptBase();
   processMetas();
+  setLocale();
   
   // --------------- GADGET ONLOAD HOOK ---------------
   
@@ -223,7 +273,13 @@ function __MODULE_FUNC__() {
     $wnd.$moduleBase = base;
     $wnd.__gwt_getProperty = computePropValue;
     $wnd.__gwt_initHandlers = __MODULE_FUNC__.__gwt_initHandlers;
-    external.gwtOnLoad($wnd, $wnd.$moduleName, "1.5");
+    $wnd.__gwt_module_id = 0;
+    $wnd.fireOnModuleLoadStart = function(className) {
+      $stats && $stats({moduleName:$moduleName, subSystem:'startup', evtGroup:'moduleStartup', millis:(new Date()).getTime(), type:'onModuleLoadStart', className:className});
+    };
+    $wnd.onunload = function() {
+      external.gwtOnLoad($wnd, null, '__GWT_MAJOR_VERSION__');
+    };
   } else {
     // Otherwise, inject the permutation
     var strongName;
