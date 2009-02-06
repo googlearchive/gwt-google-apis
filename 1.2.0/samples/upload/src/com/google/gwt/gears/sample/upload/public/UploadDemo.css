@@ -1,0 +1,17 @@
+/** Add css rules here for your application. */
+
+BODY {
+	margin: 1em;
+}
+
+.progressGauge {
+  border: 1px solid #cccccc;
+  width: 300px;
+  height: 14px;
+}
+
+.progressInner {
+  background: #34628c;
+  width: 0px;
+  height: 14px;
+}
