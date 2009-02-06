@@ -1,0 +1,46 @@
+branch-info.txt for gwt-google-apis Gadgets 1.1 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/gadgets/1.0/ was created (r714) as a straight copy from /trunk/@r713
+
+Merges:
+/releases/gadgets/1.0@714:758 was merged (r759?) into trunk/gadgets
+/releases/gadgets/1.0@758:947 was merged (r948) into trunk/gadgets
+/releases/gadgets/1.0@947:1011 was merged (r1012) into trunk/gadgets
+/releases/gadgets/1.0@947:1011 was merged (r1012) into trunk/gadgets
+/releases/gadgets/1.0@1011:1247 was merged (r1248) into trunk/gadgets
+---> The next merge into trunk will be 1247:???
+
+Changes in this branch (excluding changes to this file itself:
+- Fixed the samples' online documentation link. (r718)
+- Fixes an NPE triggered when a Gadget subclass implements a non-feature interface.(r724)
+- Adds an annotation to inject handwritten content into the gadget spec.(r755)
+- New GadgetRPC project configuration (r853)
+- Adds a sample Gadget the performs RPC. (r879)
+- Fixed typo in module path in GadgetRPC-compile script. (r898)
+- Updated links to new demos (r902)
+- Eclipse project settings were left out of Gadget RPC commit. (r903)
+- Fixes problem with hosted mode debugging (issue 199) (r924)
+- Fix issue 199 - gwtOnLoad now requires a third 'version' parameter. (r925)
+- Replace HelloGadget Demo to look like applicationCreator skeleton (r933)
+- Added the @InjectModulePrefs annotation (r989)
+- Update linker template for 1.6 (strips .cache.js from strongName) (r1011)
+- GadgetAds support added (r1032)
+- CachedImage class (r1138)
+- fetchContent() and fetchContentXML() added (r1139)
+- AdsUserPreferences requires a FormatSize value. (r1140)
+- Fix for NPE in Gadget linker (r1141)
+- Adds PreferencesUtil.getMsg() (r1152)
+- BasicGadgetsAds sample (r1158)
+- Fixes hosted mode debugging of a gadget under Windows (r1161)
+- Fix for NPE in UserPreferencesGenerator (r1163)
+- Fix for issue 218 - Dynamic hight feature broken. (r1171)
+- Fix for GWT 1.6 release - don't hard code the string "1.5" in the GadgetTemplate (r1202)
+- Add a library free .jar file to the build (r1211)
+- Increase heap size to 256m in samples launch scripts (r1213)
+- Add BasicGadgetAds to the index.html file (r1214)
+- Terminology update (r1215)
+- Increase heap size to 256m in other launch scripts (r1233)
+- Integrate GWT I18N.gwt.xml for GWT 1.6.1 with  the gadget container locale settings (r1234)
