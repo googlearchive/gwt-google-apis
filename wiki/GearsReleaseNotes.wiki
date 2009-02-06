@@ -1,4 +1,4 @@
-#summary Gears API Library for GWT Release Notes.
+﻿#summary Gears API Library for GWT Release Notes.
 
 = Gears API Library for GWT Release Notes =
 
@@ -14,7 +14,7 @@
    * Added support for Factory.getPermission() and Factory.hasPermission()
    * Updated all samples to allow more heap memory in launch scripts.
 
-===Known Issues in 1.1.1===
+===Known Issues in 1.2.0===
 
     * Gears applications can only be debugged using GWT's hosted mode on Windows; other hosted mode platforms do not support the Gears plugin. (issue 11)
     * Creating a Worker from a GWT module is not supported out-of-the-box.
