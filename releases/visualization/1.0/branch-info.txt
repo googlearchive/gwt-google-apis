@@ -13,8 +13,8 @@ Merges:
 /trunk/visualization@1136:1184 was merged (r1185) into /releases/maps/1.0
 /releases/maps/1.0@1136:1184 was merged (r1189) into /trunk/visualization
 /releases/maps/1.0@1185:1189 was merged (r1190) into /trunk/visualization
-
--> The next merge into trunk will be r1184:????
+/releases/maps/1.0@1189:1251 was merged (r1252) into /trunk/visualization
+-> The next merge into trunk will be r1251:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r1069)
@@ -42,3 +42,5 @@ Changes in this branch (excluding changes to this file itself):
  - Fixed JavaScript dates in Properties class & JSE in Selection methods that supported AbstractVisualization (r1153)
  - Fixed a build break in the AnnotatedTimeLineTest (r1179)
  - Added release notes for 1.0.1 (r1188)
+ - Merged changes from trunk (r1185-1190) to this branch (r1191)
+ - Increased heap size for all sample launch scripts to 256m (r1213)
