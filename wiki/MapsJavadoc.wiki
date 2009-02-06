@@ -4,4 +4,4 @@
 
 || [http://gwt-google-apis.googlecode.com/svn/javadoc/maps/1.0/index.html Browse the Maps API JavaDoc] ||
 
-  _Based on release 1.0.2_
+  _Based on release 1.0.3_
