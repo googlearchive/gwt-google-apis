@@ -9,7 +9,9 @@ Merges:
 /releases/gadgets/1.0@714:758 was merged (r759?) into trunk/gadgets
 /releases/gadgets/1.0@758:947 was merged (r948) into trunk/gadgets
 /releases/gadgets/1.0@947:1011 was merged (r1012) into trunk/gadgets
----> The next merge into trunk will be 1011:???
+/releases/gadgets/1.0@947:1011 was merged (r1012) into trunk/gadgets
+/releases/gadgets/1.0@1011:1247 was merged (r1248) into trunk/gadgets
+---> The next merge into trunk will be 1247:???
 
 Changes in this branch (excluding changes to this file itself:
 - Fixed the samples' online documentation link. (r718)
@@ -25,3 +27,20 @@ Changes in this branch (excluding changes to this file itself:
 - Replace HelloGadget Demo to look like applicationCreator skeleton (r933)
 - Added the @InjectModulePrefs annotation (r989)
 - Update linker template for 1.6 (strips .cache.js from strongName) (r1011)
+- GadgetAds support added (r1032)
+- CachedImage class (r1138)
+- fetchContent() and fetchContentXML() added (r1139)
+- AdsUserPreferences requires a FormatSize value. (r1140)
+- Fix for NPE in Gadget linker (r1141)
+- Adds PreferencesUtil.getMsg() (r1152)
+- BasicGadgetsAds sample (r1158)
+- Fixes hosted mode debugging of a gadget under Windows (r1161)
+- Fix for NPE in UserPreferencesGenerator (r1163)
+- Fix for issue 218 - Dynamic hight feature broken. (r1171)
+- Fix for GWT 1.6 release - don't hard code the string "1.5" in the GadgetTemplate (r1202)
+- Add a library free .jar file to the build (r1211)
+- Increase heap size to 256m in samples launch scripts (r1213)
+- Add BasicGadgetAds to the index.html file (r1214)
+- Terminology update (r1215)
+- Increase heap size to 256m in other launch scripts (r1233)
+- Integrate GWT I18N.gwt.xml for GWT 1.6.1 with  the gadget container locale settings (r1234)
