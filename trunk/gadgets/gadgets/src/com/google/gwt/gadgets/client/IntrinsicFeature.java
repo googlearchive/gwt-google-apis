@@ -15,6 +15,13 @@
  */
 package com.google.gwt.gadgets.client;
 
+import com.google.gwt.dom.client.ObjectElement;
+import com.google.gwt.gadgets.client.event.ContentFetchedHandler;
+import com.google.gwt.gadgets.client.event.Event;
+import com.google.gwt.gadgets.client.event.XmlContentFetchedHandler;
+import com.google.gwt.gadgets.client.event.ContentFetchedHandler.ContentFetchedEvent;
+import com.google.gwt.gadgets.client.event.XmlContentFetchedHandler.XmlContentFetchedEvent;
+
 /**
  * Provides access to intrinsic APIs provided by the container that are not part
  * of a feature-specific API.
@@ -24,17 +31,139 @@ public class IntrinsicFeature implements GadgetFeature {
   }
 
   /**
+   * Fetches the content of the provided URL and, when complete, calls the
+   * {@link ContentFetchedHandler#onContentFetched(ContentFetchedEvent)} method
+   * with the content of the fetched URL. The fetched content is cached on the
+   * Gadget Container.
+   */
+  public void fetchContent(final String url,
+      final ContentFetchedHandler contentFetchedHandler) {
+    fetchContent(url, new Event.FetchContentCallback() {
+      public void callback(String content) {
+        ContentFetchedEvent event = new ContentFetchedEvent(content, url);
+        contentFetchedHandler.onContentFetched(event);
+      }
+    });
+  }
+
+  /**
+   * Fetches the content of the provided URL and, when complete, calls the
+   * {@link ContentFetchedHandler#onContentFetched(ContentFetchedEvent)} method
+   * with the content of the fetched URL. The fetched content is cached on the
+   * Gadget Container with a specified refresh interval specified in seconds.
+   */
+  public void fetchContent(final String url,
+      final ContentFetchedHandler contentFetchedHandler, int millis) {
+    fetchContent(url, new Event.FetchContentCallback() {
+      public void callback(String content) {
+        ContentFetchedEvent event = new ContentFetchedEvent(content, url);
+        contentFetchedHandler.onContentFetched(event);
+      }
+    }, millis);
+  }
+
+  /**
+   * Fetches the content of the provided URL and when complete calls the {@link 
+   * XmlContentFetchedHandler#onXmlContentFetched(XmlContentFetchedEvent)}
+   * method with the content of the fetched URL. The content will then be parsed
+   * as XML content. The fetched content is cached on the Gadget Container.
+   */
+  public void fetchXmlContent(final String url,
+      final XmlContentFetchedHandler contentFetchedHandler) {
+    fetchXmlContent(url, new Event.FetchXmlContentCallback() {
+      public void callback(ObjectElement content) {
+        XmlContentFetchedEvent event = new XmlContentFetchedEvent(content, url);
+        contentFetchedHandler.onXmlContentFetched(event);
+      }
+    });
+  }
+
+  /**
+   * Fetches the content of the provided URL and when complete calls the {@link 
+   * XmlContentFetchedHandler#onXmlContentFetched(XmlContentFetchedEvent)}
+   * method with the content of the fetched URL. The content will then be parsed
+   * as XML content. The fetched content is cached on the Gadget Container with
+   * a specified refresh interval specified in seconds.
+   */
+  public void fetchXmlContent(final String url,
+      final XmlContentFetchedHandler contentFetchedHandler, int millis) {
+    fetchXmlContent(url, new Event.FetchXmlContentCallback() {
+      public void callback(ObjectElement content) {
+        XmlContentFetchedEvent event = new XmlContentFetchedEvent(content, url);
+        contentFetchedHandler.onXmlContentFetched(event);
+      }
+    }, millis);
+  }
+
+  /**
    * Returns a proxy URL that can be used to access a given URL.
    */
   public native String getCachedUrl(String url) /*-{
-    return $wnd._IG_GetCachedUrl(url);
-  }-*/;
+     return $wnd._IG_GetCachedUrl(url);
+   }-*/;
 
   /**
    * Returns a proxy URL that can be used to access a given URL with a specified
    * refresh interval specified in seconds.
    */
   public native String getCachedUrl(String url, int refreshIntervalSeconds) /*-{
-    return $wnd._IG_GetCachedUrl(url, refreshInterval);
-  }-*/;
+     return $wnd._IG_GetCachedUrl(url, refreshInterval);
+   }-*/;
+
+  /**
+   * Returns a proxy URL that can be used to access the given image's URL.
+   */
+  public native String getImageUrl(String url) /*-{
+     return $wnd._IG_GetImageUrl(url);
+   }-*/;
+
+  /**
+   * Returns a proxy URL that can be used to access a given image's URL with a
+   * specified refresh interval specified in seconds.
+   */
+  public native String getImageUrl(String url, int refreshIntervalSeconds) /*-{
+     return $wnd._IG_GetImageUrl(url, refreshInterval);
+   }-*/;
+
+  /**
+   * Native function that will trigger the content fetching.
+   */
+  private native void fetchContent(String url,
+      Event.FetchContentCallback callback) /*-{
+     return $wnd._IG_FetchContent(url, function(content) {
+           @com.google.gwt.gadgets.client.event.Event::callbackWrapper(Ljava/lang/String;Lcom/google/gwt/gadgets/client/event/Event$FetchContentCallback;)(content, callback);
+         });
+   }-*/;
+
+  /**
+   * Native function that will trigger the content fetching with a specified
+   * refresh interval for caching.
+   */
+  private native void fetchContent(String url,
+      Event.FetchContentCallback callback, int refreshIntervalSeconds) /*-{
+     return $wnd._IG_FetchContent(url, function(content) { 
+             @com.google.gwt.gadgets.client.event.Event::callbackWrapper(Ljava/lang/String;Lcom/google/gwt/gadgets/client/event/Event$FetchContentCallback;)(content, callback);
+           },{refreshInterval: refreshIntervalSeconds}
+         );
+   }-*/;
+
+  /**
+   * Native function that will trigger the XML content fetching.
+   */
+  private native void fetchXmlContent(String url,
+      Event.FetchXmlContentCallback callback) /*-{
+     return $wnd._IG_FetchXmlContent(url, function(content) { 
+         @com.google.gwt.gadgets.client.event.Event::callbackWrapper(Lcom/google/gwt/dom/client/ObjectElement;Lcom/google/gwt/gadgets/client/event/Event$FetchXmlContentCallback;)(content, callback);});
+   }-*/;
+
+  /**
+   * Native function that will trigger the XML content fetching with a specified
+   * refresh interval for caching.
+   */
+  private native void fetchXmlContent(String url,
+      Event.FetchXmlContentCallback callback, int refreshIntervalSeconds) /*-{
+     return $wnd._IG_FetchXmlContent(url, function(content) { 
+         @com.google.gwt.gadgets.client.event.Event::callbackWrapper(Lcom/google/gwt/dom/client/ObjectElement;Lcom/google/gwt/gadgets/client/event/Event$FetchXmlContentCallback;)(content, callback);},
+         {refreshInterval: refreshIntervalSeconds });
+   }-*/;
 }
