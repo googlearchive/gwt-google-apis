@@ -5,4 +5,4 @@
 
 || [http://gwt-google-apis.googlecode.com/svn/javadoc/visualization/1.0/index.html Browse the Visualization API JavaDoc] ||
 
-  _Based on release 1.0.0 (Release Candidate 1)_
+  _Based on release 1.0.1_
