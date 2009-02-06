@@ -2,6 +2,18 @@
 
 = Google Maps API Library for GWT Release Notes =
 
+
+==Release Notes for 1.0.3==
+===Changes since 1.0.2===
+
+   * Adds support for reverse Geocoding in the Geocoder class
+   * Adds the TileLayerOverlay.reset() method
+   * Adds support for the GAdsManager
+
+=== Known Issues ===
+   * Not all features in the Maps API are supported. The Maps API is constantly evolving. 
+
+----
 ==Release Notes for 1.0.2==
 ===Changes since 1.0.1 (Release Candiate 2)===
 
@@ -10,9 +22,6 @@
    * Fixed a problem caused by the GDirections.getStatus() is returning an empty object
    * Removed setCenter() from checkResize(), because in some rare cases, the setCenter() is fatal to the Maps API.  Added checkResizeAndCenter() if you want the old behavior
    * Added support for alternate methods to convert LatLng to pixels
-
-=== Known Issues ===
-   * Not all features in the Maps API are supported. The Maps API is constantly evolving. 
 
 ----
 ==Release Notes for 1.0.1 (Release Candidate 2)==
