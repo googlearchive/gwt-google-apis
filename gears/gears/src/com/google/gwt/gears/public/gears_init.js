@@ -47,7 +47,8 @@
     // IE
     try {
       factory = new ActiveXObject('Gears.Factory');
-      // privateSetGlobalObject is only required and supported on WinCE.
+      // privateSetGlobalObject is only required and supported on IE Mobile on
+      // WinCE.
       if (factory.getBuildInfo().indexOf('ie_mobile') != -1) {
         factory.privateSetGlobalObject(this);
       }

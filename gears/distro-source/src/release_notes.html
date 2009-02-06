@@ -29,6 +29,7 @@
       <h1>Gears API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+                    <li><a href="#Release_Notes_1_1_1">1.1.1</a></li>
                     <li><a href="#Release_Notes_1_1_0">1.1.0 (release candidate)</a></li>
 		    <li><a href="#Release_Notes_r290">r290 (milestone release)</a></li>
 		    <li><a href="#Release_Notes_1_0_0">1.0.0</a></li>
@@ -36,18 +37,36 @@
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
-      <h3>Changes since 1.0.0</h3>
+      <h3>Changes since 1.1.1</h3>
       <ul>
-       <li>Updated gears_init.js to add support for Gears under Webkit</li>
-       <li>Messages from workers can now be Objects, primitives, or arrays</li>
-       <li>Updated the samples to take care of a few cosmetic issues</li>
-       <li>Added WorkerPoolDemo sample</li>
+       <li>Adds Gears 0.4 feature support:
+        <ul>
+         <li>Geolocation</li>
+         <li>Desktop</li>
+         <li>Blob</li>
+         <li>HttpRequest</li>
+         <li>File Upload demo</li>
+        </li>
+        </ul>
+       <li>Added support for Factory.getPermission() and Factory.hasPermission()</li>
+       <li> Updated all samples to allow more heap memory in launch scripts.</li>
       </ul>
      <h3>Known Issues</h3>
       <ul>
        <li>Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=11">11</a>)</li>
        <li>Creating a Worker from a GWT module is not supported out-of-the-box.</li>
        <li>GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X.  As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.</li>
+      </ul>
+      <hr/>
+      <a name="Release_Notes_1_1_1"></a>
+     <h2>Release Notes for 1.1.1 (release candidate)</h2>
+
+      <h3>Changes since 1.1.0</h3>
+      <ul>
+       <li>Updated gears_init.js to add support for Gears under Webkit</li>
+       <li>Messages from workers can now be Objects, primitives, or arrays</li>
+       <li>Updated the samples to take care of a few cosmetic issues</li>
+       <li>Added WorkerPoolDemo sample</li>
       </ul>
       <hr/>
       <a name="Release_Notes_1_1_0"></a>
