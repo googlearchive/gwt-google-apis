@@ -5,25 +5,30 @@
   * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.1.1.zip gwt-gears-1.1.1.zip]
 
 *Gadgets API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.0.1.tar.gz gwt-gadgets-1.0.1.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.0.1.zip gwt-gadgets-1.0.1.zip]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.0.2.tar.gz gwt-gadgets-1.0.2.tar.gz]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.0.2.zip gwt-gadgets-1.0.2.zip]
 
 *Google AJAX Search API Library 1.0*
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.1.tar.gz gwt-search-1.0.1.tar.gz]
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.1.zip gwt-search-1.0.1.zip]
 
 *Google Maps API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.2.tar.gz gwt-maps-1.0.2.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.2.zip gwt-maps-1.0.2.zip]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.3.tar.gz gwt-maps-1.0.3.tar.gz]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.3.zip gwt-maps-1.0.3.zip]
  
+*Google Visualization API Library 1.0*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.1.tar.gz gwt-visualization-1.0.1.tar.gz]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.1.zip gwt-visualization-1.0.1.zip]
+
 ----
 
 ===Release Candidates===
 A number of additional libraries are now available as Release Candidates and are ready to be taken for a test drive. Note that Release Candidates have not yet been released for production use, and rely on [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.
 
-*Google Visualization API Library 1.0 (Release Candidate)*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.0.tar.gz gwt-visualization-1.0.0.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.0.zip gwt-visualization-1.0.0.zip]
+*Gears API Library 1.2*
+  Includes support for Gears 0.4 features
+  * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.2.0.tar.gz gwt-gears-1.2.0.tar.gz]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.2.0.zip gwt-gears-1.2.0.zip]
 
 ----
 
