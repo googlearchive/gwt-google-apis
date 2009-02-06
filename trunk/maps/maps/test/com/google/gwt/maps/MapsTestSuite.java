@@ -16,15 +16,16 @@
 package com.google.gwt.maps;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
+import com.google.gwt.maps.client.AdsManagerTest;
 import com.google.gwt.maps.client.CopyrightEventTest;
 import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
 import com.google.gwt.maps.client.MapWidgetTest;
 import com.google.gwt.maps.client.MapsNotInstalledTest;
-import com.google.gwt.maps.client.geocode.StatusCodesTest;
 import com.google.gwt.maps.client.control.ControlTest;
 import com.google.gwt.maps.client.geocode.DirectionsTest;
 import com.google.gwt.maps.client.geocode.GeocodeTest;
+import com.google.gwt.maps.client.geocode.StatusCodesTest;
 import com.google.gwt.maps.client.geom.BoundsTest;
 import com.google.gwt.maps.client.geom.LatLngBoundsTest;
 import com.google.gwt.maps.client.geom.LatLngTest;
@@ -72,6 +73,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(ProjectionTest.class);
     suite.addTestSuite(BoundsTest.class);
     suite.addTestSuite(MinimumMapVersionTest.class);
+    suite.addTestSuite(AdsManagerTest.class);
     return suite;
   }
 }
