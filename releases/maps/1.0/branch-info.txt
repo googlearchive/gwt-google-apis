@@ -12,7 +12,8 @@ Merges:
 /trunk/maps@1041:1145 was merged (r1146) into /releases/maps/1.0
 /trunk/maps@1147:1168 was merged (r1191) into /releases/maps/1.0
 /releases/maps/1.0/@1157 was merged (r1192) into /trunk/maps
--> The next merge into trunk will be r1157:????
+/releases/maps/1.0/@1157:1249 was merged (r1250) into /trunk/maps (1.0.3 release)
+-> The next merge into trunk will be r1249:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -59,3 +60,7 @@ it is returning null.(r1027, r1029)
  - Fix unit test that was causing build break on IE.(r1141)
  - Adds the tileLayerOverlay.reset() method. (r1162)
  - Add support for reverse geocoding to the Geocoder class (r1168)
+ - Add support for GAdsManager, gwt-maps-1.0.3 release notes (r1196)
+ - Fix build break due to AdsManagerTest.newInstance() (r1198)
+ - Updated javadoc from maps api for MapClickHandler (r1205)
+ - Updated documentation to point to Google API Libraries for GWT group. (r1212)
