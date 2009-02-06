@@ -21,5 +21,7 @@ Changes in this branch (excluding changes to this file itself:
 - Updated links to new demos (r902)
 - Eclipse project settings were left out of Gadget RPC commit. (r903)
 - Fixes problem with hosted mode debugging (issue 199) (r924)
-- Replace HelloGadget Demo to look like applicationCreator skeleton
-- Update linker template for 1.6 (strips .cache.js from strongName)
+- Fix issue 199 - gwtOnLoad now requires a third 'version' parameter. (r925)
+- Replace HelloGadget Demo to look like applicationCreator skeleton (r933)
+- Added the @InjectModulePrefs annotation (r989)
+- Update linker template for 1.6 (strips .cache.js from strongName) (r1011)
