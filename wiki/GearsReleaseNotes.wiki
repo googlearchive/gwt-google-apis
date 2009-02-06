@@ -2,6 +2,26 @@
 
 = Gears API Library for GWT Release Notes =
 
+==Release Notes for 1.2.0==
+===Changes since 1.1.1==
+
+   * Adds Gears 0.4 feature support:
+      * Geolocation<
+      * Desktop
+      * Blob
+      * HttpRequest
+      * File Upload demo
+   * Added support for Factory.getPermission() and Factory.hasPermission()
+   * Updated all samples to allow more heap memory in launch scripts.
+
+===Known Issues in 1.1.1===
+
+    * Gears applications can only be debugged using GWT's hosted mode on Windows; other hosted mode platforms do not support the Gears plugin. (issue 11)
+    * Creating a Worker from a GWT module is not supported out-of-the-box.
+    * GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X. As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.
+
+----
+
 ==Release Notes for 1.1.1==
 ===Changes since 1.1.0==
 
@@ -9,12 +29,6 @@
     * Messages from workers can now be Objects, primitives, or arrays
     * Updated the samples to take care of a few cosmetic issues
     * Added WorkerPoolDemo sample
-
-===Known Issues===
-
-    * Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin. (issue 11)
-    * Creating a Worker from a GWT module is not supported out-of-the-box.
-    * GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X. As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.
 
 ----
 
