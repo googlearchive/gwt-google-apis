@@ -20,6 +20,31 @@ If you are on Windows, you may be hitting a path length problem.  Try unpacking 
 
 If you are having trouble running the sample scripts XXX-shell.com and XXX-compile.cmd,  make sure you have the GWT_HOME environment variable set.  It should contain a pathname that contains a uncompressed GWT distribution.
 
+== Why do I get an exception saying that $wnd.google.visualization is null? ==
+
+The following stack trace indicates that the Visualization JavaScript API is not getting loaded:
+
+{{{
+[ERROR] Unable to load module entry point class
+com.example.myviz.client.MyViz (see associated exception for
+details)
+com.google.gwt.core.client.JavaScriptException: (TypeError):
+'$wnd.google.visualization' is null or not an object
+ number: -2146823281
+ description: '$wnd.google.visualization' is null or not an object
+        at com.google.gwt.visualization.client.visualizations.Table.createJso
+(Native Method) 
+...
+}}}
+
+Make sure your hosted HTML page includes a `<script>` tag to load the Ajax Loader.  
+
+{{{
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+}}}
+
+You can then add !JavaScript code to load the visualizations yourself, or you can use the !AjaxLoader class provided with the gwt-visualization API.  See the [VisualizationGettingStarted Getting Started] page for an example.
+
 == I removed a !VisualizationWidget from a Panel.  When I added it back, it was gone!  What happened? ==
 
 GWT developers are used to working with widgets while they are detached from the DOM.  Attaching and detaching the widgets affects how and where they appear, but not the widgets themselves.  However, many of the visualizations provided by the Google Visualization API do not support this pattern.  (Currently, this applies to the !AreaChart, !BarChart, !ColumnChart, !LineChart, !PieChart, and !ScatterChart.)  Thus, these visualizations should be added to a panel once and not removed until they are no longer needed.
