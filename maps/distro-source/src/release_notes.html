@@ -29,13 +29,27 @@
       <h1>Maps API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+		    <li><a href="#Release_Notes_1_0_2">1.0.2</a></li>
 		    <li><a href="#Release_Notes_1_0_1">1.0.1 (Release Candidate 2)</a></li>
 		    <li><a href="#Release_Notes_1_0_0">1.0.0 (Release Candidate 1)</a></li>
 		    <li><a href="#Release_Notes_r290">r290 (Milestone Release)</a></li>      </ul>
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
-       <h3>Changes since 1.0.2 (Release Candidate 2)</h3>
+       <h3>Changes since 1.0.2 </h3>
+       <ul>
+         <li>Adds support for reverse Geocoding in the Geocoder class</li>
+         <li>Adds the TileLayerOverlay.reset() method</li>
+         <li>Adds support for the GAdsManager</li>
+       </ul>
+       <h3>Known Issues</h3>
+	<ul>
+         <li>Not all features in the Maps API are supported.  The Maps API is constantly evolving.</li>
+	</ul>
+     <hr/>
+     <a name="Release_Notes_1_0_2"></a>
+     <h2>Release Notes for 1.0.2 </h2> 
+       <h3>Changes since 1.0.1 </h3>
         <ul>
           <li>Fixed a bug inside of LatLngBounds.newInstance()</li> 
           <li>Allow Marker and other overlay classes to be subclassed (issue 206)</li>
@@ -43,13 +57,9 @@
           <li>Removed setCenter() from checkResize(), because in some rare cases, the setCenter() is fatal to the Maps API.  Added checkResizeAndCenter() if you want the old behavior</li>
           <li>Added support for alternate methods to convert LatLng to pixels</li>
         </ul>
-       <h3>Known Issues</h3>
-	<ul>
-         <li>Not all features in the Maps API are supported.  The Maps API is constantly evolving.</li>
-	</ul>
        <hr/>
      <a name="Release_Notes_1_0_1"></a>
-     <h2>Release Notes for 1.0.1 (Release Candidate 2)</h2>      
+     <h2>Release Notes for 1.0.1 (Release Candidate 2)</h2> 
        <h3>Changes since 1.0.0 (Release Candidate 1)</h3>
         <ul>
          <li> Corrected Projection subclassing issue in Hosted mode. (issue 180)</li>
