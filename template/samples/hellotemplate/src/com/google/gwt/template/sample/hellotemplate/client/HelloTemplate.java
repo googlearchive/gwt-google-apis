@@ -1,4 +1,4 @@
-package com.google.gwt.template.sample.template.client;
+package com.google.gwt.template.sample.hellotemplate.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
