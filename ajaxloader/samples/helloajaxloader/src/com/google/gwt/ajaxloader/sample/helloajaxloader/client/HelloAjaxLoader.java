@@ -1,4 +1,4 @@
-package com.google.gwt.ajaxloader.sample.ajaxloader.client;
+package com.google.gwt.ajaxloader.sample.helloajaxloader.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
