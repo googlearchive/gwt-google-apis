@@ -15,8 +15,13 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.events.RegionClickHandler;
+import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.events.ZoomOutHandler;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
 import com.google.gwt.visualization.client.visualizations.GeoMap.DataMode;
 
@@ -33,7 +38,7 @@ public class GeoMapTest extends VisualizationTest {
     loadApi(new Runnable() {
       public void run() {
         GeoMap.Options options = GeoMap.Options.create();
-        DataTable data = makeDataTable();
+        DataTable data = createDataTable();
         options.setRegion("world");
         GeoMap geoMap = new GeoMap(data, options);
         geoMap.setSize("300px", "300px");
@@ -55,11 +60,101 @@ public class GeoMapTest extends VisualizationTest {
         options.setShowLegend(true);
         options.setRegion("world");
 
-        DataTable data = makeDataTable();
+        DataTable data = createDataTable();
         GeoMap geoMap = new GeoMap(data, options);
         RootPanel.get().add(geoMap);
       }
     });
+  }
+
+  public void testRegionClick() {
+    AjaxLoader.loadVisualizationApi(new Runnable() {
+      public void run() {
+        GeoMap.Options options = GeoMap.Options.create();
+        final GeoMap viz = new GeoMap(createDataTable(), options);
+  
+        // Add a region click handler
+        viz.addRegionClickHandler(new RegionClickHandler() {
+  
+          @Override
+          public void onRegionClick(RegionClickEvent event) {
+            assertNotNull(event);
+            assertEquals("Israel", event.getRegion());
+            finishTest();
+          }
+        });
+        RootPanel.get().add(viz);
+
+        // Trigger a region click callback
+        triggerRegionClick(viz.getJso(), "Israel");
+      }
+    }, GeoMap.PACKAGE);
+    delayTestFinish(ASYNC_DELAY_MS);
+  }
+
+  public void testSelection() {
+    AjaxLoader.loadVisualizationApi(new Runnable() {
+      public void run() {
+        GeoMap.Options options = GeoMap.Options.create();
+        final GeoMap viz = new GeoMap(createDataTable(), options);
+  
+        // Add a selection handler
+        viz.addSelectHandler(new SelectHandler() {
+  
+          @Override
+          public void onSelect(SelectEvent event) {
+            assertNotNull(event);
+            JsArray<Selection> s = viz.getSelections();
+            assertEquals("Expected 1 element in the selection", 1,
+                s.length());
+            assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
+            assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+            finishTest();
+          }
+        });
+        RootPanel.get().add(viz);
+  
+        JsArray<Selection> s = 
+          ArrayHelper.toJsArray(Selection.createCellSelection(1, 0));
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        viz.setSelections(s);
+        s = viz.getSelections();
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        // Trigger a selection callback
+        triggerSelection(viz, s);
+      }
+    }, GeoMap.PACKAGE);
+    delayTestFinish(ASYNC_DELAY_MS);
+  }
+
+  public void testZoomOut() {
+    AjaxLoader.loadVisualizationApi(new Runnable() {
+      public void run() {
+        GeoMap.Options options = GeoMap.Options.create();
+        options.setShowZoomOut(true);
+        
+        final GeoMap viz = new GeoMap(createDataTable(), options);
+  
+        // Add a zoom out handler
+        viz.addZoomOutHandler(new ZoomOutHandler() {
+  
+          @Override
+          public void onZoomOut(ZoomOutEvent event) {
+            assertNotNull(event);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(viz);
+
+        // Trigger a zoom out callback
+        triggerZoomOut(viz.getJso());
+      }
+    }, GeoMap.PACKAGE);
+    delayTestFinish(ASYNC_DELAY_MS);
   }
 
   @Override
@@ -70,7 +165,7 @@ public class GeoMapTest extends VisualizationTest {
   /**
    * A support method used by several test cases to create a simple DataTable.
    */
-  private DataTable makeDataTable() {
+  private DataTable createDataTable() {
     // Create a simple data table
     DataTable dataTable = DataTable.create();
     dataTable.addRows(7);
@@ -84,4 +179,12 @@ public class GeoMapTest extends VisualizationTest {
     dataTable.setValue(0, 1, 3);
     return dataTable;
   }
+
+  private native void triggerRegionClick(JavaScriptObject jso, String region) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'regionClick', {'region': region});
+  }-*/;
+
+  private native void triggerZoomOut(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'zoomOut');
+  }-*/;
 }

@@ -16,9 +16,19 @@
 package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.ArrayHelper;
+import com.google.gwt.visualization.client.Selectable;
+import com.google.gwt.visualization.client.Selection;
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.ReadyHandler;
+import com.google.gwt.visualization.client.events.RegionClickHandler;
+import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.events.ZoomOutHandler;
 
 /**
  * Geomap visualization. Kind of like a cross between Map and IntensityMap.
@@ -27,7 +37,7 @@ import com.google.gwt.visualization.client.AbstractDrawOptions;
  *      "http://code.google.com/apis/visualization/documentation/gallery/geomap.html"
  *      >GeoMap Visualization Reference</a>
  */
-public class GeoMap extends Visualization<GeoMap.Options> {
+public class GeoMap extends Visualization<GeoMap.Options> implements Selectable {
   /**
    * How to display data on the map.
    */
@@ -55,6 +65,14 @@ public class GeoMap extends Visualization<GeoMap.Options> {
 
     protected Options() {
     }
+    
+    public final void setColors(int... colors) {
+      setColors(ArrayHelper.createJsArray(colors));
+    }
+
+    public final native void setColors(JsArrayInteger colors) /*-{
+      this.colors = colors;
+    }-*/;
 
     public final void setDataMode(DataMode mode) {
       setDataMode(mode.name().toLowerCase());
@@ -76,6 +94,10 @@ public class GeoMap extends Visualization<GeoMap.Options> {
       this.showLegend = show;
     }-*/;
 
+    public final native void setShowZoomOut(boolean show) /*-{
+      this.showZoomOut = show;
+    }-*/;
+
     public final void setSize(int width, int height) {
       setWidth(width);
       setHeight(height);
@@ -89,9 +111,13 @@ public class GeoMap extends Visualization<GeoMap.Options> {
     public final native void setWidth(int width) /*-{
       this.width = width + 'px';
     }-*/;
-
+    
     public final native void setWidth(String width) /*-{
       this.width = width;
+    }-*/;
+    
+    public final native void setZoomOutLabel(String label) /*-{
+      this.zoomOutLabel = label;
     }-*/;
 
     private native void setDataMode(String mode) /*-{
@@ -113,8 +139,32 @@ public class GeoMap extends Visualization<GeoMap.Options> {
     setSize("100%", "100%");
   }
 
+  public void addReadyHandler(ReadyHandler handler) {
+    Handler.addHandler(this, "drawingDone", handler);
+  }
+
+  public void addRegionClickHandler(RegionClickHandler handler) {
+    Handler.addHandler(this, "regionClick", handler);
+  }
+
+  public final void addSelectHandler(SelectHandler handler) {
+    Selection.addSelectHandler(this, handler);
+  }
+
+  public void addZoomOutHandler(ZoomOutHandler handler) {
+    Handler.addHandler(this, "zoomOut", handler);
+  }
+
+  public final JsArray<Selection> getSelections() {
+    return Selection.getSelections(this);
+  }
+
+  public final void setSelections(JsArray<Selection> sel) {
+    Selection.setSelections(this, sel);
+  }
+
   @Override
   protected native JavaScriptObject createJso(Element parent) /*-{
     return new $wnd.google.visualization.GeoMap(parent);
-  }-*/;
+  }-*/; 
 }
