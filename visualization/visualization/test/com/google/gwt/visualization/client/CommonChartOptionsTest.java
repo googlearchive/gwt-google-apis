@@ -38,8 +38,8 @@ public class CommonChartOptionsTest extends VisualizationTest {
         options.setAxisBackgroundColor("pink");
         options.setAxisColor("pink");
         options.setReverseAxis(true);
-        options.setTitleX(5);
-        options.setTitleY(5);
+        options.setTitleX("activity");
+        options.setTitleY("hours");
         
         Widget widget = new AreaChart(data, options);
         RootPanel.get().add(widget);
