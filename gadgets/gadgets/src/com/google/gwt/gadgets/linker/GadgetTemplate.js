@@ -301,7 +301,8 @@ function __MODULE_FUNC__() {
     if (fullName.search("\.cache\.js$") < 0) {
     	fullName = fullName.concat(".cache.js");
     }
-    var loadFrom = _IG_GetCachedUrl(fullName);
+    // Get a URL that is cached for a year (31536000 seconds).
+    var loadFrom = _IG_GetCachedUrl(fullName, {refreshInterval:31536000});
       
     $doc.write('<script src="' + loadFrom + '"></script>');
   }
