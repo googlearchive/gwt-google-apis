@@ -13,22 +13,43 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.ajaxloader.gwt.client;
+package com.google.gwt.ajaxloader.client;
 
+import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.ajaxloader.client.AjaxLoader;
 
 /**
  * Tests the AjaxLoader class.
  */
 public class AjaxLoaderTest extends GWTTestCase {
-
+  // length of time to wait for asynchronous test to complete.
+  static final int ASYNC_DELAY_MSEC = 10000; // 10 seconds
+  
   @Override
   public String getModuleName() {
-    return "com.google.gwt.ajaxloader.GoogleAjaxLoader";
+    return "com.google.gwt.ajaxloader.AjaxLoader";
   }
 
-  public void testAjaxLoader() {
-    AjaxLoader t = new AjaxLoader();
+  public void testLoadApi() {
+    delayTestFinish(ASYNC_DELAY_MSEC);
+    AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
+    Runnable onLoad = new Runnable() {
+      public void run() {
+        finishTest();
+      }      
+    };
+    AjaxLoader.loadApi("maps", "2", onLoad, options);
   }
+  
+  public void testLoadVisualizationApi() {
+    delayTestFinish(ASYNC_DELAY_MSEC);
+    AjaxLoader.loadVisualizationApi(new Runnable() {
+
+      public void run() {
+        finishTest();
+      }
+      
+    }, "piechart");
+  }
+  
 }

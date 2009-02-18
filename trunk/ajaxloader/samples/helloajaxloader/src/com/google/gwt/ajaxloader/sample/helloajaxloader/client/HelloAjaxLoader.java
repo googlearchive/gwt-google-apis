@@ -1,16 +1,29 @@
+/*
+ * Copyright 2009 Google Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.google.gwt.ajaxloader.sample.helloajaxloader.client;
 
+import com.google.gwt.ajaxloader.client.AjaxLoader;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * Demonstrates the use of the AjaxLoader API.
  */
 public class HelloAjaxLoader implements EntryPoint {
 
@@ -18,43 +31,77 @@ public class HelloAjaxLoader implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    Image img = new Image("http://code.google.com/webtoolkit/logo-185x175.png");
-    Button button = new Button("Click me");
 
-    VerticalPanel vPanel = new VerticalPanel();
-    // We can add style names.
-    vPanel.addStyleName("widePanel");
-    vPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-    vPanel.add(img);
-    vPanel.add(button);
-
-    // Add image and button to the RootPanel
-    RootPanel.get().add(vPanel);
-
-    // Create the dialog box
-    final DialogBox dialogBox = new DialogBox();
-    dialogBox.setText("Welcome to GWT AjaxLoader Demo!");
-    dialogBox.setAnimationEnabled(true);
-    Button closeButton = new Button("close");
-    VerticalPanel dialogVPanel = new VerticalPanel();
-    dialogVPanel.setWidth("100%");
-    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-    dialogVPanel.add(closeButton);
-
-    closeButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
-        dialogBox.hide();
-      }
-    });
-
-    // Set the contents of the Widget
-    dialogBox.setWidget(dialogVPanel);
+    // Uncomment and replace the key below to load a key for the APIs.  You 
+    //   could replace this with some kind of lookup based on 
+    //   Window.location.getHost() and Window.location.getPort();
+    // AjaxLoader.init("ABCDEFG");
     
-    button.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
-        dialogBox.center();
-        dialogBox.show();
+    AjaxLoader.loadApi("maps", "2", new Runnable() {
+      public void run() {
+        mapsLoaded();
       }
-    });
+    }, null);
+    
+    AjaxLoader.loadVisualizationApi(new Runnable() {
+
+      public void run() {
+        pieChartLoaded();
+      }
+    }, "imagepiechart");
+  }
+
+  /**
+   * This method is invoked after the Maps API is successfully loaded.
+   */
+  private void mapsLoaded() {
+    Element mapsDiv = Document.get().createDivElement();
+    RootPanel.getBodyElement().appendChild(mapsDiv);
+    nativeMakeMap(mapsDiv);  
+  }
+
+  /**
+   * A snippet of JavaScript that will create a visualization.  See 
+   * the gwt-visualization library for GWT wrappers for the Google Visualization 
+   * API.
+   * 
+   * @param chartDiv An element in the DOM to attach the pie chart to.
+   */
+  private native void nativeMakeImagePieChart(Element chartDiv) /*-{
+    var data = new $wnd.google.visualization.DataTable();
+    data.addColumn('string', 'Task');
+    data.addColumn('number', 'Hours per Day');
+    data.addRows(5);
+    data.setValue(0, 0, 'Work');
+    data.setValue(0, 1, 11);
+    data.setValue(1, 0, 'Eat');
+    data.setValue(1, 1, 2);
+    data.setValue(2, 0, 'Commute');
+    data.setValue(2, 1, 2);
+    data.setValue(3, 0, 'Watch TV');
+    data.setValue(3, 1, 2);
+    data.setValue(4, 0, 'Sleep');
+    data.setValue(4, 1, 7);
+
+    var chart = new $wnd.google.visualization.ImagePieChart(chartDiv);
+    chart.draw(data, {width: 500, height: 200, is3D: true, title: 'My Daily Activities'});
+  }-*/;
+
+  private native void nativeMakeMap(Element mapsDiv) /*-{
+    var mapOptions = new Object();
+    mapOptions.size = new $wnd.GSize(300,300);
+    mapOne = new $wnd.GMap2(mapsDiv,
+                     mapOptions);
+    mapOne.setCenter(new $wnd.GLatLng(37.4419, -122.1419), 13);
+  }-*/;
+  
+  /**
+   * This method is invoked after the visualization API is successfully loaded.
+   */
+  private void pieChartLoaded() {
+    Element chartDiv = Document.get().createDivElement();
+    RootPanel.getBodyElement().appendChild(chartDiv);
+    nativeMakeImagePieChart(chartDiv);
   }
 }
+
