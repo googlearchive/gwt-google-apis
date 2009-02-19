@@ -23,14 +23,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>test</name>
-			<type>2</type>
-			<locationURI>ajaxloader_API_ROOT/ajaxloader/test</locationURI>
-		</link>
-		<link>
 			<name>src</name>
 			<type>2</type>
-			<locationURI>ajaxloader_API_ROOT/ajaxloader/src</locationURI>
+			<locationURI>AJAXLOADER_API_ROOT/ajaxloader/src</locationURI>
+		</link>
+		<link>
+			<name>test</name>
+			<type>2</type>
+			<locationURI>AJAXLOADER_API_ROOT/ajaxloader/test</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
