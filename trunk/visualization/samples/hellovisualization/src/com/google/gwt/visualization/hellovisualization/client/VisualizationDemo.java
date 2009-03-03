@@ -35,6 +35,7 @@ import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.Query.Callback;
 import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.formatters.ArrowFormat;
 import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.Table;
 import com.google.gwt.visualization.client.visualizations.Table.Options;
@@ -159,7 +160,10 @@ class VisualizationDemo implements EntryPoint {
         panel.add(viz);
         Options options = Table.Options.create();
         options.setShowRowNumber(true);
-        viz.draw(response.getDataTable(), options);
+        DataTable dataTable = response.getDataTable();
+        ArrowFormat formatter = createFormatter();
+        formatter.format(dataTable, 1);
+        viz.draw(dataTable, options);
 
         viz.addSelectHandler(new SelectHandler() {
           @Override
@@ -191,5 +195,11 @@ class VisualizationDemo implements EntryPoint {
       }
     });
     return panel;
+  }
+
+  private ArrowFormat createFormatter() {
+    ArrowFormat.Options options = ArrowFormat.Options.create();
+    options.setBase(1.5);
+    return ArrowFormat.create(options);
   }
 }
