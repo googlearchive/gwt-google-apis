@@ -19,40 +19,15 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.visualization.client.DataTable;
 
 /**
- * Formats a JavaScript Date value.
+ * Describes how numeric columns should be formatted.
  * 
- * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#dateformatter"
- * > DateFormat Reference. </a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#numberformatter"
+ * > NumberFormat Reference. </a>
  */
-public class DateFormat extends JavaScriptObject {
-  /**
-   * A quick formatting option for the date.
-   */
-  public static enum FormatType {
-    /**
-     * Short format (month first): e.g., "2/28/08"
-     */
-    SHORT, 
-    
-    /**
-     * Medium format: e.g., "Feb 28, 2008"
-     */
-    MEDIUM, 
-    
-    /**
-     * Long format: e.g., "February 28, 2008"
-     */
-    LONG; 
-    
-    @Override
-    public String toString() {
-      return name().toLowerCase();
-    }
-  }
-
+public class NumberFormat extends JavaScriptObject { 
   /**
    * Options to configure the formatter.
-   */
+   */ 
   public static class Options extends JavaScriptObject {
     public static Options create() {
       return JavaScriptObject.createObject().cast();
@@ -61,28 +36,36 @@ public class DateFormat extends JavaScriptObject {
     protected Options() {
     }
     
-    public final void setPattern(FormatType pattern) {
-      setFormatType(pattern.toString());
-    }
-    
-    public final native void setPattern(String pattern) /*-{
-      this.pattern = pattern;
+    public final native void setDecimalSymbol(String symbol) /*-{
+      this.decimalSymbol = symbol;
     }-*/;
-    
-    public final native void setTimeZone(int zone) /*-{
-      this.timeZone = zone;
+
+    public final native void setFractionDigits(int n) /*-{
+      this.fractionDigits = n;
     }-*/;
-    
-    private native void setFormatType(String type) /*-{
-      this.formatType = type;
+
+    public final native void setNegativeColor(String color) /*-{
+      this.negativeColor = color;
+    }-*/;
+
+    public final native void setNegativeParens(boolean parens) /*-{
+    	this.negativeParens = parens;
+    }-*/;
+
+    public final native void setPrefix(String prefix) /*-{
+    	this.prefix = prefix;
+    }-*/;
+
+    public final native void setSuffix(String suffix) /*-{
+      this.suffix = suffix;
     }-*/;
   }
   
-  public static native DateFormat create(Options options) /*-{
-    return new $wnd.google.visualization.DateFormat(options);
+  public static native NumberFormat create(Options options) /*-{
+    return new $wnd.google.visualization.NumberFormat(options);
   }-*/;
 
-  protected DateFormat() {
+  protected NumberFormat() {
   }
   
   public final native void format(DataTable data, int columnIndex) /*-{

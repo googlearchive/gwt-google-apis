@@ -19,35 +19,29 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.visualization.client.DataTable;
 
 /**
- * Adds an up or down arrow to a numeric cell, depending on whether the value is 
- * above or below a specified base value.
+ * Assigns colors to the foreground or background of a numeric cell, 
+ * depending on the cell value.
  * 
- * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#arrowformatter"
- * > ArrowFormat Reference. </a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#colorformatter"
+ * > ColorFormat Reference. </a>
  */
-public class ArrowFormat extends JavaScriptObject {  
-  /**
-   * Options to configure the formatter.
-   */
-  public static class Options extends JavaScriptObject {
-    public static Options create() {
-      return JavaScriptObject.createObject().cast();
-    }
-
-    protected Options() {
-    }
-    
-    public final native void setBase(double base) /*-{
-      this.base = base;
-    }-*/;
-  }
-  
-  public static native ArrowFormat create(Options options) /*-{
-    return new $wnd.google.visualization.ArrowFormat(options);
+public class ColorFormat extends JavaScriptObject {
+  public static native ColorFormat create() /*-{
+    return new $wnd.google.visualization.ColorFormat();
   }-*/;
 
-  protected ArrowFormat() {
+  protected ColorFormat() {
   }
+  
+  public final native void addGradientRange(double from, double to, 
+      String color, String fromBgColor, String toBgColor) /*-{
+  	this.addGradientRange(from, to, color, fromBgColor, toBgColor);
+  }-*/;
+  
+  public final native void addRange(double from, double to, 
+      String color, String bgcolor) /*-{
+    this.addRange(from, to, color, bgcolor);
+  }-*/;
   
   public final native void format(DataTable data, int columnIndex) /*-{
     this.format(data, columnIndex);

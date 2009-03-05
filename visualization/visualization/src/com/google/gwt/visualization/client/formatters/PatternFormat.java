@@ -19,6 +19,15 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.visualization.client.DataTable;
 
+/**
+ * Enables you to merge the values of designated columns into a single column, 
+ * along with arbitrary text. So, for example, if you had a column for first 
+ * name and a column for last name, you could populate a third column with 
+ * {last name}, {first name}.
+ * 
+ * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#patternformatter"
+ * > PatternFormat Reference. </a>
+ */
 public class PatternFormat extends JavaScriptObject {
   public static native PatternFormat create(String pattern) /*-{
     return new $wnd.google.visualization.PatternFormat(pattern);
