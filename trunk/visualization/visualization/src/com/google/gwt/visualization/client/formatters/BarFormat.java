@@ -18,9 +18,26 @@ package com.google.gwt.visualization.client.formatters;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.visualization.client.DataTable;
 
+/**
+ * Adds a colored bar to a numeric cell indicating whether the cell value is 
+ * above or below a specified base value. 
+ * 
+ * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#barformatter"
+ * > BarFormat Reference. </a>
+ */
 public class BarFormat extends JavaScriptObject {
+  /**
+   * BarFormat supports three colors for drawing the bar.
+   */
   public static enum Color { 
-    RED, GREEN, BLUE; 
+    /**  #FF0000 */
+    RED, 
+    
+    /** #00FF00 */
+    GREEN, 
+    
+    /** #0000FF */
+    BLUE; 
     
     @Override
     public String toString() {
@@ -28,6 +45,9 @@ public class BarFormat extends JavaScriptObject {
     }
   }
   
+  /**
+   * Options to configure the formatter.
+   */
   public static class Options extends JavaScriptObject {
     public static Options create() {
       return JavaScriptObject.createObject().cast();
