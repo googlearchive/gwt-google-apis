@@ -19,11 +19,11 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.visualization.client.DataTable;
 
 /**
- * Assigns colors to the foreground or background of a numeric cell, 
- * depending on the cell value.
+ * Assigns colors to the foreground or background of a numeric cell, depending
+ * on the cell value.
  * 
- * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#colorformatter"
- * > ColorFormat Reference. </a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#colorformatter"> 
+ *       ColorFormat Reference.</a>
  */
 public class ColorFormat extends JavaScriptObject {
   public static native ColorFormat create() /*-{
@@ -32,17 +32,17 @@ public class ColorFormat extends JavaScriptObject {
 
   protected ColorFormat() {
   }
-  
-  public final native void addGradientRange(double from, double to, 
+
+  public final native void addGradientRange(double from, double to,
       String color, String fromBgColor, String toBgColor) /*-{
-  	this.addGradientRange(from, to, color, fromBgColor, toBgColor);
+    this.addGradientRange(from, to, color, fromBgColor, toBgColor);
   }-*/;
-  
-  public final native void addRange(double from, double to, 
-      String color, String bgcolor) /*-{
+
+  public final native void addRange(double from, double to, String color,
+      String bgcolor) /*-{
     this.addRange(from, to, color, bgcolor);
   }-*/;
-  
+
   public final native void format(DataTable data, int columnIndex) /*-{
     this.format(data, columnIndex);
   }-*/;

@@ -21,13 +21,13 @@ import com.google.gwt.visualization.client.DataTable;
 /**
  * Describes how numeric columns should be formatted.
  * 
- * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#numberformatter"
- * > NumberFormat Reference. </a>
+ * @see <a href="http://code.google.com/apis/visualization/documentation/reference.html#numberformatter">
+ *      NumberFormat Reference. </a>
  */
-public class NumberFormat extends JavaScriptObject { 
+public class NumberFormat extends JavaScriptObject {
   /**
    * Options to configure the formatter.
-   */ 
+   */
   public static class Options extends JavaScriptObject {
     public static Options create() {
       return JavaScriptObject.createObject().cast();
@@ -35,7 +35,7 @@ public class NumberFormat extends JavaScriptObject {
 
     protected Options() {
     }
-    
+
     public final native void setDecimalSymbol(String symbol) /*-{
       this.decimalSymbol = symbol;
     }-*/;
@@ -49,25 +49,25 @@ public class NumberFormat extends JavaScriptObject {
     }-*/;
 
     public final native void setNegativeParens(boolean parens) /*-{
-    	this.negativeParens = parens;
+      this.negativeParens = parens;
     }-*/;
 
     public final native void setPrefix(String prefix) /*-{
-    	this.prefix = prefix;
+      this.prefix = prefix;
     }-*/;
 
     public final native void setSuffix(String suffix) /*-{
       this.suffix = suffix;
     }-*/;
   }
-  
+
   public static native NumberFormat create(Options options) /*-{
     return new $wnd.google.visualization.NumberFormat(options);
   }-*/;
 
   protected NumberFormat() {
   }
-  
+
   public final native void format(DataTable data, int columnIndex) /*-{
     this.format(data, columnIndex);
   }-*/;
