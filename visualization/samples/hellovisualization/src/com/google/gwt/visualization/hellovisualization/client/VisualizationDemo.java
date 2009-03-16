@@ -40,17 +40,15 @@ import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.Table;
 import com.google.gwt.visualization.client.visualizations.Table.Options;
 
-
 /**
  * Google Visualization API in GWT demo.
- * 
  */
 class VisualizationDemo implements EntryPoint {
   private final TabPanel tabPanel = new TabPanel();
-  
+
   public void onModuleLoad() {
-    final VerticalPanel vp  = new VerticalPanel();
-    vp.getElement().getStyle().setPropertyPx("margin", 15); 
+    final VerticalPanel vp = new VerticalPanel();
+    vp.getElement().getStyle().setPropertyPx("margin", 15);
     RootPanel.get().add(vp);
     vp.add(new Label("Google Visualization with GWT demo."));
     vp.add(tabPanel);
@@ -64,12 +62,13 @@ class VisualizationDemo implements EntryPoint {
 
   /**
    * Creates a table and a view and shows both next to each other.
+   * 
    * @return a panel with two tables.
    */
   private Widget createDataView() {
     Panel panel = new HorizontalPanel();
     DataTable table = DataTable.create();
-    
+
     /* create a table with 3 columns */
     table.addColumn(ColumnType.NUMBER, "x");
     table.addColumn(ColumnType.NUMBER, "x * x");
@@ -87,7 +86,7 @@ class VisualizationDemo implements EntryPoint {
     Table chart = new Table();
     flowPanel.add(chart);
     chart.draw(table);
-    
+
     flowPanel = new FlowPanel();
     flowPanel.add(new Label("DataView with columns 2 and 1:"));
     /* create a view on this table, with columns 2 and 1 */
@@ -97,8 +96,14 @@ class VisualizationDemo implements EntryPoint {
     flowPanel.add(viewChart);
     panel.add(flowPanel);
     viewChart.draw(view);
-    
+
     return panel;
+  }
+
+  private ArrowFormat createFormatter() {
+    ArrowFormat.Options options = ArrowFormat.Options.create();
+    options.setBase(1.5);
+    return ArrowFormat.create(options);
   }
 
   /**
@@ -124,7 +129,7 @@ class VisualizationDemo implements EntryPoint {
     data.setValue(4, 1, 7);
 
     /* create pie chart */
-    
+
     PieChart.Options options = PieChart.Options.create();
     options.setWidth(400);
     options.setHeight(240);
@@ -195,11 +200,5 @@ class VisualizationDemo implements EntryPoint {
       }
     });
     return panel;
-  }
-
-  private ArrowFormat createFormatter() {
-    ArrowFormat.Options options = ArrowFormat.Options.create();
-    options.setBase(1.5);
-    return ArrowFormat.create(options);
   }
 }
