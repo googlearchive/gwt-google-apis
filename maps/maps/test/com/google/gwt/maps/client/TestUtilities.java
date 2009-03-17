@@ -48,6 +48,10 @@ public class TestUtilities {
   }
 
   private static native String getNodeName(Element elem) /*-{
-     return (elem.nodeName || "").toLowerCase();
+    return (elem.nodeName || "").toLowerCase();
   }-*/;
+
+  private TestUtilities() {
+    // Don't instantiate this class.
+  }
 }

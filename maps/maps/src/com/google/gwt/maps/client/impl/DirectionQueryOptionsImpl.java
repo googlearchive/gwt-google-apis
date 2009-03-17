@@ -23,8 +23,8 @@ import com.google.gwt.maps.jsio.client.FieldName;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 
 /**
- * Wraps the GDirectionQueryOptions object in the Maps API using JSIO.
- * It has no constructor, but is instantiated as an object literal.
+ * Wraps the GDirectionQueryOptions object in the Maps API using JSIO. It has no
+ * constructor, but is instantiated as an object literal.
  */
 @BeanProperties
 public interface DirectionQueryOptionsImpl extends JSFlyweightWrapper {
@@ -34,16 +34,19 @@ public interface DirectionQueryOptionsImpl extends JSFlyweightWrapper {
   @Constructor("Object")
   JavaScriptObject construct();
 
+  @FieldName("avoidHighways")
+  void setAvoidHighways(JavaScriptObject jsoPeer, boolean avoid);
+
   void setLocale(JavaScriptObject jsoPeer, String locale);
 
-  void setPreserveViewport(JavaScriptObject jsoPeer,
-      boolean preserveViewport);
+  void setPreserveViewport(JavaScriptObject jsoPeer, boolean preserveViewport);
 
   @FieldName("getPolyline")
-  void setRetrievePolyline(JavaScriptObject jsoPeer,
-      boolean retrievePolyline);
+  void setRetrievePolyline(JavaScriptObject jsoPeer, boolean retrievePolyline);
 
   @FieldName("getSteps")
   void setRetrieveSteps(JavaScriptObject jsoPeer, boolean retrieveSteps);
 
+  @FieldName("travelMode")
+  void setTravelMode(JavaScriptObject jsoPeer, int travelMode);
 }
