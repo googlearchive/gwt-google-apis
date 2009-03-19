@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client;
+package com.google.gwt.language.client.translation;
 
 /**
  * All languages. In sync with google.language.Languaes enum.

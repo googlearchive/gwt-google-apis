@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client;
+package com.google.gwt.language.client.translation;
 
 /**
  * Wrappers for all translation API.
@@ -30,7 +30,7 @@ public class TranslationApi {
    */
   public static native void detect(String text, LangDetCallback callback) /*-{
     $wnd.google.language.detect(text, function(result) {
-      callback.@com.google.gwt.language.client.LangDetCallback::onCallbackWrapper(Lcom/google/gwt/language/client/LangDetResult;)(result);
+      callback.@com.google.gwt.language.client.translation.LangDetCallback::onCallbackWrapper(Lcom/google/gwt/language/client/translation/LangDetResult;)(result);
     });
   }-*/;
 
@@ -122,7 +122,7 @@ public class TranslationApi {
    */
   private static native void translate(String text, String src, String dest, TranslationCallback callback) /*-{
     $wnd.google.language.translate(text, src, dest, function(result) {
-      callback.@com.google.gwt.language.client.TranslationCallback::onCallbackWrapper(Lcom/google/gwt/language/client/TranslationResult;)(result);
+      callback.@com.google.gwt.language.client.translation.TranslationCallback::onCallbackWrapper(Lcom/google/gwt/language/client/translation/TranslationResult;)(result);
     });
   }-*/;
 
@@ -136,7 +136,7 @@ public class TranslationApi {
    */
   private static native void translateWithOption(Option option, String src, String dest, TranslationCallback callback) /*-{
     $wnd.google.language.translate(option, src, dest, function(result) {
-      callback.@com.google.gwt.language.client.TranslationCallback::onCallbackWrapper(Lcom/google/gwt/language/client/TranslationResult;)(result);
+      callback.@com.google.gwt.language.client.translation.TranslationCallback::onCallbackWrapper(Lcom/google/gwt/language/client/translation/TranslationResult;)(result);
     });
   }-*/;
 

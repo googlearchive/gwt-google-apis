@@ -13,32 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client;
-
-import com.google.gwt.core.client.JavaScriptObject;
+package com.google.gwt.language.client.translation;
 
 /**
- * Wrapper for javascript error object that contains details of errors.
+ * Different possible font rendering status values.
  */
-public class Error extends JavaScriptObject {
-
-  protected Error() { }
-
-  /**
-   * A HTTP-style error code
-   *
-   * @return error code as string
-   */
-  public final native String getCode() /*-{
-    return this.code;
-  }-*/;
-
-  /**
-   * A human readable string description of the error.
-   *
-   * @return error message as string
-   */
-  public final native String getMessage() /*-{
-    return this.message;
-  }-*/;
+public enum FontRenderingStatus {
+  UNSUPPORTED,
+  SUPPORTED,
+  UNKNOWN;
 }

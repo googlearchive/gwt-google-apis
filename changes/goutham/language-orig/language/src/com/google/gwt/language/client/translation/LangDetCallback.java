@@ -13,32 +13,32 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client;
+package com.google.gwt.language.client.translation;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 
 /**
- * Callback for translate api. The onCallback() method must be overridden
+ * Callback for language detection api. The onCallback() method must be overridden
  * by clients.
  */
-public abstract class TranslationCallback {
+public abstract class LangDetCallback {
 
   /**
    * This must be overridden by the client to deal with asynchronous feedback
-   * containing translation results.
+   * containing language detection results.
    *
-   * @param result the result of a translation request.
+   * @param result the result of a language detection request.
    */
-  protected abstract void onCallback(TranslationResult result);
+  public abstract void onCallback(LangDetResult result);
 
   /**
    * This wraps onCallback method and provides a framework for catching
    * exceptions in callbacks.
    *
-   * @param result the result of a translation request.
+   * @param result the result of a language detection request.
    */
-  public final void onCallbackWrapper(TranslationResult result) {
+  public final void onCallbackWrapper(LangDetResult result) {
     UncaughtExceptionHandler exceptionHandler = GWT.getUncaughtExceptionHandler();
     if (exceptionHandler != null) {
       try {

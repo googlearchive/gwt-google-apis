@@ -13,27 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client;
+package com.google.gwt.language.client.translation;
+
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Content type of the text to be translated.
+ * Wrapper for translation API translate-text results object.
  */
-public enum ContentType {
-  TEXT("text"),
-  HTML("html");
+public class TranslationResult extends JavaScriptObject {
 
-  private String value;
+  protected TranslationResult() { }
 
-  private ContentType(String value) {
-    this.value = value;
-  }
+  public final native Error getError() /*-{
+    return this.error;
+  }-*/;
 
-  /**
-   * Get the text value associated with enum member.
-   *
-   * @return string containing enum value.
-   */
-  public String getValue() {
-    return this.value;
-  }
+  public final native String getTranslatedText() /*-{
+    return this.translation;
+  }-*/;
 }
