@@ -80,7 +80,7 @@ public final class Desktop extends JavaScriptObject {
    */
   public native void openFiles(OpenFilesHandler handler) /*-{
     this.openFiles(function(files) {
-      @com.google.gwt.gears.client.desktop.Desktop::fireFilesOpened(Lcom/google/gwt/gears/client/desktop/OpenFilesHandler;com/google/gwt/core/client/JsArray;)(handler, files);
+      @com.google.gwt.gears.client.desktop.Desktop::fireFilesOpened(Lcom/google/gwt/gears/client/desktop/OpenFilesHandler;Lcom/google/gwt/core/client/JsArray;)(handler, files);
     });
   }-*/;
 
