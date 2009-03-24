@@ -267,10 +267,10 @@ public final class HttpRequest extends JavaScriptObject {
     this.onreadystatechange = function() {
       if (request.readyState == 4) {
         @com.google.gwt.gears.client.httprequest.HttpRequest::fireRequestComplete(Lcom/google/gwt/gears/client/httprequest/RequestCallback;Lcom/google/gwt/gears/client/httprequest/HttpRequest;)(handler, request);
+        request.onreadystatechange = null;
+        request.onprogress = null;
+        request.upload.onprogress = null;
       }
-      request.onreadystatechange = null;
-      request.onprogress = null;
-      request.upload.onprogress = null;
     };
   }-*/;
 
