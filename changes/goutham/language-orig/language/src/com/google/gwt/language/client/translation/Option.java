@@ -47,9 +47,10 @@ public final class Option extends JavaScriptObject {
    * @return Option object
    */
   private static native Option newInstance(String text, String type) /*-{
-    this.text = text;
-    this.type = type;
-    return this;
+    var option = new Object();
+    option.text = text;
+    option.type = type;
+    return option;
   }-*/;
 
   /**
