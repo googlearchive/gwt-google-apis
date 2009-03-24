@@ -17,6 +17,7 @@ package com.google.gwt.gears.client.desktop;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.gears.client.desktop.OpenFilesHandler.OpenFilesEvent;
 
@@ -32,9 +33,14 @@ public final class Desktop extends JavaScriptObject {
 
   // Called from JSNI
   @SuppressWarnings("unused")
-  private static void fireFilesOpened(OpenFilesHandler handler, File[] files) {
+  private static void fireFilesOpened(OpenFilesHandler handler,
+      JsArray<File> fileArray) {
     if (handler == null) {
       return;
+    }
+    File[] files = new File[fileArray.length()];
+    for (int i = 0; i < files.length; i++) {
+      files[i] = fileArray.get(i);
     }
     OpenFilesEvent event = new OpenFilesEvent(files);
     UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
@@ -74,7 +80,7 @@ public final class Desktop extends JavaScriptObject {
    */
   public native void openFiles(OpenFilesHandler handler) /*-{
     this.openFiles(function(files) {
-      @com.google.gwt.gears.client.desktop.Desktop::fireFilesOpened(Lcom/google/gwt/gears/client/desktop/OpenFilesHandler;[Lcom/google/gwt/gears/client/desktop/File;)(handler, files);
+      @com.google.gwt.gears.client.desktop.Desktop::fireFilesOpened(Lcom/google/gwt/gears/client/desktop/OpenFilesHandler;Lcom/google/gwt/core/client/JsArray;)(handler, files);
     });
   }-*/;
 
@@ -133,7 +139,7 @@ public final class Desktop extends JavaScriptObject {
   public native void openFiles(OpenFilesHandler handler,
       OpenFilesOptions options) /*-{
     this.openFiles(function(files) {
-      @com.google.gwt.gears.client.desktop.Desktop::fireFilesOpened(Lcom/google/gwt/gears/client/desktop/OpenFilesHandler;[Lcom/google/gwt/gears/client/desktop/File;)(handler, files);
+      @com.google.gwt.gears.client.desktop.Desktop::fireFilesOpened(Lcom/google/gwt/gears/client/desktop/OpenFilesHandler;Lcom/google/gwt/core/client/JsArray;)(handler, files);
     }, options);
   }-*/;
 
