@@ -50,11 +50,11 @@ public class CommonChartOptions extends CommonOptions {
     this.reverseAxis = reverseAxis;
   }-*/;
 
-  public final native void setTitleX(int x) /*-{
-    this.titleX = x;
+  public final native void setTitleX(String title) /*-{
+    this.titleX = title;
   }-*/;
 
-  public final native void setTitleY(int y) /*-{
-    this.titleY = y;
+  public final native void setTitleY(String title) /*-{
+    this.titleY = title;
   }-*/;
 }

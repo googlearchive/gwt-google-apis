@@ -26,14 +26,15 @@ import com.google.gwt.visualization.client.visualizations.GeoMap.Options;
  */
 public class GeoDemo implements LeftTabPanel.WidgetProvider {
   public Widget getWidget() {
-    Options options = Options.create();
+    final Options options = Options.create();
     options.setDataMode(GeoMap.DataMode.REGIONS);
     options.setHeight(300);
     options.setWidth(450);
     options.setShowLegend(false);
+    options.setColors(0xFF8747, 0xFFB581, 0xc06000);
     options.setRegion("world");
 
-    DataTable dataTable = DataTable.create();      
+    final DataTable dataTable = DataTable.create();      
     dataTable.addRows(7);
     dataTable.addColumn(ColumnType.STRING, "ADDRESS", "address");
     dataTable.setValue(0, 0, "Israel");
@@ -44,7 +45,7 @@ public class GeoDemo implements LeftTabPanel.WidgetProvider {
     dataTable.setValue(5, 0, "France");
     dataTable.setValue(6, 0, "RU");
     
-    GeoMap geo = new GeoMap(dataTable, options);
+    final GeoMap geo = new GeoMap(dataTable, options);
     return geo;
   }
 }
