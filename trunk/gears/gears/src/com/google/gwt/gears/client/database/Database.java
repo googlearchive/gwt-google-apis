@@ -55,8 +55,8 @@ public final class Database extends JavaScriptObject {
    * Substitute zero or more bind parameters from <code>args</code> into
    * <code>sqlStatement</code> and execute the resulting SQL statement. There
    * must be exactly as many items in <code>args</code> as there are ? place
-   * holders in <code>sqlStatement</code>. <code>args</code> can be omitted
-   * if there are no place holders. The results of executing the statement are
+   * holders in <code>sqlStatement</code>. <code>args</code> can be omitted if
+   * there are no place holders. The results of executing the statement are
    * returned in a ResultSet.
    * 
    * Note that if multiple processes (including Workers) attempt to write to the
@@ -100,8 +100,8 @@ public final class Database extends JavaScriptObject {
    * WHERE 1 instead, though be aware that this is slower than an unconstrained
    * delete.
    * 
-   * @return the number of database rows impacted by the last INSERT, UPDATE or *
-   *         DELETE statement on this Database instance
+   * @return the number of database rows impacted by the last INSERT, UPDATE or
+   *         * DELETE statement on this Database instance
    */
   public native int getRowsAffected() /*-{
     return this.rowsAffected;
@@ -115,8 +115,8 @@ public final class Database extends JavaScriptObject {
   }-*/;
 
   /**
-   * Opens a database with the specified <code>name</code>. Note that this
-   * name is local to the application's origin.
+   * Opens a database with the specified <code>name</code>. Note that this name
+   * is local to the application's origin.
    * 
    * @param name name of the database
    */
@@ -124,11 +124,27 @@ public final class Database extends JavaScriptObject {
     this.open(name);
   }-*/;
 
+  /**
+   * Completely deletes the currently opened database. Closes the database first
+   * if necessary.
+   */
+  public void remove() throws DatabaseException {
+    try {
+      uncheckedRemove();
+    } catch (JavaScriptException ex) {
+      throw new DatabaseException(ex.getDescription(), ex);
+    }
+  }
+
   private native ResultSet execute(String sqlStatement, JavaScriptObject args) /*-{
     return this.execute(sqlStatement, args);
   }-*/;
 
   private native void uncheckedClose() /*-{
     this.close();
+  }-*/;
+
+  private native void uncheckedRemove() /*-{
+    this.remove();
   }-*/;
 }
