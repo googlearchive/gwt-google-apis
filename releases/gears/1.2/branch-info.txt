@@ -8,7 +8,7 @@ Copies:
 Merges:
 /releases/gears/1.2/@1176:1180 was merged (r1182) into trunk/gears
 /releases/gears/1.2/@1180:1253 was merged (r1254) into trunk/gears
-
+/trunk/gears@1253:1296 was merged (r1298) into releases/gears/1.2
 ---> The next merge into trunk will be 1253:????
 
 Changes in this branch (excluding changes to this file itself:
@@ -18,4 +18,7 @@ Changes in this branch (excluding changes to this file itself:
 - Update gears_init.js (r1208)
 - Increase heap size for all samples launch scripts (r1213)
 - Update build to include WorkerPoolDemo in output and UploadDemo in index.html. (r1216)
-
+- Fixes issue 239. Desktop.openFiles() throws cast class exception. (r1290)
+- Fix build break (r1291)
+- Adds the remove() method to the database class (r1294)
+- Fixes issue 242.  RequestCallback failing on Chrome & IE. (r1295)
