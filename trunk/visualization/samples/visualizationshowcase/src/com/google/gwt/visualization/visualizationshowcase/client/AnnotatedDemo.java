@@ -17,9 +17,14 @@ package com.google.gwt.visualization.visualizationshowcase.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
+import com.google.gwt.visualization.client.Properties;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.RangeChangeHandler;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine.Options;
 
@@ -29,7 +34,7 @@ import java.util.Date;
  * Demo for AnnotatedTimeLine visualization.
  */
 public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
-  private Widget widget;
+  private AnnotatedTimeLine widget;
 
   @SuppressWarnings("deprecation")
   public AnnotatedDemo() {
@@ -75,6 +80,18 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(5, 4, 39463);
 
     widget = new AnnotatedTimeLine(data, options, "700px", "240px");
+    
+    addHandler();
+  }
+
+  private void addHandler() {
+    widget.addRangeChangeHandler(new RangeChangeHandler() {
+      @Override
+      public void onRangeChange(RangeChangeEvent event) {
+        Window.alert("The range has changed.\n" + event.getStart() + 
+            "\nFalls mainly on the plains.\n" + event.getEnd());
+      }
+    });
   }
 
   public Widget getWidget() {
