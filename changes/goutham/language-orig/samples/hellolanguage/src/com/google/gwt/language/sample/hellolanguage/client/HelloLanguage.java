@@ -1,4 +1,4 @@
-package com.google.gwt.language.sample.hellotemplate.client;
+package com.google.gwt.language.sample.hellolanguage.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class HelloTemplate implements EntryPoint {
+public class HelloLanguage implements EntryPoint {
 
   /**
    * This is the entry point method.

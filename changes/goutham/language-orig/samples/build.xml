@@ -6,25 +6,25 @@
 	<!-- "build" is the default when subprojects are directly targetted -->
 	<property name="target" value="build" />
 
-	<target name="hellotemplate" description="Build the Template sample">
-		<gwt.ant dir="hellotemplate" />
+	<target name="hellolanguage" description="Build the Language sample">
+		<gwt.ant dir="hellolanguage" />
 	</target>
 
-	<target name="-do" depends="hellotemplate" description="Run all subprojects" />
+	<target name="-do" depends="hellolanguage" description="Run all subprojects" />
 
-	<target name="build" description="Builds Template API Library for GWT Samples">
+	<target name="build" description="Builds Language API Library for GWT Samples">
 		<antcall target="-do">
 			<param name="target" value="build" />
 		</antcall>
 	</target>
 
-	<target name="checkstyle" description="Static analysis of Template API Library for GWT source">
+	<target name="checkstyle" description="Static analysis of Language API Library for GWT source">
 		<antcall target="-do">
 			<param name="target" value="checkstyle" />
 		</antcall>
 	</target>
 
-	<target name="test" depends="build" description="Test Template API Library for GWT">
+	<target name="test" depends="build" description="Test Language API Library for GWT">
 		<antcall target="-do">
 			<param name="target" value="test" />
 		</antcall>

@@ -14,7 +14,7 @@
       <inherits name='com.google.gwt.language.Language' />
 
       <!-- Specify the app entry point class.                         -->
-      <entry-point class='com.google.gwt.language.sample.hellotemplate.client.HelloTemplate'/>
+      <entry-point class='com.google.gwt.language.sample.hellolanguage.client.HelloLanguage'/>
     
       <!-- Specify the application specific style sheet.              -->
       <stylesheet src='HelloTemplate.css' />
