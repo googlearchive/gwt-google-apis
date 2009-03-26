@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Provides access to the dynamic height feature.
+ * TODO(zundel): requires the 'window' feature
  */
 public class DynamicHeightFeature implements GadgetFeature {
   private DynamicHeightFeature() {
@@ -29,9 +30,18 @@ public class DynamicHeightFeature implements GadgetFeature {
    * content to the RootPanel returned by {@link #getContentDiv()}.
    */
   public native void adjustHeight() /*-{
-    $wnd._IG_AdjustIFrameHeight();
+    $wnd.gadgets.window.adjustHeight();
   }-*/;
 
+  /**
+   * Causes the Gadget to be resized.  Make sure you have added your
+   * content to the RootPanel returned by {@link #getContentDiv()}.
+   * @param height the height in pixels to resize to.
+   */
+  public native void adjustHeight(int height) /*-{
+    $wnd.gadgets.window.adjustHeight(height);
+  }-*/;
+  
   /**
    * Use this method to retrieve the RootPanel to attach all gadget content to
    * when using DynamicHeight.

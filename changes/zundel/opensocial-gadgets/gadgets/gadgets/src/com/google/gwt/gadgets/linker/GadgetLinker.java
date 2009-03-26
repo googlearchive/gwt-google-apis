@@ -103,7 +103,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_scriptsLoaded['"
           + scriptUrl
           + "'] = true;\n"
-          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+_IG_GetCachedUrl(base+'"
+          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+gadgets.io.getProxyUrl(base+'"
           + scriptUrl + "') + '\\\"></script>');\n" + "  }\n";
     } else {
       return "  if (!__gwt_scriptsLoaded['"
@@ -112,7 +112,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_scriptsLoaded['"
           + scriptUrl
           + "'] = true;\n"
-          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+_IG_GetCachedUrl('"
+          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+gadgets.io.getProxyUrl('"
           + scriptUrl + "') + '\\\"></script>');\n" + "  }\n";
     }
   }
@@ -139,7 +139,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_stylesLoaded['"
           + stylesheetUrl
           + "'] = true;\n"
-          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+_IG_GetCachedUrl(base+'"
+          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+gadgets.io.getProxyUrl(base+'"
           + stylesheetUrl + "') + '\\\">');\n" + "  }\n";
     } else {
       return "  if (!__gwt_stylesLoaded['"
@@ -148,7 +148,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_stylesLoaded['"
           + stylesheetUrl
           + "'] = true;\n"
-          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+_IG_GetCachedUrl('"
+          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+gadgets.io.getProxyUrl('"
           + stylesheetUrl + "') + '\\\">');\n" + "  }\n";
     }
   }

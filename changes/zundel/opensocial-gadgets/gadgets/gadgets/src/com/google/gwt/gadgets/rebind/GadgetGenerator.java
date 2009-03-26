@@ -300,8 +300,6 @@ public class GadgetGenerator extends Generator {
     if (prefs != null) {
       GadgetUtils.writeAnnotationToElement(logger, prefs, modulePrefs,
           "requirements");
-      GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
-          prefs.requirements());
     }
 
     // Write out the UserPref tags
@@ -332,8 +330,6 @@ public class GadgetGenerator extends Generator {
             Element require = (Element) modulePrefs.appendChild(d.createElement("Require"));
             require.setAttribute("feature", feature);
           }
-          GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
-              name.requirements());
         }
       }
       contentToInject += getInjectedContent(logger, currentClass);

@@ -99,7 +99,7 @@ public class IntrinsicFeature implements GadgetFeature {
    * Returns a proxy URL that can be used to access a given URL.
    */
   public native String getCachedUrl(String url) /*-{
-     return $wnd._IG_GetCachedUrl(url);
+     return $wnd.gadgets.io.getProxyUrl(url);
    }-*/;
 
   /**
@@ -107,23 +107,27 @@ public class IntrinsicFeature implements GadgetFeature {
    * refresh interval specified in seconds.
    */
   public native String getCachedUrl(String url, int refreshIntervalSeconds) /*-{
-     return $wnd._IG_GetCachedUrl(url, refreshInterval);
+     return $wnd.gadgets.io.getProxyUrl(url, { "REFRESH_INTERVAL":refreshInterval });
    }-*/;
 
   /**
    * Returns a proxy URL that can be used to access the given image's URL.
+   * @deprecated use getCachedUrl()
    */
-  public native String getImageUrl(String url) /*-{
-     return $wnd._IG_GetImageUrl(url);
-   }-*/;
+  @Deprecated
+  public String getImageUrl(String url) {
+     return getCachedUrl(url);
+   }
 
   /**
    * Returns a proxy URL that can be used to access a given image's URL with a
    * specified refresh interval specified in seconds.
+   * @deprecated use getCachedUrl()
    */
-  public native String getImageUrl(String url, int refreshIntervalSeconds) /*-{
-     return $wnd._IG_GetImageUrl(url, refreshInterval);
-   }-*/;
+   @Deprecated
+  public String getImageUrl(String url, int refreshIntervalSeconds) {
+     return getCachedUrl(url, refreshIntervalSeconds);
+   }
 
   /**
    * Native function that will trigger the content fetching.

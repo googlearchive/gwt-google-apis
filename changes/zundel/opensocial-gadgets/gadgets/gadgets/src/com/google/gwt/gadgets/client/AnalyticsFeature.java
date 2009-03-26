@@ -15,8 +15,12 @@
  */
 package com.google.gwt.gadgets.client;
 
+import com.google.gwt.core.client.GWT;
+
 /**
  * Provides access to the Google Analytics feature.
+ *   spec should have: <Require feature="com.google.gadgets.analytics" /> 
+ * TODO(zundel): see http://code.google.com/apis/analytics/docs/gadgetTracking.html
  */
 public class AnalyticsFeature implements GadgetFeature {
   private AnalyticsFeature() {
@@ -28,7 +32,8 @@ public class AnalyticsFeature implements GadgetFeature {
    * @param id the Google Analytics account ID
    * @param path the virtual page view path that should be recorded
    */
-  public native void recordPageView(String id, String path) /*-{
-    $wnd._IG_Analytics(id, path);
-  }-*/;
+  public void recordPageView(String id, String path) {
+    // $wnd._IG_Analytics(id, path);
+    GWT.log("Analytics not yet supported.", null);
+  }
 }
