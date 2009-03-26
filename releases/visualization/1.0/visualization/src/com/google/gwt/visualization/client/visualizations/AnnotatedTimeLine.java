@@ -250,7 +250,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   }
 
   public final void addRangeChangeHandler(RangeChangeHandler handler) {
-    Handler.addHandler(this, "rangeChange", handler);
+    Handler.addHandler(this, "rangechange", handler);
   }
 
   @Override

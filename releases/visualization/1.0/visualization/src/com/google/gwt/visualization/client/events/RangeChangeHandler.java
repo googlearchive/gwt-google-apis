@@ -28,20 +28,20 @@ public abstract class RangeChangeHandler extends Handler {
    * visualization.
    */
   public class RangeChangeEvent {
-    private Date from;
-    private Date to;
+    private Date start;
+    private Date end;
 
-    public RangeChangeEvent(Date from, Date to) {
-      this.from = from;
-      this.to = to;
+    public RangeChangeEvent(Date start, Date end) {
+      this.start = start;
+      this.end = end;
     }
 
-    public Date getFrom() {
-      return from;
+    public Date getStart() {
+      return start;
     }
 
-    public Date getTo() {
-      return to;
+    public Date getEnd() {
+      return end;
     }
   }
 
@@ -49,8 +49,8 @@ public abstract class RangeChangeHandler extends Handler {
 
   @Override
   protected void onEvent(Properties properties) {
-    Date from = properties.getDate("from");
-    Date to = properties.getDate("to");
-    onRangeChange(new RangeChangeEvent(from, to));
+    Date start = properties.getDate("start");
+    Date end = properties.getDate("end");
+    onRangeChange(new RangeChangeEvent(start, end));
   }
 }
