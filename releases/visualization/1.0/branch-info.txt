@@ -15,7 +15,8 @@ Merges:
 /releases/maps/1.0@1185:1189 was merged (r1190) into /trunk/visualization
 /releases/maps/1.0@1189:1251 was merged (r1252) into /trunk/visualization
 /trunk/visualization@1251:1294 was merged (r1295) into /releases/visualization/1.0
--> The next merge into trunk will be r1294:????
+/trunk/visualization@1294:1304 was merged (r1305) into /releases/visualization/1.0
+-> The next merge into trunk will be r1304:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r1069)
@@ -49,3 +50,4 @@ Changes in this branch (excluding changes to this file itself):
  - Added formatters (r1276, 1277, 1278)
  - Removed showcase from classpath (r1278)
  - Fixes checkstyle errors (r1283)
+ - Fixes AnnotatedTimeLine rangechange event. (r1300)
