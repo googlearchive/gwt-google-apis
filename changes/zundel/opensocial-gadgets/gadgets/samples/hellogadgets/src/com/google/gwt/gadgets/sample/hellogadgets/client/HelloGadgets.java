@@ -34,8 +34,6 @@ import com.google.gwt.user.client.ui.Widget;
     directory_title = "HelloGadgets - Google APIs for GWT", //
     author = "Eric Ayers", //
     author_email = "zundel@google.com", //
-    author_affiliation = "Google Inc.", //
-    height = 210, //
     thumbnail = "gwt-hello-gadgets-igoogle-thumb.png", //
     screenshot = "gwt-hello-gadgets-igoogle.png")
 public class HelloGadgets extends Gadget<HelloPreferences> {

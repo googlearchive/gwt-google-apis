@@ -16,7 +16,6 @@
 package com.google.gwt.gadgets.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.gadgets.client.GadgetFeature.MayRequire;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
@@ -63,14 +62,6 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * statement about yourself (try to keep to ~500 characters).
      */
     String author_aboutme() default "";
-
-    /**
-     * For the <a href="http://google.com/ig/authors">authors</a> page, an
-     * optional string such as "Google" that indicates the author's affiliation.
-     * This attribute is required for gadgets that are included in the content
-     * directory.
-     */
-    String author_affiliation() default "";
 
     /**
      * Optional string that provides the gadget author's email address. You can
@@ -125,18 +116,6 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * simply "Friends".
      */
     String directory_title() default "";
-
-    /**
-     * Optional positive integer that specifies the height of the area in which
-     * the gadget runs. The default height is 200.
-     */
-    int height() default 200;
-
-    /**
-     * A list of gadget features that may be required. (to create
-     * &lt;MayRequire&gt; tags in the gadget spec file.)
-     */
-    MayRequire[] requirements() default {};
 
     /**
      * Optional boolean that specifies whether the aspect ratio (height-to-width

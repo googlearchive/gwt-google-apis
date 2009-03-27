@@ -266,7 +266,7 @@ function __MODULE_FUNC__() {
 
 	// --------------- GADGET ONLOAD HOOK ---------------
 
-	gadget.util.registerOnLoadHandler( function() {
+	gadgets.util.registerOnLoadHandler( function() {
 		if (!bodyDone) {
 			bodyDone = true;
 			// __MODULE_STYLES_BEGIN__

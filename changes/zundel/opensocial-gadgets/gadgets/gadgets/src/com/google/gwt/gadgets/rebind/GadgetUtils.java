@@ -22,10 +22,8 @@ import com.google.gwt.core.ext.typeinfo.JGenericType;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.gadgets.client.Gadget;
-import com.google.gwt.gadgets.client.GadgetFeature.MayRequire;
 import com.google.gwt.gadgets.client.impl.PreferenceGeneratorName;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.lang.annotation.Annotation;
@@ -114,8 +112,9 @@ class GadgetUtils {
   }
 
   /**
-   * Add the key-value pairs of an Annotation to an Element. Enumerated
-   * properties will be ignored. Specific properties can be excluded by name.
+   * Add the key-value pairs of an Annotation to an Element using reflection to
+   * pull all method names to use as attribute names. Enumerated properties will
+   * be ignored. Specific properties can be excluded by name.
    */
   static void writeAnnotationToElement(TreeLogger logger, Annotation a,
       Element elt, String... excludeNames) throws UnableToCompleteException {
@@ -137,20 +136,6 @@ class GadgetUtils {
       } catch (InvocationTargetException e) {
         logger.log(TreeLogger.ERROR, "Could not decode annotation", e);
         throw new UnableToCompleteException();
-      }
-    }
-  }
-
-  static void writeRequirementsToElement(TreeLogger logger, Document d,
-      Element parent, MayRequire[] requirements)
-      throws UnableToCompleteException {
-    for (MayRequire req : requirements) {
-      Element mayRequire = (Element) parent.appendChild(d.createElement("MayRequire"));
-      writeAnnotationToElement(logger, req, mayRequire, "info");
-
-      String cdata = req.info();
-      if (cdata != null && cdata.length() > 0) {
-        mayRequire.appendChild(d.createCDATASection(cdata));
       }
     }
   }
