@@ -17,7 +17,9 @@ package com.google.gwt.gadgets.sample.basicgadgetads.client;
 
 import com.google.gwt.gadgets.client.AdsFeature;
 import com.google.gwt.gadgets.client.AdsUserPreferences;
+import com.google.gwt.gadgets.client.DynamicHeightFeature;
 import com.google.gwt.gadgets.client.GadgetAds;
+import com.google.gwt.gadgets.client.NeedsDynamicHeight;
 import com.google.gwt.gadgets.client.Gadget.InjectContent;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.ui.GadgetImage;
@@ -37,22 +39,25 @@ import com.google.gwt.user.client.ui.Widget;
 title = "Basic Gadget Ads using GWT!", //
 author = "Nicolas Garnier", //
 author_email = "nivco+gadgetads@google.com", //
-author_affiliation = "Google Inc.", //
 // The Gadget Ad size must be defined and must match a supported Google
-// AdSense Ad Format.
-height = GadgetAds.SupportedGoogleAdSenseAdFormats.SKYSCRAPER_HEIGHT, //
+// AdSense Ad Format. Height is set in the dynamic height feature.
 width = GadgetAds.SupportedGoogleAdSenseAdFormats.SKYSCRAPER_WIDTH)
 // Adding a dummy call to an Ad interaction JavaScript function in the Gadget
 // Spec because the Gadget Ads Validator doesn't inspect the external
 // JavaScript files.
-@InjectContent(files = { "dummyAdsInteraction.xml" })
-public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> {
+@InjectContent(files = {"dummyAdsInteraction.xml"})
+public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> implements
+    NeedsDynamicHeight {
 
   // The AdsFeature is required in Gadget Ads
   private AdsFeature adsFeature;
 
   public void initializeFeature(AdsFeature adsFeature) {
     this.adsFeature = adsFeature;
+  }
+
+  public void initializeFeature(DynamicHeightFeature feature) {
+    feature.adjustHeight(GadgetAds.SupportedGoogleAdSenseAdFormats.SKYSCRAPER_HEIGHT);
   }
 
   @Override
@@ -69,14 +74,16 @@ public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> {
     // Using GadgetImage instead of Image will cache your images on the
     // Gadget's Container server. It is a Gadget Ads requirement that all
     // embedded assets must be cached.
-    vp.add(new GadgetImage("http://code.google.com/webtoolkit/images/gwt-logo.png"));
+    vp.add(new GadgetImage(
+        "http://code.google.com/webtoolkit/images/gwt-logo.png"));
 
     // Adding a waiting message to the RootPanel
     Label disclaimer = new Label("Use GWT for your Gadget Ads!");
     vp.add(disclaimer);
 
     // Another Logo
-    vp.add(new GadgetImage("http://code.google.com/webtoolkit/images/gwt-logo.png"));
+    vp.add(new GadgetImage(
+        "http://code.google.com/webtoolkit/images/gwt-logo.png"));
 
     // Adding the button to go to the GWT website
     Button button = new Button("Visit the GWT Website NOW!!");
@@ -94,7 +101,8 @@ public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> {
     });
 
     // Another Logo
-    vp.add(new GadgetImage("http://code.google.com/webtoolkit/images/gwt-logo.png"));
+    vp.add(new GadgetImage(
+        "http://code.google.com/webtoolkit/images/gwt-logo.png"));
 
     // Some styling
     vp.setHeight("100%");
