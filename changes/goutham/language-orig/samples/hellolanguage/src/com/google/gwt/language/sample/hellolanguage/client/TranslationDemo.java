@@ -18,7 +18,7 @@ package com.google.gwt.language.sample.hellolanguage.client;
 import com.google.gwt.language.client.translation.LangDetCallback;
 import com.google.gwt.language.client.translation.LangDetResult;
 import com.google.gwt.language.client.translation.Language;
-import com.google.gwt.language.client.translation.TranslationApi;
+import com.google.gwt.language.client.translation.Translation;
 import com.google.gwt.language.client.translation.TranslationCallback;
 import com.google.gwt.language.client.translation.TranslationResult;
 import com.google.gwt.user.client.ui.Button;
@@ -87,7 +87,7 @@ public class TranslationDemo {
         waiting.setText("Waiting for detection results...");
 
         // Translation API call to detect language of text
-        TranslationApi.detect(translationArea.getText(), new LangDetCallback() {
+        Translation.detect(translationArea.getText(), new LangDetCallback() {
           @Override
           protected void onCallback(LangDetResult result) {
             detectedLanguage.setText(result.getLanguage());
@@ -147,7 +147,7 @@ public class TranslationDemo {
         waiting.setText("Waiting for translation results...");
 
         // Translation API call to translate text
-        TranslationApi.translate(translationArea.getText(), src, dest,
+        Translation.translate(translationArea.getText(), src, dest,
             new TranslationCallback() {
 
           @Override

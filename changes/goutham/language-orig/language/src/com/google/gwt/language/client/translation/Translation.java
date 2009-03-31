@@ -18,7 +18,7 @@ package com.google.gwt.language.client.translation;
 /**
  * Wrappers for all translation API.
  */
-public class TranslationApi {
+public class Translation {
 
   /**
    * A global method that will return the language code that describes the
@@ -143,5 +143,5 @@ public class TranslationApi {
   /**
    * This class contains only static members and not meant to be instantiated.
    */
-  private TranslationApi() { }
+  private Translation() { }
 }
