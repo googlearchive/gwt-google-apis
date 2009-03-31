@@ -17,14 +17,21 @@
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>HelloAjaxLoader</title>
+    <title>HelloLanguage</title>
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
     <!-- If you add any GWT meta tags, they must   -->
     <!-- be added before this line.                -->
     <!--                                           -->
-    <script type="text/javascript" language="javascript" src="com.google.gwt.ajaxloader.sample.helloajaxloader.HelloAjaxLoader.nocache.js"></script>
+    <script type="text/javascript" language="javascript" src="com.google.gwt.language.sample.hellolanguage.HelloLanguage.nocache.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("language", "1");
+      google.load("elements", "1", {
+          packages: "transliteration"
+      });
+    </script>
   </head>
 
   <!--                                           -->

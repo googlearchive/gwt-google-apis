@@ -30,7 +30,7 @@ public abstract class LangDetCallback {
    *
    * @param result the result of a language detection request.
    */
-  public abstract void onCallback(LangDetResult result);
+  protected abstract void onCallback(LangDetResult result);
 
   /**
    * This wraps onCallback method and provides a framework for catching

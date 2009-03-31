@@ -17,6 +17,6 @@
       <entry-point class='com.google.gwt.language.sample.hellolanguage.client.HelloLanguage'/>
     
       <!-- Specify the application specific style sheet.              -->
-      <stylesheet src='HelloTemplate.css' />
+      <stylesheet src='HelloLanguage.css' />
 	
 </module>

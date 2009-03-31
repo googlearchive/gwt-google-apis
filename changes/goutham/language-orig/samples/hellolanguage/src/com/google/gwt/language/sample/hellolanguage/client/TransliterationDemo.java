@@ -15,19 +15,9 @@
  */
 package com.google.gwt.language.sample.hellolanguage.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * Transliteration demo
  */
-public class HelloLanguage implements EntryPoint {
+public class TransliterationDemo {
 
-  /**
-   * This is the entry point method.
-   */
-  public void onModuleLoad() {
-    TranslationDemo translationDemo = new TranslationDemo();
-    RootPanel.get().add(translationDemo.getDemoPanel());
-  }
 }
