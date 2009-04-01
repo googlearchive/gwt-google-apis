@@ -41,4 +41,19 @@ public enum LanguageCode {
   public String getLangCode() {
     return langCode;
   }
+
+  /**
+   * Returns the LanguageCode corresponding to given 2-letter language code.
+   *
+   * @param lang language code
+   * @return LanguageCode enum object
+   */
+  public static LanguageCode getLanguage(String lang) {
+    for (LanguageCode l : LanguageCode.values()) {
+      if (l.getLangCode().equals(lang)) {
+        return l;
+      }
+    }
+    return null;
+  }
 }

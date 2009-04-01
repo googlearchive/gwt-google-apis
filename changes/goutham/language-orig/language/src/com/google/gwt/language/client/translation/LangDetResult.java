@@ -16,6 +16,7 @@
 package com.google.gwt.language.client.translation;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.language.client.Error;
 
 /**
  * Wrapper for translation API Language Detection results object.
