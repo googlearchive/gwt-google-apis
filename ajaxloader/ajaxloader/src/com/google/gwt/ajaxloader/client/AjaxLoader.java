@@ -32,7 +32,7 @@ public class AjaxLoader {
    * An object to pass as the third parameter to load() call.
    */
   public static class AjaxLoaderOptions extends JavaScriptObject {
-    static AjaxLoaderOptions newInstance() {
+    public static AjaxLoaderOptions newInstance() {
       return JavaScriptObject.createObject().cast();
     }
 
@@ -124,14 +124,14 @@ public class AjaxLoader {
     // Initialize the API if it hasn't already been initialized.
     init();
 
-    // Set the onLoad callback into the 
+    // Set the onLoad callback into the
     assert (onLoad != null);
     if (settings == null) {
       settings = AjaxLoaderOptions.newInstance();
     }
     settings.setCallback(onLoad);
     final AjaxLoaderOptions copyOfSettings = settings;
-    
+
     // Define a Runnable that will run the actual load.
     Runnable apiLoad = new Runnable() {
 
