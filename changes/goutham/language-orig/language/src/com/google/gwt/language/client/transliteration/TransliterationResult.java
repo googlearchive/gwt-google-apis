@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,11 +28,12 @@ import java.util.List;
  */
 public class TransliterationResult extends JavaScriptObject {
 
-  protected TransliterationResult() { }
+  protected TransliterationResult() {
+  }
 
   /**
    * Present if there was an error loading the feed.
-   *
+   * 
    * @return the {@code Error} object.
    */
   public final native Error getError() /*-{
@@ -42,7 +43,7 @@ public class TransliterationResult extends JavaScriptObject {
   /**
    * Gets multiple transliterations of requested words. Each array of string
    * contains transliterations for corresponding word in the request.
-   *
+   * 
    * @return transliterations for words in request
    */
   public final List<List<String>> getTransliterations() {
@@ -63,20 +64,20 @@ public class TransliterationResult extends JavaScriptObject {
 
   /**
    * An array of words that are transliterations for a given word in request.
-   *
+   * 
    * @param jso the JavaScriptObject which contains transliterations
    * @return array of transliterated words
    */
-  private final native JsArrayString getTransliteratedWords(JavaScriptObject jso) /*-{
+  private native JsArrayString getTransliteratedWords(JavaScriptObject jso) /*-{
     return jso.transliteratedWords;
   }-*/;
 
   /**
    * Gets transliterations obtained from server.
-   *
+   * 
    * @return an array of transliterated-word-arrays.
    */
-  private final native JsArray<JavaScriptObject> getTransliterationsInternal() /*-{
+  private native JsArray<JavaScriptObject> getTransliterationsInternal() /*-{
     return this.transliterations;
   }-*/;
 }

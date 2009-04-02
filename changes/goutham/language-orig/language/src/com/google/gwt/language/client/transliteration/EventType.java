@@ -23,23 +23,6 @@ package com.google.gwt.language.client.transliteration;
  */
 public enum EventType {
   /**
-   * Event fired when transliteration is enabled or disabled in the
-   * TransliterationControl in any of the following ways:
-   * <ul>
-   * <li> When the transliteration is enabled or disabled using the shortcut key.
-   * <li> When the transliteration is enabled or disabled using
-   * enableTransliteration, disableTransliteration & toggleTransliteration.
-   * <li> When the transliteration is enabled or disabled by clicking the
-   * transliteration control drawn by showControl.
-   * </ul>
-   * <br>
-   * The event object passed to the listener contains the field
-   * transliterationEnabled which is true if the transliteration is 'on', else
-   * false.
-   */
-  STATE_CHANGED(getNativeEventType("STATE_CHANGED")),
-
-  /**
    * Event fired when the transliteration language pair is changed in the
    * TransliterationControl in any of the following ways:
    * <ul>
@@ -63,16 +46,33 @@ public enum EventType {
    * Event fired when the server could not be successfully contacted for doing a
    * transliteration.
    */
-  SERVER_UNREACHABLE(getNativeEventType("SERVER_UNREACHABLE"));
+  SERVER_UNREACHABLE(getNativeEventType("SERVER_UNREACHABLE")),
 
-  String eventType;
-  private EventType(String eventType) {
-    this.eventType = eventType;
-  }
+  /**
+   * Event fired when transliteration is enabled or disabled in the
+   * TransliterationControl in any of the following ways:
+   * <ul>
+   * <li> When the transliteration is enabled or disabled using the shortcut key.
+   * <li> When the transliteration is enabled or disabled using
+   * enableTransliteration, disableTransliteration & toggleTransliteration.
+   * <li> When the transliteration is enabled or disabled by clicking the
+   * transliteration control drawn by showControl.
+   * </ul>
+   * <br>
+   * The event object passed to the listener contains the field
+   * transliterationEnabled which is true if the transliteration is 'on', else
+   * false.
+   */
+  STATE_CHANGED(getNativeEventType("STATE_CHANGED"));
 
   private static native String getNativeEventType(String eventType) /*-{
     return $wnd.google.elements.transliteration.TransliterationControl.EventType[eventType];
   }-*/;
+  String eventType;
+
+  private EventType(String eventType) {
+    this.eventType = eventType;
+  }
 
   public String getEventType() {
     return this.eventType;

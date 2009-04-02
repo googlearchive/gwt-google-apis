@@ -32,5 +32,4 @@ public class TransliterationDemo {
   public Panel getDemoPanel() {
     return mainPanel;
   }
-  
 }

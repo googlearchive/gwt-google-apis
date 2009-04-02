@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,12 +22,13 @@ import com.google.gwt.language.client.Error;
  * Wrapper for translation API Language Detection results object.
  */
 public class LangDetResult extends JavaScriptObject {
-  protected LangDetResult() { }
+  protected LangDetResult() {
+  }
 
   /**
    * Returns a numeric value between 0-1.0 that represents the confidence level
    * in the language code for the given text.
-   *
+   * 
    * @return confidence value as double.
    */
   public final native double confidence() /*-{
@@ -36,7 +37,7 @@ public class LangDetResult extends JavaScriptObject {
 
   /**
    * Present if there was an error loading the feed.
-   *
+   * 
    * @return the {@code Error} object.
    */
   public final native Error getError() /*-{
@@ -45,7 +46,7 @@ public class LangDetResult extends JavaScriptObject {
 
   /**
    * The language code associated with the given text.
-   *
+   * 
    * @return language code of text as string.
    */
   public final native String getLanguage() /*-{
@@ -55,7 +56,7 @@ public class LangDetResult extends JavaScriptObject {
   /**
    * A boolean representing whether or not the detection interval believes the
    * language code is reliable for the given text.
-   *
+   * 
    * @return true if result is reliable, false otherwise.
    */
   public final native boolean isReliable() /*-{
