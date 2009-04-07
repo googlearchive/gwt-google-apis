@@ -84,7 +84,11 @@ public class Selection extends JavaScriptObject {
    */
   public static final native <E extends Visualization<?>, Selectable> void setSelections(E viz, JsArray<Selection> selections) /*-{
     var jso = viz.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
-    jso.setSelection(selections);
+    if (selections == null) {
+      jso.setSelection([{'row': null, 'column': null}]);
+    } else {
+      jso.setSelection(selections);
+    }
   }-*/;
 
   /**

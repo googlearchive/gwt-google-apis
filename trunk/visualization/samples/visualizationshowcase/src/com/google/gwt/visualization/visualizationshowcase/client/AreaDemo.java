@@ -32,14 +32,23 @@ public class AreaDemo implements LeftTabPanel.WidgetProvider {
     options.setHeight(240);
     options.setTitle("Company Performance");
     options.setWidth(400);
+    options.setShowCategories(true);
+    options.setEnableTooltip(true);
+    options.setMin(0);
+    options.setMax(2000);
     
     DataTable data = Showcase.getCompanyPerformance();
 
     AreaChart viz = new AreaChart(data, options);
     Label status = new Label();
+    Label onMouseOverAndOutStatus = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
+    viz.addReadyHandler(new ReadyDemo(status));
+    viz.addOnMouseOverHandler(new OnMouseOverDemo(onMouseOverAndOutStatus));
+    viz.addOnMouseOutHandler(new OnMouseOutDemo(onMouseOverAndOutStatus));
     result.add(status);
     result.add(viz);
+    result.add(onMouseOverAndOutStatus);
     return result;
   }
 }

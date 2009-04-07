@@ -37,11 +37,17 @@ public class PieDemo implements LeftTabPanel.WidgetProvider {
     options.setHeight(240);
     options.set3D(true);
     options.setTitle("My Daily Activities");
+    options.setEnableTooltip(true);
 
     PieChart viz = new PieChart(data, options);
     Label status = new Label();
+    Label onMouseOverAndOutStatus = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
+    viz.addReadyHandler(new ReadyDemo(status));
+    viz.addOnMouseOverHandler(new OnMouseOverDemo(onMouseOverAndOutStatus));
+    viz.addOnMouseOutHandler(new OnMouseOutDemo(onMouseOverAndOutStatus));
     result.add(status);
+    result.add(onMouseOverAndOutStatus);
     result.add(viz);
     return result;
   }

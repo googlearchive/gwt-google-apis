@@ -31,15 +31,23 @@ public class ScatterDemo implements LeftTabPanel.WidgetProvider {
     
     Options options = Options.create();
     options.setHeight(240);
-    options.setTitle("My Daily Activities");
+    options.setTitle("Sugar, salt and calories comparison");
     options.setWidth(400);
-
-    DataTable data = Showcase.getDailyActivities();
+    options.setEnableTooltip(true);
+    options.setMin(0);
+    options.setMax(20);
+    
+    DataTable data = Showcase.getSugarSaltAndCaloriesComparison();
 
     ScatterChart viz = new ScatterChart(data, options);
     Label status = new Label();
+    Label onMouseOverAndOutStatus = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
+    viz.addReadyHandler(new ReadyDemo(status));
+    viz.addOnMouseOverHandler(new OnMouseOverDemo(onMouseOverAndOutStatus));
+    viz.addOnMouseOutHandler(new OnMouseOutDemo(onMouseOverAndOutStatus));
     result.add(status);
+    result.add(onMouseOverAndOutStatus);
     result.add(viz);
     return result;
   }
