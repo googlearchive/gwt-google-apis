@@ -22,7 +22,15 @@
 		<ant dir="visualization" target="${target}" />
 	</target>
 
-	<target name="-do" depends="gadgets, gears, maps, search, visualization" description="Run all subprojects" />
+	<target name="ajaxloader" description="Build AjaxLoader">
+		<ant dir="ajaxloader" target="${target}" />
+	</target>
+
+	<target name="language" description="Build Language">
+		<ant dir="language" target="${target}" />
+	</target>
+
+	<target name="-do" depends="gadgets, gears, maps, search, visualization, ajaxloader, language" description="Run all subprojects" />
 
 	<target name="build" description="Builds all of the APIs that make up the Google API Library for GWT">
 		<antcall target="-do">
