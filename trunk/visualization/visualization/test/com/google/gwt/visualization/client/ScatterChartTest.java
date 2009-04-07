@@ -20,8 +20,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.events.OnMouseOutHandler;
 import com.google.gwt.visualization.client.events.OnMouseOverHandler;
-import com.google.gwt.visualization.client.events.OnMouseOutHandler.OnMouseOutEvent;
-import com.google.gwt.visualization.client.events.OnMouseOverHandler.OnMouseOverEvent;
 import com.google.gwt.visualization.client.visualizations.ScatterChart;
 import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
 
@@ -30,33 +28,13 @@ import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
  */
 public class ScatterChartTest extends VisualizationTest {
 
-  public void testScatterChart() {
-    loadApi(new Runnable() {
-      public void run() {
-        Widget widget;
-        Options options = Options.create();
-        options.setWidth(400);
-        options.setHeight(400);
-        options.setLineSize(2);
-        options.setPointSize(5);
-        widget = new ScatterChart(createCompanyPerformance(), options);
-        RootPanel.get().add(widget);
-      }
-    });
-  }
-
-  @Override
-  protected String getVisualizationPackage() {
-    return ScatterChart.PACKAGE;
-  }
-  
   public void testOnMouseOverAndOut() {
     AjaxLoader.loadVisualizationApi(new Runnable() {
       public void run() {
         ScatterChart chart;
         Options options = Options.create();
         chart = new ScatterChart(createCompanyPerformance(), options);
-        chart.addOnMouseOverHandler (new OnMouseOverHandler() {
+        chart.addOnMouseOverHandler(new OnMouseOverHandler() {
           @Override
           public void onMouseOverEvent(OnMouseOverEvent event) {
             assertNotNull(event);
@@ -79,14 +57,34 @@ public class ScatterChartTest extends VisualizationTest {
       }
     }, ScatterChart.PACKAGE);
   }
+
+  public void testScatterChart() {
+    loadApi(new Runnable() {
+      public void run() {
+        Widget widget;
+        Options options = Options.create();
+        options.setWidth(400);
+        options.setHeight(400);
+        options.setLineSize(2);
+        options.setPointSize(5);
+        widget = new ScatterChart(createCompanyPerformance(), options);
+        RootPanel.get().add(widget);
+      }
+    });
+  }
   
-  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
+  @Override
+  protected String getVisualizationPackage() {
+    return ScatterChart.PACKAGE;
+  }
+  
+  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
       {'row':1, 'column':1});
   }-*/;
 
-  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
       {'row':1, 'column':1});
   }-*/;
 }
