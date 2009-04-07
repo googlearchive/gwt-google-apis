@@ -23,7 +23,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class AjaxLoaderTest extends GWTTestCase {
   // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 10000; // 10 seconds
+  static final int ASYNC_DELAY_MSEC = 20000; // 20 seconds
   
   @Override
   public String getModuleName() {
