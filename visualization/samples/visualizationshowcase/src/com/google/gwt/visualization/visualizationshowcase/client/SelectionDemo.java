@@ -21,7 +21,6 @@ import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
-
 /**
  * Demo for SelectHandler that can be applied to any Selectable visualization.
  */

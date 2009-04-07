@@ -22,6 +22,10 @@ import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.CommonChartOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.OnMouseOutHandler;
+import com.google.gwt.visualization.client.events.OnMouseOverHandler;
+import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -63,6 +67,18 @@ public class BarChart extends Visualization<BarChart.Options> implements
 
   public BarChart(AbstractDataTable data, Options options) {
     super(data, options);
+  }
+
+  public final void addOnMouseOutHandler(OnMouseOutHandler handler) {
+    Handler.addHandler(this, "onmouseout", handler);
+  }
+  
+  public final void addOnMouseOverHandler(OnMouseOverHandler handler) {
+    Handler.addHandler(this, "onmouseover", handler);
+  }
+  
+  public final void addReadyHandler(ReadyHandler handler) {
+    Handler.addHandler(this, "ready", handler);
   }
 
   public final void addSelectHandler(SelectHandler handler) {

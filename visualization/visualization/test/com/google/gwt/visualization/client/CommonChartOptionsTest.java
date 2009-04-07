@@ -40,6 +40,7 @@ public class CommonChartOptionsTest extends VisualizationTest {
         options.setReverseAxis(true);
         options.setTitleX("activity");
         options.setTitleY("hours");
+        options.setShowCategories(true);
         
         Widget widget = new AreaChart(data, options);
         RootPanel.get().add(widget);

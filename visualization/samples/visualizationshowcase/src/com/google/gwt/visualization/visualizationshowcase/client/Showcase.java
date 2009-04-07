@@ -79,9 +79,30 @@ class Showcase implements EntryPoint {
     data.setValue(4, 1, 7);
     return data;
   }
+  
+  static DataTable getSugarSaltAndCaloriesComparison() {
+    DataTable data = DataTable.create();
+    data.addColumn(ColumnType.NUMBER, "Sugar");
+    data.addColumn(ColumnType.NUMBER, "Calories");
+    data.addColumn(ColumnType.NUMBER, "Salt");
+    data.addRows(4);
+    data.setValue(0, 0, 20);
+    data.setValue(0, 1, 11);
+    data.setValue(0, 2, 30);
+    data.setValue(1, 0, 30);
+    data.setValue(1, 1, 10);
+    data.setValue(1, 2, 20);
+    data.setValue(2, 0, 27);
+    data.setValue(2, 1, 2);
+    data.setValue(2, 2, 34);
+    data.setValue(3, 0, 22);
+    data.setValue(3, 1, 2);
+    data.setValue(3, 1, 9);
+    return data;
+  }
 
   public void onModuleLoad() {
-    AjaxLoader.loadVisualizationApi(
+    AjaxLoader.loadVisualizationApi("1.1",
         new Runnable() {
           public void run() {
             final VerticalPanel vp = new VerticalPanel();

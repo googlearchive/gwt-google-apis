@@ -23,6 +23,10 @@ import com.google.gwt.visualization.client.CommonOptions;
 import com.google.gwt.visualization.client.LegendPosition;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.OnMouseOutHandler;
+import com.google.gwt.visualization.client.events.OnMouseOverHandler;
+import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -51,6 +55,14 @@ public class PieChart extends Visualization<PieChart.Options> implements
     public final native void set3D(boolean enable3D) /*-{
       this.is3D = enable3D;
     }-*/;
+    
+    public final native void setPieJoinAngle(double pieJoinAngle) /*-{
+      this.pieJoinAngle = pieJoinAngle;
+    }-*/;
+  
+    public final native void setPieMinimalAngle(double pieMinimalAngle) /*-{
+      this.pieMinimalAngle = pieMinimalAngle;
+    }-*/;
   }
 
   /**
@@ -74,6 +86,18 @@ public class PieChart extends Visualization<PieChart.Options> implements
     super(data, options);
   }
 
+  public final void addOnMouseOutHandler(OnMouseOutHandler handler) {
+    Handler.addHandler(this, "onmouseout", handler);
+  }
+  
+  public final void addOnMouseOverHandler(OnMouseOverHandler handler) {
+    Handler.addHandler(this, "onmouseover", handler);
+  }
+  
+  public final void addReadyHandler(ReadyHandler handler) {
+    Handler.addHandler(this, "ready", handler);
+  }
+  
   public final void addSelectHandler(SelectHandler handler) {
     Selection.addSelectHandler(this, handler);
   }

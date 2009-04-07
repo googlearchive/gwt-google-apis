@@ -15,8 +15,14 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.visualization.client.events.OnMouseOutHandler;
+import com.google.gwt.visualization.client.events.OnMouseOverHandler;
+import com.google.gwt.visualization.client.events.OnMouseOutHandler.OnMouseOutEvent;
+import com.google.gwt.visualization.client.events.OnMouseOverHandler.OnMouseOverEvent;
+import com.google.gwt.visualization.client.visualizations.AreaChart;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.ColumnChart.Options;
 
@@ -24,7 +30,7 @@ import com.google.gwt.visualization.client.visualizations.ColumnChart.Options;
  * Tests for the ColumnChart class.
  */
 public class ColumnChartTest extends VisualizationTest {
- 
+
   public void testColumnChart() {
     loadApi(new Runnable() {
       public void run() {
@@ -34,6 +40,7 @@ public class ColumnChartTest extends VisualizationTest {
         options.setHeight(400);
         options.set3D(true);
         options.setStacked(false);
+        options.setShowCategories(true);
         widget = new ColumnChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
@@ -44,4 +51,44 @@ public class ColumnChartTest extends VisualizationTest {
   protected String getVisualizationPackage() {
     return ColumnChart.PACKAGE;
   }
+
+  public void testOnMouseOverAndOut() {
+    AjaxLoader.loadVisualizationApi(new Runnable() {
+      public void run() {
+        ColumnChart chart;
+        Options options = Options.create();
+        chart = new ColumnChart(createCompanyPerformance(), options);
+        chart.addOnMouseOverHandler (new OnMouseOverHandler() {
+          @Override
+          public void onMouseOverEvent(OnMouseOverEvent event) {
+            assertNotNull(event);
+            assertEquals(1, event.getRow());
+            assertEquals(1, event.getColumn());
+            finishTest();
+          }
+        });
+        chart.addOnMouseOutHandler(new OnMouseOutHandler() {
+          @Override
+          public void onMouseOutEvent(OnMouseOutEvent event) {
+            assertNotNull(event);
+            assertEquals(1, event.getRow());
+            assertEquals(1, event.getColumn());
+            finishTest();
+          }
+        });
+        triggerOnMouseOver(chart.getJso());
+        triggerOnMouseOut(chart.getJso());
+      }
+    }, ColumnChart.PACKAGE);
+  }
+  
+  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
+      {'row':1, 'column':1});
+  }-*/;
+
+  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+      {'row':1, 'column':1});
+  }-*/;
 }
