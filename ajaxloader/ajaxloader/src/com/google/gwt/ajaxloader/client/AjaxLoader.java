@@ -149,28 +149,6 @@ public class AjaxLoader {
     }
   }
 
-  // TODO(zundel): Do these loadXXXApi convenience routines belong in this
-  // API, or in the Visualization API?
-  public static void loadVisualizationApi(Runnable onLoad, String... packages) {
-    loadVisualizationApi("1", onLoad, ArrayHelper.createJsArray(packages));
-  }
-
-  public static void loadVisualizationApi(String version, Runnable onLoad,
-      JsArrayString packages) {
-    AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
-    options.setPackages(packages);
-    // TODO: map which packages have already been loaded, so that we can
-    // call the loader only when necessary
-    loadApi("visualization", version, onLoad, options);
-  }
-
-  public static void loadVisualizationApi(String version, Runnable onLoad,
-      String... packages) {
-    AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
-    options.setPackages(packages);
-    loadApi("visualization", version, onLoad, options);
-  }
-
   /**
    * Adds a script element to the DOM that loads the Ajax API Loader main script
    * "jsapi".
