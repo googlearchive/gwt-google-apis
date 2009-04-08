@@ -16,6 +16,7 @@
 package com.google.gwt.ajaxloader.sample.helloajaxloader.client;
 
 import com.google.gwt.ajaxloader.client.AjaxLoader;
+import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -41,13 +42,15 @@ public class HelloAjaxLoader implements EntryPoint {
         mapsLoaded();
       }
     }, null);
-    
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+
+    AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
+    options.setPackages("imagepiechart");
+    AjaxLoader.loadApi("visualization", "1", new Runnable() {   
 
       public void run() {
         pieChartLoaded();
       }
-    }, "imagepiechart");
+    }, options);
   }
 
   /**

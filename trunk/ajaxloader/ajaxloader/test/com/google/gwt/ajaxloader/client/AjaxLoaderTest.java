@@ -40,16 +40,5 @@ public class AjaxLoaderTest extends GWTTestCase {
     };
     AjaxLoader.loadApi("search", "1", onLoad, options);
   }
-  
-  public void testLoadVisualizationApi() {
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    AjaxLoader.loadVisualizationApi(new Runnable() {
 
-      public void run() {
-        finishTest();
-      }
-      
-    }, "piechart");
-  }
-  
 }
