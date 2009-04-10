@@ -54,7 +54,7 @@ public class AjaxLoader {
       this.nocss = value;
     }-*/;
 
-    public final native void setOtherParms(JavaScriptObject otherParams) /*-{
+    public final native void setOtherParms(String otherParams) /*-{
       this.other_params = otherParams;
     }-*/;
 
