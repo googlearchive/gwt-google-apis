@@ -40,5 +40,4 @@ public class AjaxLoaderTest extends GWTTestCase {
     };
     AjaxLoader.loadApi("search", "1", onLoad, options);
   }
-
 }
