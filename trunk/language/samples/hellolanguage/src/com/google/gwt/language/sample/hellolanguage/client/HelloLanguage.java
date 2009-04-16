@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,10 +17,13 @@ package com.google.gwt.language.sample.hellolanguage.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.language.client.LanguageUtils;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * Main class for GWT language API demo.
  */
 public class HelloLanguage implements EntryPoint {
 
@@ -32,20 +35,48 @@ public class HelloLanguage implements EntryPoint {
    * made.
    */
   public void onModuleLoad() {
-    // TODO: Use a tabbed interface for the demo? 
+
+    final TabPanel demoTabPanel = new TabPanel();
+    demoTabPanel.setWidth("100%");
+    RootPanel.get().add(demoTabPanel);
+
+    final VerticalPanel transDemoPanel = new VerticalPanel();
+    transDemoPanel.add(loadingLabel());
+
+    final VerticalPanel langDetectDemoPanel = new VerticalPanel();
+    langDetectDemoPanel.add(loadingLabel());
+
+    final VerticalPanel translitDemoPanel = new VerticalPanel();
+    translitDemoPanel.add(loadingLabel());
+
+    demoTabPanel.add(transDemoPanel, "Translation demo");
+    demoTabPanel.add(langDetectDemoPanel, "Language detection demo");
+    demoTabPanel.add(translitDemoPanel, "Transliteration demo");
+    demoTabPanel.selectTab(0);
+
     LanguageUtils.loadTranslation(new Runnable() {
-
       public void run() {
-        TranslationDemo translationDemo = new TranslationDemo();
-        RootPanel.get("translateDemo").add(translationDemo.getDemoPanel());
+        transDemoPanel.clear();
+        transDemoPanel.add(new TranslationDemo());
+
+        langDetectDemoPanel.clear();
+        langDetectDemoPanel.add(new LanguageDetectionDemo());
       }
     });
+
     LanguageUtils.loadTransliteration(new Runnable() {
-
       public void run() {
-        TransliterationDemo transliterateDemo = new TransliterationDemo();
-        RootPanel.get("transliterateDemo").add(transliterateDemo.getDemoPanel());
+        translitDemoPanel.clear();
+        TransliterationDemo translitDemo = new TransliterationDemo();
+        translitDemoPanel.add(translitDemo);
+
+        // This must be done after attachment to root panel.
+        translitDemo.initialize();
       }
     });
+  }
+
+  private Label loadingLabel() {
+    return new Label("Loading...");
   }
 }
