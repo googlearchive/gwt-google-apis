@@ -15,150 +15,131 @@
  */
 package com.google.gwt.language.sample.hellolanguage.client;
 
-import com.google.gwt.language.client.translation.LangDetCallback;
-import com.google.gwt.language.client.translation.LangDetResult;
 import com.google.gwt.language.client.translation.Language;
 import com.google.gwt.language.client.translation.Translation;
 import com.google.gwt.language.client.translation.TranslationCallback;
 import com.google.gwt.language.client.translation.TranslationResult;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Translation demo.
- *
- * TODO: Consider styling this demo before release.
+ * Demo for translation API.
  */
-public class TranslationDemo {
+public class TranslationDemo extends Composite {
 
-  private final VerticalPanel mainPanel = new VerticalPanel();
-  private final TextArea translationArea = new TextArea();
+  private final TextArea inputTextArea = new TextArea();
+  private final Label outputDiv = new Label();
+
+  private final ListBox sourceLanguages = new ListBox();
+  private final ListBox destinationLanguages = new ListBox();
 
   public TranslationDemo() {
+    inputTextArea.setStyleName(Styles.DEMO_TEXTAREA_STYLE);
+    outputDiv.setStyleName(Styles.TRANS_OUTPUT_DIV_STYLE);
 
-    // Construct panel
-    mainPanel.add(new Label("Enter text:"));
-    mainPanel.add(translationArea);
+    VerticalPanel wrapperPanel = new VerticalPanel();
+    wrapperPanel.setWidth("100%");
 
-    VerticalPanel vPanel = new VerticalPanel();
-    vPanel.setBorderWidth(1);
-    vPanel.add(createTranslationPanel());
-    vPanel.add(createLangDetectionPanel());
-    mainPanel.add(vPanel);
+    VerticalPanel demoPanel = getDemoPanel();
+    wrapperPanel.add(demoPanel);
+    wrapperPanel.setCellHorizontalAlignment(demoPanel,
+        HasHorizontalAlignment.ALIGN_CENTER);
+
+    initWidget(wrapperPanel);
   }
 
   /**
-   * Returns the panel associated with this demo.
+   * Creates a "Translate" button.
    *
-   * @return the main panel
+   * @return button
    */
-  public Panel getDemoPanel() {
-    return mainPanel;
-  }
+  private Button createTranslateButton() {
+    Button translateButton = new Button("Translate");
+    translateButton.addClickListener(new ClickListener() {
 
-  /**
-   * Returns language detection demo panel.
-   *
-   * @return language detection demo panel
-   */
-  private Panel createLangDetectionPanel() {
-    VerticalPanel vPanel = new VerticalPanel();
-    Button langDetectionButton = new Button("Detect language");
-    final Label detectedLanguage = new Label();
-    final Label waiting = new Label();
-
-    vPanel.add(new Label("Language detection:"));
-    vPanel.add(langDetectionButton);
-    vPanel.add(new Label("Detected language:"));
-    vPanel.add(detectedLanguage);
-    vPanel.add(waiting);
-
-    langDetectionButton.addClickListener(new ClickListener() {
-
-      public void onClick(Widget sender) {
-        detectedLanguage.setText("");
-        waiting.setText("Waiting for detection results...");
-
-        // Translation API call to detect language of text
-        Translation.detect(translationArea.getText(), new LangDetCallback() {
-          @Override
-          protected void onCallback(LangDetResult result) {
-            detectedLanguage.setText(result.getLanguage());
-            waiting.setText("");
-          }
-        });
-      }
-    });
-    return vPanel;
-  }
-
-  /**
-   * Translation demo panel.
-   *
-   * TODO: Consider some RTL languages also.
-   *
-   * @return translation demo panel
-   */
-  private Panel createTranslationPanel() {
-    Button translate = new Button("Translate");
-    final Label translatedText = new Label();
-    final Label waiting = new Label();
-
-    final ListBox sourceLanguages = new ListBox();
-    sourceLanguages.addItem(Language.ENGLISH.toString());
-    sourceLanguages.addItem(Language.FRENCH.toString());
-    sourceLanguages.addItem(Language.SPANISH.toString());
-
-    final ListBox destLanguages = new ListBox();
-    destLanguages.addItem(Language.SPANISH.toString());
-    destLanguages.addItem(Language.ENGLISH.toString());
-    destLanguages.addItem(Language.FRENCH.toString());
-
-    HorizontalPanel hPanel = new HorizontalPanel();
-    hPanel.add(new Label("Source:"));
-    hPanel.add(sourceLanguages);
-    hPanel.add(new Label("Destination:"));
-    hPanel.add(destLanguages);
-    hPanel.add(translate);
-
-    VerticalPanel vPanel = new VerticalPanel();
-    vPanel.add(new Label("Language translation:"));
-    vPanel.add(hPanel);
-    vPanel.add(new Label("Translated text:"));
-    vPanel.add(translatedText);
-    vPanel.add(waiting);
-
-    // TODO: for GWT 1.6, should use EventHandler event callbacks.
-    translate.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         Language src = Language.valueOf(sourceLanguages.getItemText(
             sourceLanguages.getSelectedIndex()));
-        Language dest = Language.valueOf(destLanguages.getItemText(
-            destLanguages.getSelectedIndex()));
-
-        translatedText.setText("");
-        waiting.setText("Waiting for translation results...");
+        Language dest = Language.valueOf(destinationLanguages.getItemText(
+            destinationLanguages.getSelectedIndex()));
 
         // Translation API call to translate text
-        Translation.translate(translationArea.getText(), src, dest,
+        Translation.translate(inputTextArea.getText(), src, dest,
             new TranslationCallback() {
 
           @Override
           protected void onCallback(TranslationResult result) {
-            translatedText.setText(result.getTranslatedText());
-            waiting.setText("");
+            if (result.getError() == null) {
+              outputDiv.setText(result.getTranslatedText());
+            } else {
+              outputDiv.setText(result.getError().getMessage());
+            }
           }
         });
       }
     });
 
-    return vPanel;
+    return translateButton;
+  }
+
+  /**
+   * Creates translation control panel containing list boxes for source and
+   * destination languages, and a button to translate.
+   *
+   * @return panel containing controls
+   */
+  private HorizontalPanel createTranslationControlPanel() {
+    populateListBoxes();
+
+    HorizontalPanel listBoxesPanel = new HorizontalPanel();
+    listBoxesPanel.add(sourceLanguages);
+    listBoxesPanel.add(new Label(">>"));
+    listBoxesPanel.add(destinationLanguages);
+
+    Button translateButton = createTranslateButton();
+
+    HorizontalPanel controlPanel = new HorizontalPanel();
+    controlPanel.setSpacing(10);
+    controlPanel.setWidth("100%");
+    controlPanel.add(listBoxesPanel);
+    controlPanel.add(translateButton);
+    controlPanel.setCellHorizontalAlignment(translateButton,
+        HasHorizontalAlignment.ALIGN_RIGHT);
+
+    return controlPanel;
+  }
+
+  /**
+   * Contains the entire demo panel.
+   *
+   * @return demo panel
+   */
+  private VerticalPanel getDemoPanel() {
+    VerticalPanel demoPanel = new VerticalPanel();
+    demoPanel.add(new Label("Enter source language text: "));
+    demoPanel.add(inputTextArea);
+    demoPanel.add(createTranslationControlPanel());
+    demoPanel.add(new Label("Translated text:"));
+    demoPanel.add(outputDiv);
+    return demoPanel;
+  }
+
+  /**
+   * Populates list boxes with source and destination languages.
+   */
+  private void populateListBoxes() {
+    // Populate source & destination language list box.
+    for (Language lang : Language.values()) {
+      sourceLanguages.addItem(lang.toString());
+      destinationLanguages.addItem(lang.toString());
+    }
   }
 }

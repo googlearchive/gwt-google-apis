@@ -11,3 +11,22 @@ button {
 img {
   margin-top: 20px;
 }
+
+.demoTextArea {
+  height: 120px;
+  width: 500px;
+}
+
+.translationOutputDiv {
+  height: 120px;
+  width: 500px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.langDetectionOutputDiv {
+	height: 25px;
+  width: 400px;
+	border-width: 1px;
+	border-style: solid;
+}
