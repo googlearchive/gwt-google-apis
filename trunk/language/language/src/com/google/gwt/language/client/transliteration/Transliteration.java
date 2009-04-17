@@ -26,6 +26,23 @@ import java.util.ArrayList;
 public class Transliteration {
 
   /**
+   * For the given sourceLanguage, this returns a map of destination languages
+   * for which transliteration is supported.
+   * 
+   * @param sourceLanguage the language to use for typing
+   * @return an array of languages suitable as targets for transliteration.
+   */
+  public static LanguageCode[] getDestinationLanguages(
+      LanguageCode sourceLanguage) {
+    JsArrayString jsResult = nativeGetDestinationLanguages(sourceLanguage.getLangCode());
+    LanguageCode[] result = new LanguageCode[jsResult.length()];
+    for (int i = 0, n = jsResult.length(); i < n; i++) {
+      result[i] = LanguageCode.valueOf(jsResult.get(i));
+    }
+    return result;
+  }
+
+  /**
    * Returns a boolean indicating whether transliteration is supported in the
    * client's browser.
    * 
@@ -56,6 +73,23 @@ public class Transliteration {
     transliterate(jsArrayStr, srcLang.getLangCode(), destLang.getLangCode(),
         callback);
   }
+
+  /**
+   * Returns an array of language code constants suitable as targets for
+   * transliteration with the specified source language.
+   * 
+   * @param langCode name of a source language (not the 2 letter code).
+   * @return a list of the language codes by name (not the 2 letter code).
+   */
+  private static native JsArrayString nativeGetDestinationLanguages(
+      String langCode) /*-{
+    var result = new Array();
+    var map = $wnd.google.elements.transliteration.getDestinationLanguages(langCode);
+    for (prop in map) {
+      result.push(prop);
+    }
+    return result;
+  }-*/;
 
   /**
    * A method that will obtain transliterations for the given words in the

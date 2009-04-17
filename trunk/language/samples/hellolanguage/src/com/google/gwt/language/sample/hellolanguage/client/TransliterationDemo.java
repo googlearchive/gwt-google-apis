@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -18,6 +18,7 @@ package com.google.gwt.language.sample.hellolanguage.client;
 import com.google.gwt.language.client.transliteration.LanguageCode;
 import com.google.gwt.language.client.transliteration.Options;
 import com.google.gwt.language.client.transliteration.TransliteratableTextArea;
+import com.google.gwt.language.client.transliteration.Transliteration;
 import com.google.gwt.language.client.transliteration.TransliterationControl;
 import com.google.gwt.language.client.transliteration.TransliterationControlDiv;
 import com.google.gwt.user.client.ui.Composite;
@@ -29,9 +30,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class TransliterationDemo extends Composite {
   private final LanguageCode srcLanguage = LanguageCode.ENGLISH;
-
-  private final Options options = Options.newInstance(srcLanguage,
-      getDestinationLanguages(), true, "ctrl+g");
+  private final LanguageCode[] destLanguages = Transliteration.getDestinationLanguages(srcLanguage);
+  private Options options = Options.newInstance(srcLanguage, destLanguages,
+      true, "ctrl+g");
   private final TransliterationControl control = TransliterationControl.newInstance(options);
   private final TransliterationControlDiv div = new TransliterationControlDiv(
       "translitdiv");
@@ -65,24 +66,5 @@ public class TransliterationDemo extends Composite {
     // issue. Currently we have to explicitly resize.
     transltextarea.setWidth("500px");
     transltextarea.setHeight("120px");
-  }
-
-  /**
-   * Returns all destination languages of transliteration. Skips only English
-   * as its not a valid destination language.
-   *
-   * @return array of destination languages
-   */
-  private LanguageCode[] getDestinationLanguages() {
-    LanguageCode[] destinationLanguages =
-        new LanguageCode[LanguageCode.values().length - 1];
-    int i = 0;
-    for (LanguageCode langCode : LanguageCode.values()) {
-      if (langCode != LanguageCode.ENGLISH) {
-        destinationLanguages[i] = langCode;
-        ++i;
-      }
-    }
-    return destinationLanguages;
   }
 }
