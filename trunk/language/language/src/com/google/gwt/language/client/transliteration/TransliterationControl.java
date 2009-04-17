@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,6 +17,7 @@ package com.google.gwt.language.client.transliteration;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 
 /**
  * Wrapper for google.elements.transliteration.TransliterationControl JS class.
@@ -29,7 +30,7 @@ public class TransliterationControl extends JavaScriptObject {
   /**
    * Create an instance of TransliterationControl class. Only one instance of
    * this can be created per page.
-   * 
+   *
    * @param options the {@code Options} object containing required data
    * @return instance of this class
    */
@@ -44,7 +45,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Adds a listener for the given event type. When the particular event type is
    * triggered, the listener is called with the event object. The contents of
    * the event object depend on the type of the event.
-   * 
+   *
    * @param eventType event type. See {@code EventType}
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -69,8 +70,37 @@ public class TransliterationControl extends JavaScriptObject {
   }-*/;
 
   /**
+   * Gets current language code pair for transliteration. The array returned is
+   * always of length 2; containing source and destination language codes in
+   * order.
+   *
+   * @return a 2 element array containing source and destination language codes.
+   */
+  public final String[] getLanguagePair() {
+    JsArrayString jsArrayResults = getLanguagePairInternal();
+    String[] results = new String[2];
+    results[0] = jsArrayResults.get(0);
+    results[1] = jsArrayResults.get(1);
+    return results;
+  }
+
+  /**
+   * Gets current language pair for transliteration. The array returned is
+   * always of length 2; containing source and destination languages in order.
+   *
+   * @return a 2 element array containing source and destination languages
+   */
+  public final LanguageCode[] getLanguageCodePair() {
+    JsArrayString jsArrayResults = getLanguagePairInternal();
+    LanguageCode[] results = new LanguageCode[2];
+    results[0] = LanguageCode.getLanguage(jsArrayResults.get(0));
+    results[1] = LanguageCode.getLanguage(jsArrayResults.get(1));
+    return results;
+  }
+
+  /**
    * Returns a boolean indicating whether transliteration is enabled or not.
-   * 
+   *
    * @return true if transliteration is enabled, false otherwise
    */
   public final native boolean isTransliterationEnabled() /*-{
@@ -79,7 +109,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes textarea with given id transliteratable.
-   * 
+   *
    * @param textAreaId id of textarea
    */
   public final native void makeTransliteratable(String textAreaId) /*-{
@@ -88,7 +118,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes the given {@code TransliteratableTextArea} transliteratable.
-   * 
+   *
    * @param textArea an instance of {@code TransliteratableTextArea}
    */
   public final void makeTransliteratable(TransliteratableTextArea textArea) {
@@ -97,7 +127,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Removes a listener.
-   * 
+   *
    * @param eventType event type. See {@code EventType}
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -109,7 +139,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Changes the language pair for transliteration.
-   * 
+   *
    * @param sourceLanguage source language
    * @param destLanguage destination language
    * @return a boolean indicating whether the setLanguage action was successful.
@@ -126,7 +156,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Changes the language pair for transliteration.
-   * 
+   *
    * @param sourceLangCode source language code
    * @param destLangCode destination language code
    * @return a boolean indicating whether the setLanguage action was successful.
@@ -142,7 +172,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Shows transliteration control under div with given id.
-   * 
+   *
    * @param divId id of the div
    */
   public final native void showControl(String divId) /*-{
@@ -151,7 +181,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Shows the transliteration control under given div element.
-   * 
+   *
    * @param div the {@code TransliterationControlDiv} where control should be
    *          shown
    */
@@ -170,7 +200,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Adds a listener for the given event type. When the particular event type is
    * triggered, the listener is called with the event object. The contents of
    * the event object depend on the type of the event.
-   * 
+   *
    * @param eventType event type as string
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -183,8 +213,22 @@ public class TransliterationControl extends JavaScriptObject {
   }-*/;
 
   /**
+   * Returns a JS array of string values containing source and destination
+   * languages of transliteration.
+   *
+   * @return A JsArrayString with source and destination languages.
+   */
+  private final native JsArrayString getLanguagePairInternal() /*-{
+    var results = this.getLanguagePair();
+    var array = new Array();
+    array.push(results.sourceLanguage);
+    array.push(results.destinationLanguage);
+    return array;
+  }-*/;
+
+  /**
    * Removes a listener.
-   * 
+   *
    * @param eventType event type as string
    * @param listener the listener to the event that is called when event is
    *          triggered
