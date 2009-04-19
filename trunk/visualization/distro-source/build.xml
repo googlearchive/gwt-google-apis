@@ -8,6 +8,7 @@
 		<gwt.tgz.cat destfile="${gwt.build.dist}/${project.distname}.tar.gz">
 			<!-- jars -->
 			<tarfileset file="${gwt.build.lib}/gwt-${api.name}.jar" prefix="${project.distname}" />
+			<tarfileset file="${gwt.build.lib}/gwt-${api.name}-noredist.jar" prefix="${project.distname}" />
 
 			<!-- distro-source files -->
 			<tarfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
@@ -39,6 +40,7 @@
 		<zip destfile="${gwt.build.dist}/${project.distname}.zip">
 			<!-- jars -->
 			<zipfileset file="${gwt.build.lib}/gwt-${api.name}.jar" prefix="${project.distname}" />
+			<zipfileset file="${gwt.build.lib}/gwt-${api.name}-noredist.jar" prefix="${project.distname}" />
 
 			<!-- distro-source files -->
 			<zipfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">

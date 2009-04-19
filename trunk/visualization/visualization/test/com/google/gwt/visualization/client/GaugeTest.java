@@ -23,7 +23,6 @@ import com.google.gwt.visualization.client.visualizations.Gauge;
  * Tests for the Gauge class.
  */
 public class GaugeTest extends VisualizationTest {
- 
 
   /**
    * This test case will try creating a simple Gauge. It first asserts that the

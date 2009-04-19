@@ -17,13 +17,10 @@ package com.google.gwt.visualization.visualizationshowcase.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.Properties;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
-import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.RangeChangeHandler;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine.Options;

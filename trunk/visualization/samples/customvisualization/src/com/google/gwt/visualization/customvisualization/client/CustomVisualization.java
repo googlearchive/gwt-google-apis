@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.customvisualization.client;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -23,7 +24,6 @@ import com.google.gwt.user.client.ui.TableListener;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.AbstractVisualization;
-import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.events.SelectHandler;

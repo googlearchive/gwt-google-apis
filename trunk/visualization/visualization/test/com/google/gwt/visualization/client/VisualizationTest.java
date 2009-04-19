@@ -25,7 +25,7 @@ import com.google.gwt.visualization.client.visualizations.Visualization;
  */
 public class VisualizationTest extends GWTTestCase {
   public static final int ASYNC_DELAY_MS = 10 * 1000;
-  
+
   /**
    * Extracts the value of a named parameter from a URL query string.
    * 
@@ -102,15 +102,37 @@ public class VisualizationTest extends GWTTestCase {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * Loads the visualization API asynchronously and runs the specified test.
+   * When the testRunnable method completes, the test is considered finished
+   * successfully.
+   * 
+   * @param testRunnable code to invoke when the API loadeded.
+   * 
+   */
   protected void loadApi(final Runnable testRunnable) {
+    loadApi(testRunnable, true);
+  }
+
+  /**
+   * Loads the visualization API asynchronously and runs the specified test.
+   * 
+   * @param testRunnable code to invoke when the API loadeded.
+   * @param callFinishTest if <code>true</code>, the finishTest() method is
+   *          called when the test completes. If <code>false</code>, the caller
+   *          is responsible for ending the test.
+   */
+  protected void loadApi(final Runnable testRunnable, final boolean callFinishTest) {
     if (loaded) {
       testRunnable.run();
     } else {
-      AjaxLoader.loadVisualizationApi(new Runnable() {
+      VisualizationUtils.loadVisualizationApi(new Runnable() {
         public void run() {
           loaded = true;
           testRunnable.run();
-          finishTest();
+          if (callFinishTest) {
+            finishTest();
+          }
         }
       }, getVisualizationPackage());
       delayTestFinish(ASYNC_DELAY_MS);
@@ -125,7 +147,8 @@ public class VisualizationTest extends GWTTestCase {
    * @param viz - the Visualization to trigger the event on
    * @param s - a selection object.
    */
-  protected <E extends Visualization<?>, Selectable>void triggerSelection(E viz, JsArray<Selection> s) {
+  protected <E extends Visualization<?>, Selectable> void triggerSelection(
+      E viz, JsArray<Selection> s) {
     Selection.triggerSelection(viz, s);
   }
 }

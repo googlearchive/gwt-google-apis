@@ -29,7 +29,7 @@ import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
 public class ScatterChartTest extends VisualizationTest {
 
   public void testOnMouseOverAndOut() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         ScatterChart chart;
         Options options = Options.create();
@@ -55,7 +55,7 @@ public class ScatterChartTest extends VisualizationTest {
         triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
-    }, ScatterChart.PACKAGE);
+    }, false);
   }
 
   public void testScatterChart() {

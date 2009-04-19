@@ -29,7 +29,7 @@ public class AjaxLoaderTest extends GWTTestCase {
   }
 
   public void testLoad() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    VisualizationUtils.loadVisualizationApi(new Runnable() {
       public void run() {
         finishTest();
       }
@@ -38,9 +38,9 @@ public class AjaxLoaderTest extends GWTTestCase {
   }
 
   public void testReload() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    VisualizationUtils.loadVisualizationApi(new Runnable() {
       public void run() {
-        AjaxLoader.loadVisualizationApi(new Runnable() {
+        VisualizationUtils.loadVisualizationApi(new Runnable() {
           public void run() {
             finishTest();
           }

@@ -14,5 +14,6 @@
 
 <module>
   <inherits name="com.google.gwt.core.Core" />
+  <inherits name="com.google.gwt.ajaxloader.AjaxLoader" />
   <source path="client" />
 </module>

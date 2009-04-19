@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -60,7 +61,7 @@ public class TableTest extends VisualizationTest {
   }
 
   public void testSelection() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         Table.Options options = Table.Options.create();
         final Table viz = new Table(createCompanyPerformance(), options);
@@ -94,8 +95,7 @@ public class TableTest extends VisualizationTest {
         // Trigger a selection callback
         triggerSelection(viz, s);
       }
-    }, Table.PACKAGE);
-    delayTestFinish(ASYNC_DELAY_MS);
+    }, false);
   }
 
   public void testSortPolicy() {

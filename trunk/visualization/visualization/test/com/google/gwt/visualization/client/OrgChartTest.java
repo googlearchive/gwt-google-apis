@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -47,42 +48,43 @@ public class OrgChartTest extends VisualizationTest {
   }
 
   public void testSelection() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         OrgChart.Options options = OrgChart.Options.create();
         final OrgChart viz = new OrgChart(createDataTable(), options);
-  
+
         // Add a selection handler
         viz.addSelectHandler(new SelectHandler() {
-  
+
           @Override
           public void onSelect(SelectEvent event) {
             assertNotNull(event);
             JsArray<Selection> s = viz.getSelections();
-            assertEquals("Expected 1 element in the selection", 1,
-                s.length());
+            assertEquals("Expected 1 element in the selection", 1, s.length());
             assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
-            assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+            assertEquals("Expected column 0 to be selected", 0,
+                s.get(0).getColumn());
             finishTest();
           }
         });
         RootPanel.get().add(viz);
-  
-        JsArray<Selection> s = 
-          ArrayHelper.toJsArray(Selection.createCellSelection(1, 0));
+
+        JsArray<Selection> s = ArrayHelper.toJsArray(Selection.createCellSelection(
+            1, 0));
         assertEquals("Expected 1 element in the selection", 1, s.length());
         assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
-        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        assertEquals("Expected column 0 to be selected", 0,
+            s.get(0).getColumn());
         viz.setSelections(s);
         s = viz.getSelections();
         assertEquals("Expected 1 element in the selection", 1, s.length());
         assertEquals("Expected row 1 to be selected", 1, s.get(0).getRow());
-        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        assertEquals("Expected column 0 to be selected", 0,
+            s.get(0).getColumn());
         // Trigger a selection callback
         triggerSelection(viz, s);
       }
-    }, OrgChart.PACKAGE);
-    delayTestFinish(ASYNC_DELAY_MS);
+    }, false);
   }
 
   public void testSize() {
@@ -90,19 +92,19 @@ public class OrgChartTest extends VisualizationTest {
       public void run() {
         Widget widget;
         Options options;
-        
+
         options = Options.create();
         options.setSize(Size.SMALL);
         widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setSize(Size.MEDIUM);
         widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
-        
+
         options = Options.create();
         options.setSize(Size.LARGE);
         widget = new OrgChart(createDataTable(), options);

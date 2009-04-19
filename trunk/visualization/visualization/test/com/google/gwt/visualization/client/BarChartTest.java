@@ -20,8 +20,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.events.OnMouseOutHandler;
 import com.google.gwt.visualization.client.events.OnMouseOverHandler;
-import com.google.gwt.visualization.client.events.OnMouseOutHandler.OnMouseOutEvent;
-import com.google.gwt.visualization.client.events.OnMouseOverHandler.OnMouseOverEvent;
 import com.google.gwt.visualization.client.visualizations.BarChart;
 import com.google.gwt.visualization.client.visualizations.BarChart.Options;
 
@@ -46,18 +44,13 @@ public class BarChartTest extends VisualizationTest {
     });
   }
 
-  @Override
-  protected String getVisualizationPackage() {
-    return BarChart.PACKAGE;
-  }
-  
   public void testOnMouseOverAndOut() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         BarChart chart;
         Options options = Options.create();
         chart = new BarChart(createCompanyPerformance(), options);
-        chart.addOnMouseOverHandler (new OnMouseOverHandler() {
+        chart.addOnMouseOverHandler(new OnMouseOverHandler() {
           @Override
           public void onMouseOverEvent(OnMouseOverEvent event) {
             assertNotNull(event);
@@ -78,16 +71,21 @@ public class BarChartTest extends VisualizationTest {
         triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
-    }, BarChart.PACKAGE);
+    }, false);
   }
-
-  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
-      {'row':1, 'column':1});
-  }-*/;
+  
+  @Override
+  protected String getVisualizationPackage() {
+    return BarChart.PACKAGE;
+  }
 
   private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
     $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+      {'row':1, 'column':1});
+  }-*/;
+
+  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
       {'row':1, 'column':1});
   }-*/;
 }
