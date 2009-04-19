@@ -19,7 +19,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.visualization.client.AjaxLoader;
+import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
@@ -102,7 +102,7 @@ class Showcase implements EntryPoint {
   }
 
   public void onModuleLoad() {
-    AjaxLoader.loadVisualizationApi("1.1",
+    VisualizationUtils.loadVisualizationApi("1.1",
         new Runnable() {
           public void run() {
             final VerticalPanel vp = new VerticalPanel();

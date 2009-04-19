@@ -15,13 +15,13 @@
  */
 package com.google.gwt.visualization.client.visualizations;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
-import com.google.gwt.visualization.client.ArrayHelper;
 import com.google.gwt.visualization.client.events.Handler;
 import com.google.gwt.visualization.client.events.RangeChangeHandler;
 

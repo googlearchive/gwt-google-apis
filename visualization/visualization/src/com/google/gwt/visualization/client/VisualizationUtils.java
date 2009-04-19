@@ -15,18 +15,17 @@
  */
 package com.google.gwt.visualization.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.ajaxloader.client.AjaxLoader;
+import com.google.gwt.ajaxloader.client.ArrayHelper;
+import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 import com.google.gwt.core.client.JsArrayString;
 
 /**
- * A wrapper for the google Ajax loader.
+ * This class contains utility methods that are of use to the API in general.  
+ * Incldes a wrapper for loading the Visualization API using the google Ajax loader.
  */
-public class AjaxLoader {
-  public static native void loadApi(String api, String version, 
-      JavaScriptObject settings) /*-{
-    $wnd.google.load(api, version, settings);
-  }-*/;
-  
+public class VisualizationUtils {
+   
   public static void loadVisualizationApi(Runnable onLoad, String... packages) {
     loadVisualizationApi("1", onLoad, ArrayHelper.createJsArray(packages));
   }
@@ -35,19 +34,17 @@ public class AjaxLoader {
       JsArrayString packages) {
     // TODO: map which packages have already been loaded, so that we can
     // call the loader only when necessary
-    loadApi("visualization", version, createSettings(onLoad, packages));
+    AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
+    options.setPackages(packages);
+    AjaxLoader.loadApi("visualization", version, onLoad, options); 
   }
 
   public static void loadVisualizationApi(String version, Runnable onLoad,
       String... packages) {
     loadVisualizationApi(version, onLoad, ArrayHelper.createJsArray(packages));
   }
-
-  private static native JavaScriptObject createSettings(Runnable onLoad, 
-      JsArrayString packages) /*-{
-    var callback = function() {
-      @com.google.gwt.visualization.client.ExceptionHelper::runProtected(Ljava/lang/Runnable;)(onLoad);
-    }
-    return {'callback' : callback, 'packages' : packages};
-  }-*/;
+  
+  private VisualizationUtils() {
+    // Do not allow this class to be instantiated.
+  }
 }

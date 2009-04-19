@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.formatters.PatternFormat;

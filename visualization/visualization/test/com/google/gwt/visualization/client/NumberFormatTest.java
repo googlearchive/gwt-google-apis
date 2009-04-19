@@ -28,7 +28,7 @@ public class NumberFormatTest extends VisualizationTest {
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
   }
-  
+
   public void testBarFormat() {
     loadApi(new Runnable() {
       public void run() {
@@ -44,15 +44,15 @@ public class NumberFormatTest extends VisualizationTest {
         options.setNegativeParens(false);
         options.setPrefix("$");
         options.setSuffix("%");
-        
+
         NumberFormat formatter = NumberFormat.create(options);
         formatter.format(dataTable, 0);
         assertEquals("$-3_142%", dataTable.getFormattedValue(0, 0));
         // TODO(zundel): Unit tests are curently broken with this assertion.
-        //   dataTable.getProperty() returns null.
-        // assertEquals("color:red;", 
-        //  dataTable.getProperty(0, 0, "__td-style"));
-      }  
+        // dataTable.getProperty() returns null.
+        // assertEquals("color:red;",
+        // dataTable.getProperty(0, 0, "__td-style"));
+      }
     });
   }
 

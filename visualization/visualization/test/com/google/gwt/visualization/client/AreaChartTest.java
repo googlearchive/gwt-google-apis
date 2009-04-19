@@ -20,8 +20,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.events.OnMouseOutHandler;
 import com.google.gwt.visualization.client.events.OnMouseOverHandler;
-import com.google.gwt.visualization.client.events.OnMouseOutHandler.OnMouseOutEvent;
-import com.google.gwt.visualization.client.events.OnMouseOverHandler.OnMouseOverEvent;
 import com.google.gwt.visualization.client.visualizations.AreaChart;
 import com.google.gwt.visualization.client.visualizations.AreaChart.Options;
 
@@ -48,12 +46,12 @@ public class AreaChartTest extends VisualizationTest {
   }
   
   public void testOnMouseOverAndOut() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+   loadApi(new Runnable() {
       public void run() {
         AreaChart chart;
         Options options = Options.create();
         chart = new AreaChart(createCompanyPerformance(), options);
-        chart.addOnMouseOverHandler (new OnMouseOverHandler() {
+        chart.addOnMouseOverHandler(new OnMouseOverHandler() {
           @Override
           public void onMouseOverEvent(OnMouseOverEvent event) {
             assertNotNull(event);
@@ -74,7 +72,7 @@ public class AreaChartTest extends VisualizationTest {
         triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
-    }, AreaChart.PACKAGE);
+    }, false);
   }
 
   @Override
@@ -82,13 +80,13 @@ public class AreaChartTest extends VisualizationTest {
     return AreaChart.PACKAGE;
   }
   
-  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
+  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
       {'row':1, 'column':1});
   }-*/;
   
-  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
       {'row':1, 'column':1});
   }-*/;
 }

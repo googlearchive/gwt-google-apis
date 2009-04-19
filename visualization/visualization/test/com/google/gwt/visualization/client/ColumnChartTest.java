@@ -20,9 +20,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.events.OnMouseOutHandler;
 import com.google.gwt.visualization.client.events.OnMouseOverHandler;
-import com.google.gwt.visualization.client.events.OnMouseOutHandler.OnMouseOutEvent;
-import com.google.gwt.visualization.client.events.OnMouseOverHandler.OnMouseOverEvent;
-import com.google.gwt.visualization.client.visualizations.AreaChart;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.ColumnChart.Options;
 
@@ -47,18 +44,13 @@ public class ColumnChartTest extends VisualizationTest {
     });
   }
 
-  @Override
-  protected String getVisualizationPackage() {
-    return ColumnChart.PACKAGE;
-  }
-
   public void testOnMouseOverAndOut() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         ColumnChart chart;
         Options options = Options.create();
         chart = new ColumnChart(createCompanyPerformance(), options);
-        chart.addOnMouseOverHandler (new OnMouseOverHandler() {
+        chart.addOnMouseOverHandler(new OnMouseOverHandler() {
           @Override
           public void onMouseOverEvent(OnMouseOverEvent event) {
             assertNotNull(event);
@@ -79,16 +71,21 @@ public class ColumnChartTest extends VisualizationTest {
         triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
-    }, ColumnChart.PACKAGE);
+    }, false);
+  }
+
+  @Override
+  protected String getVisualizationPackage() {
+    return ColumnChart.PACKAGE;
   }
   
-  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
+  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
       {'row':1, 'column':1});
   }-*/;
 
-  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
       {'row':1, 'column':1});
   }-*/;
 }
