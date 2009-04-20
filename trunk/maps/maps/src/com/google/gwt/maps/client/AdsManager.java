@@ -57,6 +57,20 @@ public class AdsManager extends JavaScriptObject {
     }-*/;
 
     /**
+     * The AdSense channel number used for fetching ads. Channels are an
+     * optional feature that AdSense publishers can use to track ad revenue from
+     * multiple sources.
+     * 
+     * @param channelIn The AdSense channel number.
+     * @return this AdsManagerOption object, for convenience when using the
+     *         Builder pattern.
+     */
+    public final native AdsManagerOptions setChannel(double channelIn) /*-{
+      this.channel = channelIn;
+      return this;
+    }-*/;
+    
+    /**
      * The maximum number of ads to show on the map at any time. The default
      * value is 3.
      * 
