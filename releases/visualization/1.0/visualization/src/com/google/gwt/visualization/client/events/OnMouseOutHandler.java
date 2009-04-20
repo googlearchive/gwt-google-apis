@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2009 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,40 +17,39 @@ package com.google.gwt.visualization.client.events;
 
 import com.google.gwt.visualization.client.Properties;
 
-import java.util.Date;
-
 /**
- * This class handles range events for visualizations such as AnnotatedTimeLine.
+ * This class handles onmouseout events for visualizations such as 
+ * browsercharts.
  */
-public abstract class RangeChangeHandler extends Handler {
+public abstract class OnMouseOutHandler extends Handler {
   /**
-   * This event is fired when the user changes the date range of the
-   * visualization.
+   * The onmouseout event is fired when the mouse is out of data displayed in 
+   * the visualization.
    */
-  public class RangeChangeEvent {
-    private Date end;
-    private Date start;
+  public static class OnMouseOutEvent {
+    private int row;
+    private int column;
 
-    public RangeChangeEvent(Date start, Date end) {
-      this.start = start;
-      this.end = end;
+    public OnMouseOutEvent(int row, int column) {
+      this.row = row;
+      this.column = column;
     }
 
-    public Date getEnd() {
-      return end;
+    public int getColumn() {
+      return column;
     }
-
-    public Date getStart() {
-      return start;
+    
+    public int getRow() {
+      return row;
     }
   }
 
-  public abstract void onRangeChange(RangeChangeEvent event);
-
+  public abstract void onMouseOutEvent(OnMouseOutEvent event);
+  
   @Override
   protected void onEvent(Properties properties) {
-    Date start = properties.getDate("start");
-    Date end = properties.getDate("end");
-    onRangeChange(new RangeChangeEvent(start, end));
+    int row = properties.getInt("row");
+    int column = properties.getInt("column");
+    onMouseOutEvent(new OnMouseOutEvent(row, column));
   }
 }

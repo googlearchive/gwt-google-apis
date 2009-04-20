@@ -34,13 +34,22 @@ public class LineDemo implements LeftTabPanel.WidgetProvider {
     options.setTitle("Company Performance");
     options.setWidth(400);
     options.setSmoothLine(true);
+    options.setShowCategories(true);
+    options.setEnableTooltip(true);
+    options.setMin(0);
+    options.setMax(2000);
     
     DataTable data = Showcase.getCompanyPerformance();
 
     LineChart viz = new LineChart(data, options);
     Label status = new Label();
+    Label onMouseOverAndOutStatus = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
+    viz.addReadyHandler(new ReadyDemo(status));
+    viz.addOnMouseOverHandler(new OnMouseOverDemo(onMouseOverAndOutStatus));
+    viz.addOnMouseOutHandler(new OnMouseOutDemo(onMouseOverAndOutStatus));
     result.add(status);
+    result.add(onMouseOverAndOutStatus);
     result.add(viz);
     return result;
   }

@@ -15,7 +15,10 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.visualization.client.events.OnMouseOutHandler;
+import com.google.gwt.visualization.client.events.OnMouseOverHandler;
 import com.google.gwt.visualization.client.visualizations.PieChart;
 
 /**
@@ -40,6 +43,36 @@ public class PieChartTest extends VisualizationTest {
     });
   }
 
+  public void testOnMouseOverAndOut() {
+    loadApi(new Runnable() {
+      public void run() {
+        PieChart chart;
+        PieChart.Options options = PieChart.Options.create();
+        chart = new PieChart(createCompanyPerformance(), options);
+        chart.addOnMouseOverHandler(new OnMouseOverHandler() {
+          @Override
+          public void onMouseOverEvent(OnMouseOverEvent event) {
+            assertNotNull(event);
+            assertEquals(1, event.getRow());
+            assertEquals(1, event.getColumn());
+            finishTest();
+          }
+        });
+        chart.addOnMouseOutHandler(new OnMouseOutHandler() {
+          @Override
+          public void onMouseOutEvent(OnMouseOutEvent event) {
+            assertNotNull(event);
+            assertEquals(1, event.getRow());
+            assertEquals(1, event.getColumn());
+            finishTest();
+          }
+        });
+        triggerOnMouseOver(chart.getJso());
+        triggerOnMouseOut(chart.getJso());
+      }
+    }, false);
+  }
+
   /**
    * Tests the options that are peculiar to the PieChart.Options class.
    */
@@ -47,9 +80,19 @@ public class PieChartTest extends VisualizationTest {
     PieChart.Options options = PieChart.Options.create();
     options.set3D(true);
   }
-
+  
   @Override
   protected String getVisualizationPackage() {
     return PieChart.PACKAGE;
   }
+  
+  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+      {'row':1, 'column':1});
+  }-*/;
+
+  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
+      {'row':1, 'column':1});
+  }-*/;
 }

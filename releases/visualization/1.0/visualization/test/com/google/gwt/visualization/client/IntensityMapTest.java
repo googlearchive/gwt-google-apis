@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
@@ -64,7 +65,7 @@ public class IntensityMapTest extends VisualizationTest {
   }
 
   public void testSelection() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         DataTable data = createDailyActivities();
         IntensityMap.Options options = IntensityMap.Options.create();
@@ -97,8 +98,7 @@ public class IntensityMapTest extends VisualizationTest {
         // Trigger a selection callback
         triggerSelection(viz, s);
       }
-    }, IntensityMap.PACKAGE);
-    delayTestFinish(ASYNC_DELAY_MS);
+    }, false);
   }
 
   public void testColors() {

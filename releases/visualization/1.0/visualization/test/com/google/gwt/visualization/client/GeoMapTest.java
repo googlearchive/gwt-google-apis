@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -68,7 +69,7 @@ public class GeoMapTest extends VisualizationTest {
   }
 
   public void testRegionClick() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         GeoMap.Options options = GeoMap.Options.create();
         final GeoMap viz = new GeoMap(createDataTable(), options);
@@ -88,12 +89,11 @@ public class GeoMapTest extends VisualizationTest {
         // Trigger a region click callback
         triggerRegionClick(viz.getJso(), "Israel");
       }
-    }, GeoMap.PACKAGE);
-    delayTestFinish(ASYNC_DELAY_MS);
+    }, false);
   }
 
   public void testSelection() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    loadApi(new Runnable() {
       public void run() {
         GeoMap.Options options = GeoMap.Options.create();
         final GeoMap viz = new GeoMap(createDataTable(), options);
@@ -127,12 +127,11 @@ public class GeoMapTest extends VisualizationTest {
         // Trigger a selection callback
         triggerSelection(viz, s);
       }
-    }, GeoMap.PACKAGE);
-    delayTestFinish(ASYNC_DELAY_MS);
+    }, false);
   }
 
   public void testZoomOut() {
-    AjaxLoader.loadVisualizationApi(new Runnable() {
+    VisualizationUtils.loadVisualizationApi(new Runnable() {
       public void run() {
         GeoMap.Options options = GeoMap.Options.create();
         options.setShowZoomOut(true);
