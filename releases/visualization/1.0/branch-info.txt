@@ -16,7 +16,8 @@ Merges:
 /releases/maps/1.0@1189:1251 was merged (r1252) into /trunk/visualization
 /trunk/visualization@1251:1294 was merged (r1295) into /releases/visualization/1.0
 /trunk/visualization@1294:1304 was merged (r1305) into /releases/visualization/1.0
--> The next merge into trunk will be r1304:????
+/trunk/visualization@1304:1308 was merged (r1339) into /releases/visualization/1.0
+-> The next merge into trunk will be r1338:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r1069)
@@ -51,3 +52,6 @@ Changes in this branch (excluding changes to this file itself):
  - Removed showcase from classpath (r1278)
  - Fixes checkstyle errors (r1283)
  - Fixes AnnotatedTimeLine rangechange event. (r1300)
+ - Added mouse out, mouse over, and ready event support (r1326)
+ - Fix build breaks caused by new version of gviz api (r1327,1328)
+ - Moved AjaxLoader support to the common ajaxloader project (r1337, 1338)
