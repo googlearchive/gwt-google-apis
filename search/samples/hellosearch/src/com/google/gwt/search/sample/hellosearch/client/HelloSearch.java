@@ -29,12 +29,11 @@ import com.google.gwt.search.client.SearchCompleteHandler;
 import com.google.gwt.search.client.SearchControl;
 import com.google.gwt.search.client.SearchControlOptions;
 import com.google.gwt.search.client.SearchStartingHandler;
+import com.google.gwt.search.client.SearchUtils;
 import com.google.gwt.search.client.VideoResult;
 import com.google.gwt.search.client.VideoSearch;
 import com.google.gwt.search.client.WebResult;
 import com.google.gwt.search.client.WebSearch;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -47,8 +46,8 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * HelloSearch application.
  */
-public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandler,
-    SearchStartingHandler {
+public class HelloSearch implements EntryPoint, KeepHandler,
+    SearchCompleteHandler, SearchStartingHandler {
 
   private class GoogleCodeWebSearch extends WebSearch {
     public GoogleCodeWebSearch() {
@@ -61,10 +60,10 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
   private VerticalPanel clips = new VerticalPanel();
   private HorizontalPanel hp = new HorizontalPanel();
   private static final int CLIP_WIDTH = 200;
-  
+
   public void onKeep(KeepEvent event) {
     final Result result = event.getResult();
-    
+
     String title;
     if (result instanceof WebResult) {
       WebResult web = (WebResult) result;
@@ -101,12 +100,30 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
   }
 
   public void onModuleLoad() {
-   
+
     clips.setWidth("100%");
     clips.addStyleName("clips");
 
     clips.add(new Label("Saved Clippings:"));
+    clips.setWidth(CLIP_WIDTH + "px");
+    hp.add(clips);
+    final Label loadingLabel = new Label("Loading...");
+    hp.add(loadingLabel);
+    hp.setWidth("100%");
+    hp.getElement().getStyle().setPropertyPx("margin", 15);
+    RootPanel.get().add(hp);
 
+    // Use the AjaxLoader to load the Search API before running the rest of
+    // the startup.
+    SearchUtils.loadSearchApi(new Runnable() {
+      public void run() {
+        hp.remove(loadingLabel);
+        onApiLoad();
+      }
+    });
+  }
+
+  public void onApiLoad() {
     SearchControlOptions options = new SearchControlOptions();
 
     // We can use custom subclasses
@@ -125,19 +142,11 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
     options.setLinkTarget(LinkTarget.BLANK);
 
     SearchControl searchControl = new SearchControl(options);
-
     searchControl.addKeepHandler(this);
     searchControl.addSearchCompleteHandler(this);
     searchControl.addSearchStartingHandler(this);
     searchControl.execute("Google Web Toolkit");
-    
-    clips.setWidth(CLIP_WIDTH + "px");
-    hp.add(clips);
     hp.add(searchControl);
-    hp.setWidth("100%");
-    hp.getElement().getStyle().setPropertyPx("margin", 15);
-    
-    RootPanel.get().add(hp);
   }
 
   /**
@@ -153,5 +162,4 @@ public class HelloSearch implements EntryPoint, KeepHandler, SearchCompleteHandl
     System.out.println("Searching for query: " + event.getQuery() + " : "
         + event.getSearch().toString());
   }
-
 }
