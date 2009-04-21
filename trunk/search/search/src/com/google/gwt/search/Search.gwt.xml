@@ -13,7 +13,8 @@
 <!-- limitations under the License.                                         -->
 
 <module>
-	<inherits name="com.google.gwt.user.User"/>
-	<inherits name="com.google.gwt.search.jsio.JSIO"/>
-	<stylesheet src="http://www.google.com/uds/css/gsearch.css"/>
+  <inherits name="com.google.gwt.user.User"/>
+  <inherits name="com.google.gwt.search.jsio.JSIO"/>
+  <inherits name="com.google.gwt.ajaxloader.AjaxLoader"/>
+  <stylesheet src="http://www.google.com/uds/css/gsearch.css"/>
 </module>
