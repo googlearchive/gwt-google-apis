@@ -63,6 +63,62 @@ public class Maps {
   }-*/;
 
   /**
+   * Returns <code>true</code> if the application's UI layout is right-to-left
+   * in bidirectional languages such as Arabic or Hebrew.
+   * 
+   * Note: because bidirectional languages such as Arabic and Hebrew affect the
+   * layout of the GInfoWindow object, these languages are only selected if
+   * explicitly requested via an applicable <code>hl</code> parameter or through
+   * the addition of the allow_bidi=true parameter to the API bootstrap request.
+   * For more information about BCP 47, see the W3 documentation.
+   * 
+   * @return <code>true</code> if the application's UI layout is right-to-left
+   *         in bidirectional languages such as Arabic or Hebrew.
+   */
+  public static native boolean isRTL() /*-{
+    return $wnd.GLanguage.isRtl();
+  }-*/;
+
+  /**
+   * Writes the message as plain text into the log window. HTML markup
+   * characters will be escaped so that they are visible as characters.
+   * 
+   * @param message the message to write to the log window.
+   */
+  public static native void logWrite(String message) /*-{
+    $wnd.GLog.write(message);
+  }-*/;
+
+  /**
+   * Writes the message as plain text into the log window. HTML markup
+   * characters will be escaped so that they are visible as characters.
+   * 
+   * @param message the message to write to the log window.
+   * @param color CSS color specification for the text.
+   */
+  public static native void logWrite(String message, String color) /*-{
+    $wnd.GLog.write(message, color);
+  }-*/;
+
+  /**
+   * Writes text as HTML in the log window.
+   * 
+   * @param html message to write into the log window.
+   */
+  public static native void logWriteHtml(String html) /*-{
+    $wnd.GLog.write(html);
+  }-*/;
+
+  /**
+   * Writes a link to the given URL into the log window.
+   * 
+   * @param url URL to write into the log window.
+   */
+  public static native void logWriteUrl(String url) /*-{
+    $wnd.GLog.write(url);
+  }-*/;
+
+  /**
    * Use private constructor so this class can't be instantiated.
    */
   private Maps() {

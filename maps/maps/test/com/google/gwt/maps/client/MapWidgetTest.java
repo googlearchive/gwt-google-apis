@@ -37,6 +37,7 @@ public class MapWidgetTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
   }
@@ -59,6 +60,25 @@ public class MapWidgetTest extends GWTTestCase {
 
   public void testIsLoaded() {
     assertTrue("The MAPS api is not properly loaded.", Maps.isLoaded());
+  }
+
+  public void testIsRTL() {
+    assertFalse("Is RTL", Maps.isRTL());
+  }
+
+  public void testKeyboardHandler() {
+    LatLng center = LatLng.newInstance(0, 0);
+    final MapWidget map = new MapWidget(center, 1);
+    map.setSize("300px", "300px");
+    map.installKeyboardHandler();
+    RootPanel.get().add(map);
+  }
+
+  public void testlog() {
+    Maps.logWrite("foo");
+    Maps.logWrite("red foo", "#f00");
+    Maps.logWriteUrl("http://www.google.com/");
+    Maps.logWriteHtml("<b><i>HTML</i> Content</b>");
   }
 
   public void testMapWidgetCloseInfoWindow() {

@@ -95,6 +95,9 @@ public class DrawingOverlayDemo extends MapsDemo {
     // Go to Paris
     map = new MapWidget(LatLng.newInstance(48.859068, 2.344894), 12);
     map.setSize("500px", "400px");
+    
+    map.setDoubleClickZoom(false);
+    map.setDraggable(false);
 
     VerticalPanel panel = new VerticalPanel();
     panel.setSpacing(10);

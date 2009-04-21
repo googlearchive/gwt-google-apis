@@ -33,6 +33,7 @@ public class AdsManagerTest extends GWTTestCase {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
+  @Override
   public void gwtSetUp() {
     atlanta = LatLng.newInstance(33.7814790, -84.3880580);
     map = new MapWidget(atlanta, 8);

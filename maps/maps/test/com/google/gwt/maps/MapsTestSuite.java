@@ -18,6 +18,7 @@ package com.google.gwt.maps;
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.maps.client.AdsManagerTest;
 import com.google.gwt.maps.client.CopyrightEventTest;
+import com.google.gwt.maps.client.DraggableObjectTest;
 import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
 import com.google.gwt.maps.client.MapWidgetTest;
@@ -53,6 +54,7 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(MapWidgetEventsTest.class);
     suite.addTestSuite(MapsNotInstalledTest.class);
     suite.addTestSuite(MapWidgetTest.class);
+    suite.addTestSuite(DraggableObjectTest.class);
     suite.addTestSuite(ControlTest.class);
     suite.addTestSuite(GeocodeTest.class);
     suite.addTestSuite(StatusCodesTest.class);

@@ -67,11 +67,13 @@ public interface InfoWindowOptionsImpl extends JSFlyweightWrapper {
   /**
    * @deprecated use a GEvent handler instead.
    */
+  @Deprecated
   void setOnCloseFn(JavaScriptObject jsoPeer, VoidCallback closeFunction);
 
   /**
    * @deprecated use a GEvent handler instead.
    */
+  @Deprecated
   void setOnOpenFn(JavaScriptObject jsoPeer, VoidCallback openFunction);
 
   void setSelectedTab(JavaScriptObject jsoPeer, int tab);
