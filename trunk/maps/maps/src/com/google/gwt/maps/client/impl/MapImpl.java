@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.maps.client.DraggableObject;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.Control;
@@ -60,7 +61,7 @@ public interface MapImpl extends JSFlyweightWrapper {
   void clearOverlays(JavaScriptObject jsoPeer);
 
   void closeInfoWindow(JavaScriptObject jsoPeer);
-  
+
   void closeInfoWindow(MapWidget map);
 
   @Constructor("$wnd.GMap2")
@@ -92,7 +93,7 @@ public interface MapImpl extends JSFlyweightWrapper {
   void enableDoubleClickZoom(JavaScriptObject jsoPeer);
 
   void enableDragging(JavaScriptObject jsoPeer);
-  
+
   void enableGoogleBar(JavaScriptObject jsoPeer);
 
   void enableInfoWindow(JavaScriptObject jsoPeer);
@@ -104,7 +105,7 @@ public interface MapImpl extends JSFlyweightWrapper {
   LatLng fromDivPixelToLatLng(JavaScriptObject jsoPeer, Point pixel);
 
   Point fromLatLngToContainerPixel(JavaScriptObject jsoPeer, LatLng latlng);
-  
+
   Point fromLatLngToDivPixel(JavaScriptObject jsoPeer, LatLng latlng);
 
   LatLngBounds getBounds(JavaScriptObject jsoPeer);
@@ -116,6 +117,8 @@ public interface MapImpl extends JSFlyweightWrapper {
   LatLng getCenter(JavaScriptObject jsoPeer);
 
   MapType getCurrentMapType(JavaScriptObject jsoPeerPeer);
+
+  DraggableObject getDragObject(JavaScriptObject jsoPeerPeer);
 
   void getEarthInstance(JavaScriptObject jsoPeer, JavaScriptObject jsoCallback);
 
@@ -172,7 +175,8 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom);
 
-  void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom, MapType type);
+  void setCenter(JavaScriptObject jsoPeer, LatLng center, int zoom,
+      MapType type);
 
   void setMapType(JavaScriptObject jsoPeerPeer, MapType type);
 

@@ -31,7 +31,8 @@ public class MapsNotInstalledTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
-   public void gwtSetUp() {
+   @Override
+  public void gwtSetUp() {
      TestUtilities.cleanDom();
    }
 

@@ -26,6 +26,18 @@ import com.google.gwt.core.client.JsArray;
 public class LatLng extends JavaScriptObject {
 
   /**
+   * Converts the supplied latitude/longitude String value into a LatLng object.
+   * The passed string should be in the format "latitude,longitude." Any space
+   * between the latitude and longitude values will be ignored. This method will
+   * return a LatLng with precision to 6 digits
+   * 
+   * @return a LatLng with precision to 6 digits.
+   */
+  public static native LatLng fromUrlValue(String value) /*-{
+    return $wnd.GLatLng.fromUrlValue(value);
+  }-*/;
+
+  /**
    * Create a new point. latitude will be clamped to lie between -90 degrees and
    * +90 degrees, and longitude will be wrapped to lie between -180 degrees and
    * +180 degrees.
@@ -45,8 +57,8 @@ public class LatLng extends JavaScriptObject {
    * 
    * @param latitude value between -90 and +90 degrees (clamped)
    * @param longitude value between -180 and +180 degrees (wrapped)
-   * @param unbounded if <code>true</code>, then numbers will not be wrapped
-   *          or clamped.
+   * @param unbounded if <code>true</code>, then numbers will not be wrapped or
+   *          clamped.
    */
   public static native LatLng newInstance(double latitude, double longitude,
       boolean unbounded) /*-{
@@ -55,7 +67,8 @@ public class LatLng extends JavaScriptObject {
   }-*/;
 
   /**
-   * Convenience routine for creating a JsArray from Java array of LatLng values.
+   * Convenience routine for creating a JsArray from Java array of LatLng
+   * values.
    * 
    * @param points A Java array of LatLng values
    * @return A JavaScript array of LatLng values
@@ -72,7 +85,7 @@ public class LatLng extends JavaScriptObject {
   protected LatLng() {
     // Protected constructor required for JavaScript overlays.
   }
-  
+
   /**
    * Returns the distance from another LatLng in meters.
    * 
@@ -122,7 +135,7 @@ public class LatLng extends JavaScriptObject {
   public final native double getLatitudeRadians() /*-{
     return this.latRadians();
   }-*/;
-  
+
   /**
    * Returns the longitude coordinate of this point in degrees as a number
    * between -180 and 180.
@@ -144,12 +157,14 @@ public class LatLng extends JavaScriptObject {
   }-*/;
 
   /**
-   * Does what equals() ought to do, but we are constrained by the JS overlay rules.
+   * Does what equals() ought to do, but we are constrained by the JS overlay
+   * rules.
+   * 
    * @param other a point to compare
    * @return <code>true</code> if the latitude and longitude match.
    */
   public final native boolean isEquals(LatLng other) /*-{
-     return this.equals(other);
+    return this.equals(other);
   }-*/;
 
   /**

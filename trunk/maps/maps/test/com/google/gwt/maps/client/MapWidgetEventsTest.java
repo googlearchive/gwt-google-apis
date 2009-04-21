@@ -90,6 +90,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
   }

@@ -36,11 +36,14 @@ public interface TileLayerOverlayImpl extends JSFlyweightWrapper {
   @Constructor("$wnd.GTileLayerOverlay")
   JavaScriptObject construct(TileLayer tileLayer);
 
+  @Constructor("$wnd.GTileLayerOverlay")
+  JavaScriptObject construct(TileLayer tileLayer, JavaScriptObject options);
+
   TileLayer getTileLayer(TileLayerOverlay overlay);
 
   void hide(TileLayerOverlay overlay);
 
   void refresh(TileLayerOverlay overlay);
-  
+
   void show(TileLayerOverlay overlay);
 }
