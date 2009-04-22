@@ -15,6 +15,9 @@
  */
 package com.google.gwt.maps.client;
 
+import com.google.gwt.ajaxloader.client.AjaxLoader;
+import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
+
 /**
  * A collection of static methods and API wide constants.
  */
@@ -80,7 +83,57 @@ public class Maps {
   }-*/;
 
   /**
+   * Initializes the Maps API using the AjaxLoader. This is in lieu of
+   * specifying the &lt;script&gt; tag for maps.google.com in your hosted HTML
+   * page or project's GWT module specification.
+   * 
+   * @see "http://code.google.com/apis/maps/documentation/#AJAX_Loader"
+   * 
+   * @param key Maps API key. See http://code.google.com/apis/maps/signup.html
+   * @param version The version of the maps API to load. For example, "2.x"
+   * @param usingSensor Use of the Google Maps API now requires that you
+   *          indicate whether your application is using a sensor (such as a GPS
+   *          locator) to determine the user's location. This is especially
+   *          important for mobile devices.
+   * @param settings other AjaxLoader settings for the Maps API. This parameter
+   *          must not be <code>null</code>.
+   * @param onLoad callback to be invoked when the library is loaded.
+   */
+  public static void loadMapsApi(String key, String version,
+      boolean usingSensor, AjaxLoaderOptions settings, Runnable onLoad) {
+    assert settings != null;
+    AjaxLoader.init(key);
+    if (usingSensor) {
+      settings.setOtherParms("sensor=true");
+    }
+    AjaxLoader.loadApi("maps", version, onLoad, settings);
+  }
+
+  /**
+   * Initializes the Maps API using the AjaxLoader. This is in lieu of
+   * specifying the &lt;script&gt; tag for maps.google.com in your hosted HTML
+   * page or project's GWT module specification.
+   * 
+   * @see "http://code.google.com/apis/maps/documentation/#AJAX_Loader"
+   * 
+   * @param key Maps API key. See http://code.google.com/apis/maps/signup.html
+   * @param version The version of the maps API to load. For example, "2.x"
+   * @param usingSensor Use of the Google Maps API now requires that you
+   *          indicate whether your application is using a sensor (such as a GPS
+   *          locator) to determine the user's location. This is especially
+   *          important for mobile devices.
+   * @param onLoad callback to be invoked when the library is loaded.
+   */
+  public static void loadMapsApi(String key, String version,
+      boolean usingSensor, Runnable onLoad) {
+    loadMapsApi(key, version, usingSensor, AjaxLoaderOptions.newInstance(),
+        onLoad);
+  }
+
+  /**
    * Writes the message as plain text into the log window. HTML markup
+   * characters will be escaped so that they are visible as characters.
+   * 
    * characters will be escaped so that they are visible as characters.
    * 
    * @param message the message to write to the log window.
