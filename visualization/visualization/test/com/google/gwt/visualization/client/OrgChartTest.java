@@ -40,6 +40,9 @@ public class OrgChartTest extends VisualizationTest {
         Widget widget;
         Options options = Options.create();
         options.setAllowHtml(true);
+        options.setAllowCollapse(true);
+        options.setColor("#00FF00");
+        options.setSelectionColor("#FF0000");
         widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());

@@ -17,6 +17,7 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
@@ -48,8 +49,20 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
     protected Options() {
     }
 
+    public final native void setAllowCollapse(boolean allow) /*-{
+      this.allowCollapse = allow;
+    }-*/;
+
     public final native void setAllowHtml(boolean allowHtml) /*-{
       this.allowHtml = allowHtml;
+    }-*/;
+
+    public final native void setColor(String color) /*-{
+      this.color = color;
+    }-*/;
+
+    public final native void setSelectionColor(String color) /*-{
+      this.selectionColor = color;
     }-*/;
 
     public final void setSize(Size size) {
@@ -81,6 +94,18 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
   public final void addSelectHandler(SelectHandler handler) {
     Selection.addSelectHandler(this, handler);
   }
+
+  public final native void collapse(int row, boolean collapsed) /*-{
+    this.collapse(row, collapsed);
+  }-*/;
+
+  public final native JsArrayInteger getChildrenIndexes(int row) /*-{
+    return this.getChildrenIndexes(row);
+  }-*/;
+
+  public final native JsArrayInteger getCollapsedNodes() /*-{
+    return this.getCollapsedNodes();
+  }-*/;
 
   public final JsArray<Selection> getSelections() {
     return Selection.getSelections(this);
