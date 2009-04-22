@@ -69,17 +69,25 @@ public class GoogleBarAdsOptions extends JavaScriptObject {
    * @return a new instance of GoogleBarAdsOptions.
    */
   public static native GoogleBarAdsOptions newInstance() /*-{
-    // A complex constructor works around inlining bug. See GWT issue 3568
-    // http://code.google.com/p/google-web-toolkit/issues/detail?id=3568
-    var obj;
-    obj = new $wnd.Object();
-    return obj;
-  }-*/;
+     // A complex constructor works around inlining bug. See GWT issue 3568
+     // http://code.google.com/p/google-web-toolkit/issues/detail?id=3568
+     var obj;
+     obj = new $wnd.Object();
+     return obj;
+   }-*/;
 
   protected GoogleBarAdsOptions() {
     // Protected constructor required for JSO Overlays
   }
 
+  /**
+   * Specifies the ad "safety" level to use for advertising results on your
+   * GGoogleBar. Ad Safety levels indicate the level of adult content filtering
+   * applied to search results.
+   * 
+   * @param adsafe one of the MapUIOptions.AdSafeOptions constant values. Any
+   *          other values are ignored.
+   */
   public final GoogleBarAdsOptions setAdSafe(AdSafeOption adsafe) {
     return setAdSafe(adsafe.getValue());
   }
@@ -89,13 +97,13 @@ public class GoogleBarAdsOptions extends JavaScriptObject {
    * GGoogleBar. Ad Safety levels indicate the level of adult content filtering
    * applied to search results.
    * 
-   * @param adsafe one of the MapUIOptions.ADSAFE constant values. Any other
-   *          values are ignored.
+   * @param adsafe one of the AdSafe constant values ("none", "low", "medium",
+   *          "high".) Any other values are ignored.
    */
   public final native GoogleBarAdsOptions setAdSafe(String adsafe) /*-{
-    this.adsafe = adsafe;
-    return this;
-  }-*/;
+     this.adsafe = adsafe;
+     return this;
+   }-*/;
 
   /**
    * Specifies the channel number of your Google AdSense for Search account, if
@@ -107,9 +115,9 @@ public class GoogleBarAdsOptions extends JavaScriptObject {
    * @param channel the adsense channel name.
    */
   public final native GoogleBarAdsOptions setChannel(String channel) /*-{
-    this.channel = channel;
-    return this;
-  }-*/;
+     this.channel = channel;
+     return this;
+   }-*/;
 
   /**
    * Specifies the Client ID of your Google AdSense for Search account.
@@ -119,9 +127,9 @@ public class GoogleBarAdsOptions extends JavaScriptObject {
    * @param client the client id for your AdSense account.
    */
   public final native GoogleBarAdsOptions setClient(String client) /*-{
-    this.client = client;
-    return this;
-  }-*/;
+     this.client = client;
+     return this;
+   }-*/;
 
   /**
    * Specifies the language in which to serve advertising results. Languages are
@@ -132,7 +140,7 @@ public class GoogleBarAdsOptions extends JavaScriptObject {
    *          serve advertising results.
    */
   public final native GoogleBarAdsOptions setLanguage(String language) /*-{
-    this.language = language;
-    return this;
-  }-*/;
+     this.language = language;
+     return this;
+   }-*/;
 }
