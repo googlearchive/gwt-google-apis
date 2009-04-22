@@ -213,6 +213,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     list.addMapsDemo(Geocoder2Demo.init());
     list.addMapsDemo(ReverseGeocoderDemo.init());
     list.addMapsDemo(EarthPluginDemo.init());
+    list.addMapsDemo(GoogleBarDemo.init());
   }
 
   private void showInfo() {

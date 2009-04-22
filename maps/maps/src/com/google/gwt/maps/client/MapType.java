@@ -303,21 +303,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getDefaultMapType(int i) /*-{
-    var o = $wnd.G_DEFAULT_MAP_TYPES[i];
-    if (o.__gwtPeer) {
-       // Avoid double wrapping the object.
-       return o.__gwtPeer;
-    } else {
-      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-    }
-  }-*/;
+     var o = $wnd.G_DEFAULT_MAP_TYPES[i];
+     if (o.__gwtPeer) {
+        // Avoid double wrapping the object.
+        return o.__gwtPeer;
+     } else {
+       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+     }
+   }-*/;
 
   /**
    * @return the length of the G_DEFAULT_MAP_TYPES array.
    */
   private static native int getDefaultMapTypesSize() /*-{
-    return $wnd.G_DEFAULT_MAP_TYPES.length;
-  }-*/;
+     return $wnd.G_DEFAULT_MAP_TYPES.length;
+   }-*/;
 
   /**
    * Return one member of the G_MARS_MAP_TYPES array. If it has already been
@@ -327,21 +327,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getMarsMapType(int i) /*-{
-    var o = $wnd.G_MARS_MAP_TYPES[i];
-    if (o.__gwtPeer) {
-       // Avoid double wrapping the object.
-       return o.__gwtPeer;
-     } else {
-       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-     }
-  }-*/;
+     var o = $wnd.G_MARS_MAP_TYPES[i];
+     if (o.__gwtPeer) {
+        // Avoid double wrapping the object.
+        return o.__gwtPeer;
+      } else {
+        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+      }
+   }-*/;
 
   /**
    * @return the length of the MARS_MAP_TYPES array.
    */
   private static native int getMarsMapTypesSize() /*-{
-    return $wnd.G_MARS_MAP_TYPES.length;
-  }-*/;
+     return $wnd.G_MARS_MAP_TYPES.length;
+   }-*/;
 
   /**
    * Return one member of the G_MOON_MAP_TYPES array. If it has already been
@@ -351,21 +351,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getMoonMapType(int i) /*-{
-    var o = $wnd.G_MOON_MAP_TYPES[i];
-    if (o.__gwtPeer) {
-       // Avoid double wrapping the object.
-       return o.__gwtPeer;
-    } else {
-      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-    }
-  }-*/;
+     var o = $wnd.G_MOON_MAP_TYPES[i];
+     if (o.__gwtPeer) {
+        // Avoid double wrapping the object.
+        return o.__gwtPeer;
+     } else {
+       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+     }
+   }-*/;
 
   /**
    * @return the length of the MOON_MAP_TYPES array.
    */
   private static native int getMoonMapTypesSize() /*-{
-    return $wnd.G_MOON_MAP_TYPES.length;
-  }-*/;
+     return $wnd.G_MOON_MAP_TYPES.length;
+   }-*/;
 
   /**
    * Return one member of the G_SKY_MAP_TYPES array. If it has already been
@@ -375,21 +375,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getSkyMapType(int i) /*-{
-    var o = $wnd.G_SKY_MAP_TYPES[i];
-    if (o.__gwtPeer) {
-       // Avoid double wrapping the object.
-       return o.__gwtPeer;
-    } else {
-      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-    }
-  }-*/;
+     var o = $wnd.G_SKY_MAP_TYPES[i];
+     if (o.__gwtPeer) {
+        // Avoid double wrapping the object.
+        return o.__gwtPeer;
+     } else {
+       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+     }
+   }-*/;
 
   /**
    * @return the length of the SKY_MAP_TYPES array.
    */
   private static native int getSkyMapTypesSize() /*-{
-    return $wnd.G_SKY_MAP_TYPES.length;
-  }-*/;
+     return $wnd.G_SKY_MAP_TYPES.length;
+   }-*/;
 
   private static void initMapTypes() {
     if (mapTypesInitialized) {
