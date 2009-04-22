@@ -23,6 +23,7 @@ import com.google.gwt.core.ext.typeinfo.JEnumType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.gadgets.client.EnumPreference.EnumDisplayValue;
+import com.google.gwt.gadgets.client.UserPreferences.PreferenceAttributes;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import org.w3c.dom.Document;
@@ -65,6 +66,13 @@ public class EnumPreferenceGenerator implements PreferenceGenerator {
       throws UnableToCompleteException {
     logger = logger.branch(TreeLogger.DEBUG, "Generating enumvalue elements",
         null);
+
+    PreferenceAttributes attributes = m.getAnnotation(PreferenceAttributes.class);
+    if (attributes != null && attributes.options() == PreferenceAttributes.Options.HIDDEN) {
+      // Don't generate EnumValue elements for hidden preferences
+      logger.log(TreeLogger.DEBUG, "No, not generating enumvalue elements for hidden pref", null);
+      return;
+    }
 
     JEnumType enumType = getEnumType(preferenceType);
     assert enumType != null;
