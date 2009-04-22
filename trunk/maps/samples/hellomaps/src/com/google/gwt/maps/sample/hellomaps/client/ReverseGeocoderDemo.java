@@ -18,7 +18,6 @@ package com.google.gwt.maps.sample.hellomaps.client;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MarkerClickHandler;
 import com.google.gwt.maps.client.geocode.Geocoder;
@@ -75,7 +74,7 @@ public class ReverseGeocoderDemo extends MapsDemo {
     outer.add(map);
     map.setSize("500px", "300px");
     initWidget(outer);
-    map.addControl(new LargeMapControl());
+    map.setUIToDefault();
 
     map.addMapClickHandler(new MapClickHandler() {
 

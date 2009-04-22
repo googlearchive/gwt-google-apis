@@ -16,8 +16,6 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.MapTypeControl;
-import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
@@ -72,9 +70,7 @@ public class ClickDemo extends MapsDemo {
     map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
-
-    map.addControl(new SmallMapControl());
-    map.addControl(new MapTypeControl());
+    map.setUIToDefault();
 
     map.addMapClickHandler(new MapClickHandler() {
       public void onClick(MapClickEvent e) {

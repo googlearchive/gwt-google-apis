@@ -20,8 +20,6 @@ import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.MapTypeControl;
-import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
@@ -260,8 +258,7 @@ public class MapEventDemo extends MapsDemo {
     // Center the new map on Midtown Atlanta
     map = new MapWidget(ATLANTA, 13);
     map.setSize("500px", "300px");
-    map.addControl(new SmallMapControl());
-    map.addControl(new MapTypeControl());
+    map.setUIToDefault();
 
     MarkerOptions opt = MarkerOptions.newInstance();
     opt.setDraggable(true);

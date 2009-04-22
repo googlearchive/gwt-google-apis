@@ -38,6 +38,9 @@ public interface ControlImpl extends JSFlyweightWrapper {
   @Constructor("$wnd.GLargeMapControl")
   JavaScriptObject createLargeMapControl();
 
+  @Constructor("$wnd.GLargeMapControl3D")
+  JavaScriptObject createLargeMapControl3D();
+  
   @Constructor("$wnd.GMapTypeControl")
   JavaScriptObject createMapTypeControl();
 
@@ -50,6 +53,9 @@ public interface ControlImpl extends JSFlyweightWrapper {
   @Constructor("$wnd.GMenuMapTypeControl")
   JavaScriptObject createMenuMapTypeControl(boolean useShortNames);
 
+  @Constructor("$wnd.GNavLabelControl")
+  JavaScriptObject createNavLabelControl();
+
   @Constructor("$wnd.GOverviewMapControl")
   JavaScriptObject createOverviewMapControl();
 
@@ -61,4 +67,7 @@ public interface ControlImpl extends JSFlyweightWrapper {
 
   @Constructor("$wnd.GSmallZoomControl")
   JavaScriptObject createSmallZoomControl();
+  
+  @Constructor("$wnd.GSmallZoomControl3D")
+  JavaScriptObject createSmallZoomControl3D();
 }

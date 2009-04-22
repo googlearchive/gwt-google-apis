@@ -18,7 +18,6 @@ package com.google.gwt.maps.sample.hellomaps.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.event.EarthInstanceHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.Timer;
@@ -66,7 +65,7 @@ public class EarthPluginDemo extends MapsDemo {
     Panel panel = new FlowPanel();
     map = new MapWidget(LatLng.newInstance(37.42317, -122.08364), 16);
     map.setSize("500px", "500px");
-    map.addControl(new SmallMapControl());
+    map.setUIToDefault();
     map.addMapType(MapType.getEarthMap());
     map.setCurrentMapType(MapType.getEarthMap());
     panel.add(map);
@@ -101,29 +100,29 @@ public class EarthPluginDemo extends MapsDemo {
    * @param ge The Google Earth Instance
    */
   private native void createPlacemark(JavaScriptObject ge) /*-{
-     var placemark = ge.createPlacemark('');
-     placemark.setName("You are at Google");
-     ge.getFeatures().appendChild(placemark);
+    var placemark = ge.createPlacemark('');
+    placemark.setName("You are at Google");
+    ge.getFeatures().appendChild(placemark);
 
-     // Create style map for placemark
-     var normal = ge.createIcon('');
-     normal.setHref('http://maps.google.com/mapfiles/kml/paddle/red-circle.png');
-     var iconNormal = ge.createStyle('');
-     iconNormal.getIconStyle().setIcon(normal);
-     var highlight = ge.createIcon('');
-     highlight.setHref('http://maps.google.com/mapfiles/kml/paddle/red-circle.png');
-     var iconHighlight = ge.createStyle('');
-     iconHighlight.getIconStyle().setIcon(highlight);
-     var styleMap = ge.createStyleMap('');
-     styleMap.setNormalStyle(iconNormal);
-     styleMap.setHighlightStyle(iconHighlight);
-     placemark.setStyleSelector(styleMap);
+    // Create style map for placemark
+    var normal = ge.createIcon('');
+    normal.setHref('http://maps.google.com/mapfiles/kml/paddle/red-circle.png');
+    var iconNormal = ge.createStyle('');
+    iconNormal.getIconStyle().setIcon(normal);
+    var highlight = ge.createIcon('');
+    highlight.setHref('http://maps.google.com/mapfiles/kml/paddle/red-circle.png');
+    var iconHighlight = ge.createStyle('');
+    iconHighlight.getIconStyle().setIcon(highlight);
+    var styleMap = ge.createStyleMap('');
+    styleMap.setNormalStyle(iconNormal);
+    styleMap.setHighlightStyle(iconHighlight);
+    placemark.setStyleSelector(styleMap);
 
-     // Create point     
-     var la = ge.getView().copyAsLookAt(ge.ALTITUDE_RELATIVE_TO_GROUND);
-     var point = ge.createPoint('');
-     point.setLatitude(la.getLatitude());
-     point.setLongitude(la.getLongitude());
-     placemark.setGeometry(point);
-   }-*/;
+    // Create point     
+    var la = ge.getView().copyAsLookAt(ge.ALTITUDE_RELATIVE_TO_GROUND);
+    var point = ge.createPoint('');
+    point.setLatitude(la.getLatitude());
+    point.setLongitude(la.getLongitude());
+    placemark.setGeometry(point);
+  }-*/;
 }

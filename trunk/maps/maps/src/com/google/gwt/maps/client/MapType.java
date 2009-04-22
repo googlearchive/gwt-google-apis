@@ -85,7 +85,7 @@ public final class MapType {
   /**
    * Returns G_DEFAULT_MAP_TYPES as an Java Array of MapType objects.
    * 
-   * @return  an immutable list of MapType objects.
+   * @return an immutable list of MapType objects.
    */
   public static List<MapType> getDefaultMapTypes() {
     if (defaultMapTypes != null) {
@@ -101,55 +101,56 @@ public final class MapType {
     return defaultMapTypes;
   }
 
-    /**
-     * Returns a map type that shows Google Earth using the browser plugin.
-     * 
-     * @return a map type that shows Google Earth.
-     */
-    public static MapType getEarthMap() {
-      initMapTypes();
-      return earthMap;
-    }
+  /**
+   * Returns a map type that shows Google Earth using the browser plugin.
+   * 
+   * @return a map type that shows Google Earth.
+   */
+  public static MapType getEarthMap() {
+    initMapTypes();
+    return earthMap;
+  }
 
-    /**
-     * Returns a map type that shows transparent street maps over Google Earth
-     * satellite images.
-     * 
-     * @return a map type that shows transparent street maps over Google Earth
-     *         satellite images.
-     */
-    public static MapType getHybridMap() {
-      initMapTypes();
-      return hybridMap;
-    }
+  /**
+   * Returns a map type that shows transparent street maps over Google Earth
+   * satellite images.
+   * 
+   * @return a map type that shows transparent street maps over Google Earth
+   *         satellite images.
+   */
+  public static MapType getHybridMap() {
+    initMapTypes();
+    return hybridMap;
+  }
 
-    /**
-     * Returns a map type displays a shaded relief map of the surface of Mars.
-     * 
-     * @return a map type displays a shaded relief map of the surface of Mars,
-     *         color-coded by altitude. This map type is not displayed within map
-     *         type controls by default. (Since 2.95)
-     */
-    public static MapType getMarsElevationMap() {
-      initMapTypes();
-      return marsElevationMap;
-    }
+  /**
+   * Returns a map type displays a shaded relief map of the surface of Mars.
+   * 
+   * @return a map type displays a shaded relief map of the surface of Mars,
+   *         color-coded by altitude. This map type is not displayed within map
+   *         type controls by default. (Since 2.95)
+   */
+  public static MapType getMarsElevationMap() {
+    initMapTypes();
+    return marsElevationMap;
+  }
 
-    /**
-     * Returns a map type displays a shaded infrared map of the surface of Mars.
-     * 
-     * @return a map type displays a shaded infrared map of the surface of Mars,
-     *         where warmer areas appear brighter and colder areas appear darker.
-     *         (Since 2.95)
-     */
-    public static MapType getMarsInfraredMap() {
-      initMapTypes();
-      return marsInfraredMap;
-    }
+  /**
+   * Returns a map type displays a shaded infrared map of the surface of Mars.
+   * 
+   * @return a map type displays a shaded infrared map of the surface of Mars,
+   *         where warmer areas appear brighter and colder areas appear darker.
+   *         (Since 2.95)
+   */
+  public static MapType getMarsInfraredMap() {
+    initMapTypes();
+    return marsInfraredMap;
+  }
+
   /**
    * Turns G_MARS_MAP_TYPES into an immutable of MapType objects.
    * 
-   * @return  an immutable list of MapType objects.
+   * @return an immutable list of MapType objects.
    */
   public static List<MapType> getMarsMapTypes() {
     if (marsMapTypes != null) {
@@ -302,21 +303,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getDefaultMapType(int i) /*-{
-     var o = $wnd.G_DEFAULT_MAP_TYPES[i];
-     if (o.__gwtPeer) {
-        // Avoid double wrapping the object.
-        return o.__gwtPeer;
-     } else {
-       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-     }
+    var o = $wnd.G_DEFAULT_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+    } else {
+      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+    }
   }-*/;
 
   /**
    * @return the length of the G_DEFAULT_MAP_TYPES array.
    */
   private static native int getDefaultMapTypesSize() /*-{
-     return $wnd.G_DEFAULT_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_DEFAULT_MAP_TYPES.length;
+  }-*/;
 
   /**
    * Return one member of the G_MARS_MAP_TYPES array. If it has already been
@@ -326,21 +327,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getMarsMapType(int i) /*-{
-     var o = $wnd.G_MARS_MAP_TYPES[i];
-     if (o.__gwtPeer) {
-        // Avoid double wrapping the object.
-        return o.__gwtPeer;
-      } else {
-        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-      }
-   }-*/;
+    var o = $wnd.G_MARS_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+     } else {
+       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+     }
+  }-*/;
 
   /**
    * @return the length of the MARS_MAP_TYPES array.
    */
   private static native int getMarsMapTypesSize() /*-{
-     return $wnd.G_MARS_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_MARS_MAP_TYPES.length;
+  }-*/;
 
   /**
    * Return one member of the G_MOON_MAP_TYPES array. If it has already been
@@ -350,21 +351,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getMoonMapType(int i) /*-{
-      var o = $wnd.G_MOON_MAP_TYPES[i];
-      if (o.__gwtPeer) {
-         // Avoid double wrapping the object.
-         return o.__gwtPeer;
-      } else {
-        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-      }
-   }-*/;
+    var o = $wnd.G_MOON_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+    } else {
+      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+    }
+  }-*/;
 
   /**
    * @return the length of the MOON_MAP_TYPES array.
    */
   private static native int getMoonMapTypesSize() /*-{
-     return $wnd.G_MOON_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_MOON_MAP_TYPES.length;
+  }-*/;
 
   /**
    * Return one member of the G_SKY_MAP_TYPES array. If it has already been
@@ -374,21 +375,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getSkyMapType(int i) /*-{
-      var o = $wnd.G_SKY_MAP_TYPES[i];
-      if (o.__gwtPeer) {
-         // Avoid double wrapping the object.
-         return o.__gwtPeer;
-      } else {
-        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-      }
-   }-*/;
+    var o = $wnd.G_SKY_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+    } else {
+      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+    }
+  }-*/;
 
   /**
    * @return the length of the SKY_MAP_TYPES array.
    */
   private static native int getSkyMapTypesSize() /*-{
-     return $wnd.G_SKY_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_SKY_MAP_TYPES.length;
+  }-*/;
 
   private static void initMapTypes() {
     if (mapTypesInitialized) {
@@ -456,15 +457,14 @@ public final class MapType {
       final MapTypeNewCopyrightHandler handler) {
     maybeInitMapTypeNewCopyrightHandlers();
 
-    mapTypeNewCopyrightHandlers.addHandler(handler,
-        new CopyrightCallback() {
-          @Override
-          public void callback(Copyright copyright) {
-            MapTypeNewCopyrightEvent e = new MapTypeNewCopyrightEvent(
-                MapType.this, copyright);
-            handler.onNewCopyright(e);
-          }
-        });
+    mapTypeNewCopyrightHandlers.addHandler(handler, new CopyrightCallback() {
+      @Override
+      public void callback(Copyright copyright) {
+        MapTypeNewCopyrightEvent e = new MapTypeNewCopyrightEvent(
+            MapType.this, copyright);
+        handler.onNewCopyright(e);
+      }
+    });
   }
 
   /**
@@ -496,8 +496,8 @@ public final class MapType {
    * @return the copyrights corresponding to the given viewport
    */
   public String[] getCopyrights(LatLngBounds bounds, int zoomLevel) {
-    JSList<String> copyrights = MapTypeImpl.impl.getCopyrights(jsoPeer, bounds,
-        zoomLevel);
+    JSList<String> copyrights = MapTypeImpl.impl.getCopyrights(jsoPeer,
+        bounds, zoomLevel);
     String[] returnValue = new String[copyrights.size()];
     JsUtil.toArray(copyrights, returnValue);
     return returnValue;
@@ -553,6 +553,15 @@ public final class MapType {
    */
   public String getName(boolean shortName) {
     return MapTypeImpl.impl.getName(jsoPeer, shortName);
+  }
+
+  /**
+   * Returns the native JavaScript object representing this MapType.
+   * 
+   * @return the native JavaScript object representing this MapType.
+   */
+  public JavaScriptObject getPeer() {
+    return jsoPeer;
   }
 
   /**
@@ -643,7 +652,7 @@ public final class MapType {
     maybeInitMapTypeNewCopyrightHandlers();
     mapTypeNewCopyrightHandlers.trigger(event.getCopyright());
   }
-  
+
   /**
    * Lazy init the HandlerCollection.
    */
