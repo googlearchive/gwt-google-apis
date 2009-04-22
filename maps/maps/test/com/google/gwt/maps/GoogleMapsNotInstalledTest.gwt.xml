@@ -22,6 +22,6 @@
   <!-- module that do require the JSON module.                              -->
   <inherits name="com.google.gwt.json.JSON" />
     
-  <!-- The maps script tag is intentionally omitted to test Maps.isLoaded() -->
+  <!-- The maps script tag is intentionally omitted to test Maps.isLoded()  -->
   
 </module>

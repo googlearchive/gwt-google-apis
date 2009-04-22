@@ -17,7 +17,6 @@ package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.GeoXmlLoadCallback;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
@@ -84,7 +83,7 @@ public class KmlOverlayDemo extends MapsDemo {
     Panel panel = new FlowPanel();
     map = new MapWidget(LatLng.newInstance(41.875696, -87.624207), 11);
     map.setSize("640px", "480px");
-    map.addControl(new LargeMapControl());
+    map.setUIToDefault();
     panel.add(map);
 
     // Toggle the visibility of the overlays by

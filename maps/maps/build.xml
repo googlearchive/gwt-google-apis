@@ -43,15 +43,6 @@
 			<fileset dir="src" excludes="**/package.html" />
 			<fileset dir="${javac.out}" />
 		</gwt.jar>
-                <gwt.noredist.jar>
-                        <fileset dir="src">
-                                <exclude name="**/package.html" />
-                                <exclude name="**/com/google/gwt/ajaxloader/**" />
-                        </fileset>
-                        <fileset dir="${javac.out}" >
-                                <exclude name="**/com/google/gwt/ajaxloader/**" />
-                        </fileset>
-                </gwt.noredist.jar>
 	</target>
 
 	<target name="checkstyle" depends="compile" description="Static analysis of source">

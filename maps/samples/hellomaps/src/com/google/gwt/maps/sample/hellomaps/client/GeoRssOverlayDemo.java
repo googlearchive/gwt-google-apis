@@ -17,7 +17,6 @@ package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.GeoXmlLoadCallback;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
@@ -87,7 +86,7 @@ public class GeoRssOverlayDemo extends MapsDemo {
 
     map = new MapWidget(LatLng.newInstance(49.496675, -102.65625), 3);
     map.setSize("640px", "480px");
-    map.addControl(new LargeMapControl());
+    map.setUIToDefault();
     panel.add(map);
     toggleButton = new Button("Toggle Markers");
     toggleButton.setEnabled(false);

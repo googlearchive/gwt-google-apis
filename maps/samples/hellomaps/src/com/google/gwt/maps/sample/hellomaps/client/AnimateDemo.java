@@ -71,6 +71,7 @@ public class AnimateDemo extends MapsDemo {
   public AnimateDemo() {
     map = new MapWidget(start, 13);
     map.setSize("500px", "300px");
+    map.setUIToDefault();
     initWidget(map);
   }
 

@@ -18,8 +18,6 @@ package com.google.gwt.maps.sample.hellomaps.client;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.MapTypeControl;
-import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.event.MarkerClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
@@ -78,9 +76,7 @@ public class IconClassDemo extends MapsDemo {
     map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
-
-    map.addControl(new SmallMapControl());
-    map.addControl(new MapTypeControl());
+    map.setUIToDefault();
 
     // Create a base icon for all of our markers that specifies the
     // shadow, icon dimensions, etc.
@@ -128,11 +124,12 @@ public class IconClassDemo extends MapsDemo {
 
       public void onClick(MarkerClickEvent event) {
         InfoWindow info = map.getInfoWindow();
-        info.open(event.getSender(), new InfoWindowContent("Marker <b>" + letter + "</b>"));
+        info.open(event.getSender(), new InfoWindowContent("Marker <b>"
+            + letter + "</b>"));
       }
-      
+
     });
-    
+
     return marker;
   }
 }

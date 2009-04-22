@@ -42,7 +42,8 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class InfoWindowDemo extends MapsDemo {
 
-  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790, -84.3880580);
+  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790,
+      -84.3880580);
   private static HTML descHTML = null;
   private static final String TEST_DEFAULT = "Default Info Window";
   private static final String TEST_IMAGE = "Test adding an Image";
@@ -104,6 +105,7 @@ public class InfoWindowDemo extends MapsDemo {
       }
     };
   }
+
   private final ListBox actionListBox;
   private InfoWindow info = null;
 
@@ -175,15 +177,29 @@ public class InfoWindowDemo extends MapsDemo {
       HTML htmlWidget = new HTML("<h1>ATTENTION PLEASE</h1>"
           + "<p> I have a few things to say to you (click maximize.)</p>");
       content = new InfoWindowContent(htmlWidget);
-      content.setMaxContent("<p>Now is the time for all good men to come to the"
-          + " aid of their country because we hold these truths to be self"
-          + " evident, that I have a dream, that one day our children and our"
-          + " children's children will tear down this wall!</p>"
-          + "<p>Now is the time for all good men to come to the"
-          + " aid of their country because we hold these truths to be self"
-          + " evident, that I have a dream, that one day our children and our"
-          + " children's children will tear down this wall!</p>");
-      content.setMaxTitle("ATTENTION PLEASE");
+      content.setMaxContent("<p>Lorem ipsum dolor sit amet, consetetur "  
+      + "sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut "
+      + "labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos "
+      + "et accusam et justo duo dolores et ea rebum. Stet clita kasd "
+      + "gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. "
+      + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam "
+      + "nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam "
+      + "erat, sed diam voluptua. At vero eos et accusam et justo duo dolores "
+      + "et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est "
+      + "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur "
+      + "sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore "
+      + "et dolore magna aliquyam erat, sed diam voluptua. At vero eos et "
+      + "accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, "
+      + "no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
+      + "<p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit "
+      + "esse molestie consequat, vel illum dolore eu feugiat nulla facilisis "
+      + "at vero eros et accumsan et iusto odio dignissim qui blandit "
+      + "praesent luptatum zzril delenit augue duis dolore te feugait nulla "
+      + "facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
+      + "sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna "
+      + "aliquam erat volutpat.</p>");
+
+      content.setMaxTitle("Lorem Ipsum");
 
     } else if (selection.equals(TEST_IMAGE)) {
 

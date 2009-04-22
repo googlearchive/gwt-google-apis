@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.DraggableObject;
 import com.google.gwt.maps.client.MapType;
+import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.Control;
 import com.google.gwt.maps.client.control.ControlPosition;
@@ -39,6 +40,8 @@ import com.google.gwt.user.client.Element;
  */
 public interface MapImpl extends JSFlyweightWrapper {
 
+  // TODO(zundel): changing this class to a JavaScript overlay will prevent 
+  //  problems when down-grading the API version.
   MapImpl impl = GWT.create(MapImpl.class);
 
   void addControl(JavaScriptObject jsoPeer, Control control);
@@ -82,6 +85,8 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void disableInfoWindow(JavaScriptObject jsoPeer);
 
+  void disablePinchToZoom(JavaScriptObject jsoPeer);
+
   void disableScrollWheelZoom(JavaScriptObject jsoPeer);
 
   boolean doubleClickZoomEnabled(JavaScriptObject jsoPeer);
@@ -97,6 +102,8 @@ public interface MapImpl extends JSFlyweightWrapper {
   void enableGoogleBar(JavaScriptObject jsoPeer);
 
   void enableInfoWindow(JavaScriptObject jsoPeer);
+
+  void enablePinchToZoom(JavaScriptObject jsoPeer);
 
   void enableScrollWheelZoom(JavaScriptObject jsoPeer);
 
@@ -117,6 +124,8 @@ public interface MapImpl extends JSFlyweightWrapper {
   LatLng getCenter(JavaScriptObject jsoPeer);
 
   MapType getCurrentMapType(JavaScriptObject jsoPeerPeer);
+
+  MapUIOptions getDefaultUI(JavaScriptObject jsoPeer);
 
   DraggableObject getDragObject(JavaScriptObject jsoPeerPeer);
 
@@ -159,6 +168,8 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void panTo(JavaScriptObject jsoPeer, LatLng center);
 
+  boolean pinchToZoomEnabled(JavaScriptObject jsoPeer);
+
   void removeControl(JavaScriptObject jsoPeer, Control control);
 
   void removeMapType(JavaScriptObject jsoPeerPeer, MapType type);
@@ -180,6 +191,10 @@ public interface MapImpl extends JSFlyweightWrapper {
 
   void setMapType(JavaScriptObject jsoPeerPeer, MapType type);
 
+  void setUI(JavaScriptObject jsoPeer, MapUIOptions options);
+
+  void setUIToDefault(JavaScriptObject jsoPeer);
+
   void setZoom(JavaScriptObject jsoPeer, int level);
 
   void showMapBlowup(MapWidget map, LatLng point, JavaScriptObject options);
@@ -187,5 +202,4 @@ public interface MapImpl extends JSFlyweightWrapper {
   void zoomIn(JavaScriptObject jsoPeer);
 
   void zoomOut(JavaScriptObject jsoPeer);
-
 }

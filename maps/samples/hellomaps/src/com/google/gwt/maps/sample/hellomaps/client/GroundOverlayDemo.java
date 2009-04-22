@@ -16,8 +16,6 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.MapTypeControl;
-import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.event.GroundOverlayVisibilityChangedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
@@ -73,8 +71,7 @@ public class GroundOverlayDemo extends MapsDemo {
     vp.add(map);
     vp.setSpacing(10);
     map.setSize("500px", "500px");
-    map.addControl(new SmallMapControl());
-    map.addControl(new MapTypeControl());
+    map.setUIToDefault();
     
     hideButton = new Button("Hide");
     vp.add(hideButton);

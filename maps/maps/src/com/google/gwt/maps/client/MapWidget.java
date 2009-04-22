@@ -291,6 +291,54 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Returns a {@link MapUIOptions} object specifying default behaviour and UI
+   * elements for the Map, based on the UI of maps.google.com.
+   */
+  public MapUIOptions getDefaultUI() {
+    return MapImpl.impl.getDefaultUI(jsoPeer);
+  }
+
+   /** Returns a Boolean indicating whether pinch to zoom is enabled.
+   * 
+   * @return <code>true</code> if ping to zoom is enabled.
+   */
+  public boolean isPinchToZoomEnabled() {
+    return MapImpl.impl.pinchToZoomEnabled(jsoPeer);
+  }
+
+  /**
+   * Enables or disables pinching to zoom on an iPhone or iPod touch. Note:
+   * pinch to zoom is enabled by default.
+   * 
+   * @param value pass <code>false</code> to disable pinching to zoom.
+   */
+  public void setPinchToZoom(boolean value) {
+    if (value) {
+      MapImpl.impl.enablePinchToZoom(jsoPeer);
+    } else {
+      MapImpl.impl.disablePinchToZoom(jsoPeer);
+    }
+  }
+
+  /**
+   * Adds behaviour and UI elements specified in the options parameter, which
+   * can be a modified version of the object returned from getDefaultUI().
+   * 
+   * @param options the user interface options to set on the map.
+   */
+  public void setUI(MapUIOptions options) {
+    MapImpl.impl.setUI(jsoPeer, options);
+  }
+
+  /**
+   * Adds the default behaviour and UI elements specified in getDefaultUI() to
+   * the Map.
+   */
+  public void setUIToDefault() {
+    MapImpl.impl.setUIToDefault(jsoPeer);
+  }
+
+  /**
    * This event is fired before the info window closes. (Since 2.83)
    * 
    * @param handler the handler to call when this event fires.
