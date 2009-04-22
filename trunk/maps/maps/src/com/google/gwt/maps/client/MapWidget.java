@@ -76,7 +76,6 @@ import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MapImpl;
-import com.google.gwt.maps.client.impl.MapOptionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl.IntIntCallback;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.MapTypeCallback;
@@ -224,6 +223,31 @@ public final class MapWidget extends Composite {
 
   /**
    * Creates a new map widget and sets the view to the specified center point
+   * and zoom level.
+   * 
+   * Note: The 'load' event requires that a handler be registered before
+   * GMap2.setCenter() is called. Since that method is always called in this
+   * constructor, it isn't clear that gwt-google-apis users needs this event.
+   * 
+   * @param center the geographical point about which to center
+   * @param zoomLevel zoomLevel the zoom level
+   * @param options optional settings to specify when creating the map.
+   */
+  public MapWidget(LatLng center, int zoomLevel, MapOptions options) {
+    Maps.assertLoaded();
+    initWidget(mapContainer);
+    jsoPeer = MapImpl.impl.construct(getElement(), options);
+    MapImpl.impl.bind(jsoPeer, this);
+    if (center == null) {
+      center = LatLng.newInstance(0, 0);
+    }
+    setCenter(center, zoomLevel);
+    // Initialize the InfoWindow instance for this map.
+    getInfoWindow();
+  }
+
+  /**
+   * Creates a new map widget and sets the view to the specified center point
    * and zoom level. Also, sets the dragging and draggable cursor values. See
    * the W3C CSS spec for allowable cursor string values.
    * 
@@ -237,22 +261,13 @@ public final class MapWidget extends Composite {
    *          draggable
    * @param draggingCursor CSS name of the cursor to display when the map is
    *          being dragged
+   * @deprecated Use {@link #MapWidget(LatLng, int, MapOptions)} instead.
    */
+  @Deprecated
   public MapWidget(LatLng center, int zoomLevel, String draggableCursor,
       String draggingCursor) {
-    Maps.assertLoaded();
-    initWidget(mapContainer);
-    JavaScriptObject opts = MapOptionsImpl.impl.construct();
-    MapOptionsImpl.impl.setDraggableCursor(opts, draggableCursor);
-    MapOptionsImpl.impl.setDraggingCursor(opts, draggingCursor);
-    jsoPeer = MapImpl.impl.construct(getElement(), opts);
-    MapImpl.impl.bind(jsoPeer, this);
-    if (center == null) {
-      center = LatLng.newInstance(0, 0);
-    }
-    setCenter(center, zoomLevel);
-    // Initialize the InfoWindow instance for this map.
-    getInfoWindow();
+    this(center, zoomLevel, MapOptions.newInstance().setDraggableCursor(
+        draggableCursor).setDraggingCursor(draggingCursor));
   }
 
   /**
@@ -1852,11 +1867,12 @@ public final class MapWidget extends Composite {
    */
   void trigger(MapZoomEndEvent event) {
     maybeInitMapZoomEndHandlers();
-    mapZoomEndHandlers.trigger(event.getOldZoomLevel(), event.getNewZoomLevel());
+    mapZoomEndHandlers.trigger(event.getOldZoomLevel(),
+        event.getNewZoomLevel());
   }
 
   /**
-   * 
+   * Lazy init the HandlerCollection.
    */
   private void maybeInitInfoWindowBeforeCloseHandlers() {
     if (infoWindowBeforeCloseHandlers == null) {
