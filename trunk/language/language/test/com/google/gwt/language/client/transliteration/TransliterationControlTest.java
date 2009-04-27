@@ -23,10 +23,10 @@ import com.google.gwt.user.client.ui.RootPanel;
  * Tests for TransliterationControl class.
  */
 public class TransliterationControlTest extends GWTTestCase {
+  private static TransliterationControl control;
+  private TransliterationControlDiv div;
   private TransliteratableTextArea textArea1;
   private TransliteratableTextArea textArea2;
-  private TransliterationControlDiv div;
-  private static TransliterationControl control;
 
   @Override
   public String getModuleName() {
