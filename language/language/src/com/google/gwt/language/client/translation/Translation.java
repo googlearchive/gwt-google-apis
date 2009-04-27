@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -37,7 +37,7 @@ public class Translation {
    * A global method that will return the language code that describes the
    * language of the given text. The result is supplied asynchronously to the
    * given callback function as the result object.
-   *
+   * 
    * @param text text whose language has to be detected
    * @param callback callback for asynchronous feedback
    */
@@ -72,7 +72,7 @@ public class Translation {
    * Method that will detect whether Unicode font rendering for the indicated
    * language is supported on the user's browser or not. The result is a
    * constant from the Font Rendering Status Enum.
-   *
+   * 
    * @param lang the language whose font rendering support status is expected
    * @return font rendering status
    */
@@ -90,7 +90,7 @@ public class Translation {
   /**
    * A method that will return the translatable status for a given language
    * code.
-   *
+   * 
    * @param lang the language from Language enum.
    * @return true if language is translatable.
    */
@@ -102,7 +102,7 @@ public class Translation {
    * Method that will return translated text for the given text supplied,
    * matching the destination language. The result is supplied asynchronously to
    * the given callback as the result object.
-   *
+   * 
    * @param option the {@code Option} object.
    * @param src source language
    * @param dest destination language
@@ -110,14 +110,15 @@ public class Translation {
    */
   public static void translate(Option option, Language src, Language dest,
       TranslationCallback callback) {
-    translateWithOption(option, src.getLangCode(), dest.getLangCode(), callback);
+    translateWithOption(option, src.getLangCode(), dest.getLangCode(),
+        callback);
   }
 
   /**
    * Method that will return translated text for the given text supplied,
    * matching the destination language. The result is supplied asynchronously to
    * the given callback as the result object.
-   *
+   * 
    * @param text text to be translated
    * @param src source language
    * @param dest destination language
@@ -129,29 +130,8 @@ public class Translation {
   }
 
   /**
-   * Returns font rendering support status.
-   *
-   * @param langCode the language code.
-   * @return an integer that represents the font rendering status.
-   */
-  private static native int isFontRenderingSupported(String langCode) /*-{
-    return $wnd.google.language.isFontRenderingSupported(langCode);
-  }-*/;
-
-  /**
-   * Private helper method that actually invokes the underlying javascript to
-   * get translatable status of language.
-   *
-   * @param langCode 2 letter language code.
-   * @return true if translatable, false otherwise.
-   */
-  private static native boolean isTranslatable(String langCode) /*-{
-    return $wnd.google.language.isTranslatable(langCode);
-  }-*/;
-
-  /**
    * Translates text from source to destination language.
-   *
+   * 
    * @param text text to be translated
    * @param src source language
    * @param dest destination language
@@ -165,9 +145,30 @@ public class Translation {
   }-*/;
 
   /**
+   * Returns font rendering support status.
+   * 
+   * @param langCode the language code.
+   * @return an integer that represents the font rendering status.
+   */
+  private static native int isFontRenderingSupported(String langCode) /*-{
+    return $wnd.google.language.isFontRenderingSupported(langCode);
+  }-*/;
+
+  /**
+   * Private helper method that actually invokes the underlying javascript to
+   * get translatable status of language.
+   * 
+   * @param langCode 2 letter language code.
+   * @return true if translatable, false otherwise.
+   */
+  private static native boolean isTranslatable(String langCode) /*-{
+    return $wnd.google.language.isTranslatable(langCode);
+  }-*/;
+
+  /**
    * Translates text from source to destination language given the {@code
    * Option} object.
-   *
+   * 
    * @param option the option object containing details of translation text.
    * @param src source language
    * @param dest destination language

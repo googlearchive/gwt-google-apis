@@ -101,13 +101,13 @@ public class TranslationTest extends GWTTestCase {
    * Tests that Option object is instantiated properly.
    */
   public void testTranslationOptionObject() {
-    final String TEXT = "hello world";
-    Option option = Option.newInstance(TEXT, ContentType.HTML);
+    final String textToTranslate = "hello world";
+    Option option = Option.newInstance(textToTranslate, ContentType.HTML);
     assertNotNull(option);
     assertEquals(ContentType.HTML, option.getType());
-    assertEquals(TEXT, option.getText());
+    assertEquals(textToTranslate, option.getText());
 
-    Option option2 = Option.newInstance(TEXT, ContentType.TEXT);
+    Option option2 = Option.newInstance(textToTranslate, ContentType.TEXT);
     assertEquals(ContentType.TEXT, option2.getType());
   }
 
