@@ -13,32 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client;
+package com.google.gwt.language;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.junit.tools.GWTTestSuite;
+import com.google.gwt.language.client.translation.TranslationTest;
+import com.google.gwt.language.client.transliteration.TransliterationControlTest;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * Wrapper for javascript error object that contains details of errors.
+ * Language API test suite.
  */
-public class Error extends JavaScriptObject {
+public class LanguageTestSuite extends GWTTestSuite {
 
-  protected Error() { }
-
-  /**
-   * A HTTP-style error code
-   *
-   * @return error code as integer
-   */
-  public final native int getCode() /*-{
-    return this.code;
-  }-*/;
-
-  /**
-   * A human readable string description of the error.
-   *
-   * @return error message as string
-   */
-  public final native String getMessage() /*-{
-    return this.message;
-  }-*/;
+  public static Test suite() {
+    TestSuite suite = new TestSuite("Tests for Language API");
+    suite.addTestSuite(TranslationTest.class);
+    suite.addTestSuite(TransliterationControlTest.class);
+    return suite;
+  }
 }
