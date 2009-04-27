@@ -15,6 +15,7 @@
  */
 package com.google.gwt.language.sample.hellolanguage.client;
 
+import com.google.gwt.language.client.translation.BrandingOptions;
 import com.google.gwt.language.client.translation.Language;
 import com.google.gwt.language.client.translation.Translation;
 import com.google.gwt.language.client.translation.TranslationCallback;
@@ -40,7 +41,7 @@ public class TranslationDemo extends Composite {
 
   private final ListBox sourceLanguages = new ListBox();
   private final ListBox destinationLanguages = new ListBox();
-
+  
   public TranslationDemo() {
     inputTextArea.setStyleName(Styles.DEMO_TEXTAREA_STYLE);
     outputDiv.setStyleName(Styles.TRANS_OUTPUT_DIV_STYLE);
@@ -52,7 +53,13 @@ public class TranslationDemo extends Composite {
     wrapperPanel.add(demoPanel);
     wrapperPanel.setCellHorizontalAlignment(demoPanel,
         HasHorizontalAlignment.ALIGN_CENTER);
-
+    
+    Widget branding = Translation.createBrandingWidget(
+        BrandingOptions.newInstance(BrandingOptions.Type.VERTICAL));
+    wrapperPanel.add(branding);
+    wrapperPanel.setCellHorizontalAlignment(branding,
+        HasHorizontalAlignment.ALIGN_RIGHT);
+    
     initWidget(wrapperPanel);
   }
 

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.language.sample.hellolanguage.client;
 
+import com.google.gwt.language.client.translation.BrandingOptions;
 import com.google.gwt.language.client.translation.LangDetCallback;
 import com.google.gwt.language.client.translation.LangDetResult;
 import com.google.gwt.language.client.translation.Translation;
@@ -47,6 +48,13 @@ public class LanguageDetectionDemo extends Composite {
     wrapperPanel.add(demoPanel);
     wrapperPanel.setCellHorizontalAlignment(demoPanel,
         HasHorizontalAlignment.ALIGN_CENTER);
+    
+    Widget branding = Translation.createBrandingWidget(
+        BrandingOptions.newInstance(BrandingOptions.Type.VERTICAL));
+    wrapperPanel.add(branding);
+    wrapperPanel.setCellHorizontalAlignment(branding,
+        HasHorizontalAlignment.ALIGN_RIGHT);
+    
     initWidget(wrapperPanel);
   }
 
