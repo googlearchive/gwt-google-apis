@@ -15,10 +15,23 @@
  */
 package com.google.gwt.language.client.translation;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Widget;
+
 /**
  * Wrappers for all translation API.
  */
 public class Translation {
+  
+  /**
+   * Creates a widget with Google branding.
+   * 
+   * @return branding widget
+   */
+  public static Widget createBrandingWidget(BrandingOptions options) {
+    return new HTML(Translation.getBranding(options).getInnerHTML());
+  }
 
   /**
    * A global method that will return the language code that describes the
@@ -32,6 +45,27 @@ public class Translation {
     $wnd.google.language.detect(text, function(result) {
       callback.@com.google.gwt.language.client.translation.LangDetCallback::onCallbackWrapper(Lcom/google/gwt/language/client/translation/LangDetResult;)(result);
     });
+  }-*/;
+  
+  /**
+   * Gets Google branding DOM and attaches it to the div specified by {@code
+   * id}. Note that for this to work, the div given by {@code id} should already
+   * be attached to RootPanel before this method is invoked.
+   * 
+   * @param id the id to which branding DOM should be attached
+   * @param options options for branding
+   */
+  public static native void getBranding(String id, BrandingOptions options) /*-{
+    $wnd.google.language.getBranding(id, options);
+  }-*/;
+  
+  /**
+   * Returns Google brand images as a HTML Element object.
+   * 
+   * @return the element containing branding DOM
+   */
+  public static native Element getBranding(BrandingOptions options) /*-{
+    return $wnd.google.language.getBranding(options);
   }-*/;
 
   /**
