@@ -1,0 +1,7 @@
+#summary Class Reference for the Language API Library for GWT
+
+= Language API Class Reference =
+
+|| [http://gwt-google-apis.googlecode.com/svn/javadoc/language/1.0/index.html Browse the Language API JavaDoc] ||
+
+  _Based on release 1.0.0_

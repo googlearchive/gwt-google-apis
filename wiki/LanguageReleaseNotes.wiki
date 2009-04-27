@@ -1,0 +1,10 @@
+#summary Google Language API for GWT Release Notes
+
+=Google Language API Library for GWT Release Notes=
+
+==Release Notes for 1.0.0 ==
+===Initial Release===
+
+   * Support for the Translation API
+   * Support for the Transliteration API
+
