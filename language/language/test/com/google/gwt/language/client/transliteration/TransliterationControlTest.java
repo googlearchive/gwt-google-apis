@@ -28,6 +28,8 @@ public class TransliterationControlTest extends GWTTestCase {
   private TransliteratableTextArea textArea1;
   private TransliteratableTextArea textArea2;
 
+  private static final int MAX_TEST_FINISH_DELAY = 10000;
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.language.Language";
@@ -81,6 +83,48 @@ public class TransliterationControlTest extends GWTTestCase {
   }
 
   /**
+   * Tests that language change event listeners are working correctly.
+   */
+  public void testLanguageChangeEventListeners() {
+    LanguageUtils.loadTransliteration(new Runnable() {
+      public void run() {
+        initialize();
+        control.setLanguagePair(LanguageCode.ENGLISH, LanguageCode.HINDI);
+        control.addEventListener(EventType.LANGUAGE_CHANGED,
+            new TranslitEventListener() {
+
+          @Override
+          protected void onEvent(TransliterationEvent result) {
+            // Remove the listener before assertions to avoid impact of
+            // failures on other tests.
+            control.removeEventListener(EventType.LANGUAGE_CHANGED, this);
+
+            LanguageCode srcLang = result.getSourceLanguage();
+            LanguageCode destLang = result.getDestinationLanguage();
+
+            // Verify that language change is correctly reflected by result.
+            assertTrue("Expected ENGLISH as source language and KANNADA as"
+                    + " destination language", srcLang == LanguageCode.ENGLISH
+                    && destLang == LanguageCode.KANNADA);
+
+            LanguageCode[] langPair = control.getLanguageCodePair();
+
+            // Verify that language change is correctly reflected by control
+            assertTrue("Expected ENGLISH as source language and KANNADA as"
+                + " destination language", langPair[0] == LanguageCode.ENGLISH
+                && langPair[1] == LanguageCode.KANNADA);
+
+            finishTest();
+          }
+
+        });
+        control.setLanguagePair(LanguageCode.ENGLISH, LanguageCode.KANNADA);
+      }
+    });
+    delayTestFinish(MAX_TEST_FINISH_DELAY);
+  }
+
+  /**
    * Tests that language pair may be correctly set and unset.
    */
   public void testLanguagePairSetting() {
@@ -98,6 +142,39 @@ public class TransliterationControlTest extends GWTTestCase {
             langPair2[1] == LanguageCode.HINDI);
       }
     });
+  }
+
+  /**
+   * Tests that State change event listeners are working correctly.
+   */
+  public void testStateChangeEventListeners() {
+    LanguageUtils.loadTransliteration(new Runnable() {
+      public void run() {
+        initialize();
+        control.addEventListener(EventType.STATE_CHANGED,
+            new TranslitEventListener() {
+
+          @Override
+          protected void onEvent(TransliterationEvent result) {
+            // Remove the listener before assertions to avoid impact of
+            // failures on other tests.
+            control.removeEventListener(EventType.STATE_CHANGED, this);
+
+            assertFalse("Expected transliteration to be disabled",
+                control.isTransliterationEnabled());
+
+            // Verify that event object is correctly reflecting current state.
+            assertFalse("Expected transliteration to be disabled",
+                result.isTransliterationEnabled());
+
+            finishTest();
+          }
+
+        });
+        control.toggleTransliteration();
+      }
+    });
+    delayTestFinish(MAX_TEST_FINISH_DELAY);
   }
 
   /**
