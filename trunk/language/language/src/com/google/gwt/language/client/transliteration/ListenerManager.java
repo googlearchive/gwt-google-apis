@@ -29,8 +29,8 @@ import java.util.List;
 class ListenerManager {
 
   /**
-   * Keeps a pair consisting of Java TranslitEventListener and its JSO
-   * counterpart.
+   * Stores the tuple containing event type, TranslitEventListener and its
+   * JS counterpart.
    */
   private static class ListenerInfo {
     private final EventType eventType;
@@ -60,6 +60,13 @@ class ListenerManager {
   private final static List<ListenerInfo> listenerCache =
       new ArrayList<ListenerInfo>();
 
+  /**
+   * Creates a JavaScriptObject counterpart of input TranslitEventListener
+   * object.
+   *
+   * @param listener the TranslitEventListener whose JS equivalent is desired
+   * @return JavaScriptObject counterpart of listener
+   */
   static native final JavaScriptObject createJSOEventListener(
       TranslitEventListener listener) /*-{
     return function(e) {
