@@ -19,22 +19,8 @@
 
   <stylesheet src="HelloSearch.css" />
     
-	<entry-point class="com.google.gwt.search.sample.hellosearch.client.HelloSearch"/>
-    <!--
-      If you want to deploy this application outside of localhost,  you 
-      may want to obtain an API key at:
-      
-        http://code.google.com/apis/ajaxsearch/signup.html
-      
-      You do not need a key to use this API. Using a key in your application/site 
-      is completely optional. However, it is useful to have one for notification
-      about problems with your site from Google.
-     
-      After you obtain a valid key, append "&amp;key=ABC" to the string below,
-      where "ABC" is the key you are given.  Note that the beginning of the 
-      URL may be different from the one presented on the signup page.  (We
-      recommend you keep this one.)
-     -->
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;gwt=1"/>
+  <!-- The Search API is loaded using the AjaxLoader class, which is        -->
+  <!-- invoked inside this entry point                                      -->
+  <entry-point class="com.google.gwt.search.sample.hellosearch.client.HelloSearch"/>
 
 </module>

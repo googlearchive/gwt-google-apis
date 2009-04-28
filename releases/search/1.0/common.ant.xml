@@ -84,6 +84,9 @@
 		location="${gwt.build.out}/${project.tail}" />
 	<property name="project.lib"
 		location="${gwt.build.lib}/gwt-${ant.project.name}.jar" />
+        <property name="project.noredist.lib"
+                location="${gwt.build.lib}/gwt-${ant.project.name}-noredist.jar" />
+
 	<property name="project.jni"
 		location="${gwt.build}/${project.tail}" />
 	<property name="javac.out" location="${project.build}/bin" />
@@ -177,6 +180,10 @@
 		<jar destfile="${project.lib}" update="true"
 			duplicate="preserve" index="true" />
 	</presetdef>
+        <presetdef name="gwt.noredist.jar">
+                <jar destfile="${project.noredist.lib}" update="true"
+                        duplicate="preserve" index="true" />
+        </presetdef>
 
 	<macrodef name="gwt.junit">
 		<!-- TODO: make this more generic / refactor so it can be used from dev/core -->
