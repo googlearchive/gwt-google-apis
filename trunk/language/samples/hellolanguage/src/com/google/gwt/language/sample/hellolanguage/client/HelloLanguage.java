@@ -17,6 +17,8 @@ package com.google.gwt.language.sample.hellolanguage.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.language.client.LanguageUtils;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
@@ -27,6 +29,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class HelloLanguage implements EntryPoint {
 
+  private static final int DEMO_PANEL_HEIGHT = 400;
   /**
    * The onModuleLoad() method is called when the body of the document is
    * finished loading. The JavaScript APIs are not loaded unless they were
@@ -37,8 +40,16 @@ public class HelloLanguage implements EntryPoint {
   public void onModuleLoad() {
 
     final TabPanel demoTabPanel = new TabPanel();
-    demoTabPanel.setWidth("100%");
+    demoTabPanel.getDeckPanel().setPixelSize(Window.getClientWidth() - 30,
+        DEMO_PANEL_HEIGHT);
     RootPanel.get().add(demoTabPanel);
+
+    Window.addWindowResizeListener(new WindowResizeListener() {
+      public void onWindowResized(int width, int height) {
+        demoTabPanel.getDeckPanel().setPixelSize(Window.getClientWidth() - 30,
+            DEMO_PANEL_HEIGHT);
+      }
+    });
 
     final VerticalPanel transDemoPanel = new VerticalPanel();
     transDemoPanel.add(loadingLabel());
