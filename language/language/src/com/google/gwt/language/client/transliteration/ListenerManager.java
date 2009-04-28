@@ -34,8 +34,8 @@ class ListenerManager {
    */
   private static class ListenerInfo {
     private final EventType eventType;
-    private final TranslitEventListener listener;
     private final JavaScriptObject jso;
+    private final TranslitEventListener listener;
 
     ListenerInfo(EventType eventType, TranslitEventListener listener,
         JavaScriptObject jso) {
@@ -57,7 +57,7 @@ class ListenerManager {
     }
   }
 
-  private final static List<ListenerInfo> listenerCache =
+  private static final List<ListenerInfo> listenerCache =
       new ArrayList<ListenerInfo>();
 
   /**
@@ -67,7 +67,7 @@ class ListenerManager {
    * @param listener the TranslitEventListener whose JS equivalent is desired
    * @return JavaScriptObject counterpart of listener
    */
-  static native final JavaScriptObject createJSOEventListener(
+  static final native JavaScriptObject createJSOEventListener(
       TranslitEventListener listener) /*-{
     return function(e) {
       listener.@com.google.gwt.language.client.transliteration.TranslitEventListener::onEventWrapper(Lcom/google/gwt/language/client/transliteration/TransliterationEvent;)(e);

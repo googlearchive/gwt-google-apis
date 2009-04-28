@@ -24,11 +24,11 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class TransliterationControlTest extends GWTTestCase {
   private static TransliterationControl control;
+  private static final int MAX_TEST_FINISH_DELAY = 10000;
   private TransliterationControlDiv div;
   private TransliteratableTextArea textArea1;
-  private TransliteratableTextArea textArea2;
 
-  private static final int MAX_TEST_FINISH_DELAY = 10000;
+  private TransliteratableTextArea textArea2;
 
   @Override
   public String getModuleName() {

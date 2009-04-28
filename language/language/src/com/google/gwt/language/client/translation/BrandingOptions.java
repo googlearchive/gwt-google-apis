@@ -56,7 +56,7 @@ public class BrandingOptions extends JavaScriptObject {
    * @param type the type of branding (vertical or horizontal)
    * @return this object
    */
-  private native static final BrandingOptions newInstance(String type) /*-{
+  private static native BrandingOptions newInstance(String type) /*-{
     var object = new Object();
     object.type = type;
     return object;
