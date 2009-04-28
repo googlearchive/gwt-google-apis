@@ -18,20 +18,26 @@ package com.google.gwt.ajaxloader.sample.helloajaxloader.client;
 import com.google.gwt.ajaxloader.client.AjaxLoader;
 import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Demonstrates the use of the AjaxLoader API.
  */
 public class HelloAjaxLoader implements EntryPoint {
 
+  private final VerticalPanel verticalPanel = new VerticalPanel();
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
-
+    verticalPanel.getElement().getStyle().setPropertyPx("margin", 10);
+    verticalPanel.setSpacing(10);
+    RootPanel.get().add(verticalPanel);
+    
     // Uncomment and replace the key below to load a key for the APIs.  You 
     //   could replace this with some kind of lookup based on 
     //   Window.location.getHost() and Window.location.getPort();
@@ -57,9 +63,10 @@ public class HelloAjaxLoader implements EntryPoint {
    * This method is invoked after the Maps API is successfully loaded.
    */
   private void mapsLoaded() {
-    Element mapsDiv = Document.get().createDivElement();
-    RootPanel.getBodyElement().appendChild(mapsDiv);
-    nativeMakeMap(mapsDiv);  
+    verticalPanel.add(new Label("Maps API loaded with AjaxLoader"));
+    SimplePanel mapPanel = new SimplePanel();
+    nativeMakeMap(mapPanel.getElement());
+    verticalPanel.add(mapPanel);
   }
 
   /**
@@ -101,9 +108,10 @@ public class HelloAjaxLoader implements EntryPoint {
    * This method is invoked after the visualization API is successfully loaded.
    */
   private void pieChartLoaded() {
-    Element chartDiv = Document.get().createDivElement();
-    RootPanel.getBodyElement().appendChild(chartDiv);
-    nativeMakeImagePieChart(chartDiv);
+    verticalPanel.add(new Label("Visualization API loaded with AjaxLoader"));
+    SimplePanel chartPanel = new SimplePanel();
+    nativeMakeImagePieChart(chartPanel.getElement());
+    verticalPanel.add(chartPanel);
   }
 }
 

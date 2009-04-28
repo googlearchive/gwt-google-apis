@@ -6,6 +6,9 @@ Copies:
 /releases/ajaxloader/1.0/ was created (r1346) as a copy from /trunk@1345
 
 Merges:
---->The next merge into trunk will be 1346:????
+/trunk/ajaxloader/@1346 was merged (r1372) into releases/ajaxloader/1.0
+--->The next merge into trunk will be 1371:????
 
 Changes in this branch (excluding changes to this file itself)
+- Package description added (r1367)
+- Updated release notes, index doc, and minor styling to the sample (r1371)
