@@ -1,0 +1,7 @@
+#summary Class Reference for the AjaxLoader API Library for GWT
+
+= AjaxLoader API Class Reference =
+
+|| [http://gwt-google-apis.googlecode.com/svn/javadoc/ajaxloader/1.0/index.html Browse the AjaxLoader API JavaDoc] ||
+
+  _Based on release 1.0.0_
