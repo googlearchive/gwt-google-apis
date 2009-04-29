@@ -31,7 +31,7 @@ import com.google.gwt.gears.client.geolocation.PositionHandler.PositionEvent;
  * <li>Watch the user's position as it changes over time, using the
  * {@link #watchPosition(PositionHandler) watchPosition} method
  * <li>Quickly and cheaply obtain the user's last known position, using the
- * {@link #getlastPosition} property
+ * {@link #getLastPosition()} method
  * </ul>
  * <p>
  * The Geolocation API provides the best estimate of the user's position using a
