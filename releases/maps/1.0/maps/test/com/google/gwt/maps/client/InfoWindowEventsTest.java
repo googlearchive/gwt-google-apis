@@ -53,6 +53,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
   }
@@ -229,16 +230,18 @@ public class InfoWindowEventsTest extends GWTTestCase {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
         new Timer() {
+          @Override
           public void run() {
             info.maximize();
             new Timer() {
+              @Override
               public void run() {
                 info.restore();
               }
             }.schedule(1000);
           }
         }.schedule(300);
-      };
+      }
 
     });
     info.addInfoWindowRestoreClickHandler(new InfoWindowRestoreClickHandler() {
@@ -296,9 +299,11 @@ public class InfoWindowEventsTest extends GWTTestCase {
 
       public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
         new Timer() {
+          @Override
           public void run() {
             info.maximize();
             new Timer() {
+              @Override
               public void run() {
                 info.restore();
               }

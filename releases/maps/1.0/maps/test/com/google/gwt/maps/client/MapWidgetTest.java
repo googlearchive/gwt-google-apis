@@ -37,6 +37,7 @@ public class MapWidgetTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
   }
@@ -52,6 +53,17 @@ public class MapWidgetTest extends GWTTestCase {
     assertNotNull("Maps version", version);
   }
 
+  public void testIPhoneOpts() {
+    // Just call these methods, we can't really test if they are working.
+    MapWidget m = new MapWidget(LatLng.newInstance(45, 45), 8);
+    RootPanel.get().add(m);
+    m.setPinchToZoom(true);
+    // This will never work, unless you run this test on an iPhone/iTouch.
+    // assertTrue("pinch to zoom not True", m.isPinchToZoomEnabled());
+    m.setPinchToZoom(false);
+    assertFalse("pinch to zoom not False", m.isPinchToZoomEnabled());
+  }
+
   public void testIsBrowserCompatible() {
     assertTrue("The MAPS api is not compatible with this browser.",
         Maps.isBrowserCompatible());
@@ -59,6 +71,25 @@ public class MapWidgetTest extends GWTTestCase {
 
   public void testIsLoaded() {
     assertTrue("The MAPS api is not properly loaded.", Maps.isLoaded());
+  }
+
+  public void testIsRTL() {
+    assertFalse("Is RTL", Maps.isRTL());
+  }
+
+  public void testKeyboardHandler() {
+    LatLng center = LatLng.newInstance(0, 0);
+    final MapWidget map = new MapWidget(center, 1);
+    map.setSize("300px", "300px");
+    map.installKeyboardHandler();
+    RootPanel.get().add(map);
+  }
+
+  public void testlog() {
+    Maps.logWrite("foo");
+    Maps.logWrite("red foo", "#f00");
+    Maps.logWriteUrl("http://www.google.com/");
+    Maps.logWriteHtml("<b><i>HTML</i> Content</b>");
   }
 
   public void testMapWidgetCloseInfoWindow() {
@@ -133,7 +164,7 @@ public class MapWidgetTest extends GWTTestCase {
     assertNotNull("convertDivPixelToLatLng()", result);
     assertTrue(latLng.isEquals(LatLng.newInstance(0, 0)));
   }
-
+  
   public void testMapWidgetLatLngZoom() {
     MapWidget m = new MapWidget(LatLng.newInstance(45, 45), 8);
     RootPanel.get().add(m);

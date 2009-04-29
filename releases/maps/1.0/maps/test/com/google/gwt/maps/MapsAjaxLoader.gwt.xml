@@ -15,14 +15,14 @@
 <module>
   <inherits name="com.google.gwt.user.User" />
   <inherits name="com.google.gwt.maps.GoogleMaps" />
-  <inherits name="com.google.gwt.i18n.I18N" />
+  
+  <!-- The JSON module is not actually used in this test, but if you leave  -->
+  <!-- it out, you get errors from the compiler when you run the unit       -->
+  <!-- tests because there are other classes on the <source> path for this  -->
+  <!-- module that do require the JSON module.                              -->
   <inherits name="com.google.gwt.json.JSON" />
     
-  <!--
-    If you want to deploy this application outside of localhost,
-    you must obtain a Google Maps API key at:
-    http://www.google.com/apis/maps/signup.html
-    Replace the src attribute below with a URL that contains your key.
-  -->
-  <script src="http://maps.google.com/maps?file=api&amp;v=2.147&amp;key=ABQIAAAAG8LzhtshQCjpSshU_uJjmxRII77nF3p9tM7LktEY_493N8UDkRSxVj4RkjzrVFb94nbD4QDNPJIIEg" />
+  <!-- The Maps API script tag is intentionally omitted to test             -->
+  <!-- Maps.loadMapsApi()                                                   -->
+  
 </module>

@@ -18,7 +18,11 @@ package com.google.gwt.maps;
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.maps.client.AdsManagerTest;
 import com.google.gwt.maps.client.CopyrightEventTest;
+import com.google.gwt.maps.client.GoogleBarOptionsTest;
+import com.google.gwt.maps.client.DraggableObjectTest;
 import com.google.gwt.maps.client.InfoWindowEventsTest;
+import com.google.gwt.maps.client.MapOptionsTest;
+import com.google.gwt.maps.client.MapUIOptionsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
 import com.google.gwt.maps.client.MapWidgetTest;
 import com.google.gwt.maps.client.MapsNotInstalledTest;
@@ -50,29 +54,47 @@ import junit.framework.TestSuite;
 public class MapsTestSuite extends GWTTestSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Maps API");
-    suite.addTestSuite(MapWidgetEventsTest.class);
+    
+    // com.google.gwt.maps.client tests
+    suite.addTestSuite(AdsManagerTest.class);
+    suite.addTestSuite(CopyrightEventTest.class);
+    suite.addTestSuite(DraggableObjectTest.class);
+    suite.addTestSuite(GoogleBarOptionsTest.class);
+    suite.addTestSuite(InfoWindowEventsTest.class);
     suite.addTestSuite(MapsNotInstalledTest.class);
+    suite.addTestSuite(MapOptionsTest.class);
+    suite.addTestSuite(MapUIOptionsTest.class);
+    suite.addTestSuite(MapWidgetEventsTest.class);
     suite.addTestSuite(MapWidgetTest.class);
+
+    // com.google.gwt.maps.client.control tests
     suite.addTestSuite(ControlTest.class);
+
+    // com.google.gwt.maps.client.geocode tests
+    suite.addTestSuite(DirectionsTest.class);
     suite.addTestSuite(GeocodeTest.class);
     suite.addTestSuite(StatusCodesTest.class);
-    suite.addTestSuite(DirectionsTest.class);
-    suite.addTestSuite(InfoWindowEventsTest.class);
+
+    // com.google.gwt.maps.client.geom tests
+    suite.addTestSuite(BoundsTest.class);
+    suite.addTestSuite(LatLngBoundsTest.class);
+    suite.addTestSuite(LatLngTest.class);
+    suite.addTestSuite(ProjectionTest.class);
+
+    // com.google.gwt.maps.client.impl
+    suite.addTestSuite(MinimumMapVersionTest.class);
+    
+    // com.google.gwt.maps.client.overlay
+    suite.addTestSuite(GeoXmlOverlayTest.class);
+    suite.addTestSuite(IconTest.class);
     suite.addTestSuite(MarkerEventsTest.class);
     suite.addTestSuite(MarkerTest.class);
-    suite.addTestSuite(IconTest.class);
-    suite.addTestSuite(GeoXmlOverlayTest.class);
     suite.addTestSuite(OverlayTest.class);
     suite.addTestSuite(PolygonEventsTest.class);
     suite.addTestSuite(PolylineEventsTest.class);
     suite.addTestSuite(PolygonTest.class);
     suite.addTestSuite(PolylineTest.class);
-    suite.addTestSuite(CopyrightEventTest.class);
-    suite.addTestSuite(LatLngTest.class);
-    suite.addTestSuite(LatLngBoundsTest.class);
-    suite.addTestSuite(ProjectionTest.class);
-    suite.addTestSuite(BoundsTest.class);
-    suite.addTestSuite(MinimumMapVersionTest.class);
+
     suite.addTestSuite(AdsManagerTest.class);
     return suite;
   }

@@ -34,6 +34,7 @@ public class LatLngTest extends GWTTestCase {
   /**
    * Runs before every test method.
    */
+  @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
   }
@@ -46,6 +47,12 @@ public class LatLngTest extends GWTTestCase {
     assertTrue(result > 0);
     assertTrue(result2 > 0);
     assertTrue(result > result2);
+  }
+  
+  public void testFromUrlValue() {
+    LatLng result = LatLng.fromUrlValue("12.345, 54.321");
+    assertEquals("fromUrl - latitute", result.getLatitude(), 12.345, .001);
+    assertEquals("fromUrl - longitude", result.getLongitude(), 54.321, .001);
   }
   
   public void testIsEquals() {

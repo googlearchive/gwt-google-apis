@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.geocode.DirectionQueryOptions.TravelMode;
 import com.google.gwt.maps.client.overlay.Marker;
 
 import java.util.List;
@@ -37,44 +38,6 @@ public class DirectionsTest extends GWTTestCase {
     MapWidget map = new MapWidget();
     DirectionsPanel directionsPanel = new DirectionsPanel();
     DirectionQueryOptions opts = new DirectionQueryOptions(map, directionsPanel);
-    String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
-        + "to: 1600 amphitheatre mtn view ca USA";
-    Directions.load(query, opts, new DirectionsCallback() {
-
-      public void onFailure(int statusCode) {
-        fail("Query failed with status: " + statusCode + " "
-            + StatusCodes.getName(statusCode));
-      }
-
-      public void onSuccess(DirectionResults result) {
-        assertNotNull("CopyrightHtml", result.getCopyrightsHtml());
-        assertNotNull("Distance", result.getDistance());
-        assertTrue("Distance.inMeters() > 0",
-            result.getDistance().inMeters() > 0);
-        assertNotNull("Distance.inLocalizedUnits",
-            result.getDistance().inLocalizedUnits());
-        assertNotNull("Duration", result.getDuration());
-        assertTrue("Duration.inSeconds() > 0",
-            result.getDuration().inSeconds() > 0);
-        assertNotNull("Duration.inLocalizedUnits",
-            result.getDuration().inLocalizedUnits());
-        assertNotNull("result.getRoutes()", result.getRoutes());
-        assertNotNull("result.getSummaryHtml()", result.getSummaryHtml());
-        assertNotNull("polyline", result.getPolyline());
-        assertNotNull("result.getPlacemarks()", result.getPlacemarks());
-        List<Marker> markers = result.getMarkers();
-        assertNotNull("markers", markers);
-        assertNotNull("markers.get(0)", markers.get(0));
-        assertNotNull("markers.get(1)", markers.get(1));
-        finishTest();
-      }
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-  }
-
-  public void testDirectionsNoPanel() {
-    MapWidget map = new MapWidget();
-    DirectionQueryOptions opts = new DirectionQueryOptions(map);
     String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
         + "to: 1600 amphitheatre mtn view ca USA";
     Directions.load(query, opts, new DirectionsCallback() {
@@ -151,10 +114,64 @@ public class DirectionsTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
   }
 
+  public void testDirectionsNoPanel() {
+    MapWidget map = new MapWidget();
+    DirectionQueryOptions opts = new DirectionQueryOptions(map);
+    String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
+        + "to: 1600 amphitheatre mtn view ca USA";
+    Directions.load(query, opts, new DirectionsCallback() {
+
+      public void onFailure(int statusCode) {
+        fail("Query failed with status: " + statusCode + " "
+            + StatusCodes.getName(statusCode));
+      }
+
+      public void onSuccess(DirectionResults result) {
+        assertNotNull("CopyrightHtml", result.getCopyrightsHtml());
+        assertNotNull("Distance", result.getDistance());
+        assertTrue("Distance.inMeters() > 0",
+            result.getDistance().inMeters() > 0);
+        assertNotNull("Distance.inLocalizedUnits",
+            result.getDistance().inLocalizedUnits());
+        assertNotNull("Duration", result.getDuration());
+        assertTrue("Duration.inSeconds() > 0",
+            result.getDuration().inSeconds() > 0);
+        assertNotNull("Duration.inLocalizedUnits",
+            result.getDuration().inLocalizedUnits());
+        assertNotNull("result.getRoutes()", result.getRoutes());
+        assertNotNull("result.getSummaryHtml()", result.getSummaryHtml());
+        assertNotNull("polyline", result.getPolyline());
+        assertNotNull("result.getPlacemarks()", result.getPlacemarks());
+        List<Marker> markers = result.getMarkers();
+        assertNotNull("markers", markers);
+        assertNotNull("markers.get(0)", markers.get(0));
+        assertNotNull("markers.get(1)", markers.get(1));
+        result.clear();
+        finishTest();
+      }
+    });
+    delayTestFinish(ASYNC_DELAY_MSEC);
+  }
+
+  // A simple test to ensure none of the methods throws exceptions.
+  public void testDirectionsQueryOptions() {
+    MapWidget map = new MapWidget();
+    DirectionsPanel directionsPanel = new DirectionsPanel();
+    DirectionQueryOptions opts = new DirectionQueryOptions(map,
+        directionsPanel);
+    opts.setAvoidHighways(true);
+    opts.setLocale("de_DE");
+    opts.setPreserveViewport(true);
+    opts.setRetrievePolyline(false);
+    opts.setRetrieveSteps(false);
+    opts.setTravelMode(TravelMode.DRIVING);
+  }
+
   public void testFailedDirections() {
     MapWidget map = new MapWidget();
     DirectionsPanel directionsPanel = new DirectionsPanel();
-    DirectionQueryOptions opts = new DirectionQueryOptions(map, directionsPanel);
+    DirectionQueryOptions opts = new DirectionQueryOptions(map, 
+        directionsPanel);
     String query = "from: 1000 Baloney St NW, Atlantis, XY USA "
         + "to: 160000 amphibian street absolutelynowhere SB USA";
     Directions.load(query, opts, new DirectionsCallback() {
@@ -169,4 +186,14 @@ public class DirectionsTest extends GWTTestCase {
     });
     delayTestFinish(ASYNC_DELAY_MSEC);
   }
+
+  // I checked the actual values returned for the DRIVING and WALKING constants
+  // by the JS API. This test ensures that the TravelMode enum is working,
+  // but could fail in the future if the values returned by these contstants
+  // is changed.
+  public void testTravelModes() {
+    assertEquals("TRAVEL_MODE_DRIVING", 1, TravelMode.DRIVING.value());
+    assertEquals("TRAVEL_MODE_WALKING", 2, TravelMode.WALKING.value());
+  }
+
 }
