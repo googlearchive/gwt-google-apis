@@ -33,6 +33,9 @@ public class OrgDemo implements LeftTabPanel.WidgetProvider {
   public OrgDemo() {
     Options options = Options.create();
     options.setSize(Size.LARGE);
+    options.setAllowCollapse(true);
+    options.setColor("#00FF00");
+    options.setSelectionColor("#FF0000");
 
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.STRING, "Name");

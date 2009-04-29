@@ -17,7 +17,8 @@ Merges:
 /trunk/visualization@1251:1294 was merged (r1295) into /releases/visualization/1.0
 /trunk/visualization@1294:1304 was merged (r1305) into /releases/visualization/1.0
 /trunk/visualization@1304:1308 was merged (r1339) into /releases/visualization/1.0
--> The next merge into trunk will be r1338:????
+/trunk/visualization@1338:1388 was merged (r1389) into /releases/visualization/1.0
+-> The next merge into trunk will be r1388:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r1069)
@@ -55,3 +56,5 @@ Changes in this branch (excluding changes to this file itself):
  - Added mouse out, mouse over, and ready event support (r1326)
  - Fix build breaks caused by new version of gviz api (r1327,1328)
  - Moved AjaxLoader support to the common ajaxloader project (r1337, 1338)
+ - Adds new options and methods to OrgChart. (r1353)
+ - Updated javadoc, package info, and release notes for 1.0.2 release (r1388)
