@@ -29,6 +29,7 @@
       <h1>Gears API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
+                    <li><a href="#Release_Notes_1_2_0">1.2.0</a></li>
                     <li><a href="#Release_Notes_1_1_1">1.1.1</a></li>
                     <li><a href="#Release_Notes_1_1_0">1.1.0 (release candidate)</a></li>
 		    <li><a href="#Release_Notes_r290">r290 (milestone release)</a></li>
@@ -37,6 +38,20 @@
       <hr/>
       <a name="Release_Notes_Current"></a>
      <h2>Release Notes for @GWT_VERSION@</h2>
+      <h3>Changes since 1.2.0</h3>
+      <ul>
+       <li>Desktop.openFiles no longer throws a CastClassException (issue 239)</li>
+       <li>Added the remove() method to the Database class</li>
+       <li>Fixed failures in RequestCallback on some browsers (issue 242)</li>
+      </ul>
+     <h3>Known Issues</h3>
+      <ul>
+       <li>Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=11">11</a>)</li>
+       <li>Creating a Worker from a GWT module is not supported out-of-the-box.</li>
+       <li>GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X.  As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.</li>
+      </ul>
+      <hr/>
+     <h2>Release Notes for 1.2.0 (release candidate)</h2>
       <h3>Changes since 1.1.1</h3>
       <ul>
        <li>Adds Gears 0.4 feature support:
@@ -51,15 +66,9 @@
        <li>Added support for Factory.getPermission() and Factory.hasPermission()</li>
        <li> Updated all samples to allow more heap memory in launch scripts.</li>
       </ul>
-     <h3>Known Issues</h3>
-      <ul>
-       <li>Gears applications can only be debugged using GWT's hosted mode on Windows; none of the other hosted mode platforms support the Gears plugin. (issue <a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=11">11</a>)</li>
-       <li>Creating a Worker from a GWT module is not supported out-of-the-box.</li>
-       <li>GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X.  As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.</li>
-      </ul>
       <hr/>
       <a name="Release_Notes_1_1_1"></a>
-     <h2>Release Notes for 1.1.1 (release candidate)</h2>
+     <h2>Release Notes for 1.1.1</h2>
 
       <h3>Changes since 1.1.0</h3>
       <ul>
