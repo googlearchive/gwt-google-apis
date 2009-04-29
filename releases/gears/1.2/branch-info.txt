@@ -9,7 +9,8 @@ Merges:
 /releases/gears/1.2/@1176:1180 was merged (r1182) into trunk/gears
 /releases/gears/1.2/@1180:1253 was merged (r1254) into trunk/gears
 /trunk/gears@1253:1296 was merged (r1298) into releases/gears/1.2
----> The next merge into trunk will be 1253:????
+/trunk/gears@1296:1381 was merged (r1382) into releases/gears/1.2
+---> The next merge into trunk will be 1381:????
 
 Changes in this branch (excluding changes to this file itself:
 - Swapped the run order of FactoryTest and DatabaseTest to fix problem in test rack (r1180)
@@ -22,3 +23,4 @@ Changes in this branch (excluding changes to this file itself:
 - Fix build break (r1291)
 - Adds the remove() method to the database class (r1294)
 - Fixes issue 242.  RequestCallback failing on Chrome & IE. (r1295)
+- Updated release nodes and javadoc references (r1381)

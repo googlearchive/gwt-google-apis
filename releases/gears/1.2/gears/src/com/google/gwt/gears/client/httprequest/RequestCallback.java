@@ -16,12 +16,12 @@
 package com.google.gwt.gears.client.httprequest;
 
 /**
- * Called when a pending {@link com.google.gwt.http.client.Request} completes
+ * Called when a pending {@link HttpRequest} completes
  * normally.
  */
 public interface RequestCallback {
   /**
-   * Called when a pending {@link com.google.gwt.http.client.Request} completes
+   * Called when a pending {@link HttpRequest} completes
    * normally. Note this method is called even when the status code of the HTTP
    * response is not "OK", 200.
    * 
