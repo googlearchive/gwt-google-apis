@@ -8,4 +8,3 @@
    * Allows specifying the API key dynamically through the AjaxLoader.init() function
    * Allows one or more APIs to be dynamically loaded through the AjaxLoader.loadAPI() function.
    * Includes 2 generally useful helper classes: ExceptionHelper and ArrayHelper
-

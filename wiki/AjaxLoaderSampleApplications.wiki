@@ -2,7 +2,6 @@
 
 = AjaxLoader Library Examples =
 
-
 ===[http://gwt.google.com/samples/HelloAjaxLoader-1.0.0/HelloAjaxLoader.html HelloAjaxLoader]===
 	
 [http://gwt-google-apis.googlecode.com/svn/wiki/HelloAjaxLoader-2.png]
