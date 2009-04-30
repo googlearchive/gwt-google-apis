@@ -55,7 +55,85 @@ $PP_OFF
 $ ./SimpleLanguage-compile
 Compiling module com.example.simpleviz.SimpleLanguage
 Compilation succeeded
-Linking compilation into ./www/com.example.simpleviz.SimpleLanguage
+Linking compilation into ./www/com.example.simplelang.SimpleLanguage
 }}}
 
 If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the *File > Import...* menu option.
+
+==Writing your first application==
+
+Add the required imports and replace the `onModuleLoad` body with the code below to get your application running!
+
+{{{
+package com.google.gwt.language.sample.hellolanguage.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.language.client.LanguageUtils;
+import com.google.gwt.language.client.translation.Language;
+import com.google.gwt.language.client.translation.Translation;
+import com.google.gwt.language.client.translation.TranslationCallback;
+import com.google.gwt.language.client.translation.TranslationResult;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+/**
+ * Main class for GWT language API demo.
+ */
+public class HelloLanguage implements EntryPoint {
+
+  public void onModuleLoad() {
+
+    // Loads the translation API
+    LanguageUtils.loadTranslation(new Runnable() {
+      public void run() {
+        RootPanel.get().add(new HTML("<h1>SimpleLanguage</h1><p>"));
+        RootPanel.get().add(createTranslationPanel());
+      }
+    });
+  }
+
+  // Creates translation panel.
+  private Panel createTranslationPanel() {
+    final TextArea transArea = new TextArea();
+    transArea.setPixelSize(200, 100);
+
+    // This is where translation results are put.
+    final Label outputLabel = new Label();
+
+    Button translateButton = new Button("Translate");
+    translateButton.addClickListener(new ClickListener() {
+
+      public void onClick(Widget sender) {
+        Translation.translate(transArea.getText(), Language.ENGLISH,
+            Language.SPANISH, new TranslationCallback() {
+
+              @Override
+              protected void onCallback(TranslationResult result) {
+                if (result.getError() != null) {
+                  outputLabel.setText(result.getError().getMessage());
+                } else {
+                  outputLabel.setText(result.getTranslatedText());
+                }
+              }
+        });
+      }
+    });
+
+    // Add all widgets to translation panel.
+    VerticalPanel transPanel = new VerticalPanel();
+    transPanel.add(transArea);
+    transPanel.add(translateButton);
+    transPanel.add(new Label("Translation result: "));
+    transPanel.add(outputLabel);
+    return transPanel;
+  }
+}
+
+}}}
