@@ -14,7 +14,8 @@ Merges:
 /releases/maps/1.0/@1157 was merged (r1192) into /trunk/maps
 /releases/maps/1.0/@1157:1249 was merged (r1250) into /trunk/maps (1.0.3 release)
 /releases/maps/1.0/@1249:1383 was merged (r1384) into /trunk/maps (1.0.4 release)
--> The next merge into trunk will be r1383:????
+/releases/maps/1.0/@1383:1392 was merged (r1393) into /trunk/maps (1.0.4 release)
+-> The next merge into trunk will be r1392:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -73,4 +74,4 @@ it is returning null.(r1027, r1029)
  - Added GMapUIOptions and 3D Controls support, polish on demos (r1355)
  - Added GoogleBar settings and MapOptions support (new constructor override for MapWidget) (r1356)
  - Javadoc update for setAdSafe() methods (r1357)
-
+ - Fix build break in GWT 1.5 - Checkbox.get/setValue() not supported. (r1392)
