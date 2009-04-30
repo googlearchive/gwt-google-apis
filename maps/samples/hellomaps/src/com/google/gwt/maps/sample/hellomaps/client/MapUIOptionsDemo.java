@@ -69,9 +69,6 @@ public class MapUIOptionsDemo extends MapsDemo {
     };
   }
 
-  private MapWidget smallMap;
-  private MapWidget largeMap;
-
   private class UIOptionsControl {
     final Panel panel;
     final Size size;
@@ -154,18 +151,18 @@ public class MapUIOptionsDemo extends MapsDemo {
       map = newMapWidget();
 
       MapUIOptions options = MapUIOptions.newInstance(size);
-      options.setDoubleClick(doubleClick.getValue());
-      options.setHybridMapType(hybridMapType.getValue());
-      options.setKeyboard(keyboard.getValue());
-      options.setLargeMapControl3d(largeControl3d.getValue());
-      options.setMapTypeControl(mapTypeControl.getValue());
-      options.setMenuMapTypeControl(menuMapTypeControl.getValue());
-      options.setNormalMapType(normalMapType.getValue());
-      options.setPhysicalMapType(physicalMapType.getValue());
-      options.setSatelliteMapType(satelliteMapType.getValue());
-      options.setScaleControl(scaleControl.getValue());
-      options.setScrollwheel(scrollwheel.getValue());
-      options.setSmallZoomControl3d(smallZoomControl3d.getValue());
+      options.setDoubleClick(doubleClick.isChecked());
+      options.setHybridMapType(hybridMapType.isChecked());
+      options.setKeyboard(keyboard.isChecked());
+      options.setLargeMapControl3d(largeControl3d.isChecked());
+      options.setMapTypeControl(mapTypeControl.isChecked());
+      options.setMenuMapTypeControl(menuMapTypeControl.isChecked());
+      options.setNormalMapType(normalMapType.isChecked());
+      options.setPhysicalMapType(physicalMapType.isChecked());
+      options.setSatelliteMapType(satelliteMapType.isChecked());
+      options.setScaleControl(scaleControl.isChecked());
+      options.setScrollwheel(scrollwheel.isChecked());
+      options.setSmallZoomControl3d(smallZoomControl3d.isChecked());
 
       map.setUI(options);
       panel.add(map);
@@ -178,18 +175,18 @@ public class MapUIOptionsDemo extends MapsDemo {
       map = newMapWidget();
 
       MapUIOptions options = MapUIOptions.newInstance(size);
-      doubleClick.setValue(options.getDoubleClick());
-      hybridMapType.setValue(options.getHybridMapType());
-      keyboard.setValue(options.getKeyboard());
-      largeControl3d.setValue(options.getLargeMapControl3d());
-      mapTypeControl.setValue(options.getMapTypeControl());
-      menuMapTypeControl.setValue(options.getMenuMapTypeControl());
-      normalMapType.setValue(options.getNormalMapType());
-      physicalMapType.setValue(options.getPhysicalMapType());
-      satelliteMapType.setValue(options.getSatelliteMapType());
-      scaleControl.setValue(options.getScaleControl());
-      scrollwheel.setValue(options.getScrollwheel());
-      smallZoomControl3d.setValue(options.getSmallZoomControl3d());
+      doubleClick.setChecked(options.getDoubleClick());
+      hybridMapType.setChecked(options.getHybridMapType());
+      keyboard.setChecked(options.getKeyboard());
+      largeControl3d.setChecked(options.getLargeMapControl3d());
+      mapTypeControl.setChecked(options.getMapTypeControl());
+      menuMapTypeControl.setChecked(options.getMenuMapTypeControl());
+      normalMapType.setChecked(options.getNormalMapType());
+      physicalMapType.setChecked(options.getPhysicalMapType());
+      satelliteMapType.setChecked(options.getSatelliteMapType());
+      scaleControl.setChecked(options.getScaleControl());
+      scrollwheel.setChecked(options.getScrollwheel());
+      smallZoomControl3d.setChecked(options.getSmallZoomControl3d());
 
       map.setUI(options);
       panel.add(map);
