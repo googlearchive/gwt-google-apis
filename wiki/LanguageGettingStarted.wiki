@@ -138,3 +138,5 @@ public class SimpleLanguage implements EntryPoint {
 }}}
 
 The Language API provides support for loading API using AjaxLoader library. You may use the `LanguageUtils` class to load translation API in this case. When the API javascript is loaded, the `run()` method is executed which loads a simple Language demo. Enter some text in the textarea and click on "Translate" to translate input text from English to Spanish. Check out the screenshot of the running application below:
+
+  http://gwt-google-apis.googlecode.com/svn/wiki/SimpleLanguage.PNG
