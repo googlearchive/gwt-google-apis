@@ -76,7 +76,6 @@ import com.google.gwt.maps.client.impl.HandlerCollection;
 import com.google.gwt.maps.client.impl.JsUtil;
 import com.google.gwt.maps.client.impl.MapEvent;
 import com.google.gwt.maps.client.impl.MapImpl;
-import com.google.gwt.maps.client.impl.MapOptionsImpl;
 import com.google.gwt.maps.client.impl.EventImpl.IntIntCallback;
 import com.google.gwt.maps.client.impl.EventImpl.LatLngCallback;
 import com.google.gwt.maps.client.impl.EventImpl.MapTypeCallback;
@@ -224,6 +223,31 @@ public final class MapWidget extends Composite {
 
   /**
    * Creates a new map widget and sets the view to the specified center point
+   * and zoom level.
+   * 
+   * Note: The 'load' event requires that a handler be registered before
+   * GMap2.setCenter() is called. Since that method is always called in this
+   * constructor, it isn't clear that gwt-google-apis users needs this event.
+   * 
+   * @param center the geographical point about which to center
+   * @param zoomLevel zoomLevel the zoom level
+   * @param options optional settings to specify when creating the map.
+   */
+  public MapWidget(LatLng center, int zoomLevel, MapOptions options) {
+    Maps.assertLoaded();
+    initWidget(mapContainer);
+    jsoPeer = MapImpl.impl.construct(getElement(), options);
+    MapImpl.impl.bind(jsoPeer, this);
+    if (center == null) {
+      center = LatLng.newInstance(0, 0);
+    }
+    setCenter(center, zoomLevel);
+    // Initialize the InfoWindow instance for this map.
+    getInfoWindow();
+  }
+
+  /**
+   * Creates a new map widget and sets the view to the specified center point
    * and zoom level. Also, sets the dragging and draggable cursor values. See
    * the W3C CSS spec for allowable cursor string values.
    * 
@@ -237,22 +261,13 @@ public final class MapWidget extends Composite {
    *          draggable
    * @param draggingCursor CSS name of the cursor to display when the map is
    *          being dragged
+   * @deprecated Use {@link #MapWidget(LatLng, int, MapOptions)} instead.
    */
+  @Deprecated
   public MapWidget(LatLng center, int zoomLevel, String draggableCursor,
       String draggingCursor) {
-    Maps.assertLoaded();
-    initWidget(mapContainer);
-    JavaScriptObject opts = MapOptionsImpl.impl.construct();
-    MapOptionsImpl.impl.setDraggableCursor(opts, draggableCursor);
-    MapOptionsImpl.impl.setDraggingCursor(opts, draggingCursor);
-    jsoPeer = MapImpl.impl.construct(getElement(), opts);
-    MapImpl.impl.bind(jsoPeer, this);
-    if (center == null) {
-      center = LatLng.newInstance(0, 0);
-    }
-    setCenter(center, zoomLevel);
-    // Initialize the InfoWindow instance for this map.
-    getInfoWindow();
+    this(center, zoomLevel, MapOptions.newInstance().setDraggableCursor(
+        draggableCursor).setDraggingCursor(draggingCursor));
   }
 
   /**
@@ -288,6 +303,54 @@ public final class MapWidget extends Composite {
    */
   public void addControlWidget(Widget w) {
     mapContainer.add(w);
+  }
+
+  /**
+   * Returns a {@link MapUIOptions} object specifying default behaviour and UI
+   * elements for the Map, based on the UI of maps.google.com.
+   */
+  public MapUIOptions getDefaultUI() {
+    return MapImpl.impl.getDefaultUI(jsoPeer);
+  }
+
+   /** Returns a Boolean indicating whether pinch to zoom is enabled.
+   * 
+   * @return <code>true</code> if ping to zoom is enabled.
+   */
+  public boolean isPinchToZoomEnabled() {
+    return MapImpl.impl.pinchToZoomEnabled(jsoPeer);
+  }
+
+  /**
+   * Enables or disables pinching to zoom on an iPhone or iPod touch. Note:
+   * pinch to zoom is enabled by default.
+   * 
+   * @param value pass <code>false</code> to disable pinching to zoom.
+   */
+  public void setPinchToZoom(boolean value) {
+    if (value) {
+      MapImpl.impl.enablePinchToZoom(jsoPeer);
+    } else {
+      MapImpl.impl.disablePinchToZoom(jsoPeer);
+    }
+  }
+
+  /**
+   * Adds behaviour and UI elements specified in the options parameter, which
+   * can be a modified version of the object returned from getDefaultUI().
+   * 
+   * @param options the user interface options to set on the map.
+   */
+  public void setUI(MapUIOptions options) {
+    MapImpl.impl.setUI(jsoPeer, options);
+  }
+
+  /**
+   * Adds the default behaviour and UI elements specified in getDefaultUI() to
+   * the Map.
+   */
+  public void setUIToDefault() {
+    MapImpl.impl.setUIToDefault(jsoPeer);
   }
 
   /**
@@ -730,9 +793,9 @@ public final class MapWidget extends Composite {
    * Notifies the map of a change in the size of its container and moves to the
    * center of the map. Call this method after the size of the container DOM
    * object has changed, so that the map can adjust itself to fit the new size.
-   *
-   * Note: This call may cause problems with the Maps API if called during
-   * a Zoom or other transition.
+   * 
+   * Note: This call may cause problems with the Maps API if called during a
+   * Zoom or other transition.
    */
   public void checkResizeAndCenter() {
     LatLng center = getCenter();
@@ -843,6 +906,15 @@ public final class MapWidget extends Composite {
    */
   public MapType getCurrentMapType() {
     return MapImpl.impl.getCurrentMapType(jsoPeer);
+  }
+
+  /**
+   * Returns the draggable object used by this map.
+   * 
+   * @return the draggable object used by this map.
+   */
+  public DraggableObject getDragObject() {
+    return MapImpl.impl.getDragObject(jsoPeer);
   }
 
   /**
@@ -1037,7 +1109,8 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes a single handler of this map previously added with
-   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)} .
+   * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)}
+   * .
    * 
    * @param handler the handler to remove
    */
@@ -1794,11 +1867,12 @@ public final class MapWidget extends Composite {
    */
   void trigger(MapZoomEndEvent event) {
     maybeInitMapZoomEndHandlers();
-    mapZoomEndHandlers.trigger(event.getOldZoomLevel(), event.getNewZoomLevel());
+    mapZoomEndHandlers.trigger(event.getOldZoomLevel(),
+        event.getNewZoomLevel());
   }
 
   /**
-   * 
+   * Lazy init the HandlerCollection.
    */
   private void maybeInitInfoWindowBeforeCloseHandlers() {
     if (infoWindowBeforeCloseHandlers == null) {

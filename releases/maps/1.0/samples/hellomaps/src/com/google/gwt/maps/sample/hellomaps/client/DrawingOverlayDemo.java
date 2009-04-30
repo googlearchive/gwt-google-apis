@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.PolygonCancelLineHandler;
 import com.google.gwt.maps.client.event.PolygonEndLineHandler;
@@ -96,6 +97,15 @@ public class DrawingOverlayDemo extends MapsDemo {
     map = new MapWidget(LatLng.newInstance(48.859068, 2.344894), 12);
     map.setSize("500px", "400px");
 
+    // Change the default UI controls a bit to help with drawing.
+    MapUIOptions options = map.getDefaultUI();
+    options.setScrollwheel(false);
+    options.setDoubleClick(false);
+    options.setLargeMapControl3d(true);
+    map.setUI(options);
+    map.setDoubleClickZoom(false);
+    map.setDraggable(false);
+
     VerticalPanel panel = new VerticalPanel();
     panel.setSpacing(10);
     panel.add(makeToolbar());
@@ -108,7 +118,8 @@ public class DrawingOverlayDemo extends MapsDemo {
   }
 
   private void createPolyline() {
-    PolyStyleOptions style = PolyStyleOptions.newInstance(color, weight, opacity);
+    PolyStyleOptions style = PolyStyleOptions.newInstance(color, weight,
+        opacity);
 
     final Polyline poly = new Polyline(new LatLng[0]);
     lastPolyline = poly;
@@ -133,7 +144,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     poly.addPolylineEndLineHandler(new PolylineEndLineHandler() {
 
       public void onEnd(PolylineEndLineEvent event) {
-        message2.setText(message2.getText() + " : Line End at " + event.getLatLng() + ".  Bounds="
+        message2.setText(message2.getText() + " : Line End at "
+            + event.getLatLng() + ".  Bounds="
             + poly.getBounds().getNorthEast() + ","
             + poly.getBounds().getSouthWest() + " length=" + poly.getLength()
             + "m");
@@ -142,7 +154,8 @@ public class DrawingOverlayDemo extends MapsDemo {
   }
 
   private void createPolygon() {
-    PolyStyleOptions style = PolyStyleOptions.newInstance(color, weight, opacity);
+    PolyStyleOptions style = PolyStyleOptions.newInstance(color, weight,
+        opacity);
 
     final Polygon poly = new Polygon(new LatLng[0], color, weight, opacity,
         color, fillFlag ? .7 : 0.0);
@@ -168,9 +181,11 @@ public class DrawingOverlayDemo extends MapsDemo {
     poly.addPolygonEndLineHandler(new PolygonEndLineHandler() {
 
       public void onEnd(PolygonEndLineEvent event) {
-        message2.setText(message2.getText() + " : Polygon End at " + event.getLatLng() + ".  Bounds="
+        message2.setText(message2.getText() + " : Polygon End at "
+            + event.getLatLng() + ".  Bounds="
             + poly.getBounds().getNorthEast() + ","
-            + poly.getBounds().getSouthWest() + " area=" + poly.getArea() + "m");
+            + poly.getBounds().getSouthWest() + " area=" + poly.getArea()
+            + "m");
       }
     });
   }
@@ -218,7 +233,7 @@ public class DrawingOverlayDemo extends MapsDemo {
       }
     });
     buttonPanel.add(addButton);
-    
+
     editPolylineButton.setEnabled(false);
     editPolylineButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
@@ -272,8 +287,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     weightBox.addChangeListener(new ChangeListener() {
       public void onChange(Widget sender) {
         String val = weightBox.getItemText(weightBox.getSelectedIndex());
-        val = val.replace(" pixel","");
-        val = val.replace("s","");
+        val = val.replace(" pixel", "");
+        val = val.replace("s", "");
         weight = Integer.parseInt(val);
       }
     });
@@ -289,7 +304,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     colorBox.addItem("#FF00FF violet");
     colorBox.addChangeListener(new ChangeListener() {
       public void onChange(Widget sender) {
-        color = colorBox.getItemText(colorBox.getSelectedIndex()).substring(0,7);
+        color = colorBox.getItemText(colorBox.getSelectedIndex()).substring(0,
+            7);
       }
     });
     grid.setWidget(1, 2, colorBox);
@@ -309,8 +325,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     addPolylineButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         message1.setText("opacity=" + opacity + " color=" + color + " weight="
-            + weight + " polygon=" + makePolygon + " center=" + map.getCenter()
-            + " zoom=" + map.getZoomLevel());
+            + weight + " polygon=" + makePolygon + " center="
+            + map.getCenter() + " zoom=" + map.getZoomLevel());
         addPolyDialog.hide();
         createPolyline();
         editPolylineButton.setEnabled(true);
@@ -321,8 +337,9 @@ public class DrawingOverlayDemo extends MapsDemo {
     addPolygonButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
         message1.setText("Opacity=" + opacity + " color=" + color + "weight="
-            + weight + "polygon = " + makePolygon + "Center=" + map.getCenter()
-            + " zoom=" + map.getZoomLevel() + "fill=" + fillFlag);
+            + weight + "polygon = " + makePolygon + "Center="
+            + map.getCenter() + " zoom=" + map.getZoomLevel() + "fill="
+            + fillFlag);
         addPolyDialog.hide();
         createPolygon();
         editPolygonButton.setEnabled(true);

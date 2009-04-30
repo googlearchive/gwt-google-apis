@@ -18,8 +18,6 @@ package com.google.gwt.maps.sample.hellomaps.client;
 import com.google.gwt.maps.client.MapPane;
 import com.google.gwt.maps.client.MapPaneType;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.MapTypeControl;
-import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Point;
@@ -139,8 +137,7 @@ public class CustomOverlayDemo extends MapsDemo {
   public CustomOverlayDemo() {
     map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
-    map.addControl(new SmallMapControl());
-    map.addControl(new MapTypeControl());
+    map.setUIToDefault();
     initWidget(map);
   }
 

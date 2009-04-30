@@ -26,11 +26,33 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public final class DirectionQueryOptions {
 
-  private final JavaScriptObject jsoPeer;
-
   final MapWidget map;
 
   final Widget panel;
+
+  private final JavaScriptObject jsoPeer;
+
+  /**
+   * Constant values used for setting the mode of travel for retrieving
+   * directions.
+   */
+  public static enum TravelMode {
+    WALKING(), DRIVING();
+
+    private final int value;
+
+    private TravelMode() {
+      value = getConstant(this.name());
+    }
+
+    private native int getConstant(String name) /*-{
+      return $wnd['G_TRAVEL_MODE_' + name];
+    }-*/;
+
+    public int value() {
+      return value;
+    }
+  }
 
   /**
    * Create an options object with default parameters.
@@ -63,6 +85,16 @@ public final class DirectionQueryOptions {
   }
 
   /**
+   * If <code>true</code> directions will attempt to exclude highways when
+   * computing directions. Note that directions may still include highways if
+   * there are no viable alternatives.
+   * 
+   */
+  public void setAvoidHighways(boolean avoid) {
+    DirectionQueryOptionsImpl.impl.setAvoidHighways(jsoPeer, avoid);
+  }
+
+  /**
    * The locale to use for the directions result. For example, "en_US", "fr",
    * "fr_CA", etc.
    * 
@@ -75,11 +107,10 @@ public final class DirectionQueryOptions {
   /**
    * By default, when a Directions object has a map, the map is centered and
    * zoomed to the bounding box of the the directions result. When this option
-   * is set to <code>true</code>, the viewport is left alone for this
-   * request.
+   * is set to <code>true</code>, the viewport is left alone for this request.
    * 
-   * @param preserveViewport pass <code>true</code> to leave alone the
-   *          viewport (do not center).
+   * @param preserveViewport pass <code>true</code> to leave alone the viewport
+   *          (do not center).
    */
   public void setPreserveViewport(boolean preserveViewport) {
     DirectionQueryOptionsImpl.impl.setPreserveViewport(jsoPeer,
@@ -111,5 +142,16 @@ public final class DirectionQueryOptions {
    */
   public void setRetrieveSteps(boolean retrieveSteps) {
     DirectionQueryOptionsImpl.impl.setRetrieveSteps(jsoPeer, retrieveSteps);
+  }
+
+  /**
+   * The mode of travel, such as driving (default) or walking. Note that if you
+   * specify walking directions, you will need to specify a &lt;div&gt; panel to
+   * hold a warning notice to users.
+   * 
+   * @param mode the mode of travel.
+   */
+  public void setTravelMode(TravelMode mode) {
+    DirectionQueryOptionsImpl.impl.setTravelMode(jsoPeer, mode.value());
   }
 }

@@ -28,7 +28,9 @@ import com.google.gwt.maps.jsio.client.Constructor;
  */
 public abstract class GeoXmlOverlayImpl extends OverlayImpl {
 
-  public static final GeoXmlOverlayImpl impl = GWT.create(GeoXmlOverlayImpl.class);
+  @SuppressWarnings("hiding")
+  public static final GeoXmlOverlayImpl impl = //
+    GWT.create(GeoXmlOverlayImpl.class);
 
   @Constructor("$wnd.GGeoXml")
   public abstract JavaScriptObject constructGeoXmlOverlay(String url);

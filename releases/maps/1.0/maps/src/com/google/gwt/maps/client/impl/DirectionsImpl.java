@@ -50,6 +50,8 @@ public interface DirectionsImpl extends JSFlyweightWrapper {
 
   DirectionsImpl impl = GWT.create(DirectionsImpl.class);
 
+  void clear(JavaScriptObject jsoPeer);
+  
   @Constructor("$wnd.GDirections")
   JavaScriptObject construct(MapWidget map, Element panel);
 

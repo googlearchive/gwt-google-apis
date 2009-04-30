@@ -17,7 +17,6 @@ package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geocode.DirectionQueryOptions;
 import com.google.gwt.maps.client.geocode.DirectionResults;
 import com.google.gwt.maps.client.geocode.Directions;
@@ -29,9 +28,8 @@ import com.google.gwt.maps.client.geocode.StatusCodes;
 import com.google.gwt.maps.client.geocode.Waypoint;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 import java.util.List;
 
@@ -40,20 +38,21 @@ import java.util.List;
  * directions.
  * 
  * For full documentation of the various objects, methods and events in the
- * Directions API package, consult the API Reference at
- * {@link "http://code.google.com/apis/maps"}
+ * Directions API package, consult the API Reference at {@link
+ * "http://code.google.com/apis/maps"}
  */
 public class RoutedDirectionsDemo extends MapsDemo {
-  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790, -84.3880580);
+  private static final LatLng ATLANTA = LatLng.newInstance(33.7814790,
+      -84.3880580);
   // Points of interest along the map.
   private static final LatLng STONE_MOUNTAIN_PARK = LatLng.newInstance(
       33.80653802509606, -84.15252685546875);
   // Cyclorama
-  private static final LatLng CYCLORAMA = LatLng.newInstance(33.741185330333956,
-      -84.35834884643555);
+  private static final LatLng CYCLORAMA = LatLng.newInstance(
+      33.741185330333956, -84.35834884643555);
   // Georgia Aquarium
-  private static final LatLng GEORGIA_AQUARIUM = LatLng.newInstance(33.761443931868925,
-      -84.39432263374329);
+  private static final LatLng GEORGIA_AQUARIUM = LatLng.newInstance(
+      33.761443931868925, -84.39432263374329);
   // Underground Atlanta
   private static final LatLng UNDERGROUND_ATLANTA = LatLng.newInstance(
       33.75134645137294, -84.39026713371277);
@@ -64,7 +63,7 @@ public class RoutedDirectionsDemo extends MapsDemo {
       + " Atlanta, GA USA</p>"
       + " <p>Queries the Google Directions service and displays a polyline,"
       + " markers on the map, and textual directions on the right.  The"
-      + " directions are for a leisurely route from Midtown Atlanta to the"  
+      + " directions are for a leisurely route from Midtown Atlanta to the"
       + " Atlanta Airport through various waypoints.</p>\n";
 
   private static Waypoint waypoints[] = {
@@ -75,7 +74,7 @@ public class RoutedDirectionsDemo extends MapsDemo {
       new Waypoint(STONE_MOUNTAIN_PARK), //
       new Waypoint(DWARF_HOUSE), //
       new Waypoint("N Terminal Pkwy, Atlanta, GA 30320") // The Airport
-      };
+  };
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
@@ -102,29 +101,23 @@ public class RoutedDirectionsDemo extends MapsDemo {
   private MapWidget map;
 
   public RoutedDirectionsDemo() {
-    final Grid grid = new Grid(1, 2);
-    grid.setWidth("100%");
-    grid.getCellFormatter().setWidth(0, 0, "64%");
-    grid.getCellFormatter().setVerticalAlignment(0, 0,
-        HasVerticalAlignment.ALIGN_TOP);
-    grid.getCellFormatter().setWidth(0, 1, "34%");
-    grid.getCellFormatter().setVerticalAlignment(0, 1,
-        HasVerticalAlignment.ALIGN_TOP);
-
+    HorizontalPanel hp = new HorizontalPanel();
     map = new MapWidget(ATLANTA, 15);
-    map.setHeight("480px");
-    map.addControl(new LargeMapControl());
-    grid.setWidget(0, 0, map);
+    map.setSize("400px", "480px");
+    map.setUIToDefault();
+    map.getElement().getStyle().setPropertyPx("margin", 15);
+    hp.add(map);
     DirectionsPanel directionsPanel = new DirectionsPanel();
-    grid.setWidget(0, 1, directionsPanel);
+    hp.add(directionsPanel);
     directionsPanel.setSize("100%", "100%");
 
-    initWidget(grid);
+    initWidget(hp);
 
-    DirectionQueryOptions opts = new DirectionQueryOptions(map, directionsPanel);
+    DirectionQueryOptions opts = new DirectionQueryOptions(map,
+        directionsPanel);
 
     // Create directions from Midtown Atlanta to the Airport with a *few*
-    // stops along the way.    
+    // stops along the way.
     Directions.loadFromWaypoints(waypoints, opts, new DirectionsCallback() {
 
       public void onFailure(int statusCode) {
@@ -134,7 +127,7 @@ public class RoutedDirectionsDemo extends MapsDemo {
 
       public void onSuccess(DirectionResults result) {
         GWT.log("Successfully loaded directions.", null);
-        
+
         // A little exercise of the route API
         List<Route> routes = result.getRoutes();
         for (Route r : routes) {

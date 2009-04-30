@@ -95,7 +95,6 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(PolygonTest.class);
     suite.addTestSuite(PolylineTest.class);
 
-    suite.addTestSuite(AdsManagerTest.class);
     return suite;
   }
 }

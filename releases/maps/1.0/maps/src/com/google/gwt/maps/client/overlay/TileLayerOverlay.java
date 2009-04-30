@@ -36,20 +36,31 @@ public class TileLayerOverlay extends ConcreteOverlay {
     TileLayerOverlayImpl.impl.bind(jso, overlay);
     return overlay;
   }
-  
+
   /**
    * Creates a tile layer overlay from the given tile layer.
    * 
-   * @param tileLayer
+   * @param tileLayer tile layer instance.
    */
   public TileLayerOverlay(TileLayer tileLayer) {
     super(TileLayerOverlayImpl.impl.construct(tileLayer));
   }
-  
+
+  /**
+   * Creates a tile layer overlay from the given tile layer.
+   * 
+   * @param tileLayer tile layers instance.
+   * @param options optional arguments
+   */
+  public TileLayerOverlay(TileLayer tileLayer, 
+      TileLayerOverlayOptions options) {
+    super(TileLayerOverlayImpl.impl.construct(tileLayer, options));
+  }
+
   /**
    * Create this overlay from an existing JavaScriptObject instance.
    * 
-   * @param jsoPeer an existing JavaScriptObject instance.
+   * @param jso an existing JavaScriptObject instance.
    */
   protected TileLayerOverlay(JavaScriptObject jso) {
     super(jso);
@@ -65,13 +76,14 @@ public class TileLayerOverlay extends ConcreteOverlay {
   }
 
   public void refresh() {
-      TileLayerOverlayImpl.impl.refresh(this);
+    TileLayerOverlayImpl.impl.refresh(this);
   }
-  
+
   /**
    * Shows or hides this overlay.
    * 
-   * @param visible <code>true</code> to show the overlay, <code>false</code> to hide.
+   * @param visible <code>true</code> to show the overlay, <code>false</code> to
+   *          hide.
    */
   public void setVisible(boolean visible) {
     if (visible) {

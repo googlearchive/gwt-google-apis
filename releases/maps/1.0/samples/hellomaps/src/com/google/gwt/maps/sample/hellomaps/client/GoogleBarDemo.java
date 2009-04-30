@@ -15,11 +15,13 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.maps.client.GoogleBarAdsOptions;
+import com.google.gwt.maps.client.GoogleBarOptions;
+import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.event.MapClickHandler;
+import com.google.gwt.maps.client.GoogleBarAdsOptions.AdSafeOption;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.overlay.Marker;
-import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
@@ -35,18 +37,17 @@ import com.google.gwt.user.client.ui.HTML;
  * a marker, we create a new marker at that point. When the visitor clicks a
  * marker, we remove it from the map.
  */
-public class ClickDemo extends MapsDemo {
+public class GoogleBarDemo extends MapsDemo {
   private static HTML descHTML = null;
   private static final String descString = "<p>Creates a 500 x 300 "
-      + "pixel map viewport centered on Palo Alto, CA USA. " + "</p>\n"
-      + "<p>Each time the mouse is clicked in this demo, a new marker is "
-      + "placed on the map at the point there the click event occurred.</p>";
+      + "pixel map viewport to Demonstrates the Google Bar for search "
+      + "and ads</p>";
 
   public static MapsDemoInfo init() {
     return new MapsDemoInfo() {
       @Override
       public MapsDemo createInstance() {
-        return new ClickDemo();
+        return new GoogleBarDemo();
       }
 
       @Override
@@ -59,31 +60,29 @@ public class ClickDemo extends MapsDemo {
 
       @Override
       public String getName() {
-        return "Click Handling";
+        return "Google Bar";
       }
     };
   }
 
   private final MapWidget map;
 
-  public ClickDemo() {
-    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
-    map.setSize("500px", "300px");
+  public GoogleBarDemo() {
+    GoogleBarAdsOptions adsOptions = GoogleBarAdsOptions.newInstance();
+    adsOptions.setAdSafe(AdSafeOption.ADSAFE_MEDIUM);
+    GoogleBarOptions googleBarOptions = GoogleBarOptions.newInstance();
+    googleBarOptions.setAdsOptions(adsOptions);
+    googleBarOptions.setShowOnLoad(true);
+    googleBarOptions.setStyle("new");
+    MapOptions mapOptions = MapOptions.newInstance();
+    mapOptions.setGoogleBarOptions(googleBarOptions);
+    mapOptions.setSize(Size.newInstance(500, 600));
+    // Dublin
+    map = new MapWidget(LatLng.newInstance(53.350705, -6.264095), 13,
+        mapOptions);
+    // map.setUIToDefault();
+    map.setGoogleBarEnabled(true);
+
     initWidget(map);
-    map.setUIToDefault();
-
-    map.addMapClickHandler(new MapClickHandler() {
-      public void onClick(MapClickEvent e) {
-        MapWidget sender = e.getSender();
-        Overlay overlay = e.getOverlay();
-        LatLng point = e.getLatLng();
-
-        if (overlay != null && overlay instanceof Marker) {
-          sender.removeOverlay(overlay);
-        } else {
-          sender.addOverlay(new Marker(point));
-        }
-      }
-    });
   }
 }

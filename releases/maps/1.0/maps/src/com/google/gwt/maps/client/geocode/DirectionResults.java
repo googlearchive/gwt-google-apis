@@ -37,6 +37,14 @@ public final class DirectionResults {
   }
 
   /**
+   * Clears any existing directions results, removes overlays from the map and
+   * panel, and cancels any pending load() requests.
+   */
+  public void clear() {
+    DirectionsImpl.impl.clear(jsoPeer);
+  }
+
+  /**
    * This method is used to get the bounding box for the result of this
    * directions query. Returns a LatLngBounds object or null if no successful
    * result is available.
@@ -125,8 +133,10 @@ public final class DirectionResults {
    * 
    * @return the Polyline object associated with the entire directions response.
    */
-  // TODO(zundel): this method fails with a CastClassException from the generated JSIO method DirectionsImplImpl.getPolyline()
+  // TODO(zundel): this method fails with a CastClassException from the
+  // generated JSIO method DirectionsImplImpl.getPolyline()
   public Polyline getPolyline() {
+    Object o = nativeGetGwtPeerAsObject(jsoPeer);
     return DirectionsImpl.impl.getPolyline(jsoPeer);
   }
 
@@ -159,4 +169,8 @@ public final class DirectionResults {
   public String getSummaryHtml() {
     return DirectionsImpl.impl.getSummaryHtml(jsoPeer);
   }
+
+  private native Object nativeGetGwtPeerAsObject(JavaScriptObject jsoPeer) /*-{
+    return jsoPeer.__gwtPeer;
+  }-*/;
 }

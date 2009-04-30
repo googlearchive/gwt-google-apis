@@ -83,7 +83,7 @@ public class AdsManager extends JavaScriptObject {
 
     /**
      * Accessor intended for unit testing only.
-     * @return the Channel number set in {@link #channel()}.
+     * @return the Channel number set in {@link #setChannel(int)}.
      */
     final native int getChannel() /*-{
       return this.channel;
