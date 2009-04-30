@@ -1,0 +1,14 @@
+branch-info.txt for gwt-google-apis Language 1.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/language/1.0/ was created (r1386) as a copy from /trunk@1385
+
+Merges:
+/trunk/language/@1385:1401 was merged (r1402) into releases/language/1.0
+--->The next merge into trunk will be 1401:????
+
+Changes in this branch (excluding changes to this file itself)
+- Updated svn:external for language to point at a specific rev in the language/1.0 release. (r1387)
+- Updated launch scripts for Language and Language projects (r1400)

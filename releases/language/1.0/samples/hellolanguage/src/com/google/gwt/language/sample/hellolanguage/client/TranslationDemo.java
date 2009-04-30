@@ -41,7 +41,7 @@ public class TranslationDemo extends Composite {
 
   private final ListBox sourceLanguages = new ListBox();
   private final ListBox destinationLanguages = new ListBox();
-  
+
   public TranslationDemo() {
     inputTextArea.setStyleName(Styles.DEMO_TEXTAREA_STYLE);
     outputDiv.setStyleName(Styles.TRANS_OUTPUT_DIV_STYLE);
@@ -53,13 +53,13 @@ public class TranslationDemo extends Composite {
     wrapperPanel.add(demoPanel);
     wrapperPanel.setCellHorizontalAlignment(demoPanel,
         HasHorizontalAlignment.ALIGN_CENTER);
-    
+
     Widget branding = Translation.createBrandingWidget(
         BrandingOptions.newInstance(BrandingOptions.Type.VERTICAL));
     wrapperPanel.add(branding);
     wrapperPanel.setCellHorizontalAlignment(branding,
         HasHorizontalAlignment.ALIGN_RIGHT);
-    
+
     initWidget(wrapperPanel);
   }
 
@@ -143,10 +143,29 @@ public class TranslationDemo extends Composite {
    * Populates list boxes with source and destination languages.
    */
   private void populateListBoxes() {
-    // Populate source & destination language list box.
+    int englishIndex = 0;
+    int spanishIndex = 0;
+    int iter = 0;
+
+    // Populate source & destination language list boxes.
     for (Language lang : Language.values()) {
+      if (!Translation.isTranslatable(lang)) {
+        continue;
+      }
+
       sourceLanguages.addItem(lang.toString());
       destinationLanguages.addItem(lang.toString());
+      if (lang == Language.ENGLISH) {
+        englishIndex = iter;
+      } else if (lang == Language.SPANISH) {
+        spanishIndex = iter;
+      }
+      ++iter;
     }
+
+    // Select English as default source and Spanish as default destination
+    // languages.
+    sourceLanguages.setSelectedIndex(englishIndex);
+    destinationLanguages.setSelectedIndex(spanishIndex);
   }
 }
