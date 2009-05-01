@@ -145,6 +145,24 @@ public class TransliterationControlTest extends GWTTestCase {
   }
 
   /**
+   * Just to verify that makeTransliteratable does not throw any exceptions.
+   */
+  public void testMakeTransliteratable() {
+    LanguageUtils.loadTransliteration(new Runnable() {
+      public void run() {
+        initialize();
+        TransliteratableTextArea[] textAreas = { textArea1, textArea2 };
+        control.makeTransliteratable(textAreas);
+
+        TextAreaOptions options = TextAreaOptions.newInstance(true, false);
+        control.makeTransliteratable(textAreas, options);
+        finishTest();
+      }
+    });
+    delayTestFinish(MAX_TEST_FINISH_DELAY);
+  }
+
+  /**
    * Tests that State change event listeners are working correctly.
    */
   public void testStateChangeEventListeners() {
