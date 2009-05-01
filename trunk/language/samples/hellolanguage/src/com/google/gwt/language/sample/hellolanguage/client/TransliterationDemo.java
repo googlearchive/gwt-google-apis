@@ -17,8 +17,8 @@ package com.google.gwt.language.sample.hellolanguage.client;
 
 import com.google.gwt.language.client.transliteration.LanguageCode;
 import com.google.gwt.language.client.transliteration.Options;
+import com.google.gwt.language.client.transliteration.SupportedDestinationLanguages;
 import com.google.gwt.language.client.transliteration.TransliteratableTextArea;
-import com.google.gwt.language.client.transliteration.Transliteration;
 import com.google.gwt.language.client.transliteration.TransliterationControl;
 import com.google.gwt.language.client.transliteration.TransliterationControlDiv;
 import com.google.gwt.user.client.ui.Composite;
@@ -30,7 +30,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class TransliterationDemo extends Composite {
   private final LanguageCode srcLanguage = LanguageCode.ENGLISH;
-  private final LanguageCode[] destLanguages = Transliteration.getDestinationLanguages(srcLanguage);
+  private final LanguageCode[] destLanguages =
+      SupportedDestinationLanguages.ALL.getLanguageCodes();
   private final Options options = Options.newInstance(srcLanguage, destLanguages,
       true, "ctrl+g");
   private final TransliterationControl control = TransliterationControl.newInstance(options);
