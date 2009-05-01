@@ -15,6 +15,7 @@
  */
 package com.google.gwt.language.client.transliteration;
 
+import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
@@ -110,21 +111,99 @@ public class TransliterationControl extends JavaScriptObject {
   }-*/;
 
   /**
-   * Makes textarea with given id transliteratable.
+   * Makes textarea with given textarea id transliteratable.
    *
-   * @param textAreaId id of textarea
+   * @param textAreaId textarea id
+   * @throws JavaScriptException on invalid textarea id
    */
-  public final native void makeTransliteratable(String textAreaId) /*-{
-    this.makeTransliteratable([textAreaId]);
-  }-*/;
+  public final void makeTransliteratable(String textAreaId) {
+    makeTransliteratable(new String[] { textAreaId });
+  }
 
   /**
-   * Makes the given {@code TransliteratableTextArea} transliteratable.
+   * Makes textarea given by id transliteratable.
    *
-   * @param textArea an instance of {@code TransliteratableTextArea}
+   * @param textArea textarea id
+   * @param options options for textarea
+   * @throws JavaScriptException on invalid textarea id
+   */
+  public final void makeTransliteratable(String textArea, TextAreaOptions options) {
+    makeTransliteratable(new String[] { textArea }, options);
+  }
+
+  /**
+   * Makes array of textareas transliteratable.
+   *
+   * @param textAreaIds array of textarea ids.
+   * @throws JavaScriptException on invalid textarea ids
+   */
+  public final void makeTransliteratable(String[] textAreaIds) {
+    JsArrayString textAreaJsArray = ArrayHelper.createJsArray(textAreaIds);
+    makeTransliteratable(textAreaJsArray);
+  }
+
+  /**
+   * Makes array of textareas transliteratable with given options.
+   *
+   * @param textAreaIds array of textarea ids
+   * @param options options for textarea adjustment
+   * @throws JavaScriptException on invalid textarea ids
+   */
+  public final void makeTransliteratable(String[] textAreaIds,
+      TextAreaOptions options) {
+    JsArrayString textAreaJsArray = ArrayHelper.createJsArray(textAreaIds);
+    makeTransliteratable(textAreaJsArray, options);
+  }
+
+  /**
+   * Makes a textarea transliteratable.
+   *
+   * @param textArea transliteratable textarea
+   * @throws JavaScriptException on invalid textarea
    */
   public final void makeTransliteratable(TransliteratableTextArea textArea) {
-    makeTransliteratable(textArea.getId());
+    makeTransliteratable(new TransliteratableTextArea[] { textArea });
+  }
+
+  /**
+   * Makes textarea transliteratable.
+   *
+   * @param textArea transliteratable textarea
+   * @param options options for textarea
+   * @throws JavaScriptException on invalid textarea
+   */
+  public final void makeTransliteratable(TransliteratableTextArea textArea,
+      TextAreaOptions options) {
+    makeTransliteratable(new TransliteratableTextArea[] { textArea }, options);
+  }
+
+  /**
+   * Makes array of textareas transliteratable.
+   *
+   * @param textAreas transliteratable textareas
+   * @throws JavaScriptException on invalid textareas
+   */
+  public final void makeTransliteratable(TransliteratableTextArea[] textAreas) {
+    JsArrayString textAreaJsArray = createJsArrayString(textAreas);
+    makeTransliteratable(textAreaJsArray);
+  }
+
+  /**
+   * Makes array of textareas transliteratable.
+   *
+   * @param textAreas transliteratable textareas
+   * @param options options for textarea adjustment
+   * @throws JavaScriptException on invalid textareas
+   */
+  public final void makeTransliteratable(TransliteratableTextArea[] textAreas,
+      TextAreaOptions options) {
+    JsArrayString textAreaJsArray = JsArrayString.createArray().cast();
+    int index = 0;
+    for (TransliteratableTextArea textArea : textAreas) {
+      textAreaJsArray.set(index, textArea.getId());
+      ++index;
+    }
+    makeTransliteratable(textAreaJsArray, options);
   }
 
   /**
@@ -214,6 +293,23 @@ public class TransliterationControl extends JavaScriptObject {
   }-*/;
 
   /**
+   * Creates JS array of strings using textarea ids.
+   *
+   * @param textAreas textarea array
+   * @return js string array of textarea ids
+   */
+  private final JsArrayString createJsArrayString(
+      TransliteratableTextArea[] textAreas) {
+    JsArrayString textAreaJsArray = JsArrayString.createArray().cast();
+    int index = 0;
+    for (TransliteratableTextArea textArea : textAreas) {
+      textAreaJsArray.set(index, textArea.getId());
+      ++index;
+    }
+    return textAreaJsArray;
+  }
+
+  /**
    * Returns a JS array of string values containing source and destination
    * languages of transliteration.
    *
@@ -225,6 +321,27 @@ public class TransliterationControl extends JavaScriptObject {
     array.push(results.sourceLanguage);
     array.push(results.destinationLanguage);
     return array;
+  }-*/;
+
+  /**
+   * Makes given array of textareas transliteratable.
+   *
+   * @param textAreaJsArray ids of textareas
+   */
+  private final native void makeTransliteratable(
+      JsArrayString textAreaJsArray) /*-{
+    this.makeTransliteratable(textAreaJsArray);
+  }-*/;
+
+  /**
+   * Makes given array of textareas transliteratable.
+   *
+   * @param textAreaJsArray ids of textareas
+   * @param options options for textarea
+   */
+  private final native void makeTransliteratable(JsArrayString textAreaJsArray,
+      TextAreaOptions options) /*-{
+    this.makeTransliteratable(textAreaJsArray, options);
   }-*/;
 
   /**
