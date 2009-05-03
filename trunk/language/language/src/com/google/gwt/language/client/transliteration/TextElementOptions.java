@@ -19,31 +19,31 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * The optional argument supplies the options that are applied for this set of
- * textfields. The opt_options arugment can contain the following fields:<br>
+ * textfields. This can contain the following fields:<br>
  * <ul>
- * <li>adjustTextareaStyle - Optional boolean field. If true, the textarea size
- * and font are adjusted optimally to suit Indic and Arabic characters. Default
- * value for this field is true.
- * <li>adjustTextareaDirection - Optional boolean field. If true, the textarea
+ * <li>adjustTextareaStyle - Optional boolean field. If true, the text field
+ * size and font are adjusted optimally to suit Indic and Arabic characters.
+ * Default value for this field is true.
+ * <li>adjustTextareaDirection - Optional boolean field. If true, the text field
  * direction is adjusted optimally according to the direction of the
- * destinationLanguage and the contents of the textarea. Default value for this
- * field is true.
+ * destinationLanguage and the contents of the text field. Default value for
+ * this field is true.
  * </ul>
  */
-public class TextAreaOptions extends JavaScriptObject {
+public class TextElementOptions extends JavaScriptObject {
 
-  protected TextAreaOptions() { }
+  protected TextElementOptions() { }
 
   /**
    * Creates new instance with given options.
    *
-   * @param adjustTextareaStyle adjusts textarea optimally to suit Indic and
+   * @param adjustTextareaStyle adjusts text field optimally to suit Indic and
    *          Arabic characters.
    * @param adjustTextareaDirection adjusts direction optionally for destination
    *          language.
    * @return TextAreaOptions object
    */
-  public static native TextAreaOptions newInstance(boolean adjustTextareaStyle,
+  public static native TextElementOptions newInstance(boolean adjustTextareaStyle,
       boolean adjustTextareaDirection) /*-{
     var options = new Object();
     options.adjustTextareaStyle = adjustTextareaStyle;
