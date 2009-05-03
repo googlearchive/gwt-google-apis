@@ -13,11 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.language.client.LanguageUtils;
+import com.google.gwt.language.client.transliteration.control.ListenerManager;
 
 /**
  * Tests for ListenerManager class.

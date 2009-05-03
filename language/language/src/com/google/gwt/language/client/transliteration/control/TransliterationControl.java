@@ -13,12 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.language.client.transliteration.LanguageCode;
 
 /**
  * Wrapper for google.elements.transliteration.TransliterationControl JS class.

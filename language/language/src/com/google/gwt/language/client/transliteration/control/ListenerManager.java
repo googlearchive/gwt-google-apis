@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -70,7 +70,7 @@ class ListenerManager {
   static final native JavaScriptObject createJSOEventListener(
       TransliterationEventListener listener) /*-{
     return function(e) {
-      listener.@com.google.gwt.language.client.transliteration.TransliterationEventListener::onEventWrapper(Lcom/google/gwt/language/client/transliteration/TransliterationEventDetail;)(e);
+      listener.@com.google.gwt.language.client.transliteration.control.TransliterationEventListener::onEventWrapper(Lcom/google/gwt/language/client/transliteration/control/TransliterationEventDetail;)(e);
     }
   }-*/;
 

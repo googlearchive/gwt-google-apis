@@ -17,10 +17,10 @@ package com.google.gwt.language.sample.hellolanguage.client;
 
 import com.google.gwt.language.client.transliteration.LanguageCode;
 import com.google.gwt.language.client.transliteration.SupportedDestinationLanguages;
-import com.google.gwt.language.client.transliteration.TransliteratableTextArea;
-import com.google.gwt.language.client.transliteration.TransliterationControl;
-import com.google.gwt.language.client.transliteration.TransliterationControlDiv;
-import com.google.gwt.language.client.transliteration.TransliterationControlOptions;
+import com.google.gwt.language.client.transliteration.control.TransliteratableTextArea;
+import com.google.gwt.language.client.transliteration.control.TransliterationControl;
+import com.google.gwt.language.client.transliteration.control.TransliterationControlDiv;
+import com.google.gwt.language.client.transliteration.control.TransliterationControlOptions;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;

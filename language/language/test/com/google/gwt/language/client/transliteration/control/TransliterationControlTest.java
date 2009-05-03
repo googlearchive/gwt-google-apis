@@ -13,10 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.language.client.LanguageUtils;
+import com.google.gwt.language.client.transliteration.LanguageCode;
+import com.google.gwt.language.client.transliteration.TransliterationUtils;
+import com.google.gwt.language.client.transliteration.control.TransliterationControl;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -203,8 +206,8 @@ public class TransliterationControlTest extends GWTTestCase {
     if (control == null) {
       TransliterationControlOptions options = TransliterationControlOptions.newInstance(
           LanguageCode.ENGLISH,
-          Transliteration.getDestinationLanguages(LanguageCode.ENGLISH), true,
-          "ctrl+g");
+          TransliterationUtils.getDestinationLanguages(LanguageCode.ENGLISH),
+          true, "ctrl+g");
       control = TransliterationControl.newInstance(options);
     }
     control.enableTransliteration();
