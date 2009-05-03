@@ -62,7 +62,7 @@ public class Transliteration {
   private static native void transliterate(JsArrayString wordsArray,
       String srcLang, String destLang, TransliterationCallback callback) /*-{
     $wnd.google.language.transliterate(wordsArray, srcLang, destLang, function(result) {
-      callback.@com.google.gwt.language.client.transliteration.TransliterationCallback::onCallbackWrapper(Lcom/google/gwt/language/client/transliteration/TransliterationResult;)(result);
+      callback.@com.google.gwt.language.client.transliteration.text.TransliterationCallback::onCallbackWrapper(Lcom/google/gwt/language/client/transliteration/text/TransliterationResult;)(result);
     });
   }-*/;
 }
