@@ -13,9 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.language.client.transliteration.LanguageCode;
 
 /**
  * The transliteration event object that is given to the event listener when a

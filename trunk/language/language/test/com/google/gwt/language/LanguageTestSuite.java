@@ -17,8 +17,8 @@ package com.google.gwt.language;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.language.client.translation.TranslationTest;
-import com.google.gwt.language.client.transliteration.ListenerManagerTest;
-import com.google.gwt.language.client.transliteration.TransliterationControlTest;
+import com.google.gwt.language.client.transliteration.control.ListenerManagerTest;
+import com.google.gwt.language.client.transliteration.control.TransliterationControlTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
