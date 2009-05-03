@@ -31,8 +31,8 @@ public enum SupportedDestinationLanguages {
    */
   INDIC(getNativeLanguages("INDIC"));
 
-  private static native JsArrayString getNativeLanguages(String array) /*-{
-    return $wnd.google.elements.transliteration.SupportedDestinationLanguages[array];
+  private static native JsArrayString getNativeLanguages(String groupName) /*-{
+    return $wnd.google.elements.transliteration.SupportedDestinationLanguages[groupName];
   }-*/;
 
   private JsArrayString languages;
@@ -42,7 +42,8 @@ public enum SupportedDestinationLanguages {
   }
 
   /**
-   * Gets supported languages associated with this enum member.
+   * Gets supported languages associated with this enum member as
+   * {@code LanguageCode}s.
    *
    * @return array of languages
    */
@@ -55,7 +56,7 @@ public enum SupportedDestinationLanguages {
   }
 
   /**
-   * Gets supported languages associated with this enum member.
+   * Gets supported languages associated with this enum member as strings.
    *
    * @return array of languages
    */
