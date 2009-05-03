@@ -35,9 +35,10 @@ public class TransliterationControl extends JavaScriptObject {
    * @param options the {@code Options} object containing required data
    * @return instance of this class
    */
-  public static native TransliterationControl newInstance(Options options) /*-{
-    return new $wnd.google.elements.transliteration.TransliterationControl(options);
-  }-*/;
+  public static native TransliterationControl newInstance(
+      TransliterationControlOptions options) /*-{
+     return new $wnd.google.elements.transliteration.TransliterationControl(options);
+   }-*/;
 
   protected TransliterationControl() {
   }

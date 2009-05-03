@@ -201,7 +201,8 @@ public class TransliterationControlTest extends GWTTestCase {
   private void initialize() {
     // TransliterationControl may not be instantiated more than once.
     if (control == null) {
-      Options options = Options.newInstance(LanguageCode.ENGLISH,
+      TransliterationControlOptions options = TransliterationControlOptions.newInstance(
+          LanguageCode.ENGLISH,
           Transliteration.getDestinationLanguages(LanguageCode.ENGLISH), true,
           "ctrl+g");
       control = TransliterationControl.newInstance(options);
