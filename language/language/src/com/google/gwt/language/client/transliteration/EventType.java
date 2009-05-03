@@ -65,16 +65,17 @@ public enum EventType {
    */
   STATE_CHANGED(getNativeEventType("STATE_CHANGED"));
 
-  private static native String getNativeEventType(String eventType) /*-{
-    return $wnd.google.elements.transliteration.TransliterationControl.EventType[eventType];
-  }-*/;
-  String eventType;
-
-  private EventType(String eventType) {
-    this.eventType = eventType;
-  }
+  private String eventType;
 
   public String getEventType() {
     return this.eventType;
+  }
+
+  private static native String getNativeEventType(String eventType) /*-{
+    return $wnd.google.elements.transliteration.TransliterationControl.EventType[eventType];
+  }-*/;
+
+  private EventType(String eventType) {
+    this.eventType = eventType;
   }
 }
