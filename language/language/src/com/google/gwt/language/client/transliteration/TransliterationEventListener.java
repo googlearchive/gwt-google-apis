@@ -22,14 +22,14 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
  * Listener of transliteration events. Override this class' abstract method
  * onEvent() to put your own logic.
  */
-public abstract class TranslitEventListener {
+public abstract class TransliterationEventListener {
 
   /**
    * Called when an event is triggered.
    *
    * @param result the event object
    */
-  protected abstract void onEvent(TransliterationEvent result);
+  protected abstract void onEvent(TransliterationEventDetail result);
 
   /**
    * This wraps onEvent method and provides a framework for catching
@@ -37,7 +37,7 @@ public abstract class TranslitEventListener {
    *
    * @param event the event object.
    */
-  public void onEventWrapper(TransliterationEvent event) {
+  public void onEventWrapper(TransliterationEventDetail event) {
     UncaughtExceptionHandler exceptionHandler = GWT.getUncaughtExceptionHandler();
     if (exceptionHandler != null) {
       try {

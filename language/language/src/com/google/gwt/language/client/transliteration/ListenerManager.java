@@ -35,9 +35,9 @@ class ListenerManager {
   private static class ListenerInfo {
     private final EventType eventType;
     private final JavaScriptObject jso;
-    private final TranslitEventListener listener;
+    private final TransliterationEventListener listener;
 
-    ListenerInfo(EventType eventType, TranslitEventListener listener,
+    ListenerInfo(EventType eventType, TransliterationEventListener listener,
         JavaScriptObject jso) {
       this.eventType = eventType;
       this.listener = listener;
@@ -52,7 +52,7 @@ class ListenerManager {
       return jso;
     }
 
-    TranslitEventListener getListener() {
+    TransliterationEventListener getListener() {
       return listener;
     }
   }
@@ -68,9 +68,9 @@ class ListenerManager {
    * @return JavaScriptObject counterpart of listener
    */
   static final native JavaScriptObject createJSOEventListener(
-      TranslitEventListener listener) /*-{
+      TransliterationEventListener listener) /*-{
     return function(e) {
-      listener.@com.google.gwt.language.client.transliteration.TranslitEventListener::onEventWrapper(Lcom/google/gwt/language/client/transliteration/TransliterationEvent;)(e);
+      listener.@com.google.gwt.language.client.transliteration.TransliterationEventListener::onEventWrapper(Lcom/google/gwt/language/client/transliteration/TransliterationEventDetail;)(e);
     }
   }-*/;
 
@@ -82,7 +82,7 @@ class ListenerManager {
    * @return the JSO object
    */
   static JavaScriptObject findAndRemove(EventType eventType,
-      TranslitEventListener listener) {
+      TransliterationEventListener listener) {
     for (ListenerInfo listenerInfo : listenerCache) {
       if (listenerInfo.getEventType() == eventType
           && listenerInfo.getListener() == listener) {
@@ -99,7 +99,7 @@ class ListenerManager {
    * @param listener the Java event listener object.
    * @param jso jso counterpart of listener.
    */
-  static void store(EventType eventType, TranslitEventListener listener,
+  static void store(EventType eventType, TransliterationEventListener listener,
       JavaScriptObject jso) {
     listenerCache.add(new ListenerInfo(eventType, listener, jso));
   }

@@ -53,7 +53,7 @@ public class TransliterationControl extends JavaScriptObject {
    *          triggered
    */
   public final void addEventListener(EventType eventType,
-      TranslitEventListener listener) {
+      TransliterationEventListener listener) {
     JavaScriptObject jso = ListenerManager.createJSOEventListener(listener);
     addEventListener(eventType.getEventType(), jso);
     ListenerManager.store(eventType, listener, jso);
@@ -215,7 +215,7 @@ public class TransliterationControl extends JavaScriptObject {
    *          triggered
    */
   public final void removeEventListener(EventType eventType,
-      TranslitEventListener listener) {
+      TransliterationEventListener listener) {
     removeEventListener(eventType.getEventType(),
         ListenerManager.findAndRemove(eventType, listener));
   }

@@ -21,8 +21,8 @@ import com.google.gwt.core.client.JavaScriptObject;
  * The transliteration event object that is given to the event listener when a
  * registered event is triggered. See {@code TranslitEventListener}.
  */
-public class TransliterationEvent extends JavaScriptObject {
-  protected TransliterationEvent() {
+public class TransliterationEventDetail extends JavaScriptObject {
+  protected TransliterationEventDetail() {
   }
 
   /**
