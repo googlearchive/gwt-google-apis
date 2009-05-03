@@ -19,6 +19,7 @@ import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.language.client.translation.TranslationTest;
 import com.google.gwt.language.client.transliteration.control.ListenerManagerTest;
 import com.google.gwt.language.client.transliteration.control.TransliterationControlTest;
+import com.google.gwt.language.client.transliteration.text.TransliterationTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -33,6 +34,7 @@ public class LanguageTestSuite extends GWTTestSuite {
     suite.addTestSuite(TranslationTest.class);
     suite.addTestSuite(TransliterationControlTest.class);
     suite.addTestSuite(ListenerManagerTest.class);
+    suite.addTestSuite(TransliterationTest.class);
     return suite;
   }
 }
