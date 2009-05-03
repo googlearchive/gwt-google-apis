@@ -128,7 +128,7 @@ public class TransliterationControl extends JavaScriptObject {
    * @param options options for textarea
    * @throws JavaScriptException on invalid textarea id
    */
-  public final void makeTransliteratable(String textArea, TextAreaOptions options) {
+  public final void makeTransliteratable(String textArea, TextElementOptions options) {
     makeTransliteratable(new String[] { textArea }, options);
   }
 
@@ -151,7 +151,7 @@ public class TransliterationControl extends JavaScriptObject {
    * @throws JavaScriptException on invalid textarea ids
    */
   public final void makeTransliteratable(String[] textAreaIds,
-      TextAreaOptions options) {
+      TextElementOptions options) {
     JsArrayString textAreaJsArray = ArrayHelper.createJsArray(textAreaIds);
     makeTransliteratable(textAreaJsArray, options);
   }
@@ -174,7 +174,7 @@ public class TransliterationControl extends JavaScriptObject {
    * @throws JavaScriptException on invalid textarea
    */
   public final void makeTransliteratable(TransliteratableTextArea textArea,
-      TextAreaOptions options) {
+      TextElementOptions options) {
     makeTransliteratable(new TransliteratableTextArea[] { textArea }, options);
   }
 
@@ -197,7 +197,7 @@ public class TransliterationControl extends JavaScriptObject {
    * @throws JavaScriptException on invalid textareas
    */
   public final void makeTransliteratable(TransliteratableTextArea[] textAreas,
-      TextAreaOptions options) {
+      TextElementOptions options) {
     JsArrayString textAreaJsArray = JsArrayString.createArray().cast();
     int index = 0;
     for (TransliteratableTextArea textArea : textAreas) {
@@ -341,7 +341,7 @@ public class TransliterationControl extends JavaScriptObject {
    * @param options options for textarea
    */
   private final native void makeTransliteratable(JsArrayString textAreaJsArray,
-      TextAreaOptions options) /*-{
+      TextElementOptions options) /*-{
     this.makeTransliteratable(textAreaJsArray, options);
   }-*/;
 

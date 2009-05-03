@@ -154,7 +154,7 @@ public class TransliterationControlTest extends GWTTestCase {
         TransliteratableTextArea[] textAreas = { textArea1, textArea2 };
         control.makeTransliteratable(textAreas);
 
-        TextAreaOptions options = TextAreaOptions.newInstance(true, false);
+        TextElementOptions options = TextElementOptions.newInstance(true, false);
         control.makeTransliteratable(textAreas, options);
         finishTest();
       }
