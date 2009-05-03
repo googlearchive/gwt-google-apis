@@ -91,10 +91,10 @@ public class TransliterationControlTest extends GWTTestCase {
         initialize();
         control.setLanguagePair(LanguageCode.ENGLISH, LanguageCode.HINDI);
         control.addEventListener(EventType.LANGUAGE_CHANGED,
-            new TranslitEventListener() {
+            new TransliterationEventListener() {
 
           @Override
-          protected void onEvent(TransliterationEvent result) {
+          protected void onEvent(TransliterationEventDetail result) {
             // Remove the listener before assertions to avoid impact of
             // failures on other tests.
             control.removeEventListener(EventType.LANGUAGE_CHANGED, this);
@@ -170,10 +170,10 @@ public class TransliterationControlTest extends GWTTestCase {
       public void run() {
         initialize();
         control.addEventListener(EventType.STATE_CHANGED,
-            new TranslitEventListener() {
+            new TransliterationEventListener() {
 
           @Override
-          protected void onEvent(TransliterationEvent result) {
+          protected void onEvent(TransliterationEventDetail result) {
             // Remove the listener before assertions to avoid impact of
             // failures on other tests.
             control.removeEventListener(EventType.STATE_CHANGED, this);
