@@ -7,7 +7,9 @@ Copies:
 
 Merges:
 /releases/search/1.0/@713:941 was merged (r942) into /trunk/search/
--> The next merge into trunk will be r941:????
+/releases/search/1.0/@1347:1368 was merged (r1369) into /trunk/search/
+/releases/search/1.0/@1368:1417 was merged (r1418) into /trunk/search/
+-> The next merge into trunk will be r1417:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r713)
@@ -16,3 +18,10 @@ Changes in this branch (excluding changes to this file itself):
  - Added overload to LocalSearch.setCenterPoint() to accept a JSO (r800)
  - JSIO update to coerce undefined when used in boolean parameters (r860)
  - Updated release notes for 1.0.1 release (r881) 
+ - Nailed the ajaxloader directory to the AjaxLoader 1.0.0 release (r1372)
+
+
+
+
+
+
