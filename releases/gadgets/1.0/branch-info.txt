@@ -12,7 +12,8 @@ Merges:
 /releases/gadgets/1.0@947:1011 was merged (r1012) into trunk/gadgets
 /releases/gadgets/1.0@1011:1247 was merged (r1248) into trunk/gadgets
 /trunk/gadgets/@1248:1321 was merged (r1342) into releases/gadgets/1.0
----> The next merge into trunk will be 1321:???
+/trunk/gadgets/@1321:1420 was merged (r1421) into releases/gadgets/1.0
+---> The next merge into trunk will be 1421:???
 
 Changes in this branch (excluding changes to this file itself:
 - Fixed the samples' online documentation link. (r718)
@@ -47,3 +48,5 @@ Changes in this branch (excluding changes to this file itself:
 - Integrate GWT I18N.gwt.xml for GWT 1.6.1 with  the gadget container locale settings (r1234)
 - Modified cache time from 1 hour to 1 year for resources. (r1272)
 - Adds support for the locked-domain feature (r1321)
+- Suppress <EnumValue> tags for hidden user preferences (r1354)
+- Documentation updates for 1.0.3 release (r1420)

@@ -29,8 +29,8 @@
       <h1>Gadgets API Library for GWT Release Notes</h1>
       <ul>
 		    <li><a href="#Release_Notes_Current">@GWT_VERSION@</a></li>
-		    <li><a href="#Release_Notes_1_0_2">1.0.2 (release candidate)</a></li>
-		    <li><a href="#Release_Notes_1_0_1">1.0.1 (release candidate)</a></li>
+		    <li><a href="#Release_Notes_1_0_2">1.0.2</a></li>
+		    <li><a href="#Release_Notes_1_0_1">1.0.1</a></li>
 		    <li><a href="#Release_Notes_1_0_0">1.0.0 (release candidate)</a></li>
 		    <li><a href="#Release_Notes_r290">r290 (milestone release)</a></li>
       </ul>
@@ -39,12 +39,18 @@
      <h2>Release Notes for @GWT_VERSION@</h2>
       <h3>Changes since 1.0.2</h3>
       <ul>
-       <li>Adds an interface that can be used to add the "locked-domain" feature to a gadget.</li>
-       <li>Gadgets' generated JavaScript code is now cached up to a year instead of just an hour. This should improve the loading time of GWT Gadgets.</li>
+       <li>&lt;EnumValue&gt; tags are now omitted for hidden user prefs.</li>
+       <li>Added the LockedDomain feature</li>
+       <li>Caching of generated JavaScript code is now set to 1 year. Previuosly it was just an hour. This should improve the loading time of GWT gadgets. </li>
       </ul>
+      <h3>Known Issues in @GWT_VERSION@</h3>
+       <ul>
+        <li>Gadgets must be debugged using -noserver and the Gadget must be hosted in a Gadget container like <a href="http://www.google.com/ig">iGoogle</a> or <a href="http://incubator.apache.org/shindig/">Shindig</a>.</li>
+       </ul>
      <hr/>
       <a name="Release_Notes_1_0_2"></a>
-     <h2>Changes since 1.0.2</h2>
+     <h2>ReleaseNotes for 1.0.2</h2>
+      <h3>Changes since 1.0.1</h3>
       <ul>
        <li>Adds support for GadgetAds and sample code.</li>
        <li>Adds the getMsg() method to PreferencesUtil for <a href="http://code.google.com/apis/gadgets/docs/i18n.html#Displaying">internationalization</a> support.</li>
@@ -61,6 +67,7 @@ subclass of Gadget (e.g. GadgetAds).</li>
      <hr/>
       <a name="Release_Notes_1_0_1"></a>
      <h2>ReleaseNotes for 1.0.1</h2>
+      <h3>Changes since 1.0.0</h3>
       <ul>
        <li>Fix to a Null Pointer Exception in the gadget generator triggered when a Gadget subclass implements a non-feature interface.</li>
        <li>Added an annotation @InjectContent for a Gadget which enables developers to inject handwritten content (stored in files) into the gadget spec.</li>
@@ -69,17 +76,13 @@ subclass of Gadget (e.g. GadgetAds).</li>
       <hr/>
       <a name="Release_Notes_1_0_0"></a>
      <h2>ReleaseNotes for 1.0.0 (release candidate)</h2>
+      <h3>Changes since r290</h3>
       <ul>
        <li>This library requires GWT 1.5 or later and Java 1.5 or later.</li>
         <li>This release supports the <a href="http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html">Legacy Gadget API</a>.</li>
        <li>Fixed script and stylesheet injection in gadgets bootstrap.</li>
        <li>Added xerces library reference for debugging a gadget in hosted mode.</li>
       </ul>
-      <h3>Known Issues in 1.0.0</h3>
-       <ul>
-        <li>Gadgets must be debugged using -noserver and the Gadget must be hosted in a Gadget container like <a href="http://www.google.com/ig">iGoogle</a> or <a href="http://incubator.apache.org/shindig/">Shindig</a>.</li>
-        <li>GWT RPC does not work through iGoogle (<a href="http://code.google.com/p/gwt-google-apis/issues/detail?id=154">issue 154</a>)</li>
-       </ul>
      <hr/>
      <a name="Release_Notes_r290"></a>
      <h2>Release Notes for r290 (milestone release)</h2>
