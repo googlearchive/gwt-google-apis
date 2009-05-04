@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,16 +29,16 @@ public class TransliterationControlOptions extends JavaScriptObject {
    * multiple destination languages. The first language in the destination
    * language array is the default language for transliteration while others may
    * be enabled by using transliteration control widget.
-   *
+   * 
    * @param srcLanguage source language of transliteration
    * @param destLanguages destination languages
    * @param transliterationEnabled
    * @param shortcutKey
    * @return instance of Options class
    */
-  public static TransliterationControlOptions newInstance(LanguageCode srcLanguage,
-      LanguageCode[] destLanguages, boolean transliterationEnabled,
-      String shortcutKey) {
+  public static TransliterationControlOptions newInstance(
+      LanguageCode srcLanguage, LanguageCode[] destLanguages,
+      boolean transliterationEnabled, String shortcutKey) {
     JsArrayString destLanguageJsArray = (JsArrayString) JavaScriptObject.createArray();
 
     for (int i = 0; i < destLanguages.length; ++i) {
@@ -55,7 +55,7 @@ public class TransliterationControlOptions extends JavaScriptObject {
    * be enabled by using transliteration control widget. This is to support any
    * transliteration languaegs that might not be part of {@code LanguageCode}
    * enum yet.
-   *
+   * 
    * @param srcLangCode source language of transliteration
    * @param destLangCodes destination languages
    * @param transliterationEnabled whether transliteration should be enabled by
@@ -77,7 +77,7 @@ public class TransliterationControlOptions extends JavaScriptObject {
   /**
    * Private method that creates an instance of {@code Options} class with given
    * source language and array of destination languages.
-   *
+   * 
    * @param srcLangCode source language of transliteration
    * @param destLangCodes destination languages
    * @param transliterationEnabled whether transliteration should be enabled by
