@@ -17,32 +17,25 @@ package com.google.gwt.language.sample.hellolanguage.client;
 
 import com.google.gwt.language.client.transliteration.LanguageCode;
 import com.google.gwt.language.client.transliteration.SupportedDestinationLanguages;
-import com.google.gwt.language.client.transliteration.control.TransliteratableTextArea;
 import com.google.gwt.language.client.transliteration.control.TransliterationControl;
-import com.google.gwt.language.client.transliteration.control.TransliterationControlDiv;
 import com.google.gwt.language.client.transliteration.control.TransliterationControlOptions;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Demo for transliteration API.
  */
 public class TransliterationDemo extends Composite {
-  private final LanguageCode srcLanguage = LanguageCode.ENGLISH;
-  private final LanguageCode[] destLanguages =
-      SupportedDestinationLanguages.ALL.getLanguageCodes();
-  private final TransliterationControlOptions options = TransliterationControlOptions.newInstance(
-      srcLanguage, destLanguages, true, "ctrl+g");
-  private final TransliterationControl control = TransliterationControl.newInstance(options);
-  private final TransliterationControlDiv div = new TransliterationControlDiv(
-      "translitdiv");
-  private final TransliteratableTextArea transltextarea = new TransliteratableTextArea(
-      "translarea");
-
   public TransliterationDemo() {
     VerticalPanel demoPanel = new VerticalPanel();
+
+    HTML div = new HTML();
     demoPanel.add(div);
+
+    TextArea transltextarea = new TextArea();
     demoPanel.add(transltextarea);
 
     VerticalPanel wrapperPanel = new VerticalPanel();
@@ -51,15 +44,24 @@ public class TransliterationDemo extends Composite {
     wrapperPanel.setCellHorizontalAlignment(demoPanel,
         HasHorizontalAlignment.ALIGN_CENTER);
     initWidget(wrapperPanel);
+
+    initTransliterationControls(div, transltextarea);
   }
 
   /**
-   * Initializes the transliteration controls and the makes the textarea
-   * transliteratable. This must be called only after the panel containing this
-   * demo widget has been attached to the root panel because the below
-   * initializations require elements to be present on the UI to act on them.
+   * Initializes the transliteration controls.
+   *
+   * @param div the div to which language options menu is attached.
+   * @param transltextarea the textarea for transliteration
    */
-  public void initialize() {
+  private void initTransliterationControls(HTML div, TextArea transltextarea) {
+    LanguageCode srcLanguage = LanguageCode.ENGLISH;
+    LanguageCode[] destLanguages = SupportedDestinationLanguages.ALL.getLanguageCodes();
+
+    TransliterationControlOptions options = TransliterationControlOptions.newInstance(
+        srcLanguage, destLanguages, true, "ctrl+g");
+    TransliterationControl control = TransliterationControl.newInstance(options);
+
     control.showControl(div);
     control.makeTransliteratable(transltextarea);
 
