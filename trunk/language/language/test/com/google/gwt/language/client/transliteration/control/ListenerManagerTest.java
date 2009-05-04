@@ -18,7 +18,6 @@ package com.google.gwt.language.client.transliteration.control;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.language.client.LanguageUtils;
-import com.google.gwt.language.client.transliteration.control.ListenerManager;
 
 /**
  * Tests for ListenerManager class.

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,7 +19,6 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.language.client.LanguageUtils;
 import com.google.gwt.language.client.transliteration.LanguageCode;
 import com.google.gwt.language.client.transliteration.TransliterationUtils;
-import com.google.gwt.language.client.transliteration.control.TransliterationControl;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -28,6 +27,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class TransliterationControlTest extends GWTTestCase {
   private static TransliterationControl control;
   private static final int MAX_TEST_FINISH_DELAY = 10000;
+  private static final int TEST_INNER_VALUE = 5;
+  private static final int TEST_OUTER_VALUE = 10;
   private TransliterationControlDiv div;
   private TransliteratableTextArea textArea1;
 
@@ -89,38 +90,48 @@ public class TransliterationControlTest extends GWTTestCase {
    * Tests that language change event listeners are working correctly.
    */
   public void testLanguageChangeEventListeners() {
+
     LanguageUtils.loadTransliteration(new Runnable() {
+      int testOuterValue = TEST_OUTER_VALUE;
+
       public void run() {
         initialize();
         control.setLanguagePair(LanguageCode.ENGLISH, LanguageCode.HINDI);
         control.addEventListener(EventType.LANGUAGE_CHANGED,
             new TransliterationEventListener() {
+              int testInnerValue = TEST_INNER_VALUE;
 
-          @Override
-          protected void onEvent(TransliterationEventDetail result) {
-            // Remove the listener before assertions to avoid impact of
-            // failures on other tests.
-            control.removeEventListener(EventType.LANGUAGE_CHANGED, this);
+              @Override
+              protected void onEvent(TransliterationEventDetail result) {
+                // The addEventListener has a way to change the meaning of
+                // 'this', so this is mean to just test the bindings work.
+                assert (testInnerValue == TEST_INNER_VALUE);
+                assert (testOuterValue == TEST_OUTER_VALUE);
 
-            LanguageCode srcLang = result.getSourceLanguage();
-            LanguageCode destLang = result.getDestinationLanguage();
+                // Remove the listener before assertions to avoid impact of
+                // failures on other tests.
+                control.removeEventListener(EventType.LANGUAGE_CHANGED, this);
 
-            // Verify that language change is correctly reflected by result.
-            assertTrue("Expected ENGLISH as source language and KANNADA as"
+                LanguageCode srcLang = result.getSourceLanguage();
+                LanguageCode destLang = result.getDestinationLanguage();
+
+                // Verify that language change is correctly reflected by result.
+                assertTrue("Expected ENGLISH as source language and KANNADA as"
                     + " destination language", srcLang == LanguageCode.ENGLISH
                     && destLang == LanguageCode.KANNADA);
 
-            LanguageCode[] langPair = control.getLanguageCodePair();
+                LanguageCode[] langPair = control.getLanguageCodePair();
 
-            // Verify that language change is correctly reflected by control
-            assertTrue("Expected ENGLISH as source language and KANNADA as"
-                + " destination language", langPair[0] == LanguageCode.ENGLISH
-                && langPair[1] == LanguageCode.KANNADA);
+                // Verify that language change is correctly reflected by control
+                assertTrue("Expected ENGLISH as source language and KANNADA as"
+                    + " destination language",
+                    langPair[0] == LanguageCode.ENGLISH
+                        && langPair[1] == LanguageCode.KANNADA);
 
-            finishTest();
-          }
+                finishTest();
+              }
 
-        });
+            });
         control.setLanguagePair(LanguageCode.ENGLISH, LanguageCode.KANNADA);
       }
     });
@@ -136,13 +147,13 @@ public class TransliterationControlTest extends GWTTestCase {
         initialize();
         control.setLanguagePair(LanguageCode.ENGLISH, LanguageCode.KANNADA);
         LanguageCode[] langPair = control.getLanguageCodePair();
-        assertTrue(langPair[0] == LanguageCode.ENGLISH &&
-            langPair[1] == LanguageCode.KANNADA);
+        assertTrue(langPair[0] == LanguageCode.ENGLISH
+            && langPair[1] == LanguageCode.KANNADA);
 
         control.setLanguagePair(LanguageCode.ENGLISH, LanguageCode.HINDI);
         LanguageCode[] langPair2 = control.getLanguageCodePair();
-        assertTrue(langPair2[0] == LanguageCode.ENGLISH &&
-            langPair2[1] == LanguageCode.HINDI);
+        assertTrue(langPair2[0] == LanguageCode.ENGLISH
+            && langPair2[1] == LanguageCode.HINDI);
       }
     });
   }
@@ -154,7 +165,7 @@ public class TransliterationControlTest extends GWTTestCase {
     LanguageUtils.loadTransliteration(new Runnable() {
       public void run() {
         initialize();
-        TransliteratableTextArea[] textAreas = { textArea1, textArea2 };
+        TransliteratableTextArea[] textAreas = {textArea1, textArea2};
         control.makeTransliteratable(textAreas);
 
         TextElementOptions options = TextElementOptions.newInstance(true, false);
@@ -175,23 +186,24 @@ public class TransliterationControlTest extends GWTTestCase {
         control.addEventListener(EventType.STATE_CHANGED,
             new TransliterationEventListener() {
 
-          @Override
-          protected void onEvent(TransliterationEventDetail result) {
-            // Remove the listener before assertions to avoid impact of
-            // failures on other tests.
-            control.removeEventListener(EventType.STATE_CHANGED, this);
+              @Override
+              protected void onEvent(TransliterationEventDetail result) {
+                // Remove the listener before assertions to avoid impact of
+                // failures on other tests.
+                control.removeEventListener(EventType.STATE_CHANGED, this);
 
-            assertFalse("Expected transliteration to be disabled",
-                control.isTransliterationEnabled());
+                assertFalse("Expected transliteration to be disabled",
+                    control.isTransliterationEnabled());
 
-            // Verify that event object is correctly reflecting current state.
-            assertFalse("Expected transliteration to be disabled",
-                result.isTransliterationEnabled());
+                // Verify that event object is correctly reflecting current
+                // state.
+                assertFalse("Expected transliteration to be disabled",
+                    result.isTransliterationEnabled());
 
-            finishTest();
-          }
+                finishTest();
+              }
 
-        });
+            });
         control.toggleTransliteration();
       }
     });
