@@ -80,9 +80,6 @@ public class HelloLanguage implements EntryPoint {
         translitDemoPanel.clear();
         TransliterationDemo translitDemo = new TransliterationDemo();
         translitDemoPanel.add(translitDemo);
-
-        // This must be done after attachment to root panel.
-        translitDemo.initialize();
       }
     });
   }

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,7 +19,9 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.language.client.LanguageUtils;
 import com.google.gwt.language.client.transliteration.LanguageCode;
 import com.google.gwt.language.client.transliteration.TransliterationUtils;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 
 /**
  * Tests for TransliterationControl class.
@@ -29,10 +31,10 @@ public class TransliterationControlTest extends GWTTestCase {
   private static final int MAX_TEST_FINISH_DELAY = 10000;
   private static final int TEST_INNER_VALUE = 5;
   private static final int TEST_OUTER_VALUE = 10;
-  private TransliterationControlDiv div;
-  private TransliteratableTextArea textArea1;
+  private HTML div;
+  private TextArea textArea1;
 
-  private TransliteratableTextArea textArea2;
+  private TextArea textArea2;
 
   @Override
   public String getModuleName() {
@@ -41,13 +43,13 @@ public class TransliterationControlTest extends GWTTestCase {
 
   @Override
   public void gwtSetUp() {
-    div = new TransliterationControlDiv("div1");
+    div = new HTML();
     RootPanel.get().add(div);
 
-    textArea1 = new TransliteratableTextArea("id1");
+    textArea1 = new TextArea();
     RootPanel.get().add(textArea1);
 
-    textArea2 = new TransliteratableTextArea("id2");
+    textArea2 = new TextArea();
     RootPanel.get().add(textArea2);
   }
 
@@ -165,7 +167,7 @@ public class TransliterationControlTest extends GWTTestCase {
     LanguageUtils.loadTransliteration(new Runnable() {
       public void run() {
         initialize();
-        TransliteratableTextArea[] textAreas = {textArea1, textArea2};
+        TextArea[] textAreas = {textArea1, textArea2};
         control.makeTransliteratable(textAreas);
 
         TextElementOptions options = TextElementOptions.newInstance(true, false);
