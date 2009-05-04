@@ -39,8 +39,8 @@ public class TransliterationUtils {
   }
 
   /**
-   * Returns a boolean indicating whether transliteration is supported in the
-   * client's browser.
+   * Returns a boolean indicating whether transliteration in controls is
+   * supported in the client's browser.
    *
    * @return boolean true if compatible, false otherwise
    */
