@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -32,14 +32,14 @@ public class TransliterationControl extends JavaScriptObject {
   /**
    * Create an instance of TransliterationControl class. Only one instance of
    * this can be created per page.
-   *
+   * 
    * @param options the {@code Options} object containing required data
    * @return instance of this class
    */
   public static native TransliterationControl newInstance(
       TransliterationControlOptions options) /*-{
-     return new $wnd.google.elements.transliteration.TransliterationControl(options);
-   }-*/;
+    return new $wnd.google.elements.transliteration.TransliterationControl(options);
+  }-*/;
 
   protected TransliterationControl() {
   }
@@ -48,7 +48,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Adds a listener for the given event type. When the particular event type is
    * triggered, the listener is called with the event object. The contents of
    * the event object depend on the type of the event.
-   *
+   * 
    * @param eventType event type. See {@code EventType}
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -77,7 +77,7 @@ public class TransliterationControl extends JavaScriptObject {
   /**
    * Gets current language pair for transliteration. The array returned is
    * always of length 2; containing source and destination languages in order.
-   *
+   * 
    * @return a 2 element array containing source and destination languages
    */
   public final LanguageCode[] getLanguageCodePair() {
@@ -92,7 +92,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Gets current language code pair for transliteration. The array returned is
    * always of length 2; containing source and destination language codes in
    * order.
-   *
+   * 
    * @return a 2 element array containing source and destination language codes.
    */
   public final String[] getLanguagePair() {
@@ -105,7 +105,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Returns a boolean indicating whether transliteration is enabled or not.
-   *
+   * 
    * @return true if transliteration is enabled, false otherwise
    */
   public final native boolean isTransliterationEnabled() /*-{
@@ -114,28 +114,29 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes textarea with given textarea id transliteratable.
-   *
+   * 
    * @param textAreaId textarea id
    * @throws JavaScriptException on invalid textarea id
    */
   public final void makeTransliteratable(String textAreaId) {
-    makeTransliteratable(new String[] { textAreaId });
+    makeTransliteratable(new String[] {textAreaId});
   }
 
   /**
    * Makes textarea given by id transliteratable.
-   *
+   * 
    * @param textArea textarea id
    * @param options options for textarea
    * @throws JavaScriptException on invalid textarea id
    */
-  public final void makeTransliteratable(String textArea, TextElementOptions options) {
-    makeTransliteratable(new String[] { textArea }, options);
+  public final void makeTransliteratable(String textArea,
+      TextElementOptions options) {
+    makeTransliteratable(new String[] {textArea}, options);
   }
 
   /**
    * Makes array of textareas transliteratable.
-   *
+   * 
    * @param textAreaIds array of textarea ids.
    * @throws JavaScriptException on invalid textarea ids
    */
@@ -146,7 +147,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes array of textareas transliteratable with given options.
-   *
+   * 
    * @param textAreaIds array of textarea ids
    * @param options options for textarea adjustment
    * @throws JavaScriptException on invalid textarea ids
@@ -159,29 +160,29 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes a textarea transliteratable.
-   *
+   * 
    * @param textArea transliteratable textarea
    * @throws JavaScriptException on invalid textarea
    */
   public final void makeTransliteratable(TransliteratableTextArea textArea) {
-    makeTransliteratable(new TransliteratableTextArea[] { textArea });
+    makeTransliteratable(new TransliteratableTextArea[] {textArea});
   }
 
   /**
    * Makes textarea transliteratable.
-   *
+   * 
    * @param textArea transliteratable textarea
    * @param options options for textarea
    * @throws JavaScriptException on invalid textarea
    */
   public final void makeTransliteratable(TransliteratableTextArea textArea,
       TextElementOptions options) {
-    makeTransliteratable(new TransliteratableTextArea[] { textArea }, options);
+    makeTransliteratable(new TransliteratableTextArea[] {textArea}, options);
   }
 
   /**
    * Makes array of textareas transliteratable.
-   *
+   * 
    * @param textAreas transliteratable textareas
    * @throws JavaScriptException on invalid textareas
    */
@@ -192,7 +193,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes array of textareas transliteratable.
-   *
+   * 
    * @param textAreas transliteratable textareas
    * @param options options for textarea adjustment
    * @throws JavaScriptException on invalid textareas
@@ -210,7 +211,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Removes a listener.
-   *
+   * 
    * @param eventType event type. See {@code EventType}
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -223,7 +224,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Changes the language pair for transliteration.
-   *
+   * 
    * @param sourceLanguage source language
    * @param destLanguage destination language
    * @return a boolean indicating whether the setLanguage action was successful.
@@ -240,7 +241,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Changes the language pair for transliteration.
-   *
+   * 
    * @param sourceLangCode source language code
    * @param destLangCode destination language code
    * @return a boolean indicating whether the setLanguage action was successful.
@@ -256,7 +257,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Shows transliteration control under div with given id.
-   *
+   * 
    * @param divId id of the div
    */
   public final native void showControl(String divId) /*-{
@@ -265,7 +266,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Shows the transliteration control under given div element.
-   *
+   * 
    * @param div the {@code TransliterationControlDiv} where control should be
    *          shown
    */
@@ -284,7 +285,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Adds a listener for the given event type. When the particular event type is
    * triggered, the listener is called with the event object. The contents of
    * the event object depend on the type of the event.
-   *
+   * 
    * @param eventType event type as string
    * @param jsoListener the listener to the event that is called when event is
    *          triggered
@@ -296,12 +297,11 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Creates JS array of strings using textarea ids.
-   *
+   * 
    * @param textAreas textarea array
    * @return js string array of textarea ids
    */
-  private final JsArrayString createJsArrayString(
-      TransliteratableTextArea[] textAreas) {
+  private JsArrayString createJsArrayString(TransliteratableTextArea[] textAreas) {
     JsArrayString textAreaJsArray = JsArrayString.createArray().cast();
     int index = 0;
     for (TransliteratableTextArea textArea : textAreas) {
@@ -314,7 +314,7 @@ public class TransliterationControl extends JavaScriptObject {
   /**
    * Returns a JS array of string values containing source and destination
    * languages of transliteration.
-   *
+   * 
    * @return A JsArrayString with source and destination languages.
    */
   private native JsArrayString getLanguagePairInternal() /*-{
@@ -327,28 +327,27 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes given array of textareas transliteratable.
-   *
+   * 
    * @param textAreaJsArray ids of textareas
    */
-  private final native void makeTransliteratable(
-      JsArrayString textAreaJsArray) /*-{
+  private native void makeTransliteratable(JsArrayString textAreaJsArray) /*-{
     this.makeTransliteratable(textAreaJsArray);
   }-*/;
 
   /**
    * Makes given array of textareas transliteratable.
-   *
+   * 
    * @param textAreaJsArray ids of textareas
    * @param options options for textarea
    */
-  private final native void makeTransliteratable(JsArrayString textAreaJsArray,
+  private native void makeTransliteratable(JsArrayString textAreaJsArray,
       TextElementOptions options) /*-{
     this.makeTransliteratable(textAreaJsArray, options);
   }-*/;
 
   /**
    * Removes a listener.
-   *
+   * 
    * @param eventType event type as string
    * @param listener the listener to the event that is called when event is
    *          triggered

@@ -32,8 +32,6 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class TextElementOptions extends JavaScriptObject {
 
-  protected TextElementOptions() { }
-
   /**
    * Creates new instance with given options.
    *
@@ -50,4 +48,6 @@ public class TextElementOptions extends JavaScriptObject {
     options.adjustTextareaDirection = adjustTextareaDirection;
     return options;
   }-*/;
+
+  protected TextElementOptions() { }
 }
