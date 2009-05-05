@@ -7,7 +7,8 @@ Copies:
 
 Merges:
 /trunk/language/@1385:1401 was merged (r1402) into releases/language/1.0
---->The next merge into trunk will be 1401:????
+/trunk/language/@1401:1421 was merged (r1422) into releases/language/1.0
+--->The next merge into trunk will be 1421:????
 
 Changes in this branch (excluding changes to this file itself)
 - Updated svn:external for language to point at a specific rev in the language/1.0 release. (r1387)

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 /**
  * Wrapper for underlying JS EventType enum. The
@@ -68,7 +68,8 @@ public enum EventType {
   private static native String getNativeEventType(String eventType) /*-{
     return $wnd.google.elements.transliteration.TransliterationControl.EventType[eventType];
   }-*/;
-  String eventType;
+
+  private String eventType;
 
   private EventType(String eventType) {
     this.eventType = eventType;

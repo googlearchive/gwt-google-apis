@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -32,7 +32,7 @@ public class ListenerManagerTest extends GWTTestCase {
   public void testStoreAndRetrieveListeners() {
     LanguageUtils.loadTransliteration(new Runnable() {
       public void run() {
-        TranslitEventListener listener1 = buildTranslitEventListener();
+        TransliterationEventListener listener1 = buildTranslitEventListener();
         JavaScriptObject jso1 = ListenerManager.createJSOEventListener(listener1);
         ListenerManager.store(EventType.STATE_CHANGED, listener1, jso1);
         ListenerManager.store(EventType.LANGUAGE_CHANGED, listener1, jso1);
@@ -45,7 +45,7 @@ public class ListenerManagerTest extends GWTTestCase {
             jso1, ListenerManager.findAndRemove(EventType.LANGUAGE_CHANGED,
                 listener1));
 
-        TranslitEventListener listener2 = buildTranslitEventListener();
+        TransliterationEventListener listener2 = buildTranslitEventListener();
         JavaScriptObject jso2 = ListenerManager.createJSOEventListener(listener2);
         ListenerManager.store(EventType.LANGUAGE_CHANGED, listener2, jso2);
 
@@ -65,11 +65,11 @@ public class ListenerManagerTest extends GWTTestCase {
  *
  * @return TranslitEventListener object
  */
-  private TranslitEventListener buildTranslitEventListener() {
-    TranslitEventListener listener = new TranslitEventListener() {
+  private TransliterationEventListener buildTranslitEventListener() {
+    TransliterationEventListener listener = new TransliterationEventListener() {
 
       @Override
-      protected void onEvent(TransliterationEvent result) {
+      protected void onEvent(TransliterationEventDetail result) {
         // Do nothing.
       }
 

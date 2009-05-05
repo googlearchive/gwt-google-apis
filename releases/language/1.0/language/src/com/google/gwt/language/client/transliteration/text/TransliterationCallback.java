@@ -13,40 +13,40 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.text;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 
 /**
- * Listener of transliteration events. Override this class' abstract method
- * onEvent() to put your own logic.
+ * Callback for transliteration results. onCallback() method must be
+ * overridden by clients.
  */
-public abstract class TranslitEventListener {
-
+public abstract class TransliterationCallback {
   /**
-   * Called when an event is triggered.
+   * This must be overridden by the client to deal with asynchronous feedback
+   * containing transliteration results.
    *
-   * @param result the event object
+   * @param result the result of a transliteration request.
    */
-  protected abstract void onEvent(TransliterationEvent result);
+  protected abstract void onCallback(TransliterationResult result);
 
   /**
-   * This wraps onEvent method and provides a framework for catching
+   * This wraps onCallback method and provides a framework for catching
    * exceptions in callbacks.
    *
-   * @param event the event object.
+   * @param result the result of a transliteration request.
    */
-  public void onEventWrapper(TransliterationEvent event) {
+  public final void onCallbackWrapper(TransliterationResult result) {
     UncaughtExceptionHandler exceptionHandler = GWT.getUncaughtExceptionHandler();
     if (exceptionHandler != null) {
       try {
-        onEvent(event);
+        onCallback(result);
       } catch (Exception e) {
         exceptionHandler.onUncaughtException(e);
       }
     } else {
-      onEvent(event);
+      onCallback(result);
     }
   }
 }

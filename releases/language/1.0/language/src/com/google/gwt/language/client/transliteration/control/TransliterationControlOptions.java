@@ -13,31 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.language.client.transliteration;
+package com.google.gwt.language.client.transliteration.control;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.language.client.transliteration.LanguageCode;
 
 /**
  * Wrapper for Options object.
  */
-public class Options extends JavaScriptObject {
-  /**
-   * Creates instance of {@code Options} class with given parameters.
-   * 
-   * @param srcLanguage source language of transliteration
-   * @param destLanguage destination language of transliteration
-   * @param transliterationEnabled whether transliteration should be enabled by
-   *          default
-   * @param shortcutKey shortcut key to toggle transliteration
-   * @return instance of this class
-   */
-  public static Options newInstance(LanguageCode srcLanguage,
-      LanguageCode destLanguage, boolean transliterationEnabled,
-      String shortcutKey) {
-    return newInstance(srcLanguage.getLangCode(), destLanguage.getLangCode(),
-        transliterationEnabled, shortcutKey);
-  }
+public class TransliterationControlOptions extends JavaScriptObject {
 
   /**
    * Creates instance of {@code Options} class with given parameters. Supports
@@ -51,9 +36,9 @@ public class Options extends JavaScriptObject {
    * @param shortcutKey
    * @return instance of Options class
    */
-  public static Options newInstance(LanguageCode srcLanguage,
-      LanguageCode[] destLanguages, boolean transliterationEnabled,
-      String shortcutKey) {
+  public static TransliterationControlOptions newInstance(
+      LanguageCode srcLanguage, LanguageCode[] destLanguages,
+      boolean transliterationEnabled, String shortcutKey) {
     JsArrayString destLanguageJsArray = (JsArrayString) JavaScriptObject.createArray();
 
     for (int i = 0; i < destLanguages.length; ++i) {
@@ -62,27 +47,6 @@ public class Options extends JavaScriptObject {
     return newInstance(srcLanguage.getLangCode(), destLanguageJsArray,
         transliterationEnabled, shortcutKey);
   }
-
-  /**
-   * This is public to support transliteration languages that might not be part
-   * of {@code LanguageCode} enum yet.
-   * 
-   * @param srcLangCode source language of transliteration
-   * @param destLangCode destination language of transliteration
-   * @param transliterationEnabled whether transliteration should be enabled by
-   *          default
-   * @param shortcutKey shortcut key to toggle transliteration
-   * @return instance of {@code Options} class
-   */
-  public static native Options newInstance(String srcLangCode,
-      String destLangCode, boolean transliterationEnabled, String shortcutKey) /*-{
-    var options = new Object();
-    options.sourceLanguage = srcLangCode;
-    options.destinationLanguage = destLangCode;
-    options.transliterationEnabled = transliterationEnabled;
-    options.shortcutKey = shortcutKey;
-    return options;
-  }-*/;
 
   /**
    * Creates instance of {@code Options} class with given parameters. Supports
@@ -99,8 +63,8 @@ public class Options extends JavaScriptObject {
    * @param shortcutKey shortcut key to toggle transliteration
    * @return instance of {@code Options} class
    */
-  public static Options newInstance(String srcLangCode, String[] destLangCodes,
-      boolean transliterationEnabled, String shortcutKey) {
+  public static TransliterationControlOptions newInstance(String srcLangCode,
+      String[] destLangCodes, boolean transliterationEnabled, String shortcutKey) {
     JsArrayString destLanguageJsArray = (JsArrayString) JavaScriptObject.createArray();
 
     for (int i = 0; i < destLangCodes.length; ++i) {
@@ -121,9 +85,9 @@ public class Options extends JavaScriptObject {
    * @param shortcutKey shortcut key to toggle transliteration
    * @return instance of {@code Options} class
    */
-  private static native Options newInstance(String srcLangCode,
-      JsArrayString destLangCodes, boolean transliterationEnabled,
-      String shortcutKey) /*-{
+  private static native TransliterationControlOptions newInstance(
+      String srcLangCode, JsArrayString destLangCodes,
+      boolean transliterationEnabled, String shortcutKey) /*-{
     var options = new Object();
     options.sourceLanguage = srcLangCode;
     options.destinationLanguage = destLangCodes;
@@ -132,6 +96,6 @@ public class Options extends JavaScriptObject {
     return options;
   }-*/;
 
-  protected Options() {
+  protected TransliterationControlOptions() {
   }
 }
