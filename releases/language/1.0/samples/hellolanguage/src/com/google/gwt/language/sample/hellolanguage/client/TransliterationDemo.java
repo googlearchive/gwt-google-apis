@@ -22,6 +22,7 @@ import com.google.gwt.language.client.transliteration.control.TransliterationCon
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -32,7 +33,12 @@ public class TransliterationDemo extends Composite {
   public TransliterationDemo() {
     VerticalPanel demoPanel = new VerticalPanel();
 
+    demoPanel.add(new Label("Enter text to transliterate:"));
+
     HTML div = new HTML();
+    // Style name used for IE7 workaround related to layout 
+    // of the control. See Issue 261
+    div.setStyleName("demo-transliterate-control");
     demoPanel.add(div);
 
     TextArea transltextarea = new TextArea();

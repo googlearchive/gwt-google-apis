@@ -24,7 +24,18 @@
     <!-- If you add any GWT meta tags, they must   -->
     <!-- be added before this line.                -->
     <!--                                           -->
-    <script type="text/javascript" language="javascript" src="com.google.gwt.language.sample.hellolanguage.HelloLanguage.nocache.js"></script>    
+    <script type="text/javascript" language="javascript" src="com.google.gwt.language.sample.hellolanguage.HelloLanguage.nocache.js"></script>
+ 
+    <!-- IE7 Standards mode workaround related to  -->
+    <!-- layout of theTransliteration control.     -->
+    <!-- See Issue 261                             -->
+    <!--[if IE 7]>
+    <style>
+ .demo-transliterate-control > .goog-inline-block {
+   display: inline; /* was inline-block */
+}
+    </style>
+    <![endif]-->   
   </head>
 
   <!--                                           -->
