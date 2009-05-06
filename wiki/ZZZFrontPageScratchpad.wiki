@@ -6,8 +6,8 @@ The Google API Libraries for Google Web Toolkit is a collection of libraries tha
 
 Note that these versions rely on [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.
 
-====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=GearsGettingStarted Gears 1.1 Library]====
-  Version 1.1 of the Gears library is now available. In addition to support for the Gears !LocalServer, Database, and !WorkerPool, this version adds integrated support for offline applications and updated sample applications.  The bindings have also been refactored to use !JavaScript overlays, and a new package hierarchy.
+====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=GearsGettingStarted Gears 1.2 Library]====
+  The Gears API library for GWT provides bindings for APIs provided for the [http://code.google.com/apis/gears/ Google Gears] plugin. In addition to support for the Gears !LocalServer, Database, and !WorkerPool, this version adds integrated support for offline applications and updated sample applications.  The bindings have also been refactored to use !JavaScript overlays, and a new package hierarchy.  Version 1.2 of the Gears API library for GWT adds support for Gelocation and Blob support which are new in Gears 0.4.  
 
 ====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=GadgetsGettingStarted Gadgets 1.0 Library]====
   [http://code.google.com/apis/gadgets/ Gadgets] are simple HTML and !JavaScript applications that can be embedded in webpages and other apps. This library simplifies gadget development with GWT by automatically generating a [http://code.google.com/apis/gadgets/docs/legacy/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project. After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish] your gadget. 
@@ -21,11 +21,8 @@ Note that these versions rely on [http://code.google.com/webtoolkit/download.htm
 ====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=Visualization Google Visualization 1.0 Library]====
   The [http://code.google.com/apis/visualization/ Google Visualization API] library enables you to expose your own data, stored on any data-store that is connected to the web, as a Visualization compliant datasource.  Some of the visualizations supported by this release candidate library include the [http://code.google.com/apis/visualization/documentation/gallery/piechart.html Google Piechart], [http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html Google Annotated Timeline] and [http://code.google.com/apis/visualization/documentation/gallery/geomap.html Google GeoMap]. For a full list of visualizations with GWT wrappers you can refer to the [http://code.google.com/apis/visualization/documentation/gallery.html Google Visualization Gallery]. 
 
-==Release Candidates==
-Release Candidates for the following libraries are now available and ready to be taken for a test drive. Note that these versions rely on [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.
+====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=LanguageGettingStarted Language 1.0 Library]====
+  The [http://code.google.com/apis/ajaxlanguage Language API] for GWT provides access to Google's online Translation and Transliteration facilities.  With the AJAX Language API, you can translate and detect the language of blocks of text within a webpage using only Javascript. In addition, you can enable transliteration on any textfield or textarea in your web page. For example, if you were transliterating to Hindi, this API will allow users to phonetically spell out Hindi words using English and have them appear in the Hindi script.
 
-====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=GearsGettingStarted Gears 1.2 Library]====
-  Version 1.2 of the Gears API library for GWT adds support for Gelocation and Blob support which are new in Gears 0.4.  
-
-==Under Development==
-Please see the [Downloads download page] for milestone builds of other libraries. 
+====[http://code.google.com/docreader/#p=gwt-google-apis&s=gwt-google-apis&t=AjaxLoaderGettingStarted AjaxLoader 1.0 Library]====
+  Version 1.0 of the [http://code.google.com/apis/ajax/documentation/ AjaxLoader API] for GWT provides GWT applications to control when Google APIs are loaded and to vary API arguments at runtime.  This library is incorporated into the Visualization, Maps, Search, and Language APIs.
