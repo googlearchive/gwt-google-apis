@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -70,7 +71,10 @@ public class ClickDemo extends MapsDemo {
     map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13);
     map.setSize("500px", "300px");
     initWidget(map);
-    map.setUIToDefault();
+    // Workaround for bug with click handler & setUItoDefaults() - see issue 260
+    MapUIOptions opts = map.getDefaultUI();
+    opts.setDoubleClick(false);
+    map.setUI(opts);
 
     map.addMapClickHandler(new MapClickHandler() {
       public void onClick(MapClickEvent e) {

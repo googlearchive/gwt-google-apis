@@ -17,6 +17,7 @@ package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.InfoWindowContent;
+import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MarkerClickHandler;
@@ -74,7 +75,10 @@ public class ReverseGeocoderDemo extends MapsDemo {
     outer.add(map);
     map.setSize("500px", "300px");
     initWidget(outer);
-    map.setUIToDefault();
+    // Workaround for bug with click handler & setUItoDefaults() - see issue 260
+    MapUIOptions opts = map.getDefaultUI();
+    opts.setDoubleClick(false);
+    map.setUI(opts);
 
     map.addMapClickHandler(new MapClickHandler() {
 
