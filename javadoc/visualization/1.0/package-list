@@ -1,3 +1,4 @@
+com.google.gwt.ajaxloader.client
 com.google.gwt.visualization.client
 com.google.gwt.visualization.client.events
 com.google.gwt.visualization.client.visualizations

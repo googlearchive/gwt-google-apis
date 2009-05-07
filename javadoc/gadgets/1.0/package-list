@@ -1,2 +1,3 @@
 com.google.gwt.gadgets.client
+com.google.gwt.gadgets.client.event
 com.google.gwt.gadgets.client.ui
