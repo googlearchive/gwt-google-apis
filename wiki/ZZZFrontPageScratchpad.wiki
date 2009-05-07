@@ -1,5 +1,7 @@
 =Google API Libraries for Google Web Toolkit=
 
+<font color="#f00"><i>May 7, 2009 Update:</i> Two new APIs released and all existing APIs have been updated.</font> 
+
 The Google API Libraries for Google Web Toolkit is a collection of libraries that provide Java language bindings for popular Google !JavaScript APIs. These libraries make it quick and easy for developers to use these Google !JavaScript APIs with Google Web Toolkit. The libraries are supported by the Google Web Toolkit team.
 
 ==Available Libraries===
