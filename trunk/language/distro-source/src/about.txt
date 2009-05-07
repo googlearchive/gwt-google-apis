@@ -1,4 +1,4 @@
-Template API Library for GWT @GWT_VERSION@
+Language API Library for GWT @GWT_VERSION@
 (c) Copyright Google, Inc. 2008.  All rights reserved.
 Visit Google Code (http://code.google.com/p/gwt-google-apis).
 
