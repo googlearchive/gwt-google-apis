@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapType;
+import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
@@ -258,7 +259,10 @@ public class MapEventDemo extends MapsDemo {
     // Center the new map on Midtown Atlanta
     map = new MapWidget(ATLANTA, 13);
     map.setSize("500px", "300px");
-    map.setUIToDefault();
+    // Workaround for bug with click handler & setUItoDefaults() - see issue 260
+    MapUIOptions opts = map.getDefaultUI();
+    opts.setDoubleClick(false);
+    map.setUI(opts);
 
     MarkerOptions opt = MarkerOptions.newInstance();
     opt.setDraggable(true);
