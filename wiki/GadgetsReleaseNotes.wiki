@@ -2,7 +2,15 @@
 
 = Gadgets API Library for GWT Release Notes =
 
-== Release Notes for 1.0.1==
+== Release Notes for 1.0.3==
+===Changes since 1.0.2===
+
+   *  EnumValue tags in the gadget manifest are now omitted for hidden user prefs
+   * Added the !LockedDomain feature
+   * Caching of generated !JavaScript code is now set to 1 year. Previuosly it was just an hour. This should improve the loading time of GWT gadgets.
+
+----
+== Release Notes for 1.0.2==
 ===Changes since 1.0.1===
 
    * Adds support for GadgetAds and sample code.

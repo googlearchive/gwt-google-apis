@@ -1,7 +1,20 @@
 ﻿#summary Gears API Library for GWT Release Notes.
 
 = Gears API Library for GWT Release Notes =
+==Release Notes for 1.2.1==
+===Changes since 1.2.0==
 
+   * Desktop.openFiles no longer throws a CastClassException (issue 239)
+   * Added the remove() method to the Database class
+   * Fixed failures in RequestCallback on some browsers (issue 242)
+
+===Known Issues in 1.2.0===
+
+   * Gears applications can only be debugged using GWT's hosted mode on Windows; other hosted mode platforms do not support the Gears plugin. (issue 11)
+   * Creating a Worker from a GWT module is not supported out-of-the-box.
+   * GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X. As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.
+
+----
 ==Release Notes for 1.2.0==
 ===Changes since 1.1.1==
 
@@ -14,14 +27,7 @@
    * Added support for Factory.getPermission() and Factory.hasPermission()
    * Updated all samples to allow more heap memory in launch scripts.
 
-===Known Issues in 1.2.0===
-
-    * Gears applications can only be debugged using GWT's hosted mode on Windows; other hosted mode platforms do not support the Gears plugin. (issue 11)
-    * Creating a Worker from a GWT module is not supported out-of-the-box.
-    * GWT hosted mode does not respect URLs which are being redirected by the Gears plugin version 0.4.X. As a result, the ManagedResourceDemo will not demonstrate the expected refresh behavior.
-
 ----
-
 ==Release Notes for 1.1.1==
 ===Changes since 1.1.0==
 
@@ -31,7 +37,6 @@
     * Added WorkerPoolDemo sample
 
 ----
-
 ==Release Notes for 1.1.0 (release candidate)==
 ===Changes since r290===
 
@@ -41,7 +46,6 @@
     * All samples will now rebind their EntryPoints to handle cases where Gears is not installed.
 
 ----
-
 ==Release Notes for r290 (milestone release)==
 ===Changes since 1.0.0===
 
@@ -55,7 +59,6 @@
     * Split these GWT bindings into their own distribution.
 
 ----
-
 ==Release Notes for 1.0.0==
 
 ===Initial release. ===

@@ -2,7 +2,7 @@
 
 =  !HelloMaps Demo =
 
-===[http://gwt.google.com/samples/HelloMaps-1.0.3/HelloMaps.html HelloMaps]===
+===[http://gwt.google.com/samples/HelloMaps-1.0.4/HelloMaps.html HelloMaps]===
 	
 [http://gwt-google-apis.googlecode.com/svn/wiki/HelloMaps-2.png]
 

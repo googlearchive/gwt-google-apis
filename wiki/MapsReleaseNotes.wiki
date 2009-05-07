@@ -2,16 +2,25 @@
 
 = Google Maps API Library for GWT Release Notes =
 
+==Release Notes for 1.0.4==
+===Changes since 1.0.3===
 
+   * Adds new options and methods to OrgChart
+   * Adds support for mouseover, mouseout and load events
+   * Added support for some formatters
+   * Moves AjaxLoader and some other common classes to a separate library
+
+=== Known Issues ===
+
+   * Not all features in the Maps API are supported. The Maps API is constantly evolving. 
+
+----
 ==Release Notes for 1.0.3==
 ===Changes since 1.0.2===
 
    * Adds support for reverse Geocoding in the Geocoder class
    * Adds the TileLayerOverlay.reset() method
    * Adds support for the GAdsManager
-
-=== Known Issues ===
-   * Not all features in the Maps API are supported. The Maps API is constantly evolving. 
 
 ----
 ==Release Notes for 1.0.2==

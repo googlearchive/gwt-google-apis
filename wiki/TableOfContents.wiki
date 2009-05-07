@@ -38,19 +38,18 @@
    * [VisualizationSampleApplications Sample Applications]
    * [VisualizationReleaseNotes Release Notes]
    * [VisualizationFAQ FAQs]
- * Coming Soon
-   * AjaxLoader
-     * [AjaxLoaderGettingStarted Getting Started]
-     * [AjaxLoaderJavadoc API Reference] 
-     * [AjaxLoaderSampleApplications Sample Applications]
-     * [AjaxLoaderReleaseNotes Release Notes]
-     * [AjaxLoaderFAQ FAQs]
-   * Language
-     * [LanguageGettingStarted Getting Started]
-     * [LanguageJavadoc API Reference] 
-     * [LanguageSampleApplications Sample Applications]
-     * [LanguageReleaseNotes Release Notes]
-     * [LanguageFAQ FAQs]
+ * Language
+   * [LanguageGettingStarted Getting Started]
+   * [LanguageJavadoc API Reference] 
+   * [LanguageSampleApplications Sample Applications]
+   * [LanguageReleaseNotes Release Notes]
+   * [LanguageFAQ FAQs]
+ * AjaxLoader
+   * [AjaxLoaderGettingStarted Getting Started]
+   * [AjaxLoaderJavadoc API Reference] 
+   * [AjaxLoaderSampleApplications Sample Applications]
+   * [AjaxLoaderReleaseNotes Release Notes]
+   * [AjaxLoaderFAQ FAQs]
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [TemplateProject Template Project]

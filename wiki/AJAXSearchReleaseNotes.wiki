@@ -1,7 +1,14 @@
-#summary Google AJAX Search API Library for GWT Release Notes.
+﻿#summary Google AJAX Search API Library for GWT Release Notes.
 
 = Google AJAX Search API Library for GWT Release Notes =
 
+
+==Release Notes for 1.0.2==
+===Changes since 1.0.1===
+
+   * Added AjaxLoader support
+
+----
 ==Release Notes for 1.0.1==
 ===Changes since 1.0.0===
 

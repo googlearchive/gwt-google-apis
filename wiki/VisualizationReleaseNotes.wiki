@@ -2,8 +2,16 @@
 
 =Google Visualization API Library for GWT Release Notes=
 
+==Release Notes for 1.0.2==
+===Changes since 1.0.1===
+   * Adds new options and methods to OrgChart
+   * Adds support for mouseover, mouseout and load events
+   * Added support for some formatters
+   * Moves AjaxLoader and some other common classes to a separate library
+
+----
 ==Release Notes for 1.0.1==
-===Changes since 1.0.0 (Release Candidate)==
+===Changes since 1.0.0===
 
    * Adds some missing javadoc annotations and packages to the build
    * Fixes a bug where JavaScript dates were not being correctly converted to Java dates in the Properties class
