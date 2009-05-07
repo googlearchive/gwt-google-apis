@@ -20,11 +20,11 @@ There are some files created by the GWT compiler that are very long and cause is
 
 == Why can't I run the samples from the distribution? ==
 
-If you are on Windows, you may be hitting a path length problem.  Try unpacking the distribution in a folder with a short name off of the root of a drive.
+If you are on Windows, you may be hitting a path length problem.  Try unpacking the distribution with a third-party unzip program.   Also, try putting it in a folder with a short name off of the root of a drive.
 
 If you are having trouble running the sample scripts XXX-shell.com and XXX-compile.cmd,  make sure you have the GWT_HOME environment variable set.  It should contain a pathname that contains a uncompressed GWT distribution.
 
-== Why do I get an exception saying that $wnd.google.visualization is null? ==
+== Why do I get an exception saying that $wnd.google.visualization "is null" or "has no properties"? ==
 
 The following stack trace indicates that the Visualization JavaScript API is not getting loaded:
 
@@ -48,6 +48,8 @@ Make sure your hosted HTML page includes a `<script>` tag to load the Ajax Loade
 }}}
 
 You can then add !JavaScript code to load the visualizations yourself, or you can use the !AjaxLoader class provided with the gwt-visualization API.  See the [VisualizationGettingStarted Getting Started] page for an example.
+
+If you have this tag in place, try opening up your web browser (IE on Windows, Safari on Mac) and navigate to the url `http://www.google.com/jsapi` manually.  If you do not see a page of JavaScript, chances are that there is some proxy or firewall setting blocking access to download the API.
 
 == I removed a !VisualizationWidget from a Panel.  When I added it back, it was gone!  What happened? ==
 
