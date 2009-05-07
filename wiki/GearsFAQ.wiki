@@ -5,6 +5,10 @@
 These FAQs refer to the Google API Library for GWT bindings for the Gears API.  
 See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
 
+== Why do I see the dialog "Password needed" when extracting the .zip distribution in Windows? ==
+
+There are some files created by the GWT compiler that are very long and cause issues with the built-in Windows compressed folder support.  You can try using a different program to unzip the folder (such as Cygwin or 7-zip), or you can use the `.tar.gz` distribution.
+
 == How do I write worker thread code in GWT? ==
 
 The bindings do not support such a way right now, but if you create a GWT module and specify the Single Script linker, you can load the generated script as a public resource using the [http://gwt-google-apis.googlecode.com/svn/javadoc/gears/1.1/com/google/gwt/gears/client/workerpool/WorkerPool.html#createWorkerFromUrl(java.lang.String) WorkerPool.createWorkerFromUrl(String)] method.
