@@ -4,8 +4,6 @@
 
 == Assumptions ==
 
-TODO(zundel): Port these instructions to GWT 1.6
- 
   * You are familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit].
   * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools.
   * You are familiar with [http://code.google.com/apis/ajaxlanguage/ Google Language API].
