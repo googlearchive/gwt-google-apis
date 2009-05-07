@@ -5,7 +5,7 @@
 == Release Notes for 1.0.3==
 ===Changes since 1.0.2===
 
-   * <EnumValue> tags are now omitted for hidden user prefs
+   *  EnumValue tags in the gadget manifest are now omitted for hidden user prefs
    * Added the !LockedDomain feature
    * Caching of generated !JavaScript code is now set to 1 year. Previuosly it was just an hour. This should improve the loading time of GWT gadgets.
 
