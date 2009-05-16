@@ -2,3 +2,5 @@ com.google.gwt.ajaxloader.client
 com.google.gwt.language.client
 com.google.gwt.language.client.translation
 com.google.gwt.language.client.transliteration
+com.google.gwt.language.client.transliteration.control
+com.google.gwt.language.client.transliteration.text
