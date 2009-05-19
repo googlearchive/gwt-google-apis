@@ -18,8 +18,9 @@ Merges:
 /trunk/maps/@1392:1429 was merged (r1430) into /releases/maps/1.0 (1.0.4 release)
 /trunk/maps/@1429:1435 was merged (r1436) into /releases/maps/1.0 (1.0.4 release)
 /trunk/maps/@1435:1457 was merged (r1458) into /releases/maps/1.0 (1.0.4 release)
+/trunk/maps/@1458:1460 was merged (r1461) into /releases/maps/1.0 (1.0.4 release)
 
--> The next merge into trunk will be r1457:????
+-> The next merge into trunk will be r1460:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -83,3 +84,4 @@ it is returning null.(r1027, r1029)
  - Update release notes (r1434)
  - Added new ajaxloader documentation to javadoc. (r1452)
  - Added gwt-maps-noredist.jar target (r1457)
+ - Fixed name of maps-redist.jar, disabled failing tests (r1460)
