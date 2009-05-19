@@ -84,6 +84,8 @@
 		location="${gwt.build.out}/${project.tail}" />
 	<property name="project.lib"
 		location="${gwt.build.lib}/gwt-${ant.project.name}.jar" />
+	<property name="project.noredist.lib"
+		location="${gwt.build.lib}/gwt-noredist-${ant.project.name}.jar" />
 	<property name="project.jni"
 		location="${gwt.build}/${project.tail}" />
 	<property name="javac.out" location="${project.build}/bin" />
@@ -175,6 +177,10 @@
 
 	<presetdef name="gwt.jar">
 		<jar destfile="${project.lib}" update="true"
+			duplicate="preserve" index="true" />
+	</presetdef>
+	<presetdef name="gwt.noredist.jar">
+		<jar destfile="${project.noredist.lib}" update="true"
 			duplicate="preserve" index="true" />
 	</presetdef>
 
