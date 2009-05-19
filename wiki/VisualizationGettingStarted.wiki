@@ -57,33 +57,11 @@ Linking compilation into ./www/com.example.simpleviz.SimpleViz
 
 If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the *File > Import...* menu option.
 
-==Adding the Visualization Script Tag to your HTML Page==
+==Adding Script Tags to your HTML Page==
 
-Your GWT application will need access to the Google !JavaScript Visualization API. In order to do this, you must include an additional script tag in your application's `SimpleViz.html` file. Include the following script tags above the reference to your GWT module.
+Your GWT application will need access to the Google !JavaScript Visualization API which is not bundled with this library.  In order to do this, you must reference the VisualizationUtils.loadApi() method in your application.  This class will download the API from Google's servers into the browser.  No modifications to your HTML page are necessary.
 
-{{{
-    <!--                                           -->
-    <!-- This script loads the Visualization API.  -->
-    <!--                                           -->
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    
-    <!--                                           -->
-    <!-- This script loads your compiled module.   -->
-    <!-- If you add any GWT meta tags, they must   -->
-    <!-- be added before this line.                -->
-    <!--                                           -->
-    <script type="text/javascript" language="javascript" src="com.example.simpleviz.client.SimpleViz.nocache.js"></script>
-  </head>
-}}}
-
-Some visualizations may require loading an additional script, for instance, the !MapVisualization requires loading the Google Maps API with a script tag like the following:
-
-{{{
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABCDEFG"></script>
-}}}
-
-(Where the key "ABCDEFG" is replaced by your Google API key.)  Please see the [http://code.google.com/apis/visualization/documentation/gallery.html
-documentation] for each visualization for additional loading instructions.  
+Please see the [http://code.google.com/apis/visualization/documentation/gallery.html documentation] for each visualization for additional loading instructions.
 
 == A Simple Visualization ==
 
