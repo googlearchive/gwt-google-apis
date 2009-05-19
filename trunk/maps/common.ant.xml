@@ -85,7 +85,7 @@
 	<property name="project.lib"
 		location="${gwt.build.lib}/gwt-${ant.project.name}.jar" />
 	<property name="project.noredist.lib"
-		location="${gwt.build.lib}/gwt-noredist-${ant.project.name}.jar" />
+		location="${gwt.build.lib}/gwt-${ant.project.name}-noredist.jar" />
 	<property name="project.jni"
 		location="${gwt.build}/${project.tail}" />
 	<property name="javac.out" location="${project.build}/bin" />
