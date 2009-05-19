@@ -56,7 +56,10 @@ public class MapsTestSuite extends GWTTestSuite {
     TestSuite suite = new TestSuite("Test for the Maps API");
     
     // com.google.gwt.maps.client tests
-    suite.addTestSuite(AdsManagerTest.class);
+   
+    // This test is unreliable and fails in an asyncronous way. 
+    // internal ref 1859398
+    // suite.addTestSuite(AdsManagerTest.class);
     suite.addTestSuite(CopyrightEventTest.class);
     suite.addTestSuite(DraggableObjectTest.class);
     suite.addTestSuite(GoogleBarOptionsTest.class);
