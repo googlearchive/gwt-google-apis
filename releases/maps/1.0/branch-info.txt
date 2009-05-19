@@ -13,11 +13,13 @@ Merges:
 /trunk/maps@1147:1168 was merged (r1191) into /releases/maps/1.0
 /releases/maps/1.0/@1157 was merged (r1192) into /trunk/maps
 /releases/maps/1.0/@1157:1249 was merged (r1250) into /trunk/maps (1.0.3 release)
-/releases/maps/1.0/@1249:1383 was merged (r1384) into /trunk/maps (1.0.4 release)
-/releases/maps/1.0/@1383:1392 was merged (r1393) into /trunk/maps (1.0.4 release)
-/releases/maps/1.0/@1392:1429 was merged (r1430) into /trunk/maps (1.0.4 release)
-/releases/maps/1.0/@1429:1435 was merged (r1436) into /trunk/maps (1.0.4 release)
--> The next merge into trunk will be r1435:????
+/trunk/maps/@1249:1383 was merged (r1384) into /releases/maps/1.0 (1.0.4 release)
+/trunk/maps/@1383:1392 was merged (r1393) into /releases/maps/1.0 (1.0.4 release)
+/trunk/maps/@1392:1429 was merged (r1430) into /releases/maps/1.0 (1.0.4 release)
+/trunk/maps/@1429:1435 was merged (r1436) into /releases/maps/1.0 (1.0.4 release)
+/trunk/maps/@1435:1457 was merged (r1458) into /releases/maps/1.0 (1.0.4 release)
+
+-> The next merge into trunk will be r1457:????
 
 Changes in this branch (excluding changes to this file itself):
  - Branch created (r808)
@@ -79,3 +81,5 @@ it is returning null.(r1027, r1029)
  - Fix build break in GWT 1.5 - Checkbox.get/setValue() not supported. (r1392)
  - Workaround for issue 260 - demos that depend on click handlers not working (r1429) 
  - Update release notes (r1434)
+ - Added new ajaxloader documentation to javadoc. (r1452)
+ - Added gwt-maps-noredist.jar target (r1457)
