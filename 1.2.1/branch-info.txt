@@ -1,0 +1,26 @@
+branch-info.txt for gwt-google-apis Gears 1.2 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/gears/1.2/ was created (r1176) as a straight copy from /trunk/@r1175
+
+Merges:
+/releases/gears/1.2/@1176:1180 was merged (r1182) into trunk/gears
+/releases/gears/1.2/@1180:1253 was merged (r1254) into trunk/gears
+/trunk/gears@1253:1296 was merged (r1298) into releases/gears/1.2
+/trunk/gears@1296:1381 was merged (r1382) into releases/gears/1.2
+---> The next merge into trunk will be 1381:????
+
+Changes in this branch (excluding changes to this file itself:
+- Swapped the run order of FactoryTest and DatabaseTest to fix problem in test rack (r1180)
+- Create alternative .jar file w/o Xerces (r1195)
+- Update javadoc in Geolocation class, 1.0.2 release notes (r1197)
+- Update gears_init.js (r1208)
+- Increase heap size for all samples launch scripts (r1213)
+- Update build to include WorkerPoolDemo in output and UploadDemo in index.html. (r1216)
+- Fixes issue 239. Desktop.openFiles() throws cast class exception. (r1290)
+- Fix build break (r1291)
+- Adds the remove() method to the database class (r1294)
+- Fixes issue 242.  RequestCallback failing on Chrome & IE. (r1295)
+- Updated release nodes and javadoc references (r1381)
