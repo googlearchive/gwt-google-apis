@@ -1,0 +1,81 @@
+branch-info.txt for gwt-google-apis Maps 1.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/maps/1.0/ was created (r808) as a straight copy from /trunk/maps/@r807
+
+Merges:
+/releases/maps/1.0/@808:943 was merged (r946) into /trunk/maps
+/releases/maps/1.0/@944:1029 was merged (r1030) into /trunk/maps
+/releases/maps/1.0/@1029:1141 was merged (r1142) into /trunk/maps
+/trunk/maps@1041:1145 was merged (r1146) into /releases/maps/1.0
+/trunk/maps@1147:1168 was merged (r1191) into /releases/maps/1.0
+/releases/maps/1.0/@1157 was merged (r1192) into /trunk/maps
+/releases/maps/1.0/@1157:1249 was merged (r1250) into /trunk/maps (1.0.3 release)
+/releases/maps/1.0/@1249:1383 was merged (r1384) into /trunk/maps (1.0.4 release)
+/releases/maps/1.0/@1383:1392 was merged (r1393) into /trunk/maps (1.0.4 release)
+/releases/maps/1.0/@1392:1429 was merged (r1430) into /trunk/maps (1.0.4 release)
+/releases/maps/1.0/@1429:1435 was merged (r1436) into /trunk/maps (1.0.4 release)
+-> The next merge into trunk will be r1435:????
+
+Changes in this branch (excluding changes to this file itself):
+ - Branch created (r808)
+ - Updated minimum version in release notes (r812)
+ - Default platform in .classpath should be windows, not mac (r830)
+ - Fixed bad link to online docs (r832)
+ - Updated name of the first event demo (r833)
+ - Updated description and table headers in demo (r834)
+ - Fixed the drawing demo to close out an editing session (r835)
+ - Hierarchical Map control workaround (issue 173) (r836)
+ - Update to demo description (r837)
+ - Update to demo description, viewport (r838)
+ - Update to change the 'Hide' to 'Show' when button pressed in demo (r839)
+ - Update description of Map Event Handlers demo (r840)
+ - Update description of open window demo (r841)
+ - Added a bit of styling to the overall HelloMaps demo (r842)
+ - Fixed typos in demo description text (r843)
+ - Update to demo description (r844)
+ - Allow MarkerOptions to be subclassed (r857)
+ - Address issue 180 - problem with Projection subclass in Hosted mode (r860)
+ - Allow TileLayer to be extended (r861)
+ - Corrected constructor for Overlay.createPeer() and add unit tests (r866)
+ - Updated minimum version in release notes to v2.118 (2.113 was a typo in the Maps doc) (r870)
+ - Address issue 189 - TOO_MANY_QUERIES constant couldn't be interpreted (r873)
+ - Update link to issue tracker in docs (r897)
+ - New release of Maps API broke Overlay tests introduced in r866 (r908)
+ - Updated code comments & fixed formatting (r911)
+ - Roll back part of r911 which inadvertently introduced a logic change (r913)
+ - Further fix for InfoWindow w/ widgets (issues 156, 181) (r924)
+ - Added Maps.getVersion() (r926)
+ - Temporarily fix the Maps API version an 2.132a to get a version to test (r927)
+ - Add the Maps API version at the bottom of the HelloMaps demo (r931)
+ - Further fix to the Overlay class createPeer() method to detect problem with API & conditionally use workaround. (r936)
+ - Bump maximum memory for launch scripts. (r940)
+ - Update release notes (r943)
+ - LatLngBounds.newInstance()was missing parenthesis inside the JSNI method. (r958)
+ - Fixes issue 206 Allow Marker to be subclassed with an externally provided JSO. (r1010)
+ - Defensive programming around the GDirections.getStatus() method. Sometimes
+it is returning null.(r1027, r1029)
+ - Removed setCenter() from MapWidget.checkResize() (issue216).(r1033)
+ - Added alternative conversion of LatLng to pixels.(r1034)
+ - Fixed build break in MapWidget.onAttach().(r1035)
+ - Updated release notes.(r1089)
+ - Fix unit test that was causing build break on IE.(r1141)
+ - Adds the tileLayerOverlay.reset() method. (r1162)
+ - Add support for reverse geocoding to the Geocoder class (r1168)
+ - Add support for GAdsManager, gwt-maps-1.0.3 release notes (r1196)
+ - Fix build break due to AdsManagerTest.newInstance() (r1198)
+ - Updated javadoc from maps api for MapClickHandler (r1205)
+ - Updated documentation to point to Google API Libraries for GWT group. (r1212)
+ - Fix issue 245 in issue tracker: DirectionResult.clear() and DirectionQueryOptions properties added (r1286)
+ - Adds an AdsManagerOptions.setChannel() method that takes a double instead of an int (r1341)
+ - DraggableObject support, LatLnt.fromUrlValue, TileOverlay constructor override, updated drawing overlay demo (r1348)
+ - Added AjaxLoader support for the Maps API.
+ - Added GMapUIOptions and 3D Controls support, polish on demos (r1352)
+ - Added GMapUIOptions and 3D Controls support, polish on demos (r1355)
+ - Added GoogleBar settings and MapOptions support (new constructor override for MapWidget) (r1356)
+ - Javadoc update for setAdSafe() methods (r1357)
+ - Fix build break in GWT 1.5 - Checkbox.get/setValue() not supported. (r1392)
+ - Workaround for issue 260 - demos that depend on click handlers not working (r1429) 
+ - Update release notes (r1434)
