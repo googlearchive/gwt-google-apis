@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>gwt-visualization</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+		<nature>com.google.gwt.eclipse.plugin.gwtNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>showcase</name>
+			<type>2</type>
+			<location>/usr/local/google/home/zundel/workspace/gwt-google-apis/trunk/visualization/samples/showcase/src</location>
+		</link>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<locationURI>VISUALIZATION_API_ROOT/visualization/src</locationURI>
+		</link>
+		<link>
+			<name>test</name>
+			<type>2</type>
+			<locationURI>VISUALIZATION_API_ROOT/visualization/test</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
