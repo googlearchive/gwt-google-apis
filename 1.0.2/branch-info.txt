@@ -1,0 +1,60 @@
+branch-info.txt for gwt-google-apis Visualization 1.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/visualization/1.0/ was created (r1069) as a straight copy from /trunk/maps/@r1069
+
+Merges:
+/trunk/visualization@1069:1089 was merged (r1090) into /releases/visualization/1.0
+/releases/maps/1.0/@1069:1093 was merged (r1094) into /trunk/visualization
+/releases/maps/1.0@1093:1124 was merged (r1127) into /trunk/visualization
+/releases/maps/1.0@1124:1136 was merged (r1177) into /trunk/visualization
+/trunk/visualization@1136:1184 was merged (r1185) into /releases/visualization/1.0
+/releases/maps/1.0@1136:1184 was merged (r1189) into /trunk/visualization
+/releases/maps/1.0@1185:1189 was merged (r1190) into /trunk/visualization
+/releases/maps/1.0@1189:1251 was merged (r1252) into /trunk/visualization
+/trunk/visualization@1251:1294 was merged (r1295) into /releases/visualization/1.0
+/trunk/visualization@1294:1304 was merged (r1305) into /releases/visualization/1.0
+/trunk/visualization@1304:1308 was merged (r1339) into /releases/visualization/1.0
+/trunk/visualization@1338:1388 was merged (r1389) into /releases/visualization/1.0
+-> The next merge into trunk will be r1388:????
+
+Changes in this branch (excluding changes to this file itself):
+ - Branch created (r1069)
+ - Fixed a build break on Windows for the testColors() test (r1071)
+ - Checkstyle fixes (r1072)
+ - Added DataTableTest to the suite (r1073)
+ - Updated release notes for 1.0.0 (r1075)
+ - Added some polish to HelloVisualization Table tab (r1078)
+ - Fixed issue 219 - Date and Array validation fails for DataTable on Safari (r1086)
+ - Fixed links in docs to samples (r1087)
+ - Merged back some unit tests accidentally committed to trunk (r1091)
+ - Refactored Visualization to derive from Widget (r1093)
+ - Displays a message for file: URLs in the MotionDemo (r1098)
+ - Updates the Showcase to look better and adds size requirements to some visualizations (r1100)
+ - Merged in change accidentally committed to trunk (r1101)
+ - Polish added to CustomVisualization - 15px margin (r1104)
+ - Updated index.html to get rid of space beneath 'Samples' heading (r1105)
+ - Adds sapcing between the text at the top of Showcase and the tab panel. (r1106)
+ - Updated .classpath - accidentally got checked in with mac dev environment set (r1107)
+ - Selection bug fix and test cases (r1108)
+ - Shortened samples package name to work around Windows path length limitations (r1109)
+ - Corrected the GeoDemo to not have a huge blank area outside the map.  Corrected checktyle errors (sorting and organizing imports) (r1110)
+ - Fixes a glitch in the vertical layout on Chrome for HelloVisualization. (r1111)
+ - Add missing javadoc and adds a timer around the build (r1136)
+ - Fixed JavaScript dates in Properties class & JSE in Selection methods that supported AbstractVisualization (r1153)
+ - Fixed a build break in the AnnotatedTimeLineTest (r1179)
+ - Added release notes for 1.0.1 (r1188)
+ - Merged changes from trunk (r1185-1190) to this branch (r1191)
+ - Increased heap size for all sample launch scripts to 256m (r1213)
+ - Fix to CommonChartOptions titleX and titleY property setters (r1271)
+ - Added formatters (r1276, 1277, 1278)
+ - Removed showcase from classpath (r1278)
+ - Fixes checkstyle errors (r1283)
+ - Fixes AnnotatedTimeLine rangechange event. (r1300)
+ - Added mouse out, mouse over, and ready event support (r1326)
+ - Fix build breaks caused by new version of gviz api (r1327,1328)
+ - Moved AjaxLoader support to the common ajaxloader project (r1337, 1338)
+ - Adds new options and methods to OrgChart. (r1353)
+ - Updated javadoc, package info, and release notes for 1.0.2 release (r1388)
