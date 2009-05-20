@@ -1,6 +1,0 @@
-<project name="database" default="build" basedir=".">
-	<property name="sample.api" value="ajaxloader" />
-	<property name="sample.root" value="helloajaxloader" />
-	<property name="sample.module" value="HelloAjaxLoader" />
-	<import file="../common.ant.xml" />
-</project>

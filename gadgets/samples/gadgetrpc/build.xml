@@ -1,6 +1,0 @@
-<project name="GadgetRPC" default="build" basedir=".">
-	<property name="sample.api" value="gadgets"/>
-	<property name="sample.root" value="gadgetrpc" />
-	<property name="sample.module" value="GadgetRPC" />
-	<import file="../common.ant.xml" />
-</project>

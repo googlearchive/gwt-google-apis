@@ -1,6 +1,0 @@
-<project name="visualizationshowcase" default="build" basedir=".">
-	<property name="sample.api" value="visualization"/>
-	<property name="sample.root" value="visualizationshowcase" />
-	<property name="sample.module" value="VisualizationShowcase" />
-	<import file="../common.ant.xml" />
-</project>
