@@ -1,0 +1,19 @@
+branch-info.txt for gwt-google-apis AjaxLoader 1.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/ajaxloader/1.0/ was created (r1346) as a copy from /trunk@1345
+
+Merges:
+/trunk/ajaxloader/@1346:1371 was merged (r1372) into releases/ajaxloader/1.0
+/trunk/ajaxloader/@1371:1400 was merged (r1401) into releases/ajaxloader/1.0
+/trunk/ajaxloader/@1400:1440 was merged (r1441) into releases/ajaxloader/1.0
+--->The next merge into trunk will be 1440:????
+
+Changes in this branch (excluding changes to this file itself)
+- Package description added (r1367)
+- Updated release notes, index doc, and minor styling to the sample (r1371)
+- Minor glitch in the formatting of the word "License" (r1399)
+- Updated launch scripts for Language and AjaxLoader projects (r1400)
+- Updated path in launch scripts for Ajaxloader (r1440)
