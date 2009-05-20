@@ -1,6 +1,0 @@
-<project name="BasicGadgetAds" default="build" basedir=".">
-	<property name="sample.api" value="gadgets"/>
-	<property name="sample.root" value="basicgadgetads" />
-	<property name="sample.module" value="BasicGadgetAds" />
-	<import file="../common.ant.xml" />
-</project>

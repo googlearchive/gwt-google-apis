@@ -1,6 +1,0 @@
-<project name="HelloGadgets" default="build" basedir=".">
-	<property name="sample.api" value="gadgets"/>
-	<property name="sample.root" value="hellogadgets" />
-	<property name="sample.module" value="HelloGadgets" />
-	<import file="../common.ant.xml" />
-</project>
