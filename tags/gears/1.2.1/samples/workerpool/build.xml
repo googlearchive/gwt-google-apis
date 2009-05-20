@@ -1,0 +1,6 @@
+<project name="workerpool" default="build" basedir=".">
+	<property name="sample.api" value="gears"/>
+	<property name="sample.root" value="workerpool" />
+	<property name="sample.module" value="WorkerPoolDemo" />
+	<import file="../common.ant.xml" />
+</project>
