@@ -5,9 +5,11 @@
 == Assumptions ==
  
   * You are familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit].
-  * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools.
+  * You know how to [http://code.google.com/webtoolkit/gettingstarted.html create a new GWT project].
   * You are familiar with [http://code.google.com/apis/visualization/ Google Visualization API].
   * You are using the Visualization API Library for GWT version 1.0.2 or later.
+  * You are using GWT 1.6 or later.
+  * You have installed Eclipse and/or Apache Ant.
 
 == Downloading the Visualization API Library for GWT ==
 
@@ -15,53 +17,32 @@ You can download the latest production releases of the libraries from the [http:
 
 You can reference the `.jar` file either from the folder that you uncompressed the project in, or copy it and reference it from another location.  In this example, we've chosen to copy the file to the path `/usr/local/gwt-visualization`.
 
-== Setting up a GWT Project to use the Visualization API===
-
-There are three steps needed to use the Visualization API in a GWT project:
-
-   # Include the library JAR file in the classpath
-   # Inherit com.google.gwt.visualization.Visualization in the module XML definition file. 
-   # Include a `<script>` tag in your html page in order to load the API.
-
-We'll explain each step as we set up a new project.
-
 == Creating a New GWT Project ==
 
-Start by creating a new GWT project called !SimpleViz as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
-
-For the purposes of this example we assume `gwt-visualization.jar` has been unpacked in `/usr/local/gwt-visualization` and that you are using the Eclipse IDE.  Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-visualization/gwt-visualization.jar` to the Java classpath for the launch, compile and and Eclipse definitions. 
-
-We also need to tell the GWT compiler that we are using the Visualization module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.visualization.Visualization` as the module to be inherited. This will place the inheritance entry `Visualization.gwt.xml` into the generated project file `SimpleViz.gwt.xml`.
-
+Start by creating a new GWT project called !SimpleViz.
 
 {{{
 $PP_OFF
-$ projectCreator -eclipse SimpleViz -out SimpleViz \
-     -addToClassPath /usr/local/gwt-visualization/gwt-visualization.jar
-
-$ applicationCreator -eclipse SimpleViz -out SimpleViz \
-     -addToClassPath /usr/local/gwt-visualization/gwt-visualization.jar \
-     -addModule com.google.gwt.visualization.Visualization com.example.simpleviz.client.SimpleViz
+$ ./webAppCreator -out SimpleViz com.example.simpleviz.SimpleViz
 }}}
 
+This creates a project directory called SimpleViz.  Copy the gwt-visuzalization.jar file into SimpleViz/war/WEB-INF/lib.
 
-Now you should now have a standard project set up. Before continuing, test out compilation with the `SimpleViz-compile` script.
+The webAppCreator also creates a file called SimpleViz.gwt.xml in the SimpleViz/src/com/example/simpleviz directory.  Look for the following line (it should be one of the first lines in the file):
 
 {{{
-$PP_OFF
-$ ./SimpleViz-compile
-Compiling module com.example.simpleviz.SimpleViz
-Compilation succeeded
-Linking compilation into ./www/com.example.simpleviz.SimpleViz
+  <!-- Other module inherits                                      -->
 }}}
+
+On the next line, paste the following:
+
+{{{
+  <inherits name='com.google.gwt.visualization.Visualization'/>
+}}}
+
+Now you should now have a standard project set up. Before continuing, test out compilation by executing ant on your build.xml file.
 
 If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the *File > Import...* menu option.
-
-==Adding Script Tags to your HTML Page==
-
-Your GWT application will need access to the Google !JavaScript Visualization API which is not bundled with this library.  In order to do this, you must reference the VisualizationUtils.loadApi() method in your application.  This class will download the API from Google's servers into the browser.  No modifications to your HTML page are necessary.
-
-Please see the [http://code.google.com/apis/visualization/documentation/gallery.html documentation] for each visualization for additional loading instructions.
 
 == A Simple Visualization ==
 
@@ -169,13 +150,13 @@ public class SimpleViz implements EntryPoint {
 }
 }}}
 
-Now you can compile your project again, and open `www/com.example.simpleviz.SimpleViz/SimpleViz.html` in your favorite browser.
+Now you can build your project again, and open `www/com.example.simpleviz.SimpleViz/SimpleViz.html` in your favorite browser.
 
   [http://gwt-google-apis.googlecode.com/svn/wiki/SimpleViz-1.png]
 
 Congratulations! You should now have visualizations working within a GWT application.
 
-_Note: Of course, you can run your visualizations in GWT hosted mode as well, but be aware that many visualizations use SVG, which is not supported in the Linux hosted mode browser as of GWT 1.5.  Future releases of GWT will remedy this issue._
+_Note: Of course, you can run your visualizations in GWT hosted mode as well, but be aware that many visualizations use SVG, which is not supported in the Linux hosted mode browser as of GWT 1.6.  Future releases of GWT will remedy this issue._
 
 == What Just Happened? ==
 
@@ -203,7 +184,7 @@ In order to load the Google Visualization API into your GWT module, you need to 
 
     // Load the visualization api, passing the onLoadCallback to be called
     // when loading is done.
-    AjaxLoader.loadVisualizationApi(onLoadCallback, PieChart.PACKAGE);
+    VisualizationUtils.loadVisualizationApi(onLoadCallback, PieChart.PACKAGE);
   }
 }}}
 
