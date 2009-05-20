@@ -1,0 +1,34 @@
+branch-info.txt for gwt-google-apis Language 1.0 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/language/1.0/ was created (r1386) as a copy from /trunk@1385
+
+Merges:
+/trunk/language/@1385:1401 was merged (r1402) into releases/language/1.0
+/trunk/language/@1401:1421 was merged (r1422) into releases/language/1.0
+/trunk/language/@1421:1427 was merged (r1428) into releases/language/1.0
+--->The next merge into trunk will be 1427:????
+
+Changes in this branch (excluding changes to this file itself)
+- Updated svn:external for language to point at a specific rev in the language/1.0 release. (r1387)
+- Updated launch scripts for Language and Language projects (r1400)
+- makeTransliterable now takes an array of textareas (r1403)
+- Added SupportedDestinationLanguages enum (r1404)
+- Small change. Updates comments, updates a parameter name (r1406)
+- RenamedOptions.jave to TransliterationControlOptions.java (r1407)
+- Making event type field private (r1408)
+- Renamed TranslitEventListener and TransliterationEvent. (r1409)
+- Rename TextAreaOptions.java to TextElementOptions as this is applicable to both TextAreas and TextBoxes (r1410)
+- Moved Transliteration control classes , created TransliterationUtils class (r1411)
+- Small bug fix and added unit test for the code (r1412)
+- Sort & format pass (r1413)
+- Added a test for transliteration control (r1414)
+- Exposed getTransliterationsAsJsArray().  Update to a comment. (r1415)
+- New way to specify transliteratable text fields and language options DIV (r1416)
+- Fixed launch scripts for Windows. (r1418)
+- Updating the comments in LanguageUtils.java (r1423)
+- Workaround for iE7 standards mode issue. (r1425)
+- Changed "Template" to "Language" in about.txt (r1426)
+- Missing closing style tag from r1425 (r1427)
