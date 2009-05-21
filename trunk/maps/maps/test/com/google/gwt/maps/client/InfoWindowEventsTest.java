@@ -109,7 +109,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
             info.maximize();
           }
 
-        }.schedule(300);
+        }.schedule(3000);
       }
 
     });
