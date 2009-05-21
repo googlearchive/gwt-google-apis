@@ -131,16 +131,17 @@ You may not want to put a method like that in the public interface of your Optio
 
 = Wrapping Visualization Methods =
 
-As mentioned before, the underlying !JavaScript visualization object can be accessed by calling `getJso()`.  One case where you probably need to call this is when you are wrapping a visualization method.  Let's say your visualization has a method called `toggle`, that takes no arguments and does not return a value.  Here is a code sample that wraps such a method:
+As mentioned before, the underlying !JavaScript visualization object can be accessed by calling `getJso()`.  One case where you probably need to call this is when you are wrapping a visualization method.  Here is a code sample that wraps a method called `collapse`, that takes an integer argument and does not return a value:
 
 {{{
-  public void toggle() {
-    toggle(getJso());
+
+  public void collapse(int row) {
+    collapse(getJso(), row);
   }
-  
-  private native void toggle(JavaScriptObject jso) /*-{
-    jso.toogle();
+
+  private final native void collapse(JavaScriptObject jso, int row) /*-{
+    jso.collapse(row);
   }-*/;
 }}}
 
-Most methods take parameters or return data.  Passing objects between GWT Java and native !JavaScript can be tricky; for guidance, see the section on exotic options. 
+Passing objects between GWT Java and native !JavaScript can be tricky; for guidance, see the section on exotic options. 
