@@ -58,6 +58,8 @@ There are several notable restrictions to keep in mind when working with !JavaSc
  
   * *A !JavaScript String object maps to a Java String when returned from JSNI, not a !JavaScriptObject.*  Running such code may work in web mode, but a project in hosted mode will throw a cast class exception.
 
+  * *!JavaScriptObject subclasses cannot contain instance variables.*
+
 == Options Class Setters ==
 
 The Options class should have a setter method for each draw option that the visualization supports.  It's a good idea to write these setters in JSNI. For example, if your visualization supports an integer option named "width", its JSNI method would look like this:
@@ -83,7 +85,7 @@ If the option expects a complex !JavaScript object, the parameter type should be
 Compare the Color code to the specification of the [http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Configuration_Options backgroundColor option], one of the options that expects a complex object that can be any of the following types:
 
     * _A string with color supported by HTML, for example 'red' or '#00cc00'_
-    * _An object with properties stroke, fill, and strokeSize. stroke and fill should be a string with a color. strokeSize is a number. For example: `{backgroundColor: {stroke:'black', fill:'#eee', strokeSize: 1}}`. To use just fill, without stroke, use stroke:null, strokeSize: 0._
+    * _An object with properties stroke, fill, and strokeSize. The properties stroke and fill should be a string with a color. The property strokeSize is a number. For example: `{backgroundColor: {stroke: 'black', fill: '#eee', strokeSize: 1}}`. To use just fill, without stroke, use stroke: null, strokeSize: 0._
 
 Like all instantiable subclasses of !JavaScriptObject, Color has a protected constructor and a static `create()` method.  Color also has setters very similar to the setters of the Options class.
 
@@ -121,10 +123,10 @@ You may not want to put a method like that in the public interface of your Optio
 
 {{{    
     public final void setZoomStartTime(Date startTime) {
-      setZoomStartTime(startTime.getTime());
+      nativeSetZoomStartTime(startTime.getTime());
     }
 
-    private native void setZoomStartTime(double startTime) /*-{
+    private native void nativeSetZoomStartTime(double startTime) /*-{
       this.zoomStartTime = new $wnd.Date(startTime);
     }-*/;
 }}}
@@ -136,12 +138,12 @@ As mentioned before, the underlying !JavaScript visualization object can be acce
 {{{
 
   public void collapse(int row) {
-    collapse(getJso(), row);
+    nativeCollapse(getJso(), row);
   }
 
-  private final native void collapse(JavaScriptObject jso, int row) /*-{
+  private final native void nativeCollapse(JavaScriptObject jso, int row) /*-{
     jso.collapse(row);
   }-*/;
 }}}
 
-Passing objects between GWT Java and native !JavaScript can be tricky; for guidance, see the section on exotic options. 
+Passing objects between GWT Java and native !JavaScript can be tricky; for guidance, see the section on exotic options above. 
