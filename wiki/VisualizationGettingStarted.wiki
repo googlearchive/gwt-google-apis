@@ -26,7 +26,19 @@ $PP_OFF
 $ ./webAppCreator -out SimpleViz com.example.simpleviz.SimpleViz
 }}}
 
-This creates a project directory called SimpleViz.  Copy the gwt-visuzalization.jar file into SimpleViz/war/WEB-INF/lib.
+This creates an Ant build file ("build.xml") in the SimpleViz directory.  Look for the following line (it should be one of the first lines in the file):
+
+{{{
+    <!-- Add any additional non-server libs (such as JUnit) -->
+}}}
+
+On the next line, paste the following:
+
+{{{
+    <pathelement location="/usr/local/gwt-visualization/gwt-visualization.jar"/>
+}}}
+
+replacing "/usr/local/gwt-visualization/gwt-visualization.jar" with your visualization jar location.
 
 The webAppCreator also creates a file called SimpleViz.gwt.xml in the SimpleViz/src/com/example/simpleviz directory.  Look for the following line (it should be one of the first lines in the file):
 
