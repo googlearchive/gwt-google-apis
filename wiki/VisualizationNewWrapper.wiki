@@ -143,4 +143,4 @@ As mentioned before, the underlying !JavaScript visualization object can be acce
   }-*/;
 }}}
 
-Most methods take parameters or return data.  Passing objects between !GWT Java and native !JavaScript can be tricky; for guidance, see the section on exotic options. 
+Most methods take parameters or return data.  Passing objects between GWT Java and native !JavaScript can be tricky; for guidance, see the section on exotic options. 
