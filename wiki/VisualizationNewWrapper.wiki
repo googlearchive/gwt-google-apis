@@ -128,3 +128,19 @@ You may not want to put a method like that in the public interface of your Optio
       this.zoomStartTime = new $wnd.Date(startTime);
     }-*/;
 }}}
+
+= Wrapping Visualization Methods =
+
+As mentioned before, the underlying !JavaScript visualization object can be accessed by calling `getJso()`.  One case where you probably need to call this is when you are wrapping a visualization method.  Let's say your visualization has a method called `toggle`, that takes no arguments and does not return a value.  Here is a code sample that wraps such a method:
+
+{{{
+  public void toggle() {
+    toggle(getJso());
+  }
+  
+  private native void toggle(JavaScriptObject jso) /*-{
+    jso.toogle();
+  }-*/;
+}}}
+
+Most methods take parameters or return data.  Passing objects between !GWT Java and native !JavaScript can be tricky; for guidance, see the section on exotic options. 
