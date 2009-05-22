@@ -152,6 +152,9 @@ public class CopyrightEventTest extends GWTTestCase {
       public void onNewCopyright(MapTypeNewCopyrightEvent event) {
         assertEquals(event.getSender(), mapType);
         assertEquals(event.getCopyright(), copyright);
+        // This handler has started to fire later in the unit tests, so remove
+        // it on success.
+        mapType.removeMapTypeNewCopyrightHandler(this);
         finishTest();
       }
 
