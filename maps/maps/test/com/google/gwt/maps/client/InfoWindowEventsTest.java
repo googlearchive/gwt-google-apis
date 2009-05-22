@@ -116,7 +116,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
     info.addInfoWindowMaximizeClickHandler(new InfoWindowMaximizeClickHandler() {
 
       public void onMaximizeClick(InfoWindowMaximizeClickEvent event) {
-        assertEquals(event.getSender(), info);
+        assertEquals(info, event.getSender());
         finishTest();
       }
 
@@ -182,7 +182,7 @@ public class InfoWindowEventsTest extends GWTTestCase {
       }
 
     });
-    delayTestFinish(ASYNC_DELAY_MSEC);
+    delayTestFinish(ASYNC_DELAY_MSEC * 2);
     info.open(map.getCenter(), content);
   }
 
