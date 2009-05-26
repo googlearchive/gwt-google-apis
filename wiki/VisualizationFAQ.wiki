@@ -26,6 +26,8 @@ If you are having trouble running the sample scripts XXX-shell.com and XXX-compi
 
 == Why do I get an exception saying that $wnd.google.visualization "is null" or "has no properties"? ==
 
+  _See [http://code.google.com/p/gwt-google-apis/issues/detail?id=271 Issue 217] for an unresolved issue surrounding running in Linux hosted mode_
+ 
 The following stack trace indicates that the Visualization JavaScript API is not getting loaded:
 
 {{{
@@ -50,6 +52,17 @@ Make sure your hosted HTML page includes a `<script>` tag to load the Ajax Loade
 You can then add !JavaScript code to load the visualizations yourself, or you can use the !AjaxLoader class provided with the gwt-visualization API.  See the [VisualizationGettingStarted Getting Started] page for an example.
 
 If you have this tag in place, try opening up your web browser (IE on Windows, Safari on Mac) and navigate to the url `http://www.google.com/jsapi` manually.  If you do not see a page of JavaScript, chances are that there is some proxy or firewall setting blocking access to download the API.
+
+== How can I get the Visualization Widgets working under Linux? ==
+
+Answer from a [http://groups.google.com/group/google-visualization-api/browse_thread/thread/c23870b13c1b0c62 Google Visualization API Group] thread:
+
+In Ubuntu (up to 9.04) I could get the timeline working with the following:
+
+  * GWT uses Mozilla 1.7 as hosted mode browser with its own plugins.  Flash player 10 does not work reliable with this old browser therefore grab flash 9 from http://www.adobe.com/go/tn_14266.
+
+ * Copy the libflashplugin.so from the archive to /opt/gwt/mozilla-1.7.12/plugins (or whereever you have gwt installed) and restart the hosted mode browser
+
 
 == I removed a !VisualizationWidget from a Panel.  When I added it back, it was gone!  What happened? ==
 
