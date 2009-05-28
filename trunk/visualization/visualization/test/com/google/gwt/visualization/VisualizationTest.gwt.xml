@@ -15,4 +15,5 @@
 <module>
   <inherits name="com.google.gwt.visualization.Visualization" />
   <script src="http://www.google.com/jsapi" />
+  <script src="ajax_loader.html" />
 </module>
