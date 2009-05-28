@@ -64,43 +64,6 @@ public class IntensityMapTest extends VisualizationTest {
     return data;
   }
 
-  public void testSelection() {
-    loadApi(new Runnable() {
-      public void run() {
-        DataTable data = createDailyActivities();
-        IntensityMap.Options options = IntensityMap.Options.create();
-        options.setWidth(400);
-        options.setHeight(240);
-        final IntensityMap viz = new IntensityMap(data, options);
-
-        // Add a selection handler
-        viz.addSelectHandler(new SelectHandler() {
-
-          @Override
-          public void onSelect(SelectEvent event) {
-            assertNotNull(event);
-            JsArray<Selection> s = viz.getSelections();
-            assertEquals("Expected 1 element in the selection", 1,
-                s.length());
-            assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
-            finishTest();
-          }
-        });
-        RootPanel.get().add(viz);
-        JsArray<Selection> s = 
-            ArrayHelper.toJsArray(Selection.createColumnSelection(0));
-        assertEquals("Expected 1 element in the selection", 1, s.length());
-        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
-        viz.setSelections(s);
-        s = viz.getSelections();
-        assertEquals("Expected 1 element in the selection", 1, s.length());
-        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
-        // Trigger a selection callback
-        triggerSelection(viz, s);
-      }
-    }, false);
-  }
-
   public void testColors() {
     loadApi(new Runnable() {
 
@@ -147,6 +110,48 @@ public class IntensityMapTest extends VisualizationTest {
         assertEquals("asia", getParameter(widget, "chl"));
       }
     });
+  }
+
+  public void testSelection() {
+    loadApi(new Runnable() {
+      public void run() {
+        DataTable data = createDailyActivities();
+        IntensityMap.Options options = IntensityMap.Options.create();
+        options.setWidth(400);
+        options.setHeight(240);
+        final IntensityMap viz = new IntensityMap(data, options);
+
+        // Add a selection handler
+        viz.addSelectHandler(new SelectHandler() {
+          private int numTimesCalled = 0;
+          
+          @Override
+          public void onSelect(SelectEvent event) {
+            numTimesCalled++;
+            assertNotNull(event);
+            JsArray<Selection> s = viz.getSelections();
+            assertEquals("Expected 1 element in the selection", 1,
+                s.length());
+            assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+            if (numTimesCalled == 2) {
+              finishTest();
+            }
+          }
+        });
+        // The initial add triggers the select event
+        RootPanel.get().add(viz);  
+        JsArray<Selection> s = 
+            ArrayHelper.toJsArray(Selection.createColumnSelection(0));
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        viz.setSelections(s);
+        s = viz.getSelections();
+        assertEquals("Expected 1 element in the selection", 1, s.length());
+        assertEquals("Expected column 0 to be selected", 0, s.get(0).getColumn());
+        // Trigger a selection callback
+        triggerSelection(viz, s);
+      }
+    }, false);
   }
 
   @Override

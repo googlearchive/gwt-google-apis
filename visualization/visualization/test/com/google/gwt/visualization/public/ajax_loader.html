@@ -1,0 +1,30 @@
+/* 
+ * ajax_loader.html - invoke the AJAX loader to initialize the Visualization API.  
+ * 
+ * Note, as you add new visualizations, you will need to add new items to the
+ * 'packages' property in the second argument to google.load(). 
+ *
+ * TODO: This code loads the APIs asynchronously.  We need to hook into the 
+ * callback method to delay running the tests until the API is loaded.
+ */
+
+var packages = [ 
+ "areachart",
+ "barchart",
+ "columnchart",
+ "gauge",
+ "geomap",
+ "intensitymap",
+ "linechart",
+ "map",
+ "motionchart",
+ "orgchart",
+ "piechart", 
+ "scatterchart",
+ "table", 
+ "annotatedtimeline",
+ ];
+ 
+window.google.load("visualization", "1", {'packages' : packages });
+window.google.setOnLoadCallback(function() { window.visualization_api_loaded = true; });
+window.ajax_loader_called = true;
