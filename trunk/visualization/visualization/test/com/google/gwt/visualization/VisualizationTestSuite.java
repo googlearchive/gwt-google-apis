@@ -55,10 +55,7 @@ import junit.framework.TestSuite;
 public class VisualizationTestSuite extends GWTTestSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Visualization API");
-    // TODO(zundel): Temporarily commented out while waiting for issue 271 
-    //    to be resolved.
-    
-    // suite.addTestSuite(AjaxLoaderTest.class);
+    suite.addTestSuite(AjaxLoaderTest.class);
     suite.addTestSuite(AnnotatedTimeLineTest.class);
     suite.addTestSuite(AreaChartTest.class);
     suite.addTestSuite(ArrowFormatTest.class);

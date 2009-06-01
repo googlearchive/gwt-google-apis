@@ -44,7 +44,7 @@ public class BarChartTest extends VisualizationTest {
     });
   }
 
-  public void testOnMouseOver() {
+  public void testOnMouseOverAndOut() {
     loadApi(new Runnable() {
       public void run() {
         BarChart chart;
@@ -59,17 +59,6 @@ public class BarChartTest extends VisualizationTest {
             finishTest();
           }
         });
-        triggerOnMouseOver(chart.getJso());
-      }
-    }, false);
-  }
-
-  public void testOnMouseOut() {
-    loadApi(new Runnable() {
-      public void run() {
-        BarChart chart;
-        Options options = Options.create();
-        chart = new BarChart(createCompanyPerformance(), options);
         chart.addOnMouseOutHandler(new OnMouseOutHandler() {
           @Override
           public void onMouseOutEvent(OnMouseOutEvent event) {
@@ -79,11 +68,12 @@ public class BarChartTest extends VisualizationTest {
             finishTest();
           }
         });
+        triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
     }, false);
   }
-
+  
   @Override
   protected String getVisualizationPackage() {
     return BarChart.PACKAGE;
