@@ -71,3 +71,7 @@ GWT developers are used to working with widgets while they are detached from the
 == I called `setSelection()` on a visualization before adding it to a Panel.  Why didn't it work? ==
 
 Some methods of some visualizations only work properly when the visualization is attached to the DOM.  See the answer to the previous question.
+
+== What happened to com.google.gwt.visualization.client.AjaxLoader?  After upgrading it is gone! ==
+
+In release gwt-visualization-1.0.2, The AjaxLoader class was moved to a common package to be shared with other APIs.  You can access the same functionality by using the com.google.gwt.visualization.client.VisualizationUtils class.  In the future, we will deprecate classes before removing them.
