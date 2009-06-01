@@ -17,7 +17,6 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.visualizations.Visualization;
 
@@ -45,73 +44,39 @@ public class VisualizationTest extends GWTTestCase {
     }
   }-*/;
 
-  private static native boolean isVisualizationApiLoaded() /*-{
-  
-  // return $wnd.window.ajax_loader_called ? true : false;
-  return $wnd.visualization_api_loaded ? true : false;
-}-*/;
+  private boolean loaded = false;
 
-  private Timer delayForAjaxLoader;
-  private int delayTries = 8;
+  public VisualizationTest() {
+    super();
+  }
 
-private boolean loaded = false;
+  public AbstractDataTable createCompanyPerformance() {
+    DataTable data = DataTable.create();
+    data.addColumn(ColumnType.STRING, "Year");
+    data.addColumn(ColumnType.NUMBER, "Sales");
+    data.addColumn(ColumnType.NUMBER, "Expenses");
+    data.addRows(4);
+    data.setValue(0, 0, "2004");
+    data.setValue(0, 1, 1000);
+    data.setValue(0, 2, 400);
+    data.setValue(1, 0, "2005");
+    data.setValue(1, 1, 1170);
+    data.setValue(1, 2, 460);
+    data.setValue(2, 0, "2006");
+    data.setValue(2, 1, 660);
+    data.setValue(2, 2, 1120);
+    data.setValue(3, 0, "2007");
+    data.setValue(3, 1, 1030);
+    data.setValue(3, 2, 540);
+    return data;
+  }
 
-public VisualizationTest() {
-  super();
-}
-
-public AbstractDataTable createCompanyPerformance() {
-  DataTable data = DataTable.create();
-  data.addColumn(ColumnType.STRING, "Year");
-  data.addColumn(ColumnType.NUMBER, "Sales");
-  data.addColumn(ColumnType.NUMBER, "Expenses");
-  data.addRows(4);
-  data.setValue(0, 0, "2004");
-  data.setValue(0, 1, 1000);
-  data.setValue(0, 2, 400);
-  data.setValue(1, 0, "2005");
-  data.setValue(1, 1, 1170);
-  data.setValue(1, 2, 460);
-  data.setValue(2, 0, "2006");
-  data.setValue(2, 1, 660);
-  data.setValue(2, 2, 1120);
-  data.setValue(3, 0, "2007");
-  data.setValue(3, 1, 1030);
-  data.setValue(3, 2, 540);
-  return data;
-}
   @Override
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
   }
 
- /**
-  * This function is a hack intended to work around issue 271.
-  * The AjaxLoader class is not working in hosted mode, so we are loading the
-  * API in a separate script declared in the module.  By naming it test0, this 
-  * test is inserted first in all the VisualizationTest cases to make sure the
-  * API finishes loaded.
-  */
-  public void test0() {
-    if (!isVisualizationApiLoaded()) {
-      
-       delayForAjaxLoader  = new Timer() {
-        @Override
-        public void run() {
-          if (!isVisualizationApiLoaded()) {
-            delayTries--;
-            if (delayTries <= 0) {
-              fail("Exceeded max tries to load ajaxloader");
-            }
-            delayForAjaxLoader.schedule(1000);
-          } else {
-            finishTest();
-          }
-        }
-      };
-        
-      delayTestFinish(10000);  
-    }
+  public void test() {
   }
 
   /**
@@ -146,9 +111,7 @@ public AbstractDataTable createCompanyPerformance() {
    * 
    */
   protected void loadApi(final Runnable testRunnable) {
-    // Short circuit for manual use of ajax loader.
-    testRunnable.run();
-    // loadApi(testRunnable, true);
+    loadApi(testRunnable, true);
   }
 
   /**
@@ -160,10 +123,6 @@ public AbstractDataTable createCompanyPerformance() {
    *          is responsible for ending the test.
    */
   protected void loadApi(final Runnable testRunnable, final boolean callFinishTest) {
-    // Short circuit for manual use of the ajax loader.
-    loaded = true;
-    delayTestFinish(ASYNC_DELAY_MS);
-    
     if (loaded) {
       testRunnable.run();
     } else {
@@ -176,6 +135,7 @@ public AbstractDataTable createCompanyPerformance() {
           }
         }
       }, getVisualizationPackage());
+      delayTestFinish(ASYNC_DELAY_MS);
     }
   }
 
