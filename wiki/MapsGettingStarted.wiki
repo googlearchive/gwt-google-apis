@@ -54,8 +54,6 @@ Compilation succeeded
 
 If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
 
-
-
 ==Adding the Maps script tag to your module XML file==
 
 Your GWT application will need access to the Maps API, as well as the API key. In order to do this, you must include a <script> tag in your module's `SimpleMaps.gwt.xml` file. Include the script tag shown in your module.xml file above the automatically generated stylesheet reference.
@@ -74,8 +72,11 @@ Your GWT application will need access to the Maps API, as well as the API key. I
   -->
  <!-- script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;key=???" /-->
 
- <!-- You can usually run under localhost without a key -->
- <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2" />
+ <!-- You can usually run under localhost without a key                           -->
+ <!-- Set the 'sensor' parameter to true if your app makes use of an onboard
+      positioning sensor, such as a GPS reciever.
+   -->
+ <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;sensor=false" />
 
 }}}
 
