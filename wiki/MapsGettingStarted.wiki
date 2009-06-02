@@ -17,7 +17,7 @@ This guide describes the basics of getting the Google Maps Library working in a 
 
 You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-maps.jar`. 
 
-You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-`_<machine>_`.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-maps`.  If you are using Windows, you might choose to copy these files to a path like `C:\gwt\gwt-maps`
+You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev-<machine>.jar` and `gwt-user.jar` files).  In this example, we've chosen to copy the file to the path `/usr/local/gwt-maps`.  If you are using Windows, you might choose to copy these files to a path like `C:\gwt\gwt-maps`
 
 == Creating a new GWT Project ==
 
