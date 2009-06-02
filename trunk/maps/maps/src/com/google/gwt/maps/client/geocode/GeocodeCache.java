@@ -25,16 +25,28 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public abstract class GeocodeCache {
 
+  /**
+   * Used by JSIO library to instantiate this class from an existing JavaScript
+   * object.
+   */
   @SuppressWarnings("unused")
   private static GeocodeCache createPeer(JavaScriptObject jsoPeer) {
     return new CustomGeocodeCache(jsoPeer);
   }
 
-  protected JavaScriptObject jsoPeer;
+  protected final JavaScriptObject jsoPeer;
 
+  /**
+   * @deprecated use {@link GeocodeCache#GeocodeCache(JavaScriptObject)} instead
+   */
+  @Deprecated
   protected GeocodeCache() {
+    jsoPeer = null;
   }
 
+  /**
+   * Instantiate a new wrapper object from an existing JavaScript instance.
+   */
   protected GeocodeCache(JavaScriptObject jsoPeer) {
     this.jsoPeer = jsoPeer;
   }
@@ -86,5 +98,4 @@ public abstract class GeocodeCache {
    * @return the address in canonical form.
    */
   public abstract String toCanonical(String address);
-
 }
