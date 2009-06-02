@@ -65,8 +65,9 @@ public class GeocodeTest extends GWTTestCase {
       String cmpPostalCode = place.getPostalCode();
       assertNotNull("PostalCode", cmpPostalCode);
       String cmpCounty = place.getCounty();
-      // assertNotNull("County", place.getCounty()); // Started to fail on
-      // 8/29/08
+      // The County field isn't populated consistently and this assertion will
+      // fail on some results.
+      // assertNotNull("County", place.getCounty()); 
       String cmpState = place.getState();
       assertNotNull("State", cmpState);
       String cmpCountryCode = place.getCountry();
@@ -302,7 +303,7 @@ public class GeocodeTest extends GWTTestCase {
         for (int i = 0; i < locations.length(); ++i) {
           Placemark location = locations.get(i);
           
-          if (location.getCity() != null && location.getCity().equals("Berlin")) {
+          if ("Berlin".equals(location.getCity())) {
             finishTest();
           }
 
