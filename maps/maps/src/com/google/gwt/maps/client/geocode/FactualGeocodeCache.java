@@ -35,7 +35,7 @@ public final class FactualGeocodeCache extends GeocodeCache {
   }
 
   private FactualGeocodeCache(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+    super(jsoPeer);
   }
 
   /*
