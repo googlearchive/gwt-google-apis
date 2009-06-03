@@ -15,16 +15,13 @@ The following items were gleaned from the issue tracker and informal requests on
 || *Project* || *Primary Contact* ||
 || Open Social support || Sascha Haeberling ||
 || Open Social Gadget Support || Sascha Haeberling ||
-|| AJAX Translation || Alex Rudnik, Goutham Bhat ||
-|| Migrating AJAX Loader into a standalone project || Alex Rudnik ||
-
 
 == Large Effort Projects ==
 
   These projects will take a lot of planning and a large time commitment.
 
 || *Project* || *Primary Contact* ||
-|| GData: Add support for the GData library || _none_ ||
+|| GData: Add support for the GData library || _none_ (coordinate w/ gwt-gdata project?) ||
 || AJAX Feed API: [http://code.google.com/p/gwt-google-apis/issues/detail?id=25 Issue 25] Add support for the AJAX Feed Library || _none_ ||
 || Gadgets: Add gadgets.* bindings (compatible with opensocial containers) || _none_ ||
 
