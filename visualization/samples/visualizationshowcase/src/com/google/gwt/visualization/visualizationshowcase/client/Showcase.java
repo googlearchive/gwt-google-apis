@@ -19,8 +19,8 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.DataTable;
+import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
 import com.google.gwt.visualization.client.visualizations.AreaChart;
@@ -41,6 +41,11 @@ import com.google.gwt.visualization.client.visualizations.Table;
  * Google Visualization API in GWT demo.
  */
 class Showcase implements EntryPoint {
+  /**
+   * Demo for ad hoc visualization wrapping.  See ImageDemo.java
+   */
+  private static final String IMAGECHART_PACKAGE = "imagechart";
+
   static DataTable getCompanyPerformance() {
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.STRING, "Year");
@@ -102,8 +107,7 @@ class Showcase implements EntryPoint {
   }
 
   public void onModuleLoad() {
-    VisualizationUtils.loadVisualizationApi("1.1",
-        new Runnable() {
+    VisualizationUtils.loadVisualizationApi(new Runnable() {
           public void run() {
             final VerticalPanel vp = new VerticalPanel();
             vp.setSpacing(15);
@@ -124,7 +128,8 @@ class Showcase implements EntryPoint {
             tabby.add(new BarDemo(), "BarChart");
             tabby.add(new ColumnDemo(), "ColumnChart");
             tabby.add(new GaugeDemo(), "Gauge");
-            tabby.add(new GeoDemo(), "Geo Map");
+            tabby.add(new GeoDemo(), "GeoMap");
+            tabby.add(new ImageDemo(), "RadarChart");
             tabby.add(new IntensityDemo(), "IntensityMap");
             tabby.add(new LineDemo(), "LineChart");
             tabby.add(new MapDemo(), "Map");
@@ -139,6 +144,6 @@ class Showcase implements EntryPoint {
         ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE,
         IntensityMap.PACKAGE, LineChart.PACKAGE, MapVisualization.PACKAGE,
         MotionChart.PACKAGE, OrgChart.PACKAGE, PieChart.PACKAGE,
-        ScatterChart.PACKAGE, Table.PACKAGE);
+        ScatterChart.PACKAGE, Table.PACKAGE, IMAGECHART_PACKAGE);
   }
 }
