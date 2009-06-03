@@ -95,16 +95,30 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
     Selection.addSelectHandler(this, handler);
   }
 
-  public final native void collapse(int row, boolean collapsed) /*-{
-    this.collapse(row, collapsed);
+  public void collapse(int row, boolean collapsed) {
+    this.collapse(getJso(), row, collapsed);
+  }
+
+  public JsArrayInteger getChildrenIndexes(int row) {
+    return this.getChildrenIndexes(getJso(), row);
+  }
+
+  public JsArrayInteger getCollapsedNodes() {
+    return this.getCollapsedNodes(getJso());
+  }
+
+  private native void collapse(JavaScriptObject jso, int row, 
+      boolean collapsed) /*-{
+    jso.collapse(row, collapsed);
   }-*/;
 
-  public final native JsArrayInteger getChildrenIndexes(int row) /*-{
-    return this.getChildrenIndexes(row);
+  private native JsArrayInteger getChildrenIndexes(JavaScriptObject jso, 
+      int row) /*-{
+    return jso.getChildrenIndexes(row);
   }-*/;
 
-  public final native JsArrayInteger getCollapsedNodes() /*-{
-    return this.getCollapsedNodes();
+  private native JsArrayInteger getCollapsedNodes(JavaScriptObject jso) /*-{
+    return jso.getCollapsedNodes();
   }-*/;
 
   public final JsArray<Selection> getSelections() {

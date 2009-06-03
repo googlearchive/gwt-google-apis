@@ -34,6 +34,23 @@ public class OrgChartTest extends VisualizationTest {
     return "com.google.gwt.visualization.VisualizationTest";
   }
 
+  public void testCollapse() {
+    loadApi(new Runnable() {
+      public void run() {
+        Options options = Options.create();
+        options.setAllowHtml(true);
+        options.setAllowCollapse(true);
+        options.setColor("#00FF00");
+        options.setSelectionColor("#FF0000");
+        OrgChart widget = new OrgChart(createDataTable(), options);
+        RootPanel.get().add(widget);
+        assertEquals(0, widget.getCollapsedNodes().length());
+        widget.collapse(0, true);
+        assertEquals(0, widget.getCollapsedNodes().get(0));
+      }
+    });
+  }
+
   public void testOrgChart() {
     loadApi(new Runnable() {
       public void run() {
