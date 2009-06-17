@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.TimeOfDay.BadTimeException;
 import com.google.gwt.visualization.client.visualizations.PieChart;
@@ -26,6 +27,19 @@ import java.util.Date;
  * viz that uses CommonOptions rather than its subclass, CommonChartOptions.
  */
 public class DataTableTest extends VisualizationTest {
+  private static native JavaScriptObject nativeData() /*-{
+    return {
+       cols: [{id: 'task', label: 'Task', type: 'string'},
+                {id: 'hours', label: 'Hours per Day', type: 'number'}],
+       rows: [{c:[{v: 'Work'}, {v: 11}]},
+              {c:[{v: 'Eat'}, {v: 2}]},
+              {c:[{v: 'Commute'}, {v: 2}]},
+              {c:[{v: 'Watch TV'}, {v:2}]},
+              {c:[{v: 'Sleep'}, {v:7, f:'7.000'}]}
+             ]
+     };
+  }-*/;
+
   public void testBoolean() {
     loadApi(new Runnable() {
       public void run() {
@@ -37,31 +51,17 @@ public class DataTableTest extends VisualizationTest {
       }
     });
   }
-  
-  public void testInteger() {
-    loadApi(new Runnable() {
-      public void run() {
-        DataTable data = DataTable.create();
-        data.addColumn(ColumnType.NUMBER);
-        data.addRows(1);
-        data.setValue(0, 0, -1);
-        assertEquals(-1, data.getValueInt(0, 0));
-      }
-    });
+
+  public void testDataTableFromJso() {
+    DataTable table = DataTable.create(nativeData(), 0.6);
+    assertNotNull(table);
+    assertEquals(2, table.getNumberOfColumns());
+    assertEquals(5, table.getNumberOfRows());
+    assertEquals("task", table.getColumnId(0));
+    assertEquals("hours", table.getColumnId(1));
+    assertEquals(11, table.getValueInt(0, 1));
   }
-  
-  public void testDouble() {
-    loadApi(new Runnable() {
-      public void run() {
-        DataTable data = DataTable.create();
-        data.addColumn(ColumnType.NUMBER);
-        data.addRows(1);
-        data.setValue(0, 0, 1.5);
-        assertEquals(1.5, data.getValueDouble(0, 0));
-      }
-    });
-  }
-  
+
   public void testDate() {
     loadApi(new Runnable() {
       @SuppressWarnings("deprecation")
@@ -80,7 +80,31 @@ public class DataTableTest extends VisualizationTest {
       }
     });
   }
-  
+
+  public void testDouble() {
+    loadApi(new Runnable() {
+      public void run() {
+        DataTable data = DataTable.create();
+        data.addColumn(ColumnType.NUMBER);
+        data.addRows(1);
+        data.setValue(0, 0, 1.5);
+        assertEquals(1.5, data.getValueDouble(0, 0));
+      }
+    });
+  }
+
+  public void testInteger() {
+    loadApi(new Runnable() {
+      public void run() {
+        DataTable data = DataTable.create();
+        data.addColumn(ColumnType.NUMBER);
+        data.addRows(1);
+        data.setValue(0, 0, -1);
+        assertEquals(-1, data.getValueInt(0, 0));
+      }
+    });
+  }
+
   public void testString() {
     loadApi(new Runnable() {
       public void run() {
@@ -96,7 +120,7 @@ public class DataTableTest extends VisualizationTest {
       }
     });
   }
-  
+
   public void testTimeOfDay() {
     loadApi(new Runnable() {
       public void run() {
