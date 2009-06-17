@@ -33,8 +33,9 @@ import java.util.Date;
  * </code>
  * 
  * 
- * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html"
- * > Annotated Timeline Visualization Reference. </a>
+ * @see <a
+ *      href="http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html" >
+ *      Annotated Timeline Visualization Reference. </a>
  */
 public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> {
   /**
@@ -42,14 +43,14 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
    */
   public static enum AnnotatedLegendPosition {
     /**
-     * Put the colored legend on the same row as the date.
-     */
-    SAME_ROW,
-
-    /**
      * Put the colored legend on a new row.
      */
-    NEW_ROW;
+    NEW_ROW,
+
+    /**
+     * Put the colored legend on the same row as the date.
+     */
+    SAME_ROW;
 
     @Override
     public String toString() {
@@ -177,18 +178,6 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
    */
   public static enum ScaleType {
     /**
-     * Set the range of the values axis to be from 0 to the maximal value in the
-     * input DataTable.
-     */
-    FIXED,
-
-    /**
-     * Set the range of the values axis to be from the minimal value in the
-     * input DataTable to the maximal value in the input DataTable.
-     */
-    MAXIMIZE,
-
-    /**
      * Set the range of the values axis to be from 0 to the maximal value in
      * each series.
      */
@@ -198,7 +187,19 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
      * Set the range of the values axis to be from the minimal value of each
      * series to the maximal value of each series.
      */
-    ALLMAXIMIZE
+    ALLMAXIMIZE,
+
+    /**
+     * Set the range of the values axis to be from 0 to the maximal value in the
+     * input DataTable.
+     */
+    FIXED,
+
+    /**
+     * Set the range of the values axis to be from the minimal value in the
+     * input DataTable to the maximal value in the input DataTable.
+     */
+    MAXIMIZE
   }
 
   /**
@@ -212,20 +213,33 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     OPAQUE,
 
     /**
+     * Makes the background of the HTML page show through all the transparent
+     * portions of the application and can slow animation performance.
+     */
+    TRANSPARENT,
+
+    /**
      * Plays the application in its own rectangular window on a web page. WINDOW
      * indicates that the Flash application has no interaction with HTML layers
      * and is always the topmost item.
      */
-    WINDOW,
-
-    /**
-     * Makes the background of the HTML page show through all the transparent
-     * portions of the application and can slow animation performance.
-     */
-    TRANSPARENT
+    WINDOW
   }
 
   public static final String PACKAGE = "annotatedtimeline";
+
+  /**
+   * 
+   * @param data data to visualize
+   * @param options Optional parameters for the visualization
+   * @param width the CSS specifier for the width of the visualization
+   * @param height the CSS specifier for the height of the visualization
+   */
+  public AnnotatedTimeLine(AbstractDataTable data, Options options,
+      String width, String height) {
+    super(data, options);
+    setSize(width, height);
+  }
 
   /**
    * 
@@ -234,18 +248,6 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
    */
   public AnnotatedTimeLine(String width, String height) {
     super();
-    setSize(width, height);
-  }
-  
-  /**
-   * 
-   * @param data data to visualize
-   * @param options Optional parameters for the visualization
-   * @param width the CSS specifier for the width of the visualization
-   * @param height the CSS specifier for the height of the visualization
-   */
-  public AnnotatedTimeLine(AbstractDataTable data, Options options, String width, String height) {
-    super(data, options);
     setSize(width, height);
   }
 

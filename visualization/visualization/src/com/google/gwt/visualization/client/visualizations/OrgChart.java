@@ -107,6 +107,19 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
     return this.getCollapsedNodes(getJso());
   }
 
+  public final JsArray<Selection> getSelections() {
+    return Selection.getSelections(this);
+  }
+
+  public final void setSelections(JsArray<Selection> sel) {
+    Selection.setSelections(this, sel);
+  }
+
+  @Override
+  protected native JavaScriptObject createJso(Element parent) /*-{
+    return new $wnd.google.visualization.OrgChart(parent);
+  }-*/;
+
   private native void collapse(JavaScriptObject jso, int row, 
       boolean collapsed) /*-{
     jso.collapse(row, collapsed);
@@ -119,18 +132,5 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
 
   private native JsArrayInteger getCollapsedNodes(JavaScriptObject jso) /*-{
     return jso.getCollapsedNodes();
-  }-*/;
-
-  public final JsArray<Selection> getSelections() {
-    return Selection.getSelections(this);
-  }
-
-  public final void setSelections(JsArray<Selection> sel) {
-    Selection.setSelections(this, sel);
-  }
-
-  @Override
-  protected native JavaScriptObject createJso(Element parent) /*-{
-    return new $wnd.google.visualization.OrgChart(parent);
   }-*/;
 }
