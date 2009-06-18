@@ -13,7 +13,8 @@ Merges:
 /releases/gadgets/1.0@1011:1247 was merged (r1248) into trunk/gadgets
 /trunk/gadgets/@1248:1321 was merged (r1342) into releases/gadgets/1.0
 /trunk/gadgets/@1321:1420 was merged (r1421) into releases/gadgets/1.0
----> The next merge into trunk will be 1421:???
+/trunk/gadgets/@1420:1505 was merged (r1506) into releases/gadgets/1.0
+---> The next merge into trunk will be 1505:???
 
 Changes in this branch (excluding changes to this file itself:
 - Fixed the samples' online documentation link. (r718)
@@ -50,3 +51,5 @@ Changes in this branch (excluding changes to this file itself:
 - Adds support for the locked-domain feature (r1321)
 - Suppress <EnumValue> tags for hidden user preferences (r1354)
 - Documentation updates for 1.0.3 release (r1420)
+- Updated to allow more heap memory during compile (r1504)
+- Fix for issue 275 - get version number for current GWT runtime for hosted mode debugging (r1505)

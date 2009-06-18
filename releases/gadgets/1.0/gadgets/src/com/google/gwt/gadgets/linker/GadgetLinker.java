@@ -15,6 +15,7 @@
  */
 package com.google.gwt.gadgets.linker;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -26,11 +27,57 @@ import com.google.gwt.dev.About;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Finalizes the module manifest file with the selection script.
  */
 public final class GadgetLinker extends XSLinker {
+
+  /**
+   * TODO(zundel): remove this code once GWT 1.5 & 1.6 is obsolete and replace
+   * with About.getGwtVersionArray()
+   * 
+   * Workaround for issue 275 - wrong version in hosted mode. The static final
+   * constants were being inlined into the gwt-gadgets jar file.
+   * 
+   * @return version number as an array of 3 integers.
+   */
+  private static int[] getVersionArray() throws UnableToCompleteException {
+    // Fails because in GWT 1.5, GWT_VERSION_NUMBER is static final and cached
+    // result = About.GWT_VERSION_NUM.split("\\.");
+    // GWT 2.0 has a new method for version parsing
+    try {
+      Method versionNumMethod = About.class.getMethod("getGwtVersionArray");
+      return (int[]) versionNumMethod.invoke(null, (Object[]) null);
+    } catch (NoSuchMethodException ex) {
+      GWT.log("Couldn't fetch version from constant or method", ex);
+    } catch (InvocationTargetException ex) {
+      GWT.log("Couldn't fetch version from constant or method", ex);
+    } catch (IllegalAccessException ex) {
+      GWT.log("Couldn't fetch version from constant or method", ex);
+    }
+
+    // GWT 1.6 and prior has only a string constant
+    try {
+      Field versionNumField = About.class.getField("GWT_VERSION_NUM");
+      String versionNumString = (String) versionNumField.get(null);
+      String[] result = versionNumString.split("\\.");
+      assert (result.length == 3);
+      int[] val = {
+          Integer.valueOf(result[0]), Integer.valueOf(result[1]),
+          Integer.valueOf(result[2])};
+      return val;
+    } catch (NoSuchFieldException ex) {
+      // No problem, just try another way to get the version
+    } catch (IllegalAccessException ex) {
+      GWT.log("Error trying to retrieve version", ex);
+      // Fall through, there may be another way
+    }
+    throw new UnableToCompleteException();
+  }
 
   private EmittedArtifact manifestArtifact;
 
@@ -124,7 +171,7 @@ public final class GadgetLinker extends XSLinker {
     StringBuffer scriptContents = new StringBuffer(
         super.generateSelectionScript(logger, context, artifacts));
     // Add a substitution for the GWT major release number. e.g. "1.6"
-    String gwtVersions[] = About.GWT_VERSION_NUM.split("\\.");
+    int gwtVersions[] = getVersionArray();
     replaceAll(scriptContents, "__GWT_MAJOR_VERSION__", gwtVersions[0] + "."
         + gwtVersions[1]);
     return scriptContents.toString();
