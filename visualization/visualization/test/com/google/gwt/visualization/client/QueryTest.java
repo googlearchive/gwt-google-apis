@@ -27,7 +27,10 @@ public class QueryTest extends VisualizationTest {
     loadApi(new Runnable() {
       public void run() {
         // This URL is used in the visualization API online samples.
-        Query query = Query.create("http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1");
+        Query.Options options = Query.Options.create();
+        options.setSendMethod(Query.SendMethod.SCRIPT_INJECTION);
+        Query query = Query.create("http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1",
+                                   options);
         query.send(new Callback() {
           public void onResponse(QueryResponse response) {
             if (response.isError()) {
