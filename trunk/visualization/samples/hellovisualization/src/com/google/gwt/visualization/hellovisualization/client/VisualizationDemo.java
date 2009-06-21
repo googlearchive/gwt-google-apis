@@ -34,6 +34,7 @@ import com.google.gwt.visualization.client.QueryResponse;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.Query.Callback;
+import com.google.gwt.visualization.client.Query.SendMethod;
 import com.google.gwt.visualization.client.events.SelectHandler;
 import com.google.gwt.visualization.client.formatters.ArrowFormat;
 import com.google.gwt.visualization.client.visualizations.PieChart;
@@ -151,7 +152,9 @@ class VisualizationDemo implements EntryPoint {
     panel.add(label);
     // Read data from spreadsheet
     String dataUrl = "http://spreadsheets.google.com/tq?key=prll1aQH05yQqp_DKPP9TNg&pub=1";
-    Query query = Query.create(dataUrl);
+    Query.Options queryOptions = Query.Options.create();
+    queryOptions.setSendMethod(SendMethod.SCRIPT_INJECTION);
+    Query query = Query.create(dataUrl, queryOptions);
     query.send(new Callback() {
 
       public void onResponse(QueryResponse response) {

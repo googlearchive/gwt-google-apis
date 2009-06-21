@@ -28,6 +28,45 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
  *      Query API Reference</a>
  */
 public class Query extends JavaScriptObject {
+  
+  public static enum SendMethod {
+    XHR("xhr"),
+    SCRIPT_INJECTION("scriptInjection"),
+    MAKE_REQUEST("makeRequest"),
+    AUTO("auto");
+    
+    private String strValue;
+    
+    private SendMethod(String value) {
+      strValue = value;
+    }
+    
+    @Override
+    public String toString() {
+      return strValue;
+    }
+  }
+  
+  public static class Options extends Properties {
+    public static Options create() {
+      return JavaScriptObject.createObject().cast();
+    }
+
+    protected Options() {
+    }
+
+    public final void setSendMethod(SendMethod sendMethod) {
+      setSendMethod(sendMethod.toString());
+    }
+
+    public final native void setMakeRequestParams(JavaScriptObject params) /*-{
+      this.makeRequestParams = params;
+    }-*/;
+    
+    private final native void setSendMethod(String sendMethod) /*-{
+      this.sendMethod = sendMethod;
+    }-*/;
+  }
 
   /**
    * Callback for sending a query.
@@ -39,6 +78,10 @@ public class Query extends JavaScriptObject {
 
   public static final native Query create(String dataSource) /*-{
     return new $wnd.google.visualization.Query(dataSource);
+  }-*/;
+
+  public static final native Query create(String dataSource, Options options) /*-{
+    return new $wnd.google.visualization.Query(dataSource, options);
   }-*/;
 
   private static void fireAndCatch(UncaughtExceptionHandler handler,
