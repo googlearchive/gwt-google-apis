@@ -43,12 +43,13 @@ import com.google.gwt.visualization.client.QueryTest;
 import com.google.gwt.visualization.client.ScatterChartTest;
 import com.google.gwt.visualization.client.SelectionTest;
 import com.google.gwt.visualization.client.TableTest;
+import com.google.gwt.visualization.client.ToolbarTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * TestSuite for the Maps API.
+ * TestSuite for the Visualization API.
  * 
  * Running GWTTestCases as a suite speeds up the execution when you have many
  * classes.
@@ -83,6 +84,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(SelectionTest.class);
     suite.addTestSuite(ScatterChartTest.class);
     suite.addTestSuite(TableTest.class);
+    suite.addTestSuite(ToolbarTest.class);
     return suite;
   }
 }

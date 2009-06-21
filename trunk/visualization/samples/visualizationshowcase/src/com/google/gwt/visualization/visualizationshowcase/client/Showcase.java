@@ -138,6 +138,7 @@ class Showcase implements EntryPoint {
             tabby.add(new PieDemo(), "PieChart");
             tabby.add(new ScatterDemo(), "ScatterChart");
             tabby.add(new TableDemo(), "Table");
+            tabby.add(new ToolbarDemo(), "Toolbar");
             tabby.setWidget(annotatedWidget);
           }
         }, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE,
