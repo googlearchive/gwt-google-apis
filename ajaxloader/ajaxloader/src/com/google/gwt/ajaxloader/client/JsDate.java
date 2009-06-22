@@ -17,7 +17,6 @@
 package com.google.gwt.ajaxloader.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArrayNumber;
 
 import java.util.Date;
 

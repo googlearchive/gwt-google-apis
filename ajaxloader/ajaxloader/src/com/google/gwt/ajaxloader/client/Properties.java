@@ -17,9 +17,6 @@ package com.google.gwt.ajaxloader.client;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArrayBoolean;
-import com.google.gwt.core.client.JsArrayInteger;
-import com.google.gwt.core.client.JsArrayNumber;
 
 import java.util.Date;
 
@@ -83,7 +80,8 @@ public abstract class Properties extends JavaScriptObject {
    * is not a Date.
    * @throws TypeException If the key is found but the value is not an object.
    */
-  public final Date getDate(String key) throws JavaScriptException, TypeException {
+  public final Date getDate(String key) 
+      throws JavaScriptException, TypeException {
     return JsDate.toJava((JsDate) getObject(key));
   }
 
@@ -149,6 +147,15 @@ public abstract class Properties extends JavaScriptObject {
       return null;
     }
   }
+  
+  /**
+   * Remove the property at the specified key.
+   * 
+   * @param key The name of the property to remove.
+   */
+  public final native void remove(String key) /*-{
+    delete this[key];
+  }-*/;
 
   /**
    * Set a property.
@@ -209,15 +216,6 @@ public abstract class Properties extends JavaScriptObject {
   }-*/;
   
   /**
-   * Remove the property at the specified key.
-   * 
-   * @param key The name of the property to remove.
-   */
-  public final native void remove(String key) /*-{
-    delete this[key];
-  }-*/;
-  
-  /**
    * Executes the JavaScript typeof operator against the property with the
    * given key.  Note that the typeof undefined is "undefined" and the typeof
    * null is "object".
@@ -230,7 +228,7 @@ public abstract class Properties extends JavaScriptObject {
     return typeof this[key];
   }-*/;
   
-  private final native boolean containsKey(String key) /*-{
+  private native boolean containsKey(String key) /*-{
     return this[key] != null;
   }-*/;
 
@@ -242,11 +240,11 @@ public abstract class Properties extends JavaScriptObject {
     return this[key];
   }-*/;
 
-  private final native JavaScriptObject nativeGetObject(String key) /*-{
+  private native JavaScriptObject nativeGetObject(String key) /*-{
     return this[key];
   }-*/;
   
-  private final native String nativeGetString(String key) /*-{
+  private native String nativeGetString(String key) /*-{
     return this[key];
   }-*/;
   
