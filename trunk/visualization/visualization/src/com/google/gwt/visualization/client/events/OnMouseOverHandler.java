@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties.TypeException;
 import com.google.gwt.visualization.client.Properties;
 
 /**
@@ -47,9 +48,9 @@ public abstract class OnMouseOverHandler extends Handler {
   public abstract void onMouseOverEvent(OnMouseOverEvent event);
   
   @Override
-  protected void onEvent(Properties properties) {
-    int row = properties.getInt("row");
-    int column = properties.getInt("column");
+  protected void onEvent(Properties properties) throws TypeException {
+    int row = properties.getNumber("row").intValue();
+    int column = properties.getNumber("column").intValue();
     onMouseOverEvent(new OnMouseOverEvent(row, column));
   }
 }

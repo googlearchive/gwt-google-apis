@@ -28,6 +28,7 @@ import com.google.gwt.visualization.client.visualizations.BarChart;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.Gauge;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
+import com.google.gwt.visualization.client.visualizations.ImageChart;
 import com.google.gwt.visualization.client.visualizations.IntensityMap;
 import com.google.gwt.visualization.client.visualizations.LineChart;
 import com.google.gwt.visualization.client.visualizations.MapVisualization;
@@ -44,7 +45,7 @@ class Showcase implements EntryPoint {
   /**
    * Demo for ad hoc visualization wrapping.  See ImageDemo.java
    */
-  private static final String IMAGECHART_PACKAGE = "imagechart";
+  private static final String SPARKLINE_PACKAGE = "imagesparkline";
 
   static DataTable getCompanyPerformance() {
     DataTable data = DataTable.create();
@@ -129,22 +130,23 @@ class Showcase implements EntryPoint {
             tabby.add(new ColumnDemo(), "ColumnChart");
             tabby.add(new GaugeDemo(), "Gauge");
             tabby.add(new GeoDemo(), "GeoMap");
-            tabby.add(new ImageDemo(), "RadarChart");
             tabby.add(new IntensityDemo(), "IntensityMap");
             tabby.add(new LineDemo(), "LineChart");
             tabby.add(new MapDemo(), "Map");
             tabby.add(new MotionDemo(), "MotionChart");
             tabby.add(new OrgDemo(), "OrgChart");
             tabby.add(new PieDemo(), "PieChart");
+            tabby.add(new ImageDemo(), "RadarChart");
             tabby.add(new ScatterDemo(), "ScatterChart");
+            tabby.add(new SparklineDemo(), "Sparkline");
             tabby.add(new TableDemo(), "Table");
             tabby.add(new ToolbarDemo(), "Toolbar");
             tabby.setWidget(annotatedWidget);
           }
         }, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE,
-        ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE,
+        ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE, ImageChart.PACKAGE,
         IntensityMap.PACKAGE, LineChart.PACKAGE, MapVisualization.PACKAGE,
         MotionChart.PACKAGE, OrgChart.PACKAGE, PieChart.PACKAGE,
-        ScatterChart.PACKAGE, Table.PACKAGE, IMAGECHART_PACKAGE);
+        ScatterChart.PACKAGE, Table.PACKAGE, SPARKLINE_PACKAGE);
   }
 }

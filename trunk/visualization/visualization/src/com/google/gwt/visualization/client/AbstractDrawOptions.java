@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.Properties;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -24,26 +25,55 @@ import com.google.gwt.core.client.JavaScriptObject;
  * visualization, the caller can call these "unstructured" methods to set
  * the new option.
  */
-public abstract class AbstractDrawOptions extends JavaScriptObject {
+public abstract class AbstractDrawOptions extends Properties {
   protected AbstractDrawOptions() {
   }
 
+  /**
+   * @deprecated 
+   * Use {@link com.google.gwt.ajaxloader.client.Properties#set(String, Boolean)} 
+   * instead.
+   */
+  @Deprecated
   public final native void setOption(String option, boolean value) /*-{
     this[option] = value;
   }-*/;
 
+  /**
+   * @deprecated 
+   * Use {@link com.google.gwt.ajaxloader.client.Properties#set(String, Double)} 
+   * instead.
+   */
+  @Deprecated
   public final native void setOption(String option, double value) /*-{
     this[option] = value;
   }-*/;
 
+  /**
+   * @deprecated 
+   * Use {@link com.google.gwt.ajaxloader.client.Properties#set(String, Double)} 
+   * instead.
+   */
+  @Deprecated
   public final native void setOption(String option, int value) /*-{
     this[option] = value;
   }-*/;
 
+  /**
+   * @deprecated Use {@link com.google.gwt.ajaxloader.client.Properties#set(String, JavaScriptObject)} 
+   * instead.
+   */
+  @Deprecated
   public final native void setOption(String option, JavaScriptObject value) /*-{
     this[option] = value;
   }-*/;
 
+  /**
+   * @deprecated 
+   * Use {@link com.google.gwt.ajaxloader.client.Properties#set(String, String)} 
+   * instead.
+   */
+  @Deprecated
   public final native void setOption(String option, String value) /*-{
     this[option] = value;
   }-*/;

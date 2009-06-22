@@ -30,6 +30,7 @@ import com.google.gwt.visualization.client.DataTableTest;
 import com.google.gwt.visualization.client.DateFormatTest;
 import com.google.gwt.visualization.client.GaugeTest;
 import com.google.gwt.visualization.client.GeoMapTest;
+import com.google.gwt.visualization.client.ImageChartTest;
 import com.google.gwt.visualization.client.IntensityMapTest;
 import com.google.gwt.visualization.client.LineChartTest;
 import com.google.gwt.visualization.client.MapVisualizationTest;
@@ -71,6 +72,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(DateFormatTest.class);
     suite.addTestSuite(GaugeTest.class);
     suite.addTestSuite(GeoMapTest.class);
+    suite.addTestSuite(ImageChartTest.class);
     suite.addTestSuite(IntensityMapTest.class);
     suite.addTestSuite(LineChartTest.class);
     suite.addTestSuite(MapVisualizationTest.class);

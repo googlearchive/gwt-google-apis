@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties.TypeException;
 import com.google.gwt.visualization.client.Properties;
 
 /**
@@ -40,7 +41,7 @@ public abstract class PageHandler extends Handler {
   public abstract void onPage(PageEvent event);
 
   @Override
-  protected void onEvent(Properties properties) {
-    onPage(new PageEvent(properties.getInt("page")));
+  protected void onEvent(Properties properties) throws TypeException {
+    onPage(new PageEvent(properties.getNumber("page").intValue()));
   }
 }

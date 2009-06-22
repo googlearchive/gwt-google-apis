@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties.TypeException;
 import com.google.gwt.visualization.client.Properties;
 
 /**
@@ -39,7 +40,7 @@ public abstract class RegionClickHandler extends Handler {
   public abstract void onRegionClick(RegionClickEvent event);
 
   @Override
-  protected void onEvent(Properties properties) {
+  protected void onEvent(Properties properties) throws TypeException {
     onRegionClick(new RegionClickEvent(properties.getString("region")));
   }
 }

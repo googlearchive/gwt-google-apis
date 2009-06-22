@@ -29,7 +29,7 @@ public class PropertiesTest extends GWTTestCase {
   }
   
   @SuppressWarnings("deprecation")
-  public void testDate() {
+  public void testDate() throws Exception {
     Properties properties = createProperties();
     Date actual = properties.getDate("date");
     Date expected = new Date(108, 11, 16);

@@ -15,38 +15,20 @@
  */
 package com.google.gwt.visualization.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
-import java.util.Date;
-
 /**
  * Name/value map with additional properties.
  */
-public class Properties extends JavaScriptObject {
+public class Properties extends com.google.gwt.ajaxloader.client.Properties {
   protected Properties() {
   }
 
-  public final native boolean getBoolean(String name) /*-{
-    return this[name];
-  }-*/;
-
-  public final Date getDate(String name) {
-    return new Date((long) getDateDouble(name));
-  }
-
-  public final native double getDouble(String name) /*-{
-    return this[name];
-  }-*/;
-
+  /**
+   * @deprecated 
+   * Use {@link com.google.gwt.ajaxloader.client.Properties#getNumber(String)} 
+   * instead.
+   */
+  @Deprecated
   public final native int getInt(String name) /*-{
     return this[name];
-  }-*/;
-
-  public final native String getString(String name) /*-{
-    return this[name];
-  }-*/;
-
-  private native double getDateDouble(String name) /*-{
-    return this[name].getTime();
   }-*/;
 }
