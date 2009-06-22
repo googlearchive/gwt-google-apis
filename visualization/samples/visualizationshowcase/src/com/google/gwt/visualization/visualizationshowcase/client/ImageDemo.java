@@ -15,17 +15,13 @@
  */
 package com.google.gwt.visualization.visualizationshowcase.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
-import com.google.gwt.visualization.client.visualizations.Visualization;
+import com.google.gwt.visualization.client.visualizations.ImageChart;
 
 /**
- * Demonstrates ad hoc visualization wrapping.  
- * 
+ * Demo for ImageChart visualization.
  * 
  * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/genericimagechart.html"
  * > Generic Image Chart Reference. </a>
@@ -34,13 +30,13 @@ public class ImageDemo implements LeftTabPanel.WidgetProvider {
   private Widget widget;
 
   public ImageDemo() {
-    AbstractDrawOptions options = JavaScriptObject.createObject().cast();
+    ImageChart.Options options = ImageChart.Options.create();
     
-    options.setOption("cht", "rs");
-    options.setOption("chco", "00ff00,ff00ff");
-    options.setOption("chg", "25.0,25.0,4.0,4.0");
-    options.setOption("chm", "B,FF000080,0,1.0,5.0|B,FF990080,1,1.0,5.0");
-    options.setOption("chls", "2,1,0|2,5,5");
+    options.set("cht", "rs");
+    options.set("chco", "00ff00,ff00ff");
+    options.set("chg", "25.0,25.0,4.0,4.0");
+    options.set("chm", "B,FF000080,0,1.0,5.0|B,FF990080,1,1.0,5.0");
+    options.set("chls", "2,1,0|2,5,5");
 
     DataTable dataTable = DataTable.create();
     dataTable.addColumn(ColumnType.STRING);
@@ -76,12 +72,7 @@ public class ImageDemo implements LeftTabPanel.WidgetProvider {
     dataTable.setValue(6, 2, 10);
     dataTable.setValue(7, 2, 5);
     
-    widget = new Visualization<AbstractDrawOptions>(dataTable, options) {
-      @Override
-      protected native JavaScriptObject createJso(Element div) /*-{
-        return new $wnd.google.visualization.ImageChart(div);
-      }-*/;
-    };
+    widget = new ImageChart(dataTable, options);
   }
 
   public Widget getWidget() {

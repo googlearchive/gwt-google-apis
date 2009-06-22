@@ -15,6 +15,7 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties.TypeException;
 import com.google.gwt.visualization.client.Properties;
 
 /**
@@ -45,9 +46,9 @@ public abstract class SortHandler extends Handler {
   public abstract void onSort(SortEvent event);
 
   @Override
-  protected void onEvent(Properties event) {
+  protected void onEvent(Properties event) throws TypeException {
     boolean ascending = event.getBoolean("ascending");
-    int column = event.getInt("column");
+    int column = event.getNumber("column").intValue();
     onSort(new SortEvent(ascending, column));
   }
 }
