@@ -62,6 +62,9 @@ public final class GearsManifestLinker extends AbstractLinker {
   private static final Pattern FILTER_PATTERN = Pattern.compile(
       "@filter (.*)$", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
   private static final String GEARS_MANIFEST = "GearsManifest.json";
+  private static final String[] BUILTIN_FILTERS = { 
+    ".*\\.gwt\\.rpc", // Causes problems with AppEngine, see issue 280 
+  };
 
   private static void replaceAll(StringBuffer buf, String search, String replace) {
     int len = search.length();
@@ -127,6 +130,11 @@ public final class GearsManifestLinker extends AbstractLinker {
 
     // Look for @filter expressions in the manifest template
     Set<Pattern> filters = extractFilters(logger, out);
+
+    // Append the builtin filters
+    for (String pattern : BUILTIN_FILTERS) {
+      filters.add(Pattern.compile(pattern));
+    }
 
     // Generate the manifest entries
     String entries = generateEntries(logger, context, filters, artifacts);
