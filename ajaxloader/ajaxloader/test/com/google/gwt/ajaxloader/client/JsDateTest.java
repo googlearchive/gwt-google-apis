@@ -15,7 +15,6 @@
  */
 package com.google.gwt.ajaxloader.client;
 
-import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -33,6 +32,7 @@ public class JsDateTest extends GWTTestCase {
     return "com.google.gwt.ajaxloader.AjaxLoader";
   }
 
+  @SuppressWarnings("deprecation")
   public void testIsDate() {
     Date jdate = new Date(109, 6, 14);
     assertTrue(JsDate.isDate(JsDate.toJs(jdate)));
@@ -42,12 +42,14 @@ public class JsDateTest extends GWTTestCase {
     assertFalse(JsDate.isDate(timeIsNotANumber()));
   }
   
+  @SuppressWarnings("deprecation")
   public void testTime() {
     Date jdate = new Date(109, 6, 14);
     JsDate js = JsDate.toJs(jdate);
     assertEquals(jdate.getTime(), js.getTime());
   }
   
+  @SuppressWarnings("deprecation")
   public void testToJava() {
     Date jdate = new Date(109, 6, 14);
     JsDate js = JsDate.create(jdate.getTime());
