@@ -20,10 +20,14 @@ package com.google.gwt.language.client.transliteration;
  */
 public enum LanguageCode {
   ARABIC("ar"), // Comments keep Eclipse formatter from putting on one line
+  BENGALI("bn"), //
   ENGLISH("en"), //
+  GUJARATI("gu"), //
   HINDI("hi"), //
   KANNADA("kn"), //
   MALAYALAM("ml"), //
+  MARATHI("mr"), //
+  NEPALI("ne"), //
   TAMIL("ta"), //
   TELUGU("te");
 
