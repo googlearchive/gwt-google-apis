@@ -227,6 +227,17 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
     String[] files() default "";
   }
 
+  @Target(ElementType.TYPE)
+  public @interface Content {
+    Class<? extends ContentSection<?>>[] contents();
+  }
+  
+  @Target(ElementType.TYPE)
+  public @interface ContentType {
+    String[] views();
+    String type() default "html";
+  }
+
   /**
    * Enables developers to define hand-written content for the ModulePrefs
    * section of the gadget manifset file.

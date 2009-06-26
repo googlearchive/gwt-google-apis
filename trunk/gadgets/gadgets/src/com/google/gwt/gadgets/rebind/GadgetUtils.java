@@ -21,7 +21,10 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JGenericType;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.gadgets.client.ContentSection;
 import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.Gadget.Content;
+import com.google.gwt.gadgets.client.Gadget.ContentType;
 import com.google.gwt.gadgets.client.GadgetFeature.MayRequire;
 import com.google.gwt.gadgets.client.impl.PreferenceGeneratorName;
 
@@ -31,6 +34,7 @@ import org.w3c.dom.Element;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,6 +42,17 @@ import java.util.List;
  * Utility methods for Gadget Generators.
  */
 class GadgetUtils {
+
+  static class GadgetViewType {
+    String[] viewNames;
+    JClassType viewType;
+
+    public GadgetViewType(String[] viewNames, JClassType viewType) {
+      this.viewNames = viewNames;
+      this.viewType = viewType;
+    }
+  }
+  
   /**
    * Return an instance of a PreferenceGenerator that can be used for a subtype
    * of Preference.
@@ -153,6 +168,38 @@ class GadgetUtils {
         mayRequire.appendChild(d.createCDATASection(cdata));
       }
     }
+  }
+  
+  /**
+   * For the given gadget source type this function looks at it's
+   * {@link Content} annotation to see if multiple views have been defined. If
+   * so, it will return an array which contains the view names and their
+   * associated {@link ContentSection} types.
+   * 
+   * @return An array of views and associated types or null, if no views have
+   *         been specified.
+   */
+  static GadgetViewType[] getViewTypes(TreeLogger logger, JClassType gadgetSourceType,
+      TypeOracle typeOracle) throws UnableToCompleteException {
+    List<GadgetViewType> result = new ArrayList<GadgetViewType>();
+    Content content = gadgetSourceType.getAnnotation(Content.class);
+    if (content != null) {
+      int i = 0;
+      for (Class<? extends ContentSection<?>> contentSectionClass : content.contents()) {
+        String viewTypeName = contentSectionClass.getName().replaceAll("\\$", ".");
+        JClassType viewType = typeOracle.findType(viewTypeName);
+        if (viewType != null) {
+          ContentType contentType = viewType.getAnnotation(ContentType.class);
+          result.add(new GadgetViewType(contentType.views(), viewType));
+        } else {
+          logger.log(TreeLogger.ERROR, "Unable to find view type: " + viewTypeName);
+          throw new UnableToCompleteException();
+        }
+      }
+    } else {
+      return null;
+    }
+    return result.toArray(new GadgetViewType[0]);
   }
 
   /**
