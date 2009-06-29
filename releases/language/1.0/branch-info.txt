@@ -9,7 +9,8 @@ Merges:
 /trunk/language/@1385:1401 was merged (r1402) into releases/language/1.0
 /trunk/language/@1401:1421 was merged (r1422) into releases/language/1.0
 /trunk/language/@1421:1427 was merged (r1428) into releases/language/1.0
---->The next merge into trunk will be 1427:????
+/trunk/language/@1427:1515 was merged (r1516) into releases/language/1.0
+--->The next merge into trunk will be 1515:????
 
 Changes in this branch (excluding changes to this file itself)
 - Updated svn:external for language to point at a specific rev in the language/1.0 release. (r1387)
@@ -32,3 +33,10 @@ Changes in this branch (excluding changes to this file itself)
 - Workaround for iE7 standards mode issue. (r1425)
 - Changed "Template" to "Language" in about.txt (r1426)
 - Missing closing style tag from r1425 (r1427)
+- Changed 'Temaplate' to 'Language' in about.txt (r1433)
+- Added link to online user guide. (r1445)
+- Adding two missing packages to javadoc (build.xml change) (r1450)
+- Adding missing package.html files (r1453)
+- Simple unit test for language enum - issue 270 response (r1498)
+- Updated to allow more heap memory during compile (r1504)
+- Adding language codes that are now being returned by the API for transliteration. (r1514)
