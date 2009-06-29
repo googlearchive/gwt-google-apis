@@ -51,6 +51,10 @@ public class OverlayTest extends GWTTestCase {
     return new $wnd.GPolyline([p1,p2]);
   }-*/;
 
+  private static native JavaScriptObject nativeCreateStreetviewOverlay() /*-{
+    return new $wnd.GStreetviewOverlay();
+  }-*/;
+
   private static native JavaScriptObject nativeCreateTileLayerOverlay() /*-{
     return new $wnd.GTileLayerOverlay($wnd.G_NORMAL_MAP.getTileLayers()[0]);
   }-*/;
@@ -77,6 +81,8 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof Marker", o instanceof Marker);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
+    assertFalse("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
     assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
@@ -92,6 +98,8 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
     assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);
+    assertFalse("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
     assertTrue("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
@@ -105,6 +113,8 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
+    assertFalse("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
     assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
@@ -118,6 +128,8 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);    
     assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
+    assertFalse("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
     assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
@@ -132,6 +144,22 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertTrue("overlay instanceof Polyline", o instanceof Polyline);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
+    assertFalse("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
+    assertFalse("overlay instanceof TileLayerOverlay",
+        o instanceof TileLayerOverlay);
+    assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
+  }
+
+  public void testIsStreetviewOverlay() {
+    Overlay o = Overlay.createPeer(nativeCreateStreetviewOverlay());
+    assertFalse("overlay instanceof Marker", o instanceof Marker);
+    assertFalse("overlay instanceof GeoXmlOverlay", o instanceof GeoXmlOverlay);
+    assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
+    assertFalse("overlay instanceof Polygon", o instanceof Polygon);
+    assertFalse("overlay instanceof Polyline", o instanceof Polyline);
+    assertTrue("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);
     assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
@@ -146,6 +174,8 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
+    assertFalse("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
     assertFalse("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
   }
 
@@ -158,6 +188,8 @@ public class OverlayTest extends GWTTestCase {
     assertFalse("overlay instanceof GroundOverlay", o instanceof GroundOverlay);
     assertFalse("overlay instanceof Polygon", o instanceof Polygon);
     assertFalse("overlay instanceof Polyline", o instanceof Polyline);
+    assertFalse("overlay instanceof StreetviewOverlay",
+        o instanceof StreetviewOverlay);
     assertTrue("overlay instanceof TrafficLayer", o instanceof TrafficOverlay);
     assertFalse("overlay instanceof TileLayerOverlay",
         o instanceof TileLayerOverlay);

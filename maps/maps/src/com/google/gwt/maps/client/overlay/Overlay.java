@@ -74,6 +74,8 @@ public abstract class Overlay {
     
     if (nativeIsMarker(jsoPeer)) {
       return new Marker(jsoPeer);
+    } else if (nativeIsStreetviewOverlay(jsoPeer)) {
+      return new StreetviewOverlay(jsoPeer);
     } else if (nativeIsTileLayerOverlay(jsoPeer)) {
       return new TileLayerOverlay(jsoPeer);
     }
@@ -90,6 +92,8 @@ public abstract class Overlay {
         return new GeoXmlOverlay(jsoPeer);
       } else if (nativeIsGroundOverlayDuck(jsoPeer)) {
         return new GroundOverlay(jsoPeer);
+      } else if (nativeIsStreetviewOverlayDuck(jsoPeer)) {
+        return new StreetviewOverlay(jsoPeer);
       }
     } else {  
       if (nativeIsGeoXml(jsoPeer)) {
@@ -212,6 +216,18 @@ public abstract class Overlay {
     // JS Maps API bug: internal ref 1431785
     // Use a duck type test
     return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GPolyline.prototype);
+  }-*/;
+
+  private static native boolean nativeIsStreetviewOverlay(
+      JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GStreetviewOverlay);
+  }-*/;
+
+  private static native boolean nativeIsStreetviewOverlayDuck(
+      JavaScriptObject jsoPeer) /*-{
+    // JS Maps API bug: internal ref 1431785
+    // Use a duck type test
+    return @com.google.gwt.maps.client.overlay.Overlay::isSameDuckType(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(jsoPeer, $wnd.GStreetviewOverlay.prototype);
   }-*/;
 
   private static native boolean nativeIsTileLayerOverlay(
