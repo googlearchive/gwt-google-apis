@@ -15,6 +15,10 @@
  */
 package com.google.gwt.gears.client;
 
+import com.google.gwt.gears.client.blobbuilder.BlobBuilder;
+import com.google.gwt.gears.client.database.Database;
+import com.google.gwt.gears.client.localserver.LocalServer;
+import com.google.gwt.gears.client.workerpool.WorkerPool;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -27,37 +31,45 @@ public class FactoryTest extends GWTTestCase {
     return "com.google.gwt.gears.Gears";
   }
 
-  // TODO: Enable when Database, LocalServer and WorkerPool are converted to
-  // overlay types
-  // /**
-  // * Test method for
-  // * {@link com.google.gwt.gears.client.Factory#createDatabase()}.
-  // */
-  // public void testCreateDatabase() {
-  // Factory factory = Factory.getInstance();
-  // Database database = factory.createDatabase();
-  // assertNotNull("Factory.createDatabase() returned null", database);
-  // }
-  //
-  // /**
-  // * Test method for
-  // * {@link com.google.gwt.gears.client.Factory#createLocalServer()}.
-  // */
-  // public void testCreateLocalServer() {
-  // Factory factory = Factory.getInstance();
-  // LocalServer localServer = factory.createLocalServer();
-  // assertNotNull("Factory.createLocalServer() returned null", localServer);
-  // }
-  //
-  // /**
-  // * Test method for
-  // * {@link com.google.gwt.gears.client.Factory#createWorkerPool()}.
-  // */
-  // public void testCreateWorkerPool() {
-  // Factory factory = Factory.getInstance();
-  // WorkerPool workerPool = factory.createWorkerPool();
-  // assertNotNull("Factory.createWorkerPool() returned null", workerPool);
-  // }
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.client.Factory#createBlobBuilder()}.
+   */
+  public void testCreateBlobBuilder() {
+    Factory factory = Factory.getInstance();
+    BlobBuilder builder = factory.createBlobBuilder();
+    assertNotNull("Factory.createBlobBuilder() returned null", builder);
+  }
+
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.client.Factory#createDatabase()}.
+   */
+  public void testCreateDatabase() {
+    Factory factory = Factory.getInstance();
+    Database database = factory.createDatabase();
+    assertNotNull("Factory.createDatabase() returned null", database);
+  }
+
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.client.Factory#createLocalServer()}.
+   */
+  public void testCreateLocalServer() {
+    Factory factory = Factory.getInstance();
+    LocalServer localServer = factory.createLocalServer();
+    assertNotNull("Factory.createLocalServer() returned null", localServer);
+  }
+
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.client.Factory#createWorkerPool()}.
+   */
+  public void testCreateWorkerPool() {
+    Factory factory = Factory.getInstance();
+    WorkerPool workerPool = factory.createWorkerPool();
+    assertNotNull("Factory.createWorkerPool() returned null", workerPool);
+  }
 
   /**
    * Test method for {@link com.google.gwt.gears.client.Factory#getBuildInfo()}.
@@ -81,9 +93,9 @@ public class FactoryTest extends GWTTestCase {
     Factory factory = Factory.getInstance();
     assertNotNull("Factory.getVersion() was null", factory.getVersion());
   }
-  
+
   /**
-   * Test Method for {@link com.google.gwt.gears.client.Factory#hasPermission()}.
+   * Test Method for {@link com.google.gwt.gears.client.Factory#hasPermission()} .
    */
   public void testHasPermission() {
     Factory factory = Factory.getInstance();

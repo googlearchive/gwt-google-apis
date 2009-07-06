@@ -16,6 +16,7 @@
 package com.google.gwt.gears;
 
 import com.google.gwt.gears.client.FactoryTest;
+import com.google.gwt.gears.client.blobbuilder.BlobBuilderTest;
 import com.google.gwt.gears.client.database.DatabaseTest;
 import com.google.gwt.gears.client.database.ResultSetTest;
 import com.google.gwt.gears.client.localserver.LocalServerTest;
@@ -38,12 +39,12 @@ public class GearsTestSuite extends TestCase {
     // it difficult to actually grant permission during unit tests!  Moved after 
     // another test to workaround.
     suite.addTestSuite(FactoryTest.class);
+    suite.addTestSuite(BlobBuilderTest.class);
     suite.addTestSuite(ResultSetTest.class);
     suite.addTestSuite(LocalServerTest.class);
     suite.addTestSuite(ResultSetTest.class);
     suite.addTestSuite(ManagedResourceStoreTest.class);
     suite.addTestSuite(WorkerPoolTest.class);
-
     return suite;
   }
 }
