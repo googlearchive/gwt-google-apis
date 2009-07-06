@@ -15,10 +15,12 @@
  */
 package com.google.gwt.ajaxloader;
 
-import com.google.gwt.junit.tools.GWTTestSuite;
+import com.google.gwt.ajaxloader.client.AjaxKeyRepositoryTest;
 import com.google.gwt.ajaxloader.client.AjaxLoaderTest;
+import com.google.gwt.ajaxloader.client.ArrayHelperTest;
 import com.google.gwt.ajaxloader.client.JsDateTest;
 import com.google.gwt.ajaxloader.client.PropertiesTest;
+import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,7 +31,9 @@ import junit.framework.TestSuite;
 public class AjaxLoaderTestSuite extends GWTTestSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the AjaxLoader API");
+    suite.addTestSuite(AjaxKeyRepositoryTest.class);
     suite.addTestSuite(AjaxLoaderTest.class);
+    suite.addTestSuite(ArrayHelperTest.class);
     suite.addTestSuite(JsDateTest.class);
     suite.addTestSuite(PropertiesTest.class);
     return suite;
