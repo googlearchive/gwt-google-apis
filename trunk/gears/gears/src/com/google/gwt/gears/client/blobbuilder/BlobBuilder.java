@@ -98,6 +98,6 @@ public final class BlobBuilder extends JavaScriptObject {
   }-*/;
 
   private native void append(JavaScriptObject arr) /*-{
-    this.append(bytes);
+    this.append(arr);
   }-*/;
 }
