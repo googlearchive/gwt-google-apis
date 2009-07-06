@@ -16,6 +16,7 @@
 package com.google.gwt.gears.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.gears.client.blobbuilder.BlobBuilder;
 import com.google.gwt.gears.client.database.Database;
 import com.google.gwt.gears.client.desktop.Desktop;
 import com.google.gwt.gears.client.geolocation.Geolocation;
@@ -27,6 +28,11 @@ import com.google.gwt.gears.client.workerpool.WorkerPool;
  * Factory class used to create all other Gears objects.
  */
 public final class Factory extends JavaScriptObject {
+  /**
+   * String used to request a BlobBuilder instance from Gears.
+   */
+  public static final String BLOBBUILDER = "beta.blobbuilder";
+
   /**
    * String used to request a Database instance from Gears.
    */
@@ -70,6 +76,15 @@ public final class Factory extends JavaScriptObject {
 
   protected Factory() {
     // Required for overlay types
+  }
+
+  /**
+   * Creates a new {@link BlobBuilder} instance.
+   *
+   * @return a new {@link BlobBuilder} instance
+   */
+  public BlobBuilder createBlobBuilder() {
+    return create(BLOBBUILDER);
   }
 
   /**
