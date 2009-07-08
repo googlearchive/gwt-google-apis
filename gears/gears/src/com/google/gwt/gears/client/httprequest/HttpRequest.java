@@ -202,7 +202,7 @@ public final class HttpRequest extends JavaScriptObject {
    * Sends the request.
    */
   public native void send()/*-{
-    this.send(callback);
+    this.send();
   }-*/;
 
   /**
