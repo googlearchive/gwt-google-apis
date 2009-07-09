@@ -17,6 +17,7 @@ package com.google.gwt.gears.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.gears.client.blobbuilder.BlobBuilder;
+import com.google.gwt.gears.client.canvas.Canvas;
 import com.google.gwt.gears.client.database.Database;
 import com.google.gwt.gears.client.desktop.Desktop;
 import com.google.gwt.gears.client.geolocation.Geolocation;
@@ -32,6 +33,11 @@ public final class Factory extends JavaScriptObject {
    * String used to request a BlobBuilder instance from Gears.
    */
   public static final String BLOBBUILDER = "beta.blobbuilder";
+
+  /**
+   * String used to request a Canvas instance from Gears.
+   */
+  public static final String CANVAS = "beta.canvas";
 
   /**
    * String used to request a Database instance from Gears.
@@ -85,6 +91,15 @@ public final class Factory extends JavaScriptObject {
    */
   public BlobBuilder createBlobBuilder() {
     return create(BLOBBUILDER);
+  }
+
+  /**
+   * Creates a new {@link Canvas} instance.
+   *
+   * @return a new {@link Canvas} instance
+   */
+  public Canvas createCanvas() {
+    return create(CANVAS);
   }
 
   /**
