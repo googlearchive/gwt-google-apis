@@ -28,7 +28,7 @@ import com.google.gwt.gears.client.impl.Utils;
  * <p>
  * The BlobBuilder API does not require user permission.
  */
-public final class BlobBuilder extends JavaScriptObject {
+public class BlobBuilder extends JavaScriptObject {
 
   protected BlobBuilder() {
     // required for overlay types
@@ -39,7 +39,7 @@ public final class BlobBuilder extends JavaScriptObject {
    * 
    * @param c a <code>byte</code>.
    */
-  public native void append(byte c) /*-{
+  public final native void append(byte c) /*-{
     this.append(c);
   }-*/;
 
@@ -48,7 +48,7 @@ public final class BlobBuilder extends JavaScriptObject {
    * 
    * @param s a string (which will be encoded as UTF-8).
    */
-  public native void append(String s) /*-{
+  public final native void append(String s) /*-{
     this.append(s);
   }-*/;
 
@@ -57,7 +57,7 @@ public final class BlobBuilder extends JavaScriptObject {
    * 
    * @param b a blob.
    */
-  public native void append(Blob b) /*-{
+  public final native void append(Blob b) /*-{
     this.append(b);
   }-*/;
 
@@ -66,7 +66,7 @@ public final class BlobBuilder extends JavaScriptObject {
    * 
    * @param bytes an array of bytes.
    */
-  public void append(byte[] bytes) {
+  public final void append(byte[] bytes) {
     append(Utils.toJavaScriptArray(bytes));
   }
 
@@ -75,7 +75,7 @@ public final class BlobBuilder extends JavaScriptObject {
    * 
    * @param strings an array of strings.
    */
-  public void append(String[] strings) {
+  public final void append(String[] strings) {
     append(Utils.toJavaScriptArray(strings));
   }
 
@@ -84,7 +84,7 @@ public final class BlobBuilder extends JavaScriptObject {
    * 
    * @param blobs an array of blobs.
    */
-  public void append(Blob[] blobs) {
+  public final void append(Blob[] blobs) {
     append(Utils.toJavaScriptArray(blobs));
   }
 
@@ -93,7 +93,7 @@ public final class BlobBuilder extends JavaScriptObject {
    * 
    * @return A new Blob containing the previously appended data.
    */
-  public native Blob getAsBlob() /*-{
+  public final native Blob getAsBlob() /*-{
     return this.getAsBlob();
   }-*/;
 

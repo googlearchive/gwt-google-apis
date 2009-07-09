@@ -16,6 +16,7 @@
 package com.google.gwt.gears.client;
 
 import com.google.gwt.gears.client.blobbuilder.BlobBuilder;
+import com.google.gwt.gears.client.canvas.Canvas;
 import com.google.gwt.gears.client.database.Database;
 import com.google.gwt.gears.client.localserver.LocalServer;
 import com.google.gwt.gears.client.workerpool.WorkerPool;
@@ -39,6 +40,16 @@ public class FactoryTest extends GWTTestCase {
     Factory factory = Factory.getInstance();
     BlobBuilder builder = factory.createBlobBuilder();
     assertNotNull("Factory.createBlobBuilder() returned null", builder);
+  }
+
+  /**
+   * Test method for
+   * {@link com.google.gwt.gears.client.Factory#createCanvas()}.
+   */
+  public void testCreateCanvas() {
+    Factory factory = Factory.getInstance();
+    Canvas canvas = factory.createCanvas();
+    assertNotNull("Factory.createCanvas() returned null", canvas);
   }
 
   /**
