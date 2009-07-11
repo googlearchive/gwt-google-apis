@@ -5,6 +5,7 @@
 ==Release Notes for 1.0.4==
 ===Changes since 1.0.3===
 
+   * The minimum required Maps API version is 2.147
    * Adds new options and methods to OrgChart
    * Adds support for mouseover, mouseout and load events
    * Added support for some formatters
