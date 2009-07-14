@@ -63,3 +63,7 @@ Passing no key to the Maps API usually works for developing on the local machine
 == Why can't I use Maps API data types in a servlet? ==
 
 The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web browser.  Unfortunately, you cannot use these APIs in server side code.
+
+== How can I use GWT with Maps API 3.0? ==
+
+The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI  methods to interface with the Maps v3 API.
