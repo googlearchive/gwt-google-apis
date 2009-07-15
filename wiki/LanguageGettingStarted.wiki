@@ -89,6 +89,10 @@ public class SimpleLanguage implements EntryPoint {
   public void onModuleLoad() {
 
     // Loads the translation API
+    //
+    // It is not safe to make calls into the translation API until the run()
+    //  method is invoked.  Use LanguageUtils.loadTransliteration() for the 
+    //  transliteration API.
     LanguageUtils.loadTranslation(new Runnable() {
       public void run() {
         RootPanel.get().add(new HTML("<h1>SimpleLanguage</h1><p>"));
