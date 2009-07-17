@@ -30,7 +30,7 @@ public class PolylineOptions extends JavaScriptObject {
    * @return a new PolylineOptions instance. 
    */
   public static native PolylineOptions newInstance(boolean clickable) /*-{
-    return {"geodesic":geodesic};
+    return {"clickable":clickable};
   }-*/;
 
   /**

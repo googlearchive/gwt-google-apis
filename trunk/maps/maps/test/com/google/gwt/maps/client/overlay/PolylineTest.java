@@ -167,6 +167,19 @@ public class PolylineTest extends GWTTestCase {
     RootPanel.get().add(map);
   }
 
+  public void testPolylineOptions2() {
+    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+    map.setSize("500px", "400px");
+    LatLng nycToZurich[] = {LatLng.newInstance(40.75, -73.90), // New York
+        LatLng.newInstance(47.3, 8.5) // Zurich
+    };
+    map.setCenter(LatLng.newInstance(40, -25), 2);
+    Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
+        PolylineOptions.newInstance(false));
+    map.addOverlay(pline);
+    RootPanel.get().add(map);
+  }
+
   /**
    * Test the setEditngEnabled() method.
    */
@@ -225,5 +238,5 @@ public class PolylineTest extends GWTTestCase {
     RootPanel.get().add(map);
     assertEquals("vertex count", 3, p.getVertexCount());
   }
-
+  
 }
