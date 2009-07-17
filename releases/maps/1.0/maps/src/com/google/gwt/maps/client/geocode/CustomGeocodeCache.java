@@ -25,7 +25,12 @@ import com.google.gwt.maps.client.impl.GeocodeCacheImpl;
  */
 public class CustomGeocodeCache extends GeocodeCache {
 
-  static CustomGeocodeCache createPeer(JavaScriptObject jsoPeer) {
+  /**
+   * Used by JSIO library to instantiate this class from an existing
+   * JavaScript object.
+   */
+  @SuppressWarnings("unused")
+  private static CustomGeocodeCache createPeer(JavaScriptObject jsoPeer) {
     return new CustomGeocodeCache(jsoPeer);
   }
 
@@ -56,7 +61,7 @@ public class CustomGeocodeCache extends GeocodeCache {
   private ExportedGeocodeCache exportedGeocodeCache;
 
   public CustomGeocodeCache() {
-    jsoPeer = GeocodeCacheImpl.impl.constructGeocodeCache();
+    super(GeocodeCacheImpl.impl.constructGeocodeCache());
 
     /*
      * The exported GeocodeCache object is bound to the GGeocodeCache object
@@ -64,14 +69,13 @@ public class CustomGeocodeCache extends GeocodeCache {
      * AbstractGeocodeCache. This is to work around problems when trying to use
      * @Exported in the same class hierarchy with methods you want to import in
      * JSIO.
-     * 
      */
     exportedGeocodeCache = new ExportedGeocodeCache(this);
     GeocodeCacheImpl.impl.bind(jsoPeer, exportedGeocodeCache);
   }
 
   CustomGeocodeCache(JavaScriptObject jsoPeer) {
-    this.jsoPeer = jsoPeer;
+    super(jsoPeer);
   }
 
   @Override

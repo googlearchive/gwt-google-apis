@@ -91,11 +91,7 @@ public final class Geocoder {
         new com.google.gwt.maps.client.impl.EventImpl.LatLngCallback() {
           @Override
           public void callback(LatLng latlng) {
-            if (latlng != null) {
-              fireLatLng(callback, true, latlng);
-            } else {
-              fireLatLng(callback, false, null);
-            }
+            fireLatLng(callback, latlng != null, latlng);
           }
         });
   }
@@ -153,8 +149,6 @@ public final class Geocoder {
 
   /**
    * Returns the viewport for magnifying geocoding results within that geocoder.
-   * 
-   * @return the viewport for magnifying geocoding results within that geocoder.
    */
   public LatLngBounds getViewport() {
     return GeocoderImpl.impl.getViewport(jsoPeer);
@@ -261,5 +255,4 @@ public final class Geocoder {
       cb.onFailure(statusCode);
     }
   }
-
 }

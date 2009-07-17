@@ -14,12 +14,13 @@ Merges:
 /releases/maps/1.0/@1157 was merged (r1192) into /trunk/maps
 /releases/maps/1.0/@1157:1249 was merged (r1250) into /trunk/maps (1.0.3 release)
 /trunk/maps/@1249:1383 was merged (r1384) into /releases/maps/1.0 (1.0.4 release)
-/trunk/maps/@1383:1392 was merged (r1393) into /releases/maps/1.0 (1.0.4 release)
-/trunk/maps/@1392:1429 was merged (r1430) into /releases/maps/1.0 (1.0.4 release)
-/trunk/maps/@1429:1435 was merged (r1436) into /releases/maps/1.0 (1.0.4 release)
-/trunk/maps/@1435:1457 was merged (r1458) into /releases/maps/1.0 (1.0.4 release)
-/trunk/maps/@1458:1460 was merged (r1461) into /releases/maps/1.0 (1.0.4 release)
-/trunk/maps/@1460:1478 was merged (r1479) into /releases/maps/1.0 (1.0.4 release)
+/trunk/maps/@1383:1392 was merged (r1393) into /releases/maps/1.0 
+/trunk/maps/@1392:1429 was merged (r1430) into /releases/maps/1.0
+/trunk/maps/@1429:1435 was merged (r1436) into /releases/maps/1.0 
+/trunk/maps/@1435:1457 was merged (r1458) into /releases/maps/1.0
+/trunk/maps/@1458:1460 was merged (r1461) into /releases/maps/1.0 
+/trunk/maps/@1460:1478 was merged (r1479) into /releases/maps/1.0
+/trunk/maps/@1478:1532 was merged (r1533) into /releases/maps/1.0
 
 -> The next merge into trunk will be r1460:????
 
@@ -87,3 +88,15 @@ it is returning null.(r1027, r1029)
  - Added gwt-maps-noredist.jar target (r1457)
  - Fixed name of maps-redist.jar, disabled failing tests (r1460)
  - Disable testDraggableObjectStatic completely (r1478)
+ - Lengthened a timeout value. (r1482)
+ - Remove the mapType copyright handler after the test succeeds (r1483)
+ - Test cleanups (r1484)
+ - Readability cleanups (r1493)
+ - GeocodeCache superclass constructor now initializes jsoPeer (r1495)
+ - Re-enables ads manager tests (r1499)
+ - Allow more heap memory during compile (r1504)
+ - Adds the StreetViewOverlay class (r1518)
+ - Fixes issue 291 - but in PolylineOptions factory method (r1530)
+ - Fixed the expected vs. actual values for the copyright test (r1531)
+ - Updated copyright test to each have a unique string (r1532)
+
