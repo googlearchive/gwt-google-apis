@@ -81,7 +81,7 @@ public class CopyrightEventTest extends GWTTestCase {
         -180.0), LatLng.newInstance(90.0, 180.0));
     final CopyrightCollection collection = new CopyrightCollection();
     final Copyright copyright = new Copyright(3452981, bounds, 3,
-        "2008 Google");
+        "2008 Google testCopyrightCollectionEvent");
     collection.addNewCopyrightHandler(new NewCopyrightHandler() {
 
       public void onNewCopyright(NewCopyrightEvent event) {
@@ -100,7 +100,7 @@ public class CopyrightEventTest extends GWTTestCase {
         -180.0), LatLng.newInstance(90.0, 180.0));
     final CopyrightCollection collection = new CopyrightCollection();
     final Copyright copyright = new Copyright(3432241, bounds, 3,
-        "2008 Google");
+        "2008 Google testCopyrightCollectionTrigger");
     collection.addNewCopyrightHandler(new NewCopyrightHandler() {
 
       public void onNewCopyright(NewCopyrightEvent event) {
@@ -151,7 +151,8 @@ public class CopyrightEventTest extends GWTTestCase {
     final MapType mapType = MapType.getNormalMap();
     LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0,
         -180.0), LatLng.newInstance(90.0, 180.0));
-    final Copyright copyright = new Copyright(123432, bounds, 3, "2008 Google");
+    final Copyright copyright = new Copyright(123432, bounds, 3,
+        "2008 Google testMapTypeTrigger");
 
     mapType.addMapTypeNewCopyrightHandler(new MapTypeNewCopyrightHandler() {
 
@@ -207,7 +208,8 @@ public class CopyrightEventTest extends GWTTestCase {
   public void testTileLayerTrigger() {
     LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0,
         -180.0), LatLng.newInstance(90.0, 180.0));
-    final Copyright copyright = new Copyright(123432, bounds, 3, "2008 Google");
+    final Copyright copyright = new Copyright(123432, bounds, 3,
+        "2008 Google testTileLayerTrigger");
     CopyrightCollection collection = new CopyrightCollection();
     collection.addCopyright(copyright);
     final TileLayer tileLayer = getTileLayer(collection);
