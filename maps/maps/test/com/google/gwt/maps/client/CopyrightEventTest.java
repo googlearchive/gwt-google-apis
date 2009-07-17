@@ -85,8 +85,8 @@ public class CopyrightEventTest extends GWTTestCase {
     collection.addNewCopyrightHandler(new NewCopyrightHandler() {
 
       public void onNewCopyright(NewCopyrightEvent event) {
-        assertEquals(event.getSender(), collection);
-        assertEquals(event.getCopyright(), copyright);
+        assertEquals(collection, event.getSender());
+        assertEquals(copyright, event.getCopyright());
         finishTest();
       }
 
@@ -104,8 +104,8 @@ public class CopyrightEventTest extends GWTTestCase {
     collection.addNewCopyrightHandler(new NewCopyrightHandler() {
 
       public void onNewCopyright(NewCopyrightEvent event) {
-        assertEquals(event.getSender(), collection);
-        assertEquals(event.getCopyright(), copyright);
+        assertEquals(collection, event.getSender());
+        assertEquals(copyright, event.getCopyright());
         finishTest();
       }
 
@@ -156,8 +156,8 @@ public class CopyrightEventTest extends GWTTestCase {
     mapType.addMapTypeNewCopyrightHandler(new MapTypeNewCopyrightHandler() {
 
       public void onNewCopyright(MapTypeNewCopyrightEvent event) {
-        assertEquals(event.getSender(), mapType);
-        assertEquals(event.getCopyright(), copyright);
+        assertEquals(mapType, event.getSender());
+        assertEquals(copyright, event.getCopyright());
         // This handler has started to fire later in the unit tests, so remove
         // it on success.
         mapType.removeMapTypeNewCopyrightHandler(this);
