@@ -38,7 +38,6 @@ public class ImageChartTest extends VisualizationTest {
         options.setSize(500, 250);
         widget = new ImageChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
-        checkParameter(widget, "chco", "FF00FF");
         checkParameter(widget, "chm", 
             "b%2CFF00FF%2C0%2C1%2C0%7Cb%2CFF00FF%2C1%2C2%2C0");
         checkParameter(widget, "chs", "500x250");
