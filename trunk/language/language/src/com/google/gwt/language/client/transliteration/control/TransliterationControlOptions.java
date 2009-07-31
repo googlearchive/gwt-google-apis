@@ -53,7 +53,7 @@ public class TransliterationControlOptions extends JavaScriptObject {
    * multiple destination languages. The first language in the destination
    * language array is the default language for transliteration while others may
    * be enabled by using transliteration control widget. This is to support any
-   * transliteration languaegs that might not be part of {@code LanguageCode}
+   * transliteration languages that might not be part of {@code LanguageCode}
    * enum yet.
    * 
    * @param srcLangCode source language of transliteration

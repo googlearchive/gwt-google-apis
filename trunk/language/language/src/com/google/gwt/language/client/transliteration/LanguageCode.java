@@ -28,8 +28,10 @@ public enum LanguageCode {
   MALAYALAM("ml"), //
   MARATHI("mr"), //
   NEPALI("ne"), //
+  PUNJABI("pa"), //
   TAMIL("ta"), //
-  TELUGU("te");
+  TELUGU("te"), //
+  URDU("ur");
 
   /**
    * Returns the LanguageCode corresponding to given 2-letter language code.
