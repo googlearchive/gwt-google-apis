@@ -18,10 +18,13 @@ package com.google.gwt.visualization.visualizationshowcase.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.events.RangeChangeHandler;
+import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine.Options;
 
@@ -31,13 +34,16 @@ import java.util.Date;
  * Demo for AnnotatedTimeLine visualization.
  */
 public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
-  private AnnotatedTimeLine widget;
+  private AnnotatedTimeLine chart;
+  private final Label status = new Label();
+  private final Label rangeStatus = new Label();
+  private VerticalPanel widget = new VerticalPanel();
 
   @SuppressWarnings("deprecation")
   public AnnotatedDemo() {
     @SuppressWarnings("unused")
-    int year, month, day;
 
+    int year, month, day;
     Options options = Options.create();
     options.setDisplayAnnotations(true);
 
@@ -76,19 +82,25 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(5, 1, 33322);
     data.setValue(5, 4, 39463);
 
-    widget = new AnnotatedTimeLine(data, options, "700px", "240px");
+    status.setText("'Ready' event was not yet fired");
+    chart = new AnnotatedTimeLine(data, options, "700px", "240px");
     
-    addHandler();
+    widget.add(chart);
+    widget.add(status);
+    widget.add(rangeStatus);
+
+    addHandlers();
   }
 
-  private void addHandler() {
-    widget.addRangeChangeHandler(new RangeChangeHandler() {
+  private void addHandlers() {
+    chart.addRangeChangeHandler(new RangeChangeHandler() {
       @Override
       public void onRangeChange(RangeChangeEvent event) {
-        Window.alert("The range has changed.\n" + event.getStart() + 
+        rangeStatus.setText("The range has changed.\n" + event.getStart() + 
             "\nFalls mainly on the plains.\n" + event.getEnd());
       }
     });
+    chart.addReadyHandler(new ReadyDemo(status));
   }
 
   public Widget getWidget() {

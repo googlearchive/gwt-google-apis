@@ -17,15 +17,21 @@ package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.DateRange;
+import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.ReadyHandler;
+import com.google.gwt.visualization.client.events.SelectHandler;
 import com.google.gwt.visualization.client.events.RangeChangeHandler;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Annotated timeline visualization. May be loaded by calling: <code>
@@ -100,6 +106,10 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
       setColors(ArrayHelper.createJsArray(colors));
     }
 
+    public final native void setDateFormat(String dateFormat) /*-{
+      this.dateFormat = dateFormat;
+    }-*/;
+
     public final native void setDisplayAnnotations(boolean display) /*-{
       this.displayAnnotations = display;
     }-*/;
@@ -108,21 +118,61 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
       this.displayAnnotationsFilter = display;
     }-*/;
 
+    public final native void setDisplayDateBarSeparator(boolean display) /*-{
+      this.displayDateBarSeparator = display;
+    }-*/;
+
     public final native void setDisplayExactValues(boolean display) /*-{
       this.displayExactValues = display;
+    }-*/;
+
+    public final native void setDisplayLegendDots(boolean display) /*-{
+      this.displayLegendDots = display;
+    }-*/;
+
+    public final native void setDisplayLegendValues(boolean display) /*-{
+      this.displayLegendValues = display;
+    }-*/;
+
+    public final native void setDisplayRangeSelector(boolean display) /*-{
+      this.displayRangeSelector = display;
     }-*/;
 
     public final native void setDisplayZoomButtons(boolean display) /*-{
       this.displayZoomButtons = display;
     }-*/;
 
+    public final native void setFill(int fill) /*-{
+      this.fill = fill;
+    }-*/;
+
+    public final void setHighlightDotMode(HighlightDotMode highlightDotMode) {
+      setHighlightDotMode(highlightDotMode.name().toString().toLowerCase());
+    }
+
     public final void setLegendPosition(AnnotatedLegendPosition position) {
       setLegendPosition(position.toString());
     }
 
+    public final native void setMax(int max) /*-{
+      this.max = max;
+    }-*/;
+
     public final native void setMin(int min) /*-{
       this.min = min;
     }-*/;
+
+    public final native void setNumberFormat(String numberFormat) /*-{
+      this.numberFormats = numberFormat;
+    }-*/;
+
+    public final void setNumberFormats(Map<Integer, String> numberFormats) {
+      resetNumberFormats();
+      for (Integer key : numberFormats.keySet()) {
+      String numberFormat = numberFormats.get(key);
+        setNumberFormats(key, numberFormat);
+      }
+    }
 
     public final void setScaleColumns(int... scaleColumns) {
       setScaleColumns(ArrayHelper.createJsArray(scaleColumns));
@@ -132,12 +182,20 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
       this.scaleColumns = scaleColumns;
     }-*/;
 
+    public final native void setScaleFormat(String scaleFormat) /*-{
+      this.scaleFormat = scaleFormat;
+    }-*/;
+
     public final void setScaleType(ScaleType type) {
       setScaleType(type.name().toLowerCase());
     }
 
+    public final native void setThickness(int thickness) /*-{
+      this.thickness = thickness;
+    }-*/;
+
     public final void setWindowMode(WindowMode wmode) {
-      setWindowMode(wmode.name().toString().toLowerCase());
+      setWindowMode(wmode.name().toLowerCase());
     }
 
     public final void setZoomEndTime(Date endTime) {
@@ -148,8 +206,20 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
       setZoomStartTime(startTime.getTime());
     }
 
+    private native void setHighlightDotMode(String highlightDotMode) /*-{
+      this.highlightDot = highlightDotMode;
+    }-*/;
+
     private native void setLegendPosition(String position) /*-{
       this.legendPosition = position;
+    }-*/;
+
+    private native void resetNumberFormats() /*-{
+      this.numberFormats = {};
+    }-*/;
+  
+    private native void setNumberFormats(int key, String numberFormat) /*-{
+      this.numberFormats[key] = numberFormat;
     }-*/;
 
     private native void setScaleType(String type) /*-{
@@ -167,6 +237,22 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     private native void setZoomStartTime(double startTime) /*-{
       this.zoomStartTime = new $wnd.Date(startTime);
     }-*/;
+  }
+
+  /**
+   * The highlighting mode: The nearest dot to the mouse (default), or the last one 
+   * before the mouse (to the left of it).
+   */
+  public static enum HighlightDotMode {
+    /**
+     * Highlight the dot nearest to the mouse.
+     */
+    NEAREST,
+
+    /**
+     * Highlight the last dot before the mouse.
+     */
+    LAST
   }
 
   /**
@@ -255,6 +341,57 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     Handler.addHandler(this, "rangechange", handler);
   }
 
+  public final void addReadyHandler(ReadyHandler handler) {
+  Handler.addHandler(this, "ready", handler);
+  }
+    
+  public final void addSelectHandler(SelectHandler handler) {
+  Selection.addSelectHandler(this, handler);
+  }
+
+  public final JsArray<Selection> getSelections() {
+    return Selection.getSelections(this);
+  }
+
+  public final DateRange getVisibleChartRange() {
+    Date start = new Date((long)getVisibleChartRangeStartTime());
+    Date end = new Date((long)getVisibleChartRangeEndTime());
+    return new DateRange(start, end);
+  }
+  
+  public final void hideDataColumns(int... columnIndexes) {
+    hideDataColumns(ArrayHelper.createJsArray(columnIndexes));
+  }
+
+  public final native void hideDataColumns(JsArrayInteger columnIndexes) /*-{
+    this.hideDataColumns(columnIndexes);
+  }-*/;
+
+  public final void setVisibleChartRange(Date startTime, Date endTime) {
+    setVisibleChartRange(startTime.getTime(), endTime.getTime());
+  }
+
+  public final void showDataColumns(int... columnIndexes) {
+    showDataColumns(ArrayHelper.createJsArray(columnIndexes));
+  }
+
+  public final native void showDataColumns(JsArrayInteger columnIndexes) /*-{
+    this.showDataColumns(columnIndexes);
+  }-*/;
+
+ 
+  private native double getVisibleChartRangeEndTime() /*-{
+    return this.getVisibleChartRange()['end'].getTime();
+  }-*/;
+
+  private native double getVisibleChartRangeStartTime() /*-{
+    return this.getVisibleChartRange()['start'].getTime();
+  }-*/;
+
+  private native void setVisibleChartRange(double startTime, double endTime) /*-{
+    this.setVisibleChartRange(new $wnd.Date(startTime), new $wnd.Date(endTime));
+  }-*/;
+  
   @Override
   protected native JavaScriptObject createJso(Element parent) /*-{
     return new $wnd.google.visualization.AnnotatedTimeLine(parent);
