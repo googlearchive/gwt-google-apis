@@ -16,6 +16,7 @@
 package com.google.gwt.visualization.client.visualizations;
 
 import com.google.gwt.ajaxloader.client.ArrayHelper;
+import com.google.gwt.ajaxloader.client.JsDate;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayInteger;
@@ -206,6 +207,10 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
       setZoomStartTime(startTime.getTime());
     }
 
+    private native void resetNumberFormats() /*-{
+      this.numberFormats = {};
+    }-*/;
+
     private native void setHighlightDotMode(String highlightDotMode) /*-{
       this.highlightDot = highlightDotMode;
     }-*/;
@@ -214,10 +219,6 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
       this.legendPosition = position;
     }-*/;
 
-    private native void resetNumberFormats() /*-{
-      this.numberFormats = {};
-    }-*/;
-  
     private native void setNumberFormats(int key, String numberFormat) /*-{
       this.numberFormats[key] = numberFormat;
     }-*/;
@@ -354,8 +355,13 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   }
 
   public final DateRange getVisibleChartRange() {
-    Date start = new Date((long)getVisibleChartRangeStartTime());
-    Date end = new Date((long)getVisibleChartRangeEndTime());
+    JsArray<JsDate> dates = getVisibleChartRange(getJso());
+    if (dates == null) {
+      return null;
+    }
+    
+    Date start = JsDate.toJava(dates.get(0));
+    Date end = JsDate.toJava(dates.get(1));
     return new DateRange(start, end);
   }
   
@@ -363,37 +369,50 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     hideDataColumns(ArrayHelper.createJsArray(columnIndexes));
   }
 
-  public final native void hideDataColumns(JsArrayInteger columnIndexes) /*-{
-    this.hideDataColumns(columnIndexes);
-  }-*/;
+  public final void hideDataColumns(JsArrayInteger columnIndexes) {
+    this.hideDataColumns(getJso(), columnIndexes);
+  };
 
   public final void setVisibleChartRange(Date startTime, Date endTime) {
-    setVisibleChartRange(startTime.getTime(), endTime.getTime());
+    this.setVisibleChartRange(getJso(), 
+        startTime.getTime(), endTime.getTime());
   }
 
   public final void showDataColumns(int... columnIndexes) {
     showDataColumns(ArrayHelper.createJsArray(columnIndexes));
   }
 
-  public final native void showDataColumns(JsArrayInteger columnIndexes) /*-{
-    this.showDataColumns(columnIndexes);
-  }-*/;
+  public final void showDataColumns(JsArrayInteger columnIndexes) {
+    this.showDataColumns(getJso(), columnIndexes);
+  };
 
- 
-  private native double getVisibleChartRangeEndTime() /*-{
-    return this.getVisibleChartRange()['end'].getTime();
-  }-*/;
-
-  private native double getVisibleChartRangeStartTime() /*-{
-    return this.getVisibleChartRange()['start'].getTime();
-  }-*/;
-
-  private native void setVisibleChartRange(double startTime, double endTime) /*-{
-    this.setVisibleChartRange(new $wnd.Date(startTime), new $wnd.Date(endTime));
-  }-*/;
-  
   @Override
   protected native JavaScriptObject createJso(Element parent) /*-{
     return new $wnd.google.visualization.AnnotatedTimeLine(parent);
+  }-*/;
+
+  private native JsArray<JsDate> 
+      getVisibleChartRange(JavaScriptObject jso) /*-{
+    var dates = jso.getVisibleChartRange();
+    if (dates == null) {
+      return null;
+    }
+    return [dates['start'], dates['end']];
+  }-*/;
+
+  private native void hideDataColumns(JavaScriptObject jso, 
+      JsArrayInteger columnIndexes) /*-{
+    jso.hideDataColumns(columnIndexes);
+  }-*/;
+
+  private native void setVisibleChartRange(JavaScriptObject jso, 
+      double startTime, double endTime) /*-{
+    jso.setVisibleChartRange(new $wnd.Date(startTime), 
+        new $wnd.Date(endTime));
+  }-*/;
+  
+  private native void showDataColumns(JavaScriptObject jso, 
+      JsArrayInteger columnIndexes) /*-{
+    jso.showDataColumns(columnIndexes);
   }-*/;
 }

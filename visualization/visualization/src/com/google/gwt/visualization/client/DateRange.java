@@ -30,11 +30,11 @@ public class DateRange {
     this.end = end;
   }
 
-  public final Date getStart() {
-    return this.start;
-  }
-
   public final Date getEnd() {
     return this.end;
+  }
+
+  public final Date getStart() {
+    return this.start;
   }
 }
