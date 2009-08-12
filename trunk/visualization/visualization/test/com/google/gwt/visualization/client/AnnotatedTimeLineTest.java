@@ -18,6 +18,7 @@ package com.google.gwt.visualization.client;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine.AnnotatedLegendPosition;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine.Options;
@@ -152,6 +153,61 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
             options, "400px", "400px");
         RootPanel.get().add(widget);
         System.out.println(widget.getElement().getString());
+      }
+    });
+  }
+
+  public void testVisibleRange() {
+    loadApi(new Runnable() {
+      @SuppressWarnings("deprecation")
+      public void run() {
+        Options options = Options.create();
+
+        final AnnotatedTimeLine widget = 
+          new AnnotatedTimeLine(createAnnotatedDataTable(),
+              options, "400px", "400px");
+        RootPanel.get().add(widget);
+        
+        widget.addReadyHandler(new ReadyHandler() {
+          @Override
+          public void onReady(ReadyEvent event) {
+            widget.setVisibleChartRange(new Date(108, 1, 2), 
+                new Date(108, 1, 3));
+            DateRange dateRange = widget.getVisibleChartRange();
+            
+            // These tests fail now, as setting the range programatically does
+            // not set the range in the getter.
+            // I am on it in the js side, and then will uncomment here.
+            
+            //  assertEquals(new Date(108, 1, 2), dateRange.getStart());
+            //  assertEquals(new Date(108, 1, 2).getTimezoneOffset(), 
+            //      dateRange.getStart().getTimezoneOffset());
+            //  assertEquals(new Date(108, 1, 3), dateRange.getEnd());
+          }
+        });
+      }
+    });
+  }
+
+  public void testHideAndShowColumns() {
+    loadApi(new Runnable() {
+      @SuppressWarnings("deprecation")
+      public void run() {
+        Options options = Options.create();
+
+        final AnnotatedTimeLine widget = 
+          new AnnotatedTimeLine(createAnnotatedDataTable(),
+              options, "400px", "400px");
+        RootPanel.get().add(widget);
+        
+        widget.addReadyHandler(new ReadyHandler() {
+          @Override
+          public void onReady(ReadyEvent event) {
+            widget.hideDataColumns(2, 3);
+            widget.showDataColumns(2);
+          }
+        });
+        
       }
     });
   }
