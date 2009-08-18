@@ -25,7 +25,8 @@
 		</gwt.javac>
 	</target>
 
-	<target name="compile.tests" description="Compiles the test code for this project">
+	<target name="compile.tests" depends="compile.emma"
+		description="Compiles the test code for this project">
 		<mkdir dir="${javac.junit.out}" />
 		<gwt.javac srcdir="test" destdir="${javac.junit.out}">
 			<classpath>
@@ -43,7 +44,7 @@
 			<fileset dir="src" excludes="**/package.html" />
 			<fileset dir="${javac.out}" />
 		</gwt.jar>
-                <gwt.noredist.jar>
+                <gwt.jar destfile="${project.noredist.lib}">
                         <fileset dir="src" >
                                <exclude name="**/package.html" />
                                <exclude name="**/com/google/gwt/ajaxloader/**" />
@@ -51,7 +52,7 @@
                         <fileset dir="${javac.out}" >
                                <exclude name="com/google/gwt/ajaxloader/**" />
                         </fileset>
-                </gwt.noredist.jar>
+                </gwt.jar>
 
 	</target>
 
