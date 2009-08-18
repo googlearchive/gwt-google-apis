@@ -49,4 +49,5 @@
 	<target name="clean" description="Cleans the entire Gadgets API Library for GWT build">
 		<delete dir="${gwt.build}" />
 	</target>
+
 </project>
