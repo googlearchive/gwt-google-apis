@@ -87,7 +87,7 @@ public class AjaxLoader {
   static Vector<Runnable> queuedApiLoads = new Vector<Runnable>();
 
   /**
-   * Initialize the API without a key.
+   * Initialize the API without specifying a key.
    */
   public static void init() {
     init(null);
@@ -102,6 +102,12 @@ public class AjaxLoader {
   public static void init(String apiKey) {
     if (initialized == true) {
       return;
+    }
+
+    if (apiKey == null) {
+      // No key was specified. Use the location in the page to lookup a key from
+      // the Key repository
+      apiKey = AjaxKeyRepository.getKey();
     }
 
     loaded = injectJsapi(apiKey);

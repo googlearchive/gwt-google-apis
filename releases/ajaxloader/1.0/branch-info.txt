@@ -9,7 +9,8 @@ Merges:
 /trunk/ajaxloader/@1346:1371 was merged (r1372) into releases/ajaxloader/1.0
 /trunk/ajaxloader/@1371:1400 was merged (r1401) into releases/ajaxloader/1.0
 /trunk/ajaxloader/@1400:1440 was merged (r1441) into releases/ajaxloader/1.0
---->The next merge into trunk will be 1440:????
+/trunk/ajaxloader/@1440:1544 was merged (r1545) into releases/ajaxloader/1.0
+--->The next merge into trunk will be 1544:????
 
 Changes in this branch (excluding changes to this file itself)
 - Package description added (r1367)
@@ -17,3 +18,11 @@ Changes in this branch (excluding changes to this file itself)
 - Minor glitch in the formatting of the word "License" (r1399)
 - Updated launch scripts for Language and AjaxLoader projects (r1400)
 - Updated path in launch scripts for Ajaxloader (r1440)
+- Added link to online user guide. (r1445)
+- Properties and JsDate, two useful subclasses of JavaScriptObject. (r1501)
+- Updated to allow more heap memory during compile. (r1504)
+- checkstyle fixes (r1544)
+- Sort and format pass. (r1512)
+- Creates a key repository for AjaxLoader Keys used by Maps and search. (r1513)
+- Adds Tests to ArrayHelper, adds toJavaArrayBytes and removes other classes to avoid problems with overloads (r1520)
+- Enhances the ant build infrastructure to allow emma  builds. (r1543)
