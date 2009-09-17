@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,6 +23,7 @@ import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.language.client.transliteration.LanguageCode;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
@@ -38,7 +39,7 @@ public class TransliterationControl extends JavaScriptObject {
   /**
    * Create an instance of TransliterationControl class. Only one instance of
    * this can be created per page.
-   *
+   * 
    * @param options the {@code Options} object containing required data
    * @return instance of this class
    */
@@ -54,7 +55,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Adds a listener for the given event type. When the particular event type is
    * triggered, the listener is called with the event object. The contents of
    * the event object depend on the type of the event.
-   *
+   * 
    * @param eventType event type. See {@code EventType}
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -83,7 +84,7 @@ public class TransliterationControl extends JavaScriptObject {
   /**
    * Gets current language pair for transliteration. The array returned is
    * always of length 2; containing source and destination languages in order.
-   *
+   * 
    * @return a 2 element array containing source and destination languages
    */
   public final LanguageCode[] getLanguageCodePair() {
@@ -98,7 +99,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Gets current language code pair for transliteration. The array returned is
    * always of length 2; containing source and destination language codes in
    * order.
-   *
+   * 
    * @return a 2 element array containing source and destination language codes.
    */
   public final String[] getLanguagePair() {
@@ -111,7 +112,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Returns a boolean indicating whether transliteration is enabled or not.
-   *
+   * 
    * @return true if transliteration is enabled, false otherwise
    */
   public final native boolean isTransliterationEnabled() /*-{
@@ -119,80 +120,124 @@ public class TransliterationControl extends JavaScriptObject {
   }-*/;
 
   /**
-   * Makes text field with given id transliteratable. Note that the text field
-   * should already be attached to the page before this is called.
-   *
-   * @param textFieldId text field id
-   * @throws JavaScriptException on invalid text field id
+   * Allows a rich text area to be made transliteratable.
+   * 
+   * @param richText Area to make transliteratable.
    */
-  public final void makeTransliteratable(String textFieldId) {
-    makeTransliteratable(new String[] {textFieldId});
+  public final void makeTransliteratable(RichTextArea richText) {
+    RichTextArea[] richTexts = new RichTextArea[1];
+    richTexts[0] = richText;
+    makeTransliteratable(richTexts);
   }
 
   /**
-   * Makes text field with given id transliteratable with given options. Note
-   * that the text field should already be attached to the page before this is
-   * called.
-   *
-   * @param textField text field id
-   * @param options options for text field
-   * @throws JavaScriptException on invalid text field id
+   * Allows a rich text area to be made transliteratable.
+   * 
+   * @param richText Area to make transliteratable.
+   * @param options optional arguments.
    */
-  public final void makeTransliteratable(String textField,
+  public final void makeTransliteratable(RichTextArea richText,
       TextElementOptions options) {
-    makeTransliteratable(new String[] {textField}, options);
+    RichTextArea[] richTexts = new RichTextArea[1];
+    richTexts[0] = richText;
+    makeTransliteratable(richTexts, options);
   }
 
   /**
-   * Makes array of text fields transliteratable. Note that the text field
-   * should already be attached to the page before this is called.
-   *
-   * @param textFieldIds array of text field ids.
-   * @throws JavaScriptException on invalid text field ids
+   * Allows an array of rich text areas to be made transliteratable.
+   * 
+   * @param richTexts Areas to be made transliteratable.
    */
-  public final void makeTransliteratable(String[] textFieldIds) {
-    JsArrayString textFieldJsArray = ArrayHelper.createJsArray(textFieldIds);
-    makeTransliteratable(textFieldJsArray);
+  public final void makeTransliteratable(RichTextArea[] richTexts) {
+    JsArray<JavaScriptObject> richTextJsArray = createJsArray(richTexts);
+    makeTransliteratable(richTextJsArray);
   }
 
   /**
-   * Makes array of text fields transliteratable with given options. Note that
-   * the text field should already be attached to the page before this is
-   * called.
-   *
-   * @param textFieldIds array of text field ids
-   * @param options options for text field adjustment
-   * @throws JavaScriptException on invalid text field ids
+   * Allows an array of rich text areas to be made transliteratable.
+   * 
+   * @param richTexts Areas to be made transliteratable.
+   * @param options optional arguments.
    */
-  public final void makeTransliteratable(String[] textFieldIds,
+  public final void makeTransliteratable(RichTextArea[] richTexts,
       TextElementOptions options) {
-    JsArrayString textFieldJsArray = ArrayHelper.createJsArray(textFieldIds);
-    makeTransliteratable(textFieldJsArray, options);
+    JsArray<JavaScriptObject> richTextJsArray = createJsArray(richTexts);
+    makeTransliteratable(richTextJsArray, options);
+  }
+
+  /**
+   * Makes the DOM element with given id transliteratable. Note that the 
+   * element should already be attached to the page before this is called.
+   * 
+   * @param elementId DOM element id
+   * @throws JavaScriptException on invalid id
+   */
+  public final void makeTransliteratable(String elementId) {
+    makeTransliteratable(new String[] {elementId});
+  }
+
+  /**
+   * Makes the DOM element with given id transliteratable. Note that the 
+   * element should already be attached to the page before this is called.
+   * 
+   * @param elementId DOM element id
+   * @param options options for element
+   * @throws JavaScriptException on invalid id
+   */
+  public final void makeTransliteratable(String elementId,
+      TextElementOptions options) {
+    makeTransliteratable(new String[] {elementId}, options);
+  }
+
+  /**
+   * Makes the DOM element with given id transliteratable. Note that the 
+   * element should already be attached to the page before this is called.
+   * 
+   * @param elementIds array of DOM element ids.
+   * @throws JavaScriptException on invalid id
+   */
+  public final void makeTransliteratable(String[] elementIds) {
+    JsArrayString elementIdJsArray = ArrayHelper.toJsArrayString(elementIds);
+    makeTransliteratable(elementIdJsArray);
+  }
+
+  /**
+   * Makes the DOM element with given id transliteratable. Note that the 
+   * element should already be attached to the page before this is called.
+   * 
+   * @param elementIds array of DOM element ids
+   * @param options options for element
+   * @throws JavaScriptException on invalid id
+   */
+  public final void makeTransliteratable(String[] elementIds,
+      TextElementOptions options) {
+    JsArrayString elementIdJsArray = ArrayHelper.toJsArrayString(elementIds);
+    makeTransliteratable(elementIdJsArray, options);
   }
 
   /**
    * Make the given text area transliteratable.
-   *
+   * 
    * @param textArea the text area to be made transliteratable.
    */
   public final void makeTransliteratable(TextArea textArea) {
-    makeTransliteratable(new TextArea[] { textArea });
+    makeTransliteratable(new TextArea[] {textArea});
   }
 
   /**
    * Make the given text area transliteratable with given options.
-   *
+   * 
    * @param textArea the text area to be made transliteratable.
    * @param options options for text area adjustment
    */
   public final void makeTransliteratable(TextArea textArea,
       TextElementOptions options) {
-    makeTransliteratable(new TextArea[] { textArea }, options);
+    makeTransliteratable(new TextArea[] {textArea}, options);
   }
 
   /**
    * Make the given text areas transliteratable.
-   *
+   * 
    * @param textAreas the array of text areas to be made transliteratable.
    */
   public final void makeTransliteratable(TextArea[] textAreas) {
@@ -202,7 +247,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Make the given text areas transliteratable with given options.
-   *
+   * 
    * @param textAreas the text areas to be made transliteratable
    * @param options options for text area adjustment
    */
@@ -214,27 +259,27 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Make the given text box transliteratable.
-   *
+   * 
    * @param textBox the text box to be made transliteratable.
    */
   public final void makeTransliteratable(TextBox textBox) {
-    makeTransliteratable(new TextBox[] { textBox });
+    makeTransliteratable(new TextBox[] {textBox});
   }
 
   /**
    * Make the given text box transliteratable with given options.
-   *
+   * 
    * @param textBox the text area to be made transliteratable.
    * @param options options for text box adjustment
    */
   public final void makeTransliteratable(TextBox textBox,
       TextElementOptions options) {
-    makeTransliteratable(new TextBox[] { textBox }, options);
+    makeTransliteratable(new TextBox[] {textBox}, options);
   }
 
   /**
    * Make the given text boxes transliteratable.
-   *
+   * 
    * @param textBoxes the array of text boxes to be made transliteratable.
    */
   public final void makeTransliteratable(TextBox[] textBoxes) {
@@ -244,7 +289,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Make the given text boxes transliteratable with given options.
-   *
+   * 
    * @param textBoxes the text boxes to be made transliteratable
    * @param options options for text box adjustment
    */
@@ -256,7 +301,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Removes a listener.
-   *
+   * 
    * @param eventType event type. See {@code EventType}
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -269,7 +314,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Changes the language pair for transliteration.
-   *
+   * 
    * @param sourceLanguage source language
    * @param destLanguage destination language
    * @return a boolean indicating whether the setLanguage action was successful.
@@ -286,7 +331,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Changes the language pair for transliteration.
-   *
+   * 
    * @param sourceLangCode source language code
    * @param destLangCode destination language code
    * @return a boolean indicating whether the setLanguage action was successful.
@@ -302,7 +347,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Shows transliteration control under given DIV element.
-   *
+   * 
    * @param div the HTML DIV element
    */
   public final void showControl(HTML div) {
@@ -311,7 +356,7 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Shows transliteration control under div with given id.
-   *
+   * 
    * @param divId id of the div
    */
   public final native void showControl(String divId) /*-{
@@ -329,7 +374,7 @@ public class TransliterationControl extends JavaScriptObject {
    * Adds a listener for the given event type. When the particular event type is
    * triggered, the listener is called with the event object. The contents of
    * the event object depend on the type of the event.
-   *
+   * 
    * @param eventType event type as string
    * @param jsoListener the listener to the event that is called when event is
    *          triggered
@@ -340,12 +385,25 @@ public class TransliterationControl extends JavaScriptObject {
   }-*/;
 
   /**
+   * Creates a JS array of text fields from given Java array.
+   */
+  private JsArray<JavaScriptObject> createJsArray(RichTextArea[] richTexts) {
+    JsArray<JavaScriptObject> richTextJsArray = JavaScriptObject.createArray().cast();
+    int index = 0;
+    for (RichTextArea richText : richTexts) {
+      richTextJsArray.set(index, richText.getElement());
+      ++index;
+    }
+    return richTextJsArray;
+  }
+
+  /**
    * Creates a JS array of text fields from given java array.
-   *
+   * 
    * @param textFields array of text fields
    * @return Javascript array of text fields
    */
-  private final JsArray<JavaScriptObject> createJsArray(TextBoxBase[] textFields) {
+  private JsArray<JavaScriptObject> createJsArray(TextBoxBase[] textFields) {
     JsArray<JavaScriptObject> textFieldJsArray = JavaScriptObject.createArray().cast();
     int index = 0;
     for (TextBoxBase textField : textFields) {
@@ -358,7 +416,7 @@ public class TransliterationControl extends JavaScriptObject {
   /**
    * Returns a JS array of string values containing source and destination
    * languages of transliteration.
-   *
+   * 
    * @return A JsArrayString with source and destination languages.
    */
   private native JsArrayString getLanguagePairInternal() /*-{
@@ -371,17 +429,16 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Makes the given text fields transliteratable.
-   *
+   * 
    * @param textFields the array of text field references
    */
-  private final native void makeTransliteratable(
-      JsArray<JavaScriptObject> textFields) /*-{
+  private native void makeTransliteratable(JsArray<JavaScriptObject> textFields) /*-{
     this.makeTransliteratable(textFields);
   }-*/;
 
   /**
    * Make the given text fields transliteratable with given options.
-   *
+   * 
    * @param textFields javascript array of text fields.
    * @param options options for text field adjustment
    */
@@ -391,28 +448,28 @@ public class TransliterationControl extends JavaScriptObject {
   }-*/;
 
   /**
-   * Makes given array of text fields transliteratable.
-   *
-   * @param textFields ids of text fields
+   * Makes given array of DOM elements transliteratable.
+   * 
+   * @param elementIds ids of elements
    */
-  private native void makeTransliteratable(JsArrayString textFields) /*-{
+  private native void makeTransliteratable(JsArrayString elementIds) /*-{
     this.makeTransliteratable(textFields);
   }-*/;
 
   /**
-   * Makes given array of text fields transliteratable.
-   *
-   * @param textFields ids of text fields
+   * Makes given array of DOM elements transliteratable.
+   * 
+   * @param elementIds ids of elements
    * @param options options for text field adjustment
    */
-  private native void makeTransliteratable(JsArrayString textFields,
+  private native void makeTransliteratable(JsArrayString elementIds,
       TextElementOptions options) /*-{
-    this.makeTransliteratable(textFields, options);
+    this.makeTransliteratable(elementIds, options);
   }-*/;
 
   /**
    * Removes a listener.
-   *
+   * 
    * @param eventType event type as string
    * @param listener the listener to the event that is called when event is
    *          triggered
@@ -424,10 +481,10 @@ public class TransliterationControl extends JavaScriptObject {
 
   /**
    * Show transliteration control under given div element.
-   *
+   * 
    * @param div the div element to which control is attached.
    */
-  private final native void showControl(Element div) /*-{
+  private native void showControl(Element div) /*-{
     this.showControl(div);
   }-*/;
 }
