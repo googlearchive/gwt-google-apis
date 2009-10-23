@@ -6,7 +6,7 @@
 == Where can I go to get help with using the Visualization APIs? ==
 
 For general questions about the Visualization API for GWT, first try the 
-[http://groups.google.com/group/google-visualization-api Google Visualization API] Google group.  Make sure to mention that you are using the GWT wrappers for the project.
+[http://groups.google.com/group/google-visualization-api Google Visualization API] Google group.  Make sure to mention that you are using the GWT wrappers for the project.  Be sure to check out the [http://code.google.com/p/gwt-google-apis/wiki/VisualizationFAQ Visualization API FAQ] for general Visualization API questions.
 
 Another place you can to for help is the [http://groups.google.com/group/gwt-google-apis GWT-Google-Apis] group, which is the forum for the developers of the GWT wrappers for all Google APIs.  You can also try the [http://groups.google.com/group/gwt-google-api Google-Web-Toolkit] group which is the main public forum for GWT. 
   
@@ -75,3 +75,11 @@ Some methods of some visualizations only work properly when the visualization is
 == What happened to com.google.gwt.visualization.client.AjaxLoader?  After upgrading it is gone! ==
 
 In release gwt-visualization-1.0.2, The AjaxLoader class was moved to a common package to be shared with other APIs.  You can access the same functionality by using the com.google.gwt.visualization.client.VisualizationUtils class.  In the future, we will deprecate classes before removing them.
+
+== Can I combine the Visualization API and Gears to create an offline visualization application? ==
+
+No.  See [http://code.google.com/apis/visualization/faq.html#offline the Visualization API FAQ].
+
+== Can I use the Visualization API for GWT in a plain Java application without using GWT? ==
+
+No.  The gwt-visualization library merely wraps a set of JavaScript APIs and is dependent on the underlying browse, flash plugin, and uses the network to communicate with Google's servers.
