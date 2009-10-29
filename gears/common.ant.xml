@@ -382,7 +382,7 @@
 
   <taskdef resource="emma_ant.properties" classpathref="emma.taskdef.lib" />
 
-  <target name="compile.emma" description="Instruments emma classes" unless="emma.compiled">
+  <target name="compile.emma.if.enabled" description="Instruments emma classes" unless="emma.compiled">
     <delete dir="${javac.emma.out}" />
     <property name="emma.compiled" value="true" />
     <antcall target="-compile.emma.if.enabled" />
