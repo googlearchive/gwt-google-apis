@@ -6,19 +6,19 @@ Many visualizations can fire events, which can be caught and handled by code in 
 
 = The `Selectable` Interface =
 
-Many visualizations fire the `select` event when the user clicks a component of the visualization.  The GWT Visualization API includes special support for the select event.  The wrapper for a visualization that supports selection should implement the `Selectable` interface, and use the `SelectionHelper` class to implement these three special methods:
+Many visualizations fire the `select` event when the user clicks a component of the visualization.  The GWT Visualization API includes special support for the select event.  The wrapper for a visualization that supports selection should implement the `Selectable` interface, and use the `Selection` class to implement these three special methods:
 
 {{{
   public final void addSelectHandler(SelectHandler handler) {
-    SelectionHelper.addSelectHandler(this, handler);
+    Selection.addSelectHandler(this, handler);
   }
 
   public final JsArray<Selection> getSelections() {
-    return SelectionHelper.getSelections(this);
+    return Selection.getSelections(this);
   }
 
   public final void setSelections(JsArray<Selection> sel) {
-    SelectionHelper.setSelections(this, sel);
+    Selection.setSelections(this, sel);
   }
 }}}
 
