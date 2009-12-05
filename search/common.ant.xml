@@ -206,6 +206,7 @@
     <!-- TODO: make this more generic / refactor so it can be used from dev/core -->
     <attribute name="test.args" default="" />
     <attribute name="test.out" default="" />
+    <attribute name="test.name" default="" />
     <attribute name="test.reports" default="@{test.out}/reports" />
     <attribute name="test.emma.coverage" default="@{test.out}/emma-coverage" />
     <attribute name="test.cases" default="" />
