@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.core.ext.linker.CompilationResult;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.linker.XSLinker;
 import com.google.gwt.dev.About;
@@ -100,7 +101,9 @@ public final class GadgetLinker extends XSLinker {
       }
     }
 
-    if (manifestArtifact == null) {
+    // When compiling for web mode, enforce that the manifest is present.
+    if (manifestArtifact == null
+        && !artifacts.find(CompilationResult.class).isEmpty()) {
       logger.log(TreeLogger.ERROR, "No gadget manifest found in ArtifactSet.");
       throw new UnableToCompleteException();
     }
