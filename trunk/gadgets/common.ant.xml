@@ -103,7 +103,7 @@
 
   <!-- References to files from the GWT_HOME directory -->
         <property name="gwt.dev.jar"
-                location="${gwt.home}/gwt-dev.jar" />
+                location="${gwt.home}/gwt-dev-${build.host.platform}.jar" />
         <property name="gwt.user.jar" location="${gwt.home}/gwt-user.jar" />
 
         <!--  Reference to jars produced by this build -->
@@ -132,7 +132,7 @@
   </condition>
 
   <!-- JUnit support -->
-  <property name="gwt.dev.staging.jar" location="${gwt.build.staging}/gwt-${build.host.platform}-${gwt.version}/gwt-dev.jar" />
+  <property name="gwt.dev.staging.jar" location="${gwt.build.staging}/gwt-${build.host.platform}-${gwt.version}/gwt-dev-${build.host.platform}.jar" />
   <property name="gwt.junit.port" value="8888" />
   <property name="gwt.junit.testcase.includes" value="**/EmulSuite.class"/>
 
