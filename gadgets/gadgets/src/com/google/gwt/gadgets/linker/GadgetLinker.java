@@ -101,13 +101,16 @@ public final class GadgetLinker extends XSLinker {
       }
     }
 
-    // When compiling for web mode, enforce that the manifest is present.
-    if (manifestArtifact == null
-        && !artifacts.find(CompilationResult.class).isEmpty()) {
-      logger.log(TreeLogger.ERROR, "No gadget manifest found in ArtifactSet.");
-      throw new UnableToCompleteException();
+    if (manifestArtifact == null) {
+      if (artifacts.find(CompilationResult.class).isEmpty()) {
+        // Maybe hosted mode or junit, defer to XSLinker.
+        return new XSLinker().link(logger, context, toLink);
+      } else {
+        // When compiling for web mode, enforce that the manifest is present.
+        logger.log(TreeLogger.ERROR, "No gadget manifest found in ArtifactSet.");
+        throw new UnableToCompleteException();
+      }
     }
-
     return super.link(logger, context, toLink);
   }
 
