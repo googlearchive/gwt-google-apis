@@ -102,30 +102,40 @@
   <fail unless="build.host.platform" message="Building on ${os.name} is not supported" />
 
   <!-- References to files from the GWT_HOME directory -->
-        <property name="gwt.dev.jar"
-                location="${gwt.home}/gwt-dev-${build.host.platform}.jar" />
-        <property name="gwt.user.jar" location="${gwt.home}/gwt-user.jar" />
 
-        <!--  Reference to jars produced by this build -->
-        <property name="ant.gwt.jar"
-                location="${gwt.home}/ant-gwt.jar" />
-        <!-- 
-                Refactor this out to common code
-        -->
-        <property name="api.name" value="maps" />
-        <property name="gwt.google.apis.jar"
-                location="${gwt.build.lib}/gwt-${api.name}.jar" />
+  <!-- GWT 2.0 -->
+  <property name="gwt-dev1" value="${gwt.home}/gwt-dev.jar"/>  
+  <!-- GWT versions < 2.0 -->
+  <property name="gwt-dev2" value="${gwt.home}/gwt-dev-${build.host.platform}.jar" />
 
-        <!-- Sanity check -->
-        <available file="${gwt.tools}" type="dir"
-                property="gwt.tools.exists" />
-        <fail unless="gwt.tools.exists"
-                message="Cannot find '${gwt.tools}' tools directory; perhaps you should define the GWT_TOOLS environment variable" />
+  <condition property="gwt.dev.jar" value="${gwt-dev1}">
+    <available file="${gwt-dev1}" />
+  </condition>
+  <condition property="gwt.dev.jar" value="${gwt-dev2}">
+    <available file="${gwt-dev2}" />
+  </condition>
 
-        <available file="${gwt.dev.jar}" property="gwt.dev.jar.exists" />
-        <fail unless="gwt.dev.jar.exists"
-                message="Cannot find '${gwt.dev.jar}'; perhaps you should define the GWT_HOME environment variable" />
+  <property name="gwt.user.jar" location="${gwt.home}/gwt-user.jar" />
 
+  <!--  Reference to jars produced by this build -->
+  <property name="ant.gwt.jar"
+           location="${gwt.home}/ant-gwt.jar" />
+  <!-- 
+           Refactor this out to common code
+   -->
+   <property name="api.name" value="maps" />
+   <property name="gwt.google.apis.jar"
+           location="${gwt.build.lib}/gwt-${api.name}.jar" />
+
+   <!-- Sanity check -->
+   <available file="${gwt.tools}" type="dir"
+          property="gwt.tools.exists" />
+   <fail unless="gwt.tools.exists"
+           message="Cannot find '${gwt.tools}' tools directory; perhaps you should define the GWT_TOOLS environment variable" />
+
+   <available file="${gwt.dev.jar}" property="gwt.dev.jar.exists" />
+   <fail unless="gwt.dev.jar.exists"
+           message="Cannot find '${gwt.dev.jar}'; perhaps you should define the GWT_HOME environment variable" />
 
   <condition property="junit.platform.args" value="-XstartOnFirstThread" else="">
     <isset property="build.host.ismac" />
