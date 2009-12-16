@@ -17,6 +17,7 @@ package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.search.client.impl.GSearch;
 import com.google.gwt.search.client.impl.GSearchCompleteCallback;
 import com.google.gwt.user.client.ui.Widget;
@@ -199,9 +200,16 @@ public abstract class Search {
    * According to the terms of service for the Google AJAX Search API, it is
    * necessary to display the attribution Element near search result if you are
    * using a raw Searcher.
+   * 
+   * Be prepared for this method to return <code>null</code> as an attribution
+   * is not always available.
    */
   public Widget getAttribution() {
-    return Result.makeWidget(impl.getAttribution(this));
+    Element attribution = impl.getAttribution(this);
+    if (attribution == null) {
+      return null;
+    }
+    return Result.makeWidget(attribution);
   }
 
   /**
@@ -234,9 +242,9 @@ public abstract class Search {
    * 
    * @param pageNumber supplies the page number of the results that the
    *          application wants. This value is range checked relative to the
-   *          <code>.cursor.pages</code> property and no operation is
-   *          performed if the page is out of range or if the underlying
-   *          searcher does not have a cursor property.
+   *          <code>.cursor.pages</code> property and no operation is performed
+   *          if the page is out of range or if the underlying searcher does not
+   *          have a cursor property.
    */
   public void gotoPage(int pageNumber) {
     impl.gotoPage(this, pageNumber);
@@ -280,7 +288,8 @@ public abstract class Search {
    * 
    * @param addition Additional parameters to add to any queries executed by the
    *          Search.
-   * @see <a href="http://www.google.com/help/refinesearch.html">Refine Search</a>
+   * @see <a href="http://www.google.com/help/refinesearch.html">Refine Search<
+   *      /a>
    */
   public void setQueryAddition(String addition) {
     impl.setQueryAddition(this, addition);
