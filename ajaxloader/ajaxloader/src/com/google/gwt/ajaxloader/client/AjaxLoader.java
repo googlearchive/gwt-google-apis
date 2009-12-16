@@ -15,10 +15,12 @@
  */
 package com.google.gwt.ajaxloader.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.user.client.Window;
 
 import java.util.Vector;
 
@@ -63,7 +65,7 @@ public class AjaxLoader {
     }-*/;
 
     public final void setPackages(String... packages) {
-      setPackages(ArrayHelper.createJsArray(packages));
+      setPackages(ArrayHelper.toJsArrayString(packages));
     }
 
     private native void setCallback(Runnable onLoad) /*-{
@@ -176,7 +178,7 @@ public class AjaxLoader {
     }
     Document doc = Document.get();
     String key = (apiKey == null) ? "" : ("key=" + apiKey + "&");
-    String src = "http://www.google.com/jsapi?" + key
+    String src = Window.Location.getProtocol() + "//www.google.com/jsapi?" + key
         + "callback=__gwt_AjaxLoader_onLoad";
     ScriptElement script = doc.createScriptElement();
     script.setSrc(src);
