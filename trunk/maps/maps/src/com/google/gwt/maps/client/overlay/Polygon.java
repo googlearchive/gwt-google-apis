@@ -397,6 +397,18 @@ public class Polygon extends ConcreteOverlay {
   }
 
   /**
+   * Inserts a new point at the given index in the polygon. The {@link Polygon}
+   * must already be added to the map via
+   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
+   * 
+   * @param index position in the polygon to insert the new point.
+   * @param latlng point to insert into the polygon.
+   */
+  public void insertVertex(int index, LatLng latlng) {
+    PolygonImpl.impl.insertVertex(jsoPeer, index, latlng);
+  }
+
+  /**
    * Returns true if the polygon is visible on the map.
    * 
    * @return true if the polygon is visible on the map.
@@ -610,18 +622,6 @@ public class Polygon extends ConcreteOverlay {
    */
   public boolean supportsHide() {
     return PolygonImpl.impl.supportsHide(jsoPeer);
-  }
-
-  /**
-   * Inserts a new point at the given index in the polygon. The {@link Polygon}
-   * must already be added to the map via
-   * {@link com.google.gwt.maps.client.MapWidget#addOverlay(Overlay)}
-   * 
-   * @param index position in the polygon to insert the new point.
-   * @param latlng point to insert into the polygon.
-   */
-  void insertVertex(int index, LatLng latlng) {
-    PolygonImpl.impl.insertVertex(jsoPeer, index, latlng);
   }
 
   /**
