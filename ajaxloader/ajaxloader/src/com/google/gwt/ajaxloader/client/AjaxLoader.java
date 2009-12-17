@@ -46,6 +46,12 @@ public class AjaxLoader {
       this.base_domain = baseDomain;
     }-*/;
 
+    private native void setCallback(Runnable onLoad) /*-{
+      this.callback = function() {
+        @com.google.gwt.ajaxloader.client.ExceptionHelper::runProtected(Ljava/lang/Runnable;)(onLoad);
+      }
+    }-*/;
+
     public final native void setLanguage(String language) /*-{
       // TODO(zundel): try to incorporate w/ GWT locale?
        this.language = language;
@@ -67,12 +73,6 @@ public class AjaxLoader {
     public final void setPackages(String... packages) {
       setPackages(ArrayHelper.toJsArrayString(packages));
     }
-
-    private native void setCallback(Runnable onLoad) /*-{
-      this.callback = function() {
-        @com.google.gwt.ajaxloader.client.ExceptionHelper::runProtected(Ljava/lang/Runnable;)(onLoad);
-      }
-    }-*/;
   }
 
   // NativeCreateCallback already ran, or someone injected the API outside of
@@ -87,6 +87,13 @@ public class AjaxLoader {
   static boolean loaded = false;
 
   static Vector<Runnable> queuedApiLoads = new Vector<Runnable>();
+
+  private static String getProtocol() {
+	if (Window.Location.getProtocol().equals("https:")) {
+		return "https:";
+	}
+	return "http:";
+  }
 
   /**
    * Initialize the API without specifying a key.
@@ -114,6 +121,36 @@ public class AjaxLoader {
 
     loaded = injectJsapi(apiKey);
     initialized = true;
+  }
+
+  /**
+   * Adds a script element to the DOM that loads the Ajax API Loader main script
+   * "jsapi".
+   * 
+   * @param apiKey Optional API key value (pass null to omit the key). See
+   *          http://code.google.com/apis/ajaxsearch/signup.html
+   * @returns <code>true</code> if the API has already been loaded. Otherwise,
+   *          returns <code>false</code>, meaning that the application should
+   *          wait for a callback.
+   */
+  private static boolean injectJsapi(String apiKey) {
+    if (alreadyInjected) {
+      return true;
+    }
+    boolean alreadyLoaded = nativeCreateCallback();
+    alreadyInjected = true;
+    if (alreadyLoaded) {
+      return true;
+    }
+    Document doc = Document.get();
+    String key = (apiKey == null) ? "" : ("key=" + apiKey + "&");
+    String src = getProtocol() + "//www.google.com/jsapi?" + key
+        + "callback=__gwt_AjaxLoader_onLoad";
+    ScriptElement script = doc.createScriptElement();
+    script.setSrc(src);
+    script.setType("text/javascript");
+    doc.getBody().appendChild(script);
+    return false;
   }
 
   /**
@@ -156,37 +193,7 @@ public class AjaxLoader {
       queuedApiLoads.add(apiLoad);
     }
   }
-
-  /**
-   * Adds a script element to the DOM that loads the Ajax API Loader main script
-   * "jsapi".
-   * 
-   * @param apiKey Optional API key value (pass null to omit the key). See
-   *          http://code.google.com/apis/ajaxsearch/signup.html
-   * @returns <code>true</code> if the API has already been loaded. Otherwise,
-   *          returns <code>false</code>, meaning that the application should
-   *          wait for a callback.
-   */
-  private static boolean injectJsapi(String apiKey) {
-    if (alreadyInjected) {
-      return true;
-    }
-    boolean alreadyLoaded = nativeCreateCallback();
-    alreadyInjected = true;
-    if (alreadyLoaded) {
-      return true;
-    }
-    Document doc = Document.get();
-    String key = (apiKey == null) ? "" : ("key=" + apiKey + "&");
-    String src = Window.Location.getProtocol() + "//www.google.com/jsapi?" + key
-        + "callback=__gwt_AjaxLoader_onLoad";
-    ScriptElement script = doc.createScriptElement();
-    script.setSrc(src);
-    script.setType("text/javascript");
-    doc.getBody().appendChild(script);
-    return false;
-  }
-
+  
   /**
    * Creates a function to be registered for a callback after jsapi loads.
    */
