@@ -34,6 +34,7 @@ public class ArrayHelperTest extends GWTTestCase {
       return {'intMember':arg1, 'stringMember':arg2};
     }-*/;
 
+    @SuppressWarnings("unused")
     protected TestObject() {
     }
 

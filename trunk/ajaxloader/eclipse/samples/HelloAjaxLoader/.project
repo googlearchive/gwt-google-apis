@@ -10,22 +10,20 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
-		<nature>com.google.gwt.eclipse.plugin.gwtNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
 			<name>src</name>
 			<type>2</type>
 			<locationURI>AJAXLOADER_API_ROOT/samples/helloajaxloader/src</locationURI>
+		</link>
+		<link>
+			<name>war</name>
+			<type>2</type>
+			<locationURI>AJAXLOADER_API_ROOT/samples/helloajaxloader/war</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

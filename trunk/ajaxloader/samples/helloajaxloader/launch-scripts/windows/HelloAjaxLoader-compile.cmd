@@ -1,5 +1,5 @@
 @if "%GWT_HOME%"=="" goto needGWTHome
-@java -Xmx128M -cp "%~dp0\..\..\src;%~dp0\..\..\bin;%GWT_HOME%\gwt-user.jar;%GWT_HOME%\gwt-dev-windows.jar;..\..\..\..\gwt-ajaxloader.jar" com.google.gwt.dev.GWTCompiler -out "%~dp0\..\..\www" %* com.google.gwt.ajaxloader.sample.helloajaxloader.HelloAjaxLoader
+@java -Xmx256M -cp "%~dp0\..\..\src;%~dp0\..\..\war\WEB-INF\classes;%GWT_HOME%\gwt-user.jar;%GWT_HOME%\gwt-dev-windows.jar;%GWT_HOME%\gwt-dev.jar;..\..\..\..\gwt-ajaxloader.jar" com.google.gwt.dev.Compiler -war "%~dp0\..\..\war" %* com.google.gwt.ajaxloader.sample.helloajaxloader.HelloAjaxLoader
 @exit /B %ERRORLEVEL%
 
 :needGWTHome
