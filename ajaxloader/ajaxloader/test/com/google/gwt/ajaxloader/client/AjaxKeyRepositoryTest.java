@@ -32,6 +32,7 @@ public class AjaxKeyRepositoryTest extends GWTTestCase {
    * Tests AjaxKeyRepsoritory.getKey() method.
    */
   public void testDefault() {
+    @SuppressWarnings("unused")
     String value = AjaxKeyRepository.getKey();
     // The fact that the method runs without an exception is about all we can
     // reliably test. Can't really assert here, unit tests often run on some

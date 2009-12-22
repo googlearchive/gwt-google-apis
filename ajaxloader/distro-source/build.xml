@@ -24,8 +24,7 @@
 			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
 				<include name="samples/*" />
 				<include name="samples/*/src/**" />
-				<include name="samples/*/bin/**" />
-				<include name="samples/*/www/**" />
+				<include name="samples/*/war/**" />
 			</tarfileset>
 
 			<tarfileset dir="${gwt.build.out}/samples" mode="755" prefix="${project.distname}/samples">
@@ -55,8 +54,7 @@
 			<zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
 				<include name="samples/*" />
 				<include name="samples/*/src/**" />
-				<include name="samples/*/bin/**" />
-				<include name="samples/*/www/**" />
+				<include name="samples/*/war/**" />
 			</zipfileset>
 
 			<!--

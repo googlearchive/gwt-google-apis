@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/gwt-user"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/gwt-dev-windows"/>
+        <classpathentry exported="true" kind="var" path="/GWT_TOOLS/lib/junit/junit-3.8.1.jar" sourcepath="/GWT_TOOLS/lib/junit/junit-3.8.1-src.zip"/>
+
 	<classpathentry kind="output" path="bin"/>
 </classpath>
