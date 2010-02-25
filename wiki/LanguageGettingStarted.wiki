@@ -16,8 +16,6 @@ You can reference the `.jar` file either from the folder that you uncompressed t
 
 == Setting up a GWT Project to use the Language API===
 
-_Note: these instructions are designed to work with the GWT 1.5 release._
-
 There are three steps needed to use the Language API in a GWT project:
 
    # Include the library JAR file in the classpath
