@@ -22,7 +22,7 @@ There are some files created by the GWT compiler that are very long and cause is
 
 If you are on Windows, you may be hitting a path length problem.  Try unpacking the distribution with a third-party unzip program.   Also, try putting it in a folder with a short name off of the root of a drive.
 
-If you are having trouble running the sample scripts XXX-shell.com and XXX-compile.cmd,  make sure you have the GWT_HOME environment variable set.  It should contain a pathname that contains a uncompressed GWT distribution.
+If you are having trouble running the sample scripts XXX-shell.cmd and XXX-compile.cmd,  make sure you have the GWT_HOME environment variable set.  It should contain a pathname that contains a uncompressed GWT distribution.
 
 == Why do I get an exception saying that $wnd.google.visualization "is null" or "has no properties"? ==
 

@@ -166,7 +166,8 @@ The modules need to call this callback after they finished loading. For the Goog
  <script language="javascript" src="com.google.gwt.visualization.sample.customvisualization.CustomVisualization.nocache.js"></script>
 }}}
 
-In GWT we can just use a [http://code.google.com/docreader/#p=google-web-toolkit-doc-1-5&s=google-web-toolkit-doc-1-5&t=DevGuideJavaScriptFromJava JSNI] function that is executed after the visualization was registered:
+In GWT we can just use a [http://code.google.com/webtoolkit/doc/latest/DevGuideCodingBasicsJSNI.html JSNI] function that is executed after the visualization was registered:
+
 {{{
  public void onModuleLoad() {
     // Register the visualization
@@ -181,7 +182,7 @@ In GWT we can just use a [http://code.google.com/docreader/#p=google-web-toolkit
   }-*/;
 }}}
 
-If you plan to make your visualization available to applications which run on other domains than the domain that serves your visualization you need to compile using the cross site linker ( [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(DevGuideModuleXml) XSLinker]).
+If you plan to make your visualization available to applications which run on other domains than the domain that serves your visualization you need to compile using the cross site linker ( [http://code.google.com/webtoolkit/doc/latest/DevGuideOrganizingProjects.html#DevGuideModuleXml XSLinker]).
 
 This can be done by adding this line the [http://code.google.com/p/gwt-google-apis/source/browse/trunk/visualization/samples/customvisualization/src/com/google/gwt/visualization/sample/customvisualization/CustomVisualization.gwt.xml CustomVisualization.gwt.xml].
 

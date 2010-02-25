@@ -82,50 +82,17 @@ Total time: 2 minutes 47 seconds
 }}}  
 
 
-=== Creating <project>-compile and <project>-shell ===
+=== Creating a skeleton project ===
 
-You can use the `projectCreator` and `applicationCreator` to create a skeleton project to get started.
-
-{{{
-$PP_OFF
-$  projectCreator -eclipse MapsTutorial -out MapsTutorial \
-Created directory MapsTutorial/src
-Created directory MapsTutorial/test
-Created file MapsTutorial/.project
-Created file MapsTutorial/.classpath
-
-$ applicationCreator -eclipse MapsTutorial -out MapsTutorial com.example.google.gwt.mapstutorial.client.MapsTutorial
-Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial
-Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/client
-Created directory MapsTutorial/src/com/example/google/gwt/mapstutorial/public
-Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml
-Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/public/MapsTutorial.html
-Created file MapsTutorial/src/com/example/google/gwt/mapstutorial/client/MapsTutorial.java
-Created file MapsTutorial/MapsTutorial.launch
-Created file MapsTutorial/MapsTutorial-shell
-Created file MapsTutorial/MapsTutorial-compile
-}}}
-
-
-The GWT compiler needs to know about the Java source and compiled Java class files, so let's modify the command line script `MapsTutorial-shell` and append the maps distribution's `src` directory and the `bin` directory of the build output to the `-cp` argument to `java`:
+You can use either the Google Plugin for Eclipse or the `webAppCreator` script to create a skeleton project to get started.
 
 {{{
 $PP_OFF
-#!/bin/sh
-APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src:/usr/local/gwt-google-apis/maps/build/out/maps/bin" com.google.gwt.dev.GWTShell -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial/MapsTutorial.html;    
+$ webAppCreator -out MapsTutorial com.example.google.gwt.mapstutorial.client.MapsTutorial
 }}}
 
-Next, make a similar change to the `MapsTutorial-compile` script:
 
-{{{
-$PP_OFF
-#!/bin/sh
-APPDIR=`dirname $0`;
-java  -cp "$APPDIR/src:$APPDIR/bin:/usr/local/gwt/gwt-user.jar:/usr/local/gwt/gwt-dev-linux.jar:/usr/local/gwt-google-apis/maps/maps/src:/usr/local/gwt-google-apis/maps/build/out/maps/bin" com.google.gwt.dev.GWTCompiler -out "$APPDIR/www" "$@" com.example.google.gwt.mapstutorial.MapsTutorial;
-}}}
-
-Finally, we need to update the module to include the Maps project module file and the Google Maps API script.  Edit `MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml` and add the following lines:
+Then update the module to include the Maps project module file and the Google Maps API script.  Edit `MapsTutorial/src/com/example/google/gwt/mapstutorial/MapsTutorial.gwt.xml` and add the following lines:
 
 {{{
  <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
@@ -142,8 +109,6 @@ Finally, we need to update the module to include the Maps project module file an
  <!-- You can run under localhost without a key -->
  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x" />
 }}}
-
-Test to see that hosted mode and web mode work by running the `MapsTutorial-shell` and `MapsTutorial-compile` scripts.
 
 === Import the Eclipse project from the GWT Google APIs source code ===
 

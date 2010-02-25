@@ -4,45 +4,13 @@
 
 ==Creating a new GWT project==
 
-Start by creating a new GWT project called !GearsWorkerPoolTutorial as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Tutorial]. 
+Start by creating a new GWT project called !GearsWorkerPoolTutorial as described in the[http://code.google.com/eclipse/docs/creating_new_webapp.html GWT Plugin Guide]. 
 
-Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-gears/gwt-gears.jar` to the Java classpath for the launch, compile and .and eclipse definitions. Note that for the purposes of this example we assume `gwt-gears.jar` has been unpacked in `/usr/local/gwt-gears` and that you are using the Eclipse IDE.
-
-{{{
-$PP_OFF
-$ projectCreator -eclipse GearsWorkerPoolTutorial -out GearsWorkerPoolTutorial \
-     -addToClassPath /usr/local/gwt-gears/gwt-gears.jar
-}}}
+Since we are working with an additional library, add the library `gwt-gears.jar` to the Java classpath.  Then, add the module `com.google.gwt.gears.Offline` to your module.
 
 {{{
 $PP_OFF
-$ applicationCreator -eclipse GearsWorkerPoolTutorial \
-     -out GearsWorkerPoolTutorial \
-     -addToClassPath /usr/local/gwt-gears/gwt-gears.jar \
-     -addModule com.google.gwt.gears.Gears \
-     com.example.google.gwt.gearsworkerpooltutorial.client.GearsWorkerPoolTutorial
-}}}
-
-You should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by either running `GearsWorkerPoolTutorial-shell` from the command line or using the _Run_ configuration from Eclipse. 
-
-{{{
-$PP_OFF
-$ cd GearsWorkerPoolTutorial
-$ ./GearsWorkerPoolTutorial-shell
-}}}
-
-You should see the skeleton project come up:
-
-  http://gwt-google-apis.googlecode.com/svn/wiki/GettingStartedBasic1.png
-
-Also test out compilation with the `GearsWorkerPoolTutorial-compile` script or the _Compile/Browse_ button in hosted mode
-
-{{{
-$PP_OFF
-$ ./GearsWorkerPoolTutorial-compile
-Compiling into ./www/com.example.google.gwt.gearsstutorial.GearsWorkerPoolTutorial
-Copying all files found on public path
-Compilation succeeded
+    <inherits name='com.google.gwt.gears.Gears' />
 }}}
 
 == Update the HTML host file ==
@@ -257,7 +225,7 @@ public class NoGears {
 
 === Modify !GearsWorkerPoolTutorial.gwt.xml ===
 
-In order to tell the compiler to add logic to the selection script to pull up your rebound entry point, you need to create a [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(DevGuideDeferredBindingReplacement) replace-class-with] rule in your `gwt.xml` module file.  
+In order to tell the compiler to add logic to the selection script to pull up your rebound entry point, you need to create a [http://code.google.com/webtoolkit/doc/latest/DevGuideCodingBasicsDeferred.html#replacement replace-class-with] rule in your `gwt.xml` module file.  
 
 {{{
   <!-- Rebind the entry point if Gears is not installed -->

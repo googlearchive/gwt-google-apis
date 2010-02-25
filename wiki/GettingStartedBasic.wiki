@@ -1,4 +1,4 @@
 #summary Getting Started with the Google API Library for GWT
 
-Document has moved.  see [http://code.google.com/docreader/#p(gwt-google-apis)]
+Document has moved.  See [http://code.google.com/p/gwt-google-apis/wiki]
 

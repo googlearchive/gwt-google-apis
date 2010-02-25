@@ -6,7 +6,7 @@ These FAQs refer to the Google AJAX Search API Library for GWT.  See also [Overv
 
 == Using the AJAX Search RESTful interface ==
 
-There is no explicit API support at this time for the AJAXSearch RESTful interface, but you can implement it with a combination of the GWT's `RequestBuilder` class and  and [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(DevGuideJSOverlays) JavaScript overlay types]. 
+There is no explicit API support at this time for the AJAXSearch RESTful interface, but you can implement it with a combination of the GWT's `RequestBuilder` class and  and [http://code.google.com/webtoolkit/doc/latest/DevGuideCodingBasicsOverlay.html JavaScript overlay types]. 
 
 == Why is there a `gwt` argument in the query line on the <script> tag to load the AJAX Search API? ==
 

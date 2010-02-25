@@ -10,8 +10,7 @@ This guide describes the basics of getting the Google Maps Library working in a 
 == Assumptions ==
  
   * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
-  * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
-
+  * You know how to [http://code.google.com/eclipse/docs/creating_new_webapp.html create a new GWT project.]
 
 == Downloading the Google Maps Library for GWT ==
 
@@ -21,38 +20,14 @@ You can either reference the `.jar` file from the folder that you uncompressed t
 
 == Creating a new GWT Project ==
 
-Start by creating a new GWT project called !SimpleMaps as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
+Start by creating a new GWT project called !SimpleMaps as described in the [http://code.google.com/eclipse/docs/creating_new_webapp.html Google Plugin for Eclipse user's guide.]
 
-Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-maps/gwt-maps.jar` to the Java classpath for the launch, compile and and eclipse definitions. For the purposes of this example we assume `gwt-maps.jar` has been unpacked in `/usr/local/gwt-maps` and that you are using the Eclipse IDE.
-
-We also need to tell the GWT compiler that we are using the Maps module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.maps.GoogleMaps` as the module to be inherited. This will place the inheritance entry `Maps.gwt.xml` into the generated project file `SimpleMaps.gwt.xml`.
-
+Since we are working with an additional library, add `gwt-maps.jar` to the Java classpath.  Then, add the inherits line for `com.google.gwt.maps.GoogleMaps` to your module.
 
 {{{
 $PP_OFF
-$ projectCreator -eclipse SimpleMaps -out SimpleMaps \
-     -addToClassPath /usr/local/gwt-maps/gwt-maps.jar
-
-$ applicationCreator -eclipse SimpleMaps -out SimpleMaps \
-		     -addToClassPath /usr/local/gwt-maps/gwt-maps.jar \
-		     -addModule com.google.gwt.maps.GoogleMaps \
-		     com.example.google.gwt.mapstutorial.client.SimpleMaps
+    <inherits name='com.google.gwt.maps.GoogleMaps' />
 }}}
-
-
-Now you should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by running _!SimpleMaps-shell_ from the command line. 
-
-Also test out compilation with the `SimpleMaps-compile` script or the _Compile/Browse_ button in hosted mode.
-
-{{{
-$PP_OFF
-$ ./SimpleMaps-compile
-Compiling into ./www/com.example.google.gwt.mapstutorial.SimpleMaps
-Copying all files found on public path
-Compilation succeeded
-}}}
-
-If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
 
 ==Adding the Maps script tag to your module XML file==
 
@@ -61,7 +36,6 @@ Your GWT application will need access to the Maps API, as well as the API key. I
 
 {{{
  <!-- Load the Google Maps GWT bindings from the gwt-google-apis project -->
- <!-- Added by projectCreator if you use the -addModule argument -->
  <inherits name="com.google.gwt.maps.GoogleMaps" />
 
  <!--

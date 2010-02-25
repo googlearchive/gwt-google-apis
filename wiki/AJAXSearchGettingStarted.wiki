@@ -9,8 +9,7 @@ This guide describes the basics of getting the Google AJAX Search Library workin
 == Assumptions ==
  
   * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
-  * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
-
+  * You know how to [http://code.google.com/eclipse/docs/creating_new_webapp.html create a new GWT project] using the Google Plugin for Eclipse.
 
 == Downloading the Google AJAX Search Library for GWT ==
 
@@ -31,37 +30,13 @@ We'll explain each as we set up a new project.
 
 == Creating a new GWT Project ==
 
-Start by creating a new GWT project called !SimpleSearch as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
+Start by creating a new GWT project called !SimpleSearch as described in the [http://code.google.com/eclipse/docs/creating_new_webapp.html GWT Plugin Guide].
 
-Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gwt-search/gwt-search.jar` to the Java classpath for the launch, compile and and eclipse definitions. For the purposes of this example we assume `gwt-search.jar` has been unpacked in `/usr/local/gwt-search` and that you are using the Eclipse IDE.
-
-We also need to tell the GWT compiler that we are using the Search module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.search.Search` as the module to be inherited. This will place the inheritance entry `Search.gwt.xml` into the generated project file `SimpleSearch.gwt.xml`.
-
+Since we are working with an additional library, add the library `gwt-search.jar` to the Java classpath.  Then, add the module `com.google.gwt.search.Search` to your module.
 
 {{{
-$PP_OFF
-$ projectCreator -eclipse SimpleSearch -out SimpleSearch \
-     -addToClassPath /usr/local/gwt-search/gwt-search.jar
-
-$ applicationCreator -eclipse SimpleSearch -out SimpleSearch \
-     -addToClassPath /usr/local/gwt-search/gwt-search.jar \
-     -addModule com.google.gwt.search.Search com.example.simplesearch.client.SimpleSearch
+    <inherits name='com.google.gwt.gears.Offline' />
 }}}
-
-
-Now you should now have a standard project set up. Before continuing, make sure you can launch the skeleton project in hosted mode by running _!SimpleSearch-shell_ from the command line. 
-
-Also test out compilation with the `SimpleSearch-compile` script or the _Compile/Browse_ button in hosted mode.
-
-{{{
-$PP_OFF
-$ ./SimpleSearch-compile
-Compiling module com.example.simplesearch.SimpleSearch
-Compilation succeeded
-Linking compilation into ./www/com.example.simplesearch.SimpleSearch
-}}}
-
-If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
 
 ==Adding the AJAX Search script tag to your module XML file==
 

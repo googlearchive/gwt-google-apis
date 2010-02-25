@@ -1,4 +1,4 @@
-﻿#summary How to write and debug a Gadget using GWT
+#summary How to write and debug a Gadget using GWT
 
 = Getting Started with Gadgets and GWT =
 
@@ -12,7 +12,7 @@ This guide will get you started writing your first gadget.  Before you start, ma
 == Assumptions ==
  
   * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
-  * You know how to [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStartedCreateProject) create a new GWT project] and import it into the Eclipse IDE environment using the `projectCreator` and `applicationCreator` tools
+  * You know how to [http://code.google.com/eclipse/docs/creating_new_webapp.html create a new GWT project.]
 
 
 == Downloading the gadget library for GWT ==
@@ -39,28 +39,14 @@ These differences derive from the fact that a gadget must adhere to a specific f
 
 == Creating a new GWT Project ==
 
-Start by creating a new GWT project called !SimpleGadget as described in the [http://code.google.com/docreader/#p(google-web-toolkit-doc-1-5)s(google-web-toolkit-doc-1-5)t(GettingStarted) GWT Getting Started Guide]. 
+Start by creating a new GWT project called !SimpleGadget as described in the [http://code.google.com/eclipse/docs/creating_new_webapp.html Google Plugin for Eclipse user's guide.]
 
-Since we are working with an additional library, we use the command line argument `-addToClassPath` which adds the library `/usr/local/gadgets/gwt-gadgets.jar` to the Java classpath for the launch, compile and and eclipse definitions. For the purposes of this example we assume `gwt-gadgets.jar` has been unpacked in `/usr/local/gadgets` and that you are using the Eclipse IDE.
-
-We also need to tell the GWT compiler that we are using the gwt-gadgets module. To do this, we use the command line argument `-addToModule` and specify `com.google.gwt.gadgets.Gadgets` as the module to be inherited. This will place the inheritance entry `Gadgets.gwt.xml` into the generated project file `SimpleGadget.gwt.xml`.
-
+Since we are working with an additional library, add `gwt-gadgets.jar` to the Java classpath.  Then, add the inherits line for `com.google.gwt.gadgets.Gadgets` to your module.
 
 {{{
 $PP_OFF
-$ projectCreator -eclipse SimpleGadget -out SimpleGadget \
-     -addToClassPath /usr/local/gadgets/gwt-gadgets.jar
-
-
-$ applicationCreator -eclipse SimpleGadget -out SimpleGadget \
-     -addToClassPath /usr/local/gadgets/gwt-gadgets.jar \
-     -addModule com.google.gwt.gadgets.Gadgets com.example.simplegadget.client.SimpleGadget
+    <inherits name='com.google.gwt.gadgets.Gadgets' />
 }}}
-
-
-Now you should now have a standard GWT project set up (though nothing Gadget related other than the library inclusion). Before continuing, make sure you can launch the skeleton project in hosted mode by running _!SimpleSearch-shell_ from the command line. 
-
-If you are using the Eclipse IDE, now would be a good time to import your new project into Eclipse using the `File --> Import...` command.
 
 === Modify the Project ===
 
@@ -73,7 +59,7 @@ import com.google.gwt.gadgets.client.UserPreferences;
    public class SimpleGadget extends Gadget<UserPreferences> 
 }}}
 
-Remove the `onModuleStart()` method.  No constructor is necessary.
+Remove the `onModuleLoad()` method.  No constructor is necessary.
 
 Next, you need to implement the `init(UserPreferences)` method from the `Gadget` class.  This sample implements a very simple body for the Gadget.
 
@@ -103,7 +89,7 @@ Finally, above the class statement, add an annotation to set the gadget title, a
 
 You now have the basics of a Gadget in place, but there are a few more steps required to run the Gadget in GWT's hosted mode, so first let's compile and deploy what we have to a Gadget container like iGoogle.
 
-Use the `SimpleGadget-compile` shell script to build your project. The output of the compiler will have:
+Use the Google Plugin for Eclipse to build your project in Web mode. The output of the compiler will have:
    * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
    * A `SampleGadgets.html` file.  This is just a holdover from a regular GWT module and is not used in publishing a gadget (but it can be useful in hosted mode, as we'll see later).  
    * Other resources such as image files.
@@ -115,7 +101,7 @@ Use the `SimpleGadget-compile` shell script to build your project. The output of
 
 == Uploading your Gadget to iGoogle ==
 
-To test our your newly compiled code, take the output files above (located in the `SimpleGadget/www` directory unless you changed GWT's output location) and upload them all to the same directory on a public web server. 
+To test our your newly compiled code, take the output files above (located in the `SimpleGadget/war` directory unless you changed GWT's output location) and upload them all to the same directory on a public web server. 
 
 Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in the upper right corner. Click "Add Feed or Gadget" and specify the full URL to the gadget spec file (`com.example.simplegadget.client.SimpleGadget.gadget.xml`) that you uploaded to your server in the previous step. Click "Add" and go back to your iGoogle page. 
 
