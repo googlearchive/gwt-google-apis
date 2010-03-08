@@ -35,7 +35,7 @@ Start by creating a new GWT project called !SimpleSearch as described in the [ht
 Since we are working with an additional library, add the library `gwt-search.jar` to the Java classpath.  Then, add the module `com.google.gwt.search.Search` to your module.
 
 {{{
-    <inherits name='com.google.gwt.gears.Offline' />
+    <inherits name='com.google.gwt.search.Search' />
 }}}
 
 ==Adding the AJAX Search script tag to your module XML file==
