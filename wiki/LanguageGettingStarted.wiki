@@ -33,7 +33,7 @@ Since we are working with an additional library, add the library `gwt-language.j
 
 {{{
 $PP_OFF
-    <inherits name='com.google.gwt.gadgets.Gadgets' />
+    <inherits name='com.google.gwt.language.Language' />
 }}}
 
 ==Writing your first application==

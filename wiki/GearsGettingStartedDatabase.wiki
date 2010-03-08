@@ -6,7 +6,7 @@
 
 Start by creating a new GWT project called !GearsDatabaseTutorial as described in the [http://code.google.com/eclipse/docs/creating_new_webapp.html GWT Plugin Guide]. 
 
-Since we are working with an additional library, add the library `gwt-gears.jar` to the Java classpath.  Then, add the module `com.google.gwt.gears.Offline` to your module.
+Since we are working with an additional library, add the library `gwt-gears.jar` to the Java classpath.  Then, add the module `com.google.gwt.gears.Gears` to your module.
 
 {{{
 $PP_OFF
