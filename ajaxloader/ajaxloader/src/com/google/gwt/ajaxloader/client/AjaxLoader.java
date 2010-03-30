@@ -15,7 +15,6 @@
  */
 package com.google.gwt.ajaxloader.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Document;
@@ -89,10 +88,10 @@ public class AjaxLoader {
   static Vector<Runnable> queuedApiLoads = new Vector<Runnable>();
 
   private static String getProtocol() {
-	if (Window.Location.getProtocol().equals("https:")) {
-		return "https:";
-	}
-	return "http:";
+    if (Window.Location.getProtocol().equals("https:")) {
+      return "https:";
+    }
+    return "http:";
   }
 
   /**
@@ -119,7 +118,14 @@ public class AjaxLoader {
       apiKey = AjaxKeyRepository.getKey();
     }
 
-    loaded = injectJsapi(apiKey);
+    boolean alreadyLoaded = injectJsapi(apiKey); 
+
+    // In IE, the above script can execute immediately if its already in the
+    // cache, so don't touch the loaded variable unless we bypassed loading the
+    // script completely
+    if (alreadyLoaded) {
+      loaded = true;
+    }
     initialized = true;
   }
 
@@ -193,7 +199,7 @@ public class AjaxLoader {
       queuedApiLoads.add(apiLoad);
     }
   }
-  
+
   /**
    * Creates a function to be registered for a callback after jsapi loads.
    */
