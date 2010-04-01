@@ -56,6 +56,10 @@ If you wish to scale to the size of the container, make sure you adjust the size
    RootPanel.add(panel);
 }}}
 
+== Why do I see the map off center surrounded with grey background on one side? ==
+
+In some cases, it is necessary to force the map to resize its layout after the map is initially added.  you can use the `MapWidget.checkResizeAndCenter()` method to clean this up.   You may need to delay calling this function using a `DeferredCommand` or other mechanism to wait until after the DOM layout pass that resizes the map is called.
+
 == I'm using localhost, why am I seeing a dialog asking for a key? ==
 
 Passing no key to the Maps API usually works for developing on the local machine, but you may need to create a key for localhost:`<port>` at the [http://code.google.com/apis/maps/signup.html Maps developer web site.]
@@ -66,4 +70,4 @@ The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web br
 
 == How can I use GWT with Maps API 3.0? ==
 
-The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI  methods to interface with the Maps v3 API.
+The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI  methods to interface with the Maps v3 API.  There are [http://code.google.com/query/#q=gwt%20maps%20v3 other projects hosted on Google Code] that have GWT bindings for the Maps v3 API.
