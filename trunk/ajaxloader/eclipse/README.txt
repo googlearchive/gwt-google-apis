@@ -7,10 +7,6 @@ These instructions require
 
 ---------- Required Google API Library for GWT variables ---------
 
-Window->Preferences->General->Workspace->Linked Resources
-Create a variable named "AJAXLOADER_API_ROOT" pointing to a working copy of 
-the http://gwt-google-apis.googlecode.com/svn/trunk/ajaxloader folder.
-
 Window->Preferences->Java->Build Path->Classpath Variables
 Create a variable named "GWT_TOOLS" to point to a copy of the GWT tool 
 distribution checked out from http://google-web-toolkit.googlecode.com/svn/tools
