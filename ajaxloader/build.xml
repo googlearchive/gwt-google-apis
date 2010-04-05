@@ -7,7 +7,7 @@
 	<property name="target" value="build" />
 
 	<target name="build-tools" description="Builds tools required to build the Ajaxloader API Library for GWT">
-	    <gwt.ant dir="build-tools"/>
+		<gwt.ant dir="build-tools"/>
 	</target>
 		
 	<target name="dist" depends="build-tools, ajaxloader, doc, samples" description="Run the distributions">
@@ -18,11 +18,11 @@
 		<gwt.ant dir="doc" />
 	</target>
 
-	<target name="ajaxloader" description="Build Ajaxloader Bindings">
+	<target name="ajaxloader" depends="build-tools" description="Build Ajaxloader Bindings">
 		<gwt.ant dir="ajaxloader"/>
 	</target>
 	
-	<target name="samples" depends="ajaxloader" description="Build Ajaxloader samples">
+	<target name="samples" depends="build-tools, ajaxloader" description="Build Ajaxloader samples">
 		<gwt.ant dir="samples" />
 	</target>
 
