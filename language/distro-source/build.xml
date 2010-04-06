@@ -22,15 +22,10 @@
 			</tarfileset>
 
 			<!-- samples -->
-			<tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
-				<include name="samples/*" />
+			<tarfileset dir="${gwt.root}" prefix="${project.distname}">
+				<include name="samples/*/*.war" />
 				<include name="samples/*/src/**" />
-				<include name="samples/*/bin/**" />
-				<include name="samples/*/www/**" />
-			</tarfileset>
-
-			<tarfileset dir="${gwt.build.out}/samples" mode="755" prefix="${project.distname}/samples">
-				<include name="*/launch-scripts/*/*" />
+				<include name="samples/*/war/**" />
 			</tarfileset>
 		</gwt.tgz.cat>
 	</target>
@@ -54,18 +49,10 @@
 			</zipfileset>
 
 			<!-- samples -->
-			<zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
-				<include name="samples/*" />
+			<zipfileset dir="${gwt.root}" prefix="${project.distname}">
+				<include name="samples/*/*.war" />
 				<include name="samples/*/src/**" />
-				<include name="samples/*/bin/**" />
-				<include name="samples/*/www/**" />
-			</zipfileset>
-
-			<!--
-				Sample launch scripts.
-			-->
-			<zipfileset dir="${gwt.build.out}/samples" prefix="${project.distname}/samples">
-				<include name="*/launch-scripts/*/*" />
+				<include name="samples/*/war/**" />
 			</zipfileset>
 		</zip>
 	</target>

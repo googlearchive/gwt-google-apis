@@ -1,4 +1,4 @@
-<project name="Template API Library for GWT" default="build" basedir=".">
+<project name="Language API Library for GWT" default="build" basedir=".">
 	<property name="gwt.root" location="." />
 	<property name="project.tail" value="" />
 	<import file="${gwt.root}/common.ant.xml" />
@@ -6,7 +6,7 @@
 	<!-- "build" is the default when subprojects are directly targetted -->
 	<property name="target" value="build" />
 
-	<target name="build-tools" description="Builds tools required to build the Template API Library for GWT">
+	<target name="build-tools" description="Builds tools required to build the Language API Library for GWT">
 	    <gwt.ant dir="build-tools"/>
 	</target>
 		
@@ -18,35 +18,38 @@
 		<gwt.ant dir="doc" />
 	</target>
 
-	<target name="language" description="Build Template Bindings">
+	<target name="language" depends="build-tools" description="Build Language Bindings">
 		<gwt.ant dir="language"/>
 	</target>
 	
-	<target name="samples" depends="language" description="Build Template samples">
+	<target name="samples" depends="build-tools, language" description="Build Language samples">
 		<gwt.ant dir="samples" />
 	</target>
 
 	<target name="-do" depends="dist" description="Run all subprojects" />
 
-	<target name="build" description="Builds Template API Library for GWT">
+	<target name="build" description="Builds Language API Library for GWT">
 		<antcall target="-do">
 			<param name="target" value="build" />
 		</antcall>
 	</target>
 
-	<target name="checkstyle" description="Static analysis of Template API Library for GWT source">
+	<target name="checkstyle" description="Static analysis of Language API Library for GWT source">
 		<antcall target="-do">
 			<param name="target" value="checkstyle" />
 		</antcall>
 	</target>
 
-	<target name="test" depends="build" description="Test Template API Library for GWT">
+	<target name="test" depends="build" description="Test Language API Library for GWT">
 		<antcall target="-do">
 			<param name="target" value="test" />
 		</antcall>
 	</target>
 
-	<target name="clean" description="Cleans the entire Template API Library for GWT build">
+	<target name="clean" description="Cleans the entire Language API Library for GWT build">
 		<delete dir="${gwt.build}" />
+		<antcall target="-do">
+			<param name="target" value="clean" />
+		</antcall>
 	</target>
 </project>
