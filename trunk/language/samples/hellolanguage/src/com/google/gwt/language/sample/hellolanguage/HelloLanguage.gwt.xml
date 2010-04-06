@@ -1,4 +1,4 @@
-<module>
+<module rename-to="hellolanguage">
 
       <!-- Inherit the core Web Toolkit stuff.                        -->
       <inherits name='com.google.gwt.user.User'/>
@@ -15,8 +15,5 @@
 
       <!-- Specify the app entry point class.                         -->
       <entry-point class='com.google.gwt.language.sample.hellolanguage.client.HelloLanguage'/>
-    
-      <!-- Specify the application specific style sheet.              -->
-      <stylesheet src='HelloLanguage.css' />
-	
+
 </module>
