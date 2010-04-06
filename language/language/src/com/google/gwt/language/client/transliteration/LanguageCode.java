@@ -29,6 +29,7 @@ public enum LanguageCode {
   MARATHI("mr"), //
   NEPALI("ne"), //
   PUNJABI("pa"), //
+  PERSIAN("fa"), //
   TAMIL("ta"), //
   TELUGU("te"), //
   URDU("ur");
