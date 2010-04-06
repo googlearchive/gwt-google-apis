@@ -59,6 +59,7 @@ public enum Language {
   ICELANDIC("is"), //
   INDONESIAN("id"), //
   INUKTITUT("iu"), //
+  IRISH("ga"), //
   ITALIAN("it"), //
   JAPANESE("ja"), //
   KANNADA("kn"), //
@@ -107,7 +108,9 @@ public enum Language {
   UZBEK("uz"), //
   UIGHUR("ug"), //
   VIETNAMESE("vi"), //
-  UNKNOWN("");
+  UNKNOWN(""), //
+  WELSH("cy"), //
+  YIDDISH("yi"); //
 
   private String langCode;
 
