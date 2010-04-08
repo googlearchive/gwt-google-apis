@@ -124,10 +124,10 @@ public class GadgetGenerator extends Generator {
       sw.println("private native void nativeInit() /*-{");
       sw.indent();
       // Looking at the superclass in case any Features are needed there.
-      for (JClassType currentClass = sourceType; currentClass != null; currentClass =
-          currentClass.getSuperclass()) {
+      for (JClassType currentClass = sourceType; currentClass != null; currentClass = currentClass.getSuperclass()) {
         for (JClassType interfaceType : currentClass.getImplementedInterfaces()) {
-          generateFeatureInitializer(logger, typeOracle, sw, sourceType, interfaceType);
+          generateFeatureInitializer(logger, typeOracle, sw, sourceType,
+              interfaceType);
         }
       }
       sw.outdent();
@@ -203,6 +203,78 @@ public class GadgetGenerator extends Generator {
     PreferenceGenerator prefGenerator = GadgetUtils.getPreferenceGenerator(
         logger, prefType);
     prefGenerator.configurePreferenceElement(logger, d, userPref, prefType, m);
+  }
+
+  /**
+   * Creates a single Content section.
+   * 
+   * @param logger for logging errors
+   * @param type either the Gadget or ContentView sub-class the section is for
+   * @param d the document we use to create the Content XML element for
+   * @param viewName the name of the view. Can be empty or null, if not name is
+   *          given
+   * @return the XML Content element
+   * @throws UnableToCompleteException
+   */
+  protected Element createContentSection(TreeLogger logger, JClassType type,
+      Document d, String viewName) throws UnableToCompleteException {
+    StringBuilder contentToInject = new StringBuilder();
+    getInjectedContent(logger, type, contentToInject);
+    // The Gadget linker will fill in the bootstrap
+    // <content type="html">
+    Element content = d.createElement("Content");
+    content.setAttribute("type", "html");
+    if (viewName != null && viewName.length() > 0) {
+      content.setAttribute("view", viewName);
+      /*
+       * Add a piece of JS code that sets the name of this view. We use this to
+       * select the right code. Thus we don't have to rely on the views feature
+       * being present. We could use gadget.views.* functionality, but we
+       * shouldn't enforce the "views" feature to be present, as it adds API
+       * that the gadget doesn't use.
+       */
+      contentToInject.append("<script>window.gadgetViewName = '"
+          + viewName.replace("\'", "\\\'") + "';</script>");
+    }
+    content.appendChild(d.createCDATASection(contentToInject + "__BOOTSTRAP__"));
+    return content;
+  }
+
+  /**
+   * Returns one or more (in case the content section is set for multiple
+   * views).
+   * 
+   * @{link Element}s for each content section that this gadget contains.
+   */
+  protected Element[] createContentSections(TreeLogger logger,
+      JClassType gadgetSourceType, TypeOracle typeOracle, Document d)
+      throws UnableToCompleteException {
+    // TODO(haeberling): Check that a Gadget class has not Content AND
+    // InjectContent
+    List<Element> result = new ArrayList<Element>();
+    GadgetViewType[] gadgetViewTypes = GadgetUtils.getViewTypes(logger,
+        gadgetSourceType, typeOracle);
+
+    if (gadgetViewTypes == null) {
+      // If the Gadget class doesn't have a Content annotation, we treat it as a
+      // single-view gadget.
+      result.add(createContentSection(logger, gadgetSourceType, d, null));
+    } else {
+      logger.log(TreeLogger.INFO, "Using multi-view generation mode.");
+      for (int i = 0; i < gadgetViewTypes.length; ++i) {
+        // If a view type has been assigned multiple view, we create a separate
+        // content section for each.
+        // The gadget spec would support having one content
+        // section and the view names concatenated with commas, but a GWT
+        // property provider must have a fixed list of possible values.
+        String[] viewNames = gadgetViewTypes[i].viewNames;
+        for (String viewName : viewNames) {
+          result.add(createContentSection(logger, gadgetViewTypes[i].viewType,
+              d, viewName));
+        }
+      }
+    }
+    return result.toArray(new Element[0]);
   }
 
   protected void generateFeatureInitializer(TreeLogger logger,
@@ -320,7 +392,7 @@ public class GadgetGenerator extends Generator {
     }
 
     String contentToInject = "";
-    
+
     // Add required features to the manifest
     // <require feature="someFeature" />
     for (JClassType currentClass = type; currentClass != null; currentClass = currentClass.getSuperclass()) {
@@ -342,78 +414,11 @@ public class GadgetGenerator extends Generator {
     }
 
     // Generate and append the Content section(s).
-    for (Element contentSection : createContentSections(logger, type, typeOracle, d)) {
+    for (Element contentSection : createContentSections(logger, type,
+        typeOracle, d)) {
       module.appendChild(contentSection);
     }
     serializer.write(d, output);
-  }
-
-  /**
-   * Returns one or more (in case the content section is set for multiple views)
-   * @{link Element}s for each content section that this gadget contains.
-   */
-  protected Element[] createContentSections(TreeLogger logger, JClassType gadgetSourceType,
-      TypeOracle typeOracle, Document d) throws UnableToCompleteException {
-    // TODO(haeberling): Check that a Gadget class has not Content AND
-    // InjectContent
-    List<Element> result = new ArrayList<Element>();
-    GadgetViewType[] gadgetViewTypes =
-        GadgetUtils.getViewTypes(logger, gadgetSourceType, typeOracle);
-
-    if (gadgetViewTypes == null) {
-      // If the Gadget class doesn't have a Content annotation, we treat it as a
-      // single-view gadget.
-      result.add(createContentSection(logger, gadgetSourceType, d, null));
-    } else {
-      logger.log(TreeLogger.INFO, "Using multi-view generation mode.");
-      for (int i = 0; i < gadgetViewTypes.length; ++i) {
-        // If a view type has been assigned multiple view, we create a separate
-        // content section for each.
-        // The gadget spec would support having one content
-        // section and the view names concatenated with commas, but a GWT
-        // property provider must have a fixed list of possible values.
-        String[] viewNames = gadgetViewTypes[i].viewNames;
-        for (String viewName : viewNames) {
-          result.add(createContentSection(logger, gadgetViewTypes[i].viewType, d, viewName));
-        }
-      }
-    }
-    return result.toArray(new Element[0]);
-  }
-
-  /**
-   * Creates a single Content section.
-   * 
-   * @param logger for logging errors
-   * @param type either the Gadget or ContentView sub-class the section is for
-   * @param d the document we use to create the Content XML element for
-   * @param viewName the name of the view. Can be empty or null, if not name is
-   *        given
-   * @return the XML Content element
-   * @throws UnableToCompleteException
-   */
-  protected Element createContentSection(TreeLogger logger, JClassType type, Document d,
-      String viewName) throws UnableToCompleteException {
-    StringBuilder contentToInject = new StringBuilder();
-    getInjectedContent(logger, type, contentToInject);
-    // The Gadget linker will fill in the bootstrap
-    // <content type="html">
-    Element content = d.createElement("Content");
-    content.setAttribute("type", "html");
-    if (viewName != null && viewName.length() > 0) {
-      content.setAttribute("view", viewName);
-      /*
-       * Add a piece of JS code that sets the name of this view. We use this to
-       * select the right code. Thus we don't have to rely on the views feature
-       * being present. We could use gadget.views.* functionality, but we
-       * shouldn't enforce the "views" feature to be present, as it adds API
-       * that the gadget doesn't use.
-       */
-      contentToInject.append("<script>window.gadgetViewName = '" + viewName.replace("\'", "\\\'")
-          + "';</script>");
-    }
-    content.appendChild(d.createCDATASection(contentToInject + "__BOOTSTRAP__"));
-    return content;
   }
 
   protected void validateType(TreeLogger logger, JClassType type)

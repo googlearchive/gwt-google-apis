@@ -16,20 +16,21 @@
 
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.gadgets.client.Gadget.ContentType;
-import com.google.gwt.gadgets.client.Gadget.InjectContent;
-
 /**
  * If a gadget wants to support multiple views, it has to contain one
- * ContentSection for each. The annotation {@link InjectContent} can be used to
- * inject content into the section and {@link ContentType} is used to define
+ * ContentSection for each. The annotation
+ * {@link com.google.gwt.gadgets.client.Gadget.InjectContent} can be used to
+ * inject content into the section and
+ * {@link com.google.gwt.gadgets.client.Gadget.ContentType} is used to define
  * which view this section is used for.
+ * 
+ * @param <T> A Gadget subclass
  */
 public abstract class ContentSection<T extends Gadget<?>> {
 
   /**
-   * This is the entry method for the content section. It should be overridden by
-   * a user-defined implementation.
+   * This is the entry method for the content section. It should be overridden
+   * by a user-defined implementation.
    * 
    * @param gadget The gadget object that contains this content section.
    */
