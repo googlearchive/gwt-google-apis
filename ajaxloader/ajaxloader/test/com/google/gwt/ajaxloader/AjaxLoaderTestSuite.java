@@ -36,6 +36,9 @@ public class AjaxLoaderTestSuite extends GWTTestSuite {
     suite.addTestSuite(ArrayHelperTest.class);
     suite.addTestSuite(JsDateTest.class);
     suite.addTestSuite(PropertiesTest.class);
+    // Excluding from the automatic test suite because the client location API 
+    // may not pass depending on where the test machine is located.
+    // suite.addTestSuite(ClientLocation.class);
     return suite;
   }
 }
