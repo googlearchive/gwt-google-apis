@@ -52,7 +52,7 @@ class GadgetUtils {
       this.viewType = viewType;
     }
   }
-  
+
   /**
    * Return an instance of a PreferenceGenerator that can be used for a subtype
    * of Preference.
@@ -129,6 +129,41 @@ class GadgetUtils {
   }
 
   /**
+   * For the given gadget source type this function looks at it's
+   * {@link Content} annotation to see if multiple views have been defined. If
+   * so, it will return an array which contains the view names and their
+   * associated {@link ContentSection} types.
+   * 
+   * @return An array of views and associated types or null, if no views have
+   *         been specified.
+   */
+  static GadgetViewType[] getViewTypes(TreeLogger logger,
+      JClassType gadgetSourceType, TypeOracle typeOracle)
+      throws UnableToCompleteException {
+    List<GadgetViewType> result = new ArrayList<GadgetViewType>();
+    Content content = gadgetSourceType.getAnnotation(Content.class);
+    if (content != null) {
+      int i = 0;
+      for (Class<? extends ContentSection<?>> contentSectionClass : content.contents()) {
+        String viewTypeName = contentSectionClass.getName().replaceAll("\\$",
+            ".");
+        JClassType viewType = typeOracle.findType(viewTypeName);
+        if (viewType != null) {
+          ContentType contentType = viewType.getAnnotation(ContentType.class);
+          result.add(new GadgetViewType(contentType.views(), viewType));
+        } else {
+          logger.log(TreeLogger.ERROR, "Unable to find view type: "
+              + viewTypeName);
+          throw new UnableToCompleteException();
+        }
+      }
+    } else {
+      return null;
+    }
+    return result.toArray(new GadgetViewType[0]);
+  }
+
+  /**
    * Add the key-value pairs of an Annotation to an Element. Enumerated
    * properties will be ignored. Specific properties can be excluded by name.
    */
@@ -168,38 +203,6 @@ class GadgetUtils {
         mayRequire.appendChild(d.createCDATASection(cdata));
       }
     }
-  }
-  
-  /**
-   * For the given gadget source type this function looks at it's
-   * {@link Content} annotation to see if multiple views have been defined. If
-   * so, it will return an array which contains the view names and their
-   * associated {@link ContentSection} types.
-   * 
-   * @return An array of views and associated types or null, if no views have
-   *         been specified.
-   */
-  static GadgetViewType[] getViewTypes(TreeLogger logger, JClassType gadgetSourceType,
-      TypeOracle typeOracle) throws UnableToCompleteException {
-    List<GadgetViewType> result = new ArrayList<GadgetViewType>();
-    Content content = gadgetSourceType.getAnnotation(Content.class);
-    if (content != null) {
-      int i = 0;
-      for (Class<? extends ContentSection<?>> contentSectionClass : content.contents()) {
-        String viewTypeName = contentSectionClass.getName().replaceAll("\\$", ".");
-        JClassType viewType = typeOracle.findType(viewTypeName);
-        if (viewType != null) {
-          ContentType contentType = viewType.getAnnotation(ContentType.class);
-          result.add(new GadgetViewType(contentType.views(), viewType));
-        } else {
-          logger.log(TreeLogger.ERROR, "Unable to find view type: " + viewTypeName);
-          throw new UnableToCompleteException();
-        }
-      }
-    } else {
-      return null;
-    }
-    return result.toArray(new GadgetViewType[0]);
   }
 
   /**

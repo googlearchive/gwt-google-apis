@@ -49,6 +49,51 @@ import java.lang.annotation.Target;
  */
 public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
   /**
+   * Specifies which View content sections should be associated with this
+   * Gadget.
+   */
+  @Target(ElementType.TYPE)
+  public @interface Content {
+    Class<? extends ContentSection<?>>[] contents();
+  }
+
+  /**
+   * Specifies the type of content and the list of views.
+   */
+  @Target(ElementType.TYPE)
+  public @interface ContentType {
+    String type() default "html";
+
+    String[] views();
+  }
+
+  /**
+   * Enables developers to define hand-written content that is injected into the
+   * gadget manifest file.
+   */
+  @Target(ElementType.TYPE)
+  public @interface InjectContent {
+    /**
+     * A list of file names whose content will be concatenated and included in
+     * the Gadget XML file's CDATA section.
+     */
+    String[] files() default "";
+  }
+
+  /**
+   * Enables developers to define hand-written content for the ModulePrefs
+   * section of the gadget manifset file.
+   */
+  @Target(ElementType.TYPE)
+  public @interface InjectModulePrefs {
+    /**
+     * A list of file names whose content will be concatenated and included in
+     * the Gadget XML file's ModulePrefs section.
+     */
+    String[] files() default "";
+  }
+
+  /**
    * Defines the preferences associated with the gadget.
    */
   @Target(ElementType.TYPE)
@@ -212,43 +257,6 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * the gadget runs. This setting only applies to syndicated gadgets.
      */
     int width() default 320;
-  }
-
-  /**
-   * Enables developers to define hand-written content that is injected into the
-   * gadget manifest file.
-   */
-  @Target(ElementType.TYPE)
-  public @interface InjectContent {
-    /**
-     * A list of file names whose content will be concatenated and included in
-     * the Gadget XML file's CDATA section.
-     */
-    String[] files() default "";
-  }
-
-  @Target(ElementType.TYPE)
-  public @interface Content {
-    Class<? extends ContentSection<?>>[] contents();
-  }
-  
-  @Target(ElementType.TYPE)
-  public @interface ContentType {
-    String[] views();
-    String type() default "html";
-  }
-
-  /**
-   * Enables developers to define hand-written content for the ModulePrefs
-   * section of the gadget manifset file.
-   */
-  @Target(ElementType.TYPE)
-  public @interface InjectModulePrefs {
-    /**
-     * A list of file names whose content will be concatenated and included in
-     * the Gadget XML file's ModulePrefs section.
-     */
-    String[] files() default "";
   }
 
   protected Gadget() {
