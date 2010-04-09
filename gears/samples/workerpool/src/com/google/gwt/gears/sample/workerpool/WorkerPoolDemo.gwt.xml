@@ -14,18 +14,28 @@
 
 <!-- Gears Database example                                                 -->
 <!--                                                                        -->
-<module>
+<module rename-to="workerpooldemo">
+
+	<!-- Inherit the core Web Toolkit stuff.                        -->
 	<inherits name='com.google.gwt.user.User'/>
+
+	<!-- Inherit the default GWT style sheet.  You can change       -->
+	<!-- the theme of your GWT application by uncommenting          -->
+	<!-- any one of the following lines.                            -->
+	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
+	<!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+	<!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+
+	<!-- Other module inherits                                      -->
 	<inherits name='com.google.gwt.gears.Gears'/>
-	
-	<!-- Inherit the standard theme -->
-	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
-	
+
+	<!-- Specify the app entry point class.                         -->
 	<entry-point class='com.google.gwt.gears.sample.workerpool.client.WorkerPoolDemo'/>
-	
+
 	<!-- Rebind the entry point if Gears is not installed -->
 	<replace-with class="com.google.gwt.gears.sample.workerpool.client.WorkerPoolDemoNoGears">
-    	<when-type-is class="com.google.gwt.gears.sample.workerpool.client.WorkerPoolDemo"/>
-    	<when-property-is name="gears.installed" value="false"/>
-  	</replace-with>
-</module>	
+		<when-type-is class="com.google.gwt.gears.sample.workerpool.client.WorkerPoolDemo"/>
+		<when-property-is name="gears.installed" value="false"/>
+	</replace-with>
+
+</module>

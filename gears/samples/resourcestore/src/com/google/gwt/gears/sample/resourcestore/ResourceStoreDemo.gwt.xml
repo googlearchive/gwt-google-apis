@@ -14,7 +14,8 @@
 
 <!-- Gears ResourceStore example                                     -->
 <!--                                                                        -->
-<module>
+<module rename-to="resourcestoredemo">
+
   <!-- Inherit the core Web Toolkit stuff.                  -->
   <inherits name='com.google.gwt.user.User'/>
 	
