@@ -2,5 +2,6 @@
 	<property name="sample.api" value="gears"/>
 	<property name="sample.root" value="workerpool" />
 	<property name="sample.module" value="WorkerPoolDemo" />
+	<property name="sample.module.lowercase" value="workerpooldemo" />
 	<import file="../common.ant.xml" />
 </project>

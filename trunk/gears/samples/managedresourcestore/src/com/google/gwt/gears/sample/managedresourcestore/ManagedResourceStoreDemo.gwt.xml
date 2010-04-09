@@ -14,22 +14,28 @@
 
 <!-- Gears ManagedResourceStore example                                     -->
 <!--                                                                        -->
-<module>
+<module rename-to="managedresourcestoredemo">
+
+  <!-- Inherit the core Web Toolkit stuff. -->
   <inherits name='com.google.gwt.user.User' />
 
   <!-- The following lines add Google Gears support and automatic offline mode -->
   <inherits name='com.google.gwt.gears.Gears' />
   <inherits name='com.google.gwt.gears.Offline' />
   
-  <!-- Inherit the standard theme -->
-  <inherits name="com.google.gwt.user.theme.standard.Standard"/>
-  
-  <entry-point
-    class='com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemo' />
+  <!-- Inherit the default GWT style sheet.  You can change       -->
+  <!-- the theme of your GWT application by uncommenting          -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+  <!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+
+  <entry-point class='com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemo' />
     
   <!-- Rebind the entry point if Gears is not installed -->
   <replace-with class="com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemoNoGears">
     <when-type-is class="com.google.gwt.gears.sample.managedresourcestore.client.ManagedResourceStoreDemo"/>
     <when-property-is name="gears.installed" value="false"/>
   </replace-with>
+
 </module>

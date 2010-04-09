@@ -14,19 +14,24 @@
 
 <!-- Gears Upload sample                                                    -->
 <!--                                                                        -->
-<module>
+<module rename-to="uploaddemo">
+
+      <!-- Inherit the core Web Toolkit stuff.                        -->
       <inherits name='com.google.gwt.user.User'/>
-      <inherits name="com.google.gwt.gears.Gears" />
 	
-      <!-- Inherit the default GWT style sheet -->
+      <!-- Inherit the default GWT style sheet.  You can change       -->
+      <!-- the theme of your GWT application by uncommenting          -->
+      <!-- any one of the following lines.                            -->
       <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+      <!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+      <!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+
+      <!-- Other module inherits                                      -->
+      <inherits name="com.google.gwt.gears.Gears" />
 
       <!-- Specify the app entry point class -->
       <entry-point class="com.google.gwt.gears.sample.upload.client.UploadDemo"/>
     
-      <!-- Specify the application specific style sheet.              -->
-      <stylesheet src='UploadDemo.css' />
-
       <!-- Rebind the entry point if Gears is not installed -->
       <replace-with class="com.google.gwt.gears.sample.upload.client.UploadDemoNoGears">
           <when-type-is class="com.google.gwt.gears.sample.upload.client.UploadDemo"/>
