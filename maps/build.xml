@@ -18,11 +18,11 @@
 		<gwt.ant dir="doc" />
 	</target>
 
-	<target name="maps" description="Build Maps Bindings">
+	<target name="maps" depends="build-tools" description="Build Maps Bindings">
 		<gwt.ant dir="maps"/>
 	</target>
 	
-	<target name="samples" depends="maps" description="Build Maps samples">
+	<target name="samples" depends="build-tools, maps" description="Build Maps samples">
 		<gwt.ant dir="samples" />
 	</target>
 
@@ -48,5 +48,8 @@
 
 	<target name="clean" description="Cleans the entire Maps API Library for GWT build">
 		<delete dir="${gwt.build}" />
+		<antcall target="-do">
+			<param name="target" value="clean" />
+		</antcall>
 	</target>
 </project>
