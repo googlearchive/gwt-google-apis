@@ -18,11 +18,11 @@
 		<gwt.ant dir="doc" />
 	</target>
 
-	<target name="search" description="Build AJAX Search Bindings">
+	<target name="search" depends="build-tools" description="Build AJAX Search Bindings">
 		<gwt.ant dir="search"/>
 	</target>
 	
-	<target name="samples" depends="search" description="Build AJAX Search samples">
+	<target name="samples" depends="build-tools, search" description="Build AJAX Search samples">
 		<gwt.ant dir="samples" />
 	</target>
 
@@ -48,5 +48,8 @@
 
 	<target name="clean" description="Cleans the entire AJAX Search API Library for GWT build">
 		<delete dir="${gwt.build}" />
+		<antcall target="-do">
+			<param name="target" value="clean" />
+		</antcall>
 	</target>
 </project>

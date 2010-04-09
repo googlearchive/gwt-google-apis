@@ -12,12 +12,20 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module>
-	<inherits name="com.google.gwt.user.User"/>
-	<inherits name="com.google.gwt.search.Search"/>
-	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
+<module rename-to="hellosearch">
 
-  <stylesheet src="HelloSearch.css" />
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.user.User'/>
+
+  <!-- Inherit the default GWT style sheet.  You can change       -->
+  <!-- the theme of your GWT application by uncommenting          -->
+  <!-- any one of the following lines.                            -->
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+  <!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+
+  <!-- Other module inherits                                      -->
+  <inherits name="com.google.gwt.search.Search"/>
     
   <!-- The Search API is loaded using the AjaxLoader class, which is        -->
   <!-- invoked inside this entry point                                      -->
