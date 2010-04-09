@@ -12,23 +12,23 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module>
-  <inherits name="com.google.gwt.i18n.I18N"/>
-  <inherits name="com.google.gwt.user.User" />
-  <inherits name="com.google.gwt.maps.GoogleMaps" />
-  <inherits name="com.google.gwt.i18n.I18N" />
-  <inherits name="com.google.gwt.user.theme.standard.Standard"/>
-    
-  <entry-point class="com.google.gwt.maps.sample.hellomaps.client.HelloMaps" />
+<module rename-to="hellomaps">
 
-  <stylesheet src="HelloMaps.css" />
- 
+	<!-- Inherit the core Web Toolkit stuff.                        -->
+	<inherits name='com.google.gwt.user.User'/>
 
-  <!--
-    If you want to deploy this application outside of localhost,
-    you must obtain a Google Maps API key at:
-    http://www.google.com/apis/maps/signup.html
-    Replace the src attribute below with a URL that contains your key.
-  -->
-  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;key=ABQIAAAARrCK38aboqQKDotehUjrPhTb-vLQlFZmc2N8bgWI8YDPp5FEVBQ-MFjXfKfAvdbsbp3pa0q7fQNDDA" />
+	<!-- Inherit the default GWT style sheet.  You can change       -->
+	<!-- the theme of your GWT application by uncommenting          -->
+	<!-- any one of the following lines.                            -->
+	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
+	<!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+	<!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/>     -->
+
+	<!-- Other module inherits                                      -->
+	<inherits name="com.google.gwt.maps.GoogleMaps" />
+	<inherits name="com.google.gwt.i18n.I18N"/>
+
+	<!-- Specify the app entry point class.                         -->
+	<entry-point class="com.google.gwt.maps.sample.hellomaps.client.HelloMaps" />
+
 </module>
