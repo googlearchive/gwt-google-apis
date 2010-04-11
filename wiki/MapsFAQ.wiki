@@ -4,6 +4,8 @@
 
 These FAQs refer to the Google Maps Library for GWT.  See the [Overview Project Overview] for general information on the Google Maps Library for GWT.
 
+<wiki:toc max_depth="2" />
+
 == Where can I go for more help using the Maps API for GWT? ==
 
 Besides this User Guide, there are three Google groups you can search and post to:
@@ -71,3 +73,23 @@ The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web br
 == How can I use GWT with Maps API 3.0? ==
 
 The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI  methods to interface with the Maps v3 API.  There are [http://code.google.com/query/#q=gwt%20maps%20v3 other projects hosted on Google Code] that have GWT bindings for the Maps v3 API.
+
+== How can I run JUnit unit tests using the Maps API? ==
+
+Running unit tests for the Maps API sometimes fails because some of the API methods require a proper Maps API key to be setup. 
+
+  * One alternative is to create a maps key for the IP address/port of your machine the test is running on and edit GoogleMapsTest.gwt.xml.  But if you are running from eclipse, that port number changes with each run, so this idea kind of stinks.
+
+  * Another workaround is to use 'localhost' for running your tests. Here's how to do that:
+
+  Create a new GWT JUnit Test launch configuration in Eclipse (using the Google Eclipse Plugin) for the class com.google.gwt.maps.MapsTestSuite.
+
+    # Edit the command line arguments and add the following to the VM args textarea:
+{{{
+    -Dgwt.args="-runStyle Manual:1"
+}}}
+    # Next, run the test.  After a few moments, a URL will popup in the console asking you to point your browser to it.
+    # There are 2 IP addresses in the URL (they refer to your local machine's network card).  Substitute '127.0.0.1' for the IP addresses and launch a browser similar to the following:
+{{{
+    http://127.0.0.1:55947/com.google.gwt.maps.GoogleMapsTest.JUnit/junit.html?gwt.junit.sessionId=0&gwt.codesvr=127.0.0.1:55945&gwt.junit.blockindex=134
+}}}
