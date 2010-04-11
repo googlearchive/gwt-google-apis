@@ -5,6 +5,8 @@
 These FAQs refer to the Google API Library for GWT bindings for the Gears API.  
 See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
 
+<wiki:toc max_depth="2" />
+
 == Why do I see the dialog "Password needed" when extracting the .zip distribution in Windows? ==
 
 There are some files created by the GWT compiler that are very long and cause issues with the built-in Windows compressed folder support.  You can try using a different program to unzip the folder (such as Cygwin or 7-zip), or you can use the `.tar.gz` distribution.

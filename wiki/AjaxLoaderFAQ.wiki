@@ -2,6 +2,7 @@
 
 = AjaxLoader API FAQs = 
 
+<wiki:toc max_depth="2" />
 
 == Where can I go to get help with using the AjaxLoader API? ==
 

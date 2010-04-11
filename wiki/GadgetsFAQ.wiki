@@ -4,6 +4,7 @@
 
 These FAQs refer to the Google API Library for GWT bindings for the gadgets API.  See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
 
+<wiki:toc max_depth="2" />
 
 == Why doesn't the sample work in hosted mode? ==
 

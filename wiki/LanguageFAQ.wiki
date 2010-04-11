@@ -2,6 +2,8 @@
 
 = Language API FAQs = 
 
+<wiki:toc max_depth="2" />
+
 == What Languages are supported by the Language API? ==
 
 Check the underlying [http://code.google.com/apis/ajaxlanguage Ajax Language JavaScript API documentation] for a list of the currently supported languages.  If a new language is added to the !JavaScript API but not yet supported by the Language enumeration, please file an [http://code.google.com/p/gwt-google-apis/issues/list issue].  In the interim, you can pass in the text representation of the language code. 
