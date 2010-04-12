@@ -98,6 +98,7 @@
 	</target>
 
 	<target name="clean" description="Cleans this project's intermediate and output files">
+                <delete dir="bin" />
 		<delete dir="${project.build}" />
 		<delete file="${project.lib}" />
 	</target>
