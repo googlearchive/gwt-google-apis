@@ -290,6 +290,11 @@ function __MODULE_FUNC__() {
 // __PERMUTATIONS_BEGIN__
       // Permutation logic
 // __PERMUTATIONS_END__
+      var idx = strongName.indexOf(':');
+      if (idx != -1) {
+        softPermutationId = Number(strongName.substring(idx + 1));
+        strongName = strongName.substring(0, idx);
+      }
     } catch (e) {
       // intentionally silent on property failure
       return;
