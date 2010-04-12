@@ -14,8 +14,15 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module>
-      <inherits name='com.google.gwt.user.User'/>
-      <inherits name="com.google.gwt.gadgets.Gadgets" />
+<module rename-to="basicgadgetads">
+
+	<!-- Inherit the core Web Toolkit stuff.                        -->
+	<inherits name='com.google.gwt.user.User'/>
+
+	<!-- Other module inherits                                      -->
+	<inherits name="com.google.gwt.gadgets.Gadgets" />
+
+	<!-- Specify the app entry point class.                         -->
       <entry-point class='com.google.gwt.gadgets.sample.basicgadgetads.client.BasicGadgetAds'/>
+
 </module>
