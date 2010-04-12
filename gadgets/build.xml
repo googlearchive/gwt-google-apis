@@ -18,11 +18,11 @@
 		<gwt.ant dir="doc" />
 	</target>
 
-	<target name="gadgets" description="Build Gears Bindings">
+	<target name="gadgets" depends="build-tools" description="Build Gadgets Bindings">
 		<gwt.ant dir="gadgets"/>
 	</target>
 	
-	<target name="samples" depends="gadgets" description="Build Gadgets samples">
+	<target name="samples" depends="build-tools, gadgets" description="Build Gadgets samples">
 		<gwt.ant dir="samples" />
 	</target>
 
@@ -48,6 +48,9 @@
 
 	<target name="clean" description="Cleans the entire Gadgets API Library for GWT build">
 		<delete dir="${gwt.build}" />
+		<antcall target="-do">
+			<param name="target" value="clean" />
+		</antcall>
 	</target>
 
 </project>

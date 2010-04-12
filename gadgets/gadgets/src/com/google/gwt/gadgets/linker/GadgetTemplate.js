@@ -42,6 +42,9 @@ function __MODULE_FUNC__() {
   // A multi-tier lookup map that uses actual property values to quickly find
   // the strong name of the cache.js file to load.
   ,answers = []
+              
+   // Provides the module with the soft permutation id
+  ,softPermutationId = 0
 
   // Error functions.  Default unset in compiled mode, may be set by meta props.
   ,onLoadErrorFunc, propertyErrorFunc
@@ -78,13 +81,13 @@ function __MODULE_FUNC__() {
       if (isHostedMode()) {
         // Kicks off hosted mode
         try {
-          external.gwtOnLoad($wnd, '__MODULE_NAME__', '__GWT_MAJOR_VERSION__');
+          external.gwtOnLoad($wnd, '__MODULE_NAME__', softPermutationId);
         } catch (e) {
           $wnd.alert("external.gwtOnLoad failed: " + e);
         };
       } else if (gwtOnLoad) {
         // Start the compiled permutation
-        gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base, '__GWT_MAJOR_VERSION__');
+        gwtOnLoad(onLoadErrorFunc, '__MODULE_NAME__', base, softPermutationId);
       }
     }
   }
