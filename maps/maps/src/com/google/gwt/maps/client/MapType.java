@@ -64,9 +64,14 @@ public final class MapType {
     }
   };
 
+  private static MapType aerialHybridMap;
+  private static MapType aerialMap;
   private static List<MapType> defaultMapTypes;
   private static MapType earthMap;
   private static MapType hybridMap;
+  private static MapType mapmakerHybridMap;
+  private static MapType mapmakerNormalMap;
+  private static List<MapType> mapmakerMapTypes;
   private static boolean mapTypesInitialized = false;
   private static MapType marsElevationMap;
   private static MapType marsInfraredMap;
@@ -79,8 +84,31 @@ public final class MapType {
   private static MapType physicalMap;
   private static MapType satelliteMap;
   private static List<MapType> skyMapTypes;
-
   private static MapType skyVisibleMap;
+
+  /**
+   * This map type displays a transparent layer of major streets on top of
+   * aerial imagery.
+   * 
+   * @return a map type that displays a transparent layer of major streets on
+   *         top of aerial imagery.
+   */
+  public static MapType getAerialHybridMap() {
+    initMapTypes();
+    return aerialHybridMap;
+  }
+
+  /**
+   * This map type displays a transparent layer of major streets on satellite
+   * images.
+   * 
+   * @return A map type that displays a transparent layer of major streets on
+   *         satellite images.
+   */
+  public static MapType getAerialMap() {
+    initMapTypes();
+    return aerialMap;
+  }
 
   /**
    * Returns G_DEFAULT_MAP_TYPES as an Java Array of MapType objects.
@@ -121,6 +149,55 @@ public final class MapType {
   public static MapType getHybridMap() {
     initMapTypes();
     return hybridMap;
+  }
+
+  /**
+   * This map type displays a transparent layer of major streets created using
+   * Google Mapmaker on satellite images.
+   * 
+   * Note: When you use the Mapmaker maptype, users will only see maps in
+   * countries where Google Map Maker is launched.
+   * 
+   * @return a map type that displays a transparent layer of major streets
+   *         created using Google Mapmaker on satellite images.
+   */
+  public static MapType getMapmakerHybridMap() {
+    initMapTypes();
+    return mapmakerHybridMap;
+  }
+
+  /**
+   * This map type displays a street map with tiles created using Google
+   * Mapmaker.
+   * 
+   * Note: When you use a Mapmaker map type, users will only see maps in
+   * countries where Google Map Maker is launched.
+   * 
+   * @return A map type that displays a street map with tiles created using
+   *         Google Mapmaker.
+   */
+  public static MapType getMapmakerNormalMap() {
+    initMapTypes();
+    return mapmakerNormalMap;
+  }
+
+  /**
+   * Turns G_MAPMAKER_MAP_TYPES into an immutable of MapType objects.
+   * 
+   * @return an immutable list of MapType objects.
+   */
+  public static List<MapType> getMapmakerMapTypes() {
+    if (mapmakerMapTypes != null) {
+      return mapmakerMapTypes;
+    }
+    initMapTypes();
+    int size = getMapmakerMapTypesSize();
+    List<MapType> l = new ArrayList<MapType>();
+    for (int i = 0; i < size; i++) {
+      l.add(getMapmakerMapType(i));
+    }
+    mapmakerMapTypes = Collections.unmodifiableList(l);
+    return mapmakerMapTypes;
   }
 
   /**
@@ -303,21 +380,45 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getDefaultMapType(int i) /*-{
-     var o = $wnd.G_DEFAULT_MAP_TYPES[i];
-     if (o.__gwtPeer) {
-        // Avoid double wrapping the object.
-        return o.__gwtPeer;
-     } else {
-       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-     }
-   }-*/;
+    var o = $wnd.G_DEFAULT_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+    } else {
+      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+    }
+  }-*/;
 
   /**
    * @return the length of the G_DEFAULT_MAP_TYPES array.
    */
   private static native int getDefaultMapTypesSize() /*-{
-     return $wnd.G_DEFAULT_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_DEFAULT_MAP_TYPES.length;
+  }-*/;
+
+  /**
+   * Return one member of the G_MAPMAKER_MAP_TYPES array. If it has already been
+   * wrapped, return the wrapped object. Otherwise, wrap the object.
+   * 
+   * @param i index into the array
+   * @return an element of the array as a Java object
+   */
+  private static native MapType getMapmakerMapType(int i) /*-{
+    var o = $wnd.G_MAPMAKER_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+     } else {
+       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+     }
+  }-*/;
+
+  /**
+   * @return the length of the MAPMAKER_MAP_TYPES array.
+   */
+  private static native int getMapmakerMapTypesSize() /*-{
+    return $wnd.G_MAPMAKER_MAP_TYPES.length;
+  }-*/;
 
   /**
    * Return one member of the G_MARS_MAP_TYPES array. If it has already been
@@ -327,21 +428,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getMarsMapType(int i) /*-{
-     var o = $wnd.G_MARS_MAP_TYPES[i];
-     if (o.__gwtPeer) {
-        // Avoid double wrapping the object.
-        return o.__gwtPeer;
-      } else {
-        return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-      }
-   }-*/;
+    var o = $wnd.G_MARS_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+     } else {
+       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+     }
+  }-*/;
 
   /**
    * @return the length of the MARS_MAP_TYPES array.
    */
   private static native int getMarsMapTypesSize() /*-{
-     return $wnd.G_MARS_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_MARS_MAP_TYPES.length;
+  }-*/;
 
   /**
    * Return one member of the G_MOON_MAP_TYPES array. If it has already been
@@ -351,21 +452,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getMoonMapType(int i) /*-{
-     var o = $wnd.G_MOON_MAP_TYPES[i];
-     if (o.__gwtPeer) {
-        // Avoid double wrapping the object.
-        return o.__gwtPeer;
-     } else {
-       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-     }
-   }-*/;
+    var o = $wnd.G_MOON_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+    } else {
+      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+    }
+  }-*/;
 
   /**
    * @return the length of the MOON_MAP_TYPES array.
    */
   private static native int getMoonMapTypesSize() /*-{
-     return $wnd.G_MOON_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_MOON_MAP_TYPES.length;
+  }-*/;
 
   /**
    * Return one member of the G_SKY_MAP_TYPES array. If it has already been
@@ -375,21 +476,21 @@ public final class MapType {
    * @return an element of the array as a Java object
    */
   private static native MapType getSkyMapType(int i) /*-{
-     var o = $wnd.G_SKY_MAP_TYPES[i];
-     if (o.__gwtPeer) {
-        // Avoid double wrapping the object.
-        return o.__gwtPeer;
-     } else {
-       return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
-     }
-   }-*/;
+    var o = $wnd.G_SKY_MAP_TYPES[i];
+    if (o.__gwtPeer) {
+       // Avoid double wrapping the object.
+       return o.__gwtPeer;
+    } else {
+      return @com.google.gwt.maps.client.MapType::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(o);
+    }
+  }-*/;
 
   /**
    * @return the length of the SKY_MAP_TYPES array.
    */
   private static native int getSkyMapTypesSize() /*-{
-     return $wnd.G_SKY_MAP_TYPES.length;
-   }-*/;
+    return $wnd.G_SKY_MAP_TYPES.length;
+  }-*/;
 
   private static void initMapTypes() {
     if (mapTypesInitialized) {
@@ -407,6 +508,10 @@ public final class MapType {
     marsVisibleMap = createPeer(MapTypeImpl.impl.getMarsVisibleMap());
     marsInfraredMap = createPeer(MapTypeImpl.impl.getMarsInfraredMap());
     skyVisibleMap = createPeer(MapTypeImpl.impl.getSkyVisibleMap());
+    aerialMap = createPeer(MapTypeImpl.impl.getAerialMap());
+    aerialHybridMap = createPeer(MapTypeImpl.impl.getAerialHybridMap());
+    mapmakerNormalMap = createPeer(MapTypeImpl.impl.getMapmakerNormalMap());
+    mapmakerHybridMap = createPeer(MapTypeImpl.impl.getMapmakerHybridMap());    
     mapTypesInitialized = true;
   }
 
@@ -460,8 +565,8 @@ public final class MapType {
     mapTypeNewCopyrightHandlers.addHandler(handler, new CopyrightCallback() {
       @Override
       public void callback(Copyright copyright) {
-        MapTypeNewCopyrightEvent e = new MapTypeNewCopyrightEvent(
-            MapType.this, copyright);
+        MapTypeNewCopyrightEvent e = new MapTypeNewCopyrightEvent(MapType.this,
+            copyright);
         handler.onNewCopyright(e);
       }
     });
@@ -496,8 +601,8 @@ public final class MapType {
    * @return the copyrights corresponding to the given viewport
    */
   public String[] getCopyrights(LatLngBounds bounds, int zoomLevel) {
-    JSList<String> copyrights = MapTypeImpl.impl.getCopyrights(jsoPeer,
-        bounds, zoomLevel);
+    JSList<String> copyrights = MapTypeImpl.impl.getCopyrights(jsoPeer, bounds,
+        zoomLevel);
     String[] returnValue = new String[copyrights.size()];
     JsUtil.toArray(copyrights, returnValue);
     return returnValue;
