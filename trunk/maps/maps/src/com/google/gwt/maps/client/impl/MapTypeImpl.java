@@ -40,15 +40,21 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   void bind(JavaScriptObject jsoPeer, MapType mapType);
 
   @Constructor("$wnd.GMapType")
-  JavaScriptObject construct(JSList<? extends TileLayer> layers, Projection projection,
-      String name);
+  JavaScriptObject construct(JSList<? extends TileLayer> layers,
+      Projection projection, String name);
 
   @Constructor("$wnd.GMapType")
-  JavaScriptObject construct(JSList<? extends TileLayer> layers, Projection projection,
-      String name, MapTypeOptions opts);
+  JavaScriptObject construct(JSList<? extends TileLayer> layers,
+      Projection projection, String name, MapTypeOptions opts);
+
+  @Global("$wnd.G_AERIAL_HYBRID_MAP")
+  JavaScriptObject getAerialHybridMap();
+
+  @Global("$wnd.G_AERIAL_MAP")
+  JavaScriptObject getAerialMap();
 
   String getAlt(JavaScriptObject jsoPeer);
-  
+
   int getBoundsZoomLevel(JavaScriptObject jsoPeer, LatLngBounds bounds,
       Size viewSize);
 
@@ -67,6 +73,15 @@ public interface MapTypeImpl extends JSFlyweightWrapper {
   JavaScriptObject getHybridMapType();
 
   String getLinkColor(JavaScriptObject jsoPeer);
+
+  @Global("$wnd.G_MAPMAKER_HYBRID_MAP")
+  JavaScriptObject getMapmakerHybridMap();
+
+  @Global("$wnd.G_MAPMAKER_NORMAL_MAP")
+  JavaScriptObject getMapmakerNormalMap();
+
+  @Global("$wnd.G_MAPMAKER_MAP_TYPES")
+  JavaScriptObject getMapmakerMapTypes();
 
   @Global("$wnd.G_MARS_ELEVATION_MAP")
   JavaScriptObject getMarsElevationMap();

@@ -56,10 +56,13 @@ public class MapTypeDemo extends MapsDemo {
       List<MapType> tmpTypeList = new ArrayList<MapType>();
       tmpTypeList.add(MapType.getPhysicalMap());
       tmpTypeList.add(MapType.getEarthMap());
+      tmpTypeList.add(MapType.getAerialMap());
+      tmpTypeList.add(MapType.getAerialHybridMap());
       initListByMapType("", tmpTypeList);
       initListByMapType("Moon: ", MapType.getMoonMapTypes());
       initListByMapType("Mars: ", MapType.getMarsMapTypes());
       initListByMapType("Sky: ", MapType.getSkyMapTypes());
+      initListByMapType("Mapmaker: ", MapType.getMapmakerMapTypes());
 
       lb.addChangeListener(new ChangeListener() {
         public void onChange(Widget sender) {
@@ -127,7 +130,7 @@ public class MapTypeDemo extends MapsDemo {
     }
     map.addMapType(MapType.getPhysicalMap());
     map.addMapType(MapType.getEarthMap());
-    
+
     for (MapType mt : MapType.getMoonMapTypes()) {
       map.addMapType(mt);
     }
@@ -139,6 +142,13 @@ public class MapTypeDemo extends MapsDemo {
     for (MapType mt : MapType.getSkyMapTypes()) {
       map.addMapType(mt);
     }
+
+    for (MapType mt : MapType.getMapmakerMapTypes()) {
+      map.addMapType(mt);
+    }
+
+    map.addMapType(MapType.getAerialMap());
+    map.addMapType(MapType.getAerialHybridMap());
 
     map.addControl(new DemoCustomMapTypeControl());
     map.addControl(new LargeMapControl());
