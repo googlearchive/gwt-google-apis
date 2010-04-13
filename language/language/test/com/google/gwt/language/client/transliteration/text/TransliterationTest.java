@@ -25,7 +25,6 @@ import java.util.ArrayList;
  * Test for Transliteration class.
  */
 public class TransliterationTest extends GWTTestCase {
-
   private static final int MAX_TEST_FINISH_DELAY = 10000;
 
   @Override

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,7 +22,6 @@ import com.google.gwt.language.client.LanguageUtils;
  * Tests for translation API.
  */
 public class TranslationTest extends GWTTestCase {
-
   private static final int MAX_TEST_FINISH_DELAY = 10000;
 
   @Override
@@ -57,17 +56,17 @@ public class TranslationTest extends GWTTestCase {
   public void testTranslation() {
     LanguageUtils.loadTranslation(new Runnable() {
       public void run() {
-        Translation.translate("hello world", Language.ENGLISH, Language.SPANISH,
-            new TranslationCallback() {
+        Translation.translate("hello world", Language.ENGLISH,
+            Language.SPANISH, new TranslationCallback() {
 
-          @Override
-          protected void onCallback(TranslationResult result) {
-            assertNull(result.getError());
-            assertEquals("hola mundo", result.getTranslatedText());
-            finishTest();
-          }
+              @Override
+              protected void onCallback(TranslationResult result) {
+                assertNull(result.getError());
+                assertEquals("hola mundo", result.getTranslatedText());
+                finishTest();
+              }
 
-        });
+            });
       }
     });
     delayTestFinish(MAX_TEST_FINISH_DELAY);
@@ -83,15 +82,15 @@ public class TranslationTest extends GWTTestCase {
         Translation.translate("hello world", "en", "zz",
             new TranslationCallback() {
 
-          @Override
-          protected void onCallback(TranslationResult result) {
-            assertEquals("invalid translation language pair",
-                result.getError().getMessage());
-            assertEquals(400, result.getError().getCode());
-            finishTest();
-          }
+              @Override
+              protected void onCallback(TranslationResult result) {
+                assertEquals("invalid translation language pair",
+                    result.getError().getMessage());
+                assertEquals(400, result.getError().getCode());
+                finishTest();
+              }
 
-        });
+            });
       }
     });
     delayTestFinish(MAX_TEST_FINISH_DELAY);
@@ -112,30 +111,31 @@ public class TranslationTest extends GWTTestCase {
   }
 
   /**
-   * Verifies that translation API works correctly with content type = html.
+   * Verifies that translation API works correctly with content type = html. The
+   * API should leave alone any HTML tags.
    */
   public void testTranslationWithHTMLOption() {
     LanguageUtils.loadTranslation(new Runnable() {
       public void run() {
-        Option option = Option.newInstance("&lt;body&gt;text body&lt;/body&gt;",
+        Option option = Option.newInstance("<bold>beans and rice</bold>",
             ContentType.HTML);
         assertNotNull(option);
         Translation.translate(option, Language.ENGLISH, Language.SPANISH,
             new TranslationCallback() {
 
-          @Override
-          protected void onCallback(TranslationResult result) {
-            assertNull(result.getError());
-            String resultText = result.getTranslatedText();
+              @Override
+              protected void onCallback(TranslationResult result) {
+                assertNull(result.getError());
+                String resultText = result.getTranslatedText();
 
-            // Since translation server can put spaces in response text, we
-            // have to compare this way.
-            assertTrue(resultText.startsWith("&lt;body&gt;"));
-            assertTrue(resultText.endsWith("&lt;/ body&gt;"));
-            assertTrue(resultText.contains("cuerpo de texto"));
-            finishTest();
-          }
-        });
+                // Since translation server can put spaces in response text, we
+                // have to compare this way.
+                assertTrue(resultText.startsWith("<bold>"));
+                assertTrue(resultText.endsWith("</bold>"));
+                assertTrue(resultText.contains("frijoles y arroz"));
+                finishTest();
+              }
+            });
       }
     });
     delayTestFinish(MAX_TEST_FINISH_DELAY);
@@ -143,30 +143,33 @@ public class TranslationTest extends GWTTestCase {
 
   /**
    * Verifies that translation API works correctly with content type = text.
+   * html tag contents are interpreted as words in the source language and may
+   * be translated.
    */
   public void testTranslationWithTextOption() {
     LanguageUtils.loadTranslation(new Runnable() {
       public void run() {
-        Option option = Option.newInstance("&lt;body&gt;text body&lt;/body&gt;",
-            ContentType.TEXT);
+        Option option = Option.newInstance(
+            "Please bring me < bold > beans and rice. </ bold>", ContentType.TEXT);
         assertNotNull(option);
         Translation.translate(option, Language.ENGLISH, Language.SPANISH,
             new TranslationCallback() {
 
-          @Override
-          protected void onCallback(TranslationResult result) {
-            assertNull(result.getError());
-            String resultText = result.getTranslatedText();
+              @Override
+              protected void onCallback(TranslationResult result) {
+                assertNull(result.getError());
+                String resultText = result.getTranslatedText();
 
-            // Since translation server can put spaces in response text, we
-            // have to compare this way.
-            assertTrue(resultText.startsWith("<body>"));
-            assertTrue(resultText.endsWith("</ body>"));
-            assertTrue(resultText.contains("cuerpo de texto"));
-            finishTest();
-          }
+                // Since translation server can put spaces in response text, we
+                // have to compare this way.
+                assertTrue(resultText.toLowerCase().contains("negrita"));
+                assertTrue(resultText.toLowerCase().contains("frijoles "));
+                assertTrue(resultText.toLowerCase().contains(" y "));
+                assertTrue(resultText.toLowerCase().contains(" arroz"));
+                finishTest();
+              }
 
-        });
+            });
       }
     });
     delayTestFinish(MAX_TEST_FINISH_DELAY);

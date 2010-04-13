@@ -15,6 +15,9 @@
  */
 package com.google.gwt.language.client.translation;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
+
 /**
  * All languages. In sync with google.language.Languages enum.
  */
@@ -117,7 +120,7 @@ public enum Language {
   /**
    * Private constructor.
    * 
-   * @param langCode
+   * @param langCode the unique short string that identifies a language.
    */
   private Language(String langCode) {
     this.langCode = langCode;
@@ -131,4 +134,56 @@ public enum Language {
   public String getLangCode() {
     return langCode;
   }
+
+  /**
+   * Bindings for the google.languages.language.Languages object.
+   */
+  public static class SupportedLanguages extends JavaScriptObject {
+    protected SupportedLanguages() {
+    }
+
+    /**
+     * Lookup a language code value by language name.
+     */
+    public final native String getLanguageCode(String name) /*-{
+      return this[name];
+    }-*/;
+
+    /**
+     * Look up a language name value by language code.
+     */
+    public final native String getLanguageName(String languageCode) /*-{
+      if (!this.__lookupByCode) {
+        // Create a map from language code back to name 
+        this.__lookupByCode = {};
+        for (var prop in this) {
+          if (prop.match(/^[A-Z_]+$/)) {
+            this.__lookupByCode[this[prop]] = prop;
+          }
+        }
+      }
+      return this.__lookupByCode[languageCode];
+    }-*/;
+
+    /**
+     * Returns a list of language keys in the object.
+     */
+    public final native JsArrayString getLanguages() /*-{
+      var result = [];
+      for (var prop in this) {
+        if (prop.match(/^[A-Z_]+$/)) {
+          result.push(prop);
+        }
+      }
+      return result;
+    }-*/;
+  }
+
+  /**
+   * Returns a JavaScriptObject that contains the list of language names as
+   * properties, with the 2 character ISO language code as the property values.
+   */
+  public static native SupportedLanguages nativeSupportedLangauges() /*-{
+    return $wnd.google.language.Languages;
+  }-*/;
 }
