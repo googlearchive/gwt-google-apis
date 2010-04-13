@@ -22,6 +22,8 @@ import com.google.gwt.maps.sample.hellomaps.client.MapsDemo.MapsDemoInfo;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.HistoryListener;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -30,6 +32,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Main class for implementing the HelloMaps gwt-google-apis demo.
@@ -73,12 +76,22 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     loadMapsDemos();
 
     innerPanel.setStylePrimaryName("hm-mapinnerpanel");
-    innerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+    // innerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 
     HorizontalPanel horizPanel = new HorizontalPanel();
     list.setStylePrimaryName("hm-demolistbox");
+    Button nextLink = new Button(">>");
+    nextLink.addClickListener(new ClickListener() {
+
+      public void onClick(Widget sender) {
+        show(list.getNext(), false);
+      }
+    });
+
     horizPanel.add(new Label("Select Demo: "));
+    horizPanel.setSpacing(4);
     horizPanel.add(list);
+    horizPanel.add(nextLink);
     innerPanel.add(horizPanel);
     innerPanel.add(description);
     innerPanel.setSpacing(10);
@@ -215,6 +228,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     list.addMapsDemo(ReverseGeocoderDemo.init());
     list.addMapsDemo(EarthPluginDemo.init());
     list.addMapsDemo(GoogleBarDemo.init());
+    list.addMapsDemo(AdsManagerDemo.init());
   }
 
   private void showInfo() {
