@@ -23,7 +23,8 @@ import com.google.gwt.language.client.LanguageUtils;
  * Tests for ListenerManager class.
  */
 public class ListenerManagerTest extends GWTTestCase {
-
+  private static final int MAX_TEST_FINISH_DELAY = 10000;
+  
   @Override
   public String getModuleName() {
     return "com.google.gwt.language.Language";
@@ -56,8 +57,10 @@ public class ListenerManagerTest extends GWTTestCase {
                 listener2));
         assertNull("Expected null when object is already retrieved earlier",
             ListenerManager.findAndRemove(EventType.LANGUAGE_CHANGED, listener2));
+        finishTest();
       }
     });
+    delayTestFinish(MAX_TEST_FINISH_DELAY);
   }
 
 /**

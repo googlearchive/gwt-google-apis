@@ -19,9 +19,11 @@ package com.google.gwt.language.client.transliteration;
  * Supported transliteration languages.
  */
 public enum LanguageCode {
+  AMHARIC("am"), //
   ARABIC("ar"), // Comments keep Eclipse formatter from putting on one line
   BENGALI("bn"), //
   ENGLISH("en"), //
+  GREEK("el"), //
   GUJARATI("gu"), //
   HINDI("hi"), //
   KANNADA("kn"), //
@@ -30,8 +32,12 @@ public enum LanguageCode {
   NEPALI("ne"), //
   PUNJABI("pa"), //
   PERSIAN("fa"), //
+  RUSSIAN("ru"), //
+  SANSKRIT("sa"), //
+  SERBIAN("sr"), //
   TAMIL("ta"), //
   TELUGU("te"), //
+  TIGRINYA("ti"), //
   URDU("ur");
 
   /**

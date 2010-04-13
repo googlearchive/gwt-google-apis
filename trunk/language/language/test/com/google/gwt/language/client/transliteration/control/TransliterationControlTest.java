@@ -33,7 +33,6 @@ public class TransliterationControlTest extends GWTTestCase {
   private static final int TEST_OUTER_VALUE = 10;
   private HTML div;
   private TextArea textArea1;
-
   private TextArea textArea2;
 
   @Override
@@ -84,8 +83,10 @@ public class TransliterationControlTest extends GWTTestCase {
         control.toggleTransliteration();
         assertTrue("Expected transliteration to be enabled",
             control.isTransliterationEnabled());
+        finishTest();
       }
     });
+    delayTestFinish(MAX_TEST_FINISH_DELAY);    
   }
 
   /**
@@ -156,8 +157,10 @@ public class TransliterationControlTest extends GWTTestCase {
         LanguageCode[] langPair2 = control.getLanguageCodePair();
         assertTrue(langPair2[0] == LanguageCode.ENGLISH
             && langPair2[1] == LanguageCode.HINDI);
+        finishTest();
       }
     });
+    delayTestFinish(MAX_TEST_FINISH_DELAY);
   }
 
   /**
@@ -169,8 +172,18 @@ public class TransliterationControlTest extends GWTTestCase {
         initialize();
         TextArea[] textAreas = {textArea1, textArea2};
         control.makeTransliteratable(textAreas);
+        finishTest();
+      }
+    });
+    delayTestFinish(MAX_TEST_FINISH_DELAY);
+  }
 
+  public void testMakeTransliteratableWithOptions() {
+    LanguageUtils.loadTransliteration(new Runnable() {
+      public void run() {
+        initialize();
         TextElementOptions options = TextElementOptions.newInstance(true, false);
+        TextArea[] textAreas = {textArea1, textArea2};
         control.makeTransliteratable(textAreas, options);
         finishTest();
       }
