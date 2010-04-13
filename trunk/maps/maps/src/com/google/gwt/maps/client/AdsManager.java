@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 Google Inc.
+ * Copyright 2010 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -27,9 +27,14 @@ public class AdsManager extends JavaScriptObject {
    * Optional parameters to use when creating an AdsManager.
    */
   public static class AdsManagerOptions extends JavaScriptObject {
+    /**
+     * Specifies {@link AdsManager} should display content ads in a frame on the
+     * map.
+     */
+    public static final String STYLE_ADUNIT = "adunit";
 
     /**
-     * Create a new AdsManagerOptions instance.
+     * Create a new {@link AdsManagerOptions} instance.
      */
     public static native AdsManagerOptions newInstance() /*-{
       var result = new $wnd.Object(); 
@@ -38,8 +43,7 @@ public class AdsManager extends JavaScriptObject {
 
     protected AdsManagerOptions() {
       // Protected or private constructor required for JavaScriptObject
-      // overlays.
-      // Use newInstance() to instantiate a new AdsManager object.
+      // overlays. Use newInstance() to instantiate a new AdsManager object.
     }
 
     /**
@@ -82,27 +86,52 @@ public class AdsManager extends JavaScriptObject {
     }-*/;
 
     /**
+     * The AdSense for Maps style to exhibit for the placement of maps.
+     * 
+     * @param style The AdSense for Maps style to exhibit for the placement of
+     *          maps.
+     * @return AdsManagerOption object, for convenience when using the Builder
+     *         pattern.
+     */
+    public final native AdsManagerOptions setStyle(String style) /*-{
+      this.style = style;
+      return this;
+    }-*/;
+
+    /**
      * Accessor intended for unit testing only.
-     * @return the Channel number set in {@link #setChannel(int)}.
+     * 
+     * @return the style set in {@link #setStyle(String)}
      */
     final native int getChannel() /*-{
       return this.channel;
     }-*/;
-    
+
     /**
      * Accessor intended for unit testing only.
+     * 
      * @return the maxAdsOnMap value set in {@link #setMaxAdsOnMap(int)}.
-     */    
+     */
     final native int getMaxAdsOnMap() /*-{
       return this.maxAdsOnMap;
     }-*/;
 
     /**
      * Accessor intended for unit testing only.
+     * 
      * @return the minZoomLevel set in {@link #setMinZoomLevel(int)}.
      */
     final native int getMinZoomLevel() /*-{
       return this.minZoomLevel;
+    }-*/;
+
+    /**
+     * Accessor intended for unit testing only.
+     * 
+     * @return the minZoomLevel set in {@link #setMinZoomLevel(int)}.
+     */
+    final native String getStyle() /*-{
+      return this.style;
     }-*/;
   }
 
@@ -114,8 +143,7 @@ public class AdsManager extends JavaScriptObject {
    * 
    * @return A new AdsManager object.
    */
-  public static native AdsManager newInstance(MapWidget map, 
-      String publisherId) /*-{
+  public static native AdsManager newInstance(MapWidget map, String publisherId) /*-{
     return new $wnd.GAdsManager(
         map.@com.google.gwt.maps.client.MapWidget::getPeer()(), 
         publisherId);

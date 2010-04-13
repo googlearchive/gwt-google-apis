@@ -30,7 +30,7 @@ import java.util.ArrayList;
  */
 public class DemoList extends Composite {
 
-//  private HorizontalPanel list = new HorizontalPanel();
+  // private HorizontalPanel list = new HorizontalPanel();
   private ListBox list = new ListBox();
   private ArrayList<MapsDemoInfo> sinks = new ArrayList<MapsDemoInfo>();
 
@@ -40,7 +40,7 @@ public class DemoList extends Composite {
     list.addChangeListener(new ChangeListener() {
       public void onChange(Widget sender) {
         History.newItem(list.getItemText(list.getSelectedIndex()));
-      }      
+      }
     });
   }
 
@@ -58,6 +58,14 @@ public class DemoList extends Composite {
       }
     }
     return null;
+  }
+
+  public MapsDemoInfo getNext() {
+    int nextIndex = list.getSelectedIndex() + 1;
+    if (nextIndex >= sinks.size()) {
+      nextIndex = 0;
+    }
+    return sinks.get(nextIndex);
   }
 
   public void setMapsDemoSelection(String name) {
