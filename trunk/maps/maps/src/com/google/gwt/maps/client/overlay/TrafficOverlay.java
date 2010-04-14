@@ -50,6 +50,14 @@ public final class TrafficOverlay extends ConcreteOverlay {
   }
   
   /**
+   * Construct a new traffic overlay with options.
+   * See {@link TrafficOverlayOptions}
+   */
+  public TrafficOverlay(TrafficOverlayOptions options) {
+	  super(TrafficOverlayImpl.impl.construct(options));
+  }
+  
+  /**
    * Create this overlay from an existing JavaScriptObject instance.
    * 
    * @param jsoPeer an existing JavaScriptObject instance.
