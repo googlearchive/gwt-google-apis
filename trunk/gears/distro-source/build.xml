@@ -3,7 +3,7 @@
 	<property name="project.tail" value="distro-source" />
 	<import file="common.ant.xml" />
 
-	<target name="tar" depends="filter" description="Packages the tar.gz distro">
+	<target name="tar" depends="filter,transform.eclipse.config" description="Packages the tar.gz distro">
 		<mkdir dir="${gwt.build.dist}" />
 		<gwt.tgz.cat destfile="${gwt.build.dist}/${project.distname}.tar.gz">
 			<!-- jars -->
@@ -21,9 +21,16 @@
 				<include name="doc/javadoc/**" />
 			</tarfileset>
 
+			<!-- .classpath files for samples -->
+			<tarfileset dir="${xslt.out}" prefix="${project.distname}">
+				<exclude name="samples/gwtnote/**" />
+				<include name="samples/*/.classpath" />
+			</tarfileset>
+
 			<!-- samples -->
 			<tarfileset dir="${gwt.root}" prefix="${project.distname}">
 				<exclude name="samples/gwtnote/**" />
+				<include name="samples/*/.project" />
 				<include name="samples/*/*.war" />
 				<include name="samples/*/src/**" />
 				<include name="samples/*/war/**" />
@@ -31,7 +38,7 @@
 		</gwt.tgz.cat>
 	</target>
 
-	<target name="zip" depends="filter" description="Packages the zip distro">
+	<target name="zip" depends="filter,transform.eclipse.config" description="Packages the zip distro">
 		<mkdir dir="${gwt.build.dist}" />
 		<zip destfile="${gwt.build.dist}/${project.distname}.zip">
 			<!-- jars -->
@@ -49,9 +56,16 @@
 				<include name="doc/javadoc/**" />
 			</zipfileset>
 
+			<!-- .classpath files for samples -->
+			<zipfileset dir="${xslt.out}" prefix="${project.distname}">
+				<exclude name="samples/gwtnote/**" />
+				<include name="samples/*/.classpath" />
+			</zipfileset>
+
 			<!-- samples -->
 			<zipfileset dir="${gwt.root}" prefix="${project.distname}">
 				<exclude name="samples/gwtnote/**" />
+				<include name="samples/*/.project" />
 				<include name="samples/*/*.war" />
 				<include name="samples/*/src/**" />
 				<include name="samples/*/war/**" />
