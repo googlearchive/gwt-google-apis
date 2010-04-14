@@ -18,6 +18,7 @@ package com.google.gwt.maps.client.impl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.overlay.TrafficOverlay;
+import com.google.gwt.maps.client.overlay.TrafficOverlayOptions;
 import com.google.gwt.maps.jsio.client.Constructor;
 import com.google.gwt.maps.jsio.client.JSFlyweightWrapper;
 
@@ -31,5 +32,8 @@ public interface TrafficOverlayImpl extends JSFlyweightWrapper {
   @Constructor("$wnd.GTrafficOverlay")
   JavaScriptObject construct();
 
+  @Constructor("$wnd.GTrafficOverlay")
+  JavaScriptObject construct(TrafficOverlayOptions options);
+  
   void setVisible(TrafficOverlay overlay, boolean visible);
 }
