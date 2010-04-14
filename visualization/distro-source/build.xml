@@ -55,9 +55,9 @@
 			</zipfileset>
 
 			<!-- .classpath files for samples -->
-			<tarfileset dir="${xslt.out}" prefix="${project.distname}">
+			<zipfileset dir="${xslt.out}" prefix="${project.distname}">
 				<include name="samples/*/.classpath" />
-			</tarfileset>
+			</zipfileset>
 
 			<!-- samples -->
 			<zipfileset dir="${gwt.root}" prefix="${project.distname}">
