@@ -15,6 +15,8 @@
  */
 package com.google.gwt.maps.client.overlay;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
@@ -28,6 +30,8 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.RootPanel;
+
+import java.util.ArrayList;
 
 /**
  * Tests the Marker class.
@@ -151,5 +155,50 @@ public class MarkerTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
 
     marker1.trigger(new MarkerClickEvent(marker1));
+  }
+  
+  /**
+   * Test of marker custom z-index
+   */
+  public void testZIndexProcess() {
+    MarkerOptions opts = MarkerOptions.newInstance();
+    opts.setZIndexProcess(new MarkerOptions.ZIndexProcess() {
+      
+      private double count = 0;
+      
+      public double computeZIndex(Marker marker) {
+        return (count = count - 1);
+      }
+    });
+    
+    LatLng p1 = LatLng.newInstance(45, 45);
+    LatLng p2 = LatLng.newInstance(50, 50);
+    Marker m1 = new Marker(p1, opts);
+    Marker m2 = new Marker(p2, opts);
+    
+    MapWidget map = new MapWidget(p1, 1);
+    map.setSize("300px", "300px");
+    map.addOverlay(m1);
+    map.addOverlay(m2);
+    RootPanel.get().add(map);
+    
+    // From this point, this test investigates the DOM structure of created map,
+    // therefore it might break if internal implementation of Maps changes.
+    
+    Element div = map.getElement().getFirstChildElement().getFirstChildElement();
+    NodeList<Element> imgs = div.getElementsByTagName("img");
+    
+    ArrayList<Element> markers = new ArrayList<Element>();
+    for (int i = 0; i < imgs.getLength(); i++) {
+      Element img = imgs.getItem(i);
+      String src = img.getPropertyString("src"); 
+      if (src != null && src.endsWith("/marker.png")) {
+        markers.add(img);
+      }
+    }
+    assertEquals(2, markers.size());
+    
+    assertEquals("-1", markers.get(0).getStyle().getZIndex());
+    assertEquals("-2", markers.get(1).getStyle().getZIndex());
   }
 }
