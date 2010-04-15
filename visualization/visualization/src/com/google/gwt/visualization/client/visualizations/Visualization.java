@@ -41,6 +41,7 @@ public abstract class Visualization<OptionsType extends AbstractDrawOptions> ext
     setSize(result, width, height);
     return result;
   }
+
   /**
    * Set the size of a div element by setting the style attribute.
    * 
@@ -52,7 +53,7 @@ public abstract class Visualization<OptionsType extends AbstractDrawOptions> ext
     div.getStyle().setPropertyPx("width", width);
     div.getStyle().setPropertyPx("height", height);
   }
-  
+
   private AbstractDataTable dataTable;
   private OptionsType options;
   private JavaScriptObject jso;
@@ -90,11 +91,11 @@ public abstract class Visualization<OptionsType extends AbstractDrawOptions> ext
   }-*/;
 
   /**
-   * Note: calling this method should not usually be necessary except by 
-   * subclasses.  If you need to call it, make sure you know what you're
-   * doing.
+   * Note: calling this method should not usually be necessary except by
+   * subclasses. If you need to call it, make sure you know what you're doing.
+   * 
    * @return The underlying JavaScriptObject representing the JavaScript
-   * implementation of the visualization.
+   *         implementation of the visualization.
    */
   public JavaScriptObject getJso() {
     return jso;
@@ -102,10 +103,10 @@ public abstract class Visualization<OptionsType extends AbstractDrawOptions> ext
 
   /**
    * Creates an instance of the underlying JavaScriptObject for this
-   * visualization.  Subclasses must override this with JSNI that calls the
+   * visualization. Subclasses must override this with JSNI that calls the
    * JavaScript constructor for their visualization.
    * 
-   * @param div  The container for the visualization.
+   * @param div The container for the visualization.
    * @return The underlying JavaScriptObject for the visualization.
    */
   protected abstract JavaScriptObject createJso(Element div);

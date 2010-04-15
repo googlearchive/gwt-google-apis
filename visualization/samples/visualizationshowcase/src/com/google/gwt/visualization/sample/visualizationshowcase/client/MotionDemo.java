@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.events.StateChangeHandler;
 import com.google.gwt.visualization.client.visualizations.MotionChart;
 import com.google.gwt.visualization.client.visualizations.MotionChart.Options;
 
@@ -31,27 +32,37 @@ import java.util.Date;
  * Demo for MotionChart visualization.
  */
 public class MotionDemo implements LeftTabPanel.WidgetProvider {
+  private static final String STATE_STRING = "{"
+      + "\"duration\":{\"timeUnit\":\"D\",\"multiplier\":1},\"nonSelectedAlpha\":0.4,"
+      + "\"yZoomedDataMin\":300,\"yZoomedDataMax\":1200,\"iconKeySettings\":[],\"yZoomedIn\":false,"
+      + "\"xZoomedDataMin\":300,\"xLambda\":1,\"time\":\"1988-01-06\",\"orderedByX\":false,\"xZoomedIn\":false,"
+      + "\"uniColorForNonSelected\":false,\"sizeOption\":\"_UNISIZE\",\"iconType\":\"BUBBLE\","
+      + "\"playDuration\":15000,\"dimensions\":{\"iconDimensions\":[\"dim0\"]},\"xZoomedDataMax\":1200,"
+      + "\"yLambda\":1,\"yAxisOption\":\"2\",\"colorOption\":\"4\",\"showTrails\":true,\"xAxisOption\":\"2\","
+      + "\"orderedByY\":false}";
   private Widget widget;
 
   @SuppressWarnings("deprecation")
   public MotionDemo() {
-    
+
     String protocol = Window.Location.getProtocol();
     if (protocol.startsWith("file")) {
-      widget = new HTML("<font color=\"blue\"><i>Note: Protocol is: " + protocol
-          + ".  Note that this visualization does not work when loading the HTML from "
-          + "a local file. It works only when loading the HTML from a "
-          + "web server. </i></font>");
+      widget = new HTML(
+          "<font color=\"blue\"><i>Note: Protocol is: "
+              + protocol
+              + ".  Note that this visualization does not work when loading the HTML from "
+              + "a local file. It works only when loading the HTML from a "
+              + "web server. </i></font>");
       return;
     }
-    
+
     @SuppressWarnings("unused")
     int year, month, day;
 
     Options options = Options.create();
     options.setHeight(300);
     options.setWidth(600);
-
+    options.setState(STATE_STRING);
     DataTable data = DataTable.create();
     data.addRows(6);
     data.addColumn(ColumnType.STRING, "Fruit");
@@ -95,7 +106,18 @@ public class MotionDemo implements LeftTabPanel.WidgetProvider {
       GWT.log("Error creating data table - Date bug on mac?", ex);
     }
 
-    widget = new MotionChart(data, options);
+    final MotionChart motionChart = new MotionChart(data, options);
+    motionChart.addStateChangeHandler(new StateChangeHandler() {
+
+      @Override
+      public void onStateChange(StateChangeEvent event) {
+        String result = motionChart.getState();
+        GWT.log(result);
+      }
+    });
+
+    widget = motionChart;
+
   }
 
   public Widget getWidget() {

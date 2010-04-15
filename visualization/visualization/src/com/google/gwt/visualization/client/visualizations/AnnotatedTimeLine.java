@@ -27,9 +27,9 @@ import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.DateRange;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.RangeChangeHandler;
 import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
-import com.google.gwt.visualization.client.events.RangeChangeHandler;
 
 import java.util.Date;
 import java.util.Map;
@@ -41,8 +41,8 @@ import java.util.Map;
  * 
  * 
  * @see <a
- *      href="http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html" >
- *      Annotated Timeline Visualization Reference. </a>
+ *      href="http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html"
+ *      > Annotated Timeline Visualization Reference. </a>
  */
 public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> {
   /**
@@ -104,7 +104,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     }-*/;
 
     public final void setColors(String... colors) {
-      setColors(ArrayHelper.createJsArray(colors));
+      setColors(ArrayHelper.toJsArrayString(colors));
     }
 
     public final native void setDateFormat(String dateFormat) /*-{
@@ -170,7 +170,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     public final void setNumberFormats(Map<Integer, String> numberFormats) {
       resetNumberFormats();
       for (Integer key : numberFormats.keySet()) {
-      String numberFormat = numberFormats.get(key);
+        String numberFormat = numberFormats.get(key);
         setNumberFormats(key, numberFormat);
       }
     }
@@ -241,8 +241,8 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   }
 
   /**
-   * The highlighting mode: The nearest dot to the mouse (default), or the last one 
-   * before the mouse (to the left of it).
+   * The highlighting mode: The nearest dot to the mouse (default), or the last
+   * one before the mouse (to the left of it).
    */
   public static enum HighlightDotMode {
     /**
@@ -343,11 +343,11 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   }
 
   public final void addReadyHandler(ReadyHandler handler) {
-  Handler.addHandler(this, "ready", handler);
+    Handler.addHandler(this, "ready", handler);
   }
-    
+
   public final void addSelectHandler(SelectHandler handler) {
-  Selection.addSelectHandler(this, handler);
+    Selection.addSelectHandler(this, handler);
   }
 
   public final JsArray<Selection> getSelections() {
@@ -359,12 +359,12 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     if (dates == null) {
       return null;
     }
-    
+
     Date start = JsDate.toJava(dates.get(0));
     Date end = JsDate.toJava(dates.get(1));
     return new DateRange(start, end);
   }
-  
+
   public final void hideDataColumns(int... columnIndexes) {
     hideDataColumns(ArrayHelper.createJsArray(columnIndexes));
   }
@@ -374,8 +374,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   };
 
   public final void setVisibleChartRange(Date startTime, Date endTime) {
-    this.setVisibleChartRange(getJso(), 
-        startTime.getTime(), endTime.getTime());
+    this.setVisibleChartRange(getJso(), startTime.getTime(), endTime.getTime());
   }
 
   public final void showDataColumns(int... columnIndexes) {
@@ -391,8 +390,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     return new $wnd.google.visualization.AnnotatedTimeLine(parent);
   }-*/;
 
-  private native JsArray<JsDate> 
-      getVisibleChartRange(JavaScriptObject jso) /*-{
+  private native JsArray<JsDate> getVisibleChartRange(JavaScriptObject jso) /*-{
     var dates = jso.getVisibleChartRange();
     if (dates == null) {
       return null;
@@ -400,18 +398,18 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     return [dates['start'], dates['end']];
   }-*/;
 
-  private native void hideDataColumns(JavaScriptObject jso, 
+  private native void hideDataColumns(JavaScriptObject jso,
       JsArrayInteger columnIndexes) /*-{
     jso.hideDataColumns(columnIndexes);
   }-*/;
 
-  private native void setVisibleChartRange(JavaScriptObject jso, 
+  private native void setVisibleChartRange(JavaScriptObject jso,
       double startTime, double endTime) /*-{
     jso.setVisibleChartRange(new $wnd.Date(startTime), 
         new $wnd.Date(endTime));
   }-*/;
-  
-  private native void showDataColumns(JavaScriptObject jso, 
+
+  private native void showDataColumns(JavaScriptObject jso,
       JsArrayInteger columnIndexes) /*-{
     jso.showDataColumns(columnIndexes);
   }-*/;

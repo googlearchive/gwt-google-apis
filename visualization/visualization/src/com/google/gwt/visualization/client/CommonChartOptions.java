@@ -46,10 +46,18 @@ public class CommonChartOptions extends CommonOptions {
     this.axisColor = color;
   }-*/;
 
+  public final native void setAxisFontSize(double size) /*-{
+    this.axisFontSize = size;
+  }-*/;
+
+  public final native void setLogScale(boolean logScale) /*-{
+    this.logScale = logScale;
+  }-*/;
+  
   public final native void setMax(double max) /*-{
     this.max = max;
   }-*/;
-  
+
   public final native void setMin(double min) /*-{
     this.min = min;
   }-*/;
@@ -61,7 +69,7 @@ public class CommonChartOptions extends CommonOptions {
   public final native void setShowCategories(boolean showCategories) /*-{
     this.showCategories = showCategories;
   }-*/;
-  
+
   public final native void setTitleX(String title) /*-{
     this.titleX = title;
   }-*/;

@@ -44,9 +44,9 @@ public class AreaChartTest extends VisualizationTest {
       }
     });
   }
-  
-  public void testOnMouseOverAndOut() {
-   loadApi(new Runnable() {
+
+  public void testOnMouseOver() {
+    loadApi(new Runnable() {
       public void run() {
         AreaChart chart;
         Options options = Options.create();
@@ -60,6 +60,17 @@ public class AreaChartTest extends VisualizationTest {
             finishTest();
           }
         });
+        triggerOnMouseOver(chart.getJso());
+      }
+    }, false);
+  }
+
+  public void testOnMouseOut() {
+    loadApi(new Runnable() {
+      public void run() {
+        AreaChart chart;
+        Options options = Options.create();
+        chart = new AreaChart(createCompanyPerformance(), options);
         chart.addOnMouseOutHandler(new OnMouseOutHandler() {
           @Override
           public void onMouseOutEvent(OnMouseOutEvent event) {
@@ -69,7 +80,6 @@ public class AreaChartTest extends VisualizationTest {
             finishTest();
           }
         });
-        triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
     }, false);
@@ -79,14 +89,14 @@ public class AreaChartTest extends VisualizationTest {
   protected String getVisualizationPackage() {
     return AreaChart.PACKAGE;
   }
-  
+
   private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
-      {'row':1, 'column':1});
-  }-*/;
-  
-  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
-    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
-      {'row':1, 'column':1});
-  }-*/;
+  $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+    {'row':1, 'column':1});
+}-*/;
+
+private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+  $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
+    {'row':1, 'column':1});
+}-*/;
 }

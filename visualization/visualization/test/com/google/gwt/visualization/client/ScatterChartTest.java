@@ -28,7 +28,7 @@ import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
  */
 public class ScatterChartTest extends VisualizationTest {
 
-  public void testOnMouseOverAndOut() {
+  public void testOnMouseOver() {
     loadApi(new Runnable() {
       public void run() {
         ScatterChart chart;
@@ -43,6 +43,17 @@ public class ScatterChartTest extends VisualizationTest {
             finishTest();
           }
         });
+        triggerOnMouseOver(chart.getJso());
+      }
+    }, false);
+  }
+  
+  public void testOnMouseOut() {
+    loadApi(new Runnable() {
+      public void run() {
+        ScatterChart chart;
+        Options options = Options.create();
+        chart = new ScatterChart(createCompanyPerformance(), options);
         chart.addOnMouseOutHandler(new OnMouseOutHandler() {
           @Override
           public void onMouseOutEvent(OnMouseOutEvent event) {
@@ -52,11 +63,10 @@ public class ScatterChartTest extends VisualizationTest {
             finishTest();
           }
         });
-        triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
     }, false);
-  }
+  }  
 
   public void testScatterChart() {
     loadApi(new Runnable() {

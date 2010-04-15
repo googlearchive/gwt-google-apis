@@ -16,10 +16,15 @@
 package com.google.gwt.visualization.client;
 
 import com.google.gwt.ajaxloader.client.ArrayHelper;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.events.CollapseHandler;
+import com.google.gwt.visualization.client.events.OnMouseOutHandler;
+import com.google.gwt.visualization.client.events.OnMouseOverHandler;
+import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
 import com.google.gwt.visualization.client.visualizations.OrgChart;
 import com.google.gwt.visualization.client.visualizations.OrgChart.Options;
@@ -51,6 +56,46 @@ public class OrgChartTest extends VisualizationTest {
     });
   }
 
+  public void testOnMouseOut() {
+    loadApi(new Runnable() {
+      public void run() {
+        OrgChart chart;
+        Options options = Options.create();
+        chart = new OrgChart(createDataTable(), options);
+        chart.addOnMouseOutHandler(new OnMouseOutHandler() {
+          @Override
+          public void onMouseOutEvent(OnMouseOutEvent event) {
+            assertNotNull(event);
+            assertEquals(1, event.getRow());
+            assertEquals(1, event.getColumn());
+            finishTest();
+          }
+        });
+        triggerOnMouseOut(chart.getJso());
+      }
+    }, false);
+  }
+
+  public void testOnMouseOver() {
+    loadApi(new Runnable() {
+      public void run() {
+        OrgChart chart;
+        Options options = Options.create();
+        chart = new OrgChart(createDataTable(), options);
+        chart.addOnMouseOverHandler(new OnMouseOverHandler() {
+          @Override
+          public void onMouseOverEvent(OnMouseOverEvent event) {
+            assertNotNull(event);
+            assertEquals(1, event.getRow());
+            assertEquals(1, event.getColumn());
+            finishTest();
+          }
+        });
+        triggerOnMouseOver(chart.getJso());
+      }
+    }, false);
+  }
+
   public void testOrgChart() {
     loadApi(new Runnable() {
       public void run() {
@@ -60,6 +105,8 @@ public class OrgChartTest extends VisualizationTest {
         options.setAllowCollapse(true);
         options.setColor("#00FF00");
         options.setSelectionColor("#FF0000");
+        options.setNodeClass("foo");
+        options.setSelectedNodeClass("foo-selected");
         widget = new OrgChart(createDataTable(), options);
         RootPanel.get().add(widget);
         // System.out.println(widget.getElement().getString());
@@ -134,6 +181,46 @@ public class OrgChartTest extends VisualizationTest {
     });
   }
 
+  public void testOrgChartCollapseHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        AbstractDataTable data = createDataTable();
+        OrgChart.Options options = OrgChart.Options.create();
+        options.setSize(Size.LARGE);
+        OrgChart widget = new OrgChart(data, options);
+        widget.addCollapseHandler(new CollapseHandler() {
+          @Override
+          public void onCollapseEvent(CollapseEvent event) {
+            assertEquals(event.getCollapsed(), true);
+            assertEquals(event.getRow(), 1);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(widget);
+        triggerCollapse(widget.getJso());
+      }
+    }, false);
+
+  };
+
+  public void testOrgChartReady() {
+    loadApi(new Runnable() {
+      public void run() {
+        AbstractDataTable data = createDataTable();
+        OrgChart.Options options = OrgChart.Options.create();
+        options.setSize(Size.LARGE);
+        OrgChart widget = new OrgChart(data, options);
+        widget.addReadyHandler(new ReadyHandler() {
+          @Override
+          public void onReady(ReadyEvent event) {
+            finishTest();
+          }
+        });
+        RootPanel.get().add(widget);
+      }
+    }, false);
+  }
+
   @Override
   protected String getVisualizationPackage() {
     return OrgChart.PACKAGE;
@@ -155,4 +242,19 @@ public class OrgChartTest extends VisualizationTest {
     data.setValue(4, 1, "Bob");
     return data;
   }
+
+  private native void triggerOnMouseOut(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseout', 
+      {'row':1, 'column':1});
+  }-*/;
+
+  private native void triggerOnMouseOver(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'onmouseover', 
+      {'row':1, 'column':1});
+  }-*/;
+
+  private native void triggerCollapse(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'collapse', 
+      {'collapsed':true, 'row':1});
+  }-*/;
 }

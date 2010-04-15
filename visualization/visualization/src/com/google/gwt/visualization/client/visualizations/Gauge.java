@@ -68,7 +68,7 @@ public class Gauge extends Visualization<Gauge.Options> {
     }-*/;
 
     public final void setMajorTicks(String... labels) {
-      setMajorTicks(ArrayHelper.createJsArray(labels));
+      setMajorTicks(ArrayHelper.toJsArrayString(labels));
     }
 
     public final native void setMinorTicks(int numberOfTicks) /*-{

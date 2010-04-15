@@ -73,6 +73,10 @@ public class MapVisualization extends Visualization<MapVisualization.Options>
       this.showTip = show;
     }-*/;
 
+    public final native void setZoomLevel(double zoomLevel) /*-{
+      this.zoomLevel = zoomLevel;
+    }-*/;
+    
     private native void setMapType(String type) /*-{
       this.mapType = type;
     }-*/;
@@ -89,16 +93,6 @@ public class MapVisualization extends Visualization<MapVisualization.Options>
 
   /**
    * 
-   * @param width the CSS specifier for the width of the visualization
-   * @param height the CSS specifier for the height of the visualization
-   */  
-  public MapVisualization(String width, String height) {
-    super();
-    setSize(width, height);
-  }
-
-  /**
-   * 
    * @param data data to visualize
    * @param options Optional parameters for the visualization
    * @param width the CSS specifier for the width of the visualization
@@ -106,6 +100,16 @@ public class MapVisualization extends Visualization<MapVisualization.Options>
    */
   public MapVisualization(AbstractDataTable data, Options options, String width, String height) {
     super(data, options);
+    setSize(width, height);
+  }
+
+  /**
+   * 
+   * @param width the CSS specifier for the width of the visualization
+   * @param height the CSS specifier for the height of the visualization
+   */  
+  public MapVisualization(String width, String height) {
+    super();
     setSize(width, height);
   }
 

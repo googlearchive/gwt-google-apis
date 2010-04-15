@@ -67,7 +67,7 @@ public class GeoMap extends Visualization<GeoMap.Options> implements Selectable 
     }
     
     public final void setColors(int... colors) {
-      setColors(ArrayHelper.createJsArray(colors));
+      setColors(ArrayHelper.toJsArrayInteger(colors));
     }
 
     public final native void setColors(JsArrayInteger colors) /*-{

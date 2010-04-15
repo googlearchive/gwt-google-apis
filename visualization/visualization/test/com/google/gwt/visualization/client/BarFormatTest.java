@@ -24,19 +24,6 @@ import com.google.gwt.visualization.client.visualizations.PieChart;
  * Tests for the BarFormat class.
  */
 public class BarFormatTest extends VisualizationTest {
-  private static final String HTML = "<span style=\"padding: 0; float: left; "
-      + "white-space: nowrap;\"><img style=\"padding: 0\" "
-      + "src=\"http://www.google.com/uds/modules/gviz/1.0/table/bar_s.png\" "
-      + "height=\"12\" width=\"1\" /><img style=\"padding: 0\" "
-      + "src=\"http://www.google.com/uds/modules/gviz/1.0/table/bar_w.png\" "
-      + "height=\"12\" width=\"57\" /><img style=\"padding: 0\" "
-      + "src=\"http://www.google.com/uds/modules/gviz/1.0/table/bar_r.png\" "
-      + "height=\"12\" width=\"1\" /><img style=\"padding: 0\" "
-      + "src=\"http://www.google.com/uds/modules/gviz/1.0/table/bar_w.png\" "
-      + "height=\"12\" width=\"42\" /><img style=\"padding: 0\" "
-      + "src=\"http://www.google.com/uds/modules/gviz/1.0/table/bar_s.png\" "
-      + "height=\"12\" width=\"1\" />\u00a05</span>\u00a0";
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
@@ -67,8 +54,6 @@ public class BarFormatTest extends VisualizationTest {
         options.setBase(6);
         BarFormat formatter = BarFormat.create(options);
         formatter.format(dataTable, 1);
-        // TODO(zundel): Unit test breaks with new Visualization API Release
-        // assertEquals(HTML, dataTable.getFormattedValue(1, 1));
       }
     });
   }

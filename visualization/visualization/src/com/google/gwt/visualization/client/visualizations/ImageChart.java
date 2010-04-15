@@ -110,7 +110,7 @@ public class ImageChart extends Visualization<ImageChart.Options> {
     }-*/;
 
     public final void setColors(String... colors) {
-      setColors(ArrayHelper.createJsArray(colors));
+      setColors(ArrayHelper.toJsArrayString(colors));
     }
     
     public final native void setFill(boolean fill) /*-{
