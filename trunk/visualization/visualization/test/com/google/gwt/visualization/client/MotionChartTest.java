@@ -15,17 +15,25 @@
  */
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
+import com.google.gwt.visualization.client.events.ReadyHandler;
+import com.google.gwt.visualization.client.events.StateChangeHandler;
 import com.google.gwt.visualization.client.visualizations.MotionChart;
+
+import java.util.Date;
 
 /**
  * Tests for the MotionChart class.
  * 
- * Note that only one instance of MotionChart is allowed at a time, which kind of restricts this unit test.
+ * Note that only one instance of MotionChart is allowed at a time, which kind
+ * of restricts this unit test.
  */
 public class MotionChartTest extends VisualizationTest {
-  
+
   /**
    * This test case will try creating a simple MotionChart. It first asserts
    * that the Visualization API has been correctly loaded (see
@@ -34,14 +42,80 @@ public class MotionChartTest extends VisualizationTest {
   public void testASimpleMotionChart() {
     loadApi(new Runnable() {
       public void run() {
-        DataTable data = makeDataTable();
+        DataTable data = createDataTable();
         MotionChart.Options options = MotionChart.Options.create();
         options.setSize(600, 200);
-        RootPanel.get().add(new MotionChart(data, options));        
+        RootPanel.get().add(new MotionChart(data, options));
       }
     });
   }
-  
+
+  public void testMotionChartOptions() {
+    loadApi(new Runnable() {
+      public void run() {
+        DataTable data = createDataTable();
+        MotionChart.Options options = MotionChart.Options.create();
+        options.setSize(600, 200);
+        options.setShowAdvancedPanel(true);
+        options.setShowChartButtons(true);
+        options.setShowHeader(true);
+        options.setShowSelectListComponent(true);
+        options.setShowSidePanel(true);
+        options.setShowXMetricPicker(true);
+        options.setShowYMetricPicker(true);
+        options.setShowXScalePicker(true);
+        options.setShowYScalePicker(true);
+        RootPanel.get().add(new MotionChart(data, options));
+      }
+    });
+  }
+
+  public void testMotionChartReady() {
+    loadApi(new Runnable() {
+      public void run() {
+        DataTable data = createDataTable();
+        MotionChart.Options options = MotionChart.Options.create();
+        options.setSize(600, 200);
+        MotionChart widget = new MotionChart(data, options);
+        widget.addReadyHandler(new ReadyHandler() {
+          @Override
+          public void onReady(ReadyEvent event) {
+            finishTest();
+          }
+        });
+        RootPanel.get().add(widget);
+      }
+    }, false);
+  }
+
+  /**
+   * This test is meant to test the statechanged event. Unfortunately, we don't
+   * have a way to trigger user interaction, so this test just goes through the
+   * motions of setting up the event.
+   */
+  public void testMotionChartStateChanged() {
+    loadApi(new Runnable() {
+      public void run() {
+        DataTable data = createDataTable();
+        MotionChart.Options options = MotionChart.Options.create();
+        options.setSize(600, 200);
+        final MotionChart widget = new MotionChart(data, options);
+        widget.addStateChangeHandler(new StateChangeHandler() {
+          @Override
+          public void onStateChange(StateChangeEvent event) {
+            // Unfortunately, when the state change is triggered manually in
+            // this way, there is no getState() method present on the
+            // MotionChart object, so we can't use an automatic test. See
+            // MotionDemo.java
+            finishTest();
+          }
+        });
+        RootPanel.get().add(widget);
+        triggerStateChanged(widget.getJso());
+      }
+    }, false);
+  }
+
   @Override
   protected String getVisualizationPackage() {
     return MotionChart.PACKAGE;
@@ -50,18 +124,39 @@ public class MotionChartTest extends VisualizationTest {
   /**
    * A support method used by several test cases to create a simple DataTable.
    */
-  private DataTable makeDataTable() {
+  private DataTable createDataTable() {
     // Create a simple data table
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.STRING, "Fruit");
+    data.addColumn(ColumnType.DATE, "Date");
     data.addColumn(ColumnType.NUMBER, "Baskets");
+    data.addColumn(ColumnType.NUMBER, "Heat Index");
     data.addRows(3);
     data.setValue(0, 0, "Banana");
-    data.setValue(0, 1, 12);
-    data.setValue(1, 0, "Jalape–o");
-    data.setValue(1, 1, 33);
-    data.setValue(2, 0, "Haba–ero");
-    data.setValue(2, 1, 99);
+    data.setValue(0, 2, 12);
+    data.setValue(0, 3, 3);
+    data.setValue(1, 0, "Jalapeï¿½o");
+    data.setValue(1, 2, 33);
+    data.setValue(1, 3, 130);
+    data.setValue(2, 0, "Habaï¿½ero");
+    data.setValue(2, 2, 99);
+    data.setValue(2, 3, 1000);
+
+    @SuppressWarnings("unused")
+    int year, month, day;
+
+    try {
+      data.setValue(0, 1, new Date(year = 1988 - 1900, month = 0, day = 1));
+      data.setValue(1, 1, new Date(year = 1988 - 1900, month = 0, day = 1));
+      data.setValue(2, 1, new Date(year = 1988 - 1900, month = 0, day = 1));
+    } catch (JavaScriptException ex) {
+      GWT.log("Error creating data table - Date bug on mac?", ex);
+    }
     return data;
   }
+
+  private native void triggerStateChanged(JavaScriptObject jso) /*-{
+    $wnd.google.visualization.events.trigger(jso, 'statechanged', 
+    {});
+  }-*/;
 }

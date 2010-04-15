@@ -37,20 +37,22 @@ public class CommonChartOptionsTest extends VisualizationTest {
         options.setWidth(400);
         options.setAxisBackgroundColor("pink");
         options.setAxisColor("pink");
+        options.setAxisFontSize(32.0);
+        options.setLogScale(true);
         options.setReverseAxis(true);
         options.setTitleX("activity");
         options.setTitleY("hours");
         options.setShowCategories(true);
-        
+
         Widget widget = new AreaChart(data, options);
         RootPanel.get().add(widget);
         Element div = widget.getElement();
         // assert that the div's first child is an iframe
-        IFrameElement.as(div.getFirstChildElement());      
+        IFrameElement.as(div.getFirstChildElement());
       }
     });
   }
-  
+
   @Override
   protected String getVisualizationPackage() {
     return AreaChart.PACKAGE;

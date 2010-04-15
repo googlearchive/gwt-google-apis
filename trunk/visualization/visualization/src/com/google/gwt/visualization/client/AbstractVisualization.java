@@ -24,12 +24,13 @@ import com.google.gwt.user.client.ui.RootPanel;
  * AbstractVisualization implementations can draw a visualization.
  * 
  * This class is implemented to write visualizations in GWT and export them to
- * javascript.
+ * JavaScript.
  * 
  * @param <E> The draw options class.
  * 
  */
-public abstract class AbstractVisualization<E extends AbstractDrawOptions> extends Composite {
+public abstract class AbstractVisualization<E extends AbstractDrawOptions>
+    extends Composite {
   /**
    * This interface is implemented by a factory class that can create
    * visualizations.
@@ -39,12 +40,13 @@ public abstract class AbstractVisualization<E extends AbstractDrawOptions> exten
   }
 
   /**
-   * This function makes the GWT class available in javascript.
+   * This function makes the GWT class available in JavaScript.
    * 
-   * @param name Javascript name of the class.
+   * @param name JavaScript name of the class.
    * @param factory Factory object that instantiates the visualization
    */
-  public static final native void registerVisualization(String name, VisualizationFactory factory) /*-{
+  public static final native void registerVisualization(String name,
+      VisualizationFactory factory) /*-{
     // setup the constructor
     $wnd[name] = function(container) {
       this.gwt_vis = @com.google.gwt.visualization.client.AbstractVisualization::createVisualization(Lcom/google/gwt/visualization/client/AbstractVisualization$VisualizationFactory;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/user/client/Element;)(factory, this, container);
@@ -56,8 +58,9 @@ public abstract class AbstractVisualization<E extends AbstractDrawOptions> exten
   }-*/;
 
   @SuppressWarnings("unused")
-  private static AbstractVisualization<?> createVisualization(VisualizationFactory factory,
-      JavaScriptObject jsVisualization, Element container) {
+  private static AbstractVisualization<?> createVisualization(
+      VisualizationFactory factory, JavaScriptObject jsVisualization,
+      Element container) {
     AbstractVisualization<?> visualization = factory.create();
     visualization.jsVisualization = jsVisualization;
 
@@ -106,11 +109,11 @@ public abstract class AbstractVisualization<E extends AbstractDrawOptions> exten
   }
 
   /**
-   * Note: calling this method should not usually be necessary except by 
-   * subclasses.  If you need to call it, make sure you know what you're
-   * doing.
+   * Note: calling this method should not usually be necessary except by
+   * subclasses. If you need to call it, make sure you know what you're doing.
+   * 
    * @return The underlying JavaScriptObject representing the JavaScript
-   * implementation of the visualization.
+   *         implementation of the visualization.
    */
   public JavaScriptObject getJso() {
     return jsVisualization;

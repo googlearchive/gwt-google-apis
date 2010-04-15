@@ -43,7 +43,7 @@ public class PieChartTest extends VisualizationTest {
     });
   }
 
-  public void testOnMouseOverAndOut() {
+  public void testOnMouseOver() {
     loadApi(new Runnable() {
       public void run() {
         PieChart chart;
@@ -58,6 +58,17 @@ public class PieChartTest extends VisualizationTest {
             finishTest();
           }
         });
+        triggerOnMouseOver(chart.getJso());
+      }
+    }, false);
+  }
+  
+  public void testOnMouseOut() {
+    loadApi(new Runnable() {
+      public void run() {
+        PieChart chart;
+        PieChart.Options options = PieChart.Options.create();
+        chart = new PieChart(createCompanyPerformance(), options);
         chart.addOnMouseOutHandler(new OnMouseOutHandler() {
           @Override
           public void onMouseOutEvent(OnMouseOutEvent event) {
@@ -67,11 +78,10 @@ public class PieChartTest extends VisualizationTest {
             finishTest();
           }
         });
-        triggerOnMouseOver(chart.getJso());
         triggerOnMouseOut(chart.getJso());
       }
     }, false);
-  }
+  }  
 
   /**
    * Tests the options that are peculiar to the PieChart.Options class.

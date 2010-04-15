@@ -53,7 +53,7 @@ public class IntensityMap extends Visualization<IntensityMap.Options> implements
     }-*/;
 
     public final void setColors(String... colors) {
-      setColors(ArrayHelper.createJsArray(colors));
+      setColors(ArrayHelper.toJsArrayString(colors));
     }
 
     public final native void setHeight(int height) /*-{

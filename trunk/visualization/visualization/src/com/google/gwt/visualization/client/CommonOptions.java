@@ -53,9 +53,9 @@ public class CommonOptions extends AbstractDrawOptions {
   }-*/;
 
   public final void setColors(String... colors) {
-    setColors(ArrayHelper.createJsArray(colors));
+    setColors(ArrayHelper.toJsArrayString(colors));
   }
-  
+
   public final native void setEnableTooltip(boolean enableTooltip) /*-{
     this.enableTooltip = enableTooltip;
   }-*/;
@@ -84,6 +84,10 @@ public class CommonOptions extends AbstractDrawOptions {
     this.legendBackgroundColor = color;
   }-*/;
 
+  public final native void setLegendFontSize(double fontSize) /*-{
+    this.legentFontSize = fontSize;
+  }-*/;
+
   public final native void setLegendTextColor(Color color) /*-{
     this.legendTextColor = color;
   }-*/;
@@ -107,6 +111,18 @@ public class CommonOptions extends AbstractDrawOptions {
 
   public final native void setTitleColor(String color) /*-{
     this.titleColor = color;
+  }-*/;
+
+  public final native void setTitleFontSize(double fontSize) /*-{
+    this.titleFontSize = fontSize;
+  }-*/;
+
+  public final native void setTooltipHeight(int tooltipHeight) /*-{
+    this.tooltipHeight = tooltipHeight;
+  }-*/;
+
+  public final native void setTooltipWidth(int tooltipWidth) /*-{
+    this.tooltipWidth = tooltipWidth;
   }-*/;
 
   public final native void setWidth(int width) /*-{

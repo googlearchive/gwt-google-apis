@@ -23,6 +23,11 @@ import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
+import com.google.gwt.visualization.client.events.CollapseHandler;
+import com.google.gwt.visualization.client.events.Handler;
+import com.google.gwt.visualization.client.events.OnMouseOutHandler;
+import com.google.gwt.visualization.client.events.OnMouseOverHandler;
+import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
 
 /**
@@ -57,10 +62,20 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
       this.allowHtml = allowHtml;
     }-*/;
 
+    @Deprecated
     public final native void setColor(String color) /*-{
       this.color = color;
     }-*/;
 
+    public final native void setNodeClass(String nodeClass) /*-{
+      this.nodeClass = nodeClass;
+    }-*/;
+
+    public final native void setSelectedNodeClass(String selectedNodeClass) /*-{
+      this.selectedNodeClass = selectedNodeClass;
+    }-*/;
+
+    @Deprecated
     public final native void setSelectionColor(String color) /*-{
       this.selectionColor = color;
     }-*/;
@@ -89,6 +104,22 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
 
   public OrgChart(AbstractDataTable data, Options options) {
     super(data, options);
+  }
+
+  public final void addCollapseHandler(CollapseHandler handler) {
+    Handler.addHandler(this, "collapse", handler);
+  }
+
+  public final void addOnMouseOutHandler(OnMouseOutHandler handler) {
+    Handler.addHandler(this, "onmouseout", handler);
+  }
+
+  public final void addOnMouseOverHandler(OnMouseOverHandler handler) {
+    Handler.addHandler(this, "onmouseover", handler);
+  }
+
+  public final void addReadyHandler(ReadyHandler handler) {
+    Handler.addHandler(this, "ready", handler);
   }
 
   public final void addSelectHandler(SelectHandler handler) {
@@ -120,13 +151,11 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
     return new $wnd.google.visualization.OrgChart(parent);
   }-*/;
 
-  private native void collapse(JavaScriptObject jso, int row, 
-      boolean collapsed) /*-{
+  private native void collapse(JavaScriptObject jso, int row, boolean collapsed) /*-{
     jso.collapse(row, collapsed);
   }-*/;
 
-  private native JsArrayInteger getChildrenIndexes(JavaScriptObject jso, 
-      int row) /*-{
+  private native JsArrayInteger getChildrenIndexes(JavaScriptObject jso, int row) /*-{
     return jso.getChildrenIndexes(row);
   }-*/;
 

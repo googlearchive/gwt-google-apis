@@ -20,45 +20,40 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 
 /**
- * Visualizations toolbar. A tool for visualizations,
- * for exporting purposes.
+ * Visualizations toolbar. A tool for visualizations, for exporting purposes.
  * 
  * @see <a href=
  *      "http://code.google.com/apis/visualization/documentation/gallery/toolbar.html"
  *      > Visualization Toolbar Reference</a>
  */
 public class Toolbar extends Widget {
-  
+
   public static final String PACKAGE = "default";
 
   private JsArray<Component> components;
   private DivElement div;
-  
+
   /**
    * Enum for component type.
    */
   public enum Type {
-    HTMLCODE("htmlcode"),
-    CSV("csv"),
-    HTML("html"),
-    IGOOGLE("igoogle");
-    
+    HTMLCODE("htmlcode"), CSV("csv"), HTML("html"), IGOOGLE("igoogle");
+
     private String typeCode;
-    
+
     Type(String typeCode) {
       this.typeCode = typeCode;
     }
-    
+
     public String getTypeCode() {
       return typeCode;
     }
   }
-  
+
   /**
    * Component for the toolbar.
    */
@@ -66,14 +61,14 @@ public class Toolbar extends Widget {
     public static Component create() {
       return JavaScriptObject.createObject().cast();
     }
-    
+
     protected Component() {
     }
 
     public final native void setDataSource(String dataSource) /*-{
       this.datasource = dataSource;
     }-*/;
-    
+
     public final native void setGadget(String gadget) /*-{
       this.gadget = gadget;
     }-*/;
@@ -81,7 +76,7 @@ public class Toolbar extends Widget {
     public final void setType(Type type) {
       setType(type.typeCode);
     }
-    
+
     public final native void setUserprefs(String userprefs) /*-{
       this.userprefs = userprefs;
     }-*/;
@@ -96,9 +91,9 @@ public class Toolbar extends Widget {
     div = Document.get().createDivElement();
     setElement(div);
     setStyleName("gwt-viz-container");
-    components = createComponents(); 
+    components = createComponents();
   }
-  
+
   public void addComponent(Component value) {
     components.set(components.length(), value);
   }
@@ -111,9 +106,8 @@ public class Toolbar extends Widget {
   private native JsArray<Component> createComponents() /*-{
     return [];
   }-*/;
-  
-  private native void nativeDraw(
-      Element div, JsArray<Component> components) /*-{
+
+  private native void nativeDraw(Element div, JsArray<Component> components) /*-{
     $wnd.google.visualization.drawToolbar(div, components);
   }-*/;
 }

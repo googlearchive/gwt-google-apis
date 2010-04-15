@@ -28,8 +28,7 @@ import com.google.gwt.visualization.client.events.SelectHandler;
 import com.google.gwt.visualization.client.events.SortHandler;
 
 /**
- * 
- * Table visualization. 
+ * Table visualization.
  * 
  * @see <a href=
  *      "http://code.google.com/apis/visualization/documentation/gallery/table.html"
@@ -42,6 +41,43 @@ public class Table extends Visualization<Table.Options> implements Selectable {
    * 
    */
   public static class Options extends AbstractDrawOptions {
+
+    public static class CssClassNames extends JavaScriptObject {
+      protected CssClassNames() {
+      }
+
+      public final native void setHeaderCell(String headerCell) /*-{
+        this.headerCell = headerCell;
+      }-*/;
+
+      public final native void setHeaderRow(String headerRow) /*-{
+        this.headerRow = headerRow;
+      }-*/;
+
+      public final native void setHoverTableRow(String hoverTableRow) /*-{
+        this.hoverTableRow = hoverTableRow;
+      }-*/;
+
+      public final native void setOddTableRow(String oddTableRow) /*-{
+        this.oddTableRow = oddTableRow;
+      }-*/;
+
+      public final native void setRowNumberCell(String rowNumberCell) /*-{
+        this.rowNumberCell = rowNumberCell;
+      }-*/;
+
+      public final native void setSelectedTableRow(String selectedTableRow) /*-{
+        this.selectedTableRow = selectedTableRow;
+      }-*/;
+
+      public final native void setTableCell(String tableCell) /*-{
+        this.tableCell = tableCell;
+      }-*/;
+
+      public final native void setTableRow(String tableRow) /*-{
+        this.tableRow = tableRow;
+      }-*/;
+    }
 
     /**
      * A parameter passed to several of the setters.
@@ -76,12 +112,36 @@ public class Table extends Visualization<Table.Options> implements Selectable {
       this.allowHtml = allowHtml;
     }-*/;
 
+    public final native void setAlternatingRowStyle(boolean alternatingRowStyle) /*-{
+      this.alternatingRowStyle = alternatingRowStyle;
+    }-*/;
+
+    public final native void setCssClassNames(CssClassNames cssClassNames) /*-{
+      this.cssClassNames = cssClassNames;
+    }-*/;
+
+    public final native void setFirstRowNumber(int rowNumber) /*-{
+      this.firstRowNumber = rowNumber;
+    }-*/;
+
+    public final native void setHeight(String height) /*-{
+      this.height = height;
+    }-*/;
+
     public final void setPage(Policy policy) {
       setPage(policy.toString());
     }
 
     public final native void setPageSize(int pageSize) /*-{
       this.pageSize = pageSize;
+    }-*/;
+
+    public final native void setRtlTable(boolean rtlTable) /*-{
+      this.rtlTable = rtlTable;
+    }-*/;
+
+    public final native void setScrollLeftStartPosition(int pixels) /*-{
+      this.scrollLeftStartPosition = pixels;
     }-*/;
 
     public final native void setShowRowNumber(boolean showRowNumber) /*-{
@@ -91,6 +151,22 @@ public class Table extends Visualization<Table.Options> implements Selectable {
     public final void setSort(Policy policy) {
       setSort(policy.toString());
     }
+
+    public final native void setSortAscending(boolean sortAscending) /*-{
+      this.sortAscending = sortAscending;
+    }-*/;
+
+    public final native void setSortColumn(int sortColumn) /*-{
+      this.sortColumn = sortColumn;
+    }-*/;
+
+    public final native void setStartPage(int startPage) /*-{
+      this.startPage = startPage;
+    }-*/;
+
+    public final native void setWidth(String width) /*-{
+      this.width = width;
+    }-*/;
 
     private native void setPage(String page) /*-{
       this.page = page;

@@ -42,9 +42,13 @@ public class CommonOptionsTest extends VisualizationTest {
         options.setColors("pink", "black", "white");
         options.setFocusBorderColor("pink");
         options.setLegendBackgroundColor("pink");
+        options.setLegendFontSize(36.0);
         options.setLegendTextColor("pink");
         options.setTitle("My Daily Activities");
         options.setTitleColor("pink");
+        options.setTitleFontSize(48.0);
+        options.setTooltipHeight(12);
+        options.setTooltipWidth(60);
         
         Widget widget = new PieChart(data, options);
         RootPanel.get().add(widget);

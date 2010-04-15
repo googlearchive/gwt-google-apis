@@ -27,7 +27,7 @@ import com.google.gwt.core.client.JsArrayString;
 public class VisualizationUtils {
    
   public static void loadVisualizationApi(Runnable onLoad, String... packages) {
-    loadVisualizationApi("1", onLoad, ArrayHelper.createJsArray(packages));
+    loadVisualizationApi("1", onLoad, ArrayHelper.toJsArrayString(packages));
   }
 
   public static void loadVisualizationApi(String version, Runnable onLoad,
@@ -41,7 +41,7 @@ public class VisualizationUtils {
 
   public static void loadVisualizationApi(String version, Runnable onLoad,
       String... packages) {
-    loadVisualizationApi(version, onLoad, ArrayHelper.createJsArray(packages));
+    loadVisualizationApi(version, onLoad, ArrayHelper.toJsArrayString(packages));
   }
   
   private VisualizationUtils() {

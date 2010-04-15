@@ -58,6 +58,7 @@ public class MapVisualizationTest extends VisualizationTest {
         options.setMapType(Type.HYBRID);
         options.setShowLine(true);
         options.setShowTip(true);
+        options.setZoomLevel(10.0);
         DataTable data = makeDataTable();
         MapVisualization mapViz = new MapVisualization(data, options, "400px",
             "400px");

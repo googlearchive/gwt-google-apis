@@ -29,7 +29,7 @@ public class PatternFormatTest extends VisualizationTest {
   public String getModuleName() {
     return "com.google.gwt.visualization.VisualizationTest";
   }
-  
+
   public void testPatternFormat() {
     loadApi(new Runnable() {
       public void run() {
@@ -44,15 +44,14 @@ public class PatternFormatTest extends VisualizationTest {
         dataTable.setValue(2, 0, "niv");
         dataTable.setValue(2, 1, 27);
 
-        PatternFormat formatter = 
-          PatternFormat.create("{0} is {1} years old. \\{2\\}");
-        int[] java = new int[] {0, 1};
-        JsArrayInteger js = ArrayHelper.createJsArray(java);
+        PatternFormat formatter = PatternFormat.create("{0} is {1} years old. \\{2\\}");
+        int[] java = new int[]{0, 1};
+        JsArrayInteger js = ArrayHelper.toJsArrayInteger(java);
         formatter.format(dataTable, js, 1);
         assertEquals("hillel is 25 years old. {2}",
-                     dataTable.getFormattedValue(0, 1));
-        assertEquals("yoav is 24 years old. {2}",
-                     dataTable.getFormattedValue(1, 1));
+            dataTable.getFormattedValue(0, 1));
+        assertEquals("yoav is 24 years old. {2}", dataTable.getFormattedValue(
+            1, 1));
       }
     });
   }

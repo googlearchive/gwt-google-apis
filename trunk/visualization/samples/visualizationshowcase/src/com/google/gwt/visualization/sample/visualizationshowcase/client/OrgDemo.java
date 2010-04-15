@@ -29,7 +29,7 @@ import com.google.gwt.visualization.client.visualizations.OrgChart.Size;
  */
 public class OrgDemo implements LeftTabPanel.WidgetProvider {
   private VerticalPanel panel = new VerticalPanel();
-  
+
   public OrgDemo() {
     Options options = Options.create();
     options.setSize(Size.LARGE);
@@ -50,7 +50,7 @@ public class OrgDemo implements LeftTabPanel.WidgetProvider {
     data.setValue(3, 1, "Jim");
     data.setValue(4, 0, "Carol");
     data.setValue(4, 1, "Bob");
-    
+
     OrgChart viz = new OrgChart(data, options);
     Label status = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
