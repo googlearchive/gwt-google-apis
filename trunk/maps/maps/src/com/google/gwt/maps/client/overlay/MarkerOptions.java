@@ -23,6 +23,13 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class MarkerOptions extends JavaScriptObject {
 
+  /**
+   * Interface defining function changing default z-Index order of the markers
+   */
+  public static interface ZIndexProcess {
+    public double computeZIndex(Marker marker);
+  }
+
   public static MarkerOptions newInstance() {
     return (MarkerOptions) createObject();
   }
@@ -46,8 +53,8 @@ public class MarkerOptions extends JavaScriptObject {
    * @param autoPan <code>true</code> to turn on auto pan.
    */
   public final native void setAutoPan(boolean autoPan) /*-{
-   this.autoPan = autoPan;
-   }-*/;
+    this.autoPan = autoPan;
+  }-*/;
 
   /**
    * When finishing dragging, this number is used to define the acceleration
@@ -58,8 +65,8 @@ public class MarkerOptions extends JavaScriptObject {
    *          marker during the bounce.
    */
   public final native void setBounceGravity(double bounceGravity) /*-{
-     this.bounceGravity = bounceGravity;
-   }-*/;
+    this.bounceGravity = bounceGravity;
+  }-*/;
 
   /**
    * Toggles whether or not the marker should bounce up and down after it
@@ -68,8 +75,8 @@ public class MarkerOptions extends JavaScriptObject {
    * @param bouncy <code>true</code> to set the marker to be bouncy.
    */
   public final native void setBouncy(boolean bouncy) /*-{
-     this.bouncy = bouncy;
-   }-*/;
+    this.bouncy = bouncy;
+  }-*/;
 
   /**
    * Toggles whether or not the marker is clickable. Markers that are not
@@ -80,8 +87,8 @@ public class MarkerOptions extends JavaScriptObject {
    * @param clickable whether or not the marker is clickable.
    */
   public final native void setClickable(boolean clickable) /*-{
-     this.clickable = clickable;
-   }-*/;
+    this.clickable = clickable;
+  }-*/;
 
   /**
    * When dragging markers normally, the marker floats up and away from the
@@ -93,8 +100,8 @@ public class MarkerOptions extends JavaScriptObject {
    *          the cursor when dragged.
    */
   public final native void setDragCrossMove(boolean dragCrossMove) /*-{
-     this.dragCrossMove = dragCrossMove;
-   }-*/;
+    this.dragCrossMove = dragCrossMove;
+  }-*/;
 
   /**
    * Toggles whether or not the marker will be draggable by users. Markers set
@@ -106,8 +113,8 @@ public class MarkerOptions extends JavaScriptObject {
    * @param draggable whether or not the marker will be draggable by users.
    */
   public final native void setDraggable(boolean draggable) /*-{
-     this.draggable = draggable;
-   }-*/;
+    this.draggable = draggable;
+  }-*/;
 
   /**
    * Chooses the Icon for this class. If not specified,
@@ -126,6 +133,27 @@ public class MarkerOptions extends JavaScriptObject {
    * @param title a string to set as the tooltip on the marker.
    */
   public final native void setTitle(String title) /*-{
-     this.title = title;
-   }-*/;
+    this.title = title;
+  }-*/;
+
+  /**
+   * This function is used for changing the z-Index order of the markers when
+   * they are overlaid on the map and is also called when their infowindow is
+   * opened. The default order is that the more southerly markers are placed
+   * higher than more northerly markers. This function is passed in the Marker
+   * object and returns a number indicating the new z-index.
+   * 
+   * @param process function used for changing the z-Index order of the markers
+   */
+  public final native void setZIndexProcess(ZIndexProcess process) /*-{
+    this.zIndexProcess = function (jso) {
+      var marker;
+      if (jso.__gwtPeer == null) {
+        marker = @com.google.gwt.maps.client.overlay.Marker::createPeer(Lcom/google/gwt/core/client/JavaScriptObject;)(jso);
+      } else {
+        marker = jso.__gwtPeer;
+      }
+      return process.@com.google.gwt.maps.client.overlay.MarkerOptions.ZIndexProcess::computeZIndex(Lcom/google/gwt/maps/client/overlay/Marker;)(marker);
+    }
+  }-*/;
 }
