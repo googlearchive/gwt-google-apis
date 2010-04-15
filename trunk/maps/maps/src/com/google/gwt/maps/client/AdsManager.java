@@ -55,7 +55,7 @@ public class AdsManager extends JavaScriptObject {
      * @return this AdsManagerOption object, for convenience when using the
      *         Builder pattern.
      */
-    public final native AdsManagerOptions setChannel(int channelIn) /*-{
+    public final native AdsManagerOptions setChannel(double channelIn) /*-{
       this.channel = channelIn;
       return this;
     }-*/;
@@ -101,9 +101,9 @@ public class AdsManager extends JavaScriptObject {
     /**
      * Accessor intended for unit testing only.
      * 
-     * @return the style set in {@link #setStyle(String)}
+     * @return the channel number set in {@link #setChannel(double)}
      */
-    final native int getChannel() /*-{
+    final native double getChannel() /*-{
       return this.channel;
     }-*/;
 
@@ -128,7 +128,7 @@ public class AdsManager extends JavaScriptObject {
     /**
      * Accessor intended for unit testing only.
      * 
-     * @return the minZoomLevel set in {@link #setMinZoomLevel(int)}.
+     * @return the style set in {@link #setStyle(String)}
      */
     final native String getStyle() /*-{
       return this.style;

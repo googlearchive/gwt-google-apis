@@ -59,12 +59,12 @@ public class AdsManagerTest extends GWTTestCase {
     AdsManagerOptions options = AdsManagerOptions.newInstance().setMaxAdsOnMap(
         2);
     assertEquals("MaxAdsOnMap 2", 2, options.getMaxAdsOnMap());
-    options.setMaxAdsOnMap(10).setMinZoomLevel(7).setChannel(3);
+    options.setMaxAdsOnMap(10).setMinZoomLevel(7).setChannel(3.0d);
     assertEquals("MinZoomLevel 2", 7, options.getMinZoomLevel());
     assertEquals("MaxAdsOnMap 2", 10, options.getMaxAdsOnMap());
-    assertEquals("Channel 2", 3, options.getChannel());
-    options.setChannel(2);
-    assertEquals("Channel 3", 2, options.getChannel());
+    assertEquals("Channel 2", 3.0d, options.getChannel(), 1e-8);
+    options.setChannel(2.0d);
+    assertEquals("Channel 3", 2.0d, options.getChannel(), 1e-8);
     assertEquals("MinZoomLevel 3", 7, options.getMinZoomLevel());
     assertEquals("MaxAdsOnMap 3", 10, options.getMaxAdsOnMap());
     options.setStyle(AdsManagerOptions.STYLE_ADUNIT);
@@ -73,7 +73,7 @@ public class AdsManagerTest extends GWTTestCase {
   }
 
   public void testAdsManagerWithOpts() {
-    AdsManagerOptions options = AdsManagerOptions.newInstance().setChannel(1).setMaxAdsOnMap(
+    AdsManagerOptions options = AdsManagerOptions.newInstance().setChannel(1.0d).setMaxAdsOnMap(
         5).setMinZoomLevel(10);
     AdsManager adsManager = AdsManager.newInstance(map, "pub-1234567890123456",
         options);
