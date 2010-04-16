@@ -17,6 +17,7 @@ package com.google.gwt.maps.client.geocode;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.geom.LatLngBounds;
 
 /**
  * This class represents a JSON result returned from the Google Geocoding
@@ -24,6 +25,48 @@ import com.google.gwt.maps.client.geom.LatLng;
  * Language(xAL) from <a href="http://www.oasis-open.org">OASIS</a>.
  */
 public class Placemark extends JavaScriptObject {
+
+  /**
+   * This class represents a JSON ExtendedData object being part of result
+   * returned from the Google Geocoding service.
+   */
+  public static class ExtendedData extends JavaScriptObject {
+
+    /**
+     * A protected constructor is required for JS overlays.
+     */
+    protected ExtendedData() {
+    }
+
+    /**
+     * The rectangle area representing bounds of the placemark.
+     * 
+     * @return bounds of the placemark.
+     */
+    public final LatLngBounds getBounds() {
+      return LatLngBounds.newInstance(LatLng.newInstance(
+          nativeGetLatLngBoxSouth(), nativeGetLatLngBoxWest()),
+          LatLng.newInstance(nativeGetLatLngBoxNorth(),
+              nativeGetLatLngBoxEast()));
+    }
+
+    private native double nativeGetLatLngBoxEast() /*-{
+      return this.LatLonBox.east;
+    }-*/;
+
+    private native double nativeGetLatLngBoxNorth() /*-{
+      return this.LatLonBox.north;
+    }-*/;
+
+    private native double nativeGetLatLngBoxSouth() /*-{
+      return this.LatLonBox.south;
+    }-*/;
+
+    private native double nativeGetLatLngBoxWest() /*-{
+      return this.LatLonBox.west;
+    }-*/;
+
+  }
 
   /**
    * A protected constructor is required for JS overlays.
@@ -87,6 +130,15 @@ public class Placemark extends JavaScriptObject {
   public final String getCounty() {
     return getSubAdministrativeArea();
   }
+
+  /**
+   * Returns class grouping additional information regarding geocoding.
+   * 
+   * @return class providing additional information.
+   */
+  public final native ExtendedData getExtendedData() /*-{
+    return this.ExtendedData;
+  }-*/;
 
   public final native String getLocality() /*-{
     var AdministrativeArea = this.AddressDetails.Country.AdministrativeArea;
