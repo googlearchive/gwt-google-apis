@@ -191,7 +191,7 @@ public class MapEventDemo extends MapsDemo {
       + "<i>Note: after calling this method, the other buttons may be in an invalid state.</i></li>\n"
       + "</ul>\n"
       + "<ul>\n"
-      + " <li><b>Show Info Window</b> pops up the info window</li>\n"    
+      + " <li><b>Show Info Window</b> pops up the info window</li>\n"
       + " <li><b>Marker Info Window</b> pops up the info window on the marker</li>\n"
       + " <li><b>Add/Remove Map Type</b> adds/removes a map type from the map.</li>\n"
       + " <li><b>Clear Table</b> Remove all entries from the table below.</li>\n"
@@ -208,8 +208,7 @@ public class MapEventDemo extends MapsDemo {
       + "<li><b>Clear Text</b> A button that clears the <b>Events</b> textbox.</li>"
       + "<li><b>Remove Handler</b> Remove this specific handler instance.  Note: "
       + "this leaves the entry in place so that you can see that the event no longer "
-      + "fires the handlers."
-      + "</ul>\n";
+      + "fires the handlers." + "</ul>\n";
 
   // A unique number assigned to each new listener added.
   private static int listenerId = 0;
@@ -562,8 +561,12 @@ public class MapEventDemo extends MapsDemo {
         final MapClickHandler h = new MapClickHandler() {
 
           public void onClick(MapClickEvent e) {
+            String additionalText = "";
+            if (e.getOverlay() != null) {
+              additionalText = " Overlay clicked" + e.getOverlayLatLng();
+            }
             textBox.setText(textBox.getText() + "onClick(" + e.getLatLng()
-                + ")");
+                + ")" + additionalText);
           }
 
         };

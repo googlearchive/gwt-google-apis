@@ -166,7 +166,7 @@ public final class MapWidget extends Composite {
   private static native JavaScriptObject getEarthInstanceCB(
       EarthInstanceHandler handler, MapWidget mapWidget)/*-{
     return function(object) {
-      @com.google.gwt.maps.client.MapWidget::earthInstanceCallback(Lcom/google/gwt/maps/client/event/EarthInstanceHandler;Lcom/google/gwt/maps/client/MapWidget;Lcom/google/gwt/core/client/JavaScriptObject;)(handler, mapWidget, object);
+    @com.google.gwt.maps.client.MapWidget::earthInstanceCallback(Lcom/google/gwt/maps/client/event/EarthInstanceHandler;Lcom/google/gwt/maps/client/MapWidget;Lcom/google/gwt/core/client/JavaScriptObject;)(handler, mapWidget, object);
     };
   }-*/;
 
@@ -313,7 +313,8 @@ public final class MapWidget extends Composite {
     return MapImpl.impl.getDefaultUI(jsoPeer);
   }
 
-   /** Returns a Boolean indicating whether pinch to zoom is enabled.
+  /**
+   * Returns a Boolean indicating whether pinch to zoom is enabled.
    * 
    * @return <code>true</code> if ping to zoom is enabled.
    */
@@ -476,8 +477,9 @@ public final class MapWidget extends Composite {
 
     mapClickHandlers.addHandler(handler, new OverlayLatLngCallback() {
       @Override
-      public void callback(Overlay overlay, LatLng latlng) {
-        MapClickEvent e = new MapClickEvent(MapWidget.this, overlay, latlng);
+      public void callback(Overlay overlay, LatLng latlng, LatLng overlaylatlng) {
+        MapClickEvent e = new MapClickEvent(MapWidget.this, overlay, latlng,
+            overlaylatlng);
         handler.onClick(e);
       }
     });
@@ -494,8 +496,9 @@ public final class MapWidget extends Composite {
 
     mapDoubleClickHandlers.addHandler(handler, new OverlayLatLngCallback() {
       @Override
-      public void callback(Overlay overlay, LatLng latlng) {
-        // the overlay parameter is always NULL according to the Maps API.
+      public void callback(Overlay overlay, LatLng latlng, LatLng overlayLatLng) {
+        // The overlay parameter is always NULL according to the Maps API and is
+        // ignored. The overlaylatlng parameter should be ignored as well.
         MapDoubleClickEvent e = new MapDoubleClickEvent(MapWidget.this, latlng);
         handler.onDoubleClick(e);
       }
@@ -1650,7 +1653,7 @@ public final class MapWidget extends Composite {
    */
   void trigger(MapClickEvent event) {
     maybeInitMapClickHandlers();
-    mapClickHandlers.trigger(event.getOverlay(), event.getLatLng());
+    mapClickHandlers.trigger(event.getOverlay(), event.getLatLng(), event.getOverlayLatLng());
   }
 
   /**
@@ -1867,8 +1870,7 @@ public final class MapWidget extends Composite {
    */
   void trigger(MapZoomEndEvent event) {
     maybeInitMapZoomEndHandlers();
-    mapZoomEndHandlers.trigger(event.getOldZoomLevel(),
-        event.getNewZoomLevel());
+    mapZoomEndHandlers.trigger(event.getOldZoomLevel(), event.getNewZoomLevel());
   }
 
   /**
