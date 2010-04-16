@@ -85,13 +85,20 @@ public class GeocodeTest extends GWTTestCase {
           cmpState.toLowerCase());
       assertEquals("Country Code", countryCode.toLowerCase(),
           cmpCountryCode.toLowerCase());
+
+      Placemark.ExtendedData extended = place.getExtendedData();
+      assertNotNull("Extended Data", extended);
+      assertTrue(extended.getBounds().getNorthEast().getLatitude() != 0);
+      assertTrue(extended.getBounds().getNorthEast().getLongitude() != 0);
+      assertTrue(extended.getBounds().getSouthWest().getLatitude() != 0);
+      assertTrue(extended.getBounds().getSouthWest().getLongitude() != 0);
     }
 
     void testMockPlacemark() {
       JSONValue v = JSONParser.parse(jsonString);
       JSONObject obj = v.isObject();
       assertNotNull("Couldn't JSON parse an object from : " + addressQuery
-          + " : \n" + jsonString);
+          + " : \n" + jsonString, obj);
       Placemark place = (Placemark) obj.getJavaScriptObject();
       comparePlacemark(place);
     }
@@ -103,21 +110,21 @@ public class GeocodeTest extends GWTTestCase {
   static final PlacemarkMock[] goodTestPlacemarks = {
       new PlacemarkMock(
           "10 10th St NW, Atlanta, GA 30309 USA",
-          "{\"id\":\"p1\", \"address\":\"10 10th St NW, Atlanta, GA 30309, USA\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"US\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"GA\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Fulton\", \"Locality\":{\"LocalityName\":\"Atlanta\", \"Thoroughfare\":{\"ThoroughfareName\":\"10 10th St NW\"}, \"PostalCode\":{\"PostalCodeNumber\":\"30309\"}}}}}, \"Accuracy\":8}, \"Point\":{\"coordinates\":[-84.388042,33.781479,0]}}",
+          "{\"id\":\"p1\", \"address\":\"10 10th St NW, Atlanta, GA 30309, USA\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"US\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"GA\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Fulton\", \"Locality\":{\"LocalityName\":\"Atlanta\", \"Thoroughfare\":{\"ThoroughfareName\":\"10 10th St NW\"}, \"PostalCode\":{\"PostalCodeNumber\":\"30309\"}}}}}, \"Accuracy\":8}, \"ExtendedData\": {\"LatLonBox\": {\"north\": 33.7846417,\"south\": 33.7783464,\"east\": -84.3849262,\"west\": -84.3912214}},\"Point\":{\"coordinates\":[-84.388042,33.781479,0]}}",
           "10 10th st nw", "atlanta", "30309", "fulton", "ga", "us"), //
       new PlacemarkMock(
           "Domkloster 3, 50667 Köln, Deutschland", //  
-          "{\"id\":\"p1\", \"address\":\"Domkloster, 50667 Altstadt-Nord, K�ln, Germany\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"DE\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"Nordrhein-Westfalen\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"K�ln\", \"Locality\":{\"LocalityName\":\"K�ln\", \"DependentLocality\":{\"DependentLocalityName\":\"Altstadt-Nord\", \"Thoroughfare\":{\"ThoroughfareName\":\"Domkloster\"}, \"PostalCode\":{\"PostalCodeNumber\":\"50667\"}}}}}}, \"Accuracy\":6}, \"Point\":{\"coordinates\":[6.956613,50.940872,0]}}", // Cologne
+          "{\"id\":\"p1\", \"address\":\"Domkloster, 50667 Altstadt-Nord, K�ln, Germany\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"DE\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"Nordrhein-Westfalen\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"K�ln\", \"Locality\":{\"LocalityName\":\"K�ln\", \"DependentLocality\":{\"DependentLocalityName\":\"Altstadt-Nord\", \"Thoroughfare\":{\"ThoroughfareName\":\"Domkloster\"}, \"PostalCode\":{\"PostalCodeNumber\":\"50667\"}}}}}}, \"Accuracy\":6}, \"ExtendedData\": {\"LatLonBox\": {\"north\": 50.9438241, \"south\": 50.9375288, \"east\": 6.9601959, \"west\": 6.9539007}},\"Point\":{\"coordinates\":[6.956613,50.940872,0]}}", // Cologne
           "Domkloster", "K�ln", "50667", "K�ln", "Nordrhein-Westfalen",
           "DE"),
       new PlacemarkMock(
           "4141 Avenue Pierre-De-Coubertin, Montréal, QC, Canada",
-          "{\"id\":\"p1\", \"address\":\"4141 Rue Pierre-de-Coubertin, Montr�al, QC, Canada\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"CA\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"QC\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Communaut�-Urbaine-de-Montr�al\", \"Locality\":{\"LocalityName\":\"Montr�al\", \"Thoroughfare\":{\"ThoroughfareName\":\"4141 Rue Pierre-de-Coubertin\"}, \"PostalCode\":{\"PostalCodeNumber\":\"H1V\"}}}}}, \"Accuracy\":8}, \"Point\":{\"coordinates\":[-73.550814,45.555154,0]}}",
+          "{\"id\":\"p1\", \"address\":\"4141 Rue Pierre-de-Coubertin, Montr�al, QC, Canada\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"CA\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"QC\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Communaut�-Urbaine-de-Montr�al\", \"Locality\":{\"LocalityName\":\"Montr�al\", \"Thoroughfare\":{\"ThoroughfareName\":\"4141 Rue Pierre-de-Coubertin\"}, \"PostalCode\":{\"PostalCodeNumber\":\"H1V\"}}}}}, \"Accuracy\":8}, \"ExtendedData\": {\"LatLonBox\": {\"north\": 45.5691633, \"south\": 45.5628680, \"east\": -73.5408470, \"west\": -73.5471423}},\"Point\":{\"coordinates\":[-73.550814,45.555154,0]}}",
           "4141 Rue Pierre-de-Coubertin", "Montr�al", "H1V",
           "Communaut�-Urbaine-de-Montr�al", "QC", "CA"),
       new PlacemarkMock(
           "Champ de Mars 75007 Paris, France",
-          "{\"id\":\"p1\", \"address\":\"Parc du Champ de Mars, 75007 7�me Arrondissement Paris, Paris, France\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"FR\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"Ile-de-France\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Paris\", \"Locality\":{\"LocalityName\":\"Paris\", \"DependentLocality\":{\"DependentLocalityName\":\"7�me Arrondissement Paris\", \"Thoroughfare\":{\"ThoroughfareName\":\"Parc du Champ de Mars\"}, \"PostalCode\":{\"PostalCodeNumber\":\"75007\"}}}}}}, \"Accuracy\":6}, \"Point\":{\"coordinates\":[2.298605,48.855948,0]}}",
+          "{\"id\":\"p1\", \"address\":\"Parc du Champ de Mars, 75007 7�me Arrondissement Paris, Paris, France\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"FR\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"Ile-de-France\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Paris\", \"Locality\":{\"LocalityName\":\"Paris\", \"DependentLocality\":{\"DependentLocalityName\":\"7�me Arrondissement Paris\", \"Thoroughfare\":{\"ThoroughfareName\":\"Parc du Champ de Mars\"}, \"PostalCode\":{\"PostalCodeNumber\":\"75007\"}}}}}}, \"Accuracy\":6}, \"ExtendedData\": {\"LatLonBox\": {\"north\": 48.8634520, \"south\": 48.8487691, \"east\": 2.3143407,\"west\": 2.2823259}},\"Point\":{\"coordinates\":[2.298605,48.855948,0]}}",
           "Parc du Champ de Mars", "Paris", "75007", "Paris", "Ile-de-France",
           "FR")};
 
