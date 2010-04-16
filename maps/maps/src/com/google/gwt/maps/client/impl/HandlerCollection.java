@@ -79,7 +79,7 @@ public class HandlerCollection<E> {
         mapEvent.value(), callback);
     handlers.add(new HandleContainer<E>(listener, jso));
   }
-  
+
   /**
    * Add a listener and the event handles associated with it.
    * 
@@ -91,7 +91,7 @@ public class HandlerCollection<E> {
         mapEvent.value(), callback);
     handlers.add(new HandleContainer<E>(listener, jso));
   }
-  
+
   /**
    * Add a listener and the event handles associated with it.
    * 
@@ -103,7 +103,7 @@ public class HandlerCollection<E> {
         mapEvent.value(), callback);
     handlers.add(new HandleContainer<E>(listener, jso));
   }
-  
+
   /**
    * Add a listener and the event handles associated with it.
    * 
@@ -220,7 +220,7 @@ public class HandlerCollection<E> {
   public void trigger() {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value);
   }
-  
+
   /**
    * Manually trigger an event that takes a single boolean argument.
    * 
@@ -229,7 +229,7 @@ public class HandlerCollection<E> {
   public void trigger(boolean arg) {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, arg);
   }
-  
+
   /**
    * Manually trigger an event that takes a single boolean argument.
    * 
@@ -238,7 +238,7 @@ public class HandlerCollection<E> {
   public void trigger(Copyright arg) {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, arg);
   }
-    
+
   /**
    * Manually trigger an event that takes two integer arguments.
    * 
@@ -250,18 +250,17 @@ public class HandlerCollection<E> {
   }
 
   /**
-   * Manually trigger an event that takes  {@link LatLng}
-   * arguments.
+   * Manually trigger an event that takes {@link LatLng} arguments.
    * 
    * @param point A coordinate to send as a parameter of the event.
    */
   public void trigger(LatLng point) {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, point);
   }
-  
+
   /**
-   * Manually trigger an event that takes  {@link LatLngBounds}
-   * and <code>int</code> arguments.
+   * Manually trigger an event that takes {@link LatLngBounds} and
+   * <code>int</code> arguments.
    * 
    * @param bounds rectangular bounds
    * @param value integer value to pass
@@ -298,7 +297,18 @@ public class HandlerCollection<E> {
   public void trigger(Overlay overlay, LatLng point) {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, overlay, point);
   }
-  
+
+  /**
+   * Manually trigger an event that takes {@link Overlay} and 2 {@link LatLng}
+   * arguments.
+   * 
+   * @param overlay An overlay to send as a parameter of the event.
+   * @param point A coordinate to send as a parameter of the event.
+   */
+  public void trigger(Overlay overlay, LatLng point1, LatLng point2) {
+    EventImpl.impl.trigger(jsoPeer, mapEvent.value, overlay, point1, point2);
+  }
+
   /**
    * Manually trigger an event that takes {@link Point}, {@link Element}, and
    * {@link Overlay} arguments.

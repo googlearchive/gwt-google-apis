@@ -32,11 +32,11 @@ import java.util.EventObject;
  * argument contains the geographical coordinates of the point that was clicked.
  * If the user clicks on an overlay that is clickable (such as a GMarker,
  * GPolygon, GPolyline, or GInfoWindow), the overlay argument contains the
- * overlay object.  In addition, a click event is then also fired on the
- * overlay itself.
+ * overlay object. In addition, a click event is then also fired on the overlay
+ * itself.
  * 
- * Also note that this event fired twice when the user intends to send
- * a double click.  The MapDoubleClickHandler will also be fired in this case.
+ * Also note that this event fired twice when the user intends to send a double
+ * click. The MapDoubleClickHandler will also be fired in this case.
  */
 public interface MapClickHandler {
 
@@ -47,11 +47,14 @@ public interface MapClickHandler {
   class MapClickEvent extends EventObject {
     private final LatLng latlng;
     private final Overlay overlay;
+    private final LatLng overlaylatlng;
 
-    public MapClickEvent(MapWidget source, Overlay overlay, LatLng latlng) {
+    public MapClickEvent(MapWidget source, Overlay overlay, LatLng latlng,
+        LatLng overlaylatlng) {
       super(source);
       this.overlay = overlay;
       this.latlng = latlng;
+      this.overlaylatlng = overlaylatlng;
     }
 
     /**
@@ -75,6 +78,17 @@ public interface MapClickHandler {
      */
     public Overlay getOverlay() {
       return overlay;
+    }
+
+    /**
+     * If the user clicks on an overlay that is clickable, returns the
+     * coordinates of the clicked overlay.
+     * 
+     * @return the coordinates of the clicked overlay if the click was over an
+     *         overlay, otherwise <code>null</code>.
+     */
+    public LatLng getOverlayLatLng() {
+      return overlaylatlng;
     }
 
     /**

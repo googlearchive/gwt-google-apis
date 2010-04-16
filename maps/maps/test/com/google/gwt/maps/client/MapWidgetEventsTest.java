@@ -347,13 +347,17 @@ public class MapWidgetEventsTest extends GWTTestCase {
         assertEquals(event.getSender(), m);
         assertNotNull("maker is null", o);
         Marker marker = (Marker) o;
-        assertTrue(marker.getPoint().getLatitude() == 12.34);
-        assertTrue(marker.getPoint().getLongitude() == -22.2);
         assertTrue(marker.getLatLng().getLatitude() == 12.34);
         assertTrue(marker.getLatLng().getLongitude() == -22.2);
         assertNotNull("point is null", p);
         assertTrue(p.getLatitude() == 10.1);
         assertTrue(p.getLongitude() == 12.2);
+        LatLng overlaylatlng = event.getOverlayLatLng();
+        assertNotNull("overlaylatlng is null", overlaylatlng);
+        assertEquals("Latitude didn't match for overlaylatlng", 1.0,
+            overlaylatlng.getLatitude(), .001);
+        assertEquals("Longitude didn't match for overlaylatlng", 2.0,
+            overlaylatlng.getLongitude(), .001);
         finishTest();
       }
 
@@ -361,7 +365,7 @@ public class MapWidgetEventsTest extends GWTTestCase {
     RootPanel.get().add(m);
     Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
     MapClickEvent e = new MapClickEvent(m, marker, LatLng.newInstance(10.1,
-        12.2));
+        12.2), LatLng.newInstance(1.0, 2.0));
     delayTestFinish(ASYNC_DELAY_MSEC);
     m.trigger(e);
   }

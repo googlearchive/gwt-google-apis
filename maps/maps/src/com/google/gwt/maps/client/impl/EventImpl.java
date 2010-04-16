@@ -74,10 +74,10 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   }
 
   /**
-   * TODO: JSIO should wrap any java method that returns to JavaScript
-   * with code to deal with uncaught exceptions.  Since it does not do
-   * that now, we created this class and create little helper anonymous
-   * classes to deal with uncaught exceptions.
+   * TODO: JSIO should wrap any java method that returns to JavaScript with code
+   * to deal with uncaught exceptions. Since it does not do that now, we created
+   * this class and create little helper anonymous classes to deal with uncaught
+   * exceptions.
    */
   public interface Callback {
     void execute();
@@ -180,17 +180,19 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   }
 
   /**
-   * Provides a callback interface with an {@link Overlay} and {@link LatLng}
-   * argument.
+   * Provides a callback interface with an {@link Overlay} and two {@link LatLng}
+   * arguments.
    */
   public abstract static class OverlayLatLngCallback extends JSFunction {
-    public abstract void callback(Overlay overlay, LatLng latlng);
+    public abstract void callback(Overlay overlay, LatLng latlng,
+        LatLng overlaylatlng);
 
     @Exported
-    public void callbackWrapper(final Overlay overlay, final LatLng latlng) {
+    public void callbackWrapper(final Overlay overlay, final LatLng latlng,
+        final LatLng overlaylatlng) {
       invokeAndMaybeReportUncaughtExceptions(new Callback() {
         public void execute() {
-          callback(overlay, latlng);
+          callback(overlay, latlng, overlaylatlng);
         }
       });
     }
@@ -372,6 +374,9 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Overlay overlay, LatLng latlng);
+  
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      Overlay overlay, LatLng latlng1, LatLng latlng2);  
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Point point, Element elem, Overlay overlay);
