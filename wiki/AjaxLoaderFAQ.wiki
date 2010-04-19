@@ -7,6 +7,13 @@
 == Where can I go to get help with using the AjaxLoader API? ==
 
 You may post questions to the  [http://groups.google.com/group/gwt-google-apis GWT-Google-Apis] group, which is the forum for the developers of the GWT wrappers for all Google APIs.  You can also try the [http://groups.google.com/group/gwt-google-api Google-Web-Toolkit] group which is the main public forum for GWT. 
+
+== Do I need a copy of this project to use AjaxLoader with the other Google APIs for GWT? ==
+
+The projects that require the AjaxLoader classes are distributed with a .jar file that bundles
+them in.  However, most projects also contain a gwt-XXX-noredist.jar distribution that does not
+include the AjaxLoader or other classes.   The -noredist.jar bundles are useful when your
+project already has a conflicting version of a dependency.   You may need a standalone version of gwt-ajaxloader.jar if you wish to use the -noredist.jar files.
   
 == What should I do if I think I've found a bug? ==
 
