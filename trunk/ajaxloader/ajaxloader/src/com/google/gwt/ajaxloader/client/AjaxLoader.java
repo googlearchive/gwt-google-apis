@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,7 +25,7 @@ import java.util.Vector;
 
 /**
  * A wrapper for the google Ajax API loader.
- * 
+ *
  * http://code.google.com/apis/ajax/documentation/
  */
 public class AjaxLoader {
@@ -88,7 +88,7 @@ public class AjaxLoader {
   static Vector<Runnable> queuedApiLoads = new Vector<Runnable>();
 
   public static ClientLocation getClientLocation() {
-    if (!injectJsapi(null)) {
+    if (!injectJsapi(null, null)) {
       return null;
     }
     return nativeGetClientLocation();
@@ -104,10 +104,24 @@ public class AjaxLoader {
   /**
    * Initialize the API with a supplied key value. See
    * http://code.google.com/apis/ajaxsearch/signup.html
-   * 
+   *
    * @param apiKey API key value.
    */
   public static void init(String apiKey) {
+    init(apiKey, null);
+  }
+
+  /**
+   * Initialize the API with a supplied key value and custom hostname. Most
+   * programmers should use {@link AjaxLoader#init(String)} instead, as it
+   * covers almost all cases of using AjaxLoader API.
+   *
+   * See http://code.google.com/apis/ajaxsearch/signup.html
+   *
+   * @param apiKey API key value.
+   * @param hostname Custom hostname (e.g. "www.google.com").
+   */
+  public static void init(String apiKey, String hostname) {
     if (initialized == true) {
       return;
     }
@@ -118,7 +132,7 @@ public class AjaxLoader {
       apiKey = AjaxKeyRepository.getKey();
     }
 
-    boolean alreadyLoaded = injectJsapi(apiKey);
+    boolean alreadyLoaded = injectJsapi(apiKey, hostname);
 
     // In IE, the above script can execute immediately if its already in the
     // cache, so don't touch the loaded variable unless we bypassed loading the
@@ -131,7 +145,7 @@ public class AjaxLoader {
 
   /**
    * Launches an API load request.
-   * 
+   *
    * @param api The name of the API to load
    * @param version The API version to load
    * @param onLoad A callback that will be invoked when the API is finished
@@ -180,14 +194,14 @@ public class AjaxLoader {
   /**
    * Adds a script element to the DOM that loads the Ajax API Loader main script
    * "jsapi".
-   * 
+   *
    * @param apiKey Optional API key value (pass null to omit the key). See
    *          http://code.google.com/apis/ajaxsearch/signup.html
    * @returns <code>true</code> if the API has already been loaded. Otherwise,
    *          returns <code>false</code>, meaning that the application should
    *          wait for a callback.
    */
-  private static boolean injectJsapi(String apiKey) {
+  private static boolean injectJsapi(String apiKey, String hostname) {
     if (alreadyInjected) {
       return true;
     }
@@ -198,7 +212,8 @@ public class AjaxLoader {
     }
     Document doc = Document.get();
     String key = (apiKey == null) ? "" : ("key=" + apiKey + "&");
-    String src = getProtocol() + "//www.google.com/jsapi?" + key
+    hostname = (hostname == null) ? "www.google.com" : hostname;
+    String src = getProtocol() + "//" + hostname + "/jsapi?" + key
         + "callback=__gwt_AjaxLoader_onLoad";
     ScriptElement script = doc.createScriptElement();
     script.setSrc(src);
