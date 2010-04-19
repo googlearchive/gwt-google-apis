@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,6 +29,7 @@ import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.Gauge;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
 import com.google.gwt.visualization.client.visualizations.ImageChart;
+import com.google.gwt.visualization.client.visualizations.ImageLineChart;
 import com.google.gwt.visualization.client.visualizations.IntensityMap;
 import com.google.gwt.visualization.client.visualizations.LineChart;
 import com.google.gwt.visualization.client.visualizations.MapVisualization;
@@ -43,7 +44,7 @@ import com.google.gwt.visualization.client.visualizations.Table;
  */
 class Showcase implements EntryPoint {
   /**
-   * Demo for ad hoc visualization wrapping.  See ImageDemo.java
+   * Demo for ad hoc visualization wrapping. See ImageDemo.java
    */
   private static final String SPARKLINE_PACKAGE = "imagesparkline";
 
@@ -85,7 +86,7 @@ class Showcase implements EntryPoint {
     data.setValue(4, 1, 7);
     return data;
   }
-  
+
   static DataTable getSugarSaltAndCaloriesComparison() {
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.NUMBER, "Sugar");
@@ -108,7 +109,8 @@ class Showcase implements EntryPoint {
   }
 
   public void onModuleLoad() {
-    VisualizationUtils.loadVisualizationApi(new Runnable() {
+    VisualizationUtils.loadVisualizationApi(
+        new Runnable() {
           public void run() {
             final VerticalPanel vp = new VerticalPanel();
             vp.setSpacing(15);
@@ -137,6 +139,7 @@ class Showcase implements EntryPoint {
             tabby.add(new OrgDemo(), "OrgChart");
             tabby.add(new PieDemo(), "PieChart");
             tabby.add(new ImageDemo(), "RadarChart");
+            tabby.add(new ImageLineDemo(), "ImageLineChart");
             tabby.add(new ScatterDemo(), "ScatterChart");
             tabby.add(new SparklineDemo(), "Sparkline");
             tabby.add(new TableDemo(), "Table");
@@ -145,8 +148,9 @@ class Showcase implements EntryPoint {
           }
         }, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE,
         ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE, ImageChart.PACKAGE,
-        IntensityMap.PACKAGE, LineChart.PACKAGE, MapVisualization.PACKAGE,
-        MotionChart.PACKAGE, OrgChart.PACKAGE, PieChart.PACKAGE,
-        ScatterChart.PACKAGE, Table.PACKAGE, SPARKLINE_PACKAGE);
+        ImageLineChart.PACKAGE, IntensityMap.PACKAGE, LineChart.PACKAGE,
+        MapVisualization.PACKAGE, MotionChart.PACKAGE, OrgChart.PACKAGE,
+        PieChart.PACKAGE, ScatterChart.PACKAGE, Table.PACKAGE,
+        SPARKLINE_PACKAGE);
   }
 }
