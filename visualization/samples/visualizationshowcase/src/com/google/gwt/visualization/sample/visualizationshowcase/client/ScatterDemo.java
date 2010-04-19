@@ -28,7 +28,7 @@ import com.google.gwt.visualization.client.visualizations.ScatterChart.Options;
 public class ScatterDemo implements LeftTabPanel.WidgetProvider {
   public Widget getWidget() {
     VerticalPanel result = new VerticalPanel();
-    
+
     Options options = Options.create();
     options.setHeight(240);
     options.setTitle("Sugar, salt and calories comparison");
@@ -36,7 +36,7 @@ public class ScatterDemo implements LeftTabPanel.WidgetProvider {
     options.setEnableTooltip(true);
     options.setMin(0);
     options.setMax(20);
-    
+
     DataTable data = Showcase.getSugarSaltAndCaloriesComparison();
 
     ScatterChart viz = new ScatterChart(data, options);

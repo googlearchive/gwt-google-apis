@@ -40,7 +40,6 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
   @SuppressWarnings("deprecation")
   public AnnotatedDemo() {
     @SuppressWarnings("unused")
-
     int year, month, day;
     Options options = Options.create();
     options.setDisplayAnnotations(true);
@@ -82,7 +81,7 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
 
     status.setText("'Ready' event was not yet fired");
     chart = new AnnotatedTimeLine(data, options, "700px", "240px");
-    
+
     widget.add(chart);
     widget.add(status);
     widget.add(rangeStatus);
@@ -94,8 +93,8 @@ public class AnnotatedDemo implements LeftTabPanel.WidgetProvider {
     chart.addRangeChangeHandler(new RangeChangeHandler() {
       @Override
       public void onRangeChange(RangeChangeEvent event) {
-        rangeStatus.setText("The range has changed.\n" + event.getStart() + 
-            "\nFalls mainly on the plains.\n" + event.getEnd());
+        rangeStatus.setText("The range has changed.\n" + event.getStart()
+            + "\nFalls mainly on the plains.\n" + event.getEnd());
       }
     });
     chart.addReadyHandler(new ReadyDemo(status));

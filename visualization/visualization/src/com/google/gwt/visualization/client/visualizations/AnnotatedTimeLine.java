@@ -76,6 +76,22 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   }
 
   /**
+   * The highlighting mode: The nearest dot to the mouse (default), or the last
+   * one before the mouse (to the left of it).
+   */
+  public static enum HighlightDotMode {
+    /**
+     * Highlight the last dot before the mouse.
+     */
+    LAST,
+
+    /**
+     * Highlight the dot nearest to the mouse.
+     */
+    NEAREST
+  }
+
+  /**
    * Options for drawing the chart.
    * 
    */
@@ -89,6 +105,10 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
 
     public final native void setAllowHtml(boolean allowHtml) /*-{
       this.allowHtml = allowHtml;
+    }-*/;
+
+    public final native void setAllowRedraw(boolean allowRedraw) /*-{
+      this.allowRedraw = allowRedraw;
     }-*/;
 
     public final native void setAllValuesSuffix(String suffix) /*-{
@@ -176,7 +196,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     }
 
     public final void setScaleColumns(int... scaleColumns) {
-      setScaleColumns(ArrayHelper.createJsArray(scaleColumns));
+      setScaleColumns(ArrayHelper.toJsArrayInteger(scaleColumns));
     }
 
     public final native void setScaleColumns(JsArrayInteger scaleColumns) /*-{
@@ -238,22 +258,6 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     private native void setZoomStartTime(double startTime) /*-{
       this.zoomStartTime = new $wnd.Date(startTime);
     }-*/;
-  }
-
-  /**
-   * The highlighting mode: The nearest dot to the mouse (default), or the last
-   * one before the mouse (to the left of it).
-   */
-  public static enum HighlightDotMode {
-    /**
-     * Highlight the dot nearest to the mouse.
-     */
-    NEAREST,
-
-    /**
-     * Highlight the last dot before the mouse.
-     */
-    LAST
   }
 
   /**
@@ -366,7 +370,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   }
 
   public final void hideDataColumns(int... columnIndexes) {
-    hideDataColumns(ArrayHelper.createJsArray(columnIndexes));
+    hideDataColumns(ArrayHelper.toJsArrayInteger(columnIndexes));
   }
 
   public final void hideDataColumns(JsArrayInteger columnIndexes) {
@@ -378,7 +382,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
   }
 
   public final void showDataColumns(int... columnIndexes) {
-    showDataColumns(ArrayHelper.createJsArray(columnIndexes));
+    showDataColumns(ArrayHelper.toJsArrayInteger(columnIndexes));
   }
 
   public final void showDataColumns(JsArrayInteger columnIndexes) {

@@ -39,6 +39,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
         Widget widget;
         Options options = Options.create();
         options.setAllowHtml(false);
+        options.setAllowRedraw(true);
         options.setAllValuesSuffix("ski");
         options.setAnnotationsWidth(5);
         options.setColors("blue", "purple", "pink");
