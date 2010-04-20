@@ -142,9 +142,8 @@
   </condition>
 
   <!-- JUnit support -->
-  <property name="gwt.dev.staging.jar" location="${gwt.build.staging}/gwt-${build.host.platform}-${gwt.version}/gwt-dev-${build.host.platform}.jar" />
   <property name="gwt.junit.port" value="8888" />
-  <property name="gwt.junit.testcase.includes" value="**/EmulSuite.class"/>
+  <property name="gwt.junit.testcase.includes" value="**/*TestSuite.class"/>
 
   <!-- Headless mode keeps the hosted mode browser and log window
        from popping up during a unit test run. This is usually desirable,
@@ -249,7 +248,7 @@
         <jvmarg value="-Demma.coverage.out.merge=true" />
         <sysproperty key="gwt.args" value="${junit.notheadless.arg} @{test.args}" />
         <sysproperty key="java.awt.headless" value="${junit.headless}" />
-        <sysproperty key="gwt.devjar" value="${gwt.dev.staging.jar}" />
+        <sysproperty key="gwt.devjar" value="${gwt.dev.jar}" />
         <classpath>
           <path refid="project.classpath.src" />
           <pathelement location="${gwt.root}/${project.tail}/super" />
@@ -259,7 +258,8 @@
           <pathelement location="${javac.emma.out}" />
           <path refid="project.classpath.class" />
           <pathelement location="${emma.lib}" />
-          <pathelement location="${gwt.dev.staging.jar}" />
+          <pathelement location="${gwt.dev.jar}" />
+          <pathelement location="${gwt.user.jar}" />
           <pathelement location="${gwt.tools.lib}/junit/junit-3.8.1.jar" />
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar" />
           <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar" />
