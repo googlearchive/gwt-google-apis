@@ -7,10 +7,12 @@ These instructions require
 
 ---------- Importing Projects ------------------------------------
 
-To work with sample code in Eclipse, copy gwt-xxx.jar (xxx is the name of the
-api. e.g. maps, search) to samples/name-of-sample/war/libs folder.
+To work with sample code in Eclipse, the precompiled library needs to be copied
+into the war directory. Please first execute command 'ant libs' in the
+directory of the sample project, or simply copy gwt-xxx.jar (xxx is the name of
+the api. e.g. maps, search) to samples/name-of-sample/war/WEB-INF/lib folder.
 
-After copying the jar file, import the project in the samples/name-of-sample
+After copying the libraries, import the project in the samples/name-of-sample
 folder.
 
 Select Project -> Properties from the menu bar and afterwards select:

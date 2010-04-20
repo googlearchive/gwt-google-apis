@@ -12,7 +12,7 @@
 
 			<!-- distro-source files -->
 			<tarfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
-				<include name="*" />
+				<include name="**" />
 			</tarfileset>
 
 			<!-- doc -->
@@ -29,7 +29,6 @@
 			<!-- samples -->
 			<tarfileset dir="${gwt.root}" prefix="${project.distname}">
 				<include name="samples/*/.project" />
-				<include name="samples/*/*.war" />
 				<include name="samples/*/src/**" />
 				<include name="samples/*/war/**" />
 			</tarfileset>
@@ -45,7 +44,7 @@
 
 			<!-- distro-source files -->
 			<zipfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
-				<include name="*" />
+				<include name="**" />
 			</zipfileset>
 
 			<!-- doc -->
@@ -62,7 +61,6 @@
 			<!-- samples -->
 			<zipfileset dir="${gwt.root}" prefix="${project.distname}">
 				<include name="samples/*/.project" />
-				<include name="samples/*/*.war" />
 				<include name="samples/*/src/**" />
 				<include name="samples/*/war/**" />
 			</zipfileset>
