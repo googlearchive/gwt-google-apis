@@ -9,7 +9,7 @@
   <xsl:template match="classpathentry[@kind='src' and @combineaccessrules='false']">
     <xsl:choose>
       <xsl:when test="@path=concat('/gwt-', $api.name)">
-        <classpathentry kind="lib" path="war/libs/gwt-{$api.name}.jar"/>
+        <classpathentry kind="lib" path="war/WEB-INF/lib/gwt-{$api.name}.jar"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:copy>

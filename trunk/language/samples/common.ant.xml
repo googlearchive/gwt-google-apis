@@ -59,7 +59,7 @@
 		</zip>
 	</target>
 
-	<target name="build" depends="compile, gwtc, war" description="Build and package this project" />
+	<target name="build" depends="compile, gwtc" description="Build this project" />
 
 	<target name="checkstyle" description="Static analysis of source">
 		<gwt.checkstyle>
