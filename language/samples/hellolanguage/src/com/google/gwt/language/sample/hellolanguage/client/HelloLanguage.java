@@ -16,9 +16,10 @@
 package com.google.gwt.language.sample.hellolanguage.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.language.client.LanguageUtils;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
@@ -44,8 +45,8 @@ public class HelloLanguage implements EntryPoint {
         DEMO_PANEL_HEIGHT);
     RootPanel.get().add(demoTabPanel);
 
-    Window.addWindowResizeListener(new WindowResizeListener() {
-      public void onWindowResized(int width, int height) {
+    Window.addResizeHandler(new ResizeHandler() {
+      public void onResize(ResizeEvent event) {
         demoTabPanel.getDeckPanel().setPixelSize(Window.getClientWidth() - 30,
             DEMO_PANEL_HEIGHT);
       }
