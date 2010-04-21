@@ -5,25 +5,25 @@
   <import file="${gwt.root}/common.ant.xml"/>
   <!-- "build" is the default when subprojects are directly targetted -->
   <property name="target" value="build"/>
-  <target name="database" description="Build Database">
-    <gwt.ant dir="database"/>
+  <target name="databasedemo" description="Build Database">
+    <gwt.ant dir="databasedemo"/>
   </target>
   <target name="gwtnote" description="Build GWTNote">
     <gwt.ant dir="gwtnote"/>
   </target>
-  <target name="managedresourcestore" description="Build ManagedResourceStore">
-    <gwt.ant dir="managedresourcestore"/>
+  <target name="managedresourcestoredemo" description="Build ManagedResourceStore">
+    <gwt.ant dir="managedresourcestoredemo"/>
   </target>
-  <target name="resourcestore" description="Build ResourceStore">
-    <gwt.ant dir="resourcestore"/>
+  <target name="resourcestoredemo" description="Build ResourceStore">
+    <gwt.ant dir="resourcestoredemo"/>
   </target>
-  <target name="workerpool" description="Build WorkerPool">
-    <gwt.ant dir="workerpool"/>
+  <target name="workerpooldemo" description="Build WorkerPool">
+    <gwt.ant dir="workerpooldemo"/>
   </target>
-  <target name="upload" description="Build Upload">
-    <gwt.ant dir="upload"/>
+  <target name="uploaddemo" description="Build Upload">
+    <gwt.ant dir="uploaddemo"/>
   </target>
-  <target name="-do" depends="database, gwtnote, managedresourcestore, resourcestore, workerpool, upload" description="Run all subprojects"/>
+  <target name="-do" depends="databasedemo, gwtnote, managedresourcestoredemo, resourcestoredemo, workerpooldemo, uploaddemo" description="Run all subprojects"/>
   <target name="build" description="Builds Google API Library for GWT Samples">
     <antcall target="-do">
       <param name="target" value="build"/>

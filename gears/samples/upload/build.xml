@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<project name="upload" default="build" basedir=".">
-  <property name="sample.api" value="gears"/>
-  <property name="sample.root" value="upload"/>
-  <property name="sample.module" value="UploadDemo"/>
-  <property name="sample.module.lowercase" value="uploaddemo"/>
-  <import file="../common.ant.xml"/>
-</project>

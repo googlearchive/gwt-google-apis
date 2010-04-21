@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<project name="uploaddemo" default="build" basedir=".">
+  <property name="sample.api" value="gears"/>
+  <property name="sample.root" value="uploaddemo"/>
+  <property name="sample.module" value="UploadDemo"/>
+  <import file="../common.ant.xml"/>
+</project>
