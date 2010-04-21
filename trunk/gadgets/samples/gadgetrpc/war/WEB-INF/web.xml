@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
-
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>GadgetRPC.html</welcome-file>
   </welcome-file-list>
-
   <servlet>
     <servlet-name>gadgetRPCServlet</servlet-name>
     <servlet-class>com.google.gwt.gadgets.sample.gadgetrpc.server.GadgetRPCServlet</servlet-class>
@@ -14,5 +12,4 @@
     <servlet-name>gadgetRPCServlet</servlet-name>
     <url-pattern>/gadgetrpc/GadgetRPC</url-pattern>
   </servlet-mapping>
-
 </web-app>

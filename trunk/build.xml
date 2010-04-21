@@ -1,58 +1,47 @@
+<?xml version="1.0"?>
 <project name="Google API Library for GWT" default="build" basedir=".">
-	<!-- "build" is the default when subprojects are directly targetted -->
-	<property name="target" value="build" />
-
-	<target name="search" description="Build AJAX Search">
-		<ant dir="search" target="${target}" />
-	</target>
-
-	<target name="gadgets" description="Build Gadgets">
-		<ant dir="gadgets" target="${target}" />
-	</target>
-
-	<target name="gears" description="Build Gears">
-		<ant dir="gears" target="${target}" />
-	</target>
-
-	<target name="maps" description="Build Maps">
-		<ant dir="maps" target="${target}" />
-	</target>
-
-	<target name="visualization" description="Build Visualization">
-		<ant dir="visualization" target="${target}" />
-	</target>
-
-	<target name="ajaxloader" description="Build AjaxLoader">
-		<ant dir="ajaxloader" target="${target}" />
-	</target>
-
-	<target name="language" description="Build Language">
-		<ant dir="language" target="${target}" />
-	</target>
-
-	<target name="-do" depends="gadgets, gears, maps, search, visualization, ajaxloader, language" description="Run all subprojects" />
-
-	<target name="build" description="Builds all of the APIs that make up the Google API Library for GWT">
-		<antcall target="-do">
-			<param name="target" value="build" />
-		</antcall>
-	</target>
-
-	<target name="checkstyle" description="Static analysis of Google API Library for GWT source">
-		<antcall target="-do">
-			<param name="target" value="checkstyle" />
-		</antcall>
-	</target>
-
-	<target name="test" depends="build" description="Test Google API Library for GWT">
-		<antcall target="-do">
-			<param name="target" value="test" />
-		</antcall>
-	</target>
-
-	<target name="clean" description="Cleans the entire Google API Library for GWT build">
-		<antcall target="-do">
-			<param name="target" value="clean" />
-		</antcall>
-	</target>
+  <!-- "build" is the default when subprojects are directly targetted -->
+  <property name="target" value="build"/>
+  <target name="search" description="Build AJAX Search">
+    <ant dir="search" target="${target}"/>
+  </target>
+  <target name="gadgets" description="Build Gadgets">
+    <ant dir="gadgets" target="${target}"/>
+  </target>
+  <target name="gears" description="Build Gears">
+    <ant dir="gears" target="${target}"/>
+  </target>
+  <target name="maps" description="Build Maps">
+    <ant dir="maps" target="${target}"/>
+  </target>
+  <target name="visualization" description="Build Visualization">
+    <ant dir="visualization" target="${target}"/>
+  </target>
+  <target name="ajaxloader" description="Build AjaxLoader">
+    <ant dir="ajaxloader" target="${target}"/>
+  </target>
+  <target name="language" description="Build Language">
+    <ant dir="language" target="${target}"/>
+  </target>
+  <target name="-do" depends="gadgets, gears, maps, search, visualization, ajaxloader, language" description="Run all subprojects"/>
+  <target name="build" description="Builds all of the APIs that make up the Google API Library for GWT">
+    <antcall target="-do">
+      <param name="target" value="build"/>
+    </antcall>
+  </target>
+  <target name="checkstyle" description="Static analysis of Google API Library for GWT source">
+    <antcall target="-do">
+      <param name="target" value="checkstyle"/>
+    </antcall>
+  </target>
+  <target name="test" depends="build" description="Test Google API Library for GWT">
+    <antcall target="-do">
+      <param name="target" value="test"/>
+    </antcall>
+  </target>
+  <target name="clean" description="Cleans the entire Google API Library for GWT build">
+    <antcall target="-do">
+      <param name="target" value="clean"/>
+    </antcall>
+  </target>
 </project>

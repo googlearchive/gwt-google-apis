@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--                                                                        -->
 <!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
@@ -11,35 +12,25 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-
 <module>
   <!-- Produces the final Gadget manifest -->
-  <define-linker name="gadget"
-    class="com.google.gwt.gadgets.linker.GadgetLinker" />
-  <add-linker name="gadget" />
-
+  <define-linker name="gadget" class="com.google.gwt.gadgets.linker.GadgetLinker"/>
+  <add-linker name="gadget"/>
   <!-- Generates the top layer of the Gadget sandwich -->
   <generate-with class="com.google.gwt.gadgets.rebind.GadgetGenerator">
-    <when-type-assignable class="com.google.gwt.gadgets.client.Gadget" />
+    <when-type-assignable class="com.google.gwt.gadgets.client.Gadget"/>
   </generate-with>
-
   <!-- Automatically write Gadget property accessor implementations -->
-  <generate-with
-    class="com.google.gwt.gadgets.rebind.UserPreferencesGenerator">
-    <when-type-assignable class="com.google.gwt.gadgets.client.UserPreferences" />
+  <generate-with class="com.google.gwt.gadgets.rebind.UserPreferencesGenerator">
+    <when-type-assignable class="com.google.gwt.gadgets.client.UserPreferences"/>
   </generate-with>
-
   <define-property name="gadget_view" values="home"/>
-  <property-provider name="gadget_view">
-    <![CDATA[
+  <property-provider name="gadget_view"><![CDATA[
       return $wnd.gadgetViewName || "home";
-    ]]>
-  </property-provider>
-
+    ]]></property-provider>
   <generate-with class="com.google.gwt.gadgets.rebind.ContentSectionGenerator">
-    <when-type-is class="com.google.gwt.gadgets.client.ContentSection" />
+    <when-type-is class="com.google.gwt.gadgets.client.ContentSection"/>
   </generate-with>
-
-  <source path="annotations" />
-  <source path="client" />
+  <source path="annotations"/>
+  <source path="client"/>
 </module>

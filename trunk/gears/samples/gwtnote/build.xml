@@ -1,7 +1,8 @@
+<?xml version="1.0"?>
 <project name="GWTNote" default="build" basedir=".">
-	<property name="sample.api" value="gears"/>
-	<property name="sample.root" value="gwtnote" />
-	<property name="sample.module" value="GWTNote" />
-	<property name="sample.module.lowercase" value="gwtnote" />
-	<import file="../common.ant.xml" />
+  <property name="sample.api" value="gears"/>
+  <property name="sample.root" value="gwtnote"/>
+  <property name="sample.module" value="GWTNote"/>
+  <property name="sample.module.lowercase" value="gwtnote"/>
+  <import file="../common.ant.xml"/>
 </project>

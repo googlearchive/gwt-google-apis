@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--                                                                        -->
 <!-- Copyright 2007 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
@@ -11,16 +12,14 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-
 <!-- JavaScript interoperability support.                                   -->
 <!--                                                                        -->
 <module>
-  <inherits name="com.google.gwt.core.Core" />
+  <inherits name="com.google.gwt.core.Core"/>
   <generate-with class="com.google.gwt.search.jsio.rebind.JSWrapperGenerator">
-    <when-type-assignable class="com.google.gwt.search.jsio.client.JSWrapper" />
+    <when-type-assignable class="com.google.gwt.search.jsio.client.JSWrapper"/>
   </generate-with>
-  <generate-with
-    class="com.google.gwt.search.jsio.rebind.JSFlyweightWrapperGenerator">
-    <when-type-assignable class="com.google.gwt.search.jsio.client.JSFlyweightWrapper" />
+  <generate-with class="com.google.gwt.search.jsio.rebind.JSFlyweightWrapperGenerator">
+    <when-type-assignable class="com.google.gwt.search.jsio.client.JSFlyweightWrapper"/>
   </generate-with>
 </module>
