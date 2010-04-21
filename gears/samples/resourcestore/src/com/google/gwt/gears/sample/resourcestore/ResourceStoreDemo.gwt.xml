@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--                                                                        -->
 <!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
@@ -11,27 +12,20 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-
 <!-- Gears ResourceStore example                                     -->
 <!--                                                                        -->
 <module rename-to="resourcestoredemo">
-
   <!-- Inherit the core Web Toolkit stuff.                  -->
-  <inherits name='com.google.gwt.user.User'/>
-	
+  <inherits name="com.google.gwt.user.User"/>
   <!-- Inherit the Gears Module -->
-  <inherits name='com.google.gwt.gears.Gears'/>
-  
+  <inherits name="com.google.gwt.gears.Gears"/>
   <!-- Inherit the standard theme -->
   <inherits name="com.google.gwt.user.theme.standard.Standard"/>
-	
   <!-- Specify the app entry point class.                   -->
-  <entry-point class='com.google.gwt.gears.sample.resourcestore.client.ResourceStoreDemo'/>
-  
+  <entry-point class="com.google.gwt.gears.sample.resourcestore.client.ResourceStoreDemo"/>
   <!-- Rebind the entry point if Gears is not installed -->
   <replace-with class="com.google.gwt.gears.sample.resourcestore.client.ResourceStoreDemoNoGears">
     <when-type-is class="com.google.gwt.gears.sample.resourcestore.client.ResourceStoreDemo"/>
     <when-property-is name="gears.installed" value="false"/>
   </replace-with>
-    
 </module>

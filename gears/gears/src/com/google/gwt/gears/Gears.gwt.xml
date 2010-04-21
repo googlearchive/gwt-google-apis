@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
  - Copyright 2007 Google Inc.
  - 
@@ -16,7 +17,6 @@
 <module>
   <!-- Define a property which answers true if Gears is installed -->
   <define-property name="gears.installed" values="false,true"/>
-
   <!-- Property provider which answers true if Gears is installed -->
   <property-provider name="gears.installed"><![CDATA[
     // Firefox
@@ -36,11 +36,10 @@
       }
     }
 
-	return "false";
+  return "false";
   ]]></property-provider>
-  
   <!--
-  	Gears' required JavaScript initialization code.
+    Gears' required JavaScript initialization code.
   -->
-  <script src='gears_init.js'/>
+  <script src="gears_init.js"/>
 </module>

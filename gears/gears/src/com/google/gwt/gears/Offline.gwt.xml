@@ -12,17 +12,14 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-
 <!--
   Inheriting this module will automatically create a ManagedResourceStore
   manifest and configure the application to run in an offline mode.
 -->
 <module>
-  <inherits name="com.google.gwt.gears.Gears" />
-  <source path="offline/client" />
-
+  <inherits name="com.google.gwt.gears.Gears"/>
+  <source path="offline/client"/>
   <!-- Add a Linker to generate the manifest file. -->
-  <define-linker name="gearsManifest"
-    class="com.google.gwt.gears.offline.linker.GearsManifestLinker" />
-  <add-linker name="gearsManifest" />
+  <define-linker name="gearsManifest" class="com.google.gwt.gears.offline.linker.GearsManifestLinker"/>
+  <add-linker name="gearsManifest"/>
 </module>

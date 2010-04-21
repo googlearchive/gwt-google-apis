@@ -1,7 +1,8 @@
+<?xml version="1.0"?>
 <project name="resourcestore" default="build" basedir=".">
-	<property name="sample.api" value="gears"/>
-	<property name="sample.root" value="resourcestore" />
-	<property name="sample.module" value="ResourceStoreDemo" />
-	<property name="sample.module.lowercase" value="resourcestoredemo" />
-	<import file="../common.ant.xml" />
+  <property name="sample.api" value="gears"/>
+  <property name="sample.root" value="resourcestore"/>
+  <property name="sample.module" value="ResourceStoreDemo"/>
+  <property name="sample.module.lowercase" value="resourcestoredemo"/>
+  <import file="../common.ant.xml"/>
 </project>

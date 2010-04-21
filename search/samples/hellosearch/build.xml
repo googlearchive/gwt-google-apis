@@ -1,6 +1,7 @@
+<?xml version="1.0"?>
 <project name="database" default="build" basedir=".">
-	<property name="sample.api" value="search"/>
-	<property name="sample.root" value="hellosearch" />
-	<property name="sample.module" value="HelloSearch" />
-	<import file="../common.ant.xml" />
+  <property name="sample.api" value="search"/>
+  <property name="sample.root" value="hellosearch"/>
+  <property name="sample.module" value="HelloSearch"/>
+  <import file="../common.ant.xml"/>
 </project>

@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--                                                                        -->
 <!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
@@ -11,12 +12,11 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-
 <module rename-to="gwtnote">
   <inherits name="com.google.gwt.i18n.I18N"/>
   <inherits name="com.google.gwt.user.User"/>
   <inherits name="com.google.gwt.gears.Gears"/>
-  <inherits name="com.google.gwt.i18n.I18N" />
+  <inherits name="com.google.gwt.i18n.I18N"/>
   <entry-point class="com.google.gwt.gears.sample.gwtnote.client.GWTNote"/>
   <servlet path="/rpc" class="com.google.gwt.gears.sample.gwtnote.server.NoteServiceImpl"/>
 </module>

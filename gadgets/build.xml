@@ -1,56 +1,45 @@
+<?xml version="1.0"?>
 <project name="Gadgets API Library for GWT" default="build" basedir=".">
-	<property name="gwt.root" location="." />
-	<property name="project.tail" value="" />
-	<import file="${gwt.root}/common.ant.xml" />
-
-	<!-- "build" is the default when subprojects are directly targetted -->
-	<property name="target" value="build" />
-
-	<target name="build-tools" description="Builds tools required to build the Gadgets API Library for GWT">
-	    <gwt.ant dir="build-tools"/>
-	</target>
-		
-	<target name="dist" depends="build-tools, gadgets, doc, samples" description="Run the distributions">
-		<gwt.ant dir="distro-source" />
-	</target>
-
-	<target name="doc" depends="gadgets" description="Build doc">
-		<gwt.ant dir="doc" />
-	</target>
-
-	<target name="gadgets" depends="build-tools" description="Build Gadgets Bindings">
-		<gwt.ant dir="gadgets"/>
-	</target>
-	
-	<target name="samples" depends="build-tools, gadgets" description="Build Gadgets samples">
-		<gwt.ant dir="samples" />
-	</target>
-
-	<target name="-do" depends="dist" description="Run all subprojects" />
-
-	<target name="build" description="Builds Gadgets API Library for GWT">
-		<antcall target="-do">
-			<param name="target" value="build" />
-		</antcall>
-	</target>
-
-	<target name="checkstyle" description="Static analysis of Gadgets API Library for GWT source">
-		<antcall target="-do">
-			<param name="target" value="checkstyle" />
-		</antcall>
-	</target>
-
-	<target name="test" depends="build" description="Test Gadgets API Library for GWT">
-		<antcall target="-do">
-			<param name="target" value="test" />
-		</antcall>
-	</target>
-
-	<target name="clean" description="Cleans the entire Gadgets API Library for GWT build">
-		<delete dir="${gwt.build}" />
-		<antcall target="-do">
-			<param name="target" value="clean" />
-		</antcall>
-	</target>
-
+  <property name="gwt.root" location="."/>
+  <property name="project.tail" value=""/>
+  <import file="${gwt.root}/common.ant.xml"/>
+  <!-- "build" is the default when subprojects are directly targetted -->
+  <property name="target" value="build"/>
+  <target name="build-tools" description="Builds tools required to build the Gadgets API Library for GWT">
+    <gwt.ant dir="build-tools"/>
+  </target>
+  <target name="dist" depends="build-tools, gadgets, doc, samples" description="Run the distributions">
+    <gwt.ant dir="distro-source"/>
+  </target>
+  <target name="doc" depends="gadgets" description="Build doc">
+    <gwt.ant dir="doc"/>
+  </target>
+  <target name="gadgets" depends="build-tools" description="Build Gadgets Bindings">
+    <gwt.ant dir="gadgets"/>
+  </target>
+  <target name="samples" depends="build-tools, gadgets" description="Build Gadgets samples">
+    <gwt.ant dir="samples"/>
+  </target>
+  <target name="-do" depends="dist" description="Run all subprojects"/>
+  <target name="build" description="Builds Gadgets API Library for GWT">
+    <antcall target="-do">
+      <param name="target" value="build"/>
+    </antcall>
+  </target>
+  <target name="checkstyle" description="Static analysis of Gadgets API Library for GWT source">
+    <antcall target="-do">
+      <param name="target" value="checkstyle"/>
+    </antcall>
+  </target>
+  <target name="test" depends="build" description="Test Gadgets API Library for GWT">
+    <antcall target="-do">
+      <param name="target" value="test"/>
+    </antcall>
+  </target>
+  <target name="clean" description="Cleans the entire Gadgets API Library for GWT build">
+    <delete dir="${gwt.build}"/>
+    <antcall target="-do">
+      <param name="target" value="clean"/>
+    </antcall>
+  </target>
 </project>

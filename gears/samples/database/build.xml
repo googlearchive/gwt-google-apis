@@ -1,7 +1,8 @@
+<?xml version="1.0"?>
 <project name="database" default="build" basedir=".">
-	<property name="sample.api" value="gears"/>
-	<property name="sample.root" value="database" />
-	<property name="sample.module" value="DatabaseDemo" />
-	<property name="sample.module.lowercase" value="databasedemo" />
-	<import file="../common.ant.xml" />
+  <property name="sample.api" value="gears"/>
+  <property name="sample.root" value="database"/>
+  <property name="sample.module" value="DatabaseDemo"/>
+  <property name="sample.module.lowercase" value="databasedemo"/>
+  <import file="../common.ant.xml"/>
 </project>

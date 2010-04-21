@@ -1,6 +1,7 @@
+<?xml version="1.0"?>
 <project name="hellovisualization" default="build" basedir=".">
-	<property name="sample.api" value="visualization"/>
-	<property name="sample.root" value="hellovisualization" />
-	<property name="sample.module" value="HelloVisualization" />
-	<import file="../common.ant.xml" />
+  <property name="sample.api" value="visualization"/>
+  <property name="sample.root" value="hellovisualization"/>
+  <property name="sample.module" value="HelloVisualization"/>
+  <import file="../common.ant.xml"/>
 </project>

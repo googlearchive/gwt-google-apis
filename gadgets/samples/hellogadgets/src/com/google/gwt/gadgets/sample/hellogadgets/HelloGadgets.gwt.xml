@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--                                                                        -->
 <!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
@@ -11,23 +12,16 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-
 <module rename-to="hellogadgets">
-
-	<!-- Inherit the core Web Toolkit stuff.                        -->
-	<inherits name='com.google.gwt.user.User'/>
-
-	<!-- Other module inherits                                      -->
-	<inherits name="com.google.gwt.gadgets.Gadgets" />
-	<inherits name="com.google.gwt.http.HTTP" />
-
-        <!-- Using GWT built-in themes adds a number of static          -->
-        <!-- resources to the gadget. No theme inherits lines were      -->
-        <!-- added in order to make this gadget as simple as possible   -->
-
-	<!-- Specify the app entry point class.                         -->
-	<entry-point class="com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets" />
-
-	<stylesheet src="hello.css" />
-
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name="com.google.gwt.user.User"/>
+  <!-- Other module inherits                                      -->
+  <inherits name="com.google.gwt.gadgets.Gadgets"/>
+  <inherits name="com.google.gwt.http.HTTP"/>
+  <!-- Using GWT built-in themes adds a number of static          -->
+  <!-- resources to the gadget. No theme inherits lines were      -->
+  <!-- added in order to make this gadget as simple as possible   -->
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class="com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets"/>
+  <stylesheet src="hello.css"/>
 </module>

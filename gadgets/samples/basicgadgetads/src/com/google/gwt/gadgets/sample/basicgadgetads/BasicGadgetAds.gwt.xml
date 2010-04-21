@@ -1,5 +1,5 @@
+<?xml version="1.0"?>
 <!DOCTYPE document SYSTEM "http://google-web-toolkit.googlecode.com/svn/releases/1.5/distro-source/core/src/gwt-module.dtd">
-
 <!--                                                                        -->
 <!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
@@ -13,16 +13,11 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-
 <module rename-to="basicgadgetads">
-
-	<!-- Inherit the core Web Toolkit stuff.                        -->
-	<inherits name='com.google.gwt.user.User'/>
-
-	<!-- Other module inherits                                      -->
-	<inherits name="com.google.gwt.gadgets.Gadgets" />
-
-	<!-- Specify the app entry point class.                         -->
-      <entry-point class='com.google.gwt.gadgets.sample.basicgadgetads.client.BasicGadgetAds'/>
-
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name="com.google.gwt.user.User"/>
+  <!-- Other module inherits                                      -->
+  <inherits name="com.google.gwt.gadgets.Gadgets"/>
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class="com.google.gwt.gadgets.sample.basicgadgetads.client.BasicGadgetAds"/>
 </module>
