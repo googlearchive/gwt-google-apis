@@ -42,9 +42,8 @@ import com.google.gwt.user.client.ui.Widget;
  * files are supported.
  */
 public class KmlOverlayDemo extends MapsDemo {
-
+  private static String KML_DEMO_URI = "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml";
   private static HTML descHTML = null;
-
   private static final String descString = "<p>Creates a map view of the "
       + "contents of a KML file</p>"
       + "<p>Displays some paths in a KML file hosted at Google.</p>\n"
@@ -75,9 +74,10 @@ public class KmlOverlayDemo extends MapsDemo {
   }
 
   private GeoXmlOverlay geoXml = null;
-  private boolean geoXmlShown;
+  private boolean geoXmlShown = false;
   private final MapWidget map;
   private final Button removeAddButton;
+  private final Button showHideButton;
 
   public KmlOverlayDemo() {
     Panel panel = new FlowPanel();
@@ -88,24 +88,14 @@ public class KmlOverlayDemo extends MapsDemo {
 
     // Toggle the visibility of the overlays by
     // adding and removing the overlay.
-    removeAddButton = new Button("Remove/Add KML");
+    removeAddButton = new Button("Add KML Overlay");
     // Toggle the visibility of the overlays
     // using the show() and hide() methods
-    final Button showHideButton = new Button("Show/Hide KML");
+    showHideButton = new Button("Hide");
     removeAddButton.setEnabled(false);
     removeAddButton.addClickListener(new ClickListener() {
       public void onClick(Widget sender) {
-        if (geoXml == null) {
-          return;
-        }
-        if (geoXmlShown) {
-          map.removeOverlay(geoXml);
-          showHideButton.setEnabled(false);
-        } else {
-          map.addOverlay(geoXml);
-          showHideButton.setEnabled(true);
-        }
-        geoXmlShown = !geoXmlShown;
+        toggleOverlay();
       }
     });
     panel.add(removeAddButton);
@@ -117,8 +107,10 @@ public class KmlOverlayDemo extends MapsDemo {
         }
         if (geoXml.isHidden()) {
           geoXml.setVisible(true);
+          showHideButton.setText("Hide");
         } else {
           geoXml.setVisible(false);
+          showHideButton.setText("Show");
         }
       }
     });
@@ -126,40 +118,54 @@ public class KmlOverlayDemo extends MapsDemo {
     panel.add(showHideButton);
     initWidget(panel);
 
-    GeoXmlOverlay.load("http://mapgadgets.googlepages.com/cta.kml",
-        new GeoXmlLoadCallback() {
+    GeoXmlOverlay.load(KML_DEMO_URI, new GeoXmlLoadCallback() {
 
-          @Override
-          public void onFailure(String url, Throwable e) {
-            StringBuffer message = new StringBuffer("KML File " + url
-                + " failed to load");
-            if (e != null) {
-              message.append(e.toString());
-            }
-            Window.alert(message.toString());
-          }
+      @Override
+      public void onFailure(String url, Throwable e) {
+        StringBuffer message = new StringBuffer("KML File " + url
+            + " failed to load");
+        if (e != null) {
+          message.append(e.toString());
+        }
+        Window.alert(message.toString());
+      }
 
-          @Override
-          public void onSuccess(String url, GeoXmlOverlay overlay) {
-            geoXml = overlay;
-            removeAddButton.setEnabled(true);
-            showHideButton.setEnabled(true);
-            map.addOverlay(geoXml);
-            GWT.log("KML File " + url + "loaded successfully", null);
-            GWT.log("Default Center=" + geoXml.getDefaultCenter(), null);
-            GWT.log("Default Span=" + geoXml.getDefaultSpan(), null);
-            GWT.log("Default Bounds=" + geoXml.getDefaultBounds(), null);
-            GWT.log("Supports hide=" + geoXml.supportsHide(), null);
-          }
-        });
+      @Override
+      public void onSuccess(String url, GeoXmlOverlay overlay) {
+        geoXml = overlay;
+        removeAddButton.setEnabled(true);
+        GWT.log("KML File " + url + " loaded successfully", null);
+        GWT.log("Default Center=" + geoXml.getDefaultCenter(), null);
+        GWT.log("Default Span=" + geoXml.getDefaultSpan(), null);
+        GWT.log("Default Bounds=" + geoXml.getDefaultBounds(), null);
+        GWT.log("Supports hide=" + geoXml.supportsHide(), null);
+        toggleOverlay();
+      }
+    });
   }
 
   @Override
   public void onShow() {
     map.clearOverlays();
-    if (geoXml != null) {
-      map.addOverlay(geoXml);
+    if (geoXmlShown == false) {
+      toggleOverlay();
     }
-    geoXmlShown = true;
+  }
+
+  private void toggleOverlay() {
+    if (geoXml == null) {
+      return;
+    }
+
+    if (geoXmlShown) {
+      removeAddButton.setText("Add KML Overlay");
+      map.removeOverlay(geoXml);
+      geoXmlShown = false;
+    } else {
+      removeAddButton.setText("Remove KML Overlay");
+      map.addOverlay(geoXml);
+      geoXmlShown = true;
+    }
+    showHideButton.setEnabled(geoXmlShown);
   }
 }
