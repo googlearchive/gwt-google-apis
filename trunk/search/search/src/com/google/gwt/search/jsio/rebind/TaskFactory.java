@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -48,7 +48,8 @@ public class TaskFactory {
   public static interface Policy {
     /**
      * Specifies the base interface type so that it will be ignored by
-     * {@link #extractMethods()}.
+     * {@link TaskFactory#extractMethods(TreeLogger, TypeOracle, JClassType, Policy)}
+     * .
      */
     Collection<JMethod> getOperableMethods(TypeOracle oracle, JClassType clazz);
 
@@ -278,7 +279,7 @@ public class TaskFactory {
 
   /**
    * Populate propertyAccessors from an array of JMethods.
-   * 
+   *
    * @return A Map of Strings to Tasks.
    */
   public static Map<String, Task> extractMethods(TreeLogger logger,
@@ -366,7 +367,7 @@ public class TaskFactory {
 
   /**
    * Utility method to extract the bean-style property name from a method.
-   * 
+   *
    * @return The property name if the method's name looks like a bean property,
    *         otherwise the method's name.
    */
@@ -389,7 +390,7 @@ public class TaskFactory {
 
   /**
    * Utility method to access a Map of String, Tasks.
-   * 
+   *
    * @param propertyAccessors The Map to operate on
    * @param property The name of the property
    * @return A Task in the given map; created if it does not exist

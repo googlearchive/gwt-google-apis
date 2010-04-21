@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -34,8 +34,8 @@ public class SearchTest extends GWTTestCase {
   /**
    * Test a LocalResult's fields.
    */
+  @SuppressWarnings("unused")
   public void testLocalSearch() {
-    SearchControlOptions options = new SearchControlOptions();
     LocalSearch local = new LocalSearch();
     local.setResultSetSize(ResultSetSize.SMALL);
     local.setCenterPoint("10 10th Street NW, Atlanta, GA USA");
@@ -76,8 +76,6 @@ public class SearchTest extends GWTTestCase {
    * Test a Handler attached to a Search object.
    */
   public void testSearchSearchHandler() {
-
-    SearchControlOptions options = new SearchControlOptions();
     WebSearch ws = new WebSearch();
     ws.setResultSetSize(ResultSetSize.SMALL);
     ws.addSearchCompleteHandler(new SearchCompleteHandler() {
@@ -168,8 +166,6 @@ public class SearchTest extends GWTTestCase {
    * Test the getResults() method.
    */
   public void testGetResults() {
-
-    SearchControlOptions options = new SearchControlOptions();
     WebSearch ws = new WebSearch();
     ws.setResultSetSize(ResultSetSize.SMALL);
     ws.addSearchCompleteHandler(new SearchCompleteHandler() {
@@ -177,7 +173,6 @@ public class SearchTest extends GWTTestCase {
 
       public void onSearchComplete(SearchCompleteEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
 
         resultCount++;
         if (resultCount > 1) {
