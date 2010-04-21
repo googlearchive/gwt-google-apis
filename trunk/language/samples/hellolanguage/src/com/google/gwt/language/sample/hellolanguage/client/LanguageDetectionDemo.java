@@ -15,12 +15,13 @@
  */
 package com.google.gwt.language.sample.hellolanguage.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.language.client.translation.BrandingOptions;
 import com.google.gwt.language.client.translation.LangDetCallback;
 import com.google.gwt.language.client.translation.LangDetResult;
 import com.google.gwt.language.client.translation.Translation;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -48,13 +49,12 @@ public class LanguageDetectionDemo extends Composite {
     wrapperPanel.add(demoPanel);
     wrapperPanel.setCellHorizontalAlignment(demoPanel,
         HasHorizontalAlignment.ALIGN_CENTER);
-    
-    Widget branding = Translation.createBrandingWidget(
-        BrandingOptions.newInstance(BrandingOptions.Type.VERTICAL));
+
+    Widget branding = Translation.createBrandingWidget(BrandingOptions.newInstance(BrandingOptions.Type.VERTICAL));
     wrapperPanel.add(branding);
     wrapperPanel.setCellHorizontalAlignment(branding,
         HasHorizontalAlignment.ALIGN_RIGHT);
-    
+
     initWidget(wrapperPanel);
   }
 
@@ -85,9 +85,8 @@ public class LanguageDetectionDemo extends Composite {
    */
   private Button createLanguageDetectionButton() {
     Button langDetButton = new Button("Detect");
-    langDetButton.addClickListener(new ClickListener() {
-
-      public void onClick(Widget sender) {
+    langDetButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         Translation.detect(inputTextArea.getText(), new LangDetCallback() {
           @Override
           protected void onCallback(LangDetResult result) {

@@ -15,13 +15,14 @@
  */
 package com.google.gwt.language.sample.hellolanguage.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.language.client.translation.BrandingOptions;
 import com.google.gwt.language.client.translation.Language;
 import com.google.gwt.language.client.translation.Translation;
 import com.google.gwt.language.client.translation.TranslationCallback;
 import com.google.gwt.language.client.translation.TranslationResult;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -54,8 +55,7 @@ public class TranslationDemo extends Composite {
     wrapperPanel.setCellHorizontalAlignment(demoPanel,
         HasHorizontalAlignment.ALIGN_CENTER);
 
-    Widget branding = Translation.createBrandingWidget(
-        BrandingOptions.newInstance(BrandingOptions.Type.VERTICAL));
+    Widget branding = Translation.createBrandingWidget(BrandingOptions.newInstance(BrandingOptions.Type.VERTICAL));
     wrapperPanel.add(branding);
     wrapperPanel.setCellHorizontalAlignment(branding,
         HasHorizontalAlignment.ALIGN_RIGHT);
@@ -70,30 +70,25 @@ public class TranslationDemo extends Composite {
    */
   private Button createTranslateButton() {
     Button translateButton = new Button("Translate");
-    translateButton.addClickListener(new ClickListener() {
-
-      public void onClick(Widget sender) {
-        Language src = Language.valueOf(sourceLanguages.getItemText(
-            sourceLanguages.getSelectedIndex()));
-        Language dest = Language.valueOf(destinationLanguages.getItemText(
-            destinationLanguages.getSelectedIndex()));
+    translateButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
+        Language src = Language.valueOf(sourceLanguages.getItemText(sourceLanguages.getSelectedIndex()));
+        Language dest = Language.valueOf(destinationLanguages.getItemText(destinationLanguages.getSelectedIndex()));
 
         // Translation API call to translate text
         Translation.translate(inputTextArea.getText(), src, dest,
             new TranslationCallback() {
-
-          @Override
-          protected void onCallback(TranslationResult result) {
-            if (result.getError() == null) {
-              outputDiv.setText(result.getTranslatedText());
-            } else {
-              outputDiv.setText(result.getError().getMessage());
-            }
-          }
-        });
+              @Override
+              protected void onCallback(TranslationResult result) {
+                if (result.getError() == null) {
+                  outputDiv.setText(result.getTranslatedText());
+                } else {
+                  outputDiv.setText(result.getError().getMessage());
+                }
+              }
+            });
       }
     });
-
     return translateButton;
   }
 
