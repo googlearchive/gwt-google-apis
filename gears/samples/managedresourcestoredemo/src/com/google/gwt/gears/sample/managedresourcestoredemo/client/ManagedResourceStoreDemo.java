@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,8 @@
 package com.google.gwt.gears.sample.managedresourcestoredemo.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.GearsException;
 import com.google.gwt.gears.client.localserver.LocalServer;
@@ -24,11 +26,9 @@ import com.google.gwt.gears.offline.client.Offline;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Sample application demonstrating how to use the {@link ManagedResourceStore}
@@ -66,15 +66,15 @@ public class ManagedResourceStoreDemo implements EntryPoint {
       // Gears probably isn't available (e.g. hosted mode)
     }
 
-    createManagedResourceStoreButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    createManagedResourceStoreButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         statusLabel.setText("Starting update");
         createManagedResourceStore();
       }
     });
 
-    removeManagedResourceStoreButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    removeManagedResourceStoreButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         try {
           LocalServer server = Factory.getInstance().createLocalServer();
           ManagedResourceStore store = Offline.getManagedResourceStore();

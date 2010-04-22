@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,23 +16,24 @@
 package com.google.gwt.gears.sample.databasedemo.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.database.Database;
 import com.google.gwt.gears.client.database.DatabaseException;
 import com.google.gwt.gears.client.database.ResultSet;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.KeyboardListener;
-import com.google.gwt.user.client.ui.KeyboardListenerAdapter;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 import java.util.Date;
 
@@ -42,7 +43,7 @@ import java.util.Date;
 public class DatabaseDemo implements EntryPoint {
   private static final int NUM_SAVED_ROWS = 3;
   private static final int NUM_DATA_TABLE_COLUMNS = 3;
-  
+
   private final Button addButton = new Button("Add");
   private final Button clearButton = new Button("Clear Database");
   private Database db;
@@ -62,7 +63,7 @@ public class DatabaseDemo implements EntryPoint {
     outerPanel.add(textAndButtonsPanel);
     outerPanel.add(new Label("Last 3 Entries:"));
     outerPanel.add(dataTable);
-    
+
     for (int i = 0; i <= NUM_SAVED_ROWS; ++i) {
       dataTable.insertRow(i);
       for (int j = 0; j < NUM_DATA_TABLE_COLUMNS; j++) {
@@ -79,28 +80,29 @@ public class DatabaseDemo implements EntryPoint {
       db.open("database-demo");
       db.execute("CREATE TABLE IF NOT EXISTS Phrases (Id INTEGER PRIMARY KEY AUTOINCREMENT, Phrase VARCHAR(255), Timestamp INTEGER)");
     } catch (DatabaseException e) {
-      RootPanel.get("demo").add(new HTML("Error opening or creating database: <font color=\"red\">" + e.toString() + "</font>"));
-      // Fatal error.  Do not build the interface.
+      RootPanel.get("demo").add(
+          new HTML("Error opening or creating database: <font color=\"red\">"
+              + e.toString() + "</font>"));
+      // Fatal error. Do not build the interface.
       return;
     }
 
-    input.addKeyboardListener(new KeyboardListenerAdapter() {
-      @Override
-      public void onKeyDown(Widget sender, char keyCode, int modifiers) {
-        if (keyCode == KeyboardListener.KEY_ENTER) {
+    input.addKeyDownHandler(new KeyDownHandler() {
+      public void onKeyDown(KeyDownEvent event) {
+        if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
           insertPhrase();
         }
       }
     });
 
-    addButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    addButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         insertPhrase();
       }
     });
 
-    clearButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    clearButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         clearPhrases();
         displayRecentPhrases();
       }
@@ -136,13 +138,13 @@ public class DatabaseDemo implements EntryPoint {
           dataTable.setText(i, 2, new Date(rs.getFieldAsLong(2)).toString());
         } else {
           db.execute("DELETE FROM Phrases WHERE Id = ?",
-              new String[] {rs.getFieldAsString(0)});
+              new String[]{rs.getFieldAsString(0)});
         }
       }
       // If a phrase has been removed, clear the label.
       for (; i <= NUM_SAVED_ROWS; i++) {
         for (int j = 0; j < NUM_DATA_TABLE_COLUMNS; j++) {
-          dataTable.clearCell(i, j);  
+          dataTable.clearCell(i, j);
         }
       }
       rs.close();
@@ -159,7 +161,7 @@ public class DatabaseDemo implements EntryPoint {
       String phrase = input.getText();
       if (phrase.length() > 0) {
         db.execute("INSERT INTO Phrases (Phrase, Timestamp) VALUES (?, ?)",
-            new String[] {phrase, Long.toString(System.currentTimeMillis())});
+            new String[]{phrase, Long.toString(System.currentTimeMillis())});
         displayRecentPhrases();
         input.setText("");
       }

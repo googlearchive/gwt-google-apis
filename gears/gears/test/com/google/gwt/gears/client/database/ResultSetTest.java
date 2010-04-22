@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -75,8 +75,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.database.client.ResultSet#close()}.
-   * 
+   * {@link com.google.gwt.gears.client.database.ResultSet#close()}.
+   *
    * @throws GearsException
    */
   public void testClose() throws GearsException {
@@ -96,8 +96,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.database.client.ResultSet#getFieldAsByte(int)}.
-   * 
+   * {@link com.google.gwt.gears.client.database.ResultSet#getFieldAsByte(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsByte() throws GearsException {
@@ -117,8 +117,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for {@link
-   * com.google.gwt.gears.database.client.ResultSet#getFieldAsChar(int)}.
-   * 
+   * com.google.gwt.gears.client.database.ResultSet#getFieldAsChar(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsChar() throws GearsException {
@@ -136,8 +136,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.database.client.ResultSet#getFieldAsDate(int)}.
-   * 
+   * {@link com.google.gwt.gears.client.database.ResultSet#getFieldAsDate(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsDate() throws GearsException {
@@ -155,8 +155,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for {@link
-   * com.google.gwt.gears.database.client.ResultSet#getFieldAsDouble(int)}.
-   * 
+   * com.google.gwt.gears.client.database.ResultSet#getFieldAsDouble(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsDouble() throws GearsException {
@@ -174,8 +174,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for {@link
-   * com.google.gwt.gears.database.client.ResultSet#getFieldAsFloat(int)}.
-   * 
+   * com.google.gwt.gears.client.database.ResultSet#getFieldAsFloat(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsFloat() throws GearsException {
@@ -193,8 +193,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for {@link
-   * com.google.gwt.gears.database.client.ResultSet#getFieldAsInt(int)}.
-   * 
+   * com.google.gwt.gears.client.database.ResultSet#getFieldAsInt(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsInt() throws GearsException {
@@ -212,8 +212,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for {@link
-   * com.google.gwt.gears.database.client.ResultSet#getFieldAsLong(int)}.
-   * 
+   * com.google.gwt.gears.client.database.ResultSet#getFieldAsLong(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsLong() throws GearsException {
@@ -231,8 +231,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for {@link
-   * com.google.gwt.gears.database.client.ResultSet#getFieldAsShort(int)}.
-   * 
+   * com.google.gwt.gears.client.database.ResultSet#getFieldAsShort(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsShort() throws GearsException {
@@ -250,8 +250,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for {@link
-   * com.google.gwt.gears.database.client.ResultSet#getFieldAsString(int)}.
-   * 
+   * com.google.gwt.gears.client.database.ResultSet#getFieldAsString(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldAsString() throws GearsException {
@@ -269,8 +269,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.database.client.ResultSet#getFieldCount()}.
-   * 
+   * {@link com.google.gwt.gears.client.database.ResultSet#getFieldCount()}.
+   *
    * @throws GearsException
    */
   public void testGetFieldCount() throws GearsException {
@@ -288,8 +288,8 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.database.client.ResultSet#getFieldName(int)}.
-   * 
+   * {@link com.google.gwt.gears.client.database.ResultSet#getFieldName(int)}.
+   *
    * @throws GearsException
    */
   public void testGetFieldName() throws GearsException {
@@ -310,9 +310,9 @@ public class ResultSetTest extends GWTTestCase {
 
   /**
    * Test method for
-   * {@link com.google.gwt.gears.database.client.ResultSet#isValidRow()} and
-   * {@link com.google.gwt.gears.database.client.ResultSet#next()}.
-   * 
+   * {@link com.google.gwt.gears.client.database.ResultSet#isValidRow()} and
+   * {@link com.google.gwt.gears.client.database.ResultSet#next()}.
+   *
    * @throws GearsException
    */
   public void testNextAndIsValidRow() throws GearsException {

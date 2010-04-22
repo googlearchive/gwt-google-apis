@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,9 +16,10 @@
 package com.google.gwt.gears.sample.workerpooldemo.client;
 
 import com.google.gwt.animation.client.Animation;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -35,7 +36,7 @@ public class AnimationToy extends Composite {
   /**
    * A custom animation that moves a small image around a circle in an
    * {@link AbsolutePanel}.
-   * 
+   *
    * (Ripped from the GWT Showcase demo)
    */
   public class CustomAnimation extends Animation {
@@ -84,7 +85,7 @@ public class AnimationToy extends Composite {
 
     /**
      * Update the position of the widget, adding a rotational offset.
-     * 
+     *
      * @param w the widget to move
      * @param radian the progress in radian
      * @param offset the offset in radian
@@ -139,8 +140,6 @@ public class AnimationToy extends Composite {
 
   /**
    * Constructor.
-   * 
-   * @param constants the constants
    */
   public AnimationToy() {
     initWidget(initialize());
@@ -187,7 +186,7 @@ public class AnimationToy extends Composite {
   /**
    * Create an options panel that allows users to select a widget and reposition
    * it.
-   * 
+   *
    * @return the new options panel
    */
   private Widget createOptionsBar() {
@@ -201,8 +200,8 @@ public class AnimationToy extends Composite {
 
     // Add start button
     startButton = new Button("Start");
-    startButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    startButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         animation.run(2000);
       }
     });
@@ -210,8 +209,8 @@ public class AnimationToy extends Composite {
 
     // Add cancel button
     cancelButton = new Button("Cancel");
-    cancelButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    cancelButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         animation.cancel();
       }
     });
