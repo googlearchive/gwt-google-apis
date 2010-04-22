@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,10 +17,11 @@ package com.google.gwt.visualization.sample.customvisualization.client;
 
 import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.SourcesTableEvents;
-import com.google.gwt.user.client.ui.TableListener;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
 import com.google.gwt.visualization.client.AbstractVisualization;
@@ -31,7 +32,7 @@ import com.google.gwt.visualization.client.events.SelectHandler.SelectEvent;
 
 /**
  * A Google Visualization written in GWT.
- * 
+ *
  */
 class CustomVisualization extends
     AbstractVisualization<CustomVisualization.CustomVisualizationDrawOptions>
@@ -55,20 +56,19 @@ class CustomVisualization extends
   }
 
   private final FlexTable grid = new FlexTable();
-  private Integer selectedColumn;
-  private Integer selectedRow;
+  Cell cell;
 
   public CustomVisualization() {
     initWidget(grid);
   }
 
   public void addSelectHandler(final SelectHandler handler) {
-    grid.addTableListener(new TableListener() {
-      public void onCellClicked(SourcesTableEvents sender, int row, int cell) {
-        selectedColumn = cell;
-        selectedRow = row - 1; // -1 because of the title row
+    grid.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
+        cell = grid.getCellForEvent(event);
         handler.onSelect(new SelectEvent());
-      }});
+      }
+    });
   }
 
   @Override
@@ -91,19 +91,22 @@ class CustomVisualization extends
       }
     }
     // handle selection
-    grid.addTableListener(new TableListener() {
-
-      public void onCellClicked(SourcesTableEvents sender, int row, int cell) {
-        selectedColumn = cell;
-        selectedRow = row - 1; // -1 because of the title row
+    grid.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
+        cell = grid.getCellForEvent(event);
         CustomVisualization.this.fireSelectionEvent();
       }
     });
   }
 
   public JsArray<Selection> getSelections() {
-    return ArrayHelper.toJsArray(Selection.createCellSelection(selectedRow,
-        selectedColumn));
+    if (cell == null) {
+      return ArrayHelper.toJsArray(Selection.createCellSelection(0, 0));
+    } else {
+      // -1 because of the title row
+      return ArrayHelper.toJsArray(Selection.createCellSelection(
+          cell.getRowIndex() - 1, cell.getCellIndex()));
+    }
   }
 
   public void setSelections(JsArray<Selection> sel) {

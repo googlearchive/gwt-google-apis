@@ -16,13 +16,14 @@
 package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
-import com.google.gwt.user.client.ui.TreeListener;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -66,19 +67,11 @@ public class LeftTabPanel extends Composite {
     decorator.add(right);
 
     main.add(decorator);
-    leftTree.addTreeListener(new TreeListener() {
-
-      // @Override
-      public void onTreeItemSelected(TreeItem item) {
-        String name = item.getText();
+    leftTree.addSelectionHandler(new SelectionHandler<TreeItem>() {
+      public void onSelection(SelectionEvent<TreeItem> event) {
+        String name = event.getSelectedItem().getText();
         setWidget(right, cogs.get(name));
       }
-
-      // @Override
-      public void onTreeItemStateChanged(TreeItem item) {
-        // nop
-      }
-
     });
   }
 
