@@ -11,7 +11,7 @@
       <tarfileset file="${gwt.build.lib}/gwt-${api.name}-noredist.jar" prefix="${project.distname}"/>
       <!-- distro-source files -->
       <tarfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
-        <include name="*"/>
+        <include name="**"/>
       </tarfileset>
       <!-- doc -->
       <tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
@@ -25,7 +25,6 @@
       <!-- samples -->
       <tarfileset dir="${gwt.root}" prefix="${project.distname}">
         <include name="samples/*/.project"/>
-        <include name="samples/*/*.war"/>
         <include name="samples/*/src/**"/>
         <include name="samples/*/war/**"/>
       </tarfileset>
@@ -39,7 +38,7 @@
       <zipfileset file="${gwt.build.lib}/gwt-${api.name}-noredist.jar" prefix="${project.distname}"/>
       <!-- distro-source files -->
       <zipfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
-        <include name="*"/>
+        <include name="**"/>
       </zipfileset>
       <!-- doc -->
       <zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
@@ -53,7 +52,6 @@
       <!-- samples -->
       <zipfileset dir="${gwt.root}" prefix="${project.distname}">
         <include name="samples/*/.project"/>
-        <include name="samples/*/*.war"/>
         <include name="samples/*/src/**"/>
         <include name="samples/*/war/**"/>
       </zipfileset>

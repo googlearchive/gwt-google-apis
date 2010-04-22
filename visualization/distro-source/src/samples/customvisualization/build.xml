@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project name="hellolanguage" default="build" basedir=".">
+<?xml version="1.0"?>
+<project name="customvisualization" default="build" basedir=".">
   <!-- Arguments to gwtc and devmode targets -->
   <property name="gwt.args" value=""/>
   <property environment="env"/>
@@ -18,9 +18,9 @@
       </not>
     </condition>
   </fail>
-  <property name="sample.api" value="language"/>
-  <property name="sample.root" value="hellolanguage"/>
-  <property name="sample.module" value="HelloLanguage"/>
+  <property name="sample.api" value="visualization"/>
+  <property name="sample.root" value="customvisualization"/>
+  <property name="sample.module" value="CustomVisualization"/>
   <path id="project.class.path">
     <pathelement location="war/WEB-INF/classes"/>
     <pathelement location="${gwt.sdk}/gwt-user.jar"/>

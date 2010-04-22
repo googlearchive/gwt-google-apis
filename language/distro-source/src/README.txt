@@ -4,6 +4,7 @@ These instructions require
   GWT 2.0 or higher          http://code.google.com/webtoolkit
   Google Plugin for Eclipse  http://code.google.com/eclipse
   Java JDK 1.5 or higher     http://java.sun.com/
+  Ant 1.7.1 or higher        http://ant.apache.org/
 
 ---------- Importing Projects ------------------------------------
 
@@ -11,6 +12,9 @@ To work with sample code in Eclipse, the precompiled library needs to be copied
 into the war directory. Please first execute command 'ant libs' in the
 directory of the sample project, or simply copy gwt-xxx.jar (xxx is the name of
 the api. e.g. maps, search) to samples/name-of-sample/war/WEB-INF/lib folder.
+If you decide to use ant, please be sure to pass to ant information about
+location of your GWT SDK. You can do it by either setting gwt.sdk property on
+the command line or by creating environment variable GWT_HOME.
 
 After copying the libraries, import the project in the samples/name-of-sample
 folder.
