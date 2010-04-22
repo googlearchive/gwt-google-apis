@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,6 +17,8 @@ package com.google.gwt.gears.sample.uploaddemo.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.blob.Blob;
 import com.google.gwt.gears.client.desktop.Desktop;
@@ -27,13 +29,11 @@ import com.google.gwt.gears.client.httprequest.ProgressEvent;
 import com.google.gwt.gears.client.httprequest.ProgressHandler;
 import com.google.gwt.gears.client.httprequest.RequestCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Roughly replicates a FORM upload using Gears.
@@ -71,8 +71,8 @@ public class UploadDemo implements EntryPoint {
 
     final HTML result = new HTML();
 
-    browse.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    browse.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         Desktop desktop = factory.createDesktop();
         desktop.openFiles(new OpenFilesHandler() {
 
@@ -86,8 +86,8 @@ public class UploadDemo implements EntryPoint {
       }
     });
 
-    upload.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    upload.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         HttpRequest request = factory.createHttpRequest();
         request.open("POST", GWT.getModuleBaseURL() + "upload");
         request.setRequestHeader("X-Filename", selected.getText());

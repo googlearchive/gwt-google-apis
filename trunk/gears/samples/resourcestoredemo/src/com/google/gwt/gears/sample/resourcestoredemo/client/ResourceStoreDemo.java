@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,17 +16,17 @@
 package com.google.gwt.gears.sample.resourcestoredemo.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.localserver.LocalServer;
 import com.google.gwt.gears.client.localserver.ResourceStore;
 import com.google.gwt.gears.client.localserver.ResourceStoreUrlCaptureHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Sample application which demonstrates how to use the {@link ResourceStore}
@@ -38,7 +38,7 @@ public class ResourceStoreDemo implements EntryPoint {
   private static final String RESOURCE_STORE_NAME = "helloworld-store";
 
   private static native String getLocationPathName() /*-{
-   return $doc.location.href;
+    return $doc.location.href;
   }-*/;
 
   private final HorizontalPanel buttonPanel = new HorizontalPanel();
@@ -56,26 +56,26 @@ public class ResourceStoreDemo implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    captureButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    captureButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         captureUrls();
       }
     });
 
-    createStoreButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    createStoreButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         createResourceStore();
       }
     });
 
-    removeStoreButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    removeStoreButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         removeStore();
       }
     });
 
-    uncaptureButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    uncaptureButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         removeURLs();
       }
     });
