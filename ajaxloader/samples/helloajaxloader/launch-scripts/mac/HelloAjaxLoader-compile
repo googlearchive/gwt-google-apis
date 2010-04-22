@@ -1,8 +1,0 @@
-#!/bin/sh
-APPDIR=../..;
-if [ "$GWT_HOME" == "" ]; then
-	echo "The environment variable GWT_HOME is not defined, it should point to a valid GWT installation."
-	exit
-fi
-
-java -Xmx256M -XstartOnFirstThread -cp "$APPDIR/src:$APPDIR/war/WEB-INF/classes:$GWT_HOME/gwt-user.jar:$GWT_HOME/gwt-dev-mac.jar:$GWT_HOME/gwt-dev.jar:../../../../gwt-ajaxloader.jar" com.google.gwt.dev.Compiler -war "$APPDIR/war" "$@" com.google.gwt.ajaxloader.sample.helloajaxloader.HelloAjaxLoader;
