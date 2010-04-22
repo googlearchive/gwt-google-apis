@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,8 @@
  */
 package com.google.gwt.gadgets.sample.basicgadgetads.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gadgets.client.AdsFeature;
 import com.google.gwt.gadgets.client.AdsUserPreferences;
 import com.google.gwt.gadgets.client.GadgetAds;
@@ -22,13 +24,11 @@ import com.google.gwt.gadgets.client.Gadget.InjectContent;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.ui.GadgetImage;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Basic Gadget Ads.
@@ -45,7 +45,7 @@ width = GadgetAds.SupportedGoogleAdSenseAdFormats.SKYSCRAPER_WIDTH)
 // Adding a dummy call to an Ad interaction JavaScript function in the Gadget
 // Spec because the Gadget Ads Validator doesn't inspect the external
 // JavaScript files.
-@InjectContent(files = { "dummyAdsInteraction.xml" })
+@InjectContent(files = {"dummyAdsInteraction.xml"})
 public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> {
 
   // The AdsFeature is required in Gadget Ads
@@ -69,14 +69,16 @@ public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> {
     // Using GadgetImage instead of Image will cache your images on the
     // Gadget's Container server. It is a Gadget Ads requirement that all
     // embedded assets must be cached.
-    vp.add(new GadgetImage("http://code.google.com/webtoolkit/images/gwt-logo.png"));
+    vp.add(new GadgetImage(
+        "http://code.google.com/webtoolkit/images/gwt-logo.png"));
 
     // Adding a waiting message to the RootPanel
     Label disclaimer = new Label("Use GWT for your Gadget Ads!");
     vp.add(disclaimer);
 
     // Another Logo
-    vp.add(new GadgetImage("http://code.google.com/webtoolkit/images/gwt-logo.png"));
+    vp.add(new GadgetImage(
+        "http://code.google.com/webtoolkit/images/gwt-logo.png"));
 
     // Adding the button to go to the GWT website
     Button button = new Button("Visit the GWT Website NOW!!");
@@ -87,14 +89,15 @@ public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> {
     // URL and report the clickthrough hit.
     // It is a GadgetAds requirement to use some AdsFeature.reportInteraction()
     // or AdsFeature.clickDestinationUrl()
-    button.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    button.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         adsFeature.clickDestinationUrl("http://code.google.com/webtoolkit/");
       }
     });
 
     // Another Logo
-    vp.add(new GadgetImage("http://code.google.com/webtoolkit/images/gwt-logo.png"));
+    vp.add(new GadgetImage(
+        "http://code.google.com/webtoolkit/images/gwt-logo.png"));
 
     // Some styling
     vp.setHeight("100%");
