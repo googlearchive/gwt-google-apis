@@ -64,6 +64,5 @@
   <target name="clean" description="Cleans this project's intermediate and output files">
     <delete dir="war/${sample.root}"/>
     <delete dir="war/WEB-INF/classes"/>
-    <delete file="${sample.root}.war"/>
   </target>
 </project>
