@@ -105,10 +105,7 @@
   <property name="gwt.user.jar" location="${gwt.home}/gwt-user.jar"/>
   <!--  Reference to jars produced by this build -->
   <property name="ant.gwt.jar" location="${gwt.home}/ant-gwt.jar"/>
-  <!-- 
-          Refactor this out to common code
-  -->
-  <property name="api.name" value="language"/>
+  <!-- Refactor this out to common code -->
   <property name="gwt.google.apis.jar" location="${gwt.build.lib}/gwt-${api.name}.jar"/>
   <!-- Sanity check -->
   <available file="${gwt.tools}" type="dir" property="gwt.tools.exists"/>

@@ -2,6 +2,7 @@
 <project name="samples-common">
   <property name="gwt.root" location="../.."/>
   <property name="project.tail" value="samples/${sample.root}"/>
+  <property file="${gwt.root}/common.properties"/>
   <import file="${gwt.root}/common.ant.xml"/>
   <property name="sample.package" value="${sample.root}"/>
   <property name="sample.main" value="${sample.module}"/>

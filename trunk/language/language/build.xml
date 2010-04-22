@@ -2,6 +2,7 @@
 <project name="language" default="build" basedir=".">
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="language"/>
+  <property file="${gwt.root}/common.properties"/>
   <import file="${gwt.root}/common.ant.xml"/>
   <!--                                -->
   <!-- Default hosted mode test cases -->

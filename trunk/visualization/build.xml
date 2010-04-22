@@ -2,6 +2,7 @@
 <project name="Visualization API Library for GWT" default="build" basedir=".">
   <property name="gwt.root" location="."/>
   <property name="project.tail" value=""/>
+  <property file="${gwt.root}/common.properties"/>
   <import file="${gwt.root}/common.ant.xml"/>
   <!-- "build" is the default when subprojects are directly targetted -->
   <property name="target" value="build"/>
