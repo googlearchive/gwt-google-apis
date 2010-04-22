@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -207,7 +207,7 @@ public class GadgetGenerator extends Generator {
 
   /**
    * Creates a single Content section.
-   * 
+   *
    * @param logger for logging errors
    * @param type either the Gadget or ContentView sub-class the section is for
    * @param d the document we use to create the Content XML element for
@@ -243,7 +243,7 @@ public class GadgetGenerator extends Generator {
   /**
    * Returns one or more (in case the content section is set for multiple
    * views).
-   * 
+   *
    * @{link Element}s for each content section that this gadget contains.
    */
   protected Element[] createContentSections(TreeLogger logger,
@@ -391,8 +391,6 @@ public class GadgetGenerator extends Generator {
       configurePreferenceElement(logger, d, userPref, preferenceType, m);
     }
 
-    String contentToInject = "";
-
     // Add required features to the manifest
     // <require feature="someFeature" />
     for (JClassType currentClass = type; currentClass != null; currentClass = currentClass.getSuperclass()) {
@@ -432,10 +430,10 @@ public class GadgetGenerator extends Generator {
 
   /**
    * Inject additional hand-written XML into the gadget's XML file. Get the
-   * 
+   *
    * @InjectModulePrefs annotation, where the file for injection is specified
    *                    and add it as a child of the modlePrefs element.
-   * 
+   *
    * @param logger for logging errors
    * @param type the Gadget subclass we are generating code for
    * @param modulePrefs Element in the gadget speck representing
@@ -486,7 +484,7 @@ public class GadgetGenerator extends Generator {
   /**
    * Inject additional hand-written JavaScript to be written into the gadget's
    * XML file in the &lt;Content&gt; section.
-   * 
+   *
    * @param logger for logging errors
    * @param type the Gadget subclass we are generating code for
    * @param contentToInject a StringBuilder to which all files annotated in the
@@ -510,7 +508,7 @@ public class GadgetGenerator extends Generator {
 
   /**
    * Reads the file for injection from the classpath and returns its contents.
-   * 
+   *
    * @param logger For logging.
    * @param gadgetClass The main gadget class that contained the annotation.
    *          This class should be in a '*.client' package.

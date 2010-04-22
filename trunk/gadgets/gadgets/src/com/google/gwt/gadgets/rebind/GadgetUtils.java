@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -133,7 +133,7 @@ class GadgetUtils {
    * {@link Content} annotation to see if multiple views have been defined. If
    * so, it will return an array which contains the view names and their
    * associated {@link ContentSection} types.
-   * 
+   *
    * @return An array of views and associated types or null, if no views have
    *         been specified.
    */
@@ -143,7 +143,6 @@ class GadgetUtils {
     List<GadgetViewType> result = new ArrayList<GadgetViewType>();
     Content content = gadgetSourceType.getAnnotation(Content.class);
     if (content != null) {
-      int i = 0;
       for (Class<? extends ContentSection<?>> contentSectionClass : content.contents()) {
         String viewTypeName = contentSectionClass.getName().replaceAll("\\$",
             ".");
