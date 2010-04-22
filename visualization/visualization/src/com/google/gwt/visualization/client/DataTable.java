@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,7 @@ import java.util.Date;
 
 /**
  * This class represents the DataTable.
- * 
+ *
  * @see <a
  *      href="http://code.google.com/apis/visualization/documentation/reference.html#DataTable">
  *      DataTable API Reference</a>
@@ -136,14 +136,14 @@ public class DataTable extends AbstractDataTable {
       int[] integers = new int[] {
           value.getHour(), value.getMinute(), value.getSecond(),
           value.getMillisecond()};
-      setCell(rowIndex, columnIndex, ArrayHelper.createJsArray(integers),
+      setCell(rowIndex, columnIndex, ArrayHelper.toJsArrayInteger(integers),
           formattedValue, properties);
     }
   }
 
   /**
    * Set the value of a cell to null.
-   * 
+   *
    * @param rowIndex The index of the row.
    * @param columnIndex The index of the column.
    * @param formattedValue The desired String representation of null, such as
@@ -209,7 +209,7 @@ public class DataTable extends AbstractDataTable {
 
   /**
    * Set the value of a cell to null.
-   * 
+   *
    * @param rowIndex The index of the row.
    * @param columnIndex The index of the column.
    */
@@ -261,7 +261,7 @@ public class DataTable extends AbstractDataTable {
       int minute, int second, int millis) /*-{
     var newArray = new $wnd.Array(hour, minute, second, millis);
     // Safari bug: see issue 219
-    newArray.constructor = $wnd.Array;    
+    newArray.constructor = $wnd.Array;
     this.setValue(rowIndex, columnIndex, newArray);
   }-*/;
 
