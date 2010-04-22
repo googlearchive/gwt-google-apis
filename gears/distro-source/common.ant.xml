@@ -2,6 +2,7 @@
 <project name="dist-common">
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="distro-source/${dist.platform}"/>
+  <property file="${gwt.root}/common.properties"/>
   <import file="${gwt.root}/common.ant.xml"/>
   <property name="project.distname" value="gwt-${api.name}-${gwt.version}"/>
   <property name="project.staging" location="${gwt.build.staging}/${project.distname}"/>
