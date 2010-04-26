@@ -3,7 +3,7 @@
   <property name="gwt.root" location="."/>
   <property name="project.tail" value=""/>
   <property file="${gwt.root}/common.properties"/>
-  <import file="${gwt.root}/common.ant.xml"/>
+  <import file="${common.script}"/>
   <!-- "build" is the default when subprojects are directly targetted -->
   <property name="target" value="build"/>
   <target name="build-tools" description="Builds tools required to build the Google API Library for GWT">
