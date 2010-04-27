@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -24,80 +23,76 @@ import com.google.gwt.user.client.ui.RootPanel;
  * Tests for the MapUIOptions class.
  * 
  */
-public class MapUIOptionsTest extends GWTTestCase {
-  LatLng atlanta;
-  MapWidget map;
-  
+public class MapUIOptionsTest extends MapsTestCase {
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
-  public void gwtSetUp() {
-    if (map != null) {
-      RootPanel.get().remove(map);
-      map = null;
-    }
-    atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    map = new MapWidget(atlanta, 8);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
-  }
-  
   public void testMapUIOptions() {
-    // A set of options for a small map.
-    MapUIOptions options = MapUIOptions.newInstance(Size.newInstance(100, 100));
-    options.setDoubleClick(true);
-    options.setHybridMapType(true);
-    options.setKeyboard(true);
-    options.setLargeMapControl3d(true);
-    options.setMapTypeControl(true);
-    options.setMenuMapTypeControl(true);
-    options.setNormalMapType(true);
-    options.setPhysicalMapType(true);
-    options.setSatelliteMapType(true);
-    options.setScaleControl(true);
-    options.setScrollwheel(true);
-    options.setSmallZoomControl3d(true);
-    
-    assertTrue("double click", options.getDoubleClick());
-    assertTrue("hybrid", options.getHybridMapType());
-    assertTrue("keyboard", options.getKeyboard());
-    assertTrue("largemapcontrol3d", options.getLargeMapControl3d());
-    assertTrue("maptype control", options.getMapTypeControl());
-    assertTrue("menu maptype control", options.getMenuMapTypeControl());
-    assertTrue("normal", options.getNormalMapType());
-    assertTrue("physical", options.getPhysicalMapType());
-    assertTrue("satellite", options.getSatelliteMapType());
-    assertTrue("scale control", options.getScaleControl());
-    assertTrue("scrollwheel", options.getScrollwheel());
-    assertTrue("smallzoomcontrol3d", options.getSmallZoomControl3d());
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        MapWidget map = new MapWidget(atlanta, 8);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    options.setDoubleClick(false);
-    options.setHybridMapType(false);
-    options.setKeyboard(false);
-    options.setLargeMapControl3d(false);
-    options.setMapTypeControl(false);
-    options.setMenuMapTypeControl(false);
-    options.setNormalMapType(false);
-    options.setPhysicalMapType(false);
-    options.setSatelliteMapType(false);
-    options.setScaleControl(false);
-    options.setScrollwheel(false);
-    options.setSmallZoomControl3d(false);    
+        // A set of options for a small map.
+        MapUIOptions options = MapUIOptions.newInstance(Size.newInstance(100,
+            100));
+        options.setDoubleClick(true);
+        options.setHybridMapType(true);
+        options.setKeyboard(true);
+        options.setLargeMapControl3d(true);
+        options.setMapTypeControl(true);
+        options.setMenuMapTypeControl(true);
+        options.setNormalMapType(true);
+        options.setPhysicalMapType(true);
+        options.setSatelliteMapType(true);
+        options.setScaleControl(true);
+        options.setScrollwheel(true);
+        options.setSmallZoomControl3d(true);
 
-    assertFalse("double click", options.getDoubleClick());
-    assertFalse("hybrid", options.getHybridMapType());
-    assertFalse("keyboard", options.getKeyboard());
-    assertFalse("largemapcontrol3d", options.getLargeMapControl3d());
-    assertFalse("maptype control", options.getMapTypeControl());
-    assertFalse("menu maptype control", options.getMenuMapTypeControl());
-    assertFalse("normal", options.getNormalMapType());
-    assertFalse("physical", options.getPhysicalMapType());
-    assertFalse("satellite", options.getSatelliteMapType());
-    assertFalse("scale control", options.getScaleControl());
-    assertFalse("scrollwheel", options.getScrollwheel());
-    assertFalse("smallzoomcontrol3d", options.getSmallZoomControl3d());
+        assertTrue("double click", options.getDoubleClick());
+        assertTrue("hybrid", options.getHybridMapType());
+        assertTrue("keyboard", options.getKeyboard());
+        assertTrue("largemapcontrol3d", options.getLargeMapControl3d());
+        assertTrue("maptype control", options.getMapTypeControl());
+        assertTrue("menu maptype control", options.getMenuMapTypeControl());
+        assertTrue("normal", options.getNormalMapType());
+        assertTrue("physical", options.getPhysicalMapType());
+        assertTrue("satellite", options.getSatelliteMapType());
+        assertTrue("scale control", options.getScaleControl());
+        assertTrue("scrollwheel", options.getScrollwheel());
+        assertTrue("smallzoomcontrol3d", options.getSmallZoomControl3d());
+
+        options.setDoubleClick(false);
+        options.setHybridMapType(false);
+        options.setKeyboard(false);
+        options.setLargeMapControl3d(false);
+        options.setMapTypeControl(false);
+        options.setMenuMapTypeControl(false);
+        options.setNormalMapType(false);
+        options.setPhysicalMapType(false);
+        options.setSatelliteMapType(false);
+        options.setScaleControl(false);
+        options.setScrollwheel(false);
+        options.setSmallZoomControl3d(false);
+
+        assertFalse("double click", options.getDoubleClick());
+        assertFalse("hybrid", options.getHybridMapType());
+        assertFalse("keyboard", options.getKeyboard());
+        assertFalse("largemapcontrol3d", options.getLargeMapControl3d());
+        assertFalse("maptype control", options.getMapTypeControl());
+        assertFalse("menu maptype control", options.getMenuMapTypeControl());
+        assertFalse("normal", options.getNormalMapType());
+        assertFalse("physical", options.getPhysicalMapType());
+        assertFalse("satellite", options.getSatelliteMapType());
+        assertFalse("scale control", options.getScaleControl());
+        assertFalse("scrollwheel", options.getScrollwheel());
+        assertFalse("smallzoomcontrol3d", options.getSmallZoomControl3d());
+      }
+    });
   }
-  
 }

@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.event.MapTypeNewCopyrightHandler;
 import com.google.gwt.maps.client.event.NewCopyrightHandler;
 import com.google.gwt.maps.client.event.TileLayerNewCopyrightHandler;
@@ -31,11 +30,7 @@ import com.google.gwt.maps.client.geom.Point;
  * {@link TileLayer}, and {@link MapType} classes.
  * 
  */
-public class CopyrightEventTest extends GWTTestCase {
-
-  // Length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
-
+public class CopyrightEventTest extends MapsTestCase {
   /**
    * shared routine to generate a bogus {@link TileLayer}.
    * 
@@ -77,51 +72,60 @@ public class CopyrightEventTest extends GWTTestCase {
   }
 
   public void testCopyrightCollectionEvent() {
-    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0,
-        -180.0), LatLng.newInstance(90.0, 180.0));
-    final CopyrightCollection collection = new CopyrightCollection();
-    final Copyright copyright = new Copyright(3452981, bounds, 3,
-        "2008 Google testCopyrightCollectionEvent");
-    collection.addNewCopyrightHandler(new NewCopyrightHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(
+            -90.0, -180.0), LatLng.newInstance(90.0, 180.0));
+        final CopyrightCollection collection = new CopyrightCollection();
+        final Copyright copyright = new Copyright(3452981, bounds, 3,
+            "2008 Google testCopyrightCollectionEvent");
+        collection.addNewCopyrightHandler(new NewCopyrightHandler() {
 
-      public void onNewCopyright(NewCopyrightEvent event) {
-        assertEquals(collection, event.getSender());
-        assertEquals(copyright, event.getCopyright());
-        finishTest();
+          public void onNewCopyright(NewCopyrightEvent event) {
+            assertEquals(collection, event.getSender());
+            assertEquals(copyright, event.getCopyright());
+            finishTest();
+          }
+
+        });
+        collection.addCopyright(copyright);
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    collection.addCopyright(copyright);
+    }, false);
   }
 
   public void testCopyrightCollectionTrigger() {
-    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0,
-        -180.0), LatLng.newInstance(90.0, 180.0));
-    final CopyrightCollection collection = new CopyrightCollection();
-    final Copyright copyright = new Copyright(3432241, bounds, 3,
-        "2008 Google testCopyrightCollectionTrigger");
-    collection.addNewCopyrightHandler(new NewCopyrightHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(
+            -90.0, -180.0), LatLng.newInstance(90.0, 180.0));
+        final CopyrightCollection collection = new CopyrightCollection();
+        final Copyright copyright = new Copyright(3432241, bounds, 3,
+            "2008 Google testCopyrightCollectionTrigger");
+        collection.addNewCopyrightHandler(new NewCopyrightHandler() {
 
-      public void onNewCopyright(NewCopyrightEvent event) {
-        assertEquals(collection, event.getSender());
-        assertEquals(copyright, event.getCopyright());
-        finishTest();
+          public void onNewCopyright(NewCopyrightEvent event) {
+            assertEquals(collection, event.getSender());
+            assertEquals(copyright, event.getCopyright());
+            finishTest();
+          }
+
+        });
+        collection.trigger(new NewCopyrightEvent(collection, copyright));
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    collection.trigger(new NewCopyrightEvent(collection, copyright));
+    }, false);
   }
 
-  // TODO(zundel): This test fires, but returns NULL for the copyright
-  // parameter.
-
+  // TODO(zundel): copyright always returns null.
+  //
   // public void testMapTypeEvent() {
+  // loadApi(new Runnable() {
+  // public void run() {
+  //
   // MapWidget map = new MapWidget();
-  // LatLngBounds bounds = new LatLngBounds(LatLng.newInstance(-90.0, -180.0),
-  // LatLng.newInstance(90.0, 180.0));
-  // final Copyright copyright = new Copyright(83432, bounds, 3, "2008 Google");
+  // LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(
+  // -90.0, -180.0), LatLng.newInstance(90.0, 180.0));
+  // final Copyright copyright = new Copyright(83432, bounds, 3,
+  // "2008 Google");
   // final Copyright copyright2 = new Copyright(17324, bounds, 2,
   // "2007-2008 Google");
   // CopyrightCollection collection = new CopyrightCollection();
@@ -136,38 +140,39 @@ public class CopyrightEventTest extends GWTTestCase {
   // public void onNewCopyright(MapTypeNewCopyrightEvent event) {
   // assertEquals(mapType, event.getSender());
   // assertEquals(copyright2, event.getCopyright());
-  // finishTest();
   // }
-  //
   // });
-  //  
   // map.addMapType(mapType);
-  //    
-  // delayTestFinish(ASYNC_DELAY_MSEC);
   // collection.addCopyright(copyright2);
+  // }
+  // }, false);
   // }
 
   public void testMapTypeTrigger() {
-    final MapType mapType = MapType.getNormalMap();
-    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0,
-        -180.0), LatLng.newInstance(90.0, 180.0));
-    final Copyright copyright = new Copyright(123432, bounds, 3,
-        "2008 Google testMapTypeTrigger");
+    loadApi(new Runnable() {
+      public void run() {
+        final MapType mapType = MapType.getNormalMap();
+        LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(
+            -90.0, -180.0), LatLng.newInstance(90.0, 180.0));
+        final Copyright copyright = new Copyright(123432, bounds, 3,
+            "2008 Google testMapTypeTrigger");
 
-    mapType.addMapTypeNewCopyrightHandler(new MapTypeNewCopyrightHandler() {
+        mapType.addMapTypeNewCopyrightHandler(new MapTypeNewCopyrightHandler() {
 
-      public void onNewCopyright(MapTypeNewCopyrightEvent event) {
-        assertEquals(mapType, event.getSender());
-        assertEquals(copyright, event.getCopyright());
-        // This handler has started to fire later in the unit tests, so remove
-        // it on success.
-        mapType.removeMapTypeNewCopyrightHandler(this);
-        finishTest();
+          public void onNewCopyright(MapTypeNewCopyrightEvent event) {
+            assertEquals(mapType, event.getSender());
+            assertEquals(copyright, event.getCopyright());
+            // This handler has started to fire later in the unit tests, so
+            // remove
+            // it on success.
+            mapType.removeMapTypeNewCopyrightHandler(this);
+            finishTest();
+          }
+
+        });
+        mapType.trigger(new MapTypeNewCopyrightEvent(mapType, copyright));
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    mapType.trigger(new MapTypeNewCopyrightEvent(mapType, copyright));
+    }, false);
   }
 
   // TODO(zundel): This test fires, but returns NULL for the copyright
@@ -206,23 +211,26 @@ public class CopyrightEventTest extends GWTTestCase {
   // }
 
   public void testTileLayerTrigger() {
-    LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(-90.0,
-        -180.0), LatLng.newInstance(90.0, 180.0));
-    final Copyright copyright = new Copyright(123432, bounds, 3,
-        "2008 Google testTileLayerTrigger");
-    CopyrightCollection collection = new CopyrightCollection();
-    collection.addCopyright(copyright);
-    final TileLayer tileLayer = getTileLayer(collection);
-    tileLayer.addTileLayerNewCopyrightHandler(new TileLayerNewCopyrightHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        LatLngBounds bounds = LatLngBounds.newInstance(LatLng.newInstance(
+            -90.0, -180.0), LatLng.newInstance(90.0, 180.0));
+        final Copyright copyright = new Copyright(123432, bounds, 3,
+            "2008 Google testTileLayerTrigger");
+        CopyrightCollection collection = new CopyrightCollection();
+        collection.addCopyright(copyright);
+        final TileLayer tileLayer = getTileLayer(collection);
+        tileLayer.addTileLayerNewCopyrightHandler(new TileLayerNewCopyrightHandler() {
 
-      public void onNewCopyright(TileLayerNewCopyrightEvent event) {
-        assertEquals(tileLayer, event.getSender());
-        assertEquals(copyright, event.getCopyright());
-        finishTest();
+          public void onNewCopyright(TileLayerNewCopyrightEvent event) {
+            assertEquals(tileLayer, event.getSender());
+            assertEquals(copyright, event.getCopyright());
+            finishTest();
+          }
+
+        });
+        tileLayer.trigger(new TileLayerNewCopyrightEvent(tileLayer, copyright));
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    tileLayer.trigger(new TileLayerNewCopyrightEvent(tileLayer, copyright));
+    }, false);
   }
 }

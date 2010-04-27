@@ -19,7 +19,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
-import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.TileLayerOverlay;
 import com.google.gwt.maps.jsio.client.Constructor;
 
@@ -30,14 +29,10 @@ public abstract class GeoXmlOverlayImpl extends OverlayImpl {
 
   @SuppressWarnings("hiding")
   public static final GeoXmlOverlayImpl impl = //
-    GWT.create(GeoXmlOverlayImpl.class);
+  GWT.create(GeoXmlOverlayImpl.class);
 
   @Constructor("$wnd.GGeoXml")
   public abstract JavaScriptObject constructGeoXmlOverlay(String url);
-
-  @Constructor("$wnd.GGeoXml")
-  public abstract JavaScriptObject constructGeoXmlOverlay(String url,
-      VoidCallback cb);
 
   public abstract LatLngBounds getDefaultBounds(JavaScriptObject jsoPeer);
 

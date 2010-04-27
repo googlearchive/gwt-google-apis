@@ -15,17 +15,16 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Tests the GeoXmlOverlay class.
  */
-public class GeoXmlOverlayTest extends GWTTestCase {
-  // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
+public class GeoXmlOverlayTest extends MapsTestCase {
+  private static String KML_DEMO_URI = "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml";
 
   @Override
   public String getModuleName() {
@@ -41,45 +40,50 @@ public class GeoXmlOverlayTest extends GWTTestCase {
   }
 
   public void testBadUrl() {
-    GeoXmlOverlay.load("http://badurl.example.com/cta.kml",
-        new GeoXmlLoadCallback() {
+    loadApi(new Runnable() {
+      public void run() {
+        GeoXmlOverlay.load("http://badurl.example.com/cta.kml",
+            new GeoXmlLoadCallback() {
+              @Override
+              public void onFailure(String url, Throwable e) {
+                // Test passed
+                finishTest();
+              }
+
+              @Override
+              public void onSuccess(String url, GeoXmlOverlay overlay) {
+                assertTrue("testBadUrl: Expected failure", false);
+              }
+            });
+      }
+    }, false);
+  }
+
+  public void testSimple() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget map = new MapWidget();
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
+        GeoXmlOverlay.load(KML_DEMO_URI, new GeoXmlLoadCallback() {
           @Override
           public void onFailure(String url, Throwable e) {
-            // Test passed
-            finishTest();
+            assertTrue("testSimple: Expected success", false);
           }
 
           @Override
           public void onSuccess(String url, GeoXmlOverlay overlay) {
-            assertTrue("Expected failure", false);
+            assertNotNull("url", url);
+            assertNotNull("overlay", overlay);
+            map.addOverlay(overlay);
+            assertNotNull("getDefaultBounds()", overlay.getDefaultBounds());
+            assertNotNull("getDefaultCenter()", overlay.getDefaultCenter());
+            assertNotNull("getDefaultSpan()", overlay.getDefaultSpan());
+            overlay.gotoDefaultViewport(map);
+            finishTest();
           }
         });
-  }
-
-  public void testSimple() {
-    final MapWidget map = new MapWidget();
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
-
-    GeoXmlOverlay.load("cta.kml", new GeoXmlLoadCallback() {
-      @Override
-      public void onFailure(String url, Throwable e) {
-        assertTrue("Expected success", false);
       }
-
-      @Override
-      public void onSuccess(String url, GeoXmlOverlay overlay) {
-        assertNotNull("url", url);
-        assertNotNull("overlay", overlay);
-        map.addOverlay(overlay);
-
-        assertNotNull("getDefaultBounds()", overlay.getDefaultBounds());
-        assertNotNull("getDefaultCenter()", overlay.getDefaultCenter());
-        assertNotNull("getDefaultSpan()", overlay.getDefaultSpan());
-        assertNotNull("getTileLayerOverlay()", overlay.getTileLayerOverlay());
-        overlay.gotoDefaultViewport(map);
-        finishTest();
-      }
-    });
+    }, false);
   }
 }

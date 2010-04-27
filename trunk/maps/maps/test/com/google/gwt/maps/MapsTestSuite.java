@@ -18,10 +18,11 @@ package com.google.gwt.maps;
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.maps.client.AdsManagerTest;
 import com.google.gwt.maps.client.CopyrightEventTest;
-import com.google.gwt.maps.client.GoogleBarOptionsTest;
 import com.google.gwt.maps.client.DraggableObjectTest;
+import com.google.gwt.maps.client.GoogleBarOptionsTest;
 import com.google.gwt.maps.client.InfoWindowEventsTest;
 import com.google.gwt.maps.client.MapOptionsTest;
+import com.google.gwt.maps.client.MapPaneTypeTest;
 import com.google.gwt.maps.client.MapUIOptionsTest;
 import com.google.gwt.maps.client.MapWidgetEventsTest;
 import com.google.gwt.maps.client.MapWidgetTest;
@@ -44,6 +45,7 @@ import com.google.gwt.maps.client.overlay.PolygonEventsTest;
 import com.google.gwt.maps.client.overlay.PolygonTest;
 import com.google.gwt.maps.client.overlay.PolylineEventsTest;
 import com.google.gwt.maps.client.overlay.PolylineTest;
+import com.google.gwt.maps.client.overlay.TrafficOverlayTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -61,8 +63,10 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(DraggableObjectTest.class);
     suite.addTestSuite(GoogleBarOptionsTest.class);
     suite.addTestSuite(InfoWindowEventsTest.class);
-    suite.addTestSuite(MapsNotInstalledTest.class);
     suite.addTestSuite(MapOptionsTest.class);
+    suite.addTestSuite(MapPaneTypeTest.class);
+    // Intentionally omitting MapsAjaxLoaderTest - run manually
+    suite.addTestSuite(MapsNotInstalledTest.class);
     suite.addTestSuite(MapUIOptionsTest.class);
     suite.addTestSuite(MapWidgetEventsTest.class);
     suite.addTestSuite(MapWidgetTest.class);
@@ -91,9 +95,10 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(MarkerTest.class);
     suite.addTestSuite(OverlayTest.class);
     suite.addTestSuite(PolygonEventsTest.class);
-    suite.addTestSuite(PolylineEventsTest.class);
     suite.addTestSuite(PolygonTest.class);
+    suite.addTestSuite(PolylineEventsTest.class);
     suite.addTestSuite(PolylineTest.class);
+    suite.addTestSuite(TrafficOverlayTest.class);
 
     return suite;
   }

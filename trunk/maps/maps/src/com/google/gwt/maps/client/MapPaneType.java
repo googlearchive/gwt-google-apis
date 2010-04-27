@@ -40,8 +40,8 @@ public enum MapPaneType {
   MAP_PANE("$wnd.G_MAP_MAP_PANE"),
   /**
    * This pane contains transparent elements that receive DOM mouse events for
-   * the markers. Is is above the {@link #FLOAT_SHADOW_PANE}, so that markers
-   * in the shadow of the info window can be clickable.
+   * the markers. Is is above the {@link #FLOAT_SHADOW_PANE}, so that markers in
+   * the shadow of the info window can be clickable.
    */
   MARKER_MOUSE_TARGET_PANE("$wnd.G_MAP_MARKER_MOUSE_TARGET_PANE"),
   /**
@@ -51,7 +51,12 @@ public enum MapPaneType {
   /**
    * This pane contains the shadows of the markers. It is below the markers.
    */
-  MARKER_SHADOW_PANE("$wnd.G_MAP_MARKER_SHADOW_PANE");
+  MARKER_SHADOW_PANE("$wnd.G_MAP_MARKER_SHADOW_PANE"),
+  /**
+   * This pane contains polylines, polygons, ground overlays and tile layer
+   * overlays.
+   */
+  OVERLAY_LAYER_PANE("$wnd.G_MAP_OVERLAY_LAYER_PANE");
 
   private final JSOpaque value;
 

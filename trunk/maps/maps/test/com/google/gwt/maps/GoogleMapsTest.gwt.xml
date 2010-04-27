@@ -17,11 +17,8 @@
   <inherits name="com.google.gwt.maps.GoogleMaps"/>
   <inherits name="com.google.gwt.i18n.I18N"/>
   <inherits name="com.google.gwt.json.JSON"/>
-  <!--
-    If you want to deploy this application outside of localhost,
-    you must obtain a Google Maps API key at:
-    http://www.google.com/apis/maps/signup.html
-    Replace the src attribute below with a URL that contains your key.
-  -->
-  <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAAG8LzhtshQCjpSshU_uJjmxRII77nF3p9tM7LktEY_493N8UDkRSxVj4RkjzrVFb94nbD4QDNPJIIEg"/>
+  <!-- To load the maps API use the MapsTestCase class.  To create a custom -->
+  <!-- Maps API key in a resource                                            -->
+  <!-- com.google.gwt.ajaxloader.AjaxKeyConstants.properties as described  -->
+  <!-- in AjaxKeyRepository.java                                            -->
 </module>
