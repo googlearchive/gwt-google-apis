@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,7 +28,7 @@ public class BookSearchTest extends GWTTestCase {
   public String getModuleName() {
     return "com.google.gwt.search.SearchTest";
   }
- 
+
   /**
    * Exercise some setters.
    */
@@ -51,7 +51,13 @@ public class BookSearchTest extends GWTTestCase {
     options.add(bookSearch);
     SearchControl searchControl = new SearchControl(options);
     searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
+      int resultCount = 0;
+
       public void onSearchComplete(SearchCompleteEvent event) {
+        resultCount++;
+        if (resultCount > 1) {
+          return;
+        }
         Search search = event.getSearch();
         Result result = event.getResult();
 
@@ -62,7 +68,7 @@ public class BookSearchTest extends GWTTestCase {
         assertEquals("Result class name", BookResult.class.getName(),
             result.getClass().getName());
         BookResult bookResult = (BookResult) result;
-        
+
         assertNotNull("getUnescapedUrl()", bookResult.getUnescapedUrl());
         // assertNotNull("getUrl", bookResult.getUrl()); // no such method in bindings
         assertNotNull("getAuthors()", bookResult.getAuthors());
