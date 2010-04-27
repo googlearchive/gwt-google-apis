@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -27,7 +26,7 @@ import java.util.List;
  * Tests for the MapOptions object.
  * 
  */
-public class MapOptionsTest extends GWTTestCase {
+public class MapOptionsTest extends MapsTestCase {
   private static native boolean nativeTestBackgroundColor(MapOptions options,
       String value) /*-{
     return options.backgroundColor == value;
@@ -57,43 +56,44 @@ public class MapOptionsTest extends GWTTestCase {
     return options.size.width == width && options.size.height == height;
   }-*/;
 
-  private LatLng atlanta;
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
-  @Override
-  public void gwtSetUp() {
-    atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-  }
-
   public void testMapOptions() {
-    MapOptions options = MapOptions.newInstance();
+    loadApi(new Runnable() {
+      public void run() {
 
-    // Test the setters
-    options.setBackgroundColor("#f00");
-    options.setDraggableCursor("text");
-    options.setDraggingCursor("crosshair");
-    GoogleBarOptions googleBarOptions = GoogleBarOptions.newInstance();
-    options.setGoogleBarOptions(googleBarOptions);
-    List<MapType> mapTypes = new ArrayList<MapType>();
-    mapTypes.add(MapType.getHybridMap());
-    options.setMapTypes(mapTypes);
-    options.setSize(Size.newInstance(100, 200));
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        MapOptions options = MapOptions.newInstance();
 
-    assertTrue("backgroundColor", nativeTestBackgroundColor(options, "#f00"));
-    assertTrue("draggagleCursor", nativeTestDraggableCursor(options, "text"));
-    assertTrue("draggingCursor",
-        nativeTestDraggingCursor(options, "crosshair"));
-    assertTrue("googleBarOptions", nativeTestGoogleBarOptions(options,
-        googleBarOptions));
-    assertTrue("mapTypes", nativeTestMapTypes(options));
-    assertTrue("size", nativeTestSize(options, 100, 200));
+        // Test the setters
+        options.setBackgroundColor("#f00");
+        options.setDraggableCursor("text");
+        options.setDraggingCursor("crosshair");
+        GoogleBarOptions googleBarOptions = GoogleBarOptions.newInstance();
+        options.setGoogleBarOptions(googleBarOptions);
+        List<MapType> mapTypes = new ArrayList<MapType>();
+        mapTypes.add(MapType.getHybridMap());
+        options.setMapTypes(mapTypes);
+        options.setSize(Size.newInstance(100, 200));
 
-    MapWidget map = new MapWidget(atlanta, 8, options);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+        assertTrue("backgroundColor",
+            nativeTestBackgroundColor(options, "#f00"));
+        assertTrue("draggagleCursor",
+            nativeTestDraggableCursor(options, "text"));
+        assertTrue("draggingCursor", nativeTestDraggingCursor(options,
+            "crosshair"));
+        assertTrue("googleBarOptions", nativeTestGoogleBarOptions(options,
+            googleBarOptions));
+        assertTrue("mapTypes", nativeTestMapTypes(options));
+        assertTrue("size", nativeTestSize(options, 100, 200));
+
+        MapWidget map = new MapWidget(atlanta, 8, options);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
+      }
+    });
   }
 }

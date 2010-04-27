@@ -303,7 +303,8 @@ public class HandlerCollection<E> {
    * arguments.
    * 
    * @param overlay An overlay to send as a parameter of the event.
-   * @param point A coordinate to send as a parameter of the event.
+   * @param point1 A coordinate to send as a parameter of the event.
+   * @param point2 A coordinate to send as a parameter of the event.
    */
   public void trigger(Overlay overlay, LatLng point1, LatLng point2) {
     EventImpl.impl.trigger(jsoPeer, mapEvent.value, overlay, point1, point2);

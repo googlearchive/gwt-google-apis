@@ -15,7 +15,6 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeEndHandler;
@@ -41,10 +40,8 @@ import com.google.gwt.user.client.ui.RootPanel;
  * (testXXXEvent()). Some of the events depend on user interaction and cannot be
  * triggered by the Maps API calls.
  */
-public class InfoWindowEventsTest extends GWTTestCase {
-  // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000; // 5 seconds
-  
+public class InfoWindowEventsTest extends MapsTestCase {
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
@@ -64,66 +61,72 @@ public class InfoWindowEventsTest extends GWTTestCase {
    */
 
   public void testInfoWindowCloseClickTrigger() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
-        -84.3880580), 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+            -84.3880580), 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final InfoWindow info = map.getInfoWindow();
-    info.addInfoWindowCloseClickHandler(new InfoWindowCloseClickHandler() {
+        final InfoWindow info = map.getInfoWindow();
+        info.addInfoWindowCloseClickHandler(new InfoWindowCloseClickHandler() {
 
-      public void onCloseClick(InfoWindowCloseClickEvent event) {
-        assertEquals(event.getSender(), info);
-        finishTest();
+          public void onCloseClick(InfoWindowCloseClickEvent event) {
+            assertEquals(event.getSender(), info);
+            finishTest();
+          }
+
+        });
+        info.open(map.getCenter(), new InfoWindowContent("Hello Maps!"));
+        InfoWindowCloseClickEvent e = new InfoWindowCloseClickEvent(info);
+        info.trigger(e);
       }
-
-    });
-    info.open(map.getCenter(), new InfoWindowContent("Hello Maps!"));
-    InfoWindowCloseClickEvent e = new InfoWindowCloseClickEvent(info);
-    this.delayTestFinish(ASYNC_DELAY_MSEC);
-    info.trigger(e);
+    }, false);
   }
 
   public void testInfoWindowMaximizeClickEvent() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
-        -84.3880580), 13);
-    map.setSize("300px", "300px");
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+            -84.3880580), 13);
+        map.setSize("300px", "300px");
 
-    RootPanel.get().add(map);
+        RootPanel.get().add(map);
 
-    final InfoWindow info = map.getInfoWindow();
-    InfoWindowContent content = new InfoWindowContent("HelloMaps!");
-    content.setMaxContent("Hello Again Maps!");
-    content.setMaxTitle("Hello Maps Maximized");
-    // Handler to maximize the info window as soon as it opens.
-    map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+        final InfoWindow info = map.getInfoWindow();
+        InfoWindowContent content = new InfoWindowContent("HelloMaps!");
+        content.setMaxContent("Hello Again Maps!");
+        content.setMaxTitle("Hello Maps Maximized");
+        // Handler to maximize the info window as soon as it opens.
+        map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        // This timer gives the info window a chance go get going.
-        // We saw spurious timeouts on this test case before adding the
-        // timer (the value of 300ms may need to be adjusted further.)
-        new Timer() {
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+            // This timer gives the info window a chance go get going.
+            // We saw spurious timeouts on this test case before adding the
+            // timer (the value of 300ms may need to be adjusted further.)
+            new Timer() {
 
-          @Override
-          public void run() {
-            info.maximize();
+              @Override
+              public void run() {
+                info.maximize();
+              }
+
+            }.schedule(3000);
           }
 
-        }.schedule(3000);
+        });
+        info.addInfoWindowMaximizeClickHandler(new InfoWindowMaximizeClickHandler() {
+
+          public void onMaximizeClick(InfoWindowMaximizeClickEvent event) {
+            assertEquals(info, event.getSender());
+            finishTest();
+          }
+
+        });
+
+        info.open(map.getCenter(), content);
       }
-
-    });
-    info.addInfoWindowMaximizeClickHandler(new InfoWindowMaximizeClickHandler() {
-
-      public void onMaximizeClick(InfoWindowMaximizeClickEvent event) {
-        assertEquals(info, event.getSender());
-        finishTest();
-      }
-
-    });
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    info.open(map.getCenter(), content);
+    }, false);
   }
 
   // TODO(zundel): JavaScript failure inside maps API. Filed bug w/ maps team.
@@ -182,7 +185,6 @@ public class InfoWindowEventsTest extends GWTTestCase {
       }
 
     });
-    delayTestFinish(ASYNC_DELAY_MSEC * 2);
     info.open(map.getCenter(), content);
   }
 
@@ -215,45 +217,49 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowRestoreClickEvent() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
-        -84.3880580), 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
 
-    final InfoWindow info = map.getInfoWindow();
-    InfoWindowContent content = new InfoWindowContent("HelloMaps!");
-    content.setMaxContent("Hello Again Maps!");
-    content.setMaxTitle("Hello Maps Maximized");
+        final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+            -84.3880580), 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    // Handler to maximize the info window as soon as it opens.
-    map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+        final InfoWindow info = map.getInfoWindow();
+        InfoWindowContent content = new InfoWindowContent("HelloMaps!");
+        content.setMaxContent("Hello Again Maps!");
+        content.setMaxTitle("Hello Maps Maximized");
 
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        new Timer() {
-          @Override
-          public void run() {
-            info.maximize();
+        // Handler to maximize the info window as soon as it opens.
+        map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
             new Timer() {
               @Override
               public void run() {
-                info.restore();
+                info.maximize();
+                new Timer() {
+                  @Override
+                  public void run() {
+                    info.restore();
+                  }
+                }.schedule(1000);
               }
-            }.schedule(1000);
+            }.schedule(300);
           }
-        }.schedule(300);
+
+        });
+        info.addInfoWindowRestoreClickHandler(new InfoWindowRestoreClickHandler() {
+
+          public void onRestoreClick(InfoWindowRestoreClickEvent event) {
+            assertEquals(event.getSender(), info);
+            finishTest();
+          }
+
+        });
+        info.open(map.getCenter(), content);
       }
-
-    });
-    info.addInfoWindowRestoreClickHandler(new InfoWindowRestoreClickHandler() {
-
-      public void onRestoreClick(InfoWindowRestoreClickEvent event) {
-        assertEquals(event.getSender(), info);
-        finishTest();
-      }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    info.open(map.getCenter(), content);
+    }, false);
   }
 
   // TODO(zundel): Javascript failure inside maps API. Filed bug w/ maps team.
@@ -285,68 +291,75 @@ public class InfoWindowEventsTest extends GWTTestCase {
   // }
 
   public void testInfoWindowRestoreEndEvent() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
-        -84.3880580), 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+            -84.3880580), 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final InfoWindow info = map.getInfoWindow();
-    InfoWindowContent content = new InfoWindowContent("HelloMaps!");
-    content.setMaxContent("Hello Again Maps!");
-    content.setMaxTitle("Hello Maps Maximized");
-    // Handler to maximize the info window as soon as it opens.
-    map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+        final InfoWindow info = map.getInfoWindow();
+        InfoWindowContent content = new InfoWindowContent("HelloMaps!");
+        content.setMaxContent("Hello Again Maps!");
+        content.setMaxTitle("Hello Maps Maximized");
+        // Handler to maximize the info window as soon as it opens.
+        map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
 
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        new Timer() {
-          @Override
-          public void run() {
-            info.maximize();
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
             new Timer() {
               @Override
               public void run() {
-                info.restore();
+                info.maximize();
+                new Timer() {
+                  @Override
+                  public void run() {
+                    info.restore();
+                  }
+                }.schedule(1000);
               }
-            }.schedule(1000);
+            }.schedule(300);
           }
-        }.schedule(300);
+
+        });
+        info.addInfoWindowRestoreEndHandler(new InfoWindowRestoreEndHandler() {
+
+          public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
+            assertEquals(event.getSender(), info);
+            finishTest();
+          }
+
+        });
+        info.open(map.getCenter(), content);
       }
-
-    });
-    info.addInfoWindowRestoreEndHandler(new InfoWindowRestoreEndHandler() {
-
-      public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
-        assertEquals(event.getSender(), info);
-        finishTest();
-      }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    info.open(map.getCenter(), content);
+    }, false);
   }
 
   public void testInfoWindowRestoreEndTrigger() {
-    final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
-        -84.3880580), 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
 
-    final InfoWindow info = map.getInfoWindow();
-    InfoWindowContent content = new InfoWindowContent("HelloMaps!");
-    content.setMaxContent("Hello Again Maps!");
-    content.setMaxTitle("Hello Maps Maximized");
-    info.open(map.getCenter(), content);
-    info.addInfoWindowRestoreEndHandler(new InfoWindowRestoreEndHandler() {
+        final MapWidget map = new MapWidget(LatLng.newInstance(33.7814790,
+            -84.3880580), 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-      public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
-        assertEquals(event.getSender(), info);
-        finishTest();
+        final InfoWindow info = map.getInfoWindow();
+        InfoWindowContent content = new InfoWindowContent("HelloMaps!");
+        content.setMaxContent("Hello Again Maps!");
+        content.setMaxTitle("Hello Maps Maximized");
+        info.open(map.getCenter(), content);
+        info.addInfoWindowRestoreEndHandler(new InfoWindowRestoreEndHandler() {
+
+          public void onRestoreEnd(InfoWindowRestoreEndEvent event) {
+            assertEquals(event.getSender(), info);
+            finishTest();
+          }
+
+        });
+        info.maximize();
+        InfoWindowRestoreEndEvent e = new InfoWindowRestoreEndEvent(info);
+        info.trigger(e);
       }
-
-    });
-    info.maximize();
-    InfoWindowRestoreEndEvent e = new InfoWindowRestoreEndEvent(info);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    info.trigger(e);
+    }, false);
   }
 }

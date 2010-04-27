@@ -38,7 +38,8 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
 
   /**
    * Provides a callback interface to
-   * {@link GeocoderImpl#getLocations(JavaScriptObject, String, com.google.gwt.maps.client.impl.GeocoderImpl.LocationsCallback)}.
+   * {@link GeocoderImpl#getLocations(JavaScriptObject, String, com.google.gwt.maps.client.impl.GeocoderImpl.LocationsCallback)}
+   * .
    */
   public abstract static class LocationsCallback extends JSFunction {
     public abstract void callback(Response response);
@@ -46,7 +47,7 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
 
   /**
    * Provides an interface to the object passed to
-   * {@link LocationsCallback#callback(Response)}.
+   * {@link LocationsCallback#callback(Response)}
    */
   @BeanProperties
   public static interface Response extends JSWrapper<Response> {
@@ -74,10 +75,10 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
   JavaScriptObject construct();
 
   @Constructor("$wnd.GClientGeocoder")
-  JavaScriptObject construct(GeocodeCache cache);
-  
-  @Constructor("$wnd.GClientGeocoder")
   JavaScriptObject construct(CustomGeocodeCache cache);
+
+  @Constructor("$wnd.GClientGeocoder")
+  JavaScriptObject construct(GeocodeCache cache);
 
   String getBaseCountryCode(JavaScriptObject jsoPeer);
 
@@ -86,10 +87,10 @@ public interface GeocoderImpl extends JSFlyweightWrapper {
   void getLatLng(JavaScriptObject jsoPeer, String address,
       LatLngCallback callback);
 
-  void getLocations(JavaScriptObject jsoPeer, String address,
+  void getLocations(JavaScriptObject jsoPeer, LatLng point,
       LocationsCallback callback);
 
-  void getLocations(JavaScriptObject jsoPeer, LatLng point,
+  void getLocations(JavaScriptObject jsoPeer, String address,
       LocationsCallback callback);
 
   LatLngBounds getViewport(JavaScriptObject jsoPeer);

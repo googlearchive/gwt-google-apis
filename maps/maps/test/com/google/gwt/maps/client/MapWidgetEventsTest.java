@@ -15,7 +15,7 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.maps.client.event.MapAddMapTypeHandler;
 import com.google.gwt.maps.client.event.MapAddOverlayHandler;
 import com.google.gwt.maps.client.event.MapClearOverlaysHandler;
@@ -62,7 +62,6 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -78,219 +77,212 @@ import com.google.gwt.user.client.ui.RootPanel;
  * (testXXXEvent()). Some of the events depend on user interaction and cannot be
  * triggered by the Maps API calls.
  */
-public class MapWidgetEventsTest extends GWTTestCase {
-  // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
+public class MapWidgetEventsTest extends MapsTestCase {
 
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
-  /**
-   * Runs before every test method.
-   */
-  @Override
-  public void gwtSetUp() {
-    TestUtilities.cleanDom();
-  }
-
   public void testInfoWindowBeforeCloseEvent() {
-    final MapWidget m = new MapWidget();
-    m.addInfoWindowBeforeCloseHandler(new MapInfoWindowBeforeCloseHandler() {
+    loadApi(new Runnable() {
+      public void run() {
 
-      public void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        finishTest();
+        final MapWidget m = new MapWidget();
+        m.addInfoWindowBeforeCloseHandler(new MapInfoWindowBeforeCloseHandler() {
+          public void onInfoWindowBeforeClose(
+              MapInfoWindowBeforeCloseEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        final InfoWindow info = m.getInfoWindow();
+        // If we do not wait for the infowindowopen event before calling close,
+        // the close event will never fire.
+        m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+            info.close();
+          }
+        });
+        info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
       }
-
-    });
-
-    RootPanel.get().add(m);
-
-    final InfoWindow info = m.getInfoWindow();
-
-    // If we do not wait for the infowindowopen event before calling close,
-    // the close event will never fire.
-    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        info.close();
-      }
-    });
-    info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
+    }, false);
   }
 
   public void testInfoWindowBeforeCloseTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addInfoWindowBeforeCloseHandler(new MapInfoWindowBeforeCloseHandler() {
-
-      public void onInfoWindowBeforeClose(MapInfoWindowBeforeCloseEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addInfoWindowBeforeCloseHandler(new MapInfoWindowBeforeCloseHandler() {
+          public void onInfoWindowBeforeClose(
+              MapInfoWindowBeforeCloseEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        MapInfoWindowBeforeCloseEvent e = new MapInfoWindowBeforeCloseEvent(m);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapInfoWindowBeforeCloseEvent e = new MapInfoWindowBeforeCloseEvent(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   public void testInfoWindowCloseEvent() {
-    final MapWidget m = new MapWidget();
-    RootPanel.get().add(m);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        RootPanel.get().add(m);
 
-    m.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
-
-      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        finishTest();
+        m.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
+          public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            finishTest();
+          }
+        });
+        final InfoWindow info = m.getInfoWindow();
+        // If we do not wait for the infowindowopen event before calling close,
+        // the close event will never fire.
+        m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+            info.close();
+          }
+        });
+        info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
       }
-
-    });
-
-    final InfoWindow info = m.getInfoWindow();
-
-    // If we do not wait for the infowindowopen event before calling close,
-    // the close event will never fire.
-    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        info.close();
-      }
-    });
-
-    info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
-    delayTestFinish(ASYNC_DELAY_MSEC);
+    }, false);
   }
 
   public void testInfoWindowCloseTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
-
-      public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addInfoWindowCloseHandler(new MapInfoWindowCloseHandler() {
+          public void onInfoWindowClose(MapInfoWindowCloseEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        MapInfoWindowCloseEvent e = new MapInfoWindowCloseEvent(m);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapInfoWindowCloseEvent e = new MapInfoWindowCloseEvent(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   public void testInfoWindowOpenEvent() {
-    final MapWidget m = new MapWidget();
-    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
-
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        InfoWindow info = m.getInfoWindow();
+        info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
       }
-
-    });
-
-    RootPanel.get().add(m);
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    InfoWindow info = m.getInfoWindow();
-    info.open(m.getCenter(), new InfoWindowContent("Hello Maps!"));
+    }, false);
   }
 
   public void testInfoWindowOpenTrigger() {
-    final MapWidget m = new MapWidget();
-    RootPanel.get().add(m);
-    m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
-
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        RootPanel.get().add(m);
+        m.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            finishTest();
+          }
+        });
+        MapInfoWindowOpenEvent e = new MapInfoWindowOpenEvent(m);
+        m.trigger(e);
       }
-
-    });
-
-    MapInfoWindowOpenEvent e = new MapInfoWindowOpenEvent(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   public void testMapAddMapTypeEvent() {
-    MapWidget m = new MapWidget();
-    m.addMapAddMapTypeHandler(new MapAddMapTypeHandler() {
-
-      public void onAddMapType(MapAddMapTypeEvent event) {
-        assertTrue("maptype doesn't match", event.getType().equals(
-            MapType.getMarsElevationMap()));
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget m = new MapWidget();
+        m.addMapAddMapTypeHandler(new MapAddMapTypeHandler() {
+          public void onAddMapType(MapAddMapTypeEvent event) {
+            assertTrue("maptype doesn't match", event.getType().equals(
+                MapType.getMarsElevationMap()));
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        m.addMapType(MapType.getMarsElevationMap());
       }
-
-    });
-    RootPanel.get().add(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.addMapType(MapType.getMarsElevationMap());
+    }, false);
   }
 
   public void testMapAddMapTypeTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addMapAddMapTypeHandler(new MapAddMapTypeHandler() {
-
-      public void onAddMapType(MapAddMapTypeEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        assertTrue("maptype doesn't match", event.getType().equals(
-            MapType.getMarsElevationMap()));
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addMapAddMapTypeHandler(new MapAddMapTypeHandler() {
+          public void onAddMapType(MapAddMapTypeEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            assertTrue("maptype doesn't match", event.getType().equals(
+                MapType.getMarsElevationMap()));
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        MapAddMapTypeEvent e = new MapAddMapTypeEvent(m,
+            MapType.getMarsElevationMap());
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapAddMapTypeEvent e = new MapAddMapTypeEvent(m,
-        MapType.getMarsElevationMap());
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   public void testMapAddOverlayEvent() {
-    final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
-    m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
-
-      public void onAddOverlay(MapAddOverlayEvent event) {
-        assertEquals(event.getSender(), m);
-        assertEquals(event.getOverlay(), marker);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
+        m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
+          public void onAddOverlay(MapAddOverlayEvent event) {
+            assertEquals(event.getSender(), m);
+            assertEquals(event.getOverlay(), marker);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        m.addOverlay(marker);
       }
-
-    });
-    RootPanel.get().add(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.addOverlay(marker);
+    }, false);
   }
 
   public void testMapAddOverlayTrigger() {
-    final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
-    m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
-
-      public void onAddOverlay(MapAddOverlayEvent event) {
-        assertEquals(event.getSender(), m);
-        assertEquals(event.getOverlay(), marker);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
+        m.addMapAddOverlayHandler(new MapAddOverlayHandler() {
+          public void onAddOverlay(MapAddOverlayEvent event) {
+            assertEquals(event.getSender(), m);
+            assertEquals(event.getOverlay(), marker);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        MapAddOverlayEvent e = new MapAddOverlayEvent(m, marker);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapAddOverlayEvent e = new MapAddOverlayEvent(m, marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -298,38 +290,40 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * using one of the trigger() methods.
    */
   public void testMapClearOverlayEvent() {
-    final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
-    m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
-
-      public void onClearOverlays(MapClearOverlaysEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
+        m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
+          public void onClearOverlays(MapClearOverlaysEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        m.addOverlay(marker);
+        m.clearOverlays();
       }
-
-    });
-    RootPanel.get().add(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.addOverlay(marker);
-    m.clearOverlays();
+    }, false);
   }
 
   public void testMapClearOverlayTrigger() {
-    final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
-    m.addOverlay(marker);
-    m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
-
-      public void onClearOverlays(MapClearOverlaysEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
+        m.addOverlay(marker);
+        m.addMapClearOverlaysHandler(new MapClearOverlaysHandler() {
+          public void onClearOverlays(MapClearOverlaysEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        MapClearOverlaysEvent e = new MapClearOverlaysEvent(m);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapClearOverlaysEvent e = new MapClearOverlaysEvent(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -337,37 +331,37 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * a "click" event by API calls apart from GEvent.trigger().
    */
   public void testMapClickTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addMapClickHandler(new MapClickHandler() {
-
-      @SuppressWarnings("deprecation")
-      public void onClick(MapClickEvent event) {
-        Overlay o = event.getOverlay();
-        LatLng p = event.getLatLng();
-        assertEquals(event.getSender(), m);
-        assertNotNull("maker is null", o);
-        Marker marker = (Marker) o;
-        assertTrue(marker.getLatLng().getLatitude() == 12.34);
-        assertTrue(marker.getLatLng().getLongitude() == -22.2);
-        assertNotNull("point is null", p);
-        assertTrue(p.getLatitude() == 10.1);
-        assertTrue(p.getLongitude() == 12.2);
-        LatLng overlaylatlng = event.getOverlayLatLng();
-        assertNotNull("overlaylatlng is null", overlaylatlng);
-        assertEquals("Latitude didn't match for overlaylatlng", 1.0,
-            overlaylatlng.getLatitude(), .001);
-        assertEquals("Longitude didn't match for overlaylatlng", 2.0,
-            overlaylatlng.getLongitude(), .001);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addMapClickHandler(new MapClickHandler() {
+          public void onClick(MapClickEvent event) {
+            Overlay o = event.getOverlay();
+            LatLng p = event.getLatLng();
+            assertEquals(event.getSender(), m);
+            assertNotNull("maker is null", o);
+            Marker marker = (Marker) o;
+            assertTrue(marker.getLatLng().getLatitude() == 12.34);
+            assertTrue(marker.getLatLng().getLongitude() == -22.2);
+            assertNotNull("point is null", p);
+            assertTrue(p.getLatitude() == 10.1);
+            assertTrue(p.getLongitude() == 12.2);
+            LatLng overlaylatlng = event.getOverlayLatLng();
+            assertNotNull("overlaylatlng is null", overlaylatlng);
+            assertEquals("Latitude didn't match for overlaylatlng", 1.0,
+                overlaylatlng.getLatitude(), .001);
+            assertEquals("Longitude didn't match for overlaylatlng", 2.0,
+                overlaylatlng.getLongitude(), .001);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
+        MapClickEvent e = new MapClickEvent(m, marker, LatLng.newInstance(10.1,
+            12.2), LatLng.newInstance(1.0, 2.0));
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
-    MapClickEvent e = new MapClickEvent(m, marker, LatLng.newInstance(10.1,
-        12.2), LatLng.newInstance(1.0, 2.0));
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -375,24 +369,28 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * create a "dblclick" event by API calls apart from GEvent.trigger().
    */
   public void testMapDoubleClickTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addMapDoubleClickHandler(new MapDoubleClickHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
 
-      public void onDoubleClick(MapDoubleClickEvent event) {
-        assertEquals(event.getSender(), m);
-        LatLng p = event.getLatLng();
-        assertNotNull("point is null", p);
-        assertTrue(p.getLatitude() == 10.1);
-        assertTrue(p.getLongitude() == 12.2);
-        finishTest();
+        m.addMapDoubleClickHandler(new MapDoubleClickHandler() {
+
+          public void onDoubleClick(MapDoubleClickEvent event) {
+            assertEquals(event.getSender(), m);
+            LatLng p = event.getLatLng();
+            assertNotNull("point is null", p);
+            assertTrue(p.getLatitude() == 10.1);
+            assertTrue(p.getLongitude() == 12.2);
+            finishTest();
+          }
+
+        });
+        RootPanel.get().add(m);
+        MapDoubleClickEvent e = new MapDoubleClickEvent(m, LatLng.newInstance(
+            10.1, 12.2));
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapDoubleClickEvent e = new MapDoubleClickEvent(m, LatLng.newInstance(10.1,
-        12.2));
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -400,20 +398,23 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * a "dragend" event by API calls apart from GEvent.trigger().
    */
   public void testMapDragEndTrigger() {
-    final MapWidget m = new MapWidget();
-    RootPanel.get().add(m);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        RootPanel.get().add(m);
 
-    m.addMapDragEndHandler(new MapDragEndHandler() {
+        m.addMapDragEndHandler(new MapDragEndHandler() {
 
-      public void onDragEnd(MapDragEndEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+          public void onDragEnd(MapDragEndEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+        });
+
+        MapDragEndEvent e = new MapDragEndEvent(m);
+        m.trigger(e);
       }
-    });
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    MapDragEndEvent e = new MapDragEndEvent(m);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -421,20 +422,22 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * "drag" event by API calls apart from GEvent.trigger().
    */
   public void testMapDragTrigger() {
-    final MapWidget m = new MapWidget();
-    RootPanel.get().add(m);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        RootPanel.get().add(m);
 
-    m.addMapDragHandler(new MapDragHandler() {
+        m.addMapDragHandler(new MapDragHandler() {
 
-      public void onDrag(MapDragEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+          public void onDrag(MapDragEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+        });
+        MapDragEvent e = new MapDragEvent(m);
+        m.trigger(e);
       }
-    });
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    MapDragEvent e = new MapDragEvent(m);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -442,20 +445,25 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * create a "dragstart" event by API calls apart from GEvent.trigger().
    */
   public void testMapDragStartTrigger() {
-    final MapWidget m = new MapWidget();
-    RootPanel.get().add(m);
+    loadApi(new Runnable() {
+      public void run() {
 
-    m.addMapDragStartHandler(new MapDragStartHandler() {
+        final MapWidget m = new MapWidget();
 
-      public void onDragStart(MapDragStartEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+        RootPanel.get().add(m);
+
+        m.addMapDragStartHandler(new MapDragStartHandler() {
+
+          public void onDragStart(MapDragStartEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+        });
+
+        MapDragStartEvent e = new MapDragStartEvent(m);
+        m.trigger(e);
       }
-    });
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    MapDragStartEvent e = new MapDragStartEvent(m);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -463,22 +471,26 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * create a "mousemove" event by API calls apart from GEvent.trigger().
    */
   public void testMapMouseMoveTrigger() {
-    final MapWidget m = new MapWidget();
-    final LatLng latlng = LatLng.newInstance(1.0, 2.0);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
 
-    m.addMapMouseMoveHandler(new MapMouseMoveHandler() {
+        final LatLng latlng = LatLng.newInstance(1.0, 2.0);
 
-      public void onMouseMove(MapMouseMoveEvent event) {
-        assertEquals(event.getSender(), m);
-        assertEquals(latlng, event.getLatLng());
-        finishTest();
+        m.addMapMouseMoveHandler(new MapMouseMoveHandler() {
+
+          public void onMouseMove(MapMouseMoveEvent event) {
+            assertEquals(event.getSender(), m);
+            assertEquals(latlng, event.getLatLng());
+            finishTest();
+          }
+
+        });
+        RootPanel.get().add(m);
+        MapMouseMoveEvent e = new MapMouseMoveEvent(m, latlng);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapMouseMoveEvent e = new MapMouseMoveEvent(m, latlng);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -486,24 +498,27 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * create a "mouseout" event by API calls apart from GEvent.trigger().
    */
   public void testMapMouseOutTrigger() {
-    final MapWidget m = new MapWidget();
-    final LatLng latlng = LatLng.newInstance(1.0, 2.0);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final LatLng latlng = LatLng.newInstance(1.0, 2.0);
 
-    m.addMapMouseOutHandler(new MapMouseOutHandler() {
+        m.addMapMouseOutHandler(new MapMouseOutHandler() {
 
-      public void onMouseOut(MapMouseOutEvent event) {
+          public void onMouseOut(MapMouseOutEvent event) {
 
-        assertEquals(event.getSender(), m);
-        assertEquals(latlng, event.getLatLng());
+            assertEquals(event.getSender(), m);
+            assertEquals(latlng, event.getLatLng());
 
-        finishTest();
+            finishTest();
+          }
+
+        });
+        RootPanel.get().add(m);
+        MapMouseOutEvent e = new MapMouseOutEvent(m, latlng);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapMouseOutEvent e = new MapMouseOutEvent(m, latlng);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -511,166 +526,172 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * create a "mouseover" event by API calls apart from GEvent.trigger().
    */
   public void testMapMouseOverTrigger() {
-    final MapWidget m = new MapWidget();
-    final LatLng latlng = LatLng.newInstance(1.0, 2.0);
-
-    m.addMapMouseOverHandler(new MapMouseOverHandler() {
-
-      public void onMouseOver(MapMouseOverEvent event) {
-
-        assertEquals(event.getSender(), m);
-        assertEquals(latlng, event.getLatLng());
-
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final LatLng latlng = LatLng.newInstance(1.0, 2.0);
+        m.addMapMouseOverHandler(new MapMouseOverHandler() {
+          public void onMouseOver(MapMouseOverEvent event) {
+            assertEquals(event.getSender(), m);
+            assertEquals(latlng, event.getLatLng());
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        MapMouseOverEvent e = new MapMouseOverEvent(m, latlng);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapMouseOverEvent e = new MapMouseOverEvent(m, latlng);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   public void testMapMoveEndEvent() {
-    final LatLng end = LatLng.newInstance(37.4569, -122.1569);
-    final MapWidget m = new MapWidget();
+    loadApi(new Runnable() {
+      public void run() {
+        final LatLng end = LatLng.newInstance(37.4569, -122.1569);
+        final MapWidget m = new MapWidget();
 
-    /*
-     * The Move event gets called on setCenter(). There is a setCenter() call
-     * implicit in the MapWidget() constructor. Add to the map now so that first
-     * move event won't get in the way of the test.
-     */
-    RootPanel.get().add(m);
+        /*
+         * The Move event gets called on setCenter(). There is a setCenter()
+         * call implicit in the MapWidget() constructor. Add to the map now so
+         * that first move event won't get in the way of the test.
+         */
+        RootPanel.get().add(m);
 
-    m.addMapMoveEndHandler(new MapMoveEndHandler() {
+        m.addMapMoveEndHandler(new MapMoveEndHandler() {
 
-      public void onMoveEnd(MapMoveEndEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+          public void onMoveEnd(MapMoveEndEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+
+        });
+        m.setCenter(end);
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.setCenter(end);
+    }, false);
   }
 
   /**
    * Live test of the MapMoveStart event. On Safari2/Mac this test times out.
    */
   public void testMapMoveStartEvent() {
+    loadApi(new Runnable() {
+      public void run() {
 
-    final LatLng start = LatLng.newInstance(37.4419, -122.1419);
-    final LatLng end = LatLng.newInstance(37.45, -122.15);
+        final LatLng start = LatLng.newInstance(37.4419, -122.1419);
+        final LatLng end = LatLng.newInstance(37.45, -122.15);
 
-    final MapWidget m = new MapWidget(start, 13);
+        final MapWidget m = new MapWidget(start, 13);
 
-    // Apparently, setting the size is important for the move event.
-    m.setSize("300px", "300px");
+        // Apparently, setting the size is important for the move event.
+        m.setSize("300px", "300px");
 
-    /*
-     * The MoveStart event gets called on setCenter(). There is a setCenter()
-     * call implicit in the MapWidget() constructor. Add to the map now so that
-     * first move event won't get in the way of the test.
-     */
-    RootPanel.get().add(m);
-
-    m.addMapMoveStartHandler(new MapMoveStartHandler() {
-
-      public void onMoveStart(MapMoveStartEvent event) {
-        finishTest();
+        /*
+         * The MoveStart event gets called on setCenter(). There is a
+         * setCenter() call implicit in the MapWidget() constructor. Add to the
+         * map now so that first move event won't get in the way of the test.
+         */
+        RootPanel.get().add(m);
+        m.addMapMoveStartHandler(new MapMoveStartHandler() {
+          public void onMoveStart(MapMoveStartEvent event) {
+            finishTest();
+          }
+        });
+        m.panTo(end);
       }
-
-    });
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.panTo(end);
+    }, false);
   }
 
   public void testMapMoveEndTrigger() {
-    final MapWidget m = new MapWidget();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
 
-    /*
-     * The MoveEnd event gets called on setCenter(). There is a setCenter() call
-     * implicit in the MapWidget constructor. Add to the map now so that first
-     * move event won't get in the way of the test.
-     */
-    RootPanel.get().add(m);
+        /*
+         * The MoveEnd event gets called on setCenter(). There is a setCenter()
+         * call implicit in the MapWidget constructor. Add to the map now so
+         * that first move event won't get in the way of the test.
+         */
+        RootPanel.get().add(m);
 
-    m.addMapMoveEndHandler(new MapMoveEndHandler() {
+        m.addMapMoveEndHandler(new MapMoveEndHandler() {
 
-      public void onMoveEnd(MapMoveEndEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+          public void onMoveEnd(MapMoveEndEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+
+        });
+        MapMoveEndEvent e = new MapMoveEndEvent(m);
+        m.trigger(e);
       }
-
-    });
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-
-    MapMoveEndEvent e = new MapMoveEndEvent(m);
-    m.trigger(e);
+    }, false);
   }
 
   public void testMapMoveEvent() {
-    final LatLng start = LatLng.newInstance(37.4419, -122.1419);
-    final LatLng end = LatLng.newInstance(37.4569, -122.1569);
+    loadApi(new Runnable() {
+      public void run() {
+        final LatLng start = LatLng.newInstance(37.4419, -122.1419);
+        final LatLng end = LatLng.newInstance(37.4569, -122.1569);
 
-    final MapWidget m = new MapWidget(start, 13);
+        final MapWidget m = new MapWidget(start, 13);
 
-    /*
-     * The Move event gets called on setCenter(). There is a setCenter() call
-     * implicit in the MapWidget() constructor. Add to the map now so that first
-     * move event won't get in the way of the test.
-     */
-    RootPanel.get().add(m);
+        /*
+         * The Move event gets called on setCenter(). There is a setCenter()
+         * call implicit in the MapWidget() constructor. Add to the map now so
+         * that first move event won't get in the way of the test.
+         */
+        RootPanel.get().add(m);
 
-    m.addMapMoveHandler(new MapMoveHandler() {
+        m.addMapMoveHandler(new MapMoveHandler() {
 
-      public void onMove(MapMoveEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+          public void onMove(MapMoveEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+
+        });
+
+        m.setCenter(end);
       }
-
-    });
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.setCenter(end);
+    }, false);
   }
 
   public void testMapMoveStartTrigger() {
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    final MapWidget m = new MapWidget();
-    m.addMapMoveStartHandler(new MapMoveStartHandler() {
+    loadApi(new Runnable() {
+      public void run() {
 
-      public void onMoveStart(MapMoveStartEvent event) {
-        MapWidget sender = event.getSender();
-        assertEquals(sender, m);
-        finishTest();
+        final MapWidget m = new MapWidget();
+        m.addMapMoveStartHandler(new MapMoveStartHandler() {
+
+          public void onMoveStart(MapMoveStartEvent event) {
+            MapWidget sender = event.getSender();
+            assertEquals(sender, m);
+            finishTest();
+          }
+
+        });
+        RootPanel.get().add(m);
+        MapMoveStartEvent e = new MapMoveStartEvent(m);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapMoveStartEvent e = new MapMoveStartEvent(m);
-    m.trigger(e);
+    }, false);
   }
 
   public void testMapMoveTrigger() {
-    final MapWidget m = new MapWidget();
-
-    RootPanel.get().add(m);
-
-    m.addMapMoveHandler(new MapMoveHandler() {
-
-      public void onMove(MapMoveEvent event) {
-        assertEquals(event.getSender(), m);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        RootPanel.get().add(m);
+        m.addMapMoveHandler(new MapMoveHandler() {
+          public void onMove(MapMoveEvent event) {
+            assertEquals(event.getSender(), m);
+            finishTest();
+          }
+        });
+        MapMoveEvent e = new MapMoveEvent(m);
+        m.trigger(e);
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-
-    MapMoveEvent e = new MapMoveEvent(m);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -678,39 +699,42 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * using one of the trigger() methods.
    */
   public void testMapRemoveMapTypeEvent() {
-
-    final MapWidget m = new MapWidget();
-    m.addMapRemoveMapTypeHandler(new MapRemoveMapTypeHandler() {
-
-      public void onRemoveMapType(MapRemoveMapTypeEvent event) {
-        assertEquals(event.getSender(), m);
-        assertTrue("maptype doesn't match", event.getType().equals(
-            MapType.getNormalMap()));
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addMapRemoveMapTypeHandler(new MapRemoveMapTypeHandler() {
+          public void onRemoveMapType(MapRemoveMapTypeEvent event) {
+            assertEquals(event.getSender(), m);
+            assertTrue("maptype doesn't match", event.getType().equals(
+                MapType.getNormalMap()));
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        m.removeMapType(MapType.getNormalMap());
       }
-
-    });
-    RootPanel.get().add(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.removeMapType(MapType.getNormalMap());
+    }, false);
   }
 
   public void testMapRemoveMapTypeTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addMapRemoveMapTypeHandler(new MapRemoveMapTypeHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addMapRemoveMapTypeHandler(new MapRemoveMapTypeHandler() {
 
-      public void onRemoveMapType(MapRemoveMapTypeEvent event) {
-        assertEquals(event.getSender(), m);
-        assertTrue("maptype doesn't match", event.getType().equals(
-            MapType.getNormalMap()));
-        finishTest();
+          public void onRemoveMapType(MapRemoveMapTypeEvent event) {
+            assertEquals(event.getSender(), m);
+            assertTrue("maptype doesn't match", event.getType().equals(
+                MapType.getNormalMap()));
+            finishTest();
+          }
+
+        });
+        MapRemoveMapTypeEvent e = new MapRemoveMapTypeEvent(m,
+            MapType.getNormalMap());
+        m.trigger(e);
       }
-
-    });
-    MapRemoveMapTypeEvent e = new MapRemoveMapTypeEvent(m,
-        MapType.getNormalMap());
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -718,40 +742,45 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * using one of the trigger() methods.
    */
   public void testMapRemoveOverlayEvent() {
-    final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
-    m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
+        m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
 
-      public void onRemoveOverlay(MapRemoveOverlayEvent event) {
-        assertEquals(event.getSender(), m);
-        assertEquals(event.getOverlay(), marker);
-        finishTest();
+          public void onRemoveOverlay(MapRemoveOverlayEvent event) {
+            assertEquals(event.getSender(), m);
+            assertEquals(event.getOverlay(), marker);
+            finishTest();
+          }
+
+        });
+        RootPanel.get().add(m);
+        m.addOverlay(marker);
+        m.removeOverlay(marker);
       }
-
-    });
-    RootPanel.get().add(m);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.addOverlay(marker);
-    m.removeOverlay(marker);
+    }, false);
   }
 
   public void testMapRemoveOverlayTrigger() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
+        m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
 
-    final MapWidget m = new MapWidget();
-    final Marker marker = new Marker(LatLng.newInstance(0.0, 0.0));
-    m.addMapRemoveOverlayHandler(new MapRemoveOverlayHandler() {
+          public void onRemoveOverlay(MapRemoveOverlayEvent event) {
+            assertEquals(event.getSender(), m);
+            assertEquals(event.getOverlay(), marker);
+            finishTest();
+          }
 
-      public void onRemoveOverlay(MapRemoveOverlayEvent event) {
-        assertEquals(event.getSender(), m);
-        assertEquals(event.getOverlay(), marker);
-        finishTest();
+        });
+        RootPanel.get().add(m);
+        MapRemoveOverlayEvent e = new MapRemoveOverlayEvent(m, marker);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapRemoveOverlayEvent e = new MapRemoveOverlayEvent(m, marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   /**
@@ -759,75 +788,76 @@ public class MapWidgetEventsTest extends GWTTestCase {
    * create a "singlerightclick" event by API calls apart from GEvent.trigger().
    */
   public void testMapRightClickTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addMapRightClickHandler(new MapRightClickHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addMapRightClickHandler(new MapRightClickHandler() {
 
-      @SuppressWarnings("deprecation")
-      public void onRightClick(MapRightClickEvent event) {
-        assertEquals(event.getSender(), m);
-        Point p = event.getPoint();
-        Marker marker = (Marker) event.getOverlay();
-        Element elem = event.getElement();
-        assertNotNull("point is null", p);
-        assertTrue(p.getX() == 101);
-        assertTrue(p.getY() == 222);
-        assertNotNull("element is null", elem);
-        assertNotNull("maker is null", marker);
-        assertTrue(marker.getPoint().getLatitude() == 12.34);
-        assertTrue(marker.getPoint().getLongitude() == -22.2);
-        finishTest();
+          @SuppressWarnings("deprecation")
+          public void onRightClick(MapRightClickEvent event) {
+            assertEquals(event.getSender(), m);
+            Point p = event.getPoint();
+            Marker marker = (Marker) event.getOverlay();
+            Element elem = event.getElement();
+            assertNotNull("point is null", p);
+            assertTrue(p.getX() == 101);
+            assertTrue(p.getY() == 222);
+            assertNotNull("element is null", elem);
+            assertNotNull("maker is null", marker);
+            assertTrue(marker.getPoint().getLatitude() == 12.34);
+            assertTrue(marker.getPoint().getLongitude() == -22.2);
+            finishTest();
+          }
+
+        });
+        RootPanel.get().add(m);
+        Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
+        MapRightClickEvent e = new MapRightClickEvent(m, Point.newInstance(101,
+            222), m.getElement(), marker);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    Marker marker = new Marker(LatLng.newInstance(12.34, -22.2));
-    MapRightClickEvent e = new MapRightClickEvent(m,
-        Point.newInstance(101, 222), m.getElement(), marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 
   public void testMapZoomEndEvent() {
-
-    final MapWidget m = new MapWidget(LatLng.newInstance(37.4419, -122.1419),
-        13);
-
-    m.addMapZoomEndHandler(new MapZoomEndHandler() {
-
-      public void onZoomEnd(MapZoomEndEvent event) {
-        int oldZoom = event.getOldZoomLevel();
-        int newZoom = event.getNewZoomLevel();
-        assertEquals(event.getSender(), m);
-        assertEquals(oldZoom, 13);
-        assertEquals(newZoom, 14);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget(
+            LatLng.newInstance(37.4419, -122.1419), 13);
+        m.addMapZoomEndHandler(new MapZoomEndHandler() {
+          public void onZoomEnd(MapZoomEndEvent event) {
+            int oldZoom = event.getOldZoomLevel();
+            int newZoom = event.getNewZoomLevel();
+            assertEquals(event.getSender(), m);
+            assertEquals(oldZoom, 13);
+            assertEquals(newZoom, 14);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        m.setZoomLevel(14);
       }
-
-    });
-
-    RootPanel.get().add(m);
-
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.setZoomLevel(14);
+    }, false);
   }
 
   public void testMapZoomEndTrigger() {
-    final MapWidget m = new MapWidget();
-    m.addMapZoomEndHandler(new MapZoomEndHandler() {
-
-      public void onZoomEnd(MapZoomEndEvent event) {
-        int oldZoom = event.getOldZoomLevel();
-        int newZoom = event.getNewZoomLevel();
-        assertEquals(event.getSender(), m);
-        assertEquals(oldZoom, 13);
-        assertEquals(newZoom, 14);
-        finishTest();
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        m.addMapZoomEndHandler(new MapZoomEndHandler() {
+          public void onZoomEnd(MapZoomEndEvent event) {
+            int oldZoom = event.getOldZoomLevel();
+            int newZoom = event.getNewZoomLevel();
+            assertEquals(event.getSender(), m);
+            assertEquals(oldZoom, 13);
+            assertEquals(newZoom, 14);
+            finishTest();
+          }
+        });
+        RootPanel.get().add(m);
+        MapZoomEndEvent e = new MapZoomEndEvent(m, 13, 14);
+        m.trigger(e);
       }
-
-    });
-    RootPanel.get().add(m);
-    MapZoomEndEvent e = new MapZoomEndEvent(m, 13, 14);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    m.trigger(e);
+    }, false);
   }
 }

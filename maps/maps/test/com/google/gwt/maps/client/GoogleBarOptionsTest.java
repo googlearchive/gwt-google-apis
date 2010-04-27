@@ -17,14 +17,13 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.GoogleBarAdsOptions.AdSafeOption;
 
 /**
  * Tests for the MapOptions object.
  * 
  */
-public class GoogleBarOptionsTest extends GWTTestCase {
+public class GoogleBarOptionsTest extends MapsTestCase {
 
   private static native boolean nativeTestAdsAdSafe(
       GoogleBarAdsOptions adsOptions, String value) /*-{
@@ -56,8 +55,8 @@ public class GoogleBarOptionsTest extends GWTTestCase {
     return options.linkTarget == target;
   }-*/;
 
-  private static native boolean nativeTestListingType(
-      GoogleBarOptions options, String type) /*-{
+  private static native boolean nativeTestListingType(GoogleBarOptions options,
+      String type) /*-{
     eval("var typeObj = $wnd." + type + ";");
     return options.listingType == typeObj;
   }-*/;
@@ -99,73 +98,79 @@ public class GoogleBarOptionsTest extends GWTTestCase {
   }
 
   public void testGoogleBarAdsOptions() {
-    GoogleBarAdsOptions adsOptions = GoogleBarAdsOptions.newInstance();
-    adsOptions.setAdSafe(AdSafeOption.ADSAFE_HIGH);
-    assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "high"));
-    adsOptions.setAdSafe(AdSafeOption.ADSAFE_MEDIUM);
-    assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "medium"));
-    adsOptions.setAdSafe(AdSafeOption.ADSAFE_LOW);
-    assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "low"));
-    adsOptions.setAdSafe(AdSafeOption.ADSAFE_OFF);
-    assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "off"));
-    adsOptions.setChannel("channel-1");
-    assertTrue("ads channel", nativeTestAdsChannel(adsOptions, "channel-1"));
-    adsOptions.setClient("testClient");
-    assertTrue("ads channel", nativeTestAdsClient(adsOptions, "testClient"));
-    adsOptions.setLanguage("de-DE");
-    assertTrue("ads language", nativeTestAdsLanguage(adsOptions, "de-DE"));
+    loadApi(new Runnable() {
+      public void run() {
+        GoogleBarAdsOptions adsOptions = GoogleBarAdsOptions.newInstance();
+        adsOptions.setAdSafe(AdSafeOption.ADSAFE_HIGH);
+        assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "high"));
+        adsOptions.setAdSafe(AdSafeOption.ADSAFE_MEDIUM);
+        assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "medium"));
+        adsOptions.setAdSafe(AdSafeOption.ADSAFE_LOW);
+        assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "low"));
+        adsOptions.setAdSafe(AdSafeOption.ADSAFE_OFF);
+        assertTrue("ads adsafe", nativeTestAdsAdSafe(adsOptions, "off"));
+        adsOptions.setChannel("channel-1");
+        assertTrue("ads channel", nativeTestAdsChannel(adsOptions, "channel-1"));
+        adsOptions.setClient("testClient");
+        assertTrue("ads channel", nativeTestAdsClient(adsOptions, "testClient"));
+        adsOptions.setLanguage("de-DE");
+        assertTrue("ads language", nativeTestAdsLanguage(adsOptions, "de-DE"));
+      }
+    });
   }
 
   public void testGoogleBarOptions() {
-    GoogleBarOptions options = GoogleBarOptions.newInstance();
-    GoogleBarAdsOptions adsOptions = GoogleBarAdsOptions.newInstance();
-    options.setAdsOptions(adsOptions);
-    assertTrue("adsOptions", nativeTestAdsOptions(options, adsOptions));
+    loadApi(new Runnable() {
+      public void run() {
 
-    options.setLinkTargetBlank();
-    assertTrue("linkTarget blank", nativeTestLinkTarget(options,
-        "_blank"));
-    options.setLinkTargetParent();
-    assertTrue("linkTarget parent", nativeTestLinkTarget(options,
-        "_parent"));
-    options.setLinkTargetSelf();
-    assertTrue("linkTarget self", nativeTestLinkTarget(options,
-        "_self"));
-    options.setLinkTargetTop();
-    assertTrue("linkTarget top", nativeTestLinkTarget(options,
-        "_top"));
+        GoogleBarOptions options = GoogleBarOptions.newInstance();
+        GoogleBarAdsOptions adsOptions = GoogleBarAdsOptions.newInstance();
+        options.setAdsOptions(adsOptions);
+        assertTrue("adsOptions", nativeTestAdsOptions(options, adsOptions));
 
-    options.setListingTypeBlended();
-    assertTrue("listingType blended", nativeTestListingType(options,
-        "G_GOOGLEBAR_TYPE_BLENDED_RESULTS "));
-    options.setListingTypeKmlOnly();
-    assertTrue("listingType blended", nativeTestListingType(options,
-        "G_GOOGLEBAR_TYPE_KMLONLY_RESULTS "));
-    options.setListingTypeLocalOnly();
-    assertTrue("listingType blended", nativeTestListingType(options,
-        "G_GOOGLEBAR_TYPE_LOCALONLY_RESULTS "));
+        options.setLinkTargetBlank();
+        assertTrue("linkTarget blank", nativeTestLinkTarget(options, "_blank"));
+        options.setLinkTargetParent();
+        assertTrue("linkTarget parent",
+            nativeTestLinkTarget(options, "_parent"));
+        options.setLinkTargetSelf();
+        assertTrue("linkTarget self", nativeTestLinkTarget(options, "_self"));
+        options.setLinkTargetTop();
+        assertTrue("linkTarget top", nativeTestLinkTarget(options, "_top"));
 
-    Element elem = Document.get().createDivElement();
-    elem.setId("testDivElement");
-    options.setResultListElement(elem);
-    assertTrue("resultList element",
-        nativeTestResultListElement(options, elem));
-    options.setResultListInline();
-    assertTrue("resultList inline", nativeTestResultList(options,
-        "G_GOOGLEBAR_RESULT_LIST_INLINE"));
-    options.setResultListSuppress();
-    assertTrue("resultList suppress", nativeTestResultList(options,
-        "G_GOOGLEBAR_RESULT_LIST_SUPPRESS"));
+        options.setListingTypeBlended();
+        assertTrue("listingType blended", nativeTestListingType(options,
+            "G_GOOGLEBAR_TYPE_BLENDED_RESULTS "));
+        options.setListingTypeKmlOnly();
+        assertTrue("listingType blended", nativeTestListingType(options,
+            "G_GOOGLEBAR_TYPE_KMLONLY_RESULTS "));
+        options.setListingTypeLocalOnly();
+        assertTrue("listingType blended", nativeTestListingType(options,
+            "G_GOOGLEBAR_TYPE_LOCALONLY_RESULTS "));
 
-    options.setShowOnLoad(true);
-    assertTrue("showOnLoad", nativeTestShowOnLoad(options, true));
-    options.setStyle("testStyle");
-    assertTrue("style", nativeTestStyle(options, "testStyle"));
-    options.setSuppressInitialResultSelection(true);
-    assertTrue("suppressInitialResultSelection",
-        nativeTestSuppressInitialResultSelection(options, true));
-    options.setSuppressZoomToBounds(true);
-    assertTrue("suppressZoomToBounds", nativeTestSuppressZoomToBounds(options,
-        true));
+        Element elem = Document.get().createDivElement();
+        elem.setId("testDivElement");
+        options.setResultListElement(elem);
+        assertTrue("resultList element", nativeTestResultListElement(options,
+            elem));
+        options.setResultListInline();
+        assertTrue("resultList inline", nativeTestResultList(options,
+            "G_GOOGLEBAR_RESULT_LIST_INLINE"));
+        options.setResultListSuppress();
+        assertTrue("resultList suppress", nativeTestResultList(options,
+            "G_GOOGLEBAR_RESULT_LIST_SUPPRESS"));
+
+        options.setShowOnLoad(true);
+        assertTrue("showOnLoad", nativeTestShowOnLoad(options, true));
+        options.setStyle("testStyle");
+        assertTrue("style", nativeTestStyle(options, "testStyle"));
+        options.setSuppressInitialResultSelection(true);
+        assertTrue("suppressInitialResultSelection",
+            nativeTestSuppressInitialResultSelection(options, true));
+        options.setSuppressZoomToBounds(true);
+        assertTrue("suppressZoomToBounds", nativeTestSuppressZoomToBounds(
+            options, true));
+      }
+    });
   }
 }

@@ -16,11 +16,11 @@
 package com.google.gwt.maps.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.CopyrightCollection;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.Maps;
+import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.maps.client.control.ControlAnchor;
 import com.google.gwt.maps.client.control.ControlPosition;
@@ -54,13 +54,11 @@ import com.google.gwt.user.client.ui.Widget;
  * @Binding ./com/google/gwt/maps/client/impl/TileLayerImpl.java:
  * @Binding
  */
-public class MinimumMapVersionTest extends GWTTestCase {
-  static TileLayer tileLayer = null;
+public class MinimumMapVersionTest extends MapsTestCase {
+  private static final String MAPS_MIN_VERSION = "2.147";
 
-  private static void initTileLayer() {
-    if (tileLayer != null) {
-      return;
-    }
+  private TileLayer initTileLayer() {
+    TileLayer tileLayer = null;
 
     tileLayer = new TileLayer(new CopyrightCollection("gwt-maps Unit Test"), 1,
         20) {
@@ -79,11 +77,12 @@ public class MinimumMapVersionTest extends GWTTestCase {
         return true;
       }
     };
+    return tileLayer;
   }
 
   private static native JavaScriptObject nativeMakeConcreteOverlay() /*-{
-      return new $wnd.GMarker(new $wnd.GLatLng(45,45));
-    }-*/;
+    return new $wnd.GMarker(new $wnd.GLatLng(45,45));
+  }-*/;
 
   @Override
   public String getModuleName() {
@@ -91,131 +90,171 @@ public class MinimumMapVersionTest extends GWTTestCase {
   }
 
   public void test0isMapsLoaded() {
-    assertTrue(Maps.isLoaded());
+    loadApi(new Runnable() {
+      public void run() {
+        assertTrue(Maps.isLoaded());
+      }
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testConcreteOverlayImpl() {
-    @SuppressWarnings("unused")
-    ConcreteOverlay concreteOverlay = new ConcreteOverlay(
-        nativeMakeConcreteOverlay());
+    loadApi(new Runnable() {
+      public void run() {
+        @SuppressWarnings("unused")
+        ConcreteOverlay concreteOverlay = new ConcreteOverlay(
+            nativeMakeConcreteOverlay());
+      }
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testControl() {
-    ControlPosition pos = new ControlPosition(ControlAnchor.BOTTOM_LEFT, 0, 0);
-    @SuppressWarnings("unused")
-    CustomControl c = new CustomControl(pos) {
+    loadApi(new Runnable() {
+      public void run() {
+        ControlPosition pos = new ControlPosition(ControlAnchor.BOTTOM_LEFT, 0,
+            0);
+        @SuppressWarnings("unused")
+        CustomControl c = new CustomControl(pos) {
+          @Override
+          public boolean isSelectable() {
+            return false;
+          }
 
-      @Override
-      public boolean isSelectable() {
-        return false;
+          @Override
+          protected Widget initialize(MapWidget map) {
+            return new AbsolutePanel();
+          }
+        };
       }
-
-      @Override
-      protected Widget initialize(MapWidget map) {
-        return new AbsolutePanel();
-      }
-
-    };
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testGeocodeCache() {
-    class MyGeocodeCache extends CustomGeocodeCache {
-        @Override
-        public JavaScriptObject get(String address) {
-          JavaScriptObject result = super.get(address);
-          return result;
-        }
+    loadApi(new Runnable() {
+      public void run() {
+        class MyGeocodeCache extends CustomGeocodeCache {
+          @Override
+          public JavaScriptObject get(String address) {
+            JavaScriptObject result = super.get(address);
+            return result;
+          }
 
-        @Override
-        public void put(String address, JavaScriptObject reply) {
-          super.put(address, reply);
-        }
+          @Override
+          public void put(String address, JavaScriptObject reply) {
+            super.put(address, reply);
+          }
 
-        @Override
-        public String toCanonical(String address) {
-          String result = super.toCanonical(address);
-          return result;
+          @Override
+          public String toCanonical(String address) {
+            String result = super.toCanonical(address);
+            return result;
+          }
         }
+        @SuppressWarnings("unused")
+        MyGeocodeCache customGc = new MyGeocodeCache();
       }
-    @SuppressWarnings("unused")
-    MyGeocodeCache customGc = new MyGeocodeCache();
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testMapImpl() {
-    @SuppressWarnings("unused")
-    MapWidget w = new MapWidget();
+    loadApi(new Runnable() {
+      public void run() {
+        @SuppressWarnings("unused")
+        MapWidget w = new MapWidget();
+      }
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testMapType() {
-    initTileLayer();
-    TileLayer[] layers = new TileLayer[1];
-    layers[0] = tileLayer;
-    @SuppressWarnings("unused")
-    MapType t = new MapType(layers, new MercatorProjection(1),
-        "versionTestLayer");
+    loadApi(new Runnable() {
+      public void run() {
+        initTileLayer();
+        TileLayer[] layers = new TileLayer[1];
+        layers[0] = initTileLayer();
+        @SuppressWarnings("unused")
+        MapType t = new MapType(layers, new MercatorProjection(1),
+            "versionTestLayer");
+      }
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testMercatorProjection() {
-    @SuppressWarnings("unused")
-    MercatorProjection m = new MercatorProjection(2);
+    loadApi(new Runnable() {
+      public void run() {
+        @SuppressWarnings("unused")
+        MercatorProjection m = new MercatorProjection(2);
+      }
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testOverlayImpl() {
-    @SuppressWarnings("unused")
-    Overlay o = new Overlay() {
+    loadApi(new Runnable() {
+      public void run() {
 
-      @Override
-      protected Overlay copy() {
-        return null;
+        @SuppressWarnings("unused")
+        Overlay o = new Overlay() {
+
+          @Override
+          protected Overlay copy() {
+            return null;
+          }
+
+          @Override
+          protected void initialize(MapWidget map) {
+          }
+
+          @Override
+          protected void redraw(boolean force) {
+          }
+
+          @Override
+          protected void remove() {
+          }
+
+        };
       }
-
-      @Override
-      protected void initialize(MapWidget map) {
-      }
-
-      @Override
-      protected void redraw(boolean force) {
-      }
-
-      @Override
-      protected void remove() {
-      }
-
-    };
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testProjection() {
-    initTileLayer();
-    @SuppressWarnings("unused")
-    Projection projection = new Projection() {
+    loadApi(new Runnable() {
+      public void run() {
+        initTileLayer();
+        @SuppressWarnings("unused")
+        Projection projection = new Projection() {
 
-      @Override
-      public Point fromLatLngToPixel(LatLng latlng, int zoomLevel) {
-        return Point.newInstance(0, 0);
-      }
+          @Override
+          public Point fromLatLngToPixel(LatLng latlng, int zoomLevel) {
+            return Point.newInstance(0, 0);
+          }
 
-      @Override
-      public LatLng fromPixelToLatLng(Point point, int zoomLevel,
-          boolean unbounded) {
-        return LatLng.newInstance(0, 0);
-      }
+          @Override
+          public LatLng fromPixelToLatLng(Point point, int zoomLevel,
+              boolean unbounded) {
+            return LatLng.newInstance(0, 0);
+          }
 
-      @Override
-      public double getWrapWidth(int zoomLevel) {
-        return 1.0;
-      }
+          @Override
+          public double getWrapWidth(int zoomLevel) {
+            return 1.0;
+          }
 
-      @Override
-      public boolean tileCheckRange(TileIndex index, int zoomLevel, int tileSize) {
-        return true;
+          @Override
+          public boolean tileCheckRange(TileIndex index, int zoomLevel,
+              int tileSize) {
+            return true;
+          }
+        };
       }
-    };
+    }, true, MAPS_MIN_VERSION);
   }
 
   public void testTileLayerOverlay() {
-    initTileLayer();
-    @SuppressWarnings("unused")
-    TileLayerOverlay overlay = new TileLayerOverlay(tileLayer);
+    loadApi(new Runnable() {
+      public void run() {
+        initTileLayer();
+        @SuppressWarnings("unused")
+        TileLayerOverlay overlay = new TileLayerOverlay(initTileLayer());
+      }
+    }, true, MAPS_MIN_VERSION);
   }
-
 }

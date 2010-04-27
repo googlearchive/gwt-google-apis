@@ -22,7 +22,6 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.impl.GeoXmlOverlayImpl;
-import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
 
 /**
@@ -30,20 +29,6 @@ import com.google.gwt.maps.client.overlay.Overlay.ConcreteOverlay;
  * XML or KML file.
  */
 public final class GeoXmlOverlay extends ConcreteOverlay {
-
-  /**
-   * This internal class adds a place holder for the jsoPeer that is returned
-   * from the GeoXmlOverlayImpl.impl.construct() call.
-   */
-  private abstract static class JSOVoidCallback extends VoidCallback {
-    protected boolean missedCb = false;
-    protected JavaScriptObject storedJso;
-
-    public void setJsoPeer(JavaScriptObject jsoPeer) {
-      storedJso = jsoPeer;
-    }
-  }
-
   /**
    * Factory method to create a new overlay from a GeoRSS XML or KML file. This
    * provides a callback function that returns the new object when the load
@@ -53,7 +38,6 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
    * @param cb the callback to invoke when loading completes.
    */
   public static void load(final String url, final GeoXmlLoadCallback cb) {
-
     if (url == null) {
       throw new NullPointerException("url parameter must not be null");
     }
@@ -61,33 +45,17 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
       throw new NullPointerException("callback parameter must not be null");
     }
 
-    JSOVoidCallback voidCb = new JSOVoidCallback() {
-      @Override
-      public void callback() {
-        // If the storedJso is null at this point, the outer load() call
-        // may not yet have returned (the callback is being called before
-        // constructGeoXmlOverlay() returns.)
-
-        if (storedJso == null) {
-          missedCb = true;
-          return;
-        }
-        loadCb(url, cb, storedJso);
-      }
-    };
-
-    JavaScriptObject outerJsoPeer = GeoXmlOverlayImpl.impl.constructGeoXmlOverlay(
-        url, voidCb);
-
-    voidCb.setJsoPeer(outerJsoPeer);
-
-    // A fast callback return could cause the callback() method
-    // to execute before this method gets called. If the callback couldn't
-    // execute then, invoke it now.
-    if (voidCb.missedCb) {
-      loadCb(url, cb, outerJsoPeer);
-    }
+    JavaScriptObject jsoPeer = GeoXmlOverlayImpl.impl.constructGeoXmlOverlay(url);
+    GeoXmlOverlay overlay = new GeoXmlOverlay(jsoPeer);
+    registerLoadEvent(jsoPeer, overlay, url, cb);
   }
+
+  private static native void registerLoadEvent(JavaScriptObject jsoPeer,
+      GeoXmlOverlay overlay, String url, GeoXmlLoadCallback cb) /*-{
+    $wnd.GEvent.addListener(jsoPeer, "load", function(arg) {
+      @com.google.gwt.maps.client.overlay.GeoXmlOverlay::loadCb(Lcom/google/gwt/maps/client/overlay/GeoXmlOverlay;Ljava/lang/String;Lcom/google/gwt/maps/client/overlay/GeoXmlLoadCallback;)(overlay, url, cb);
+    });
+  }-*/;
 
   /**
    * Does the work of actual invoking the user's callback code.
@@ -96,51 +64,52 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
    * @param cb the user callback to invoke.
    * @param jso the newly constructed GGeoXml instance.
    */
-  private static void fireLoadCb(String url, GeoXmlLoadCallback cb,
-      JavaScriptObject jso) {
-
-    Throwable caught = null;
-    GeoXmlOverlay overlay = null;
-    try {
-      if (GeoXmlOverlayImpl.impl.loadedCorrectly(jso)) {
-        overlay = new GeoXmlOverlay(jso);
-      }
-    } catch (Throwable e) {
-      caught = e;
-    }
-
-    if (caught == null && overlay != null) {
+  private static void fireLoadCb(GeoXmlOverlay overlay, String url,
+      GeoXmlLoadCallback cb) {
+    if (overlay.hasLoaded() && overlay.getDefaultBounds() != null) {
       cb.onSuccess(url, overlay);
     } else {
-      cb.onFailure(url, caught);
+      cb.onFailure(url, null);
     }
+  }
+
+  /**
+   * Checks to see if the XML file has finished loading, in which case it
+   * returns <code>true</code>. If the XML file has not finished loading, this
+   * method returns <code>false</false>.
+   * 
+   * @return <code>true</code> if the XML file has finished loading.
+   */
+  private boolean hasLoaded() {
+    return GeoXmlOverlayImpl.impl.hasLoaded(jsoPeer);
   }
 
   /**
    * Wraps firing the callback so that an exception handler can be called.
    * 
    * @param handler the uncaught exception handler to call
+   * @param overlay the overlay
    * @param url the url made in the load request
-   * @param cb callback to use on success/failure. *
-   * @param jso the newly constructed GGeoXml instance.
+   * @param cb callback to use on success/failure.
    */
   private static void fireLoadCbAndCatch(UncaughtExceptionHandler handler,
-      String url, GeoXmlLoadCallback cb, JavaScriptObject jso) {
+      GeoXmlOverlay overlay, String url, GeoXmlLoadCallback cb) {
     try {
-      fireLoadCb(url, cb, jso);
+      fireLoadCb(overlay, url, cb);
     } catch (Throwable e) {
       handler.onUncaughtException(e);
     }
   }
 
-  private static void loadCb(String url, GeoXmlLoadCallback cb,
-      JavaScriptObject jso) {
+  @SuppressWarnings("unused")
+  private static void loadCb(GeoXmlOverlay overlay, String url,
+      GeoXmlLoadCallback cb) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
 
     if (handler != null) {
-      fireLoadCbAndCatch(handler, url, cb, jso);
+      fireLoadCbAndCatch(handler, overlay, url, cb);
     } else {
-      fireLoadCb(url, cb, jso);
+      fireLoadCb(overlay, url, cb);
     }
   }
 
@@ -190,7 +159,9 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
    * needed, or if the GeoXmlOverlay file has not yet finished loading.
    * 
    * @return a handle to the TileLayerOverlay object
+   * @deprecated
    */
+  @Deprecated
   public TileLayerOverlay getTileLayerOverlay() {
     return GeoXmlOverlayImpl.impl.getTileLayerOverlay(jsoPeer);
   }
@@ -209,9 +180,9 @@ public final class GeoXmlOverlay extends ConcreteOverlay {
   // method is used to construct, it isn't needed.
 
   /**
-   * Returns <code>true</code> if the GeoXmlOverlay object is currently
-   * hidden, as changed by the {@link GeoXmlOverlay#setVisible(boolean)}.
-   * Otherwise returns <code>false</code>.
+   * Returns <code>true</code> if the GeoXmlOverlay object is currently hidden,
+   * as changed by the {@link GeoXmlOverlay#setVisible(boolean)}. Otherwise
+   * returns <code>false</code>.
    * 
    * @return <code>true</code> if the overlay is currently hidden.
    */

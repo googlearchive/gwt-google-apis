@@ -17,14 +17,13 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Tests the "GDraggableObject" wrapper classes.
  * 
  */
-public class DraggableObjectTest extends GWTTestCase {
+public class DraggableObjectTest extends MapsTestCase {
 
   private static native boolean nativeTestContainer(
       DraggableObjectOptions options, Element elem) /*-{
@@ -53,26 +52,30 @@ public class DraggableObjectTest extends GWTTestCase {
 
   // TODO(zundel): These tests intermittently fail and I'm not sure why
   public void disableTestDraggableObjectStatic() {
-    String result;
-    result = DraggableObject.getDraggingCursorDefault();
-    assertNotNull("getDraggingCursorDefault is null", result);
-    result = DraggableObject.getDraggableCursorDefault();
-    assertNotNull("getDraggableCursorDefault is null", result);
+    loadApi(new Runnable() {
+      public void run() {
+        String result;
+        result = DraggableObject.getDraggingCursorDefault();
+        assertNotNull("getDraggingCursorDefault is null", result);
+        result = DraggableObject.getDraggableCursorDefault();
+        assertNotNull("getDraggableCursorDefault is null", result);
 
-    DraggableObject.setDraggableCursorDefault("text");
-    assertEquals("setDraggableCursorDefault", "text",
-        DraggableObject.getDraggableCursorDefault());
-    DraggableObject.setDraggingCursorDefault("move");
-    assertEquals("setDraggingCursorDefault", "move",
-        DraggableObject.getDraggingCursorDefault());
-    Element testElement = Document.get().createDivElement();
-    DraggableObject dragObject = DraggableObject.newInstance(testElement);
-    assertNotNull("newInstance(element)", dragObject);
+        DraggableObject.setDraggableCursorDefault("text");
+        assertEquals("setDraggableCursorDefault", "text",
+            DraggableObject.getDraggableCursorDefault());
+        DraggableObject.setDraggingCursorDefault("move");
+        assertEquals("setDraggingCursorDefault", "move",
+            DraggableObject.getDraggingCursorDefault());
+        Element testElement = Document.get().createDivElement();
+        DraggableObject dragObject = DraggableObject.newInstance(testElement);
+        assertNotNull("newInstance(element)", dragObject);
 
-    testElement = Document.get().createDivElement();
-    DraggableObjectOptions options = DraggableObjectOptions.newInstance();
-    dragObject = DraggableObject.newInstance(testElement, options);
-    assertNotNull("newInstance(element)", dragObject);
+        testElement = Document.get().createDivElement();
+        DraggableObjectOptions options = DraggableObjectOptions.newInstance();
+        dragObject = DraggableObject.newInstance(testElement, options);
+        assertNotNull("newInstance(element)", dragObject);
+      }
+    });
   }
 
   @Override
@@ -89,30 +92,40 @@ public class DraggableObjectTest extends GWTTestCase {
   }
 
   public void testDraggableObject() {
-    MapWidget map = new MapWidget();
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
 
-    DraggableObject obj = map.getDragObject();
-    assertNotNull("getDragObject", obj);
-    obj.setDraggableCursor("text");
-    obj.setDraggingCursor("crosshair");
+      public void run() {
+        MapWidget map = new MapWidget();
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
+
+        DraggableObject obj = map.getDragObject();
+        assertNotNull("getDragObject", obj);
+        obj.setDraggableCursor("text");
+        obj.setDraggingCursor("crosshair");
+      }
+    });
   }
 
   public void testDraggableObjectOptions() {
-    DraggableObjectOptions options = DraggableObjectOptions.newInstance();
-    Element testElement = Document.get().createDivElement();
-    options.setContainer(testElement);
-    assertTrue("container", nativeTestContainer(options, testElement));
-    String val = "testDraggable";
-    options.setDraggableCursor(val);
-    assertTrue("draggable", nativeTestDraggable(options, "testDraggable"));
-    val = "testDragging";
-    options.setDraggingCursor(val);
-    assertTrue("dragging", nativeTestDragging(options, "testDragging"));
-    options.setLeft(1);
-    assertTrue("left", nativeTestLeft(options, 1));
-    options.setTop(2);
-    assertTrue("right", nativeTestTop(options, 2));
+    loadApi(new Runnable() {
+
+      public void run() {
+        DraggableObjectOptions options = DraggableObjectOptions.newInstance();
+        Element testElement = Document.get().createDivElement();
+        options.setContainer(testElement);
+        assertTrue("container", nativeTestContainer(options, testElement));
+        String val = "testDraggable";
+        options.setDraggableCursor(val);
+        assertTrue("draggable", nativeTestDraggable(options, "testDraggable"));
+        val = "testDragging";
+        options.setDraggingCursor(val);
+        assertTrue("dragging", nativeTestDragging(options, "testDragging"));
+        options.setLeft(1);
+        assertTrue("left", nativeTestLeft(options, 1));
+        options.setTop(2);
+        assertTrue("right", nativeTestTop(options, 2));
+      }
+    });
   }
 }
