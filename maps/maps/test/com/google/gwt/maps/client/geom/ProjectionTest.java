@@ -15,10 +15,10 @@
  */
 package com.google.gwt.maps.client.geom;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.CopyrightCollection;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.maps.client.TileLayer;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -26,16 +26,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 /**
  * Tests the Projection classes.
  */
-public class ProjectionTest extends GWTTestCase {
-  // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
-  static TileLayer tileLayer = null;
+public class ProjectionTest extends MapsTestCase {
 
-  private static void initTileLayer() {
-    if (tileLayer != null) {
-      return;
-    }
-
+  private static TileLayer initTileLayer() {
+    TileLayer tileLayer;
     tileLayer = new TileLayer(new CopyrightCollection("gwt-maps Unit Test"), 1,
         20) {
       @Override
@@ -53,6 +47,7 @@ public class ProjectionTest extends GWTTestCase {
         return true;
       }
     };
+    return tileLayer;
   }
 
   @Override
@@ -72,88 +67,103 @@ public class ProjectionTest extends GWTTestCase {
    * Test calling the MercatorProjection methods.
    */
   public void testMercatorProjection() {
-    initTileLayer();
-    MapWidget map = new MapWidget();
-    map.setSize("300px", "300px");
-    Projection projection = new MercatorProjection(20);
-    assertNotNull("new MercatorProjection(20)", projection);
-    MapType mapType = new MapType(new TileLayer[] {tileLayer}, projection,
-        "MyMap");
-    map.addMapType(mapType);
-    RootPanel.get().add(map);
-    map.setZoomLevel(10);
-    map.setCurrentMapType(mapType);
-    
-    // Now try to call some of the MercatorProjection methods directly
-    LatLng lResult = projection.fromPixelToLatLng(Point.newInstance(10,10), map.getZoomLevel(), false);
-    assertNotNull("translation from Pixel to LatLng", lResult);
-    Point pResult = projection.fromLatLngToPixel(map.getCenter(), map.getZoomLevel());
-    assertNotNull("translation from LatLng to Pixel", pResult);
-    double dResult = projection.getWrapWidth(map.getZoomLevel());
-    assertTrue("getWrapWidth()", dResult > 0);
-    // Not sure how to test tileCheckRange()
+    loadApi(new Runnable() {
+      public void run() {
+        TileLayer tileLayer = initTileLayer();
+        MapWidget map = new MapWidget();
+        map.setSize("300px", "300px");
+        Projection projection = new MercatorProjection(20);
+        assertNotNull("new MercatorProjection(20)", projection);
+        MapType mapType = new MapType(new TileLayer[] {tileLayer}, projection,
+            "MyMap");
+        map.addMapType(mapType);
+        RootPanel.get().add(map);
+        map.setZoomLevel(10);
+        map.setCurrentMapType(mapType);
+
+        // Now try to call some of the MercatorProjection methods directly
+        LatLng lResult = projection.fromPixelToLatLng(
+            Point.newInstance(10, 10), map.getZoomLevel(), false);
+        assertNotNull("translation from Pixel to LatLng", lResult);
+        Point pResult = projection.fromLatLngToPixel(map.getCenter(),
+            map.getZoomLevel());
+        assertNotNull("translation from LatLng to Pixel", pResult);
+        double dResult = projection.getWrapWidth(map.getZoomLevel());
+        assertTrue("getWrapWidth()", dResult > 0);
+        // Not sure how to test tileCheckRange()
+      }
+    });
   }
 
   /**
    * Create a simple projection and add it to a map.
    */
   public void testProjectionDefault() {
-    initTileLayer();
-    MapWidget map = new MapWidget();
-    map.setSize("300px", "300px");
-    Projection projection = new MercatorProjection(20);
-    assertNotNull("new MercatorProjection(20)", projection);
-    MapType mapType = new MapType(new TileLayer[] {tileLayer}, projection,
-        "MyMap");
-    map.addMapType(mapType);
-    RootPanel.get().add(map);
-    map.setZoomLevel(10);
-    map.setCurrentMapType(mapType);
+    loadApi(new Runnable() {
+      public void run() {
+        TileLayer tileLayer = initTileLayer();
+        MapWidget map = new MapWidget();
+        map.setSize("300px", "300px");
+        Projection projection = new MercatorProjection(20);
+        assertNotNull("new MercatorProjection(20)", projection);
+        MapType mapType = new MapType(new TileLayer[] {tileLayer}, projection,
+            "MyMap");
+        map.addMapType(mapType);
+        RootPanel.get().add(map);
+        map.setZoomLevel(10);
+        map.setCurrentMapType(mapType);
+      }
+    });
   }
 
   /**
    * Subclass the Projection abstract class and add it to a map.
    */
   public void testSubclassProjection() {
-    initTileLayer();
-    MapWidget map = new MapWidget();
-    map.setSize("300px", "300px");
-    Projection projection = new Projection() {
+    loadApi(new Runnable() {
+      public void run() {
+        TileLayer tileLayer = initTileLayer();
+        MapWidget map = new MapWidget();
+        map.setSize("300px", "300px");
+        Projection projection = new Projection() {
 
-      @Override
-      public Point fromLatLngToPixel(LatLng latlng, int zoomLevel) {
-        assertNotNull(latlng);
-        assertTrue("zoomLevel > 0", zoomLevel > 0);
-        return Point.newInstance(1, 1);
+          @Override
+          public Point fromLatLngToPixel(LatLng latlng, int zoomLevel) {
+            assertNotNull(latlng);
+            assertTrue("zoomLevel > 0", zoomLevel > 0);
+            return Point.newInstance(1, 1);
+          }
+
+          @Override
+          public LatLng fromPixelToLatLng(Point point, int zoomLevel,
+              boolean unbounded) {
+            assertNotNull(point);
+            assertTrue("zoomLevel > 0", zoomLevel > 0);
+            return LatLng.newInstance(45, 45);
+          }
+
+          @Override
+          public double getWrapWidth(int zoomLevel) {
+            assertTrue("zoomLevel > 0", zoomLevel > 0);
+            return 100;
+          }
+
+          @Override
+          public boolean tileCheckRange(TileIndex index, int zoomLevel,
+              int tileSize) {
+            assertNotNull("index", index);
+            assertTrue("zoomLevel > 0", zoomLevel > 0);
+            assertTrue("tileSize > 0", tileSize > 0);
+            return false;
+          }
+        };
+
+        MapType mapType = new MapType(new TileLayer[] {tileLayer}, projection,
+            "MyMap");
+        map.addMapType(mapType);
+        RootPanel.get().add(map);
+        map.setCurrentMapType(mapType);
       }
-
-      @Override
-      public LatLng fromPixelToLatLng(Point point, int zoomLevel,
-          boolean unbounded) {
-        assertNotNull(point);
-        assertTrue("zoomLevel > 0", zoomLevel > 0);
-        return LatLng.newInstance(45, 45);
-      }
-
-      @Override
-      public double getWrapWidth(int zoomLevel) {
-        assertTrue("zoomLevel > 0", zoomLevel > 0);
-        return 100;
-      }
-
-      @Override
-      public boolean tileCheckRange(TileIndex index, int zoomLevel, int tileSize) {
-        assertNotNull("index", index);
-        assertTrue("zoomLevel > 0", zoomLevel > 0);
-        assertTrue("tileSize > 0", tileSize > 0);
-        return false;
-      }
-    };
-
-    MapType mapType = new MapType(new TileLayer[] {tileLayer}, projection,
-        "MyMap");
-    map.addMapType(mapType);
-    RootPanel.get().add(map);
-    map.setCurrentMapType(mapType);
+    });
   }
 }

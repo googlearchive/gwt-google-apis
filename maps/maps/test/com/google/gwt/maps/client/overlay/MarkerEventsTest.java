@@ -15,10 +15,10 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.event.MapInfoWindowOpenHandler;
 import com.google.gwt.maps.client.event.MarkerClickHandler;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
@@ -54,7 +54,7 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * Tests for the MapWidget events.
+ * Tests for the MarkerWidget events.
  * 
  * Design Note(zundel): These events are, in theory, asynchronous, but as I
  * wrote these test cases, it seems that they are called synchronously in many
@@ -66,405 +66,461 @@ import com.google.gwt.user.client.ui.RootPanel;
  * (testXXXEvent()). Some of the events depend on user interaction and cannot be
  * triggered by the Maps API calls.
  */
-public class MarkerEventsTest extends GWTTestCase {
-  // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
-
+public class MarkerEventsTest extends MapsTestCase {
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
   public void testMarkerClickTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
 
-    marker.addMarkerClickHandler(new MarkerClickHandler() {
+        marker.addMarkerClickHandler(new MarkerClickHandler() {
 
-      public void onClick(MarkerClickEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+          public void onClick(MarkerClickEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+
+        });
+        MarkerClickEvent e = new MarkerClickEvent(marker);
+        marker.trigger(e);
       }
-
-    });
-    MarkerClickEvent e = new MarkerClickEvent(marker);
-    this.delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerDoubleClickTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerDoubleClickHandler(new MarkerDoubleClickHandler() {
-      public void onDoubleClick(MarkerDoubleClickEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerDoubleClickHandler(new MarkerDoubleClickHandler() {
+          public void onDoubleClick(MarkerDoubleClickEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerDoubleClickEvent e = new MarkerDoubleClickEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerDoubleClickEvent e = new MarkerDoubleClickEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerDragEndTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerDragEndHandler(new MarkerDragEndHandler() {
-      public void onDragEnd(MarkerDragEndEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerDragEndHandler(new MarkerDragEndHandler() {
+          public void onDragEnd(MarkerDragEndEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerDragEndEvent e = new MarkerDragEndEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerDragEndEvent e = new MarkerDragEndEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerDragStartTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerDragStartHandler(new MarkerDragStartHandler() {
-      public void onDragStart(MarkerDragStartEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
+
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerDragStartHandler(new MarkerDragStartHandler() {
+          public void onDragStart(MarkerDragStartEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerDragStartEvent e = new MarkerDragStartEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerDragStartEvent e = new MarkerDragStartEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerDragTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerDragHandler(new MarkerDragHandler() {
-      public void onDrag(MarkerDragEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerDragHandler(new MarkerDragHandler() {
+          public void onDrag(MarkerDragEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerDragEvent e = new MarkerDragEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerDragEvent e = new MarkerDragEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
-  
+
   public void testMarkerInfoWindowBeforeCloseEvent() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    
-    marker.addMarkerInfoWindowBeforeCloseHandler(new MarkerInfoWindowBeforeCloseHandler() {
-      public void onInfoWindowBeforeClose(MarkerInfoWindowBeforeCloseEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
-      }
-    });
-    final InfoWindow info = map.getInfoWindow();
-    map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+        final Marker marker = new Marker(atlanta);
 
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
-        DeferredCommand.addCommand(new Command() {
-          public void execute() {
-            info.close();            
+        marker.addMarkerInfoWindowBeforeCloseHandler(new MarkerInfoWindowBeforeCloseHandler() {
+          public void onInfoWindowBeforeClose(
+              MarkerInfoWindowBeforeCloseEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
           }
         });
+        final InfoWindow info = map.getInfoWindow();
+        map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+            DeferredCommand.addCommand(new Command() {
+              public void execute() {
+                info.close();
+              }
+            });
+          }
+        });
+
+        map.addOverlay(marker);
+        info.open(marker, new InfoWindowContent("Hello World!"));
       }
-    });
-    
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    map.addOverlay(marker);
-    info.open(marker, new InfoWindowContent("Hello World!"));
+    }, false);
   }
-  
+
   public void testMarkerInfoWindowBeforeCloseTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerInfoWindowBeforeCloseHandler(new MarkerInfoWindowBeforeCloseHandler() {
-      public void onInfoWindowBeforeClose(MarkerInfoWindowBeforeCloseEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
-      }
-    });
-    MarkerInfoWindowBeforeCloseEvent e = new MarkerInfoWindowBeforeCloseEvent(
-        marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
-  }
-  
-  public void testMarkerInfoWindowCloseEvent() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerInfoWindowCloseHandler(new MarkerInfoWindowCloseHandler() {
-      public void onInfoWindowClose(MarkerInfoWindowCloseEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
-      }
-    });
-    final InfoWindow info = map.getInfoWindow();
-    map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
-
-      public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {                
-        DeferredCommand.addCommand(new Command() {
-          public void execute() {
-            info.close();            
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerInfoWindowBeforeCloseHandler(new MarkerInfoWindowBeforeCloseHandler() {
+          public void onInfoWindowBeforeClose(
+              MarkerInfoWindowBeforeCloseEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
           }
         });
+        MarkerInfoWindowBeforeCloseEvent e = new MarkerInfoWindowBeforeCloseEvent(
+            marker);
+        marker.trigger(e);
       }
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    info.open(marker, new InfoWindowContent("Hello World!"));
+    }, false);
   }
-  
+
+  public void testMarkerInfoWindowCloseEvent() {
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
+
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerInfoWindowCloseHandler(new MarkerInfoWindowCloseHandler() {
+          public void onInfoWindowClose(MarkerInfoWindowCloseEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        final InfoWindow info = map.getInfoWindow();
+        map.addInfoWindowOpenHandler(new MapInfoWindowOpenHandler() {
+
+          public void onInfoWindowOpen(MapInfoWindowOpenEvent event) {
+            DeferredCommand.addCommand(new Command() {
+              public void execute() {
+                info.close();
+              }
+            });
+          }
+        });
+        info.open(marker, new InfoWindowContent("Hello World!"));
+      }
+    }, false);
+  }
+
   public void testMarkerInfoWindowCloseTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerInfoWindowCloseHandler(new MarkerInfoWindowCloseHandler() {
-      public void onInfoWindowClose(MarkerInfoWindowCloseEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerInfoWindowCloseHandler(new MarkerInfoWindowCloseHandler() {
+          public void onInfoWindowClose(MarkerInfoWindowCloseEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerInfoWindowCloseEvent e = new MarkerInfoWindowCloseEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerInfoWindowCloseEvent e = new MarkerInfoWindowCloseEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
-  
+
   public void testMarkerInfoWindowOpenEvent() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
 
-    RootPanel.get().add(map);
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    final InfoWindow info = map.getInfoWindow();
-    marker.addMarkerInfoWindowOpenHandler(new MarkerInfoWindowOpenHandler() {
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        final InfoWindow info = map.getInfoWindow();
+        marker.addMarkerInfoWindowOpenHandler(new MarkerInfoWindowOpenHandler() {
 
-      public void onInfoWindowOpen(MarkerInfoWindowOpenEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+          public void onInfoWindowOpen(MarkerInfoWindowOpenEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+
+        });
+        info.open(marker, new InfoWindowContent("Hello World!"));
       }
-      
-    });
-    
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    info.open(marker, new InfoWindowContent("Hello World!"));
+    }, false);
   }
 
   public void testMarkerInfoWindowOpenTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerInfoWindowOpenHandler(new MarkerInfoWindowOpenHandler() {
-      public void onInfoWindowOpen(MarkerInfoWindowOpenEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerInfoWindowOpenHandler(new MarkerInfoWindowOpenHandler() {
+          public void onInfoWindowOpen(MarkerInfoWindowOpenEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerInfoWindowOpenEvent e = new MarkerInfoWindowOpenEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerMouseDownTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerMouseDownHandler(new MarkerMouseDownHandler() {
-      public void onMouseDown(MarkerMouseDownEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerMouseDownHandler(new MarkerMouseDownHandler() {
+          public void onMouseDown(MarkerMouseDownEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerMouseDownEvent e = new MarkerMouseDownEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerMouseDownEvent e = new MarkerMouseDownEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerMouseOutTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerMouseOutHandler(new MarkerMouseOutHandler() {
-      public void onMouseOut(MarkerMouseOutEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerMouseOutHandler(new MarkerMouseOutHandler() {
+          public void onMouseOut(MarkerMouseOutEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerMouseOutEvent e = new MarkerMouseOutEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerMouseOutEvent e = new MarkerMouseOutEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerMouseOverTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerMouseOverHandler(new MarkerMouseOverHandler() {
-      public void onMouseOver(MarkerMouseOverEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerMouseOverHandler(new MarkerMouseOverHandler() {
+          public void onMouseOver(MarkerMouseOverEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerMouseOverEvent e = new MarkerMouseOverEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerMouseOverEvent e = new MarkerMouseOverEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerMouseUpTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerMouseUpHandler(new MarkerMouseUpHandler() {
-      public void onMouseUp(MarkerMouseUpEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerMouseUpHandler(new MarkerMouseUpHandler() {
+          public void onMouseUp(MarkerMouseUpEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerMouseUpEvent e = new MarkerMouseUpEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerMouseUpEvent e = new MarkerMouseUpEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerRemoveEvent() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerRemoveHandler(new MarkerRemoveHandler() {
-      public void onRemove(MarkerRemoveEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerRemoveHandler(new MarkerRemoveHandler() {
+          public void onRemove(MarkerRemoveEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        map.clearOverlays();
       }
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    map.clearOverlays();
+    }, false);
   }
-  
-  public void testMarkerRemoveTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerRemoveHandler(new MarkerRemoveHandler() {
-      public void onRemove(MarkerRemoveEvent event) {
-        assertEquals(event.getSender(), marker);
-        finishTest();
+  public void testMarkerRemoveTrigger() {
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
+
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerRemoveHandler(new MarkerRemoveHandler() {
+          public void onRemove(MarkerRemoveEvent event) {
+            assertEquals(event.getSender(), marker);
+            finishTest();
+          }
+        });
+        MarkerRemoveEvent e = new MarkerRemoveEvent(marker);
+        marker.trigger(e);
       }
-    });
-    MarkerRemoveEvent e = new MarkerRemoveEvent(marker);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 
   public void testMarkerVisibilityChangedEvent() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerVisibilityChangedHandler(new MarkerVisibilityChangedHandler() {
-      public void onVisibilityChanged(MarkerVisibilityChangedEvent event) {
-        assertEquals(event.getSender(), marker);
-        assertFalse(event.isVisible());
-        finishTest();
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerVisibilityChangedHandler(new MarkerVisibilityChangedHandler() {
+          public void onVisibilityChanged(MarkerVisibilityChangedEvent event) {
+            assertEquals(event.getSender(), marker);
+            assertFalse(event.isVisible());
+            finishTest();
+          }
+        });
+        marker.setVisible(false);
       }
-    });
-    
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.setVisible(false);
+    }, false);
   }
-  
-  public void testMarkerVisibilityChangedTrigger() {
-    LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
-    final MapWidget map = new MapWidget(atlanta, 13);
-    map.setSize("300px", "300px");
-    RootPanel.get().add(map);
 
-    final Marker marker = new Marker(atlanta);
-    map.addOverlay(marker);
-    marker.addMarkerVisibilityChangedHandler(new MarkerVisibilityChangedHandler() {
-      public void onVisibilityChanged(MarkerVisibilityChangedEvent event) {
-        assertEquals(event.getSender(), marker);
-        assertTrue(event.isVisible());
-        finishTest();
+  public void testMarkerVisibilityChangedTrigger() {
+    loadApi(new Runnable() {
+      public void run() {
+        LatLng atlanta = LatLng.newInstance(33.7814790, -84.3880580);
+        final MapWidget map = new MapWidget(atlanta, 13);
+        map.setSize("300px", "300px");
+        RootPanel.get().add(map);
+
+        final Marker marker = new Marker(atlanta);
+        map.addOverlay(marker);
+        marker.addMarkerVisibilityChangedHandler(new MarkerVisibilityChangedHandler() {
+          public void onVisibilityChanged(MarkerVisibilityChangedEvent event) {
+            assertEquals(event.getSender(), marker);
+            assertTrue(event.isVisible());
+            finishTest();
+          }
+        });
+        MarkerVisibilityChangedEvent e = new MarkerVisibilityChangedEvent(
+            marker, true);
+        marker.trigger(e);
       }
-    });
-    MarkerVisibilityChangedEvent e = new MarkerVisibilityChangedEvent(marker,
-        true);
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    marker.trigger(e);
+    }, false);
   }
 }

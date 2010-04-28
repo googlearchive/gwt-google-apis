@@ -15,8 +15,8 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.maps.client.event.PolygonCancelLineHandler;
 import com.google.gwt.maps.client.event.PolygonEndLineHandler;
@@ -33,18 +33,16 @@ import com.google.gwt.maps.client.geom.LatLng;
 /**
  * Tests the events attached to a Polygon and Polygon.
  */
-public class PolygonEventsTest extends GWTTestCase {
-  // Length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
+public class PolygonEventsTest extends MapsTestCase {
 
   @Override
   public String getModuleName() {
     return "com.google.gwt.maps.GoogleMapsTest";
   }
 
- /**
-  * Runs before every test method.
-  */
+  /**
+   * Runs before every test method.
+   */
   @Override
   public void gwtSetUp() {
     TestUtilities.cleanDom();
@@ -54,99 +52,114 @@ public class PolygonEventsTest extends GWTTestCase {
    * Test the "cancelline" event using a trigger.
    */
   public void testPolygonCancelLineTrigger() {
-    final MapWidget m = new MapWidget();
-    final Polygon polyline = setupPolygon(m);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Polygon polyline = setupPolygon(m);
 
-    m.addOverlay(polyline);
-    polyline.setDrawingEnabled();
-    polyline.addPolygonCancelLineHandler(new PolygonCancelLineHandler() {
+        m.addOverlay(polyline);
+        polyline.setDrawingEnabled();
+        polyline.addPolygonCancelLineHandler(new PolygonCancelLineHandler() {
 
-      public void onCancel(PolygonCancelLineEvent event) {
-        finishTest();
+          public void onCancel(PolygonCancelLineEvent event) {
+            finishTest();
+          }
+
+        });
+        polyline.trigger(new PolygonCancelLineEvent(polyline));
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    polyline.trigger(new PolygonCancelLineEvent(polyline));
+    }, false);
   }
 
   /**
    * Test the "endline" event using a trigger.
    */
   public void testPolygonEndLineTrigger() {
-    final MapWidget m = new MapWidget();
-    final Polygon polyline = setupPolygon(m);
-    final LatLng testLatLng = LatLng.newInstance(31,32);
-    
-    m.addOverlay(polyline);
-    polyline.setDrawingEnabled();
-    polyline.addPolygonEndLineHandler(new PolygonEndLineHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Polygon polyline = setupPolygon(m);
+        final LatLng testLatLng = LatLng.newInstance(31, 32);
 
-      public void onEnd(PolygonEndLineEvent event) {
-        assertEquals("event.getLatLng()", testLatLng, event.getLatLng());
-        finishTest();
+        m.addOverlay(polyline);
+        polyline.setDrawingEnabled();
+        polyline.addPolygonEndLineHandler(new PolygonEndLineHandler() {
+
+          public void onEnd(PolygonEndLineEvent event) {
+            assertEquals("event.getLatLng()", testLatLng, event.getLatLng());
+            finishTest();
+          }
+
+        });
+        polyline.trigger(new PolygonEndLineEvent(polyline, testLatLng));
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    polyline.trigger(new PolygonEndLineEvent(polyline, testLatLng));
+    }, false);
   }
 
   /**
    * Test the "lineupdated" event using a trigger.
    */
   public void testPolygonLineUpdatedTrigger() {
-    final MapWidget m = new MapWidget();
-    final Polygon polyline = setupPolygon(m);
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Polygon polyline = setupPolygon(m);
 
-    m.addOverlay(polyline);
-    polyline.setEditingEnabled(true);
-    polyline.addPolygonLineUpdatedHandler(new PolygonLineUpdatedHandler() {
+        m.addOverlay(polyline);
+        polyline.setEditingEnabled(true);
+        polyline.addPolygonLineUpdatedHandler(new PolygonLineUpdatedHandler() {
 
-      public void onUpdate(PolygonLineUpdatedEvent event) {
-        finishTest();
+          public void onUpdate(PolygonLineUpdatedEvent event) {
+            finishTest();
+          }
+
+        });
+        polyline.trigger(new PolygonLineUpdatedEvent(polyline));
       }
-
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
-    polyline.trigger(new PolygonLineUpdatedEvent(polyline));
+    }, false);
   }
-  
+
   /**
    * Test the "mouseout" event using a trigger.
    */
   public void testPolygonMouseOut() {
-    final MapWidget m = new MapWidget();
-    final Polygon polyline = setupPolygon(m);
-    m.addOverlay(polyline);
-    polyline.addPolygonMouseOutHandler(new PolygonMouseOutHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Polygon polyline = setupPolygon(m);
+        m.addOverlay(polyline);
+        polyline.addPolygonMouseOutHandler(new PolygonMouseOutHandler() {
 
-      public void onMouseOut(PolygonMouseOutEvent event) {
-        finishTest();
+          public void onMouseOut(PolygonMouseOutEvent event) {
+            finishTest();
+          }
+
+        });
+        polyline.trigger(new PolygonMouseOutEvent(polyline));
       }
-      
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);    
-    polyline.trigger(new PolygonMouseOutEvent(polyline));
+    }, false);
   }
-  
+
   /**
    * Test the "mouseover" event using a trigger.
    */
   public void testPolygonMouseOver() {
-    final MapWidget m = new MapWidget();
-    final Polygon polyline = setupPolygon(m);
-    m.addOverlay(polyline);
-    polyline.addPolygonMouseOverHandler(new PolygonMouseOverHandler() {
+    loadApi(new Runnable() {
+      public void run() {
+        final MapWidget m = new MapWidget();
+        final Polygon polyline = setupPolygon(m);
+        m.addOverlay(polyline);
+        polyline.addPolygonMouseOverHandler(new PolygonMouseOverHandler() {
 
-      public void onMouseOver(PolygonMouseOverEvent event) {
-        finishTest();
+          public void onMouseOver(PolygonMouseOverEvent event) {
+            finishTest();
+          }
+
+        });
+        polyline.trigger(new PolygonMouseOverEvent(polyline));
       }
-      
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);    
-    polyline.trigger(new PolygonMouseOverEvent(polyline));
-  }  
+    }, false);
+  }
 
   private Polygon setupPolygon(MapWidget m) {
     m.setCenter(LatLng.newInstance(37.4569, -122.1569));

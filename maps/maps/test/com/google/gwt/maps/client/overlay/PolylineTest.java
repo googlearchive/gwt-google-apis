@@ -15,9 +15,9 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -25,9 +25,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 /**
  * Tests the Polygon class.
  */
-public class PolylineTest extends GWTTestCase {
-  // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 5000;
+public class PolylineTest extends MapsTestCase {
 
   @Override
   public String getModuleName() {
@@ -46,197 +44,236 @@ public class PolylineTest extends GWTTestCase {
    * Test the getArea() method.
    */
   public void testGetLength() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
-    LatLng[] points = { // 
-    LatLng.newInstance(45, 45), //
-        LatLng.newInstance(45, -45), //
-        LatLng.newInstance(0, 0)};
-    Polyline p = new Polyline(points);
-    map.addOverlay(p);
-    RootPanel.get().add(map);
-    double result = p.getLength();
-    assertTrue("non-negative length", result > 0);
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
+        LatLng[] points = { // 
+        LatLng.newInstance(45, 45), //
+            LatLng.newInstance(45, -45), //
+            LatLng.newInstance(0, 0)};
+        Polyline p = new Polyline(points);
+        map.addOverlay(p);
+        RootPanel.get().add(map);
+        double result = p.getLength();
+        assertTrue("non-negative length", result > 0);
+      }
+    });
   }
 
   /**
    * Test the simple polyline constructor.
    */
   public void testPolyline() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
-    LatLng[] points = { // 
-    LatLng.newInstance(45, 45), //
-        LatLng.newInstance(45, -45), //
-        LatLng.newInstance(0, 0)};
-    Polyline p = new Polyline(points);
-    map.addOverlay(p);
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
+        LatLng[] points = { // 
+        LatLng.newInstance(45, 45), //
+            LatLng.newInstance(45, -45), //
+            LatLng.newInstance(0, 0)};
+        Polyline p = new Polyline(points);
+        map.addOverlay(p);
+        RootPanel.get().add(map);
+      }
+    });
   }
 
   public void testPolylineEditingOptions() {
-    PolyEditingOptions opts;
-    opts = PolyEditingOptions.newInstance();
-    assertNotNull(opts);
-    opts = PolyEditingOptions.newInstance(true);
-    assertNotNull(opts);
-    opts = PolyEditingOptions.newInstance(100);
-    assertNotNull(opts);
-    opts = PolyEditingOptions.newInstance(100, true);
-    assertNotNull(opts);
+    loadApi(new Runnable() {
+      public void run() {
+        PolyEditingOptions opts;
+        opts = PolyEditingOptions.newInstance();
+        assertNotNull(opts);
+        opts = PolyEditingOptions.newInstance(true);
+        assertNotNull(opts);
+        opts = PolyEditingOptions.newInstance(100);
+        assertNotNull(opts);
+        opts = PolyEditingOptions.newInstance(100, true);
+        assertNotNull(opts);
+      }
+    });
   }
 
   /**
    * Tests the fromEncoded() methods.
    */
   public void testPolylineFromEncoded() {
-    MapWidget map = new MapWidget(LatLng.newInstance(33.75951619957536,
-        -84.39289301633835), 20);
-    map.setSize("500px", "400px");
-    map.addMapType(MapType.getHybridMap());
-    map.setCurrentMapType(MapType.getHybridMap());
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(33.75951619957536,
+            -84.39289301633835), 20);
+        map.setSize("500px", "400px");
+        map.addMapType(MapType.getHybridMap());
+        map.setCurrentMapType(MapType.getHybridMap());
 
-    EncodedPolyline[] polylines = new EncodedPolyline[2];
-    polylines[0] = EncodedPolyline.newInstance("{t`mEt_bbO?eAx@??dAy@?", 2,
-        "BBBBB", 1);
-    polylines[0].setColor("#ff00ff");
-    polylines[0].setWeight(2);
-    polylines[0].setOpacity(0.7);
+        EncodedPolyline[] polylines = new EncodedPolyline[2];
+        polylines[0] = EncodedPolyline.newInstance("{t`mEt_bbO?eAx@??dAy@?", 2,
+            "BBBBB", 1);
+        polylines[0].setColor("#ff00ff");
+        polylines[0].setWeight(2);
+        polylines[0].setOpacity(0.7);
 
-    polylines[1] = EncodedPolyline.newInstance("au`mEz_bbO?sAbA@?pAcA?", 2,
-        "BBBBB", 1, "#0000ff", 2, 0.9);
+        polylines[1] = EncodedPolyline.newInstance("au`mEz_bbO?sAbA@?pAcA?", 2,
+            "BBBBB", 1, "#0000ff", 2, 0.9);
 
-    Polyline p0 = Polyline.fromEncoded(polylines[0]);
-    int vertexCount = p0.getVertexCount();
-    assertEquals("vertex count", vertexCount, 5);
-    assertTrue("length > 0", p0.getLength() > 0);
+        Polyline p0 = Polyline.fromEncoded(polylines[0]);
+        int vertexCount = p0.getVertexCount();
+        assertEquals("vertex count", vertexCount, 5);
+        assertTrue("length > 0", p0.getLength() > 0);
 
-    Polyline p1 = Polyline.fromEncoded(polylines[1]);
-    vertexCount = p1.getVertexCount();
-    assertEquals("vertex count", vertexCount, 5);
-    assertTrue("length > 0", p1.getLength() > 0);
+        Polyline p1 = Polyline.fromEncoded(polylines[1]);
+        vertexCount = p1.getVertexCount();
+        assertEquals("vertex count", vertexCount, 5);
+        assertTrue("length > 0", p1.getLength() > 0);
 
-    RootPanel.get().add(map);
+        RootPanel.get().add(map);
+      }
+    });
   }
 
   /**
    * Test insertVertex() and deleteVerex().
    */
   public void testPolylineInsertDelete() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
-    LatLng[] points = { // 
-    LatLng.newInstance(45, 45), //
-        LatLng.newInstance(45, -45), //
-        LatLng.newInstance(0, 0)};
-    Polyline p = new Polyline(points);
-    map.addOverlay(p);
-    RootPanel.get().add(map);
-    p.insertVertex(1, LatLng.newInstance(45, 0));
-    p.deleteVertex(3);
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
+        LatLng[] points = { // 
+        LatLng.newInstance(45, 45), //
+            LatLng.newInstance(45, -45), //
+            LatLng.newInstance(0, 0)};
+        Polyline p = new Polyline(points);
+        map.addOverlay(p);
+        RootPanel.get().add(map);
+        p.insertVertex(1, LatLng.newInstance(45, 0));
+        p.deleteVertex(3);
+      }
+    });
   }
 
   /**
    * Test the polyline constructor with extra args, but not polylineOptions.
    */
   public void testPolylineNoOpts() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
-    LatLng[] points = { // 
-    LatLng.newInstance(45, 45), //
-        LatLng.newInstance(45, -45), //
-        LatLng.newInstance(0, 0)};
-    Polyline p = new Polyline(points, "#ff0000", 3, 1.0);
-    map.addOverlay(p);
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
+        LatLng[] points = { // 
+        LatLng.newInstance(45, 45), //
+            LatLng.newInstance(45, -45), //
+            LatLng.newInstance(0, 0)};
+        Polyline p = new Polyline(points, "#ff0000", 3, 1.0);
+        map.addOverlay(p);
+        RootPanel.get().add(map);
+      }
+    });
   }
 
   /**
    * Test the constructor using the PolylineOptions argument.
    */
   public void testPolylineOptions() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
-    LatLng nycToZurich[] = {LatLng.newInstance(40.75, -73.90), // New York
-        LatLng.newInstance(47.3, 8.5) // Zurich
-    };
-    map.setCenter(LatLng.newInstance(40, -25), 2);
-    Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
-        PolylineOptions.newInstance(false, true));
-    map.addOverlay(pline);
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
+        LatLng nycToZurich[] = {LatLng.newInstance(40.75, -73.90), // New York
+            LatLng.newInstance(47.3, 8.5) // Zurich
+        };
+        map.setCenter(LatLng.newInstance(40, -25), 2);
+        Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
+            PolylineOptions.newInstance(false, true));
+        map.addOverlay(pline);
+        RootPanel.get().add(map);
+      }
+    });
   }
 
   public void testPolylineOptions2() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
-    LatLng nycToZurich[] = {LatLng.newInstance(40.75, -73.90), // New York
-        LatLng.newInstance(47.3, 8.5) // Zurich
-    };
-    map.setCenter(LatLng.newInstance(40, -25), 2);
-    Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
-        PolylineOptions.newInstance(false));
-    map.addOverlay(pline);
-    RootPanel.get().add(map);
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
+        LatLng nycToZurich[] = {LatLng.newInstance(40.75, -73.90), // New York
+            LatLng.newInstance(47.3, 8.5) // Zurich
+        };
+        map.setCenter(LatLng.newInstance(40, -25), 2);
+        Polyline pline = new Polyline(nycToZurich, "#FF0000", 1, .75,
+            PolylineOptions.newInstance(false));
+        map.addOverlay(pline);
+        RootPanel.get().add(map);
+      }
+    });
   }
 
   /**
    * Test the setEditngEnabled() method.
    */
   public void testPolylineSetEditingOptions() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
 
-    LatLng[] points = { // 
-    LatLng.newInstance(45, 45), //
-        LatLng.newInstance(45, -45), //
-        LatLng.newInstance(0, 0)};
+        LatLng[] points = { // 
+        LatLng.newInstance(45, 45), //
+            LatLng.newInstance(45, -45), //
+            LatLng.newInstance(0, 0)};
 
-    Polyline p = new Polyline(points);
-    map.addOverlay(p);
-    p.setEditingEnabled(true);
+        Polyline p = new Polyline(points);
+        map.addOverlay(p);
+        p.setEditingEnabled(true);
 
-    p = new Polyline(points);
-    map.addOverlay(p);
-    p.setEditingEnabled(false);
+        p = new Polyline(points);
+        map.addOverlay(p);
+        p.setEditingEnabled(false);
 
-    p = new Polyline(points);
-    map.addOverlay(p);
-    p.setEditingEnabled(PolyEditingOptions.newInstance(false));
+        p = new Polyline(points);
+        map.addOverlay(p);
+        p.setEditingEnabled(PolyEditingOptions.newInstance(false));
 
-    p = new Polyline(points);
-    map.addOverlay(p);
-    p.setEditingEnabled(PolyEditingOptions.newInstance(true));
+        p = new Polyline(points);
+        map.addOverlay(p);
+        p.setEditingEnabled(PolyEditingOptions.newInstance(true));
 
-    p = new Polyline(points);
-    map.addOverlay(p);
-    p.setEditingEnabled(PolyEditingOptions.newInstance(100));
+        p = new Polyline(points);
+        map.addOverlay(p);
+        p.setEditingEnabled(PolyEditingOptions.newInstance(100));
 
-    p = new Polyline(points);
-    map.addOverlay(p);
-    p.setEditingEnabled(PolyEditingOptions.newInstance(5, true));
+        p = new Polyline(points);
+        map.addOverlay(p);
+        p.setEditingEnabled(PolyEditingOptions.newInstance(5, true));
 
-    p = new Polyline(points);
-    map.addOverlay(p);
-    p.setEditingEnabled(PolyEditingOptions.newInstance(7, false));
+        p = new Polyline(points);
+        map.addOverlay(p);
+        p.setEditingEnabled(PolyEditingOptions.newInstance(7, false));
 
-    RootPanel.get().add(map);
+        RootPanel.get().add(map);
+      }
+    });
   }
 
   /**
    * Test the getVertexCount() method.
    */
   public void testPolylineVertexCount() {
-    MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
-    map.setSize("500px", "400px");
-    LatLng[] points = { // 
-    LatLng.newInstance(45, 45), //
-        LatLng.newInstance(45, -45), //
-        LatLng.newInstance(0, 0)};
-    Polyline p = new Polyline(points);
-    map.addOverlay(p);
-    RootPanel.get().add(map);
-    assertEquals("vertex count", 3, p.getVertexCount());
+    loadApi(new Runnable() {
+      public void run() {
+        MapWidget map = new MapWidget(LatLng.newInstance(0, 0), 3);
+        map.setSize("500px", "400px");
+        LatLng[] points = { // 
+        LatLng.newInstance(45, 45), //
+            LatLng.newInstance(45, -45), //
+            LatLng.newInstance(0, 0)};
+        Polyline p = new Polyline(points);
+        map.addOverlay(p);
+        RootPanel.get().add(map);
+        assertEquals("vertex count", 3, p.getVertexCount());
+      }
+    });
   }
-  
 }

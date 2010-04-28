@@ -20,13 +20,13 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
-import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.geom.LatLng;
 
 /**
  * Tests for the geocoding service and supporting classes.
  */
-public class GeocodeTest extends GWTTestCase {
+public class GeocodeTest extends MapsTestCase {
   private static class PlacemarkMock {
     final String addressQuery;
     final String city;
@@ -67,7 +67,7 @@ public class GeocodeTest extends GWTTestCase {
       String cmpCounty = place.getCounty();
       // The County field isn't populated consistently and this assertion will
       // fail on some results.
-      // assertNotNull("County", place.getCounty()); 
+      // assertNotNull("County", place.getCounty());
       String cmpState = place.getState();
       assertNotNull("State", cmpState);
       String cmpCountryCode = place.getCountry();
@@ -103,9 +103,6 @@ public class GeocodeTest extends GWTTestCase {
       comparePlacemark(place);
     }
   }
-
-  // length of time to wait for asynchronous test to complete.
-  static final int ASYNC_DELAY_MSEC = 10000;
 
   static final PlacemarkMock[] goodTestPlacemarks = {
       new PlacemarkMock(
@@ -144,48 +141,60 @@ public class GeocodeTest extends GWTTestCase {
    * Iterates through all the mock placemarks and tests them out.
    */
   public void testPlacemarks() {
-    for (PlacemarkMock m : goodTestPlacemarks) {
-      m.testMockPlacemark();
-    }
+    loadApi(new Runnable() {
+      public void run() {
+        for (PlacemarkMock m : goodTestPlacemarks) {
+          m.testMockPlacemark();
+        }
+      }
+    });
   }
 
   /**
    * Look up a good address.
    */
   public void testSimpleGeocode() {
-    final String testAddress = goodTestPlacemarks[0].getAddressQuery();
-    Geocoder geocoder = new Geocoder();
-    geocoder.getLatLng(testAddress, new LatLngCallback() {
-      public void onFailure() {
-        assertTrue("Geocode of " + testAddress + " failed.", false);
-      }
+    loadApi(new Runnable() {
+      public void run() {
 
-      public void onSuccess(LatLng point) {
-        // Test passed!
-        finishTest();
+        final String testAddress = goodTestPlacemarks[0].getAddressQuery();
+        Geocoder geocoder = new Geocoder();
+        geocoder.getLatLng(testAddress, new LatLngCallback() {
+          public void onFailure() {
+            assertTrue("Geocode of " + testAddress + " failed.", false);
+          }
+
+          public void onSuccess(LatLng point) {
+            // Test passed!
+            finishTest();
+          }
+        });
       }
     });
-    delayTestFinish(ASYNC_DELAY_MSEC * 2);
   }
 
   /**
    * Look up a bad address.
    */
   public void testSimpleGeocodeFails() {
-    final String badTestAddress = "123 Main St, Googleville";
-    Geocoder geocoder = new Geocoder();
-    geocoder.getLatLng(badTestAddress, new LatLngCallback() {
-      public void onFailure() {
-        // Test passed!
-        finishTest();
-      }
+    loadApi(new Runnable() {
+      public void run() {
 
-      public void onSuccess(LatLng point) {
-        // This was supposed to be a bad address.
-        assertTrue("Geocode of " + badTestAddress + " failed.", false);
+        final String badTestAddress = "123 Main St, Googleville";
+        Geocoder geocoder = new Geocoder();
+        geocoder.getLatLng(badTestAddress, new LatLngCallback() {
+          public void onFailure() {
+            // Test passed!
+            finishTest();
+          }
+
+          public void onSuccess(LatLng point) {
+            // This was supposed to be a bad address.
+            assertTrue("Geocode of " + badTestAddress + " failed.", false);
+          }
+        });
       }
     });
-    delayTestFinish(ASYNC_DELAY_MSEC * 2);
   }
 
   /**
@@ -193,20 +202,24 @@ public class GeocodeTest extends GWTTestCase {
    * s/b/ the same as using the default Geocoder() constructor.
    */
   public void testSimpleGeocodeFGC() {
-    final String testAddress = goodTestPlacemarks[0].getAddressQuery();
-    Geocoder geocoder = new Geocoder(new FactualGeocodeCache());
+    loadApi(new Runnable() {
+      public void run() {
 
-    geocoder.getLatLng(testAddress, new LatLngCallback() {
-      public void onFailure() {
-        assertTrue("Geocode of " + testAddress + " failed.", false);
-      }
+        final String testAddress = goodTestPlacemarks[0].getAddressQuery();
+        Geocoder geocoder = new Geocoder(new FactualGeocodeCache());
 
-      public void onSuccess(LatLng point) {
-        // Test passed!
-        finishTest();
+        geocoder.getLatLng(testAddress, new LatLngCallback() {
+          public void onFailure() {
+            assertTrue("Geocode of " + testAddress + " failed.", false);
+          }
+
+          public void onSuccess(LatLng point) {
+            // Test passed!
+            finishTest();
+          }
+        });
       }
     });
-    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 
   /**
@@ -220,112 +233,125 @@ public class GeocodeTest extends GWTTestCase {
    * Test geocoding using a LocationCallback.
    */
   public void testSimpleLocationCallback() {
-    final String testAddress = goodTestPlacemarks[0].getAddressQuery();
-    Geocoder geocoder = new Geocoder();
+    loadApi(new Runnable() {
+      public void run() {
+        final String testAddress = goodTestPlacemarks[0].getAddressQuery();
+        Geocoder geocoder = new Geocoder();
 
-    geocoder.getLocations(testAddress, new LocationCallback() {
-      public void onFailure(int statusCode) {
-        assertTrue("Geocode of " + testAddress + " failed with status "
-            + statusCode + " : " + StatusCodes.getName(statusCode), false);
-      }
+        geocoder.getLocations(testAddress, new LocationCallback() {
+          public void onFailure(int statusCode) {
+            assertTrue("Geocode of " + testAddress + " failed with status "
+                + statusCode + " : " + StatusCodes.getName(statusCode), false);
+          }
 
-      public void onSuccess(JsArray<Placemark> locations) {
-        assertTrue("length of locations expected to be > 0",
-            locations.length() > 0);
-        goodTestPlacemarks[0].comparePlacemark(locations.get(0));
-        finishTest();
+          public void onSuccess(JsArray<Placemark> locations) {
+            assertTrue("length of locations expected to be > 0",
+                locations.length() > 0);
+            goodTestPlacemarks[0].comparePlacemark(locations.get(0));
+            finishTest();
+          }
+        });
       }
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC * 2);
+    }, false);
   }
 
   /**
    * Test subclassing AbstractGeocoderCache.
    */
   public void testSubclassGeocoderCache() {
+    loadApi(new Runnable() {
+      public void run() {
 
-    class MyGeocodeCache extends CustomGeocodeCache {
-      int numTimesGetCalled = 0;
-      int numTimesPutCalled = 0;
-      int numTimesToCanonicalCalled = 0;
+        class MyGeocodeCache extends CustomGeocodeCache {
+          int numTimesGetCalled = 0;
+          int numTimesPutCalled = 0;
+          int numTimesToCanonicalCalled = 0;
 
-      @Override
-      public JavaScriptObject get(String address) {
-        JavaScriptObject result = super.get(address);
-        numTimesGetCalled++;
-        return result;
-      }
+          @Override
+          public JavaScriptObject get(String address) {
+            JavaScriptObject result = super.get(address);
+            numTimesGetCalled++;
+            return result;
+          }
 
-      @Override
-      public void put(String address, JavaScriptObject reply) {
-        super.put(address, reply);
-        numTimesPutCalled++;
-      }
+          @Override
+          public void put(String address, JavaScriptObject reply) {
+            super.put(address, reply);
+            numTimesPutCalled++;
+          }
 
-      @Override
-      public String toCanonical(String address) {
-        String result = super.toCanonical(address);
-        numTimesToCanonicalCalled++;
-        return result;
-      }
-    }
+          @Override
+          public String toCanonical(String address) {
+            String result = super.toCanonical(address);
+            numTimesToCanonicalCalled++;
+            return result;
+          }
+        }
 
-    /**
-     * Create a Geocoder with the custom GeocodeCache for the cache
-     * implementation.
-     */
-    final String testAddress = goodTestPlacemarks[0].getAddressQuery();
-    final MyGeocodeCache myGeocodeCache = new MyGeocodeCache();
-    Geocoder geocoder = new Geocoder(myGeocodeCache);
+        /**
+         * Create a Geocoder with the custom GeocodeCache for the cache
+         * implementation.
+         */
+        final String testAddress = goodTestPlacemarks[0].getAddressQuery();
+        final MyGeocodeCache myGeocodeCache = new MyGeocodeCache();
+        Geocoder geocoder = new Geocoder(myGeocodeCache);
 
-    geocoder.getLatLng(testAddress, new LatLngCallback() {
-      public void onFailure() {
-        assertTrue("Geocode of " + testAddress + " failed.", false);
-      }
+        geocoder.getLatLng(testAddress, new LatLngCallback() {
+          public void onFailure() {
+            assertTrue("Geocode of " + testAddress + " failed.", false);
+          }
 
-      public void onSuccess(LatLng point) {
-        assertTrue("get() not called", myGeocodeCache.numTimesGetCalled > 0);
-        assertTrue("put() not called", myGeocodeCache.numTimesPutCalled > 0);
-        assertTrue("toCanonical() not called",
-            myGeocodeCache.numTimesToCanonicalCalled > 0);
-        finishTest();
+          public void onSuccess(LatLng point) {
+            assertTrue("get() not called", myGeocodeCache.numTimesGetCalled > 0);
+            assertTrue("put() not called", myGeocodeCache.numTimesPutCalled > 0);
+            assertTrue("toCanonical() not called",
+                myGeocodeCache.numTimesToCanonicalCalled > 0);
+            finishTest();
+          }
+        });
       }
     });
-    delayTestFinish(ASYNC_DELAY_MSEC);
   }
 
   public void testReverseGeocoder() {
-    // Somewhere in Berlin, Germany (DE)
-    final LatLng testPoint = LatLng.newInstance(52.51622, 13.39782);
-    Geocoder geocoder = new Geocoder();
-    geocoder.getLocations(testPoint, new LocationCallback() {
+    loadApi(new Runnable() {
+      public void run() {
 
-      public void onFailure(int statusCode) {
-        assertTrue("Reverse Geocode of " + testPoint + " failed with status "
-            + statusCode + ": " + StatusCodes.getName(statusCode), false);
-      }
+        // Somewhere in Berlin, Germany (DE)
+        final LatLng testPoint = LatLng.newInstance(52.51622, 13.39782);
+        Geocoder geocoder = new Geocoder();
+        geocoder.getLocations(testPoint, new LocationCallback() {
 
-      public void onSuccess(JsArray<Placemark> locations) {
-        boolean resultFound = false;
-        for (int i = 0; i < locations.length(); ++i) {
-          Placemark location = locations.get(i);
-          
-          if ("Berlin".equals(location.getCity())) {
-            finishTest();
+          public void onFailure(int statusCode) {
+            assertTrue("Reverse Geocode of " + testPoint
+                + " failed with status " + statusCode + ": "
+                + StatusCodes.getName(statusCode), false);
           }
 
-          resultFound = true;
-        }
-        if (resultFound) {
-          // The location did not return 'Berlin' as the city, but this could be
-          // because the locale spells the city name a different way. At least
-          // we got a result - consider the test successful.
-          finishTest();
-        }
-        assertTrue("Reverse Geocode of " + testPoint
-            + " failed with no results.", false);
+          public void onSuccess(JsArray<Placemark> locations) {
+            boolean resultFound = false;
+            for (int i = 0; i < locations.length(); ++i) {
+              Placemark location = locations.get(i);
+
+              if ("Berlin".equals(location.getCity())) {
+                finishTest();
+              }
+
+              resultFound = true;
+            }
+            if (resultFound) {
+              // The location did not return 'Berlin' as the city, but this
+              // could be
+              // because the locale spells the city name a different way. At
+              // least
+              // we got a result - consider the test successful.
+              finishTest();
+            }
+            assertTrue("Reverse Geocode of " + testPoint
+                + " failed with no results.", false);
+          }
+        });
       }
-    });
-    delayTestFinish(ASYNC_DELAY_MSEC);
+    }, false);
   }
 }
