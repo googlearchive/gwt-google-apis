@@ -29,6 +29,7 @@ public abstract class Properties extends JavaScriptObject {
    * An exception thrown by the get methods when the key is found but the 
    * value has an unexpected type.
    */
+  @SuppressWarnings("serial")
   public static class TypeException extends Exception {
     private TypeException(String key, String expected, String actual) {
       super("Properties.get" + expected + "(" + key + 
