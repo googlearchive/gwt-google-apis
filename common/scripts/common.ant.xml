@@ -200,7 +200,7 @@
         <isset property="emma.enabled"/>
       </condition>
       <echo message="${javac.out} ${javac.junit.out}"/>
-      <junit dir="@{test.out}" fork="yes" printsummary="yes" failureproperty="junit.failure" tempdir="@{test.out}">
+      <junit dir="@{test.out}" fork="yes" printsummary="yes" failureproperty="junit.failure" tempdir="@{test.out}" showoutput="true">
         <jvmarg line="${junit.platform.args}"/>
         <jvmarg line="-Xmx768m"/>
         <jvmarg value="-Demma.coverage.out.file=@{test.emma.coverage}/coverage.emma"/>
