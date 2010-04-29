@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -40,7 +40,7 @@ public class DirectionsTest extends MapsTestCase {
         DirectionQueryOptions opts = new DirectionQueryOptions(map,
             directionsPanel);
         String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
-            + "to: 1600 amphitheatre mtn view ca USA";
+            + "to: 1600 Amphitheatre Parkway Mountain View, CA 94043 USA";
         Directions.load(query, opts, new DirectionsCallback() {
 
           public void onFailure(int statusCode) {
@@ -79,7 +79,7 @@ public class DirectionsTest extends MapsTestCase {
     loadApi(new Runnable() {
       public void run() {
         String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
-            + "to: 1600 amphitheatre mtn view ca USA";
+            + "to: 1600 Amphitheatre Parkway Mountain View, CA 94043 USA";
 
         Directions.load(query, new DirectionsCallback() {
 
@@ -125,7 +125,7 @@ public class DirectionsTest extends MapsTestCase {
         MapWidget map = new MapWidget();
         DirectionQueryOptions opts = new DirectionQueryOptions(map);
         String query = "from: 10 10th St NW, Atlanta, GA 30309 USA "
-            + "to: 1600 amphitheatre mtn view ca USA";
+            + "to: 1600 Amphitheatre Parkway Mountain View, CA 94043 USA";
         Directions.load(query, opts, new DirectionsCallback() {
 
           public void onFailure(int statusCode) {
