@@ -51,7 +51,7 @@
         <exclude name="**/com/google/gwt/ajaxloader/**"/>
       </fileset>
       <fileset dir="${javac.out}">
-        <exclude name="com/google/gwt/ajaxloader/**"/>
+        <exclude name="**/com/google/gwt/ajaxloader/**"/>
       </fileset>
     </gwt.jar>
   </target>
