@@ -34,7 +34,7 @@
       <param name="target" value="checkstyle"/>
     </antcall>
   </target>
-  <target name="test" depends="build" description="Test Google API Library for GWT">
+  <target name="test" description="Tests all of the APIs that make up the Google API Library for GWT">
     <antcall target="-do">
       <param name="target" value="test"/>
     </antcall>
