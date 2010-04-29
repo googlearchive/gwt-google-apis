@@ -3,33 +3,6 @@
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="distro-source"/>
   <import file="common.ant.xml"/>
-  <target name="tar" depends="filter,transform.eclipse.config" description="Packages the tar.gz distro">
-    <mkdir dir="${gwt.build.dist}"/>
-    <gwt.tgz.cat destfile="${gwt.build.dist}/${project.distname}.tar.gz">
-      <!-- jars -->
-      <tarfileset file="${gwt.build.lib}/gwt-${api.name}.jar" prefix="${project.distname}"/>
-      <tarfileset file="${gwt.build.lib}/gwt-${api.name}-noredist.jar" prefix="${project.distname}"/>
-      <!-- distro-source files -->
-      <tarfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
-        <include name="**"/>
-      </tarfileset>
-      <!-- doc -->
-      <tarfileset dir="${gwt.build.out}" prefix="${project.distname}">
-        <include name="doc"/>
-        <include name="doc/javadoc/**"/>
-      </tarfileset>
-      <!-- .classpath files for samples -->
-      <tarfileset dir="${xslt.out}" prefix="${project.distname}">
-        <include name="samples/*/.classpath"/>
-      </tarfileset>
-      <!-- samples -->
-      <tarfileset dir="${gwt.root}" prefix="${project.distname}">
-        <include name="samples/*/.project"/>
-        <include name="samples/*/src/**"/>
-        <include name="samples/*/war/**"/>
-      </tarfileset>
-    </gwt.tgz.cat>
-  </target>
   <target name="zip" depends="filter,transform.eclipse.config" description="Packages the zip distro">
     <mkdir dir="${gwt.build.dist}"/>
     <zip destfile="${gwt.build.dist}/${project.distname}.zip">
@@ -57,7 +30,7 @@
       </zipfileset>
     </zip>
   </target>
-  <target name="build" depends="tar,zip">
+  <target name="build" depends="zip">
   </target>
   <target name="clean" description="Cleans this project's intermediate and output files">
     <delete dir="${gwt.build.dist}" failonerror="false"/>
