@@ -9,6 +9,7 @@
       <!-- jars -->
       <zipfileset file="${gwt.build.lib}/gwt-${api.name}.jar" prefix="${project.distname}"/>
       <zipfileset file="${gwt.build.lib}/gwt-${api.name}-noredist.jar" prefix="${project.distname}"/>
+      <zipfileset file="${gwt.build.lib}/gwt-${api.name}-javadoc.jar" prefix="${project.distname}"/>
       <!-- distro-source files -->
       <zipfileset dir="${gwt.build.out}/distro-source" prefix="${project.distname}">
         <include name="**"/>

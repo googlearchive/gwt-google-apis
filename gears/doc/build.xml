@@ -44,5 +44,9 @@
       </sequential>
     </outofdate>
   </target>
-  <target name="build" depends="javadoc"/>
+  <target name="jar" depends="javadoc">
+    <mkdir dir="${gwt.build.lib}"/>
+    <zip destfile="${gwt.build.lib}/gwt-${api.name}-javadoc.jar" basedir="${project.build}/javadoc"/>
+  </target>
+  <target name="build" depends="javadoc,jar"/>
 </project>
