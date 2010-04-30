@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.search.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -50,16 +51,14 @@ public class BookSearchTest extends GWTTestCase {
     bookSearch.setResultSetSize(ResultSetSize.SMALL);
     options.add(bookSearch);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
+    searchControl.addSearchResultsHandler(new SearchResultsHandler() {
 
-      public void onSearchComplete(SearchCompleteEvent event) {
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
+        JsArray<Result> results = event.getResults().cast();
+        assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Book Search: search", search);
         assertNotNull("Book Search: result", result);
@@ -70,14 +69,14 @@ public class BookSearchTest extends GWTTestCase {
         BookResult bookResult = BookResult.isBookResult(result);
         assertNotNull("isBookResult", bookResult);
         assertNotNull("getUnescapedUrl()", bookResult.getUnescapedUrl());
-        // assertNotNull("getUrl", bookResult.getUrl()); // no such method in bindings
         assertNotNull("getAuthors()", bookResult.getAuthors());
         assertNotNull("getBookId()", bookResult.getBookId());
         assertNotNull("getPublishedYear()", bookResult.getPublishedYear());
         assertNotNull("getPageCount()", bookResult.getPageCount());
         assertNotNull("getThumbnailHtml()", bookResult.getThumbnailHtml());
         assertNotNull("getTitle()", bookResult.getTitle());
-        assertNotNull("getTitleNoFormatting()", bookResult.getTitleNoFormatting());
+        assertNotNull("getTitleNoFormatting()",
+            bookResult.getTitleNoFormatting());
         finishTest();
       }
 
@@ -85,5 +84,4 @@ public class BookSearchTest extends GWTTestCase {
     delayTestFinish(ASYNC_DELAY_MSEC);
     searchControl.execute("microsoft");
   }
-
 }

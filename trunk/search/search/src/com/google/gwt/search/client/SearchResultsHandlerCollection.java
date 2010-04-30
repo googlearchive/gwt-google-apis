@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,31 +16,34 @@
 package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
-import com.google.gwt.search.client.KeepHandler.KeepEvent;
+import com.google.gwt.search.client.SearchResultsHandler.SearchResultsEvent;
 
 import java.util.ArrayList;
 
 /**
- * A specialized List that is used to invoke methods on {@link KeepHandler}s.
+ * A specialized List that is used to invoke methods on
+ * {@link SearchResultsHandler}s.
  * 
  * On exception, no further listener callbacks will be invoked.
  */
 @SuppressWarnings("serial")
-class KeepHandlerCollection extends ArrayList<KeepHandler> {
-  void fireKeep(SearchControl control, Result result) {
+public class SearchResultsHandlerCollection extends
+    ArrayList<SearchResultsHandler> {
+  void fireResult(Search search, JsArray<? extends Result> results) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();
-    KeepEvent event = new KeepEvent(control, result);
-    for (KeepHandler l : this) {
+    SearchResultsEvent event = new SearchResultsEvent(search, results);
+    for (SearchResultsHandler l : this) {
       if (handler != null) {
         try {
-          l.onKeep(event);
+          l.onSearchResults(event);
         } catch (Throwable e) {
           handler.onUncaughtException(e);
           break;
         }
       } else {
-        l.onKeep(event);
+        l.onSearchResults(event);
       }
     }
   }

@@ -40,17 +40,14 @@ public class SearchTest extends GWTTestCase {
     local.setResultSetSize(ResultSetSize.SMALL);
     local.setCenterPoint("10 10th Street NW, Atlanta, GA USA");
 
-    local.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
+    local.addSearchResultsHandler(new SearchResultsHandler() {
 
-      public void onSearchComplete(SearchCompleteEvent event) {
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
-
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
+        JsArray<Result> results = event.getResults().cast();
+        assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Simple Local Search: search", search);
         assertNotNull("Simple Local Search: result", result);
@@ -78,19 +75,14 @@ public class SearchTest extends GWTTestCase {
   public void testSearchSearchHandler() {
     WebSearch ws = new WebSearch();
     ws.setResultSetSize(ResultSetSize.SMALL);
-    ws.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
+    ws.addSearchResultsHandler(new SearchResultsHandler() {
 
-      public void onSearchComplete(SearchCompleteEvent event) {
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
-
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
-        JsArray<? extends Result> results = search.getResults();
+        JsArray<Result> results = event.getResults().cast();
         assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Simple Image Search: search", search);
         assertNotNull("Simple Image Search: result", result);
@@ -136,17 +128,13 @@ public class SearchTest extends GWTTestCase {
     ws.setResultSetSize(ResultSetSize.SMALL);
     options.add(ws);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
-
-      public void onSearchComplete(SearchCompleteEvent event) {
+    searchControl.addSearchResultsHandler(new SearchResultsHandler() {
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
-
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
+        JsArray<Result> results = event.getResults().cast();
+        assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Simple Image Search: search", search);
         assertNotNull("Simple Image Search: result", result);
@@ -168,17 +156,9 @@ public class SearchTest extends GWTTestCase {
   public void testGetResults() {
     WebSearch ws = new WebSearch();
     ws.setResultSetSize(ResultSetSize.SMALL);
-    ws.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
-
-      public void onSearchComplete(SearchCompleteEvent event) {
+    ws.addSearchResultsHandler(new SearchResultsHandler() {
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
-
         JsArray<? extends Result> results = search.getResults();
         assertNotNull(results);
         assertTrue(results.length() > 0);

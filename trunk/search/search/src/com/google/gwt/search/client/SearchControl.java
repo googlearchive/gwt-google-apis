@@ -18,6 +18,7 @@ package com.google.gwt.search.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.search.client.SearchCompleteHandler.SearchCompleteEvent;
 import com.google.gwt.search.client.impl.GSearchControl;
 import com.google.gwt.search.client.impl.GsearcherOptions;
 import com.google.gwt.search.client.impl.KeepCallback;
@@ -61,10 +62,10 @@ public class SearchControl extends Composite {
   private final KeepHandlerCollection keepHandlers = new KeepHandlerCollection();
 
   /**
-   * Retains all SearchCompleteHandlers that should be notified when the
+   * Retains all {@link SearchResultsHandler}s that should be notified when the
    * SearchControl receives Result.
    */
-  private final SearchCompleteHandlerCollection resultHandlers = new SearchCompleteHandlerCollection();
+  private final SearchResultsHandlerCollection resultHandlers = new SearchResultsHandlerCollection();
 
   /**
    * Retains all SearchStartingHandlers that should be notified when the search
@@ -93,9 +94,7 @@ public class SearchControl extends Composite {
           public void onSearchResult(SearchControl control, Search search) {
             assert control == SearchControl.this;
             JsArray<? extends Result> results = search.getResults();
-            for (int i = 0; i < results.length(); ++i) {
-              resultHandlers.fireResult(search, results.get(i));
-            }
+            resultHandlers.fireResult(search, results);
           }
         });
 
@@ -151,8 +150,8 @@ public class SearchControl extends Composite {
   }
 
   /**
-   * Adds a {@link KeepHandler} to the {@link SearchControl}. It is necessary
-   * to have set a keep label by invoking
+   * Adds a {@link KeepHandler} to the {@link SearchControl}. It is necessary to
+   * have set a keep label by invoking
    * {@link SearchControlOptions#setKeepLabel(java.lang.String)} in order to
    * display the keep link on the SearchControl.
    * 
@@ -171,8 +170,32 @@ public class SearchControl extends Composite {
    * 
    * @param handler A {@link SearchCompleteHandler} that will receive
    *          notifications when the SearchControl has received a Result.
+   * @deprecated use {@link #addSearchResultsHandler(SearchResultsHandler)}
    */
-  public void addSearchCompleteHandler(SearchCompleteHandler handler) {
+  @Deprecated
+  public void addSearchCompleteHandler(final SearchCompleteHandler handler) {
+    // Delegate to addSehandler
+    resultHandlers.add(new SearchResultsHandler() {
+      public void onSearchResults(SearchResultsEvent event) {
+        JsArray<? extends Result> results = event.getResults();
+        for (int i = 0, length = results.length(); i < length; ++i) {
+          handler.onSearchComplete(new SearchCompleteEvent(event.getSearch(),
+              results.get(i)));
+        }
+      }
+    });
+  }
+
+  /**
+   * Adds a {@link SearchResultsHandler} to receive notification of all search
+   * results loaded by the SearchControl. A SearchCompleteHandler added to the
+   * SearchControl will receive Result objects from all Search objects added to
+   * the SearchControl.
+   * 
+   * @param handler A {@link SearchResultsHandler} that will receive
+   *          notifications when the SearchControl has received a Result.
+   */
+  public void addSearchResultsHandler(SearchResultsHandler handler) {
     resultHandlers.add(handler);
   }
 
@@ -212,8 +235,19 @@ public class SearchControl extends Composite {
    * Removes a {@link SearchCompleteHandler} from the {@link SearchControl}.
    * 
    * @param handler The {@link SearchCompleteHandler} to remove
+   * @deprecated
    */
+  @Deprecated
   public void removeSearchCompleteHandler(SearchCompleteHandler handler) {
+    // now a no-op...  Too much trouble to implement and I think its seldomly used.
+  }
+
+  /**
+   * Removes a {@link SearchResultsHandler} from the {@link SearchControl}.
+   * 
+   * @param handler The {@link SearchResultsHandler} to remove
+   */
+  public void removeSearchResultsHandler(SearchResultsHandler handler) {
     resultHandlers.remove(handler);
   }
 

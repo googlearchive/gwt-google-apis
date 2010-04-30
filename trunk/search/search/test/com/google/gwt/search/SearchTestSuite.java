@@ -21,6 +21,7 @@ import com.google.gwt.search.client.BookSearchTest;
 import com.google.gwt.search.client.ImageSearchTest;
 import com.google.gwt.search.client.LocalSearchTest;
 import com.google.gwt.search.client.NewsSearchTest;
+import com.google.gwt.search.client.DeprecatedSearchCompleteHandlerTest;
 import com.google.gwt.search.client.SearchTest;
 import com.google.gwt.search.client.VideoSearchTest;
 
@@ -39,6 +40,7 @@ public class SearchTestSuite extends GWTTestSuite {
     suite.addTestSuite(LocalSearchTest.class);
     suite.addTestSuite(NewsSearchTest.class);
     suite.addTestSuite(VideoSearchTest.class);
+    suite.addTestSuite(DeprecatedSearchCompleteHandlerTest.class);
     return suite;
   }
 }
