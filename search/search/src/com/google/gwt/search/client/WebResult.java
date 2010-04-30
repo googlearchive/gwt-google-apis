@@ -19,6 +19,14 @@ package com.google.gwt.search.client;
  * Web search results.
  */
 public final class WebResult extends Result {
+  public static final ResultClass RESULT_CLASS = ResultClass.WEB_SEARCH_RESULT;
+
+  public static WebResult isWebResult(Result result) {
+    if (result.getResultClass().equals(RESULT_CLASS)) {
+      return (WebResult) result;
+    }
+    return null;
+  }
 
   protected WebResult() {
     // Required for overlay types

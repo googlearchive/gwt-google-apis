@@ -19,6 +19,14 @@ package com.google.gwt.search.client;
  * Image search results.
  */
 public final class ImageResult extends Result {
+  public static final ResultClass RESULT_CLASS = ResultClass.IMAGE_SEARCH_RESULT;
+
+  public static ImageResult isImageResult(Result result) {
+    if (result.getResultClass().equals(RESULT_CLASS)) {
+      return (ImageResult) result;
+    }
+    return null;
+  }
 
   protected ImageResult() {
     // Required for overlay types

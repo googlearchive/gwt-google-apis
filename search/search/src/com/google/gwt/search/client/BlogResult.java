@@ -21,6 +21,16 @@ import java.util.Date;
  * Blog search results.
  */
 public final class BlogResult extends Result {
+  public static final ResultClass RESULT_CLASS = ResultClass.BLOG_SEARCH_RESULT;
+
+  public static BlogResult isBlogResult(Result result) {
+    ResultClass resultClass = result.getResultClass();
+    if (resultClass.equals(RESULT_CLASS)) {
+      return (BlogResult) result;
+    }
+    return null;
+  }
+
   protected BlogResult() {
     // Required for overlay types
   }

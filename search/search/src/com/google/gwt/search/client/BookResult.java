@@ -22,6 +22,14 @@ import com.google.gwt.user.client.ui.Widget;
  * Book search results.
  */
 public final class BookResult extends Result {
+  public static final ResultClass RESULT_CLASS = ResultClass.BOOK_SEARCH_RESULT;
+
+  public static BookResult isBookResult(Result result) {
+    if (result.getResultClass().equals(RESULT_CLASS)) {
+      return (BookResult) result;
+    }
+    return null;
+  }
 
   protected BookResult() {
     // Required for overlay types

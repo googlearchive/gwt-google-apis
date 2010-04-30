@@ -86,9 +86,8 @@ public class ImageSearchTest extends GWTTestCase {
         assertNotNull("Image Search: result", result);
         assertEquals("class name", ImageSearch.class.getName(),
             search.getClass().getName());
-        assertEquals("Result class name", ImageResult.class.getName(),
-            result.getClass().getName());
-        ImageResult iResult = (ImageResult) result;
+        ImageResult iResult = ImageResult.isImageResult(result);
+        assertNotNull("isImageResult", iResult);        
         assertNotNull("getContent()", iResult.getContent());
         assertNotNull("getContentNoFormatting",
             iResult.getContentNoFormatting());
@@ -131,9 +130,10 @@ public class ImageSearchTest extends GWTTestCase {
         assertNotNull("Image Search: result", result);
         assertEquals("Search class name", ImageSearch.class.getName(),
             search.getClass().getName());
-        assertEquals("Result class name", ImageResult.class.getName(),
-            result.getClass().getName());
-        ImageResult iResult = (ImageResult) result;
+        assertEquals("class name", ImageSearch.class.getName(),
+            search.getClass().getName());
+        ImageResult iResult = ImageResult.isImageResult(result);
+        assertNotNull("isImageResult", iResult);
         assertNotNull("getContent()", iResult.getContent());
         assertNotNull("getContentNoFormatting",
             iResult.getContentNoFormatting());

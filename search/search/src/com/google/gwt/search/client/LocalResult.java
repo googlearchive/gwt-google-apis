@@ -22,6 +22,15 @@ import com.google.gwt.core.client.JsArray;
  * Local search results.
  */
 public final class LocalResult extends Result {
+  public static final ResultClass RESULT_CLASS = ResultClass.LOCAL_SEARCH_RESULT;
+  
+  public static LocalResult isLocalResult(Result result) {
+    if (result.getResultClass().equals(RESULT_CLASS)) {
+      return (LocalResult) result;
+    }
+    return null;
+  }
+  
   /**
    * A phone number.
    */

@@ -67,8 +67,8 @@ public class BookSearchTest extends GWTTestCase {
             search.getClass().getName());
         assertEquals("Result class name", BookResult.class.getName(),
             result.getClass().getName());
-        BookResult bookResult = (BookResult) result;
-
+        BookResult bookResult = BookResult.isBookResult(result);
+        assertNotNull("isBookResult", bookResult);
         assertNotNull("getUnescapedUrl()", bookResult.getUnescapedUrl());
         // assertNotNull("getUrl", bookResult.getUrl()); // no such method in bindings
         assertNotNull("getAuthors()", bookResult.getAuthors());
