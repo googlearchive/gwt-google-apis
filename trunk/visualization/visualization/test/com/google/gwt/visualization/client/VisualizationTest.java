@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,8 +17,14 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.visualizations.Visualization;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A base class to support testing the visualization API that requires loading.
@@ -27,8 +33,28 @@ public class VisualizationTest extends GWTTestCase {
   public static final int ASYNC_DELAY_MS = 10 * 1000;
 
   /**
+   * Removes all elements in the body, except scripts and iframes.
+   */
+  public static void cleanDom() {
+    Element bodyElem = RootPanel.getBodyElement();
+
+    List<Element> toRemove = new ArrayList<Element>();
+    for (int i = 0, n = DOM.getChildCount(bodyElem); i < n; ++i) {
+      Element elem = DOM.getChild(bodyElem, i);
+      String nodeName = getNodeName(elem);
+      if (!"script".equals(nodeName) && !"iframe".equals(nodeName)) {
+        toRemove.add(elem);
+      }
+    }
+
+    for (int i = 0, n = toRemove.size(); i < n; ++i) {
+      DOM.removeChild(bodyElem, toRemove.get(i));
+    }
+  }
+
+  /**
    * Extracts the value of a named parameter from a URL query string.
-   * 
+   *
    * @param url the URL to extract the parameter from
    * @param name the name of the parameter
    * @return the value of the parameter
@@ -42,6 +68,10 @@ public class VisualizationTest extends GWTTestCase {
     } else {
       return results[1];
     }
+  }-*/;
+
+  private static native String getNodeName(Element elem) /*-{
+    return (elem.nodeName || "").toLowerCase();
   }-*/;
 
   private boolean loaded = false;
@@ -106,9 +136,9 @@ public class VisualizationTest extends GWTTestCase {
    * Loads the visualization API asynchronously and runs the specified test.
    * When the testRunnable method completes, the test is considered finished
    * successfully.
-   * 
+   *
    * @param testRunnable code to invoke when the API loadeded.
-   * 
+   *
    */
   protected void loadApi(final Runnable testRunnable) {
     loadApi(testRunnable, true);
@@ -116,13 +146,14 @@ public class VisualizationTest extends GWTTestCase {
 
   /**
    * Loads the visualization API asynchronously and runs the specified test.
-   * 
+   *
    * @param testRunnable code to invoke when the API loadeded.
    * @param callFinishTest if <code>true</code>, the finishTest() method is
    *          called when the test completes. If <code>false</code>, the caller
    *          is responsible for ending the test.
    */
-  protected void loadApi(final Runnable testRunnable, final boolean callFinishTest) {
+  protected void loadApi(final Runnable testRunnable,
+      final boolean callFinishTest) {
     if (loaded) {
       testRunnable.run();
     } else {
@@ -143,7 +174,7 @@ public class VisualizationTest extends GWTTestCase {
    * See <a href=
    * "http://code.google.com/apis/visualization/documentation/dev/events.html" >
    * Google Visualization API documentation</a> .
-   * 
+   *
    * @param viz - the Visualization to trigger the event on
    * @param s - a selection object.
    */
