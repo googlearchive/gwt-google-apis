@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,9 +17,10 @@ package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.search.client.SearchCompleteHandler.SearchCompleteEvent;
 import com.google.gwt.search.client.impl.GSearch;
 import com.google.gwt.search.client.impl.GSearchCompleteCallback;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -38,7 +39,7 @@ public abstract class Search {
 
     /**
      * Returns the index into the pages array of the current set of results.
-     *
+     * 
      * @return the index into the pages array of the current set of results.
      */
     public native int getCurrentPageIndex() /*-{
@@ -47,7 +48,7 @@ public abstract class Search {
 
     /**
      * Returns the estimated number of results.
-     *
+     * 
      * @return the estimated number of results.
      */
     public long getEstimatedResultCount() throws NumberFormatException {
@@ -56,7 +57,7 @@ public abstract class Search {
 
     /**
      * Returns a URL that can be used to fetch more results rendered in HTML.
-     *
+     * 
      * @return a URL that can be used to fetch more results rendered in HTML.
      */
     public native String getMoreResultsUrl() /*-{
@@ -65,7 +66,7 @@ public abstract class Search {
 
     /**
      * Returns an array of pages of results.
-     *
+     * 
      * @return an array of pages of results.
      */
     public native JsArray<Page> getPages() /*-{
@@ -88,7 +89,7 @@ public abstract class Search {
     /**
      * Returns a text label associated with the entry e.g., "1", "2", "3", or
      * "4".
-     *
+     * 
      * @return a text label associated with the entry e.g., "1", "2", "3", or
      *         "4".
      */
@@ -99,7 +100,7 @@ public abstract class Search {
     /**
      * Returns the value that will be used in the <code>&start</code> URL
      * argument to request a bundle of results.
-     *
+     * 
      * @return the value that will be used in the <code>&start</code> URL
      *         argument to request a bundle of results
      */
@@ -131,12 +132,12 @@ public abstract class Search {
   /**
    * A collection of handlers to notify when the Search receives results.
    */
-  private SearchCompleteHandlerCollection handlers;
+  private SearchResultsHandlerCollection handlers;
 
   /**
    * Package-protected constructor to restrict the use of the class outside of
    * the AjaxSearch package.
-   *
+   * 
    * @param impl The JSIO interface to use.
    */
   Search(GSearch impl) {
@@ -149,19 +150,39 @@ public abstract class Search {
    * Add a SearchCompleteHandler to receive notifications when Results are
    * created after executing the Search. This search will fire when searches
    * created by {@link Search#execute(String)} complete.
-   *
+   * 
+   * @param handler The handler to add
+   * @deprecated use {@link #addSearchResultsHandler(SearchResultsHandler )}
+   */
+  @Deprecated
+  public void addSearchCompleteHandler(final SearchCompleteHandler handler) {
+    // Delegate to addSearchResultsHandler()
+    addSearchResultsHandler(new SearchResultsHandler() {
+      public void onSearchResults(SearchResultsEvent event) {
+        JsArray<? extends Result> results = event.getResults();
+        for (int i = 0, length = results.length(); i < length; ++i) {
+          handler.onSearchComplete(new SearchCompleteEvent(event.getSearch(),
+              results.get(i)));
+        }
+      }
+    });
+  }
+
+  /**
+   * Add a {@link SearchResultsHandler} to receive notifications when Results
+   * are created after executing the Search. This search will fire when searches
+   * created by {@link Search#execute(String)} complete.
+   * 
    * @param handler The handler to add
    */
-  public void addSearchCompleteHandler(SearchCompleteHandler handler) {
+  public void addSearchResultsHandler(SearchResultsHandler handler) {
     if (handlers == null) {
-      handlers = new SearchCompleteHandlerCollection();
+      handlers = new SearchResultsHandlerCollection();
       impl.setSearchCompleteCallback(this, null, new GSearchCompleteCallback() {
         @Override
         public void onSearchResult() {
           JsArray<? extends Result> results = getResults();
-          for (int i = 0; i < results.length(); ++i) {
-            handlers.fireResult(Search.this, results.get(i));
-          }
+          handlers.fireResult(Search.this, results);
         }
       });
     }
@@ -179,7 +200,7 @@ public abstract class Search {
    * Regenerate the HTML associated with a Result object. This can be used to
    * regenerate the pre-rendered HTML associated with a Result object if
    * {@link #setNoHtmlGeneration()} had been previously called on the Search.
-   *
+   * 
    * @param result The Result to re-render.
    */
   // XXX probably don't need to expose this if we never offer the ability to
@@ -190,7 +211,7 @@ public abstract class Search {
 
   /**
    * Programmatically execute a query.
-   *
+   * 
    * @param query The search query to execute.
    */
   public void execute(String query) {
@@ -201,7 +222,7 @@ public abstract class Search {
    * According to the terms of service for the Google AJAX Search API, it is
    * necessary to display the attribution Element near search result if you are
    * using a raw Searcher.
-   *
+   * 
    * Be prepared for this method to return <code>null</code> as an attribution
    * is not always available.
    */
@@ -216,7 +237,7 @@ public abstract class Search {
   /**
    * After a successful search, this object will be populated. You can retrieve
    * results from additional pages.
-   *
+   * 
    * @return on success, a valid cursor object. otherwise, returns
    *         <code>null</code>
    */
@@ -227,7 +248,7 @@ public abstract class Search {
   /**
    * Retrieve the results from the previously-execute query. The exact types of
    * the Results will vary based upon the subtype of Search that is in use.
-   *
+   * 
    * @return A List of {@link Result} objects.
    */
   public JsArray<? extends Result> getResults() {
@@ -240,7 +261,7 @@ public abstract class Search {
    * This value is then used to index the array returned by
    * {@link Cursor#getPages()} which ultimately is used to compute the value of
    * the <code>&start</code> url argument.
-   *
+   * 
    * @param pageNumber supplies the page number of the results that the
    *          application wants. This value is range checked relative to the
    *          <code>.cursor.pages</code> property and no operation is performed
@@ -253,11 +274,23 @@ public abstract class Search {
 
   /**
    * Remove a previously-added SearchCompleteHandler.
-   *
+   * 
+   * @param l The SearchCompleteHandlerer to remove
+   * @deprecated
+   */
+  @Deprecated
+  public void removeSearchCompleteHandler(SearchCompleteHandler l) {
+    // now a no-op... Too much trouble to implement and I think its seldomly
+    // used.
+  }
+
+  /**
+   * Remove a previously-added SearchCompleteHandler.
+   * 
    * @param l The SearchCompleteHandlerer to remove
    */
-  public void removeSearchCompleteHandler(SearchCompleteHandler l) {
-    if (handlers != null) {
+  public void removeSearchResultsHandler(SearchResultsHandler l) {
+    if (l != null) {
       handlers.remove(l);
     }
   }
@@ -265,7 +298,7 @@ public abstract class Search {
   /**
    * Set the target window to use if the user clicks on a displayed result's
    * link.
-   *
+   * 
    * @param target The new LinkTarget for new Results created by the Search
    *          object.
    */
@@ -286,7 +319,7 @@ public abstract class Search {
   /**
    * Add additional terms to any query executed by the Search. This can be used
    * to create more specific queries.
-   *
+   * 
    * @param addition Additional parameters to add to any queries executed by the
    *          Search.
    * @see <a href="http://www.google.com/help/refinesearch.html">Refine
@@ -299,7 +332,7 @@ public abstract class Search {
   /**
    * Request more or fewer results when executing a search. This is taken only
    * as a hint and may not be honored when the search is executed.
-   *
+   * 
    * @param size The desired number of results.
    */
   public void setResultSetSize(ResultSetSize size) {
@@ -309,7 +342,7 @@ public abstract class Search {
   /**
    * Adds a user-specified CSS class suffix to the pre-rendered HTML provided by
    * Results that are created by the Search.
-   *
+   * 
    * @param label A CSS class suffix.
    */
   public void setUserDefinedClassSuffix(String label) {
@@ -320,7 +353,7 @@ public abstract class Search {
    * Used by SearchControl when it is used to displayed search results. This
    * will set the group heading for the results associated with a particular
    * search.
-   *
+   * 
    * @param label The label to use when displayed Results associated with a
    *          Search in a SearchControl
    */

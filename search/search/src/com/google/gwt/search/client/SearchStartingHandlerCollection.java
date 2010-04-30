@@ -26,6 +26,7 @@ import java.util.ArrayList;
  * 
  * On exception, no further listener callbacks will be invoked.
  */
+@SuppressWarnings("serial")
 public class SearchStartingHandlerCollection extends ArrayList<SearchStartingHandler> {
   void fireResult(SearchControl searchControl, Search search, String query) {
     UncaughtExceptionHandler handler = GWT.getUncaughtExceptionHandler();

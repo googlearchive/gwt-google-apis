@@ -15,6 +15,7 @@
  */
 package com.google.gwt.search.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -48,24 +49,20 @@ public class BlogSearchTest extends GWTTestCase {
     blogSearch.setResultSetSize(ResultSetSize.SMALL);
     options.add(blogSearch);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
+    searchControl.addSearchResultsHandler(new SearchResultsHandler() {
 
-      public void onSearchComplete(SearchCompleteEvent event) {
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
+        JsArray<Result> results = event.getResults().cast();
+        assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Blog Search: search", search);
         assertNotNull("Blog Search: result", result);
         assertEquals("class name", BlogSearch.class.getName(),
             search.getClass().getName());
-        assertEquals("Result class name", BlogResult.class.getName(),
-            result.getClass().getName());
-        BlogResult blogResult = BlogResult.isBlogResult(result);
+                BlogResult blogResult = BlogResult.isBlogResult(result);
         assertNotNull("isBlogResult", blogResult);
         assertNotNull("getContent()", blogResult.getContent());
         assertNotNull("getAuthor()", blogResult.getAuthor());
@@ -77,10 +74,8 @@ public class BlogSearchTest extends GWTTestCase {
             blogResult.getTitleNoFormatting());
         finishTest();
       }
-
     });
     delayTestFinish(ASYNC_DELAY_MSEC);
-    searchControl.execute("microsoft");
+    searchControl.execute("healthy food");
   }
-
 }

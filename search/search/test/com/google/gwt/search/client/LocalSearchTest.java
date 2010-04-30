@@ -15,6 +15,7 @@
  */
 package com.google.gwt.search.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -49,17 +50,13 @@ public class LocalSearchTest extends GWTTestCase {
     localSearch.setResultSetSize(ResultSetSize.SMALL);
     options.add(localSearch);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
-
-      public void onSearchComplete(SearchCompleteEvent event) {
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
-
+    searchControl.addSearchResultsHandler(new SearchResultsHandler() {
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
+        JsArray<Result> results = event.getResults().cast();
+        assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Local Search: search", search);
         assertNotNull("Local Search: result", result);

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.search.client;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -71,16 +72,13 @@ public class ImageSearchTest extends GWTTestCase {
     imgSearch.setResultSetSize(ResultSetSize.SMALL);
     options.add(imgSearch);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
-      int resultCount = 0;
-
-      public void onSearchComplete(SearchCompleteEvent event) {
-        resultCount++;
-        if (resultCount > 1) {
-          return;
-        }
+    searchControl.addSearchResultsHandler(new SearchResultsHandler() {
+      public void onSearchResults(SearchResultsEvent event) {
         Search search = event.getSearch();
-        Result result = event.getResult();
+        JsArray<Result> results = event.getResults().cast();
+        assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Image Search: search", search);
         assertNotNull("Image Search: result", result);
@@ -115,16 +113,19 @@ public class ImageSearchTest extends GWTTestCase {
 
     options.add(imgSearch);
     SearchControl searchControl = new SearchControl(options);
-    searchControl.addSearchCompleteHandler(new SearchCompleteHandler() {
+    searchControl.addSearchResultsHandler(new SearchResultsHandler() {
       int resultCount = 0;
 
-      public void onSearchComplete(SearchCompleteEvent event) {
+      public void onSearchResults(SearchResultsEvent event) {
         resultCount++;
         if (resultCount > 1) {
           return;
         }
         Search search = event.getSearch();
-        Result result = event.getResult();
+        JsArray<Result> results = event.getResults().cast();
+        assertNotNull(results);
+        assertTrue("results length", results.length() > 0);
+        Result result = results.get(0);
 
         assertNotNull("Image Search: search", search);
         assertNotNull("Image Search: result", result);
