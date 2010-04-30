@@ -21,6 +21,14 @@ import java.util.Date;
  * Video search result.
  */
 public final class VideoResult extends Result {
+  private final static ResultClass RESULT_CLASS = ResultClass.VIDEO_SEARCH_RESULT;
+
+  public static VideoResult isVideoResult(Result result) {
+    if (result.getResultClass().equals(RESULT_CLASS)) {
+      return (VideoResult) result;
+    }
+    return null;
+  }
 
   protected VideoResult() {
     // Required for overlay types
@@ -101,6 +109,19 @@ public final class VideoResult extends Result {
    *         rating was found.
    */
   public int getRating() {
+    assert hasRating() : "Check to see that the property exists with hasRating() before calling getRating()";
+    return (int) nativeGetRating();
+  }
+
+  /**
+   * Returns the rating of the video on scale of 1 to 5. Before calling this
+   * method, call {@link #hasRating()} to see if the <code>rating</code>
+   * property exists in the Result object.
+   * 
+   * @return rating of the video on scale of 1 to 5, including fractional
+   *         values. Return is undefined if no rating was found.
+   */
+  public double getRatingDecimal() {
     assert hasRating() : "Check to see that the property exists with hasRating() before calling getRating()";
     return nativeGetRating();
   }
@@ -200,7 +221,7 @@ public final class VideoResult extends Result {
     return this.viewCount;
   }-*/;
 
-  private native int nativeGetRating() /*-{
+  private native double nativeGetRating() /*-{
     return (this.rating == null ? 0 : Number(this.rating));
   }-*/;
 }

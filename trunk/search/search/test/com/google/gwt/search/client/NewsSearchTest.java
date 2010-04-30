@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -63,9 +63,8 @@ public class NewsSearchTest extends GWTTestCase {
         assertNotNull("news Search: result", result);
         assertEquals("class name", NewsSearch.class.getName(),
             search.getClass().getName());
-        assertEquals("Result class name", NewsResult.class.getName(),
-            result.getClass().getName());
-        NewsResult newsResult = (NewsResult) result;
+        NewsResult newsResult = NewsResult.isNewsResult(result);
+        assertNotNull("isNewsResult", newsResult);
         assertNotNull("getClusterUrl()", newsResult.getClusterUrl());
         assertNotNull("getLocation()", newsResult.getLocation());
         assertNotNull("getPublishedDate()", newsResult.getPublishedDate());
@@ -73,7 +72,8 @@ public class NewsSearchTest extends GWTTestCase {
         assertNotNull("getRelatedStoreies()", newsResult.getRelatedStories());
         assertNotNull("getUnescapedUrl()", newsResult.getUnescapedUrl());
         assertNotNull("getTitle()", newsResult.getTitle());
-        assertNotNull("getTitleNoFormatting()", newsResult.getTitleNoFormatting());
+        assertNotNull("getTitleNoFormatting()",
+            newsResult.getTitleNoFormatting());
         assertNotNull("getUrl", newsResult.getUrl());
         finishTest();
       }

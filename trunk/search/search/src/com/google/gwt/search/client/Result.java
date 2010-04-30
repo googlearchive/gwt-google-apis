@@ -62,9 +62,21 @@ public class Result extends JavaScriptObject {
       widget = makeWidget(element);
       setWidget(widget);
     }
-
     return widget;
   }
+
+  public final ResultClass getResultClass() {
+    String nativeResultClass = getResultClassString();
+    if (nativeResultClass == null) {
+      throw new NullPointerException(
+          "Couldn't find result class field in Gresult object");
+    }
+    return ResultClass.fromString(nativeResultClass);
+  }
+
+  public final native String getResultClassString() /*-{
+    return this["GsearchResultClass"];
+  }-*/;
 
   private native Element getElement() /*-{
     return this.html;

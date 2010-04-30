@@ -24,6 +24,14 @@ import java.util.Date;
  * A News search result.
  */
 public final class NewsResult extends Result {
+  public static final ResultClass RESULT_CLASS = ResultClass.NEWS_SEARCH_RESULT;
+
+  public static NewsResult isNewsResult(Result result) {
+    if (result.getResultClass().equals(RESULT_CLASS)) {
+      return (NewsResult) result;
+    }
+    return null;
+  }
 
   /**
    * 
@@ -267,8 +275,8 @@ public final class NewsResult extends Result {
   }-*/;
 
   /**
-   * A List of {@link NewsResult.RelatedStory}. It is only populated in a
-   * result when the story also has a set of closely related stories.
+   * A List of {@link NewsResult.RelatedStory}. It is only populated in a result
+   * when the story also has a set of closely related stories.
    * 
    * @return A List of {@link NewsResult.RelatedStory}.
    */
