@@ -28,8 +28,12 @@ import com.google.gwt.visualization.client.visualizations.BarChart;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.Gauge;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
+import com.google.gwt.visualization.client.visualizations.ImageAreaChart;
+import com.google.gwt.visualization.client.visualizations.ImageBarChart;
 import com.google.gwt.visualization.client.visualizations.ImageChart;
 import com.google.gwt.visualization.client.visualizations.ImageLineChart;
+import com.google.gwt.visualization.client.visualizations.ImagePieChart;
+import com.google.gwt.visualization.client.visualizations.ImageSparklineChart;
 import com.google.gwt.visualization.client.visualizations.IntensityMap;
 import com.google.gwt.visualization.client.visualizations.LineChart;
 import com.google.gwt.visualization.client.visualizations.MapVisualization;
@@ -43,10 +47,6 @@ import com.google.gwt.visualization.client.visualizations.Table;
  * Google Visualization API in GWT demo.
  */
 class Showcase implements EntryPoint {
-  /**
-   * Demo for ad hoc visualization wrapping. See ImageDemo.java
-   */
-  private static final String SPARKLINE_PACKAGE = "imagesparkline";
 
   static DataTable getCompanyPerformance() {
     DataTable data = DataTable.create();
@@ -128,29 +128,34 @@ class Showcase implements EntryPoint {
             AnnotatedDemo annotatedWidget = new AnnotatedDemo();
             tabby.add(annotatedWidget, "AnnotatedTimeLine");
             tabby.add(new AreaDemo(), "AreaChart");
+            tabby.add(new ImageAreaDemo(), "AreaChart (Image)");
             tabby.add(new BarDemo(), "BarChart");
+            tabby.add(new ImageBarDemo(), "BarChart (Image)");
             tabby.add(new ColumnDemo(), "ColumnChart");
             tabby.add(new GaugeDemo(), "Gauge");
             tabby.add(new GeoDemo(), "GeoMap");
             tabby.add(new IntensityDemo(), "IntensityMap");
             tabby.add(new LineDemo(), "LineChart");
+            tabby.add(new ImageLineDemo(), "LineChart (Image)");
             tabby.add(new MapDemo(), "Map");
+            tabby.add(new MoneyDemo(), "MoneyChart");
             tabby.add(new MotionDemo(), "MotionChart");
             tabby.add(new OrgDemo(), "OrgChart");
             tabby.add(new PieDemo(), "PieChart");
-            tabby.add(new ImageDemo(), "RadarChart");
-            tabby.add(new ImageLineDemo(), "ImageLineChart");
+            tabby.add(new ImagePieDemo(), "PieChart (Image)");
+            tabby.add(new ImageDemo(), "RadarChart (Image)");
             tabby.add(new ScatterDemo(), "ScatterChart");
-            tabby.add(new SparklineDemo(), "Sparkline");
+            tabby.add(new SparklineDemo(), "Sparkline (Image)");
             tabby.add(new TableDemo(), "Table");
             tabby.add(new ToolbarDemo(), "Toolbar");
             tabby.setWidget(annotatedWidget);
           }
         }, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE,
         ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE, ImageChart.PACKAGE,
-        ImageLineChart.PACKAGE, IntensityMap.PACKAGE, LineChart.PACKAGE,
+        ImageLineChart.PACKAGE, ImageAreaChart.PACKAGE, ImageBarChart.PACKAGE,
+        ImagePieChart.PACKAGE, IntensityMap.PACKAGE, LineChart.PACKAGE,
         MapVisualization.PACKAGE, MotionChart.PACKAGE, OrgChart.PACKAGE,
         PieChart.PACKAGE, ScatterChart.PACKAGE, Table.PACKAGE,
-        SPARKLINE_PACKAGE);
+        ImageSparklineChart.PACKAGE);
   }
 }

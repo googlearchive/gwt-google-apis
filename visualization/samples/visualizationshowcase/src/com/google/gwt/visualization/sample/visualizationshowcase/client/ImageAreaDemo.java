@@ -16,20 +16,21 @@
 package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart.Options;
+import com.google.gwt.visualization.client.visualizations.ImageAreaChart;
+import com.google.gwt.visualization.client.visualizations.ImageAreaChart.Options;
 
 /**
- * Demo for {@link ImageLineChart} visualization.
+ * Demo for {@link ImageAreaChart} visualization.
  *
- * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/imagelinechart.html"
- * > Image Line Chart Reference. </a>
+ * @see <a
+ *      href="http://code.google.com/apis/visualization/documentation/gallery/imageareachart.html"
+ *      > Image Area Chart Reference. </a>
  */
-public class ImageLineDemo implements LeftTabPanel.WidgetProvider {
+public class ImageAreaDemo implements LeftTabPanel.WidgetProvider {
 
   public Widget getWidget() {
     Options options = Options.create();
     options.setShowCategories(true);
-    return new ImageLineChart(Showcase.getCompanyPerformance(), options);
+    return new ImageAreaChart(Showcase.getCompanyPerformance(), options);
   }
 }

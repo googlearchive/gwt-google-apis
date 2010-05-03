@@ -16,20 +16,23 @@
 package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart.Options;
+import com.google.gwt.visualization.client.visualizations.ImagePieChart;
+import com.google.gwt.visualization.client.visualizations.ImagePieChart.Options;
 
 /**
- * Demo for {@link ImageLineChart} visualization.
+ * Demo for {@link ImagePieChart} visualization.
  *
- * @see <a href="http://code.google.com/apis/visualization/documentation/gallery/imagelinechart.html"
- * > Image Line Chart Reference. </a>
+ * @see <a
+ *      href="http://code.google.com/apis/visualization/documentation/gallery/imagepiechart.html"
+ *      > Image Pie Chart Reference. </a>
  */
-public class ImageLineDemo implements LeftTabPanel.WidgetProvider {
+public class ImagePieDemo implements LeftTabPanel.WidgetProvider {
 
   public Widget getWidget() {
     Options options = Options.create();
     options.setShowCategories(true);
-    return new ImageLineChart(Showcase.getCompanyPerformance(), options);
+    options.setIs3D(true);
+    options.setLabels("value");
+    return new ImagePieChart(Showcase.getDailyActivities(), options);
   }
 }
