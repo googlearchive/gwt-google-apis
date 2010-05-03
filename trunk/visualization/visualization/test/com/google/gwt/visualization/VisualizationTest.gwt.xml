@@ -14,5 +14,4 @@
 <!-- limitations under the License.                                         -->
 <module>
   <inherits name="com.google.gwt.visualization.Visualization"/>
-  <script src="http://www.google.com/jsapi"/>
 </module>
