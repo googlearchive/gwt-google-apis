@@ -25,7 +25,7 @@ There are three steps required for a GWT project to use the AJAX Search Library.
 
    1 Include the library JAR file in the classpath
    1 Inherit com.google.gwt.search.Search in the module XML definition file. 
-   1 Include a <script> tag in your module in order to load the api and provide the AJAX Search key.
+   1 Include a &lt;script&gt; tag in your module in order to load the api and provide the AJAX Search key.
 
 We'll explain each as we set up a new project.
 
