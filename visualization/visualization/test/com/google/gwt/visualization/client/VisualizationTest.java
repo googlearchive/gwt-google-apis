@@ -154,6 +154,20 @@ public class VisualizationTest extends GWTTestCase {
    */
   protected void loadApi(final Runnable testRunnable,
       final boolean callFinishTest) {
+    loadApi(testRunnable, callFinishTest, ASYNC_DELAY_MS);
+  }
+
+  /**
+   * Loads the visualization API asynchronously and runs the specified test.
+   *
+   * @param testRunnable code to invoke when the API loadeded.
+   * @param callFinishTest if <code>true</code>, the finishTest() method is
+   *          called when the test completes. If <code>false</code>, the caller
+   *          is responsible for ending the test.
+   * @param asyncDelayMs number of milliseconds to wait for the test to finish.
+   */
+  protected void loadApi(final Runnable testRunnable,
+      final boolean callFinishTest, final int asyncDelayMs) {
     if (loaded) {
       testRunnable.run();
     } else {
@@ -166,7 +180,7 @@ public class VisualizationTest extends GWTTestCase {
           }
         }
       }, getVisualizationPackage());
-      delayTestFinish(ASYNC_DELAY_MS);
+      delayTestFinish(asyncDelayMs);
     }
   }
 

@@ -33,6 +33,7 @@ import java.util.Date;
  * of restricts this unit test.
  */
 public class MotionChartTest extends VisualizationTest {
+  public static final int MOTION_CHART_ASYNC_DELAY_MS = 30 * 1000;
 
   @Override
   protected void gwtSetUp() throws Exception {
@@ -52,7 +53,7 @@ public class MotionChartTest extends VisualizationTest {
         options.setSize(600, 200);
         RootPanel.get().add(new MotionChart(data, options));
       }
-    });
+    }, true, MOTION_CHART_ASYNC_DELAY_MS);
   }
 
   public void testMotionChartOptions() {
@@ -72,7 +73,7 @@ public class MotionChartTest extends VisualizationTest {
         options.setShowYScalePicker(true);
         RootPanel.get().add(new MotionChart(data, options));
       }
-    });
+    }, true, MOTION_CHART_ASYNC_DELAY_MS);
   }
 
   public void testMotionChartReady() {
@@ -90,7 +91,7 @@ public class MotionChartTest extends VisualizationTest {
         });
         RootPanel.get().add(widget);
       }
-    }, false);
+    }, false, MOTION_CHART_ASYNC_DELAY_MS);
   }
 
   /**
@@ -118,7 +119,7 @@ public class MotionChartTest extends VisualizationTest {
         RootPanel.get().add(widget);
         triggerStateChanged(widget.getJso());
       }
-    }, false);
+    }, false, MOTION_CHART_ASYNC_DELAY_MS);
   }
 
   @Override
