@@ -17,17 +17,17 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart.Options;
+import com.google.gwt.visualization.client.visualizations.ImageBarChart;
+import com.google.gwt.visualization.client.visualizations.ImageBarChart.Options;
 
 /**
- * Tests for the {@link ImageLineChart} class.
+ * Tests for the {@link ImageBarChart} class.
  */
-public class ImageLineChartTest extends VisualizationTest {
+public class ImageBarChartTest extends VisualizationTest {
 
   @Override
   protected String getVisualizationPackage() {
-    return ImageLineChart.PACKAGE;
+    return ImageBarChart.PACKAGE;
   }
 
   public void testLineChart() {
@@ -35,13 +35,13 @@ public class ImageLineChartTest extends VisualizationTest {
       public void run() {
         Widget widget;
         Options options = Options.create();
-        widget = new ImageLineChart(createCompanyPerformance(), options);
+        widget = new ImageBarChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });
   }
 
-  public void testLineChartAllOptions() {
+  public void testBarChartAllOptions() {
     loadApi(new Runnable() {
       public void run() {
         Widget widget;
@@ -53,12 +53,13 @@ public class ImageLineChartTest extends VisualizationTest {
         options.setLegend(LegendPosition.BOTTOM);
         options.setMin(0);
         options.setMax(100);
-        options.setShowAxisLines(false);
+        options.setIsStacked(false);
+        options.setIsVertical(true);
         options.setShowCategoryLabels(true);
         options.setShowValueLabels(true);
         options.setTitle("test");
         options.setValueLabelsInterval(20);
-        widget = new ImageLineChart(createCompanyPerformance(), options);
+        widget = new ImageBarChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });

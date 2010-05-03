@@ -17,31 +17,31 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart;
-import com.google.gwt.visualization.client.visualizations.ImageLineChart.Options;
+import com.google.gwt.visualization.client.visualizations.ImageSparklineChart;
+import com.google.gwt.visualization.client.visualizations.ImageSparklineChart.Options;
 
 /**
- * Tests for the {@link ImageLineChart} class.
+ * Tests for the {@link ImageSparklineChart} class.
  */
-public class ImageLineChartTest extends VisualizationTest {
+public class ImageSparklineChartTest extends VisualizationTest {
 
   @Override
   protected String getVisualizationPackage() {
-    return ImageLineChart.PACKAGE;
+    return ImageSparklineChart.PACKAGE;
   }
 
-  public void testLineChart() {
+  public void testAreaChart() {
     loadApi(new Runnable() {
       public void run() {
         Widget widget;
         Options options = Options.create();
-        widget = new ImageLineChart(createCompanyPerformance(), options);
+        widget = new ImageSparklineChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });
   }
 
-  public void testLineChartAllOptions() {
+  public void testAreaChartAllOptions() {
     loadApi(new Runnable() {
       public void run() {
         Widget widget;
@@ -53,12 +53,14 @@ public class ImageLineChartTest extends VisualizationTest {
         options.setLegend(LegendPosition.BOTTOM);
         options.setMin(0);
         options.setMax(100);
-        options.setShowAxisLines(false);
-        options.setShowCategoryLabels(true);
         options.setShowValueLabels(true);
+        options.setShowAxisLines(false);
         options.setTitle("test");
-        options.setValueLabelsInterval(20);
-        widget = new ImageLineChart(createCompanyPerformance(), options);
+        options.setColor("#ff0000");
+        options.setFill(true);
+        options.setLabelPosition("none");
+        options.setLayout("h");
+        widget = new ImageSparklineChart(createCompanyPerformance(), options);
         RootPanel.get().add(widget);
       }
     });
