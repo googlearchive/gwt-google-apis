@@ -32,5 +32,5 @@
     <when-type-is class="com.google.gwt.gears.sample.uploaddemo.client.UploadDemo"/>
     <when-property-is name="gears.installed" value="false"/>
   </replace-with>
-  <servlet path="/upload" class="com.google.gwt.gears.sample.upload.server.UploadServlet"/>
+  <servlet path="/upload" class="com.google.gwt.gears.sample.uploaddemo.server.UploadServlet"/>
 </module>
