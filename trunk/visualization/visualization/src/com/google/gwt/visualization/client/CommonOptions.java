@@ -85,7 +85,7 @@ public class CommonOptions extends AbstractDrawOptions {
   }-*/;
 
   public final native void setLegendFontSize(double fontSize) /*-{
-    this.legentFontSize = fontSize;
+    this.legendFontSize = fontSize;
   }-*/;
 
   public final native void setLegendTextColor(Color color) /*-{

@@ -118,15 +118,15 @@ public class MotionChart extends Visualization<MotionChart.Options> {
   }
 
   /**
-   * Returns the current state of the {@link MotioncChart}, serialized to a JSON
+   * Returns the current state of the {@link MotionChart}, serialized to a JSON
    * string. To assign this state to the chart, assign this string to the state
    * option in the draw() method. This is often used to specify a custom chart
    * state on startup, instead of using the default state.
    * 
    * @return a JSON encoded string indicating the state of the UI. This method
    *         may return <code>null</code> if the state was not supplied by
-   *         {@link Options#setState(String)} or a statechange event has not yet
-   *         fired.
+   *         {@link MotionChart.Options#setState(String)} or a statechange event
+   *         has not yet fired.
    */
   public final native String getState() /*-{
     var jso = this.@com.google.gwt.visualization.client.visualizations.Visualization::getJso()();
