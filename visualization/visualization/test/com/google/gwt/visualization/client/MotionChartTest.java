@@ -33,12 +33,18 @@ import java.util.Date;
  * of restricts this unit test.
  */
 public class MotionChartTest extends VisualizationTest {
-  public static final int MOTION_CHART_ASYNC_DELAY_MS = 30 * 1000;
+  public static final int MOTION_CHART_ASYNC_DELAY_MS = 40 * 1000;
 
-  @Override
-  protected void gwtSetUp() throws Exception {
-    cleanDom();
-  }
+  /**
+   * HACK: Part of workaround to avoid running
+   * {@link MotionChartTest#testMotionChartReady} and
+   * {@link MotionChartTest#testMotionChartStateChanged()} on FF, which fails if
+   * screen of the tester machine is locked.
+   */
+  private static native boolean isFF() /*-{
+    var ua = navigator.userAgent.toLowerCase();
+    return ua.indexOf("gecko") != -1;
+  }-*/;
 
   /**
    * This test case will try creating a simple MotionChart. It first asserts
@@ -77,21 +83,24 @@ public class MotionChartTest extends VisualizationTest {
   }
 
   public void testMotionChartReady() {
-    loadApi(new Runnable() {
-      public void run() {
-        DataTable data = createDataTable();
-        MotionChart.Options options = MotionChart.Options.create();
-        options.setSize(600, 200);
-        MotionChart widget = new MotionChart(data, options);
-        widget.addReadyHandler(new ReadyHandler() {
-          @Override
-          public void onReady(ReadyEvent event) {
-            finishTest();
-          }
-        });
-        RootPanel.get().add(widget);
-      }
-    }, false, MOTION_CHART_ASYNC_DELAY_MS);
+    // see javadoc for isFF()
+    if (!isFF()) {
+      loadApi(new Runnable() {
+        public void run() {
+          DataTable data = createDataTable();
+          MotionChart.Options options = MotionChart.Options.create();
+          options.setSize(600, 200);
+          MotionChart widget = new MotionChart(data, options);
+          widget.addReadyHandler(new ReadyHandler() {
+            @Override
+            public void onReady(ReadyEvent event) {
+              finishTest();
+            }
+          });
+          RootPanel.get().add(widget);
+        }
+      }, false, MOTION_CHART_ASYNC_DELAY_MS);
+    }
   }
 
   /**
@@ -100,31 +109,39 @@ public class MotionChartTest extends VisualizationTest {
    * motions of setting up the event.
    */
   public void testMotionChartStateChanged() {
-    loadApi(new Runnable() {
-      public void run() {
-        DataTable data = createDataTable();
-        MotionChart.Options options = MotionChart.Options.create();
-        options.setSize(600, 200);
-        final MotionChart widget = new MotionChart(data, options);
-        widget.addStateChangeHandler(new StateChangeHandler() {
-          @Override
-          public void onStateChange(StateChangeEvent event) {
-            // Unfortunately, when the state change is triggered manually in
-            // this way, there is no getState() method present on the
-            // MotionChart object, so we can't use an automatic test. See
-            // MotionDemo.java
-            finishTest();
-          }
-        });
-        RootPanel.get().add(widget);
-        triggerStateChanged(widget.getJso());
-      }
-    }, false, MOTION_CHART_ASYNC_DELAY_MS);
+    // see javadoc for isFF()
+    if (!isFF()) {
+      loadApi(new Runnable() {
+        public void run() {
+          DataTable data = createDataTable();
+          MotionChart.Options options = MotionChart.Options.create();
+          options.setSize(600, 200);
+          final MotionChart widget = new MotionChart(data, options);
+          widget.addStateChangeHandler(new StateChangeHandler() {
+            @Override
+            public void onStateChange(StateChangeEvent event) {
+              // Unfortunately, when the state change is triggered manually in
+              // this way, there is no getState() method present on the
+              // MotionChart object, so we can't use an automatic test. See
+              // MotionDemo.java
+              finishTest();
+            }
+          });
+          RootPanel.get().add(widget);
+          triggerStateChanged(widget.getJso());
+        }
+      }, false, MOTION_CHART_ASYNC_DELAY_MS);
+    }
   }
 
   @Override
   protected String getVisualizationPackage() {
     return MotionChart.PACKAGE;
+  }
+
+  @Override
+  protected void gwtSetUp() throws Exception {
+    cleanDom();
   }
 
   /**
