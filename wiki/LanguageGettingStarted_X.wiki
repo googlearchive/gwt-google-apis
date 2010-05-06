@@ -33,9 +33,10 @@ Start by creating a new GWT project called !SimpleLanguage as described in the
 Since we are working with an additional library, add the library `gwt-language.jar` to the Java classpath.  Then, add the module `com.google.gwt.language.Language` to your module.
 
 {{{
-$PP_OFF
     <inherits name='com.google.gwt.language.Language' />
 }}}
+
+For better effect please remove the .css reference from the SimpleLanguage.html page and remove all HTML tags in the body.
 
 ==Writing your first application==
 

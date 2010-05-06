@@ -39,9 +39,11 @@ Since we are working with an additional library, add the library `gwt-search.jar
     <inherits name='com.google.gwt.search.Search' />
 }}}
 
+For better effect please remove the .css reference from the SimpleSearch.html page and remove all HTML tags in the body.
+
 ==Adding the AJAX Search script tag to your module XML file==
 
-Your GWT application will need access to the AJAX Search API, as well as the API key. In order to do this, you must include a <script> tag in your module's `SimpleSearch.gwt.xml` file. Include the script tag shown in your module.xml file above the automatically generated stylesheet reference.
+Your GWT application will need access to the AJAX Search API, as well as the API key. In order to do this, you must include a `<script>` tag in your module's `SimpleSearch.gwt.xml` file. Include the script tag shown in your module.xml file above the automatically generated stylesheet reference.
 
 {{{
     <!--
@@ -57,7 +59,7 @@ Your GWT application will need access to the AJAX Search API, as well as the API
     <stylesheet src='SimpleSearch.css' />   
 }}}
 
-You can obtain a Google AJAX Search API key at [http://code.google.com/apis/ajaxsearch/signup.html]. Replace the string `ABC` in the src attribute below with the key obtained from the site above.
+You can obtain a Google AJAX Search API key at [http://code.google.com/apis/ajaxsearch/signup.html]. Append &amp;key=ABC to the src attribute, replacing ABC with the key obtained from the site above.
 
 == Basic steps to use the API ==
 
@@ -109,7 +111,7 @@ Congratulations! You should now have Google AJAX Search working within a GWT app
   [http://gwt-google-apis.googlecode.com/svn/wiki/AJAXSearch2.png]
 
 
-== Using a !SearchControl with a !SearchCompleteHandler ==
+== Using a !SearchControl with a !SearchResultsHandler ==
 
 The Search API is not limited to showing results in just the format above. By registering a  [http://gwt-google-apis.googlecode.com/svn/javadoc/search/1.0/com/google/gwt/search/client/SearchCompleteListener SearchCompleteListener.html], you can access all the details of the results returned from the search and handle them in a programmatic way.
 
@@ -124,32 +126,38 @@ public class SimpleSearch implements EntryPoint {
 
     resultsTable = new FlexTable();
     SearchControlOptions options = new SearchControlOptions();
-    
+
     WebSearch webSearch = new WebSearch();
     // Choose no HTML generation for quicker results.
     webSearch.setNoHtmlGeneration();
     options.add(webSearch);
     final SearchControl control = new SearchControl(options);
-    control.addSearchCompleteHandler(new SearchCompleteHandler() {
+    control.addSearchResultsHandler(new SearchResultsHandler() {
 
-      public void onSearchComplete(SearchCompleteEvent event) {
-        WebSearch search = (WebSearch) event.getSearch();
-        WebResult result = (WebResult) event.getResult();
-        ++currentRow;
-        
-        resultsTable.setText(currentRow, 0, "" + currentRow);
-        resultsTable.setHTML(currentRow, 1, "<a href=\"" + result.getUrl() + "\">" 
-            + result.getTitle() + "</a>");
+      public void onSearchResults(SearchResultsEvent event) {
+        JsArray<? extends Result> results = event.getResults();
+
+        for (int i = 0; i < results.length(); i++) {
+          if (results.get(i).getResultClass().equals(
+              ResultClass.WEB_SEARCH_RESULT)) {
+            currentRow++;
+
+            WebResult result = (WebResult) results.get(i);
+            resultsTable.setText(currentRow, 0, "" + currentRow);
+            resultsTable.setHTML(currentRow, 1, "<a href=\"" + result.getUrl()
+                + "\">" + result.getTitle() + "</a>");
+          }
+        }
       }
 
     });
     final TextBox textBox = new TextBox();
     textBox.setText("treehouse");
     Button button = new Button("Run Search");
-    button.addClickListener(new ClickListener() {
+    button.addClickHandler(new ClickHandler() {
 
-      public void onClick(Widget sender) {
-        for (int i = 0 ; resultsTable.getRowCount() > 0; ++i) {
+      public void onClick(ClickEvent event) {
+        for (int i = 0; resultsTable.getRowCount() > 0; ++i) {
           resultsTable.removeRow(0);
         }
         currentRow = 0;
@@ -162,7 +170,7 @@ public class SimpleSearch implements EntryPoint {
     vp.add(textBox);
     vp.add(button);
     vp.add(resultsTable);
-    
+
     RootPanel.get().add(vp);
 
   }

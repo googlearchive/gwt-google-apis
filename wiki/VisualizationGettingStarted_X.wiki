@@ -17,6 +17,15 @@ You can download the latest production releases of the libraries from the [http:
 
 You can reference the `.jar` file either from the folder that you uncompressed the project in, or copy it and reference it from another location.  In this example, we've chosen to copy the file to the path `/usr/local/gwt-visualization`.
 
+== Setting up a GWT Project to use the Language API===
+
+There are three steps needed to use the Visualization API in a GWT project:
+
+   # Include the library JAR file in the classpath
+   # Inherit com.google.gwt.visualization.Visualization in the module XML definition file. 
+
+We'll explain each step as we set up a new project.
+
 == Creating a New GWT Project ==
 
 Start by creating a new GWT project called !SimpleViz as described in the 
@@ -27,6 +36,8 @@ Since we are working with an additional library, add the library `gwt-language.j
 {{{
   <inherits name='com.google.gwt.visualization.Visualization'/>
 }}}
+
+For better effect please remove the .css reference from the SimpleViz.html page and remove all HTML tags in the body.
 
 == A Simple Visualization ==
 
