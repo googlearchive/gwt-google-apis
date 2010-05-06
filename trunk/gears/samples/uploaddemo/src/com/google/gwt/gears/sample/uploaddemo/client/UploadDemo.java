@@ -94,7 +94,7 @@ public class UploadDemo implements EntryPoint {
 
         request.setCallback(new RequestCallback() {
           public void onResponseReceived(HttpRequest request) {
-            String msg = request.getStatus() + " " + request.getStatusText();
+            String msg = request.getStatus() + " " + request.getResponseText();
             if (request.getStatus() != 200) {
               result.setHTML("<p style=\"color:red\">" + msg + "</p>");
             } else {
