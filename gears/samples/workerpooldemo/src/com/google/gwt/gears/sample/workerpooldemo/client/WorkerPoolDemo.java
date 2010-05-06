@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,8 @@
 package com.google.gwt.gears.sample.workerpooldemo.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gears.client.Factory;
 import com.google.gwt.gears.client.workerpool.WorkerPool;
 import com.google.gwt.gears.client.workerpool.WorkerPoolMessageHandler;
@@ -23,7 +25,6 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -120,12 +121,12 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
         numDigitsListBox);
 
     buildControlPanelRow(resultTable, "Execute calculation using:", syncCalc);
-    syncCalc.setChecked(true);
+    syncCalc.setValue(true);
     buildControlPanelRow(resultTable, "", asyncCalc);
 
-    startStopButton.addClickListener(new ClickListener() {
+    startStopButton.addClickHandler(new ClickHandler() {
 
-      public void onClick(Widget sender) {
+      public void onClick(ClickEvent event) {
         if (calculationInProgress) {
           statusLabel.setText(statusLabel.getText() + "...Cancelled");
           stopCalculation();
@@ -139,7 +140,7 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
 
         startTime = System.currentTimeMillis();
         final int numDigits = Integer.valueOf(numDigitsListBox.getValue(numDigitsListBox.getSelectedIndex()));
-        if (syncCalc.isChecked()) {
+        if (syncCalc.getValue()) {
           /*
            * A DeferredCommand is used here so that the previous updates to the
            * user interface will appear. The synchronous computation will block
@@ -159,13 +160,13 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
     buildControlPanelRow(resultTable, "", startStopButton);
     tableWrapper.setWidget(resultTable);
 
-    // Position the Animation so that it looks centered. 
+    // Position the Animation so that it looks centered.
     Widget toy = new AnimationToy();
     AbsolutePanel toyWrapper = new AbsolutePanel();
     toyWrapper.setSize("450px", "210px");
     toyWrapper.add(toy, 70, 0);
     outerPanel.add(toyWrapper);
-    
+
     HTML desc = new HTML(INTERACTION_DESC);
     desc.setWidth("450px");
     outerPanel.add(desc);
@@ -175,7 +176,7 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
 
   /**
    * Utility routine to construct one row of the user interface control panel.
-   * 
+   *
    * @param table the table to add to.
    * @param text HTML text to add in the first column
    * @param w a widget in the control panel to add in the second column.
@@ -194,7 +195,7 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
    * to the number of digits requested. The method returns immediately after
    * sending the message. Meanwhile, the computation starts to run in the worker
    * when it receives the message.
-   * 
+   *
    * @param numDigits the number of digits of Pi to compute.
    */
   private void doAsyncCalculation(int numDigits) {
@@ -210,7 +211,7 @@ public class WorkerPoolDemo implements EntryPoint, WorkerPoolMessageHandler,
   /**
    * Computes the digits of Pi synchronously. The method will return after the
    * computation is complete.
-   * 
+   *
    * @param numDigits the number of digits of Pi to compute.
    */
   private void doSyncCalculation(int numDigits) {
