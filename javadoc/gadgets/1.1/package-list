@@ -1,0 +1,6 @@
+com.google.gwt.gadgets.client
+com.google.gwt.gadgets.client.event
+com.google.gwt.gadgets.client.impl
+com.google.gwt.gadgets.client.ui
+com.google.gwt.gadgets.linker
+com.google.gwt.gadgets.rebind

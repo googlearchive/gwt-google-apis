@@ -1,0 +1,13 @@
+com.google.gwt.gears.client
+com.google.gwt.gears.client.blob
+com.google.gwt.gears.client.blobbuilder
+com.google.gwt.gears.client.canvas
+com.google.gwt.gears.client.database
+com.google.gwt.gears.client.desktop
+com.google.gwt.gears.client.geolocation
+com.google.gwt.gears.client.httprequest
+com.google.gwt.gears.client.impl
+com.google.gwt.gears.client.localserver
+com.google.gwt.gears.client.workerpool
+com.google.gwt.gears.offline.client
+com.google.gwt.gears.offline.linker

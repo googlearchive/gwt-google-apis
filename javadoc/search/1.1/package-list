@@ -1,0 +1,6 @@
+com.google.gwt.ajaxloader.client
+com.google.gwt.search.client
+com.google.gwt.search.client.impl
+com.google.gwt.search.jsio.client
+com.google.gwt.search.jsio.client.impl
+com.google.gwt.search.jsio.rebind
