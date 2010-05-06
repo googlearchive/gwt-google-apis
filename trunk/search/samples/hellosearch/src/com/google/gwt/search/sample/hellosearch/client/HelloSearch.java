@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,7 @@
 package com.google.gwt.search.sample.hellosearch.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.search.client.ExpandMode;
@@ -27,9 +28,9 @@ import com.google.gwt.search.client.NewsResult;
 import com.google.gwt.search.client.NewsSearch;
 import com.google.gwt.search.client.Result;
 import com.google.gwt.search.client.ResultSetSize;
-import com.google.gwt.search.client.SearchCompleteHandler;
 import com.google.gwt.search.client.SearchControl;
 import com.google.gwt.search.client.SearchControlOptions;
+import com.google.gwt.search.client.SearchResultsHandler;
 import com.google.gwt.search.client.SearchStartingHandler;
 import com.google.gwt.search.client.SearchUtils;
 import com.google.gwt.search.client.VideoResult;
@@ -48,7 +49,7 @@ import com.google.gwt.user.client.ui.Widget;
  * HelloSearch application.
  */
 public class HelloSearch implements EntryPoint, KeepHandler,
-    SearchCompleteHandler, SearchStartingHandler {
+    SearchResultsHandler, SearchStartingHandler {
 
   private class GoogleCodeWebSearch extends WebSearch {
     public GoogleCodeWebSearch() {
@@ -144,23 +145,25 @@ public class HelloSearch implements EntryPoint, KeepHandler,
 
     SearchControl searchControl = new SearchControl(options);
     searchControl.addKeepHandler(this);
-    searchControl.addSearchCompleteHandler(this);
+    searchControl.addSearchResultsHandler(this);
     searchControl.addSearchStartingHandler(this);
     searchControl.execute("Google Web Toolkit");
     hp.add(searchControl);
+  }
+
+  public void onSearchStarting(SearchStartingEvent event) {
+    System.out.println("Searching for query: " + event.getQuery() + " : "
+        + event.getSearch().toString());
   }
 
   /**
    * This is just to show that the concrete returned types are those defined in
    * the API.
    */
-  public void onSearchComplete(SearchCompleteEvent event) {
-    Result result = event.getResult();
-    System.out.println("The result is a " + result.getResultClass().name());
-  }
-
-  public void onSearchStarting(SearchStartingEvent event) {
-    System.out.println("Searching for query: " + event.getQuery() + " : "
-        + event.getSearch().toString());
+  public void onSearchResults(SearchResultsEvent event) {
+    JsArray<? extends Result> results = event.getResults();
+    for (int i = 0; i < results.length(); i++) {
+      System.out.println("The result is a " + results.get(i).getResultClass().name());
+    }
   }
 }
