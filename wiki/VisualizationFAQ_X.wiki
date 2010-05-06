@@ -58,9 +58,9 @@ Answer from a [http://groups.google.com/group/google-visualization-api/browse_th
 
 In Ubuntu (up to 9.04) I could get the timeline working with the following:
 
-  * GWT uses Mozilla 1.7 as hosted mode browser with its own plugins.  Flash player 10 does not work reliable with this old browser therefore grab flash 9 from http://www.adobe.com/go/tn_14266.
+  * GWT uses Mozilla 1.7 as development mode browser with its own plugins.  Flash player 10 does not work reliable with this old browser therefore grab flash 9 from http://www.adobe.com/go/tn_14266.
 
- * Copy the libflashplugin.so from the archive to /opt/gwt/mozilla-1.7.12/plugins (or whereever you have gwt installed) and restart the hosted mode browser
+ * Copy the libflashplugin.so from the archive to /opt/gwt/mozilla-1.7.12/plugins (or whereever you have gwt installed) and restart the development mode browser
 
 
 == I removed a !VisualizationWidget from a Panel.  When I added it back, it was gone!  What happened? ==
