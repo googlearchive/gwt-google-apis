@@ -15,11 +15,11 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties;
 import com.google.gwt.ajaxloader.client.Properties.TypeException;
-import com.google.gwt.visualization.client.Properties;
 
 /**
- * This class handles onmouseover events for visualizations such as 
+ * This class handles onmouseover events for visualizations such as
  * browsercharts.
  */
 public abstract class OnMouseOverHandler extends Handler {
@@ -39,14 +39,14 @@ public abstract class OnMouseOverHandler extends Handler {
     public int getColumn() {
       return column;
     }
-    
+
     public int getRow() {
       return row;
     }
   }
 
   public abstract void onMouseOverEvent(OnMouseOverEvent event);
-  
+
   @Override
   protected void onEvent(Properties properties) throws TypeException {
     int row = properties.getNumber("row").intValue();

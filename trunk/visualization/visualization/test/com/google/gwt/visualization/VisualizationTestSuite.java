@@ -23,6 +23,7 @@ import com.google.gwt.visualization.client.ArrowFormatTest;
 import com.google.gwt.visualization.client.BarChartTest;
 import com.google.gwt.visualization.client.BarFormatTest;
 import com.google.gwt.visualization.client.ColorFormatTest;
+import com.google.gwt.visualization.client.ColorTest;
 import com.google.gwt.visualization.client.ColumnChartTest;
 import com.google.gwt.visualization.client.CommonChartOptionsTest;
 import com.google.gwt.visualization.client.CommonOptionsTest;
@@ -71,6 +72,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(BarChartTest.class);
     suite.addTestSuite(BarFormatTest.class);
     suite.addTestSuite(ColorFormatTest.class);
+    suite.addTestSuite(ColorTest.class);
     suite.addTestSuite(ColumnChartTest.class);
     suite.addTestSuite(CommonChartOptionsTest.class);
     suite.addTestSuite(CommonOptionsTest.class);

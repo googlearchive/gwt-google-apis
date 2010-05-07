@@ -15,7 +15,7 @@
  */
 package com.google.gwt.visualization.client.events;
 
-import com.google.gwt.visualization.client.Properties;
+import com.google.gwt.ajaxloader.client.Properties;
 
 /**
  * A handler for select events. Select events are common events that are

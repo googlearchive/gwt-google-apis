@@ -15,15 +15,15 @@
  */
 package com.google.gwt.visualization.client.events;
 
-import com.google.gwt.visualization.client.Properties;
+import com.google.gwt.ajaxloader.client.Properties;
 
 /**
  * This class handles zoom out events for visualizations such as GeoMap.
  */
 public abstract class ZoomOutHandler extends Handler {
   /**
-   * The zoom out event is fired when the user clicks the zoom out button. 
-   * The ZoomOutEvent class is a placeholder.
+   * The zoom out event is fired when the user clicks the zoom out button. The
+   * ZoomOutEvent class is a placeholder.
    */
   public static class ZoomOutEvent {
   }

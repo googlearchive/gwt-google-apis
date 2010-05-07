@@ -173,6 +173,7 @@ public class AnnotatedTimeLineTest extends VisualizationTest {
           public void onReady(ReadyEvent event) {
             widget.setVisibleChartRange(new Date(108, 1, 2),
                 new Date(108, 1, 3));
+            @SuppressWarnings("unused")
             DateRange dateRange = widget.getVisibleChartRange();
 
             // These tests fail now, as setting the range programatically does
