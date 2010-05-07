@@ -3,4 +3,10 @@ Tracks interactions between this branch and other branches.
 See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
 
 Copies:
-/releases/search/1.1/ was created (r714) as a straight copy from /trunk/@r713
+/releases/search/1.1/ was created (r1678) as a straight copy from /trunk/@r1667
+
+Merges:
+--->The next merge into trunk will be 1668:????
+
+Changes in this branch (excluding changes to this file itself)
+
