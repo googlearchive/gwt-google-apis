@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project name="samples" default="build" basedir=".">
+  <property name="gwt.root" location=".."/>
+  <property name="project.tail" value="samples"/>
+  <property file="${gwt.root}/common.properties"/>
+  <import file="${gwt.root}/common.ant.xml"/>
+  <!-- "build" is the default when subprojects are directly targetted -->
+  <property name="target" value="build"/>
+  <target name="databasedemo" description="Build Database">
+    <gwt.ant dir="databasedemo"/>
+  </target>
+  <target name="gwtnote" description="Build GWTNote">
+    <gwt.ant dir="gwtnote"/>
+  </target>
+  <target name="managedresourcestoredemo" description="Build ManagedResourceStore">
+    <gwt.ant dir="managedresourcestoredemo"/>
+  </target>
+  <target name="resourcestoredemo" description="Build ResourceStore">
+    <gwt.ant dir="resourcestoredemo"/>
+  </target>
+  <target name="workerpooldemo" description="Build WorkerPool">
+    <gwt.ant dir="workerpooldemo"/>
+  </target>
+  <target name="uploaddemo" description="Build Upload">
+    <gwt.ant dir="uploaddemo"/>
+  </target>
+  <target name="-do" depends="databasedemo, gwtnote, managedresourcestoredemo, resourcestoredemo, workerpooldemo, uploaddemo" description="Run all subprojects"/>
+  <target name="build" description="Builds Google API Library for GWT Samples">
+    <antcall target="-do">
+      <param name="target" value="build"/>
+    </antcall>
+  </target>
+  <target name="checkstyle" description="Static analysis of Google API Library for GWT source">
+    <antcall target="-do">
+      <param name="target" value="checkstyle"/>
+    </antcall>
+  </target>
+  <target name="test" depends="build" description="Test GWT">
+    <antcall target="-do">
+      <param name="target" value="test"/>
+    </antcall>
+  </target>
+  <target name="clean" description="Cleans this project's intermediate and output files">
+    <delete dir="${project.build}"/>
+    <antcall target="-do">
+      <param name="target" value="clean"/>
+    </antcall>
+  </target>
+</project>

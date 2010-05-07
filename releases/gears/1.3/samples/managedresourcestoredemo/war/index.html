@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript">
+var url = window.location.href;
+var params = "";
+if (url.lastIndexOf("?") >= 0) {
+  params = url.substring(url.lastIndexOf("?"));
+  url = url.substring(0, url.lastIndexOf("?"));
+}
+window.location.href = url.substring(0, url.lastIndexOf("/")) + "/managedresourcestoredemo/ManagedResourceStoreDemo.html" + params;
+</script>
+</head>
+<html>
+Just redirecting.
+</html>
+</html>
