@@ -16,6 +16,7 @@
 
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.Properties;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -28,25 +29,23 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
  *      Query API Reference</a>
  */
 public class Query extends JavaScriptObject {
-  
+
   public static enum SendMethod {
-    XHR("xhr"),
-    SCRIPT_INJECTION("scriptInjection"),
-    MAKE_REQUEST("makeRequest"),
-    AUTO("auto");
-    
+    XHR("xhr"), SCRIPT_INJECTION("scriptInjection"), MAKE_REQUEST("makeRequest"), AUTO(
+        "auto");
+
     private String strValue;
-    
+
     private SendMethod(String value) {
       strValue = value;
     }
-    
+
     @Override
     public String toString() {
       return strValue;
     }
   }
-  
+
   public static class Options extends Properties {
     public static Options create() {
       return JavaScriptObject.createObject().cast();
@@ -62,7 +61,7 @@ public class Query extends JavaScriptObject {
     public final native void setMakeRequestParams(JavaScriptObject params) /*-{
       this.makeRequestParams = params;
     }-*/;
-    
+
     private final native void setSendMethod(String sendMethod) /*-{
       this.sendMethod = sendMethod;
     }-*/;

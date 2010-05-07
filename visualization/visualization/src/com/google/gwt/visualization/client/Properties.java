@@ -17,15 +17,18 @@ package com.google.gwt.visualization.client;
 
 /**
  * Name/value map with additional properties.
+ * 
+ * @deprecated use {@link com.google.gwt.ajaxloader.client.Properties}
  */
+@Deprecated
 public class Properties extends com.google.gwt.ajaxloader.client.Properties {
   protected Properties() {
   }
 
   /**
-   * @deprecated 
-   * Use {@link com.google.gwt.ajaxloader.client.Properties#getNumber(String)} 
-   * instead.
+   * @deprecated Use
+   *             {@link com.google.gwt.ajaxloader.client.Properties#getNumber(String)}
+   *             instead.
    */
   @Deprecated
   public final native int getInt(String name) /*-{

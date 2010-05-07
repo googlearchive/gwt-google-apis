@@ -18,6 +18,7 @@ package com.google.gwt.visualization.client;
 
 import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
 
 /**
@@ -52,8 +53,16 @@ public class CommonOptions extends AbstractDrawOptions {
     this.colors = colors;
   }-*/;
 
+  public final native void setColors(JsArray<Color3D> colors) /*-{
+    this.colors = colors;
+  }-*/;
+
   public final void setColors(String... colors) {
     setColors(ArrayHelper.toJsArrayString(colors));
+  }
+
+  public final void setColors(Color3D... colors) {
+    setColors(ArrayHelper.toJsArray(colors));
   }
 
   public final native void setEnableTooltip(boolean enableTooltip) /*-{

@@ -40,6 +40,8 @@ public class CommonOptionsTest extends VisualizationTest {
         options.setBackgroundColor("pink");
         options.setBorderColor("pink");
         options.setColors("pink", "black", "white");
+        options.setColors(Color3D.create("#ff0000", "#ff2222"), Color3D.create(
+            "#00ff00", "#22ff22"));
         options.setFocusBorderColor("pink");
         options.setLegendBackgroundColor("pink");
         options.setLegendFontSize(36.0);
@@ -49,16 +51,16 @@ public class CommonOptionsTest extends VisualizationTest {
         options.setTitleFontSize(48.0);
         options.setTooltipHeight(12);
         options.setTooltipWidth(60);
-        
+
         Widget widget = new PieChart(data, options);
         RootPanel.get().add(widget);
         Element div = widget.getElement();
         // assert that the div's first child is an iframe
-        IFrameElement.as(div.getFirstChildElement());  
+        IFrameElement.as(div.getFirstChildElement());
       }
     });
   }
-  
+
   public void testHeight() {
     loadApi(new Runnable() {
       public void run() {

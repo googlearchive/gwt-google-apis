@@ -15,16 +15,16 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties;
 import com.google.gwt.ajaxloader.client.Properties.TypeException;
-import com.google.gwt.visualization.client.Properties;
 
 /**
- * This class handles onmouseout events for visualizations such as 
+ * This class handles onmouseout events for visualizations such as
  * browsercharts.
  */
 public abstract class OnMouseOutHandler extends Handler {
   /**
-   * The onmouseout event is fired when the mouse is out of data displayed in 
+   * The onmouseout event is fired when the mouse is out of data displayed in
    * the visualization.
    */
   public static class OnMouseOutEvent {
@@ -39,14 +39,14 @@ public abstract class OnMouseOutHandler extends Handler {
     public int getColumn() {
       return column;
     }
-    
+
     public int getRow() {
       return row;
     }
   }
 
   public abstract void onMouseOutEvent(OnMouseOutEvent event);
-  
+
   @Override
   protected void onEvent(Properties properties) throws TypeException {
     int row = properties.getNumber("row").intValue();

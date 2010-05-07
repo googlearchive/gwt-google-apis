@@ -16,6 +16,7 @@
 
 package com.google.gwt.visualization.client;
 
+import com.google.gwt.ajaxloader.client.Properties;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -23,7 +24,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * either the name of the color as a string, or the detailed color specification
  * as implemented by the following class.
  */
-public class Color extends JavaScriptObject {
+public class Color extends Properties {
   public static Color create() {
     return JavaScriptObject.createObject().cast();
   }

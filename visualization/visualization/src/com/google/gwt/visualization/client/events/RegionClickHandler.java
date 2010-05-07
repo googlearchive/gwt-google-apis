@@ -15,8 +15,8 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties;
 import com.google.gwt.ajaxloader.client.Properties.TypeException;
-import com.google.gwt.visualization.client.Properties;
 
 /**
  * This class handles region click events for visualizations such as GeoMap.

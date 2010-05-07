@@ -15,8 +15,8 @@
  */
 package com.google.gwt.visualization.client.events;
 
+import com.google.gwt.ajaxloader.client.Properties;
 import com.google.gwt.ajaxloader.client.Properties.TypeException;
-import com.google.gwt.visualization.client.Properties;
 
 /**
  * This class handles sort events for visualizations such as Table.
@@ -39,7 +39,7 @@ public abstract class SortHandler extends Handler {
     }
 
     public boolean isAscending() {
-      return ascending;
+     return ascending;
     }
   }
 

@@ -15,16 +15,16 @@
  */
 package com.google.gwt.visualization.client.events;
 
-import com.google.gwt.visualization.client.Properties;
+import com.google.gwt.ajaxloader.client.Properties;
 
 /**
- * A handler for ready events. Ready events are common events that are
- * supported by many different visualizations.
+ * A handler for ready events. Ready events are common events that are supported
+ * by many different visualizations.
  */
 public abstract class ReadyHandler extends Handler {
   /**
-   * The ready event is fired when visualization has finished rendering. 
-   * The ReadyEvent class is a placeholder.
+   * The ready event is fired when visualization has finished rendering. The
+   * ReadyEvent class is a placeholder.
    */
   public static class ReadyEvent {
   }
