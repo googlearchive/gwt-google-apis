@@ -1,0 +1,20 @@
+﻿#summary Frequently Asked Questions about the GWT bindings for AJAX Search
+
+= AJAX Search FAQs =
+
+These FAQs refer to the Google AJAX Search API Library for GWT.  See also [Overview Project Overview] for general information on the Google API Libraries for GWT.
+
+<wiki:toc max_depth="2" />
+
+== Using the AJAX Search RESTful interface ==
+
+There is no explicit API support at this time for the AJAXSearch RESTful interface, but you can implement it with a combination of the GWT's `RequestBuilder` class and  and [http://code.google.com/webtoolkit/doc/latest/DevGuideCodingBasicsOverlay.html JavaScript overlay types]. 
+
+== Why is there a `gwt` argument in the query line on the <script> tag to load the AJAX Search API? ==
+
+This optional parameter is used by Google to collect data on what percentage of API traffic is generated from apps built with GWT.
+
+== I have problems running my application on Chrome. I use Linux / Mac OS X ==
+
+It probably happens because you try to run application from your filesystem. You can read [http://blog.chromium.org/2008/12/security-in-depth-local-web-pages.html here] about recent security update in Chrome browser, which most likely is cause of your problems. Please use other browser or upload your files to web server to use Chrome.
+

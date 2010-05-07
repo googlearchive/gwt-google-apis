@@ -1,0 +1,22 @@
+﻿#summary GWT Language API questions that are asked frequently.
+
+= Language API FAQs = 
+
+<wiki:toc max_depth="2" />
+
+== What Languages are supported by the Language API? ==
+
+Check the underlying [http://code.google.com/apis/ajaxlanguage Ajax Language JavaScript API documentation] for a list of the currently supported languages.  If a new language is added to the !JavaScript API but not yet supported by the Language enumeration, please file an [http://code.google.com/p/gwt-google-apis/issues/list issue].  In the interim, you can pass in the text representation of the language code. 
+
+== Where can I go to get help with using the Language APIs? ==
+
+You may post questions to the  [http://groups.google.com/group/gwt-google-apis GWT-Google-Apis] group, which is the forum for the developers of the GWT wrappers for all Google APIs.  You can also try the [http://groups.google.com/group/gwt-google-api Google-Web-Toolkit] group which is the main public forum for GWT. 
+  
+== What should I do if I think I've found a bug? ==
+
+First post your bug to the [http://groups.google.com/group/gwt-google-api GWT-Google-Apis] group for discussion.  There may be a workaround or a patch already in place for the problem.  Bugs are logged in the [http://code.google.com/p/gwt-google-apis/issues/list Issue Tracker].  Please reserve the issue tracker for bugs with the API itself, and not for diagnosing problems with a particular application.
+
+== I have problems running my application on Chrome. I use Linux / Mac OS X ==
+
+It probably happens because you try to run application from your filesystem. You can read [http://blog.chromium.org/2008/12/security-in-depth-local-web-pages.html here] about recent security update in Chrome browser, which most likely is cause of your problems. Please use other browser or upload your files to web server to use Chrome.
+
