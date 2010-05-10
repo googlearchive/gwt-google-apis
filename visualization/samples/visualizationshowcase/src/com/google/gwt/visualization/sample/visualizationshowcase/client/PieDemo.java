@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.visualizations.PieChart;
+import com.google.gwt.visualization.client.visualizations.PieChart.PieLegendPosition;
 
 /**
  * Demo for PieChart visualization.
@@ -38,6 +39,7 @@ public class PieDemo implements LeftTabPanel.WidgetProvider {
     options.set3D(true);
     options.setTitle("My Daily Activities");
     options.setEnableTooltip(true);
+    options.setLegend(PieLegendPosition.LABEL);
 
     PieChart viz = new PieChart(data, options);
     Label status = new Label();
