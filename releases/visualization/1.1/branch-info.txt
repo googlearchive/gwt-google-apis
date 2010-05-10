@@ -1,0 +1,12 @@
+branch-info.txt for gwt-google-apis Visualization 1.1 release:
+Tracks interactions between this branch and other branches. 
+See: http://code.google.com/p/google-web-toolkit/wiki/ManagingMerges
+
+Copies:
+/releases/visualization/1.1/ was created (r1698) as a straight copy from /trunk/@r1697
+
+Merges:
+--->The next merge into trunk will be 1698:????
+
+Changes in this branch (excluding changes to this file itself)
+
