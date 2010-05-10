@@ -13,8 +13,8 @@ The following items were gleaned from the issue tracker and informal requests on
 == In progress ==
 
 || *Project* || *Primary Contact* ||
-|| Open Social support || Sascha Haeberling ||
-|| Open Social Gadget Support || Sascha Haeberling ||
+|| Open Social support || Piotr Swigon ||
+|| Open Social Gadget Support || Piotr Swigon ||
 || Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=228 Issue 228] Google Maps StreetView support || Piotr Swigon ||
 
 == Large Effort Projects ==
@@ -25,6 +25,8 @@ The following items were gleaned from the issue tracker and informal requests on
 || GData: Add support for the GData library || _none_ (coordinate w/ gwt-gdata project?) ||
 || AJAX Feed API: [http://code.google.com/p/gwt-google-apis/issues/detail?id=25 Issue 25] Add support for the AJAX Feed Library || _none_ ||
 || Gadgets: Add gadgets.* bindings (compatible with opensocial containers) || _none_ ||
+|| [http://code.google.com/apis/earth/ Google Eart API] || _none_ ||
+|| [http://code.google.com/apis/youtube/ YouTube API] || _none_ ||
 
 == Medium Effort Projects ==
 
