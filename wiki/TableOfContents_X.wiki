@@ -1,6 +1,6 @@
 ﻿#summary Table of Contents for the Google API Libraries for Google Web Toolkit
  * [Overview Google API Libraries Overview]
- * AJAX Search
+ * Search
    * [AJAXSearchGettingStarted Getting Started]
    * [AJAXSearchJavadoc API Reference]
    * [AJAXSearchSampleApplications Sample Applications]

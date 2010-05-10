@@ -82,3 +82,12 @@ No.  See [http://code.google.com/apis/visualization/faq.html#offline the Visuali
 == Can I use the Visualization API for GWT in a plain Java application without using GWT? ==
 
 No.  The gwt-visualization library merely wraps a set of JavaScript APIs and is dependent on the underlying browse, flash plugin, and uses the network to communicate with Google's servers.
+
+== I'm using GWT 2.0 and I have a problem running visualization on IE8 ==
+
+Please check if you have a <!DOCTYPE html> declaration at the top of your html files.
+
+== I have problems running my application from file ==
+
+For modern browsers it's common to forbid cross-file references, which most likely is the cause of your problems. You can run `ant devmode` command to start development mode, and paste the starup URL without `?gwt.codesvr=127.0.0.1:9997` suffix into your browser (port may vary). It will make your embedded web server serve your files in a production mode.
+
