@@ -15,6 +15,8 @@
  */
 package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.visualizations.Toolbar;
 import com.google.gwt.visualization.client.visualizations.Toolbar.Component;
@@ -24,39 +26,48 @@ import com.google.gwt.visualization.client.visualizations.Toolbar.Type;
  * Demo for the Visualization Toolbar.
  */
 public class ToolbarDemo implements LeftTabPanel.WidgetProvider {
+  private static final String GADGET = 
+      "http://www.google.com/ig/modules/pie-chart.xml";
+  // HACK: I didn't really draw the pie chart from this data because I didn't
+  // want to bother with sending a query, but the data here more or less
+  // matches the chart data.
+  private static final String DATA_SOURCE = 
+      "http://spreadsheets.google.com/tq?key=tRC7Qb0eZXwKXmnnPOmNj3g&pub=1";
+
   public Widget getWidget() {
+    Panel result = new VerticalPanel();
+    PieDemo pieDemo = new PieDemo();
+    Widget pieWidget = pieDemo.getWidget();
+    result.add(pieWidget);
+    
     Toolbar toolbar = new Toolbar();
     
     Component component = Component.create();
     component.setType(Type.HTMLCODE);
-    component.setDataSource("datasource123htmlcode");
-    component.setGadget("gadget123htmlcode");
-    toolbar.addComponent(component);
-    
-    component = Component.create();
-    component.setType(Type.HTMLCODE);
-    component.setDataSource("datasource123htmlcode2");
-    component.setGadget("gadget123htmlcode2");
+    component.setDataSource(DATA_SOURCE);
+    component.setGadget(GADGET);
     toolbar.addComponent(component);
 
     component = Component.create();
     component.setType(Type.CSV);
-    component.setDataSource("datasource123csv");
-    component.setGadget("gadget123csv");
+    component.setDataSource(DATA_SOURCE);
+    component.setGadget(GADGET);
     toolbar.addComponent(component);
     
     component = Component.create();
     component.setType(Type.HTML);
-    component.setDataSource("datasource123html2");
-    component.setGadget("gadget123html2");
+    component.setDataSource(DATA_SOURCE);
+    component.setGadget(GADGET);
     toolbar.addComponent(component);    
 
     component = Component.create();
     component.setType(Type.IGOOGLE);
-    component.setDataSource("datasource123igoogle");
-    component.setGadget("gadget123igoogle2");
-    toolbar.addComponent(component);    
+    component.setDataSource(DATA_SOURCE);
+    component.setGadget(GADGET);
+    toolbar.addComponent(component);
+    
+    result.add(toolbar);
 
-    return toolbar;
+    return result;
   }
 }
