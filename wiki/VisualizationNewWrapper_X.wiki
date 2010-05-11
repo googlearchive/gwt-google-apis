@@ -22,7 +22,7 @@ However, if you want to use a visualization that does not yet have a GWT wrapper
 
 This document does not deal with supporting events; that subject is treated in [VisualizationEventModel a separate document].
 
-Most of the code samples in this document are lifted from [http://code.google.com/p/gwt-google-apis/source/browse/trunk/visualization/visualization/src/com/google/gwt/visualization/client/visualizations/MotionChart.java MotionChart] from the GWT Visualization API.  This is a simple example of a GWT visualization wrapper class.  You might want to have a quick look at the code before continuing.
+Most of the code samples in this document are lifted from [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/visualizations/MotionChart.java MotionChart] from the GWT Visualization API.  This is a simple example of a GWT visualization wrapper class.  You might want to have a quick look at the code before continuing.
 
 == The createJso() Method == 
 
@@ -80,7 +80,7 @@ Creating a setter method for an Options class that takes a array, date, or compl
 
 == Complex !JavaScript Option Types ==
 
-If the option expects a complex !JavaScript object, the parameter type should be a subclass of !JavaScriptObject.  The best way is to write your own subclass of !JavaScriptObject with setters (implemented in JSNI) that reflect the expected structure of the !JavaScript object.  A good example is the [http://code.google.com/p/gwt-google-apis/source/browse/trunk/visualization/visualization/src/com/google/gwt/visualization/client/Color.java Color] class from the GWT Visualization API.
+If the option expects a complex !JavaScript object, the parameter type should be a subclass of !JavaScriptObject.  The best way is to write your own subclass of !JavaScriptObject with setters (implemented in JSNI) that reflect the expected structure of the !JavaScript object.  A good example is the [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/Color.java Color] class from the GWT Visualization API.
 
 Compare the Color code to the specification of the [http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Configuration_Options backgroundColor option], one of the options that expects a complex object that can be any of the following types:
 

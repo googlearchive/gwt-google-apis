@@ -251,7 +251,7 @@ To provide a read-only view of a !DataTable, you can bind a [http://code.google.
 
 === Issuing a Query ===
 
-A data table can also be obtained from a data source that has been configured to operate with Google Visualizations (for example, Google Spreadsheets), using the [http://code.google.com/p/gwt-google-apis/source/browse/trunk/visualization/visualization/src/com/google/gwt/visualization/client/Query.java Query] class.  The `Query.send()` method takes a `Query.Callback` object that specifies what to do with the !QueryResponse.  If the !QueryResponse is not an error, you can call `QueryResponse.getDataTable()` and use the resulting !DataTable to draw the visualization. For example:
+A data table can also be obtained from a data source that has been configured to operate with Google Visualizations (for example, Google Spreadsheets), using the [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/Query.java Query] class.  The `Query.send()` method takes a `Query.Callback` object that specifies what to do with the !QueryResponse.  If the !QueryResponse is not an error, you can call `QueryResponse.getDataTable()` and use the resulting !DataTable to draw the visualization. For example:
 
 {{{
     String dataUrl = "http://spreadsheets.google.com/tq?"

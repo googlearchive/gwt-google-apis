@@ -25,7 +25,7 @@ You can either reference the `.jar` file from the folder that you uncompressed t
 
 Look at the sample program _Hello Gadgets_ that ships with the `gwt-gadgets` distribution
 
-   [http://code.google.com/p/gwt-google-apis/source/browse/trunk/gadgets/samples/hellogadgets/src/com/google/gwt/gadgets/sample/hellogadgets/client/HelloGadgets.java HelloGadgets.java]
+   [http://code.google.com/p/gwt-google-apis/source/browse/releases/gadgets/1.1/samples/hellogadgets/src/com/google/gwt/gadgets/sample/hellogadgets/client/HelloGadgets.java HelloGadgets.java]
 
 There are some differences you will notice from a standard GWT project.
 
