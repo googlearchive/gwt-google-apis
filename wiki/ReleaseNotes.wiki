@@ -1,5 +1,4 @@
 ﻿#summary Google API Library for Google Web Toolkit Release Notes
-#labels Featured
 
 == Release 1.0.0 ==
 
@@ -11,8 +10,6 @@ Initial release including support for [http://gears.google.com/ Gears].
     * Refreshing a Gears application in GWT's hosted browser will ignore any URLs captured via the !ResourceStore or !ManagedResourceStore classes.
     * The offline capabilities of the !GWTNote sample application are not yet complete.  The sample does demonstrate persistence using the Gears Database class.
     * The Gears !FileSubmitter class was excluded due to time constraints.
-
-
 
 
 
