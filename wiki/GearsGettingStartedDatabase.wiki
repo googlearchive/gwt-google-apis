@@ -149,5 +149,4 @@ In order to tell the compiler to add logic to the selection script to pull up yo
 
 Now, you should be able to execute your sample project in development mode by either running _ant devmode_ from the command line or using the _Run_ configuration from Eclipse.  
 
- _ Note: Using devmode mode with the Gears project on Windows will not work with Chrome, please use other browser _
-
+ _ Note: Using devmode mode with the Gears project on Windows will not work with Chrome, please use another browser _
