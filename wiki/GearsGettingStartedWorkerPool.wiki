@@ -9,7 +9,6 @@ Start by creating a new GWT project called !GearsWorkerPoolTutorial as described
 Since we are working with an additional library, add the library `gwt-gears.jar` to the Java classpath.  Then, add the module `com.google.gwt.gears.Gears` to your module.
 
 {{{
-$PP_OFF
     <inherits name='com.google.gwt.gears.Gears' />
 }}}
 
@@ -77,10 +76,10 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
     RootPanel.get().add(new HTML("<h2>Results</h2>"));
 
     // The background color toggles when this button is placed.
-    interactButton.addClickListener(new ClickListener() {
+    interactButton.addClickHandler(new ClickHandler() {
       private boolean darkBackground = false;
 
-      public void onClick(Widget w) {
+      public void onClick(ClickEvent event) {
         String color = "white";
         if (!darkBackground) {
           color = "grey";
@@ -92,8 +91,8 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
     });
 
     // Perform some simulated work synchronously
-    syncButton.addClickListener(new ClickListener() {
-      public void onClick(Widget w) {
+    syncButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         logMessage("Starting Synchronous...");
         syncWorker("Synchronous");
       }
@@ -104,8 +103,8 @@ public class GearsWorkerPoolTutorial implements EntryPoint,
      * This will load the code for the worker from a file named 'worker.js'
      * in the ../public directory.
      */
-    workerPoolButton.addClickListener(new ClickListener() {
-      public void onClick(Widget w) {
+    workerPoolButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         if (wp == null) {
           wp = Factory.getInstance().createWorkerPool();
           wp.setMessageHandler(GearsWorkerPoolTutorial.this);
@@ -218,7 +217,7 @@ public class NoGears {
         "<font color=\"red\">ERROR: This browser does not support Gears. "
         + " Please <a href=\"http://gears.google.com/\">install Gears</a> " 
         + "and reload the application.  Note that GWT Gears applications can "
-        + "only be debugged in hosted mode on Windows.</font>"));
+        + "only be debugged in development mode on Windows.</font>"));
   }
 }
 }}}
@@ -237,13 +236,11 @@ In order to tell the compiler to add logic to the selection script to pull up yo
 
 == Run the !GearsWorkerPoolTutorial sample project ==
 
-Now, you should be able to execute your sample project in hosted mode by either running _!GearsWorkerPoolTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
+Now, you should be able to execute your sample project in development mode by either running _!GearsWorkerPoolTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
 
- _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
-
+ _ Note: Using devmode mode with the Gears project on Windows will not work with Chrome, please use other browser _
 
 And here is what the tutorial application looks like when run:
 
  http://gwt-google-apis.googlecode.com/svn/wiki/GearsWorkerPoolGettingStarted1.png
 
-If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.

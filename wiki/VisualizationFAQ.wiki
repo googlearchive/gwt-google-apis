@@ -17,17 +17,15 @@ First post your bug to the [http://groups.google.com/group/gwt-google-api GWT-Go
 
 == Why do I see the dialog "Password needed" when extracting the .zip distribution in Windows? ==
 
-There are some files created by the GWT compiler that are very long and cause issues with the built-in Windows compressed folder support.  You can try using a different program to unzip the folder (such as Cygwin or 7-zip), or you can use the `.tar.gz` distribution.
+There are some files created by the GWT compiler that are very long and cause issues with the built-in Windows compressed folder support.  You can try using a different program to unzip the folder (such as Cygwin or 7-zip).
 
 == Why can't I run the samples from the distribution? ==
 
 If you are on Windows, you may be hitting a path length problem.  Try unpacking the distribution with a third-party unzip program.   Also, try putting it in a folder with a short name off of the root of a drive.
 
-If you are having trouble running the sample scripts XXX-shell.cmd and XXX-compile.cmd,  make sure you have the GWT_HOME environment variable set.  It should contain a pathname that contains a uncompressed GWT distribution.
+If you are having trouble running the Apache Ant againt provided samples,  make sure you have the GWT_HOME environment variable set.  It should contain a pathname that contains a uncompressed GWT distribution.
 
 == Why do I get an exception saying that $wnd.google.visualization "is null" or "has no properties"? ==
-
-  _See [http://code.google.com/p/gwt-google-apis/issues/detail?id=271 Issue 217] for an unresolved issue surrounding running in Linux hosted mode_
  
 The following stack trace indicates that the Visualization JavaScript API is not getting loaded:
 
@@ -60,9 +58,9 @@ Answer from a [http://groups.google.com/group/google-visualization-api/browse_th
 
 In Ubuntu (up to 9.04) I could get the timeline working with the following:
 
-  * GWT uses Mozilla 1.7 as hosted mode browser with its own plugins.  Flash player 10 does not work reliable with this old browser therefore grab flash 9 from http://www.adobe.com/go/tn_14266.
+  * GWT uses Mozilla 1.7 as development mode browser with its own plugins.  Flash player 10 does not work reliable with this old browser therefore grab flash 9 from http://www.adobe.com/go/tn_14266.
 
- * Copy the libflashplugin.so from the archive to /opt/gwt/mozilla-1.7.12/plugins (or whereever you have gwt installed) and restart the hosted mode browser
+ * Copy the libflashplugin.so from the archive to /opt/gwt/mozilla-1.7.12/plugins (or whereever you have gwt installed) and restart the development mode browser
 
 
 == I removed a !VisualizationWidget from a Panel.  When I added it back, it was gone!  What happened? ==
@@ -88,4 +86,8 @@ No.  The gwt-visualization library merely wraps a set of JavaScript APIs and is 
 == I'm using GWT 2.0 and I have a problem running visualization on IE8 ==
 
 Please check if you have a <!DOCTYPE html> declaration at the top of your html files.
+
+== I have problems running my application from file ==
+
+For modern browsers it's common to forbid cross-file references, which most likely is the cause of your problems. You can run `ant devmode` command to start development mode, and paste the starup URL without `?gwt.codesvr=127.0.0.1:9997` suffix into your browser (port may vary). It will make your embedded web server serve your files in a production mode.
 

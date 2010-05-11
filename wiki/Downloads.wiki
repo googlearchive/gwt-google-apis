@@ -1,32 +1,30 @@
-﻿Currently, released libraries are available for the following APIs.  These APIs require [http://code.google.com/webtoolkit/download.html GWT 1.5.3] or higher.  [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].  
+﻿Currently, released libraries are available for the following APIs. [http://code.google.com/p/gwt-google-apis/downloads/list For a list of all downloads, see here].  
 
-*Gears API Library 1.2*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.2.1.tar.gz gwt-gears-1.2.1.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.2.1.zip gwt-gears-1.2.1.zip]
+These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] or higher.
 
-*Gadgets API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.0.3.tar.gz gwt-gadgets-1.0.3.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.0.3.zip gwt-gadgets-1.0.3.zip]
+*Gears API Library 1.3*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.3.0.zip gwt-gears-1.3.0.zip]
 
-*Google AJAX Search API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.2.tar.gz gwt-search-1.0.2.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.0.2.zip gwt-search-1.0.2.zip]
+*Gadgets API Library 1.1*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.1.0.zip gwt-gadgets-1.1.0.zip]
+
+*Google AJAX Search API Library 1.1*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.1.0.zip gwt-search-1.1.0.zip]
+
+*Google Visualization API Library 1.1*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.1.0.zip gwt-visualization-1.1.0.zip]
+
+*Google Language API Library 1.1*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-language-1.1.0.zip gwt-language-1.1.0.zip]
+
+*Google Ajax Loader API Library 1.1*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-ajaxloader-1.1.0.zip gwt-ajaxloader-1.1.0.zip]
+
+These APIs require [http://code.google.com/webtoolkit/versions.html GWT 1.5.3] or higher (soon to be updated).
 
 *Google Maps API Library 1.0*
   * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.4.tar.gz gwt-maps-1.0.4.tar.gz]
   * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.4.zip gwt-maps-1.0.4.zip]
- 
-*Google Visualization API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.2.tar.gz gwt-visualization-1.0.2.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.0.2.zip gwt-visualization-1.0.2.zip]
-
-*Google Language API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-language-1.0.0.tar.gz gwt-language-1.0.0.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-language-1.0.0.zip gwt-language-1.0.0.zip]
-
-*Google Ajax Loader API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-ajaxloader-1.0.0.tar.gz gwt-ajaxloader-1.0.0.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-ajaxloader-1.0.0.zip gwt-ajaxloader-1.0.0.zip]
 
 ----
 

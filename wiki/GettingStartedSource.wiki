@@ -67,7 +67,7 @@ $ GWT_TOOLS=/usr/local/gwt/tools
 $ export GWT_TOOLS
 }}}
 
-You will also need GWT_HOME setup to point to a binary build of the GWT distribution.
+You will also need GWT_HOME setup to point to a binary build of the [http://code.google.com/webtoolkit/download.html GWT distribution].
 
 After you have checked out the code from Subversion, you need to build the distribution.  You will need [http://ant.apache.org Apache Ant] and a Java JDK, such as the one available from [http://java.sun.com/ Sun Microsystems].  
 
@@ -78,7 +78,7 @@ $ ant
 ...
 
 BUILD SUCCESSFUL
-Total time: 2 minutes 47 seconds
+Total time: 10 minutes 47 seconds
 }}}  
 
 
@@ -112,6 +112,7 @@ Then update the module to include the Maps project module file and the Google Ma
 
 === Import the Eclipse project from the GWT Google APIs source code ===
 
+''This step is only needed for Maps and Visualization project''
 First, you will need to create a Linked Resource found in `eclipse/README.txt`.  For the Maps API, it is named `MAPS_API_ROOT`.  Set this value to the folder that contains the Maps source tree.
 
   1 Choose Window->Preferences... from the menu bar.
@@ -130,8 +131,8 @@ You may need to fixup the project's build path.
 
   1 Make sure the `gwt-maps` project is open and selected in the tree on the left.
   1 Navigate to  _Project->Properties...->Java Build Path->Libraries_
-  1 Add the `gwt-dev-<arch>.jar` and `gwt-user.jar` libraries to the _Libraries_ tab.
-  1 Alternatively, if you have imported the GWT source projects, add the gwt-dev-<arch> and gwt-user projects to the _Projects_ tab.
+  1 Add the `gwt-dev.jar` and `gwt-user.jar` libraries to the _Libraries_ tab.
+  1 Alternatively, if you have imported the GWT source projects, add the gwt-dev and gwt-user projects to the _Projects_ tab.
 
 === Updating Eclipse Build and Launch Configuration ===
 

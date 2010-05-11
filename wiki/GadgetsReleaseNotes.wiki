@@ -2,10 +2,23 @@
 
 = Gadgets API Library for GWT Release Notes =
 
+== Release Notes for 1.1.0==
+===Changes since 1.0.3===
+
+   * This library requires GWT 2.0.3 or later and Java 1.5 or later
+   * Library updated for compatibility with GWT 2.0
+   * Added support for multiple views and the Views API mapping
+   * Added Eclipse project files and ant script to all samples
+
+===Known Issues in 1.1.0===
+
+   * Gadgets debugging is currently not supported.
+
+----
 == Release Notes for 1.0.3==
 ===Changes since 1.0.2===
 
-   *  EnumValue tags in the gadget manifest are now omitted for hidden user prefs
+   * EnumValue tags in the gadget manifest are now omitted for hidden user prefs
    * Added the !LockedDomain feature
    * Caching of generated !JavaScript code is now set to 1 year. Previuosly it was just an hour. This should improve the loading time of GWT gadgets.
 

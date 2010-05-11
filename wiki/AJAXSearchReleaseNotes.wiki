@@ -3,6 +3,14 @@
 = Google AJAX Search API Library for GWT Release Notes =
 
 
+==Release Notes for 1.1.0==
+===Changes since 1.0.2===
+
+   * This library requires GWT 2.0.3 or later and Java 1.5 or later.
+   * Library updated for compatibility with GWT 2.0
+   * Added Eclipse project files and ant script to HelloSearch
+
+----
 ==Release Notes for 1.0.2==
 ===Changes since 1.0.1===
 

@@ -2,6 +2,18 @@
 
 =Google Visualization API Library for GWT Release Notes=
 
+
+==Release Notes for 1.1.0==
+===Changes since 1.0.2===
+   * This library requires GWT 2.0.3 or later and Java 1.5 or later
+   * Library updated for compatibility with GWT 2.0
+   * Added support for all image-charts: ImageAreaChart, ImageBarChart, ImageLineChart, ImagePieChart, ImageSparklineChart
+   * Added wrapper for Toolbar
+   * Updated Visualization API bindings to be up-to-date with published documentation
+   * Added Eclipse project files and ant script to all samples
+
+----
+
 ==Release Notes for 1.0.2==
 ===Changes since 1.0.1===
    * Adds new options and methods to OrgChart

@@ -7,6 +7,7 @@
   * You are familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit].
   * You know how to [http://code.google.com/eclipse/docs/creating_new_webapp.html create a new GWT project] using the Google Plugin for Eclipse.
   * You are familiar with [http://code.google.com/apis/ajaxlanguage/ Google Language API].
+  * You are using GWT 2.0 or later.
 
 == Downloading the Language API Library for GWT ==
 
@@ -32,32 +33,33 @@ Start by creating a new GWT project called !SimpleLanguage as described in the
 Since we are working with an additional library, add the library `gwt-language.jar` to the Java classpath.  Then, add the module `com.google.gwt.language.Language` to your module.
 
 {{{
-$PP_OFF
     <inherits name='com.google.gwt.language.Language' />
 }}}
+
+For better effect please remove the .css reference from the SimpleLanguage.html page and remove all HTML tags in the body.
 
 ==Writing your first application==
 
 Replace the content of `SimpleLanguage` class with the code below to get your application running!
 
 {{{
-package com.example.simplelang;
+package com.example.simplelang.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.language.client.LanguageUtils;
 import com.google.gwt.language.client.translation.Language;
 import com.google.gwt.language.client.translation.Translation;
 import com.google.gwt.language.client.translation.TranslationCallback;
 import com.google.gwt.language.client.translation.TranslationResult;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Main class for GWT language API demo.
@@ -69,8 +71,8 @@ public class SimpleLanguage implements EntryPoint {
     // Loads the translation API
     //
     // It is not safe to make calls into the translation API until the run()
-    //  method is invoked.  Use LanguageUtils.loadTransliteration() for the 
-    //  transliteration API.
+    // method is invoked. Use LanguageUtils.loadTransliteration() for the
+    // transliteration API.
     LanguageUtils.loadTranslation(new Runnable() {
       public void run() {
         RootPanel.get().add(new HTML("<h1>SimpleLanguage</h1><p>"));
@@ -88,9 +90,9 @@ public class SimpleLanguage implements EntryPoint {
     final Label outputLabel = new Label();
 
     Button translateButton = new Button("Translate");
-    translateButton.addClickListener(new ClickListener() {
+    translateButton.addClickHandler(new ClickHandler() {
 
-      public void onClick(Widget sender) {
+      public void onClick(ClickEvent event) {
         Translation.translate(transArea.getText(), Language.ENGLISH,
             Language.SPANISH, new TranslationCallback() {
 
@@ -102,7 +104,7 @@ public class SimpleLanguage implements EntryPoint {
                   outputLabel.setText(result.getTranslatedText());
                 }
               }
-        });
+            });
       }
     });
 

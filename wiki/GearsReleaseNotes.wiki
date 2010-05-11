@@ -1,6 +1,23 @@
 ﻿#summary Gears API Library for GWT Release Notes.
 
 = Gears API Library for GWT Release Notes =
+==Release Notes for 1.3.0==
+===Changes since 1.2.1==
+
+   * This library requires GWT 2.0.3 or later and Java 1.5 or later.
+   * Library updated for compatibility with GWT 2.0
+   * Updated the linker to filter out the .gwt.rpc files from the gears manifest by default (issue 280)
+   * Fixed method setOnProgressHandler() (issue 288)
+   * Added support for the BlobBuilder class and Blob.getBytes() method
+   * Added support for the Gears Canvas and Desktop's BlobMetaData object
+   * Added Eclipse project files and ant script to all samples
+
+===Known Issues in 1.3.0===
+
+   * Creating a Worker from a GWT module is not supported out-of-the-box.
+   * Filtering url with @filter in GearsManifest is not working with IE.
+
+----
 ==Release Notes for 1.2.1==
 ===Changes since 1.2.0==
 

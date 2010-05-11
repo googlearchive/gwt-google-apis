@@ -9,7 +9,6 @@ Start by creating a new GWT project called !GearsDatabaseTutorial as described i
 Since we are working with an additional library, add the library `gwt-gears.jar` to the Java classpath.  Then, add the module `com.google.gwt.gears.Gears` to your module.
 
 {{{
-$PP_OFF
     <inherits name='com.google.gwt.gears.Gears' />
 }}}
 
@@ -129,7 +128,7 @@ public class NoGears {
         "<font color=\"red\">ERROR: This browser does not support Gears. "
         + " Please <a href=\"http://gears.google.com/\">install Gears</a> " 
         + "and reload the application.  Note that GWT Gears applications can "
-        + "only be debugged in hosted mode on Windows.</font>"));
+        + "only be debugged in development mode on Windows.</font>"));
   }
 }
 }}}
@@ -148,8 +147,7 @@ In order to tell the compiler to add logic to the selection script to pull up yo
 
 == Run the !GearsDatabaseTutorial sample project ==
 
-Now, you should be able to execute your sample project in hosted mode by either running _!GearsDatabaseTutorial-shell_ from the command line or using the _Run_ configuration from Eclipse.  
+Now, you should be able to execute your sample project in development mode by either running _ant devmode_ from the command line or using the _Run_ configuration from Eclipse.  
 
- _ Note: Using hosted mode with the Gears project will only work on Windows as of the GWT 1.5 release. _
+ _ Note: Using devmode mode with the Gears project on Windows will not work with Chrome, please use other browser _
 
-If you would like to see your project in your host's web browser (web mode), press the _Compile/Browse_ button in hosted mode.  Try your application in a browser with and without the Gears plugin installed to see how it behaves.

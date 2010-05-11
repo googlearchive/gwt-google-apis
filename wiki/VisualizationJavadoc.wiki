@@ -3,6 +3,8 @@
 = Visualization API Class Reference =
 
 
-|| [http://gwt-google-apis.googlecode.com/svn/javadoc/visualization/1.0/index.html Browse the Visualization API JavaDoc] ||
+Browse the Visualization API Javadoc:
 
-  _Based on release 1.0.2_
+|| [http://gwt-google-apis.googlecode.com/svn/javadoc/visualization/1.0/index.html Release 1.0.2] ||
+|| [http://gwt-google-apis.googlecode.com/svn/javadoc/visualization/1.1/index.html Release 1.1.0] ||
+

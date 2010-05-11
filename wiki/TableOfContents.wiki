@@ -1,6 +1,6 @@
 ﻿#summary Table of Contents for the Google API Libraries for Google Web Toolkit
  * [Overview Google API Libraries Overview]
- * AJAX Search
+ * Search
    * [AJAXSearchGettingStarted Getting Started]
    * [AJAXSearchJavadoc API Reference]
    * [AJAXSearchSampleApplications Sample Applications]
@@ -52,7 +52,6 @@
    * [AjaxLoaderFAQ FAQs]
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
-   * [TemplateProject Template Project]
    * [DesigningAPIWrappers Design Considerations]
    * [GettingStartedSource Working with source]
    * [WishList Wish List for Contributions]

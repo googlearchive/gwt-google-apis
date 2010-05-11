@@ -3,4 +3,4 @@
 ==HelloGadgets 1.0.0==
 
 
-<wiki:gadget url="http://gwt.google.com/samples/HelloGadgets-1.0.1/com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets.gadget.xml" border="1">
+<wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.1.0/hellogadgets/com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets.gadget.xml" border="1">

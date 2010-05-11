@@ -55,6 +55,6 @@ One solution, as shown in the HelloGadgets sample, is to manually copy the style
 
 New features in 1.6 have included multiple versions of the Xerces library.  Try using the `gwt-gadgets-noredist.jar` jar file instead of `gwt-gears.jar` (new in the gwt-gadgets-1.0.2 release).  The `-noredist.jar` version does not include any extra library classes outside of the `com.google.gwt.gears` package.
 
-== I'm getting a version number mismatch when trying to debug in hosted mode. ==
+== I'm using GWT 1.6 and I'm getting a version number mismatch when trying to debug in hosted mode. ==
 
 See [http://code.google.com/p/gwt-google-apis/issues/detail?id=275 issue 275] regarding a mismatch when using the pre-compiled gwt-gadgets.jar.
