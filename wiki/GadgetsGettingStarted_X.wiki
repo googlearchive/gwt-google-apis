@@ -106,7 +106,7 @@ Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in
 
 Congratulations. Your new (if slightly boring) Gadget should  appear on the page.
 
-*Debugging Gadgets is not supproted in the current release. Below instructions are compatible with previous release of Gadgets API (1.0.2) and GWT 1.5.3 or 1.6*
+*<font color="red">Debugging Gadgets is not supproted in the current release. Below instructions are compatible with previous release of Gadgets API (1.0.2) and GWT 1.5.3 or 1.6</font>*
 
 == Debugging your Gadget in Hosted Mode ==
 
@@ -149,7 +149,7 @@ java.lang.RuntimeException: Failed to invoke native method: fireOnModuleLoadStar
 
 For most changes, you can make changes to your Java code and use the `Refresh` button on the hosted mode browser to see your changes.  If you would like to use the Java debugger, you can repeat the launch of hosted mode using a Java debugger (or launch the hosted mode shell from your IDE with the debugging setup.)
 
-*Gadgets debugging instructions end here*
+*<font color="red">Gadgets debugging instructions end here</font>*
 
 === Caching effects from the Gadget container ===
 
