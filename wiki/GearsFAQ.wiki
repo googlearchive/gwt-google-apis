@@ -25,5 +25,4 @@ New features in 1.6 have included multiple versions of the Xerces library.  Try 
 
 == I have problems running my application from file ==
 
-For modern browsers it's common to forbid cross-file references, which most likely is the cause of your problems. You can run `ant devmode` command to start development mode, and paste the starup URL without `?gwt.codesvr=127.0.0.1:9997` suffix into your browser (port may vary). It will make your embedded web server serve your files in a production mode.
-
+Modern browsers commonly forbid cross-file references, which result in permissions errors. From the command line, you can run `ant devmode` command to start development mode, make sure your project has been compiled, then paste the starup URL without the `?gwt.codesvr=127.0.0.1:9997` suffix into your browser (port may vary). It will make GWT devmode's embedded web server serve your compiled project in production mode.
