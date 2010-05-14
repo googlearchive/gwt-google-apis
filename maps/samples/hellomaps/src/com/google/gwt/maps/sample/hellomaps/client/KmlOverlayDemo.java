@@ -132,6 +132,9 @@ public class KmlOverlayDemo extends MapsDemo {
 
       @Override
       public void onSuccess(String url, GeoXmlOverlay overlay) {
+        if (geoXml != null) {
+          return;
+        }
         geoXml = overlay;
         removeAddButton.setEnabled(true);
         GWT.log("KML File " + url + " loaded successfully", null);
