@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,10 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.Control;
@@ -24,18 +28,16 @@ import com.google.gwt.maps.client.control.ControlPosition;
 import com.google.gwt.maps.client.control.HierarchicalMapTypeControl;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Panel;
@@ -48,14 +50,14 @@ import com.google.gwt.user.client.ui.Widget;
  * built-in GControl class. In this example, we create a simple zoom control
  * that has textual links rather than the graphical icons used in the standard
  * Google Maps zoom control.
- * 
+ *
  * The GTextualZoomControl class defines the two required methods of the
  * GControl interface: initialize(), in which we create the DOM elements
  * representing our control; and getDefaultPosition(), in which we return the
  * GControlPosition used if another position is not given when this control is
  * added to a map. See the class reference for GControl for more information
  * about the methods you can override when you create your custom controls.
- * 
+ *
  * All map controls should be added to the map container which can be accessed
  * with the getContainer() method on Map
  */
@@ -64,20 +66,20 @@ public class CustomControlDemo extends MapsDemo {
   /**
    * Images used in the custom map control for zooming.
    */
-  public interface ControlImageBundle extends ImageBundle {
-    AbstractImagePrototype minus();
+  public interface ControlImageBundle extends ClientBundle {
+    ImageResource minus();
 
-    @Resource("mozicon_earth.png")
-    AbstractImagePrototype moziconEarth();
+    @Source("mozicon_earth.png")
+    ImageResource moziconEarth();
 
-    AbstractImagePrototype plus();
+    ImageResource plus();
 
-    AbstractImagePrototype traffic();
+    ImageResource traffic();
   }
 
   private enum ControlDemos {
-    TEST_HIERARCHICAL_CONTROL("Hierarchical Control"), // 
-    TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"), // 
+    TEST_HIERARCHICAL_CONTROL("Hierarchical Control"), //
+    TEST_IMAGE_CUSTOM_ZOOM_CONTROL("Use a custom Image Zoom Control"), //
     TEST_TEXT_CUSTOM_ZOOM_CONTROL("Use a custom Text Zoom Control");
 
     final String value;
@@ -99,28 +101,28 @@ public class CustomControlDemo extends MapsDemo {
     @Override
     protected Widget initialize(final MapWidget map) {
       ControlImageBundle imgBundle = GWT.create(ControlImageBundle.class);
-      Image trafficImage = imgBundle.traffic().createImage();
-      Image satelliteImage = imgBundle.moziconEarth().createImage();
-      Image zoomInImage = imgBundle.plus().createImage();
-      Image zoomOutImage = imgBundle.minus().createImage();
+      Image trafficImage = new Image(imgBundle.traffic());
+      Image satelliteImage = new Image(imgBundle.moziconEarth());
+      Image zoomInImage = new Image(imgBundle.plus());
+      Image zoomOutImage = new Image(imgBundle.minus());
 
-      trafficImage.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
+      trafficImage.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent clickEvent) {
           map.setCurrentMapType(MapType.getNormalMap());
         }
       });
-      satelliteImage.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
+      satelliteImage.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent clickEvent) {
           map.setCurrentMapType(MapType.getSatelliteMap());
         }
       });
-      zoomInImage.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
+      zoomInImage.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent clickEvent) {
           map.zoomIn();
         }
       });
-      zoomOutImage.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
+      zoomOutImage.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent clickEvent) {
           map.zoomOut();
         }
       });
@@ -155,15 +157,15 @@ public class CustomControlDemo extends MapsDemo {
       Panel container = new FlowPanel();
       Button zoomInButton = new Button("Zoom In");
       zoomInButton.setStyleName("textualZoomControl");
-      zoomInButton.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
+      zoomInButton.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent clickEvent) {
           map.zoomIn();
         }
       });
       Button zoomOutButton = new Button("Zoom Out");
       zoomOutButton.setStyleName("textualZoomControl");
-      zoomOutButton.addClickListener(new ClickListener() {
-        public void onClick(Widget sender) {
+      zoomOutButton.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent clickEvent) {
           map.zoomOut();
         }
       });
@@ -219,8 +221,8 @@ public class CustomControlDemo extends MapsDemo {
 
   /**
    * Provide access to the HierarchicalMapTypeControl singleton.
-   * 
-   * @return an instance of the control is created if necessary. 
+   *
+   * @return an instance of the control is created if necessary.
    */
   private static HierarchicalMapTypeControl getHierarchicalMapTypeControl() {
     if (hControl != null) {
@@ -252,8 +254,8 @@ public class CustomControlDemo extends MapsDemo {
       actionListBox.addItem(cd.valueOf());
     }
 
-    actionListBox.addChangeListener(new ChangeListener() {
-      public void onChange(Widget sender) {
+    actionListBox.addChangeHandler(new ChangeHandler() {
+      public void onChange(ChangeEvent event) {
         displayCustomControl();
       }
     });
@@ -273,7 +275,8 @@ public class CustomControlDemo extends MapsDemo {
     map.addMapType(MapType.getMarsInfraredMap());
     vertPanel.add(map);
 
-    new Timer() { 
+    new Timer() {
+      @Override
       public void run() {
         displayCustomControl();
       }

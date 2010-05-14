@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,14 +16,16 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.InfoWindowContent.InfoWindowTab;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -32,7 +34,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * To create an info window, call the openInfoWindow method, passing it a
@@ -128,8 +129,8 @@ public class InfoWindowDemo extends MapsDemo {
     actionListBox.addItem(TEST_MAX_TITLE_CONTENT_WIDGET);
     actionListBox.addItem(TEST_MAP_BLOWUP);
 
-    actionListBox.addChangeListener(new ChangeListener() {
-      public void onChange(Widget sender) {
+    actionListBox.addChangeHandler(new ChangeHandler() {
+      public void onChange(ChangeEvent event) {
         displayInfoWindow();
       }
     });
@@ -177,7 +178,7 @@ public class InfoWindowDemo extends MapsDemo {
       HTML htmlWidget = new HTML("<h1>ATTENTION PLEASE</h1>"
           + "<p> I have a few things to say to you (click maximize.)</p>");
       content = new InfoWindowContent(htmlWidget);
-      content.setMaxContent("<p>Lorem ipsum dolor sit amet, consetetur "  
+      content.setMaxContent("<p>Lorem ipsum dolor sit amet, consetetur "
       + "sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut "
       + "labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos "
       + "et accusam et justo duo dolores et ea rebum. Stet clita kasd "
@@ -258,8 +259,8 @@ public class InfoWindowDemo extends MapsDemo {
     hp.add(b);
     hp.add(l);
     l.getElement().getStyle().setPropertyPx("margin", 7);
-    b.addClickListener(new ClickListener() {
-      public void onClick(Widget w) {
+    b.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         GWT.log("Got click in maximized window.", null);
         if (l.getText().equals("")) {
           l.setText("Hello World!");

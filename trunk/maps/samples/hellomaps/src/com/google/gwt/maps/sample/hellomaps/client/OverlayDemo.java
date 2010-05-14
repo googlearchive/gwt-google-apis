@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,8 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -26,13 +28,11 @@ import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.maps.client.overlay.PolylineOptions;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -41,7 +41,7 @@ import java.util.Comparator;
  * This example displays 10 markers at random locations on the map and a
  * polyline with 5 random points. GMarker use the default Google Maps icon if no
  * other icon is given. See Creating Icons for an example using custom icons.
- * 
+ *
  * Remember that you must include the VML namespace and CSS in your HTML
  * document to view polylines in IE. See <a
  * href="http://www.google.com/apis/maps/documentation/index.html#XHTML_and_VML">XHTML
@@ -53,7 +53,7 @@ public class OverlayDemo extends MapsDemo {
     TEST_POLYLINE_ENCODED("Display Polyline from an encoded string"), //
     TEST_POLYLINE_ENCODED_TRANSPARENT("Display Polyline from an encoded string with default transparency"), //
     TEST_POLYLINE_GEODESIC("Display a geodesic Polyline from Zurich to NYC"), //
-    TEST_POLYLINE_ONE("Display a Polyline"), // 
+    TEST_POLYLINE_ONE("Display a Polyline"), //
     TEST_TEN_MARKERS("Display ten Random Markers");
 
     final String value;
@@ -74,8 +74,8 @@ public class OverlayDemo extends MapsDemo {
       + "<ul>"
       + "<li><b>Display Polygon from an encoded string</b> Traces the outline of the Centennial Olympic Park fountain in Atlanta, GA USA.</li>\n"
       + "<li><b>Display Polyline from an encoded string</b> Traces a route across a bridge that is 100% opaque.</li>\n"
-      + "<li><b>Display Polyline from an encoded string with default transparency</b> Similar to the previous demo, but the transparency of the line is set to the default.</li>"      
-      + "<li><b>Display a geodesic Polyline from Zurich to NYC</b> A line that follows the curve of the earth.</li>"      
+      + "<li><b>Display Polyline from an encoded string with default transparency</b> Similar to the previous demo, but the transparency of the line is set to the default.</li>"
+      + "<li><b>Display a geodesic Polyline from Zurich to NYC</b> A line that follows the curve of the earth.</li>"
       + "<li><b>Display a Polyline</b> You should see a purple polyline with multiple segments "
       + "(The vertices are randomly generated).</li>\n"
       + "<li><b>Display ten random Markers</b> Ten Markers are placed at random points in the viewport.</li>"
@@ -124,11 +124,10 @@ public class OverlayDemo extends MapsDemo {
     for (OverlayDemos od : OverlayDemos.values()) {
       actionListBox.addItem(od.valueOf());
     }
-    actionListBox.addChangeListener(new ChangeListener() {
-      public void onChange(Widget sender) {
+    actionListBox.addChangeHandler(new ChangeHandler() {
+      public void onChange(ChangeEvent event) {
         displayOverlay();
       }
-
     });
 
     HorizontalPanel horizPanel = new HorizontalPanel();
@@ -144,7 +143,7 @@ public class OverlayDemo extends MapsDemo {
     vertPanel.add(map);
     map.addMapType(MapType.getHybridMap());
     map.setCurrentMapType(MapType.getHybridMap());
-    
+
     initWidget(vertPanel);
   }
 

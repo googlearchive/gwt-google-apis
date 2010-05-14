@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,17 +16,17 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.GeoXmlLoadCallback;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * The Google Maps API supports the KML and GeoRSS data formats for displaying
@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.Widget;
  * and polygons are rendered as Google Maps API polylines and polygons.
  * &ltGroundOverlay&gt; elements within KML files are rendered as GGroundOverlay
  * elements on the map.
- * 
+ *
  * GGeoXml objects are added to a map using the addOverlay() method. (You can
  * remove them from the map using removeOverlay().) Both KML and GeoRSS XML
  * files are supported.
@@ -93,15 +93,15 @@ public class KmlOverlayDemo extends MapsDemo {
     // using the show() and hide() methods
     showHideButton = new Button("Hide");
     removeAddButton.setEnabled(false);
-    removeAddButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    removeAddButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         toggleOverlay();
       }
     });
     panel.add(removeAddButton);
 
-    showHideButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    showHideButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         if (geoXml == null) {
           return;
         }

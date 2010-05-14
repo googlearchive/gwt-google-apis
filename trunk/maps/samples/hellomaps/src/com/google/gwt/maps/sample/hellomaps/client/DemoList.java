@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,12 +15,12 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.maps.sample.hellomaps.client.MapsDemo.MapsDemoInfo;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
 
@@ -37,8 +37,8 @@ public class DemoList extends Composite {
   public DemoList() {
     initWidget(list);
     list.setVisibleItemCount(1);
-    list.addChangeListener(new ChangeListener() {
-      public void onChange(Widget sender) {
+    list.addChangeHandler(new ChangeHandler() {
+      public void onChange(ChangeEvent event) {
         History.newItem(list.getItemText(list.getSelectedIndex()));
       }
     });

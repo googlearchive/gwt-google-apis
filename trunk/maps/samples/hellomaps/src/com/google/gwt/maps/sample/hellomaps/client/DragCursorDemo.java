@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.HTML;
@@ -60,7 +61,10 @@ public class DragCursorDemo extends MapsDemo {
   private final MapWidget map;
 
   public DragCursorDemo() {
-    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13, "crosshair", "text");
+    MapOptions options = MapOptions.newInstance();
+    options.setDraggableCursor("crosshair");
+    options.setDraggingCursor("text");
+    map = new MapWidget(LatLng.newInstance(37.4419, -122.1419), 13, options);
     map.setSize("500px", "300px");
     map.setUIToDefault();
     initWidget(map);
