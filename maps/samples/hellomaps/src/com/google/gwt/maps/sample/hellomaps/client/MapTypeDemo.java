@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,8 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.maps.client.MapType;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.ControlAnchor;
@@ -22,7 +24,6 @@ import com.google.gwt.maps.client.control.ControlPosition;
 import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.control.Control.CustomControl;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -64,8 +65,8 @@ public class MapTypeDemo extends MapsDemo {
       initListByMapType("Sky: ", MapType.getSkyMapTypes());
       initListByMapType("Mapmaker: ", MapType.getMapmakerMapTypes());
 
-      lb.addChangeListener(new ChangeListener() {
-        public void onChange(Widget sender) {
+      lb.addChangeHandler(new ChangeHandler() {
+        public void onChange(ChangeEvent event) {
           String selection = lb.getItemText(lb.getSelectedIndex());
           MapType mt = mapTypes.get(selection);
           if (mt != null) {

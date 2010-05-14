@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,16 +15,16 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.GroundOverlayVisibilityChangedHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.GroundOverlay;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This demo shows how to create a custom overlay in the form of a Rectangle and
@@ -72,12 +72,11 @@ public class GroundOverlayDemo extends MapsDemo {
     vp.setSpacing(10);
     map.setSize("500px", "500px");
     map.setUIToDefault();
-    
+
     hideButton = new Button("Hide");
     vp.add(hideButton);
-    hideButton.addClickListener(new ClickListener() {
-
-      public void onClick(Widget sender) {
+    hideButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         if (groundOverlay.isVisible()) {
           hideButton.setText("Show");
         } else {
@@ -85,7 +84,6 @@ public class GroundOverlayDemo extends MapsDemo {
         }
         groundOverlay.setVisible(!groundOverlay.isVisible());
       }
-
     });
     initWidget(vp);
   }

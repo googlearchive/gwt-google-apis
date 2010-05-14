@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,8 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
@@ -25,18 +27,15 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.FormHandler;
 import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.FormSubmitCompleteEvent;
-import com.google.gwt.user.client.ui.FormSubmitEvent;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
 
 /**
  * You can access the Google Maps API geocoder via the GClientGeocoder object.
@@ -44,7 +43,7 @@ import com.google.gwt.user.client.ui.Widget;
  * GLatLng. Because geocoding involves sending a request to Google's servers, it
  * can take some time. To avoid making your script wait, you should pass in a
  * callback function to execute after the response returns.
- * 
+ *
  * In this example, we geocode an address, add a marker at that point, and open
  * an info window displaying the address.
  */
@@ -105,20 +104,17 @@ public class GeocoderDemo extends MapsDemo {
     this.displayLatLng(ATLANTA);
 
     Button submit = new Button("Go!");
-    submit.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    submit.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         form.submit();
       }
     });
     formElements.add(submit);
     form.add(formElements);
-    form.addFormHandler(new FormHandler() {
-      public void onSubmit(FormSubmitEvent event) {
+    form.addSubmitHandler(new SubmitHandler() {
+      public void onSubmit(SubmitEvent event) {
         showAddress(address.getText());
-        event.setCancelled(true);
-      }
-
-      public void onSubmitComplete(FormSubmitCompleteEvent event) {
+        event.cancel();
       }
     });
     panel.add(form);
@@ -133,7 +129,7 @@ public class GeocoderDemo extends MapsDemo {
   /*
    * Build a horizontal panel to display latitude and longitude returned from
    * the geocoding service.
-   * 
+   *
    * Broke this function out to make the constructor more readable.
    */
   private Panel buildLatLngPanel() {

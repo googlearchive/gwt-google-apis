@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,10 @@
  */
 package com.google.gwt.maps.sample.hellomaps.client;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.PolygonCancelLineHandler;
@@ -29,9 +33,7 @@ import com.google.gwt.maps.client.overlay.PolyStyleOptions;
 import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.Grid;
@@ -184,8 +186,7 @@ public class DrawingOverlayDemo extends MapsDemo {
         message2.setText(message2.getText() + " : Polygon End at "
             + event.getLatLng() + ".  Bounds="
             + poly.getBounds().getNorthEast() + ","
-            + poly.getBounds().getSouthWest() + " area=" + poly.getArea()
-            + "m");
+            + poly.getBounds().getSouthWest() + " area=" + poly.getArea() + "m");
       }
     });
   }
@@ -217,8 +218,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     HorizontalPanel buttonPanel = new HorizontalPanel();
 
     Button addButton = new Button("Draw new object");
-    addButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    addButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         if (addPolyDialog == null) {
           addPolyDialog = makeAddPolyDialog();
         }
@@ -235,16 +236,16 @@ public class DrawingOverlayDemo extends MapsDemo {
     buttonPanel.add(addButton);
 
     editPolylineButton.setEnabled(false);
-    editPolylineButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    editPolylineButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         editPolyline();
       }
     });
     buttonPanel.add(editPolylineButton);
 
     editPolygonButton.setEnabled(false);
-    editPolygonButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    editPolygonButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         editPolygon();
       }
     });
@@ -269,8 +270,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     for (int i = 100; i > 0; i -= 10) {
       opacityBox.addItem(i + "%");
     }
-    opacityBox.addChangeListener(new ChangeListener() {
-      public void onChange(Widget sender) {
+    opacityBox.addChangeHandler(new ChangeHandler() {
+      public void onChange(ChangeEvent event) {
         String val = opacityBox.getItemText(opacityBox.getSelectedIndex());
         opacity = Double.parseDouble(val.replace("%", "")) / 100.0;
       }
@@ -284,8 +285,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     weightBox.addItem("3 pixels");
     weightBox.addItem("5 pixels");
     weightBox.addItem("10 pixels");
-    weightBox.addChangeListener(new ChangeListener() {
-      public void onChange(Widget sender) {
+    weightBox.addChangeHandler(new ChangeHandler() {
+      public void onChange(ChangeEvent event) {
         String val = weightBox.getItemText(weightBox.getSelectedIndex());
         val = val.replace(" pixel", "");
         val = val.replace("s", "");
@@ -302,8 +303,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     colorBox.addItem("#00FFFF cyan");
     colorBox.addItem("#0000FF blue");
     colorBox.addItem("#FF00FF violet");
-    colorBox.addChangeListener(new ChangeListener() {
-      public void onChange(Widget sender) {
+    colorBox.addChangeHandler(new ChangeHandler() {
+      public void onChange(ChangeEvent event) {
         color = colorBox.getItemText(colorBox.getSelectedIndex()).substring(0,
             7);
       }
@@ -312,21 +313,19 @@ public class DrawingOverlayDemo extends MapsDemo {
 
     grid.setHTML(0, 3, "<b>Fill Polygon</b>");
     final CheckBox fillCheckBox = new CheckBox("");
-    fillCheckBox.addClickListener(new ClickListener() {
-
-      public void onClick(Widget sender) {
-        fillFlag = fillCheckBox.isChecked();
+    fillCheckBox.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
+        fillFlag = fillCheckBox.getValue();
       }
-
     });
     grid.setWidget(1, 3, fillCheckBox);
 
     Button addPolylineButton = new Button("Make Polyline");
-    addPolylineButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    addPolylineButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         message1.setText("opacity=" + opacity + " color=" + color + " weight="
-            + weight + " polygon=" + makePolygon + " center="
-            + map.getCenter() + " zoom=" + map.getZoomLevel());
+            + weight + " polygon=" + makePolygon + " center=" + map.getCenter()
+            + " zoom=" + map.getZoomLevel());
         addPolyDialog.hide();
         createPolyline();
         editPolylineButton.setEnabled(true);
@@ -334,12 +333,11 @@ public class DrawingOverlayDemo extends MapsDemo {
     });
 
     Button addPolygonButton = new Button("Make Polygon");
-    addPolygonButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    addPolygonButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         message1.setText("Opacity=" + opacity + " color=" + color + "weight="
-            + weight + "polygon = " + makePolygon + "Center="
-            + map.getCenter() + " zoom=" + map.getZoomLevel() + "fill="
-            + fillFlag);
+            + weight + "polygon = " + makePolygon + "Center=" + map.getCenter()
+            + " zoom=" + map.getZoomLevel() + "fill=" + fillFlag);
         addPolyDialog.hide();
         createPolygon();
         editPolygonButton.setEnabled(true);
@@ -347,8 +345,8 @@ public class DrawingOverlayDemo extends MapsDemo {
     });
 
     Button cancelButton = new Button("Cancel");
-    cancelButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    cancelButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         addPolyDialog.hide();
       }
     });

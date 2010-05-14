@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,8 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapType;
@@ -80,7 +82,6 @@ import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -89,7 +90,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * In this example, the different types of events that can be attached to a map
@@ -111,7 +111,7 @@ public class MapEventDemo extends MapsDemo {
     MAP_DOUBLE_CLICK_HANDLER("MapDoubleClickHandler"), //
     MAP_DRAG_END_HANDLER("MapDragEndHandler"), //
     MAP_DRAG_HANDLER("MapDragHandler"), //
-    MAP_DRAG_START_HANDLER("MapDragStartHandler"), // 
+    MAP_DRAG_START_HANDLER("MapDragStartHandler"), //
     MAP_INFO_WINDOW_BEFORE_CLOSE_HANDLER("MapInfoWindowBeforeCloseHandler"), //
     MAP_INFO_WINDOW_CLOSE_HANDLER("MapInfoWindowCloseHandler"), //
     MAP_INFO_WINDOW_OPEN_HANDLER("MapInfoWindowOpenHandler"), //
@@ -314,9 +314,9 @@ public class MapEventDemo extends MapsDemo {
     handlerTable.setWidget(rowNumber, 2, textBox);
 
     Button clearButton = new Button("Clear Text");
-    clearButton.addClickListener(new ClickListener() {
+    clearButton.addClickHandler(new ClickHandler() {
 
-      public void onClick(Widget sender) {
+      public void onClick(ClickEvent event) {
         textBox.setText("");
       }
 
@@ -337,9 +337,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         map.getInfoWindow().addInfoWindowCloseClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.getInfoWindow().removeInfoWindowCloseClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -357,9 +357,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         map.getInfoWindow().addInfoWindowMaximizeClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.getInfoWindow().removeInfoWindowMaximizeClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -377,9 +377,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         map.getInfoWindow().addInfoWindowMaximizeEndHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.getInfoWindow().removeInfoWindowMaximizeEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -397,9 +397,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         map.getInfoWindow().addInfoWindowRestoreClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.getInfoWindow().removeInfoWindowRestoreClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -417,9 +417,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         map.getInfoWindow().addInfoWindowRestoreEndHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.getInfoWindow().removeInfoWindowRestoreEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -439,9 +439,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addInfoWindowBeforeCloseHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeInfoWindowBeforeCloseHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -460,9 +460,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addInfoWindowCloseHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeInfoWindowCloseHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -481,9 +481,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addInfoWindowOpenHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeInfoWindowOpenHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -502,9 +502,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapClearOverlaysHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapClearOverlaysHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -524,9 +524,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapAddMapTypeHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapAddMapTypeHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -546,9 +546,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapAddOverlayHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapAddOverlayHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -571,9 +571,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         map.addMapClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -591,8 +591,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapDoubleClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapDoubleClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -610,9 +610,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapDragEndHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapDragEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -630,9 +630,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapDragHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapDragHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -651,9 +651,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapDragStartHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapDragStartHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -673,9 +673,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapMouseOutHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapMouseOutHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -695,9 +695,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapMouseOverHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapMouseOverHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -715,8 +715,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapMouseMoveHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapMouseMoveHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -732,8 +732,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapMoveEndHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapMoveEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -749,8 +749,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapMoveHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapMoveHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -766,8 +766,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapMoveStartHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapMoveStartHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -786,9 +786,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapRemoveMapTypeHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapRemoveMapTypeHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -807,9 +807,9 @@ public class MapEventDemo extends MapsDemo {
         };
 
         map.addMapRemoveOverlayHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             map.removeMapRemoveOverlayHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -826,8 +826,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapRightClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapRightClickHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -843,8 +843,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapTypeChangedHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapTypeChangedHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -861,8 +861,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         map.addMapZoomEndHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             map.removeMapZoomEndHandler(h);
             // removeRowFromTable(nextListenerId);
           }
@@ -878,8 +878,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerClickHandler(h);
           }
         });
@@ -894,8 +894,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerDoubleClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerDoubleClickHandler(h);
           }
         });
@@ -910,8 +910,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerMouseDownHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerMouseDownHandler(h);
           }
         });
@@ -926,8 +926,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerMouseUpHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerMouseUpHandler(h);
           }
         });
@@ -942,8 +942,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerMouseOverHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerMouseOverHandler(h);
           }
         });
@@ -958,8 +958,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerMouseOutHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerMouseOutHandler(h);
           }
         });
@@ -974,8 +974,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerInfoWindowOpenHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerInfoWindowOpenHandler(h);
           }
         });
@@ -990,8 +990,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerInfoWindowBeforeCloseHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerInfoWindowBeforeCloseHandler(h);
           }
         });
@@ -1006,8 +1006,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerInfoWindowCloseHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerInfoWindowCloseHandler(h);
           }
         });
@@ -1022,8 +1022,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerRemoveHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerRemoveHandler(h);
           }
         });
@@ -1038,8 +1038,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerDragStartHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerDragStartHandler(h);
           }
         });
@@ -1054,8 +1054,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerDragHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerDragHandler(h);
           }
         });
@@ -1070,8 +1070,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerDragEndHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerDragEndHandler(h);
           }
         });
@@ -1087,8 +1087,8 @@ public class MapEventDemo extends MapsDemo {
           }
         };
         marker.addMarkerVisibilityChangedHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
-          public void onClick(Widget sender) {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
+          public void onClick(ClickEvent event) {
             marker.removeMarkerVisibilityChangedHandler(h);
           }
         });
@@ -1106,9 +1106,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polyline.addPolylineClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polyline.removePolylineClickHandler(h);
           }
 
@@ -1126,9 +1126,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polyline.addPolylineRemoveHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polyline.removePolylineRemoveHandler(h);
           }
 
@@ -1147,9 +1147,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polyline.addPolylineVisibilityChangedHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polyline.removePolylineVisibilityChangedHandler(h);
           }
 
@@ -1167,9 +1167,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polyline.addPolylineMouseOutHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polyline.removePolylineMouseOutHandler(h);
           }
 
@@ -1187,9 +1187,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polyline.addPolylineMouseOverHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polyline.removePolylineMouseOverHandler(h);
           }
 
@@ -1208,9 +1208,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polygon.addPolygonClickHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polygon.removePolygonClickHandler(h);
           }
 
@@ -1228,9 +1228,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polygon.addPolygonRemoveHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polygon.removePolygonRemoveHandler(h);
           }
 
@@ -1249,9 +1249,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polygon.addPolygonVisibilityChangedHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polygon.removePolygonVisibilityChangedHandler(h);
           }
 
@@ -1269,9 +1269,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polygon.addPolygonMouseOutHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polygon.removePolygonMouseOutHandler(h);
           }
 
@@ -1289,9 +1289,9 @@ public class MapEventDemo extends MapsDemo {
 
         };
         polygon.addPolygonMouseOverHandler(h);
-        removeHandlerButton.addClickListener(new ClickListener() {
+        removeHandlerButton.addClickHandler(new ClickHandler() {
 
-          public void onClick(Widget sender) {
+          public void onClick(ClickEvent event) {
             polygon.removePolygonMouseOverHandler(h);
           }
 
@@ -1367,8 +1367,8 @@ public class MapEventDemo extends MapsDemo {
 
     // Create a button to hide/show the marker
     final Button hideButton = new Button("Hide Marker");
-    hideButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    hideButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         boolean state = !marker.isVisible();
         marker.setVisible(state);
         if (state) {
@@ -1382,8 +1382,8 @@ public class MapEventDemo extends MapsDemo {
 
     // Create a button to remove the marker from the map.
     final Button removeButton = new Button("Remove Marker");
-    removeButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    removeButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         if (!markerRemoved) {
           map.removeOverlay(marker);
           removeButton.setText("Add Marker");
@@ -1400,8 +1400,8 @@ public class MapEventDemo extends MapsDemo {
     // Create a button to hide/show the polygon
     final Button hidePolygonButton = new Button("Hide Polygon");
     hidePolygonButton.setEnabled(false);
-    hidePolygonButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    hidePolygonButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         boolean state = !polygon.isVisible();
         polygon.setVisible(state);
         if (state) {
@@ -1415,8 +1415,8 @@ public class MapEventDemo extends MapsDemo {
 
     // Create a button to remove the polygon from the map.
     final Button removePolygonButton = new Button("Add Polygon");
-    removePolygonButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    removePolygonButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         if (!polygonRemoved) {
           map.removeOverlay(polygon);
           removePolygonButton.setText("Add Polygon");
@@ -1433,8 +1433,8 @@ public class MapEventDemo extends MapsDemo {
     // Create a button to hide/show the polyline
     final Button hidePolylineButton = new Button("Hide Polyline");
     hidePolylineButton.setEnabled(false);
-    hidePolylineButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    hidePolylineButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         boolean state = !polyline.isVisible();
         polyline.setVisible(state);
         if (state) {
@@ -1448,8 +1448,8 @@ public class MapEventDemo extends MapsDemo {
 
     // Create a button to remove the polyline from the map.
     final Button removePolylineButton = new Button("Add Polyline");
-    removePolylineButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    removePolylineButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         if (!polylineRemoved) {
           map.removeOverlay(polyline);
           removePolylineButton.setText("Add Polyline");
@@ -1464,8 +1464,8 @@ public class MapEventDemo extends MapsDemo {
     hp.add(removePolylineButton);
 
     final Button clearOverlaysButton = new Button("Clear Overlays");
-    clearOverlaysButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    clearOverlaysButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         map.clearOverlays();
       }
     });
@@ -1477,8 +1477,8 @@ public class MapEventDemo extends MapsDemo {
     vp.add(hp);
 
     final Button infoWindowButton = new Button("Show InfoWindow");
-    infoWindowButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    infoWindowButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         InfoWindow info = map.getInfoWindow();
         InfoWindowContent content = new InfoWindowContent("Hello Maps!");
         content.setMaxContent("Hello Maps - more content");
@@ -1489,8 +1489,8 @@ public class MapEventDemo extends MapsDemo {
     hp.add(infoWindowButton);
 
     final Button mInfoWindowButton = new Button("Marker InfoWindow");
-    mInfoWindowButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    mInfoWindowButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         InfoWindow info = map.getInfoWindow();
         InfoWindowContent content = new InfoWindowContent("Hello Maps!");
         content.setMaxContent("Hello Maps - more content");
@@ -1501,9 +1501,9 @@ public class MapEventDemo extends MapsDemo {
     hp.add(mInfoWindowButton);
 
     final Button mapTypeButton = new Button("Add Map Type");
-    mapTypeButton.addClickListener(new ClickListener() {
+    mapTypeButton.addClickHandler(new ClickHandler() {
 
-      public void onClick(Widget sender) {
+      public void onClick(ClickEvent event) {
         if (!mapTypeRemoved) {
           map.addMapType(MapType.getSkyVisibleMap());
           mapTypeButton.setText("Remove MapType");
@@ -1519,8 +1519,8 @@ public class MapEventDemo extends MapsDemo {
 
     // Create a button to clear out the table.
     final Button clearTableButton = new Button("Clear Table");
-    clearTableButton.addClickListener(new ClickListener() {
-      public void onClick(Widget sender) {
+    clearTableButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         clearListenerTable();
       }
     });
@@ -1532,7 +1532,7 @@ public class MapEventDemo extends MapsDemo {
   /**
    * Create a drop down list that shows all the different types of listeners
    * that can be added.
-   * 
+   *
    * @return a ListBox populated with the ListenerActions values
    */
   private HorizontalPanel createListenerListBox() {
@@ -1545,9 +1545,9 @@ public class MapEventDemo extends MapsDemo {
     h.add(listenerBox);
 
     Button b = new Button("Add Handler");
-    b.addClickListener(new ClickListener() {
+    b.addClickHandler(new ClickHandler() {
 
-      public void onClick(Widget sender) {
+      public void onClick(ClickEvent event) {
         int selectedIndex = listenerBox.getSelectedIndex();
         HandlerActions a = HandlerActions.values()[selectedIndex];
         addListenerToMarker(a);
