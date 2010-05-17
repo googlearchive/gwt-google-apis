@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -46,6 +46,16 @@ import com.google.gwt.maps.client.overlay.PolygonTest;
 import com.google.gwt.maps.client.overlay.PolylineEventsTest;
 import com.google.gwt.maps.client.overlay.PolylineTest;
 import com.google.gwt.maps.client.overlay.TrafficOverlayTest;
+import com.google.gwt.maps.client.streetview.PhotoSpecTest;
+import com.google.gwt.maps.client.streetview.PovTest;
+import com.google.gwt.maps.client.streetview.StreetviewClientTest;
+import com.google.gwt.maps.client.streetview.StreetviewDataTest;
+import com.google.gwt.maps.client.streetview.StreetviewFeaturesTest;
+import com.google.gwt.maps.client.streetview.StreetviewLinkTest;
+import com.google.gwt.maps.client.streetview.StreetviewLocationTest;
+import com.google.gwt.maps.client.streetview.StreetviewPanoramaOptionsTest;
+import com.google.gwt.maps.client.streetview.StreetviewPanoramaWidgetTest;
+import com.google.gwt.maps.client.streetview.StreetviewUserPhotoOptionsTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -56,7 +66,7 @@ import junit.framework.TestSuite;
 public class MapsTestSuite extends GWTTestSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Maps API");
-    
+
     // com.google.gwt.maps.client tests
     suite.addTestSuite(AdsManagerTest.class);
     suite.addTestSuite(CopyrightEventTest.class);
@@ -87,7 +97,7 @@ public class MapsTestSuite extends GWTTestSuite {
 
     // com.google.gwt.maps.client.impl
     suite.addTestSuite(MinimumMapVersionTest.class);
-    
+
     // com.google.gwt.maps.client.overlay
     suite.addTestSuite(GeoXmlOverlayTest.class);
     suite.addTestSuite(IconTest.class);
@@ -99,6 +109,18 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(PolylineEventsTest.class);
     suite.addTestSuite(PolylineTest.class);
     suite.addTestSuite(TrafficOverlayTest.class);
+
+    // com.google.gwt.maps.client.streetview
+    suite.addTestSuite(PhotoSpecTest.class);
+    suite.addTestSuite(PovTest.class);
+    suite.addTestSuite(StreetviewClientTest.class);
+    suite.addTestSuite(StreetviewDataTest.class);
+    suite.addTestSuite(StreetviewFeaturesTest.class);
+    suite.addTestSuite(StreetviewLinkTest.class);
+    suite.addTestSuite(StreetviewLocationTest.class);
+    suite.addTestSuite(StreetviewPanoramaOptionsTest.class);
+    suite.addTestSuite(StreetviewPanoramaWidgetTest.class);
+    suite.addTestSuite(StreetviewUserPhotoOptionsTest.class);
 
     return suite;
   }

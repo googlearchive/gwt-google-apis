@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,27 +17,27 @@
 package com.google.gwt.maps.sample.hellomaps.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.maps.client.Maps;
 import com.google.gwt.maps.sample.hellomaps.client.MapsDemo.MapsDemoInfo;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.HistoryListener;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Main class for implementing the HelloMaps gwt-google-apis demo.
  */
-public class HelloMaps implements EntryPoint, HistoryListener {
+public class HelloMaps implements EntryPoint, ValueChangeHandler<String> {
 
   protected DemoList list = new DemoList();
   private MapsDemoInfo curInfo;
@@ -45,19 +45,6 @@ public class HelloMaps implements EntryPoint, HistoryListener {
   private HTML description = new HTML();
   private VerticalPanel innerPanel = new VerticalPanel();
   private FlexTable outerPanel = new FlexTable();
-
-  public void onHistoryChanged(String token) {
-    // Find the MapsDemoInfo associated with the history context. If one is
-    // found, show it (It may not be found, for example, when the user mis-
-    // types a URL, or on startup, when the first context will be "").
-    MapsDemoInfo info = list.find(token);
-    if (info == null) {
-      showInfo();
-      Window.alert("Couldn't find " + token);
-      return;
-    }
-    show(info, false);
-  }
 
   public void onModuleLoad() {
 
@@ -81,9 +68,8 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     HorizontalPanel horizPanel = new HorizontalPanel();
     list.setStylePrimaryName("hm-demolistbox");
     Button nextLink = new Button(">>");
-    nextLink.addClickListener(new ClickListener() {
-
-      public void onClick(Widget sender) {
+    nextLink.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
         show(list.getNext(), false);
       }
     });
@@ -96,7 +82,7 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     innerPanel.add(description);
     innerPanel.setSpacing(10);
 
-    History.addHistoryListener(this);
+    History.addValueChangeHandler(this);
 
     outerPanel.setStylePrimaryName("hm-outerpanel");
     outerPanel.insertRow(0);
@@ -129,10 +115,15 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     // Show the initial screen.
     String initToken = History.getToken();
     if (initToken.length() > 0) {
-      onHistoryChanged(initToken);
+      onValueChange(initToken);
     } else {
       showInfo();
     }
+  }
+
+  public void onValueChange(ValueChangeEvent<String> event){
+    String token = event.getValue();
+    onValueChange(token);
   }
 
   public void show(MapsDemoInfo info, boolean affectHistory) {
@@ -219,7 +210,6 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     list.addMapsDemo(DrawingOverlayDemo.init());
     list.addMapsDemo(GeoRssOverlayDemo.init());
     list.addMapsDemo(KmlOverlayDemo.init());
-    list.addMapsDemo(StreetviewOverlayDemo.init());
     list.addMapsDemo(TrafficOverlayDemo.init());
     list.addMapsDemo(SimpleDirectionsDemo.init());
     list.addMapsDemo(RoutedDirectionsDemo.init());
@@ -229,6 +219,21 @@ public class HelloMaps implements EntryPoint, HistoryListener {
     list.addMapsDemo(EarthPluginDemo.init());
     list.addMapsDemo(GoogleBarDemo.init());
     list.addMapsDemo(AdsManagerDemo.init());
+    list.addMapsDemo(StreetviewOverlayDemo.init());
+    list.addMapsDemo(StreetviewDemo.init());
+  }
+
+  private void onValueChange(String token) {
+    // Find the MapsDemoInfo associated with the history context. If one is
+    // found, show it (It may not be found, for example, when the user mis-
+    // types a URL, or on startup, when the first context will be "").
+    MapsDemoInfo info = list.find(token);
+    if (info == null) {
+      showInfo();
+      Window.alert("Couldn't find " + token);
+      return;
+    }
+    show(info, false);
   }
 
   private void showInfo() {
