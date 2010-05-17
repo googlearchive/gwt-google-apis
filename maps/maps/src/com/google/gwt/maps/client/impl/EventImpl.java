@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,6 +25,8 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.maps.client.streetview.StreetviewData;
+import com.google.gwt.maps.client.streetview.StreetviewLocation;
 import com.google.gwt.maps.jsio.client.Exported;
 import com.google.gwt.maps.jsio.client.Global;
 import com.google.gwt.maps.jsio.client.JSFunction;
@@ -100,7 +102,39 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   }
 
   /**
-   * 
+   * Provides a callback interface with one double argument.
+   */
+  public abstract static class DoubleCallback extends JSFunction {
+    public abstract void callback(double d);
+
+    @Exported
+    public void callbackWrapper(final double d) {
+      invokeAndMaybeReportUncaughtExceptions(new Callback() {
+        public void execute() {
+          callback(d);
+        }
+      });
+    }
+  }
+
+  /**
+   * Provides a callback interface with one integer argument.
+   */
+  public abstract static class IntCallback extends JSFunction {
+    public abstract void callback(int value);
+
+    @Exported
+    public void callbackWrapper(final int value) {
+      invokeAndMaybeReportUncaughtExceptions(new Callback() {
+        public void execute() {
+          callback(value);
+        }
+      });
+    }
+  }
+
+  /**
+   * Provides a callback interface with two integer arguments.
    */
   public abstract static class IntIntCallback extends JSFunction {
     public abstract void callback(int value1, int value2);
@@ -180,8 +214,8 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
   }
 
   /**
-   * Provides a callback interface with an {@link Overlay} and two {@link LatLng}
-   * arguments.
+   * Provides a callback interface with an {@link Overlay} and two
+   * {@link LatLng} arguments.
    */
   public abstract static class OverlayLatLngCallback extends JSFunction {
     public abstract void callback(Overlay overlay, LatLng latlng,
@@ -211,6 +245,38 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       invokeAndMaybeReportUncaughtExceptions(new Callback() {
         public void execute() {
           callback(point, element, overlay);
+        }
+      });
+    }
+  }
+
+  /**
+   * Provides a callback interface with {@link StreetviewData} argument.
+   */
+  public abstract static class StreetviewDataCallback extends JSFunction {
+    public abstract void callback(StreetviewData data);
+
+    @Exported
+    public void callbackWrapper(final StreetviewData data) {
+      invokeAndMaybeReportUncaughtExceptions(new Callback() {
+        public void execute() {
+          callback(data);
+        }
+      });
+    }
+  }
+
+  /**
+   * Provides a callback interface with {@link StreetviewLocation} argument.
+   */
+  public abstract static class StreetviewLocationCallback extends JSFunction {
+    public abstract void callback(StreetviewLocation location);
+
+    @Exported
+    public void callbackWrapper(final StreetviewLocation location) {
+      invokeAndMaybeReportUncaughtExceptions(new Callback() {
+        public void execute() {
+          callback(location);
         }
       });
     }
@@ -326,6 +392,12 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       CopyrightCallback handler);
 
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      DoubleCallback handler);
+
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      IntCallback handler);
+
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
       IntIntCallback handler);
 
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
@@ -347,6 +419,9 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
       PointElementOverlayCallback handler);
 
   abstract JavaScriptObject addListener(JavaScriptObject source, String event,
+      StreetviewLocationCallback handler);
+
+  abstract JavaScriptObject addListener(JavaScriptObject source, String event,
       VoidCallback handler);
 
   abstract void trigger(JavaScriptObject source, String mapEventString);
@@ -356,6 +431,11 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Copyright value);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      double value);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString, int arg);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
       int arg1, int arg2);
@@ -374,12 +454,15 @@ public abstract class EventImpl implements JSWrapper<EventImpl> {
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Overlay overlay, LatLng latlng);
-  
+
   abstract void trigger(JavaScriptObject source, String mapEventString,
-      Overlay overlay, LatLng latlng1, LatLng latlng2);  
+      Overlay overlay, LatLng latlng1, LatLng latlng2);
 
   abstract void trigger(JavaScriptObject source, String mapEventString,
       Point point, Element elem, Overlay overlay);
+
+  abstract void trigger(JavaScriptObject source, String mapEventString,
+      StreetviewLocation value);
 
   // We don't use this method with the advent of the HandlerCollection.
   // protected abstract void clearListeners(JavaScriptObject source, String
