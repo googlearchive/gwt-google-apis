@@ -21,7 +21,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapType;
-import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.InfoWindowCloseClickHandler;
 import com.google.gwt.maps.client.event.InfoWindowMaximizeClickHandler;
@@ -239,7 +238,7 @@ public class MapEventDemo extends MapsDemo {
 
   private MapWidget map;
   // Saves the state of whether the sky map type has been removed.
-  private boolean mapTypeRemoved = false;
+  private boolean mapTypeRemoved = true;
   private Marker marker;
   // Saves the state of whether the maker is currently removed from the map
   private boolean markerRemoved = false;
@@ -258,10 +257,7 @@ public class MapEventDemo extends MapsDemo {
     // Center the new map on Midtown Atlanta
     map = new MapWidget(ATLANTA, 13);
     map.setSize("500px", "300px");
-    // Workaround for bug with click handler & setUItoDefaults() - see issue 260
-    MapUIOptions opts = map.getDefaultUI();
-    opts.setDoubleClick(false);
-    map.setUI(opts);
+    map.setUIToDefault();
 
     MarkerOptions opt = MarkerOptions.newInstance();
     opt.setDraggable(true);
@@ -1504,13 +1500,14 @@ public class MapEventDemo extends MapsDemo {
     mapTypeButton.addClickHandler(new ClickHandler() {
 
       public void onClick(ClickEvent event) {
-        if (!mapTypeRemoved) {
+        if (mapTypeRemoved) {
           map.addMapType(MapType.getSkyVisibleMap());
           mapTypeButton.setText("Remove MapType");
         } else {
           map.removeMapType(MapType.getSkyVisibleMap());
           mapTypeButton.setText("Add MapType");
         }
+        map.setUIToDefault();
         mapTypeRemoved = !mapTypeRemoved;
       }
 
