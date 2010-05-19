@@ -1,0 +1,12 @@
+com.google.gwt.ajaxloader.client
+com.google.gwt.maps.client
+com.google.gwt.maps.client.control
+com.google.gwt.maps.client.event
+com.google.gwt.maps.client.geocode
+com.google.gwt.maps.client.geom
+com.google.gwt.maps.client.impl
+com.google.gwt.maps.client.overlay
+com.google.gwt.maps.client.streetview
+com.google.gwt.maps.jsio.client
+com.google.gwt.maps.jsio.client.impl
+com.google.gwt.maps.jsio.rebind
