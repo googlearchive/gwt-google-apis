@@ -756,7 +756,7 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * This event is fired when a map type is added to the map.
+   * This event is fired when the map reaches a new zoom level.
    *
    * @param handler the handler to call when this event fires.
    */
