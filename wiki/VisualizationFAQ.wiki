@@ -1,6 +1,6 @@
-﻿#summary GWT Chat Tools questions that are asked frequently.  Very frequently.
+﻿#summary GWT Chart Tools questions that are asked frequently.  Very frequently.
 
-= Chart Tools FAQs = 
+= Chart Tools (aka Visualization API) FAQs = 
 
 <wiki:toc max_depth="2" />
 
@@ -18,7 +18,7 @@ First post your bug to the [http://groups.google.com/group/gwt-google-api GWT-Go
 == Can I use the GWT Chart Tools API with both Interactive and Image Charts? ==
 
 Most of the code in the gwt-visualization library is targeted toward interactive charts, but you can use the [http://code.google.com/apis/visualization/documentation/gallery/genericimagechart.html Image Chart] to build an image chart with the library.
- 
+
 == Why do I see the dialog "Password needed" when extracting the .zip distribution in Windows? ==
 
 There are some files created by the GWT compiler that are very long and cause issues with the built-in Windows compressed folder support.  You can try using a different program to unzip the folder (such as Cygwin or 7-zip).
@@ -31,7 +31,7 @@ If you are having trouble running the Apache Ant againt provided samples,  make 
 
 == Why do I get an exception saying that $wnd.google.visualization "is null" or "has no properties"? ==
  
-The following stack trace indicates that the Visualization JavaScript API is not getting loaded:
+The following stack trace indicates that the JavaScript API is not getting loaded:
 
 {{{
 [ERROR] Unable to load module entry point class
@@ -52,11 +52,15 @@ Make sure your hosted HTML page includes a `<script>` tag to load the Ajax Loade
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 }}}
 
-You can then add !JavaScript code to load the visualizations yourself, or you can use the !AjaxLoader class provided with the gwt-visualization API.  See the [VisualizationGettingStarted Getting Started] page for an example.
+You can then add !JavaScript code to load the API yourself, or you can use the !AjaxLoader class provided with the gwt-visualization API.  See the [VisualizationGettingStarted Getting Started] page for an example.
 
 If you have this tag in place, try opening up your web browser (IE on Windows, Safari on Mac) and navigate to the url `http://www.google.com/jsapi` manually.  If you do not see a page of JavaScript, chances are that there is some proxy or firewall setting blocking access to download the API.
 
-== How can I get the Visualization Widgets working under Linux? ==
+== How can I get the Visualization Widgets working in GWT 1.5 Hosted Mode under Linux? ==
+
+This issue should be resolved under GWT 2.0 and later using the Development Mode browser plugin.
+
+Under GWT 1.5 and prior, the hosted mode browser did not support flash out of the box.
 
 Answer from a [http://groups.google.com/group/google-visualization-api/browse_thread/thread/c23870b13c1b0c62 Google Visualization API Group] thread:
 
@@ -79,7 +83,7 @@ Some methods of some charts only work properly when the chart is attached to the
 
 In release gwt-visualization-1.0.2, The AjaxLoader class was moved to a common package to be shared with other APIs.  You can access the same functionality by using the com.google.gwt.visualization.client.VisualizationUtils class.  In the future, we will deprecate classes before removing them.
 
-== Can I combine the Chart Tools API and Gears to create an offline visualization application? ==
+== Can I combine the Chart Tools API and Gears to create an offline application? ==
 
 No.  See [http://code.google.com/apis/visualization/faq.html#offline the Visualization API FAQ].
 
