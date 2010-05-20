@@ -28,12 +28,12 @@
    * [MapsJavadoc API Reference]
    * [MapsReleaseNotes Release Notes]
    * [MapsFAQ FAQs]
- * Visualization
+ * Chart Tools
    * [VisualizationGettingStarted Getting Started]
-   * Visualization Developers Guide
-     * [VisualizationNewWrapper Creating a wrapper for an existing Visualization]
+   * Chart Tools Developers Guide
+     * [VisualizationNewWrapper Creating a wrapper for an existing Interactive Chart]
      * [VisualizationEventModel Understanding the Event Model]
-     * [VisualizationCustomVisualization  Writing a new Visualization using GWT]
+     * [VisualizationCustomVisualization  Writing a new Interactive Chart using GWT]
    * [VisualizationJavadoc API Reference]
    * [VisualizationSampleApplications Sample Applications]
    * [VisualizationReleaseNotes Release Notes]
