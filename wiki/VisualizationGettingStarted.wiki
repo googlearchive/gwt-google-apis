@@ -1,13 +1,13 @@
-﻿#summary Getting Started Using the Google Visualization API with GWT
+﻿#summary Getting Started Using the Google Chart Tools with GWT
 
-= Getting Started with Visualizations =
+= Getting Started with Chart Tools =
 
 == Assumptions ==
  
   * You are familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit].
   * You know how to [http://code.google.com/webtoolkit/gettingstarted.html create a new GWT project].
-  * You are familiar with [http://code.google.com/apis/visualization/ Google Visualization API].
-  * You are using the Visualization API Library for GWT version 1.1.0 or later.
+  * You are familiar with [http://code.google.com/apis/charttools/ Google Chart Tools API].
+  * You are using the Chart Tools (Visualization) API Library for GWT version 1.1.0 or later.
   * You are using GWT 2.0 or later.
   * You have installed Eclipse and/or Apache Ant.
 
