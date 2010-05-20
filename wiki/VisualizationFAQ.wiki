@@ -1,13 +1,13 @@
-﻿#summary GWT Visualization questions that are asked frequently.  Very frequently.
+﻿#summary GWT Chat Tools questions that are asked frequently.  Very frequently.
 
-= Visualization FAQs = 
+= Chart Tools FAQs = 
 
 <wiki:toc max_depth="2" />
 
-== Where can I go to get help with using the Visualization APIs? ==
+== Where can I go to get help with using the Chart Tools APIs? ==
 
-For general questions about the Visualization API for GWT, first try the 
-[http://groups.google.com/group/google-visualization-api Google Visualization API] Google group.  Make sure to mention that you are using the GWT wrappers for the project.  Be sure to check out the [http://code.google.com/p/gwt-google-apis/wiki/VisualizationFAQ Visualization API FAQ] for general Visualization API questions.
+For general questions about the Chart Tools API for GWT, first try the 
+[http://groups.google.com/group/google-visualization-api Google Visualization API Google group].  Make sure to mention that you are using the GWT wrappers for the project. 
 
 Another place you can to for help is the [http://groups.google.com/group/gwt-google-apis GWT-Google-Apis] group, which is the forum for the developers of the GWT wrappers for all Google APIs.  You can also try the [http://groups.google.com/group/gwt-google-api Google-Web-Toolkit] group which is the main public forum for GWT. 
   
@@ -15,6 +15,10 @@ Another place you can to for help is the [http://groups.google.com/group/gwt-goo
 
 First post your bug to the [http://groups.google.com/group/gwt-google-api GWT-Google-Apis] group for discussion.  There may be a workaround or a patch already in place for the problem.  Bugs are logged in the [http://code.google.com/p/gwt-google-apis/issues/list Issue Tracker].  Please reserve the issue tracker for bugs with the API itself, and not for diagnosing problems with a particular application.
 
+== Can I use the GWT Chart Tools API with both Interactive and Image Charts? ==
+
+Most of the code in the gwt-visualization library is targeted toward interactive charts, but you can use the [http://code.google.com/apis/visualization/documentation/gallery/genericimagechart.html Image Chart] to build an image chart with the library.
+ 
 == Why do I see the dialog "Password needed" when extracting the .zip distribution in Windows? ==
 
 There are some files created by the GWT compiler that are very long and cause issues with the built-in Windows compressed folder support.  You can try using a different program to unzip the folder (such as Cygwin or 7-zip).
@@ -65,21 +69,21 @@ In Ubuntu (up to 9.04) I could get the timeline working with the following:
 
 == I removed a !VisualizationWidget from a Panel.  When I added it back, it was gone!  What happened? ==
 
-GWT developers are used to working with widgets while they are detached from the DOM.  Attaching and detaching the widgets affects how and where they appear, but not the widgets themselves.  However, many of the visualizations provided by the Google Visualization API do not support this pattern.  (Currently, this applies to the !AreaChart, !BarChart, !ColumnChart, !LineChart, !PieChart, and !ScatterChart.)  Thus, these visualizations should be added to a panel once and not removed until they are no longer needed.
+GWT developers are used to working with widgets while they are detached from the DOM.  Attaching and detaching the widgets affects how and where they appear, but not the widgets themselves.  However, many of the charts provided by the Google Chart Tools API for Interactive Charts do not support this pattern.  (Currently, this applies to the !AreaChart, !BarChart, !ColumnChart, !LineChart, !PieChart, and !ScatterChart.)  Thus, these charts should be added to a panel once and not removed until they are no longer needed.
 
-== I called `setSelection()` on a visualization before adding it to a Panel.  Why didn't it work? ==
+== I called `setSelection()` on a chart before adding it to a Panel.  Why didn't it work? ==
 
-Some methods of some visualizations only work properly when the visualization is attached to the DOM.  See the answer to the previous question.
+Some methods of some charts only work properly when the chart is attached to the DOM.  See the answer to the previous question.
 
 == What happened to com.google.gwt.visualization.client.AjaxLoader?  After upgrading it is gone! ==
 
 In release gwt-visualization-1.0.2, The AjaxLoader class was moved to a common package to be shared with other APIs.  You can access the same functionality by using the com.google.gwt.visualization.client.VisualizationUtils class.  In the future, we will deprecate classes before removing them.
 
-== Can I combine the Visualization API and Gears to create an offline visualization application? ==
+== Can I combine the Chart Tools API and Gears to create an offline visualization application? ==
 
 No.  See [http://code.google.com/apis/visualization/faq.html#offline the Visualization API FAQ].
 
-== Can I use the Visualization API for GWT in a plain Java application without using GWT? ==
+== Can I use the Chart Tools API for GWT in a plain Java application without using GWT? ==
 
 No.  The gwt-visualization library merely wraps a set of JavaScript APIs and is dependent on the underlying browse, flash plugin, and uses the network to communicate with Google's servers.
 
@@ -90,4 +94,3 @@ Please check if you have a <!DOCTYPE html> declaration at the top of your html f
 == I have problems running my application from file ==
 
 For modern browsers it's common to forbid cross-file references, which most likely is the cause of your problems. You can run `ant devmode` command to start development mode, and paste the starup URL without `?gwt.codesvr=127.0.0.1:9997` suffix into your browser (port may vary). It will make your embedded web server serve your files in a production mode.
-
