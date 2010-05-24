@@ -119,8 +119,11 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(StreetviewLinkTest.class);
     suite.addTestSuite(StreetviewLocationTest.class);
     suite.addTestSuite(StreetviewPanoramaOptionsTest.class);
-    suite.addTestSuite(StreetviewPanoramaWidgetTest.class);
     suite.addTestSuite(StreetviewUserPhotoOptionsTest.class);
+
+    // This test is running as a different module.
+    // It's the last one to minimize the module-switching time.
+    suite.addTestSuite(StreetviewPanoramaWidgetTest.class);
 
     return suite;
   }
