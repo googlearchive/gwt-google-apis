@@ -1,0 +1,100 @@
+﻿#summary Frequently Asked Questions about the GWT bindings for Google Maps
+
+= Maps FAQs =
+
+These FAQs refer to the Google Maps Library for GWT.  See the [Overview Project Overview] for general information on the Google Maps Library for GWT.
+
+<wiki:toc max_depth="2" />
+
+== Where can I go for more help using the Maps API for GWT? ==
+
+Besides this User Guide, there are three Google groups you can search and post to:
+
+  * [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit]: the forum for all users of the Google Web Toolkit.
+  * [http://groups.google.com/group/gwt-google-apis GWT-Google-Apis]: a group used by contributors to the GWT bindings for the Maps API.  Use this list for bug reports or discussion about the development of new features.
+  * [http://groups.google.com/group/Google-Maps-API Google Maps API]: a group used for users of the Maps JavaScript API.  Search this group to find known issues and solutions with the Maps API in general.  Be sure to read their posting guidelines before writing to the list.  There is lots of traffic to this list and in general they will point GWT users to one of the first 2 lists unless the problem can be reproduced in plain hand-written JavaScript.
+
+== I don't see Google Maps method XXX in the API. What should I do? ==
+
+New features are added to the Google Maps API often. The newest features of the JavaScript Maps API may not yet be present in the latest stable release of the GWT library bindings.  
+
+First check the [http://code.google.com/p/gwt-google-apis/ gwt-google-apis issue tracker] to see if the method might have been added to the trunk, but not the stable release yet.  If it has, you can download the subversion source, build it with [http://ant.apache.org Apache Ant], and get an updated `gwt-maps.jar`.   Submitting a patch along with your issue is encouraged and appreciated!  See [http://code.google.com/webtoolkit/makinggwtbetter.html Making GWT Better].
+
+== What about the Mapitz and other Maps bindings? ==
+
+The Google API Libraries for Google Web Toolkit is the official set of bindings for Google APIs maintained by Google.  Other developers have made available APIs that give an interface to the Google Maps API or other similar functionality through GWT.  Although Google does not maintain or support these alternate bindings, you are likely to find other users of those libraries on the GWT forum [http://groups.google.com/group/Google-Web-Toolkit Google-Web-Toolkit].
+
+== How do I get the latest version of the API from Subversion? ==
+
+Building your own gwt-maps.jar from the latest source isn't too hard.  You will
+need the following software:
+
+   * The 1.5 or 1.6 version of the [http://java.sun.com JDK]
+   * The [http://ant.apache.org Apache Ant] utility (version 1.7.1 or greater) 
+   * A [http://subversion.tigris.org Subversion] client.  
+
+Once you have the above software installed, follow these steps:
+
+   # Download the code from the subversion repository. If you are using the command line tool, use the command: `svn co http://gwt-google-apis.googlecode.com/svn/trunk trunk`
+   # Download the tools directory from the Google Web Toolkit repository.  If you are using the command line tool, use the command: `svn co http://google-web-toolkit.googlecode.com/svn/tools tools`
+   # Set the environment variable `GWT_TOOLS` to point to the directory where you checked out the tools distribution.
+   # Set the environment variable `GWT_HOME` to point to a binary distribution of GWT downloaded from the [http://code.google.com/webtoolkit GWT project site].
+   # Run `ant` on the top level file.  The `gwt-maps` library will build along with the other libraries. 
+
+The `gwt-maps.jar` file should end up under `maps/build/lib/gwt-maps.jar`.
+
+== Why is my map showing up very small or not at all? ==
+
+By default, the map does not have a CSS width and height set.  You must use `MapWidget.setSize()`, `MapWidget.setWidth()`, `MapWidget.setHeight()` or style with `width` and `height` CSS properties of the map widget.  
+
+If you wish to scale to the size of the container, make sure you adjust the size of your outer containing panel or widget and use `setSize()` with a percentage.  The following example will create a map that fills the width of the browser and is 500 pixels tall:
+
+{{{
+   AbsolutePanel panel = new AbsolutePanel();
+   panel.setSize("100%","500px");
+   MapWidget myMap = new MapWidget();
+   map.setSize("100%", "100%");
+   panel.add(map);
+   RootPanel.add(panel);
+}}}
+
+== Why do I see the map off center surrounded with grey background on one side? ==
+
+In some cases, it is necessary to force the map to resize its layout after the map is initially added.  you can use the `MapWidget.checkResizeAndCenter()` method to clean this up.   You may need to delay calling this function using a `DeferredCommand` or other mechanism to wait until after the DOM layout pass that resizes the map is called.
+
+== I'm using localhost, why am I seeing a dialog asking for a key? ==
+
+Passing no key to the Maps API usually works for developing on the local machine, but you may need to create a key for localhost:`<port>` at the [http://code.google.com/apis/maps/signup.html Maps developer web site.]
+
+== Why can't I use Maps API data types in a servlet? ==
+
+The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web browser.  Unfortunately, you cannot use these APIs in server side code.
+
+== How can I use GWT with Maps API 3.0? ==
+
+The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI methods to interface with the Maps v3 API.  There are [http://code.google.com/query/#q=gwt%20maps%20v3 other projects hosted on Google Code] that have GWT bindings for the Maps v3 API.
+
+== How can I run JUnit unit tests using the Maps API? ==
+
+Running unit tests for the Maps API sometimes fails because some of the API methods require a proper Maps API key to be setup. 
+
+  * One alternative is to create a maps key for the IP address/port of your machine the test is running on and edit GoogleMapsTest.gwt.xml.  But if you are running from eclipse, that port number changes with each run, so this idea kind of stinks.
+
+  * Another workaround is to use 'localhost' for running your tests. Here's how to do that:
+
+  Create a new GWT JUnit Test launch configuration in Eclipse (using the Google Eclipse Plugin) for the class com.google.gwt.maps.MapsTestSuite.
+
+    # Edit the command line arguments and add the following to the VM args textarea:
+{{{
+    -Dgwt.args="-runStyle Manual:1"
+}}}
+    # Next, run the test.  After a few moments, a URL will popup in the console asking you to point your browser to it.
+    # There are 2 IP addresses in the URL (they refer to your local machine's network card).  Substitute '127.0.0.1' for the IP addresses and launch a browser similar to the following:
+{{{
+    http://127.0.0.1:55947/com.google.gwt.maps.GoogleMapsTest.JUnit/junit.html?gwt.junit.sessionId=0&gwt.codesvr=127.0.0.1:55945&gwt.junit.blockindex=134
+}}}
+
+== I have problems running my application from file ==
+
+For modern browsers it's common to forbid cross-file references, which most likely is the cause of your problems. You can run `ant devmode` command to start development mode, and paste the starup URL into your browser without `?gwt.codesvr=127.0.0.1:9997` suffix (port may vary). It will make your embedded web server serve your files in a production mode.
+
