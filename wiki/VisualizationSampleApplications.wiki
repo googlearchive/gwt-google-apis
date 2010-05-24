@@ -1,4 +1,4 @@
-#summary Sample applications distributed with the Visualization API
+#summary Sample applications distributed with the Chart Tools API
 
 = Chart Tools Library Examples =
 

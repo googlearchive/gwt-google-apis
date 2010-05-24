@@ -1,4 +1,4 @@
-#summary Class Reference for the Visualization API Library for GWT
+#summary Class Reference for the Chart Tools API Library for GWT
 
 =  Chart Tools (aka Visualization) API Class Reference =
 

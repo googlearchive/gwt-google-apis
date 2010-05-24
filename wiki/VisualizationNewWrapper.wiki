@@ -1,32 +1,38 @@
-﻿#summary Wrapping a Visualization in GWT
+﻿#summary Wrapping an Interactive Chart in GWT
 
-= Visualizations and Wrappers =
+= Interactive Charts and Wrappers =
 
-In order to use a visualization in a GWT project, the visualization needs a GWT "wrapper" class.  The following visualization classes come bundled in the GWT Visualization API: 
+In order to use an interactive chart in a GWT project, the chart needs a GWT "wrapper" class.  The following chart classes come bundled in the GWT Chart Tools API: 
 
   * [http://code.google.com/apis/visualization/documentation/gallery/annotatedtimeline.html AnnotatedTimeLine]
+  * [http://code.google.com/apis/visualization/documentation/gallery/imageareachart.html ImageAreaChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/areachart.html AreaChart]
+  * [http://code.google.com/apis/visualization/documentation/gallery/imagebarchart.html ImageBarChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/barchart.html BarChart], [http://code.google.com/apis/visualization/documentation/gallery/columnchart.html ColumnChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/gauge.html Gauge]
   * [http://code.google.com/apis/visualization/documentation/gallery/geomap.html GeoMap]
+  * [http://code.google.com/apis/visualization/documentation/gallery/genericimagechart.html ImageChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/intensitymap.html IntensityMap]
+  * [http://code.google.com/apis/visualization/documentation/gallery/imagelinechart.html ImageLineChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/linechart.html LineChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/map.html MapVisualization]
   * [http://code.google.com/apis/visualization/documentation/gallery/motionchart.html MotionChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/orgchart.html OrgChart]
+  * [http://code.google.com/apis/visualization/documentation/gallery/imagepiechart.html ImagePieChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/piechart.html PieChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/scatterchart.html ScatterChart]
+  * [http://code.google.com/apis/visualization/documentation/gallery/imagesparkline.html ImageSparklineChart]
   * [http://code.google.com/apis/visualization/documentation/gallery/table.html Table]. 
 
-However, if you want to use a visualization that does not yet have a GWT wrapper, it's easy to write your own. This document describes how.
+However, if you want to use a chart that does not yet have a GWT wrapper, it's easy to write your own. This document describes how.
 
 This document does not deal with supporting events; that subject is treated in [VisualizationEventModel a separate document].
 
-Most of the code samples in this document are lifted from [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/visualizations/MotionChart.java MotionChart] from the GWT Visualization API.  This is a simple example of a GWT visualization wrapper class.  You might want to have a quick look at the code before continuing.
+Most of the code samples in this document are lifted from [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/visualizations/MotionChart.java MotionChart] from the GWT Chart Tools API.  This is a simple example of a wrapper class.  You might want to have a quick look at the code before continuing.
 
 == The createJso() Method == 
 
-Every visualization class must implement a createJso() method.  This method is a [http://code.google.com/p/jslibs/wiki/jsffi JSNI] call to the constructor of the underlying !JavaScript implementation of the visualization.  For example:
+Every wrapper class must implement a createJso() method.  This method is a [http://code.google.com/p/jslibs/wiki/jsffi JSNI] call to the constructor of the underlying !JavaScript implementation of the chart.  For example:
 
 {{{
   public JavaScriptObject creatJso(Element parent) /*-{
@@ -38,7 +44,7 @@ This !JavaScriptObject can be accessed (although this is usually unnecessary) th
 
 == The Options Class ==
 
-Visualization wrappers must extend the class `Visualization<E extends AbstractDrawOptions>`.  E is a class that defines the draw options that can be used with this visualization.  The wrappers provided by the GWT Visualization API follow the convention of defining an inner class called Options, and extending Visualization<XXX.Options>.  
+Wrappers must extend the class `Visualization<E extends AbstractDrawOptions>`.  E is a class that defines the draw options that can be used with this visualization.  The wrappers provided by the GWT Chart Tools API follow the convention of defining an inner class called Options, and extending Visualization<XXX.Options>.  
 
 The options class does not need to be an inner class, but it does need to extend !AbstractDrawOptions, which is a subclass of of [http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideOverlayTypes JavaScriptObject] (the same class that is returned from `createJso()`).  !JavaScriptObject is a special GWT class that allows GWT Java code to hold references to objects defined in !JavaScript.
 
@@ -80,7 +86,7 @@ Creating a setter method for an Options class that takes a array, date, or compl
 
 == Complex !JavaScript Option Types ==
 
-If the option expects a complex !JavaScript object, the parameter type should be a subclass of !JavaScriptObject.  The best way is to write your own subclass of !JavaScriptObject with setters (implemented in JSNI) that reflect the expected structure of the !JavaScript object.  A good example is the [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/Color.java Color] class from the GWT Visualization API.
+If the option expects a complex !JavaScript object, the parameter type should be a subclass of !JavaScriptObject.  The best way is to write your own subclass of !JavaScriptObject with setters (implemented in JSNI) that reflect the expected structure of the !JavaScript object.  A good example is the [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/Color.java Color] class from the GWT Chart Tools API.
 
 Compare the Color code to the specification of the [http://code.google.com/apis/visualization/documentation/gallery/areachart.html#Configuration_Options backgroundColor option], one of the options that expects a complex object that can be any of the following types:
 
@@ -131,9 +137,9 @@ You may not want to put a method like that in the public interface of your Optio
     }-*/;
 }}}
 
-= Wrapping Visualization Methods =
+= Wrapping Methods =
 
-As mentioned before, the underlying !JavaScript visualization object can be accessed by calling `getJso()`.  One case where you probably need to call this is when you are wrapping a visualization method.  Here is a code sample that wraps a method called `collapse`, that takes an integer argument and does not return a value:
+As mentioned before, the underlying !JavaScript visualization object can be accessed by calling `getJso()`.  One case where you probably need to call this is when you are wrapping a method.  Here is a code sample that wraps a method called `collapse`, that takes an integer argument and does not return a value:
 
 {{{
 

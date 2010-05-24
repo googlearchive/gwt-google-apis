@@ -89,7 +89,7 @@ No.  See [http://code.google.com/apis/visualization/faq.html#offline the Visuali
 
 == Can I use the Chart Tools API for GWT in a plain Java application without using GWT? ==
 
-No.  The gwt-visualization library merely wraps a set of JavaScript APIs and is dependent on the underlying browse, flash plugin, and uses the network to communicate with Google's servers.
+No.  The gwt-visualization library merely wraps a set of JavaScript APIs and is dependent on the underlying browser, flash plugin, and uses the network to communicate with Google's servers.
 
 == I'm using GWT 2.0 and I have a problem running visualization on IE8 ==
 

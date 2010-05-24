@@ -11,15 +11,15 @@
   * You are using GWT 2.0 or later.
   * You have installed Eclipse and/or Apache Ant.
 
-== Downloading the Visualization API Library for GWT ==
+== Downloading the Chart Tools API Library for GWT ==
 
 You can download the latest production releases of the libraries from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page]. After you download the distribution, uncompress it.  Inside the folder you will find a .jar file named `gwt-visualization.jar`. This .jar file is the only thing you'll need from the distribution. 
 
 You can reference the `.jar` file either from the folder that you uncompressed the project in, or copy it and reference it from another location.  In this example, we've chosen to copy the file to the path `/usr/local/gwt-visualization`.
 
-== Setting up a GWT Project to use the Language API===
+== Setting up a GWT Project to use the Chart Tools API===
 
-There are three steps needed to use the Visualization API in a GWT project:
+There are three steps needed to use the gwt-visualization API in a GWT project:
 
    # Include the library JAR file in the classpath
    # Inherit com.google.gwt.visualization.Visualization in the module XML definition file. 
@@ -31,7 +31,7 @@ We'll explain each step as we set up a new project.
 Start by creating a new GWT project called !SimpleViz as described in the 
 [http://code.google.com/eclipse/docs/creating_new_webapp.html GWT Plugin Guide]. 
 
-Since we are working with an additional library, add the library `gwt-language.jar` to the Java classpath.  Then, add the module `com.google.gwt.visualization.Visualization` to your module.
+Since we are working with an additional library, add the library `gwt-visualization.jar` to the Java classpath.  Then, add the module `com.google.gwt.visualization.Visualization` to your module.
 
 {{{
   <inherits name='com.google.gwt.visualization.Visualization'/>
@@ -39,7 +39,7 @@ Since we are working with an additional library, add the library `gwt-language.j
 
 For better effect please remove the .css reference from the SimpleViz.html page and remove all HTML tags in the body.
 
-== A Simple Visualization ==
+== A Simple Interactive Chart ==
 
 Replace the contents of !SimpleViz.java with the following:
 
@@ -149,7 +149,7 @@ Now you can build your project again, and open `war/SimpleViz.html` in your favo
 
   [http://gwt-google-apis.googlecode.com/svn/wiki/SimpleViz-1.png]
 
-Congratulations! You should now have visualizations working within a GWT application.
+Congratulations! You should now have an interactive chart working within a GWT application.
 
 == What Just Happened? ==
 
@@ -157,7 +157,7 @@ Let's take a closer look at !SimpleViz.
 
 === Calling the Ajax Loader ===
 
-In order to load the Google Visualization API into your GWT module, you need to invoke the Google Ajax Loader.  This is done with the static methods of the !AjaxLoader class.  To load the API, you need to provide a Java Runnable object to be executed when the API is loaded, along with a list of visualizations to be loaded.  Visualizations provided by Google come with a constant named `PACKAGE` that should be used in order to load them.  For example:
+In order to load the Google Chart Tools API into your GWT module, you need to invoke the Google Ajax Loader.  This is done with the static methods of the !AjaxLoader class.  To load the API, you need to provide a Java Runnable object to be executed when the API is loaded, along with a list of charts to be loaded.  Visualizations provided by Google come with a constant named `PACKAGE` that should be used in order to load them.  For example:
 
 {{{  
   public void onModuleLoad() {
@@ -183,7 +183,7 @@ In order to load the Google Visualization API into your GWT module, you need to 
 
 === Creating Draw Options ===
 
-The properties of the Options class for each visualization correspond to the supported names and value types defined in the [http://code.google.com/apis/visualization/documentation/gallery.html documentation] of each specific visualization.  In the GWT Visualization API, each visualization has its own Options class.  These classes are subclasses of !JavaScriptObject, so they cannot be instantiated with the _new_ operator.  Instead, they are created with the static method Options.create(). 
+The properties of the Options class for each chart correspond to the supported names and value types defined in the [http://code.google.com/apis/visualization/documentation/gallery.html documentation] of each specific chart.  In the GWT Chart Tools API, each chart has its own Options class.  These classes are subclasses of !JavaScriptObject, so they cannot be instantiated with the _new_ operator.  Instead, they are created with the static method Options.create(). 
 
 {{{
   private Options createOptions() {
@@ -204,7 +204,7 @@ options.setOption("nlives", 10);
 
 === Creating a !DataTable ===
 
-For all visualizations, the data is created using the [http://code.google.com/apis/visualization/documentation/reference.html#DataTable DataTable] class or the [http://code.google.com/apis/visualization/documentation/reference.html#DataView DataView] class. A !DataTable is a two dimensional table with rows and columns and cells. As with the Options classes, the `DataTable` class is a subclass of `JavaScriptObject`, so new instances are created by calling the static method `DataTable.create()`.  Each column has a data type defined by the `DataTable.ColumnType` enum. 
+For all charts, the data is created using the [http://code.google.com/apis/visualization/documentation/reference.html#DataTable DataTable] class or the [http://code.google.com/apis/visualization/documentation/reference.html#DataView DataView] class. A !DataTable is a two dimensional table with rows and columns and cells. As with the Options classes, the `DataTable` class is a subclass of `JavaScriptObject`, so new instances are created by calling the static method `DataTable.create()`.  Each column has a data type defined by the `DataTable.ColumnType` enum. 
 
 {{{
   private AbstractDataTable createTable() {
@@ -251,7 +251,7 @@ To provide a read-only view of a !DataTable, you can bind a [http://code.google.
 
 === Issuing a Query ===
 
-A data table can also be obtained from a data source that has been configured to operate with Google Visualizations (for example, Google Spreadsheets), using the [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/Query.java Query] class.  The `Query.send()` method takes a `Query.Callback` object that specifies what to do with the !QueryResponse.  If the !QueryResponse is not an error, you can call `QueryResponse.getDataTable()` and use the resulting !DataTable to draw the visualization. For example:
+A data table can also be obtained from a data source that has been configured to operate with Google Chart Tools (for example, Google Spreadsheets), using the [http://code.google.com/p/gwt-google-apis/source/browse/releases/visualization/1.1/visualization/src/com/google/gwt/visualization/client/Query.java Query] class.  The `Query.send()` method takes a `Query.Callback` object that specifies what to do with the !QueryResponse.  If the !QueryResponse is not an error, you can call `QueryResponse.getDataTable()` and use the resulting !DataTable to draw the chart. For example:
 
 {{{
     String dataUrl = "http://spreadsheets.google.com/tq?"
@@ -283,7 +283,7 @@ A data table can also be obtained from a data source that has been configured to
  
 === Creating a !SelectHandler ===
 
-Handlers are created for visualizations very similarly to how listeners are created for widgets.  Visualizations define "addXXXHandler" methods that take a handler for some event.  Many visualizations support !SelectHandler and !SelectEvent. Here is an example of a !SelectHandler implementation:
+Handlers are created for Visualizations very similarly to how listeners are created for widgets.  Visualization subclasses define "addXXXHandler" methods that take a handler for some event.  Many visualizations support !SelectHandler and !SelectEvent. Here is an example of a !SelectHandler implementation:
 
 {{{
   private SelectHandler createSelectHandler(final PieChart chart) {
