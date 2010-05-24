@@ -32,6 +32,7 @@ import com.google.gwt.visualization.client.DataView;
 import com.google.gwt.visualization.client.Query;
 import com.google.gwt.visualization.client.QueryResponse;
 import com.google.gwt.visualization.client.Selection;
+import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.Query.Callback;
 import com.google.gwt.visualization.client.Query.SendMethod;
@@ -48,17 +49,20 @@ class VisualizationDemo implements EntryPoint {
   private final TabPanel tabPanel = new TabPanel();
 
   public void onModuleLoad() {
-    final VerticalPanel vp = new VerticalPanel();
-    vp.getElement().getStyle().setPropertyPx("margin", 15);
-    RootPanel.get().add(vp);
-    vp.add(new Label("Google Visualization with GWT demo."));
-    vp.add(tabPanel);
-    tabPanel.setWidth("800");
-    tabPanel.setHeight("600");
-    tabPanel.add(createPieChart(), "Pie Chart");
-    tabPanel.add(createTable(), "Table");
-    tabPanel.add(createDataView(), "DataView");
-    tabPanel.selectTab(0);
+    VisualizationUtils.loadVisualizationApi(new Runnable() {
+      public void run() {
+        final VerticalPanel vp = new VerticalPanel();
+        vp.getElement().getStyle().setPropertyPx("margin", 15);
+        RootPanel.get().add(vp);
+        vp.add(new Label("Google Visualization with GWT demo."));
+        vp.add(tabPanel);
+        tabPanel.setWidth("800");
+        tabPanel.setHeight("600");
+        tabPanel.add(createPieChart(), "Pie Chart");
+        tabPanel.add(createTable(), "Table");
+        tabPanel.add(createDataView(), "DataView");
+        tabPanel.selectTab(0);
+      }}, PieChart.PACKAGE, Table.PACKAGE);
   }
 
   /**
@@ -174,7 +178,6 @@ class VisualizationDemo implements EntryPoint {
         viz.draw(dataTable, options);
 
         viz.addSelectHandler(new SelectHandler() {
-          @Override
           public void onSelect(SelectEvent event) {
             StringBuffer b = new StringBuffer();
             Table table = viz;
