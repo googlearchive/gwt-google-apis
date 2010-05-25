@@ -62,6 +62,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -596,7 +597,16 @@ public class MapWidgetEventsTest extends MapsTestCase {
             finishTest();
           }
         });
-        m.panTo(end);
+
+        // The code that handles resizing after the map is attached to the DOM
+        // interferes with this test if the pan is specified before the map is
+        // attached to the DOM.
+        new Timer() {
+          public void run() {
+            m.panTo(end);
+          }
+        }.schedule(1000);
+
       }
     }, false);
   }

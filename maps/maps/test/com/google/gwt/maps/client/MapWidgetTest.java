@@ -19,6 +19,8 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -171,42 +173,52 @@ public class MapWidgetTest extends MapsTestCase {
   public void testMapWidgetLatLngConvertPixel() {
     loadApi(new Runnable() {
       public void run() {
-        MapWidget m = new MapWidget(LatLng.newInstance(0, 0), 1);
+        final MapWidget m = new MapWidget(LatLng.newInstance(0, 0), 1);
         m.setSize("500px", "500px");
-        RootPanel.get().add(m);
-        Point result;
-        result = m.convertLatLngToContainerPixel(LatLng.newInstance(45, 45));
-        assertNotNull("convertLatLngToContainerPixel()", result);
-        result = m.convertLatLngToDivPixel(LatLng.newInstance(45, 45));
-        assertNotNull("convertLatLngToDivPixel()", result);
+        RootLayoutPanel.get().add(m);
 
-        result = m.convertLatLngToContainerPixel(LatLng.newInstance(0, 0));
-        assertNotNull("convertLatLngToContainerPixel()", result);
-        assertTrue("convertLatLngToContainerPixel().getX == 250",
-            result.getX() == 250);
-        assertTrue("convertLatLngToContainerPixel().getY == 250",
-            result.getY() == 250);
-        result = m.convertLatLngToDivPixel(LatLng.newInstance(0, 0));
-        assertNotNull("convertLatLngToDivPixel()", result);
-        assertTrue("convertLatLngToContainerPixel().getX == 250",
-            result.getX() == 250);
-        assertTrue("convertLatLngToContainerPixel().getY == 250",
-            result.getY() == 250);
+        new Timer() {
+          public void run() {
+            Point result;
+            assertTrue(m.isVisible());
+            assertTrue(m.isAttached());
 
-        LatLng latLng;
-        latLng = m.convertContainerPixelToLatLng(Point.newInstance(100, 100));
-        assertNotNull("convertContainerPixelToLatLng()", result);
-        latLng = m.convertDivPixelToLatLng(Point.newInstance(100, 100));
-        assertNotNull("convertDivPixelToLatLng()", result);
+            result = m.convertLatLngToContainerPixel(LatLng.newInstance(45, 45));
+            assertNotNull("convertLatLngToContainerPixel()", result);
+            result = m.convertLatLngToDivPixel(LatLng.newInstance(45, 45));
+            assertNotNull("convertLatLngToDivPixel()", result);
 
-        latLng = m.convertContainerPixelToLatLng(Point.newInstance(250, 250));
-        assertNotNull("convertContainerPixelToLatLng()", result);
-        assertTrue(latLng.isEquals(LatLng.newInstance(0, 0)));
-        latLng = m.convertDivPixelToLatLng(Point.newInstance(250, 250));
-        assertNotNull("convertDivPixelToLatLng()", result);
-        assertTrue(latLng.isEquals(LatLng.newInstance(0, 0)));
+            result = m.convertLatLngToContainerPixel(LatLng.newInstance(0, 0));
+            assertNotNull("convertLatLngToContainerPixel()", result);
+            assertEquals("convertLatLngToContainerPixel().getX() == 250", 250,
+                result.getX());
+            assertEquals("convertLatLngToContainerPixel().getY() == 250", 250,
+                result.getY());
+
+            result = m.convertLatLngToDivPixel(LatLng.newInstance(0, 0));
+            assertNotNull("convertLatLngToDivPixel()", result);
+            assertEquals("convertLatLngToDivPixel().getX() == 250", 250,
+                result.getX());
+            assertEquals("convertLatLngToDivPixel().getY() == 250", 250,
+                result.getY());
+
+            LatLng latLng;
+            latLng = m.convertContainerPixelToLatLng(Point.newInstance(100, 100));
+            assertNotNull("convertContainerPixelToLatLng()", result);
+            latLng = m.convertDivPixelToLatLng(Point.newInstance(100, 100));
+            assertNotNull("convertDivPixelToLatLng()", result);
+
+            latLng = m.convertContainerPixelToLatLng(Point.newInstance(250, 250));
+            assertNotNull("convertContainerPixelToLatLng()", result);
+            assertTrue(latLng.isEquals(LatLng.newInstance(0, 0)));
+            latLng = m.convertDivPixelToLatLng(Point.newInstance(250, 250));
+            assertNotNull("convertDivPixelToLatLng()", result);
+            assertTrue(latLng.isEquals(LatLng.newInstance(0, 0)));
+            finishTest();
+          }
+        }.schedule(1000);
       }
-    });
+    }, false);
   }
 
   public void testMapWidgetLatLngZoom() {
