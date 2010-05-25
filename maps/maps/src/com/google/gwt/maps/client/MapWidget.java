@@ -1,18 +1,19 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.GWT;
@@ -87,10 +88,13 @@ import com.google.gwt.maps.client.impl.EventImpl.PointElementOverlayCallback;
 import com.google.gwt.maps.client.impl.EventImpl.VoidCallback;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.maps.jsio.client.JSList;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.RequiresResize;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.HashMap;
@@ -98,17 +102,28 @@ import java.util.Map;
 
 /**
  * A widget that presents a viewable Google Map to a user.
- *
+ * 
  * Note: the GEvent.trigger methods are implemented by the API but intended for
  * internal testing only.
  */
-public final class MapWidget extends Composite {
+public final class MapWidget extends Composite implements RequiresResize {
 
-  private static class MapPanel extends FlowPanel {
+  private static class MapPanel extends SimplePanel implements RequiresResize {
     public void addVirtual(Widget w) {
       w.removeFromParent();
-      getChildren().add(w);
+      setWidget(w);
       adopt(w);
+    }
+
+    /**
+     * This method is automatically called by the parent container whenever it
+     * changes size.
+     */
+    public void onResize() {
+      Widget child = getWidget();
+      if (child instanceof RequiresResize) {
+        ((RequiresResize) child).onResize();
+      }
     }
   }
 
@@ -130,7 +145,7 @@ public final class MapWidget extends Composite {
    * is invoked by the JavaScript function passed to
    * GMap2.getEarthInstance(callback). Implementation is in GWT Java rather than
    * JSNI to simplify the code.
-   *
+   * 
    * @param earthInstanceHandler the {@link EarthInstanceHandler} to invoke.
    * @param mapWidget the map to add this earth handler to.
    * @param earthInstance the potential Earth object, or null if the earth
@@ -157,7 +172,7 @@ public final class MapWidget extends Composite {
   /**
    * Returns a JavaScript function suitable for passing to
    * GMap2.getEarthInstance(callback) via the MapWidgetImpl JSFlyweightWrapper.
-   *
+   * 
    * @param handler the EarthInstanceHandler to invoke
    * @return the JavaScript callback function
    */
@@ -211,7 +226,7 @@ public final class MapWidget extends Composite {
   /**
    * Creates a new map widget and sets the view to the given center and zoom
    * level.
-   *
+   * 
    * @param center the geographical point about which to center
    * @param zoomLevel the zoom level
    */
@@ -222,11 +237,11 @@ public final class MapWidget extends Composite {
   /**
    * Creates a new map widget and sets the view to the specified center point
    * and zoom level.
-   *
+   * 
    * Note: The 'load' event requires that a handler be registered before
    * GMap2.setCenter() is called. Since that method is always called in this
    * constructor, it isn't clear that gwt-google-apis users needs this event.
-   *
+   * 
    * @param center the geographical point about which to center
    * @param zoomLevel zoomLevel the zoom level
    * @param options optional settings to specify when creating the map.
@@ -234,7 +249,7 @@ public final class MapWidget extends Composite {
   public MapWidget(LatLng center, int zoomLevel, MapOptions options) {
     Maps.assertLoaded();
     initWidget(mapContainer);
-    jsoPeer = MapImpl.impl.construct(getElement(), options);
+    jsoPeer = MapImpl.impl.construct(mapContainer.getElement(), options);
     MapImpl.impl.bind(jsoPeer, this);
     if (center == null) {
       center = LatLng.newInstance(0, 0);
@@ -248,11 +263,11 @@ public final class MapWidget extends Composite {
    * Creates a new map widget and sets the view to the specified center point
    * and zoom level. Also, sets the dragging and draggable cursor values. See
    * the W3C CSS spec for allowable cursor string values.
-   *
+   * 
    * Note: The 'load' event requires that a handler be registered before
    * GMap2.setCenter() is called. Since that method is always called in this
    * constructor, it isn't clear that gwt-google-apis users needs this event.
-   *
+   * 
    * @param center the geographical point about which to center
    * @param zoomLevel zoomLevel the zoom level
    * @param draggableCursor CSS name of the cursor to display when the map is
@@ -271,7 +286,7 @@ public final class MapWidget extends Composite {
   /**
    * Adds a control to the map. The default position of the control is used. A
    * control instance cannot be added more than once to the map.
-   *
+   * 
    * @param control the control to be added
    */
   public void addControl(Control control) {
@@ -281,7 +296,7 @@ public final class MapWidget extends Composite {
   /**
    * Adds a control to the map at the given position. A control instance cannot
    * be added more than once to the map.
-   *
+   * 
    * @param control the control to be added
    * @param position the position of the control
    */
@@ -291,12 +306,12 @@ public final class MapWidget extends Composite {
 
   /**
    * Adds a Control's widget to the map.
-   *
+   * 
    * This method is not intended to be called by the user. To add a custom
    * control to the map, subclass
    * {@link com.google.gwt.maps.client.control.Control.CustomControl} and
    * implement the initialize(MapWidget) method.
-   *
+   * 
    * @param w the control widget to add to the map
    */
   public void addControlWidget(Widget w) {
@@ -304,57 +319,8 @@ public final class MapWidget extends Composite {
   }
 
   /**
-   * Returns a {@link MapUIOptions} object specifying default behaviour and UI
-   * elements for the Map, based on the UI of maps.google.com.
-   */
-  public MapUIOptions getDefaultUI() {
-    return MapImpl.impl.getDefaultUI(jsoPeer);
-  }
-
-  /**
-   * Returns a Boolean indicating whether pinch to zoom is enabled.
-   *
-   * @return <code>true</code> if ping to zoom is enabled.
-   */
-  public boolean isPinchToZoomEnabled() {
-    return MapImpl.impl.pinchToZoomEnabled(jsoPeer);
-  }
-
-  /**
-   * Enables or disables pinching to zoom on an iPhone or iPod touch. Note:
-   * pinch to zoom is enabled by default.
-   *
-   * @param value pass <code>false</code> to disable pinching to zoom.
-   */
-  public void setPinchToZoom(boolean value) {
-    if (value) {
-      MapImpl.impl.enablePinchToZoom(jsoPeer);
-    } else {
-      MapImpl.impl.disablePinchToZoom(jsoPeer);
-    }
-  }
-
-  /**
-   * Adds behaviour and UI elements specified in the options parameter, which
-   * can be a modified version of the object returned from getDefaultUI().
-   *
-   * @param options the user interface options to set on the map.
-   */
-  public void setUI(MapUIOptions options) {
-    MapImpl.impl.setUI(jsoPeer, options);
-  }
-
-  /**
-   * Adds the default behaviour and UI elements specified in getDefaultUI() to
-   * the Map.
-   */
-  public void setUIToDefault() {
-    MapImpl.impl.setUIToDefault(jsoPeer);
-  }
-
-  /**
    * This event is fired before the info window closes. (Since 2.83)
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addInfoWindowBeforeCloseHandler(
@@ -378,7 +344,7 @@ public final class MapWidget extends Composite {
    * call to openInfoWindow*(), the handler
    * {@link MapInfoWindowBeforeCloseHandler}, {@link MapInfoWindowCloseHandler}
    * and {@link MapInfoWindowOpenHandler} are fired in this order
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addInfoWindowCloseHandler(final MapInfoWindowCloseHandler handler) {
@@ -395,7 +361,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when the info window opens.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addInfoWindowOpenHandler(final MapInfoWindowOpenHandler handler) {
@@ -412,7 +378,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when a map type is added to the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapAddMapTypeHandler(final MapAddMapTypeHandler handler) {
@@ -431,7 +397,7 @@ public final class MapWidget extends Composite {
    * This event is fired when a single overlay is added to the map by the method
    * addOverlay(). The new overlay is passed as an argument overlay to the event
    * handler.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapAddOverlayHandler(final MapAddOverlayHandler handler) {
@@ -449,7 +415,7 @@ public final class MapWidget extends Composite {
   /**
    * This event is fired when all overlays are removed at once by the method
    * {@link MapWidget#clearOverlays()}.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapClearOverlaysHandler(final MapClearOverlaysHandler handler) {
@@ -467,7 +433,7 @@ public final class MapWidget extends Composite {
   /**
    * Add a click handler for mouse click events. Note: this event fires even for
    * double click events (twice!).
-   *
+   * 
    * @param handler handler to invoke on mouse click events.
    */
   public void addMapClickHandler(final MapClickHandler handler) {
@@ -486,7 +452,7 @@ public final class MapWidget extends Composite {
   /**
    * Add a double click handler for mouse double click events. Note that this
    * event will not be invoked if the double click was on a marker object.
-   *
+   * 
    * @param handler handler to invoke on mouse double click events.
    */
   public void addMapDoubleClickHandler(final MapDoubleClickHandler handler) {
@@ -505,7 +471,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when the user stops dragging the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapDragEndHandler(final MapDragEndHandler handler) {
@@ -522,7 +488,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is repeatedly fired while the user drags the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapDragHandler(final MapDragHandler handler) {
@@ -539,7 +505,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when the user starts dragging the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapDragStartHandler(final MapDragStartHandler handler) {
@@ -557,7 +523,7 @@ public final class MapWidget extends Composite {
   /**
    * This event is fired when the user moves the mouse over the map from outside
    * the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapMouseMoveHandler(final MapMouseMoveHandler handler) {
@@ -575,7 +541,7 @@ public final class MapWidget extends Composite {
   /**
    * This event is fired when the user moves the mouse over the map from outside
    * the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapMouseOutHandler(final MapMouseOutHandler handler) {
@@ -593,7 +559,7 @@ public final class MapWidget extends Composite {
   /**
    * This event is fired when the user moves the mouse over the map from outside
    * the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapMouseOverHandler(final MapMouseOverHandler handler) {
@@ -610,7 +576,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when the change of the map view ends.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapMoveEndHandler(final MapMoveEndHandler handler) {
@@ -627,7 +593,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired, possibly repeatedly, while the map view is changing.
-   *
+   * 
    * @param handler handler to invoke on map move events.
    */
   public void addMapMoveHandler(final MapMoveHandler handler) {
@@ -646,7 +612,7 @@ public final class MapWidget extends Composite {
    * This event is fired when the map view starts changing. This can be caused
    * by dragging, in which case a {@link MapDragStartEvent} is also fired, or by
    * invocation of a method that changes the map view.
-   *
+   * 
    * @param handler handler to invoke on map move events.
    */
   public void addMapMoveStartHandler(final MapMoveStartHandler handler) {
@@ -663,7 +629,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when a map type is removed from the map.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapRemoveMapTypeHandler(final MapRemoveMapTypeHandler handler) {
@@ -683,7 +649,7 @@ public final class MapWidget extends Composite {
    * This handler is fired when a single overlay is removed by the method
    * {@link MapWidget#removeOverlay(Overlay)}. The overlay that was removed is
    * passed as an argument overlay to the event handler.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapRemoveOverlayHandler(final MapRemoveOverlayHandler handler) {
@@ -701,7 +667,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Add a click handler for mouse right click events.
-   *
+   * 
    * This event is fired when the DOM contextmenu event is fired on the map
    * container. If the right click was on a marker, then the marker is passed to
    * the event handler in the overlay argument. The pixel coordinates (in the
@@ -711,7 +677,7 @@ public final class MapWidget extends Composite {
    * zoom is enabled, then the map zooms out and no {@link MapRightClickHandler}
    * event is fired. If, however, double click to zoom is disabled, two
    * {@link MapRightClickHandler} events will be fired.
-   *
+   * 
    * @param handler handler to invoke on mouse click events.
    */
   public void addMapRightClickHandler(final MapRightClickHandler handler) {
@@ -731,7 +697,7 @@ public final class MapWidget extends Composite {
   /**
    * Adds a new map type to the map. See section GMapType for how to define
    * custom map types.
-   *
+   * 
    * @param type
    */
   public void addMapType(MapType type) {
@@ -740,7 +706,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when another map type is selected.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapTypeChangedHandler(final MapTypeChangedHandler handler) {
@@ -757,7 +723,7 @@ public final class MapWidget extends Composite {
 
   /**
    * This event is fired when the map reaches a new zoom level.
-   *
+   * 
    * @param handler the handler to call when this event fires.
    */
   public void addMapZoomEndHandler(final MapZoomEndHandler handler) {
@@ -776,7 +742,7 @@ public final class MapWidget extends Composite {
   /**
    * Adds an overlay to the map and fires any registered
    * {@link MapAddOverlayHandler}.
-   *
+   * 
    * @param overlay
    */
   public void addOverlay(Overlay overlay) {
@@ -794,7 +760,7 @@ public final class MapWidget extends Composite {
    * Notifies the map of a change in the size of its container and moves to the
    * center of the map. Call this method after the size of the container DOM
    * object has changed, so that the map can adjust itself to fit the new size.
-   *
+   * 
    * Note: This call may cause problems with the Maps API if called during a
    * Zoom or other transition.
    */
@@ -823,7 +789,7 @@ public final class MapWidget extends Composite {
    * Computes the geographical coordinates from pixel coordinates in the div
    * that holds the draggable map. You need this when you implement interaction
    * with custom overlays.
-   *
+   * 
    * @param pixel the container coordinates
    * @return the corresponding geographical coordinates
    */
@@ -837,7 +803,7 @@ public final class MapWidget extends Composite {
    * interaction with custom overlays that don't extend the {@link Overlay}
    * interface. If this doesn't give you the expected output, try
    * {@link #convertContainerPixelToLatLng(Point)} instead.
-   *
+   * 
    * @param pixel point on the map to convert to Lat/Lng
    * @return a set of converted coordinates
    */
@@ -848,7 +814,7 @@ public final class MapWidget extends Composite {
   /**
    * Computes the pixel coordinates of the given geographical point in the DOM
    * element that contains the map on the page.
-   *
+   * 
    * @param latlng the geographical coordinates
    * @return the corresponding projection pixel
    */
@@ -861,7 +827,7 @@ public final class MapWidget extends Composite {
    * element that holds the draggable map. You need this method to position a
    * custom overlay when you implement the GOverlay.redraw() method for a custom
    * overlay.
-   *
+   * 
    * @param latlng the geographical coordinates
    * @return the corresponding projection pixel
    */
@@ -872,7 +838,7 @@ public final class MapWidget extends Composite {
   /**
    * Returns the the visible rectangular region of the map view in geographical
    * coordinates.
-   *
+   * 
    * @return the visible region of the map view
    */
   public LatLngBounds getBounds() {
@@ -883,7 +849,7 @@ public final class MapWidget extends Composite {
    * Returns the zoom level at which the given rectangular region fits in the
    * map view. The zoom level is computed for the currently selected map type.
    * If no map type is selected yet, the first on the list of map types is used.
-   *
+   * 
    * @param bounds a rectangular region to test
    * @return the zoom level at which the bounds fit in the map view.
    */
@@ -893,7 +859,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns the geographical coordinates of the center point of the map view.
-   *
+   * 
    * @return the center of the map view
    */
   public LatLng getCenter() {
@@ -902,7 +868,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns the currently selected map type.
-   *
+   * 
    * @return the currently selected map type
    */
   public MapType getCurrentMapType() {
@@ -910,8 +876,16 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Returns a {@link MapUIOptions} object specifying default behaviour and UI
+   * elements for the Map, based on the UI of maps.google.com.
+   */
+  public MapUIOptions getDefaultUI() {
+    return MapImpl.impl.getDefaultUI(jsoPeer);
+  }
+
+  /**
    * Returns the draggable object used by this map.
-   *
+   * 
    * @return the draggable object used by this map.
    */
   public DraggableObject getDragObject() {
@@ -922,7 +896,7 @@ public final class MapWidget extends Composite {
    * Asynchronously retrieves the Earth instance, initializing it if necessary.
    * On success, the event will contain an initialized Earth Plugin object. On
    * failure, the Earth Plugin object will be null.
-   *
+   * 
    * @param handler the {@link EarthInstanceHandler} to invoke on initialization
    *          or failure
    */
@@ -932,9 +906,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Gets the info window associated with the map.
-   *
+   * 
    * There is only one info window per map.
-   *
+   * 
    * @return the info window associated with the map.
    */
   public InfoWindow getInfoWindow() {
@@ -946,7 +920,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Gets the array of map types registered with this map.
-   *
+   * 
    * @return the map types registered with this map
    */
   public MapType[] getMapTypes() {
@@ -960,7 +934,7 @@ public final class MapWidget extends Composite {
   /**
    * Returns the overlay DIV with the given id. Used by some subclasses of
    * {@link Overlay}.
-   *
+   * 
    * @param type the id of the layer
    * @return the corresponding overlay pane
    */
@@ -986,7 +960,7 @@ public final class MapWidget extends Composite {
   /**
    * This method is not meant to be published, but is needed internally to
    * support the GeoXmlOverlay gotoDefaultViewport() method.
-   *
+   * 
    * @return JavaScript object that is encapsulated by the MapWidget object.
    */
   public JavaScriptObject getPeer() {
@@ -995,7 +969,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns the size of the map view in pixels.
-   *
+   * 
    * @return the size of the map view in pixels
    */
   // TODO(samgross): this should probably be related to the size of the widget
@@ -1005,7 +979,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns the current zoom level.
-   *
+   * 
    * @return the current zoom level
    */
   public int getZoomLevel() {
@@ -1021,7 +995,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns <code>true</code> if continuous smooth zooming is enabled.
-   *
+   * 
    * @return <code>true</code> if continuous smooth zooming is enabled
    */
   public boolean isContinuousZoomEnabled() {
@@ -1030,7 +1004,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns <code>true</code> if double-click to zoom is enabled.
-   *
+   * 
    * @return <code>true</code> if double-click to zoom is enabled
    */
   public boolean isDoubleClickZoomEnabled() {
@@ -1039,7 +1013,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns <code>true</code> if dragging of the map is enabled.
-   *
+   * 
    * @return <code>true</code> if dragging of the map is enabled
    */
   public boolean isDraggable() {
@@ -1048,7 +1022,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Returns <code>true</code> if opening info windows is enabled.
-   *
+   * 
    * @return <code>true</code> if opening info windows is enabled
    */
   public boolean isInfoWindowEnabled() {
@@ -1056,9 +1030,18 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Returns a Boolean indicating whether pinch to zoom is enabled.
+   * 
+   * @return <code>true</code> if ping to zoom is enabled.
+   */
+  public boolean isPinchToZoomEnabled() {
+    return MapImpl.impl.pinchToZoomEnabled(jsoPeer);
+  }
+
+  /**
    * Returns <code>true</code> if zooming using a mouse's scroll wheel is
    * enabled.
-   *
+   * 
    * @return <code>true</code> if zooming using a mouse's scroll wheel is
    *         enabled
    */
@@ -1067,9 +1050,19 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * This method is automatically called by the parent container whenever it
+   * changes size. This allows a map that is sized to a certain percentage of
+   * its parent container to adjust its contents (eliminating grey areas at the
+   * border).
+   */
+  public void onResize() {
+    checkResizeAndCenter();
+  }
+
+  /**
    * Starts a pan animation by the given distance in pixels. +1 is left and up,
    * -1 is right and down.
-   *
+   * 
    * @param dx the number of pixels to pan left
    * @param dy the number of pixels to pan up
    */
@@ -1081,7 +1074,7 @@ public final class MapWidget extends Composite {
    * Starts a pan animation by 1/3rd the size of the map in the indicated
    * directions. +1 is right and down, -1 is left and up, respectively. For
    * example, to do a large pan east, do panDirection(-1, 0).
-   *
+   * 
    * @param dx the number of units to pan left
    * @param dy the number of units to pan up
    */
@@ -1092,7 +1085,7 @@ public final class MapWidget extends Composite {
   /**
    * Centers the map to the given point. If the point is visible in the current
    * map view, the map pans in a smooth animation.
-   *
+   * 
    * @param center the new center
    */
   public void panTo(LatLng center) {
@@ -1101,7 +1094,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes the given control from the map.
-   *
+   * 
    * @param control the control to remove
    */
   public void removeControl(Control control) {
@@ -1112,7 +1105,7 @@ public final class MapWidget extends Composite {
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addInfoWindowBeforeCloseHandler(MapInfoWindowBeforeCloseHandler)}
    * .
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeInfoWindowBeforeCloseHandler(
@@ -1125,7 +1118,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addInfoWindowCloseHandler(MapInfoWindowCloseHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeInfoWindowCloseHandler(MapInfoWindowCloseHandler handler) {
@@ -1137,7 +1130,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addInfoWindowOpenHandler(MapInfoWindowOpenHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeInfoWindowOpenHandler(MapInfoWindowOpenHandler handler) {
@@ -1149,7 +1142,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapAddMapTypeHandler(MapAddMapTypeHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapAddMapTypeHandler(MapAddMapTypeHandler handler) {
@@ -1161,7 +1154,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapAddOverlayHandler(MapAddOverlayHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapAddOverlayHandler(MapAddOverlayHandler handler) {
@@ -1173,7 +1166,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapClearOverlaysHandler(MapClearOverlaysHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapClearOverlaysHandler(MapClearOverlaysHandler handler) {
@@ -1185,7 +1178,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapClickHandler(MapClickHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapClickHandler(MapClickHandler handler) {
@@ -1197,7 +1190,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapDoubleClickHandler(MapDoubleClickHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapDoubleClickHandler(MapDoubleClickHandler handler) {
@@ -1209,7 +1202,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapDragEndHandler(MapDragEndHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapDragEndHandler(MapDragEndHandler handler) {
@@ -1221,7 +1214,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapDragHandler(MapDragHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapDragHandler(MapDragHandler handler) {
@@ -1233,7 +1226,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapDragStartHandler(MapDragStartHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapDragStartHandler(MapDragStartHandler handler) {
@@ -1245,7 +1238,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMouseOutHandler(MapMouseOutHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapMouseMoveHandler(MapMouseMoveHandler handler) {
@@ -1257,7 +1250,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMouseOutHandler(MapMouseOutHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapMouseOutHandler(MapMouseOutHandler handler) {
@@ -1269,7 +1262,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMouseOverHandler(MapMouseOverHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapMouseOverHandler(MapMouseOverHandler handler) {
@@ -1281,7 +1274,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMoveEndHandler(MapMoveEndHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapMoveEndHandler(MapMoveEndHandler handler) {
@@ -1293,7 +1286,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMoveHandler(MapMoveHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapMoveHandler(MapMoveHandler handler) {
@@ -1305,7 +1298,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapMoveStartHandler(MapMoveStartHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapMoveStartHandler(MapMoveStartHandler handler) {
@@ -1317,7 +1310,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapRemoveMapTypeHandler(MapRemoveMapTypeHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapRemoveMapTypeHandler(MapRemoveMapTypeHandler handler) {
@@ -1329,7 +1322,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapRemoveOverlayHandler(MapRemoveOverlayHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapRemoveOverlayHandler(MapRemoveOverlayHandler handler) {
@@ -1341,7 +1334,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapRightClickHandler(MapRightClickHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapRightClickHandler(MapRightClickHandler handler) {
@@ -1352,10 +1345,10 @@ public final class MapWidget extends Composite {
 
   /**
    * Removes the map type from the map.
-   *
+   * 
    * If the current map type is removed, the map will switch to the first map
    * type. The last remaining map type cannot be removed.
-   *
+   * 
    * This method will update the set of buttons displayed by the {@link Control}
    * and will fire any registered instances of {@link MapRemoveMapTypeHandler}.
    */
@@ -1366,7 +1359,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapTypeChangedHandler(MapTypeChangedHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapTypeChangedHandler(MapTypeChangedHandler handler) {
@@ -1378,7 +1371,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes a single handler of this map previously added with
    * {@link MapWidget#addMapZoomEndHandler(MapZoomEndHandler)}.
-   *
+   * 
    * @param handler the handler to remove
    */
   public void removeMapZoomEndHandler(MapZoomEndHandler handler) {
@@ -1390,7 +1383,7 @@ public final class MapWidget extends Composite {
   /**
    * Removes the overlay from the map. If the overlay was on the map, it fires
    * any {@link MapRemoveOverlayHandler} handlers.
-   *
+   * 
    * @param overlay the overlay to remove from the map
    */
   public void removeOverlay(Overlay overlay) {
@@ -1414,10 +1407,10 @@ public final class MapWidget extends Composite {
 
   /**
    * Centers the map to the given latitude and longitude.
-   *
+   * 
    * To center the map using a smooth animation see
    * {@link MapWidget#panTo(LatLng)}.
-   *
+   * 
    * @param center the geographical coordinate about which to center
    */
   public void setCenter(LatLng center) {
@@ -1427,10 +1420,10 @@ public final class MapWidget extends Composite {
   /**
    * Centers the map to the given latitude and longitude and sets the zoom
    * level.
-   *
+   * 
    * To center the map using a smooth animation see
    * {@link MapWidget#panTo(LatLng)}.
-   *
+   * 
    * @param center the geographical coordinate about which to center
    * @param zoomLevel the zoom level
    */
@@ -1441,10 +1434,10 @@ public final class MapWidget extends Composite {
   /**
    * Centers the map to the given latitude and longitude and sets the zoom level
    * and current map type.
-   *
+   * 
    * The map type must be known to the map. To center the map using a smooth
    * animation see {@link MapWidget#panTo(LatLng)}.
-   *
+   * 
    * @param center the geographical coordinate about which to center
    * @param zoomLevel the zoom level
    * @param type the viewed map type
@@ -1456,7 +1449,7 @@ public final class MapWidget extends Composite {
   /**
    * Enables or disables continuous zooming on supported browsers. Continuous
    * zooming is disabled by default.
-   *
+   * 
    * @param enabled <code>true</code> to enable continuous zooming
    */
   public void setContinuousZoom(boolean enabled) {
@@ -1471,7 +1464,7 @@ public final class MapWidget extends Composite {
    * Sets the view to the given map type. The type must be known to the map via
    * {@link MapWidget#addMapType(MapType)} or be one of the three default map
    * types.
-   *
+   * 
    * @param type the desired map type
    */
   public void setCurrentMapType(MapType type) {
@@ -1481,7 +1474,7 @@ public final class MapWidget extends Composite {
   /**
    * Enables or disables the double click to zoom functionality. Double-click to
    * zoom is disabled by default.
-   *
+   * 
    * @param enabled <code>true</code> to enable double-click to zoom.
    */
   public void setDoubleClickZoom(boolean enabled) {
@@ -1494,7 +1487,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Sets whether the map is draggable.
-   *
+   * 
    * @param draggable <code>true</code> if the map is draggable
    */
   public void setDraggable(boolean draggable) {
@@ -1509,7 +1502,7 @@ public final class MapWidget extends Composite {
    * Enables or disables the GoogleBar, an integrated search control, to the
    * map. When enabled, this control takes the place of the default Powered By
    * Google logo. Note that this control is not enabled by default.
-   *
+   * 
    * @param enabled pass <code>true</code> to enable the Googlebar.
    */
   public void setGoogleBarEnabled(boolean enabled) {
@@ -1529,7 +1522,7 @@ public final class MapWidget extends Composite {
   /**
    * Sets whether info window operations on the map are enabled. Info windows
    * are enabled by default.
-   *
+   * 
    * @param enabled <code>true</code> to enable opening info windows
    */
   public void setInfoWindowEnabled(boolean enabled) {
@@ -1541,9 +1534,23 @@ public final class MapWidget extends Composite {
   }
 
   /**
+   * Enables or disables pinching to zoom on an iPhone or iPod touch. Note:
+   * pinch to zoom is enabled by default.
+   * 
+   * @param value pass <code>false</code> to disable pinching to zoom.
+   */
+  public void setPinchToZoom(boolean value) {
+    if (value) {
+      MapImpl.impl.enablePinchToZoom(jsoPeer);
+    } else {
+      MapImpl.impl.disablePinchToZoom(jsoPeer);
+    }
+  }
+
+  /**
    * Enables zooming using a mouse's scroll wheel. Scroll wheel zoom is disabled
    * by default.
-   *
+   * 
    * @param enabled <code>true</code> to enable scroll wheel zooming
    */
   public void setScrollWheelZoomEnabled(boolean enabled) {
@@ -1561,6 +1568,24 @@ public final class MapWidget extends Composite {
     checkResize();
   }
 
+  /**
+   * Adds behaviour and UI elements specified in the options parameter, which
+   * can be a modified version of the object returned from getDefaultUI().
+   * 
+   * @param options the user interface options to set on the map.
+   */
+  public void setUI(MapUIOptions options) {
+    MapImpl.impl.setUI(jsoPeer, options);
+  }
+
+  /**
+   * Adds the default behaviour and UI elements specified in getDefaultUI() to
+   * the Map.
+   */
+  public void setUIToDefault() {
+    MapImpl.impl.setUIToDefault(jsoPeer);
+  }
+
   @Override
   public void setWidth(String width) {
     super.setWidth(width);
@@ -1569,7 +1594,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Sets the zoom level to the given new value.
-   *
+   * 
    * @param level the new zoom level
    */
   public void setZoomLevel(int level) {
@@ -1592,7 +1617,7 @@ public final class MapWidget extends Composite {
 
   /**
    * Adopts the widget, but does not modify the DOM.
-   *
+   * 
    * @param w the widget to adopt
    */
   protected void addVirtual(Widget w) {
@@ -1602,14 +1627,26 @@ public final class MapWidget extends Composite {
   @Override
   protected void onAttach() {
     super.onAttach();
-    checkResizeAndCenter();
+
+    // This nested deferred command works around a problem at maps
+    // initialization time where the map does not resize correctly to its
+    // container.
+    DeferredCommand.addCommand(new Command() {
+      public void execute() {
+        DeferredCommand.addCommand(new Command() {
+          public void execute() {
+            checkResizeAndCenter();
+          }
+        });
+      }
+    });
   }
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapAddMapTypeEvent event) {
@@ -1619,9 +1656,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapAddOverlayEvent event) {
@@ -1631,9 +1668,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
 
@@ -1644,21 +1681,22 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapClickEvent event) {
     maybeInitMapClickHandlers();
-    mapClickHandlers.trigger(event.getOverlay(), event.getLatLng(), event.getOverlayLatLng());
+    mapClickHandlers.trigger(event.getOverlay(), event.getLatLng(),
+        event.getOverlayLatLng());
   }
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDoubleClickEvent event) {
@@ -1668,9 +1706,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragEndEvent event) {
@@ -1680,9 +1718,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragEvent event) {
@@ -1692,9 +1730,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapDragStartEvent event) {
@@ -1704,9 +1742,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapInfoWindowBeforeCloseEvent event) {
@@ -1716,9 +1754,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapInfoWindowCloseEvent event) {
@@ -1728,9 +1766,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapInfoWindowOpenEvent event) {
@@ -1740,9 +1778,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMouseMoveEvent event) {
@@ -1752,9 +1790,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMouseOutEvent event) {
@@ -1764,9 +1802,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMouseOverEvent event) {
@@ -1776,9 +1814,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveEndEvent event) {
@@ -1788,9 +1826,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveEvent event) {
@@ -1800,9 +1838,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapMoveStartEvent event) {
@@ -1812,9 +1850,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapRemoveMapTypeEvent event) {
@@ -1824,9 +1862,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapRemoveOverlayEvent event) {
@@ -1836,9 +1874,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapRightClickEvent event) {
@@ -1849,9 +1887,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapTypeChangedEvent event) {
@@ -1861,9 +1899,9 @@ public final class MapWidget extends Composite {
 
   /**
    * Manually trigger the specified event on this object.
-   *
+   * 
    * Note: The trigger() methods are provided for unit testing purposes only.
-   *
+   * 
    * @param event an event to deliver to the handler.
    */
   void trigger(MapZoomEndEvent event) {
