@@ -70,7 +70,7 @@ public class HelloMaps implements EntryPoint, ValueChangeHandler<String> {
     Button nextLink = new Button(">>");
     nextLink.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
-        show(list.getNext(), false);
+        show(list.getNext(), true);
       }
     });
 
@@ -230,7 +230,6 @@ public class HelloMaps implements EntryPoint, ValueChangeHandler<String> {
     MapsDemoInfo info = list.find(token);
     if (info == null) {
       showInfo();
-      Window.alert("Couldn't find " + token);
       return;
     }
     show(info, false);
