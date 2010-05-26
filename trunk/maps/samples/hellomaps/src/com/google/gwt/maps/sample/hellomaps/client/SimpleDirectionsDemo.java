@@ -131,10 +131,10 @@ public class SimpleDirectionsDemo extends MapsDemo {
   public SimpleDirectionsDemo() {
     final Grid grid = new Grid(1, 2);
     grid.setWidth("100%");
-    grid.getCellFormatter().setWidth(0, 0, "74%");
+    grid.getCellFormatter().setWidth(0, 0, "500px");
     grid.getCellFormatter().setVerticalAlignment(0, 0,
         HasVerticalAlignment.ALIGN_TOP);
-    grid.getCellFormatter().setWidth(0, 1, "24%");
+    grid.getCellFormatter().setWidth(0, 1, "300px");
     grid.getCellFormatter().setVerticalAlignment(0, 1,
         HasVerticalAlignment.ALIGN_TOP);
     map = new MapWidget(LatLng.newInstance(42.351505, -71.094455), 15);
