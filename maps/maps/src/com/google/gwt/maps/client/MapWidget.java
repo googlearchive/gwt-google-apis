@@ -93,8 +93,8 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RequiresResize;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.HashMap;
@@ -108,10 +108,10 @@ import java.util.Map;
  */
 public final class MapWidget extends Composite implements RequiresResize {
 
-  private static class MapPanel extends SimplePanel implements RequiresResize {
+  private static class MapPanel extends FlowPanel implements RequiresResize {
     public void addVirtual(Widget w) {
       w.removeFromParent();
-      setWidget(w);
+      getChildren().add(w);
       adopt(w);
     }
 
@@ -120,9 +120,10 @@ public final class MapWidget extends Composite implements RequiresResize {
      * changes size.
      */
     public void onResize() {
-      Widget child = getWidget();
-      if (child instanceof RequiresResize) {
-        ((RequiresResize) child).onResize();
+      for (Widget child : getChildren()) {
+        if (child instanceof RequiresResize) {
+          ((RequiresResize) child).onResize();
+        }
       }
     }
   }
@@ -1627,6 +1628,7 @@ public final class MapWidget extends Composite implements RequiresResize {
   @Override
   protected void onAttach() {
     super.onAttach();
+    checkResizeAndCenter();
 
     // This nested deferred command works around a problem at maps
     // initialization time where the map does not resize correctly to its
