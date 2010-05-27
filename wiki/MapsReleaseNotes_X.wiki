@@ -18,7 +18,7 @@
 
 === Known Issues ===
 
-   * Not all features in the Maps API are supported. The Maps API is constantly evolving. 
+   * This API only supports the Google Maps v2 API. 
 
 ----
 ==Release Notes for 1.0.4==
