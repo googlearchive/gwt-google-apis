@@ -2,6 +2,25 @@
 
 = Google Maps API Library for GWT Release Notes =
 
+==Release Notes for 1.1.0==
+===Changes since 1.0.4===
+
+   * This library requires GWT 2.0.3 or later and Java 1.5 or later.
+   * Library updated for compatibility with GWT 2.0
+   * Added support for Street View
+   * Improved support for AdsManager
+   * Added support for Aerial and Mapmaker map types
+   * Improved support for TrafficOverlay through addition of GTrafficOverlayOptions equivalent
+   * Added support for ZIndexProcess for Markers
+   * Added support for LatLonBox bounds for Placemark
+   * Other issues noted in the [http://code.google.com/p/gwt-google-apis/issues/list issue tracker]
+   * Added Eclipse project files and ant script to HelloMaps
+
+=== Known Issues ===
+
+   * This API only supports the Google Maps v2 API. 
+
+----
 ==Release Notes for 1.0.4==
 ===Changes since 1.0.3===
 

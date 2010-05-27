@@ -24,8 +24,7 @@ The following items were gleaned from the issue tracker and informal requests on
 || *Project* || *Primary Contact* ||
 || GData: Add support for the GData library || _none_ (coordinate w/ gwt-gdata project?) ||
 || AJAX Feed API: [http://code.google.com/p/gwt-google-apis/issues/detail?id=25 Issue 25] Add support for the AJAX Feed Library || _none_ ||
-|| Gadgets: Add gadgets.* bindings (compatible with opensocial containers) || _none_ ||
-|| [http://code.google.com/apis/earth/ Google Eart API] || _none_ ||
+|| [http://code.google.com/apis/earth/ Google Earth API] || _none_ ||
 || [http://code.google.com/apis/youtube/ YouTube API] || _none_ ||
 
 == Medium Effort Projects ==
@@ -46,3 +45,4 @@ The following items were gleaned from the issue tracker and informal requests on
 || AJAX Search: Issues [http://code.google.com/p/gwt-google-apis/issues/detail?id=33 Issue 33], [http://code.google.com/p/gwt-google-apis/issues/detail?id=34 Issue 34], [http://code.google.com/p/gwt-google-apis/issues/detail?id=35 Issue 35] Adding features to AJAX Search. || _none_ ||
 || AJAX Search: [http://googlenewsblog.blogspot.com/2009/02/adding-google-news-to-your-site.html News element] || _none_ ||
 || Maps: Add missing any of the missing features after API rev 2.118 || _none_ ||
+|| AJAX Loader: || Update Visualization and Ajax Loader [http://code.google.com/p/gwt-google-apis/issues/detail?id=266 to support faster loading of the API] 

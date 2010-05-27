@@ -1,7 +1,0 @@
-#summary Class Reference for the Maps API
-
-= Maps API Class Reference =
-
-|| [http://gwt-google-apis.googlecode.com/svn/javadoc/maps/1.0/index.html Release 1.0.4] ||
-|| [http://gwt-google-apis.googlecode.com/svn/javadoc/maps/1.1/index.html Release 1.1.0] ||
-

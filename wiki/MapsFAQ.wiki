@@ -72,11 +72,7 @@ The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web br
 
 == How can I use GWT with Maps API 3.0? ==
 
-The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI  methods to interface with the Maps v3 API.  There are [http://code.google.com/query/#q=gwt%20maps%20v3 other projects hosted on Google Code] that have GWT bindings for the Maps v3 API.
-
-== I want to use Marker Manager.  Why isn't it implemented? ==
-
-In order to keep the size of the Maps API down, the Marker Manager functionality was kept to be quite limited.  The Maps team recommends you use the additional classes in [http://code.google.com/p/gmaps-utility-library] for managing lots of markers.  Bobby Soares has created an open source set of GWT bindings for some of these classes [http://code.google.com/p/gwt-maps-utility/].
+The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI methods to interface with the Maps v3 API.  There are [http://code.google.com/query/#q=gwt%20maps%20v3 other projects hosted on Google Code] that have GWT bindings for the Maps v3 API.
 
 == How can I run JUnit unit tests using the Maps API? ==
 
@@ -97,3 +93,8 @@ Running unit tests for the Maps API sometimes fails because some of the API meth
 {{{
     http://127.0.0.1:55947/com.google.gwt.maps.GoogleMapsTest.JUnit/junit.html?gwt.junit.sessionId=0&gwt.codesvr=127.0.0.1:55945&gwt.junit.blockindex=134
 }}}
+
+== I have problems running my application from file ==
+
+For modern browsers it's common to forbid cross-file references, which most likely is the cause of your problems. You can run `ant devmode` command to start development mode, and paste the starup URL into your browser without `?gwt.codesvr=127.0.0.1:9997` suffix (port may vary). It will make your embedded web server serve your files in a production mode.
+
