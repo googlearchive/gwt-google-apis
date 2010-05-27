@@ -21,6 +21,7 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.MapsTestCase;
 import com.google.gwt.maps.client.TestUtilities;
 import com.google.gwt.maps.client.TileLayer;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -91,8 +92,16 @@ public class ProjectionTest extends MapsTestCase {
         double dResult = projection.getWrapWidth(map.getZoomLevel());
         assertTrue("getWrapWidth()", dResult > 0);
         // Not sure how to test tileCheckRange()
+
+        // The map gets recentered when its created and these callbacks
+        // may fire multiple times. Give the test some time to quiesce.
+        new Timer() {
+          public void run() {
+            finishTest();
+          }
+        }.schedule(2000);
       }
-    });
+    }, false);
   }
 
   /**
@@ -112,8 +121,17 @@ public class ProjectionTest extends MapsTestCase {
         RootPanel.get().add(map);
         map.setZoomLevel(10);
         map.setCurrentMapType(mapType);
+
+        // The map gets recentered when its created and these callbacks
+        // may fire multiple times. Give the test some time to quiesce.
+        new Timer() {
+          public void run() {
+            finishTest();
+          }
+        }.schedule(2000);
+
       }
-    });
+    }, false);
   }
 
   /**
@@ -163,7 +181,15 @@ public class ProjectionTest extends MapsTestCase {
         map.addMapType(mapType);
         RootPanel.get().add(map);
         map.setCurrentMapType(mapType);
+
+        // The map gets recentered when its created and these callbacks
+        // may fire multiple times. Give the test some time to quiesce.
+        new Timer() {
+          public void run() {
+            finishTest();
+          }
+        }.schedule(2000);
       }
-    });
+    }, false);
   }
 }
