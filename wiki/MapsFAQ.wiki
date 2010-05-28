@@ -74,7 +74,7 @@ The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web br
 
 == How can I use GWT with Maps API 3.0? ==
 
-The current gwt-maps bindings are only compatible with the Maps v2 APIs.  You can use JSNI methods to interface with the Maps v3 API.  There are [http://code.google.com/query/#q=gwt%20maps%20v3 other projects hosted on Google Code] that have GWT bindings for the Maps v3 API.
+As of the gwt-maps-1.1 release, the current bindings are only compatible with the Maps v2 APIs.  You can use JSNI methods to interface with the Maps v3 API, or there are  [http://code.google.com/query/#q=gwt%20maps%20v3 other projects hosted on Google Code] that have GWT bindings for the Maps v3 API.
 
 == How can I run JUnit unit tests using the Maps API? ==
 
