@@ -60,7 +60,9 @@ If you wish to scale to the size of the container, make sure you adjust the size
 
 == Why do I see the map off center surrounded with grey background on one side? ==
 
-In some cases, it is necessary to force the map to resize its layout after the map is initially added.  you can use the `MapWidget.checkResizeAndCenter()` method to clean this up.   You may need to delay calling this function using a `DeferredCommand` or other mechanism to wait until after the DOM layout pass that resizes the map is called.
+As of gwt-maps-1.1, the MapWidget implements the RequiresResize interface.  When added to a panel that supports this interface (such as DockLayoutPanel), the widget automatically calls map.checkResizeAndCenter() whenever the panel containing the widget is resized.  This new feature makes it possible to set your map size to 100% in both directions and fill up the available space on the screen.  To use LayoutPanel subclasses properly, make sure your html page is set to use standards mode by adding `<!doctype html>` as the first line in the document.
+
+In gwt-maps 1.0, it may be necessary to force the map to resize its layout after the map is initially added.  you can use the `MapWidget.checkResizeAndCenter()` method to clean this up.   You may need to delay calling this function using a `DeferredCommand` or other mechanism to wait until after the DOM layout pass that resizes the map is called.
 
 == I'm using localhost, why am I seeing a dialog asking for a key? ==
 
@@ -97,4 +99,3 @@ Running unit tests for the Maps API sometimes fails because some of the API meth
 == I have problems running my application from file ==
 
 For modern browsers it's common to forbid cross-file references, which most likely is the cause of your problems. You can run `ant devmode` command to start development mode, and paste the starup URL into your browser without `?gwt.codesvr=127.0.0.1:9997` suffix (port may vary). It will make your embedded web server serve your files in a production mode.
-
