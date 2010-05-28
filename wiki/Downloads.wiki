@@ -11,7 +11,10 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 *Google AJAX Search API Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.1.0.zip gwt-search-1.1.0.zip]
 
-*Google Visualization API Library 1.1*
+*Google Maps API Library 1.1*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.1.0.zip gwt-maps-1.1.0.zip]
+
+*Google Chart Tools (aka Visualization) Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.1.0.zip gwt-visualization-1.1.0.zip]
 
 *Google Language API Library 1.1*
@@ -19,12 +22,6 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 
 *Google Ajax Loader API Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-ajaxloader-1.1.0.zip gwt-ajaxloader-1.1.0.zip]
-
-These APIs require [http://code.google.com/webtoolkit/versions.html GWT 1.5.3] or higher (soon to be updated).
-
-*Google Maps API Library 1.0*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.4.tar.gz gwt-maps-1.0.4.tar.gz]
-  * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.0.4.zip gwt-maps-1.0.4.zip]
 
 ----
 
