@@ -29,7 +29,7 @@ public class DynamicHeightFeature implements GadgetFeature {
    * content to the RootPanel returned by {@link #getContentDiv()}.
    */
   public native void adjustHeight() /*-{
-    $wnd._IG_AdjustIFrameHeight();
+    $wnd.gadgets.window.adjustHeight();
   }-*/;
 
   /**

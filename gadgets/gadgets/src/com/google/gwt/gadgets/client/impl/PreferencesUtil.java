@@ -23,7 +23,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class PreferencesUtil extends JavaScriptObject {
 
   public static native PreferencesUtil nativeInitPrefs() /*-{
-     return new $wnd._IG_Prefs();
+     return new $wnd.gadgets.Prefs();
    }-*/;
 
   protected PreferencesUtil() {

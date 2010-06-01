@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -40,10 +40,10 @@ public final class GadgetLinker extends XSLinker {
   /**
    * TODO(zundel): remove this code once GWT 1.5 & 1.6 is obsolete and replace
    * with About.getGwtVersionArray()
-   * 
+   *
    * Workaround for issue 275 - wrong version in hosted mode. The static final
    * constants were being inlined into the gwt-gadgets jar file.
-   * 
+   *
    * @return version number as an array of 3 integers.
    */
   private static int[] getVersionArray() throws UnableToCompleteException {
@@ -156,7 +156,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_scriptsLoaded['"
           + scriptUrl
           + "'] = true;\n"
-          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+_IG_GetCachedUrl(base+'"
+          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+gadgets.io.getProxyUrl(base+'"
           + scriptUrl + "') + '\\\"></script>');\n" + "  }\n";
     } else {
       return "  if (!__gwt_scriptsLoaded['"
@@ -165,7 +165,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_scriptsLoaded['"
           + scriptUrl
           + "'] = true;\n"
-          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+_IG_GetCachedUrl('"
+          + "    document.write('<script language=\\\"javascript\\\" src=\\\"'+gadgets.io.getProxyUrl('"
           + scriptUrl + "') + '\\\"></script>');\n" + "  }\n";
     }
   }
@@ -192,7 +192,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_stylesLoaded['"
           + stylesheetUrl
           + "'] = true;\n"
-          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+_IG_GetCachedUrl(base+'"
+          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+gadgets.io.getProxyUrl(base+'"
           + stylesheetUrl + "') + '\\\">');\n" + "  }\n";
     } else {
       return "  if (!__gwt_stylesLoaded['"
@@ -201,7 +201,7 @@ public final class GadgetLinker extends XSLinker {
           + "    __gwt_stylesLoaded['"
           + stylesheetUrl
           + "'] = true;\n"
-          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+_IG_GetCachedUrl('"
+          + "    document.write('<link rel=\\\"stylesheet\\\" href=\\\"'+gadgets.io.getProxyUrl('"
           + stylesheetUrl + "') + '\\\">');\n" + "  }\n";
     }
   }

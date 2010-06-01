@@ -14,6 +14,7 @@
 <!-- limitations under the License.                                         -->
 <module>
   <!-- Produces the final Gadget manifest -->
+  <inherits name="com.google.gwt.ajaxloader.AjaxLoader"/>
   <define-linker name="gadget" class="com.google.gwt.gadgets.linker.GadgetLinker"/>
   <add-linker name="gadget"/>
   <!-- Generates the top layer of the Gadget sandwich -->

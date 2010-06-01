@@ -19,9 +19,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gadgets.client.Gadget;
-import com.google.gwt.gadgets.client.IntrinsicFeature;
-import com.google.gwt.gadgets.client.NeedsIntrinsics;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
+import com.google.gwt.gadgets.client.io.IoFeature;
+import com.google.gwt.gadgets.client.io.NeedsIo;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -36,9 +36,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 @ModulePrefs(title = "Gadget RPC Demo", author = "Eric Z", author_email = "zundel+gadgets@google.com")
 public class GadgetRPC extends Gadget<GadgetRPCPreferences> implements
-    NeedsIntrinsics {
+    NeedsIo {
 
-  private IntrinsicFeature intrinsicMethods = null;
+  //private IntrinsicFeature intrinsicMethods = null;
+  private IoFeature ioFeature = null;
   private GadgetRPCPreferences prefs = null;
   private Label serverStartedText = new Label("<not retrieved>");
   private Label serverCurrentText = new Label("<not retrieved>");
@@ -57,8 +58,8 @@ public class GadgetRPC extends Gadget<GadgetRPCPreferences> implements
     }
   };
 
-  public void initializeFeature(IntrinsicFeature feature) {
-    this.intrinsicMethods = feature;
+  public void initializeFeature(IoFeature ioFeature) {
+    this.ioFeature = ioFeature;
   }
 
   @Override
@@ -72,7 +73,7 @@ public class GadgetRPC extends Gadget<GadgetRPCPreferences> implements
     ServiceDefTarget serviceDef = (ServiceDefTarget) gadgetService;
     String rpcUrl = serviceDef.getServiceEntryPoint();
     if (prefs.useCachedXHR().getValue()) {
-      rpcUrl = intrinsicMethods.getCachedUrl(rpcUrl);
+      rpcUrl = ioFeature.getProxyUrl(rpcUrl);
       serviceDef.setServiceEntryPoint(rpcUrl);
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,19 +13,27 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gadgets.client;
+package com.google.gwt.gadgets.client.io;
 
 /**
- * Provides access to the title.
+ * An enum representing the content types. Values of this enum are passed to the
+ * {@link RequestOptions} instance and influence the parsing method.
  */
-public class SetTitleFeature implements GadgetFeature {
-  private SetTitleFeature() {
+public enum ContentType {
+  DOM("DOM"), FEED("FEED"), JSON("JSON"), TEXT("TEXT");
+
+  private String contentType;
+
+  private ContentType(String contentType) {
+    this.contentType = contentType;
   }
 
   /**
-   * Change the Gadget's displayed title.
+   * Returns the type of the content.
+   *
+   * @return the type of the content.
    */
-  public native void setTitle(String title) /*-{
-    $wnd.gadgets.window.setTitle(title);
-  }-*/;
+  public String getContentType() {
+    return contentType;
+  }
 }
