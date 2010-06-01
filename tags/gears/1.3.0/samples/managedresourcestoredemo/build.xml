@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<project name="managedresourcestore" default="build" basedir=".">
+  <!-- properties specific for samples -->
+  <property name="sample.api" value="gears"/>
+  <property name="sample.root" value="managedresourcestoredemo"/>
+  <property name="sample.module" value="ManagedResourceStoreDemo"/>
+  <!-- tasks common to all samples -->
+  <property name="gwt.root" location="../.."/>
+  <property file="${gwt.root}/common.properties"/>
+  <import file="${common.samples.script}"/>
+</project>
