@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,26 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gadgets.client;
+package com.google.gwt.gadgets.client.io;
 
 import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
-import com.google.gwt.gadgets.client.io.NeedsIo;
 
 /**
- * Indicates that a Gadget requires access to intrinsic features of the
+ * Indicates that a Gadget requires access to gadgets.io features of the
  * container.
- *
- * @deprecated use {@link NeedsIo} instead.
  */
 @FeatureName(FeatureName.INTRINSIC)
-@Deprecated
-public interface NeedsIntrinsics {
-  /**
-   * Entry point that gets called back to handle intrinsic features
-   * initialization.
-   *
-   * @param feature an instance of the feature to use to invoke feature specific
-   *          methods.
-   */
-  void initializeFeature(IntrinsicFeature feature);
+public interface NeedsIo {
+
+  void initializeFeature(IoFeature ioFeature);
 }
