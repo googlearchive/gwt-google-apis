@@ -1,0 +1,16 @@
+// This is an example of a custom manifest
+{"betaManifestVersion" : 1,
+  "version" : "__VERSION__",
+  "entries" : [
+    // The following line will be automatically expanded
+    __ENTRIES__,
+    //         ^--- This comma is necessary because we have entries below
+    { "url" : "ManagedResourceStoreDemo.html" },
+    { "url" : ".", "redirect" : "ManagedResourceStoreDemo.html" },
+    // This is a custom entry showing how to use an offline-only url.
+    // The filter directive could be placed anywhere in the file
+    // @filter script.js
+    { "url": "script.js",
+      "src": "script_offline.js" }
+  ]
+}
