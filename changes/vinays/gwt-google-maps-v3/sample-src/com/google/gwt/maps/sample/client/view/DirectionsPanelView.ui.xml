@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.sourceblock {
+			background: #E3E9FF;
+			padding: 0.5em;
+		}
+		.sourcelink {
+			height: 1.5em;
+			line-height: 1.5em;
+		}
+		.label {
+			width: 8em;
+			display: inline-block;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<div class="{style.sourceblock}">
+			<span class="{style.label}">Presenter</span><g:Anchor ui:field="presenterLink" addStyleNames="{style.sourcelink}" /><br />
+			<span class="{style.label}">View</span><g:Anchor ui:field="viewLink" addStyleNames="{style.sourcelink}" /><br />
+		</div>
+		<div>
+			<g:TextBox ui:field="origin"/>
+			<g:TextBox ui:field="destination"/>
+			<g:Button ui:field="directions">Directions</g:Button>
+			<g:SimplePanel ui:field="mapWrapper" />
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

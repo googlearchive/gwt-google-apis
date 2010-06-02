@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.listitem {
+			height: 2em;
+			line-height: 2em;
+			padding-left: 1em;
+			border-bottom: 1px solid #CCC;
+		}
+		.listitem:hover {
+			background: #E0ECFF;
+		}
+		.anchor {
+			cursor: pointer;
+		}
+	</ui:style>
+	<g:HTMLPanel addStyleNames="{style.listitem}">
+		<g:Anchor ui:field="anchor" addStyleNames="{style.anchor}"/>
+	</g:HTMLPanel>
+</ui:UiBinder> 

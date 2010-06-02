@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='mapsapiv3'>
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.jsio.JSIO' />
+  <source path='client'/>
+</module>
