@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,39 +16,39 @@
 
 function __MODULE_FUNC__() {
   // ---------------- INTERNAL GLOBALS ----------------
-  
+
   // Cache symbols locally for good obfuscation
   var $wnd = window
   ,$doc = document
-  
+
   // A variable to access functions in hosted mode
   ,external = $wnd.external
-  
+
   // These variables gate calling gwtOnLoad; all must be true to start
   ,gwtOnLoad, bodyDone
 
   // If non-empty, an alternate base url for this module
   ,base = ''
-  
+
   // A map of properties that were declared in meta tags
   ,metaProps = {}
-  
+
   // Maps property names onto sets of legal values for that property.
   ,values = []
-  
+
   // Maps property names onto a function to compute that property.
   ,providers = []
-  
+
   // A multi-tier lookup map that uses actual property values to quickly find
   // the strong name of the cache.js file to load.
   ,answers = []
-              
+
    // Provides the module with the soft permutation id
   ,softPermutationId = 0
 
   // Error functions.  Default unset in compiled mode, may be set by meta props.
   ,onLoadErrorFunc, propertyErrorFunc
-  
+
   ,$stats = $wnd.__gwtStatsEvent ? function(a) {return $wnd.__gwtStatsEvent(a);} : null
   ; // end of global vars
 
@@ -72,7 +72,7 @@ function __MODULE_FUNC__() {
       return false;
     }
   }
-  
+
   // Called by onScriptLoad() and onload(). It causes
   // the specified module to be cranked up.
   //
@@ -97,18 +97,17 @@ function __MODULE_FUNC__() {
   // base url.
   //
   function computeScriptBase() {
-    // _args() is provided by the container
-    base = _args()['url'];
+    base = $wnd.gadgets.util.getUrlParameters()['url'];
     base = base.substring(0,  base.lastIndexOf('/') + 1);
   }
-  
+
   // Called to slurp up all <meta> tags:
   // gwt:property, gwt:onPropertyErrorFn, gwt:onLoadErrorFn
   //
   function processMetas() {
     var meta;
-    var prefs = new _IG_Prefs();
-    
+    var prefs = new $wnd.gadgets.Prefs();
+
     if (meta = prefs.getString('gwt:onLoadErrorFn')) {
       try {
         onLoadErrorFunc = eval(meta);
@@ -116,7 +115,7 @@ function __MODULE_FUNC__() {
         alert('Bad handler \"' + content + '\" for \"gwt:onLoadErrorFn\"');
       }
     }
-    
+
     if (meta = prefs.getString('gwt:onPropertyErrorFn')) {
       try {
         propertyErrorFunc = eval(meta);
@@ -125,7 +124,7 @@ function __MODULE_FUNC__() {
           '\" for \"gwt:onPropertyErrorFn\"');
       }
     }
-    
+
     if (meta = prefs.getArray('gwt:property')) {
       for (var i = 0; i < meta.length; i++) {
         var content = meta[i];
@@ -144,7 +143,7 @@ function __MODULE_FUNC__() {
     }
   }
 
-  
+
   /**
    * Gadget iframe URLs are generated with the locale in the URL as a
    *  lang/country parameter pair (e.g. lang=en&country=US) in lieu of the
@@ -156,21 +155,21 @@ function __MODULE_FUNC__() {
     var lang = extractFromQueryStr(args, "lang");
     if (lang != null) {
       country = extractFromQueryStr(args, "country");
-      if (country != null) {      
+      if (country != null) {
 	    $wnd.__gwt_Locale = lang + "_" + country;
       } else {
         $wnd.__gwt_Locale = lang;
       }
     }
   }
-  
+
   /**
    * Returns the value of a named parameter in the URL query string.
    */
   function extractFromQueryStr(args, argName) {
     var start = args.indexOf(argName + "=");
     if (start < 0) {
-      return undefined; 
+      return undefined;
     }
     var value = args.substring(start);
     var valueBegin = value.indexOf("=") + 1;
@@ -180,11 +179,11 @@ function __MODULE_FUNC__() {
     }
     return value.substring(valueBegin, valueEnd);
   }
-   
+
   /**
    * Determines whether or not a particular property value is allowed. Called by
    * property providers.
-   * 
+   *
    * @param propName the name of the property being checked
    * @param propValue the property value being tested
    */
@@ -214,7 +213,7 @@ function __MODULE_FUNC__() {
     // set the final one to the value
     answer[propValArray[n]] = value;
   }
-  
+
   // Computes the value of a given property.  propName must be a valid property
   // name. Used by the generated PERMUTATIONS code.
   //
@@ -232,7 +231,7 @@ function __MODULE_FUNC__() {
     }
     throw null;
   }
-    
+
   // --------------- PROPERTY PROVIDERS ---------------
 
 // __PROPERTIES_BEGIN__
@@ -255,10 +254,10 @@ function __MODULE_FUNC__() {
   computeScriptBase();
   processMetas();
   setLocale();
-  
+
   // --------------- GADGET ONLOAD HOOK ---------------
-  
-  _IG_RegisterOnloadHandler(function() {
+
+  $wnd.gadgets.util.registerOnLoadHandler(function() {
     if (!bodyDone) {
       bodyDone = true;
 // __MODULE_STYLES_BEGIN__
@@ -303,22 +302,22 @@ function __MODULE_FUNC__() {
 // __MODULE_SCRIPTS_BEGIN__
   // Script resources are injected here
 // __MODULE_SCRIPTS_END__
-   
+
     // Use the container's caching function if it's available:
     var fullName = base + strongName;
     if (fullName.search("\.cache\.js$") < 0) {
     	fullName = fullName.concat(".cache.js");
     }
     // Get a URL that is cached for a year (31536000 seconds).
-    var loadFrom = _IG_GetCachedUrl(fullName, {refreshInterval:31536000});
-      
+    var loadFrom = $wnd.gadgets.io.getProxyUrl(fullName, {refreshInterval:31536000});
+
     $doc.write('<script src="' + loadFrom + '"></script>');
   }
 }
 
 // Called from compiled code to hook the window's resize & load events (the
 // code running in the script frame is not allowed to hook these directly).
-// 
+//
 // Notes:
 // 1) We declare it here in the global scope so that it won't closure the
 // internals of the module func.
@@ -341,7 +340,7 @@ __MODULE_FUNC__.__gwt_initHandlers = function(resize, beforeunload, unload) {
      oldOnResize && oldOnResize(evt);
    }
   };
-  
+
   $wnd.onbeforeunload = function(evt) {
     var ret, oldRet;
     try {
@@ -359,7 +358,7 @@ __MODULE_FUNC__.__gwt_initHandlers = function(resize, beforeunload, unload) {
 	}
    // returns undefined.
   };
-  
+
   $wnd.onunload = function(evt) {
     try {
       unload();
