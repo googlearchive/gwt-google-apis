@@ -21,7 +21,7 @@ import com.google.gwt.gadgets.client.osapi.OsapiRequest;
 import com.google.gwt.gadgets.client.osapi.OsapiRequestBuilder;
 
 /**
- * Builder for requests returning a single {@Person}.
+ * Builder for requests returning a single {@link Person}.
  */
 public class GetPersonRequestBuilder extends OsapiRequestBuilder<GetPersonRequestBuilder> {
 

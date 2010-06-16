@@ -244,7 +244,7 @@ public class GadgetGenerator extends Generator {
    * Returns one or more (in case the content section is set for multiple
    * views).
    *
-   * @{link Element}s for each content section that this gadget contains.
+   * {@link Element}s for each content section that this gadget contains.
    */
   protected Element[] createContentSections(TreeLogger logger,
       JClassType gadgetSourceType, TypeOracle typeOracle, Document d)
