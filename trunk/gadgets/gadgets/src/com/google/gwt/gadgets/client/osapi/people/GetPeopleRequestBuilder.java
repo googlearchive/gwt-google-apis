@@ -22,7 +22,7 @@ import com.google.gwt.gadgets.client.osapi.OsapiRequest;
 import com.google.gwt.gadgets.client.osapi.OsapiCollection;
 
 /**
- * Builder for requests returning {@link OsapiCollection} of {@Person}.
+ * Builder for requests returning {@link OsapiCollection} of {@link Person}.
  */
 public class GetPeopleRequestBuilder extends
     CollectionRequestBuilder<GetPeopleRequestBuilder> {
