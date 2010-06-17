@@ -15,7 +15,7 @@ The following items were gleaned from the issue tracker and informal requests on
 || *Project* || *Primary Contact* ||
 || Open Social support || Piotr Swigon ||
 || Open Social Gadget Support || Piotr Swigon ||
-|| Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=228 Issue 228] Google Maps StreetView support || Piotr Swigon ||
+|| Maps Version 3 || Vinay ||
 
 == Large Effort Projects ==
 
@@ -34,7 +34,7 @@ The following items were gleaned from the issue tracker and informal requests on
 || Maps: [http://code.google.com/p/gwt-google-apis/issues/detail?id=231 Issue 231] Add support for the open source Marker Manager (Maps API) || _none_ ||
 || Gadgets: [http://code.google.com/p/gwt-google-apis/issues/detail?id=176 Issue 176] Allow GWT themes to work with Gadgets || _none_ ||
 || AJAX Search: Add support for the [http://code.google.com/apis/ajaxsearch/documentation/#fonje AJAX Search RESTful API] || _none_ ||
-
+|| Latitude API || ||
 
 == Small Effort Projects ==
 
