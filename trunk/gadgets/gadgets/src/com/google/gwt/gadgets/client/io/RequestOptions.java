@@ -63,6 +63,34 @@ public class RequestOptions extends JavaScriptObject {
   }-*/;
 
   /**
+   * Sets the authorization method. Consult <a href=
+   * "http://code.google.com/intl/pl/apis/gadgets/docs/reference/#gadgets.io"
+   * >specification</a> for details.
+   *
+   * @param authorizationType the authorization method.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setAuthorizationType(
+      AuthorizationType authorizationType) /*-{
+    this[$wnd.gadgets.io.RequestParameters.AUTHORIZATION] = authorizationType.@com.google.gwt.gadgets.client.io.AuthorizationType::getAuthorizationType()();
+    return this;
+  }-*/;
+
+  /**
+   * Specifies the data to send to the URL using the POST method; defaults to
+   * null.
+   *
+   * @param data the data to send.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setPostData(String data) /*-{
+    this[$wnd.gadgets.io.RequestParameters.POST_DATA] = data;
+    return this;
+  }-*/;
+
+  /**
    * Explicitly sets the lifespan of cached content. The Refresh Interval is the
    * number of seconds the container should cache the given response. By
    * default, the HTTP caching headers will be respected for fetched content. If
