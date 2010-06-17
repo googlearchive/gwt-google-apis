@@ -16,27 +16,27 @@
 package com.google.gwt.gadgets.client.io;
 
 /**
- * An enum representing the content types. Values of this enum are passed to the
- * {@link RequestOptions} instance and influence the parsing method.
+ * An enum representing the authorization types. Values of this enum are passed
+ * to the {@link RequestOptions}.
  *
- * See <a href="http://code.google.com/intl/pl/apis/gadgets/docs/reference/#gadgets.io.ContentType"
+ * See <a href="http://code.google.com/intl/pl/apis/gadgets/docs/reference/#gadgets.io.AuthorizationType"
  * >gadgets specification</a> for reference.
  */
-public enum ContentType {
-  DOM("DOM"), FEED("FEED"), JSON("JSON"), TEXT("TEXT");
+public enum AuthorizationType {
+  NONE("NONE"), SIGNED("SIGNED"), OAUTH("OAUTH");
 
-  private String contentType;
+  String authorizationType;
 
-  private ContentType(String contentType) {
-    this.contentType = contentType;
+  private AuthorizationType(String authorizationType) {
+    this.authorizationType = authorizationType;
   }
 
   /**
-   * Returns the type of the content.
+   * Returns the {@link String} representing authorization type.
    *
-   * @return the type of the content.
+   * @return the {@link String} representing authorization type.
    */
-  public String getContentType() {
-    return contentType;
+  public String getAuthorizationType() {
+    return authorizationType;
   }
 }

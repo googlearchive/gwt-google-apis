@@ -16,6 +16,7 @@
 package com.google.gwt.gadgets.client.io;
 
 import com.google.gwt.ajaxloader.client.ExceptionHelper;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.ObjectElement;
 import com.google.gwt.gadgets.client.GadgetFeature;
 import com.google.gwt.gadgets.client.io.ResponseReceivedHandler.ResponseReceivedEvent;
@@ -31,6 +32,18 @@ public class IoFeature implements GadgetFeature {
 
   private IoFeature() {
   }
+
+  /**
+   * Converts an input object into a URL-encoded data string (key=value&...).
+   * This method is particularly useful when used with
+   * {@link RequestOptions#setPostData(String)} for creating POST requests.
+   *
+   * @param jso JavaScript object to convert
+   * @return result of conversion
+   */
+  public native String encodeValues(JavaScriptObject jso) /*-{
+    return $wnd.gadgets.io.encodeValues(jso);
+  }-*/;
 
   /**
    * Returns a proxy URL that can be used to access a given URL.
@@ -119,6 +132,44 @@ public class IoFeature implements GadgetFeature {
   /**
    * Makes the HTTP request and invokes the
    * {@link ResponseReceivedHandler#onResponseReceived(ResponseReceivedEvent)}
+   * method with the received response. This method can be used for fetching
+   * JSON data, which is parsed into a {@link JavaScriptObject} instance or it's
+   * subclass. The fetched content is cached on the Gadget Container.
+   *
+   * @param url the URL for the request
+   * @param handler the {@link ResponseReceivedHandler} instance to handle the
+   *          response
+   */
+  public void makeRequestAsJso(final String url,
+      final ResponseReceivedHandler<? extends JavaScriptObject> handler) {
+    makeRequestAsJso(url, handler, null);
+  }
+
+  /**
+   * Makes the HTTP request and invokes the
+   * {@link ResponseReceivedHandler#onResponseReceived(ResponseReceivedEvent)}
+   * method with the received response. This method can be used for fetching
+   * JSON data, which is parsed into a {@link JavaScriptObject} instance or it's
+   * subclass. The fetched content is cached on the Gadget Container.
+   *
+   * @param url the URL for the request
+   * @param handler the {@link ResponseReceivedHandler} instance to handle the
+   *          response
+   * @param options options for this request
+   */
+  public void makeRequestAsJso(final String url,
+      final ResponseReceivedHandler<? extends JavaScriptObject> handler,
+      RequestOptions options) {
+    if (options == null) {
+      options = RequestOptions.newInstance();
+    }
+    options.setContentType(ContentType.JSON);
+    makeRequestImpl(url, handler, options);
+  }
+
+  /**
+   * Makes the HTTP request and invokes the
+   * {@link ResponseReceivedHandler#onResponseReceived(ResponseReceivedEvent)}
    * method with the received response. This method can be used for fetching any
    * text data. The fetched content is cached on the Gadget Container.
    *
@@ -167,7 +218,7 @@ public class IoFeature implements GadgetFeature {
 
   private native <T> void makeRequestNative(String url,
       MakeRequestCallback<T> callback, RequestOptions options) /*-{
-    return $wnd.gadgets.io.makeRequest(url, function(obj) {
+    $wnd.gadgets.io.makeRequest(url, function(obj) {
       callback.@com.google.gwt.gadgets.client.io.IoFeature$MakeRequestCallback::onDone(Lcom/google/gwt/gadgets/client/io/Response;)(obj);
     }, (options === null) ? undefined : options);
   }-*/;

@@ -20,6 +20,10 @@ package com.google.gwt.gadgets.client.io;
  * the {@link RequestOptions} instance. Note that the only request method
  * required by container to implement is {@link MethodType#GET} method.
  * Implementation of remaining methods is optional.
+ *
+ *
+ * See <a href="http://code.google.com/intl/pl/apis/gadgets/docs/reference/#gadgets.io.MethodType"
+ * >gadgets specification</a> for reference.
  */
 public enum MethodType {
   DELETE("DELETE"), GET("GET"), HEAD("HEAD"), POST("POST"), PUT("PUT");
