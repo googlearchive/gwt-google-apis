@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -50,11 +50,13 @@ import com.google.gwt.maps.client.streetview.PhotoSpecTest;
 import com.google.gwt.maps.client.streetview.PovTest;
 import com.google.gwt.maps.client.streetview.StreetviewClientTest;
 import com.google.gwt.maps.client.streetview.StreetviewDataTest;
+import com.google.gwt.maps.client.streetview.StreetviewEventRemoversTest;
 import com.google.gwt.maps.client.streetview.StreetviewFeaturesTest;
 import com.google.gwt.maps.client.streetview.StreetviewLinkTest;
 import com.google.gwt.maps.client.streetview.StreetviewLocationTest;
 import com.google.gwt.maps.client.streetview.StreetviewPanoramaOptionsTest;
 import com.google.gwt.maps.client.streetview.StreetviewPanoramaWidgetTest;
+import com.google.gwt.maps.client.streetview.StreetviewPanoramaWidgetTest2;
 import com.google.gwt.maps.client.streetview.StreetviewUserPhotoOptionsTest;
 
 import junit.framework.Test;
@@ -121,9 +123,11 @@ public class MapsTestSuite extends GWTTestSuite {
     suite.addTestSuite(StreetviewPanoramaOptionsTest.class);
     suite.addTestSuite(StreetviewUserPhotoOptionsTest.class);
 
-    // This test is running as a different module.
-    // It's the last one to minimize the module-switching time.
+    // These tests are running as different modules.
+    // They are last to minimize the module-switching time.
     suite.addTestSuite(StreetviewPanoramaWidgetTest.class);
+    suite.addTestSuite(StreetviewPanoramaWidgetTest2.class);
+    suite.addTestSuite(StreetviewEventRemoversTest.class);
 
     return suite;
   }
