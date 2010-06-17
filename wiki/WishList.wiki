@@ -15,7 +15,7 @@ The following items were gleaned from the issue tracker and informal requests on
 || *Project* || *Primary Contact* ||
 || Open Social support || Piotr Swigon ||
 || Open Social Gadget Support || Piotr Swigon ||
-|| Maps Version 3 || Vinay ||
+|| Maps Version 3 || Vinay Sekhri ||
 
 == Large Effort Projects ==
 
