@@ -17,7 +17,7 @@
   <!-- To be overriden for app-specific tasks  -->
   <!-- Can be used for copying jars etc.       -->
   <target name="before-compile"/>
-  <target name="compile" description="Compile all java files" depends="before-build">
+  <target name="compile" description="Compile all java files" depends="before-compile">
     <mkdir dir="war/WEB-INF/classes"/>
     <gwt.javac destdir="war/WEB-INF/classes" classpathref="classpath"/>
   </target>
