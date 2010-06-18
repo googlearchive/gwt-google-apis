@@ -94,6 +94,26 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
   }
 
   /**
+   * Annotation to turn on long filename generation.
+   * 
+   * Long manifest names include the entire package to guarantee a unique name
+   * gets generated in case there are multiple gadgets in the compilation with
+   * the same class name.
+   * 
+   * For now, the linker will complain if this annotation is missing.
+   * Eventually, the default will be to create short filenames by default and to
+   * not require this annotation.
+   * 
+   */
+  @Target(ElementType.TYPE)
+  public @interface UseLongManifestName {
+    /**
+     * Set to <code>false</code> to enable short filenames.
+     */
+    boolean value() default true;
+  }
+
+  /**
    * Defines the preferences associated with the gadget.
    */
   @Target(ElementType.TYPE)

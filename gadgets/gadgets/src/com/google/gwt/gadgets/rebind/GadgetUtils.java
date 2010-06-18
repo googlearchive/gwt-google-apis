@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,6 +25,7 @@ import com.google.gwt.gadgets.client.ContentSection;
 import com.google.gwt.gadgets.client.Gadget;
 import com.google.gwt.gadgets.client.Gadget.Content;
 import com.google.gwt.gadgets.client.Gadget.ContentType;
+import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
 import com.google.gwt.gadgets.client.GadgetFeature.MayRequire;
 import com.google.gwt.gadgets.client.impl.PreferenceGeneratorName;
 
@@ -128,12 +129,25 @@ class GadgetUtils {
     return toReturn;
   }
 
+  static boolean useLongManifestName(TreeLogger logger, TypeOracle typeOracle,
+      JClassType extendsGadget) throws UnableToCompleteException {
+    UseLongManifestName annotation = extendsGadget.getAnnotation(Gadget.UseLongManifestName.class);
+    if (annotation == null) {
+      logger.log(TreeLogger.WARN, "Gadget class " + extendsGadget.getName()
+          + " is missing @UseLongManifestName annotation.  "
+          + "Using short names will become the default in the future.");
+      return true;
+    }
+    return annotation.value();
+
+  }
+
   /**
    * For the given gadget source type this function looks at it's
    * {@link Content} annotation to see if multiple views have been defined. If
    * so, it will return an array which contains the view names and their
    * associated {@link ContentSection} types.
-   *
+   * 
    * @return An array of views and associated types or null, if no views have
    *         been specified.
    */
