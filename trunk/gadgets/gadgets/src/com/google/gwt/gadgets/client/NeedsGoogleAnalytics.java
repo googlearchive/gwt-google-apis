@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,26 +15,19 @@
  */
 package com.google.gwt.gadgets.client;
 
-/**
- * Provides access to the Google Analytics feature.
- * 
- * @deprecated {@link GoogleAnalyticsFeature}
- */
-@Deprecated
-public class AnalyticsFeature implements GadgetFeature {
-  private AnalyticsFeature() {
-  }
+import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 
+/**
+ * Indicates that a Gadget requires the Google Analytics feature.
+ */
+@FeatureName("com.google.gadgets.analytics")
+public interface NeedsGoogleAnalytics {
   /**
-   * Record a page view.
+   * Entry point that gets called back to handle analytics feature
+   * initialization.
    * 
-   * @param id the Google Analytics account ID
-   * @param path the virtual page view path that should be recorded
-   * 
-   * @deprecated {@link GoogleAnalyticsFeature.Tracker#reportPageview(String)}
+   * @param feature an instance of the feature to use to invoke feature specific
+   *          methods.
    */
-  @Deprecated
-  public native void recordPageView(String id, String path) /*-{
-    $wnd._IG_Analytics(id, path);
-  }-*/;
+  void initializeFeature(GoogleAnalyticsFeature feature);
 }

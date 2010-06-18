@@ -19,8 +19,11 @@ import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 
 /**
  * Indicates that a Gadget requires the Google Analytics feature.
+ * 
+ * @deprecated {@link NeedsGoogleAnalytics}
  */
 @FeatureName("analytics")
+@Deprecated
 public interface NeedsAnalytics {
   /**
    * Entry point that gets called back to handle analytics feature
