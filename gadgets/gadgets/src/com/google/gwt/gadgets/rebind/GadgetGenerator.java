@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -214,7 +214,7 @@ public class GadgetGenerator extends Generator {
 
   /**
    * Creates a single Content section.
-   * 
+   *
    * @param logger for logging errors
    * @param type either the Gadget or ContentView sub-class the section is for
    * @param d the document we use to create the Content XML element for
@@ -224,8 +224,12 @@ public class GadgetGenerator extends Generator {
    * @throws UnableToCompleteException
    */
   protected Element createContentSection(TreeLogger logger, JClassType type,
-      Document d, String viewName) throws UnableToCompleteException {
+      Document d, String viewName, boolean quirksMode)
+      throws UnableToCompleteException {
     StringBuilder contentToInject = new StringBuilder();
+    if (!quirksMode) {
+      contentToInject.append("<!DOCTYPE html>");
+    }
     getInjectedContent(logger, type, contentToInject);
     // The Gadget linker will fill in the bootstrap
     // <content type="html">
@@ -250,12 +254,14 @@ public class GadgetGenerator extends Generator {
   /**
    * Returns one or more (in case the content section is set for multiple
    * views).
-   * 
+   *
    * {@link Element}s for each content section that this gadget contains.
    */
   protected Element[] createContentSections(TreeLogger logger,
       JClassType gadgetSourceType, TypeOracle typeOracle, Document d)
       throws UnableToCompleteException {
+    boolean quirksMode = GadgetUtils.allowHtmlQuirksMode(logger, typeOracle,
+        gadgetSourceType);
     // TODO(haeberling): Check that a Gadget class has not Content AND
     // InjectContent
     List<Element> result = new ArrayList<Element>();
@@ -265,7 +271,8 @@ public class GadgetGenerator extends Generator {
     if (gadgetViewTypes == null) {
       // If the Gadget class doesn't have a Content annotation, we treat it as a
       // single-view gadget.
-      result.add(createContentSection(logger, gadgetSourceType, d, null));
+      result.add(createContentSection(logger, gadgetSourceType, d, null,
+          quirksMode));
     } else {
       logger.log(TreeLogger.INFO, "Using multi-view generation mode.");
       for (int i = 0; i < gadgetViewTypes.length; ++i) {
@@ -277,7 +284,7 @@ public class GadgetGenerator extends Generator {
         String[] viewNames = gadgetViewTypes[i].viewNames;
         for (String viewName : viewNames) {
           result.add(createContentSection(logger, gadgetViewTypes[i].viewType,
-              d, viewName));
+              d, viewName, quirksMode));
         }
       }
     }
@@ -437,10 +444,10 @@ public class GadgetGenerator extends Generator {
 
   /**
    * Inject additional hand-written XML into the gadget's XML file. Get the
-   * 
+   *
    * @InjectModulePrefs annotation, where the file for injection is specified
    *                    and add it as a child of the modlePrefs element.
-   * 
+   *
    * @param logger for logging errors
    * @param type the Gadget subclass we are generating code for
    * @param modulePrefs Element in the gadget speck representing
@@ -491,7 +498,7 @@ public class GadgetGenerator extends Generator {
   /**
    * Inject additional hand-written JavaScript to be written into the gadget's
    * XML file in the &lt;Content&gt; section.
-   * 
+   *
    * @param logger for logging errors
    * @param type the Gadget subclass we are generating code for
    * @param contentToInject a StringBuilder to which all files annotated in the
@@ -515,7 +522,7 @@ public class GadgetGenerator extends Generator {
 
   /**
    * Reads the file for injection from the classpath and returns its contents.
-   * 
+   *
    * @param logger For logging.
    * @param gadgetClass The main gadget class that contained the annotation.
    *          This class should be in a '*.client' package.

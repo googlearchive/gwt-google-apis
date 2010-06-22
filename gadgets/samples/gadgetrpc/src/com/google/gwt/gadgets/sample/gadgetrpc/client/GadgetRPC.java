@@ -19,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.Gadget.AllowHtmlQuirksMode;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
 import com.google.gwt.gadgets.client.io.IoFeature;
@@ -38,6 +39,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 @ModulePrefs(title = "Gadget RPC Demo", author = "Eric Z", author_email = "zundel+gadgets@google.com")
 // Create a short manifest name (instead of prepending the package prefix)
 @UseLongManifestName(false)
+@AllowHtmlQuirksMode(false)
 public class GadgetRPC extends Gadget<GadgetRPCPreferences> implements
     NeedsIo {
 
