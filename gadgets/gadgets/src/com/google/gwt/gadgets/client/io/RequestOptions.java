@@ -36,6 +36,21 @@ public class RequestOptions extends JavaScriptObject {
   }
 
   /**
+   * Sets the authorization method. Consult <a href=
+   * "http://code.google.com/intl/pl/apis/gadgets/docs/reference/#gadgets.io"
+   * >specification</a> for details.
+   *
+   * @param authorizationType the authorization method.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setAuthorizationType(
+      AuthorizationType authorizationType) /*-{
+    this.AUTHORIZATION = authorizationType.@com.google.gwt.gadgets.client.io.AuthorizationType::getAuthorizationType()();
+    return this;
+  }-*/;
+
+  /**
    * Sets a type of content of the requested resource. This influences the
    * method of parsing used for received data.
    *
@@ -44,7 +59,21 @@ public class RequestOptions extends JavaScriptObject {
    *         the builder pattern.
    */
   public final native RequestOptions setContentType(ContentType contentType) /*-{
-    this[$wnd.gadgets.io.RequestParameters.CONTENT_TYPE] = contentType.@com.google.gwt.gadgets.client.io.ContentType::getContentType()();
+    this.CONTENT_TYPE = contentType.@com.google.gwt.gadgets.client.io.ContentType::getContentType()();
+    return this;
+  }-*/;
+
+  /**
+   * Sets HTTP headers to send to the URL.
+   *
+   * @param key Name of the header.
+   * @param value Value for the header.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setHeader(String key, String value) /*-{
+    this.HEADERS = this.HEADERS || {};
+    this.HEADERS[key] = value;
     return this;
   }-*/;
 
@@ -58,22 +87,7 @@ public class RequestOptions extends JavaScriptObject {
    *         the builder pattern.
    */
   public final native RequestOptions setMethodType(MethodType methodType) /*-{
-    this[$wnd.gadgets.io.RequestParameters.METHOD] = methodType.@com.google.gwt.gadgets.client.io.MethodType::getMethodType()();
-    return this;
-  }-*/;
-
-  /**
-   * Sets the authorization method. Consult <a href=
-   * "http://code.google.com/intl/pl/apis/gadgets/docs/reference/#gadgets.io"
-   * >specification</a> for details.
-   *
-   * @param authorizationType the authorization method.
-   * @return this instance of {@link RequestOptions} for convenience in using
-   *         the builder pattern.
-   */
-  public final native RequestOptions setAuthorizationType(
-      AuthorizationType authorizationType) /*-{
-    this[$wnd.gadgets.io.RequestParameters.AUTHORIZATION] = authorizationType.@com.google.gwt.gadgets.client.io.AuthorizationType::getAuthorizationType()();
+    this.METHOD = methodType.@com.google.gwt.gadgets.client.io.MethodType::getMethodType()();
     return this;
   }-*/;
 
@@ -86,7 +100,7 @@ public class RequestOptions extends JavaScriptObject {
    *         the builder pattern.
    */
   public final native RequestOptions setPostData(String data) /*-{
-    this[$wnd.gadgets.io.RequestParameters.POST_DATA] = data;
+    this.POST_DATA = data;
     return this;
   }-*/;
 
@@ -105,7 +119,7 @@ public class RequestOptions extends JavaScriptObject {
    *         the builder pattern.
    */
   public final native RequestOptions setRefreshInterval(int interval) /*-{
-    this[$wnd.gadgets.io.RequestParameters.REFRESH_INTERVAL] = interval;
+    this.REFRESH_INTERVAL = interval;
     return this;
   }-*/;
 }
