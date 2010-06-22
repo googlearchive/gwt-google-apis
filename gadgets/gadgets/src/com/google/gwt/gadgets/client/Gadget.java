@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -18,12 +18,13 @@ package com.google.gwt.gadgets.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.gadgets.client.GadgetFeature.MayRequire;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
  * A base class for writing a Google Gadget.
- *
+ * 
  * <p>
  * Writing a Gadget:
  * <ol>
@@ -36,7 +37,7 @@ import java.lang.annotation.Target;
  * {@link #init(UserPreferences)}. The order in which the setters are called is
  * undefined.</li>
  * </ol>
- *
+ * 
  * <p>
  * Access to user preferences is provided through a user-defined subtype of the
  * {@link UserPreferences} interface. Each preference should be defined as a
@@ -44,14 +45,14 @@ import java.lang.annotation.Target;
  * {@link UserPreferences.Preference}. The Gadget type should be parameterized
  * with the specific UserPreferences subtype, which will be provided to the
  * {@link #init(UserPreferences)} method.
- *
+ * 
  * @param <T> the type of UserPreferences the Gadget expects.
  */
 public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
 
   /**
    * Annotation to turn on browser's quirks mode.
-   *
+   * 
    * By default, generated content will trigger browser's standards mode. If you
    * want override default behavior please use this annotation.
    */
@@ -137,7 +138,7 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * use any email system, but you should not use a personal email address
      * because of spam. One approach is to use an email address of the form
      * helensmith.feedback+coolgadget@gmail.com in your gadget spec.
-     *
+     * 
      * Gmail drops everything after the plus sign (+), so this email address is
      * interpreted as helensmith.feedback@gmail.com.
      */
@@ -193,9 +194,20 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
     int height() default 200;
 
     /**
+     * Specify gadget locale support
+     * 
+     * TODO(zundel) integrate with GWT locale support?
+     * 
+     */
+    GadgetLocale[] locales() default {};
+
+    /**
      * A list of gadget features that may be required. (to create
      * &lt;MayRequire&gt; tags in the gadget spec file.)
+     * 
+     * @deprecated
      */
+    // @Deprecated
     MayRequire[] requirements() default {};
 
     /**
@@ -234,7 +246,7 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * <code>singleton="true"</code> by graying out and displaying the text
      * "Added" for gadgets that have already been added. Note that changes to
      * this attribute may not be picked up by directories right away.
-     *
+     * 
      * This attribute doesn't prevent users from adding gadgets multiple times
      * through the developer gadget or Add by URL. Consequently, you still need
      * to write your gadget to support multiple instances.
@@ -275,16 +287,62 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
   }
 
   /**
+   * This annotation allows <code>Locale</code> tags to be added to the module
+   * specification.
+   */
+  @Documented
+  @Target(value = {})
+  public @interface GadgetLocale {
+    /*
+     * NB: The Target annotation above means this annotation can't be applied to
+     * any Java element, but is only usable as a value in an annotation
+     * property.
+     */
+
+    /**
+     * The language associated with the locale.
+     * 
+     * Optional, but one of either {@link #lang()} or {@link #country()} must be
+     * specified. If omitted, the lang default is <code>*</code>.
+     */
+    String lang() default "";
+
+    /**
+     * The two letter country code associated with the locale.
+     * 
+     * Optional, but one of either {@link #lang()} or {@link #country()} must be
+     * specified. If omitted, the country default is <code>ALL</code>.
+     */
+    String country() default "";
+
+    /**
+     * A URL that points to a message bundle. Message bundles are XML files that
+     * contain the translated strings for a given locale. For more information,
+     * see Gadgets and Internationalization.
+     * 
+     * Optional.
+     */
+    String messages() default "";
+
+    /**
+     * The direction of the gadget.
+     * 
+     * Optional. The default is <code>LTR</code>.
+     */
+    LanguageDirection language_direction() default LanguageDirection.UNSPECIFIED;
+  }
+
+  /**
    * Annotation to turn on long filename generation.
-   *
+   * 
    * Long manifest names include the entire package to guarantee a unique name
    * gets generated in case there are multiple gadgets in the compilation with
    * the same class name.
-   *
+   * 
    * For now, the linker will complain if this annotation is missing.
    * Eventually, the default will be to create short filenames by default and to
    * not require this annotation.
-   *
+   * 
    */
   @Target(ElementType.TYPE)
   public @interface UseLongManifestName {
