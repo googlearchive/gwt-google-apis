@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -20,6 +20,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gadgets.client.AdsFeature;
 import com.google.gwt.gadgets.client.AdsUserPreferences;
 import com.google.gwt.gadgets.client.GadgetAds;
+import com.google.gwt.gadgets.client.Gadget.AllowHtmlQuirksMode;
 import com.google.gwt.gadgets.client.Gadget.InjectContent;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
@@ -49,6 +50,7 @@ width = GadgetAds.SupportedGoogleAdSenseAdFormats.SKYSCRAPER_WIDTH)
 @InjectContent(files = {"dummyAdsInteraction.xml"})
 // Create a short manifest name (instead of prepending the package prefix)
 @UseLongManifestName(false)
+@AllowHtmlQuirksMode(false)
 public class BasicGadgetAds extends GadgetAds<AdsUserPreferences> {
 
   // The AdsFeature is required in Gadget Ads

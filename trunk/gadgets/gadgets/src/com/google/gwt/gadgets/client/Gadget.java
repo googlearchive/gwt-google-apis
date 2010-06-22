@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 
 /**
  * A base class for writing a Google Gadget.
- * 
+ *
  * <p>
  * Writing a Gadget:
  * <ol>
@@ -36,7 +36,7 @@ import java.lang.annotation.Target;
  * {@link #init(UserPreferences)}. The order in which the setters are called is
  * undefined.</li>
  * </ol>
- * 
+ *
  * <p>
  * Access to user preferences is provided through a user-defined subtype of the
  * {@link UserPreferences} interface. Each preference should be defined as a
@@ -44,10 +44,25 @@ import java.lang.annotation.Target;
  * {@link UserPreferences.Preference}. The Gadget type should be parameterized
  * with the specific UserPreferences subtype, which will be provided to the
  * {@link #init(UserPreferences)} method.
- * 
+ *
  * @param <T> the type of UserPreferences the Gadget expects.
  */
 public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
+
+  /**
+   * Annotation to turn on browser's quirks mode.
+   *
+   * By default, generated content will trigger browser's standards mode. If you
+   * want override default behavior please use this annotation.
+   */
+  @Target(ElementType.TYPE)
+  public @interface AllowHtmlQuirksMode {
+    /**
+     * Set to <code>true</code> to use .
+     */
+    boolean value() default true;
+  }
+
   /**
    * Specifies which View content sections should be associated with this
    * Gadget.
@@ -94,26 +109,6 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
   }
 
   /**
-   * Annotation to turn on long filename generation.
-   * 
-   * Long manifest names include the entire package to guarantee a unique name
-   * gets generated in case there are multiple gadgets in the compilation with
-   * the same class name.
-   * 
-   * For now, the linker will complain if this annotation is missing.
-   * Eventually, the default will be to create short filenames by default and to
-   * not require this annotation.
-   * 
-   */
-  @Target(ElementType.TYPE)
-  public @interface UseLongManifestName {
-    /**
-     * Set to <code>false</code> to enable short filenames.
-     */
-    boolean value() default true;
-  }
-
-  /**
    * Defines the preferences associated with the gadget.
    */
   @Target(ElementType.TYPE)
@@ -142,7 +137,7 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * use any email system, but you should not use a personal email address
      * because of spam. One approach is to use an email address of the form
      * helensmith.feedback+coolgadget@gmail.com in your gadget spec.
-     * 
+     *
      * Gmail drops everything after the plus sign (+), so this email address is
      * interpreted as helensmith.feedback@gmail.com.
      */
@@ -239,7 +234,7 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * <code>singleton="true"</code> by graying out and displaying the text
      * "Added" for gadgets that have already been added. Note that changes to
      * this attribute may not be picked up by directories right away.
-     * 
+     *
      * This attribute doesn't prevent users from adding gadgets multiple times
      * through the developer gadget or Add by URL. Consequently, you still need
      * to write your gadget to support multiple instances.
@@ -277,6 +272,26 @@ public abstract class Gadget<T extends UserPreferences> implements EntryPoint {
      * the gadget runs. This setting only applies to syndicated gadgets.
      */
     int width() default 320;
+  }
+
+  /**
+   * Annotation to turn on long filename generation.
+   *
+   * Long manifest names include the entire package to guarantee a unique name
+   * gets generated in case there are multiple gadgets in the compilation with
+   * the same class name.
+   *
+   * For now, the linker will complain if this annotation is missing.
+   * Eventually, the default will be to create short filenames by default and to
+   * not require this annotation.
+   *
+   */
+  @Target(ElementType.TYPE)
+  public @interface UseLongManifestName {
+    /**
+     * Set to <code>false</code> to enable short filenames.
+     */
+    boolean value() default true;
   }
 
   protected Gadget() {

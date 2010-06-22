@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gwt-gadgets"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/oauth-provider-20100601.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/oauth-consumer-20100601.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-maps.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/oauth-20100601.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
