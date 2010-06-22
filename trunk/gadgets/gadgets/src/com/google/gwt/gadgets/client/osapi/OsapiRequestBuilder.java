@@ -29,7 +29,7 @@ import java.util.Date;
 public abstract class OsapiRequestBuilder<T extends OsapiRequestBuilder<?>>
     extends JavaScriptObject {
 
-  private static final DateTimeFormat dtf = DateTimeFormat.getFormat("yyyy-MM-ddThh:mm:ss.SSSS");
+  private static final DateTimeFormat dtf = DateTimeFormat.getFormat("yyyy-MM-dd'T'hh:mm:ss.SSSS");
 
   /**
    * Required by {@link JavaScriptObject} policy.
