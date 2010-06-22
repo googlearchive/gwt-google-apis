@@ -36,8 +36,7 @@ public interface GadgetFeature {
   public @interface FeatureName {
     /**
      * A value used to indicate that the feature is implicitly available in the
-     * container and does not need a <code>requires</code> tag in the
-     * manifest.
+     * container and does not need a <code>requires</code> tag in the manifest.
      */
     String INTRINSIC = "__@INTRINSIC@__";
 
@@ -50,17 +49,22 @@ public interface GadgetFeature {
     /**
      * Additional <code>MayRequire</code> tags can be added to the Gadget
      * manifest here.
+     * 
+     * @deprecated
      */
+    @Deprecated
     MayRequire[] requirements() default {};
   }
 
   /**
-   * This annotation allows additional <code>MayRequire</code> tags to be
-   * added to the module specification. It can be added via
+   * This annotation allows additional <code>MayRequire</code> tags to be added
+   * to the module specification. It can be added via
    * {@link Gadget.ModulePrefs#requirements()} or
    * {@link FeatureName#requirements()}.
+   * 
+   * @deprecated
    */
-  @Documented
+  @Deprecated
   @Target(value = {})
   public @interface MayRequire {
     /*

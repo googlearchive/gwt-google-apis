@@ -23,9 +23,11 @@ import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.gadgets.client.ContentSection;
 import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.LanguageDirection;
 import com.google.gwt.gadgets.client.Gadget.AllowHtmlQuirksMode;
 import com.google.gwt.gadgets.client.Gadget.Content;
 import com.google.gwt.gadgets.client.Gadget.ContentType;
+import com.google.gwt.gadgets.client.Gadget.GadgetLocale;
 import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
 import com.google.gwt.gadgets.client.GadgetFeature.MayRequire;
 import com.google.gwt.gadgets.client.impl.PreferenceGeneratorName;
@@ -177,7 +179,7 @@ class GadgetUtils {
   }
 
   static boolean useLongManifestName(TreeLogger logger, TypeOracle typeOracle,
-      JClassType extendsGadget) throws UnableToCompleteException {
+      JClassType extendsGadget) {
     UseLongManifestName annotation = extendsGadget.getAnnotation(Gadget.UseLongManifestName.class);
     if (annotation == null) {
       logger.log(TreeLogger.WARN, "Gadget class " + extendsGadget.getName()
@@ -212,6 +214,25 @@ class GadgetUtils {
       } catch (InvocationTargetException e) {
         logger.log(TreeLogger.ERROR, "Could not decode annotation", e);
         throw new UnableToCompleteException();
+      }
+    }
+  }
+
+  static void writeLocalesToElement(TreeLogger logger, Document d,
+      Element parent, GadgetLocale[] locales) throws UnableToCompleteException {
+    for (GadgetLocale locale : locales) {
+      Element localeElement = (Element) parent.appendChild(d.createElement("Locale"));
+      String country = locale.country();
+      String lang = locale.lang();
+      if (country.length() == 0 && lang.length() == 0) {
+        logger.log(TreeLogger.ERROR,
+            "All @GadgetLocale specifictions must include either lang() or country().");
+        throw new UnableToCompleteException();
+      }
+      writeAnnotationToElement(logger, locale, localeElement, "language_direction");
+      LanguageDirection direction = locale.language_direction();
+      if (direction != null && direction != LanguageDirection.UNSPECIFIED) {
+        localeElement.setAttribute("language_direction", direction.getValue());
       }
     }
   }

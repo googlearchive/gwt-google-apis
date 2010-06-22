@@ -388,9 +388,12 @@ public class GadgetGenerator extends Generator {
     ModulePrefs prefs = type.getAnnotation(ModulePrefs.class);
     if (prefs != null) {
       GadgetUtils.writeAnnotationToElement(logger, prefs, modulePrefs,
-          "requirements");
+          "requirements", "locales");
       GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
           prefs.requirements());
+      GadgetUtils.writeLocalesToElement(logger, d, modulePrefs,
+          prefs.locales());
+      
     }
 
     // Write out the UserPref tags
