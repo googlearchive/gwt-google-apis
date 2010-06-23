@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,7 @@ import com.google.gwt.gadgets.client.UserPreferences;
 import com.google.gwt.gadgets.client.Gadget.AllowHtmlQuirksMode;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
-import com.google.gwt.gadgets.client.rpc.GadgetsRpc;
+import com.google.gwt.gadgets.client.gwtrpc.GadgetsGwtRpc;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -70,7 +70,7 @@ public class GadgetRPC extends Gadget<GadgetRPC.Preferences> {
     String rpcUrl = serviceDef.getServiceEntryPoint();
 
     // Uses Gadgets container as proxy for GWT RPC requests
-    GadgetsRpc.redirectThroughProxy(serviceDef);
+    GadgetsGwtRpc.redirectThroughProxy(serviceDef);
 
     // Build the user interface.
     VerticalPanel vp = new VerticalPanel();
