@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,11 +19,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.UserPreferences;
 import com.google.gwt.gadgets.client.Gadget.AllowHtmlQuirksMode;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
-import com.google.gwt.gadgets.client.io.IoFeature;
-import com.google.gwt.gadgets.client.io.NeedsIo;
+import com.google.gwt.gadgets.client.rpc.GadgetsRpc;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -40,12 +40,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 // Create a short manifest name (instead of prepending the package prefix)
 @UseLongManifestName(false)
 @AllowHtmlQuirksMode(false)
-public class GadgetRPC extends Gadget<GadgetRPCPreferences> implements
-    NeedsIo {
+public class GadgetRPC extends Gadget<GadgetRPC.Preferences> {
 
-  //private IntrinsicFeature intrinsicMethods = null;
-  private IoFeature ioFeature = null;
-  private GadgetRPCPreferences prefs = null;
+  public static interface Preferences extends UserPreferences {
+  }
+
   private Label serverStartedText = new Label("<not retrieved>");
   private Label serverCurrentText = new Label("<not retrieved>");
   private Label exceptionInfo = new Label();
@@ -63,24 +62,15 @@ public class GadgetRPC extends Gadget<GadgetRPCPreferences> implements
     }
   };
 
-  public void initializeFeature(IoFeature ioFeature) {
-    this.ioFeature = ioFeature;
-  }
-
   @Override
-  protected void init(GadgetRPCPreferences preferences) {
-    this.prefs = preferences;
+  protected void init(GadgetRPC.Preferences preferences) {
 
     gadgetService = GWT.create(GadgetService.class);
-    // If the gadget has caching turned on, change the service entry point. This
-    // works around the Single Origin Policy(SOP) when the gadget is hosted
-    // inside the gadget spec.
     ServiceDefTarget serviceDef = (ServiceDefTarget) gadgetService;
     String rpcUrl = serviceDef.getServiceEntryPoint();
-    if (prefs.useCachedXHR().getValue()) {
-      rpcUrl = ioFeature.getProxyUrl(rpcUrl);
-      serviceDef.setServiceEntryPoint(rpcUrl);
-    }
+
+    // Uses Gadgets container as proxy for GWT RPC requests
+    GadgetsRpc.redirectThroughProxy(serviceDef);
 
     // Build the user interface.
     VerticalPanel vp = new VerticalPanel();

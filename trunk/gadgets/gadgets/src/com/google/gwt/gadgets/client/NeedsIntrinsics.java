@@ -16,13 +16,12 @@
 package com.google.gwt.gadgets.client;
 
 import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
-import com.google.gwt.gadgets.client.io.NeedsIo;
 
 /**
  * Indicates that a Gadget requires access to intrinsic features of the
  * container.
  *
- * @deprecated use {@link NeedsIo} instead.
+ * @deprecated use {@link com.google.gwt.gadgets.client.io.IoProvider} instead.
  */
 @FeatureName(FeatureName.INTRINSIC)
 @Deprecated

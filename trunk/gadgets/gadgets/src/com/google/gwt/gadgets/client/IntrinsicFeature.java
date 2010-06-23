@@ -28,7 +28,7 @@ import com.google.gwt.gadgets.client.io.ResponseReceivedHandler;
  * Provides access to intrinsic APIs provided by the container that are not part
  * of a feature-specific API.
  *
- * @deprecated use {@link com.google.gwt.gadgets.client.io.IoFeature} instead.
+ * @deprecated use {@link com.google.gwt.gadgets.client.io.GadgetsIo} instead.
  */
 @Deprecated
 public class IntrinsicFeature implements GadgetFeature {
@@ -41,8 +41,8 @@ public class IntrinsicFeature implements GadgetFeature {
    * with the content of the fetched URL. The fetched content is cached on the
    * Gadget Container.
    *
-   * @deprecated use {@link com.google.gwt.gadgets.client.io.IoFeature#makeRequest(String, ResponseReceivedHandler)} or
-   *             {@link com.google.gwt.gadgets.client.io.IoFeature#makeRequestAsText(String, ResponseReceivedHandler)}
+   * @deprecated use {@link com.google.gwt.gadgets.client.io.GadgetsIo#makeRequest(String, ResponseReceivedHandler)} or
+   *             {@link com.google.gwt.gadgets.client.io.GadgetsIo#makeRequestAsText(String, ResponseReceivedHandler)}
    *             instead.
    */
   @Deprecated
@@ -63,9 +63,9 @@ public class IntrinsicFeature implements GadgetFeature {
    * Gadget Container with a specified refresh interval specified in seconds.
    *
    * @deprecated use
-   *             {@link com.google.gwt.gadgets.client.io.IoFeature#makeRequest(String, ResponseReceivedHandler, RequestOptions)}
+   *             {@link com.google.gwt.gadgets.client.io.GadgetsIo#makeRequest(String, ResponseReceivedHandler, RequestOptions)}
    *             or
-   *             {@link com.google.gwt.gadgets.client.io.IoFeature#makeRequestAsText(String, ResponseReceivedHandler, RequestOptions)}
+   *             {@link com.google.gwt.gadgets.client.io.GadgetsIo#makeRequestAsText(String, ResponseReceivedHandler, RequestOptions)}
    *             instead.
    */
   @Deprecated
@@ -85,7 +85,7 @@ public class IntrinsicFeature implements GadgetFeature {
    * method with the content of the fetched URL. The content will then be parsed
    * as XML content. The fetched content is cached on the Gadget Container.
    *
-   * @deprecated use {@link com.google.gwt.gadgets.client.io.IoFeature#makeRequestAsDom(String, ResponseReceivedHandler)}
+   * @deprecated use {@link com.google.gwt.gadgets.client.io.GadgetsIo#makeRequestAsDom(String, ResponseReceivedHandler)}
    *             instead.
    */
   @Deprecated
@@ -107,7 +107,7 @@ public class IntrinsicFeature implements GadgetFeature {
    * a specified refresh interval specified in seconds.
    *
    * @deprecated use
-   *             {@link com.google.gwt.gadgets.client.io.IoFeature#makeRequestAsDom(String, ResponseReceivedHandler, RequestOptions)}
+   *             {@link com.google.gwt.gadgets.client.io.GadgetsIo#makeRequestAsDom(String, ResponseReceivedHandler, RequestOptions)}
    *             instead.
    */
   @Deprecated
@@ -124,7 +124,7 @@ public class IntrinsicFeature implements GadgetFeature {
   /**
    * Returns a proxy URL that can be used to access a given URL.
    *
-   * @deprecated use {@link com.google.gwt.gadgets.client.io.IoFeature#getProxyUrl(String)} instead.
+   * @deprecated use {@link com.google.gwt.gadgets.client.io.GadgetsIo#getProxyUrl(String)} instead.
    */
   @Deprecated
   public native String getCachedUrl(String url) /*-{
@@ -135,7 +135,7 @@ public class IntrinsicFeature implements GadgetFeature {
    * Returns a proxy URL that can be used to access a given URL with a specified
    * refresh interval specified in seconds.
    *
-   * @deprecated use {@link com.google.gwt.gadgets.client.io.IoFeature#getProxyUrl(String, int)} instead.
+   * @deprecated use {@link com.google.gwt.gadgets.client.io.GadgetsIo#getProxyUrl(String, int)} instead.
    */
   @Deprecated
   public native String getCachedUrl(String url, int refreshIntervalSeconds) /*-{
@@ -145,7 +145,7 @@ public class IntrinsicFeature implements GadgetFeature {
   /**
    * Returns a proxy URL that can be used to access the given image's URL.
    *
-   * @deprecated use {@link com.google.gwt.gadgets.client.io.IoFeature#getProxyUrl(String)} instead.
+   * @deprecated use {@link com.google.gwt.gadgets.client.io.GadgetsIo#getProxyUrl(String)} instead.
    */
   @Deprecated
   public native String getImageUrl(String url) /*-{
@@ -156,7 +156,7 @@ public class IntrinsicFeature implements GadgetFeature {
    * Returns a proxy URL that can be used to access a given image's URL with a
    * specified refresh interval specified in seconds.
    *
-   * @deprecated use {@link com.google.gwt.gadgets.client.io.IoFeature#getProxyUrl(String, int)} instead.
+   * @deprecated use {@link com.google.gwt.gadgets.client.io.GadgetsIo#getProxyUrl(String, int)} instead.
    */
   @Deprecated
   public native String getImageUrl(String url, int refreshIntervalSeconds) /*-{

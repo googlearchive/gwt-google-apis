@@ -25,8 +25,6 @@ import com.google.gwt.gadgets.client.Gadget.AllowHtmlQuirksMode;
 import com.google.gwt.gadgets.client.Gadget.InjectContent;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
 import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
-import com.google.gwt.gadgets.client.io.IoFeature;
-import com.google.gwt.gadgets.client.io.NeedsIo;
 import com.google.gwt.gadgets.client.io.Response;
 import com.google.gwt.gadgets.client.io.ResponseReceivedHandler;
 import com.google.gwt.gadgets.client.osapi.NeedsOsapi;
@@ -59,13 +57,12 @@ screenshot = "traveler-screenshot.png")
 @UseLongManifestName(false)
 @AllowHtmlQuirksMode(false)
 public class TravelerGadget extends Gadget<TravelerPreferences> implements
-    NeedsOsapi, NeedsIo {
+    NeedsOsapi {
 
   private static final int FRIENDS_DOCK_HEIGHT = 120;
-  private static final String NO_PHOTO_NAME = "no_avatar.jpg";
+  private static final String NO_PHOTO_NAME = "traveler/no_avatar.jpg";
   private PeopleService people;
   private TravelerServletClient travelerServletClient;
-  private IoFeature io;
   private TravelMap personalMap;
   private ErrorNotifier errorNotifier;
 
@@ -79,12 +76,18 @@ public class TravelerGadget extends Gadget<TravelerPreferences> implements
   }
 
   private void buildUi(TravelerPreferences prefs) {
-    String specUrl = GadgetsUtil.getUrlParameters("url");
-    String staticContentUrl = specUrl.substring(0, specUrl.lastIndexOf('/'));
-    String serverUrl = staticContentUrl.substring(0,
-        staticContentUrl.lastIndexOf('/'));
+    String serverUrl = prefs.serverUrl().getValue();
+    if (serverUrl == null || "".equals(serverUrl)) {
+      String specUrl = GadgetsUtil.getUrlParameters("url");
+      String staticContentUrl = specUrl.substring(0, specUrl.lastIndexOf('/'));
+      serverUrl = staticContentUrl.substring(0,
+          staticContentUrl.lastIndexOf('/'));
+    }
+    if (!serverUrl.endsWith("/")) {
+      serverUrl += "/";
+    }
 
-    travelerServletClient = new TravelerServletClient(io, prefs, serverUrl);
+    travelerServletClient = new TravelerServletClient(serverUrl);
     errorNotifier = ErrorNotifier.getErrorNotifier();
 
     // Building personal tab
@@ -117,7 +120,7 @@ public class TravelerGadget extends Gadget<TravelerPreferences> implements
 
     // Building friends tab
 
-    String noPhotoUrl = staticContentUrl + "/" + NO_PHOTO_NAME;
+    String noPhotoUrl = serverUrl + NO_PHOTO_NAME;
     final PersonBrowser browser = new PersonBrowser(people,
         FRIENDS_DOCK_HEIGHT, noPhotoUrl);
     final TravelMap friendsMap = new TravelMap();
@@ -161,10 +164,6 @@ public class TravelerGadget extends Gadget<TravelerPreferences> implements
       }
     });
     RootLayoutPanel.get().add(tabs);
-  }
-
-  public void initializeFeature(IoFeature ioFeature) {
-    this.io = ioFeature;
   }
 
   public void initializeFeature(OsapiFeature feature) {
