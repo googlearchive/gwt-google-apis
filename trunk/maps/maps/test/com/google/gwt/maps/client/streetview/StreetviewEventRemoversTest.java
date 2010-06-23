@@ -44,9 +44,12 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
     return (ua.indexOf("firefox") != -1) && (ua.indexOf("windows") != -1);
   }-*/;
 
-  private StreetviewPanoramaWidget panorama;
+  private static native boolean isIEOnWindows() /*-{
+    var ua = navigator.userAgent.toLowerCase();
+    return (ua.indexOf("msie") != -1) && (ua.indexOf("windows") != -1);
+  }-*/;
 
- 
+  private StreetviewPanoramaWidget panorama;
 
   /**
    * Using different module to force browser refresh for
@@ -57,7 +60,6 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
     return "com.google.gwt.maps.GoogleStreetviewEventRemoversTest";
   }
 
-  
   public void testRemoveErrorHandler() {
     /**
      * HACK: Workaround to avoid running these tests on FF. Tests including
@@ -96,8 +98,9 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
         new Timer() {
           @Override
           public void run() {
-            assertEquals("Expected one and only one error callback.  initialized="
-                + initialized, 1, handleCount);
+            assertEquals(
+                "Expected one and only one error callback.  initialized="
+                    + initialized, 1, handleCount);
             finishTest();
           }
         }.schedule(6 * 1000);
@@ -109,14 +112,16 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
     /**
      * HACK: Workaround to avoid running these tests on FF. Tests including
      * Flash plugin fail on FF if screen of the tester machine is locked.
+     * 
+     * For some reason, the IE test is flaky anytime.
      */
-    if (isFirefoxOnWindows()) {
+    if (isFirefoxOnWindows() || isIEOnWindows()) {
       return;
     }
     loadApi(new Runnable() {
       private int handleCount = 0;
       private boolean initialized = false;
-      
+
       public void run() {
         panorama = newDefaultPanorama();
 
@@ -137,8 +142,9 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
         new Timer() {
           @Override
           public void run() {
-            assertEquals("Expected one and only one initialized callback.  initialized="
-                + initialized, 1, handleCount);
+            assertEquals(
+                "Expected one and only one initialized callback.  initialized="
+                    + initialized, 1, handleCount);
             finishTest();
           }
         }.schedule(5 * 1000);
@@ -151,13 +157,13 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
      * HACK: Workaround to avoid running these tests on FF. Tests including
      * Flash plugin fail on FF if screen of the tester machine is locked.
      */
-    if (isFirefoxOnWindows()) {
+    if (isFirefoxOnWindows() || isIEOnWindows()) {
       return;
     }
     loadApi(new Runnable() {
       private int handleCount = 0;
       private boolean initialized = false;
-      
+
       public void run() {
         panorama = newDefaultPanorama();
 
@@ -184,8 +190,9 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
         new Timer() {
           @Override
           public void run() {
-            assertEquals("Expected one and only one pitch changed callback.  initialized="
-                + initialized, 1, handleCount);
+            assertEquals(
+                "Expected one and only one pitch changed callback.  initialized="
+                    + initialized, 1, handleCount);
             finishTest();
           }
         }.schedule(6 * 1000);
@@ -197,14 +204,16 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
     /**
      * HACK: Workaround to avoid running these tests on FF. Tests including
      * Flash plugin fail on FF if screen of the tester machine is locked.
+     * 
+     * For some reason, the IE test is flaky anytime.
      */
-    if (isFirefoxOnWindows()) {
+    if (isFirefoxOnWindows() || isIEOnWindows()) {
       return;
     }
     loadApi(new Runnable() {
       private int handleCount = 0;
       private boolean initialized = false;
-      
+
       public void run() {
         panorama = newDefaultPanorama();
 
@@ -231,8 +240,9 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
         new Timer() {
           @Override
           public void run() {
-            assertEquals("Expected one and only one yaw changed callback.  initialized="
-                + initialized, 1, handleCount);
+            assertEquals(
+                "Expected one and only one yaw changed callback.  initialized="
+                    + initialized, 1, handleCount);
             finishTest();
           }
         }.schedule(6 * 1000);
@@ -245,18 +255,18 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
      * HACK: Workaround to avoid running these tests on FF. Tests including
      * Flash plugin fail on FF if screen of the tester machine is locked.
      */
-    if (isFirefoxOnWindows()) {
+    if (isFirefoxOnWindows() || isIEOnWindows()) {
       return;
     }
     loadApi(new Runnable() {
       private int handleCount = 0;
       private boolean initialized = false;
-      
+
       public void run() {
         panorama = newDefaultPanorama();
 
         panorama.addZoomChangedHandler(new StreetviewZoomChangedHandler() {
-          public void onZoomChanged(StreetviewZoomChangedEvent event) {            
+          public void onZoomChanged(StreetviewZoomChangedEvent event) {
             if (handleCount++ != 0) {
               fail("Handler used more then once");
             }
@@ -267,7 +277,7 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
 
         panorama.addInitializedHandler(new StreetviewInitializedHandler() {
           public void onInitialized(StreetviewInitializedEvent event) {
-            initialized = true;            
+            initialized = true;
             panorama.trigger(new StreetviewZoomChangedEvent(panorama, 0));
             panorama.trigger(new StreetviewZoomChangedEvent(panorama, 0));
           }
@@ -278,8 +288,9 @@ public class StreetviewEventRemoversTest extends MapsTestCase {
         new Timer() {
           @Override
           public void run() {
-            assertEquals("Expected one and only one zoom changed callback.  initialized="
-                + initialized, 1, handleCount);
+            assertEquals(
+                "Expected one and only one zoom changed callback.  initialized="
+                    + initialized, 1, handleCount);
             finishTest();
           }
         }.schedule(6 * 1000);
