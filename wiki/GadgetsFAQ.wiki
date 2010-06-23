@@ -14,7 +14,12 @@ A Gadget must be hosted in a Gadget container (such as iGoogle or Apache Shindig
 
 The gwt-gadgets library creates what is called an 'inline' gadget, which puts the implementation of your gadget into the gadget spec file.  While this is a boon to performance, the gadget container now becomes the origin of your application, meaning that you must use a proxy to access resources on other hosts. 
 
-The [http://code.google.com/p/gwt-google-apis/source/browse/#svn/trunk/gadgets/samples/gadgetrpc/src/com/google/gwt/gadgets/sample/gadgetrpc Gadget RPC example] demonstrates how to replace the RequestBuilder used by a GWT RPC client with calls to methods in the GadgetIo class.
+On the client side, all you need to do is invoke GadgetsRpc.redirectThroughProxy method on your service. This replaces the RequestBuilder used by a GWT RPC client with calls to methods in the GadgetIo class.
+
+{{{
+  YourServiceAsync yourService = GWT.create(YourService.class);
+  GadgetsRpc.redirectThroughProxy((ServiceDefTarget) yourService);
+}}}
 
 Then, on the server side of the connection, there is a second problem to address.  By default in GWT 1.5, the servlet checks for a content type of `text/x-gwt-rpc`.  Unfortunately, the iGoogle proxy re-writes this header.  To workaround this problem, GWT 1.5.2 and later provides a method that gives the developer some control over this checking:
 
@@ -29,11 +34,15 @@ Then, on the server side of the connection, there is a second problem to address
 For a gadget, override this method in your implementation of `RemoteServiceServlet` and implement it as:
 
 {{{
+  @Override
   protected String readContent(HttpServletRequest request)
       throws ServletException, IOException {
     return RPCServletUtils.readContentAsUtf8(request, false);
   }
 }}}
+
+
+The [http://code.google.com/p/gwt-google-apis/source/browse/#svn/trunk/gadgets/samples/gadgetrpc/src/com/google/gwt/gadgets/sample/gadgetrpc Gadget RPC example] demonstrates how to follow described steps to use GWT RPC in the Gadgets container.
 
 == Why can't I use GWT Theme support with a Gadget? ==
 
