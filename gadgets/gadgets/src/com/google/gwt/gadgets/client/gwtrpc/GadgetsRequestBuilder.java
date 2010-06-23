@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gadgets.client.rpc;
+package com.google.gwt.gadgets.client.gwtrpc;
 
 import com.google.gwt.gadgets.client.io.IoProvider;
 import com.google.gwt.gadgets.client.io.MethodType;

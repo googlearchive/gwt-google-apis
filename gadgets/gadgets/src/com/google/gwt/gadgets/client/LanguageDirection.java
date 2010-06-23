@@ -16,7 +16,7 @@
 package com.google.gwt.gadgets.client;
 
 /**
- * Enum used in the {@link Gadget.Locale} annotation to specify the language
+ * Enum used in the {@link Gadget.GadgetLocale} annotation to specify the language
  * direction to use for a locale.
  * 
  * For more informatoin, see <a
