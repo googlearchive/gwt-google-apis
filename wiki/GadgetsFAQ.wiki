@@ -14,17 +14,7 @@ A Gadget must be hosted in a Gadget container (such as iGoogle or Apache Shindig
 
 The gwt-gadgets library creates what is called an 'inline' gadget, which puts the implementation of your gadget into the gadget spec file.  While this is a boon to performance, the gadget container now becomes the origin of your application, meaning that you must use a proxy to access resources on other hosts. 
 
-For RPC to work, you must first, you will need to modify the client to use the proxy provided by the gadget container:
-
-{{{
-    gadgetService = GWT.create(GadgetService.class);
-    // Work around the Single Origin Policy(SOP) when the gadget is hosted
-    // inside the gadget spec.
-    ServiceDefTarget serviceDef = (ServiceDefTarget) gadgetService;
-    String rpcUrl = serviceDef.getServiceEntryPoint();
-    rpcUrl = intrinsicMethods.getCachedUrl(rpcUrl);
-    serviceDef.setServiceEntryPoint(rpcUrl);
-}}}
+The [http://code.google.com/p/gwt-google-apis/source/browse/#svn/trunk/gadgets/samples/gadgetrpc/src/com/google/gwt/gadgets/sample/gadgetrpc Gadget RPC example] demonstrates how to replace the RequestBuilder used by a GWT RPC client with calls to methods in the GadgetIo class.
 
 Then, on the server side of the connection, there is a second problem to address.  By default in GWT 1.5, the servlet checks for a content type of `text/x-gwt-rpc`.  Unfortunately, the iGoogle proxy re-writes this header.  To workaround this problem, GWT 1.5.2 and later provides a method that gives the developer some control over this checking:
 
