@@ -186,8 +186,8 @@ public class DirectionsTest extends MapsTestCase {
         DirectionsPanel directionsPanel = new DirectionsPanel();
         DirectionQueryOptions opts = new DirectionQueryOptions(map,
             directionsPanel);
-        String query = "from: 1000 Baloney St NW, Atlantis, XY USA "
-            + "to: 160000 amphibian street absolutelynowhere SB USA";
+        String query = "from: 1000 Baloney St NW, Atlantis, XY"
+            + "to: 160000 amphibian street absolutelynowhere ZX";
         Directions.load(query, opts, new DirectionsCallback() {
 
           public void onFailure(int statusCode) {
