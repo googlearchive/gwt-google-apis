@@ -15,14 +15,34 @@
  */
 package com.google.gwt.gadgets.client.io;
 
-import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
-
 /**
- * Indicates that a Gadget requires access to gadgets.io features of the
- * container.
+ * Class providing implementation of {@link GadgetsIo}.
  */
-@FeatureName(FeatureName.INTRINSIC)
-public interface NeedsIo {
+public class IoProvider {
 
-  void initializeFeature(IoFeature ioFeature);
+  private static GadgetsIo io = new GadgetsIoImpl();
+
+  /**
+   * Method for setting mock implementation of {@link GadgetsIo} for tests.
+   *
+   * @param mockIo Mock implementation of {@link GadgetsIo} for tests.
+   */
+  static void setMock(GadgetsIo mockIo) {
+    IoProvider.io = mockIo;
+  }
+
+  /**
+   * Method providing implementation of {@link GadgetsIo}.
+   *
+   * @return Implementation of {@link GadgetsIo}.
+   */
+  public static GadgetsIo get() {
+    return io;
+  }
+
+  /**
+   * This class is not meant to be instantiated.
+   */
+  private IoProvider(){
+  }
 }

@@ -18,7 +18,7 @@ package com.google.gwt.gadgets.client.io;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * A class defining request options used with {@link IoFeature#makeRequest}
+ * A class defining request options used with {@link GadgetsIo#makeRequest}
  * methods.
  */
 public class RequestOptions extends JavaScriptObject {

@@ -17,7 +17,8 @@ package com.google.gwt.gadgets.sample.traveler.client;
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.gadgets.client.io.AuthorizationType;
-import com.google.gwt.gadgets.client.io.IoFeature;
+import com.google.gwt.gadgets.client.io.GadgetsIo;
+import com.google.gwt.gadgets.client.io.IoProvider;
 import com.google.gwt.gadgets.client.io.MethodType;
 import com.google.gwt.gadgets.client.io.RequestOptions;
 import com.google.gwt.gadgets.client.io.ResponseReceivedHandler;
@@ -32,19 +33,12 @@ import com.google.gwt.gadgets.client.io.ResponseReceivedHandler;
 public class TravelerServletClient {
 
   private static final String SERVLET_NAME = "travelerservlet";
-  private IoFeature io;
+  private GadgetsIo io;
   private String servletUrl;
 
-  public TravelerServletClient(IoFeature io, TravelerPreferences prefs, String baseUrl) {
-    this.io = io;
-    String serverUrl = prefs.serverUrl().getValue();
-    if (serverUrl == null || "".equals(serverUrl)) {
-      serverUrl = baseUrl;
-    }
-    if (!serverUrl.endsWith("/")) {
-      serverUrl += "/";
-    }
+  public TravelerServletClient(String serverUrl) {
     this.servletUrl = serverUrl + SERVLET_NAME;
+    this.io = IoProvider.get();
   }
 
   public void getLocations(ResponseReceivedHandler<JsArray<Location>> callback) {

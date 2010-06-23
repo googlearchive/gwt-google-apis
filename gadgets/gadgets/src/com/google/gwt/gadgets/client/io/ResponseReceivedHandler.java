@@ -21,7 +21,7 @@ import java.util.EventObject;
 
 /**
  * The interface a caller must implement to receive a response to a
- * {@link com.google.gwt.gadgets.client.io.IoFeature#makeRequest}.
+ * {@link com.google.gwt.gadgets.client.io.GadgetsIo#makeRequest}.
  *
  * @param <T> Type of parsed data of the response.
  */
