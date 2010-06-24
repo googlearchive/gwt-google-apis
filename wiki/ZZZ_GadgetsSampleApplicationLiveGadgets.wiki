@@ -3,7 +3,7 @@
 ==HelloGadgets 1.2.0==
 
 
-<wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets.gadget.xml" border="1" height="210">
+<wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/HelloGadgets.gadget.xml" border="1" height="210">
 
 TESTING:
-<wiki:gadget url="http://gwt.google.com/samples/hellogadgets-0.0.1798/hellogadgets/com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets.gadget.xml" border="1" height="210">
+<wiki:gadget url="http://gwt.google.com/samples/hellogadgets-0.0.1798/hellogadgets/HelloGadgets.gadget.xml" border="1" height="210">

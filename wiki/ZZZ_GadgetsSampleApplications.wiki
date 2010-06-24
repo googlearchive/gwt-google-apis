@@ -8,7 +8,7 @@
 
 A basic demonstration of writing a gadget using GWT.
 
-  <wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets.gadget.xml" border="1" height="210">
+  <wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/HelloGadgets.gadget.xml" border="1" height="210">
 
 To deploy, open [http://www.igoogle.com iGoogle].  Choose the _Add Stuff..._ link on the top right of the main page, then on the bottom left of the next page, choose the _Add Feed or Url_ link.  When the dialog comes up,  add the following url:
 
