@@ -4,8 +4,6 @@
 
 === HelloGadgets ===
 
- [http://gwt-google-apis.googlecode.com/svn/wiki/HelloGadgets-2.png]
-
 A basic demonstration of writing a gadget using GWT.
 
   <wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/HelloGadgets.gadget.xml" border="1" height="210">
@@ -31,5 +29,9 @@ Other gadgets you can try:
   `http://gwt.google.com/samples/basicgadgetads-1.2.0/basicgadgetads/BasicGadgetAds.gadget.xml`
 
    * An example of how to use the Open Social API on a gadget hosted on App Engine
+
+   [http://gwt-google-apis.googlecode.com/svn/wiki/traveler-screenshot.png]
+
+   TODO(zundel): Add a button to add to iGoogle or Orkut
 
   `http://osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml`
