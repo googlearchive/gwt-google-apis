@@ -28,6 +28,7 @@
         <include name="samples/*/.project"/>
         <include name="samples/*/src/**"/>
         <include name="samples/*/war/**"/>
+        <exclude name="samples/*/war/WEB-INF/lib/**"/>
       </zipfileset>
     </zip>
   </target>
