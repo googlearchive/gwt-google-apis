@@ -1,0 +1,26 @@
+﻿#summary Sample applications distributed with gwt-gadgets
+
+= Gadgets Library Example =
+
+=== HelloGadgets ===
+
+ [http://gwt-google-apis.googlecode.com/svn/wiki/HelloGadgets-2.png]
+
+A basic demonstration of writing a gadget using GWT.
+
+To deploy, open [http://www.igoogle.com iGoogle].  Choose the _Add Stuff..._ link on the top right of the main page, then on the bottom left of the next page, choose the _Add Feed or Url_ link.  When the dialog comes up,  add the following url:
+
+  `http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/HelloGadgets.gadget.xml`
+
+Select `OK` to add the gadget to your home page.
+
+Other gadgets you can try:
+
+   * An example of how to use GWT RPC with a gadget.
+  `http://gwt.google.com/samples/gadgetrpc-1.2.0/gadgetrpc/GadgetRPC.gadget.xml`
+
+   * An example of how to host an Ad in a gadget written with GWT.
+  `http://gwt.google.com/samples/basicgadgetads-1.2.0/basicgadgetads/BasicGadgetAds.gadget.xml`
+
+   * An example of how to use the Open Social API on a gadget hosted on App Engine
+  `http://gwt.google.com/samples/traveler-1.2.0/basicgadgetads/Traveler.gadget.xml`

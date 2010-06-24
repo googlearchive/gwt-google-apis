@@ -1,0 +1,6 @@
+﻿#summary One-sentence summary of this page.
+
+==HelloGadgets 1.2.0==
+
+
+<wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets.gadget.xml" border="1" height="210">
