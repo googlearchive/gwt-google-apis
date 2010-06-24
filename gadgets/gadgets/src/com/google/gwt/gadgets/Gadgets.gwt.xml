@@ -51,6 +51,9 @@
   <replace-with class="com.google.gwt.gadgets.client.SetPrefsFeatureImpl">
     <when-type-is class="com.google.gwt.gadgets.client.SetPrefsFeature"/>
   </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.RpcFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.rpc.RpcFeature"/>
+  </replace-with>  
   <source path="annotations"/>
   <source path="client"/>
 </module>
