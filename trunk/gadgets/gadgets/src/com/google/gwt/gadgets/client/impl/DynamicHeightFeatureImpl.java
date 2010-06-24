@@ -13,27 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gadgets.client;
+package com.google.gwt.gadgets.client.impl;
 
+import com.google.gwt.gadgets.client.DynamicHeightFeature;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Provides access to the dynamic height feature.
  */
-public interface DynamicHeightFeature {
+public class DynamicHeightFeatureImpl implements DynamicHeightFeature {
+  private DynamicHeightFeatureImpl() {
+  }
 
-  /**
-   * Causes the Gadget to be resized.  Make sure you have added your
-   * content to the RootPanel returned by {@link #getContentDiv()}.
-   */
-  void adjustHeight();
+  public native void adjustHeight() /*-{
+    $wnd.gadgets.window.adjustHeight();
+  }-*/;
 
-  /**
-   * Use this method to retrieve the RootPanel to attach all gadget content to
-   * when using DynamicHeight.
-   *
-   * @return a pointer to a panel that will allow your gadget to be resizable
-   *         when you add content here.
-   */
-  RootPanel getContentDiv();
+  public RootPanel getContentDiv() {
+    return RootPanel.get("__gwt_gadget_content_div");
+  }
 }

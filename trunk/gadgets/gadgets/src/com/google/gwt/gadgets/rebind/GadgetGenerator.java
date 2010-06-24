@@ -59,7 +59,9 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -114,24 +116,14 @@ public class GadgetGenerator extends Generator {
       SourceWriter sw = f.createSourceWriter(context, out);
       sw.println("public " + generatedSimpleSourceName + "() {");
       sw.indent();
-      sw.println("nativeInit();");
+      sw.println("initializeFeatures();");
       sw.println("init((" + userPrefsType.getQualifiedSourceName()
           + ")GWT.create(" + userPrefsType.getQualifiedSourceName()
           + ".class));");
       sw.outdent();
       sw.println("}");
 
-      sw.println("private native void nativeInit() /*-{");
-      sw.indent();
-      // Looking at the superclass in case any Features are needed there.
-      for (JClassType currentClass = sourceType; currentClass != null; currentClass = currentClass.getSuperclass()) {
-        for (JClassType interfaceType : currentClass.getImplementedInterfaces()) {
-          generateFeatureInitializer(logger, typeOracle, sw, sourceType,
-              interfaceType);
-        }
-      }
-      sw.outdent();
-      sw.println("}-*/;");
+      generateFeatureInitializers(logger, typeOracle, sw, sourceType);
 
       // Write out the manifest
       String manifestName = typeName;
@@ -291,60 +283,103 @@ public class GadgetGenerator extends Generator {
     return result.toArray(new Element[0]);
   }
 
-  protected void generateFeatureInitializer(TreeLogger logger,
-      TypeOracle typeOracle, SourceWriter sw, JClassType gadgetType,
-      JClassType featureType) throws UnableToCompleteException {
-    logger = logger.branch(TreeLogger.DEBUG,
-        "Generating GadgetFeature initializer for type "
-            + featureType.getQualifiedSourceName(), null);
-    FeatureName name = featureType.getAnnotation(FeatureName.class);
-    if (name == null) {
-      return;
-    }
-
-    JMethod[] methods = featureType.getMethods();
-    if (methods.length != 1) {
-      logger.log(TreeLogger.ERROR,
-          "A Feature interface must define exactly one method", null);
-      throw new UnableToCompleteException();
-    }
-
-    JMethod m = methods[0];
-    JParameter[] params = m.getParameters();
-
-    if (params.length != 1) {
-      logger.log(TreeLogger.ERROR, m.getName()
-          + " must have exactly one parameter", null);
-      throw new UnableToCompleteException();
-    }
-
-    JClassType paramType = params[0].getType().isClass();
+  protected void generateFeatureInitializers(TreeLogger logger,
+      TypeOracle typeOracle, SourceWriter sw, JClassType gadgetType)
+      throws UnableToCompleteException {
     JClassType gadgetFeatureType = typeOracle.findType(GadgetFeature.class.getName());
     assert gadgetFeatureType != null;
+    // Maps from the feature class to the name of a method
+    // initializing this feature
+    Map<JClassType, String> deferredFeatures = new HashMap<JClassType, String>();
+    Map<JClassType, String> concreteFeatures = new HashMap<JClassType, String>();
 
-    if (paramType == null || paramType.isAbstract()) {
-      logger.log(TreeLogger.ERROR, "The parameter " + params[0].getName()
-          + " must be a concrete class", null);
-      throw new UnableToCompleteException();
+    // Looping through features add adding them to maps
+    // Looking at the superclass in case any Features are needed there.
+    for (JClassType currentClass = gadgetType; currentClass != null; currentClass = currentClass.getSuperclass()) {
+      for (JClassType interfaceType : currentClass.getImplementedInterfaces()) {
 
-    } else if (!gadgetFeatureType.isAssignableFrom(paramType)) {
-      logger.log(TreeLogger.ERROR, "The parameter " + params[0].getName()
-          + " must be assignable to GadgetFeature", null);
-      throw new UnableToCompleteException();
+        JClassType featureType = interfaceType;
 
-    } else {
-      try {
-        paramType.getConstructor(new JType[0]);
-      } catch (NotFoundException e) {
-        logger.log(TreeLogger.ERROR,
-            "The parameter type must have a zero-arg constructor", e);
-        throw new UnableToCompleteException();
+        TreeLogger branchedLogger = logger.branch(TreeLogger.DEBUG,
+            "Generating GadgetFeature initializer for type "
+                + featureType.getQualifiedSourceName(), null);
+        FeatureName name = featureType.getAnnotation(FeatureName.class);
+        if (name == null) {
+          continue;
+        }
+
+        JMethod[] methods = featureType.getMethods();
+        if (methods.length == 0) {
+          branchedLogger.log(TreeLogger.DEBUG, featureType.getName()
+              + " defines no methods", null);
+          continue;
+        } else if (methods.length > 1) {
+          branchedLogger.log(TreeLogger.ERROR,
+              "A Feature interface must define no more then one method", null);
+          throw new UnableToCompleteException();
+        }
+
+        JMethod m = methods[0];
+        JParameter[] params = m.getParameters();
+
+        if (params.length != 1) {
+          branchedLogger.log(TreeLogger.ERROR, m.getName()
+              + " must have exactly one parameter", null);
+          throw new UnableToCompleteException();
+        }
+
+        JClassType featureClass = params[0].getType().isClassOrInterface();
+
+        if (featureClass == null) {
+          branchedLogger.log(TreeLogger.ERROR, "The parameter "
+              + params[0].getName() + " must be a class or interface", null);
+          throw new UnableToCompleteException();
+
+        } else if (featureClass.isInterface() != null
+            || featureClass.isAbstract()) {
+          deferredFeatures.put(featureClass, m.getName());
+        } else {
+          try {
+            featureClass.getConstructor(new JType[0]);
+          } catch (NotFoundException e) {
+            branchedLogger.log(TreeLogger.ERROR, "The "
+                + featureClass.getName()
+                + " type must have a zero-arg constructor", e);
+            throw new UnableToCompleteException();
+          }
+          if (!gadgetFeatureType.isAssignableFrom(featureClass)) {
+            branchedLogger.log(TreeLogger.ERROR, "The parameter "
+                + params[0].getName() + " must be assignable to GadgetFeature",
+                null);
+            throw new UnableToCompleteException();
+          }
+          concreteFeatures.put(featureClass, m.getName());
+        }
       }
     }
-
-    sw.println("this.@" + gadgetType.getQualifiedSourceName() + "::"
-        + m.getName() + "(" + paramType.getJNISignature() + ")(@"
-        + paramType.getQualifiedSourceName() + "::new()());");
+    // Writing initializing code
+    // Features instantiated with deferred bindings are created in Java
+    sw.println("private void initializeFeatures() {");
+    sw.indent();
+    for (Map.Entry<JClassType, String> feature : deferredFeatures.entrySet()) {
+      sw.println(feature.getValue() + "(("
+          + feature.getKey().getQualifiedSourceName() + ")GWT.create("
+          + feature.getKey().getQualifiedSourceName() + ".class));");
+    }
+    sw.outdent();
+    sw.println("initializeConcreteFeatures();");
+    sw.println("}");
+    // Features instantiated with a no-arg constructor are created in JS for
+    // access to non-public code
+    sw.println("private native void initializeConcreteFeatures() /*-{");
+    sw.indent();
+    for (Map.Entry<JClassType, String> feature : concreteFeatures.entrySet()) {
+      sw.println("this.@" + gadgetType.getQualifiedSourceName() + "::"
+          + feature.getValue() + "(" + feature.getKey().getJNISignature()
+          + ")(@" + feature.getKey().getQualifiedSourceName() + "::new()());");
+    }
+    sw.outdent();
+    sw.println("}-*/;");
   }
 
   protected void generateGadgetManifest(TreeLogger logger,
@@ -391,9 +426,8 @@ public class GadgetGenerator extends Generator {
           "requirements", "locales");
       GadgetUtils.writeRequirementsToElement(logger, d, modulePrefs,
           prefs.requirements());
-      GadgetUtils.writeLocalesToElement(logger, d, modulePrefs,
-          prefs.locales());
-      
+      GadgetUtils.writeLocalesToElement(logger, d, modulePrefs, prefs.locales());
+
     }
 
     // Write out the UserPref tags
@@ -471,7 +505,7 @@ public class GadgetGenerator extends Generator {
           logger.log(TreeLogger.ERROR, "Error creating XML parser", ex);
           throw new UnableToCompleteException();
         }
-        if (filename != "") {
+        if (!"".equals(filename)) {
 
           try {
             InputSource source = new InputSource();
@@ -516,7 +550,7 @@ public class GadgetGenerator extends Generator {
     if (injectContent != null) {
       String[] injectionFiles = injectContent.files();
       for (String filename : injectionFiles) {
-        if (filename != "") {
+        if (!"".equals(filename)) {
           contentToInject.append(readFileToInject(logger, type, filename));
         }
       }

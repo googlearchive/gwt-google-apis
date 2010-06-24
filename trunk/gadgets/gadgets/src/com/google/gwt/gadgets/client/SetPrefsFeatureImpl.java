@@ -15,25 +15,17 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.gadgets.client.UserPreferences.Preference;
+
 
 /**
- * Provides access to the dynamic height feature.
+ * Provides access to the preference-saving API.
  */
-public interface DynamicHeightFeature {
+public class SetPrefsFeatureImpl implements GadgetFeature, SetPrefsFeature {
+  private SetPrefsFeatureImpl() {
+  }
 
-  /**
-   * Causes the Gadget to be resized.  Make sure you have added your
-   * content to the RootPanel returned by {@link #getContentDiv()}.
-   */
-  void adjustHeight();
-
-  /**
-   * Use this method to retrieve the RootPanel to attach all gadget content to
-   * when using DynamicHeight.
-   *
-   * @return a pointer to a panel that will allow your gadget to be resizable
-   *         when you add content here.
-   */
-  RootPanel getContentDiv();
+  public <T> void set(Preference<T> pref, T value) {
+    pref.set(value);
+  }
 }
