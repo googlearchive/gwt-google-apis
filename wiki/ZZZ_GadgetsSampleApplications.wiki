@@ -8,6 +8,8 @@
 
 A basic demonstration of writing a gadget using GWT.
 
+  <wiki:gadget url="http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/com.google.gwt.gadgets.sample.hellogadgets.client.HelloGadgets.gadget.xml" border="1" height="210">
+
 To deploy, open [http://www.igoogle.com iGoogle].  Choose the _Add Stuff..._ link on the top right of the main page, then on the bottom left of the next page, choose the _Add Feed or Url_ link.  When the dialog comes up,  add the following url:
 
   `http://gwt.google.com/samples/hellogadgets-1.2.0/hellogadgets/HelloGadgets.gadget.xml`
@@ -23,4 +25,4 @@ Other gadgets you can try:
   `http://gwt.google.com/samples/basicgadgetads-1.2.0/basicgadgetads/BasicGadgetAds.gadget.xml`
 
    * An example of how to use the Open Social API on a gadget hosted on App Engine
-  `http://gwt.google.com/samples/traveler-1.2.0/basicgadgetads/Traveler.gadget.xml`
+  `http://osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml`
