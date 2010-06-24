@@ -61,7 +61,7 @@ public interface UserPreferences {
     public abstract T getValue();
 
     /**
-     * Used by {@link SetPrefsFeature#set(Preference, Object)}. It's not
+     * Used by {@link SetPrefsFeatureImpl#set(Preference, Object)}. It's not
      * exposed directly because the support for setting preference values
      * requires the <code>setprefs</code> feature.
      */

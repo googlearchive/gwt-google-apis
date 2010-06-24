@@ -13,15 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.gadgets.client;
+package com.google.gwt.gadgets.client.impl;
+
+import com.google.gwt.gadgets.client.SetTitleFeature;
 
 /**
  * Provides access to the title.
  */
-public interface SetTitleFeature {
+public class SetTitleFeatureImpl implements SetTitleFeature {
+  private SetTitleFeatureImpl() {
+  }
 
-  /**
-   * Change the Gadget's displayed title.
-   */
-  void setTitle(String title);
+  public native void setTitle(String title) /*-{
+    $wnd.gadgets.window.setTitle(title);
+  }-*/;
 }

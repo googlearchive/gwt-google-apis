@@ -32,6 +32,25 @@
   <generate-with class="com.google.gwt.gadgets.rebind.ContentSectionGenerator">
     <when-type-is class="com.google.gwt.gadgets.client.ContentSection"/>
   </generate-with>
+  <!-- Implementations of the features -->
+  <replace-with class="com.google.gwt.gadgets.client.impl.AdsFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.AdsFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.DynamicHeightFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.DynamicHeightFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.GoogleAnalyticsFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.GoogleAnalyticsFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.SetTitleFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.SetTitleFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.ViewFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.ViewFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.SetPrefsFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.SetPrefsFeature"/>
+  </replace-with>
   <source path="annotations"/>
   <source path="client"/>
 </module>

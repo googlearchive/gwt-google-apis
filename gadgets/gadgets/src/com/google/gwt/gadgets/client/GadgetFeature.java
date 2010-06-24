@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
  * constructor with an arbitrary access modifier.
  */
 public interface GadgetFeature {
+
   /**
    * Allows the Gadget manifest generator to automatically generate
    * <code>requires</code> elements. The generator will examine all types to
@@ -41,19 +42,19 @@ public interface GadgetFeature {
     String INTRINSIC = "__@INTRINSIC@__";
 
     /**
-     * The names of the features required from the container. If the feature is
-     * intrinsic to the container, use the {@link #INTRINSIC} value.
-     */
-    String[] value();
-
-    /**
      * Additional <code>MayRequire</code> tags can be added to the Gadget
      * manifest here.
-     * 
+     *
      * @deprecated
      */
     @Deprecated
     MayRequire[] requirements() default {};
+
+    /**
+     * The names of the features required from the container. If the feature is
+     * intrinsic to the container, use the {@link #INTRINSIC} value.
+     */
+    String[] value();
   }
 
   /**
@@ -61,7 +62,7 @@ public interface GadgetFeature {
    * to the module specification. It can be added via
    * {@link Gadget.ModulePrefs#requirements()} or
    * {@link FeatureName#requirements()}.
-   * 
+   *
    * @deprecated
    */
   @Deprecated

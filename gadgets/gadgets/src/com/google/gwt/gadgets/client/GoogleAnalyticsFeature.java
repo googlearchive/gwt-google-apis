@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,22 +15,25 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
  * Provides access to the Google Analytics feature.
  */
-public class GoogleAnalyticsFeature implements GadgetFeature {
-  public static class Tracker extends JavaScriptObject {
+public interface GoogleAnalyticsFeature {
+
+  /**
+   * Provides a way of reporting event and page views.
+   */
+  interface Tracker {
+
     /**
      * Requires the name of the gadget and action parameter in order to
      * correctly insert tracked data into Event Tracking reports. The other
      * parameters are optional. The values passed via this method are sent in
      * the GIF request view the utm variable.
-     * 
+     *
      * Note: this feature is currently in closed beta test and may not be
      * available to all users.
-     * 
+     *
      * @param eventName A string used at the top level of the Event Tracking
      *          reports. For example, if you were tracking interaction on a
      *          number of gadget elements, you would likely use the name of the
@@ -42,19 +45,17 @@ public class GoogleAnalyticsFeature implements GadgetFeature {
      *          "http://code.google.com/apis/analytics/docs/tracking/eventTrackerOverview.html"
      *          >Tracking Events</a>
      */
-    public final native void reportEvent(String eventName, String action) /*-{
-      this.reportEvent(eventName, action);
-    }-*/;
+    void reportEvent(String eventName, String action);
 
     /**
      * Requires the name of the gadget and action parameter in order to
      * correctly insert tracked data into Event Tracking reports. The other
      * parameters are optional. The values passed via this method are sent in
      * the GIF request view the utm variable.
-     * 
+     *
      * * Note: this feature is currently in closed beta test and may not be
      * available to all users.
-     * 
+     *
      * @param eventName A string used at the top level of the Event Tracking
      *          reports. For example, if you were tracking interaction on a
      *          number of gadget elements, you would likely use the name of the
@@ -67,20 +68,17 @@ public class GoogleAnalyticsFeature implements GadgetFeature {
      *          >Tracking Events</a>
      * @param label String you can use as a secondary segment for your gadget.
      */
-    public final native void reportEvent(String eventName, String action,
-        String label) /*-{
-      this.reportEvent(eventName, action, label);
-    }-*/;
+    void reportEvent(String eventName, String action, String label);
 
     /**
      * Requires the name of the gadget and action parameter in order to
      * correctly insert tracked data into Event Tracking reports. The other
      * parameters are optional. The values passed via this method are sent in
      * the GIF request view the utm variable.
-     * 
+     *
      * Note: this feature is currently in closed beta test and may not be
      * available to all users.
-     * 
+     *
      * @param eventName A string used at the top level of the Event Tracking
      *          reports. For example, if you were tracking interaction on a
      *          number of gadget elements, you would likely use the name of the
@@ -96,10 +94,7 @@ public class GoogleAnalyticsFeature implements GadgetFeature {
      *          interaction. This number is aggregated for each time the method
      *          is invoked.
      */
-    public final native void reportEvent(String eventName, String action,
-        String label, int value) /*-{
-      this.reportEvent(eventName, action, label, value);
-    }-*/;
+    void reportEvent(String eventName, String action, String label, int value);
 
     /**
      * Requires a string in order to correctly populate the content reports.
@@ -107,33 +102,21 @@ public class GoogleAnalyticsFeature implements GadgetFeature {
      * reporting purposes. The value passed into this method is sent in the GIF
      * request via the utm variable. Use this method to track gadget loads and
      * gadget interactions.
-     * 
+     *
      * @param path Path to provide for the virtual URL of this element.
-     * 
+     *
      */
-    public final native void reportPageview(String path) /*-{
-      this.reportPageview(path);
-    }-*/;
+    void reportPageview(String path);
 
-    /**
-     * Required protected constructor for JavaScriptObject subclass.
-     */
-    protected Tracker() {
-    }
   }
 
   /**
    * Creates a new tracker object. For further information, see <a href=
    * "http://code.google.com/apis/analytics/docs/tracking/gadgetTracking.html"
    * >Gadget Tracking in Analytics.</a>
-   * 
+   *
    * @param domainId The analytics ID for the domain to track.
    * @return a new tracker object.
    */
-  public native Tracker createTracker(String domainId) /*-{
-    return new $wnd._IG_GA(domainId);
-  }-*/;
-
-  private GoogleAnalyticsFeature() {
-  }
+  Tracker createTracker(String domainId);
 }
