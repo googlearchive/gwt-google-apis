@@ -12,26 +12,25 @@ To work with sample code in Eclipse, the precompiled library needs to be copied
 into the war directory. 
 
 If you are working with HelloGadgets, GadgetRPC or BasicGadgetAds sample,
-please follow below instructions:
-*) Copy gwt-xxx.jar (xxx is the name of the api. e.g. maps, search) to
-   samples/name-of-sample/war/WEB-INF/lib folder.
+please follow the instructions below:
+*) Copy gwt-gadgets.jar to the samples/name-of-sample/war/WEB-INF/lib folder.
 OR
 *) Execute command 'ant libs' in the directory of the sample project. Please be
    sure to pass to ant information about location of your GWT SDK. You can do
    it by either setting gwt.sdk property on the command line or by creating
    environment variable GWT_HOME.
 
-Traveler project requires more preparation. You will need to:
+The Traveler sample requires more preparation:
 1) Download http://gwt-google-apis.googlecode.com/files/gwt-maps-1.1.0.zip or
    higher and place it in the war/WEB-INF/lib directory.
-2) Point environment variable GWT_HOME at the location of your GWT SDK.
-3) Checkout http://google-web-toolkit.googlecode.com/svn/tools ant point
-   GWT_TOOLS environment variable at created directory.
-4) Download AppEngine SDK for java
-   (http://code.google.com/appengine/downloads.html) and point APPENGINE_HOME
-   environment variable at the extracted archive.
-5) Execute 'ant libs' command in the directory of the sample.
-If you forget any of above steps, 'ant libs' command will show a suitable
+2) Point the environment variable GWT_HOME at the location of your GWT SDK.
+3) Checkout http://google-web-toolkit.googlecode.com/svn/tools and point
+   GWT_TOOLS environment variable at the directory created by the checkout.
+4) Download the AppEngine SDK for Java
+   (http://code.google.com/appengine/downloads.html) and point the
+   APPENGINE_HOME environment variable at the extracted archive.
+5) Execute the 'ant libs' command in the directory of the sample.
+If you forget any of above steps, the 'ant libs' command will show a suitable
 warning.
 
 After copying the libraries, import the project in the samples/name-of-sample
