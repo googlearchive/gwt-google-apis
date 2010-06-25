@@ -18,13 +18,13 @@ Other gadgets you can try:
 
    * An example of how to use GWT RPC with a gadget.
 
-  <wiki:gadget url="http://gwt.google.com/samples/gadgetrpc-1.2.0/gadgetrpc/GadgetRPC.gadget.xml" border="1" height="210">
+  <wiki:gadget url="http://gwt.google.com/samples/gadgetrpc-1.2.0/gadgetrpc/GadgetRPC.gadget.xml" border="1" height="120">
 
   `http://gwt.google.com/samples/gadgetrpc-1.2.0/gadgetrpc/GadgetRPC.gadget.xml`
 
    * An example of how to host an Ad in a gadget written with GWT.
 
-  <wiki:gadget url="http://gwt.google.com/samples/basicgadgetads-1.2.0/basicgadgetads/BasicGadgetAds.gadget.xml" border="1" height="210">
+  <wiki:gadget url="http://gwt.google.com/samples/basicgadgetads-1.2.0/basicgadgetads/BasicGadgetAds.gadget.xml" border="1" height="600" width="120">
 
   `http://gwt.google.com/samples/basicgadgetads-1.2.0/basicgadgetads/BasicGadgetAds.gadget.xml`
 
@@ -32,6 +32,6 @@ Other gadgets you can try:
 
    [http://gwt-google-apis.googlecode.com/svn/wiki/traveler-screenshot.png]
 
-   TODO(zundel): Add a button to add to iGoogle or Orkut
+   Add to iGoogle: <a href="http://fusion.google.com/add?source=atgs&moduleurl=http%3A//osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml"><img src="http://buttons.googlesyndication.com/fusion/add.gif" border="0" alt="Add to Google"></a>
 
   `http://osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml`
