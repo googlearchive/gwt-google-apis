@@ -9,12 +9,30 @@ These instructions require
 ---------- Importing Projects ------------------------------------
 
 To work with sample code in Eclipse, the precompiled library needs to be copied
-into the war directory. Please first execute command 'ant libs' in the
-directory of the sample project, or simply copy gwt-xxx.jar (xxx is the name of
-the api. e.g. maps, search) to samples/name-of-sample/war/WEB-INF/lib folder.
-If you decide to use ant, please be sure to pass to ant information about
-location of your GWT SDK. You can do it by either setting gwt.sdk property on
-the command line or by creating environment variable GWT_HOME.
+into the war directory. 
+
+If you are working with HelloGadgets, GadgetRPC or BasicGadgetAds sample,
+please follow below instructions:
+*) Copy gwt-xxx.jar (xxx is the name of the api. e.g. maps, search) to
+   samples/name-of-sample/war/WEB-INF/lib folder.
+OR
+*) Execute command 'ant libs' in the directory of the sample project. Please be
+   sure to pass to ant information about location of your GWT SDK. You can do
+   it by either setting gwt.sdk property on the command line or by creating
+   environment variable GWT_HOME.
+
+Traveler project requires more preparation. You will need to:
+1) Download http://gwt-google-apis.googlecode.com/files/gwt-maps-1.1.0.zip or
+   higher and place it in the war/WEB-INF/lib directory.
+2) Point environment variable GWT_HOME at the location of your GWT SDK.
+3) Checkout http://google-web-toolkit.googlecode.com/svn/tools ant point
+   GWT_TOOLS environment variable at created directory.
+4) Download AppEngine SDK for java
+   (http://code.google.com/appengine/downloads.html) and point APPENGINE_HOME
+   environment variable at the extracted archive.
+5) Execute 'ant libs' command in the directory of the sample.
+If you forget any of above steps, 'ant libs' command will show a suitable
+warning.
 
 After copying the libraries, import the project in the samples/name-of-sample
 folder.
