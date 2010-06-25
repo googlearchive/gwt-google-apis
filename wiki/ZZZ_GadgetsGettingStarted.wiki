@@ -4,7 +4,7 @@
 
 The gadgets library for GWT simplifies gadget development by automatically generating a [http://code.google.com/apis/gadgets/docs/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project.  After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/publish.html publish] your gadget.
 
-Release 1.2 supports the gadget.* namespace ([http://wiki.opensocial.org/ Open Social] gadgets specification).  Releases prior to 1.2 only support the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html legacy gadgets API] based on the _IG_... namespace.
+Release 1.2 supports the `gadget.*` namespace ([http://wiki.opensocial.org/ Open Social] gadgets specification).  Releases prior to 1.2 only support the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html legacy gadgets API] based on the `_IG_*` namespace.
 
 This guide will get you started writing your first gadget.  Before you start, familiarize yourself with [http://www.google.com/ig iGoogle] and the [http://code.google.com/apis/gadgets/docs/dev_guide.html gadgets developer site].
 
