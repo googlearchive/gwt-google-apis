@@ -18,7 +18,7 @@ On the client side, all you need to do is invoke GadgetsRpc.redirectThroughProxy
 
 {{{
   YourServiceAsync yourService = GWT.create(YourService.class);
-  GadgetsRpc.redirectThroughProxy((ServiceDefTarget) yourService);
+  GadgetsGwtRpc.redirectThroughProxy((ServiceDefTarget) yourService);
 }}}
 
 Then, on the server side of the connection, there is a second problem to address.  By default in GWT 1.5, the servlet checks for a content type of `text/x-gwt-rpc`.  Unfortunately, the iGoogle proxy re-writes this header.  To workaround this problem, GWT 1.5.2 and later provides a method that gives the developer some control over this checking:
