@@ -1,0 +1,14 @@
+com.google.gwt.ajaxloader.client
+com.google.gwt.gadgets.client
+com.google.gwt.gadgets.client.event
+com.google.gwt.gadgets.client.gwtrpc
+com.google.gwt.gadgets.client.impl
+com.google.gwt.gadgets.client.io
+com.google.gwt.gadgets.client.osapi
+com.google.gwt.gadgets.client.osapi.albums
+com.google.gwt.gadgets.client.osapi.mediaitems
+com.google.gwt.gadgets.client.osapi.people
+com.google.gwt.gadgets.client.rpc
+com.google.gwt.gadgets.client.ui
+com.google.gwt.gadgets.linker
+com.google.gwt.gadgets.rebind
