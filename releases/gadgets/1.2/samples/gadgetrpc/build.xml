@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<project name="GadgetRPC" default="build" basedir=".">
+  <!-- properties specific for samples -->
+  <property name="sample.api" value="gadgets"/>
+  <property name="sample.root" value="gadgetrpc"/>
+  <property name="sample.module" value="GadgetRPC"/>
+  <!-- tasks common to all samples -->
+  <property name="gwt.root" location="../.."/>
+  <property file="${gwt.root}/common.properties"/>
+  <import file="${common.samples.script}"/>
+  <target name="copyjars" >
+    <copy todir="war/WEB-INF/lib">
+      <fileset file="${gwt.home}/gwt-servlet.jar" />
+    </copy>
+  </target>
+  <target name="before-compile" depends="copyjars"/>
+</project>
