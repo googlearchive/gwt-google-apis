@@ -32,6 +32,6 @@ Other gadgets you can try:
 
    [http://gwt-google-apis.googlecode.com/svn/wiki/traveler-screenshot.png]
 
-   Add to iGoogle: <a href="http://fusion.google.com/add?source=atgs&moduleurl=http%3A//osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml"><img src="http://buttons.googlesyndication.com/fusion/add.gif" border="0" alt="Add to Google"></a>
+   Add to iGoogle: [http://fusion.google.com/add?source=atgs&moduleurl=http%3A//osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml http://buttons.googlesyndication.com/fusion/add.gif]
 
   `http://osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml`
