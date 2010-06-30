@@ -32,8 +32,8 @@ Other gadgets you can try:
 
    [http://gwt-google-apis.googlecode.com/svn/wiki/traveler-screenshot.png]
 
-   Add to iGoogle: [http://fusion.google.com/add?source=atgs&moduleurl=http%3A//osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml http://buttons.googlesyndication.com/fusion/add.gif]
+   Add to iGoogle: [http://fusion.google.com/add?source=atgs&moduleurl=http%3A//osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml http://buttons.googlesyndication.com/fusion/add.gif]
 
-   Add to iGoogle: [http://fusion.google.com/add?source=atgs&moduleurl=http%3A//osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml http://gwt-google-apis.googlecode.com/svn/wiki/add-to-igoogle.gif]
+   Add to iGoogle: [http://fusion.google.com/add?source=atgs&moduleurl=http%3A//osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml http://gwt-google-apis.googlecode.com/svn/wiki/add-to-igoogle.gif]
 
   `http://osforgwtdemo.appspot.com/traveler/TravelerGadget.gadget.xml`
