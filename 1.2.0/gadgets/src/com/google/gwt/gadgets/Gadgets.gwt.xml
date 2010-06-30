@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--                                                                        -->
+<!-- Copyright 2008 Google Inc.                                             -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
+<!-- may not use this file except in compliance with the License. You may   -->
+<!-- may obtain a copy of the License at                                    -->
+<!--                                                                        -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                             -->
+<!--                                                                        -->
+<!-- Unless required by applicable law or agreed to in writing, software    -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,      -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
+<!-- implied. License for the specific language governing permissions and   -->
+<!-- limitations under the License.                                         -->
+<module>
+  <!-- Produces the final Gadget manifest -->
+  <inherits name="com.google.gwt.ajaxloader.AjaxLoader"/>
+  <define-linker name="gadget" class="com.google.gwt.gadgets.linker.GadgetLinker"/>
+  <add-linker name="gadget"/>
+  <!-- Generates the top layer of the Gadget sandwich -->
+  <generate-with class="com.google.gwt.gadgets.rebind.GadgetGenerator">
+    <when-type-assignable class="com.google.gwt.gadgets.client.Gadget"/>
+  </generate-with>
+  <!-- Automatically write Gadget property accessor implementations -->
+  <generate-with class="com.google.gwt.gadgets.rebind.UserPreferencesGenerator">
+    <when-type-assignable class="com.google.gwt.gadgets.client.UserPreferences"/>
+  </generate-with>
+  <define-property name="gadget_view" values="home"/>
+  <property-provider name="gadget_view"><![CDATA[
+      return $wnd.gadgetViewName || "home";
+    ]]></property-provider>
+  <generate-with class="com.google.gwt.gadgets.rebind.ContentSectionGenerator">
+    <when-type-is class="com.google.gwt.gadgets.client.ContentSection"/>
+  </generate-with>
+  <!-- Implementations of the features -->
+  <replace-with class="com.google.gwt.gadgets.client.impl.AdsFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.AdsFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.DynamicHeightFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.DynamicHeightFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.GoogleAnalyticsFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.GoogleAnalyticsFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.SetTitleFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.SetTitleFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.ViewFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.ViewFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.SetPrefsFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.SetPrefsFeature"/>
+  </replace-with>
+  <replace-with class="com.google.gwt.gadgets.client.impl.RpcFeatureImpl">
+    <when-type-is class="com.google.gwt.gadgets.client.rpc.RpcFeature"/>
+  </replace-with>  
+  <source path="annotations"/>
+  <source path="client"/>
+</module>
