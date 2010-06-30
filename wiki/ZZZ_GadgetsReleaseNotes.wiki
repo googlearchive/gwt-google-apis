@@ -5,15 +5,15 @@
 == Release Notes for 1.2.0==
 ===Changes since 1.1.0===
 
-   * Update use of the gadgets JavaScript API to use gadget.* namespace.
-   * Deprecate legacy gadgets related methods and interfaces.
-   * Added OpenSocial Lite API (1.0) core support.
-   * New Traveler sample that shows use of gadgets + OpenSocial + AppEngine using OAuth authentication and the Maps library.
+   * Updates use of the gadgets JavaScript API to use gadget.* namespace.
+   * Deprecates legacy gadgets related methods and interfaces.
+   * Adds OpenSocial Lite API (1.0) core support.
+   * New Traveler sample shows use of gadgets + OpenSocial + AppEngine using OAuth authentication and the Maps library.
    * New Utility class for easy use of GWT RPC in the gadgets environment + updated GadgetRPC example.
    * Adds support for Locale settings in gadget manifest.
    * HTML strict or quirks mode can be selected with the @UseHtmlQuirksMode annotation.
    * Gadget manifest names can be generated with short or long format, controlled by the @UseLongManifestName annotation.
-   * Feature classes changed to interface to allow mocking these interfaces for unit testing
+   * Changes Feature classes to interfaces to allow mocking for unit testing.
 
 ===Known Issues in 1.2.0===
 
