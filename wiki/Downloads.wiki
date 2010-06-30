@@ -5,8 +5,8 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 *Gears API Library 1.3*
   * [http://gwt-google-apis.googlecode.com/files/gwt-gears-1.3.0.zip gwt-gears-1.3.0.zip]
 
-*Gadgets API Library 1.1*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.1.0.zip gwt-gadgets-1.1.0.zip]
+*Gadgets API Library 1.2*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-gadgets-1.2.0.zip gwt-gadgets-1.2.0.zip]
 
 *Google AJAX Search API Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-search-1.1.0.zip gwt-search-1.1.0.zip]

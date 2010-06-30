@@ -1,6 +1,23 @@
-﻿#summary Gadgets API Library for GWT Release Notes
+#summary Gadgets API Library for GWT Release Notes
 
 = Gadgets API Library for GWT Release Notes =
+
+== Release Notes for 1.2.0==
+===Changes since 1.1.0===
+
+   * Updates use of the gadgets JavaScript API to use gadget.* namespace.
+   * Deprecates legacy gadgets related methods and interfaces.
+   * Adds OpenSocial Lite API (1.0) core support.
+   * New Traveler sample shows use of gadgets + OpenSocial + AppEngine using OAuth authentication and the Maps library.
+   * New Utility class for easy use of GWT RPC in the gadgets environment + updated GadgetRPC example.
+   * Adds support for Locale settings in gadget manifest.
+   * HTML strict or quirks mode can be selected with the @UseHtmlQuirksMode annotation.
+   * Gadget manifest names can be generated with short or long format, controlled by the @UseLongManifestName annotation.
+   * Changes Feature classes to interfaces to allow mocking for unit testing.
+
+===Known Issues in 1.2.0===
+
+   * Gadgets debugging is currently not supported.
 
 == Release Notes for 1.1.0==
 ===Changes since 1.0.3===
@@ -9,10 +26,6 @@
    * Library updated for compatibility with GWT 2.0
    * Added support for multiple views and the Views API mapping
    * Added Eclipse project files and ant script to all samples
-
-===Known Issues in 1.1.0===
-
-   * Gadgets debugging is currently not supported.
 
 ----
 == Release Notes for 1.0.3==

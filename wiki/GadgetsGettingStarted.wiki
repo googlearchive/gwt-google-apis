@@ -1,12 +1,12 @@
-#summary How to write and debug a Gadget using GWT
+﻿#summary How to write and debug a Gadget using GWT
 
 = Getting Started with Gadgets and GWT =
 
-The gadgets library for GWT simplifies gadget development by automatically generating a [http://code.google.com/apis/gadgets/docs/legacy/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project.  After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish] your gadget.
+The gadgets library for GWT simplifies gadget development by automatically generating a [http://code.google.com/apis/gadgets/docs/reference.html#XML_Ref Gadget Specification] from Java source, inserting a selection script in the specification much like a regular GWT project.  After compiling your gadget with GWT, all files are in place to [http://code.google.com/apis/gadgets/docs/publish.html publish] your gadget.
 
-Please note that the gadget library currently only supports the legacy gadgets API based on the _IG_... namespace.
+Release 1.2 supports the `gadget.*` namespace ([http://wiki.opensocial.org/ Open Social] gadgets specification).  Releases prior to 1.2 only support the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html legacy gadgets API] based on the `_IG_*` namespace.
 
-This guide will get you started writing your first gadget.  Before you start, make sure you are familiar with [http://www.google.com/ig iGoogle] and the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html gadgets developer site].
+This guide will get you started writing your first gadget.  Before you start, familiarize yourself with [http://www.google.com/ig iGoogle] and the [http://code.google.com/apis/gadgets/docs/dev_guide.html gadgets developer site].
 
 
 == Assumptions ==
@@ -25,17 +25,17 @@ You can either reference the `.jar` file from the folder that you uncompressed t
 
 Look at the sample program _Hello Gadgets_ that ships with the `gwt-gadgets` distribution
 
-   [http://code.google.com/p/gwt-google-apis/source/browse/releases/gadgets/1.1/samples/hellogadgets/src/com/google/gwt/gadgets/sample/hellogadgets/client/HelloGadgets.java HelloGadgets.java]
+   [http://code.google.com/p/gwt-google-apis/source/browse/releases/gadgets/1.2/samples/hellogadgets/src/com/google/gwt/gadgets/sample/hellogadgets/client/HelloGadgets.java HelloGadgets.java]
 
 There are some differences you will notice from a standard GWT project.
 
   # There is no class that implements the [http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/com/google/gwt/core/client/EntryPoint.html EntryPoint] interface.
-  # The entry point class is a subclass of [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/Gadget.html Gadget].
-  # There is an `@ModulePrefs` annotation on the class
-  # There is a relationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
+  # The entry point class is a subclass of [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/Gadget.html Gadget].
+  # There is a `@ModulePrefs` annotation on the class
+  # There is a relationship between the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/Gadget.html Gadget] subclass and the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subclass named `HelloPreferences`.
 
 
-These differences derive from the fact that a gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html gadget developer's documentation].  To meet this requirement, gadget support is implemented using a custom [http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/com/google/gwt/core/ext/Linker.html GWT Linker]. 
+These differences derive from the fact that a gadget must adhere to a specific framework as described in the [http://code.google.com/apis/gadgets/docs/dev_guide.html gadget developer's documentation].  To meet this requirement, gadget support is implemented using a custom [http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/com/google/gwt/core/ext/Linker.html GWT Linker]. 
 
 == Creating a new GWT Project ==
 
@@ -82,7 +82,14 @@ Finally, above the class statement, add an annotation to set the gadget title, a
 @ModulePrefs(title = "SimpleGadget", author = "yournamehere", author_email = "yournamehere@gmail.com")
 }}}
 
-[http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides attributes to the [http://code.google.com/apis/gadgets/docs/legacy/reference.html#Moduleprefs_Ref  `<ModulePrefs>`] tag in the Gadget Specification.
+[http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/Gadget.ModulePrefs.html @ModulePrefs] provides attributes to the [http://code.google.com/apis/gadgets/docs/reference.html#Moduleprefs_Ref  `<ModulePrefs>`] tag in the Gadget Specification.
+
+These two annotations are currently mandatory and control what the output name of the gadget spec looks like and whether or not HTML quirks mode is turned on.
+
+{{{
+@UseLongManifestName(false)
+@AllowHtmlQuriksMode(false)
+}}}
 
 == Compiling your Gadget ==
 
@@ -92,7 +99,7 @@ Use the Google Plugin for Eclipse to build your project in Web mode. The output 
    * Several `.cache.js` files, one per compiler permutation.  These contain the application logic for your gadget compiled for each browser/locale combination.
    * A `SampleGadgets.html` file.  This is just a holdover from a regular GWT module and is not used in publishing a gadget.  
    * Other resources such as image files.
-   * A `*.xml` file.  This is the gadget specification file that you will need in order to [http://code.google.com/apis/gadgets/docs/legacy/publish.html publish your gadget]. It contains:
+   * A `*.xml` file.  This is the gadget specification file that you will need in order to [http://code.google.com/apis/gadgets/docs/publish.html publish your gadget]. It contains:
        * Information about your gadget specified in `@ModulePrefs` 
        * Which features your gadget needs
        * A user preference value specification 
@@ -102,7 +109,7 @@ Use the Google Plugin for Eclipse to build your project in Web mode. The output 
 
 To test our your newly compiled code, take the output files above (located in the `SimpleGadget/war` directory unless you changed GWT's output location) and upload them all to the same directory on a public web server. 
 
-Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in the upper right corner. Click "Add Feed or Gadget" and specify the full URL to the gadget spec file (`com.example.simplegadget.client.SimpleGadget.gadget.xml`) that you uploaded to your server in the previous step. Click "Add" and go back to your iGoogle page. 
+Next, go to [http://www.google.com/ig iGoogle] and click the "Add Stuff" link in the upper right corner. Click "Add Feed or Gadget" and specify the full URL to the gadget spec file (`SimpleGadget.gadget.xml`) that you uploaded to your server in the previous step. Click "Add" and go back to your iGoogle page. 
 
 Congratulations. Your new (if slightly boring) Gadget should  appear on the page.
 
@@ -155,7 +162,7 @@ For most changes, you can make changes to your Java code and use the `Refresh` b
 
 One important aspect of the Gadget infrastructure you must be aware of is that Gadget containers, such as iGoogle, are free to cache the Gadget specifications.  In the case of iGoogle, the default caching is one hour.  See FAQ item [http://code.google.com/apis/gadgets/faq.html#CantSeeChanges I updated my gadget, but I can't see my changes. What's going on?]  
 
-As a developer, you can use the [http://code.google.com/apis/gadgets/docs/legacy/tools.html#Dev_Gadget Developer Gadget] on iGoogle to turn off caching for your view of the gadget by un-checking the `Cached` checkbox beside the URL of your Gadget Spec.
+As a developer, you can use the [http://www.google.com/ig/directory?type=gadgets&url=www.google.com/ig/modules/developer.xml Developer Gadget] on iGoogle to turn off caching for your view of the gadget by un-checking the `Cached` checkbox beside the URL of your Gadget Spec.
 
 For deploying a gadget developed with GWT, the caching by Gadget Containers is a significant issue. If you deploy your GWT application and remove old versions of the compiled program, the cached version of the Gadget spec will still refer to the old (and now deleted) files and end users will experience an outage until the cache is refreshed.  
 
@@ -163,14 +170,14 @@ For deploying a gadget developed with GWT, the caching by Gadget Containers is a
 
 If the Gadget requires access to features of the container, it should implement the appropriate _!NeedsFoo_ interfaces, which currently include:
  
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/NeedsAnalytics.html NeedsAnalytics]
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/NeedsDynamicHeight.html NeedsDynamicHeight]
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/NeedsIntrinsics.html NeedsIntrinsics]
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/NeedsSetPrefs.html NeedsSetPrefs]
-  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/NeedsSetTitle.html NeedsSetTitle]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/NeedsAnalytics.html NeedsAnalytics]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/NeedsDynamicHeight.html NeedsDynamicHeight]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/NeedsIntrinsics.html NeedsIntrinsics]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/NeedsSetPrefs.html NeedsSetPrefs]
+  * [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/NeedsSetTitle.html NeedsSetTitle]
 
 
-At runtime, all feature setters will be called strictly before [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)]. The order in which the setters are called is undefined.
+At runtime, all feature setters will be called strictly before [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)]. The order in which the setters are called is undefined.
 
 
 For example, if you wanted to use the optional feature to set the title dynamically, you would need to inherit the `NeedsSetTitle` interface. The following code sets the title of the gadget dynamically. 
@@ -180,6 +187,8 @@ For example, if you wanted to use the optional feature to set the title dynamica
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 @ModulePrefs(title="Original Title", author = "yournamehere", author_email = "yournamehere@gmail.com")
+@UseLongManifestName(false)
+@AllowHtmlQuriksMode(false)
 public class NeedsSetTitleGadget extends Gadget<UserPreferences> implements
     NeedsSetTitle {
   int titleIndex = 0;
@@ -214,7 +223,7 @@ Here's the resulting Gadget:
 
 The gadget spec allows you to specify user preferences for your gadget.  User preferences allow the gadget container to provide a user interface and storage for parameters used to customize the gadget. 
 
-In GWT, access to user preferences is provided through a user-defined subtype of the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] interface. Each preference should be defined as a zero-argument method, returning the desired type of [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/UserPreferences.Preference.html UserPreferences.Preference Preference]. The Gadget type should be parameterized with the specific [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subtype, which will be provided to the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)] method. 
+In GWT, access to user preferences is provided through a user-defined subtype of the [http://gwt-google-apis.googlecode.com/svn/javadoc/gagets/1.2/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] interface. Each preference should be defined as a zero-argument method, returning the desired type of [http://gwt-google-apis.googlecode.com/svn/javadoc/gagets/1.2/com/google/gwt/gadgets/client/UserPreferences.Preference.html UserPreferences.Preference Preference]. The Gadget type should be parameterized with the specific [http://gwt-google-apis.googlecode.com/svn/javadoc/gagets/1.2/com/google/gwt/gadgets/client/UserPreferences.html UserPreferences] subtype, which will be provided to the [http://gwt-google-apis.googlecode.com/svn/javadoc/gagets/1.2/com/google/gwt/gadgets/client/Gadget.html#init(T) init(UserPreferences)] method. 
 
 
 The following sample code shows how to implement a simple checkbox type of preference.  In this sample, the gadget displays a different menu depending on whether the user checks the _Vegetarian_ checkbox.  First, the custom `UserPreference` subclass:
@@ -305,9 +314,9 @@ Here is a screen shot of the resulting gadget's preferences menu in iGoogle:
 == Syndicating your Gadget ==
 
 
-Once your testing is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication content directory] and syndicate it to any webpage, not just a Gadget container. For more information, see the [http://code.google.com/apis/gadgets/docs/legacy/publish.html#Syndication Publishing Using Syndication] guidelines and documentation. Be sure to note the restrictions on syndicated gadgets, such as the storage of preferences. 
+Once your testing is complete, you can list your gadget in the [http://code.google.com/apis/gadgets/docs/publish.html#Syndication content directory] and syndicate it to any webpage, not just a Gadget container. For more information, see the [http://code.google.com/apis/gadgets/docs/publish.html#Syndication Publishing Using Syndication] guidelines and documentation. Be sure to note the restrictions on syndicated gadgets, such as the storage of preferences. 
  
 
 ==Next steps==
 
-For more information what you can do with Gadgets, read the [http://code.google.com/apis/gadgets/docs/legacy/dev_guide.html Gadget documentation] and the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.1/index.html Gadget Library for GWT class reference].
+For more information what you can do with Gadgets, read the [http://code.google.com/apis/gadgets/docs/dev_guide.html Gadget documentation] and the [http://gwt-google-apis.googlecode.com/svn/javadoc/gagets/1.2/index.html Gadget Library for GWT class reference].

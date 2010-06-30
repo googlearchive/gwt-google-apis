@@ -14,7 +14,7 @@ A Gadget must be hosted in a Gadget container (such as iGoogle or Apache Shindig
 
 The gwt-gadgets library creates what is called an 'inline' gadget, which puts the implementation of your gadget into the gadget spec file.  While this is a boon to performance, the gadget container now becomes the origin of your application, meaning that you must use a proxy to access resources on other hosts. 
 
-On the client side, all you need to do is invoke GadgetsRpc.redirectThroughProxy method on your service. This replaces the RequestBuilder used by a GWT RPC client with calls to methods in the GadgetIo class.
+On the client side, all you need to do is invoke [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/gwtrpc/GadgetsGwtRpc.html#redirectThroughProxy(com.google.gwt.user.client.rpc.ServiceDefTarget) `GadgetsRpc.redirectThroughProxy`] method on your service. This replaces the RequestBuilder used by a GWT RPC client with calls to methods in the [http://gwt-google-apis.googlecode.com/svn/javadoc/gadgets/1.2/com/google/gwt/gadgets/client/io/GadgetsIo.html `GadgetIo`] class.
 
 {{{
   YourServiceAsync yourService = GWT.create(YourService.class);
