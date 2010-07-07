@@ -24,7 +24,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.gadgets.client.UserPreferences.Preference;
-import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
@@ -63,7 +62,6 @@ public class UserPreferencesGenerator extends Generator {
     ClassSourceFileComposerFactory f = new ClassSourceFileComposerFactory(
         sourceType.getPackage().getName(), generatedSimpleSourceName);
     f.addImport(GWT.class.getName());
-    f.addImport(PreferencesUtil.class.getName());
     f.addImplementedInterface(typeName);
 
     // All source gets written through this Writer

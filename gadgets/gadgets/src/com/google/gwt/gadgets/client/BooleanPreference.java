@@ -30,7 +30,7 @@ public abstract class BooleanPreference extends Preference<Boolean> {
    */
   @Override
   public Boolean getValue() {
-    return prefs.getBool(getName());
+    return PreferencesProvider.get().getBool(getName());
   }
 
   /**
@@ -40,6 +40,6 @@ public abstract class BooleanPreference extends Preference<Boolean> {
    */
   @Override
   void set(Boolean value) {
-    prefs.set(getName(), value.toString());
+    PreferencesProvider.get().set(getName(), value);
   }
 }

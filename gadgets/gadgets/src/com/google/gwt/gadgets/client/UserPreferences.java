@@ -16,7 +16,6 @@
 package com.google.gwt.gadgets.client;
 
 import com.google.gwt.gadgets.client.impl.PreferenceGeneratorName;
-import com.google.gwt.gadgets.client.impl.PreferencesUtil;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -43,12 +42,7 @@ public interface UserPreferences {
    */
   @PreferenceGeneratorName("com.google.gwt.gadgets.rebind.DefaultPreferenceGenerator")
   public abstract class Preference<T> {
-    /**
-     * Access to the low-level preferences API. Access to this object should
-     * only be necessary for implementors of new preference types.
-     */
-    protected final PreferencesUtil prefs = PreferencesUtil.nativeInitPrefs();
-
+  
     /**
      * The unique name of the preference. This value is typically the name of
      * the accessor method.
