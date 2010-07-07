@@ -15,6 +15,8 @@
  */
 package com.google.gwt.gadgets;
 
+import com.google.gwt.gadgets.client.PreferencesTest;
+import com.google.gwt.gadgets.client.MockPreferencesTest;
 import com.google.gwt.gadgets.client.osapi.BatchRequestTest;
 import com.google.gwt.gadgets.client.osapi.OsapiCollectionTest;
 import com.google.gwt.gadgets.client.osapi.OsapiRequestTest;
@@ -34,6 +36,8 @@ public class GadgetsTestSuite extends GWTTestSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Tests for Gadgets API");
 
+    suite.addTestSuite(MockPreferencesTest.class);
+    suite.addTestSuite(PreferencesTest.class);
     suite.addTestSuite(BatchRequestTest.class);
     suite.addTestSuite(GetAlbumsTest.class);
     suite.addTestSuite(GetMediaItemsTest.class);

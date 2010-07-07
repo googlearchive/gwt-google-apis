@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,23 +16,34 @@
 package com.google.gwt.gadgets.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.gadgets.client.PreferencesFeature;
 
 /**
- * Provides access to Gadget preferences support.
+ * Provides access to native Gadget preferences support.
  */
-public class PreferencesUtil extends JavaScriptObject {
+public class PreferencesFeatureImpl extends JavaScriptObject implements
+    PreferencesFeature {
 
-  public static native PreferencesUtil nativeInitPrefs() /*-{
-     return new $wnd.gadgets.Prefs();
-   }-*/;
+  public static native PreferencesFeature get() /*-{
+    return new $wnd.gadgets.Prefs();
+  }-*/;
 
-  protected PreferencesUtil() {
+  public static native PreferencesFeature get(String moduleId) /*-{
+    return new $wnd.gadgets.Prefs(moduleId);
+  }-*/;
+
+  protected PreferencesFeatureImpl() {
   }
+
+  public final native JsArrayString getArray(String name) /*-{
+    this.getArray(name);
+  }-*/;
 
   public final native boolean getBool(String name) /*-{
     return this.getBool(name) || false;
   }-*/;
-  
+
   public final native String getMsg(String name) /*-{
     var maybeString = this.getMsg(name);
     return maybeString == undefined ? null : maybeString;
@@ -43,8 +54,8 @@ public class PreferencesUtil extends JavaScriptObject {
     return maybeString == undefined ? null : maybeString;
   }-*/;
 
-  public final native void push(JavaScriptObject array, String value) /*-{
-    array.push(value);
+  public native final void set(String name, boolean value) /*-{
+    this.set(name, value);
   }-*/;
 
   public final native void set(String name, String value) /*-{
@@ -52,6 +63,10 @@ public class PreferencesUtil extends JavaScriptObject {
   }-*/;
 
   public final native void setArray(String name, JavaScriptObject value) /*-{
+    this.setArray(name, value);
+  }-*/;
+
+  public native final void setArray(String name, JsArrayString value) /*-{
     this.setArray(name, value);
   }-*/;
 }
