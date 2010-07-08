@@ -109,7 +109,7 @@ public class EnumPreferenceGenerator implements PreferenceGenerator {
     sw.println("public " + enumType.getQualifiedSourceName() + " getValue() {");
     sw.indent();
     sw.println("return " + enumType.getQualifiedSourceName()
-        + ".valueOf(prefs.getString(getName()));");
+        + ".valueOf(PreferencesProvider.get().getString(getName()));");
     sw.outdent();
     sw.println("}");
 
