@@ -243,7 +243,7 @@ public interface MealPreferences extends UserPreferences {
 
 Next, a `Gadget` class that uses the `MealPreferences` class.  The meal choices are displayed in a table - when the user selects a dish, an alert window is opened.
 
-{{
+{{{
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
