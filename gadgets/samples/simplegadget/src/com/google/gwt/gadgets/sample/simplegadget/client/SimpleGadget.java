@@ -53,7 +53,6 @@ public class SimpleGadget extends Gadget<UserPreferences> implements
     RootLayoutPanel.get().add(changeTitleButton);
   }
 
-  @Override
   public void initializeFeature(SetTitleFeature feature) {
     this.titleFeature = feature;
   }
