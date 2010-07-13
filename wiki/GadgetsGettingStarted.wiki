@@ -88,7 +88,7 @@ These two annotations are currently mandatory and control what the output name o
 
 {{{
 @UseLongManifestName(false)
-@AllowHtmlQuriksMode(false)
+@AllowHtmlQuirksMode(false)
 }}}
 
 == Compiling your Gadget ==
@@ -184,15 +184,15 @@ For example, if you wanted to use the optional feature to set the title dynamica
 
 {{{
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * Sample gadget from the Getting Started manual.
  */
-@ModulePrefs(title="Original Title", author = "yournamehere", author_email = "yournamehere@gmail.com")
+@ModulePrefs(title = "Original Title", author = "yournamehere", author_email = "yournamehere@gmail.com")
 @UseLongManifestName(false)
-@AllowHtmlQuriksMode(false)
-public class NeedsSetTitleGadget extends Gadget<UserPreferences> implements
+@AllowHtmlQuirksMode(false)
+public class SimpleGadget extends Gadget<UserPreferences> implements
     NeedsSetTitle {
   int titleIndex = 0;
-  String[] titles = { "NeedsTitle Example", "Hello World!","Goodbye World!"};
+  String[] titles = {"NeedsTitle Example", "Hello World!", "Goodbye World!"};
   SetTitleFeature titleFeature;
 
   @Override
@@ -203,11 +203,12 @@ public class NeedsSetTitleGadget extends Gadget<UserPreferences> implements
       public void onClick(ClickEvent event) {
         titleFeature.setTitle(titles[titleIndex++ % titles.length]);
       }
-      
+
     });
-   RootPanel.get().add(changeTitleButton);
+    RootLayoutPanel.get().add(changeTitleButton);
   }
 
+  @Override
   public void initializeFeature(SetTitleFeature feature) {
     this.titleFeature = feature;
   }
@@ -242,25 +243,28 @@ public interface MealPreferences extends UserPreferences {
 
 Next, a `Gadget` class that uses the `MealPreferences` class.  The meal choices are displayed in a table - when the user selects a dish, an alert window is opened.
 
-{{{
+{{
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.Gadget.AllowHtmlQuirksMode;
 import com.google.gwt.gadgets.client.Gadget.ModulePrefs;
+import com.google.gwt.gadgets.client.Gadget.UseLongManifestName;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * Sample gadget from the Getting Started manual.
  */
 @ModulePrefs(title = "MealPreferences Gadget", author = "yournamehere", author_email = "yournamehere@gmail.com")
+@UseLongManifestName(false)
+@AllowHtmlQuirksMode(false)
 public class MealPreferencesGadget extends Gadget<MealPreferences> {
-
   private String[] meatEntrees = {
       "steak kabobs", "lamb fricassee", "chicken kiev"};
   private String[] vegEntrees = {"saag paneer", "baba ganoush", "boca burger"};
@@ -272,7 +276,7 @@ public class MealPreferencesGadget extends Gadget<MealPreferences> {
 
     // Create a table with a checklist of all available dishes based on the
     // user's dietary preferences.
-    Panel p = new VerticalPanel();
+    Panel p = new DockLayoutPanel(Unit.PX);
     p.setWidth("100%");
 
     FlexTable ft = new FlexTable();
@@ -291,7 +295,7 @@ public class MealPreferencesGadget extends Gadget<MealPreferences> {
       index++;
     }
     p.add(ft);
-    RootPanel.get().add(p);
+    RootLayoutPanel.get().add(p);
   }
 
   private void initDishes(MealPreferences preferences) {
