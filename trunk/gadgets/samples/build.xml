@@ -18,7 +18,13 @@
   <target name="traveler" description="Build Traveler">
     <gwt.ant dir="traveler"/>
   </target>
-  <target name="-do" depends="hellogadgets,gadgetrpc,basicgadgetads,traveler" description="Run all subprojects"/>
+  <target name="simplegadget" description="Build SimpleGadget">
+    <gwt.ant dir="simplegadget"/>
+  </target>
+  <target name="mealpreferences" description="Build MealPreferences">
+    <gwt.ant dir="mealpreferences"/>
+  </target>
+  <target name="-do" depends="hellogadgets,gadgetrpc,basicgadgetads,traveler,simplegadget,mealpreferences" description="Run all subprojects"/>
   <target name="build" description="Builds Gadgets API Library for GWT Samples">
     <antcall target="-do">
       <param name="target" value="build"/>
