@@ -112,18 +112,11 @@ Then update the module to include the Maps project module file and the Google Ma
 
 === Import the Eclipse project from the GWT Google APIs source code ===
 
-''This step is only needed for Maps and Visualization project''
-First, you will need to create a Linked Resource found in `eclipse/README.txt`.  For the Maps API, it is named `MAPS_API_ROOT`.  Set this value to the folder that contains the Maps source tree.
-
-  1 Choose Window->Preferences... from the menu bar.
-  1 Chose General->Workspace->Linked Resources from the Preferences dialog
-  1 Create a new Linked Resource named `MAPS_API_ROOT` that points to _GWT_GOOGLE_APIS_DIR _(`/usr/local/gwt-google-apis/maps` in our example.)
-
 Next, you can import the project.
 
   1 Choose _File->Import..._ from the menu bar.
   1 Select _General->Existing Projects into Workspace_
-  1 Browse from _Select root directory_ to the path you checked out from subversion (_GWT_GOOGLE_APIS_DIR_`/maps/eclipse` or `/usr/local/gwt/gwt-google-apis/maps/eclipse` in our example.)
+  1 Browse from _Select root directory_ to the path you checked out from subversion (_GWT_GOOGLE_APIS_DIR_`/maps/maps` or `/usr/local/gwt/gwt-google-apis/maps/maps` in our example.)
   1 You should see a project named `gwt-maps` on the list.  Make sure it is selected.
   1 Choose _Finish_ to import the project.
 
@@ -131,8 +124,8 @@ You may need to fixup the project's build path.
 
   1 Make sure the `gwt-maps` project is open and selected in the tree on the left.
   1 Navigate to  _Project->Properties...->Java Build Path->Libraries_
-  1 Add the `gwt-dev.jar` and `gwt-user.jar` libraries to the _Libraries_ tab.
-  1 Alternatively, if you have imported the GWT source projects, add the gwt-dev and gwt-user projects to the _Projects_ tab.
+  1 If you are using the Google Plugin for Eclipse, make sure the project has _Use Google Web Toolkit_ enabled in the project properties.
+  1 If you aren't using the Google Plugin for Eclipse, add the `gwt-dev.jar` and `gwt-user.jar` libraries to the _Libraries_ tab.  Alternatively, if you have imported the GWT source projects, add the gwt-dev and gwt-user projects to the _Projects_ tab.
 
 === Updating Eclipse Build and Launch Configuration ===
 
@@ -148,7 +141,7 @@ After you successfully import the project, you first need to update the !MapsTut
   1 Open the _Projects_ tab.
   1 Add the project `gwt-maps`.
 
-Next, update the launch configuration.  This will will allow you to launch hosted mode from Eclipse's `Run Dialog...` menu option.  
+Next, update the launch configuration for !DevelopmentMode.   Using the Google Plugin for Eclipse, you simply create a new Web Application launch configuration.   The following steps demonstrate how to create a launch configuration manually without the plugin to  launch !DevelopmentMode from Eclipse's `Run Dialog...` menu option.  
 
  1 Make sure your new project is open. 
  1 Navigate to  _Run->Open Run Dialog..._
