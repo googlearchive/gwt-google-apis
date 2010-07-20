@@ -17,20 +17,21 @@ package com.google.gwt.search.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
 
 /**
  * Local search results.
  */
 public final class LocalResult extends Result {
   public static final ResultClass RESULT_CLASS = ResultClass.LOCAL_SEARCH_RESULT;
-  
+
   public static LocalResult isLocalResult(Result result) {
     if (result.getResultClass().equals(RESULT_CLASS)) {
       return (LocalResult) result;
     }
     return null;
   }
-  
+
   /**
    * A phone number.
    */
@@ -70,6 +71,26 @@ public final class LocalResult extends Result {
   protected LocalResult() {
     // Required for overlay types
   }
+
+  /**
+   * Supplies an array consisting of the mailing address lines for this result,
+   * for instance:
+   * 
+   * <pre>
+   * ["1600 Amphitheatre Pky", "Mountain View, CA 94043"] 
+   *  or
+   * ["Via del Corso, 330", "00186 Roma (RM), Italy"]
+   * </pre>
+   * 
+   * To correctly render an address associated with a result, either use the
+   * {@link Result#getHtml()} method of the result directly or iterate through
+   * this array and display each addressLine in turn.
+   * 
+   * @return an array consisting of the mailing address lines for the result.
+   */
+  public native JsArrayString getAddressLines() /*-{
+    return this.addressLines;
+  }-*/;
 
   /**
    * Returns the city name for the result. Note:, in some cases, this property
