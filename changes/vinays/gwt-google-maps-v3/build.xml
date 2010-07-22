@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ Copyright 2010 Google Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ under the License.
+-->
+<!-- A basic initial build script for gwt-google-maps-v3 -->
+<project name="MapsSamples" default="usage" basedir=".">
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- PROPERTIES                                                          -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- User-specific dependencies, including GWT SDK and JUnit -->
+  <property file="build.properties"/>
+  <property environment="env"/>
+  <propertyset id="proxy.properties">
+    <propertyref prefix="java.net.useSystemProxies"/>
+    <propertyref prefix="http."/>
+    <propertyref prefix="https."/>
+    <propertyref prefix="ftp."/>
+    <propertyref prefix="socksProxy"/>
+  </propertyset>
+
+  <!-- Source Directory Names -->
+  <property name="source" location="src" />
+  <property name="source.test" location="test" />
+  <property name="source.samples" location="sample-src" />
+  <property name="source.samples.war" location="sample-war"/>
+
+  <!-- Artifact Names -->
+  <property name="dist.name" value="gwt-google-maps-v3"/>
+  <property name="dist.name.samples" value="gwt-google-maps-v3-samples"/>
+
+  <!-- GWT Config -->
+  <property name="gwt.args" value="" />
+  <property name="gwt.module.name" value="com.google.gwt.maps.sample.MapsSamples" />
+  <property name="gwt.module.renamed" value="mapssamples" />
+  <property name="gwt.startup.url" value="index.html" />
+
+  <!-- Outputs -->
+  <property name="output.dir" location="target"/>
+  <property name="output.classes" location="${output.dir}/classes"/>
+  <property name="output.dist" location="${output.dir}/${dist.name}"/>
+  <property name="output.dist.jar" location="${output.dist}.jar"/>
+  <property name="output.test.classes" location="${output.dir}/test-classes"/>
+  <property name="output.samples.classes" location="${output.dir}/classes-samples"/>
+  <property name="output.samples.dist" location="${output.dir}/${dist.name.samples}"/>
+  <property name="output.samples.dist.libs" location="${output.samples.dist}/WEB-INF/lib"/>
+  <property name="output.samples.dist.classes" location="${output.samples.dist}/WEB-INF/classes"/>
+  <property name="output.samples.dist.war" location="${output.samples.dist}.war"/>
+  <property name="output.reports" location="${output.dir}/reports"/>
+  <property name="output.reports.htmlunit.dev" location="${output.reports}/htmlunit.dev"/>
+  <property name="output.reports.htmlunit.prod" location="${output.reports}/htmlunit.prod"/>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- CLASSPATH SETUP                                                     -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <target name="set-classpath">
+    <condition property="gwt.sdk" value="${env.GWT_SDK}" else="./lib">
+      <isset property="env.GWT_SDK" />
+    </condition>
+    <fail message="Could not find GWT SDK jars in ${gwt.sdk} please provide gwt-user.jar and gwt-dev.jar or set GWT_SDK environment variable">
+      <condition>
+        <not>
+          <and>
+            <available file="${gwt.sdk}/gwt-user.jar"/>
+            <available file="${gwt.sdk}/gwt-dev.jar"/>
+          </and>
+        </not>
+      </condition>
+    </fail>
+
+    <path id="classpath">
+      <pathelement location="${gwt.sdk}/gwt-user.jar"/>
+      <pathelement location="${gwt.sdk}/gwt-dev.jar"/>
+      <fileset dir="${source.samples.war}" includes="WEB-INF/lib/*.jar"/>
+    </path>
+
+    <path id="samples.classpath">
+      <pathelement location="${output.dist.jar}"/>
+      <path refid="classpath"/>
+    </path>
+
+    <path id="samples.gwt.classpath">
+      <path refid="samples.classpath"/>
+      <pathelement location="${source.samples}"/>
+    </path>
+  </target>
+
+  <target name="set-classpath.tests">
+    <condition property="junit.jar" value="${env.GWT_JUNIT_JAR}" else="./lib/junit.jar">
+      <isset property="env.GWT_JUNIT_JAR"/>
+    </condition>
+    <fail message="Could not find JUnit Jar at ${junit.jar} please provide the Jar or set the GWT_JUNIT_JAR environment variable to point at the Jar">
+      <condition>
+        <not>
+          <available file="${junit.jar}"/>
+        </not>
+      </condition>
+    </fail>
+    
+    <path id="test.classpath">
+      <pathelement location="${output.classes}"/>
+      <pathelement location="${junit.jar}"/>
+      <pathelement location="${output.test.classes}"/>
+      <path refid="classpath" />
+    </path>
+
+    <path id="test.gwt.classpath">
+      <pathelement location="${source}"/>
+      <pathelement location="${source.test}"/>
+      <path refid="test.classpath" />
+    </path>
+  </target>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- COMMON                                                              -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <target name="usage">
+    <echo>
+       Usage:    build target-name
+
+       Common Targets:
+         clean           - Deletes all compiled class files, build artifacts, and
+                         temporary build files (i.e. everything in
+                         ${output.dir}).
+
+       API Module Targets:
+         test            - Runs all tests in both Development and Production modes.
+         package         - Creates a Jar file containing all source, class, and
+                         module files necessary for distribution.
+
+       Maps Samples Module Targets (will build API module first):
+         devmode.samples - Runs the Samples module in development mode.
+         package.samples - Creates a deployable War file containing Samples module.
+    </echo>
+  </target>
+
+  <target name="clean" description="Cleans this project">
+    <echo message="Cleaning output directories"/>
+    <delete dir="${output.dir}" failonerror="false" />
+    <delete dir="tomcat" failonerror="false" />
+    <delete dir=".gwt-tmp" failonerror="false" />
+    <!-- Just in case some classes ended up in the source directory -->
+    <delete dir="${source.samples.war}/WEB-INF/classes" failonerror="false" />
+    <delete dir="${source.samples.war}/${gwt.module.renamed}"
+            failonerror="false" />
+  </target>
+    
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- API MODULE TARGETS                                                  -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <target name="javac" depends="set-classpath" description="Compile Java source">
+    <echo message="Compiling Maps API sources"/>
+    <mkdir dir="${output.classes}"/>
+    <javac srcdir="${source}" includes="**" encoding="utf-8"
+           destdir="${output.classes}"
+           source="1.5" target="1.5" nowarn="true"
+           debug="true" debuglevel="lines,vars,source"
+           includeantruntime="false">
+      <classpath refid="classpath"/>
+    </javac>
+  </target>
+ 
+  <target name="javac.tests" depends="javac, set-classpath.tests" description="Compiles test code">
+    <echo message="Compiling Maps API test sources"/>
+    <mkdir dir="${output.test.classes}" />
+    <javac srcdir="${source.test}" includes="**" encoding="utf-8"
+           destdir="${output.test.classes}"
+           source="1.5" target="1.5" nowarn="true"
+           debug="true" debuglevel="lines,vars,source"
+           includeantruntime="false">
+      <classpath refid="test.classpath"/>
+    </javac>
+  </target>
+
+  <target name="test.dev" depends="javac.tests, copy-resources"
+          description="Run development mode tests">
+    <echo message="Executing Development Mode tests"/>
+    <mkdir dir="${output.reports.htmlunit.dev}" />
+    <junit fork="true" printsummary="true" haltonfailure="true"
+           haltonerror="true" showoutput="true">
+      <jvmarg line="-Xmx256m" />
+      <sysproperty key="gwt.args" value="-standardsMode -logLevel WARN" />
+      <sysproperty key="java.awt.headless" value="true" />
+      <syspropertyset refid="proxy.properties"/>
+      <classpath refid="test.gwt.classpath"/>
+      <batchtest todir="${output.reports.htmlunit.dev}">
+        <fileset dir="${source.test}" >
+          <include name="**/*Test.java" />
+        </fileset>
+      </batchtest>
+      <formatter type="plain" usefile="false"/>
+      <formatter type="xml" />
+    </junit>
+  </target>
+
+  <target name="test.prod" depends="javac.tests, copy-resources"
+          description="Run production mode tests">
+    <echo message="Executing Production Mode tests"/>
+    <mkdir dir="${output.reports.htmlunit.prod}" />
+    <junit fork="true" printsummary="true" haltonfailure="true"
+           haltonerror="true" showoutput="true">
+      <jvmarg line="-Xmx256m" />
+      <sysproperty key="gwt.args"
+                   value="-prod -standardsMode -logLevel INFO -standardsMode -out www-test" />
+      <sysproperty key="java.awt.headless" value="true" />
+      <syspropertyset refid="proxy.properties"/>
+      <classpath refid="test.gwt.classpath"/>
+      <batchtest todir="${output.reports.htmlunit.prod}" >
+        <fileset dir="${source.test}" >
+          <include name="**/*Test.java" />
+        </fileset>
+      </batchtest>
+      <formatter type="plain"  usefile="false"/>
+      <formatter type="xml" />
+    </junit>
+  </target>
+
+  <target name="test" description="Run development and production mode tests">
+    <antcall target="test.dev" />
+    <antcall target="test.prod" />
+  </target>
+
+  <target name="copy-resources" depends="javac"
+          description="Copy classes and source into dist directory">
+    <echo message="Copying classes and sources into distribution directory"/>
+    <mkdir dir="${output.dist}"/>
+    <copy description="Copy in the classes" todir="${output.dist}">
+      <fileset dir="${output.classes}"/>
+    </copy>
+    <copy description="Copy in the source and module descriptors"
+          todir="${output.dist}">
+      <fileset dir="${source}"/>
+    </copy>
+  </target>
+
+  <target name="package" depends="copy-resources"
+          description="Create a Jar with the classes and source">
+    <echo message="Packaging Maps API as Jar"/>
+    <jar destfile="${output.dist.jar}" basedir="${output.dist}"/>
+  </target>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- SAMPLE MODULE TARGETS                                               -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <target name="libs" description="Copy libs to WEB-INF/lib">
+    <echo message="Copying libraries into Samples Application libraries directory"/>
+    <mkdir dir="${output.samples.dist.libs}"/>
+    <copy todir="${output.samples.dist.libs}">
+      <fileset dir="${source.samples.war}" includes="WEB-INF/lib**/*.jar"/>
+    </copy>
+  </target>
+
+  <target name="javac.samples" depends="package, libs"
+          description="Compile Java sources for samples">
+    <echo message="Compiling Samples Application classes"/>
+    <mkdir dir="${output.samples.classes}"/>
+    <javac srcdir="${source.samples}" includes="**" encoding="utf-8"
+           destdir="${output.samples.classes}"
+           source="1.5" target="1.5" nowarn="true"
+           debug="true" debuglevel="lines,vars,source"
+           includeantruntime="false">
+      <classpath refid="samples.classpath"/>
+    </javac>
+  </target>
+
+  <target name="copy-resources.samples" depends="javac.samples"
+          description="Copy static resources into war directory">
+    <echo message="Copying static resources into Samples Application directories"/>
+    <copy description="Copy in the static resources"
+          todir="${output.samples.dist}">
+      <fileset dir="${source.samples.war}"/>
+    </copy>
+  </target>
+
+  <target name="devmode.samples" depends="copy-resources.samples"
+          description="Run development mode">
+    <echo message="Starting Dev Mode for Samples Application"/>
+    <java failonerror="true" fork="true" classname="com.google.gwt.dev.DevMode">
+      <classpath refid="samples.gwt.classpath"/>
+      <jvmarg value="-Xmx256M"/>
+      <arg value="-startupUrl"/>
+      <arg value="${gwt.startup.url}"/>
+      <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+      <arg line="${gwt.args}"/>
+      <arg line="-war ${output.samples.dist}"/>
+      <arg value="${gwt.module.name}"/>
+    </java>
+  </target>
+
+  <target name="gwtc.samples" depends="copy-resources.samples"
+          description="GWT compile to JavaScript">
+    <echo message="Compiling Samples Application to JavaScript"/>
+    <java failonerror="true" fork="true"
+          classname="com.google.gwt.dev.Compiler">
+      <classpath refid="samples.gwt.classpath"/>
+      <!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
+      <jvmarg value="-Xmx256M"/>
+      <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+      <arg line="${gwt.args}"/>
+      <arg line="-war ${output.samples.dist}"/>
+      <arg value="${gwt.module.name}"/>
+    </java>
+  </target>
+
+  <target name="package.samples" depends="gwtc.samples"
+          description="Create a war file">
+    <echo message="Packaging Samples Application as War"/>
+    <copy description="Copy in the classes"
+          todir="${output.samples.dist.classes}">
+      <fileset dir="${output.samples.classes}"
+               excludes="**/client/**, **/*.gwt.xml"/>
+    </copy>
+    <war destfile="${output.samples.dist.war}"
+         basedir="${output.samples.dist}"/>
+  </target>
+
+</project>

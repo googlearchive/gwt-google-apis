@@ -23,7 +23,7 @@ import com.google.gwt.maps.sample.client.event.ShowNavigationItemEvent;
 import com.google.gwt.maps.sample.client.presenter.NavigationPresenter;
 import com.google.gwt.maps.sample.client.view.ControllerView;
 import com.google.gwt.maps.sample.client.view.NavigationView;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 /**
  * Sample usage code for GWT Maps API v3.
@@ -54,7 +54,7 @@ public class MapsSamples implements EntryPoint {
     controller.setNavigationPresenter(navPresenter);
     controller.bind();
     
-    RootPanel.get("chrome").add(view.asWidget());
+    RootLayoutPanel.get().add(view.asWidget());
     
     final NavigationItem navItem = new NavigationItem("Simple", "Simple");
     eventBus.fireEvent(new ShowNavigationItemEvent(navItem));
