@@ -104,6 +104,6 @@ For modern browsers it's common to forbid cross-file references, which most like
 The ChartTools API [http://code.google.com/apis/visualization/documentation/release_notes.html#05182010 released changes] that update the look and feel of some of the charts.  
 The steps to migrate to the new look and feel are outlined in the [http://code.google.com/apis/visualization/documentation/release_notes.html#migratingtocore Migration Guide] for !JavaScript.
 
-In order to do this with GWT, when loading the API, pass the string `"corecharts"` instead of `LineChart.PACKAGE` as the last argument to `VisualizationUtils.loadVisualizationApi()`.  Do not use any of the individual chart `PACKAGE` constants or you may see inconsistent behavior.
+In order to do this with GWT, when loading the API, pass the string `"corechart"` instead of `LineChart.PACKAGE` as the last argument to `VisualizationUtils.loadVisualizationApi()`.  Do not use any of the individual chart `PACKAGE` constants or you may see inconsistent behavior.
 
 Not all of the methods may work appropriately as some have been renamed.  If you need to use these methods, then create a subclass of the appropriate Chart [http://gwt-google-apis.googlecode.com/svn/javadoc/visualization/1.1/com/google/gwt/visualization/client/CommonOptions.html Options] class and add new JSNI methods to invoke the !JavaScript API.
