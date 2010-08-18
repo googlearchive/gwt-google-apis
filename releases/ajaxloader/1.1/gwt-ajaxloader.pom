@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.google.gwt.google-apis</groupId>
+		<artifactId>google-apis-parent</artifactId>
+		<version>1</version>
+		<relativePath>../google-apis-parent/pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.google.gwt.google-apis</groupId>
+	<artifactId>gwt-ajaxloader</artifactId>
+	<version>1.1.0</version>
+	<name>Google API Libraries for Google Web Toolkit</name>
+	<description>
+		The Google API Libraries for Google Web Toolkit is a collection of libraries that provide Java language bindings 
+  		for popular Google JavaScript APIs. These libraries make it quick and easy for developers to use these Google 
+  		JavaScript APIs with Google Web Toolkit. The libraries are supported by the Google Web Toolkit team.
+	</description>
+
+	<build>
+		<sourceDirectory>./ajaxloader/src</sourceDirectory>
+	</build>
+</project>
