@@ -57,3 +57,14 @@ New features in 1.6 have included multiple versions of the Xerces library.  Try 
 == I'm using GWT 1.6 and I'm getting a version number mismatch when trying to debug in hosted mode. ==
 
 See [http://code.google.com/p/gwt-google-apis/issues/detail?id=275 issue 275] regarding a mismatch when using the pre-compiled gwt-gadgets.jar.
+
+== I'm using the GWT 2.1 milestone and see errors using GWT RPC ==
+
+{{{
+SEVERE: Exception while dispatching incoming RPC call
+java.lang.SecurityException: Blocked request without GWT permutation header (XSRF attack?)
+       at
+com.google.gwt.user.server.rpc.RemoteServiceServlet.checkPermutationStrongName(RemoteServiceServlet.java:250)
+}}}
+
+As of r7703, (GWT 2.1 milestones), the X-GWT-Permutation header is being checked.  You can bypass this check by  overriding the method `checkPermutationStrongName()` in your subclass of `RemoteServiceServlet`.
