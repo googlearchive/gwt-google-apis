@@ -1,12 +1,12 @@
 /*
- * Copyright 2008 Google Inc.
- * 
+ * Copyright 2010 Google Inc.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,8 +19,15 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.visualizations.BarChart;
-import com.google.gwt.visualization.client.visualizations.BarChart.Options;
+import com.google.gwt.visualization.client.visualizations.corechart.AxisOptions;
+import com.google.gwt.visualization.client.visualizations.corechart.BarChart;
+import com.google.gwt.visualization.client.visualizations.corechart.Options;
+import com.google.gwt.visualization.sample.visualizationshowcase.client.LeftTabPanel;
+import com.google.gwt.visualization.sample.visualizationshowcase.client.OnMouseOutDemo;
+import com.google.gwt.visualization.sample.visualizationshowcase.client.OnMouseOverDemo;
+import com.google.gwt.visualization.sample.visualizationshowcase.client.ReadyDemo;
+import com.google.gwt.visualization.sample.visualizationshowcase.client.SelectionDemo;
+import com.google.gwt.visualization.sample.visualizationshowcase.client.Showcase;
 
 /**
  * Demo for BarChart visualization.
@@ -32,15 +39,14 @@ public class BarDemo implements LeftTabPanel.WidgetProvider {
     options.setHeight(240);
     options.setTitle("Company Performance");
     options.setWidth(400);
-    options.set3D(true);
-    options.setShowCategories(true);
-    options.setEnableTooltip(true);
-    options.setMin(0);
-    options.setMax(2000);
-    
-    DataTable data = Showcase.getCompanyPerformance();
+    AxisOptions vAxisOptions = AxisOptions.create();
+    vAxisOptions.setMinValue(0);
+    vAxisOptions.setMaxValue(2000);
+    options.setVAxisOptions(vAxisOptions);
 
+    DataTable data = Showcase.getCompanyPerformance();
     BarChart viz = new BarChart(data, options);
+
     Label status = new Label();
     Label onMouseOverAndOutStatus = new Label();
     viz.addSelectHandler(new SelectionDemo(viz, status));
@@ -48,8 +54,8 @@ public class BarDemo implements LeftTabPanel.WidgetProvider {
     viz.addOnMouseOverHandler(new OnMouseOverDemo(onMouseOverAndOutStatus));
     viz.addOnMouseOutHandler(new OnMouseOutDemo(onMouseOverAndOutStatus));
     result.add(status);
-    result.add(onMouseOverAndOutStatus);
     result.add(viz);
+    result.add(onMouseOverAndOutStatus);
     return result;
   }
 }
