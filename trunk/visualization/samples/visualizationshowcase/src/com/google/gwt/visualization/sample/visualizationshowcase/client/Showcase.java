@@ -23,9 +23,6 @@ import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
 import com.google.gwt.visualization.client.visualizations.AnnotatedTimeLine;
-import com.google.gwt.visualization.client.visualizations.AreaChart;
-import com.google.gwt.visualization.client.visualizations.BarChart;
-import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.Gauge;
 import com.google.gwt.visualization.client.visualizations.GeoMap;
 import com.google.gwt.visualization.client.visualizations.ImageAreaChart;
@@ -35,13 +32,11 @@ import com.google.gwt.visualization.client.visualizations.ImageLineChart;
 import com.google.gwt.visualization.client.visualizations.ImagePieChart;
 import com.google.gwt.visualization.client.visualizations.ImageSparklineChart;
 import com.google.gwt.visualization.client.visualizations.IntensityMap;
-import com.google.gwt.visualization.client.visualizations.LineChart;
 import com.google.gwt.visualization.client.visualizations.MapVisualization;
 import com.google.gwt.visualization.client.visualizations.MotionChart;
 import com.google.gwt.visualization.client.visualizations.OrgChart;
-import com.google.gwt.visualization.client.visualizations.PieChart;
-import com.google.gwt.visualization.client.visualizations.ScatterChart;
 import com.google.gwt.visualization.client.visualizations.Table;
+import com.google.gwt.visualization.client.visualizations.corechart.CoreChart;
 
 /**
  * Google Visualization API in GWT demo.
@@ -150,12 +145,12 @@ class Showcase implements EntryPoint {
             tabby.add(new ToolbarDemo(), "Toolbar");
             tabby.setWidget(annotatedWidget);
           }
-        }, AnnotatedTimeLine.PACKAGE, AreaChart.PACKAGE, BarChart.PACKAGE,
-        ColumnChart.PACKAGE, Gauge.PACKAGE, GeoMap.PACKAGE, ImageChart.PACKAGE,
+        }, AnnotatedTimeLine.PACKAGE, CoreChart.PACKAGE,
+        Gauge.PACKAGE, GeoMap.PACKAGE, ImageChart.PACKAGE,
         ImageLineChart.PACKAGE, ImageAreaChart.PACKAGE, ImageBarChart.PACKAGE,
-        ImagePieChart.PACKAGE, IntensityMap.PACKAGE, LineChart.PACKAGE,
+        ImagePieChart.PACKAGE, IntensityMap.PACKAGE,
         MapVisualization.PACKAGE, MotionChart.PACKAGE, OrgChart.PACKAGE,
-        PieChart.PACKAGE, ScatterChart.PACKAGE, Table.PACKAGE,
+        Table.PACKAGE,
         ImageSparklineChart.PACKAGE);
   }
 }

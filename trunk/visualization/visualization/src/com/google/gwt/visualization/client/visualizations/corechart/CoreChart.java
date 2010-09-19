@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,13 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.visualization.client.visualizations;
+
+package com.google.gwt.visualization.client.visualizations.corechart;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.visualization.client.AbstractDataTable;
-import com.google.gwt.visualization.client.CommonChartOptions;
 import com.google.gwt.visualization.client.Selectable;
 import com.google.gwt.visualization.client.Selection;
 import com.google.gwt.visualization.client.events.Handler;
@@ -27,54 +27,45 @@ import com.google.gwt.visualization.client.events.OnMouseOutHandler;
 import com.google.gwt.visualization.client.events.OnMouseOverHandler;
 import com.google.gwt.visualization.client.events.ReadyHandler;
 import com.google.gwt.visualization.client.events.SelectHandler;
+import com.google.gwt.visualization.client.visualizations.Visualization;
 
 /**
  *
- * Area Chart visualization. Like a line chart with the area under the line
- * filled in.
+ * Corechart Visualization consolidates: area chart, line chart, scatter chart,
+ * bar chart, column chart and pie charts.
  *
  * @see <a href=
- *      "http://code.google.com/apis/visualization/documentation/gallery/areachart.html"
- *      >Area Chart Visualization Reference</a>
- *
- * @deprecated this class is outdated. Instead, please use the class
- *             com.google.gwt.visualization.client.visualizations.corechart.AreaChart
+ *      "http://code.google.com/apis/visualization/documentation/gallery.html"
+ *      > Google Visualization API Gallery</a>
  */
-@Deprecated
-public class AreaChart extends Visualization<AreaChart.Options> implements
+public abstract class CoreChart extends Visualization<Options> implements
     Selectable {
+
   /**
-   * Options for drawing the area chart.
-   *
+   * Available types for core charts.
+   * Used by Options.setType()
    */
-  public static class Options extends CommonChartOptions {
-    public static Options create() {
-      return JavaScriptObject.createObject().cast();
-    }
-
-    protected Options() {
-    }
-
-    public final native void setLineSize(int size) /*-{
-      this.lineSize = size;
-    }-*/;
-
-    public final native void setPointSize(int size) /*-{
-      this.pointSize = size;
-    }-*/;
-
-    public final native void setStacked(boolean stacked) /*-{
-      this.isStacked = stacked;
-    }-*/;
+  public enum Type {
+    AREA,
+    LINE,
+    SCATTER,
+    BARS,
+    COLUMNS,
+    PIE,
+    NONE
   }
 
-  public static final String PACKAGE = "areachart";
+  public static final String PACKAGE = "corechart";
 
-  public AreaChart() {
+  public static Options createOptions() {
+    return JavaScriptObject.createObject().cast();
+  }
+
+  public CoreChart() {
     super();
   }
 
-  public AreaChart(AbstractDataTable data, Options options) {
+  public CoreChart(AbstractDataTable data, Options options) {
     super(data, options);
   }
 
@@ -104,6 +95,6 @@ public class AreaChart extends Visualization<AreaChart.Options> implements
 
   @Override
   protected native JavaScriptObject createJso(Element parent) /*-{
-    return new $wnd.google.visualization.AreaChart(parent);
+   return new $wnd.google.visualization.CoreChart(parent);
   }-*/;
 }
