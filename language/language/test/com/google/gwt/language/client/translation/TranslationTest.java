@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.language.client.translation;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.language.client.LanguageUtils;
 
@@ -115,8 +116,10 @@ public class TranslationTest extends GWTTestCase {
    * API should leave alone any HTML tags.
    */
   public void testTranslationWithHTMLOption() {
+    GWT.log("Started test of HTML option");
     LanguageUtils.loadTranslation(new Runnable() {
       public void run() {
+        GWT.log("API Loaded, start test of HTML option");
         Option option = Option.newInstance("<bold>beans and rice</bold>",
             ContentType.HTML);
         assertNotNull(option);
@@ -125,6 +128,7 @@ public class TranslationTest extends GWTTestCase {
 
               @Override
               protected void onCallback(TranslationResult result) {
+                GWT.log("Got Callback HTML option");
                 assertNull(result.getError());
                 String resultText = result.getTranslatedText();
 
@@ -132,7 +136,9 @@ public class TranslationTest extends GWTTestCase {
                 // have to compare this way.
                 assertTrue(resultText.startsWith("<bold>"));
                 assertTrue(resultText.endsWith("</bold>"));
-                assertTrue(resultText.contains("frijoles y arroz"));
+                assertTrue(resultText.contains("frijoles "));
+                assertTrue(resultText.contains(" y "));
+                assertTrue(resultText.contains(" arroz"));
                 finishTest();
               }
             });
@@ -163,7 +169,7 @@ public class TranslationTest extends GWTTestCase {
                 // Since translation server can put spaces in response text, we
                 // have to compare this way.
                 assertTrue(resultText.toLowerCase().contains("negrita"));
-                assertTrue(resultText.toLowerCase().contains("frijoles "));
+                assertTrue(resultText.toLowerCase().contains("frijol"));
                 assertTrue(resultText.toLowerCase().contains(" y "));
                 assertTrue(resultText.toLowerCase().contains(" arroz"));
                 finishTest();
