@@ -35,8 +35,18 @@ public class AbstractDataTable extends JavaScriptObject {
    * The type of a column.
    */
   public enum ColumnType {
-    BOOLEAN, DATE, DATETIME, NUMBER, STRING, TIMEOFDAY;
+    BOOLEAN("boolean"),
+    DATE("date"),
+    DATETIME("datetime"),
+    NUMBER("number"),
+    STRING("string"),
+    TIMEOFDAY("timeofday");
 
+    private final String parameter;
+
+    ColumnType(String parameter) {
+      this.parameter = parameter;
+    }
     /**
      * Get a ColumnType enum value from the String representation.
      * 
@@ -53,7 +63,7 @@ public class AbstractDataTable extends JavaScriptObject {
      * @return the String representation of the ColumnType.
      */
     String getParameter() {
-      return name().toLowerCase();
+      return parameter;
     }
   }
 
