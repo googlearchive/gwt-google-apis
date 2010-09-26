@@ -196,10 +196,10 @@ The properties of the Options class for each chart correspond to the supported n
   }
 }}}
 
-For the purpose of forward compatibility, the class !AbstractDrawOptions (which is the base class of all Options classes) also includes some general-purpose `setOption()` methods.  This allows the caller to set a new option that has not yet been incorporated into their version of the Options class.  For example:
+For the purpose of forward compatibility, the class !AbstractDrawOptions (which is the base class of all Options classes) also includes some general-purpose `set()` methods.  This allows the caller to set a new option that has not yet been incorporated into their version of the Options class.  For example:
 
 {{{
-options.setOption("nlives", 10);
+options.set("nlives", 10);
 }}}
 
 === Creating a !DataTable ===
