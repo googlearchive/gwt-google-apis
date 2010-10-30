@@ -20,7 +20,7 @@ package com.google.gwt.visualization.client;
  * Representation of time of day that may be used as a value in a data table (or
  * data view).
  */
-public class TimeOfDay {
+public class TimeOfDay implements Comparable<TimeOfDay> {
   /**
    * Exception indicating an invalid value being set for a time of day field.
    */
@@ -88,6 +88,19 @@ public class TimeOfDay {
     result = prime * result + minute;
     result = prime * result + second;
     return result;
+  }
+  
+  @Override public int compareTo(TimeOfDay that) {
+    // Safe because both are positive integers
+    return millis() - that.millis();
+  }
+  
+  final int millis() {
+    // Safe because we are looking at number smaller than 100M, well within range of int
+    int minutes = 60 * hour + minute;
+    int seconds = 60 * minutes + second;
+    int millis = 1000 * seconds + millisecond;
+    return millis;
   }
 
   public void setHour(int hour) throws BadTimeException {
