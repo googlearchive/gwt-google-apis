@@ -90,7 +90,7 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     return result;
   }
   
-  @Override public int compareTo(TimeOfDay that) {
+  public int compareTo(TimeOfDay that) {
     // Safe because both are positive integers
     return millis() - that.millis();
   }

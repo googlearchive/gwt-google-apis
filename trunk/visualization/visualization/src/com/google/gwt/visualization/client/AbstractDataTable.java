@@ -133,8 +133,11 @@ public class AbstractDataTable extends JavaScriptObject {
   }-*/;
 
   public final TimeOfDay getValueTimeOfDay(int rowIndex, int columnIndex) {
-    TimeOfDay result = new TimeOfDay();
     JsArrayInteger jsArray = getValueArrayInteger(rowIndex, columnIndex);
+    if (jsArray.length() == 0) {
+      return null;
+    }
+    TimeOfDay result = new TimeOfDay();
     try {
       result.setHour(jsArray.get(0));
       result.setMinute(jsArray.get(1));
