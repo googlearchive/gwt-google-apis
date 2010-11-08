@@ -1,0 +1,4 @@
+sample-war/WEB-INF/classes/**
+sample-war/WEB-INF/lib/**
+sample-war/mapssamples/**
+
