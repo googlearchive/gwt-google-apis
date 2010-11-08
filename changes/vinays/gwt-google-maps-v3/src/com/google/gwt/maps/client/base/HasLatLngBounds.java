@@ -20,7 +20,6 @@ import com.google.gwt.core.client.JavaScriptObject;
  * A LatLngBounds instance represents a rectangle in geographical coordinates,
  * including one that crosses the 180 degrees longitudinal meridian.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasLatLngBounds {
   

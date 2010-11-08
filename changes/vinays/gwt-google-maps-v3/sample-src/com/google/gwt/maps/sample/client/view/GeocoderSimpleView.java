@@ -40,7 +40,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Simple sample ui.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class GeocoderSimpleView extends Composite implements Display {
   

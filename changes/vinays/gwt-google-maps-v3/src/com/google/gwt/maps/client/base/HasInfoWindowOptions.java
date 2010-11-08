@@ -19,7 +19,6 @@ import com.google.gwt.maps.client.HasJso;
 /**
  * The Interface HasInfoWindowOptions.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasInfoWindowOptions extends HasJso {
 

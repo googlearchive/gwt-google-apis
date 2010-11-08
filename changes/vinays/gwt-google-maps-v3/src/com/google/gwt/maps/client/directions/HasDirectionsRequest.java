@@ -36,7 +36,6 @@ import java.util.List;
 /**
  * A directions query to be sent to the {@link DirectionsService}.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasDirectionsRequest extends HasJso {
 

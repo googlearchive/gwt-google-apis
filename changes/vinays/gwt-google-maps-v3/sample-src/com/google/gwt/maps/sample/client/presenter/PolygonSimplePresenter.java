@@ -30,7 +30,6 @@ import java.util.ArrayList;
  * 
  * Add a rectangle overlay on the map with given corner LatLngs.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class PolygonSimplePresenter implements Presenter<PolygonSimplePresenter.Display> {
 

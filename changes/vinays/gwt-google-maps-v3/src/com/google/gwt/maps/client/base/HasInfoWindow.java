@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.mvc.MVCObject;
  * An overlay that looks like a bubble and is often connected to a marker. This
  * class extends {@link MVCObject}.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasInfoWindow extends HasJso {
   

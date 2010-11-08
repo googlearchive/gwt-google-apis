@@ -42,7 +42,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * 
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class DirectionsPanelView extends Composite implements Display {
 

@@ -26,7 +26,6 @@ import java.util.List;
 /**
  * This class implements {@link HasPolygonOptions}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class PolygonOptions implements HasPolygonOptions {
   

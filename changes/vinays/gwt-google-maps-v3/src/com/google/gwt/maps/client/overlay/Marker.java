@@ -24,7 +24,6 @@ import com.google.gwt.maps.client.overlay.impl.MarkerImpl;
 /**
  * This class implements {@link HasMarker}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class Marker extends MVCObject implements HasMarker {
 

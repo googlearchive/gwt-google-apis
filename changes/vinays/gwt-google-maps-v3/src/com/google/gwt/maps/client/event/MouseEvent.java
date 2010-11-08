@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.event.impl.MouseEventImpl;
 /**
  * This class implements {@link HasMouseEvent}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class MouseEvent implements HasMouseEvent {
 

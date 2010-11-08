@@ -19,7 +19,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * This class implements {@link HasLatLng}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class LatLng extends JavaScriptObject {
     

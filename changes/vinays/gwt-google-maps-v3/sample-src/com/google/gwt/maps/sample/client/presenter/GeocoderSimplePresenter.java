@@ -36,7 +36,6 @@ import java.util.List;
  * 
  * Geocode address entered in the text box.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresenter.Display> {
 

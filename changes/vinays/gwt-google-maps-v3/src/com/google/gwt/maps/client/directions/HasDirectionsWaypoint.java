@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.base.LatLng;
  * A DirectionsWaypoint represents a location between origin and destination
  * through which the trip should be routed.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasDirectionsWaypoint extends HasJso {
 

@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.directions.impl.DirectionsWaypointImpl;
 /**
  * This class implements {@link HasDirectionsWaypoint}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class DirectionsWaypoint implements HasDirectionsWaypoint {
 

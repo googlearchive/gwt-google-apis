@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.base.LatLng;
 /**
  * The specification for a geocoding request to be sent to the {@link Geocoder}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasGeocoderRequest extends HasJso {
   

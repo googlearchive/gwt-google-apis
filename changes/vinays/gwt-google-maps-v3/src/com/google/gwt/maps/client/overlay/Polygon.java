@@ -28,7 +28,6 @@ import java.util.List;
 /**
  * This class implements {@link HasPolygon}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class Polygon extends MVCObject implements HasPolygon {
   

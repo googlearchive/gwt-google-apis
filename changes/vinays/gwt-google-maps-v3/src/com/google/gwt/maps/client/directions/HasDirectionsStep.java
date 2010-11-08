@@ -22,7 +22,6 @@ import java.util.List;
 /**
  * A single DirectionsStep in a DirectionsResult. Some fields may be undefined.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasDirectionsStep extends HasJso {
 

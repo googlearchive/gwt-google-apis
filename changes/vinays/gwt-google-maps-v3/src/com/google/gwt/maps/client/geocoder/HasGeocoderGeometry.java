@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.base.LatLng;
 /**
  * GeocoderGeometry information about this GeocoderResult.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasGeocoderGeometry extends HasJso {
   

@@ -19,7 +19,6 @@ import java.util.ArrayList;
  * It attaches five info windows each containing a letter of a sentence to five
  * markers randomly positioned on the map.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class EventClosurePresenter implements Presenter<EventClosurePresenter.Display> {
 

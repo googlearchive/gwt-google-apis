@@ -37,7 +37,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Simple event sample ui.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class EventSimpleView extends Composite implements Display {
   

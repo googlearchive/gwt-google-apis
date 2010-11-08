@@ -22,7 +22,6 @@ import java.util.List;
 /**
  * 
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasPolylineOptions extends HasJso {
 

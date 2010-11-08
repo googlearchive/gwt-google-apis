@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.geocoder.impl.GeocoderRequestImpl;
 /**
  * This class implements {@link HasGeocoderRequest}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class GeocoderRequest implements HasGeocoderRequest {
 

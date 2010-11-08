@@ -25,7 +25,6 @@ import java.util.List;
 /**
  * This class implements {@link HasPolylineOptions}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class PolylineOptions implements HasPolylineOptions {
 

@@ -20,7 +20,6 @@ import com.google.gwt.maps.client.base.impl.InfoWindowOptionsImpl;
 /**
  * This class implements {@link HasInfoWindowOptions}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class InfoWindowOptions implements HasInfoWindowOptions {
 

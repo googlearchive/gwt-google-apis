@@ -25,7 +25,6 @@ import com.google.gwt.maps.client.impl.ScaleControlStyleImpl;
 /**
  * This class implements {@link HasMapOptions}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class MapOptions implements HasMapOptions {
 

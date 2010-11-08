@@ -22,7 +22,6 @@ import com.google.gwt.maps.client.mvc.HasMVCObject;
  * 
  * This class extends MVCObject.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasMarker extends HasMVCObject {
   

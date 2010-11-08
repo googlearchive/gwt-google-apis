@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.overlay.impl.CircleOptionsImpl;
 /**
  * This class implements {@link HasCircleOptions}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class CircleOptions implements HasCircleOptions {
   

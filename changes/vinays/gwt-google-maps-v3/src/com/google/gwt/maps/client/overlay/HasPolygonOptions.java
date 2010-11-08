@@ -23,7 +23,6 @@ import java.util.List;
 /**
  * Polygon options.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasPolygonOptions extends HasJso {
 

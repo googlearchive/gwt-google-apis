@@ -28,7 +28,6 @@ import java.util.List;
 /**
  * This class implements {@link HasPolyline}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class Polyline extends MVCObject implements HasPolyline {
 

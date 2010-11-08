@@ -22,7 +22,6 @@ import com.google.gwt.maps.client.base.impl.LatLngBoundsImpl;
 /**
  * This class implements {@link HasLatLngBounds}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class LatLngBounds implements HasLatLngBounds {
 

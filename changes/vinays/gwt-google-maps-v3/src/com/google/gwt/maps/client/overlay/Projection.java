@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.overlay.impl.ProjectionImpl;
 /**
  * 
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class Projection implements HasProjection {
   

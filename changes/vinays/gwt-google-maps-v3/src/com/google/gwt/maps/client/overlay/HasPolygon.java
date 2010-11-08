@@ -28,7 +28,6 @@ import java.util.List;
  * 
  * This class extends {@link MVCObject}.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasPolygon extends HasMVCObject {
 

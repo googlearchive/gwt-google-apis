@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.geocoder.impl.GeocoderGeometryImpl;
 /**
  * This class implements {@link HasGeocoderGeometry}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class GeocoderGeometry implements HasGeocoderGeometry {
 

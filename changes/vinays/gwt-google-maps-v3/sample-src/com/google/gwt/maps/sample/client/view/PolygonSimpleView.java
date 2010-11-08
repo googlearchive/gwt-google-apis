@@ -36,7 +36,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * This class implements {@link Display}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class PolygonSimpleView extends Composite implements Display {
 

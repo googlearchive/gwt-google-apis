@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.base.LatLng;
  * This object is returned from various mouse events on the map and overlays,
  * and contains all the fields shown below.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasMouseEvent extends HasJso {
 

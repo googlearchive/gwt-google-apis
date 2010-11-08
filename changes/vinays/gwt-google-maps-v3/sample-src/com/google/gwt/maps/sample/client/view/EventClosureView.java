@@ -41,7 +41,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Event closure sample ui.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class EventClosureView extends Composite implements Display {
 

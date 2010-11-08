@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.mvc.MVCObject;
 /**
  * This class implements {@link HasInfoWindow}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class InfoWindow extends MVCObject implements HasInfoWindow {
 

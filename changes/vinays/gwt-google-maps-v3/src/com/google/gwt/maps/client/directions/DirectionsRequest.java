@@ -25,7 +25,6 @@ import java.util.List;
 /**
  * This class implements {@link HasDirectionsRequest}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class DirectionsRequest implements HasDirectionsRequest {
 

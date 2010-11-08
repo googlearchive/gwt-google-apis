@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.overlay.impl.MarkerOptionsImpl;
 /**
  * This class implements {@link HasMarkerOptions}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class MarkerOptions implements HasMarkerOptions {
 

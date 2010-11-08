@@ -29,7 +29,6 @@ import com.google.gwt.user.client.Element;
  * 
  * This class extends {@link MVCObject}.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class Map extends MVCObject implements HasMap {
   

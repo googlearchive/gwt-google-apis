@@ -23,7 +23,6 @@ import com.google.gwt.maps.client.mvc.HasMVCObject;
  * A circle on the Earth's surface; also known as a "spherical cap". This class
  * extends MVCObject.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasCircle extends HasMVCObject {
   

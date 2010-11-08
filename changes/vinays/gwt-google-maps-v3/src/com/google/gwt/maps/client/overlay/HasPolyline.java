@@ -24,7 +24,6 @@ import java.util.List;
  * A polyline is a linear overlay of connected line segments on the map. This
  * class extends MVCObject.
  * 
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasPolyline extends HasJso {
 

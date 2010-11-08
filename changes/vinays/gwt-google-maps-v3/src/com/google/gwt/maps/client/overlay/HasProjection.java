@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.base.LatLng;
 /**
  * 
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasProjection extends HasJso {
 

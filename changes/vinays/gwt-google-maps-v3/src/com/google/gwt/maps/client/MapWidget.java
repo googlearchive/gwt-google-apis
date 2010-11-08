@@ -25,7 +25,6 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * Note: Resize event will be trigger on load(i.e when it is attached to window's document).
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class MapWidget extends Widget {
 

@@ -19,7 +19,6 @@ import com.google.gwt.maps.client.base.LatLng;
 /**
  * Getters and setters for MapOptions.
  *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public interface HasMapOptions extends HasJso {
 
