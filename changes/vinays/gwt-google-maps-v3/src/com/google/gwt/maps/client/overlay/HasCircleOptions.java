@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 
 /**
  * 
@@ -26,12 +26,12 @@ public interface HasCircleOptions {
 
   public JavaScriptObject getJso();
 
-  public HasLatLng getCenter();
+  public LatLng getCenter();
 
   /**
    * The center.
    */
-  public void setCenter(HasLatLng center);
+  public void setCenter(LatLng center);
 
   public String getFillColor();
 

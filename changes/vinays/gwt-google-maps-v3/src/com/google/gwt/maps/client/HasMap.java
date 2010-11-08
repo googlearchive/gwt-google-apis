@@ -14,8 +14,8 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.MVCObject;
 import com.google.gwt.maps.client.overlay.HasProjection;
 import com.google.gwt.user.client.Element;
@@ -41,7 +41,7 @@ public interface HasMap extends HasJso {
    */
   public HasLatLngBounds getBounds();
   
-  public HasLatLng getCenter();
+  public LatLng getCenter();
   
   public Element getDiv();
   
@@ -64,7 +64,7 @@ public interface HasMap extends HasJso {
    * than both the width and height of the map, the transition will be smoothly
    * animated.
    */
-  void panTo(HasLatLng latLng);
+  void panTo(LatLng latLng);
 
   /**
    * Pans the map by the minimum amount necessary to contain the given
@@ -78,7 +78,7 @@ public interface HasMap extends HasJso {
    */
   void panToBounds(HasLatLngBounds bounds);
   
-  void setCenter(HasLatLng latLng);
+  void setCenter(LatLng latLng);
   
   void setMapTypeId(String mapTypeId);
   

@@ -93,7 +93,7 @@ public interface HasInfoWindow extends HasJso {
   
   public String getContent();
   
-  public HasLatLng getPosition();
+  public LatLng getPosition();
   
   public int getZIndex();
   
@@ -101,7 +101,7 @@ public interface HasInfoWindow extends HasJso {
   
   public void setOptions(HasInfoWindowOptions options);
   
-  public void setPosition(HasLatLng position);
+  public void setPosition(LatLng position);
   
   public void setZIndex(int zIndex);
   

@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.directions;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 
 /**
  * A DirectionsWaypoint represents a location between origin and destination
@@ -27,7 +27,7 @@ public interface HasDirectionsWaypoint extends HasJso {
 
   public String getLocationString();
 
-  public HasLatLng getLocationLatLng();
+  public LatLng getLocationLatLng();
 
   /**
    * Waypoint location. Can be an address string or LatLng. Optional.
@@ -37,7 +37,7 @@ public interface HasDirectionsWaypoint extends HasJso {
   /**
    * Waypoint location. Can be an address string or LatLng. Optional.
    */
-  public void setLocation(HasLatLng point);
+  public void setLocation(LatLng point);
 
   public boolean isStopover();
 

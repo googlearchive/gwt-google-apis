@@ -19,7 +19,6 @@ import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.LatLngBounds;
@@ -50,7 +49,7 @@ public class PolygonSimpleView extends Composite implements Display {
   }
 
   final private static int ZOOM = 8;
-  final private static LatLng CENTER = new LatLng(-25.363882,131.044922);
+  final private static LatLng CENTER = LatLng.construct(-25.363882,131.044922);
   final private static String MAP_TYPE = new MapTypeId().getRoadmap();
   
   final private MapWidget mapWidget;
@@ -77,13 +76,13 @@ public class PolygonSimpleView extends Composite implements Display {
   }
 
   @Override
-  public HasLatLngBounds createBounds(HasLatLng southWest, HasLatLng northEast) {
+  public HasLatLngBounds createBounds(LatLng southWest, LatLng northEast) {
     return new LatLngBounds(southWest, northEast);
   }
 
   @Override
-  public HasLatLng createLatLng(double lat, double lng) {
-    return new LatLng(lat, lng);
+  public LatLng createLatLng(double lat, double lng) {
+    return LatLng.construct(lat, lng);
   }
 
   /* (non-Javadoc)

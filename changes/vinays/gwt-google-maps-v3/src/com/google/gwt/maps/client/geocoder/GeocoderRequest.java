@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client.geocoder;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.LatLngBounds;
@@ -54,8 +53,8 @@ public class GeocoderRequest implements HasGeocoderRequest {
   }
 
   @Override
-  public HasLatLng getLatLng() {
-    return new LatLng(GeocoderRequestImpl.impl.getLatLng(jso));
+  public LatLng getLatLng() {
+    return (LatLng) GeocoderRequestImpl.impl.getLatLng(jso);
   }
 
   @Override
@@ -79,8 +78,8 @@ public class GeocoderRequest implements HasGeocoderRequest {
   }
 
   @Override
-  public void setLatLng(HasLatLng latLng) {
-    GeocoderRequestImpl.impl.setLatLng(jso, latLng.getJso());
+  public void setLatLng(LatLng latLng) {
+    GeocoderRequestImpl.impl.setLatLng(jso, latLng);
   }
 
   @Override

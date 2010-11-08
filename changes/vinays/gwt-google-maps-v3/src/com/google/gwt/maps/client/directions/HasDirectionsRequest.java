@@ -28,10 +28,10 @@
  */
 package com.google.gwt.maps.client.directions;
 
-import java.util.List;
-
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
+
+import java.util.List;
 
 /**
  * A directions query to be sent to the {@link DirectionsService}.
@@ -40,11 +40,11 @@ import com.google.gwt.maps.client.base.HasLatLng;
  */
 public interface HasDirectionsRequest extends HasJso {
 
-  public HasLatLng getDestinationLatLng();
+  public LatLng getDestinationLatLng();
 
   public String getDestinationString();
 
-  public HasLatLng getOriginLatLng();
+  public LatLng getOriginLatLng();
 
   public String getOriginString();
 
@@ -62,7 +62,7 @@ public interface HasDirectionsRequest extends HasJso {
    * Location of destination. This can be specified as either a LatLng to be
    * geocoded. Required.
    */
-  public void setDestinationLatLng(HasLatLng destination);
+  public void setDestinationLatLng(LatLng destination);
 
   /**
    * Location of destination. This can be specified as either a LatLng to be
@@ -74,7 +74,7 @@ public interface HasDirectionsRequest extends HasJso {
    * Location of origin. This can be specified as either a LatLng to be
    * geocoded. Required.
    */
-  public void setOriginLatLng(HasLatLng origin);
+  public void setOriginLatLng(LatLng origin);
 
   /**
    * Location of origin. This can be specified as either a string to be geocoded

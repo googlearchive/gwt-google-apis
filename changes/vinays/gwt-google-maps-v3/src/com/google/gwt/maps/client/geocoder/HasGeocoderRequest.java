@@ -15,8 +15,8 @@
 package com.google.gwt.maps.client.geocoder;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.base.LatLng;
 
 /**
  * The specification for a geocoding request to be sent to the {@link Geocoder}.
@@ -46,12 +46,12 @@ public interface HasGeocoderRequest extends HasJso {
    */
   public void setLanguage(String language);
   
-  public HasLatLng getLatLng();
+  public LatLng getLatLng();
   
   /**
    * LatLng about which to search. Optional.
    */
-  public void setLatLng(HasLatLng latLng);
+  public void setLatLng(LatLng latLng);
   
   public String getRegion();
   

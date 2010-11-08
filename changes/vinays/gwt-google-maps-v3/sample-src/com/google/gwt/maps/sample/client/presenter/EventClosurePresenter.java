@@ -1,17 +1,17 @@
 package com.google.gwt.maps.sample.client.presenter;
 
-import java.util.ArrayList;
-
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.base.HasInfoWindow;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.event.EventCallback;
 import com.google.gwt.maps.client.overlay.HasMarker;
 import com.google.gwt.maps.sample.client.Constant;
 import com.google.gwt.maps.sample.client.view.SampleView;
+
+import java.util.ArrayList;
 
 /**
  * Adds five random markers on map with random infoWindows attached.
@@ -29,9 +29,9 @@ public class EventClosurePresenter implements Presenter<EventClosurePresenter.Di
   public static interface Display extends SampleView {
     HasMap getMap();
     void fitBounds(HasLatLngBounds bounds);
-    HasLatLng createLatLng(double lat, double lng);
-    HasLatLngBounds createBounds(HasLatLng southWest, HasLatLng northEast);
-    HasMarker createMarkerAt(HasLatLng position);
+    LatLng createLatLng(double lat, double lng);
+    HasLatLngBounds createBounds(LatLng southWest, LatLng northEast);
+    HasMarker createMarkerAt(LatLng position);
     HasInfoWindow createInfoWindow(String content);
     void addListener(HasJso instance, String eventName, EventCallback callback);
     void clearInstanceListeners(HasJso instance);
@@ -61,16 +61,16 @@ public class EventClosurePresenter implements Presenter<EventClosurePresenter.Di
   public void bind() {
     display.setPresenterLink(presenterLink);
     display.setViewLink(viewLink);
-    final HasLatLng southWest = display.createLatLng(-31.203405, 125.244141);
-    final HasLatLng northEast = display.createLatLng(-25.363882, 131.044922);
+    final LatLng southWest = display.createLatLng(-31.203405, 125.244141);
+    final LatLng northEast = display.createLatLng(-25.363882, 131.044922);
     display.fitBounds(display.createBounds(southWest, northEast));
     
-    final double lngSpan = northEast.getLongitude() - southWest.getLongitude();
-    final double latSpan = northEast.getLatitude() - southWest.getLatitude();
+    final double lngSpan = northEast.lng() - southWest.lng();
+    final double latSpan = northEast.lat() - southWest.lat();
     
     for (int i = 0; i < 5; ++i) {
-      final HasLatLng location = display.createLatLng(southWest.getLatitude() + (latSpan * Math.random()),
-          southWest.getLongitude() + (lngSpan * Math.random()));
+      final LatLng location = display.createLatLng(southWest.lat() + (latSpan * Math.random()),
+          southWest.lng() + (lngSpan * Math.random()));
       final HasMarker marker = display.createMarkerAt(location);
       markers.add(marker);
       int j = i + 1;

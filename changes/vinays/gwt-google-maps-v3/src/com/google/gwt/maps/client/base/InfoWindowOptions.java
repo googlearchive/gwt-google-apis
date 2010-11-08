@@ -50,8 +50,8 @@ public class InfoWindowOptions implements HasInfoWindowOptions {
   }
 
   @Override
-  public HasLatLng getPosition() {
-    return new LatLng(InfoWindowOptionsImpl.impl.getPosition(jso));
+  public LatLng getPosition() {
+    return (LatLng) InfoWindowOptionsImpl.impl.getPosition(jso);
   }
 
   @Override
@@ -85,8 +85,8 @@ public class InfoWindowOptions implements HasInfoWindowOptions {
   }
 
   @Override
-  public void setPosition(HasLatLng position) {
-    InfoWindowOptionsImpl.impl.setPosition(jso, position.getJso());
+  public void setPosition(LatLng position) {
+    InfoWindowOptionsImpl.impl.setPosition(jso, position);
   }
 
   @Override

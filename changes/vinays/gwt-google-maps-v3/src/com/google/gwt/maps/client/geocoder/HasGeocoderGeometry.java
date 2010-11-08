@@ -15,8 +15,8 @@
 package com.google.gwt.maps.client.geocoder;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.base.LatLng;
 
 /**
  * GeocoderGeometry information about this GeocoderResult.
@@ -65,7 +65,7 @@ public interface HasGeocoderGeometry extends HasJso {
   /**
    * The latitude/longitude coordinates of this result.
    */
-  public HasLatLng getLocation();
+  public LatLng getLocation();
   
   /**
    * The type of location returned in location.

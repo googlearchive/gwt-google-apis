@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.LatLngBounds;
@@ -67,8 +66,8 @@ public class Map extends MVCObject implements HasMap {
   }
 
   @Override
-  public HasLatLng getCenter() {
-    return new LatLng(MapImpl.impl.getCenter(jso));
+  public LatLng getCenter() {
+    return (LatLng) MapImpl.impl.getCenter(jso);
   }
 
   @Override
@@ -100,8 +99,8 @@ public class Map extends MVCObject implements HasMap {
   }
 
   @Override
-  public void panTo(HasLatLng latLng) {
-    MapImpl.impl.panTo(jso, latLng.getJso());
+  public void panTo(LatLng latLng) {
+    MapImpl.impl.panTo(jso, latLng);
   }
 
   @Override
@@ -110,8 +109,8 @@ public class Map extends MVCObject implements HasMap {
   }
 
   @Override
-  public void setCenter(HasLatLng latLng) {
-    MapImpl.impl.setCenter(jso, latLng.getJso());
+  public void setCenter(LatLng latLng) {
+    MapImpl.impl.setCenter(jso, latLng);
   }
 
   @Override

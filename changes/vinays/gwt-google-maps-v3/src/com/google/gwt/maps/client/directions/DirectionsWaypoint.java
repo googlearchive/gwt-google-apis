@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client.directions;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.directions.impl.DirectionsWaypointImpl;
 
@@ -37,8 +36,8 @@ public class DirectionsWaypoint implements HasDirectionsWaypoint {
   }
 
   @Override
-  public HasLatLng getLocationLatLng() {
-    return new LatLng(DirectionsWaypointImpl.impl.getLocationLatLng(jso));
+  public LatLng getLocationLatLng() {
+    return (LatLng) DirectionsWaypointImpl.impl.getLocationLatLng(jso);
   }
 
   @Override
@@ -57,8 +56,8 @@ public class DirectionsWaypoint implements HasDirectionsWaypoint {
   }
 
   @Override
-  public void setLocation(HasLatLng point) {
-    DirectionsWaypointImpl.impl.setLocationLatLng(jso, point.getJso());
+  public void setLocation(LatLng point) {
+    DirectionsWaypointImpl.impl.setLocationLatLng(jso, point);
   }
 
   @Override

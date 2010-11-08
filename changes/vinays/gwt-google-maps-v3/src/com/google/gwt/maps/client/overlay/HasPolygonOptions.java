@@ -14,11 +14,11 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import java.util.List;
-
 import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
+
+import java.util.List;
 
 /**
  * Polygon options.
@@ -33,7 +33,7 @@ public interface HasPolygonOptions extends HasJso {
 
   public HasMap getMap();
 
-  public List<List<HasLatLng>> getPaths();
+  public List<List<LatLng>> getPaths();
 
   public String getStrokeColor();
 
@@ -64,7 +64,7 @@ public interface HasPolygonOptions extends HasJso {
    * paths property may specify one or more arrays of LatLng coordinates. Simple
    * polygons may be defined using a single array of LatLngs.
    */
-  public void setPaths(List<List<HasLatLng>> paths);
+  public void setPaths(List<List<LatLng>> paths);
 
   /**
    * The stroke color in HTML hex style, ie. "#FFAA00".

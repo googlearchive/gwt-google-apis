@@ -14,105 +14,47 @@
  */
 package com.google.gwt.maps.client.base;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.impl.LatLngImpl;
 
 /**
  * This class implements {@link HasLatLng}.
  *
  * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
-public class LatLng implements HasLatLng {
-
-  final private LatLngImpl impl;
-  final private JavaScriptObject jso;
+public class LatLng extends JavaScriptObject {
+    
+  public static native LatLng construct(double lat, double lng) /*-{
+    return new $wnd.google.maps.LatLng(lat, lng);
+  }-*/;
   
-  public LatLng(final LatLngImpl impl, final JavaScriptObject jso) {
-    this.impl = impl;
-    this.jso = jso;
-  }
+  public static native LatLng construct(double lat, double lng, boolean noWrap) /*-{
+    return new $wnd.google.maps.LatLng(lat, lng, noWrap);
+  }-*/;
   
-  public LatLng(final JavaScriptObject jso) {
-    this.impl = GWT.create(LatLngImpl.class);
-    this.jso = jso;
-  }
+  protected LatLng() {}
   
-  public LatLng(final double lat, final double lng) {
-    impl = GWT.create(LatLngImpl.class);
-    jso = impl.construct(lat, lng);
-  }
+  public final native double lat() /*-{
+    return this.lat();
+  }-*/;
   
-  public LatLng(final double lat, final double lng, boolean noWrap) {
-    impl = GWT.create(LatLngImpl.class);
-    jso = impl.construct(lat, lng, noWrap);
-  }
+  public final native double lng() /*-{
+    return this.lng();
+  }-*/;
   
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLng#getLatitude()
-   */
-  @Override
-  public double getLatitude() {
-    return impl.lat(jso);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLng#getLongitude()
-   */
-  @Override
-  public double getLongitude() {
-    return impl.lng(jso);
-  }
+  public final native String getString() /*-{
+    return this.toString();
+  }-*/;
   
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    return impl.toString(jso);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLng#toUrlValue()
-   */
-  @Override
-  public String toUrlValue() {
-    return impl.toUrlValue(jso);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLng#toUrlValue(int)
-   */
-  @Override
-  public String toUrlValue(int precision) {
-    return impl.toUrlValue(jso, precision);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLng#equalsTo(com.google.gwt.maps.client.base.HasLatLng)
-   */
-  @Override
-  public boolean equalsTo(HasLatLng other) {
-    return impl.equals(jso, other.getJso());
-  }
+  public final native String toUrlValue() /*-{
+    return this.toUrlValue();
+  }-*/;
   
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object other) {
-    if (other == null || !(other instanceof LatLng)) {
-      return false;
-    }
-    return equalsTo((HasLatLng) other);
-  }
+  public final native String toUrlValue(int precision) /*-{
+    return this.toUrlValue(precision);
+  }-*/;
   
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLng#getJso()
-   */
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
+  public final native boolean equalsTo(LatLng other) /*-{
+    this.equals(other);
+  }-*/;
 
 }

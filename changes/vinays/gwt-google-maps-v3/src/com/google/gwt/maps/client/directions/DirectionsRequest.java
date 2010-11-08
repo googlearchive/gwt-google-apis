@@ -14,14 +14,13 @@
  */
 package com.google.gwt.maps.client.directions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.directions.impl.DirectionsRequestImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class implements {@link HasDirectionsRequest}.
@@ -37,8 +36,8 @@ public class DirectionsRequest implements HasDirectionsRequest {
   }
 
   @Override
-  public HasLatLng getDestinationLatLng() {
-    return new LatLng(DirectionsRequestImpl.impl.getDestinationLatLng(jso));
+  public LatLng getDestinationLatLng() {
+    return (LatLng) DirectionsRequestImpl.impl.getDestinationLatLng(jso);
   }
 
   @Override
@@ -47,8 +46,8 @@ public class DirectionsRequest implements HasDirectionsRequest {
   }
 
   @Override
-  public HasLatLng getOriginLatLng() {
-    return new LatLng(DirectionsRequestImpl.impl.getOriginLatLng(jso));
+  public LatLng getOriginLatLng() {
+    return (LatLng) DirectionsRequestImpl.impl.getOriginLatLng(jso);
   }
 
   @Override
@@ -87,8 +86,8 @@ public class DirectionsRequest implements HasDirectionsRequest {
   }
 
   @Override
-  public void setDestinationLatLng(HasLatLng destination) {
-    DirectionsRequestImpl.impl.setDestinationLatLng(jso, destination.getJso());
+  public void setDestinationLatLng(LatLng destination) {
+    DirectionsRequestImpl.impl.setDestinationLatLng(jso, destination);
   }
 
   @Override
@@ -97,8 +96,8 @@ public class DirectionsRequest implements HasDirectionsRequest {
   }
 
   @Override
-  public void setOriginLatLng(HasLatLng origin) {
-    DirectionsRequestImpl.impl.setOriginLatLng(jso, origin.getJso());
+  public void setOriginLatLng(LatLng origin) {
+    DirectionsRequestImpl.impl.setOriginLatLng(jso, origin);
   }
 
   @Override

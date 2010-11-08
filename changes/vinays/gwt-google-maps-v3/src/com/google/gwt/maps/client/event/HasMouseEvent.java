@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.event;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 
 /**
  * This object is returned from various mouse events on the map and overlays,
@@ -28,6 +28,6 @@ public interface HasMouseEvent extends HasJso {
   /**
    * The latitude/longitude that was below the cursor when the event occurred.
    */
-  public HasLatLng getLatLng();
+  public LatLng getLatLng();
   
 }

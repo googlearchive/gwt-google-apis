@@ -59,13 +59,13 @@ public interface HasInfoWindowOptions extends HasJso {
    */
   public void setPixelOffset(HasSize size);
   
-  public HasLatLng getPosition();
+  public LatLng getPosition();
   
   /**
    * The LatLng at which to display this InfoWindow. If the InfoWindow is opened
    * with an anchor, the anchor's position will be used instead.
    */
-  public void setPosition(HasLatLng position);
+  public void setPosition(LatLng position);
   
   public int getZIndex();
   

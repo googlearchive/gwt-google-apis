@@ -27,7 +27,7 @@ public interface HasLatLngBounds {
   /**
    * Returns true if the given lat/lng is in this bounds.
    */
-  public boolean contains(HasLatLng point);
+  public boolean contains(LatLng point);
   
   /**
    * Returns true if this bounds approximately equals the given bounds.
@@ -37,22 +37,22 @@ public interface HasLatLngBounds {
   /**
    * Extends this bounds to contain the given point.
    */
-  public HasLatLngBounds extend(HasLatLng point);
+  public HasLatLngBounds extend(LatLng point);
   
   /**
    * Computes the center of this LatLngBounds
    */
-  public HasLatLng getCenter();
+  public LatLng getCenter();
   
   /**
    * Returns the north-east corner of this bounds.
    */
-  public HasLatLng getNorthEast();
+  public LatLng getNorthEast();
   
   /**
    * Returns the south-west corner of this bounds.
    */
-  public HasLatLng getSouthWest();
+  public LatLng getSouthWest();
   
   /**
    * Returns true if this bounds shares any points with this bounds.
@@ -67,7 +67,7 @@ public interface HasLatLngBounds {
   /**
    * Converts the given map bounds to a lat/lng span.
    */
-  public HasLatLng toSpan();
+  public LatLng toSpan();
   
   /**
    * Converts to string.

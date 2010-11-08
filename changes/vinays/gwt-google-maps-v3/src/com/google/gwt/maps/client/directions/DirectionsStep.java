@@ -14,13 +14,12 @@
  */
 package com.google.gwt.maps.client.directions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.directions.impl.DirectionsStepImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DirectionsStep implements HasDirectionsStep {
 
@@ -41,8 +40,8 @@ public class DirectionsStep implements HasDirectionsStep {
   }
 
   @Override
-  public HasLatLng getEndPoint() {
-    return new LatLng(DirectionsStepImpl.impl.getEndPoint(jso));
+  public LatLng getEndPoint() {
+    return (LatLng) DirectionsStepImpl.impl.getEndPoint(jso);
   }
 
   @Override
@@ -51,17 +50,17 @@ public class DirectionsStep implements HasDirectionsStep {
   }
 
   @Override
-  public List<HasLatLng> getPath() {
-    List<HasLatLng> latLngs = new ArrayList<HasLatLng>();
+  public List<LatLng> getPath() {
+    List<LatLng> latLngs = new ArrayList<LatLng>();
     for (JavaScriptObject js : DirectionsStepImpl.impl.getPath(jso)) {
-      latLngs.add(new LatLng(js));
+      latLngs.add((LatLng) js);
     }
     return latLngs;
   }
 
   @Override
-  public HasLatLng getStartPoint() {
-    return new LatLng(DirectionsStepImpl.impl.getStartPoint(jso));
+  public LatLng getStartPoint() {
+    return (LatLng) DirectionsStepImpl.impl.getStartPoint(jso);
   }
 
   @Override

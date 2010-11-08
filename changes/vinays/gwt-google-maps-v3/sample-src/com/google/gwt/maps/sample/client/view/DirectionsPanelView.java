@@ -54,7 +54,7 @@ public class DirectionsPanelView extends Composite implements Display {
   }
   
   final private static int ZOOM = 8;
-  final private static LatLng CENTER = new LatLng(41.850033, -87.6500523);
+  final private static LatLng CENTER = LatLng.construct(41.850033, -87.6500523);
   final private static String MAP_TYPE = new MapTypeId().getRoadmap();
 
   @UiField

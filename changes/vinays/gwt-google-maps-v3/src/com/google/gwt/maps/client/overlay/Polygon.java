@@ -14,17 +14,16 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.MVCObject;
 import com.google.gwt.maps.client.overlay.impl.PolygonImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class implements {@link HasPolygon}.
@@ -60,11 +59,11 @@ public class Polygon extends MVCObject implements HasPolygon {
    * @see com.google.gwt.maps.client.overlay.HasPolygon#getPath()
    */
   @Override
-  public List<HasLatLng> getPath() {
-    final ArrayList<HasLatLng> path = new ArrayList<HasLatLng>();
+  public List<LatLng> getPath() {
+    final ArrayList<LatLng> path = new ArrayList<LatLng>();
     final JsArray<JavaScriptObject> jsPath = PolygonImpl.impl.getPath(jso);
     for (int i = 0; i < jsPath.length(); ++i) {
-      path.add(new LatLng(jsPath.get(i)));
+      path.add((LatLng) jsPath.get(i));
     }
     return path;
   }
@@ -73,14 +72,14 @@ public class Polygon extends MVCObject implements HasPolygon {
    * @see com.google.gwt.maps.client.overlay.HasPolygon#getPaths()
    */
   @Override
-  public List<List<HasLatLng>> getPaths() {
+  public List<List<LatLng>> getPaths() {
     final JsArray<JsArray<JavaScriptObject>> jsPaths = PolygonImpl.impl.getPaths(jso);
-    final ArrayList<List<HasLatLng>> paths = new ArrayList<List<HasLatLng>>();
+    final ArrayList<List<LatLng>> paths = new ArrayList<List<LatLng>>();
     for (int i = 0; i < jsPaths.length(); ++i) {
       JsArray<JavaScriptObject> jsPath = jsPaths.get(i);
-      ArrayList<HasLatLng> path = new ArrayList<HasLatLng>();
+      ArrayList<LatLng> path = new ArrayList<LatLng>();
       for (int j = 0; j < jsPath.length(); ++j) {
-        path.add(new LatLng(jsPaths.get(i)));
+        path.add((LatLng) jsPath.get(i));
       }
       paths.add(path);
     }
@@ -108,10 +107,10 @@ public class Polygon extends MVCObject implements HasPolygon {
    */
   @SuppressWarnings("unchecked")
   @Override
-  public void setPath(List<HasLatLng> path) {
+  public void setPath(List<LatLng> path) {
     JsArray<JavaScriptObject> jsPath = (JsArray<JavaScriptObject>) JavaScriptObject.createArray();
-    for (HasLatLng point : path) {
-      jsPath.push(point.getJso());
+    for (LatLng point : path) {
+      jsPath.push(point);
     }
     PolygonImpl.impl.setPath(jso, jsPath);
   }
@@ -121,14 +120,14 @@ public class Polygon extends MVCObject implements HasPolygon {
    */
   @SuppressWarnings("unchecked")
   @Override
-  public void setPaths(List<List<HasLatLng>> paths) {
+  public void setPaths(List<List<LatLng>> paths) {
     final JsArray<JsArray<JavaScriptObject>> jsPaths
         = (JsArray<JsArray<JavaScriptObject>>) JavaScriptObject.createArray();
-    for (List<HasLatLng> path : paths) {
+    for (List<LatLng> path : paths) {
       final JsArray<JavaScriptObject> jsPath
           = (JsArray<JavaScriptObject>) JavaScriptObject.createArray();
-      for (HasLatLng point : path) {
-        jsPath.push(point.getJso());
+      for (LatLng point : path) {
+        jsPath.push(point);
       }
       jsPaths.push(jsPath);
     }

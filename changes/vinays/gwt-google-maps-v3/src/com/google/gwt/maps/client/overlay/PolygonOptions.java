@@ -14,15 +14,14 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.overlay.impl.PolygonOptionsImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class implements {@link HasPolygonOptions}.
@@ -66,14 +65,14 @@ public class PolygonOptions implements HasPolygonOptions {
    * @see com.google.gwt.maps.client.overlay.HasPolygonOptions#getPaths()
    */
   @Override
-  public List<List<HasLatLng>> getPaths() {
+  public List<List<LatLng>> getPaths() {
     final JsArray<JsArray<JavaScriptObject>> jsPaths = PolygonOptionsImpl.impl.getPaths(jso);
-    final ArrayList<List<HasLatLng>> paths = new ArrayList<List<HasLatLng>>();
+    final ArrayList<List<LatLng>> paths = new ArrayList<List<LatLng>>();
     for (int i = 0; i < jsPaths.length(); ++i) {
       JsArray<JavaScriptObject> jsPath = jsPaths.get(i);
-      ArrayList<HasLatLng> path = new ArrayList<HasLatLng>();
+      ArrayList<LatLng> path = new ArrayList<LatLng>();
       for (int j = 0; j < jsPath.length(); ++j) {
-        path.add(new LatLng(jsPaths.get(i)));
+        path.add((LatLng) jsPath.get(i));
       }
       paths.add(path);
     }
@@ -141,14 +140,14 @@ public class PolygonOptions implements HasPolygonOptions {
    */
   @SuppressWarnings("unchecked")
   @Override
-  public void setPaths(List<List<HasLatLng>> paths) {
+  public void setPaths(List<List<LatLng>> paths) {
     final JsArray<JsArray<JavaScriptObject>> jsPaths
         = (JsArray<JsArray<JavaScriptObject>>) JavaScriptObject.createArray();
-    for (List<HasLatLng> path : paths) {
+    for (List<LatLng> path : paths) {
       final JsArray<JavaScriptObject> jsPath
           = (JsArray<JavaScriptObject>) JavaScriptObject.createArray();
-      for (HasLatLng point : path) {
-        jsPath.push(point.getJso());
+      for (LatLng point : path) {
+        jsPath.push(point);
       }
       jsPaths.push(jsPath);
     }

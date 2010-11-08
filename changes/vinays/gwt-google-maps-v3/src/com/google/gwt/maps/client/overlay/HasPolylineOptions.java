@@ -14,10 +14,10 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import java.util.List;
-
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
+
+import java.util.List;
 
 /**
  * 
@@ -29,7 +29,7 @@ public interface HasPolylineOptions extends HasJso {
   /**
    * 
    */
-  List<HasLatLng> getPath();
+  List<LatLng> getPath();
 
   String getStrokeColor();
 
@@ -44,7 +44,7 @@ public interface HasPolylineOptions extends HasJso {
    * MVCArray Inserting or removing LatLngs in the MVCArray will automatically
    * update the polyline on the map.
    */
-  void setPath(List<HasLatLng> path);
+  void setPath(List<LatLng> path);
 
   /**
    * The stroke color in HTML hex style, ie. "#FFAA00".

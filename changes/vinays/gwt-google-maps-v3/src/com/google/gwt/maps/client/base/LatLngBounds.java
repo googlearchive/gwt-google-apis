@@ -44,17 +44,17 @@ public class LatLngBounds implements HasLatLngBounds {
     jso = impl.construct();
   }
 
-  public LatLngBounds(final HasLatLng sw, final HasLatLng ne) {
+  public LatLngBounds(final LatLng sw, final LatLng ne) {
     impl = GWT.create(LatLngBoundsImpl.class);
-    jso = impl.construct(sw.getJso(), ne.getJso());
+    jso = impl.construct(sw, ne);
   }
   
   /* (non-Javadoc)
    * @see com.google.gwt.maps.client.base.HasLatLngBounds#contains(com.google.gwt.maps.client.base.HasLatLng)
    */
   @Override
-  public boolean contains(HasLatLng point) {
-    return impl.contains(jso, point.getJso());
+  public boolean contains(LatLng point) {
+    return impl.contains(jso, point);
   }
 
   /* (non-Javadoc)
@@ -80,32 +80,32 @@ public class LatLngBounds implements HasLatLngBounds {
    * @see com.google.gwt.maps.client.base.HasLatLngBounds#extend(com.google.gwt.maps.client.base.HasLatLng)
    */
   @Override
-  public HasLatLngBounds extend(HasLatLng point) {
-    return new LatLngBounds(impl, impl.extend(jso, point.getJso()));
+  public HasLatLngBounds extend(LatLng point) {
+    return new LatLngBounds(impl, impl.extend(jso, point));
   }
 
   /* (non-Javadoc)
    * @see com.google.gwt.maps.client.base.HasLatLngBounds#getCenter()
    */
   @Override
-  public HasLatLng getCenter() {
-    return new LatLng(impl.getCenter(jso));
+  public LatLng getCenter() {
+    return (LatLng) impl.getCenter(jso);
   }
 
   /* (non-Javadoc)
    * @see com.google.gwt.maps.client.base.HasLatLngBounds#getNorthEast()
    */
   @Override
-  public HasLatLng getNorthEast() {
-    return new LatLng(impl.getNorthEast(jso));
+  public LatLng getNorthEast() {
+    return (LatLng) impl.getNorthEast(jso);
   }
 
   /* (non-Javadoc)
    * @see com.google.gwt.maps.client.base.HasLatLngBounds#getSouthWest()
    */
   @Override
-  public HasLatLng getSouthWest() {
-    return new LatLng(impl.getSouthWest(jso));
+  public LatLng getSouthWest() {
+    return (LatLng) impl.getSouthWest(jso);
   }
 
   /* (non-Javadoc)
@@ -128,8 +128,8 @@ public class LatLngBounds implements HasLatLngBounds {
    * @see com.google.gwt.maps.client.base.HasLatLngBounds#toSpan()
    */
   @Override
-  public HasLatLng toSpan() {
-    return new LatLng(impl.toSpan(jso));
+  public LatLng toSpan() {
+    return (LatLng) impl.toSpan(jso);
   }
   
   /* (non-Javadoc)

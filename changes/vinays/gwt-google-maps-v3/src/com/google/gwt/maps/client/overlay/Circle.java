@@ -16,7 +16,6 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.MVCObject;
 import com.google.gwt.maps.client.overlay.impl.CircleImpl;
@@ -38,8 +37,8 @@ public class Circle extends MVCObject implements HasCircle {
   }
 
   @Override
-  public HasLatLng getCenter() {
-    return new LatLng(CircleImpl.impl.getCenter(jso));
+  public LatLng getCenter() {
+    return (LatLng) CircleImpl.impl.getCenter(jso);
   }
 
   @Override
@@ -59,8 +58,8 @@ public class Circle extends MVCObject implements HasCircle {
   }
 
   @Override
-  public void setCenter(HasLatLng center) {
-    CircleImpl.impl.setCenter(jso, center.getJso());
+  public void setCenter(LatLng center) {
+    CircleImpl.impl.setCenter(jso, center);
   }
 
   @Override

@@ -14,10 +14,10 @@
  */
 package com.google.gwt.maps.client.directions;
 
-import java.util.List;
-
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
+
+import java.util.List;
 
 /**
  * A single DirectionsStep in a DirectionsResult. Some fields may be undefined.
@@ -41,7 +41,7 @@ public interface HasDirectionsStep extends HasJso {
   /**
    * The ending point of this step.
    */
-  public HasLatLng getEndPoint();
+  public LatLng getEndPoint();
   
   /**
    * Instructions for this step.
@@ -51,11 +51,11 @@ public interface HasDirectionsStep extends HasJso {
   /**
    * A sequence of LatLngs describing the course of this step.
    */
-  public List<HasLatLng> getPath();
+  public List<LatLng> getPath();
   
   /**
    * The starting point of this step.
    */
-  public HasLatLng getStartPoint();
+  public LatLng getStartPoint();
   
 }

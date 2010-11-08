@@ -15,8 +15,8 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.event.Event;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -58,7 +58,7 @@ public class MapWidget extends Widget {
   protected void onLoad() {
     super.onLoad();
     // Resize the map and retain the center.
-    HasLatLng center = map.getCenter();
+    LatLng center = map.getCenter();
     Event.trigger(map, "resize");
     map.setCenter(center);
   }

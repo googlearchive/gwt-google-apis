@@ -16,7 +16,7 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 
 /**
  * 
@@ -67,12 +67,12 @@ public interface HasMarkerOptions extends HasJso {
    */
   void setMap(HasMap map);
 
-  HasLatLng getPosition();
+  LatLng getPosition();
 
   /**
    * Marker position. Required.
    */
-  void setPosition(HasLatLng position);
+  void setPosition(LatLng position);
 
   String getTitle();
 

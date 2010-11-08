@@ -14,7 +14,7 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 
 /**
  * Getters and setters for MapOptions.
@@ -32,12 +32,12 @@ public interface HasMapOptions extends HasJso {
    */
   void setBackgroundColor(String backgroundColor);
 
-  HasLatLng getCenter();
+  LatLng getCenter();
 
   /**
    * The initial Map center. Required.
    */
-  void setCenter(HasLatLng center);
+  void setCenter(LatLng center);
 
   boolean isDisableDefaultUI();
 

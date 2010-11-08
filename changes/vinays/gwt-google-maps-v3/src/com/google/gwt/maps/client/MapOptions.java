@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.impl.ControlPositionImpl;
 import com.google.gwt.maps.client.impl.MapOptionsImpl;
@@ -46,8 +45,8 @@ public class MapOptions implements HasMapOptions {
   }
 
   @Override
-  public HasLatLng getCenter() {
-    return new LatLng(MapOptionsImpl.impl.getCenter(jso));
+  public LatLng getCenter() {
+    return (LatLng) MapOptionsImpl.impl.getCenter(jso);
   }
 
   @Override
@@ -139,8 +138,8 @@ public class MapOptions implements HasMapOptions {
   }
 
   @Override
-  public void setCenter(HasLatLng center) {
-    MapOptionsImpl.impl.setCenter(jso, center.getJso());
+  public void setCenter(LatLng center) {
+    MapOptionsImpl.impl.setCenter(jso, center);
   }
 
   @Override

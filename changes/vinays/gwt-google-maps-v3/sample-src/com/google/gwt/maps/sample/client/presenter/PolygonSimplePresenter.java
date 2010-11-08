@@ -14,16 +14,16 @@
  */
 package com.google.gwt.maps.sample.client.presenter;
 
-import java.util.ArrayList;
-
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.overlay.HasPolygon;
 import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.sample.client.Constant;
 import com.google.gwt.maps.sample.client.view.SampleView;
+
+import java.util.ArrayList;
 
 /**
  * Sample polygon simple presenter.
@@ -44,14 +44,14 @@ public class PolygonSimplePresenter implements Presenter<PolygonSimplePresenter.
      * 
      * new LatLng(lat, lng);
      */
-    HasLatLng createLatLng(double lat, double lng);
+    LatLng createLatLng(double lat, double lng);
     
     /**
      * Create LatLngBounds.
      * 
      * new LatLngBounds(southWest, northEast);
      */
-    HasLatLngBounds createBounds(HasLatLng southWest, HasLatLng northEast);
+    HasLatLngBounds createBounds(LatLng southWest, LatLng northEast);
 
     /**
      * Create Polygon.
@@ -100,14 +100,14 @@ public class PolygonSimplePresenter implements Presenter<PolygonSimplePresenter.
     display.setViewLink(viewLink);
     
     // Create bounds and fit map to it.
-    final HasLatLng southWest = display.createLatLng(points[2][0], points[2][1]);
-    final HasLatLng northEast = display.createLatLng(points[0][0], points[0][1]);
+    final LatLng southWest = display.createLatLng(points[2][0], points[2][1]);
+    final LatLng northEast = display.createLatLng(points[0][0], points[0][1]);
     final HasLatLngBounds bounds = display.createBounds(southWest, northEast);
     display.fitBounds(bounds);
     
     // Create polygon with given LatLngs(points).
     final Polygon polygon = new Polygon();
-    final ArrayList<HasLatLng> path = new ArrayList<HasLatLng>();
+    final ArrayList<LatLng> path = new ArrayList<LatLng>();
     for (int i = 0; i < points.length; ++i) {
       path.add(display.createLatLng(points[i][0], points[i][1]));
     }

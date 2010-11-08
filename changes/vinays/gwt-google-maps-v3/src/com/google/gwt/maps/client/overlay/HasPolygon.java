@@ -14,12 +14,12 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import java.util.List;
-
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.HasMVCObject;
 import com.google.gwt.maps.client.mvc.MVCObject;
+
+import java.util.List;
 
 /**
  * A polygon (like a polyline) defines a series of connected coordinates in an
@@ -40,12 +40,12 @@ public interface HasPolygon extends HasMVCObject {
   /**
    * Retrieves the first path.
    */
-  List<HasLatLng> getPath();
+  List<LatLng> getPath();
   
   /**
    * Retrieves the paths for this Polygon.
    */
-  List<List<HasLatLng>> getPaths();
+  List<List<LatLng>> getPaths();
 
   /**
    * Renders this Polyline or Polygon on the specified map. If map is set to
@@ -58,11 +58,11 @@ public interface HasPolygon extends HasMVCObject {
   /**
    * Sets the first path. See Polyline options for more details.
    */
-  void setPath(List<HasLatLng> path);
+  void setPath(List<LatLng> path);
   
   /**
    * Sets the path for this Polygon.
    */
-  void setPaths(List<List<HasLatLng>> paths);
+  void setPaths(List<List<LatLng>> paths);
   
 }

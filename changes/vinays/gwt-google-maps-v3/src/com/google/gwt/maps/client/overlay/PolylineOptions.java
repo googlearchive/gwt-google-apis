@@ -14,14 +14,13 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.overlay.impl.PolylineOptionsImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class implements {@link HasPolylineOptions}.
@@ -41,11 +40,11 @@ public class PolylineOptions implements HasPolylineOptions {
   }
   
   @Override
-  public List<HasLatLng> getPath() {
-    List<HasLatLng> path = new ArrayList<HasLatLng>();
+  public List<LatLng> getPath() {
+    List<LatLng> path = new ArrayList<LatLng>();
     JsArray<JavaScriptObject> pathJsArr = PolylineOptionsImpl.impl.getPath(jso);
     for (int i = 0; i < pathJsArr.length(); ++i) {
-      path.add(new LatLng(pathJsArr.get(i)));
+      path.add((LatLng) pathJsArr.get(i));
     }
     return path;
   }
@@ -67,11 +66,11 @@ public class PolylineOptions implements HasPolylineOptions {
 
   @SuppressWarnings("unchecked")
   @Override
-  public void setPath(List<HasLatLng> path) {
+  public void setPath(List<LatLng> path) {
     JsArray<JavaScriptObject> pathJsArr
         = (JsArray<JavaScriptObject>) JavaScriptObject.createArray();
-    for (HasLatLng latLng : path) {
-      pathJsArr.push(latLng.getJso());
+    for (LatLng latLng : path) {
+      pathJsArr.push(latLng);
     }
     PolylineOptionsImpl.impl.setPath(jso, pathJsArr);
   }

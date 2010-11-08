@@ -17,7 +17,6 @@ package com.google.gwt.maps.client.overlay;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.MVCObject;
 import com.google.gwt.maps.client.overlay.impl.MarkerImpl;
@@ -64,8 +63,8 @@ public class Marker extends MVCObject implements HasMarker {
   }
 
   @Override
-  public HasLatLng getPosition() {
-    return new LatLng(MarkerImpl.impl.getPosition(jso));
+  public LatLng getPosition() {
+    return (LatLng) MarkerImpl.impl.getPosition(jso);
   }
 
   @Override
@@ -124,8 +123,8 @@ public class Marker extends MVCObject implements HasMarker {
   }
 
   @Override
-  public void setPosition(HasLatLng position) {
-    MarkerImpl.impl.setPosition(jso, position.getJso());
+  public void setPosition(LatLng position) {
+    MarkerImpl.impl.setPosition(jso, position);
   }
 
   @Override

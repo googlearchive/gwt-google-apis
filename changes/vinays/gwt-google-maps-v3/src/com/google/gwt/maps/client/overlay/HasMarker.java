@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.HasMVCObject;
 
 /**
@@ -73,9 +73,9 @@ public interface HasMarker extends HasMVCObject {
    */
   void setMap(HasMap map);
 
-  HasLatLng getPosition();
+  LatLng getPosition();
 
-  void setPosition(HasLatLng position);
+  void setPosition(LatLng position);
 
   String getTitle();
 

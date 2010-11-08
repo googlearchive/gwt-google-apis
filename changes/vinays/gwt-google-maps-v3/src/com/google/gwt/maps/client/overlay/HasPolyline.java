@@ -14,11 +14,11 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import java.util.List;
-
 import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
+
+import java.util.List;
 
 /**
  * A polyline is a linear overlay of connected line segments on the map. This
@@ -36,7 +36,7 @@ public interface HasPolyline extends HasJso {
   /**
    * Retrieves the first path.
    */
-  List<HasLatLng> getPath();
+  List<LatLng> getPath();
 
   /**
    * Renders this Polyline or Polygon on the specified map. If map is set to
@@ -49,6 +49,6 @@ public interface HasPolyline extends HasJso {
   /**
    * Sets the first path. See {@link PolylineOptions} for more details.
    */
-  void setPath(List<HasLatLng> path);
+  void setPath(List<LatLng> path);
   
 }

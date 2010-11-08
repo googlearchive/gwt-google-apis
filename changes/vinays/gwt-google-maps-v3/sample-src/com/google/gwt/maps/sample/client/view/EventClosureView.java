@@ -21,7 +21,6 @@ import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.HasInfoWindow;
-import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.InfoWindow;
 import com.google.gwt.maps.client.base.LatLng;
@@ -54,7 +53,7 @@ public class EventClosureView extends Composite implements Display {
   }
 
   final private static int ZOOM = 8;
-  final private static LatLng CENTER = new LatLng(-25.363882,131.044922);
+  final private static LatLng CENTER = LatLng.construct(-25.363882,131.044922);
   final private static String MAP_TYPE = new MapTypeId().getRoadmap();
   
   final private MapWidget mapWidget;
@@ -92,7 +91,7 @@ public class EventClosureView extends Composite implements Display {
   }
 
   @Override
-  public HasLatLngBounds createBounds(HasLatLng southWest, HasLatLng northEast) {
+  public HasLatLngBounds createBounds(LatLng southWest, LatLng northEast) {
     return new LatLngBounds(southWest, northEast);
   }
 
@@ -104,12 +103,12 @@ public class EventClosureView extends Composite implements Display {
   }
 
   @Override
-  public HasLatLng createLatLng(double lat, double lng) {
-    return new LatLng(lat, lng);
+  public LatLng createLatLng(double lat, double lng) {
+    return LatLng.construct(lat, lng);
   }
 
   @Override
-  public HasMarker createMarkerAt(HasLatLng position) {
+  public HasMarker createMarkerAt(LatLng position) {
     final Marker marker = new Marker();
     marker.setMap(getMap());
     marker.setPosition(position);

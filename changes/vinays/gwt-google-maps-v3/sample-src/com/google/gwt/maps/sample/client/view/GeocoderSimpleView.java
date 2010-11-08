@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class GeocoderSimpleView extends Composite implements Display {
   
   final private static int ZOOM = 8;
-  final private static LatLng CENTER = new LatLng(-34.397, 150.644);
+  final private static LatLng CENTER = LatLng.construct(-34.397, 150.644);
   final private static String MAP_TYPE = new MapTypeId().getRoadmap();
   final private static String INIT_GEOCODE_ADDR = "Sydney, NSW";
 

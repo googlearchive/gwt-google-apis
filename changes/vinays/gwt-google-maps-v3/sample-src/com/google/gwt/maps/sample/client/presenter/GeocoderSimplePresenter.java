@@ -14,14 +14,12 @@
  */
 package com.google.gwt.maps.sample.client.presenter;
 
-import java.util.List;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLng;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.geocoder.GeocoderCallback;
 import com.google.gwt.maps.client.geocoder.HasGeocoder;
 import com.google.gwt.maps.client.geocoder.HasGeocoderRequest;
@@ -30,6 +28,8 @@ import com.google.gwt.maps.client.overlay.HasMarker;
 import com.google.gwt.maps.sample.client.Constant;
 import com.google.gwt.maps.sample.client.view.SampleView;
 import com.google.gwt.user.client.Window;
+
+import java.util.List;
 
 /**
  * Sample geocoder simple presenter.
@@ -113,7 +113,7 @@ public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresente
           public void callback(List<HasGeocoderResult> responses, String status) {
             if (status.equals("OK")) {
               final HasGeocoderResult gResult = responses.get(0);
-              final HasLatLng gLatLng = gResult.getGeometry().getLocation();
+              final LatLng gLatLng = gResult.getGeometry().getLocation();
               // Add marker at the geocoder location.
               final HasMarker marker = display.createMarker();
               marker.setPosition(gLatLng);
