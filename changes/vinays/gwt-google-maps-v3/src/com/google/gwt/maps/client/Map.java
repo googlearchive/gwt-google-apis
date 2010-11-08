@@ -66,7 +66,7 @@ public class Map extends MVCObject implements HasMap {
 
   @Override
   public LatLng getCenter() {
-    return (LatLng) MapImpl.impl.getCenter(jso);
+    return MapImpl.impl.getCenter(jso).cast();
   }
 
   @Override

@@ -53,7 +53,7 @@ public class MarkerOptions implements HasMarkerOptions {
 
   @Override
   public LatLng getPosition() {
-    return (LatLng) MarkerOptionsImpl.impl.getPosition(jso);
+    return MarkerOptionsImpl.impl.getPosition(jso).cast();
   }
 
   @Override

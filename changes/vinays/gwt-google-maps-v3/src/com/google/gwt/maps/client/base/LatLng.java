@@ -22,21 +22,21 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class LatLng extends JavaScriptObject {
     
-  public static native LatLng construct(double lat, double lng) /*-{
+  public static native LatLng newInstance(double lat, double lng) /*-{
     return new $wnd.google.maps.LatLng(lat, lng);
   }-*/;
   
-  public static native LatLng construct(double lat, double lng, boolean noWrap) /*-{
+  public static native LatLng newInstance(double lat, double lng, boolean noWrap) /*-{
     return new $wnd.google.maps.LatLng(lat, lng, noWrap);
   }-*/;
   
   protected LatLng() {}
   
-  public final native double lat() /*-{
+  public final native double getLatitude() /*-{
     return this.lat();
   }-*/;
   
-  public final native double lng() /*-{
+  public final native double getLongitude() /*-{
     return this.lng();
   }-*/;
   

@@ -38,7 +38,7 @@ public class Circle extends MVCObject implements HasCircle {
 
   @Override
   public LatLng getCenter() {
-    return (LatLng) CircleImpl.impl.getCenter(jso);
+    return CircleImpl.impl.getCenter(jso).cast();
   }
 
   @Override

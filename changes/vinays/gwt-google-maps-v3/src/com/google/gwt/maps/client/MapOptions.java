@@ -45,7 +45,7 @@ public class MapOptions implements HasMapOptions {
 
   @Override
   public LatLng getCenter() {
-    return (LatLng) MapOptionsImpl.impl.getCenter(jso);
+    return MapOptionsImpl.impl.getCenter(jso).cast();
   }
 
   @Override

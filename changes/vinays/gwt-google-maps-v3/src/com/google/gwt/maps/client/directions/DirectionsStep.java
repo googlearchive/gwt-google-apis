@@ -41,7 +41,7 @@ public class DirectionsStep implements HasDirectionsStep {
 
   @Override
   public LatLng getEndPoint() {
-    return (LatLng) DirectionsStepImpl.impl.getEndPoint(jso);
+    return DirectionsStepImpl.impl.getEndPoint(jso).cast();
   }
 
   @Override
@@ -60,7 +60,7 @@ public class DirectionsStep implements HasDirectionsStep {
 
   @Override
   public LatLng getStartPoint() {
-    return (LatLng) DirectionsStepImpl.impl.getStartPoint(jso);
+    return DirectionsStepImpl.impl.getStartPoint(jso).cast();
   }
 
   @Override

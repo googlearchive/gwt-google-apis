@@ -43,7 +43,7 @@ public class GeocoderGeometry implements HasGeocoderGeometry {
 
   @Override
   public LatLng getLocation() {
-    return (LatLng) GeocoderGeometryImpl.impl.getLocation(jso);
+    return GeocoderGeometryImpl.impl.getLocation(jso).cast();
   }
 
   @Override

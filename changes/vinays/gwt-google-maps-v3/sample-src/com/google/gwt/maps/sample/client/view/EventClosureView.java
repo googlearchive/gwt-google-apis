@@ -52,7 +52,7 @@ public class EventClosureView extends Composite implements Display {
   }
 
   final private static int ZOOM = 8;
-  final private static LatLng CENTER = LatLng.construct(-25.363882,131.044922);
+  final private static LatLng CENTER = LatLng.newInstance(-25.363882,131.044922);
   final private static String MAP_TYPE = new MapTypeId().getRoadmap();
   
   final private MapWidget mapWidget;
@@ -103,7 +103,7 @@ public class EventClosureView extends Composite implements Display {
 
   @Override
   public LatLng createLatLng(double lat, double lng) {
-    return LatLng.construct(lat, lng);
+    return LatLng.newInstance(lat, lng);
   }
 
   @Override

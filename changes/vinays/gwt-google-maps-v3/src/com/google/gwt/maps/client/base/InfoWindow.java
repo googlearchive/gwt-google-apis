@@ -58,7 +58,7 @@ public class InfoWindow extends MVCObject implements HasInfoWindow {
 
   @Override
   public LatLng getPosition() {
-    return (LatLng) InfoWindowImpl.impl.getPosition(jso);
+    return InfoWindowImpl.impl.getPosition(jso).cast();
   }
 
   @Override

@@ -63,7 +63,7 @@ public class Marker extends MVCObject implements HasMarker {
 
   @Override
   public LatLng getPosition() {
-    return (LatLng) MarkerImpl.impl.getPosition(jso);
+    return MarkerImpl.impl.getPosition(jso).cast();
   }
 
   @Override

@@ -36,7 +36,7 @@ public class CircleOptions implements HasCircleOptions {
   
   @Override
   public LatLng getCenter() {
-    return (LatLng) CircleOptionsImpl.impl.getCenter(jso);
+    return CircleOptionsImpl.impl.getCenter(jso).cast();
   }
 
   @Override

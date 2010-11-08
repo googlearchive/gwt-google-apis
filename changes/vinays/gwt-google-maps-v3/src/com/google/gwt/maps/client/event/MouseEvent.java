@@ -32,7 +32,7 @@ public class MouseEvent implements HasMouseEvent {
   
   @Override
   public LatLng getLatLng() {
-    return (LatLng) MouseEventImpl.impl.getLatLng(jso);
+    return MouseEventImpl.impl.getLatLng(jso).cast();
   }
 
   @Override

@@ -53,7 +53,7 @@ public class GeocoderRequest implements HasGeocoderRequest {
 
   @Override
   public LatLng getLatLng() {
-    return (LatLng) GeocoderRequestImpl.impl.getLatLng(jso);
+    return GeocoderRequestImpl.impl.getLatLng(jso).cast();
   }
 
   @Override

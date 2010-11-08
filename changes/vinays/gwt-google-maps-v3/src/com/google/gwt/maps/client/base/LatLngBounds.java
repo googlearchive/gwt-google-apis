@@ -88,7 +88,7 @@ public class LatLngBounds implements HasLatLngBounds {
    */
   @Override
   public LatLng getCenter() {
-    return (LatLng) impl.getCenter(jso);
+    return impl.getCenter(jso).cast();
   }
 
   /* (non-Javadoc)
@@ -96,7 +96,7 @@ public class LatLngBounds implements HasLatLngBounds {
    */
   @Override
   public LatLng getNorthEast() {
-    return (LatLng) impl.getNorthEast(jso);
+    return impl.getNorthEast(jso).cast();
   }
 
   /* (non-Javadoc)
@@ -104,7 +104,7 @@ public class LatLngBounds implements HasLatLngBounds {
    */
   @Override
   public LatLng getSouthWest() {
-    return (LatLng) impl.getSouthWest(jso);
+    return impl.getSouthWest(jso).cast();
   }
 
   /* (non-Javadoc)
@@ -128,7 +128,7 @@ public class LatLngBounds implements HasLatLngBounds {
    */
   @Override
   public LatLng toSpan() {
-    return (LatLng) impl.toSpan(jso);
+    return impl.toSpan(jso).cast();
   }
   
   /* (non-Javadoc)

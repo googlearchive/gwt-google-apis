@@ -46,7 +46,7 @@ public class Projection implements HasProjection {
    */
   @Override
   public LatLng fromPointToLatLng(HasPoint point) {
-    return (LatLng) ProjectionImpl.impl.fromPointToLatLng(jso, point.getJso());
+    return ProjectionImpl.impl.fromPointToLatLng(jso, point.getJso()).cast();
   }
 
   /* (non-Javadoc)

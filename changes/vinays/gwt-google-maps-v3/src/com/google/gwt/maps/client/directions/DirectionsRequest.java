@@ -36,7 +36,7 @@ public class DirectionsRequest implements HasDirectionsRequest {
 
   @Override
   public LatLng getDestinationLatLng() {
-    return (LatLng) DirectionsRequestImpl.impl.getDestinationLatLng(jso);
+    return DirectionsRequestImpl.impl.getDestinationLatLng(jso).cast();
   }
 
   @Override
@@ -46,7 +46,7 @@ public class DirectionsRequest implements HasDirectionsRequest {
 
   @Override
   public LatLng getOriginLatLng() {
-    return (LatLng) DirectionsRequestImpl.impl.getOriginLatLng(jso);
+    return DirectionsRequestImpl.impl.getOriginLatLng(jso).cast();
   }
 
   @Override

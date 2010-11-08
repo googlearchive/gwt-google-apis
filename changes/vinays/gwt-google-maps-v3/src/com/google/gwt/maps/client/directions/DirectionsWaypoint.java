@@ -36,7 +36,7 @@ public class DirectionsWaypoint implements HasDirectionsWaypoint {
 
   @Override
   public LatLng getLocationLatLng() {
-    return (LatLng) DirectionsWaypointImpl.impl.getLocationLatLng(jso);
+    return DirectionsWaypointImpl.impl.getLocationLatLng(jso).cast();
   }
 
   @Override
