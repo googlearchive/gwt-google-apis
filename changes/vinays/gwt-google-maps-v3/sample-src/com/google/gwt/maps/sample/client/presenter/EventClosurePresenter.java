@@ -15,13 +15,13 @@
 package com.google.gwt.maps.sample.client.presenter;
 
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.base.HasInfoWindow;
 import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.event.EventCallback;
-import com.google.gwt.maps.client.overlay.HasMarker;
+import com.google.gwt.maps.client.mvc.MVCObject;
+import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.Constant;
 import com.google.gwt.maps.sample.client.view.SampleView;
 
@@ -32,7 +32,6 @@ import java.util.ArrayList;
  * 
  * It attaches five info windows each containing a letter of a sentence to five
  * markers randomly positioned on the map.
- * 
  */
 public class EventClosurePresenter implements Presenter<EventClosurePresenter.Display> {
 
@@ -44,26 +43,22 @@ public class EventClosurePresenter implements Presenter<EventClosurePresenter.Di
     void fitBounds(HasLatLngBounds bounds);
     LatLng createLatLng(double lat, double lng);
     HasLatLngBounds createBounds(LatLng southWest, LatLng northEast);
-    HasMarker createMarkerAt(LatLng position);
+    Marker createMarkerAt(LatLng position);
     HasInfoWindow createInfoWindow(String content);
-    void addListener(HasJso instance, String eventName, EventCallback callback);
-    void clearInstanceListeners(HasJso instance);
+    void addListener(Marker instance, String eventName, EventCallback callback);
+    void clearInstanceListeners(Marker instance);
   }
   
   final private Display display;
   final private HandlerManager eventBus;
-  final private ArrayList<HasMarker> markers;
+  final private ArrayList<Marker> markers;
   final private String[] message = new String[] { "This", "is", "the", "secret", "message" };
 
-  /**
-   * @param display
-   * @param eventBus
-   */
   public EventClosurePresenter(Display display, HandlerManager eventBus) {
     super();
     this.display = display;
     this.eventBus = eventBus;
-    markers = new ArrayList<HasMarker>();
+    markers = new ArrayList<Marker>();
     presenterLink = Constant.SOURCE_URL_PREFIX + this.getClass().getName().replace('.', '/')
         + ".java";
     viewLink = Constant.SOURCE_URL_PREFIX + display.getClass().getName().replace('.', '/')
@@ -84,7 +79,7 @@ public class EventClosurePresenter implements Presenter<EventClosurePresenter.Di
     for (int i = 0; i < 5; ++i) {
       final LatLng location = display.createLatLng(southWest.getLongitude() + (latSpan * Math.random()),
           southWest.getLongitude() + (lngSpan * Math.random()));
-      final HasMarker marker = display.createMarkerAt(location);
+      final Marker marker = display.createMarkerAt(location);
       markers.add(marker);
       int j = i + 1;
       marker.setTitle("" + j);
@@ -104,18 +99,18 @@ public class EventClosurePresenter implements Presenter<EventClosurePresenter.Di
 
   @Override
   public void release() {
-    for (final HasMarker marker : markers) {
+    for (final Marker marker : markers) {
       display.clearInstanceListeners(marker);
     }
   }
 
-  private void attachSecretMessage(final HasMarker marker, final int number) {
+  private void attachSecretMessage(final Marker marker, final int number) {
     final HasInfoWindow infoWindow = display.createInfoWindow(message[number]);
     display.addListener(marker, "click", new EventCallback() {
       
       @Override
       public void callback() {
-        infoWindow.open(display.getMap(), marker);
+        infoWindow.open(display.getMap(), new MVCObject(marker));
       }
     });
   }

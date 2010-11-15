@@ -24,7 +24,7 @@ import com.google.gwt.maps.client.geocoder.GeocoderCallback;
 import com.google.gwt.maps.client.geocoder.HasGeocoder;
 import com.google.gwt.maps.client.geocoder.HasGeocoderRequest;
 import com.google.gwt.maps.client.geocoder.HasGeocoderResult;
-import com.google.gwt.maps.client.overlay.HasMarker;
+import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.Constant;
 import com.google.gwt.maps.sample.client.view.SampleView;
 import com.google.gwt.user.client.Window;
@@ -35,7 +35,6 @@ import java.util.List;
  * Sample geocoder simple presenter.
  * 
  * Geocode address entered in the text box.
- *
  */
 public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresenter.Display> {
 
@@ -64,7 +63,7 @@ public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresente
     /**
      * Create new Marker.
      */
-    HasMarker createMarker();
+    Marker createMarker();
     
     /**
      * Get embedded map.
@@ -86,9 +85,6 @@ public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresente
         + display.getClass().getName().replace('.', '/') + ".java";
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.Presenter#bind()
-   */
   @Override
   public void bind() {
     display.setPresenterLink(presenterLink);
@@ -114,7 +110,7 @@ public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresente
               final HasGeocoderResult gResult = responses.get(0);
               final LatLng gLatLng = gResult.getGeometry().getLocation();
               // Add marker at the geocoder location.
-              final HasMarker marker = display.createMarker();
+              final Marker marker = display.createMarker();
               marker.setPosition(gLatLng);
               marker.setMap(display.getMap());
               // Pan to the geocoded location.
@@ -129,25 +125,16 @@ public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresente
     
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.Presenter#getDisplay()
-   */
   @Override
   public Display getDisplay() {
     return display;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.Presenter#getEventBus()
-   */
   @Override
   public HandlerManager getEventBus() {
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.Presenter#release()
-   */
   @Override
   public void release() {
     // TODO Auto-generated method stub

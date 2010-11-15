@@ -15,7 +15,6 @@
 package com.google.gwt.maps.sample.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
@@ -27,7 +26,6 @@ import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.LatLngBounds;
 import com.google.gwt.maps.client.event.Event;
 import com.google.gwt.maps.client.event.EventCallback;
-import com.google.gwt.maps.client.overlay.HasMarker;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.presenter.EventClosurePresenter.Display;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -40,7 +38,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Event closure sample ui.
- *
  */
 public class EventClosureView extends Composite implements Display {
 
@@ -79,13 +76,13 @@ public class EventClosureView extends Composite implements Display {
   }
 
   @Override
-  public void addListener(HasJso instance, String eventName,
+  public void addListener(Marker instance, String eventName,
       EventCallback callback) {
     Event.addListener(instance, eventName, callback);
   }
 
   @Override
-  public void clearInstanceListeners(HasJso instance) {
+  public void clearInstanceListeners(Marker instance) {
     Event.clearInstanceListeners(instance);
   }
 
@@ -107,8 +104,8 @@ public class EventClosureView extends Composite implements Display {
   }
 
   @Override
-  public HasMarker createMarkerAt(LatLng position) {
-    final Marker marker = new Marker();
+  public Marker createMarkerAt(LatLng position) {
+    final Marker marker = Marker.newInstance();
     marker.setMap(getMap());
     marker.setPosition(position);
     return marker;

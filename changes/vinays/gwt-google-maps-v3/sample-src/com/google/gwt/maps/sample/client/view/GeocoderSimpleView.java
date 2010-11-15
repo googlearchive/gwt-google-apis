@@ -25,7 +25,6 @@ import com.google.gwt.maps.client.geocoder.Geocoder;
 import com.google.gwt.maps.client.geocoder.GeocoderRequest;
 import com.google.gwt.maps.client.geocoder.HasGeocoder;
 import com.google.gwt.maps.client.geocoder.HasGeocoderRequest;
-import com.google.gwt.maps.client.overlay.HasMarker;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.presenter.GeocoderSimplePresenter.Display;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -39,7 +38,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Simple sample ui.
- *
  */
 public class GeocoderSimpleView extends Composite implements Display {
   
@@ -101,49 +99,31 @@ public class GeocoderSimpleView extends Composite implements Display {
     viewLink.setText(url);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.GeocoderSimplePresenter.Display#createGeocoder()
-   */
   @Override
   public HasGeocoder createGeocoder() {
     return new Geocoder();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.GeocoderSimplePresenter.Display#createGeocoderRequest()
-   */
   @Override
   public HasGeocoderRequest createGeocoderRequest() {
     return new GeocoderRequest();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.GeocoderSimplePresenter.Display#createMarker()
-   */
   @Override
-  public HasMarker createMarker() {
-    return new Marker();
+  public Marker createMarker() {
+    return Marker.newInstance();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.GeocoderSimplePresenter.Display#getMap()
-   */
   @Override
   public HasMap getMap() {
     return mapWidget.getMap();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.GeocoderSimplePresenter.Display#getAddress()
-   */
   @Override
   public String getAddress() {
     return addressBox.getValue();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.sample.client.presenter.GeocoderSimplePresenter.Display#getGeocodeButton()
-   */
   @Override
   public HasClickHandlers getGeocodeButton() {
     return geocodeButton;

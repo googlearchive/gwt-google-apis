@@ -15,7 +15,6 @@
 package com.google.gwt.maps.sample.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
@@ -23,7 +22,6 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.event.Event;
 import com.google.gwt.maps.client.event.EventCallback;
-import com.google.gwt.maps.client.overlay.HasMarker;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.presenter.EventSimplePresenter.Display;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -36,7 +34,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Simple event sample ui.
- *
  */
 public class EventSimpleView extends Composite implements Display {
   
@@ -74,20 +71,20 @@ public class EventSimpleView extends Composite implements Display {
     mapWrapper.setWidget(mapWidget);
     mapWidget.setSize("800px", "600px");
     
-    marker = new Marker();
+    marker = Marker.newInstance();
     marker.setPosition(CENTER);
     marker.setMap(getMap());
     marker.setTitle("Hello World!");
   }
 
   @Override
-  public void addListener(final HasJso instance, final String eventName,
+  public void addListener(final Marker instance, final String eventName,
       final EventCallback callback) {
     Event.addListener(instance, eventName, callback);
   }
 
   @Override
-  public void clearInstanceListeners(final HasJso instance) {
+  public void clearInstanceListeners(final Marker instance) {
     Event.clearInstanceListeners(instance);
   }
 
@@ -97,7 +94,7 @@ public class EventSimpleView extends Composite implements Display {
   }
 
   @Override
-  public HasMarker getMarker() {
+  public Marker getMarker() {
     return marker;
   }
 

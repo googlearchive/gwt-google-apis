@@ -1,4 +1,4 @@
-/* Copyright (c) 2010 Vinay Inc.
+/* Copyright (c) 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
 package com.google.gwt.maps.sample.client.presenter;
 
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.event.EventCallback;
-import com.google.gwt.maps.client.overlay.HasMarker;
+import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.Constant;
 import com.google.gwt.maps.sample.client.view.SampleView;
 
@@ -26,8 +25,6 @@ import com.google.gwt.maps.sample.client.view.SampleView;
  * Add click event to a marker.
  * 
  * Zooms in to level '4' on click on the marker.
- *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class EventSimplePresenter implements Presenter<EventSimplePresenter.Display>{
 
@@ -36,13 +33,13 @@ public class EventSimplePresenter implements Presenter<EventSimplePresenter.Disp
 
   public static interface Display extends SampleView {
     
-    void addListener(HasJso instance, String eventName, EventCallback callback);
+    void addListener(Marker instance, String eventName, EventCallback callback);
     
-    void clearInstanceListeners(HasJso instance);
+    void clearInstanceListeners(Marker instance);
     
     HasMap getMap();
     
-    HasMarker getMarker();
+    Marker getMarker();
   }
   
   final private Display display;

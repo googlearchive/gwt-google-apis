@@ -14,6 +14,7 @@
  */
 package com.google.gwt.maps.client.event;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.HasJso;
 import com.google.gwt.maps.client.event.impl.EventImpl;
 
@@ -29,10 +30,10 @@ public class Event {
    * object instance. Returns an identifier for this listener that can be used
    * with eventRemoveListener().
    */
-  public static HasMapsEventListener addListener(HasJso instance, String eventName,
+  public static HasMapsEventListener addListener(JavaScriptObject instance, String eventName,
       EventCallback callback) {
     final HasMapsEventListener listener = new MapsEventListener(EventImpl.impl
-        .addListener(instance.getJso(), eventName, callback));
+        .addListener(instance, eventName, callback));
     return listener;
   }
 
@@ -76,8 +77,8 @@ public class Event {
   /**
    * Removes all listeners for all events for the given instance.
    */
-  public static void clearInstanceListeners(HasJso instance) {
-    EventImpl.impl.clearInstanceListeners(instance.getJso());
+  public static void clearInstanceListeners(JavaScriptObject instance) {
+    EventImpl.impl.clearInstanceListeners(instance);
   }
 
   

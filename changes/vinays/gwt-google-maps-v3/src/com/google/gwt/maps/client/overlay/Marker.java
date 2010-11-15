@@ -18,132 +18,192 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
-import com.google.gwt.maps.client.mvc.MVCObject;
-import com.google.gwt.maps.client.overlay.impl.MarkerImpl;
 
 /**
- * This class implements {@link HasMarker}.
- *
+ * Creates marker on attached map.
  */
-public class Marker extends MVCObject implements HasMarker {
+public class Marker extends JavaScriptObject {
 
-  final private JavaScriptObject jso;
-  
-  public Marker(JavaScriptObject jso) {
-    this.jso = jso;
-  }
-  
-  public Marker() {
-    this(MarkerImpl.impl.construct());
-  }
-  
-  public Marker(HasMarkerOptions options) {
-    this(MarkerImpl.impl.construct(options.getJso()));
+  /**
+   * Creates a marker with the no options specified.
+   */
+  public final static native Marker newInstance() /*-{
+    return new $wnd.google.maps.Marker();
+  }-*/;
+
+  public final static Marker newInstance(HasMarkerOptions opts) {
+    return newInstance(opts.getJso());
   }
   
-  @Override
-  public String getCursor() {
-    return MarkerImpl.impl.getCursor(jso);
+  /**
+   * Creates a marker with the options specified. If a map is specified, the
+   * marker is added to the map upon construction. Note that the position must
+   * be set for the marker to display.
+   */
+  private final static native Marker newInstance(JavaScriptObject opts) /*-{
+    return new $wnd.google.maps.Marker(opts);
+  }-*/;
+  
+  protected Marker() {}
+  
+  public final native void bindTo(String key, JavaScriptObject target) /*-{
+    this.bindTo(key, target);
+  }-*/;
+  
+  public final native void changed(String key) /*-{
+    this.changed(key);
+  }-*/;
+  
+  public final native JavaScriptObject get(String key) /*-{
+    return this.get(key);
+  }-*/;
+  
+  public final native boolean getAsBoolean(String key) /*-{
+    return this.get(key);
+  }-*/;
+  
+  public final native double getAsDouble(String key) /*-{
+    return this.get(key);
+  }-*/;
+  
+  public final native int getAsInt(String key) /*-{
+    return this.get(key);
+  }-*/;
+  
+  public final native String getAsString(String key) /*-{
+    return this.get(key);
+  }-*/;
+  
+  public final native String getCursor() /*-{
+    return this.getCursor();
+  }-*/;
+  
+  public final HasMarkerImage getIcon() {
+    return new MarkerImage(getIconImpl());
+  }
+  
+  private final native JavaScriptObject getIconImpl() /*-{
+    return this.getIcon();
+  }-*/;
+  
+  public final HasMap getMap() {
+    return new Map(getMapImpl());
+  }
+  
+  private final native JavaScriptObject getMapImpl() /*-{
+    return this.getMap();
+  }-*/;
+  
+  public final native LatLng getPosition() /*-{
+    return this.getPosition();
+  }-*/;
+  
+  public final native String getTitle() /*-{
+    return this.getTitle();
+  }-*/;
+  
+  public final native int getZIndex() /*-{
+    return this.getZIndex();
+  }-*/;
+
+  public final native boolean isClickable() /*-{
+    return this.isClickable();
+  }-*/;
+  
+  public final native boolean isDraggable() /*-{
+    return this.isDraggable();
+  }-*/;
+  
+  public final native boolean isFlat() /*-{
+    return this.isFlat();
+  }-*/;
+  
+  public final native boolean isVisible() /*-{
+    return this.isVisible();
+  }-*/;
+  
+  public final native void notify(String key) /*-{
+    this.notify(key);
+  }-*/;
+  
+  public final native void set(String key, JavaScriptObject value) /*-{
+    this.set(key, value);
+  }-*/;
+  
+  public final native void set(String key, String value) /*-{
+    this.set(key, value);
+  }-*/;
+  
+  public final native void set(String key, int value) /*-{
+    this.set(key, value);
+  }-*/;
+  
+  public final native void set(String key, double value) /*-{
+    this.set(key, value);
+  }-*/;
+  
+  public final native void set(String key, boolean value) /*-{
+    this.set(key, value);
+  }-*/;
+  
+  public final native void setClickable(boolean clickable) /*-{
+    this.setClickable(clickable)
+  }-*/;
+  
+  public final native void setCursor(String cursor) /*-{
+    this.setCursor(cursor);
+  }-*/;
+  
+  public final native void setDraggable(boolean draggable) /*-{
+    this.setDraggable(draggable);
+  }-*/;
+  
+  public final native void setFlat(boolean flat) /*-{
+    this.setFlat(flat);
+  }-*/;
+  
+  public final void setIcon(HasMarkerImage image) {
+    setIcon(image.getJso());
+  }
+  
+  private final native void setIcon(JavaScriptObject image) /*-{
+    this.setIcon(image);
+  }-*/;
+  
+  public final void setMap(HasMap map) {
+    setMap(map.getJso());
   }
 
-  @Override
-  public HasMarkerImage getIcon() {
-    return new MarkerImage(MarkerImpl.impl.getIcon(jso));
-  }
-
-  @Override
-  public void setIcon(HasMarkerImage image) {
-    MarkerImpl.impl.setIcon(jso, image.getJso());
-  }
-
-  @Override
-  public HasMap getMap() {
-    return new Map(MarkerImpl.impl.getMap(jso));
-  }
-
-  @Override
-  public LatLng getPosition() {
-    return MarkerImpl.impl.getPosition(jso).cast();
-  }
-
-  @Override
-  public String getTitle() {
-    return MarkerImpl.impl.getTitle(jso);
-  }
-
-  @Override
-  public int getZIndex() {
-    return MarkerImpl.impl.getZIndex(jso);
-  }
-
-  @Override
-  public boolean isClickable() {
-    return MarkerImpl.impl.isClickable(jso);
-  }
-
-  @Override
-  public boolean isDraggable() {
-    return MarkerImpl.impl.isDraggable(jso);
-  }
-
-  @Override
-  public boolean isFlat() {
-    return MarkerImpl.impl.isFlat(jso);
-  }
-
-  @Override
-  public boolean isVisible() {
-    return MarkerImpl.impl.isVisible(jso);
-  }
-
-  @Override
-  public void setClickable(boolean clickable) {
-    MarkerImpl.impl.setClickable(jso, clickable);
-  }
-
-  @Override
-  public void setCursor(String cursor) {
-    MarkerImpl.impl.setCursor(jso, cursor);
-  }
-
-  @Override
-  public void setDraggable(boolean draggable) {
-    MarkerImpl.impl.setDraggable(jso, draggable);
-  }
-
-  @Override
-  public void setFlat(boolean flat) {
-    MarkerImpl.impl.setFlat(jso, flat);
-  }
-
-  @Override
-  public void setMap(HasMap map) {
-    MarkerImpl.impl.setMap(jso, map.getJso());
-  }
-
-  @Override
-  public void setPosition(LatLng position) {
-    MarkerImpl.impl.setPosition(jso, position);
-  }
-
-  @Override
-  public void setTitle(String title) {
-    MarkerImpl.impl.setTitle(jso, title);
-  }
-
-  @Override
-  public void setVisible(boolean visible) {
-    MarkerImpl.impl.setVisible(jso, visible);
-  }
-
-  @Override
-  public void setZIndex(int zIndex) {
-    MarkerImpl.impl.setZIndex(jso, zIndex);
-  }
-
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
+  private final native void setMap(JavaScriptObject map) /*-{
+    this.setMap(map);
+  }-*/;
+  
+  public final native void setPosition(LatLng position) /*-{
+    this.setPosition(position);
+  }-*/;
+  
+  public final native void setTitle(String title) /*-{
+    this.setTitle(title);
+  }-*/;
+  
+  public final native void setValues(JavaScriptObject values) /*-{
+    this.setValues(values);
+  }-*/;
+  
+  public final native void setVisible(boolean visible) /*-{
+    this.setVisible(visible);
+  }-*/;
+  
+  public final native void setZIndex(int zIndex) /*-{
+    this.setZIndex(zIndex);
+  }-*/;
+  
+  public final native void unbind(String key) /*-{
+    this.unbind(key);
+  }-*/;
+  
+  public final native void unbindAll() /*-{
+    this.unbindAll();
+  }-*/;
 
 }
