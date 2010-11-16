@@ -33,6 +33,7 @@ import com.google.gwt.visualization.client.CoreColumnChartTest;
 import com.google.gwt.visualization.client.CoreLineChartTest;
 import com.google.gwt.visualization.client.CorePieChartTest;
 import com.google.gwt.visualization.client.CoreScatterChartTest;
+import com.google.gwt.visualization.client.DataColumnTest;
 import com.google.gwt.visualization.client.DataTableTest;
 import com.google.gwt.visualization.client.DataViewTest;
 import com.google.gwt.visualization.client.DateFormatTest;
@@ -89,6 +90,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(CoreLineChartTest.class);
     suite.addTestSuite(CorePieChartTest.class);
     suite.addTestSuite(CoreScatterChartTest.class);
+    suite.addTestSuite(DataColumnTest.class);
     suite.addTestSuite(DataTableTest.class);
     suite.addTestSuite(DataViewTest.class);
     suite.addTestSuite(DateFormatTest.class);

@@ -73,6 +73,10 @@ public class AbstractDataTable extends JavaScriptObject {
   public final native String getColumnId(int columnIndex) /*-{
     return this.getColumnId(columnIndex);
   }-*/;
+  
+  public final native int getColumnIndex(String columnId) /*-{
+    return this.getColumnIndex(columnId);
+  }-*/;
 
   public final native String getColumnLabel(int columnIndex) /*-{
     return this.getColumnLabel(columnIndex);
