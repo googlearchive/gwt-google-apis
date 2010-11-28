@@ -18,7 +18,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.directions.DirectionsCallback;
 import com.google.gwt.maps.client.directions.DirectionsTravelMode;
 import com.google.gwt.maps.client.directions.HasDirectionsRenderer;
@@ -42,7 +42,7 @@ public class DirectionsPanelPresenter implements
     /**
      * Get map object.
      */
-    HasMap getMap();
+    Map getMap();
 
     /**
      * Get DirectionsRequest object.

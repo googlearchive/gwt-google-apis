@@ -20,7 +20,7 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.jsio.client.BeanProperties;
 import com.google.gwt.jsio.client.Constructor;
 import com.google.gwt.jsio.client.JSFlyweightWrapper;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 
 /**
  * 
@@ -39,7 +39,7 @@ public interface PolygonOptionsImpl extends JSFlyweightWrapper {
 
   public double getFillOpacity(JavaScriptObject jso);
 
-  public HasMap getMap(JavaScriptObject jso);
+  public Map getMap(JavaScriptObject jso);
 
   public JsArray<JsArray<JavaScriptObject>> getPaths(JavaScriptObject jso);
 
@@ -55,7 +55,7 @@ public interface PolygonOptionsImpl extends JSFlyweightWrapper {
 
   public void setFillOpacity(JavaScriptObject jso, double fillOpacity);
 
-  public void setMap(JavaScriptObject jso, HasMap map);
+  public void setMap(JavaScriptObject jso, Map map);
 
   public void setPaths(JavaScriptObject jso, JsArray<JsArray<JavaScriptObject>> paths);
 

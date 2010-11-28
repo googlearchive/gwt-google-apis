@@ -14,161 +14,75 @@
  */
 package com.google.gwt.maps.client.base;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.impl.LatLngBoundsImpl;
 
 
 /**
- * This class implements {@link HasLatLngBounds}.
- *
+ * A LatLngBounds instance represents a rectangle in geographical coordinates,
+ * including one that crosses the 180 degrees longitudinal meridian.
  */
-public class LatLngBounds implements HasLatLngBounds {
-
-  final private LatLngBoundsImpl impl;
-  final private JavaScriptObject jso;
+public class LatLngBounds extends JavaScriptObject {
   
-  public LatLngBounds(final LatLngBoundsImpl impl, final JavaScriptObject jso) {
-    this.impl = impl;
-    this.jso = jso;
-  }
+  public static native final LatLngBounds newInstance() /*-{
+    return new $wnd.google.maps.LatLngBounds();
+  }-*/;
   
-  public LatLngBounds(final JavaScriptObject jso) {
-    this.impl = GWT.create(LatLngBoundsImpl.class);
-    this.jso = jso;
-  }
+  public static native final LatLngBounds newInstance(LatLng sw, LatLng ne) /*-{
+    return new $wnd.google.maps.LatLngBounds(sw, ne);
+  }-*/;
   
-  public LatLngBounds() {
-    impl = GWT.create(LatLngBoundsImpl.class);
-    jso = impl.construct();
-  }
-
-  public LatLngBounds(final LatLng sw, final LatLng ne) {
-    impl = GWT.create(LatLngBoundsImpl.class);
-    jso = impl.construct(sw, ne);
-  }
+  protected LatLngBounds() {}
   
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#contains(com.google.gwt.maps.client.base.HasLatLng)
-   */
-  @Override
-  public boolean contains(LatLng point) {
-    return impl.contains(jso, point);
-  }
+  public native final boolean contains(LatLng point) /*-{
+    return this.contains(point);
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#equalsTo(com.google.gwt.maps.client.base.HasLatLngBounds)
-   */
-  @Override
-  public boolean equalsTo(HasLatLngBounds other) {
-    return impl.equals(jso, other.getJso());
-  }
+  public native final boolean equalsTo(LatLngBounds other) /*-{
+    return this.equals(other);
+  }-*/;
+
+  public native final LatLngBounds extend(LatLng point) /*-{
+    return this.extend(point);
+  }-*/;
+
+  public native final LatLng getCenter() /*-{
+    return this.getCenter();
+  }-*/;
+
+  public native final LatLng getNorthEast() /*-{
+    return this.getNorthEast();
+  }-*/;
+
+  public native final LatLng getSouthWest() /*-{
+    return this.getSouthWest();
+  }-*/;
+
+  public native final boolean intersects(LatLngBounds other) /*-{
+    return this.intersects(other);
+  }-*/;
+
+  public native final boolean isEmpty() /*-{
+    return this.isEmpty();
+  }-*/;
+
+  public native final LatLng toSpan() /*-{
+    return this.toSpan();
+  }-*/;
   
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object other) {
-    if (other == null || !(other instanceof LatLngBounds)) {
-      return false;
-    }
-    return equalsTo((HasLatLngBounds) other);
-  }
+  public native final String getString() /*-{
+    return this.toString();
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#extend(com.google.gwt.maps.client.base.HasLatLng)
-   */
-  @Override
-  public HasLatLngBounds extend(LatLng point) {
-    return new LatLngBounds(impl, impl.extend(jso, point));
-  }
+  public native final String toUrlValue() /*-{
+    return this.toUrlValue();
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#getCenter()
-   */
-  @Override
-  public LatLng getCenter() {
-    return impl.getCenter(jso).cast();
-  }
+  public native final String toUrlValue(int precision) /*-{
+    return this.toUrlValue(precision);
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#getNorthEast()
-   */
-  @Override
-  public LatLng getNorthEast() {
-    return impl.getNorthEast(jso).cast();
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#getSouthWest()
-   */
-  @Override
-  public LatLng getSouthWest() {
-    return impl.getSouthWest(jso).cast();
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#intersects(com.google.gwt.maps.client.base.HasLatLngBounds)
-   */
-  @Override
-  public boolean intersects(HasLatLngBounds other) {
-    return impl.intersects(jso, other.getJso());
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#isEmpty()
-   */
-  @Override
-  public boolean isEmpty() {
-    return impl.isEmpty(jso);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#toSpan()
-   */
-  @Override
-  public LatLng toSpan() {
-    return impl.toSpan(jso).cast();
-  }
-  
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    return impl.toString(jso);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#toUrlValue()
-   */
-  @Override
-  public String toUrlValue() {
-    return impl.toUrlValue(jso);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#toUrlValue(int)
-   */
-  @Override
-  public String toUrlValue(int precision) {
-    return impl.toUrlValue(jso, precision);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#union(com.google.gwt.maps.client.base.HasLatLngBounds)
-   */
-  @Override
-  public HasLatLngBounds union(HasLatLngBounds other) {
-    return new LatLngBounds(impl, impl.union(jso, other.getJso()));
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasLatLngBounds#getJso()
-   */
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
+  public native final LatLngBounds union(LatLngBounds other) /*-{
+    return this.union(other);
+  }-*/;
 
 }

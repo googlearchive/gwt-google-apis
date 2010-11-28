@@ -15,12 +15,10 @@
 package com.google.gwt.maps.sample.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.base.HasInfoWindow;
-import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.InfoWindow;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.LatLngBounds;
@@ -87,13 +85,13 @@ public class EventClosureView extends Composite implements Display {
   }
 
   @Override
-  public HasLatLngBounds createBounds(LatLng southWest, LatLng northEast) {
-    return new LatLngBounds(southWest, northEast);
+  public LatLngBounds createBounds(LatLng southWest, LatLng northEast) {
+    return LatLngBounds.newInstance(southWest, northEast);
   }
 
   @Override
-  public HasInfoWindow createInfoWindow(String content) {
-    final InfoWindow infoWindow = new InfoWindow();
+  public InfoWindow createInfoWindow(String content) {
+    final InfoWindow infoWindow = InfoWindow.newInstance();
     infoWindow.setContent(content);
     return infoWindow;
   }
@@ -112,7 +110,7 @@ public class EventClosureView extends Composite implements Display {
   }
 
   @Override
-  public HasMap getMap() {
+  public Map getMap() {
     return mapWidget.getMap();
   }
 
@@ -122,7 +120,7 @@ public class EventClosureView extends Composite implements Display {
   }
 
   @Override
-  public void fitBounds(HasLatLngBounds bounds) {
+  public void fitBounds(LatLngBounds bounds) {
     mapWidget.fitBounds(bounds);
   }
 

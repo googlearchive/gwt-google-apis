@@ -15,8 +15,8 @@
 package com.google.gwt.maps.client.geocoder;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.LatLngBounds;
 
 /**
  * GeocoderGeometry information about this GeocoderResult.
@@ -74,10 +74,10 @@ public interface HasGeocoderGeometry extends HasJso {
   /**
    * The bounds of the recommended viewport for displaying this GeocodeResult.
    */
-  public HasLatLngBounds getViewport();
+  public LatLngBounds getViewport();
   
   /**
    * The precise bounds of this GeocodeResult, if applicable.
    */
-  public HasLatLngBounds getBounds(); // optional.
+  public LatLngBounds getBounds(); // optional.
 }

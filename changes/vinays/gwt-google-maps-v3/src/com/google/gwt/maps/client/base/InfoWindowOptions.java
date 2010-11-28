@@ -15,87 +15,83 @@
 package com.google.gwt.maps.client.base;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.impl.InfoWindowOptionsImpl;
+import com.google.gwt.dom.client.Node;
 
 /**
- * This class implements {@link HasInfoWindowOptions}.
- *
+ * The class to specify InfoWindow specifications as options.
  */
-public class InfoWindowOptions implements HasInfoWindowOptions {
+public class InfoWindowOptions extends JavaScriptObject {
 
-  final private JavaScriptObject jso;
+  public static final InfoWindowOptions newInstance() {
+    return (InfoWindowOptions) JavaScriptObject.createObject();
+  };
   
-  public InfoWindowOptions(JavaScriptObject jso) {
-    this.jso = jso;
-  }
+  protected InfoWindowOptions() {}
   
-  public InfoWindowOptions() {
-    this(InfoWindowOptionsImpl.impl.construct());
-  }
+  /**
+   * Make sure content is set as string(or html) using {@link #setContent(String)}.
+   * If not correctly used it will cause unpredictable behavior in production mode.
+   */
+  public native final String getContentString() /*-{
+    return this.content;
+  }-*/;
   
-  @Override
-  public String getContent() {
-    return InfoWindowOptionsImpl.impl.getContent(jso);
-  }
+  /**
+   * Make sure content is set as Node using {@link #setContent(Node)}.
+   * If not correctly used it will cause unpredictable behavior in production mode.
+   */
+  public native final Node getContentNode() /*-{
+    return this.content;
+  }-*/;
 
-  @Override
-  public int getMaxWidth() {
-    return InfoWindowOptionsImpl.impl.getMaxWidth(jso);
-  }
+  public native final int getMaxWidth() /*-{
+    return this.maxWidth;
+  }-*/;
 
-  @Override
-  public HasSize getPixelOffset() {
-    return new Size(InfoWindowOptionsImpl.impl.getPixelOffset(jso));
-  }
+  // TODO: replace javascriptobject with concrete type {@link Size}.
+  public native final JavaScriptObject getPixelOffset() /*-{
+    return this.pixelOffset;
+  }-*/;
 
-  @Override
-  public LatLng getPosition() {
-    return InfoWindowOptionsImpl.impl.getPosition(jso).cast();
-  }
+  public native final LatLng getPosition() /*-{
+    return this.position;
+  }-*/;
 
-  @Override
-  public int getZIndex() {
-    return InfoWindowOptionsImpl.impl.getZIndex(jso);
-  }
+  public native final int getZIndex() /*-{
+    return this.zIndex;
+  }-*/;
 
-  @Override
-  public boolean isDisableAutoPan() {
-    return InfoWindowOptionsImpl.impl.isDisableAutoPan(jso);
-  }
+  public native final boolean isDisableAutoPan() /*-{
+    return disableAutoPan;
+  }-*/;
 
-  @Override
-  public void setContent(String html) {
-    InfoWindowOptionsImpl.impl.setContent(jso, html);
-  }
+  public native final void setContent(String html) /*-{
+    this.content = html;
+  }-*/;
 
-  @Override
-  public void setDisableAutoPan(boolean disableAutoPan) {
-    InfoWindowOptionsImpl.impl.setDisableAutoPan(jso, disableAutoPan);
-  }
+  public native final void setContent(Node node) /*-{
+    this.content = node;
+  }-*/;
 
-  @Override
-  public void setMaxWidth(int maxWidth) {
-    InfoWindowOptionsImpl.impl.setMaxWidth(jso, maxWidth);
-  }
+  public native final void setDisableAutoPan(boolean disableAutoPan) /*-{
+    this.disableAutoPan = disableAutoPan;
+  }-*/;
 
-  @Override
-  public void setPixelOffset(HasSize size) {
-    InfoWindowOptionsImpl.impl.setPixelOffset(jso, size.getJso());
-  }
+  public native final void setMaxWidth(int maxWidth) /*-{
+    this.maxWidth = maxWidth;
+  }-*/;
 
-  @Override
-  public void setPosition(LatLng position) {
-    InfoWindowOptionsImpl.impl.setPosition(jso, position);
-  }
+  //TODO: replace javascriptobject with concrete type {@link Size}.
+  public native final void setPixelOffset(JavaScriptObject size) /*-{
+    this.pixelOffset = pixelOffset;
+  }-*/;
 
-  @Override
-  public void setZIndex(int zIndex) {
-    InfoWindowOptionsImpl.impl.setZIndex(jso, zIndex);
-  }
+  public native final void setPosition(LatLng position) /*-{
+    this.position = position;
+  }-*/;
 
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
+  public native final void setZIndex(int zIndex) /*-{
+    this.zIndex = zIndex;
+  }-*/;
 
 }

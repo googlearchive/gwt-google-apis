@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasPoint;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.Point;
 import com.google.gwt.maps.client.impl.MapCanvasProjectionImpl;
@@ -33,27 +32,25 @@ public class MapCanvasProjection implements HasMapCanvasProjection {
   }
 
   @Override
-  public LatLng fromContainerPixelToLatLng(HasPoint pixel) {
+  public LatLng fromContainerPixelToLatLng(Point pixel) {
     return (LatLng) MapCanvasProjectionImpl.impl.fromContainerPixelToLatLng(
-        jso, pixel.getJso());
+        jso, pixel);
   }
 
   @Override
-  public LatLng fromDivPixelToLatLng(HasPoint pixel) {
+  public LatLng fromDivPixelToLatLng(Point pixel) {
     return (LatLng) MapCanvasProjectionImpl.impl.fromDivPixelToLatLng(jso,
-        pixel.getJso());
+        pixel);
   }
 
   @Override
-  public HasPoint fromLatLngToContainerPixel(LatLng latLng) {
-    return new Point(
-        MapCanvasProjectionImpl.impl.fromLatLngToContainerPixel(jso, latLng));
+  public Point fromLatLngToContainerPixel(LatLng latLng) {
+    return MapCanvasProjectionImpl.impl.fromLatLngToContainerPixel(jso, latLng).cast();
   }
 
   @Override
-  public HasPoint fromLatLngToDivPixel(LatLng latLng) {
-    return new Point(
-        MapCanvasProjectionImpl.impl.fromLatLngToDivPixel(jso, latLng));
+  public Point fromLatLngToDivPixel(LatLng latLng) {
+    return MapCanvasProjectionImpl.impl.fromLatLngToDivPixel(jso, latLng).cast();
   }
 
   @Override

@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.MVCObject;
 import com.google.gwt.maps.client.overlay.impl.CircleImpl;
@@ -47,9 +47,8 @@ public class Circle extends MVCObject implements HasCircle {
   }
 
   @Override
-  public HasMap getMap() {
-    // TODO Auto-generated method stub
-    return null;
+  public Map getMap() {
+    return CircleImpl.impl.getMap(jso).cast();
   }
 
   @Override
@@ -63,8 +62,8 @@ public class Circle extends MVCObject implements HasCircle {
   }
 
   @Override
-  public void setMap(HasMap map) {
-    CircleImpl.impl.setMap(jso, map.getJso());
+  public void setMap(Map map) {
+    CircleImpl.impl.setMap(jso, map);
   }
 
   @Override

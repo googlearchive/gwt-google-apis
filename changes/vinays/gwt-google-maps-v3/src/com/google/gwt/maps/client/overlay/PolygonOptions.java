@@ -16,7 +16,7 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.overlay.impl.PolygonOptionsImpl;
 
@@ -56,7 +56,7 @@ public class PolygonOptions implements HasPolygonOptions {
    * @see com.google.gwt.maps.client.overlay.HasPolygonOptions#getMap()
    */
   @Override
-  public HasMap getMap() {
+  public Map getMap() {
     return PolygonOptionsImpl.impl.getMap(jso);
   }
 
@@ -130,7 +130,7 @@ public class PolygonOptions implements HasPolygonOptions {
    * @see com.google.gwt.maps.client.overlay.HasPolygonOptions#setMap(com.google.gwt.maps.client.HasMap)
    */
   @Override
-  public void setMap(HasMap map) {
+  public void setMap(Map map) {
     PolygonOptionsImpl.impl.setMap(jso, map);
   }
 

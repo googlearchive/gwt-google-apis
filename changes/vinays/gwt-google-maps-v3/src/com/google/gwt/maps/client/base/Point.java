@@ -1,4 +1,4 @@
-/* Copyright (c) 2010 Vinay Inc.
+/* Copyright (c) 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,84 +14,42 @@
  */
 package com.google.gwt.maps.client.base;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.impl.PointImpl;
+
 
 /**
- * This class implements {@link HasPoint}.
- *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
+ * A point on a two-dimensional plane.
  */
-public class Point implements HasPoint {
+public class Point extends JavaScriptObject {
 
-  final private PointImpl impl;
-  final private JavaScriptObject jso;
+  public static native final Point newInstance(double x, double y) /*-{
+    return $wnd.google.maps.Point(x, y);
+  }-*/;
   
-  public Point(final PointImpl impl, final JavaScriptObject jso) {
-    this.impl = impl;
-    this.jso = jso;
-  }
-  
-  public Point(final JavaScriptObject jso) {
-    this.impl = GWT.create(PointImpl.class);
-    this.jso = jso;
-  }
-  
-  public Point(double x, double y) {
-    this.impl = GWT.create(PointImpl.class);
-    this.jso = impl.construct(x, y);
-  }
+  protected Point() {}
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasPoint#equalsTo(com.google.gwt.maps.client.base.HasPoint)
-   */
-  @Override
-  public boolean equalsTo(HasPoint other) {
-    return impl.equals(jso, other.getJso());
-  }
-  
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object other) {
-    if (other == null || !(other instanceof Point)) {
-      return false;
-    }
-    return equalsTo((HasPoint) other);
-  }
+  public native final boolean equalsTo(Point other) /*-{
+    return this.equals(other);
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    return impl.toString(jso);
-  }
+  public native final String getString() /*-{
+    return this.toString();
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasPoint#getJso()
-   */
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
+  public native final double getX() /*-{
+    return this.x;
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasPoint#getX()
-   */
-  @Override
-  public double getX() {
-    return impl.getX(jso);
-  }
+  public native final double getY() /*-{
+    return this.y;
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasPoint#getY()
-   */
-  @Override
-  public double getY() {
-    return impl.getY(jso);
-  }
+  public native final double setX(double x) /*-{
+    this.x = x;
+  }-*/;
+
+  public native final double setY(double y) /*-{
+    this.y = y;
+  }-*/;
 
 }

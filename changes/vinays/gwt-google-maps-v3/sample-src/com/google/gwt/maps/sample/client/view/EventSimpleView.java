@@ -15,7 +15,7 @@
 package com.google.gwt.maps.sample.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
@@ -89,7 +89,7 @@ public class EventSimpleView extends Composite implements Display {
   }
 
   @Override
-  public HasMap getMap() {
+  public Map getMap() {
     return mapWidget.getMap();
   }
 

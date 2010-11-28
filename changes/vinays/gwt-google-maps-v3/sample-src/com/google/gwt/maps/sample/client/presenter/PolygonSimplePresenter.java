@@ -15,9 +15,9 @@
 package com.google.gwt.maps.sample.client.presenter;
 
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.LatLngBounds;
 import com.google.gwt.maps.client.overlay.HasPolygon;
 import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.sample.client.Constant;
@@ -50,7 +50,7 @@ public class PolygonSimplePresenter implements Presenter<PolygonSimplePresenter.
      * 
      * new LatLngBounds(southWest, northEast);
      */
-    HasLatLngBounds createBounds(LatLng southWest, LatLng northEast);
+    LatLngBounds createBounds(LatLng southWest, LatLng northEast);
 
     /**
      * Create Polygon.
@@ -62,12 +62,12 @@ public class PolygonSimplePresenter implements Presenter<PolygonSimplePresenter.
     /**
      * Get embedded map's reference.
      */
-    HasMap getMap();
+    Map getMap();
 
     /**
      * Fit embedded map to the bounds.
      */
-    void fitBounds(HasLatLngBounds bounds);
+    void fitBounds(LatLngBounds bounds);
   }
   
   private Display display;
@@ -101,7 +101,7 @@ public class PolygonSimplePresenter implements Presenter<PolygonSimplePresenter.
     // Create bounds and fit map to it.
     final LatLng southWest = display.createLatLng(points[2][0], points[2][1]);
     final LatLng northEast = display.createLatLng(points[0][0], points[0][1]);
-    final HasLatLngBounds bounds = display.createBounds(southWest, northEast);
+    final LatLngBounds bounds = display.createBounds(southWest, northEast);
     display.fitBounds(bounds);
     
     // Create polygon with given LatLngs(points).

@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client.directions;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.ElementProvider;
 import com.google.gwt.maps.client.base.HasElementProvider;
@@ -56,8 +55,8 @@ public class DirectionsRendererOptions implements HasDirectionsRendererOptions {
    * @see com.google.gwt.maps.client.directions.HasDirectionsRendererOptions#getMap()
    */
   @Override
-  public HasMap getMap() {
-    return new Map(DirectionsRendererOptionsImpl.impl.getMap(jso));
+  public Map getMap() {
+    return DirectionsRendererOptionsImpl.impl.getMap(jso).cast();
   }
 
   /* (non-Javadoc)
@@ -149,12 +148,12 @@ public class DirectionsRendererOptions implements HasDirectionsRendererOptions {
    * @see com.google.gwt.maps.client.directions.HasDirectionsRendererOptions#setMap(com.google.gwt.maps.client.HasMap)
    */
   @Override
-  public void setMap(HasMap map) {
+  public void setMap(Map map) {
     if (map == null) {
       DirectionsRendererOptionsImpl.impl.setPanel(jso, null);
       return;
     }
-    DirectionsRendererOptionsImpl.impl.setMap(jso, map.getJso());
+    DirectionsRendererOptionsImpl.impl.setMap(jso, map);
   }
 
   /* (non-Javadoc)

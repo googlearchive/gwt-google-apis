@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.overlay.impl.MarkerOptionsImpl;
@@ -47,8 +46,8 @@ public class MarkerOptions implements HasMarkerOptions {
   }
 
   @Override
-  public HasMap getMap() {
-    return new Map(MarkerOptionsImpl.impl.getMap(jso));
+  public Map getMap() {
+    return MarkerOptionsImpl.impl.getMap(jso).cast();
   }
 
   @Override
@@ -112,8 +111,8 @@ public class MarkerOptions implements HasMarkerOptions {
   }
 
   @Override
-  public void setMap(HasMap map) {
-    MarkerOptionsImpl.impl.setMap(jso, map.getJso());
+  public void setMap(Map map) {
+    MarkerOptionsImpl.impl.setMap(jso, map);
   }
 
   @Override

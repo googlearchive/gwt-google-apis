@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasPoint;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.Point;
 import com.google.gwt.maps.client.overlay.impl.ProjectionImpl;
@@ -37,16 +36,16 @@ public class Projection implements HasProjection {
    * @see com.google.gwt.maps.client.overlay.HasProjection#fromLatLngToPoint(com.google.gwt.maps.client.base.HasLatLng)
    */
   @Override
-  public HasPoint fromLatLngToPoint(LatLng latLng) {
-    return new Point(ProjectionImpl.impl.fromLatLngToPoint(jso, latLng));
+  public Point fromLatLngToPoint(LatLng latLng) {
+    return ProjectionImpl.impl.fromLatLngToPoint(jso, latLng).cast();
   }
 
   /* (non-Javadoc)
    * @see com.google.gwt.maps.client.overlay.HasProjection#fromPointToLatLng(com.google.gwt.maps.client.base.HasPoint)
    */
   @Override
-  public LatLng fromPointToLatLng(HasPoint point) {
-    return ProjectionImpl.impl.fromPointToLatLng(jso, point.getJso()).cast();
+  public LatLng fromPointToLatLng(Point point) {
+    return ProjectionImpl.impl.fromPointToLatLng(jso, point).cast();
   }
 
   /* (non-Javadoc)

@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public interface HasPolyline extends HasJso {
   /**
    * Returns the map on which this poly is attached.
    */
-  HasMap getMap();
+  Map getMap();
 
   /**
    * Retrieves the first path.
@@ -41,7 +41,7 @@ public interface HasPolyline extends HasJso {
    * Renders this Polyline or Polygon on the specified map. If map is set to
    * null, the Poly will be removed.
    */
-  void setMap(HasMap map);
+  void setMap(Map map);
 
   void setOptions(HasPolylineOptions options);
 

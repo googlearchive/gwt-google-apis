@@ -16,7 +16,6 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.MVCObject;
@@ -50,8 +49,8 @@ public class Polygon extends MVCObject implements HasPolygon {
    * @see com.google.gwt.maps.client.overlay.HasPolygon#getMap()
    */
   @Override
-  public HasMap getMap() {
-    return new Map(PolygonImpl.impl.getMap(jso));
+  public Map getMap() {
+    return PolygonImpl.impl.getMap(jso).cast();
   }
 
   /* (non-Javadoc)
@@ -89,8 +88,8 @@ public class Polygon extends MVCObject implements HasPolygon {
    * @see com.google.gwt.maps.client.overlay.HasPolygon#setMap(com.google.gwt.maps.client.HasMap)
    */
   @Override
-  public void setMap(HasMap map) {
-    PolygonImpl.impl.setMap(jso, map.getJso());
+  public void setMap(Map map) {
+    PolygonImpl.impl.setMap(jso, map);
   }
 
   /* (non-Javadoc)

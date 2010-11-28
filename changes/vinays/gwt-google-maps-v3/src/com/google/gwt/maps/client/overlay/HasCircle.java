@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.HasMVCObject;
 
@@ -36,7 +36,7 @@ public interface HasCircle extends HasMVCObject {
   /**
    * Returns the map on which this circle is displayed.
    */
-  public HasMap getMap();
+  public Map getMap();
   
   /**
    * Returns the radius of this circle (in meters).
@@ -52,7 +52,7 @@ public interface HasCircle extends HasMVCObject {
    * Renders the circle on the specified map. If map is set to null, the circle
    * will be removed.
    */
-  public void setMap(HasMap map);
+  public void setMap(Map map);
   
   /**
    * Sets the radius of this circle (in meters).

@@ -15,7 +15,6 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 
@@ -86,11 +85,7 @@ public class Marker extends JavaScriptObject {
     return this.getIcon();
   }-*/;
   
-  public final HasMap getMap() {
-    return new Map(getMapImpl());
-  }
-  
-  private final native JavaScriptObject getMapImpl() /*-{
+  public final native Map getMap() /*-{
     return this.getMap();
   }-*/;
   
@@ -169,12 +164,8 @@ public class Marker extends JavaScriptObject {
   private final native void setIcon(JavaScriptObject image) /*-{
     this.setIcon(image);
   }-*/;
-  
-  public final void setMap(HasMap map) {
-    setMap(map.getJso());
-  }
 
-  private final native void setMap(JavaScriptObject map) /*-{
+  public final native void setMap(Map map) /*-{
     this.setMap(map);
   }-*/;
   

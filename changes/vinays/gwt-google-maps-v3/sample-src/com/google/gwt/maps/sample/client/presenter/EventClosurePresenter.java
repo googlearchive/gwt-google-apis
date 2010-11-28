@@ -15,12 +15,11 @@
 package com.google.gwt.maps.sample.client.presenter;
 
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.HasInfoWindow;
-import com.google.gwt.maps.client.base.HasLatLngBounds;
+import com.google.gwt.maps.client.Map;
+import com.google.gwt.maps.client.base.InfoWindow;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.LatLngBounds;
 import com.google.gwt.maps.client.event.EventCallback;
-import com.google.gwt.maps.client.mvc.MVCObject;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.Constant;
 import com.google.gwt.maps.sample.client.view.SampleView;
@@ -39,12 +38,12 @@ public class EventClosurePresenter implements Presenter<EventClosurePresenter.Di
   final private String viewLink;
 
   public static interface Display extends SampleView {
-    HasMap getMap();
-    void fitBounds(HasLatLngBounds bounds);
+    Map getMap();
+    void fitBounds(LatLngBounds bounds);
     LatLng createLatLng(double lat, double lng);
-    HasLatLngBounds createBounds(LatLng southWest, LatLng northEast);
+    LatLngBounds createBounds(LatLng southWest, LatLng northEast);
     Marker createMarkerAt(LatLng position);
-    HasInfoWindow createInfoWindow(String content);
+    InfoWindow createInfoWindow(String content);
     void addListener(Marker instance, String eventName, EventCallback callback);
     void clearInstanceListeners(Marker instance);
   }
@@ -105,12 +104,12 @@ public class EventClosurePresenter implements Presenter<EventClosurePresenter.Di
   }
 
   private void attachSecretMessage(final Marker marker, final int number) {
-    final HasInfoWindow infoWindow = display.createInfoWindow(message[number]);
+    final InfoWindow infoWindow = display.createInfoWindow(message[number]);
     display.addListener(marker, "click", new EventCallback() {
       
       @Override
       public void callback() {
-        infoWindow.open(display.getMap(), new MVCObject(marker));
+        infoWindow.open(display.getMap(), marker);
       }
     });
   }

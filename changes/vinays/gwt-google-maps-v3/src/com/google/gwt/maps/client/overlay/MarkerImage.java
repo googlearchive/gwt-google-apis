@@ -1,4 +1,4 @@
-/* Copyright (c) 2010 Vinay Inc.
+/* Copyright (c) 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,45 +15,43 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasPoint;
-import com.google.gwt.maps.client.base.HasSize;
+import com.google.gwt.maps.client.base.Point;
+import com.google.gwt.maps.client.base.Size;
 import com.google.gwt.maps.client.overlay.impl.MarkerImageImpl;
 
 /**
  * This class implements {@link HasMarkerImage}.
- *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
  */
 public class MarkerImage implements HasMarkerImage {
   
   public static class Builder {
     final private String url;
-    private JavaScriptObject size = null;
-    private JavaScriptObject origin = null;
-    private JavaScriptObject anchor = null;
-    private JavaScriptObject scaledSize = null;
+    private Size size = null;
+    private Point origin = null;
+    private Point anchor = null;
+    private Size scaledSize = null;
     
     public Builder(String url) {
       this.url = url;
     }
     
-    public Builder setSize(HasSize size) {
-      this.size = size.getJso();
+    public Builder setSize(Size size) {
+      this.size = size;
       return this;
     }
     
-    public Builder setOrigin(HasPoint origin) {
-      this.origin = origin.getJso();
+    public Builder setOrigin(Point origin) {
+      this.origin = origin;
       return this;
     }
     
-    public Builder setAnchor(HasPoint anchor) {
-      this.anchor = anchor.getJso();
+    public Builder setAnchor(Point anchor) {
+      this.anchor = anchor;
       return this;
     }
     
-    public Builder setScaledSize(HasSize scaledSize) {
-      this.scaledSize = scaledSize.getJso();
+    public Builder setScaledSize(Size scaledSize) {
+      this.scaledSize = scaledSize;
       return this;
     }
     

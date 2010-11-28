@@ -14,8 +14,8 @@
  */
 package com.google.gwt.maps.client;
 
-import com.google.gwt.maps.client.base.HasPoint;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.Point;
 
 /**
  */
@@ -24,25 +24,25 @@ public interface HasMapCanvasProjection extends HasJso {
   /**
    * Computes the geographical coordinates from pixel coordinates in the map's container.
    */
-  public LatLng fromContainerPixelToLatLng(HasPoint pixel);
+  public LatLng fromContainerPixelToLatLng(Point pixel);
 
   /**
    * Computes the geographical coordinates from pixel coordinates in the div
    * that holds the draggable map.
    */
-  public LatLng fromDivPixelToLatLng(HasPoint pixel);
+  public LatLng fromDivPixelToLatLng(Point pixel);
 
   /**
    * Computes the pixel coordinates of the given geographical location in the
    * DOM element the map's outer container.
    */
-  public HasPoint fromLatLngToContainerPixel(LatLng latLng);
+  public Point fromLatLngToContainerPixel(LatLng latLng);
 
   /**
    * Computes the pixel coordinates of the given geographical location in the
    * DOM element that holds the draggable map.
    */
-  public HasPoint fromLatLngToDivPixel(LatLng latLng);
+  public Point fromLatLngToDivPixel(LatLng latLng);
   
   /**
    * The width of the world in pixels in the current zoom level.

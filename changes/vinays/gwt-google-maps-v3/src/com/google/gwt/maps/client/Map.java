@@ -15,121 +15,94 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.LatLngBounds;
-import com.google.gwt.maps.client.impl.MapImpl;
-import com.google.gwt.maps.client.mvc.MVCObject;
 import com.google.gwt.maps.client.overlay.HasProjection;
 import com.google.gwt.maps.client.overlay.Projection;
 import com.google.gwt.user.client.Element;
 
 /**
  * Map java overlay.
- * 
- * This class extends {@link MVCObject}.
- *
  */
-public class Map extends MVCObject implements HasMap {
-  
-  final private JavaScriptObject jso;
-  
-  public Map(JavaScriptObject jso) {
-    this.jso = jso;
-  }
+public class Map extends JavaScriptObject {
   
   /**
    * Creates a new map inside of the given HTML container, which is typically a DIV element.
    */
-  public Map(Element mapDiv) {
-    this(MapImpl.impl.construct(mapDiv));
-  }
+  public static native final Map newInstance(Element div) /*-{
+    return new $wnd.google.maps.Map(div);
+  }-*/;
   
   /**
    * Creates a new map inside of the given HTML container, which is typically a DIV element.
-   * 
    * With map options.
    */
-  public Map(Element mapDiv, HasMapOptions mapOptions) {
-    this(MapImpl.impl.construct(mapDiv, mapOptions.getJso()));
-  }
+  public static native final Map newInstance(Element div, JavaScriptObject opts) /*-{
+    return new $wnd.google.maps.Map(div, opts);
+  }-*/;
+  
+  protected Map() {}
 
-  @Override
-  public void fitBounds(HasLatLngBounds bounds) {
-    MapImpl.impl.fitBounds(jso, bounds.getJso());
-  }
+  public native final void fitBounds(LatLngBounds bounds) /*-{
+    this.fitBounds(bounds);
+  }-*/;
 
-  @Override
-  public HasLatLngBounds getBounds() {
-    return new LatLngBounds(MapImpl.impl.getBounds(jso));
-  }
+  public native final LatLngBounds getBounds() /*-{
+    return this.getBounds();
+  }-*/;
 
-  @Override
-  public LatLng getCenter() {
-    return MapImpl.impl.getCenter(jso).cast();
-  }
+  public native final LatLng getCenter() /*-{
+    return this.getCenter();
+  }-*/;
 
-  @Override
-  public Element getDiv() {
-    return MapImpl.impl.getDiv(jso);
-  }
+  public native final Element getDiv() /*-{
+    return this.getDiv();
+  }-*/;
 
-  @Override
-  public String getMapTypeId() {
-    return MapImpl.impl.getMapTypeId(jso);
-  }
+  public native final String getMapTypeId() /*-{
+    return this.getMapTypeId();
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.HasMap#getProjection()
-   */
-  @Override
-  public HasProjection getProjection() {
-    return new Projection(MapImpl.impl.getProjection(jso));
-  }
+  // TODO: return concrete type {@link Projection}.
+  public native final JavaScriptObject getProjectionJso() /*-{
+    return this.getProjection();
+  }-*/;
 
-  @Override
-  public int getZoom() {
-    return MapImpl.impl.getZoom(jso);
-  }
+  public final HasProjection getProjection() {
+    return new Projection(getProjectionJso());
+  };
 
-  @Override
-  public void panBy(int x, int y) {
-    MapImpl.impl.panBy(jso, x, y);
-  }
+  public native final int getZoom() /*-{
+    return this.getZoom();
+  }-*/;
 
-  @Override
-  public void panTo(LatLng latLng) {
-    MapImpl.impl.panTo(jso, latLng);
-  }
+  public native final void panBy(int x, int y) /*-{
+    this.panBy(x, y);
+  }-*/;
 
-  @Override
-  public void panToBounds(HasLatLngBounds bounds) {
-    MapImpl.impl.panToBounds(jso, bounds.getJso());
-  }
+  public native final void panTo(LatLng latLng) /*-{
+    this.panTo(latLng);
+  }-*/;
 
-  @Override
-  public void setCenter(LatLng latLng) {
-    MapImpl.impl.setCenter(jso, latLng);
-  }
+  public native final void panToBounds(LatLngBounds bounds) /*-{
+    this.panToBounds(bounds);
+  }-*/;
 
-  @Override
-  public void setMapTypeId(String mapTypeId) {
-    MapImpl.impl.setMapTypeId(jso, mapTypeId);
-  }
+  public native final void setCenter(LatLng latLng) /*-{
+    this.setCenter(latLng);
+  }-*/;
 
-  @Override
-  public void setOptions(HasMapOptions options) {
-    MapImpl.impl.setOptions(jso, options.getJso());
-  }
+  public native final void setMapTypeId(String mapTypeId) /*-{
+    this.setMapTypeId(mapTypeId);
+  }-*/;
 
-  @Override
-  public void setZoom(int zoom) {
-    MapImpl.impl.setZoom(jso, zoom);
-  }
+  // TODO: replace jso with concrete type {@link MapOptions}.
+  public native final void setOptions(JavaScriptObject options) /*-{
+    this.setOptions(options);
+  }-*/;
 
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
+  public native final void setZoom(int zoom) /*-{
+    this.setZoom(zoom);
+  }-*/;
 
 }

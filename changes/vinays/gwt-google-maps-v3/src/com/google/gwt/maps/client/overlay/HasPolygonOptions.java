@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public interface HasPolygonOptions extends HasJso {
 
   public double getFillOpacity();
 
-  public HasMap getMap();
+  public Map getMap();
 
   public List<List<LatLng>> getPaths();
 
@@ -55,7 +55,7 @@ public interface HasPolygonOptions extends HasJso {
   /**
    * Map on which to display Polygon.
    */
-  public void setMap(HasMap map);
+  public void setMap(Map map);
 
   /**
    * The ordered sequence of coordinates that designates a closed loop. Unlike

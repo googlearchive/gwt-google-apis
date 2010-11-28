@@ -18,7 +18,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.geocoder.GeocoderCallback;
 import com.google.gwt.maps.client.geocoder.HasGeocoder;
@@ -68,7 +68,7 @@ public class GeocoderSimplePresenter implements Presenter<GeocoderSimplePresente
     /**
      * Get embedded map.
      */
-    HasMap getMap();
+    Map getMap();
     
   }
   

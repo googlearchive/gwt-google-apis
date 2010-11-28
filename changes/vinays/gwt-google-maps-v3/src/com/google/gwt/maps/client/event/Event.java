@@ -102,8 +102,8 @@ public class Event {
    * Triggers the given event. All arguments after eventName are passed as
    * arguments to the listeners.
    */
-  public static void trigger(HasJso instance, String eventName) {
-    EventImpl.impl.trigger(instance.getJso(), eventName);
+  public static void trigger(JavaScriptObject instance, String eventName) {
+    EventImpl.impl.trigger(instance, eventName);
   }
 
 }

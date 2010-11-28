@@ -15,8 +15,8 @@
 package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.base.HasPoint;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.Point;
 
 /**
  * 
@@ -24,7 +24,7 @@ import com.google.gwt.maps.client.base.LatLng;
  */
 public interface HasProjection extends HasJso {
 
-  HasPoint fromLatLngToPoint(LatLng latLng);
+  Point fromLatLngToPoint(LatLng latLng);
 
-  LatLng fromPointToLatLng(HasPoint point);
+  LatLng fromPointToLatLng(Point point);
 }

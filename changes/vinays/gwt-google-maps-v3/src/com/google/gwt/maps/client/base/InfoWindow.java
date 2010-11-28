@@ -15,80 +15,57 @@
 package com.google.gwt.maps.client.base;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.HasMap;
-import com.google.gwt.maps.client.base.impl.InfoWindowImpl;
-import com.google.gwt.maps.client.mvc.HasMVCObject;
-import com.google.gwt.maps.client.mvc.MVCObject;
 
 /**
- * This class implements {@link HasInfoWindow}.
- *
+ * An overlay that looks like a bubble and is often connected to a marker.
  */
-public class InfoWindow extends MVCObject implements HasInfoWindow {
-
-  private JavaScriptObject jso;
+public class InfoWindow extends JavaScriptObject {
   
+  public static final native InfoWindow newInstance() /*-{
+    return new $wnd.google.maps.InfoWindow();
+  }-*/;
   
-  public InfoWindow(JavaScriptObject jso) {
-    this.jso = jso;
-  }
+  public static final native InfoWindow newInstance(InfoWindowOptions opts) /*-{
+    return new $wnd.google.maps.InfoWindow(opts);
+  }-*/;
   
-  public InfoWindow(HasInfoWindowOptions options) {
-    this(InfoWindowImpl.impl.construct(options.getJso()));
-  }
+  protected InfoWindow() {}
   
-  public InfoWindow() {
-    this(InfoWindowImpl.impl.construct());
-  }
+  // TODO: replace JSO with concrete type {@link Map}, {@link MVCObject}.
+  public final native void open(JavaScriptObject map, JavaScriptObject anchor) /*-{
+    this.open(map, anchor);
+  }-*/;
 
-  @Override
-  public void open(HasMap map, HasMVCObject anchor) {
-    InfoWindowImpl.impl.open(jso, map.getJso(), anchor.getJso());
-  }
-
-  @Override
-  public void close() {
-    InfoWindowImpl.impl.close(jso);
-  }
-
-  @Override
-  public String getContent() {
-    return InfoWindowImpl.impl.getContent(jso);
-  }
-
-  @Override
-  public LatLng getPosition() {
-    return InfoWindowImpl.impl.getPosition(jso).cast();
-  }
-
-  @Override
-  public int getZIndex() {
-    return InfoWindowImpl.impl.getZIndex(jso);
-  }
-
-  @Override
-  public void setContent(String html) {
-    InfoWindowImpl.impl.setContent(jso, html);
-  }
-
-  @Override
-  public void setOptions(HasInfoWindowOptions options) {
-    InfoWindowImpl.impl.setOptions(jso, options.getJso());
-  }
-
-  @Override
-  public void setPosition(LatLng position) {
-    InfoWindowImpl.impl.setPosition(jso, position);
-  }
-
-  @Override
-  public void setZIndex(int zIndex) {
-    InfoWindowImpl.impl.setZIndex(jso, zIndex);
-  }
-
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
+  public final native void close() /*-{
+    this.close();
+  }-*/;
+  
+  public final native String getContent() /*-{
+    return this.getContent();
+  }-*/;
+  
+  public final native LatLng getPosition() /*-{
+    return this.getPosition();
+  }-*/;
+  
+  public final native int getZIndex() /*-{
+    return this.getZIndex();
+  }-*/;
+  
+  public final native void setContent(String html) /*-{
+    this.setContent(html);
+  }-*/;
+  
+  public final native void setOptions(InfoWindowOptions options) /*-{
+    this.setOptions(options);
+  }-*/;
+  
+  public final native void setPosition(LatLng position) /*-{
+    this.setPosition(position);
+  }-*/;
+  
+  public final native void setZIndex(int zIndex) /*-{
+    this.setZIndex(zIndex);
+  }-*/;
 
 }

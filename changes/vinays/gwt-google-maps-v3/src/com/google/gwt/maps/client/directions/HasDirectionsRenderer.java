@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.directions;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.HasElementProvider;
 
 /**
@@ -34,7 +34,7 @@ public interface HasDirectionsRenderer extends HasJso {
   /**
    * Returns the map on which the DirectionsResult is rendered.
    */
-  public HasMap getMap();
+  public Map getMap();
 
   /**
    * Returns the panel <div> in which the DirectionsResult is rendered.
@@ -57,7 +57,7 @@ public interface HasDirectionsRenderer extends HasJso {
    * This method specifies the map on which directions will be rendered. Pass
    * null to remove the directions from the map.
    */
-  public void setMap(HasMap map);
+  public void setMap(Map map);
 
   /**
    * This method renders the directions in a <div>. Pass null to remove the

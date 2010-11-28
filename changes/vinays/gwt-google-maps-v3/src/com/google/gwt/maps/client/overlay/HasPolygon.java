@@ -14,7 +14,7 @@
  */
 package com.google.gwt.maps.client.overlay;
 
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.HasMVCObject;
 import com.google.gwt.maps.client.mvc.MVCObject;
@@ -34,7 +34,7 @@ public interface HasPolygon extends HasMVCObject {
   /**
    * Returns the map on which this poly is attached.
    */
-  HasMap getMap();
+  Map getMap();
   
   /**
    * Retrieves the first path.
@@ -50,7 +50,7 @@ public interface HasPolygon extends HasMVCObject {
    * Renders this Polyline or Polygon on the specified map. If map is set to
    * null, the Poly will be removed.
    */
-  void setMap(HasMap map);
+  void setMap(Map map);
   
   void setOptions(HasPolygonOptions options);
   

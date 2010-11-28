@@ -15,7 +15,7 @@
 package com.google.gwt.maps.sample.client.presenter;
 
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.event.EventCallback;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.sample.client.Constant;
@@ -37,7 +37,7 @@ public class EventSimplePresenter implements Presenter<EventSimplePresenter.Disp
     
     void clearInstanceListeners(Marker instance);
     
-    HasMap getMap();
+    Map getMap();
     
     Marker getMarker();
   }

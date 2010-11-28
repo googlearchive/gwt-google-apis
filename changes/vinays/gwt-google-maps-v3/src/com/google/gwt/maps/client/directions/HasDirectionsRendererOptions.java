@@ -15,7 +15,7 @@
 package com.google.gwt.maps.client.directions;
 
 import com.google.gwt.maps.client.HasJso;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.HasElementProvider;
 import com.google.gwt.maps.client.overlay.HasMarkerOptions;
 import com.google.gwt.maps.client.overlay.HasPolylineOptions;
@@ -32,7 +32,7 @@ public interface HasDirectionsRendererOptions extends HasJso {
 
   public boolean isHideRouteList();
 
-  public HasMap getMap();
+  public Map getMap();
 
   public HasMarkerOptions getMarkerOptions();
   
@@ -67,7 +67,7 @@ public interface HasDirectionsRendererOptions extends HasJso {
   /**
    * Map on which to display the directions.
    */
-  public void setMap(HasMap map);
+  public void setMap(Map map);
 
   /**
    * Options for the markers. All markers rendered by the DirectionsRenderer

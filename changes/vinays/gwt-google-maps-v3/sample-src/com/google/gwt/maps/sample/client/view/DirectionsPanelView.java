@@ -16,7 +16,7 @@ package com.google.gwt.maps.sample.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.maps.client.HasMap;
+import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
@@ -170,7 +170,7 @@ public class DirectionsPanelView extends Composite implements Display {
    * #getMap()
    */
   @Override
-  public HasMap getMap() {
+  public Map getMap() {
     return mapWidget.getMap();
   }
 

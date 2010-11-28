@@ -1,4 +1,4 @@
-/* Copyright (c) 2010 Vinay Inc.
+/* Copyright (c) 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,84 +14,42 @@
  */
 package com.google.gwt.maps.client.base;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.maps.client.base.impl.SizeImpl;
 
 /**
- * This class implements {@link HasSize}.
- *
- * @author vinay.sekhri@gmail.com (Vinay Sekhri)
+ * Two-dimensional size, where width is the distance on the x-axis, and height is
+ * the distance on the y-axis.
  */
-public class Size implements HasSize {
+public class Size extends JavaScriptObject {
 
-  final private SizeImpl impl;
-  final private JavaScriptObject jso;
+  public static native final Size newInstance(int width, int height) /*-{
+    return new $wnd.google.maps.Size(width, height);
+  }-*/;
+
+  protected Size() {}
+
+  public native final boolean equalsTo(Size other) /*-{
+    return this.equals(other);
+  }-*/;
+
+  public native final int getHeight() /*-{
+    return this.height;
+  }-*/;
+
+  public native final int getWidth() /*-{
+    return this.width;
+  }-*/;
   
-  public Size(final SizeImpl impl, final JavaScriptObject jso) {
-    this.impl = impl;
-    this.jso = jso;
-  }
-  
-  public Size(final JavaScriptObject jso) {
-    this.impl = GWT.create(SizeImpl.class);
-    this.jso = jso;
-  }
+  public native final String getString() /*-{
+    return this.toString();
+  }-*/;
 
-  public Size(int width, int height) {
-    this.impl = GWT.create(SizeImpl.class);
-    this.jso = impl.construct(width, height);
-  }
+  public native final int setHeight(int height) /*-{
+    this.height = height;
+  }-*/;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasSize#equalsTo(com.google.gwt.maps.client.base.HasSize)
-   */
-  @Override
-  public boolean equalsTo(HasSize other) {
-    return impl.equals(jso, other.getJso());
-  }
-  
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object other) {
-    if (other == null || !(other instanceof Size)) {
-      return false;
-    }
-    return equalsTo((HasSize) other);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasSize#getHeight()
-   */
-  @Override
-  public int getHeight() {
-    return impl.getHeight(jso);
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasSize#getJso()
-   */
-  @Override
-  public JavaScriptObject getJso() {
-    return jso;
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.gwt.maps.client.base.HasSize#getWidth()
-   */
-  @Override
-  public int getWidth() {
-    return impl.getWidth(jso);
-  }
-  
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    return impl.toString(jso);
-  }
+  public native final int setWidth(int width) /*-{
+    this.width = width;
+  }-*/;
 
 }

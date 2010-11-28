@@ -16,7 +16,6 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.Map;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.mvc.MVCObject;
@@ -46,8 +45,8 @@ public class Polyline extends MVCObject implements HasPolyline {
   }
 
   @Override
-  public HasMap getMap() {
-    return new Map(PolylineImpl.impl.getMap(jso));
+  public Map getMap() {
+    return PolylineImpl.impl.getMap(jso).cast();
   }
 
   @Override
@@ -61,8 +60,8 @@ public class Polyline extends MVCObject implements HasPolyline {
   }
 
   @Override
-  public void setMap(HasMap map) {
-    PolylineImpl.impl.setMap(jso, map.getJso());
+  public void setMap(Map map) {
+    PolylineImpl.impl.setMap(jso, map);
   }
 
   @Override

@@ -16,7 +16,6 @@ package com.google.gwt.maps.client.overlay;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.jsio.client.Exported;
-import com.google.gwt.maps.client.HasMap;
 import com.google.gwt.maps.client.HasMapCanvasProjection;
 import com.google.gwt.maps.client.HasMapPanes;
 import com.google.gwt.maps.client.Map;
@@ -54,8 +53,8 @@ public abstract class OverlayView extends MVCObject implements HasOverlayView {
   }
   
   @Override
-  public HasMap getMap() {
-    return new Map(OverlayViewImpl.impl.getMap(jso));
+  public Map getMap() {
+    return OverlayViewImpl.impl.getMap(jso).cast();
   }
   
   @Override
@@ -69,8 +68,8 @@ public abstract class OverlayView extends MVCObject implements HasOverlayView {
   }
   
   @Override
-  public void setMap(HasMap map) {
-    OverlayViewImpl.impl.setMap(jso, map.getJso());
+  public void setMap(Map map) {
+    OverlayViewImpl.impl.setMap(jso, map);
   }
   
   @Exported

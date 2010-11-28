@@ -15,8 +15,8 @@
 package com.google.gwt.maps.client;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.maps.client.base.HasLatLngBounds;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.base.LatLngBounds;
 import com.google.gwt.maps.client.event.Event;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -30,14 +30,14 @@ public class MapWidget extends Widget {
 
   final private static String EXCEPTION_NOT_ATTACHED
       = "Map widget must be attached to window's document.";
-  private HasMap map;
+  private Map map;
   
   public MapWidget(HasMapOptions options) {
     setElement(Document.get().createDivElement());
-    map = new Map(getElement(), options);
+    map = Map.newInstance(getElement(), options.getJso());
   }
   
-  public HasMap getMap() {
+  public Map getMap() {
     return map;
   }
 
@@ -46,7 +46,7 @@ public class MapWidget extends Widget {
    * 
    * Note: Call this *after* you add it to a LayoutPanel. It will throw an exception if not done so.
    */
-  public void fitBounds(HasLatLngBounds bounds) {
+  public void fitBounds(LatLngBounds bounds) {
     if (!this.isAttached()) {
       throw new IllegalStateException(EXCEPTION_NOT_ATTACHED);
     }
