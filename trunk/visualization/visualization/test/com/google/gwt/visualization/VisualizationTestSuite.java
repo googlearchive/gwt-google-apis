@@ -22,6 +22,7 @@ import com.google.gwt.visualization.client.AreaChartTest;
 import com.google.gwt.visualization.client.ArrowFormatTest;
 import com.google.gwt.visualization.client.BarChartTest;
 import com.google.gwt.visualization.client.BarFormatTest;
+import com.google.gwt.visualization.client.ChartAreaTest;
 import com.google.gwt.visualization.client.ColorFormatTest;
 import com.google.gwt.visualization.client.ColorTest;
 import com.google.gwt.visualization.client.ColumnChartTest;
@@ -60,6 +61,7 @@ import com.google.gwt.visualization.client.SelectionTest;
 import com.google.gwt.visualization.client.TableTest;
 import com.google.gwt.visualization.client.TimeOfDayTest;
 import com.google.gwt.visualization.client.ToolbarTest;
+import com.google.gwt.visualization.client.visualizations.corechart.OptionsTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -79,6 +81,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(ArrowFormatTest.class);
     suite.addTestSuite(BarChartTest.class);
     suite.addTestSuite(BarFormatTest.class);
+    suite.addTestSuite(ChartAreaTest.class);
     suite.addTestSuite(ColorFormatTest.class);
     suite.addTestSuite(ColorTest.class);
     suite.addTestSuite(ColumnChartTest.class);
@@ -117,6 +120,10 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(TableTest.class);
     suite.addTestSuite(TimeOfDayTest.class);
     suite.addTestSuite(ToolbarTest.class);
+
+    // Corechart tests.
+    suite.addTestSuite(OptionsTest.class);
+
     return suite;
   }
 }
