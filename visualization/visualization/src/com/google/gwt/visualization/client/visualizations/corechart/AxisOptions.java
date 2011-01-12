@@ -43,6 +43,10 @@ public class AxisOptions extends AbstractDrawOptions {
     this.baselineColor = baselineColor;
   }-*/;
 
+  public final native void setDirection(int direction) /*-{
+    this.direction = direction;
+  }-*/;
+
   public final native void setIsLogScale(boolean isLogScale) /*-{
     this.logScale = isLogScale;
   }-*/;
@@ -53,6 +57,10 @@ public class AxisOptions extends AbstractDrawOptions {
 
   public final native void setMinValue(double min) /*-{
     this.minValue = min;
+  }-*/;
+
+  public final native void setTextPosition(String position) /*-{
+    this.textPosition = position;
   }-*/;
 
   public final native void setTextStyle(TextStyle style) /*-{

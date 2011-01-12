@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -43,7 +43,7 @@ import java.util.List;
  * used. For example, {@link java.util.Collections#min(java.util.Collection)},
  * {@link java.util.Collections#max(java.util.Collection)}, {@link
  * java.util.Collections#binarySearch(List, Object)} or Guava utilities such
- * as {@link com.google.common.collect.Iterables.filter} etc.
+ * as {@link com.google.common.collect.Iterable.filter} etc.
  * Passing around {@code DataColumn} object is also easier than passing around a
  * data table along with the column index integer.
  *
@@ -82,17 +82,17 @@ public abstract class DataColumn<T> extends AbstractList<T> {
   public final ColumnType getColumnType() {
    return data.getColumnType(columnIndex);
   }
-  
+
   /** Returns the column label. @see AbstractDataTable#getColumnLabel(int) */
   public final String getColumnLabel() {
     return data.getColumnLabel(columnIndex);
   }
-  
+
   /** Returns the column index. */
   public final int getColumnIndex() {
     return columnIndex;
   }
-  
+
   /** Returns the underlying table that this object reads from or writes to. */
   public final AbstractDataTable getDataTable() {
     return data;
@@ -106,7 +106,7 @@ public abstract class DataColumn<T> extends AbstractList<T> {
    * Sets the cell value at {@code row} to {@code value} and returns the
    * previous cell value. Unsupported unless the underlying table is an instance
    * of {@link DataTable}.
-   * 
+   *
    * <p>When the previous value isn't need, use {@link #setValue(int, Object)}
    * for better performance.
    */
@@ -138,13 +138,13 @@ public abstract class DataColumn<T> extends AbstractList<T> {
 
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<?> of(AbstractDataTable table, String columnId) {
     return of(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<?> of(AbstractDataTable table, int columnIndex) {
     ColumnType columnType = table.getColumnType(columnIndex);
@@ -165,16 +165,16 @@ public abstract class DataColumn<T> extends AbstractList<T> {
         throw new AssertionError(columnType.name());
     }
   }
-  
+
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<Boolean> booleans(AbstractDataTable table, String columnId) {
     return booleans(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<Boolean> booleans(AbstractDataTable table, int columnIndex) {
     return new PrimitiveDataColumn<Boolean>(table, columnIndex, ColumnType.BOOLEAN) {
@@ -188,16 +188,16 @@ public abstract class DataColumn<T> extends AbstractList<T> {
       }
     };
   }
-  
+
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<Integer> integers(AbstractDataTable table, String columnId) {
     return integers(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<Integer> integers(AbstractDataTable table, int columnIndex) {
     return new PrimitiveDataColumn<Integer>(table, columnIndex, ColumnType.NUMBER) {
@@ -211,7 +211,7 @@ public abstract class DataColumn<T> extends AbstractList<T> {
       }
     };
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   static DataColumn<Number> numbers(AbstractDataTable table, int columnIndex) {
     return new PrimitiveDataColumn<Number>(table, columnIndex, ColumnType.NUMBER) {
@@ -225,16 +225,16 @@ public abstract class DataColumn<T> extends AbstractList<T> {
       }
     };
   }
-  
+
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<Double> doubles(AbstractDataTable table, String columnId) {
     return doubles(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<Double> doubles(AbstractDataTable table, int columnIndex) {
     return new PrimitiveDataColumn<Double>(table, columnIndex, ColumnType.NUMBER) {
@@ -248,16 +248,16 @@ public abstract class DataColumn<T> extends AbstractList<T> {
       }
     };
   }
-  
+
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<String> strings(AbstractDataTable table, String columnId) {
     return strings(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<String> strings(AbstractDataTable table, int columnIndex) {
     return new DataColumn<String>(table, columnIndex, ColumnType.STRING) {
@@ -269,32 +269,32 @@ public abstract class DataColumn<T> extends AbstractList<T> {
       void setNonNullValue(int row, String value) {
         ((DataTable) data).setValue(row, columnIndex, value);
       }
-    };  
+    };
   }
-  
+
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<Date> dates(AbstractDataTable table, String columnId) {
     return dates(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<Date> dates(AbstractDataTable table, int columnIndex) {
     return datetimes(table, columnIndex);
   }
-  
+
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<Date> datetimes(AbstractDataTable table, String columnId) {
     return datetimes(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<Date> datetimes(AbstractDataTable table, int columnIndex) {
     return new DataColumn<Date>(table, columnIndex, ColumnType.DATE, ColumnType.DATETIME) {
@@ -308,16 +308,16 @@ public abstract class DataColumn<T> extends AbstractList<T> {
       }
     };
   }
-  
+
   /**
    * Returns the column identified by {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if {@code columnId} is not found
+   *
+   * @throws IllegalArgumentException if {@code columnId} is not found
    */
   public static DataColumn<TimeOfDay> timeOfDays(AbstractDataTable table, String columnId) {
     return timeOfDays(table, getColumnIndex(table, columnId));
   }
-  
+
   /** Returns the column identified by {@code columnIndex} in {@code table}. */
   public static DataColumn<TimeOfDay> timeOfDays(AbstractDataTable table, int columnIndex) {
     return new DataColumn<TimeOfDay>(table, columnIndex, ColumnType.TIMEOFDAY) {
@@ -331,9 +331,9 @@ public abstract class DataColumn<T> extends AbstractList<T> {
       }
     };
   }
-  
+
   /**
-   * Returns a list of all the columns in the specified table, in the order 
+   * Returns a list of all the columns in the specified table, in the order
    * they appear in the table.
    */
   public static List<DataColumn<?>> getAllColumns(AbstractDataTable dataTable) {
@@ -343,14 +343,14 @@ public abstract class DataColumn<T> extends AbstractList<T> {
     }
     return columns;
   }
- 
-  /** Sets the value of {@code row}. {@code value} is not null. */ 
+
+  /** Sets the value of {@code row}. {@code value} is not null. */
   abstract void setNonNullValue(int row, T value);
-  
+
   /**
    * Returns the column index for {@code columnId} in {@code table}.
-   * 
-   * @throw IllegalArgumentException if that column ID is not found
+   *
+   * @throws IllegalArgumentException if that column ID is not found
    */
   private static int getColumnIndex(AbstractDataTable table, String columnId) {
     int index = table.getColumnIndex(columnId);
@@ -361,7 +361,7 @@ public abstract class DataColumn<T> extends AbstractList<T> {
   }
 
   private static abstract class PrimitiveDataColumn<T> extends DataColumn<T> {
-    
+
     PrimitiveDataColumn(
         AbstractDataTable table, int columnIndex, ColumnType columnType) {
       super(table, columnIndex, columnType);

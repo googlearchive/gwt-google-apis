@@ -20,6 +20,8 @@ import com.google.gwt.ajaxloader.client.ArrayHelper;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.ChartArea;
+import com.google.gwt.visualization.client.Color;
 import com.google.gwt.visualization.client.LegendPosition;
 import com.google.gwt.visualization.client.visualizations.corechart.CoreChart.Type;
 
@@ -38,8 +40,20 @@ public class Options extends AbstractDrawOptions {
   protected Options() {
   }
 
+  public final native void setAxisTitlesPosition(String position) /*-{
+    this.axisTitlesPosition = position;
+  }-*/;
+
   public final native void setBackgroundColor(String color) /*-{
     this.backgroundColor = color;
+  }-*/;
+
+  public final native void setBackgroundColor(Color color) /*-{
+    this.backgroundColor = color;
+  }-*/;
+
+  public final native void setChartArea(ChartArea chartArea) /*-{
+    this.chartArea = chartArea;
   }-*/;
 
   public final native void setColors(JsArrayString colors) /*-{

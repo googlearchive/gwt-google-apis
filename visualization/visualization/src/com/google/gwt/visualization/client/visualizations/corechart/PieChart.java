@@ -63,8 +63,16 @@ public class PieChart extends CoreChart {
       this.is3D = is3D;
     }-*/;
 
+    public final native void setPieResidueSliceLabel(String label) /*-{
+      this.pieResidueSliceLabel = label;
+    }-*/;
+
     public final native void setPieSliceText(String text) /*-{
       this.pieSliceText = text;
+    }-*/;
+
+    public final native void setPieSliceTextStyle(TextStyle textStyle) /*-{
+      this.pieSliceTextStyle = textStyle;
     }-*/;
 
     public final native void setSliceVisibilityThreshold(double angle) /*-{
