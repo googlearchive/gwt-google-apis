@@ -62,6 +62,9 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
       this.allowHtml = allowHtml;
     }-*/;
 
+    /**
+     * Use {@link #setNodeClass(String)} instead.
+     */
     @Deprecated
     public final native void setColor(String color) /*-{
       this.color = color;
@@ -75,6 +78,9 @@ public class OrgChart extends Visualization<OrgChart.Options> implements
       this.selectedNodeClass = selectedNodeClass;
     }-*/;
 
+    /**
+     * Use {@link #setSelectedNodeClass(String)} instead.
+     */
     @Deprecated
     public final native void setSelectionColor(String color) /*-{
       this.selectionColor = color;
