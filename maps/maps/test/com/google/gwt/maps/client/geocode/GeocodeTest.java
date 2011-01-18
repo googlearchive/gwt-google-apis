@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -110,7 +110,7 @@ public class GeocodeTest extends MapsTestCase {
           "{\"id\":\"p1\", \"address\":\"10 10th St NW, Atlanta, GA 30309, USA\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"US\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"GA\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"Fulton\", \"Locality\":{\"LocalityName\":\"Atlanta\", \"Thoroughfare\":{\"ThoroughfareName\":\"10 10th St NW\"}, \"PostalCode\":{\"PostalCodeNumber\":\"30309\"}}}}}, \"Accuracy\":8}, \"ExtendedData\": {\"LatLonBox\": {\"north\": 33.7846417,\"south\": 33.7783464,\"east\": -84.3849262,\"west\": -84.3912214}},\"Point\":{\"coordinates\":[-84.388042,33.781479,0]}}",
           "10 10th st nw", "atlanta", "30309", "fulton", "ga", "us"), //
       new PlacemarkMock(
-          "Domkloster 3, 50667 Köln, Deutschland", //  
+          "Domkloster 3, 50667 Köln, Deutschland", //
           "{\"id\":\"p1\", \"address\":\"Domkloster, 50667 Altstadt-Nord, K�ln, Germany\", \"AddressDetails\":{\"Country\":{\"CountryNameCode\":\"DE\", \"AdministrativeArea\":{\"AdministrativeAreaName\":\"Nordrhein-Westfalen\", \"SubAdministrativeArea\":{\"SubAdministrativeAreaName\":\"K�ln\", \"Locality\":{\"LocalityName\":\"K�ln\", \"DependentLocality\":{\"DependentLocalityName\":\"Altstadt-Nord\", \"Thoroughfare\":{\"ThoroughfareName\":\"Domkloster\"}, \"PostalCode\":{\"PostalCodeNumber\":\"50667\"}}}}}}, \"Accuracy\":6}, \"ExtendedData\": {\"LatLonBox\": {\"north\": 50.9438241, \"south\": 50.9375288, \"east\": 6.9601959, \"west\": 6.9539007}},\"Point\":{\"coordinates\":[6.956613,50.940872,0]}}", // Cologne
           "Domkloster", "K�ln", "50667", "K�ln", "Nordrhein-Westfalen",
           "DE"),
@@ -180,7 +180,7 @@ public class GeocodeTest extends MapsTestCase {
     loadApi(new Runnable() {
       public void run() {
 
-        final String badTestAddress = "123 Main St, Googleville";
+        final String badTestAddress = "123 Main St, Googleville CX";
         Geocoder geocoder = new Geocoder();
         geocoder.getLatLng(badTestAddress, new LatLngCallback() {
           public void onFailure() {
@@ -190,7 +190,7 @@ public class GeocodeTest extends MapsTestCase {
 
           public void onSuccess(LatLng point) {
             // This was supposed to be a bad address.
-            assertTrue("Geocode of " + badTestAddress + " failed.", false);
+            assertTrue("Geocode of " + badTestAddress + " suceeded, but was supposed to fail.", false);
           }
         });
       }
