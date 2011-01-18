@@ -76,6 +76,10 @@ public class Options extends AbstractDrawOptions {
     this.fontSize = fontSize;
   }-*/;
 
+  public final native void setGridlineColor(String color) /*-{
+    this.gridlineColor = color;
+  }-*/;
+
   public final native void setHAxisOptions(AxisOptions options) /*-{
     this.hAxis = options;
   }-*/;

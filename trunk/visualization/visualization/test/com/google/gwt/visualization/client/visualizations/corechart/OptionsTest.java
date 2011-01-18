@@ -52,6 +52,7 @@ public class OptionsTest extends VisualizationTest {
         options.setColors("pink", "black", "white");
         options.setFontName("Verbena");
         options.setFontSize(12);
+        options.setGridlineColor("blue");
         options.setHeight(400);
         options.setLegend(LegendPosition.RIGHT);
         TextStyle textStyle = TextStyle.create();
