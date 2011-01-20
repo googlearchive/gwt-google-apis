@@ -34,12 +34,13 @@ public class LineDemo implements LeftTabPanel.WidgetProvider {
     options.setHeight(240);
     options.setTitle("Company Performance");
     options.setWidth(400);
+    options.setInterpolateNulls(true);
     AxisOptions vAxisOptions = AxisOptions.create();
     vAxisOptions.setMinValue(0);
     vAxisOptions.setMaxValue(2000);
     options.setVAxisOptions(vAxisOptions);
 
-    DataTable data = Showcase.getCompanyPerformance();
+    DataTable data = Showcase.getCompanyPerformanceWithNulls();
     LineChart viz = new LineChart(data, options);
 
     Label status = new Label();
