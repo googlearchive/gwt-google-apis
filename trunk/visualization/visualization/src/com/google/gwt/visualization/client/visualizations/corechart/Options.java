@@ -88,6 +88,10 @@ public class Options extends AbstractDrawOptions {
     this.height = height;
   }-*/;
 
+  public final native void setInterpolateNulls(boolean interpolate) /*-{
+    this.interpolateNulls = interpolate;
+  }-*/;
+
   public final native void setIsStacked(boolean isStacked) /*-{
     this.isStacked = isStacked;
   }-*/;

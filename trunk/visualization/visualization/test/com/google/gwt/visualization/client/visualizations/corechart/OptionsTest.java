@@ -28,8 +28,7 @@ import com.google.gwt.visualization.client.visualizations.corechart.PieChart.Pie
 import com.google.gwt.visualization.client.Color;
 
 /**
- * Tests for the CommonOptions class. Uses PieChart because PieChart is the only
- * viz that uses CommonOptions rather than its subclass, CommonChartOptions.
+ * Tests for the Options class. Uses PieChart for historical reasons.
  */
 public class OptionsTest extends VisualizationTest {
   public void testOptions() {
@@ -54,6 +53,7 @@ public class OptionsTest extends VisualizationTest {
         options.setFontSize(12);
         options.setGridlineColor("blue");
         options.setHeight(400);
+        options.setInterpolateNulls(true);
         options.setLegend(LegendPosition.RIGHT);
         TextStyle textStyle = TextStyle.create();
         textStyle.setFontSize(10);

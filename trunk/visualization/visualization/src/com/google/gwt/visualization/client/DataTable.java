@@ -214,7 +214,7 @@ public class DataTable extends AbstractDataTable {
    * @param rowIndex The index of the row.
    * @param columnIndex The index of the column.
    */
-  final native void setValueNull(int rowIndex, int columnIndex) /*-{
+  public final native void setValueNull(int rowIndex, int columnIndex) /*-{
     this.setValue(rowIndex, columnIndex, null);
   }-*/;
 
