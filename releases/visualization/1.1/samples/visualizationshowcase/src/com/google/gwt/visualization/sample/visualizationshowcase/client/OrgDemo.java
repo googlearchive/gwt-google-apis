@@ -15,6 +15,9 @@
  */
 package com.google.gwt.visualization.sample.visualizationshowcase.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -30,12 +33,26 @@ import com.google.gwt.visualization.client.visualizations.OrgChart.Size;
 public class OrgDemo implements LeftTabPanel.WidgetProvider {
   private VerticalPanel panel = new VerticalPanel();
 
+  public static interface Resources extends ClientBundle {
+    @Source("OrgDemo.css")
+    Css orgDemoCss();
+  }
+
+  public static interface Css extends CssResource {
+    String nodeClass();
+    String selectedNodeClass();
+  }
+
   public OrgDemo() {
+    Resources bundle = GWT.create(Resources.class);
+    Css css = bundle.orgDemoCss();
+    css.ensureInjected();
+
     Options options = Options.create();
     options.setSize(Size.LARGE);
     options.setAllowCollapse(true);
-    options.setColor("#00FF00");
-    options.setSelectionColor("#FF0000");
+    options.setNodeClass(css.nodeClass());
+    options.setSelectedNodeClass(css.selectedNodeClass());
 
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.STRING, "Name");

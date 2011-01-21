@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -38,9 +38,10 @@ import com.google.gwt.visualization.client.Query.Callback;
 import com.google.gwt.visualization.client.Query.SendMethod;
 import com.google.gwt.visualization.client.events.SelectHandler;
 import com.google.gwt.visualization.client.formatters.ArrowFormat;
-import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.Table;
 import com.google.gwt.visualization.client.visualizations.Table.Options;
+import com.google.gwt.visualization.client.visualizations.corechart.PieChart;
+import com.google.gwt.visualization.client.visualizations.corechart.PieChart.PieOptions;
 
 /**
  * Google Visualization API in GWT demo.
@@ -67,7 +68,7 @@ class VisualizationDemo implements EntryPoint {
 
   /**
    * Creates a table and a view and shows both next to each other.
-   * 
+   *
    * @return a panel with two tables.
    */
   private Widget createDataView() {
@@ -113,7 +114,7 @@ class VisualizationDemo implements EntryPoint {
 
   /**
    * Creates a pie chart visualization.
-   * 
+   *
    * @return panel with pie chart.
    */
   private Widget createPieChart() {
@@ -135,7 +136,7 @@ class VisualizationDemo implements EntryPoint {
 
     /* create pie chart */
 
-    PieChart.Options options = PieChart.Options.create();
+    PieOptions options = PieChart.createPieOptions();
     options.setWidth(400);
     options.setHeight(240);
     options.set3D(true);
@@ -145,7 +146,7 @@ class VisualizationDemo implements EntryPoint {
 
   /**
    * Creates a table visualization from a spreadsheet.
-   * 
+   *
    * @return panel with a table.
    */
   private Widget createTable() {
@@ -178,6 +179,7 @@ class VisualizationDemo implements EntryPoint {
         viz.draw(dataTable, options);
 
         viz.addSelectHandler(new SelectHandler() {
+          @Override
           public void onSelect(SelectEvent event) {
             StringBuffer b = new StringBuffer();
             Table table = viz;

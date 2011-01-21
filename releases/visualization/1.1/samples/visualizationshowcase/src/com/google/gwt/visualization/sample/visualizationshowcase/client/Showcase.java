@@ -44,6 +44,13 @@ import com.google.gwt.visualization.client.visualizations.corechart.CoreChart;
 class Showcase implements EntryPoint {
 
   static DataTable getCompanyPerformance() {
+    DataTable data = getCompanyPerformanceWithNulls();
+    data.setValue(2, 1, 660);
+    data.setValue(2, 2, 1120);
+    return data;
+  }
+
+  static DataTable getCompanyPerformanceWithNulls() {
     DataTable data = DataTable.create();
     data.addColumn(ColumnType.STRING, "Year");
     data.addColumn(ColumnType.NUMBER, "Sales");
@@ -56,8 +63,8 @@ class Showcase implements EntryPoint {
     data.setValue(1, 1, 1170);
     data.setValue(1, 2, 460);
     data.setValue(2, 0, "2006");
-    data.setValue(2, 1, 660);
-    data.setValue(2, 2, 1120);
+    data.setValueNull(2, 1);
+    data.setValueNull(2, 2);
     data.setValue(3, 0, "2007");
     data.setValue(3, 1, 1030);
     data.setValue(3, 2, 540);
