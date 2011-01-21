@@ -83,12 +83,27 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     /**
      * Highlight the last dot before the mouse.
      */
-    LAST,
+    LAST("last"),
 
     /**
      * Highlight the dot nearest to the mouse.
      */
-    NEAREST
+    NEAREST("nearest");
+
+    private final String parameter;
+
+    HighlightDotMode(String parameter) {
+      this.parameter = parameter;
+    }
+
+    /**
+     * Get the String representation of the HighlightDotMode.
+     * 
+     * @return the String representation of the HighlightDotMode.
+     */
+    public String getParameter() {
+      return parameter;
+    }
   }
 
   /**
@@ -168,7 +183,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     }-*/;
 
     public final void setHighlightDotMode(HighlightDotMode highlightDotMode) {
-      setHighlightDotMode(highlightDotMode.name().toString().toLowerCase());
+      setHighlightDotMode(highlightDotMode.getParameter());
     }
 
     public final void setLegendPosition(AnnotatedLegendPosition position) {
@@ -208,7 +223,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     }-*/;
 
     public final void setScaleType(ScaleType type) {
-      setScaleType(type.name().toLowerCase());
+      setScaleType(type.getParameter());
     }
 
     public final native void setThickness(int thickness) /*-{
@@ -216,7 +231,7 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     }-*/;
 
     public final void setWindowMode(WindowMode wmode) {
-      setWindowMode(wmode.name().toLowerCase());
+      setWindowMode(wmode.getParameter());
     }
 
     public final void setZoomEndTime(Date endTime) {
@@ -272,25 +287,40 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
      * Set the range of the values axis to be from 0 to the maximal value in
      * each series.
      */
-    ALLFIXED,
+    ALLFIXED("allfixed"),
 
     /**
      * Set the range of the values axis to be from the minimal value of each
      * series to the maximal value of each series.
      */
-    ALLMAXIMIZE,
+    ALLMAXIMIZE("allmaximize"),
 
     /**
      * Set the range of the values axis to be from 0 to the maximal value in the
      * input DataTable.
      */
-    FIXED,
+    FIXED("fixed"),
 
     /**
      * Set the range of the values axis to be from the minimal value in the
      * input DataTable to the maximal value in the input DataTable.
      */
-    MAXIMIZE
+    MAXIMIZE("maximize");
+
+    private final String parameter;
+
+    ScaleType(String parameter) {
+      this.parameter = parameter;
+    }
+
+    /**
+     * Get the String representation of the ScaleType.
+     * 
+     * @return the String representation of the ScaleType.
+     */
+    public String getParameter() {
+      return parameter;
+    }
   }
 
   /**
@@ -301,20 +331,35 @@ public class AnnotatedTimeLine extends Visualization<AnnotatedTimeLine.Options> 
     /**
      * Makes the application hide everything behind it on the page.
      */
-    OPAQUE,
+    OPAQUE("opaque"),
 
     /**
      * Makes the background of the HTML page show through all the transparent
      * portions of the application and can slow animation performance.
      */
-    TRANSPARENT,
+    TRANSPARENT("transparent"),
 
     /**
      * Plays the application in its own rectangular window on a web page. WINDOW
      * indicates that the Flash application has no interaction with HTML layers
      * and is always the topmost item.
      */
-    WINDOW
+    WINDOW("window");
+
+    private final String parameter;
+
+    WindowMode(String parameter) {
+      this.parameter = parameter;
+    }
+
+    /**
+     * Get the String representation of the WindowMode.
+     * 
+     * @return the String representation of the WindowMode.
+     */
+    public String getParameter() {
+      return parameter;
+    }
   }
 
   public static final String PACKAGE = "annotatedtimeline";

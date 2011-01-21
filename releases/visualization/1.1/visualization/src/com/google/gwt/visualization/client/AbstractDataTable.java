@@ -35,8 +35,18 @@ public class AbstractDataTable extends JavaScriptObject {
    * The type of a column.
    */
   public enum ColumnType {
-    BOOLEAN, DATE, DATETIME, NUMBER, STRING, TIMEOFDAY;
+    BOOLEAN("boolean"),
+    DATE("date"),
+    DATETIME("datetime"),
+    NUMBER("number"),
+    STRING("string"),
+    TIMEOFDAY("timeofday");
 
+    private final String parameter;
+
+    ColumnType(String parameter) {
+      this.parameter = parameter;
+    }
     /**
      * Get a ColumnType enum value from the String representation.
      * 
@@ -53,7 +63,7 @@ public class AbstractDataTable extends JavaScriptObject {
      * @return the String representation of the ColumnType.
      */
     String getParameter() {
-      return name().toLowerCase();
+      return parameter;
     }
   }
 
@@ -62,6 +72,10 @@ public class AbstractDataTable extends JavaScriptObject {
 
   public final native String getColumnId(int columnIndex) /*-{
     return this.getColumnId(columnIndex);
+  }-*/;
+  
+  public final native int getColumnIndex(String columnId) /*-{
+    return this.getColumnIndex(columnId);
   }-*/;
 
   public final native String getColumnLabel(int columnIndex) /*-{
@@ -123,8 +137,11 @@ public class AbstractDataTable extends JavaScriptObject {
   }-*/;
 
   public final TimeOfDay getValueTimeOfDay(int rowIndex, int columnIndex) {
-    TimeOfDay result = new TimeOfDay();
     JsArrayInteger jsArray = getValueArrayInteger(rowIndex, columnIndex);
+    if (jsArray == null) {
+      return null;
+    }
+    TimeOfDay result = new TimeOfDay();
     try {
       result.setHour(jsArray.get(0));
       result.setMinute(jsArray.get(1));

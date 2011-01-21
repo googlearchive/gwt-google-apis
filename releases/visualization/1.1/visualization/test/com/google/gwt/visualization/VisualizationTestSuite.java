@@ -27,6 +27,13 @@ import com.google.gwt.visualization.client.ColorTest;
 import com.google.gwt.visualization.client.ColumnChartTest;
 import com.google.gwt.visualization.client.CommonChartOptionsTest;
 import com.google.gwt.visualization.client.CommonOptionsTest;
+import com.google.gwt.visualization.client.CoreAreaChartTest;
+import com.google.gwt.visualization.client.CoreBarChartTest;
+import com.google.gwt.visualization.client.CoreColumnChartTest;
+import com.google.gwt.visualization.client.CoreLineChartTest;
+import com.google.gwt.visualization.client.CorePieChartTest;
+import com.google.gwt.visualization.client.CoreScatterChartTest;
+import com.google.gwt.visualization.client.DataColumnTest;
 import com.google.gwt.visualization.client.DataTableTest;
 import com.google.gwt.visualization.client.DataViewTest;
 import com.google.gwt.visualization.client.DateFormatTest;
@@ -51,6 +58,7 @@ import com.google.gwt.visualization.client.QueryTest;
 import com.google.gwt.visualization.client.ScatterChartTest;
 import com.google.gwt.visualization.client.SelectionTest;
 import com.google.gwt.visualization.client.TableTest;
+import com.google.gwt.visualization.client.TimeOfDayTest;
 import com.google.gwt.visualization.client.ToolbarTest;
 
 import junit.framework.Test;
@@ -76,6 +84,13 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(ColumnChartTest.class);
     suite.addTestSuite(CommonChartOptionsTest.class);
     suite.addTestSuite(CommonOptionsTest.class);
+    suite.addTestSuite(CoreAreaChartTest.class);
+    suite.addTestSuite(CoreBarChartTest.class);
+    suite.addTestSuite(CoreColumnChartTest.class);
+    suite.addTestSuite(CoreLineChartTest.class);
+    suite.addTestSuite(CorePieChartTest.class);
+    suite.addTestSuite(CoreScatterChartTest.class);
+    suite.addTestSuite(DataColumnTest.class);
     suite.addTestSuite(DataTableTest.class);
     suite.addTestSuite(DataViewTest.class);
     suite.addTestSuite(DateFormatTest.class);
@@ -100,6 +115,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(SelectionTest.class);
     suite.addTestSuite(ScatterChartTest.class);
     suite.addTestSuite(TableTest.class);
+    suite.addTestSuite(TimeOfDayTest.class);
     suite.addTestSuite(ToolbarTest.class);
     return suite;
   }

@@ -26,7 +26,8 @@ import com.google.gwt.core.client.JsArrayInteger;
  *      DataView API Reference</a>
  */
 public class DataView extends AbstractDataTable {
-  public static native DataView create(DataTable table) /*-{
+
+  public static native DataView create(AbstractDataTable table) /*-{
     return new $wnd.google.visualization.DataView(table);
   }-*/;
 

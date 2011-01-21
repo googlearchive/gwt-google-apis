@@ -135,7 +135,7 @@ public class DataTableTest extends VisualizationTest {
           fail(e.getMessage());
         }
         data.setValue(0, 0, (TimeOfDay) null);
-        assertNull(data.getValueString(0, 0));
+        assertNull(data.getValueTimeOfDay(0, 0));
         assertTrue(data.isValueNull(0, 0));
       }
     });
