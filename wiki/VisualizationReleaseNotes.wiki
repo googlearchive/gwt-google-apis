@@ -3,6 +3,13 @@
 =Google Visualization API Library for GWT Release Notes=
 
 
+==Release Notes for 1.1.1==
+===Changes since 1.1.0===
+    * New Corecharts support.
+    * Minor update for compatibility with GWT 2.1.
+    * Enhancements to DataView and AbstractDataColumn classes.
+
+----
 ==Release Notes for 1.1.0==
 ===Changes since 1.0.2===
    * This library requires GWT 2.0.3 or later and Java 1.5 or later
@@ -13,7 +20,6 @@
    * Added Eclipse project files and ant script to all samples
 
 ----
-
 ==Release Notes for 1.0.2==
 ===Changes since 1.0.1===
    * Adds new options and methods to OrgChart

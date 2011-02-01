@@ -93,7 +93,7 @@ No.  The gwt-visualization library merely wraps a set of JavaScript APIs and is 
 
 == I'm using GWT 2.0 and I have a problem running visualization on IE8 ==
 
-Please check if you have a <!DOCTYPE html> declaration at the top of your html files.
+Please make sure you have a <!DOCTYPE html> declaration at the top of your html files.
 
 == I have problems running my application from file ==
 

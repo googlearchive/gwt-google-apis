@@ -15,7 +15,7 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
   * [http://gwt-google-apis.googlecode.com/files/gwt-maps-1.1.0.zip gwt-maps-1.1.0.zip]
 
 *Google Chart Tools (aka Visualization) Library 1.1*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.1.0.zip gwt-visualization-1.1.0.zip]
+  * [http://gwt-google-apis.googlecode.com/files/gwt-visualization-1.1.1.zip gwt-visualization-1.1.1.zip]
 
 *Google Language API Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-language-1.1.0.zip gwt-language-1.1.0.zip]
