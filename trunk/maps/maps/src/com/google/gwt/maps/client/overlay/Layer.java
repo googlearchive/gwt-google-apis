@@ -39,11 +39,11 @@ public class Layer extends ConcreteOverlay {
     }
 
     public final native void hide() /*-{
-			this.hide();
+      this.hide();
     }-*/;
 
     public final native void show() /*-{
-			this.show;
+      this.show;
     }-*/;
   }
 
@@ -51,7 +51,7 @@ public class Layer extends ConcreteOverlay {
    * returns <code>true</code> if the named layer is currently hidden.
    */
   public static native boolean isHidden(String layerId) /*-{
-		return $wnd.GLayer.isHidden(layerId);
+    return $wnd.GLayer.isHidden(layerId);
   }-*/;
 
   /**
