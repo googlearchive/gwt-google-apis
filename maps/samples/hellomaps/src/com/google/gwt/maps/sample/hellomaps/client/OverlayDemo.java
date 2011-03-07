@@ -23,6 +23,7 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.LatLngBounds;
 import com.google.gwt.maps.client.overlay.EncodedPolyline;
+import com.google.gwt.maps.client.overlay.Layer;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.maps.client.overlay.Polyline;
@@ -54,7 +55,8 @@ public class OverlayDemo extends MapsDemo {
     TEST_POLYLINE_ENCODED_TRANSPARENT("Display Polyline from an encoded string with default transparency"), //
     TEST_POLYLINE_GEODESIC("Display a geodesic Polyline from Zurich to NYC"), //
     TEST_POLYLINE_ONE("Display a Polyline"), //
-    TEST_TEN_MARKERS("Display ten Random Markers");
+    TEST_TEN_MARKERS("Display ten Random Markers"), //
+    TEST_GLAYER("Third Party Layer Support"); //
 
     final String value;
 
@@ -79,6 +81,7 @@ public class OverlayDemo extends MapsDemo {
       + "<li><b>Display a Polyline</b> You should see a purple polyline with multiple segments "
       + "(The vertices are randomly generated).</li>\n"
       + "<li><b>Display ten random Markers</b> Ten Markers are placed at random points in the viewport.</li>"
+      + "<li><b>Load a <a href=\"http://spreadsheets.google.com/pub?key=p9pdwsai2hDN-cAocTLhnag\">Third Party Layer</a></b>"
       + "</ul>"
       + "<p>Equivalent to the Maps JavaScript API Example: "
       + "<a href=\"http://code.google.com/apis/maps/documentation/examples/polyline-simple.html\">"
@@ -246,6 +249,12 @@ public class OverlayDemo extends MapsDemo {
       }
         break;
 
+      case TEST_GLAYER: {
+        map.setCenter(LatLng.newInstance(33.75951619957536, -84.39289301633835), 15);
+        map.addOverlay(Layer.newInstance("com.panoramio.all"));
+      }
+      break;
+      
       default:
         Window.alert("Cannot handle selection: " + selected.valueOf());
         break;
