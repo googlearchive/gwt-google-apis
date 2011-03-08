@@ -26,7 +26,7 @@ import java.util.Date;
 /**
  * The base class from which all search result types derive.
  */
-public class Result extends JavaScriptObject {
+public abstract class Result extends JavaScriptObject {
   /**
    * Invoke cloneNode on an Element. This needs to be moved into DOM.
    */
@@ -78,6 +78,10 @@ public class Result extends JavaScriptObject {
     return this["GsearchResultClass"];
   }-*/;
 
+  public final native String getString() /*-{
+    return this.titleNoFormatting;
+  }-*/;
+
   private native Element getElement() /*-{
     return this.html;
   }-*/;
@@ -85,7 +89,7 @@ public class Result extends JavaScriptObject {
   private native Widget getWidget() /*-{
     return this.widget;
   }-*/;
-
+  
   private native void setWidget(Widget widget) /*-{
     this.widget = widget;
   }-*/;
