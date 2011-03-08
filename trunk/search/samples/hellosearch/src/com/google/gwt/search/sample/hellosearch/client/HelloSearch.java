@@ -19,6 +19,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.search.client.BookSearch;
 import com.google.gwt.search.client.ExpandMode;
 import com.google.gwt.search.client.ImageSearch;
 import com.google.gwt.search.client.KeepHandler;
@@ -137,6 +138,7 @@ public class HelloSearch implements EntryPoint, KeepHandler,
     ws.setUserDefinedLabel("Ajaxian");
     ws.setResultSetSize(ResultSetSize.SMALL);
     options.add(ws);
+    options.add(new BookSearch());
     options.add(new NewsSearch());
     options.add(new VideoSearch(), ExpandMode.CLOSED);
     options.add(new ImageSearch());
@@ -164,6 +166,7 @@ public class HelloSearch implements EntryPoint, KeepHandler,
     JsArray<? extends Result> results = event.getResults();
     for (int i = 0; i < results.length(); i++) {
       System.out.println("The result is a " + results.get(i).getResultClass().name());
+      System.out.println(results.get(i).getString());
     }
   }
 }
