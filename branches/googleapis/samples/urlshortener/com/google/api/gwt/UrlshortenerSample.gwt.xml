@@ -1,0 +1,6 @@
+<module>
+  <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.api.gwt.ApiCore" />
+
+  <entry-point name="com.google.api.gwt.samples.urlshortener.client.UrlshortenerEntryPoint" />
+</module>
