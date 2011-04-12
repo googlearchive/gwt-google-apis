@@ -1,0 +1,9 @@
+<module>
+  <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.api.gwt.oauth2.OAuth2" />
+
+  <super-source path="super" />
+
+  <source path="client" />
+  <source path="shared" />
+</module>

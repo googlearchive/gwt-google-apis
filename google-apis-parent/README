@@ -1,4 +1,0 @@
-google-apis-parent/
-
-This directory is to hold maven configuration common to all 
-of the gwt-google-apis projects.
