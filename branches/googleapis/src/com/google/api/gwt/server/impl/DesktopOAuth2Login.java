@@ -16,10 +16,10 @@
 package com.google.api.gwt.server.impl;
 
 import com.google.api.gwt.shared.OAuth2Login;
-import com.google.gwt.autobean.server.AutoBeanFactoryMagic;
-import com.google.gwt.autobean.shared.AutoBean;
-import com.google.gwt.autobean.shared.AutoBeanCodex;
-import com.google.gwt.autobean.shared.AutoBeanFactory;
+import com.google.web.bindery.autobean.shared.AutoBean;
+import com.google.web.bindery.autobean.shared.AutoBeanCodex;
+import com.google.web.bindery.autobean.shared.AutoBeanFactory;
+import com.google.web.bindery.autobean.vm.AutoBeanFactorySource;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -34,7 +34,7 @@ public class DesktopOAuth2Login extends OAuth2Login {
     AutoBean<ServerResponse> response();
   }
 
-  private static final Factory FACTORY = AutoBeanFactoryMagic.create(Factory.class);
+  private static final Factory FACTORY = AutoBeanFactorySource.create(Factory.class);
 
   @Override
   protected String getRedirectUri() {

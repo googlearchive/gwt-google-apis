@@ -15,7 +15,7 @@
  */
 package com.google.api.gwt.shared;
 
-import com.google.gwt.autobean.shared.AutoBean.PropertyName;
+import com.google.web.bindery.autobean.shared.AutoBean.PropertyName;
 
 import java.util.ArrayList;
 import java.util.List;

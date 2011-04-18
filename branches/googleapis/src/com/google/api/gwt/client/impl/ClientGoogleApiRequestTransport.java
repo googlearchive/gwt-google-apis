@@ -16,10 +16,10 @@
 package com.google.api.gwt.client.impl;
 
 import com.google.api.gwt.shared.GoogleApiRequestTransport;
-import com.google.gwt.autobean.client.impl.JsoSplittable;
-import com.google.gwt.autobean.shared.AutoBean;
-import com.google.gwt.autobean.shared.AutoBeanCodex;
-import com.google.gwt.autobean.shared.AutoBeanFactory;
+import com.google.web.bindery.autobean.gwt.client.impl.JsoSplittable;
+import com.google.web.bindery.autobean.shared.AutoBean;
+import com.google.web.bindery.autobean.shared.AutoBeanCodex;
+import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
