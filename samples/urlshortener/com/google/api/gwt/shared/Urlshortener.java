@@ -16,7 +16,7 @@
 
 package com.google.api.gwt.samples.urlshortener.shared;
 
-import com.google.gwt.autobean.shared.AutoBean.PropertyName;
+import com.google.web.bindery.autobean.shared.AutoBean.PropertyName;
 import com.google.web.bindery.requestfactory.shared.JsonRpcContent;
 import com.google.web.bindery.requestfactory.shared.JsonRpcService;
 import com.google.web.bindery.requestfactory.shared.JsonRpcWireName;
