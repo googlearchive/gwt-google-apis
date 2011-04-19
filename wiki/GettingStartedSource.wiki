@@ -36,7 +36,6 @@ To get started, point your client at the GWT Google APIs subversion repository  
 The following example shows a checkout using the command line client on Linux:
 
 {{{
-$PP_OFF
  $ mkdir /usr/local/gwt-google-apis
  $ cd /usr/local/gwt-google-apis/
  $ svn checkout http://gwt-google-apis.googlecode.com/svn/trunk/ .
@@ -53,7 +52,6 @@ Remember the path where you performed the checkout.  This documentation will ref
 You will also need a copy of the GWT tools.  Check that out from the google-web-toolkit project:
 
 {{{
-$PP_OFF
 $ mkdir -p /usr/local/gwt
 $ cd /usr/local/gwt
 $ svn co http://google-web-toolkit.googlecode.com/svn/tools ./tools
@@ -62,7 +60,6 @@ $ svn co http://google-web-toolkit.googlecode.com/svn/tools ./tools
 and then set an environment variable named GWT_TOOLS to point there.
 
 {{{
-$PP_OFF
 $ GWT_TOOLS=/usr/local/gwt/tools
 $ export GWT_TOOLS
 }}}
@@ -72,7 +69,6 @@ You will also need GWT_HOME setup to point to a binary build of the [http://code
 After you have checked out the code from Subversion, you need to build the distribution.  You will need [http://ant.apache.org Apache Ant] and a Java JDK, such as the one available from [http://java.sun.com/ Sun Microsystems].  
 
 {{{
-$PP_OFF
 $ cd /usr/local/gwt-google-apis/
 $ ant
 ...
