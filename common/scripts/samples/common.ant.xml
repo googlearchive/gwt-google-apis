@@ -13,6 +13,9 @@
     <fileset file="${gwt.google.apis.jar}"/>
     <fileset file="${gwt.user.jar}"/>
     <fileset file="${gwt.dev.jar}"/>
+    <fileset file="${gwt.tools}/lib/javax/validation/validation-api-1.0.0.GA.jar"/>
+    <fileset file="${gwt.tools}/lib/javax/validation/validation-api-1.0.0.GA-sources.jar"/>
+    <!-- <fileset file="${gwt.tools}/lib/javax/validation/validation-api-1.0.0.GA.jar"/> -->
   </path>
   <!-- To be overriden for app-specific tasks  -->
   <!-- Can be used for copying jars etc.       -->
@@ -28,6 +31,8 @@
         <fileset file="${gwt.google.apis.jar}"/>
         <fileset file="${gwt.user.jar}"/>
         <fileset file="${gwt.dev.jar}"/>
+        <fileset file="${gwt.tools}/lib/javax/validation/validation-api-1.0.0.GA.jar"/>
+        <fileset file="${gwt.tools}/lib/javax/validation/validation-api-1.0.0.GA-sources.jar"/>
       </sourcefiles>
       <targetfiles path="$war/${sample.package}/${sample.module}.nocache.js"/>
       <sequential>
