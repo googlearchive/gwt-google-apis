@@ -51,7 +51,7 @@ public abstract class OAuth2Login {
       }
       StringBuilder sb = new StringBuilder();
       for (String scope : scopes) {
-        sb.append("+").append(scope);
+        sb.append(" ").append(scope);
       }
       String scope = sb.substring(1);
       login.scope = scope;
