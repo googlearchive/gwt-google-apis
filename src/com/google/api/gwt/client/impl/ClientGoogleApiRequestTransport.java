@@ -16,10 +16,6 @@
 package com.google.api.gwt.client.impl;
 
 import com.google.api.gwt.shared.GoogleApiRequestTransport;
-import com.google.web.bindery.autobean.gwt.client.impl.JsoSplittable;
-import com.google.web.bindery.autobean.shared.AutoBean;
-import com.google.web.bindery.autobean.shared.AutoBeanCodex;
-import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
@@ -27,13 +23,15 @@ import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.http.client.Response;
+import com.google.web.bindery.autobean.gwt.client.impl.JsoSplittable;
+import com.google.web.bindery.autobean.shared.AutoBean;
+import com.google.web.bindery.autobean.shared.AutoBeanCodex;
+import com.google.web.bindery.autobean.shared.AutoBeanFactory;
+import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 import java.util.Map;
 
-/**
- * Intended to be constructed via {@link GoogleApiRequestTransport.Builder}.
- */
 public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
 
   /**
@@ -54,12 +52,12 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
   }
 
   static class InitializationState {
-    private final RequestTransportReceiver receiver;
+    private final Receiver<GoogleApiRequestTransport> receiver;
     private boolean scriptLoaded;
     private GoogleApiRequestTransport transport;
 
     public InitializationState(GoogleApiRequestTransport transport,
-        RequestTransportReceiver receiver) {
+        Receiver<GoogleApiRequestTransport> receiver) {
       this.receiver = receiver;
       this.transport = transport;
     }
@@ -132,7 +130,7 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
   protected final JavaScriptObject headers = JavaScriptObject.createObject();
 
   @Override
-  protected void configure(RequestTransportReceiver receiver) {
+  protected void configure(Receiver<GoogleApiRequestTransport> receiver) {
     // Only load the script once, if the necessary API isn't available
     if (script == null && !isLoaded()) {
       script = Document.get().createScriptElement();
