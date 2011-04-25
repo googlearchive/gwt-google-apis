@@ -16,11 +16,13 @@
 
 package com.google.api.gwt.samples.urlshortener.client;
 
+import com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport;
+import com.google.api.gwt.client.impl.ClientOAuth2Login;
 import com.google.api.gwt.samples.urlshortener.shared.Url;
 import com.google.api.gwt.samples.urlshortener.shared.Urlshortener;
 import com.google.api.gwt.samples.urlshortener.shared.Urlshortener.UrlContext;
+import com.google.api.gwt.samples.urlshortener.shared.UrlshortenerAuthScope;
 import com.google.api.gwt.shared.GoogleApiRequestTransport;
-import com.google.api.gwt.shared.GoogleApiRequestTransport.RequestTransportReceiver;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -37,17 +39,29 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 public class UrlshortenerEntryPoint implements EntryPoint {
 
   // Instantiate the service class.
+  private static final String CLIENT_ID = "";
   private final Urlshortener urlShortener = GWT.create(Urlshortener.class);
 
   @Override
   public void onModuleLoad() {
-    initialize();
+    login();
+  }
+
+  /** Demonstrates authentication using OAuth 2.0. */
+  private void login() {
+    new ClientOAuth2Login(CLIENT_ID).withScopes(UrlshortenerAuthScope.URLSHORTENER)
+        .login(new Receiver<String>() {
+          @Override
+          public void onSuccess(String accessToken) {
+            initialize(accessToken);
+          }
+        });
   }
 
   /** Demonstrates initialization of the RequestTransport. */
-  private void initialize() {
-    new GoogleApiRequestTransport.Builder() //
-        .build(new RequestTransportReceiver() {
+  private void initialize(String accessToken) {
+    new ClientGoogleApiRequestTransport().setAccessToken(accessToken).create(
+        new Receiver<GoogleApiRequestTransport>() {
           @Override
           public void onSuccess(GoogleApiRequestTransport transport) {
             urlShortener.initialize(new SimpleEventBus(), transport);
@@ -56,7 +70,7 @@ public class UrlshortenerEntryPoint implements EntryPoint {
           }
 
           @Override
-          public void onFailure(Throwable cause) {
+          public void onFailure(ServerFailure error) {
             Window.alert("Failed to initialize Transport");
           }
         });

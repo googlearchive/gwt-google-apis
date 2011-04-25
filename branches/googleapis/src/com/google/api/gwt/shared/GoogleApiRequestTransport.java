@@ -15,7 +15,9 @@
  */
 package com.google.api.gwt.shared;
 
+import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,121 +29,96 @@ import java.util.Map;
  */
 public abstract class GoogleApiRequestTransport implements RequestTransport {
 
+  private String applicationName;
+  private Map<String, String> queryParams = new HashMap<String, String>();
+  private Map<String, String> headers;
+  private String rpcUrl = DEFAULT_RPC_URL;
+
+  private boolean finished = false;
+
   /**
-   * Constructs instances of {@link GoogleApiRequestTransport}.
+   * Initialize the RequestTransport and pass it to the {@code receiver}
+   * parameter.
    */
-  public static class Builder {
-    private String applicationName;
-    private final Map<String, String> headers = new HashMap<String, String>();
-    private GoogleApiRequestTransport transport = TransportHelper.createTransport();
-    private final Map<String, String> queryParams = new HashMap<String, String>();
-
-    public Builder() {
-      setRpcUrl(DEFAULT_RPC_URL);
+  public void create(Receiver<GoogleApiRequestTransport> receiver) {
+    if (finished) {
+      receiver.onFailure(new ServerFailure("Already called create() on GoogleApiRequestTransport"));
+      return;
     }
-
-    /**
-     * Initialize the RequestTransport and pass it to the {@code receiver}
-     * parameter.
-     */
-    public void build(RequestTransportReceiver receiver) {
-      if (transport == null) {
-        throw new IllegalStateException("build() already called");
-      }
-
-      if (!queryParams.isEmpty()) {
-        StringBuilder currentUrl = new StringBuilder(transport.rpcUrl);
-        boolean needsAmp = currentUrl.indexOf("?") != -1;
-        for (Map.Entry<String, String> entry : queryParams.entrySet()) {
-          if (needsAmp) {
-            currentUrl.append("&");
-          } else {
-            currentUrl.append("?");
-            needsAmp = true;
-          }
-          currentUrl.append(entry.getKey()).append("=").append(entry.getValue());
+    if (!queryParams.isEmpty()) {
+      StringBuilder currentUrl = new StringBuilder(rpcUrl);
+      boolean needsAmp = currentUrl.indexOf("?") != -1;
+      for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+        if (needsAmp) {
+          currentUrl.append("&");
+        } else {
+          currentUrl.append("?");
+          needsAmp = true;
         }
-        transport.rpcUrl = currentUrl.toString();
+        currentUrl.append(entry.getKey()).append("=").append(entry.getValue());
       }
-
-      // Mandatory headers
-      String userAgent =
-          (applicationName == null ? "" : (applicationName + " ")) + USER_AGENT_STRING;
-      setRequestHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE);
-      setRequestHeader(USER_AGENT_HEADER, userAgent);
-      transport.headers = Collections.unmodifiableMap(headers);
-
-      transport.configure(receiver);
-      transport = null;
+      rpcUrl = currentUrl.toString();
     }
 
-    /**
-     * Set the OAuth access token to pass with the request in order to access
-     * protected information.
-     */
-    public Builder setAccessToken(String authorization) {
-      setRequestHeader(AUTHORIZATION_HEADER, OAUTH + authorization);
-      return this;
-    }
+    // Mandatory headers
+    String userAgent = (applicationName == null ? "" : (applicationName + " ")) + USER_AGENT_STRING;
+    setRequestHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE);
+    setRequestHeader(USER_AGENT_HEADER, userAgent);
+    headers = Collections.unmodifiableMap(headers);
+    queryParams = Collections.unmodifiableMap(new HashMap<String, String>());
 
-    /**
-     * Set the API access key to support quota management.
-     */
-    public Builder setApiAccessKey(String apiAccessKey) {
-      setQueryParameter("key", apiAccessKey);
-      return this;
-    }
-
-    /**
-     * Set the application name for use in quota management.
-     *
-     * @param applicationName A user-agent fragment, such as {@code MyApp/1.0}
-     */
-    public Builder setApplicationName(String applicationName) {
-      this.applicationName = applicationName;
-      return this;
-    }
-
-    /**
-     * Append a query parameter to the URL used to make the request.
-     */
-    public Builder setQueryParameter(String name, String value) {
-      if (value == null) {
-        queryParams.remove(name);
-      } else {
-        queryParams.put(name, value);
-      }
-      return this;
-    }
-
-    /**
-     * Add a header to every HTTP query used to make a request.
-     */
-    public Builder setRequestHeader(String name, String value) {
-      if (value == null) {
-        headers.remove(name);
-      } else {
-        headers.put(name, value);
-      }
-      return this;
-    }
-
-    /**
-     * Set the base URL that requests will be sent to.
-     */
-    public Builder setRpcUrl(String rpcUrl) {
-      transport.rpcUrl = rpcUrl;
-      return this;
-    }
+    configure(receiver);
   }
 
   /**
-   * Provided by user code to receive an initialized instance of the transport.
+   * Set the OAuth access token to pass with the request in order to access
+   * protected information.
    */
-  public interface RequestTransportReceiver {
-    void onFailure(Throwable cause);
+  public GoogleApiRequestTransport setAccessToken(String authorization) {
+    setRequestHeader(AUTHORIZATION_HEADER, OAUTH + authorization);
+    return this;
+  }
 
-    void onSuccess(GoogleApiRequestTransport transport);
+  /**
+   * Set the API access key to support quota management.
+   */
+  public GoogleApiRequestTransport setApiAccessKey(String apiAccessKey) {
+    setQueryParameter("key", apiAccessKey);
+    return this;
+  }
+
+  /**
+   * Set the application name for use in quota management.
+   *
+   * @param applicationName A user-agent fragment, such as {@code MyApp/1.0}
+   */
+  public GoogleApiRequestTransport setApplicationName(String applicationName) {
+    this.applicationName = applicationName;
+    return this;
+  }
+
+  /**
+   * Append a query parameter to the URL used to make the request.
+   */
+  public GoogleApiRequestTransport setQueryParameter(String name, String value) {
+    if (value == null) {
+      queryParams.remove(name);
+    } else {
+      queryParams.put(name, value);
+    }
+    return this;
+  }
+
+  /**
+   * Add a header to every HTTP query used to make a request.
+   */
+  public GoogleApiRequestTransport setRequestHeader(String name, String value) {
+    if (value == null) {
+      headers.remove(name);
+    } else {
+      headers.put(name, value);
+    }
+    return this;
   }
 
   protected static final String AUTHORIZATION_HEADER = "Authorization";
@@ -152,15 +129,12 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
   protected static final String ORIGIN = PROTOCOL + "www.googleapis.com/";
   protected static final String DEFAULT_RPC_URL = ORIGIN + "rpc";
   protected static final String USER_AGENT_HEADER = "X-JavaScript-User-Agent";
-  protected static final String USER_AGENT_STRING = "google-api-gwtrf-client/0.1";
-
-  private Map<String, String> headers;
-  private String rpcUrl;
+  protected static final String USER_AGENT_STRING = "google-api-gwt-client/0.1";
 
   protected GoogleApiRequestTransport() {
   }
 
-  protected abstract void configure(RequestTransportReceiver receiver);
+  protected abstract void configure(Receiver<GoogleApiRequestTransport> receiver);
 
   protected Map<String, String> getHeaders() {
     return headers;

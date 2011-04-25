@@ -17,45 +17,45 @@ package com.google.api.gwt.client.impl;
 
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
+import com.google.api.gwt.shared.AuthScope;
 import com.google.api.gwt.shared.OAuth2Login;
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.core.client.GWT;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 /**
- * Intended to be constructed via {@link OAuth2Login.Builder}.
+ * Implementation of {@link OAuth2Login} that delegates to the gwt-oauth2
+ * implementation to provide an access token.
  */
 public class ClientOAuth2Login extends OAuth2Login {
 
-  @Override
-  protected void configure(CodeProvider codeProvider, final OAuth2LoginReceiver receiver) {
-    AuthRequest req = new AuthRequest(authUrl, CLIENT_ID).withScopes(scope);
+  public ClientOAuth2Login(String clientId) {
+    super(clientId);
+  }
 
+  private static final String GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth";
+
+  @Override
+  public void login(final Receiver<String> callback) {
+    AuthRequest req = new AuthRequest(GOOGLE_AUTH_URL, clientId).withScopes(scopesToString(scopes));
     Auth.get().login(req, new Callback<String, Throwable>() {
       @Override
-      public void onSuccess(String token) {
-        accessToken = token;
-        receiver.onSuccess(ClientOAuth2Login.this);
+      public void onSuccess(String result) {
+        callback.onSuccess(result);
       }
 
       @Override
-      public void onFailure(Throwable caught) {
-        receiver.onFailure(caught);
+      public void onFailure(Throwable reason) {
+        callback.onFailure(new ServerFailure(reason.getMessage()));
       }
     });
   }
 
-  @Override
-  protected String getRedirectUri() {
-    return GWT.getModuleBaseURL() + "OAuth2Helper.html";
-  }
-
-  @Override
-  protected String getResponseType() {
-    return TOKEN;
-  }
-
-  @Override
-  protected void postToTokenUrl(String payload, ServerResponseReceiver receiver) {
-    throw new UnsupportedOperationException();
+  private static String[] scopesToString(AuthScope... scopes) {
+    String[] strings = new String[scopes.length];
+    for (int i = 0; i < scopes.length; i++) {
+      strings[i] = scopes[i].getScope();
+    }
+    return strings;
   }
 }
