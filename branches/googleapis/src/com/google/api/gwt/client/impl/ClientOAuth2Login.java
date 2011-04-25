@@ -17,8 +17,8 @@ package com.google.api.gwt.client.impl;
 
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
-import com.google.api.gwt.oauth2.client.LoginCallback;
 import com.google.api.gwt.shared.OAuth2Login;
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 
 /**
@@ -30,9 +30,9 @@ public class ClientOAuth2Login extends OAuth2Login {
   protected void configure(CodeProvider codeProvider, final OAuth2LoginReceiver receiver) {
     AuthRequest req = new AuthRequest(authUrl, CLIENT_ID).withScopes(scope);
 
-    Auth.get().login(req, new LoginCallback() {
+    Auth.get().login(req, new Callback<String, Throwable>() {
       @Override
-      public void onLogin(String token) {
+      public void onSuccess(String token) {
         accessToken = token;
         receiver.onSuccess(ClientOAuth2Login.this);
       }
