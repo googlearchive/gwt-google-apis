@@ -17,6 +17,7 @@ package com.google.api.gwt.samples.buzz.shared;
 
 import com.google.api.gwt.buzz.v1.shared.Buzz;
 import com.google.api.gwt.buzz.v1.shared.Buzz.ActivitiesContext.ListRequest.Scope;
+import com.google.api.gwt.buzz.v1.shared.Buzz.BuzzAuthScope;
 import com.google.api.gwt.buzz.v1.shared.model.Activity;
 import com.google.api.gwt.buzz.v1.shared.model.ActivityFeed;
 import com.google.api.gwt.buzz.v1.shared.model.Comment;
@@ -27,14 +28,14 @@ import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
 /**
- * Demo code for reading a user's Buzz feed. The two concrete subclasses provide
- * environment-specific bootstrapping.
+ * Demo code for reading a user's Buzz feed. The concrete subclass
+ * {@link BuzzModule} provides the client-specific usage. This class is suitable
+ * for tests or to be used on the server-side.
  */
 public abstract class BuzzBase {
-  protected static final String CLIENT_ID = "629256018955.apps.googleusercontent.com";
-  private static final String API_KEY = "AIzaSyCJLFXyjqx604qverIinL9UAevgvPyjJjE";
+  protected static final String CLIENT_ID = "692753340433.apps.googleusercontent.com";
+  private static final String API_KEY = "AIzaSyA5bNyuRQFaTQle_YC5BUH7tQzRmAPiqsM";
   private static final String APPLICATION_NAME = "BuzzSample/1.0";
-
 
   public void login(OAuth2Login loginImpl, final GoogleApiRequestTransport transportImpl) {
     loginImpl.withScopes(BuzzAuthScope.BUZZ_READONLY).login(new Receiver<String>() {

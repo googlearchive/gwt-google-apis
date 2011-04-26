@@ -25,8 +25,12 @@ import com.google.api.gwt.samples.urlshortener.shared.UrlshortenerAuthScope;
 import com.google.api.gwt.shared.GoogleApiRequestTransport;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
@@ -38,8 +42,10 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
  */
 public class UrlshortenerEntryPoint implements EntryPoint {
 
-  // Instantiate the service class.
-  private static final String CLIENT_ID = "";
+  private static final String CLIENT_ID = "692753340433.apps.googleusercontent.com";
+  private static final String API_KEY = "AIzaSyA5bNyuRQFaTQle_YC5BUH7tQzRmAPiqsM";
+  private static final String APPLICATION_NAME = "UrlshortenerSample/1.0";
+
   private final Urlshortener urlShortener = GWT.create(Urlshortener.class);
 
   @Override
@@ -49,19 +55,31 @@ public class UrlshortenerEntryPoint implements EntryPoint {
 
   /** Demonstrates authentication using OAuth 2.0. */
   private void login() {
-    new ClientOAuth2Login(CLIENT_ID).withScopes(UrlshortenerAuthScope.URLSHORTENER)
-        .login(new Receiver<String>() {
-          @Override
-          public void onSuccess(String accessToken) {
-            initialize(accessToken);
-          }
-        });
+    final Button button = new Button("Log in to get started");
+    button.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        new ClientOAuth2Login(CLIENT_ID)
+            .withScopes(UrlshortenerAuthScope.URLSHORTENER)
+            .login(new Receiver<String>() {
+              @Override
+              public void onSuccess(String accessToken) {
+                initialize(accessToken);
+              }
+            });
+        button.setVisible(false);
+      }
+    });
+    RootPanel.get().add(button);
   }
 
   /** Demonstrates initialization of the RequestTransport. */
   private void initialize(String accessToken) {
-    new ClientGoogleApiRequestTransport().setAccessToken(accessToken).create(
-        new Receiver<GoogleApiRequestTransport>() {
+    new ClientGoogleApiRequestTransport()
+        .setApiAccessKey(API_KEY)
+        .setApplicationName(APPLICATION_NAME)
+        .setAccessToken(accessToken)
+        .create(new Receiver<GoogleApiRequestTransport>() {
           @Override
           public void onSuccess(GoogleApiRequestTransport transport) {
             urlShortener.initialize(new SimpleEventBus(), transport);
