@@ -31,7 +31,7 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
 
   private String applicationName;
   private Map<String, String> queryParams = new HashMap<String, String>();
-  private Map<String, String> headers;
+  private Map<String, String> headers = new HashMap<String, String>();
   private String rpcUrl = DEFAULT_RPC_URL;
 
   private boolean finished = false;
