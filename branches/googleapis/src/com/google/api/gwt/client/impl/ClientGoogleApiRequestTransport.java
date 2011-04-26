@@ -76,7 +76,7 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
 
   private static final Factory FACTORY = GWT.create(Factory.class);
   private static final String SUPPORT_URL =
-      "https://ajax.googleapis.com/ajax/libs/googleapis/0.0.3/googleapis.min.js";
+      "https://ajax.googleapis.com/ajax/libs/googleapis/0.0.4/googleapis.min.js";
 
   /**
    * Prevents the js client shell script from being loaded multiple times.
