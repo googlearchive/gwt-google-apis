@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,9 +19,10 @@ package com.google.gwt.language.client.transliteration;
  * Supported transliteration languages.
  */
 public enum LanguageCode {
-  AMHARIC("am"), //
-  ARABIC("ar"), // Comments keep Eclipse formatter from putting on one line
+  AMHARIC("am"), // Comments keep Eclipse formatter from putting on one line
+  ARABIC("ar"), //
   BENGALI("bn"), //
+  CHINESE("zh"), //
   ENGLISH("en"), //
   GREEK("el"), //
   GUJARATI("gu"), //
@@ -30,11 +31,13 @@ public enum LanguageCode {
   MALAYALAM("ml"), //
   MARATHI("mr"), //
   NEPALI("ne"), //
+  ORIYA("or"), //
   PUNJABI("pa"), //
   PERSIAN("fa"), //
   RUSSIAN("ru"), //
   SANSKRIT("sa"), //
   SERBIAN("sr"), //
+  SINHALESE("si"), //
   TAMIL("ta"), //
   TELUGU("te"), //
   TIGRINYA("ti"), //
@@ -42,7 +45,7 @@ public enum LanguageCode {
 
   /**
    * Returns the LanguageCode corresponding to given 2-letter language code.
-   * 
+   *
    * @param lang language code
    * @return LanguageCode enum object
    */
@@ -63,7 +66,7 @@ public enum LanguageCode {
 
   /**
    * Get 2-letter language code.
-   * 
+   *
    * @return 2-letter language code.
    */
   public String getLangCode() {
