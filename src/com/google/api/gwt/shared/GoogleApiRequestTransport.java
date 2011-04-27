@@ -141,28 +141,4 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
     return rpcUrl;
   }
 
-  // begin_strip
-  /**
-   * Override the RPC URL being requested. By default this is
-   * {@link "https://www.googleapis.com/"}. If you set this, it must include the
-   * trailing slash.
-   */
-  public GoogleApiRequestTransport setBaseUrl(String baseUrl) {
-    this.rpcUrl = baseUrl + "/rpc";
-    configureBaseUrl(baseUrl);
-    return this;
-  }
-
-  /**
-   * Configures the base JS library to use the proxy.html from the new base URL
-   * in future requests.
-   */
-  private native void configureBaseUrl(String baseUrl) /*-{
-    $wnd['__GOOGLEAPIS'] = {
-      'googleapis.config' : {
-        'proxy' : baseUrl + '/static/proxy.html'
-      }
-    }
-  }-*/;
-  // end_strip
 }
