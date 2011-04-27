@@ -32,7 +32,7 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
   private String applicationName;
   private Map<String, String> queryParams = new HashMap<String, String>();
   private Map<String, String> headers = new HashMap<String, String>();
-  private String rpcUrl = DEFAULT_RPC_URL;
+  private String rpcUrl = "https://www.googleapis.com/rpc";
 
   private boolean finished = false;
 
@@ -121,15 +121,12 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
     return this;
   }
 
-  protected static final String AUTHORIZATION_HEADER = "Authorization";
-  protected static final String CONTENT_TYPE = "application/json";
-  protected static final String CONTENT_TYPE_HEADER = "Content-Type";
-  protected static final String PROTOCOL = "https://";
-  protected static final String OAUTH = "OAuth ";
-  protected static final String ORIGIN = PROTOCOL + "www.googleapis.com/";
-  protected static final String DEFAULT_RPC_URL = ORIGIN + "rpc";
-  protected static final String USER_AGENT_HEADER = "X-JavaScript-User-Agent";
-  protected static final String USER_AGENT_STRING = "google-api-gwt-client/0.1";
+  private static final String AUTHORIZATION_HEADER = "Authorization";
+  private static final String CONTENT_TYPE = "application/json";
+  private static final String CONTENT_TYPE_HEADER = "Content-Type";
+  private static final String OAUTH = "OAuth ";
+  private static final String USER_AGENT_HEADER = "X-JavaScript-User-Agent";
+  private static final String USER_AGENT_STRING = "google-api-gwt-client/0.1";
 
   protected GoogleApiRequestTransport() {
   }
@@ -143,4 +140,29 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
   protected String getRpcUrl() {
     return rpcUrl;
   }
+
+  // begin_strip
+  /**
+   * Override the RPC URL being requested. By default this is
+   * {@link "https://www.googleapis.com/"}. If you set this, it must include the
+   * trailing slash.
+   */
+  public GoogleApiRequestTransport setBaseUrl(String baseUrl) {
+    this.rpcUrl = baseUrl + "/rpc";
+    configureBaseUrl(baseUrl);
+    return this;
+  }
+
+  /**
+   * Configures the base JS library to use the proxy.html from the new base URL
+   * in future requests.
+   */
+  private native void configureBaseUrl(String baseUrl) /*-{
+    $wnd['__GOOGLEAPIS'] = {
+      'googleapis.config' : {
+        'proxy' : baseUrl + '/static/proxy.html'
+      }
+    }
+  }-*/;
+  // end_strip
 }
