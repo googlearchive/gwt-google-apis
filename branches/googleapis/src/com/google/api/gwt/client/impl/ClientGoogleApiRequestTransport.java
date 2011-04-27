@@ -34,8 +34,8 @@ import java.util.Map;
  */
 public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
 
-  private static final String JS_LIBRARY_URL =
-      "https://ajax.googleapis.com/ajax/libs/googleapis/0.0.4/googleapis.min.js";
+  private static final String JS_CLIENT_NAME = "ae_f85e3bd0744c7080861c3ae42085d071.js";
+  private static final String JS_CLIENT_URL = "https://ssl.gstatic.com/gb/js/" + JS_CLIENT_NAME;
 
   /**
    * Prevents the js client shell script from being loaded multiple times.
@@ -87,10 +87,10 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
   private static native JavaScriptObject makeData(
       String url, JavaScriptObject headers, String payload) /*-{
     return {
-      'url' : url,
-      'headers' : headers,
-      'body' : payload,
-      'httpMethod' : 'POST'
+        'url' : url,
+        'headers' : headers,
+        'body' : payload,
+        'httpMethod' : 'POST'
     };
   }-*/;
 
@@ -105,7 +105,7 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
     // Only load the script once, if the necessary API isn't available
     if (script == null && !isLoaded()) {
       script = Document.get().createScriptElement();
-      script.setSrc(JS_LIBRARY_URL);
+      script.setSrc(JS_CLIENT_URL);
       Document.get().getElementsByTagName("head").getItem(0).appendChild(script);
     }
 
@@ -122,12 +122,22 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
       public boolean execute() {
         boolean loaded = isLoaded();
         if (loaded) {
+          baseConfigure();
           receiver.onSuccess(ClientGoogleApiRequestTransport.this);
         }
         return !loaded;
       }
     }, 100);
   }
+
+  /** Configures the base JS client to use the alternate JS library. */
+  private static native void baseConfigure() /*-{
+    $wnd['__GOOGLEAPIS'] = {
+      'googleapis.config' : {
+        'gcv' : @com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport::JS_CLIENT_NAME
+      }
+    };
+  }-*/;
 
   @Override
   public void send(String payload, TransportReceiver receiver) {
