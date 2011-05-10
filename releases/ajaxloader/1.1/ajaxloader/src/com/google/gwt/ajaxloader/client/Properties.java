@@ -24,7 +24,7 @@ import java.util.Date;
  * A collection of properties of arbitrary type, for interoperability with
  * non-GWT JavaScript libraries.
  */
-public abstract class Properties extends JavaScriptObject {
+public class Properties extends JavaScriptObject {
   /**
    * An exception thrown by the get methods when the key is found but the 
    * value has an unexpected type.
