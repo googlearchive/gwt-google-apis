@@ -6,6 +6,13 @@
   <import file="${gwt.root}/common.ant.xml"/>
   <property name="sample.package" value="${sample.root}"/>
   <property name="sample.main" value="${sample.module}"/>
+ <!--
+    Number of localworkers for sample compilation.  This depends on your
+    hardware, so it's a good candidate to specify in local.ant.properties
+    if this default isn't good for you.  Ideally, it should approximate
+    the number of CPU cores in your machine.
+  -->
+  <property name="gwt.samples.localworkers" value="2" />
   <path id="classpath">
     <pathelement location="src"/>
     <pathelement location="war/WEB-INF/classes"/>
@@ -38,6 +45,8 @@
       <sequential>
         <mkdir dir="war"/>
         <java dir="." classname="com.google.gwt.dev.Compiler" classpathref="classpath" fork="yes" failonerror="true" maxmemory="512m">
+          <arg value="-localWorkers" />
+          <arg value="${gwt.samples.localworkers}" />
           <arg value="-war"/>
           <arg file="war"/>
           <arg value="com.google.gwt.${sample.api}.sample.${sample.package}.${sample.module}"/>
