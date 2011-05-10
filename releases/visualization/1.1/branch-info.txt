@@ -6,11 +6,19 @@ Copies:
 /releases/visualization/1.1/ was created (r1698) as a straight copy from /trunk/@r1697
 
 Merges:
+/trunk/visualization:1817:1901 was merged (r1902) /releases/visualization/1.1
 /trunk/visualization:1698:1856 was merged (r1870) /releases/visualization/1.1 
 /trunk/visualization:1867:1870 was merged (r1871) /releases/visualization/1.1 
 --->The next merge into trunk will be 1871:????
 
 Changes in this branch (excluding changes to this file itself)
+r1867 - Adds interopolateNulls to corechart
+r1863,1864 - Updates the OrgDemo to get rid of some deprecated methods
+r1860 - update release notes, adds some missing functionality to support PieChart
+r1856 - change DataView.create() to accept AbstractDataTable
+r1855 - DatacColumn class and AbstractDataColumn#getColumnIndex()
+r1847 - Checking emtpy array for null is wrong
+r1846 - Added TimeOfDay
 r1842 - Fixed enums to not rely on .name() call (allows for enum ordinalization optimization)
 r1845 - Added TimeOfDay
 r1846 - Added TimeOfDay
