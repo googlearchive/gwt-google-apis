@@ -6,8 +6,15 @@ Copies:
 /releases/maps/1.1/ was created (r1737) as a straight copy from /trunk/@r1736
 
 Merges:
+/trunk/maps@1742:1902 was merged (r1903) into /releases/maps/1.1
 /trunk/maps@1737:1741 was merged (r1742) into /releases/maps/1.1
---->The next merge into trunk will be 1742:????
+--->The next merge into trunk will be 1903:????
 
 Changes in this branch (excluding changes to this file itself)
+r1875 - Provides an implementation of GLayer()
+r1866 - Disables cranky test
+r1789 - Updated tests for stability
+r1780 - Splits up streetview tests
+r1741 - Problems with overlays in HelloMaps demo after RequiresResize patch
+r1740 - Issue 565801: Adds history support for ">>>" button in HelloMaps sample
 

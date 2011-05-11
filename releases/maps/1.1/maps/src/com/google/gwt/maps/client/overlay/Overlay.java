@@ -24,10 +24,6 @@ import com.google.gwt.maps.jsio.client.Exported;
  * The base class for adding objects at a specific position on top of the map.
  */
 public abstract class Overlay {
-  // internal ref 1431785
-  // Delayed loading of parts of the Maps API fools the instanceof test
-  private static boolean useDuckTypes = nativeCmpGeoXmltoGroundOverlay();
-  
   /**
    * This class is used to wrap Overlays written entirely in JavaScript.
    * 
@@ -62,6 +58,10 @@ public abstract class Overlay {
       OverlayImpl.impl.remove(super.jsoPeer);
     }
   }
+  
+  // internal ref 1431785
+  // Delayed loading of parts of the Maps API fools the instanceof test
+  private static boolean useDuckTypes = nativeCmpGeoXmltoGroundOverlay();
 
   /**
    * Used to create a new Overlay by wrapping an existing GOverlay object. This
@@ -106,6 +106,8 @@ public abstract class Overlay {
         return new Polyline(jsoPeer);
       } else if (nativeIsPolygon(jsoPeer)) {
         return new Polygon(jsoPeer);
+      } else if (nativeIsLayer(jsoPeer)) {
+        return new Layer(jsoPeer);
       }
     }
     
@@ -191,6 +193,10 @@ public abstract class Overlay {
       return false;
     }  
     return true;
+  }-*/;
+
+  private static native  boolean nativeIsLayer(JavaScriptObject jsoPeer) /*-{
+    return (jsoPeer instanceof $wnd.GLayer);
   }-*/;
 
   private static native boolean nativeIsMarker(JavaScriptObject jsoPeer) /*-{

@@ -76,7 +76,7 @@
   <!-- Remoteweb and Selenium targets for automated testing -->
   <target name="test.dev.remoteweb"  depends="compile, compile.tests" description="Run a dev mode remoteweb test" if="gwt.remote.browsers">
     <echo message="Performing remote browser testing in dev mode at ${gwt.remote.browsers}"/>
-    <gwt.junit test.args="-port ${gwt.junit.port} -out www -standardsMode -runStyle RemoteWeb:${gwt.remote.browsers} -Xtries 3" test.out="${junit.out}/test.dev.remoteweb" test.cases="default.dev.tests"/>
+    <gwt.junit test.args="-port ${gwt.junit.port} -out www -standardsMode -runStyle RemoteWeb:${gwt.remote.browsers} -Xtries 4" test.out="${junit.out}/test.dev.remoteweb" test.cases="default.dev.tests"/>
   </target>
 
   <target name="test.dev.selenium"  depends="compile, compile.tests" description="Run a dev mode test using Selenium RC at the given host and path" if="gwt.selenium.hosts">
@@ -86,7 +86,7 @@
 
   <target name="test.prod.remoteweb"  depends="compile, compile.tests" description="Run a prod mode remoteweb test" if="gwt.remote.browsers">
     <echo message="Performing remote browser testing in prod mode at ${gwt.remote.browsers}"/>
-    <gwt.junit test.args="-port ${gwt.junit.port} -out www -prod -standardsMode -runStyle RemoteWeb:${gwt.remote.browsers} -Xtries 3" test.out="${junit.out}/test.prod.remoteweb" test.cases="default.prod.tests"/>
+    <gwt.junit test.args="-port ${gwt.junit.port} -out www -prod -standardsMode -runStyle RemoteWeb:${gwt.remote.browsers} -Xtries 4" test.out="${junit.out}/test.prod.remoteweb" test.cases="default.prod.tests"/>
   </target>
 
   <target name="test.prod.selenium"  depends="compile, compile.tests" description="Run a prod mode test using Selenium RC" if="gwt.selenium.hosts">
