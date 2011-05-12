@@ -6,7 +6,8 @@ Copies:
 /releases/gadgets/1.3/ was created (r1680) as a straight copy from /trunk/@r1667
 
 Merges:
---->The next merge into trunk will be 1668:????
+/trunk/gadgets(r1668:r1905) was merged into this release (r1906)
+--->The next merge into trunk will be 1906:????
 
 Changes in this branch (excluding changes to this file itself)
 

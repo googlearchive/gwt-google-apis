@@ -24,6 +24,7 @@ import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.util.tools.Utility;
 
 import java.io.BufferedReader;
 import java.io.IOException;
