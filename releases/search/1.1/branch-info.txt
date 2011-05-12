@@ -6,7 +6,10 @@ Copies:
 /releases/search/1.1/ was created (r1678) as a straight copy from /trunk/@r1667
 
 Merges:
+/trunk/search(r1668:r1907) was merged into this release (r1908) 
 --->The next merge into trunk will be 1668:????
 
 Changes in this branch (excluding changes to this file itself)
+r1877 - BookSearchTest was flaky
+r1834 - Adds addressLines to search API
 

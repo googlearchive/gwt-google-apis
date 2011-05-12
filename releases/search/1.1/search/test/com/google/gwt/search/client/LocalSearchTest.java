@@ -67,6 +67,7 @@ public class LocalSearchTest extends GWTTestCase {
         assertNotNull("getLat()", localResult.getLat());
         assertNotNull("getLng()", localResult.getLng());
         assertNotNull("getStreetAddress()", localResult.getStreetAddress());
+        assertNotNull("getAddressLines()", localResult.getAddressLines());
         assertNotNull("getCity()", localResult.getCity());
         assertNotNull("getRegion()", localResult.getRegion());
         assertNotNull("getCountry()", localResult.getCountry());
