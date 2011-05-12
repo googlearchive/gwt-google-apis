@@ -15,7 +15,7 @@
  */
 package com.google.gwt.gadgets.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.gadgets.client.UserPreferences.DataType;
 import com.google.gwt.gadgets.client.UserPreferences.Preference;
 
@@ -24,7 +24,7 @@ import com.google.gwt.gadgets.client.UserPreferences.Preference;
  */
 @DataType("list")
 public abstract class ListPreference extends Preference<String[]> {
-  
+
   /**
    * Returns the value of a list preference as a list of strings.
    * 
@@ -32,7 +32,15 @@ public abstract class ListPreference extends Preference<String[]> {
    */
   @Override
   public String[] getValue() {
-    return prefs.getString(getName()).split("\\|");
+    JsArrayString result = PreferencesProvider.get().getArray(getName());
+    if (result == null) {
+      return null;
+    }
+    String[] stringResult = new String[result.length()];
+    for (int i = 0; i < result.length(); i++) {
+      stringResult[i] = result.get(i);
+    }
+    return stringResult;
   }
 
   /**
@@ -42,9 +50,10 @@ public abstract class ListPreference extends Preference<String[]> {
    */
   @Override
   void set(String[] value) {
-    JavaScriptObject array = JavaScriptObject.createArray();
+    PreferencesFeature prefs = PreferencesProvider.get();
+    JsArrayString array = JsArrayString.createArray().cast();
     for (String s : value) {
-      prefs.push(array, s);
+      array.push(s);
     }
     prefs.setArray(getName(), array);
   }

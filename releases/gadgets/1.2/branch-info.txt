@@ -6,8 +6,17 @@ Copies:
 /releases/gadgets/1.2/ was created (r1808) as a straight copy from /trunk/@r1807
 
 Merges:
+/trunk/gadgets/@1811:r1904 was merged (r1904) into this branch
 /trunk/gadgets/@1808:1810 was merged (r1811) into this branch
---->The next merge into trunk will be 1811:????
+--->The next merge into trunk will be 1905:????
 
 Changes in this branch (excluding changes to this file itself)
-
+r1886 - Adds support for the gadget.pubsub feature
+r1880 - Updates the GadgetLinker to derive from the CrossSiteIframeLinker.
+r1831 - Excludes the ajaxloader classes from the -noredist.jar file.
+r1829 - Removed @Override that causes compiler error in Java 1.5
+r1828 - Added the samples from the getting started page to the project.
+r1826 - Generated code for User Preferences was missing an import.
+r1825 - Adds back the PreferencesUtil class.  
+r1824 - Updated the EnumGenerator.
+r1823 - Added a way to mock Preferences and associated unit tests.

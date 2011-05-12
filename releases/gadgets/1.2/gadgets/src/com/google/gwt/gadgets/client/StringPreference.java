@@ -30,7 +30,7 @@ public abstract class StringPreference extends Preference<String> {
    */
   @Override
   public String getValue() {
-    return prefs.getString(getName());
+    return PreferencesProvider.get().getString(getName());
   }
 
   /**
@@ -40,6 +40,6 @@ public abstract class StringPreference extends Preference<String> {
    */
   @Override
   void set(String value) {
-    prefs.set(getName(), value);
+    PreferencesProvider.get().set(getName(), value);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2010 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,42 +16,84 @@
 package com.google.gwt.gadgets.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.gadgets.client.PreferencesProvider;
 
 /**
  * Provides access to Gadget preferences support.
+ * 
+ * @deprecated use {@link com.google.gwt.gadgets.client.PreferencesFeature}
  */
-public class PreferencesUtil extends JavaScriptObject {
+@Deprecated
+public class PreferencesUtil {
+  private static PreferencesUtil singleton;
 
-  public static native PreferencesUtil nativeInitPrefs() /*-{
-     return new $wnd.gadgets.Prefs();
-   }-*/;
-
-  protected PreferencesUtil() {
+  /**
+   * @deprecated use 
+   *             {@link com.google.gwt.gadgets.client.PreferencesProvider#get()}
+   */
+  @Deprecated
+  public static PreferencesUtil nativeInitPrefs() {
+    if (singleton == null) {
+      singleton = new PreferencesUtil();
+    }
+    return singleton;
   }
 
-  public final native boolean getBool(String name) /*-{
-    return this.getBool(name) || false;
-  }-*/;
-  
-  public final native String getMsg(String name) /*-{
-    var maybeString = this.getMsg(name);
-    return maybeString == undefined ? null : maybeString;
-  }-*/;
+  /**
+   * @deprecated use
+   *             {@link com.google.gwt.gadgets.client.PreferencesFeature#getBool(String)}
+   */
+  @Deprecated
+  public final boolean getBool(String name) {
+    return PreferencesProvider.get().getBool(name);
+  }
 
-  public final native String getString(String name) /*-{
-    var maybeString = this.getString(name);
-    return maybeString == undefined ? null : maybeString;
-  }-*/;
+  /**
+   * @deprecated use
+   *             {@link com.google.gwt.gadgets.client.PreferencesFeature#getMsg(String)}
+   */
+  @Deprecated
+  public final String getMsg(String name) {
+    return PreferencesProvider.get().getMsg(name);
+  }
 
+  /**
+   * @deprecated use
+   *             {@link com.google.gwt.gadgets.client.PreferencesFeature#getString(String)}
+   */
+  @Deprecated
+  public final String getString(String name) {
+    return PreferencesProvider.get().getString(name);
+  }
+
+  /**
+   * @deprecated use something else like the JsArray classes.
+   * 
+   */
+  @Deprecated
   public final native void push(JavaScriptObject array, String value) /*-{
     array.push(value);
   }-*/;
 
-  public final native void set(String name, String value) /*-{
-    this.set(name, value);
-  }-*/;
+  /**
+   * @deprecated use
+   *             {@link com.google.gwt.gadgets.client.PreferencesFeature#set(String, 
+   *             String)}
+   */
+  @Deprecated
+  public final void set(String name, String value) {
+    PreferencesProvider.get().set(name, value);
+  }
 
-  public final native void setArray(String name, JavaScriptObject value) /*-{
-    this.setArray(name, value);
-  }-*/;
+  /**
+   * @deprecated use 
+   *             {@link com.google.gwt.gadgets.client.PreferencesFeature#setArray(String, 
+   *             com.google.gwt.core.client.JsArrayString)}
+   * 
+   */
+  @Deprecated
+  public final void setArray(String name, JavaScriptObject value) {
+    PreferencesProvider.get().setArray(name, (JsArrayString) value);
+  }
 }

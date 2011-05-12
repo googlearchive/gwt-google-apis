@@ -61,6 +61,6 @@ public abstract class EnumPreference<E extends Enum<E>> extends Preference<E> {
    */
   @Override
   void set(E value) {
-    prefs.set(getName(), value.name());
+    PreferencesProvider.get().set(getName(), value.name());
   }
 }
