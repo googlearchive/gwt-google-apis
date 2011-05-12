@@ -6,7 +6,12 @@ Copies:
 /releases/language/1.1/ was created (r1677) as a straight copy from /trunk/@r1667
 
 Merges:
+/trunk/language(r1668:r1906) was merged into this branch (r1907)
 --->The next merge into trunk will be 1668:????
 
 Changes in this branch (excluding changes to this file itself)
+r1899 - Commented out some broken tests - API is broken
+r1892 - Added missing language codes
+r1843 - updated language codes
+
 
