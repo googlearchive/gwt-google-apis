@@ -15,13 +15,13 @@
  */
 package com.google.api.gwt.samples.buzz.shared;
 
-import com.google.api.gwt.buzz.v1.shared.Buzz;
-import com.google.api.gwt.buzz.v1.shared.Buzz.ActivitiesContext.ListRequest.Scope;
-import com.google.api.gwt.buzz.v1.shared.Buzz.BuzzAuthScope;
-import com.google.api.gwt.buzz.v1.shared.model.Activity;
-import com.google.api.gwt.buzz.v1.shared.model.ActivityFeed;
-import com.google.api.gwt.buzz.v1.shared.model.Comment;
-import com.google.api.gwt.buzz.v1.shared.model.Person;
+import com.google.api.gwt.services.buzz.v1.shared.Buzz;
+import com.google.api.gwt.services.buzz.v1.shared.Buzz.ActivitiesContext.ListRequest.Scope;
+import com.google.api.gwt.services.buzz.v1.shared.Buzz.BuzzAuthScope;
+import com.google.api.gwt.services.buzz.v1.shared.model.Activity;
+import com.google.api.gwt.services.buzz.v1.shared.model.ActivityFeed;
+import com.google.api.gwt.services.buzz.v1.shared.model.Comment;
+import com.google.api.gwt.services.buzz.v1.shared.model.Person;
 import com.google.api.gwt.shared.GoogleApiRequestTransport;
 import com.google.api.gwt.shared.OAuth2Login;
 import com.google.gwt.event.shared.SimpleEventBus;
