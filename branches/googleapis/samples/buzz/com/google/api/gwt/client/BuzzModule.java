@@ -16,10 +16,10 @@
 
 package com.google.api.gwt.samples.buzz.client;
 
-import com.google.api.gwt.buzz.v1.shared.Buzz;
 import com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport;
 import com.google.api.gwt.client.impl.ClientOAuth2Login;
 import com.google.api.gwt.samples.buzz.shared.BuzzBase;
+import com.google.api.gwt.services.buzz.v1.shared.Buzz;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
