@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project basedir="." default="build" name="google-api-gwt-client">
+  <property environment="env" />
+
+  <property name="gwtdir" value="${env.GWT_DIR}" />
+  <property name="oauth2dir" value="${env.OAUTH2_DIR}" />
+
+  <property name="src.dir" value="${basedir}/src" />
+  <property name="build.dir" value="${basedir}/build" />
+  <property name="build.classes.dir" value="${build.dir}/classes" />
+  <property name="build.dist.dir" value="${build.dir}/dist" />
+  <property name="build.javadoc.dir" value="${build.dir}/javadoc" />
+
+  <property name="release" value="unknown" />
+  <property name="debuglevel" value="source,lines,vars" />
+
+  <target name="verify" description="Check that necessary dependencies were found">
+    <available file="${gwtdir}/gwt-user.jar" property="foundgwtuserjar" />
+    <fail unless="foundgwtuserjar" message="Cannot find gwt-user.jar" />
+
+    <available file="${oauth2dir}/liboauth2.jar" property="foundoauth2jar" />
+    <fail unless="foundoauth2jar" message="Cannot find liboauth2.jar" />
+  </target>
+
+  <target name="build" depends="clean, verify" description="Compile sources with javac">
+    <mkdir dir="${build.classes.dir}" />
+    <copy includeemptydirs="false" todir="${build.classes.dir}">
+      <fileset dir="${src.dir}" />
+    </copy>
+
+    <echo message="${ant.project.name}: ${ant.file}" />
+    <javac debug="true" debuglevel="${debuglevel}" destdir="${build.classes.dir}">
+      <src path="${src.dir}" />
+      <classpath>
+        <pathelement location="${build.classes.dir}" />
+        <pathelement location="${gwtdir}/gwt-user.jar" />
+        <pathelement location="${oauth2dir}/liboauth2.jar" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="build" description="Generate a jar of the base library">
+    <mkdir dir="${build.dist.dir}" />
+    <jar jarfile="${build.dist.dir}/google-api-gwt-client-${release}.jar">
+      <fileset dir="${build.classes.dir}" />
+    </jar>
+  </target>
+
+  <target name="clean" description="Remove generated files">
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <target name="javadoc">
+    <delete dir="${build.javadoc.dir}" />
+    <mkdir dir="${build.javadoc.dir}" />
+
+    <javadoc packagenames="com.google.api.gwt.*"
+        destdir="${build.javadoc.dir}"
+        encoding="UTF-8"
+        docencoding="UTF-8"
+        charset="UTF-8"
+        use="true"
+        author="true"
+        protected="true"
+        linksource="true"
+        windowtitle="Google API Client Library for GWT - ${release}">
+      <sourcepath>
+        <pathelement location="src" />
+      </sourcepath>
+      <link href="http://google-web-toolkit.googlecode.com/svn/javadoc/2.1/" />
+      <link href="http://java.sun.com/javase/6/docs/api" />
+    </javadoc>
+  </target>
+</project>
