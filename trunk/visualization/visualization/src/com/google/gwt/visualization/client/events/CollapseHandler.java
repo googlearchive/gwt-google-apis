@@ -48,7 +48,8 @@ public abstract class CollapseHandler extends Handler {
 
   @Override
   protected void onEvent(Properties properties) throws TypeException {
-    int row = properties.getNumber("row").intValue();
+    Double boxedRow = properties.getNumber("row");
+    int row = boxedRow == null ? -1 : boxedRow.intValue();
     boolean collapsed = properties.getBoolean("collapsed");
     onCollapseEvent(new CollapseEvent(row, collapsed));
   }

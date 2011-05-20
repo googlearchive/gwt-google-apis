@@ -49,8 +49,10 @@ public abstract class OnMouseOverHandler extends Handler {
 
   @Override
   protected void onEvent(Properties properties) throws TypeException {
-    int row = properties.getNumber("row").intValue();
-    int column = properties.getNumber("column").intValue();
+    Double boxedRow = properties.getNumber("row");
+    int row = boxedRow == null ? -1 : boxedRow.intValue(); 
+    Double boxedColumn = properties.getNumber("column");
+    int column =  boxedColumn == null ? -1 : boxedColumn.intValue();
     onMouseOverEvent(new OnMouseOverEvent(row, column));
   }
 }
