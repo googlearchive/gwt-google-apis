@@ -1,0 +1,10 @@
+<module>
+  <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.api.gwt.ApiCore" />
+  <inherits name="com.google.web.bindery.requestfactory.RequestFactory" />
+
+  <source path="client"/>
+  <source path="shared"/>
+
+  <entry-point class="com.google.api.gwt.samples.urlshortener.client.UrlshortenerEntryPoint" />
+</module>
