@@ -48,7 +48,8 @@ public abstract class SortHandler extends Handler {
   @Override
   protected void onEvent(Properties event) throws TypeException {
     boolean ascending = event.getBoolean("ascending");
-    int column = event.getNumber("column").intValue();
+    Double boxedColumn = event.getNumber("column");
+    int column = boxedColumn == null ? -1 : boxedColumn.intValue();
     onSort(new SortEvent(ascending, column));
   }
 }
