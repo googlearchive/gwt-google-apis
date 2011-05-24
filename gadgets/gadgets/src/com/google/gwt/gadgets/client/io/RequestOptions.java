@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,7 +25,7 @@ public class RequestOptions extends JavaScriptObject {
 
   /**
    * Returns new instance of {@link RequestOptions}.
-   *
+   * 
    * @return new instance of {@link RequestOptions}.
    */
   public static RequestOptions newInstance() {
@@ -39,13 +39,12 @@ public class RequestOptions extends JavaScriptObject {
    * Sets the authorization method. Consult <a href=
    * "http://code.google.com/intl/pl/apis/gadgets/docs/reference/#gadgets.io"
    * >specification</a> for details.
-   *
+   * 
    * @param authorizationType the authorization method.
    * @return this instance of {@link RequestOptions} for convenience in using
    *         the builder pattern.
    */
-  public final native RequestOptions setAuthorizationType(
-      AuthorizationType authorizationType) /*-{
+  public final native RequestOptions setAuthorizationType(AuthorizationType authorizationType) /*-{
     this.AUTHORIZATION = authorizationType.@com.google.gwt.gadgets.client.io.AuthorizationType::getAuthorizationType()();
     return this;
   }-*/;
@@ -53,7 +52,7 @@ public class RequestOptions extends JavaScriptObject {
   /**
    * Sets a type of content of the requested resource. This influences the
    * method of parsing used for received data.
-   *
+   * 
    * @param contentType type of content of the requested resource.
    * @return this instance of {@link RequestOptions} for convenience in using
    *         the builder pattern.
@@ -65,7 +64,7 @@ public class RequestOptions extends JavaScriptObject {
 
   /**
    * Sets HTTP headers to send to the URL.
-   *
+   * 
    * @param key Name of the header.
    * @param value Value for the header.
    * @return this instance of {@link RequestOptions} for convenience in using
@@ -81,7 +80,7 @@ public class RequestOptions extends JavaScriptObject {
    * Sets the HTTP request method. Note that the only request method required by
    * container to implement is {@link MethodType#GET} method. Implementation of
    * remaining methods is optional.
-   *
+   * 
    * @param methodType the HTTP request method.
    * @return this instance of {@link RequestOptions} for convenience in using
    *         the builder pattern.
@@ -92,9 +91,74 @@ public class RequestOptions extends JavaScriptObject {
   }-*/;
 
   /**
+   * A service provider may be able to automatically provision a gadget with a
+   * request token that is preapproved for access to a resource. This parameter
+   * is optional.
+   * 
+   * @param requestToken the request token to use.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setOAuthRequestToken(String requestToken) /*-{
+    this.OAUTH_REQUEST_TOKEN = requestToken;
+    return this;
+  }-*/;
+
+  /**
+   * The secret corresponding to a preapproved request token. This parameter is
+   * optional.
+   * 
+   * @param requestTokenSecret the corresponding secret to the request token.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setOAuthRequestTokenSecret(String requestTokenSecret) /*-{
+    this.OAUTH_REQUEST_TOKEN_SECRET = requestTokenSecret;
+    return this;
+  }-*/;
+
+  /**
+   * The nickname the gadget uses to refer to the OAuth <Service> element from
+   * its XML spec. If unspecified, defaults to "".
+   * 
+   * @param serviceName the of the service configuration to use.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setOAuthServiceName(String serviceName) /*-{
+    this.OAUTH_SERVICE_NAME = serviceName;
+    return this;
+  }-*/;
+
+  /**
+   * The nickname the gadget uses to refer to an OAuth token granting access to
+   * a particular resources. If unspecified, defaults to "".
+   * 
+   * @param tokenName the of the token to use.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setOAuthTokenName(String tokenName) /*-{
+    this.OAUTH_TOKEN_NAME = tokenName;
+    return this;
+  }-*/;
+
+  /**
+   * Sets when to use OAuth tokens for authentication.
+   * 
+   * @param useTokenOption when to use OAuth tokens for authentication.
+   * @return this instance of {@link RequestOptions} for convenience in using
+   *         the builder pattern.
+   */
+  public final native RequestOptions setOAuthUseToken(OAuthUseTokenOptions useTokenOption) /*-{
+    this.OAUTH_USE_TOKEN = useTokenOption.@com.google.gwt.gadgets.client.io.OAuthUseTokenOptions::getUseTokenOption()();
+    return this;
+  }-*/;
+
+  /**
    * Specifies the data to send to the URL using the POST method; defaults to
    * null.
-   *
+   * 
    * @param data the data to send.
    * @return this instance of {@link RequestOptions} for convenience in using
    *         the builder pattern.
@@ -113,7 +177,7 @@ public class RequestOptions extends JavaScriptObject {
    * headers specified, this value will default to 3600 (one hour). Note that
    * Signed requests and objects with POST_DATA present will generally not be
    * cached.
-   *
+   * 
    * @param interval the lifespan of cached content in seconds.
    * @return this instance of {@link RequestOptions} for convenience in using
    *         the builder pattern.
