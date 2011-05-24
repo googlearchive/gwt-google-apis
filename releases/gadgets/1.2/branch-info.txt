@@ -6,11 +6,13 @@ Copies:
 /releases/gadgets/1.2/ was created (r1808) as a straight copy from /trunk/@r1807
 
 Merges:
-/trunk/gadgets/@1811:r1904 was merged (r1904) into this branch
+/trunk/gadgets/@1905:1917 was merged (r1918) into this branch
+/trunk/gadgets/@1811:1904 was merged (r1904) into this branch
 /trunk/gadgets/@1808:1810 was merged (r1811) into this branch
---->The next merge into trunk will be 1905:????
+--->The next merge into trunk will be 1918:????
 
 Changes in this branch (excluding changes to this file itself)
+r1917 - Adds support to add more parameters to HTTP request for OAUTH support
 r1886 - Adds support for the gadget.pubsub feature
 r1880 - Updates the GadgetLinker to derive from the CrossSiteIframeLinker.
 r1831 - Excludes the ajaxloader classes from the -noredist.jar file.
