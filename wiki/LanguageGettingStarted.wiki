@@ -21,7 +21,7 @@ There are three steps needed to use the Language API in a GWT project:
 
    # Include the library JAR file in the classpath
    # Inherit com.google.gwt.language.Language in the module XML definition file. 
-   # Add a call to your Module entry point to `LanguageUtil.loadTranslation()` and/or `LangaugeUtil.loadTransliteration()` to download the API from Google's severs.
+   # Add a call to your Module entry point to `LanguageUtil.loadTranslation()` and/or `LanguageUtil.loadTransliteration()` to download the API from Google's severs.
 
 We'll explain each step as we set up a new project.
 
