@@ -68,6 +68,19 @@ In gwt-maps 1.0, it may be necessary to force the map to resize its layout after
 
 Passing no key to the Maps API usually works for developing on the local machine, but you may need to create a key for localhost:`<port>` at the [http://code.google.com/apis/maps/signup.html Maps developer web site.]
 
+==How do I use the Google Maps API for GWT with a Maps Premier client ID? ==
+
+Maps Premier users will can  Use `AjaxLoaderOptions` to set the client ID.  This will also bypass the need for an API key:
+
+{{{
+  AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
+  options.setOtherParms("client=gme-yourclientid");
+  Maps.loadMapsApi("notsupplied", "2", false,options, new Runnable() {
+    public void run() {
+      buildUi();
+    }
+  });
+}}}
 == Why can't I use Maps API data types in a servlet? ==
 
 The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web browser.  Unfortunately, you cannot use these APIs in server side code.
