@@ -70,12 +70,12 @@ Passing no key to the Maps API usually works for developing on the local machine
 
 ==How do I use the Google Maps API for GWT with a Maps  API Premier client ID? ==
 
-Maps API Premier users will can  Use `AjaxLoaderOptions` to set the client ID.  This will also bypass the need for an API key:
+Maps API Premier users can use `AjaxLoaderOptions` to set the client ID.  This will also bypass the need for an API key:
 
 {{{
   AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
   options.setOtherParms("client=gme-yourclientid");
-  Maps.loadMapsApi("notsupplied", "2", false,options, new Runnable() {
+  Maps.loadMapsApi("notsupplied", "2", false, options, new Runnable() {
     public void run() {
       buildUi();
     }
