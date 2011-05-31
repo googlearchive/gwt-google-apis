@@ -113,7 +113,7 @@ This method makes a request for at most 5 activities, then `alert()`s with the n
 
 == Adding Authentication ==
 
-Some methods require the user of your application to authenticate, and to grant access to their data to your application. This can be accomplished using [http://TODO OAuth 2.0].
+Some methods require the user of your application to authenticate, and to grant access to their data to your application. This can be accomplished using [http://code.google.com/apis/accounts/docs/OAuth2.html OAuth 2.0].
 
 You will need to ask your users for access to their data before making any requests. In fact, you will need to do this before initializing the transport. All requests made using the transport will use the access token your application receives as a result of the OAuth 2.0 flow.
 
@@ -157,4 +157,4 @@ private void initialize(String accessToken) {
 ==Next Steps==
 You should now have the basics of using a Google API in your GWT application.
 
-To find out more about what you can do with a specific API, see the [http://TODO library class reference].
+To find out more about what you can do with a specific API, see the the library's specific API reference, or check out some [GoogleAPIsSamples sample applications].
