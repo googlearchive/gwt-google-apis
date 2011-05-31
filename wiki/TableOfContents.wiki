@@ -50,6 +50,69 @@
    * [AjaxLoaderSampleApplications Sample Applications]
    * [AjaxLoaderReleaseNotes Release Notes]
    * [AjaxLoaderFAQ FAQs]
+
+
+<wiki:comment>
+Begin generated libraries section
+</wiki:comment>
+
+ * Books API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/books/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Buzz API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/buzz/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Chrome Web Store API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/chromewebstore/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Custom Search API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/customsearch/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Diacritize API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/diacritize/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Discovery API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/discovery/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Latitude API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/latitude/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Moderator API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/moderator/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Prediction API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/prediction/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Shopping API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/shopping/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Task Queue API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/taskqueue/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Tasks API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/tasks/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * URL Shortener (goo.gl) API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/urlshortener/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+
+<wiki:comment>
+End generated libraries section
+</wiki:comment>
+
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [DesigningAPIWrappers Design Considerations]
