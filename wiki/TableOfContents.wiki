@@ -50,12 +50,9 @@
    * [AjaxLoaderSampleApplications Sample Applications]
    * [AjaxLoaderReleaseNotes Release Notes]
    * [AjaxLoaderFAQ FAQs]
-
-
 <wiki:comment>
 Begin generated libraries section
 </wiki:comment>
-
  * Books API
    * [GoogleAPIsGettingStarted Getting Started]
    * [http://gwt-google-apis.googlecode.com/svn/javadoc/books/0.1/index.html API Reference]
@@ -108,11 +105,9 @@ Begin generated libraries section
    * [GoogleAPIsGettingStarted Getting Started]
    * [http://gwt-google-apis.googlecode.com/svn/javadoc/urlshortener/0.1/index.html API Reference]
    * [GoogleAPIsSamples Sample Applications]
-
 <wiki:comment>
 End generated libraries section
 </wiki:comment>
-
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [DesigningAPIWrappers Design Considerations]
