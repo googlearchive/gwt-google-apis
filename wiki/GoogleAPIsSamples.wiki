@@ -1,0 +1,59 @@
+#summary Sample applications using new Google APIs
+
+<wiki:toc max_depth="1" />
+
+== Google Books API Family ==
+
+|| [http://code.google.com/apis/books Documentation] | [http://www.google.com/support/forum/p/booksearch-apis/label?lid=2b7bff1f1cd4a476 Help Forum] ||
+|| No samples yet. ||
+
+== Google Buzz API ==
+
+|| [http://code.google.com/apis/buzz/docs Documentation] | [http://code.google.com/apis/buzz/forum.html Help Forum] ||
+|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/buzz/demo/BuzzSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Fbranches%2Fgoogleapis%2Fsamples%2Fbuzz%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Fbuzz Code] ||
+
+== Google Custom Search API ==
+
+|| [http://code.google.com/apis/customsearch/v1/overview.html Documentation] | [http://www.google.com/support/forum/p/customsearch Help Forum] ||
+|| No samples yet. ||
+
+== Google Diacritize API ==
+
+|| [http://code.google.com/apis/ajaxlanguage/documentation/#Diacritization Documentation] | [http://groups.google.com/group/Google-AJAX-Search-API Help Forum] ||
+|| No samples yet. ||
+
+== Google APIs Discovery Service ==
+
+|| [http://code.google.com/apis/discovery/overview.html Documentation] | [http://code.google.com/apis/discovery/forum.html Help Forum] ||
+|| No samples yet. ||
+
+== Google Latitude API ==
+
+|| [http://code.google.com/apis/latitude Documentation] | [https://groups.google.com/group/google-latitude-api Help Forum] ||
+|| No samples yet. ||
+
+*NOTE:* this API does not support OAuth 2.
+
+== Google Moderator API ==
+
+|| [http://code.google.com/apis/moderator Documentation] | [https://groups.google.com/group/google-moderator-api Help Forum] ||
+|| No samples yet. ||
+
+== Google Prediction API ==
+
+|| [http://code.google.com/apis/predict Documentation] | [https://groups.google.com/group/prediction-api-discuss Help Forum] ||
+|| No samples yet. ||
+
+== Search API for Shopping ==
+
+|| [http://code.google.com/apis/shopping/search/ Documentation] | [https://groups.google.com/group/google-search-api-for-shopping Help Forum] ||
+|| No samples yet. ||
+
+== Tasks API ==
+
+|| [http://code.google.com/apis/tasks/overview.html Documentation] | [http://code.google.com/apis/tasks/forum.html Help Forum] ||
+|| No samples yet. ||
+
+== Google URL Shortener (goo.gl) API ==
+|| [http://code.google.com/apis/urlshortener/overview.html Documentation] | [http://groups.google.com/group/google-url-shortener Help Forum] ||
+|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Ftrunk%2Fapis%2Fsamples%2Furlshortener%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Furlshortener Code] ||
