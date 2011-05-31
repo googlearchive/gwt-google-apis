@@ -55,6 +55,6 @@
 || [http://code.google.com/apis/tasks/overview.html Documentation] | [http://code.google.com/apis/tasks/forum.html Help Forum] ||
 || No samples yet. ||
 
-= Google URL Shortener (goo.gl) API =
+= Google URL Shortener API =
 || [http://code.google.com/apis/urlshortener/overview.html Documentation] | [http://groups.google.com/group/google-url-shortener Help Forum] ||
 || *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Ftrunk%2Fapis%2Fsamples%2Furlshortener%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Furlshortener Code] ||
