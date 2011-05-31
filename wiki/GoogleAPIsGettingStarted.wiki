@@ -14,7 +14,7 @@ This guide describes the basics of using Google APIs in a GWT project. For more 
 
 == Downloading a service-specific Google API library ==
 
-You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/downloads/ project download page].
+You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/wiki/Downloads download page].
 
 You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev.jar` and `gwt-user.jar` files).
 
