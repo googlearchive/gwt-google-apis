@@ -1,48 +1,48 @@
 #summary Using Google APIs in a project
 
-*Note: This document is not specific to one service, but rather describes the setup and usage of any of the new Google APIs (e.g., Buzz, Moderator, Latitude, etc.)*
+*Note: This document is not specific to one service, but rather describes the setup and usage of any of the new Google APIs (such as Buzz, Moderator, Latitude, and other APIs shown on the [GoogleAPIsSamples sample applications] page).*
 
 = Getting Started with Using Google APIs =
 
-This guide describes the basics of using Google APIs in a GWT project. For more information on the functionality provided by a specific API service, see the specific API's developer's guide.
+This guide describes the basics of using Google APIs in a GWT project. For more information on the functionality provided by a specific service's API, see the documentation for that API.
 
 == Assumptions ==
  
-  * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit]
+  * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit].
   * You know how to [http://code.google.com/eclipse/docs/creating_new_webapp.html create a new GWT project] using the Google Plugin for Eclipse.
   * You are using GWT 2.3 or later.
 
-== Downloading a service-specific Google API library ==
+== Download a service-specific Google API library ==
 
 You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/wiki/Downloads download page].
 
-You can either reference the `.jar` file from the folder that you uncompressed the project in, or copy it to another location, such as the location of your GWT distribution (containing `gwt-dev.jar` and `gwt-user.jar` files).
+You can either reference the `.jar` file from the folder where you uncompressed the project, or you can copy it to another location, such as the location of your GWT distribution (containing `gwt-dev.jar` and `gwt-user.jar` files).
 
-== Creating a new GWT Project ==
+== Create a new GWT Project ==
 
 Start by creating a new GWT project as described in the [http://code.google.com/eclipse/docs/creating_new_webapp.html GWT Plugin Guide].
 
-Since we are working with an additional library, add the jar you just downloaded to the Java classpath.  Then, add the GWT module to your project's module by adding a line like this to your project's gwt.xml file:
+Add the jar you just downloaded to the Java classpath.  Then, add the GWT module to your project's module by adding a line like this to your project's gwt.xml file:
 
 {{{
 <inherits name='com.google.api.gwt.services.Service' />
 }}}
 
-The `Service` you use will depend on the service with which you want to communicate. For example, if you want to communicate with the Buzz API, add this line to your gwt.xml file:
+The `Service` you use depends on the service with which you want to communicate. For example, if you want to communicate with the Buzz service, add this line to your gwt.xml file:
 
 {{{
 <inherits name='com.google.api.gwt.services.Buzz' />
 }}}
 
-To use the Moderator API instead, the module is `Moderator`, for the Translate it is `Translate`, and so on.
+To use the Moderator service instead, the module is `Moderator`, for the Translate service, it is `Translate`, and so on.
 
-== Basic steps to use the service ==
+== Communicating with the service ==
 
-Now that your project has the code it needs to make requests to the service, there are a couple things you need to do to enable requests.
+Now that your project has the code it needs to make requests to the service, there are a couple of things you need to do to enable requests.
 
-=== Initialize the GoogleApiRequestTransport ===
+=== Initialize the !GoogleApiRequestTransport ===
 
-Before making a request, the transport must be initialized. To do this (using the Buzz service as an example), write code like this:
+Before making a request, you must initialize the transport. To do this (using the Buzz service as an example), write code like this:
 
 {{{
 // e.g., Buzz.class, Translate.class, Moderator.class...
@@ -75,11 +75,11 @@ This code snippet sets up the service so that it can make requests. It sets your
 
 === Make Requests to the Service ===
 
-The specifics of making a request will be different depending on the service with which you are communicating, but the basics are similar, and will generally look something like this:
+The specifics of making a request are different depending on which API you are using, but the basics are similar, and the code generally looks something like this:
 
 {{{
 private void makeRequest() {
-  service.collection().method("requiredParam", "reqParam2")
+  service.collection().method("requiredParam1", "requiredParam2")
       .setOptionalParam("optionalParam")
       .to(new Receiver<Response>() {
         @Override
@@ -93,7 +93,7 @@ private void makeRequest() {
 
 This code snippet uses the same `service` instance described earlier, which was instantiated by a call to `GWT.create(Service.class)`.
 
-As a specific example, the Buzz service provides a method to list activities posted by a user. The code to make a request to this method would look something like this:
+As a specific example, the Buzz API provides a method to list activities posted by a user. The code to make a request to this method looks like this:
 
 {{{
 private void makeRequest() {
@@ -113,11 +113,11 @@ This method makes a request for at most 5 activities, then `alert()`s with the n
 
 == Adding Authentication ==
 
-Some methods require the user of your application to authenticate, and to grant access to their data to your application. This can be accomplished using [http://code.google.com/apis/accounts/docs/OAuth2.html OAuth 2.0].
+Some APIs provide methods that access or update a user's private data. Before you make any requests to these APIs, you need to ask the user of your application to authenticate and grant your application access to their data. If you tried the example above, you found out that this was needed when your request failed!
 
-You will need to ask your users for access to their data before making any requests. In fact, you will need to do this before initializing the transport. All requests made using the transport will use the access token your application receives as a result of the OAuth 2.0 flow.
+In fact, you need to ask the user for permission and obtain an access token before initializing the transport.  After you initialize the transport with the access token, all requests use the access token. You can get an access token using an    [http://code.google.com/apis/accounts/docs/OAuth2.html OAuth 2.0] flow.
 
-To initiate an OAuth 2.0 flow, you will use an `OAuth2Login` implementation. The implementation provided with the library is `ClientOAuth2Login`, which delegates to the [http://code.google.com/p/gwt-oauth2 gwt-oauth2] project under the covers to handle the flow.
+To initiate an OAuth 2.0 flow, use an `OAuth2Login` implementation. The implementation provided with the library is `ClientOAuth2Login`, which delegates to the [http://code.google.com/p/gwt-oauth2 gwt-oauth2] project under the covers to handle the flow.
 
 {{{
 private void authenticate() {
@@ -132,11 +132,11 @@ private void authenticate() {
 }
 }}}
 
-Replace `Service.ServiceAuthScope` with one or more auth scope enums included in your service's library, e.g., `Buzz.BuzzAuthScope.BUZZ_READ_ONLY` or `Urlshortener.UrlshortenerAuthScope.URLSHORTENER`.
+You'll need to replace `Service.ServiceAuthScope` with one or more auth scope enums included in your service's library, e.g., `Buzz.BuzzAuthScope.BUZZ_READ_ONLY` or `Urlshortener.UrlshortenerAuthScope.URLSHORTENER`.
 
-The scopes provided to the `withScopes()` method will grant your application different access levels to your user's data. Some scopes provide read-only access while others also provide write access to their data. You will need to read the API's documentation to find out which scopes your application will require.
+The scopes you provide to the `withScopes()` method grant your application different access levels to your user's data. Some scopes provide read-only access while others also provide write access to their data. Read the API's documentation and decide which scopes your application requires.
 
-When using the `gwt-oauth2` implementation, calling the `login()` method will display a pop-up to your user which will ask them to grant access to their data. If they grant access, the callback's `onSuccess()` method will be called with the access token generated by the auth provider. Once you have this token, you will then need to pass it to the transport:
+When using the `gwt-oauth2` implementation, call the `login()` method to display a pop-up that asks your user to grant access to their data. If they grant access, the callback's `onSuccess()` method is invoked with the access token generated by the auth provider. Once you have this token, you then need to pass it to the transport:
 
 {{{
 private void initialize(String accessToken) {
