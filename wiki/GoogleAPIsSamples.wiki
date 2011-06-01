@@ -18,22 +18,10 @@
 || [http://code.google.com/apis/customsearch/v1/overview.html Documentation] | [http://www.google.com/support/forum/p/customsearch Help Forum] ||
 || No samples yet. ||
 
-= Google Diacritize API =
-
-|| [http://code.google.com/apis/ajaxlanguage/documentation/#Diacritization Documentation] | [http://groups.google.com/group/Google-AJAX-Search-API Help Forum] ||
-|| No samples yet. ||
-
 = Google APIs Discovery Service =
 
 || [http://code.google.com/apis/discovery/overview.html Documentation] | [http://code.google.com/apis/discovery/forum.html Help Forum] ||
 || No samples yet. ||
-
-= Google Latitude API =
-
-|| [http://code.google.com/apis/latitude Documentation] | [https://groups.google.com/group/google-latitude-api Help Forum] ||
-|| No samples yet. ||
-
-*NOTE:* this API does not support OAuth 2.
 
 = Google Moderator API =
 
