@@ -2,7 +2,7 @@
 
 = Getting Started with Using Google APIs =
 
-*Note: This document is specific to the URL Shortener API. However, the concepts it introduces are universal to other services. Please consult the service's API documentation and JavaDoc reference for information specific to the service you intend to use.*
+*Note: This document is specific to the URL Shortener API. However, the concepts it introduces are universal to other services. Please consult the service's API documentation and !JavaDoc reference for information specific to the service you intend to use.*
 
 == Assumptions ==
  
