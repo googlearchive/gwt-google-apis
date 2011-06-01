@@ -81,7 +81,7 @@ The specifics of making a request are different depending on which API you are u
 Urlshortener urlshortener = GWT.create(Urlshortener.class); // Must be initialized!
 
 private void makeRequest() {
-  String shortUrl = "http://goo.gl/XXXXX";
+  String shortUrl = "http://goo.gl/h8cEU";
   urlshortener.url().get(shortUrl)
       // If the service had any optional parameters, they would go here, e.g.:
       // .setOptionalParameter("optionalParam")
@@ -146,5 +146,7 @@ Note the absence of the call to `setApiAccessKey()` in the above sample. If you 
 
 ==Next Steps==
 You should now have the basics of using the URL Shortener API in your GWT application. The concepts learned in this guide apply to all new Google API libraries.
+
+For a more complete sample of working with the URL Shortener API, with running code, see the [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Ftrunk%2Fapis%2Fsamples%2Furlshortener%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Furlshortener URL Shortener API Sample] ([http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html demo]).
 
 To find out more about what you can do with a specific service, see the the library's specific API reference, or check out some [GoogleAPIsSamples sample applications].
