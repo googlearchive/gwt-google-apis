@@ -111,7 +111,7 @@ To initiate an OAuth 2.0 flow, use an `OAuth2Login` implementation. The implemen
 {{{
 private void authenticate() {
   new ClientOAuth2Login(CLIENT_ID)
-      .withScopes(Urlshortener.UrlshortenerAuthScope.URLSHORTENER) // Also BuzzAuthScope, ModeratorAuthScope, etc.
+      .withScopes(Urlshortener.UrlshortenerAuthScope.URLSHORTENER) // Or Buzz.BuzzAuthScope, Moderator.ModeratorAuthScope, etc.
       .login(new Receiver<String>() {
         @Override
         public void onSuccess(String accessToken) {
