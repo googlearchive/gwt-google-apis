@@ -4,45 +4,55 @@
 <wiki:toc max_depth="1" />
 
 = Google Books API Family =
+Lets you search for books and manage your Google Books library.
 
 || [http://code.google.com/apis/books Documentation] | [http://www.google.com/support/forum/p/booksearch-apis/label?lid=2b7bff1f1cd4a476 Help Forum] ||
 || No samples yet. ||
 
 = Google Buzz API =
+Lets you share updates, photos, videos, and more with your friends around the world
 
 || [http://code.google.com/apis/buzz/docs Documentation] | [http://code.google.com/apis/buzz/forum.html Help Forum] ||
 || *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/buzz/demo/BuzzSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Fbranches%2Fgoogleapis%2Fsamples%2Fbuzz%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Fbuzz Code] ||
 
 = Google Custom Search API =
+Lets you search over a website or collection of websites
 
 || [http://code.google.com/apis/customsearch/v1/overview.html Documentation] | [http://www.google.com/support/forum/p/customsearch Help Forum] ||
 || No samples yet. ||
 
 = Google APIs Discovery Service =
+Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API
 
 || [http://code.google.com/apis/discovery/overview.html Documentation] | [http://code.google.com/apis/discovery/forum.html Help Forum] ||
 || No samples yet. ||
 
 = Google Moderator API =
+Lets you collect ideas, questions, and recommendations from audiences of any size
 
 || [http://code.google.com/apis/moderator Documentation] | [https://groups.google.com/group/google-moderator-api Help Forum] ||
 || No samples yet. ||
 
 = Google Prediction API =
+Lets you access a cloud hosted machine learning service that makes it easy to build smart apps
 
 || [http://code.google.com/apis/predict Documentation] | [https://groups.google.com/group/prediction-api-discuss Help Forum] ||
 || No samples yet. ||
 
 = Search API for Shopping =
+Lets you search over product data
 
 || [http://code.google.com/apis/shopping/search/ Documentation] | [https://groups.google.com/group/google-search-api-for-shopping Help Forum] ||
 || No samples yet. ||
 
 = Google Tasks API =
+Lets you manage your tasks and task lists.
 
 || [http://code.google.com/apis/tasks/overview.html Documentation] | [http://code.google.com/apis/tasks/forum.html Help Forum] ||
 || No samples yet. ||
 
 = Google URL Shortener API =
+Lets you create, inspect, and manage goo.gl short URLs
+
 || [http://code.google.com/apis/urlshortener/overview.html Documentation] | [http://groups.google.com/group/google-url-shortener Help Forum] ||
 || *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Ftrunk%2Fapis%2Fsamples%2Furlshortener%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Furlshortener Code] ||
