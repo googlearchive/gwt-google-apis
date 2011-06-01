@@ -2,11 +2,11 @@
 
 * [Overview Google API Libraries Overview]
  * Search
-   # [AJAXSearchGettingStarted Getting Started]
-   # [AJAXSearchJavadoc API Reference]
-   # [AJAXSearchSampleApplications Sample Applications]
-   # [AJAXSearchReleaseNotes Release Notes]
-   # [AJAXSearchFAQ FAQs]
+    [AJAXSearchGettingStarted Getting Started]
+    [AJAXSearchJavadoc API Reference]
+    [AJAXSearchSampleApplications Sample Applications]
+    [AJAXSearchReleaseNotes Release Notes]
+    [AJAXSearchFAQ FAQs]
  * Gadgets
    * [GadgetsGettingStarted Getting Started]
    * [GadgetsJavadoc API Reference]
