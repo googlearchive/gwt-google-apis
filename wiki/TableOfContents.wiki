@@ -66,17 +66,9 @@
    * [GoogleAPIsGettingStarted Getting Started]
    * [http://gwt-google-apis.googlecode.com/svn/javadoc/customsearch/0.1/index.html API Reference]
    * [GoogleAPIsSamples Sample Applications]
- * Diacritize API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/diacritize/0.1/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
  * Discovery API
    * [GoogleAPIsGettingStarted Getting Started]
    * [http://gwt-google-apis.googlecode.com/svn/javadoc/discovery/0.1/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
- * Latitude API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/latitude/0.1/index.html API Reference]
    * [GoogleAPIsSamples Sample Applications]
  * Moderator API
    * [GoogleAPIsGettingStarted Getting Started]
