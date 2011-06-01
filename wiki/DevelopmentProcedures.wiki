@@ -4,7 +4,7 @@
 
 The Google API Library for GWT project is open source with an open development policy.  
 
-  * Patches are welcome from anyone in the community.  If you are not a regular contributor, it will be most helpful to post your patch as an [http://code.google.com/p/gwt-google-apis/issues/lis issue] and follow up with a message to the [https://groups.google.com/group/gwt-google-apis gwt-google-apis group].
+  * Patches are welcome from anyone in the community.  If you are not a regular contributor, it will be most helpful to post your patch as an [http://code.google.com/p/gwt-google-apis/issues/list issue] and follow up with a message to the [https://groups.google.com/group/gwt-google-apis gwt-google-apis group].
 
   * All patches should be peer reviewed before committed to the repository.  Reviews are a public process and should be posted to the rietveld instance at [http://gwt-code-reviews.appspot.com gwt-code-reviews.appspot.com].
 
@@ -33,4 +33,3 @@ http://gwt-code-reviews.appspot.com/629801/show
   * API calls should first be deprecated for an appreciable period of time before being removed.  Users need a chance to transition their code.  If you have a question on how to effectively do this, please ask on the [https://groups.google.com/group/gwt-google-apis gwt-google-apis group].
 
   * Make sure that new functionality is accompanied by unit tests or a manual test plan for testing.
-
