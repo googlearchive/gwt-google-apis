@@ -86,13 +86,13 @@
    * [GoogleAPIsGettingStarted Getting Started]
    * [http://gwt-google-apis.googlecode.com/svn/javadoc/taskqueue/0.1/index.html API Reference]
    * [GoogleAPIsSamples Sample Applications]
- * Tasks API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/tasks/0.1/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
  * URL Shortener (goo.gl) API
    * [GoogleAPIsGettingStarted Getting Started]
    * [http://gwt-google-apis.googlecode.com/svn/javadoc/urlshortener/0.1/index.html API Reference]
+   * [GoogleAPIsSamples Sample Applications]
+ * Tasks API
+   * [GoogleAPIsGettingStarted Getting Started]
+   * [http://gwt-google-apis.googlecode.com/svn/javadoc/tasks/0.1/index.html API Reference]
    * [GoogleAPIsSamples Sample Applications]
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
