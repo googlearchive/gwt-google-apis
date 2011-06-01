@@ -154,6 +154,8 @@ private void initialize(String accessToken) {
 }
 }}}
 
+Note that if you provide an access token, you should not also provide an API key. The access token uniquely identifies your application, and so the API key is an unnecessary addition.
+
 ==Next Steps==
 You should now have the basics of using a Google API in your GWT application.
 
