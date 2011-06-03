@@ -32,12 +32,18 @@
 // issues. Applications that use the code below will continue to work seamlessly
 // when that happens.
 
+// Modified for GWT from the original gears_init.js distribution for injection 
+// into an iframe.
 (function() {
+  // In GWT, you can't assume that the permutation will be injected at the top 
+  // level, so use $wnd as the top level window.
+  
   // We are already defined. Hooray!
-  if (window.google && google.gears) {
+  if ($wnd.google && $wnd.google.gears) {
     return;
   }
-
+  var doc = $wnd.document;
+  
   var factory = null;
 
   // Firefox
@@ -56,12 +62,18 @@
       // Safari
       if ((typeof navigator.mimeTypes != 'undefined')
            && navigator.mimeTypes["application/x-googlegears"]) {
-        factory = document.createElement("object");
+        factory = doc.createElement("object");
         factory.style.display = "none";
         factory.width = 0;
         factory.height = 0;
         factory.type = "application/x-googlegears";
-        document.documentElement.appendChild(factory);
+        doc.documentElement.appendChild(factory);
+        if(factory && (typeof factory.create == 'undefined')) {
+          // If NP_Initialize() returns an error, factory will still be created.
+          // We need to make sure this case doesn't cause Gears to appear to
+          // have been initialized.
+          factory = null;
+        }
       }
     }
   }
@@ -74,14 +86,14 @@
 
   // Now set up the objects, being careful not to overwrite anything.
   //
-  // Note: In Internet Explorer for Windows Mobile, you can't add properties to
+  // Note: In Internet Explorer for Tops Mobile, you can't add properties to
   // the window object. However, global objects are automatically added as
   // properties of the window object in all browsers.
-  if (!window.google) {
-    google = {};
+  if (!$wnd.google) {
+    $wnd.google = {};
   }
 
-  if (!google.gears) {
-    google.gears = {factory: factory};
+  if (!$wnd.google.gears) {
+    $wnd.google.gears = {factory: factory};
   }
 })();
