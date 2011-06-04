@@ -52,7 +52,7 @@
   } else {
     // IE
     try {
-      factory = new ActiveXObject('Gears.Factory');
+      factory = new $wnd.ActiveXObject('Gears.Factory');
       // privateSetGlobalObject is only required and supported on IE Mobile on
       // WinCE.
       if (factory.getBuildInfo().indexOf('ie_mobile') != -1) {
@@ -60,8 +60,8 @@
       }
     } catch (e) {
       // Safari
-      if ((typeof navigator.mimeTypes != 'undefined')
-           && navigator.mimeTypes["application/x-googlegears"]) {
+      if ((typeof $wnd.navigator.mimeTypes != 'undefined')
+           && $wnd.navigator.mimeTypes["application/x-googlegears"]) {
         factory = doc.createElement("object");
         factory.style.display = "none";
         factory.width = 0;
