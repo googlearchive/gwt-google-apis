@@ -31,6 +31,7 @@ import com.google.gwt.visualization.client.CommonOptionsTest;
 import com.google.gwt.visualization.client.CoreAreaChartTest;
 import com.google.gwt.visualization.client.CoreBarChartTest;
 import com.google.gwt.visualization.client.CoreColumnChartTest;
+import com.google.gwt.visualization.client.CoreComboChartTest;
 import com.google.gwt.visualization.client.CoreLineChartTest;
 import com.google.gwt.visualization.client.CorePieChartTest;
 import com.google.gwt.visualization.client.CoreScatterChartTest;
@@ -75,6 +76,9 @@ import junit.framework.TestSuite;
 public class VisualizationTestSuite extends GWTTestSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Test for the Visualization API");
+
+    // To run a single test, you can update the path expression in the property:
+    //    gwt.junit.testcase.includes
     suite.addTestSuite(AjaxLoaderTest.class);
     suite.addTestSuite(AnnotatedTimeLineTest.class);
     suite.addTestSuite(AreaChartTest.class);
@@ -90,6 +94,7 @@ public class VisualizationTestSuite extends GWTTestSuite {
     suite.addTestSuite(CoreAreaChartTest.class);
     suite.addTestSuite(CoreBarChartTest.class);
     suite.addTestSuite(CoreColumnChartTest.class);
+    suite.addTestSuite(CoreComboChartTest.class);
     suite.addTestSuite(CoreLineChartTest.class);
     suite.addTestSuite(CorePieChartTest.class);
     suite.addTestSuite(CoreScatterChartTest.class);
