@@ -21,8 +21,8 @@
     <available file="${buzzdir}/libbuzz-gwt.jar" property="foundbuzzjar" />
     <fail unless="foundbuzzjar" message="Cannot find libbuzz-gwt.jar" />
 
-    <available file="${buzzdir}/buzz-gwt-src.srcjar" property="foundbuzzsrcjar" />
-    <fail unless="foundbuzzsrcjar" message="Cannot find buzz-gwt-src.srcjar" />
+    <available file="${buzzdir}/buzz-gwt.srcjar" property="foundbuzzsrcjar" />
+    <fail unless="foundbuzzsrcjar" message="Cannot find buzz-gwt.srcjar" />
 
     <available file="${oauth2dir}/liboauth2.jar" property="foundoauth2jar" />
     <fail unless="foundoauth2jar" message="Cannot find liboauth2.jar" />
@@ -40,7 +40,7 @@
         <pathelement location="${build.classes.dir}" />
         <pathelement location="${src.dir}" />
         <pathelement location="../../src/" />
-        <pathelement location="${buzzdir}/buzz-gwt-src.srcjar" />
+        <pathelement location="${buzzdir}/buzz-gwt.srcjar" />
         <pathelement location="${buzzdir}/libbuzz-gwt.jar" />
         <pathelement location="${gwtdir}/gwt-user.jar" />
         <pathelement location="${oauth2dir}/OAuth2Module.jar" />
@@ -58,7 +58,7 @@
         <pathelement location="${build.classes.dir}" />
         <pathelement location="${src.dir}" />
         <pathelement location="../../src/" />
-        <pathelement location="${buzzdir}/buzz-gwt-src.srcjar" />
+        <pathelement location="${buzzdir}/buzz-gwt.srcjar" />
         <pathelement location="${buzzdir}/libbuzz-gwt.jar" />
         <pathelement location="${gwtdir}/gwt-user.jar" />
         <pathelement location="${gwtdir}/gwt-dev.jar" />
