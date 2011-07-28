@@ -50,15 +50,15 @@
 <FONT color="green">047</FONT>        protected ApiResponseJso() {<a name="line.47"></a>
 <FONT color="green">048</FONT>        }<a name="line.48"></a>
 <FONT color="green">049</FONT>    <a name="line.49"></a>
-<FONT color="green">050</FONT>        native final String getBody() /*-{<a name="line.50"></a>
+<FONT color="green">050</FONT>        final native String getBody() /*-{<a name="line.50"></a>
 <FONT color="green">051</FONT>          return this.body;<a name="line.51"></a>
 <FONT color="green">052</FONT>        }-*/;<a name="line.52"></a>
 <FONT color="green">053</FONT>    <a name="line.53"></a>
-<FONT color="green">054</FONT>        native final int getStatus() /*-{<a name="line.54"></a>
+<FONT color="green">054</FONT>        final native int getStatus() /*-{<a name="line.54"></a>
 <FONT color="green">055</FONT>          return this.status;<a name="line.55"></a>
 <FONT color="green">056</FONT>        }-*/;<a name="line.56"></a>
 <FONT color="green">057</FONT>    <a name="line.57"></a>
-<FONT color="green">058</FONT>        native final String getStatusText() /*-{<a name="line.58"></a>
+<FONT color="green">058</FONT>        final native String getStatusText() /*-{<a name="line.58"></a>
 <FONT color="green">059</FONT>          return this.statusText;<a name="line.59"></a>
 <FONT color="green">060</FONT>        }-*/;<a name="line.60"></a>
 <FONT color="green">061</FONT>      }<a name="line.61"></a>
@@ -125,7 +125,7 @@
 <FONT color="green">122</FONT>          public boolean execute() {<a name="line.122"></a>
 <FONT color="green">123</FONT>            boolean loaded = isLoaded();<a name="line.123"></a>
 <FONT color="green">124</FONT>            if (loaded) {<a name="line.124"></a>
-<FONT color="green">125</FONT>              baseConfigure();<a name="line.125"></a>
+<FONT color="green">125</FONT>              baseConfigure(baseUrl);<a name="line.125"></a>
 <FONT color="green">126</FONT>              receiver.onSuccess(ClientGoogleApiRequestTransport.this);<a name="line.126"></a>
 <FONT color="green">127</FONT>            }<a name="line.127"></a>
 <FONT color="green">128</FONT>            return !loaded;<a name="line.128"></a>
@@ -134,20 +134,21 @@
 <FONT color="green">131</FONT>      }<a name="line.131"></a>
 <FONT color="green">132</FONT>    <a name="line.132"></a>
 <FONT color="green">133</FONT>      /** Configures the base JS client to use the alternate JS library. */<a name="line.133"></a>
-<FONT color="green">134</FONT>      private static native void baseConfigure() /*-{<a name="line.134"></a>
+<FONT color="green">134</FONT>      private static native void baseConfigure(String baseUrl) /*-{<a name="line.134"></a>
 <FONT color="green">135</FONT>        $wnd['__GOOGLEAPIS'] = {<a name="line.135"></a>
 <FONT color="green">136</FONT>          'googleapis.config' : {<a name="line.136"></a>
-<FONT color="green">137</FONT>            'gcv' : @com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport::JS_CLIENT_NAME<a name="line.137"></a>
-<FONT color="green">138</FONT>          }<a name="line.138"></a>
-<FONT color="green">139</FONT>        };<a name="line.139"></a>
-<FONT color="green">140</FONT>      }-*/;<a name="line.140"></a>
-<FONT color="green">141</FONT>    <a name="line.141"></a>
-<FONT color="green">142</FONT>      @Override<a name="line.142"></a>
-<FONT color="green">143</FONT>      public void send(String payload, TransportReceiver receiver) {<a name="line.143"></a>
-<FONT color="green">144</FONT>        JavaScriptObject data = makeData(getRpcUrl(), headers, payload);<a name="line.144"></a>
-<FONT color="green">145</FONT>        makeCall(data, receiver);<a name="line.145"></a>
-<FONT color="green">146</FONT>      }<a name="line.146"></a>
-<FONT color="green">147</FONT>    }<a name="line.147"></a>
+<FONT color="green">137</FONT>            'proxy': baseUrl + "/static/proxy.html",<a name="line.137"></a>
+<FONT color="green">138</FONT>            'gcv' : @com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport::JS_CLIENT_NAME<a name="line.138"></a>
+<FONT color="green">139</FONT>          }<a name="line.139"></a>
+<FONT color="green">140</FONT>        };<a name="line.140"></a>
+<FONT color="green">141</FONT>      }-*/;<a name="line.141"></a>
+<FONT color="green">142</FONT>    <a name="line.142"></a>
+<FONT color="green">143</FONT>      @Override<a name="line.143"></a>
+<FONT color="green">144</FONT>      public void send(String payload, TransportReceiver receiver) {<a name="line.144"></a>
+<FONT color="green">145</FONT>        JavaScriptObject data = makeData(getRpcUrl(), headers, payload);<a name="line.145"></a>
+<FONT color="green">146</FONT>        makeCall(data, receiver);<a name="line.146"></a>
+<FONT color="green">147</FONT>      }<a name="line.147"></a>
+<FONT color="green">148</FONT>    }<a name="line.148"></a>
 
 
 
