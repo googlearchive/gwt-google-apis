@@ -17,9 +17,9 @@ package com.google.api.gwt.client.impl;
 
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
+import com.google.api.gwt.oauth2.client.Callback;
 import com.google.api.gwt.shared.AuthScope;
 import com.google.api.gwt.shared.OAuth2Login;
-import com.google.gwt.core.client.Callback;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
