@@ -47,15 +47,15 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
     protected ApiResponseJso() {
     }
 
-    native final String getBody() /*-{
+    final native String getBody() /*-{
       return this.body;
     }-*/;
 
-    native final int getStatus() /*-{
+    final native int getStatus() /*-{
       return this.status;
     }-*/;
 
-    native final String getStatusText() /*-{
+    final native String getStatusText() /*-{
       return this.statusText;
     }-*/;
   }
@@ -122,7 +122,7 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
       public boolean execute() {
         boolean loaded = isLoaded();
         if (loaded) {
-          baseConfigure();
+          baseConfigure(baseUrl);
           receiver.onSuccess(ClientGoogleApiRequestTransport.this);
         }
         return !loaded;
@@ -131,9 +131,10 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
   }
 
   /** Configures the base JS client to use the alternate JS library. */
-  private static native void baseConfigure() /*-{
+  private static native void baseConfigure(String baseUrl) /*-{
     $wnd['__GOOGLEAPIS'] = {
       'googleapis.config' : {
+        'proxy': baseUrl + "/static/proxy.html",
         'gcv' : @com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport::JS_CLIENT_NAME
       }
     };

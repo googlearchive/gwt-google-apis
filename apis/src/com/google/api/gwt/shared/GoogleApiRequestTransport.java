@@ -32,7 +32,8 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
   private String applicationName;
   private Map<String, String> queryParams = new HashMap<String, String>();
   private Map<String, String> headers = new HashMap<String, String>();
-  private String rpcUrl = "https://www.googleapis.com/rpc";
+  protected String baseUrl = "https://www.googleapis.com";
+  private String rpcUrl = baseUrl + "/rpc";
 
   private boolean finished = false;
 
@@ -46,7 +47,7 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
       return;
     }
     if (!queryParams.isEmpty()) {
-      StringBuilder currentUrl = new StringBuilder(rpcUrl);
+      StringBuilder currentUrl = new StringBuilder(baseUrl + "/rpc");
       boolean needsAmp = currentUrl.indexOf("?") != -1;
       for (Map.Entry<String, String> entry : queryParams.entrySet()) {
         if (needsAmp) {
@@ -141,4 +142,13 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
     return rpcUrl;
   }
 
+  /**
+   * Override the RPC URL being requested. By default this is
+   * {@link "https://www.googleapis.com/"}. If you set this, it must *not* include
+   * the trailing slash.
+   */
+  public GoogleApiRequestTransport setBaseUrl(String baseUrl) {
+    this.baseUrl = baseUrl;
+    return this;
+  }
 }
