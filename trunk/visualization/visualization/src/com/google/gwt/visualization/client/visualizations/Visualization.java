@@ -21,6 +21,8 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.AbstractDrawOptions;
+import com.google.gwt.visualization.client.events.ErrorHandler;
+import com.google.gwt.visualization.client.events.Handler;
 
 /**
  * A Visualization object can draw a DataTable.
@@ -69,6 +71,10 @@ public abstract class Visualization<OptionsType extends AbstractDrawOptions> ext
     this();
     this.options = options;
     this.dataTable = data;
+  }
+
+  public final void addErrorHandler(ErrorHandler handler) {
+    Handler.addHandler(this, "error", handler);
   }
 
   /**
