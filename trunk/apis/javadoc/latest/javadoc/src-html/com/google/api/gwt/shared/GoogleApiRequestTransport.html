@@ -49,112 +49,110 @@
 <FONT color="green">046</FONT>          receiver.onFailure(new ServerFailure("Already called create() on GoogleApiRequestTransport"));<a name="line.46"></a>
 <FONT color="green">047</FONT>          return;<a name="line.47"></a>
 <FONT color="green">048</FONT>        }<a name="line.48"></a>
-<FONT color="green">049</FONT>        if (!queryParams.isEmpty()) {<a name="line.49"></a>
-<FONT color="green">050</FONT>          StringBuilder currentUrl = new StringBuilder(baseUrl + "/rpc");<a name="line.50"></a>
-<FONT color="green">051</FONT>          boolean needsAmp = currentUrl.indexOf("?") != -1;<a name="line.51"></a>
-<FONT color="green">052</FONT>          for (Map.Entry&lt;String, String&gt; entry : queryParams.entrySet()) {<a name="line.52"></a>
-<FONT color="green">053</FONT>            if (needsAmp) {<a name="line.53"></a>
-<FONT color="green">054</FONT>              currentUrl.append("&amp;");<a name="line.54"></a>
-<FONT color="green">055</FONT>            } else {<a name="line.55"></a>
-<FONT color="green">056</FONT>              currentUrl.append("?");<a name="line.56"></a>
-<FONT color="green">057</FONT>              needsAmp = true;<a name="line.57"></a>
-<FONT color="green">058</FONT>            }<a name="line.58"></a>
-<FONT color="green">059</FONT>            currentUrl.append(entry.getKey()).append("=").append(entry.getValue());<a name="line.59"></a>
-<FONT color="green">060</FONT>          }<a name="line.60"></a>
-<FONT color="green">061</FONT>          rpcUrl = currentUrl.toString();<a name="line.61"></a>
-<FONT color="green">062</FONT>        }<a name="line.62"></a>
-<FONT color="green">063</FONT>    <a name="line.63"></a>
-<FONT color="green">064</FONT>        // Mandatory headers<a name="line.64"></a>
-<FONT color="green">065</FONT>        String userAgent = (applicationName == null ? "" : (applicationName + " ")) + USER_AGENT_STRING;<a name="line.65"></a>
-<FONT color="green">066</FONT>        setRequestHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE);<a name="line.66"></a>
-<FONT color="green">067</FONT>        setRequestHeader(USER_AGENT_HEADER, userAgent);<a name="line.67"></a>
-<FONT color="green">068</FONT>        headers = Collections.unmodifiableMap(headers);<a name="line.68"></a>
-<FONT color="green">069</FONT>        queryParams = Collections.unmodifiableMap(new HashMap&lt;String, String&gt;());<a name="line.69"></a>
-<FONT color="green">070</FONT>    <a name="line.70"></a>
-<FONT color="green">071</FONT>        configure(receiver);<a name="line.71"></a>
-<FONT color="green">072</FONT>      }<a name="line.72"></a>
-<FONT color="green">073</FONT>    <a name="line.73"></a>
-<FONT color="green">074</FONT>      /**<a name="line.74"></a>
-<FONT color="green">075</FONT>       * Set the OAuth access token to pass with the request in order to access<a name="line.75"></a>
-<FONT color="green">076</FONT>       * protected information.<a name="line.76"></a>
-<FONT color="green">077</FONT>       */<a name="line.77"></a>
-<FONT color="green">078</FONT>      public GoogleApiRequestTransport setAccessToken(String authorization) {<a name="line.78"></a>
-<FONT color="green">079</FONT>        setRequestHeader(AUTHORIZATION_HEADER, OAUTH + authorization);<a name="line.79"></a>
-<FONT color="green">080</FONT>        return this;<a name="line.80"></a>
-<FONT color="green">081</FONT>      }<a name="line.81"></a>
-<FONT color="green">082</FONT>    <a name="line.82"></a>
-<FONT color="green">083</FONT>      /**<a name="line.83"></a>
-<FONT color="green">084</FONT>       * Set the API access key to support quota management.<a name="line.84"></a>
-<FONT color="green">085</FONT>       */<a name="line.85"></a>
-<FONT color="green">086</FONT>      public GoogleApiRequestTransport setApiAccessKey(String apiAccessKey) {<a name="line.86"></a>
-<FONT color="green">087</FONT>        setQueryParameter("key", apiAccessKey);<a name="line.87"></a>
-<FONT color="green">088</FONT>        return this;<a name="line.88"></a>
-<FONT color="green">089</FONT>      }<a name="line.89"></a>
-<FONT color="green">090</FONT>    <a name="line.90"></a>
-<FONT color="green">091</FONT>      /**<a name="line.91"></a>
-<FONT color="green">092</FONT>       * Set the application name for use in quota management.<a name="line.92"></a>
-<FONT color="green">093</FONT>       *<a name="line.93"></a>
-<FONT color="green">094</FONT>       * @param applicationName A user-agent fragment, such as {@code MyApp/1.0}<a name="line.94"></a>
-<FONT color="green">095</FONT>       */<a name="line.95"></a>
-<FONT color="green">096</FONT>      public GoogleApiRequestTransport setApplicationName(String applicationName) {<a name="line.96"></a>
-<FONT color="green">097</FONT>        this.applicationName = applicationName;<a name="line.97"></a>
-<FONT color="green">098</FONT>        return this;<a name="line.98"></a>
-<FONT color="green">099</FONT>      }<a name="line.99"></a>
-<FONT color="green">100</FONT>    <a name="line.100"></a>
-<FONT color="green">101</FONT>      /**<a name="line.101"></a>
-<FONT color="green">102</FONT>       * Append a query parameter to the URL used to make the request.<a name="line.102"></a>
-<FONT color="green">103</FONT>       */<a name="line.103"></a>
-<FONT color="green">104</FONT>      public GoogleApiRequestTransport setQueryParameter(String name, String value) {<a name="line.104"></a>
-<FONT color="green">105</FONT>        if (value == null) {<a name="line.105"></a>
-<FONT color="green">106</FONT>          queryParams.remove(name);<a name="line.106"></a>
-<FONT color="green">107</FONT>        } else {<a name="line.107"></a>
-<FONT color="green">108</FONT>          queryParams.put(name, value);<a name="line.108"></a>
-<FONT color="green">109</FONT>        }<a name="line.109"></a>
-<FONT color="green">110</FONT>        return this;<a name="line.110"></a>
-<FONT color="green">111</FONT>      }<a name="line.111"></a>
-<FONT color="green">112</FONT>    <a name="line.112"></a>
-<FONT color="green">113</FONT>      /**<a name="line.113"></a>
-<FONT color="green">114</FONT>       * Add a header to every HTTP query used to make a request.<a name="line.114"></a>
-<FONT color="green">115</FONT>       */<a name="line.115"></a>
-<FONT color="green">116</FONT>      public GoogleApiRequestTransport setRequestHeader(String name, String value) {<a name="line.116"></a>
-<FONT color="green">117</FONT>        if (value == null) {<a name="line.117"></a>
-<FONT color="green">118</FONT>          headers.remove(name);<a name="line.118"></a>
-<FONT color="green">119</FONT>        } else {<a name="line.119"></a>
-<FONT color="green">120</FONT>          headers.put(name, value);<a name="line.120"></a>
-<FONT color="green">121</FONT>        }<a name="line.121"></a>
-<FONT color="green">122</FONT>        return this;<a name="line.122"></a>
-<FONT color="green">123</FONT>      }<a name="line.123"></a>
-<FONT color="green">124</FONT>    <a name="line.124"></a>
-<FONT color="green">125</FONT>      private static final String AUTHORIZATION_HEADER = "Authorization";<a name="line.125"></a>
-<FONT color="green">126</FONT>      private static final String CONTENT_TYPE = "application/json";<a name="line.126"></a>
-<FONT color="green">127</FONT>      private static final String CONTENT_TYPE_HEADER = "Content-Type";<a name="line.127"></a>
-<FONT color="green">128</FONT>      private static final String OAUTH = "OAuth ";<a name="line.128"></a>
-<FONT color="green">129</FONT>      private static final String USER_AGENT_HEADER = "X-JavaScript-User-Agent";<a name="line.129"></a>
-<FONT color="green">130</FONT>      private static final String USER_AGENT_STRING = "google-api-gwt-client/0.1";<a name="line.130"></a>
-<FONT color="green">131</FONT>    <a name="line.131"></a>
-<FONT color="green">132</FONT>      protected GoogleApiRequestTransport() {<a name="line.132"></a>
-<FONT color="green">133</FONT>      }<a name="line.133"></a>
+<FONT color="green">049</FONT>        StringBuilder currentUrl = new StringBuilder(baseUrl + "/rpc");<a name="line.49"></a>
+<FONT color="green">050</FONT>        boolean needsAmp = currentUrl.indexOf("?") != -1;<a name="line.50"></a>
+<FONT color="green">051</FONT>        for (Map.Entry&lt;String, String&gt; entry : queryParams.entrySet()) {<a name="line.51"></a>
+<FONT color="green">052</FONT>          if (needsAmp) {<a name="line.52"></a>
+<FONT color="green">053</FONT>            currentUrl.append("&amp;");<a name="line.53"></a>
+<FONT color="green">054</FONT>          } else {<a name="line.54"></a>
+<FONT color="green">055</FONT>            currentUrl.append("?");<a name="line.55"></a>
+<FONT color="green">056</FONT>            needsAmp = true;<a name="line.56"></a>
+<FONT color="green">057</FONT>          }<a name="line.57"></a>
+<FONT color="green">058</FONT>          currentUrl.append(entry.getKey()).append("=").append(entry.getValue());<a name="line.58"></a>
+<FONT color="green">059</FONT>        }<a name="line.59"></a>
+<FONT color="green">060</FONT>        rpcUrl = currentUrl.toString();<a name="line.60"></a>
+<FONT color="green">061</FONT>    <a name="line.61"></a>
+<FONT color="green">062</FONT>        // Mandatory headers<a name="line.62"></a>
+<FONT color="green">063</FONT>        String userAgent = (applicationName == null ? "" : (applicationName + " ")) + USER_AGENT_STRING;<a name="line.63"></a>
+<FONT color="green">064</FONT>        setRequestHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE);<a name="line.64"></a>
+<FONT color="green">065</FONT>        setRequestHeader(USER_AGENT_HEADER, userAgent);<a name="line.65"></a>
+<FONT color="green">066</FONT>        headers = Collections.unmodifiableMap(headers);<a name="line.66"></a>
+<FONT color="green">067</FONT>        queryParams = Collections.unmodifiableMap(new HashMap&lt;String, String&gt;());<a name="line.67"></a>
+<FONT color="green">068</FONT>    <a name="line.68"></a>
+<FONT color="green">069</FONT>        configure(receiver);<a name="line.69"></a>
+<FONT color="green">070</FONT>      }<a name="line.70"></a>
+<FONT color="green">071</FONT>    <a name="line.71"></a>
+<FONT color="green">072</FONT>      /**<a name="line.72"></a>
+<FONT color="green">073</FONT>       * Set the OAuth access token to pass with the request in order to access<a name="line.73"></a>
+<FONT color="green">074</FONT>       * protected information.<a name="line.74"></a>
+<FONT color="green">075</FONT>       */<a name="line.75"></a>
+<FONT color="green">076</FONT>      public GoogleApiRequestTransport setAccessToken(String authorization) {<a name="line.76"></a>
+<FONT color="green">077</FONT>        setRequestHeader(AUTHORIZATION_HEADER, OAUTH + authorization);<a name="line.77"></a>
+<FONT color="green">078</FONT>        return this;<a name="line.78"></a>
+<FONT color="green">079</FONT>      }<a name="line.79"></a>
+<FONT color="green">080</FONT>    <a name="line.80"></a>
+<FONT color="green">081</FONT>      /**<a name="line.81"></a>
+<FONT color="green">082</FONT>       * Set the API access key to support quota management.<a name="line.82"></a>
+<FONT color="green">083</FONT>       */<a name="line.83"></a>
+<FONT color="green">084</FONT>      public GoogleApiRequestTransport setApiAccessKey(String apiAccessKey) {<a name="line.84"></a>
+<FONT color="green">085</FONT>        setQueryParameter("key", apiAccessKey);<a name="line.85"></a>
+<FONT color="green">086</FONT>        return this;<a name="line.86"></a>
+<FONT color="green">087</FONT>      }<a name="line.87"></a>
+<FONT color="green">088</FONT>    <a name="line.88"></a>
+<FONT color="green">089</FONT>      /**<a name="line.89"></a>
+<FONT color="green">090</FONT>       * Set the application name for use in quota management.<a name="line.90"></a>
+<FONT color="green">091</FONT>       *<a name="line.91"></a>
+<FONT color="green">092</FONT>       * @param applicationName A user-agent fragment, such as {@code MyApp/1.0}<a name="line.92"></a>
+<FONT color="green">093</FONT>       */<a name="line.93"></a>
+<FONT color="green">094</FONT>      public GoogleApiRequestTransport setApplicationName(String applicationName) {<a name="line.94"></a>
+<FONT color="green">095</FONT>        this.applicationName = applicationName;<a name="line.95"></a>
+<FONT color="green">096</FONT>        return this;<a name="line.96"></a>
+<FONT color="green">097</FONT>      }<a name="line.97"></a>
+<FONT color="green">098</FONT>    <a name="line.98"></a>
+<FONT color="green">099</FONT>      /**<a name="line.99"></a>
+<FONT color="green">100</FONT>       * Append a query parameter to the URL used to make the request.<a name="line.100"></a>
+<FONT color="green">101</FONT>       */<a name="line.101"></a>
+<FONT color="green">102</FONT>      public GoogleApiRequestTransport setQueryParameter(String name, String value) {<a name="line.102"></a>
+<FONT color="green">103</FONT>        if (value == null) {<a name="line.103"></a>
+<FONT color="green">104</FONT>          queryParams.remove(name);<a name="line.104"></a>
+<FONT color="green">105</FONT>        } else {<a name="line.105"></a>
+<FONT color="green">106</FONT>          queryParams.put(name, value);<a name="line.106"></a>
+<FONT color="green">107</FONT>        }<a name="line.107"></a>
+<FONT color="green">108</FONT>        return this;<a name="line.108"></a>
+<FONT color="green">109</FONT>      }<a name="line.109"></a>
+<FONT color="green">110</FONT>    <a name="line.110"></a>
+<FONT color="green">111</FONT>      /**<a name="line.111"></a>
+<FONT color="green">112</FONT>       * Add a header to every HTTP query used to make a request.<a name="line.112"></a>
+<FONT color="green">113</FONT>       */<a name="line.113"></a>
+<FONT color="green">114</FONT>      public GoogleApiRequestTransport setRequestHeader(String name, String value) {<a name="line.114"></a>
+<FONT color="green">115</FONT>        if (value == null) {<a name="line.115"></a>
+<FONT color="green">116</FONT>          headers.remove(name);<a name="line.116"></a>
+<FONT color="green">117</FONT>        } else {<a name="line.117"></a>
+<FONT color="green">118</FONT>          headers.put(name, value);<a name="line.118"></a>
+<FONT color="green">119</FONT>        }<a name="line.119"></a>
+<FONT color="green">120</FONT>        return this;<a name="line.120"></a>
+<FONT color="green">121</FONT>      }<a name="line.121"></a>
+<FONT color="green">122</FONT>    <a name="line.122"></a>
+<FONT color="green">123</FONT>      private static final String AUTHORIZATION_HEADER = "Authorization";<a name="line.123"></a>
+<FONT color="green">124</FONT>      private static final String CONTENT_TYPE = "application/json";<a name="line.124"></a>
+<FONT color="green">125</FONT>      private static final String CONTENT_TYPE_HEADER = "Content-Type";<a name="line.125"></a>
+<FONT color="green">126</FONT>      private static final String OAUTH = "OAuth ";<a name="line.126"></a>
+<FONT color="green">127</FONT>      private static final String USER_AGENT_HEADER = "X-JavaScript-User-Agent";<a name="line.127"></a>
+<FONT color="green">128</FONT>      private static final String USER_AGENT_STRING = "google-api-gwt-client/0.1";<a name="line.128"></a>
+<FONT color="green">129</FONT>    <a name="line.129"></a>
+<FONT color="green">130</FONT>      protected GoogleApiRequestTransport() {<a name="line.130"></a>
+<FONT color="green">131</FONT>      }<a name="line.131"></a>
+<FONT color="green">132</FONT>    <a name="line.132"></a>
+<FONT color="green">133</FONT>      protected abstract void configure(Receiver&lt;GoogleApiRequestTransport&gt; receiver);<a name="line.133"></a>
 <FONT color="green">134</FONT>    <a name="line.134"></a>
-<FONT color="green">135</FONT>      protected abstract void configure(Receiver&lt;GoogleApiRequestTransport&gt; receiver);<a name="line.135"></a>
-<FONT color="green">136</FONT>    <a name="line.136"></a>
-<FONT color="green">137</FONT>      protected Map&lt;String, String&gt; getHeaders() {<a name="line.137"></a>
-<FONT color="green">138</FONT>        return headers;<a name="line.138"></a>
-<FONT color="green">139</FONT>      }<a name="line.139"></a>
-<FONT color="green">140</FONT>    <a name="line.140"></a>
-<FONT color="green">141</FONT>      protected String getRpcUrl() {<a name="line.141"></a>
-<FONT color="green">142</FONT>        return rpcUrl;<a name="line.142"></a>
-<FONT color="green">143</FONT>      }<a name="line.143"></a>
-<FONT color="green">144</FONT>    <a name="line.144"></a>
-<FONT color="green">145</FONT>      /**<a name="line.145"></a>
-<FONT color="green">146</FONT>       * Override the RPC URL being requested. By default this is<a name="line.146"></a>
-<FONT color="green">147</FONT>       * {@link "https://www.googleapis.com/"}. If you set this, it must *not* include<a name="line.147"></a>
-<FONT color="green">148</FONT>       * the trailing slash.<a name="line.148"></a>
-<FONT color="green">149</FONT>       */<a name="line.149"></a>
-<FONT color="green">150</FONT>      public GoogleApiRequestTransport setBaseUrl(String baseUrl) {<a name="line.150"></a>
-<FONT color="green">151</FONT>        this.baseUrl = baseUrl;<a name="line.151"></a>
-<FONT color="green">152</FONT>        return this;<a name="line.152"></a>
-<FONT color="green">153</FONT>      }<a name="line.153"></a>
-<FONT color="green">154</FONT>    }<a name="line.154"></a>
+<FONT color="green">135</FONT>      protected Map&lt;String, String&gt; getHeaders() {<a name="line.135"></a>
+<FONT color="green">136</FONT>        return headers;<a name="line.136"></a>
+<FONT color="green">137</FONT>      }<a name="line.137"></a>
+<FONT color="green">138</FONT>    <a name="line.138"></a>
+<FONT color="green">139</FONT>      protected String getRpcUrl() {<a name="line.139"></a>
+<FONT color="green">140</FONT>        return rpcUrl;<a name="line.140"></a>
+<FONT color="green">141</FONT>      }<a name="line.141"></a>
+<FONT color="green">142</FONT>    <a name="line.142"></a>
+<FONT color="green">143</FONT>      /**<a name="line.143"></a>
+<FONT color="green">144</FONT>       * Override the RPC URL being requested. By default this is<a name="line.144"></a>
+<FONT color="green">145</FONT>       * {@link "https://www.googleapis.com/"}. If you set this, it must *not* include<a name="line.145"></a>
+<FONT color="green">146</FONT>       * the trailing slash.<a name="line.146"></a>
+<FONT color="green">147</FONT>       */<a name="line.147"></a>
+<FONT color="green">148</FONT>      public GoogleApiRequestTransport setBaseUrl(String baseUrl) {<a name="line.148"></a>
+<FONT color="green">149</FONT>        this.baseUrl = baseUrl;<a name="line.149"></a>
+<FONT color="green">150</FONT>        return this;<a name="line.150"></a>
+<FONT color="green">151</FONT>      }<a name="line.151"></a>
+<FONT color="green">152</FONT>    }<a name="line.152"></a>
 
 
 
