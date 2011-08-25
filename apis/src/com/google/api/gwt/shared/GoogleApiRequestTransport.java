@@ -46,20 +46,18 @@ public abstract class GoogleApiRequestTransport implements RequestTransport {
       receiver.onFailure(new ServerFailure("Already called create() on GoogleApiRequestTransport"));
       return;
     }
-    if (!queryParams.isEmpty()) {
-      StringBuilder currentUrl = new StringBuilder(baseUrl + "/rpc");
-      boolean needsAmp = currentUrl.indexOf("?") != -1;
-      for (Map.Entry<String, String> entry : queryParams.entrySet()) {
-        if (needsAmp) {
-          currentUrl.append("&");
-        } else {
-          currentUrl.append("?");
-          needsAmp = true;
-        }
-        currentUrl.append(entry.getKey()).append("=").append(entry.getValue());
+    StringBuilder currentUrl = new StringBuilder(baseUrl + "/rpc");
+    boolean needsAmp = currentUrl.indexOf("?") != -1;
+    for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+      if (needsAmp) {
+        currentUrl.append("&");
+      } else {
+        currentUrl.append("?");
+        needsAmp = true;
       }
-      rpcUrl = currentUrl.toString();
+      currentUrl.append(entry.getKey()).append("=").append(entry.getValue());
     }
+    rpcUrl = currentUrl.toString();
 
     // Mandatory headers
     String userAgent = (applicationName == null ? "" : (applicationName + " ")) + USER_AGENT_STRING;
