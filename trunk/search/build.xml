@@ -12,6 +12,9 @@
   <target name="dist" depends="build-tools, search, doc, samples" description="Run the distributions">
     <gwt.ant dir="distro-source"/>
   </target>
+  <target name="dist-dev" depends="build-tools, search" description="Build the minimum set of the distribution for development">
+    <gwt.ant dir="distro-source"/>
+  </target>
   <target name="doc" depends="search" description="Build doc">
     <gwt.ant dir="doc"/>
   </target>

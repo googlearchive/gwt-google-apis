@@ -29,6 +29,15 @@
       <param name="target" value="build"/>
     </antcall>
   </target>
+  <target name="dist-dev" description="Builds development version of the APIs that make up the Google API Library for GWT">
+    <ant dir="ajaxloader" target="dist-dev"/>
+    <ant dir="gears" target="dist-dev"/>
+    <ant dir="gadgets" target="dist-dev"/>
+    <ant dir="language" target="dist-dev"/>
+    <ant dir="maps" target="dist-dev"/>
+    <ant dir="search" target="dist-dev"/>
+    <ant dir="visualization" target="dist-dev"/>
+  </target>
   <target name="checkstyle" description="Static analysis of Google API Library for GWT source">
     <antcall target="-do">
       <param name="target" value="checkstyle"/>
