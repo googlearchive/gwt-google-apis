@@ -64,6 +64,7 @@
         author="true"
         protected="true"
         linksource="true"
+        additionalparam="-notimestamp"
         windowtitle="Google API Client Library for GWT - ${release}">
       <sourcepath>
         <pathelement location="src" />
