@@ -16,11 +16,9 @@
 package com.google.api.gwt.client.impl;
 
 import com.google.api.gwt.shared.GoogleApiRequestTransport;
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.RepeatingCommand;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.http.client.Response;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
@@ -36,11 +34,6 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
 
   private static final String JS_CLIENT_NAME = "ae_f85e3bd0744c7080861c3ae42085d071.js";
   private static final String JS_CLIENT_URL = "https://ssl.gstatic.com/gb/js/" + JS_CLIENT_NAME;
-
-  /**
-   * Prevents the js client shell script from being loaded multiple times.
-   */
-  private static ScriptElement script;
 
   private static final class ApiResponseJso extends JavaScriptObject {
     @SuppressWarnings("unused")
@@ -103,31 +96,28 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
   @Override
   protected void configure(final Receiver<GoogleApiRequestTransport> receiver) {
     // Only load the script once, if the necessary API isn't available
-    if (script == null && !isLoaded()) {
-      script = Document.get().createScriptElement();
-      script.setSrc(JS_CLIENT_URL);
-      Document.get().getElementsByTagName("head").getItem(0).appendChild(script);
-    }
+    if (!isLoaded()) {
+      ScriptInjector.fromUrl(JS_CLIENT_URL).setCallback(new Callback<Void, Exception>() {
+        public void onSuccess(Void result) {
+          baseConfigure(baseUrl);
+          setHeaders();
+          receiver.onSuccess(ClientGoogleApiRequestTransport.this);
+        }
 
+        public void onFailure(Exception e) {
+          receiver.onFailure(new ServerFailure(e.getMessage()));
+        }
+      }).inject();
+    } else {
+      receiver.onSuccess(this);
+    }
+  }
+
+  private void setHeaders() {
     for (Map.Entry<String, String> entry : getHeaders().entrySet()) {
       set(headers, entry.getKey(), entry.getValue());
     }
 
-    /*
-     * If a second instance of this class is created, the callback will still
-     * occur on a subsequent tick of the event loop.
-     */
-    Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
-      @Override
-      public boolean execute() {
-        boolean loaded = isLoaded();
-        if (loaded) {
-          baseConfigure(baseUrl);
-          receiver.onSuccess(ClientGoogleApiRequestTransport.this);
-        }
-        return !loaded;
-      }
-    }, 100);
   }
 
   /** Configures the base JS client to use the alternate JS library. */
