@@ -50,30 +50,9 @@
    * [AjaxLoaderSampleApplications Sample Applications]
    * [AjaxLoaderReleaseNotes Release Notes]
    * [AjaxLoaderFAQ FAQs]
- * Google+ API
+ * New Google APIs (incl. Google+ API)
    * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/plus/0.2/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
- * Books API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/books/0.2/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
- * Buzz API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/buzz/0.2/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
- * Discovery API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/discovery/0.2/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
- * Tasks API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/tasks/0.2/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
- * URL Shortener (goo.gl) API
-   * [GoogleAPIsGettingStarted Getting Started]
-   * [http://gwt-google-apis.googlecode.com/svn/javadoc/urlshortener/0.2/index.html API Reference]
-   * [GoogleAPIsSamples Sample Applications]
+   * [GoogleAPIsSamples Sample Applications and API Reference]
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [DesigningAPIWrappers Design Considerations]
