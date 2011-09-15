@@ -21,24 +21,24 @@ Lets you share updates, photos, videos, and more with your friends around the wo
 || [http://code.google.com/apis/buzz/docs Documentation] | [http://code.google.com/apis/buzz/forum.html Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/buzz/0.2/index.html API Reference] ||
 || *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/buzz/demo/BuzzSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Fbranches%2Fgoogleapis%2Fsamples%2Fbuzz%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Fbuzz Code] ||
 
-= APIs Discovery Service =
+= Google APIs Discovery Service =
 Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API
 
 || [http://code.google.com/apis/discovery/overview.html Documentation] | [http://code.google.com/apis/discovery/forum.html Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/discovery/0.2/index.html API Reference] ||
 || No samples yet. ||
 
-= Latitude API =
+= Google Latitude API =
 
 || [http://code.google.com/apis/latitude/overview.html Documentation] | [https://groups.google.com/group/google-latitude-api Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/latitude/0.2/index.html API Reference] ||
 || No samples yet. ||
 
-= Tasks API =
+= Google Tasks API =
 Lets you manage your tasks and task lists.
 
 || [http://code.google.com/apis/tasks/overview.html Documentation] | [http://code.google.com/apis/tasks/forum.html Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/tasks/0.2/index.html API Reference] ||
 || No samples yet. ||
 
-= URL Shortener API =
+= Google URL Shortener (goo.gl) API =
 Lets you create, inspect, and manage goo.gl short URLs
 
 || [http://code.google.com/apis/urlshortener/overview.html Documentation] | [http://groups.google.com/group/google-url-shortener Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/urlshortener/0.2/index.html API Reference] ||
