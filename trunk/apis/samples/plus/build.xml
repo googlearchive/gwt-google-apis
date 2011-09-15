@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project basedir="." default="build" name="google-api-gwt-client-sample-plus">
+  <property environment="env" />
+  <property name="gwtdir" value="${env.GWT_HOME}" />
+  <property name="plusdir" value="${env.PLUS_DIR}" />
+  <property name="oauth2dir" value="${env.OAUTH2_DIR}" />
+
+  <property name="src.dir" value="." />
+
+  <property name="build.dir" value="build" />
+  <property name="build.classes.dir" value="${build.dir}/classes" />
+
+  <target name="verify" description="Verifies that the required jars were found">
+    <available file="${gwtdir}/gwt-user.jar" property="foundgwtuserjar" />
+    <fail unless="foundgwtuserjar" message="Cannot find gwt-user.jar" />
+
+    <available file="${gwtdir}/gwt-dev.jar" property="foundgwtdevjar" />
+    <fail unless="foundgwtdevjar" message="Cannot find gwt-dev.jar" />
+
+    <available file="${plusdir}/libplus-gwt.jar" property="foundplusjar" />
+    <fail unless="foundplusjar" message="Cannot find libplus-gwt.jar" />
+
+    <available file="${plusdir}/plus-gwt.srcjar" property="foundplussrcjar" />
+    <fail unless="foundplussrcjar" message="Cannot find plus-gwt.srcjar" />
+
+    <available file="${oauth2dir}/liboauth2.jar" property="foundoauth2jar" />
+    <fail unless="foundoauth2jar" message="Cannot find liboauth2.jar" />
+
+    <available file="${oauth2dir}/OAuth2Module.jar" property="foundoauth2srcjar" />
+    <fail unless="foundoauth2srcjar" message="Cannot find OAuth2Module.jar" />
+  </target>
+
+  <target name="javac" depends="clean, verify" description="Compile sources with javac">
+    <mkdir dir="${build.classes.dir}" />
+
+    <javac srcdir="${src.dir}" includes="${src.dir}/**/*.java" encoding="UTF-8"
+      destdir="${build.classes.dir}">
+      <classpath>
+        <pathelement location="${build.classes.dir}" />
+        <pathelement location="${src.dir}" />
+        <pathelement location="../../src/" />
+        <pathelement location="${plusdir}/plus-gwt.srcjar" />
+        <pathelement location="${plusdir}/libplus-gwt.jar" />
+        <pathelement location="${gwtdir}/gwt-user.jar" />
+        <pathelement location="${oauth2dir}/OAuth2Module.jar" />
+        <pathelement location="${oauth2dir}/liboauth2.jar" />
+      </classpath>
+    </javac>
+    <copy todir="${build.classes.dir}">
+      <fileset dir="${src.dir}" />
+    </copy>
+  </target>
+
+  <target name="build" depends="javac" description="Compile sources with GWT compiler">
+    <java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+      <classpath>
+        <pathelement location="${build.classes.dir}" />
+        <pathelement location="${src.dir}" />
+        <pathelement location="../../src/" />
+        <pathelement location="${plusdir}/plus-gwt.srcjar" />
+        <pathelement location="${plusdir}/libplus-gwt.jar" />
+        <pathelement location="${gwtdir}/gwt-user.jar" />
+        <pathelement location="${gwtdir}/gwt-dev.jar" />
+        <pathelement location="${oauth2dir}/OAuth2Module.jar" />
+        <pathelement location="${oauth2dir}/liboauth2.jar" />
+      </classpath>
+
+      <jvmarg value="-Xmx256M" />
+      <arg value="com.google.api.gwt.samples.plus.PlusSample" />
+    </java>
+  </target>
+
+  <target name="clean" description="Remove generated files">
+    <delete dir="war" />
+    <delete dir="${build.classes.dir}" />
+  </target>
+</project>
