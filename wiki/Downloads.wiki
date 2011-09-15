@@ -35,6 +35,9 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 *Google APIs Discovery Service Library 0.2-alpha*
   * [http://gwt-google-apis.googlecode.com/files/gwt-discovery-v1-0.2-alpha.jar gwt-discovery-v1-0.2-alpha.jar]
 
+*Google Latitude API Library 0.2-alpha*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-latitude-v1-0.2-alpha.jar gwt-latitude-v1-0.2-alpha.jar]
+
 *Google Tasks API Library 0.2-alpha*
   * [http://gwt-google-apis.googlecode.com/files/gwt-tasks-v1-0.2-alpha.jar gwt-tasks-v1-0.2-alpha.jar]
 
