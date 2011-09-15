@@ -23,7 +23,8 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 *Google Ajax Loader API Library 1.1*
   * [http://gwt-google-apis.googlecode.com/files/gwt-ajaxloader-1.1.0.zip gwt-ajaxloader-1.1.0.zip]
 
-
+*Google+ API Library 0.2-alpha*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-plus-v1-0.2-alpha.jar gwt-plus-v1-0.2-alpha.jar]
 
 *Google Books API Library 0.2-alpha*
   * [http://gwt-google-apis.googlecode.com/files/gwt-books-v1-0.2-alpha.jar gwt-books-v1-0.2-alpha.jar]
