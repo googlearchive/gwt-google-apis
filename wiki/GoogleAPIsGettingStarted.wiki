@@ -8,13 +8,13 @@
  
   * You are already familiar with [http://code.google.com/webtoolkit/overview.html Google Web Toolkit].
   * You know how to [http://code.google.com/eclipse/docs/creating_new_webapp.html create a new GWT project] using the Google Plugin for Eclipse.
-  * You are using GWT 2.3 or later.
+  * You are using GWT 2.4 or later.
 
 == Download a service-specific Google API library ==
 
 You can download the latest release of the library from the [http://code.google.com/p/gwt-google-apis/wiki/Downloads download page].
 
-For the purposes of this sample, we will download the [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-urlshortener-v1-0.1-alpha.jar URL Shortener library].
+For the purposes of this sample, we will download the [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-urlshortener-v1-0.2-alpha.jar URL Shortener library].
 
 You can either reference the `.jar` file from the folder where you uncompressed the project, or you can copy it to another location, such as the location of your GWT distribution (containing `gwt-dev.jar` and `gwt-user.jar` files).
 
