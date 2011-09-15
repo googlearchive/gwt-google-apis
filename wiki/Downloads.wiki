@@ -25,35 +25,20 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 
 
 
-*Google Books API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-books-v1-0.1-alpha.jar gwt-books-v1-0.1-alpha.jar]
+*Google Books API Library 0.2-alpha*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-books-v1-0.2-alpha.jar gwt-books-v1-0.2-alpha.jar]
 
-*Google Buzz API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-buzz-v1-0.1-alpha.jar gwt-buzz-v1-0.1-alpha.jar]
+*Google Buzz API Library 0.2-alpha*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-buzz-v1-0.2-alpha.jar gwt-buzz-v1-0.2-alpha.jar]
 
-*Google Chrome Web Store API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-chromewebstore-v1-0.1-alpha.jar gwt-chromewebstore-v1-0.1-alpha.jar]
+*Google APIs Discovery Service Library 0.2-alpha*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-discovery-v1-0.2-alpha.jar gwt-discovery-v1-0.2-alpha.jar]
 
-*Google Custom Search API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-customsearch-v1-0.1-alpha.jar gwt-customsearch-v1-0.1-alpha.jar]
+*Google Tasks API Library 0.2-alpha*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-tasks-v1-0.2-alpha.jar gwt-tasks-v1-0.2-alpha.jar]
 
-*Google APIs Discovery Service Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-discovery-v1-0.1-alpha.jar gwt-discovery-v1-0.1-alpha.jar]
-
-*Google Moderator API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-moderator-v1-0.1-alpha.jar gwt-moderator-v1-0.1-alpha.jar]
-
-*Google Prediction API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-prediction-v1.2-0.1-alpha.jar gwt-prediction-v1.2-0.1-alpha.jar]
-
-*Google Search API for Shopping Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-shopping-v1-0.1-alpha.jar gwt-shopping-v1-0.1-alpha.jar]
-
-*Google Tasks API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-tasks-v1-0.1-alpha.jar gwt-tasks-v1-0.1-alpha.jar]
-
-*Google URL Shortener API Library 0.1-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-urlshortener-v1-0.1-alpha.jar gwt-urlshortener-v1-0.1-alpha.jar]
+*Google URL Shortener API Library 0.2-alpha*
+  * [http://gwt-google-apis.googlecode.com/files/gwt-urlshortener-v1-0.2-alpha.jar gwt-urlshortener-v1-0.2-alpha.jar]
 
 ----
 
