@@ -44,7 +44,7 @@
    * [LanguageSampleApplications Sample Applications]
    * [LanguageReleaseNotes Release Notes]
    * [LanguageFAQ FAQs]
- * AjaxLoader
+ * `AjaxLoader`
    * [AjaxLoaderGettingStarted Getting Started]
    * [AjaxLoaderJavadoc API Reference] 
    * [AjaxLoaderSampleApplications Sample Applications]
