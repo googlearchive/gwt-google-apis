@@ -1,0 +1,687 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+Location (Google API Client Library for GWT - latitude v1)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Location (Google API Client Library for GWT - latitude v1)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Location.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/LocationFeed.html" title="interface in com.google.api.gwt.services.latitude.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../../index.html?com/google/api/gwt/services/latitude/shared/model/Location.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Location.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+com.google.api.gwt.services.latitude.shared.model</FONT>
+<BR>
+Interface Location</H2>
+<DL>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/BaseProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">BaseProxy</A>, <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.37"><B>Location</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DL>
+</PRE>
+
+<P>
+Model definition for Latitude.Location.
+
+ A Location resource identifies a user's position at a particular time. It may include metadata
+ about the user's position, such as a venue if the location was recorded at the time of a check-
+ in.
+
+ This class models an object which will be transmitted to or from the Latitude service.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Google, Inc.</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getAccuracy()">getAccuracy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accuracy of the latitude and longitude coordinates, in non-negative meters.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getActivityId()">getActivityId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unique ID of the Buzz message that corresponds to the check-in associated with this location.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getAltitude()">getAltitude</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Altitude of the location, in meters.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getAltitudeAccuracy()">getAltitudeAccuracy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accuracy of the altitude value, in meters.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getHeading()">getHeading</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction of travel of the user when this location was recorded.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getKind()">getKind</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kind of this item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getLatitude()">getLatitude</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latitude of the location, in decimal degrees.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getLongitude()">getLongitude</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Longitude of the location, in decimal degrees.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getSpeed()">getSpeed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ground speed of the user at the time this location was recorded, in meters per second.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#getTimestampMs()">getTimestampMs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Timestamp of the Location Resource, in milliseconds since the epoch (UTC).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setAccuracy(java.lang.String)">setAccuracy</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Accuracy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setActivityId(java.lang.String)">setActivityId</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;ActivityId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setAltitude(java.lang.String)">setAltitude</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Altitude)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setAltitudeAccuracy(java.lang.String)">setAltitudeAccuracy</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;AltitudeAccuracy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setHeading(java.lang.String)">setHeading</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Heading)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setKind(java.lang.String)">setKind</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Kind)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setLatitude(java.lang.String)">setLatitude</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Latitude)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setLongitude(java.lang.String)">setLongitude</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Longitude)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setSpeed(java.lang.String)">setSpeed</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Speed)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/Location.html#setTimestampMs(java.lang.String)">setTimestampMs</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;TimestampMs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getKind()"><!-- --></A><H3>
+getKind</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="kind")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.41"><B>getKind</B></A>()</PRE>
+<DL>
+<DD>Kind of this item.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKind(java.lang.String)"><!-- --></A><H3>
+setKind</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="kind")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.44"><B>setKind</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Kind)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAltitude()"><!-- --></A><H3>
+getAltitude</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="altitude")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.48"><B>getAltitude</B></A>()</PRE>
+<DL>
+<DD>Altitude of the location, in meters. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAltitude(java.lang.String)"><!-- --></A><H3>
+setAltitude</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="altitude")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.51"><B>setAltitude</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Altitude)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLongitude()"><!-- --></A><H3>
+getLongitude</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="longitude")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.55"><B>getLongitude</B></A>()</PRE>
+<DL>
+<DD>Longitude of the location, in decimal degrees.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLongitude(java.lang.String)"><!-- --></A><H3>
+setLongitude</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="longitude")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.58"><B>setLongitude</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Longitude)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getActivityId()"><!-- --></A><H3>
+getActivityId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="activityId")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.65"><B>getActivityId</B></A>()</PRE>
+<DL>
+<DD>Unique ID of the Buzz message that corresponds to the check-in associated with this location.
+ Available only for check-in locations. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setActivityId(java.lang.String)"><!-- --></A><H3>
+setActivityId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="activityId")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.68"><B>setActivityId</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;ActivityId)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLatitude()"><!-- --></A><H3>
+getLatitude</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="latitude")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.72"><B>getLatitude</B></A>()</PRE>
+<DL>
+<DD>Latitude of the location, in decimal degrees.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLatitude(java.lang.String)"><!-- --></A><H3>
+setLatitude</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="latitude")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.75"><B>setLatitude</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Latitude)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAltitudeAccuracy()"><!-- --></A><H3>
+getAltitudeAccuracy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="altitudeAccuracy")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.79"><B>getAltitudeAccuracy</B></A>()</PRE>
+<DL>
+<DD>Accuracy of the altitude value, in meters. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAltitudeAccuracy(java.lang.String)"><!-- --></A><H3>
+setAltitudeAccuracy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="altitudeAccuracy")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.82"><B>setAltitudeAccuracy</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;AltitudeAccuracy)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTimestampMs()"><!-- --></A><H3>
+getTimestampMs</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="timestampMs")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.89"><B>getTimestampMs</B></A>()</PRE>
+<DL>
+<DD>Timestamp of the Location Resource, in milliseconds since the epoch (UTC). This is also the
+ Location Resource's unique id.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTimestampMs(java.lang.String)"><!-- --></A><H3>
+setTimestampMs</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="timestampMs")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.92"><B>setTimestampMs</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;TimestampMs)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpeed()"><!-- --></A><H3>
+getSpeed</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="speed")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.99"><B>getSpeed</B></A>()</PRE>
+<DL>
+<DD>Ground speed of the user at the time this location was recorded, in meters per second. Non-
+ negative. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpeed(java.lang.String)"><!-- --></A><H3>
+setSpeed</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="speed")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.102"><B>setSpeed</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Speed)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHeading()"><!-- --></A><H3>
+getHeading</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="heading")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.109"><B>getHeading</B></A>()</PRE>
+<DL>
+<DD>Direction of travel of the user when this location was recorded. In degrees, clockwise relative
+ to true north. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHeading(java.lang.String)"><!-- --></A><H3>
+setHeading</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="heading")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.112"><B>setHeading</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Heading)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAccuracy()"><!-- --></A><H3>
+getAccuracy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="accuracy")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.116"><B>getAccuracy</B></A>()</PRE>
+<DL>
+<DD>Accuracy of the latitude and longitude coordinates, in non-negative meters. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAccuracy(java.lang.String)"><!-- --></A><H3>
+setAccuracy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="accuracy")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/latitude/shared/model/Location.html#line.119"><B>setAccuracy</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Accuracy)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Location.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/latitude/shared/model/LocationFeed.html" title="interface in com.google.api.gwt.services.latitude.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../../index.html?com/google/api/gwt/services/latitude/shared/model/Location.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Location.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+</BODY>
+</HTML>
