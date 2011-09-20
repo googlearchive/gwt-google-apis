@@ -111,6 +111,7 @@ public class ClientGoogleApiRequestTransport extends GoogleApiRequestTransport {
             }
           }).inject();
     } else {
+      setHeaders();
       receiver.onSuccess(this);
     }
   }
