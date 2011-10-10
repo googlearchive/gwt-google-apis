@@ -54,8 +54,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/ActivityProvider.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../../../index.html?com/google/api/gwt/services/plus/shared/model/Person.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Person.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -95,7 +95,7 @@ Interface Person</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public interface <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.34"><B>Person</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DL>
+<DT><PRE>public interface <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.35"><B>Person</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DL>
 </PRE>
 
 <P>
@@ -152,6 +152,14 @@ Model definition for Plus.Person.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The name of this person, suitable for display.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#getEmails()">getEmails</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of email addresses for this person.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -269,7 +277,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setAboutMe(java.lang.String)">setAboutMe</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;AboutMe)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setAboutMe(java.lang.String)">setAboutMe</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aboutMe)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -277,7 +285,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setBirthday(java.lang.String)">setBirthday</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Birthday)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setBirthday(java.lang.String)">setBirthday</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;birthday)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -285,7 +293,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setCurrentLocation(java.lang.String)">setCurrentLocation</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;CurrentLocation)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setCurrentLocation(java.lang.String)">setCurrentLocation</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;currentLocation)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -293,7 +301,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setDisplayName(java.lang.String)">setDisplayName</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;DisplayName)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setDisplayName(java.lang.String)">setDisplayName</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;displayName)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -301,7 +309,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setGender(java.lang.String)">setGender</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Gender)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setEmails(java.util.List)">setEmails</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>&gt;&nbsp;emails)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -309,7 +317,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setHasApp(java.lang.Boolean)">setHasApp</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;HasApp)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setGender(java.lang.String)">setGender</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;gender)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -317,7 +325,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setId(java.lang.String)">setId</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Id)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setHasApp(java.lang.Boolean)">setHasApp</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;hasApp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -325,7 +333,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setImage(com.google.api.gwt.services.plus.shared.model.PersonImage)">setImage</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonImage</A>&nbsp;Image)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setId(java.lang.String)">setId</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -333,7 +341,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setKind(java.lang.String)">setKind</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Kind)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setImage(com.google.api.gwt.services.plus.shared.model.PersonImage)">setImage</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonImage</A>&nbsp;image)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -341,7 +349,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setLanguagesSpoken(java.util.List)">setLanguagesSpoken</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;LanguagesSpoken)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setKind(java.lang.String)">setKind</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;kind)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -349,7 +357,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setName(com.google.api.gwt.services.plus.shared.model.PersonName)">setName</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonName</A>&nbsp;Name)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setLanguagesSpoken(java.util.List)">setLanguagesSpoken</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;languagesSpoken)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -357,7 +365,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setNickname(java.lang.String)">setNickname</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Nickname)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setName(com.google.api.gwt.services.plus.shared.model.PersonName)">setName</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonName</A>&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -365,7 +373,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setOrganizations(java.util.List)">setOrganizations</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>&gt;&nbsp;Organizations)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setNickname(java.lang.String)">setNickname</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;nickname)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -373,7 +381,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setPlacesLived(java.util.List)">setPlacesLived</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>&gt;&nbsp;PlacesLived)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setOrganizations(java.util.List)">setOrganizations</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>&gt;&nbsp;organizations)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -381,7 +389,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setRelationshipStatus(java.lang.String)">setRelationshipStatus</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;RelationshipStatus)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setPlacesLived(java.util.List)">setPlacesLived</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>&gt;&nbsp;placesLived)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -389,7 +397,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setTagline(java.lang.String)">setTagline</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Tagline)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setRelationshipStatus(java.lang.String)">setRelationshipStatus</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;relationshipStatus)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -397,7 +405,7 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setUrl(java.lang.String)">setUrl</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Url)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setTagline(java.lang.String)">setTagline</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;tagline)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -405,7 +413,15 @@ Model definition for Plus.Person.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setUrls(java.util.List)">setUrls</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonUrls</A>&gt;&nbsp;Urls)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setUrl(java.lang.String)">setUrl</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/Person.html#setUrls(java.util.List)">setUrls</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonUrls</A>&gt;&nbsp;urls)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -428,7 +444,7 @@ Model definition for Plus.Person.
 getRelationshipStatus</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="relationshipStatus")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.44"><B>getRelationshipStatus</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.45"><B>getRelationshipStatus</B></A>()</PRE>
 <DL>
 <DD>The person's relationship status. Possible values are: - "single" - Person is single. -
  "in_a_relationship" - Person is in a relationship. - "engaged" - Person is engaged. - "married" -
@@ -449,7 +465,7 @@ getRelationshipStatus</H3>
 setRelationshipStatus</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="relationshipStatus")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.47"><B>setRelationshipStatus</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;RelationshipStatus)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.48"><B>setRelationshipStatus</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;relationshipStatus)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -464,7 +480,7 @@ setRelationshipStatus</H3>
 getOrganizations</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="organizations")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.51"><B>getOrganizations</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.52"><B>getOrganizations</B></A>()</PRE>
 <DL>
 <DD>A list of current or past organizations with which this person is associated.
 <P>
@@ -481,7 +497,7 @@ getOrganizations</H3>
 setOrganizations</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="organizations")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.54"><B>setOrganizations</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>&gt;&nbsp;Organizations)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.55"><B>setOrganizations</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>&gt;&nbsp;organizations)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -496,7 +512,7 @@ setOrganizations</H3>
 getKind</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="kind")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.58"><B>getKind</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.59"><B>getKind</B></A>()</PRE>
 <DL>
 <DD>Identifies this resource as a person. Value: "plus#person".
 <P>
@@ -513,7 +529,7 @@ getKind</H3>
 setKind</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="kind")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.61"><B>setKind</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Kind)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.62"><B>setKind</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;kind)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -528,7 +544,7 @@ setKind</H3>
 getDisplayName</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="displayName")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.65"><B>getDisplayName</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.66"><B>getDisplayName</B></A>()</PRE>
 <DL>
 <DD>The name of this person, suitable for display.
 <P>
@@ -545,7 +561,7 @@ getDisplayName</H3>
 setDisplayName</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="displayName")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.68"><B>setDisplayName</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;DisplayName)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.69"><B>setDisplayName</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;displayName)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -560,7 +576,7 @@ setDisplayName</H3>
 getName</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="name")
-</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonName</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.72"><B>getName</B></A>()</PRE>
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonName</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.73"><B>getName</B></A>()</PRE>
 <DL>
 <DD>An object representation of the individual components of a person's name.
 <P>
@@ -577,7 +593,7 @@ getName</H3>
 setName</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="name")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.75"><B>setName</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonName</A>&nbsp;Name)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.76"><B>setName</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonName</A>&nbsp;name)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -592,7 +608,7 @@ setName</H3>
 getUrl</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="url")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.79"><B>getUrl</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.80"><B>getUrl</B></A>()</PRE>
 <DL>
 <DD>The URL of this person's profile.
 <P>
@@ -609,7 +625,7 @@ getUrl</H3>
 setUrl</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="url")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.82"><B>setUrl</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Url)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.83"><B>setUrl</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -624,7 +640,7 @@ setUrl</H3>
 getGender</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="gender")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.89"><B>getGender</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.90"><B>getGender</B></A>()</PRE>
 <DL>
 <DD>The person's gender. Possible values are: - "male" - Male gender. - "female" - Female gender. -
  "other" - Other.
@@ -642,7 +658,7 @@ getGender</H3>
 setGender</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="gender")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.92"><B>setGender</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Gender)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.93"><B>setGender</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;gender)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -657,7 +673,7 @@ setGender</H3>
 getAboutMe</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="aboutMe")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.96"><B>getAboutMe</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.97"><B>getAboutMe</B></A>()</PRE>
 <DL>
 <DD>A short biography for this person.
 <P>
@@ -674,7 +690,7 @@ getAboutMe</H3>
 setAboutMe</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="aboutMe")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.99"><B>setAboutMe</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;AboutMe)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.100"><B>setAboutMe</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aboutMe)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -689,7 +705,7 @@ setAboutMe</H3>
 getTagline</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="tagline")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.103"><B>getTagline</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.104"><B>getTagline</B></A>()</PRE>
 <DL>
 <DD>The brief description (tagline) of this person.
 <P>
@@ -706,7 +722,7 @@ getTagline</H3>
 setTagline</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="tagline")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.106"><B>setTagline</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Tagline)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.107"><B>setTagline</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;tagline)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -721,7 +737,7 @@ setTagline</H3>
 getUrls</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="urls")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonUrls</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.110"><B>getUrls</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonUrls</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.111"><B>getUrls</B></A>()</PRE>
 <DL>
 <DD>A list of URLs for this person.
 <P>
@@ -738,7 +754,7 @@ getUrls</H3>
 setUrls</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="urls")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.113"><B>setUrls</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonUrls</A>&gt;&nbsp;Urls)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.114"><B>setUrls</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonUrls</A>&gt;&nbsp;urls)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -753,7 +769,7 @@ setUrls</H3>
 getPlacesLived</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="placesLived")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.117"><B>getPlacesLived</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.118"><B>getPlacesLived</B></A>()</PRE>
 <DL>
 <DD>A list of places where this person has lived.
 <P>
@@ -770,7 +786,7 @@ getPlacesLived</H3>
 setPlacesLived</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="placesLived")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.120"><B>setPlacesLived</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>&gt;&nbsp;PlacesLived)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.121"><B>setPlacesLived</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>&gt;&nbsp;placesLived)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -781,13 +797,13 @@ setPlacesLived</H3>
 </DL>
 <HR>
 
-<A NAME="getId()"><!-- --></A><H3>
-getId</H3>
+<A NAME="getEmails()"><!-- --></A><H3>
+getEmails</H3>
 <PRE>
-<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="id")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.124"><B>getId</B></A>()</PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="emails")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.125"><B>getEmails</B></A>()</PRE>
 <DL>
-<DD>The ID of this person.
+<DD>A list of email addresses for this person.
 <P>
 <DD><DL>
 </DL>
@@ -798,11 +814,11 @@ getId</H3>
 </DL>
 <HR>
 
-<A NAME="setId(java.lang.String)"><!-- --></A><H3>
-setId</H3>
+<A NAME="setEmails(java.util.List)"><!-- --></A><H3>
+setEmails</H3>
 <PRE>
-<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="id")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.127"><B>setId</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Id)</PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="emails")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.128"><B>setEmails</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>&gt;&nbsp;emails)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -817,7 +833,7 @@ setId</H3>
 getNickname</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="nickname")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.131"><B>getNickname</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.132"><B>getNickname</B></A>()</PRE>
 <DL>
 <DD>The nickname of this person.
 <P>
@@ -834,7 +850,7 @@ getNickname</H3>
 setNickname</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="nickname")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.134"><B>setNickname</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Nickname)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.135"><B>setNickname</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;nickname)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -849,7 +865,7 @@ setNickname</H3>
 getBirthday</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="birthday")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.138"><B>getBirthday</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.139"><B>getBirthday</B></A>()</PRE>
 <DL>
 <DD>The person's date of birth, represented as YYYY-MM-DD.
 <P>
@@ -866,7 +882,7 @@ getBirthday</H3>
 setBirthday</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="birthday")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.141"><B>setBirthday</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;Birthday)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.142"><B>setBirthday</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;birthday)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -881,7 +897,7 @@ setBirthday</H3>
 getImage</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="image")
-</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonImage</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.145"><B>getImage</B></A>()</PRE>
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonImage</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.146"><B>getImage</B></A>()</PRE>
 <DL>
 <DD>The representation of the person's profile photo.
 <P>
@@ -898,7 +914,7 @@ getImage</H3>
 setImage</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="image")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.148"><B>setImage</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonImage</A>&nbsp;Image)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.149"><B>setImage</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonImage</A>&nbsp;image)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -913,7 +929,7 @@ setImage</H3>
 getHasApp</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="hasApp")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.157"><B>getHasApp</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.158"><B>getHasApp</B></A>()</PRE>
 <DL>
 <DD>If "true", indicates that the person has installed the app that is making the request and has
  chosen to expose this install state to the caller. A value of "false" indicates that the install
@@ -933,7 +949,39 @@ getHasApp</H3>
 setHasApp</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="hasApp")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.160"><B>setHasApp</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;HasApp)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.161"><B>setHasApp</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;hasApp)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getId()"><!-- --></A><H3>
+getId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="id")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.165"><B>getId</B></A>()</PRE>
+<DL>
+<DD>The ID of this person.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setId(java.lang.String)"><!-- --></A><H3>
+setId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="id")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.168"><B>setId</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -948,7 +996,7 @@ setHasApp</H3>
 getLanguagesSpoken</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="languagesSpoken")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.164"><B>getLanguagesSpoken</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.172"><B>getLanguagesSpoken</B></A>()</PRE>
 <DL>
 <DD>The languages spoken by this person.
 <P>
@@ -965,7 +1013,7 @@ getLanguagesSpoken</H3>
 setLanguagesSpoken</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="languagesSpoken")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.167"><B>setLanguagesSpoken</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;LanguagesSpoken)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.175"><B>setLanguagesSpoken</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;languagesSpoken)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -980,7 +1028,7 @@ setLanguagesSpoken</H3>
 getCurrentLocation</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="currentLocation")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.171"><B>getCurrentLocation</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.179"><B>getCurrentLocation</B></A>()</PRE>
 <DL>
 <DD>The current location for this person.
 <P>
@@ -997,7 +1045,7 @@ getCurrentLocation</H3>
 setCurrentLocation</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="currentLocation")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.174"><B>setCurrentLocation</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;CurrentLocation)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/Person.html#line.182"><B>setCurrentLocation</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;currentLocation)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -1037,8 +1085,8 @@ setCurrentLocation</H3>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/ActivityProvider.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../../../index.html?com/google/api/gwt/services/plus/shared/model/Person.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Person.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

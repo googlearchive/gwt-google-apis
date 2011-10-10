@@ -89,7 +89,10 @@ Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/googl
 <A NAME="_C_"><!-- --></A><H2>
 <B>C</B></H2>
 <DL>
-<DT><A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html"><B>com.google.api.gwt.services.plus.shared</B></A> - package com.google.api.gwt.services.plus.shared<DD>Support classes to facilitate interaction with v1 of the plus service.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html"><B>com.google.api.gwt.services.plus.shared.model</B></A> - package com.google.api.gwt.services.plus.shared.model<DD>&nbsp;</DL>
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html"><B>com.google.api.gwt.services.plus.shared</B></A> - package com.google.api.gwt.services.plus.shared<DD>Support classes to facilitate interaction with v1 of the plus service.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html"><B>com.google.api.gwt.services.plus.shared.model</B></A> - package com.google.api.gwt.services.plus.shared.model<DD>&nbsp;<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>Comment</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.Comment.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>CommentActor</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.CommentActor.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActorImage.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>CommentActorImage</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.CommentActorImage.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>CommentFeed</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.CommentFeed.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>CommentInReplyTo</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.CommentInReplyTo.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>CommentObject</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.CommentObject.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.html#comments()"><B>comments()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.html" title="interface in com.google.api.gwt.services.plus.shared">Plus</A>
+<DD>Returns the <CODE>#CommentsContext</CODE> context.
+</DL>
 <HR>
 <A NAME="_G_"><!-- --></A><H2>
 <B>G</B></H2>
@@ -97,6 +100,9 @@ Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/googl
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html#get(java.lang.String)"><B>get(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext</A>
 <DD>Get an activity.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html#get(java.lang.String)"><B>get(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext</A>
+<DD>Get a comment.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#get(java.lang.String)"><B>get(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext</A>
 <DD>Get a person's profile.
@@ -113,6 +119,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObject</A>
 <DD>If this activity's object is itself another activity (for example, when a person reshares an
  activity), this property specifies the original activity's actor.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getActor()"><B>getActor()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>The person who posted this comment.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getAddress()"><B>getAddress()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>Street address where this activity occurred.
@@ -132,6 +141,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#getContent()"><B>getContent()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>If the attachment is an article, this property contains a snippet of text from the article.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html#getContent()"><B>getContent()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentObject</A>
+<DD>The content of this comment.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getCrosspostSource()"><B>getCrosspostSource()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>If this activity is a crosspost from another system, this property specifies the ID of the
@@ -157,9 +169,15 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>The title of the attachment (such as a photo caption or an article title).
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>The name of this actor, suitable for display.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>The name of this person, suitable for display.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getEmails()"><B>getEmails()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
+<DD>A list of email addresses for this person.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#getEmbed()"><B>getEmbed()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>If the attachment is a video, the embeddable link.
@@ -218,6 +236,18 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#getId()"><B>getId()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>The ID of the media object's resource.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getId()"><B>getId()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>The ID of this comment.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#getId()"><B>getId()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>The ID of the actor.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#getId()"><B>getId()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>The ID of this collection of comments.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html#getId()"><B>getId()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentInReplyTo</A>
+<DD>The id of the activity.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getId()"><B>getId()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>The ID of this person.
@@ -233,24 +263,45 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#getImage()"><B>getImage()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>The preview image for photos or videos.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#getImage()"><B>getImage()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>The image representation of this actor.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getImage()"><B>getImage()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>The representation of the person's profile photo.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getInReplyTo()"><B>getInReplyTo()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>The activity this comment replied to.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html#getItems()"><B>getItems()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html" title="interface in com.google.api.gwt.services.plus.shared.model">Acl</A>
 <DD>The list of access entries.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#getItems()"><B>getItems()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
 <DD>The activities in this page of results.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#getItems()"><B>getItems()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#getItems()"><B>getItems()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
+<DD>The people in this page of results.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html#getKind()"><B>getKind()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html" title="interface in com.google.api.gwt.services.plus.shared.model">Acl</A>
-<DD>&nbsp;
+<DD>Identifies this resource as a collection of access controls.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getKind()"><B>getKind()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>Identifies this resource as an activity.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#getKind()"><B>getKind()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
 <DD>Identifies this resource as a collection of activities.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getKind()"><B>getKind()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>Identifies this resource as a comment.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#getKind()"><B>getKind()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>Identifies this resource as a collection of comments.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#getKind()"><B>getKind()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
+<DD>Identifies this resource as a collection of people.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getKind()"><B>getKind()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>Identifies this resource as a person.
@@ -271,9 +322,18 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DD>The name of the organization.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#getNextLink()"><B>getNextLink()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
-<DD>&nbsp;
+<DD>Link to the next page of activities.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#getNextLink()"><B>getNextLink()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>Link to the next page of activities.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#getNextPageToken()"><B>getNextPageToken()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
+<DD>The continuation token, used to page through large result sets.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#getNextPageToken()"><B>getNextPageToken()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>The continuation token, used to page through large result sets.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#getNextPageToken()"><B>getNextPageToken()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
 <DD>The continuation token, used to page through large result sets.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getNickname()"><B>getNickname()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
@@ -284,6 +344,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#getObjectType()"><B>getObjectType()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>The type of media object.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html#getObjectType()"><B>getObjectType()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentObject</A>
+<DD>The object type of this comment.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getOrganizations()"><B>getOrganizations()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>A list of current or past organizations with which this person is associated.
@@ -292,7 +355,7 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DD>The content (text) as provided by the author, stored without any HTML formatting.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getPlaceholder()"><B>getPlaceholder()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
-<DD>&nbsp;
+<DD>True if this activity is a placeholder.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getPlaceId()"><B>getPlaceId()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>ID of the place where this activity occurred.
@@ -305,9 +368,15 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getPlusObject()"><B>getPlusObject()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>The object of this activity.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getPlusObject()"><B>getPlusObject()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>The object of this comment.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html#getPlusoners()"><B>getPlusoners()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObject</A>
 <DD>People who +1'd this activity.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html#getPrimary()"><B>getPrimary()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>
+<DD>If "true", indicates this email address is the person's primary one.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#getPrimary()"><B>getPrimary()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
 <DD>If "true", indicates this organization is the person's primary one (typically interpreted as
@@ -324,6 +393,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getPublished()"><B>getPublished()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>The time at which this activity was initially published.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getPublished()"><B>getPublished()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>The time at which this comment was initially published.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getRadius()"><B>getRadius()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>Radius, in meters, of the region where this activity occurred, centered at the latitude and
@@ -342,7 +414,22 @@ Method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api
 <DD>The String value of this scope.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#getSelfLink()"><B>getSelfLink()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
-<DD>&nbsp;
+<DD>Link to this activity resource.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectPlusoners.html#getSelfLink()"><B>getSelfLink()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectPlusoners.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectPlusoners</A>
+<DD>The URL for collection of people who +1'd this activity.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#getSelfLink()"><B>getSelfLink()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectReplies</A>
+<DD>The URL for the collection of comments in reply to this activity.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectResharers.html#getSelfLink()"><B>getSelfLink()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectResharers.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectResharers</A>
+<DD>The URL for the collection of resharers.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getSelfLink()"><B>getSelfLink()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>Link to this comment resource.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#getSelfLink()"><B>getSelfLink()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
+<DD>Link to this resource.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#getStartDate()"><B>getStartDate()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
 <DD>The date the person joined this organization.
@@ -358,6 +445,12 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityProvider.html#getTitle()"><B>getTitle()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityProvider.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityProvider</A>
 <DD>Name of the service provider.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#getTitle()"><B>getTitle()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>The title of this collection of comments.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#getTitle()"><B>getTitle()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
+<DD>The title of this collection of people.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#getTitle()"><B>getTitle()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
 <DD>The person's job title or role within the organization.
@@ -379,6 +472,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html#getType()"><B>getType()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachmentsImage</A>
 <DD>Media type of the link.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html#getType()"><B>getType()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>
+<DD>The type of address.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#getType()"><B>getType()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
 <DD>The type of organization.
@@ -394,9 +490,15 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#getUpdated()"><B>getUpdated()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
 <DD>The time at which this collection of activities was last updated.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getUpdated()"><B>getUpdated()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>The time at which this comment was last updated.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#getUpdated()"><B>getUpdated()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>The time at which this collection of comments was last updated.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getUrl()"><B>getUrl()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
-<DD>&nbsp;
+<DD>The link to this activity.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityActor.html#getUrl()"><B>getUrl()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityActor</A>
 <DD>The link to the actor's Google profile.
@@ -424,6 +526,15 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html#getUrl()"><B>getUrl()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachmentsImage</A>
 <DD>URL of the link.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#getUrl()"><B>getUrl()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>A link to the person resource for this actor.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActorImage.html#getUrl()"><B>getUrl()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActorImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActorImage</A>
+<DD>The URL of the actor's profile photo.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html#getUrl()"><B>getUrl()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentInReplyTo</A>
+<DD>The url of the activity.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getUrl()"><B>getUrl()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>The URL of this person's profile.
@@ -433,6 +544,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#getUrls()"><B>getUrls()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>A list of URLs for this person.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html#getValue()"><B>getValue()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>
+<DD>The email address.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html#getValue()"><B>getValue()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>
 <DD>A place where this person has lived.
@@ -442,6 +556,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#getVerb()"><B>getVerb()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>This activity's verb, indicating what action was performed.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#getVerb()"><B>getVerb()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>This comment's verb, indicating what action was performed.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsFullImage.html#getWidth()"><B>getWidth()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsFullImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachmentsFullImage</A>
 <DD>The width, in pixels, of the linked resource.
@@ -456,6 +573,12 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html#list(java.lang.String, com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.ListRequest.Collection)"><B>list(String, Plus.ActivitiesContext.ListRequest.Collection)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext</A>
 <DD>List all of the activities in the specified collection for a particular user.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html#list(java.lang.String)"><B>list(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext</A>
+<DD>List all of the comments for an activity.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#listByActivity(java.lang.String, com.google.api.gwt.services.plus.shared.Plus.PeopleContext.ListByActivityRequest.Collection)"><B>listByActivity(String, Plus.PeopleContext.ListByActivityRequest.Collection)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext</A>
+<DD>List all of the people in the specified collection for a particular activity.
 </DL>
 <HR>
 <A NAME="_P_"><!-- --></A><H2>
@@ -464,11 +587,17 @@ Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/googl
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.html#people()"><B>people()</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.html" title="interface in com.google.api.gwt.services.plus.shared">Plus</A>
 <DD>Returns the <CODE>#PeopleContext</CODE> context.
-<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>Person</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.Person.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonImage</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonImage.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonName</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonName.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonOrganizations</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonOrganizations.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonPlacesLived</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonPlacesLived.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonUrls</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonUrls.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Service definition for Plus (v1).<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "activities" collection.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.GetRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.activities.get" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.ListRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.activities.list" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.ListRequest.Collection</B></A> - Enum in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Possible values for <A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html#setCollection(com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.ListRequest.Collection)"><CODE>Plus.ActivitiesContext.ListRequest.setCollection(Collection)</CODE></A>.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.PeopleContext</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "people" collection.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.PeopleContext.GetRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.people.get" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PlusAuthScope.html" title="enum in com.google.api.gwt.services.plus.shared"><B>Plus.PlusAuthScope</B></A> - Enum in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Available authentiation scopes for use with this service.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PlusAclentryResource.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PlusAclentryResource</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PlusAclentryResource.</DL>
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PeopleFeed</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PeopleFeed.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>Person</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.Person.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonEmails</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonEmails.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonImage.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonImage</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonImage.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonName</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonName.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonOrganizations</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonOrganizations.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonPlacesLived</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonPlacesLived.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonUrls.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PersonUrls</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PersonUrls.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Service definition for Plus (v1).<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "activities" collection.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.GetRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.activities.get" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.ListRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.activities.list" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.ListRequest.Collection</B></A> - Enum in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Possible values for <A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html#setCollection(com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.ListRequest.Collection)"><CODE>Plus.ActivitiesContext.ListRequest.setCollection(Collection)</CODE></A>.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.SearchRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.activities.search" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.OrderBy.html" title="enum in com.google.api.gwt.services.plus.shared"><B>Plus.ActivitiesContext.SearchRequest.OrderBy</B></A> - Enum in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Possible values for <A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html#setOrderBy(com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.SearchRequest.OrderBy)"><CODE>Plus.ActivitiesContext.SearchRequest.setOrderBy(OrderBy)</CODE></A>.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.CommentsContext</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "comments" collection.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.CommentsContext.GetRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.comments.get" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.CommentsContext.ListRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.comments.list" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.PeopleContext</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "people" collection.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.PeopleContext.GetRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.people.get" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.PeopleContext.ListByActivityRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.people.listByActivity" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared"><B>Plus.PeopleContext.ListByActivityRequest.Collection</B></A> - Enum in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Possible values for <A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html#setCollection(com.google.api.gwt.services.plus.shared.Plus.PeopleContext.ListByActivityRequest.Collection)"><CODE>Plus.PeopleContext.ListByActivityRequest.setCollection(Collection)</CODE></A>.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>Plus.PeopleContext.SearchRequest</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Request object to call the "plus.people.search" method.<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PlusAuthScope.html" title="enum in com.google.api.gwt.services.plus.shared"><B>Plus.PlusAuthScope</B></A> - Enum in <A HREF="./com/google/api/gwt/services/plus/shared/package-summary.html">com.google.api.gwt.services.plus.shared</A><DD>Available authentiation scopes for use with this service.<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PlusAclentryResource.html" title="interface in com.google.api.gwt.services.plus.shared.model"><B>PlusAclentryResource</B></A> - Interface in <A HREF="./com/google/api/gwt/services/plus/shared/model/package-summary.html">com.google.api.gwt.services.plus.shared.model</A><DD>Model definition for Plus.PlusAclentryResource.</DL>
 <HR>
 <A NAME="_S_"><!-- --></A><H2>
 <B>S</B></H2>
 <DL>
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html#search()"><B>search()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext</A>
+<DD>Search public activities.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#search()"><B>search()</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext</A>
+<DD>Search all public profiles.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setAboutMe(java.lang.String)"><B>setAboutMe(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>&nbsp;
@@ -478,11 +607,20 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.GetRequest.html#setActivityId(java.lang.String)"><B>setActivityId(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.GetRequest</A>
 <DD>The ID of the activity to get.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html#setActivityId(java.lang.String)"><B>setActivityId(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext.ListRequest</A>
+<DD>The ID of the activity to get comments for.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html#setActivityId(java.lang.String)"><B>setActivityId(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A>
+<DD>The ID of the activity to get the list of people for.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setActor(com.google.api.gwt.services.plus.shared.model.ActivityActor)"><B>setActor(ActivityActor)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html#setActor(com.google.api.gwt.services.plus.shared.model.ActivityObjectActor)"><B>setActor(ActivityObjectActor)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObject</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setActor(com.google.api.gwt.services.plus.shared.model.CommentActor)"><B>setActor(CommentActor)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setAddress(java.lang.String)"><B>setAddress(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
@@ -499,11 +637,20 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html#setCollection(com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.ListRequest.Collection)"><B>setCollection(Plus.ActivitiesContext.ListRequest.Collection)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.ListRequest</A>
 <DD>The collection of activities to list.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html#setCollection(com.google.api.gwt.services.plus.shared.Plus.PeopleContext.ListByActivityRequest.Collection)"><B>setCollection(Plus.PeopleContext.ListByActivityRequest.Collection)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A>
+<DD>The collection of people to list.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.GetRequest.html#setCommentId(java.lang.String)"><B>setCommentId(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext.GetRequest</A>
+<DD>The ID of the comment to get.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html#setContent(java.lang.String)"><B>setContent(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObject</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#setContent(java.lang.String)"><B>setContent(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html#setContent(java.lang.String)"><B>setContent(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentObject</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setCrosspostSource(java.lang.String)"><B>setCrosspostSource(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
@@ -529,7 +676,13 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#setDisplayName(java.lang.String)"><B>setDisplayName(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#setDisplayName(java.lang.String)"><B>setDisplayName(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setDisplayName(java.lang.String)"><B>setDisplayName(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setEmails(java.util.List)"><B>setEmails(List&lt;PersonEmails&gt;)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#setEmbed(com.google.api.gwt.services.plus.shared.model.ActivityObjectAttachmentsEmbed)"><B>setEmbed(ActivityObjectAttachmentsEmbed)</B></A> - 
@@ -589,6 +742,18 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#setId(java.lang.String)"><B>setId(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setId(java.lang.String)"><B>setId(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#setId(java.lang.String)"><B>setId(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#setId(java.lang.String)"><B>setId(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html#setId(java.lang.String)"><B>setId(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentInReplyTo</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setId(java.lang.String)"><B>setId(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>&nbsp;
@@ -604,14 +769,26 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#setImage(com.google.api.gwt.services.plus.shared.model.ActivityObjectAttachmentsImage)"><B>setImage(ActivityObjectAttachmentsImage)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#setImage(com.google.api.gwt.services.plus.shared.model.CommentActorImage)"><B>setImage(CommentActorImage)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setImage(com.google.api.gwt.services.plus.shared.model.PersonImage)"><B>setImage(PersonImage)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setInReplyTo(java.util.List)"><B>setInReplyTo(List&lt;CommentInReplyTo&gt;)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html#setItems(java.util.List)"><B>setItems(List&lt;PlusAclentryResource&gt;)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html" title="interface in com.google.api.gwt.services.plus.shared.model">Acl</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#setItems(java.util.List)"><B>setItems(List&lt;Activity&gt;)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#setItems(java.util.List)"><B>setItems(List&lt;Comment&gt;)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#setItems(java.util.List)"><B>setItems(List&lt;Person&gt;)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html#setKind(java.lang.String)"><B>setKind(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Acl.html" title="interface in com.google.api.gwt.services.plus.shared.model">Acl</A>
@@ -621,6 +798,15 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#setKind(java.lang.String)"><B>setKind(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setKind(java.lang.String)"><B>setKind(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#setKind(java.lang.String)"><B>setKind(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#setKind(java.lang.String)"><B>setKind(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setKind(java.lang.String)"><B>setKind(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
@@ -634,6 +820,18 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html#setMaxResults(java.lang.Long)"><B>setMaxResults(Long)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.ListRequest</A>
 <DD>The maximum number of activities to include in the response, used for paging.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html#setMaxResults(java.lang.Long)"><B>setMaxResults(Long)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest</A>
+<DD>The maximum number of activities to include in the response, used for paging.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html#setMaxResults(java.lang.Long)"><B>setMaxResults(Long)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext.ListRequest</A>
+<DD>The maximum number of comments to include in the response, used for paging.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html#setMaxResults(java.lang.Long)"><B>setMaxResults(Long)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A>
+<DD>The maximum number of people to include in the response, used for paging.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html#setMaxResults(java.lang.Long)"><B>setMaxResults(Long)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.SearchRequest</A>
+<DD>The maximum number of activities to include in the response, used for paging.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonName.html#setMiddleName(java.lang.String)"><B>setMiddleName(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonName.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonName</A>
 <DD>&nbsp;
@@ -646,8 +844,17 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#setNextLink(java.lang.String)"><B>setNextLink(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#setNextLink(java.lang.String)"><B>setNextLink(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#setNextPageToken(java.lang.String)"><B>setNextPageToken(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#setNextPageToken(java.lang.String)"><B>setNextPageToken(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#setNextPageToken(java.lang.String)"><B>setNextPageToken(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setNickname(java.lang.String)"><B>setNickname(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
@@ -658,6 +865,12 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html#setObjectType(java.lang.String)"><B>setObjectType(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachments.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachments</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html#setObjectType(java.lang.String)"><B>setObjectType(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentObject</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html#setOrderBy(com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.SearchRequest.OrderBy)"><B>setOrderBy(Plus.ActivitiesContext.SearchRequest.OrderBy)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest</A>
+<DD>Specifies how to order search results.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setOrganizations(java.util.List)"><B>setOrganizations(List&lt;PersonOrganizations&gt;)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>&nbsp;
@@ -666,6 +879,18 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html#setPageToken(java.lang.String)"><B>setPageToken(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.ListRequest</A>
+<DD>The continuation token, used to page through large result sets.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html#setPageToken(java.lang.String)"><B>setPageToken(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest</A>
+<DD>The continuation token, used to page through large result sets.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html#setPageToken(java.lang.String)"><B>setPageToken(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext.ListRequest</A>
+<DD>The continuation token, used to page through large result sets.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html#setPageToken(java.lang.String)"><B>setPageToken(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A>
+<DD>The continuation token, used to page through large result sets.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html#setPageToken(java.lang.String)"><B>setPageToken(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.SearchRequest</A>
 <DD>The continuation token, used to page through large result sets.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setPlaceholder(java.lang.Boolean)"><B>setPlaceholder(Boolean)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
@@ -682,8 +907,14 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setPlusObject(com.google.api.gwt.services.plus.shared.model.ActivityObject)"><B>setPlusObject(ActivityObject)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setPlusObject(com.google.api.gwt.services.plus.shared.model.CommentObject)"><B>setPlusObject(CommentObject)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html#setPlusoners(com.google.api.gwt.services.plus.shared.model.ActivityObjectPlusoners)"><B>setPlusoners(ActivityObjectPlusoners)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObject.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObject</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html#setPrimary(java.lang.Boolean)"><B>setPrimary(Boolean)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#setPrimary(java.lang.Boolean)"><B>setPrimary(Boolean)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
@@ -700,6 +931,15 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setPublished(java.lang.String)"><B>setPublished(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setPublished(java.lang.String)"><B>setPublished(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html#setQuery(java.lang.String)"><B>setQuery(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest</A>
+<DD>Full-text search query string.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html#setQuery(java.lang.String)"><B>setQuery(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.SearchRequest</A>
+<DD>Full-text search query string.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setRadius(java.lang.String)"><B>setRadius(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
 <DD>&nbsp;
@@ -715,6 +955,21 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#setSelfLink(java.lang.String)"><B>setSelfLink(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectPlusoners.html#setSelfLink(java.lang.String)"><B>setSelfLink(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectPlusoners.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectPlusoners</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#setSelfLink(java.lang.String)"><B>setSelfLink(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectReplies</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectResharers.html#setSelfLink(java.lang.String)"><B>setSelfLink(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectResharers.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectResharers</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setSelfLink(java.lang.String)"><B>setSelfLink(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#setSelfLink(java.lang.String)"><B>setSelfLink(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#setStartDate(java.lang.String)"><B>setStartDate(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
 <DD>&nbsp;
@@ -729,6 +984,12 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityProvider.html#setTitle(java.lang.String)"><B>setTitle(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityProvider.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#setTitle(java.lang.String)"><B>setTitle(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html#setTitle(java.lang.String)"><B>setTitle(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PeopleFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">PeopleFeed</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#setTitle(java.lang.String)"><B>setTitle(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
@@ -751,6 +1012,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html#setType(java.lang.String)"><B>setType(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachmentsImage</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html#setType(java.lang.String)"><B>setType(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html#setType(java.lang.String)"><B>setType(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonOrganizations.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonOrganizations</A>
 <DD>&nbsp;
@@ -765,6 +1029,12 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html#setUpdated(java.lang.String)"><B>setUpdated(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityFeed</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setUpdated(java.lang.String)"><B>setUpdated(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html#setUpdated(java.lang.String)"><B>setUpdated(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentFeed.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentFeed</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setUrl(java.lang.String)"><B>setUrl(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
@@ -796,6 +1066,15 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html#setUrl(java.lang.String)"><B>setUrl(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachmentsImage</A>
 <DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html#setUrl(java.lang.String)"><B>setUrl(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActor.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActor</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActorImage.html#setUrl(java.lang.String)"><B>setUrl(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentActorImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentActorImage</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html#setUrl(java.lang.String)"><B>setUrl(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/CommentInReplyTo.html" title="interface in com.google.api.gwt.services.plus.shared.model">CommentInReplyTo</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html#setUrl(java.lang.String)"><B>setUrl(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Person.html" title="interface in com.google.api.gwt.services.plus.shared.model">Person</A>
 <DD>&nbsp;
@@ -811,6 +1090,9 @@ Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/googl
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html#setUserId(java.lang.String)"><B>setUserId(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.GetRequest</A>
 <DD>The ID of the person to get the profile for.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html#setValue(java.lang.String)"><B>setValue(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonEmails.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonEmails</A>
+<DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html#setValue(java.lang.String)"><B>setValue(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/PersonPlacesLived.html" title="interface in com.google.api.gwt.services.plus.shared.model">PersonPlacesLived</A>
 <DD>&nbsp;
@@ -819,6 +1101,9 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html#setVerb(java.lang.String)"><B>setVerb(String)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Activity.html" title="interface in com.google.api.gwt.services.plus.shared.model">Activity</A>
+<DD>&nbsp;
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html#setVerb(java.lang.String)"><B>setVerb(String)</B></A> - 
+Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/Comment.html" title="interface in com.google.api.gwt.services.plus.shared.model">Comment</A>
 <DD>&nbsp;
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsFullImage.html#setWidth(java.lang.Long)"><B>setWidth(Long)</B></A> - 
 Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com/google/api/gwt/services/plus/shared/model/ActivityObjectAttachmentsFullImage.html" title="interface in com.google.api.gwt.services.plus.shared.model">ActivityObjectAttachmentsFullImage</A>
@@ -834,11 +1119,25 @@ Method in interface com.google.api.gwt.services.plus.shared.model.<A HREF="./com
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html#valueOf(java.lang.String)"><B>valueOf(String)</B></A> - 
 Static method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.ListRequest.Collection</A>
 <DD>Returns the enum constant of this type with the specified name.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.OrderBy.html#valueOf(java.lang.String)"><B>valueOf(String)</B></A> - 
+Static method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.OrderBy.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest.OrderBy</A>
+<DD>Returns the enum constant of this type with the specified name.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html#valueOf(java.lang.String)"><B>valueOf(String)</B></A> - 
+Static method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest.Collection</A>
+<DD>Returns the enum constant of this type with the specified name.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PlusAuthScope.html#valueOf(java.lang.String)"><B>valueOf(String)</B></A> - 
 Static method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PlusAuthScope.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.PlusAuthScope</A>
 <DD>Returns the enum constant of this type with the specified name.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html#values()"><B>values()</B></A> - 
 Static method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.ListRequest.Collection</A>
+<DD>Returns an array containing the constants of this enum type, in
+the order they are declared.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.OrderBy.html#values()"><B>values()</B></A> - 
+Static method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.OrderBy.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest.OrderBy</A>
+<DD>Returns an array containing the constants of this enum type, in
+the order they are declared.
+<DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html#values()"><B>values()</B></A> - 
+Static method in enum com.google.api.gwt.services.plus.shared.<A HREF="./com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest.Collection</A>
 <DD>Returns an array containing the constants of this enum type, in
 the order they are declared.
 <DT><A HREF="./com/google/api/gwt/services/plus/shared/Plus.PlusAuthScope.html#values()"><B>values()</B></A> - 

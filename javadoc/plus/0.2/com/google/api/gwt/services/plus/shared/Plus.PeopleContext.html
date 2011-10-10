@@ -54,7 +54,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../../index.html?com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -98,7 +98,7 @@ Interface Plus.PeopleContext</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static interface <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.151"><B>Plus.PeopleContext</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">RequestContext</A></DL>
+<DT><PRE>public static interface <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.250"><B>Plus.PeopleContext</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">RequestContext</A></DL>
 </PRE>
 
 <P>
@@ -125,6 +125,22 @@ The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Request object to call the "plus.people.get" method.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Request object to call the "plus.people.listByActivity" method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.SearchRequest</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Request object to call the "plus.people.search" method.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ========== METHOD SUMMARY =========== -->
@@ -142,6 +158,23 @@ The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a person's profile.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#listByActivity(java.lang.String, com.google.api.gwt.services.plus.shared.Plus.PeopleContext.ListByActivityRequest.Collection)">listByActivity</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;activityId,
+                             <A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest.Collection</A>&nbsp;collection)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List all of the people in the specified collection for a particular activity.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.SearchRequest</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#search()">search</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search all public profiles.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_com.google.web.bindery.requestfactory.shared.RequestContext"><!-- --></A>
@@ -166,10 +199,45 @@ The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google
 </TR>
 </TABLE>
 
+<A NAME="listByActivity(java.lang.String, com.google.api.gwt.services.plus.shared.Plus.PeopleContext.ListByActivityRequest.Collection)"><!-- --></A><H3>
+listByActivity</H3>
+<PRE>
+<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#line.259"><B>listByActivity</B></A>(<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="activityId")</FONT>
+                                                        <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;activityId,
+                                                        <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="collection")</FONT>
+                                                        <A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest.Collection</A>&nbsp;collection)</PRE>
+<DL>
+<DD>List all of the people in the specified collection for a particular activity.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>activityId</CODE> - The ID of the activity to get the list of people for.<DD><CODE>collection</CODE> - The collection of people to list.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="search()"><!-- --></A><H3>
+search</H3>
+<PRE>
+<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.SearchRequest</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#line.303"><B>search</B></A>()</PRE>
+<DL>
+<DD>Search all public profiles.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="get(java.lang.String)"><!-- --></A><H3>
 get</H3>
 <PRE>
-<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.GetRequest</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#line.159"><B>get</B></A>(<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="userId")</FONT>
+<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.GetRequest</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html#line.336"><B>get</B></A>(<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="userId")</FONT>
                                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;userId)</PRE>
 <DL>
 <DD>Get a person's profile.
@@ -212,7 +280,7 @@ get</H3>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../../index.html?com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" target="_top"><B>FRAMES</B></A>  &nbsp;

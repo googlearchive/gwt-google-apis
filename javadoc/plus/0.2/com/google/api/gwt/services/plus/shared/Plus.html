@@ -95,19 +95,19 @@ Interface Plus</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public interface <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.50"><B>Plus</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestFactory.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">RequestFactory</A></DL>
+<DT><PRE>public interface <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.44"><B>Plus</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestFactory.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">RequestFactory</A></DL>
 </PRE>
 
 <P>
 Service definition for Plus (v1).
 
  <p>
- Google+ API
+ The Google+ API enables developers to build on top of the Google+ platform.
  </p>
 
  <p>
  For more information about this service, see the
- <a href="" target="_blank">API Documentation</a>
+ <a href="http://developers.google.com/+/api/" target="_blank">API Documentation</a>
  </p>
 <P>
 
@@ -134,6 +134,14 @@ Service definition for Plus (v1).
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "activities" collection.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "comments" collection.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -189,6 +197,14 @@ Service definition for Plus (v1).
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.html#comments()">comments</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <CODE>#CommentsContext</CODE> context.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.html#people()">people</A></B>()</CODE>
 
@@ -221,9 +237,25 @@ Service definition for Plus (v1).
 <A NAME="activities()"><!-- --></A><H3>
 activities</H3>
 <PRE>
-<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.73"><B>activities</B></A>()</PRE>
+<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.64"><B>activities</B></A>()</PRE>
 <DL>
 <DD>Returns the <CODE>#ActivitiesContext</CODE> context.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="comments()"><!-- --></A><H3>
+comments</H3>
+<PRE>
+<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.184"><B>comments</B></A>()</PRE>
+<DL>
+<DD>Returns the <CODE>#CommentsContext</CODE> context.
 <P>
 <DD><DL>
 </DL>
@@ -237,7 +269,7 @@ activities</H3>
 <A NAME="people()"><!-- --></A><H3>
 people</H3>
 <PRE>
-<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.145"><B>people</B></A>()</PRE>
+<A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext</A> <A HREF="../../../../../../../src-html/com/google/api/gwt/services/plus/shared/Plus.html#line.244"><B>people</B></A>()</PRE>
 <DL>
 <DD>Returns the <CODE>#PeopleContext</CODE> context.
 <P>

@@ -110,12 +110,36 @@ Support classes to facilitate interaction with v1 of the plus service.
 <TD>Request object to call the "plus.activities.list" method.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest</A></B></TD>
+<TD>Request object to call the "plus.activities.search" method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext</A></B></TD>
+<TD>The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "comments" collection.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext.GetRequest</A></B></TD>
+<TD>Request object to call the "plus.comments.get" method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.CommentsContext.ListRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.CommentsContext.ListRequest</A></B></TD>
+<TD>Request object to call the "plus.comments.list" method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext</A></B></TD>
 <TD>The <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/RequestContext.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared"><CODE>RequestContext</CODE></A> used to call methods on the "people" collection.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.GetRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.GetRequest</A></B></TD>
 <TD>Request object to call the "plus.people.get" method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest</A></B></TD>
+<TD>Request object to call the "plus.people.listByActivity" method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.SearchRequest.html" title="interface in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.SearchRequest</A></B></TD>
+<TD>Request object to call the "plus.people.search" method.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -130,6 +154,14 @@ Support classes to facilitate interaction with v1 of the plus service.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.ListRequest.Collection</A></B></TD>
 <TD>Possible values for <A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.ListRequest.html#setCollection(com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.ListRequest.Collection)"><CODE>Plus.ActivitiesContext.ListRequest.setCollection(Collection)</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.OrderBy.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.ActivitiesContext.SearchRequest.OrderBy</A></B></TD>
+<TD>Possible values for <A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.ActivitiesContext.SearchRequest.html#setOrderBy(com.google.api.gwt.services.plus.shared.Plus.ActivitiesContext.SearchRequest.OrderBy)"><CODE>Plus.ActivitiesContext.SearchRequest.setOrderBy(OrderBy)</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.Collection.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.PeopleContext.ListByActivityRequest.Collection</A></B></TD>
+<TD>Possible values for <A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PeopleContext.ListByActivityRequest.html#setCollection(com.google.api.gwt.services.plus.shared.Plus.PeopleContext.ListByActivityRequest.Collection)"><CODE>Plus.PeopleContext.ListByActivityRequest.setCollection(Collection)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../../../../com/google/api/gwt/services/plus/shared/Plus.PlusAuthScope.html" title="enum in com.google.api.gwt.services.plus.shared">Plus.PlusAuthScope</A></B></TD>
@@ -147,7 +179,7 @@ Package com.google.api.gwt.services.plus.shared Description
 Support classes to facilitate interaction with v1 of the plus service.
 
  <p>
- Google+ API
+ The Google+ API enables developers to build on top of the Google+ platform.
  </p>
 
  <p>
@@ -156,7 +188,7 @@ Support classes to facilitate interaction with v1 of the plus service.
 
  <p>
  For more information about this service, see the
- <a href="" target="_blank">API Documentation</a>
+ <a href="http://developers.google.com/+/api/" target="_blank">API Documentation</a>
  </p>
 <P>
 

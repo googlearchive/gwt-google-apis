@@ -95,7 +95,7 @@ Interface ActivityObjectReplies</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public interface <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.35"><B>ActivityObjectReplies</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DL>
+<DT><PRE>public interface <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.37"><B>ActivityObjectReplies</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DL>
 </PRE>
 
 <P>
@@ -125,6 +125,14 @@ Model definition for Plus.ActivityObjectReplies.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#getSelfLink()">getSelfLink</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The URL for the collection of comments in reply to this activity.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang">Long</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#getTotalItems()">getTotalItems</A></B>()</CODE>
 
@@ -134,7 +142,15 @@ Model definition for Plus.ActivityObjectReplies.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#setTotalItems(java.lang.Long)">setTotalItems</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang">Long</A>&nbsp;TotalItems)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#setSelfLink(java.lang.String)">setSelfLink</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;selfLink)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#setTotalItems(java.lang.Long)">setTotalItems</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang">Long</A>&nbsp;totalItems)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -157,7 +173,7 @@ Model definition for Plus.ActivityObjectReplies.
 getTotalItems</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="totalItems")
-</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang">Long</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.39"><B>getTotalItems</B></A>()</PRE>
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang">Long</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.41"><B>getTotalItems</B></A>()</PRE>
 <DL>
 <DD>Total number of comments on this activity.
 <P>
@@ -174,7 +190,39 @@ getTotalItems</H3>
 setTotalItems</H3>
 <PRE>
 <FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="totalItems")
-</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.42"><B>setTotalItems</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang">Long</A>&nbsp;TotalItems)</PRE>
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.44"><B>setTotalItems</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang">Long</A>&nbsp;totalItems)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSelfLink()"><!-- --></A><H3>
+getSelfLink</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="selfLink")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.48"><B>getSelfLink</B></A>()</PRE>
+<DL>
+<DD>The URL for the collection of comments in reply to this activity.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSelfLink(java.lang.String)"><!-- --></A><H3>
+setSelfLink</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="selfLink")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/plus/shared/model/ActivityObjectReplies.html#line.51"><B>setSelfLink</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;selfLink)</PRE>
 <DL>
 <DD><DL>
 </DL>
