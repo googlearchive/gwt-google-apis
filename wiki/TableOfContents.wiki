@@ -34,9 +34,9 @@
      * [AJAXSearchFAQ FAQs]
    * Gears
      * [GearsGettingStarted Getting Started]
-	* [GearsGettingStartedDatabase Using the Gears Database]
-	* [GearsGettingStartedOffline Using Gears Offline]
-	* [GearsGettingStartedWorkerPool Using Gears WorkerPool]
+        * [GearsGettingStartedDatabase Using the Gears Database]
+        * [GearsGettingStartedOffline Using Gears Offline]
+        * [GearsGettingStartedWorkerPool Using Gears WorkerPool]
      * [GearsJavadoc API Reference]
      * [GearsSampleApplications Sample Applications]
      * [GearsReleaseNotes Release Notes]
