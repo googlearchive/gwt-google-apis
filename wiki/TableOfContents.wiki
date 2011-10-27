@@ -1,33 +1,5 @@
 ﻿#summary Table of Contents for the Google API Libraries for Google Web Toolkit
  * [Overview Google API Libraries Overview]
- * Search
-   * [AJAXSearchGettingStarted Getting Started]
-   * [AJAXSearchJavadoc API Reference]
-   * [AJAXSearchSampleApplications Sample Applications]
-   * [AJAXSearchReleaseNotes Release Notes]
-   * [AJAXSearchFAQ FAQs]
- * Gadgets
-   * [GadgetsGettingStarted Getting Started]
-   * [GadgetsJavadoc API Reference]
-   * [GadgetsSampleApplications Sample Applications]
-   * [GadgetsReleaseNotes Release Notes]
-   * [GadgetsFAQ FAQs]
- * Gears
-   * [GearsGettingStarted Getting Started]
-      * [GearsGettingStartedDatabase Using the Gears Database]
-      * [GearsGettingStartedOffline Using Gears Offline]
-      * [GearsGettingStartedWorkerPool Using Gears WorkerPool]
-   * [GearsJavadoc API Reference]
-   * [GearsSampleApplications Sample Applications]
-   * [GearsReleaseNotes Release Notes]
-   * [GearsFAQ FAQs]
- * Maps
-   * [MapsGettingStarted GettingStarted]
-   * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
-   * [MapsSampleApplications Sample Applications]
-   * [MapsJavadoc API Reference]
-   * [MapsReleaseNotes Release Notes]
-   * [MapsFAQ FAQs]
  * Chart Tools
    * [VisualizationGettingStarted Getting Started]
    * Chart Tools Developers Guide
@@ -38,12 +10,12 @@
    * [VisualizationSampleApplications Sample Applications]
    * [VisualizationReleaseNotes Release Notes]
    * [VisualizationFAQ FAQs]
- * Language
-   * [LanguageGettingStarted Getting Started]
-   * [LanguageJavadoc API Reference] 
-   * [LanguageSampleApplications Sample Applications]
-   * [LanguageReleaseNotes Release Notes]
-   * [LanguageFAQ FAQs]
+ * Gadgets
+   * [GadgetsGettingStarted Getting Started]
+   * [GadgetsJavadoc API Reference]
+   * [GadgetsSampleApplications Sample Applications]
+   * [GadgetsReleaseNotes Release Notes]
+   * [GadgetsFAQ FAQs]
  * !AjaxLoader
    * [AjaxLoaderGettingStarted Getting Started]
    * [AjaxLoaderJavadoc API Reference] 
@@ -53,6 +25,35 @@
  * New Google APIs (incl. Google+ API)
    * [GoogleAPIsGettingStarted Getting Started]
    * [GoogleAPIsSamples Sample Applications and API Reference]
+ * Deprecated Google APIs
+   * Search
+     * [AJAXSearchGettingStarted Getting Started]
+     * [AJAXSearchJavadoc API Reference]
+     * [AJAXSearchSampleApplications Sample Applications]
+     * [AJAXSearchReleaseNotes Release Notes]
+     * [AJAXSearchFAQ FAQs]
+   * Gears
+     * [GearsGettingStarted Getting Started]
+	* [GearsGettingStartedDatabase Using the Gears Database]
+	* [GearsGettingStartedOffline Using Gears Offline]
+	* [GearsGettingStartedWorkerPool Using Gears WorkerPool]
+     * [GearsJavadoc API Reference]
+     * [GearsSampleApplications Sample Applications]
+     * [GearsReleaseNotes Release Notes]
+     * [GearsFAQ FAQs]
+   * Maps
+     * [MapsGettingStarted GettingStarted]
+     * [MapsDifferences Differences between the Maps JavaScript API and the GWT Wrappers]
+     * [MapsSampleApplications Sample Applications]
+     * [MapsJavadoc API Reference]
+     * [MapsReleaseNotes Release Notes]
+     * [MapsFAQ FAQs]
+   * Language
+     * [LanguageGettingStarted Getting Started]
+     * [LanguageJavadoc API Reference] 
+     * [LanguageSampleApplications Sample Applications]
+     * [LanguageReleaseNotes Release Notes]
+     * [LanguageFAQ FAQs]
  * [MakingGALGWTBetter Making Google API Libraries Better]
    * [APIDesignGoals Design Goal of API bindings]
    * [DesigningAPIWrappers Design Considerations]
