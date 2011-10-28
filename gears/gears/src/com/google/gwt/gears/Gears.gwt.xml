@@ -15,10 +15,6 @@
  - the License.
 -->
 <module>
-  <!-- This linker adds the contents of gears_init.js into each permutation. -->
-  <define-linker name="gears" class="com.google.gwt.gears.linker.GearsLinker"/>
-  <add-linker name="gears" />  
-
   <!-- Define a property which answers true if Gears is installed -->
   <define-property name="gears.installed" values="false,true"/>
   <!-- Property provider which answers true if Gears is installed -->
@@ -42,4 +38,8 @@
 
   return "false";
   ]]></property-provider>
+  <!--
+    Gears' required JavaScript initialization code.
+  -->
+  <script src="gears_init.js"/>
 </module>
