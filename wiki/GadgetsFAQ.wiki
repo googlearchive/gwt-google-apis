@@ -31,6 +31,7 @@ Then, on the server side of the connection, there is a second problem to address
   }
 }}}
 
+
 For a gadget, override this method in your implementation of `RemoteServiceServlet` and implement it as:
 
 {{{
@@ -41,6 +42,7 @@ For a gadget, override this method in your implementation of `RemoteServiceServl
   }
 }}}
 
+See also [http://code.google.com/p/gwt-google-apis/issues/detail?id=443 issue 443].
 
 The [http://code.google.com/p/gwt-google-apis/source/browse/#svn/trunk/gadgets/samples/gadgetrpc/src/com/google/gwt/gadgets/sample/gadgetrpc Gadget RPC example] demonstrates how to follow described steps to use GWT RPC in the Gadgets container.
 
