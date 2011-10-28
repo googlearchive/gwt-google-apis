@@ -42,10 +42,15 @@ public class GadgetRPCServlet extends RemoteServiceServlet implements
 
   /**
    * Do not validate HTTP headers - iGoogle munges them.
+   *  application/x-www-form-urlencoded
    */
   @Override
-  protected String readContent(HttpServletRequest request)
-      throws ServletException, IOException {
-    return RPCServletUtils.readContentAsUtf8(request, false);
+  public String readContent(HttpServletRequest request) throws ServletException, IOException {
+    return RPCServletUtils.readContent(request, "application/x-www-form-urlencoded", null);
+  }
+  
+  @Override
+  protected void checkPermutationStrongName() throws SecurityException {
+   // do nothing - skip this for now - XSFR block
   }
 }
