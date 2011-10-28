@@ -34,18 +34,6 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 
 ----
 
-===Release Candidates===
-
-   * [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-ajaxloader-1.1.1-rc1.zip Ajax Loader 1.1.1 rc1]
-   * [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-gadgets-1.2.1-rc1.zip Gadgets 1.2.1 rc1]
-   * [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-gears-1.3.1-rc1.zip Gears 1.3.1 rc2]
-   * [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-language-1.1.1-rc1.zip Language 1.1.1 rc1]
-   * [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-maps-1.1.1-rc1.zip Maps 1.1.1 rc1]
-   * [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-search-1.1.1-rc1.zip Search 1.1.1 rc1]
-   * [http://code.google.com/p/gwt-google-apis/downloads/detail?name=gwt-visualization-1.1.2-rc2.zip Visualizaiton 1.1.2 rc2]
-
-----
-
 ===Milestone Builds===
 The following libraries are under active development and available as milestone builds. 
 
