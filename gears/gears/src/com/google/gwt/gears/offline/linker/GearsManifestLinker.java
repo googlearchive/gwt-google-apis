@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.util.tools.Utility;
+import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -140,7 +141,7 @@ public final class GearsManifestLinker extends AbstractLinker {
     // Generate the manifest entries
     String entries = generateEntries(logger, context, filters, artifacts);
 
-    replaceAll(out, "__VERSION__", Utility.toHexString(digester.digest()));
+    replaceAll(out, "__VERSION__", StringUtils.toHexString(digester.digest()));
     replaceAll(out, "__ENTRIES__", entries.toString());
 
     /*
