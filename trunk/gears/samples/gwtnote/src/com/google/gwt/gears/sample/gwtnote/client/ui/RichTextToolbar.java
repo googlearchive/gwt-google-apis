@@ -16,14 +16,16 @@
 package com.google.gwt.gears.sample.gwtnote.client.ui;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.user.client.ui.ImageBundle.Resource;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PushButton;
@@ -45,138 +47,61 @@ public class RichTextToolbar extends Composite {
    * bundle allows all of these images to be packed into a single image, which
    * saves a lot of HTTP requests, drastically improving startup time.
    */
-  public interface Images extends ImageBundle {
+  public interface Images extends ClientBundle {
 
-    @Resource("bold.gif")
-    AbstractImagePrototype bold();
+    @Source("bold.gif")
+    ImageResource bold();
 
-    @Resource("createLink.gif")
-    AbstractImagePrototype createLink();
+    @Source("createLink.gif")
+    ImageResource createLink();
 
-    @Resource("hr.gif")
-    AbstractImagePrototype hr();
+    @Source("hr.gif")
+    ImageResource hr();
 
-    @Resource("indent.gif")
-    AbstractImagePrototype indent();
+    @Source("indent.gif")
+    ImageResource indent();
 
-    @Resource("insertImage.gif")
-    AbstractImagePrototype insertImage();
+    @Source("insertImage.gif")
+    ImageResource insertImage();
 
-    @Resource("italic.gif")
-    AbstractImagePrototype italic();
+    @Source("italic.gif")
+    ImageResource italic();
 
-    @Resource("justifyCenter.gif")
-    AbstractImagePrototype justifyCenter();
+    @Source("justifyCenter.gif")
+    ImageResource justifyCenter();
 
-    @Resource("justifyLeft.gif")
-    AbstractImagePrototype justifyLeft();
+    @Source("justifyLeft.gif")
+    ImageResource justifyLeft();
 
-    @Resource("justifyRight.gif")
-    AbstractImagePrototype justifyRight();
+    @Source("justifyRight.gif")
+    ImageResource justifyRight();
 
-    @Resource("ol.gif")
-    AbstractImagePrototype ol();
+    @Source("ol.gif")
+    ImageResource ol();
 
-    @Resource("outdent.gif")
-    AbstractImagePrototype outdent();
+    @Source("outdent.gif")
+    ImageResource outdent();
 
-    @Resource("removeFormat.gif")
-    AbstractImagePrototype removeFormat();
+    @Source("removeFormat.gif")
+    ImageResource removeFormat();
 
-    @Resource("removeLink.gif")
-    AbstractImagePrototype removeLink();
+    @Source("removeLink.gif")
+    ImageResource removeLink();
 
-    @Resource("strikeThrough.gif")
-    AbstractImagePrototype strikeThrough();
+    @Source("strikeThrough.gif")
+    ImageResource strikeThrough();
 
-    @Resource("subscript.gif")
-    AbstractImagePrototype subscript();
+    @Source("subscript.gif")
+    ImageResource subscript();
 
-    @Resource("superscript.gif")
-    AbstractImagePrototype superscript();
+    @Source("superscript.gif")
+    ImageResource superscript();
 
-    @Resource("ul.gif")
-    AbstractImagePrototype ul();
+    @Source("ul.gif")
+    ImageResource ul();
 
-    @Resource("underline.gif")
-    AbstractImagePrototype underline();
-  }
-
-  /**
-   * This {@link Constants} interface is used to make the toolbar's strings
-   * internationalizable.
-   */
-  public interface Strings extends Constants {
-
-    String black();
-
-    String blue();
-
-    String bold();
-
-    String color();
-
-    String createLink();
-
-    String font();
-
-    String green();
-
-    String hr();
-
-    String indent();
-
-    String insertImage();
-
-    String italic();
-
-    String justifyCenter();
-
-    String justifyLeft();
-
-    String justifyRight();
-
-    String large();
-
-    String medium();
-
-    String normal();
-
-    String ol();
-
-    String outdent();
-
-    String red();
-
-    String removeFormat();
-
-    String removeLink();
-
-    String size();
-
-    String small();
-
-    String strikeThrough();
-
-    String subscript();
-
-    String superscript();
-
-    String ul();
-
-    String underline();
-
-    String white();
-
-    String xlarge();
-
-    String xsmall();
-
-    String xxlarge();
-
-    String xxsmall();
-
-    String yellow();
+    @Source("underline.gif")
+    ImageResource underline();
   }
 
   /**
@@ -280,7 +205,7 @@ public class RichTextToolbar extends Composite {
       RichTextArea.FontSize.XX_LARGE};
 
   private Images images = GWT.create(Images.class);
-  private Strings strings = GWT.create(Strings.class);
+  private RichTextToolbarStrings strings = GWT.create(RichTextToolbarStrings.class);
   private EventListener listener = new EventListener();
 
   private RichTextArea richText;
@@ -427,15 +352,15 @@ public class RichTextToolbar extends Composite {
     return lb;
   }
 
-  private PushButton createPushButton(AbstractImagePrototype img, String tip) {
-    PushButton pb = new PushButton(img.createImage());
+  private PushButton createPushButton(ImageResource img, String tip) {
+    PushButton pb = new PushButton(new Image(img));
     pb.addClickListener(listener);
     pb.setTitle(tip);
     return pb;
   }
 
-  private ToggleButton createToggleButton(AbstractImagePrototype img, String tip) {
-    ToggleButton tb = new ToggleButton(img.createImage());
+  private ToggleButton createToggleButton(ImageResource img, String tip) {
+    ToggleButton tb = new ToggleButton(new Image(img));
     tb.addClickListener(listener);
     tb.setTitle(tip);
     return tb;
