@@ -15,12 +15,6 @@ Lets you search for books and manage your Google Books library.
 || [http://code.google.com/apis/books Documentation] | [http://www.google.com/support/forum/p/booksearch-apis/label?lid=2b7bff1f1cd4a476 Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/books/0.2/index.html API Reference] ||
 || No samples yet. ||
 
-= Google Buzz API =
-Lets you share updates, photos, videos, and more with your friends around the world
-
-|| [http://code.google.com/apis/buzz/docs Documentation] | [http://code.google.com/apis/buzz/forum.html Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/buzz/0.2/index.html API Reference] ||
-|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/buzz/demo/BuzzSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Fbranches%2Fgoogleapis%2Fsamples%2Fbuzz%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Fbuzz Code] ||
-
 = Google APIs Discovery Service =
 Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API
 
