@@ -17,9 +17,6 @@ These APIs require [http://code.google.com/webtoolkit/download.html GWT 2.0.3] o
 *Google Books API Library 0.2-alpha*
   * [http://gwt-google-apis.googlecode.com/files/gwt-books-v1-0.2-alpha.jar gwt-books-v1-0.2-alpha.jar]
 
-*Google Buzz API Library 0.2-alpha*
-  * [http://gwt-google-apis.googlecode.com/files/gwt-buzz-v1-0.2-alpha.jar gwt-buzz-v1-0.2-alpha.jar]
-
 *Google APIs Discovery Service Library 0.2-alpha*
   * [http://gwt-google-apis.googlecode.com/files/gwt-discovery-v1-0.2-alpha.jar gwt-discovery-v1-0.2-alpha.jar]
 
