@@ -1,9 +1,0 @@
-<module>
-  <inherits name="com.google.gwt.user.User" />
-  <inherits name="com.google.api.gwt.services.Buzz" />
-
-  <entry-point class="com.google.api.gwt.samples.buzz.client.BuzzModule" />
-
-  <source path="client" />
-  <source path="shared" />
-</module>
