@@ -135,7 +135,7 @@ The JavaScript API isn't very clear about this, but when using a custom icon you
 
 Also see the [http://code.google.com/p/gwt-google-apis/source/browse/trunk/maps/samples/hellomaps/src/com/google/gwt/maps/sample/hellomaps/client/IconDemo.java source code] from the HelloMaps demo.
 
-== Can I load the Map over `https` using AjaxLoader with `base_domain` parameter set? ==
+== Can I load the Map over `https` using `AjaxLoader` with `base_domain` parameter set? ==
 It is not possible to load the Maps over SSL using the `AjaxLoader` with `base_domain` parameter set. This will, however, not affect the application performance because API requests are always handled by the optimal Maps server.
 
 The only purpose of `base_domain` parameter is to bias geocoding results. If you need that functionality, you can force the same behaviour in your application by using `com.google.gwt.maps.client.geocode.Geocoder` class with 
