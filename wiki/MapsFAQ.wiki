@@ -73,17 +73,20 @@ If you are not sure which hostname/port combination to use in order to register 
 
 ==How do I use the Google Maps API for GWT with a Maps  API Premier client ID? ==
 
-Maps API Premier users can use `AjaxLoaderOptions` to set the client ID.  This will also bypass the need for an API key:
+Maps API Premier users can use `AjaxLoaderOptions` to set the client ID.  This will also bypass the need for an API key. For example:
 
 {{{
   AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
-  options.setOtherParms("client=gme-yourclientid");
+  options.setOtherParms("client=gme-yourclientid&sensor=false");
   Maps.loadMapsApi("notsupplied", "2", false, options, new Runnable() {
     public void run() {
       buildUi();
     }
   });
 }}}
+
+Please remember to adjust the sensor parameter accordingly.
+
 == Why can't I use Maps API data types in a servlet? ==
 
 The gwt-maps API is a set of wrappers for a JavaScript API that runs in a web browser.  Unfortunately, you cannot use these APIs in server side code.
