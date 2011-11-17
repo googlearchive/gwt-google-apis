@@ -15,6 +15,12 @@ Lets you search for books and manage your Google Books library.
 || [http://code.google.com/apis/books Documentation] | [http://www.google.com/support/forum/p/booksearch-apis/label?lid=2b7bff1f1cd4a476 Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/books/0.2/index.html API Reference] ||
 || No samples yet. ||
 
+= Google Calendar API (v3) =
+Lets you view and manage your events in Google Calendar
+
+|| Documentation | Help Forum | [http://gwt-google-apis.googlecode.com/svn/javadoc/calendar/0.2/index.html API Reference] ||
+|| *Sample coming soon!* ||
+
 = Google APIs Discovery Service =
 Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API
 
