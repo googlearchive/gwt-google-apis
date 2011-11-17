@@ -1,0 +1,1756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+Event (Google API Client Library for GWT - calendar v3)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Event (Google API Client Library for GWT - calendar v3)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Event.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Error.html" title="interface in com.google.api.gwt.services.calendar.shared.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventAttendee.html" title="interface in com.google.api.gwt.services.calendar.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../../index.html?com/google/api/gwt/services/calendar/shared/model/Event.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Event.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+com.google.api.gwt.services.calendar.shared.model</FONT>
+<BR>
+Interface Event</H2>
+<DL>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/BaseProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">BaseProxy</A>, <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.35"><B>Event</B></A><DT>extends <A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/requestfactory/shared/ValueProxy.html?is-external=true" title="class or interface in com.google.web.bindery.requestfactory.shared">ValueProxy</A></DL>
+</PRE>
+
+<P>
+Model definition for Calendar.Event.
+
+ This class models an object which will be transmitted to or from the Calendar service.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Google, Inc.</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getAnyoneCanAddSelf()">getAnyoneCanAddSelf</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether anyone can invite themselves to the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventAttendee.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventAttendee</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getAttendees()">getAttendees</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The attendees of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getAttendeesOmitted()">getAttendeesOmitted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether attendees have been omitted from the event's representation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getColorId()">getColorId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The color of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getCreated()">getCreated</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creation time of the event (as a RFC 3339 timestamp).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventCreator.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventCreator</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getCreator()">getCreator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The creator of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getDescription()">getDescription</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Description of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getEnd()">getEnd</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The end time of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getEtag()">getEtag</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETag of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventExtendedProperties.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventExtendedProperties</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getExtendedProperties()">getExtendedProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended properties of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventGadget.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventGadget</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getGadget()">getGadget</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A gadget that extends this event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getGuestsCanInviteOthers()">getGuestsCanInviteOthers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether attendees other than the organizer can invite others to the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getGuestsCanModify()">getGuestsCanModify</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether attendees other than the organizer can modify the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getGuestsCanSeeOtherGuests()">getGuestsCanSeeOtherGuests</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether attendees other than the organizer can see who the event's attendees are.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getHtmlLink()">getHtmlLink</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An absolute link to this event in the Google Calendar Web UI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getICalUID()">getICalUID</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event ID in the iCalendar format.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getId()">getId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Identifier of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getKind()">getKind</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type of the resource ("calendar#event").</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getLocation()">getLocation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Geographic location of the event as free-form text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventOrganizer.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventOrganizer</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getOrganizer()">getOrganizer</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The organizer of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getOriginalStartTime()">getOriginalStartTime</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For an instance of a recurring event, this is the time at which this event would start according
+ to the recurrence data in the recurring event identified by recurringEventId.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getPrivateCopy()">getPrivateCopy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether this is a private event copy where changes are not shared with other copies on other
+ calendars.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getRecurrence()">getRecurrence</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getRecurringEventId()">getRecurringEventId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For an instance of a recurring event, this is the event ID of the recurring event itself.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventReminders.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventReminders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getReminders()">getReminders</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Information about the event's reminders for the authenticated user.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getSequence()">getSequence</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sequence number as per iCalendar.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getStart()">getStart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The start time of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getStatus()">getStatus</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getSummary()">getSummary</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getTransparency()">getTransparency</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the event blocks time on the calendar.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getUpdated()">getUpdated</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last modification time of the event (as a RFC 3339 timestamp).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#getVisibility()">getVisibility</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visibility of the event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setAnyoneCanAddSelf(java.lang.Boolean)">setAnyoneCanAddSelf</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;anyoneCanAddSelf)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setAttendees(java.util.List)">setAttendees</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventAttendee.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventAttendee</A>&gt;&nbsp;attendees)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setAttendeesOmitted(java.lang.Boolean)">setAttendeesOmitted</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;attendeesOmitted)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setColorId(java.lang.String)">setColorId</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;colorId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setCreated(java.lang.String)">setCreated</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;created)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setCreator(com.google.api.gwt.services.calendar.shared.model.EventCreator)">setCreator</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventCreator.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventCreator</A>&nbsp;creator)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setDescription(java.lang.String)">setDescription</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setEnd(com.google.api.gwt.services.calendar.shared.model.EventDateTime)">setEnd</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A>&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setEtag(java.lang.String)">setEtag</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;etag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setExtendedProperties(com.google.api.gwt.services.calendar.shared.model.EventExtendedProperties)">setExtendedProperties</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventExtendedProperties.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventExtendedProperties</A>&nbsp;extendedProperties)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setGadget(com.google.api.gwt.services.calendar.shared.model.EventGadget)">setGadget</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventGadget.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventGadget</A>&nbsp;gadget)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setGuestsCanInviteOthers(java.lang.Boolean)">setGuestsCanInviteOthers</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;guestsCanInviteOthers)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setGuestsCanModify(java.lang.Boolean)">setGuestsCanModify</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;guestsCanModify)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setGuestsCanSeeOtherGuests(java.lang.Boolean)">setGuestsCanSeeOtherGuests</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;guestsCanSeeOtherGuests)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setHtmlLink(java.lang.String)">setHtmlLink</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;htmlLink)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setICalUID(java.lang.String)">setICalUID</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;iCalUID)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setId(java.lang.String)">setId</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setKind(java.lang.String)">setKind</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;kind)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setLocation(java.lang.String)">setLocation</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;location)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setOrganizer(com.google.api.gwt.services.calendar.shared.model.EventOrganizer)">setOrganizer</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventOrganizer.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventOrganizer</A>&nbsp;organizer)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setOriginalStartTime(com.google.api.gwt.services.calendar.shared.model.EventDateTime)">setOriginalStartTime</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A>&nbsp;originalStartTime)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setPrivateCopy(java.lang.Boolean)">setPrivateCopy</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;privateCopy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setRecurrence(java.util.List)">setRecurrence</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;recurrence)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setRecurringEventId(java.lang.String)">setRecurringEventId</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;recurringEventId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setReminders(com.google.api.gwt.services.calendar.shared.model.EventReminders)">setReminders</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventReminders.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventReminders</A>&nbsp;reminders)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setSequence(java.lang.Integer)">setSequence</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A>&nbsp;sequence)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setStart(com.google.api.gwt.services.calendar.shared.model.EventDateTime)">setStart</A></B>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A>&nbsp;start)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setStatus(java.lang.String)">setStatus</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;status)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setSummary(java.lang.String)">setSummary</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;summary)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setTransparency(java.lang.String)">setTransparency</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;transparency)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setUpdated(java.lang.String)">setUpdated</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;updated)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Event.html#setVisibility(java.lang.String)">setVisibility</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;visibility)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCreator()"><!-- --></A><H3>
+getCreator</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="creator")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventCreator.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventCreator</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.39"><B>getCreator</B></A>()</PRE>
+<DL>
+<DD>The creator of the event. Read-only.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCreator(com.google.api.gwt.services.calendar.shared.model.EventCreator)"><!-- --></A><H3>
+setCreator</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="creator")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.42"><B>setCreator</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventCreator.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventCreator</A>&nbsp;creator)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOrganizer()"><!-- --></A><H3>
+getOrganizer</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="organizer")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventOrganizer.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventOrganizer</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.49"><B>getOrganizer</B></A>()</PRE>
+<DL>
+<DD>The organizer of the event. If the organizer is also an attendee, this is indicated with a
+ separate entry in 'attendees' with the 'organizer' field set to True.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setOrganizer(com.google.api.gwt.services.calendar.shared.model.EventOrganizer)"><!-- --></A><H3>
+setOrganizer</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="organizer")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.52"><B>setOrganizer</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventOrganizer.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventOrganizer</A>&nbsp;organizer)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getId()"><!-- --></A><H3>
+getId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="id")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.56"><B>getId</B></A>()</PRE>
+<DL>
+<DD>Identifier of the event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setId(java.lang.String)"><!-- --></A><H3>
+setId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="id")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.59"><B>setId</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAttendees()"><!-- --></A><H3>
+getAttendees</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="attendees")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventAttendee.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventAttendee</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.63"><B>getAttendees</B></A>()</PRE>
+<DL>
+<DD>The attendees of the event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAttendees(java.util.List)"><!-- --></A><H3>
+setAttendees</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="attendees")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.66"><B>setAttendees</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventAttendee.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventAttendee</A>&gt;&nbsp;attendees)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHtmlLink()"><!-- --></A><H3>
+getHtmlLink</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="htmlLink")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.70"><B>getHtmlLink</B></A>()</PRE>
+<DL>
+<DD>An absolute link to this event in the Google Calendar Web UI. Read-only.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHtmlLink(java.lang.String)"><!-- --></A><H3>
+setHtmlLink</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="htmlLink")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.73"><B>setHtmlLink</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;htmlLink)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRecurrence()"><!-- --></A><H3>
+getRecurrence</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="recurrence")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.80"><B>getRecurrence</B></A>()</PRE>
+<DL>
+<DD>List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event. This field is omitted for
+ single events or instances of recurring events.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRecurrence(java.util.List)"><!-- --></A><H3>
+setRecurrence</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="recurrence")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.83"><B>setRecurrence</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;recurrence)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStart()"><!-- --></A><H3>
+getStart</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="start")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.89"><B>getStart</B></A>()</PRE>
+<DL>
+<DD>The start time of the event. For a recurring event, this is the start time of the first instance.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStart(com.google.api.gwt.services.calendar.shared.model.EventDateTime)"><!-- --></A><H3>
+setStart</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="start")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.92"><B>setStart</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A>&nbsp;start)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEtag()"><!-- --></A><H3>
+getEtag</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="etag")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.96"><B>getEtag</B></A>()</PRE>
+<DL>
+<DD>ETag of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEtag(java.lang.String)"><!-- --></A><H3>
+setEtag</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="etag")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.99"><B>setEtag</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;etag)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLocation()"><!-- --></A><H3>
+getLocation</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="location")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.103"><B>getLocation</B></A>()</PRE>
+<DL>
+<DD>Geographic location of the event as free-form text. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLocation(java.lang.String)"><!-- --></A><H3>
+setLocation</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="location")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.106"><B>setLocation</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;location)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRecurringEventId()"><!-- --></A><H3>
+getRecurringEventId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="recurringEventId")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.113"><B>getRecurringEventId</B></A>()</PRE>
+<DL>
+<DD>For an instance of a recurring event, this is the event ID of the recurring event itself.
+ Immutable.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRecurringEventId(java.lang.String)"><!-- --></A><H3>
+setRecurringEventId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="recurringEventId")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.116"><B>setRecurringEventId</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;recurringEventId)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOriginalStartTime()"><!-- --></A><H3>
+getOriginalStartTime</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="originalStartTime")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.123"><B>getOriginalStartTime</B></A>()</PRE>
+<DL>
+<DD>For an instance of a recurring event, this is the time at which this event would start according
+ to the recurrence data in the recurring event identified by recurringEventId. Immutable.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setOriginalStartTime(com.google.api.gwt.services.calendar.shared.model.EventDateTime)"><!-- --></A><H3>
+setOriginalStartTime</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="originalStartTime")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.126"><B>setOriginalStartTime</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A>&nbsp;originalStartTime)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStatus()"><!-- --></A><H3>
+getStatus</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="status")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.134"><B>getStatus</B></A>()</PRE>
+<DL>
+<DD>Status of the event. Optional. Possible values are: - "confirmed" - The event is confirmed. This
+ is the default status. - "tentative" - The event is tentatively confirmed. - "cancelled" - The
+ event is cancelled.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStatus(java.lang.String)"><!-- --></A><H3>
+setStatus</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="status")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.137"><B>setStatus</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;status)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUpdated()"><!-- --></A><H3>
+getUpdated</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="updated")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.141"><B>getUpdated</B></A>()</PRE>
+<DL>
+<DD>Last modification time of the event (as a RFC 3339 timestamp). Read-only.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUpdated(java.lang.String)"><!-- --></A><H3>
+setUpdated</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="updated")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.144"><B>setUpdated</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;updated)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGadget()"><!-- --></A><H3>
+getGadget</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="gadget")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventGadget.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventGadget</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.148"><B>getGadget</B></A>()</PRE>
+<DL>
+<DD>A gadget that extends this event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setGadget(com.google.api.gwt.services.calendar.shared.model.EventGadget)"><!-- --></A><H3>
+setGadget</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="gadget")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.151"><B>setGadget</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventGadget.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventGadget</A>&nbsp;gadget)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescription()"><!-- --></A><H3>
+getDescription</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="description")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.155"><B>getDescription</B></A>()</PRE>
+<DL>
+<DD>Description of the event. Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDescription(java.lang.String)"><!-- --></A><H3>
+setDescription</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="description")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.158"><B>setDescription</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getICalUID()"><!-- --></A><H3>
+getICalUID</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="iCalUID")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.162"><B>getICalUID</B></A>()</PRE>
+<DL>
+<DD>Event ID in the iCalendar format.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setICalUID(java.lang.String)"><!-- --></A><H3>
+setICalUID</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="iCalUID")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.165"><B>setICalUID</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;iCalUID)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExtendedProperties()"><!-- --></A><H3>
+getExtendedProperties</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="extendedProperties")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventExtendedProperties.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventExtendedProperties</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.169"><B>getExtendedProperties</B></A>()</PRE>
+<DL>
+<DD>Extended properties of the event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setExtendedProperties(com.google.api.gwt.services.calendar.shared.model.EventExtendedProperties)"><!-- --></A><H3>
+setExtendedProperties</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="extendedProperties")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.172"><B>setExtendedProperties</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventExtendedProperties.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventExtendedProperties</A>&nbsp;extendedProperties)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSequence()"><!-- --></A><H3>
+getSequence</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="sequence")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.176"><B>getSequence</B></A>()</PRE>
+<DL>
+<DD>Sequence number as per iCalendar.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSequence(java.lang.Integer)"><!-- --></A><H3>
+setSequence</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="sequence")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.179"><B>setSequence</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A>&nbsp;sequence)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVisibility()"><!-- --></A><H3>
+getVisibility</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="visibility")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.189"><B>getVisibility</B></A>()</PRE>
+<DL>
+<DD>Visibility of the event. Optional. Possible values are: - "default" - Uses the default visibility
+ for events on the calendar. This is the default value. - "public" - The event is public and event
+ details are visible to all readers of the calendar. - "private" - The event is private and only
+ event attendees may view event details. - "confidential" - The event is private. This value is
+ provided for compatibility reasons.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVisibility(java.lang.String)"><!-- --></A><H3>
+setVisibility</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="visibility")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.192"><B>setVisibility</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;visibility)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGuestsCanModify()"><!-- --></A><H3>
+getGuestsCanModify</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="guestsCanModify")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.198"><B>getGuestsCanModify</B></A>()</PRE>
+<DL>
+<DD>Whether attendees other than the organizer can modify the event. Optional. The default is False.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setGuestsCanModify(java.lang.Boolean)"><!-- --></A><H3>
+setGuestsCanModify</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="guestsCanModify")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.201"><B>setGuestsCanModify</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;guestsCanModify)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnd()"><!-- --></A><H3>
+getEnd</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="end")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.207"><B>getEnd</B></A>()</PRE>
+<DL>
+<DD>The end time of the event. For a recurring event, this is the end time of the first instance.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEnd(com.google.api.gwt.services.calendar.shared.model.EventDateTime)"><!-- --></A><H3>
+setEnd</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="end")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.210"><B>setEnd</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventDateTime.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventDateTime</A>&nbsp;end)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAttendeesOmitted()"><!-- --></A><H3>
+getAttendeesOmitted</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="attendeesOmitted")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.219"><B>getAttendeesOmitted</B></A>()</PRE>
+<DL>
+<DD>Whether attendees have been omitted from the event's representation. When retrieving an event,
+ this is due to a restriction specified by the 'maxAttendee' query parameter. When updating an
+ event, this can be used to only update the participant's response. Optional. The default is
+ False.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAttendeesOmitted(java.lang.Boolean)"><!-- --></A><H3>
+setAttendeesOmitted</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="attendeesOmitted")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.222"><B>setAttendeesOmitted</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;attendeesOmitted)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKind()"><!-- --></A><H3>
+getKind</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="kind")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.226"><B>getKind</B></A>()</PRE>
+<DL>
+<DD>Type of the resource ("calendar#event").
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKind(java.lang.String)"><!-- --></A><H3>
+setKind</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="kind")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.229"><B>setKind</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;kind)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCreated()"><!-- --></A><H3>
+getCreated</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="created")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.233"><B>getCreated</B></A>()</PRE>
+<DL>
+<DD>Creation time of the event (as a RFC 3339 timestamp). Read-only.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCreated(java.lang.String)"><!-- --></A><H3>
+setCreated</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="created")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.236"><B>setCreated</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;created)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColorId()"><!-- --></A><H3>
+getColorId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="colorId")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.243"><B>getColorId</B></A>()</PRE>
+<DL>
+<DD>The color of the event. This is an ID referring to an entry in the "event" section of the colors
+ definition (see the "colors" endpoint). Optional.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColorId(java.lang.String)"><!-- --></A><H3>
+setColorId</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="colorId")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.246"><B>setColorId</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;colorId)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAnyoneCanAddSelf()"><!-- --></A><H3>
+getAnyoneCanAddSelf</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="anyoneCanAddSelf")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.250"><B>getAnyoneCanAddSelf</B></A>()</PRE>
+<DL>
+<DD>Whether anyone can invite themselves to the event. Optional. The default is False.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAnyoneCanAddSelf(java.lang.Boolean)"><!-- --></A><H3>
+setAnyoneCanAddSelf</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="anyoneCanAddSelf")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.253"><B>setAnyoneCanAddSelf</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;anyoneCanAddSelf)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getReminders()"><!-- --></A><H3>
+getReminders</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="reminders")
+</FONT><A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventReminders.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventReminders</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.257"><B>getReminders</B></A>()</PRE>
+<DL>
+<DD>Information about the event's reminders for the authenticated user.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setReminders(com.google.api.gwt.services.calendar.shared.model.EventReminders)"><!-- --></A><H3>
+setReminders</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="reminders")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.260"><B>setReminders</B></A>(<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventReminders.html" title="interface in com.google.api.gwt.services.calendar.shared.model">EventReminders</A>&nbsp;reminders)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGuestsCanSeeOtherGuests()"><!-- --></A><H3>
+getGuestsCanSeeOtherGuests</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="guestsCanSeeOtherGuests")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.267"><B>getGuestsCanSeeOtherGuests</B></A>()</PRE>
+<DL>
+<DD>Whether attendees other than the organizer can see who the event's attendees are. Optional. The
+ default is False.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setGuestsCanSeeOtherGuests(java.lang.Boolean)"><!-- --></A><H3>
+setGuestsCanSeeOtherGuests</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="guestsCanSeeOtherGuests")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.270"><B>setGuestsCanSeeOtherGuests</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;guestsCanSeeOtherGuests)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSummary()"><!-- --></A><H3>
+getSummary</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="summary")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.274"><B>getSummary</B></A>()</PRE>
+<DL>
+<DD>Title of the event.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSummary(java.lang.String)"><!-- --></A><H3>
+setSummary</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="summary")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.277"><B>setSummary</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;summary)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGuestsCanInviteOthers()"><!-- --></A><H3>
+getGuestsCanInviteOthers</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="guestsCanInviteOthers")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.284"><B>getGuestsCanInviteOthers</B></A>()</PRE>
+<DL>
+<DD>Whether attendees other than the organizer can invite others to the event. Optional. The default
+ is False.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setGuestsCanInviteOthers(java.lang.Boolean)"><!-- --></A><H3>
+setGuestsCanInviteOthers</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="guestsCanInviteOthers")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.287"><B>setGuestsCanInviteOthers</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;guestsCanInviteOthers)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTransparency()"><!-- --></A><H3>
+getTransparency</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="transparency")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.295"><B>getTransparency</B></A>()</PRE>
+<DL>
+<DD>Whether the event blocks time on the calendar. Optional. Possible values are: - "opaque" - The
+ event blocks time on the calendar. This is the default value. - "transparent" - The event does
+ not block time on the calendar.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTransparency(java.lang.String)"><!-- --></A><H3>
+setTransparency</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="transparency")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.298"><B>setTransparency</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;transparency)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPrivateCopy()"><!-- --></A><H3>
+getPrivateCopy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="privateCopy")
+</FONT><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A> <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.305"><B>getPrivateCopy</B></A>()</PRE>
+<DL>
+<DD>Whether this is a private event copy where changes are not shared with other copies on other
+ calendars. Optional. Immutable.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPrivateCopy(java.lang.Boolean)"><!-- --></A><H3>
+setPrivateCopy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true" title="class or interface in com.google.web.bindery.autobean.shared">@AutoBean.PropertyName</A>(<A HREF="http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/web/bindery/autobean/shared/AutoBean.PropertyName.html?is-external=true#value()" title="class or interface in com.google.web.bindery.autobean.shared">value</A>="privateCopy")
+</FONT>void <A HREF="../../../../../../../../src-html/com/google/api/gwt/services/calendar/shared/model/Event.html#line.308"><B>setPrivateCopy</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A>&nbsp;privateCopy)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Event.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/Error.html" title="interface in com.google.api.gwt.services.calendar.shared.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../../com/google/api/gwt/services/calendar/shared/model/EventAttendee.html" title="interface in com.google.api.gwt.services.calendar.shared.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../../index.html?com/google/api/gwt/services/calendar/shared/model/Event.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Event.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+</BODY>
+</HTML>
