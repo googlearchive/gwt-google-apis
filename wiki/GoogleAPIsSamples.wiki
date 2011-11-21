@@ -19,7 +19,7 @@ Lets you search for books and manage your Google Books library.
 Lets you view and manage your events in Google Calendar
 
 || [http://code.google.com/apis/calendar/v3/ Documentation] | [http://code.google.com/apis/calendar/community/forum.html Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/calendar/0.2/index.html API Reference] ||
-|| *Sample coming soon!* ||
+|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/calendar/demo/CalendarSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Fbranches%2Fgoogleapis%2Fsamples%2Fcalendar%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Fcalendar Code] ||
 
 = Google APIs Discovery Service =
 Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API
