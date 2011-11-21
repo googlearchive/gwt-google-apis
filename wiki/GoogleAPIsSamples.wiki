@@ -7,7 +7,7 @@
 Lets you view public posts on Google+.
 
 || [http://developers.google.com/+/api/ Documentation] | [TODO Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/plus/0.2/index.html API Reference] ||
-|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/plus/demo/PlusSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Fbranches%2Fgoogleapis%2Fsamples%2Fplus%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Fplus Code] ||
+|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/plus/demo/PlusSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/trunk/apis/samples/plus/com/google/api/gwt/samples/plus Code] ||
 
 = Google Books API =
 Lets you search for books and manage your Google Books library.
@@ -19,7 +19,7 @@ Lets you search for books and manage your Google Books library.
 Lets you view and manage your events in Google Calendar
 
 || [http://code.google.com/apis/calendar/v3/ Documentation] | [http://code.google.com/apis/calendar/community/forum.html Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/calendar/0.2/index.html API Reference] ||
-|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/calendar/demo/CalendarSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Fbranches%2Fgoogleapis%2Fsamples%2Fcalendar%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Fcalendar Code] ||
+|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/calendar/demo/CalendarSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/trunk/apis/samples/calendar/com/google/api/gwt/samples/calendar Code] ||
 
 = Google APIs Discovery Service =
 Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API
@@ -42,4 +42,4 @@ Lets you manage your tasks and task lists.
 Lets you create, inspect, and manage goo.gl short URLs
 
 || [http://code.google.com/apis/urlshortener/overview.html Documentation] | [http://groups.google.com/group/google-url-shortener Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/urlshortener/0.2/index.html API Reference] ||
-|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Ftrunk%2Fapis%2Fsamples%2Furlshortener%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Furlshortener Code] ||
+|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/trunk/apis/samples/urlshortener/com/google/api/gwt/samples/urlshortener Code] ||
