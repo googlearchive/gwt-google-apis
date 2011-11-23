@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * GWT-specific implementations that will allow this to run in the browser.
  * </p>
  */
-public class PlusModule extends PlusBase implements EntryPoint {
+public class PlusEntryPoint extends PlusBase implements EntryPoint {
 
   @Override
   public void onModuleLoad() {

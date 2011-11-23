@@ -63,7 +63,7 @@ public class CalendarEntryPoint implements EntryPoint {
       @Override
       public void onClick(ClickEvent event) {
         new ClientOAuth2Login(CLIENT_ID)
-            .withScopes(CalendarAuthScope.CALENDAR)
+            .withScopes(CalendarAuthScope.CALENDAR_READONLY)
             .login(new Receiver<String>() {
               @Override
               public void onSuccess(String accessToken) {
