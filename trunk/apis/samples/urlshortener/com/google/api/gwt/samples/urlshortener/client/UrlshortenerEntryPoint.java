@@ -96,7 +96,7 @@ public class UrlshortenerEntryPoint implements EntryPoint {
 
   /** Demonstrates expanding a short URL by requesting its information. */
   private void expand() {
-    String shortUrl = Window.prompt("Enter a short URL", "");
+    String shortUrl = Window.prompt("Enter a short URL", "http://goo.gl/xwrT5");
 
     // Get a new RequestContext which we will execute.
     UrlContext urlContext = urlShortener.url();
@@ -121,7 +121,9 @@ public class UrlshortenerEntryPoint implements EntryPoint {
 
   /** Demonstrates shortening a URL by inserting a new {@link Url} object. */
   private void shorten() {
-    String longUrl = Window.prompt("Enter a long URL", "");
+    String longUrl = Window.prompt("Enter a long URL",
+        "http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/"
+            + "urlshortener.html");
 
     // Get a new RequestContext which we will execute.
     UrlContext urlContext = urlShortener.url();

@@ -2,7 +2,7 @@
   <inherits name="com.google.gwt.user.User" />
   <inherits name="com.google.api.gwt.services.Plus" />
 
-  <entry-point class="com.google.api.gwt.samples.plus.client.PlusModule" />
+  <entry-point class="com.google.api.gwt.samples.plus.client.PlusEntryPoint" />
 
   <source path="client" />
   <source path="shared" />
