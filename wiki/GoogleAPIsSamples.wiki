@@ -42,4 +42,4 @@ Lets you manage your tasks and task lists.
 Lets you create, inspect, and manage goo.gl short URLs
 
 || [http://code.google.com/apis/urlshortener/overview.html Documentation] | [http://groups.google.com/group/google-url-shortener Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/urlshortener/0.2/index.html API Reference] ||
-|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/trunk/apis/samples/urlshortener/com/google/api/gwt/samples/urlshortener Code] ||
+|| *Samples:* [http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/UrlshortenerSample.html Demo] | [http://code.google.com/p/gwt-google-apis/source/browse/trunk/apis/samples/urlshortener/com/google/api/gwt/samples/urlshortener Code] ||
