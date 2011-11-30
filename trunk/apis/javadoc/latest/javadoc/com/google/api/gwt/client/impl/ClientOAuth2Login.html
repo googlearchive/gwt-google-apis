@@ -97,7 +97,7 @@ Class ClientOAuth2Login</H2>
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientOAuth2Login.html#line.30"><B>ClientOAuth2Login</B></A><DT>extends <A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html" title="class in com.google.api.gwt.shared">OAuth2Login</A></DL>
+<DT><PRE>public class <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientOAuth2Login.html#line.34"><B>ClientOAuth2Login</B></A><DT>extends <A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html" title="class in com.google.api.gwt.shared">OAuth2Login</A></DL>
 </PRE>
 
 <P>
@@ -155,7 +155,16 @@ Implementation of <A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Log
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientOAuth2Login.html#login()">login</A></B>(<any>&nbsp;callback)</CODE>
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientOAuth2Login.html#authorize()">authorize</A></B>(<any>&nbsp;callback)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientOAuth2Login.html#validate(java.lang.String, )">validate</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;accessToken,
+                 <any>&nbsp;callback)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -167,7 +176,7 @@ Implementation of <A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Log
 <TH ALIGN="left"><B>Methods inherited from class com.google.api.gwt.shared.<A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html" title="class in com.google.api.gwt.shared">OAuth2Login</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html#withScopes(com.google.api.gwt.shared.AuthScope...)">withScopes</A></CODE></TD>
+<TD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html#login()">login</A>, <A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html#withScopes(com.google.api.gwt.shared.AuthScope...)">withScopes</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -195,7 +204,7 @@ Implementation of <A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Log
 <A NAME="ClientOAuth2Login(java.lang.String)"><!-- --></A><H3>
 ClientOAuth2Login</H3>
 <PRE>
-public <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientOAuth2Login.html#line.32"><B>ClientOAuth2Login</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;clientId)</PRE>
+public <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientOAuth2Login.html#line.40"><B>ClientOAuth2Login</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;clientId)</PRE>
 <DL>
 </DL>
 
@@ -209,13 +218,28 @@ public <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/Client
 </TR>
 </TABLE>
 
-<A NAME="login()"><!-- --></A><H3>
-login</H3>
+<A NAME="authorize()"><!-- --></A><H3>
+authorize</H3>
 <PRE>
-public void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientOAuth2Login.html#line.39"><B>login</B></A>(<any>&nbsp;callback)</PRE>
+public void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientOAuth2Login.html#line.45"><B>authorize</B></A>(<any>&nbsp;callback)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html#login()">login</A></CODE> in class <CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html" title="class in com.google.api.gwt.shared">OAuth2Login</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html#authorize()">authorize</A></CODE> in class <CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html" title="class in com.google.api.gwt.shared">OAuth2Login</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="validate(java.lang.String, )"><!-- --></A><H3>
+validate</H3>
+<PRE>
+protected void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientOAuth2Login.html#line.83"><B>validate</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;accessToken,
+                        <any>&nbsp;callback)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html#validate(java.lang.String, )">validate</A></CODE> in class <CODE><A HREF="../../../../../../com/google/api/gwt/shared/OAuth2Login.html" title="class in com.google.api.gwt.shared">OAuth2Login</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

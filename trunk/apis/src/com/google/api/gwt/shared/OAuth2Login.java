@@ -16,6 +16,7 @@
 package com.google.api.gwt.shared;
 
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 /**
  * Handles the OAuth2 login process for GWT client code.
@@ -40,5 +41,34 @@ public abstract class OAuth2Login {
     return this;
   }
 
-  public abstract void login(Receiver<String> callback);
+  /**
+   * Performs authorization to get an access token, then validates that token.
+   */
+  public void login(final Receiver<String> callback) {
+    authorize(new Receiver<String>() {
+      @Override
+      public void onSuccess(final String accessToken) {
+        OAuth2Login.this.validate(accessToken, new Receiver<Void>() {
+          @Override
+          public void onSuccess(Void result) {
+            callback.onSuccess(accessToken);
+          }
+
+          @Override
+          public void onFailure(ServerFailure failure) {
+            callback.onFailure(failure);
+          }
+        });
+      }
+
+      @Override
+      public void onFailure(ServerFailure failure) {
+        callback.onFailure(failure);
+      }
+    });
+  }
+
+  protected abstract void authorize(Receiver<String> callback);
+
+  protected abstract void validate(String accessToken, Receiver<Void> callback);
 }
