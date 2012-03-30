@@ -75,9 +75,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -91,52 +91,29 @@ com.google.api.gwt.client.impl</FONT>
 <BR>
 Class ClientGoogleApiRequestTransport</H2>
 <PRE>
-<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="class in com.google.api.gwt.shared">com.google.api.gwt.shared.GoogleApiRequestTransport</A>
-      <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport</B>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>com.google.api.gwt.client.impl.ClientGoogleApiRequestTransport</B>
 </PRE>
-<HR>
 <DL>
-<DT><PRE>public class <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.33"><B>ClientGoogleApiRequestTransport</B></A><DT>extends <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="class in com.google.api.gwt.shared">GoogleApiRequestTransport</A></DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="interface in com.google.api.gwt.shared">GoogleApiRequestTransport</A>&lt;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A>&gt;</DD>
+</DL>
+<HR>
+<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../../../../com/google/api/gwt/client/GoogleApiRequestTransport.html" title="class in com.google.api.gwt.client"><CODE>GoogleApiRequestTransport</CODE></A>.</I>
+<P>
+<DL>
+<DT><PRE><FONT SIZE="-1">@Deprecated
+</FONT>public class <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.26"><B>ClientGoogleApiRequestTransport</B></A><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="interface in com.google.api.gwt.shared">GoogleApiRequestTransport</A>&lt;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A>&gt;</DL>
 </PRE>
 
 <P>
-Implementation of <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="class in com.google.api.gwt.shared"><CODE>GoogleApiRequestTransport</CODE></A> that should be used in
- the browser. It defers requests to a the JS library which provides
- cross-domain RPC.
+Provides access to Google API endpoints for RequestFactory.
 <P>
 
 <P>
 <HR>
 
 <P>
-<!-- =========== FIELD SUMMARY =========== -->
 
-<A NAME="field_summary"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;JavaScriptObject</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#headers">headers</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="fields_inherited_from_class_com.google.api.gwt.shared.GoogleApiRequestTransport"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Fields inherited from class com.google.api.gwt.shared.<A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="class in com.google.api.gwt.shared">GoogleApiRequestTransport</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#baseUrl">baseUrl</A></CODE></TD>
-</TR>
-</TABLE>
-&nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -149,7 +126,7 @@ Implementation of <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApi
 <TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#ClientGoogleApiRequestTransport()">ClientGoogleApiRequestTransport</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -163,78 +140,65 @@ Implementation of <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApi
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#configure()">configure</A></B>(<any>&nbsp;receiver)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#create()">create</A></B>(<any>&nbsp;receiver)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#handleResult(JavaScriptObject, TransportReceiver)">handleResult</A></B>(JavaScriptObject&nbsp;result,
-                         TransportReceiver&nbsp;receiver)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called from JSNI callback in <A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#makeCall(JavaScriptObject, TransportReceiver)"><CODE>makeCall(JavaScriptObject, TransportReceiver)</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected static&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#isLoaded()">isLoaded</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#send(java.lang.String, TransportReceiver)">send</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;payload,
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#send(java.lang.String, TransportReceiver)">send</A></B>(java.lang.String&nbsp;payload,
          TransportReceiver&nbsp;receiver)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_com.google.api.gwt.shared.GoogleApiRequestTransport"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class com.google.api.gwt.shared.<A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="class in com.google.api.gwt.shared">GoogleApiRequestTransport</A></B></TH>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#create()">create</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#getHeaders()">getHeaders</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#getRpcUrl()">getRpcUrl</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setAccessToken(java.lang.String)">setAccessToken</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setApiAccessKey(java.lang.String)">setApiAccessKey</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setApplicationName(java.lang.String)">setApplicationName</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setBaseUrl(java.lang.String)">setBaseUrl</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setQueryParameter(java.lang.String, java.lang.String)">setQueryParameter</A>, <A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setRequestHeader(java.lang.String, java.lang.String)">setRequestHeader</A></CODE></TD>
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#setAccessToken(java.lang.String)">setAccessToken</A></B>(java.lang.String&nbsp;accessToken)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#setApiAccessKey(java.lang.String)">setApiAccessKey</A></B>(java.lang.String&nbsp;apiAccessKey)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#setApplicationName(java.lang.String)">setApplicationName</A></B>(java.lang.String&nbsp;applicationName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#setBaseUrl(java.lang.String)">setBaseUrl</A></B>(java.lang.String&nbsp;baseUrl)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
 <P>
-
-<!-- ============ FIELD DETAIL =========== -->
-
-<A NAME="field_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Field Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="headers"><!-- --></A><H3>
-headers</H3>
-<PRE>
-protected final JavaScriptObject <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.94"><B>headers</B></A></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -249,9 +213,9 @@ protected final JavaScriptObject <A HREF="../../../../../../src-html/com/google/
 <A NAME="ClientGoogleApiRequestTransport()"><!-- --></A><H3>
 ClientGoogleApiRequestTransport</H3>
 <PRE>
-public <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.33"><B>ClientGoogleApiRequestTransport</B></A>()</PRE>
+public <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.26"><B>ClientGoogleApiRequestTransport</B></A>()</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -263,38 +227,13 @@ public <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/Client
 </TR>
 </TABLE>
 
-<A NAME="handleResult(JavaScriptObject, TransportReceiver)"><!-- --></A><H3>
-handleResult</H3>
+<A NAME="create()"><!-- --></A><H3>
+create</H3>
 <PRE>
-protected static void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.57"><B>handleResult</B></A>(JavaScriptObject&nbsp;result,
-                                   TransportReceiver&nbsp;receiver)</PRE>
+public void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.35"><B>create</B></A>(<any>&nbsp;receiver)</PRE>
 <DL>
-<DD>Called from JSNI callback in <A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#makeCall(JavaScriptObject, TransportReceiver)"><CODE>makeCall(JavaScriptObject, TransportReceiver)</CODE></A>.
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="isLoaded()"><!-- --></A><H3>
-isLoaded</H3>
-<PRE>
-protected static boolean <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.67"><B>isLoaded</B></A>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="configure()"><!-- --></A><H3>
-configure</H3>
-<PRE>
-protected void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.97"><B>configure</B></A>(<any>&nbsp;receiver)</PRE>
-<DL>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#configure()">configure</A></CODE> in class <CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="class in com.google.api.gwt.shared">GoogleApiRequestTransport</A></CODE></DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#create()">create</A></CODE> in interface <CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="interface in com.google.api.gwt.shared">GoogleApiRequestTransport</A>&lt;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -305,9 +244,68 @@ protected void <A HREF="../../../../../../src-html/com/google/api/gwt/client/imp
 <A NAME="send(java.lang.String, TransportReceiver)"><!-- --></A><H3>
 send</H3>
 <PRE>
-public void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.137"><B>send</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;payload,
+public void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.46"><B>send</B></A>(java.lang.String&nbsp;payload,
                  TransportReceiver&nbsp;receiver)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBaseUrl(java.lang.String)"><!-- --></A><H3>
+setBaseUrl</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A> <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.54"><B>setBaseUrl</B></A>(java.lang.String&nbsp;baseUrl)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setBaseUrl(java.lang.String)">setBaseUrl</A></CODE> in interface <CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="interface in com.google.api.gwt.shared">GoogleApiRequestTransport</A>&lt;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAccessToken(java.lang.String)"><!-- --></A><H3>
+setAccessToken</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A> <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.63"><B>setAccessToken</B></A>(java.lang.String&nbsp;accessToken)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setAccessToken(java.lang.String)">setAccessToken</A></CODE> in interface <CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="interface in com.google.api.gwt.shared">GoogleApiRequestTransport</A>&lt;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setApiAccessKey(java.lang.String)"><!-- --></A><H3>
+setApiAccessKey</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A> <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.71"><B>setApiAccessKey</B></A>(java.lang.String&nbsp;apiAccessKey)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setApiAccessKey(java.lang.String)">setApiAccessKey</A></CODE> in interface <CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="interface in com.google.api.gwt.shared">GoogleApiRequestTransport</A>&lt;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setApplicationName(java.lang.String)"><!-- --></A><H3>
+setApplicationName</H3>
+<PRE>
+public <A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A> <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html#line.80"><B>setApplicationName</B></A>(java.lang.String&nbsp;applicationName)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html#setApplicationName(java.lang.String)">setApplicationName</A></CODE> in interface <CODE><A HREF="../../../../../../com/google/api/gwt/shared/GoogleApiRequestTransport.html" title="interface in com.google.api.gwt.shared">GoogleApiRequestTransport</A>&lt;<A HREF="../../../../../../com/google/api/gwt/client/impl/ClientGoogleApiRequestTransport.html" title="class in com.google.api.gwt.client.impl">ClientGoogleApiRequestTransport</A>&gt;</CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -364,9 +362,9 @@ public void <A HREF="../../../../../../src-html/com/google/api/gwt/client/impl/C
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

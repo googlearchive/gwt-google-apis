@@ -4,7 +4,6 @@
   <property environment="env" />
 
   <property name="gwtdir" value="${env.GWT_DIR}" />
-  <property name="oauth2dir" value="${env.OAUTH2_DIR}" />
 
   <property name="src.dir" value="${basedir}/src" />
   <property name="build.dir" value="${basedir}/build" />
@@ -18,9 +17,6 @@
   <target name="verify" description="Check that necessary dependencies were found">
     <available file="${gwtdir}/gwt-user.jar" property="foundgwtuserjar" />
     <fail unless="foundgwtuserjar" message="Cannot find gwt-user.jar" />
-
-    <available file="${oauth2dir}/liboauth2.jar" property="foundoauth2jar" />
-    <fail unless="foundoauth2jar" message="Cannot find liboauth2.jar" />
   </target>
 
   <target name="build" depends="clean, verify" description="Compile sources with javac">
@@ -35,7 +31,6 @@
       <classpath>
         <pathelement location="${build.classes.dir}" />
         <pathelement location="${gwtdir}/gwt-user.jar" />
-        <pathelement location="${oauth2dir}/liboauth2.jar" />
       </classpath>
     </javac>
   </target>

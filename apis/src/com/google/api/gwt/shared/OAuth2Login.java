@@ -16,59 +16,14 @@
 package com.google.api.gwt.shared;
 
 import com.google.web.bindery.requestfactory.shared.Receiver;
-import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 /**
  * Handles the OAuth2 login process for GWT client code.
+ *
+ * @deprecated Use {@link com.google.api.gwt.client.OAuth2Login}.
  */
-public abstract class OAuth2Login {
-
-  protected AuthScope[] scopes;
-  protected final String clientId;
-
-  /**
-   * @param clientId This application's unique client ID, which can be found at
-   *        the Google APIs Console
-   *        {@link "http://code.google.com/apis/console"}.
-   */
-  public OAuth2Login(String clientId) {
-    this.clientId = clientId;
-  }
-
-  /** Sets some scopes to which to request permission. */
-  public OAuth2Login withScopes(AuthScope... scopes) {
-    this.scopes = scopes;
-    return this;
-  }
-
-  /**
-   * Performs authorization to get an access token, then validates that token.
-   */
-  public void login(final Receiver<String> callback) {
-    authorize(new Receiver<String>() {
-      @Override
-      public void onSuccess(final String accessToken) {
-        OAuth2Login.this.validate(accessToken, new Receiver<Void>() {
-          @Override
-          public void onSuccess(Void result) {
-            callback.onSuccess(accessToken);
-          }
-
-          @Override
-          public void onFailure(ServerFailure failure) {
-            callback.onFailure(failure);
-          }
-        });
-      }
-
-      @Override
-      public void onFailure(ServerFailure failure) {
-        callback.onFailure(failure);
-      }
-    });
-  }
-
-  protected abstract void authorize(Receiver<String> callback);
-
-  protected abstract void validate(String accessToken, Receiver<Void> callback);
+@Deprecated
+public interface OAuth2Login<T extends OAuth2Login<T>> {
+  public T withScopes(AuthScope... scopes);
+  public void login(Receiver<String> callback);
 }
