@@ -3,7 +3,6 @@
 <project basedir="." default="build" name="google-api-gwt-client-sample-urlshortener">
   <property environment="env" />
   <property name="gwtdir" value="${env.GWT_HOME}" />
-  <property name="oauth2dir" value="${env.OAUTH2_DIR}" />
 
   <property name="src.dir" value="." />
 
@@ -16,12 +15,6 @@
 
     <available file="${gwtdir}/gwt-dev.jar" property="foundgwtdevjar" />
     <fail unless="foundgwtdevjar" message="Cannot find gwt-dev.jar" />
-
-    <available file="${oauth2dir}/liboauth2.jar" property="foundoauth2jar" />
-    <fail unless="foundoauth2jar" message="Cannot find liboauth2.jar" />
-
-    <available file="${oauth2dir}/OAuth2Module.jar" property="foundoauth2srcjar" />
-    <fail unless="foundoauth2srcjar" message="Cannot find OAuth2Module.jar" />
   </target>
 
   <target name="javac" depends="clean, verify" description="Compile sources with javac">
@@ -34,8 +27,6 @@
         <pathelement location="${src.dir}" />
         <pathelement location="../../src/" />
         <pathelement location="${gwtdir}/gwt-user.jar" />
-        <pathelement location="${oauth2dir}/OAuth2Module.jar" />
-        <pathelement location="${oauth2dir}/liboauth2.jar" />
       </classpath>
     </javac>
     <copy todir="${build.classes.dir}">
@@ -51,8 +42,6 @@
         <pathelement location="../../src/" />
         <pathelement location="${gwtdir}/gwt-user.jar" />
         <pathelement location="${gwtdir}/gwt-dev.jar" />
-        <pathelement location="${oauth2dir}/liboauth2.jar" />
-        <pathelement location="${oauth2dir}/OAuth2Module.jar" />
       </classpath>
 
       <jvmarg value="-Xmx256M" />

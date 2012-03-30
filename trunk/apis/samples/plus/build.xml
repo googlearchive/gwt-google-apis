@@ -4,7 +4,6 @@
   <property environment="env" />
   <property name="gwtdir" value="${env.GWT_HOME}" />
   <property name="plusdir" value="${env.PLUS_DIR}" />
-  <property name="oauth2dir" value="${env.OAUTH2_DIR}" />
 
   <property name="src.dir" value="." />
 
@@ -23,12 +22,6 @@
 
     <available file="${plusdir}/plus-gwt.srcjar" property="foundplussrcjar" />
     <fail unless="foundplussrcjar" message="Cannot find plus-gwt.srcjar" />
-
-    <available file="${oauth2dir}/liboauth2.jar" property="foundoauth2jar" />
-    <fail unless="foundoauth2jar" message="Cannot find liboauth2.jar" />
-
-    <available file="${oauth2dir}/OAuth2Module.jar" property="foundoauth2srcjar" />
-    <fail unless="foundoauth2srcjar" message="Cannot find OAuth2Module.jar" />
   </target>
 
   <target name="javac" depends="clean, verify" description="Compile sources with javac">
@@ -43,8 +36,6 @@
         <pathelement location="${plusdir}/plus-gwt.srcjar" />
         <pathelement location="${plusdir}/libplus-gwt.jar" />
         <pathelement location="${gwtdir}/gwt-user.jar" />
-        <pathelement location="${oauth2dir}/OAuth2Module.jar" />
-        <pathelement location="${oauth2dir}/liboauth2.jar" />
       </classpath>
     </javac>
     <copy todir="${build.classes.dir}">
@@ -62,8 +53,6 @@
         <pathelement location="${plusdir}/libplus-gwt.jar" />
         <pathelement location="${gwtdir}/gwt-user.jar" />
         <pathelement location="${gwtdir}/gwt-dev.jar" />
-        <pathelement location="${oauth2dir}/OAuth2Module.jar" />
-        <pathelement location="${oauth2dir}/liboauth2.jar" />
       </classpath>
 
       <jvmarg value="-Xmx256M" />
