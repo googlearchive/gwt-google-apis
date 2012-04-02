@@ -28,13 +28,13 @@ Add the jar you just downloaded to the Java classpath.  Then, add the GWT module
 <inherits name='com.google.api.gwt.services.Urlshortener' />
 }}}
 
-If you want to communicate with the Buzz service, add this line to your gwt.xml file:
+If you want to communicate with the Google+ API, add this line to your gwt.xml file:
 
 {{{
-<inherits name='com.google.api.gwt.services.Buzz' />
+<inherits name='com.google.api.gwt.services.Plus' />
 }}}
 
-To use the Moderator service instead, the module is `Moderator`, for the Shopping service, use `Shopping`, and so on.
+To use the Tasks service instead, the module is `Tasks`, for the Calendar API, use `Calendar`, and so on.
 
 == Communicating with the service ==
 
@@ -45,41 +45,22 @@ Now that your project has the code it needs to make requests to the service, the
 Before making a request, you must initialize the transport. To do this, write code like this:
 
 {{{
-// e.g., Buzz.class, Moderator.class, Shopping.class, etc...
+// e.g., Plus.class, Tasks.class, Calendar.class, etc...
 private Urlshortener urlshortener = GWT.create(Urlshortener.class);
 
 private void initialize() {
-  new ClientGoogleApiRequestTransport()
-      .setApiAccessKey(YOUR_API_KEY)
-      .setApplicationName(YOUR_APPLICATION_NAME)
-      .create(new Receiver<GoogleApiRequestTransport>() {
-        @Override
-        public void onSuccess(GoogleApiRequestTransport transport) {
-          urlshortener.initialize(eventBus, transport);
-
-          // Now that your service is initialized, you can make a request.
-          // It may be better to publish a "ready" event on the eventBus
-          // and listen for it to make requests elsewhere in your code.
-          makeRequest();
-        }
-
-        @Override
-        public void onFailure(ServerFailure error) {
-          Window.alert("Failed to initialize Transport!");
-        }
-      });
+  urlshortener.initialize(new SimpleEventBus(),
+      new GoogleApiRequestTransport(YOUR_APPLICATION_NAME, YOUR_API_KEY);
 }
 }}}
 
-This code snippet sets up the service so that it can make requests. It sets your API key (which is available at the [http://code.google.com/apis/console Google APIs Console]), your application's name, and by initializing it with the service in question.
+This code snippet sets up the service so that it can make requests. It sets your API key (which is available at the [http://code.google.com/apis/console Google APIs Console]) and your application's name. Once you've done this you're ready to make requests.
 
 === Make Requests to the Service ===
 
 The specifics of making a request are different depending on which API you are using, but using the URL Shortener API to expand a short link looks like this:
 
 {{{
-Urlshortener urlshortener = GWT.create(Urlshortener.class); // Must be initialized!
-
 private void makeRequest() {
   String shortUrl = "http://goo.gl/h8cEU";
   urlshortener.url().get(shortUrl)
@@ -104,45 +85,31 @@ Note that required parameters are passed to the `get()` method. When a method re
 
 Some APIs provide methods that access or update a user's private data. Before you make any requests to these APIs, you need to ask the user of your application to authenticate and grant your application access to their data. If you tried the example above, you found out that this was needed when your request failed!
 
-In fact, you need to ask the user for permission and obtain an access token before initializing the transport.  After you initialize the transport with the access token, all requests use the access token. You can get an access token using an    [http://code.google.com/apis/accounts/docs/OAuth2.html OAuth 2.0] flow.
-
-To initiate an OAuth 2.0 flow, use an `OAuth2Login` implementation. The implementation provided with the library is `ClientOAuth2Login`, which delegates to the [http://code.google.com/p/gwt-oauth2 gwt-oauth2] project under the covers to handle the flow.
+In fact, you need to ask the user for permission before initializing the transport.  You can request access by using an    [http://code.google.com/apis/accounts/docs/OAuth2.html OAuth 2.0] flow.
 
 {{{
-private void authenticate() {
-  new ClientOAuth2Login(CLIENT_ID)
-      .withScopes(Urlshortener.UrlshortenerAuthScope.URLSHORTENER) // Or Buzz.BuzzAuthScope, Moderator.ModeratorAuthScope, etc.
-      .login(new Receiver<String>() {
+private void authorize() {
+  OAuth2Login.get().authorize(YOUR_CLIENT_ID,
+      Urlshortener.UrlshortenerAuthScope.URLSHORTENER, 
+      new Callback<Void, Exception>() {
         @Override
-        public void onSuccess(String accessToken) {
-          initialize(accessToken);
+        public void onSuccess(Void unused) {
+          // Your app has been granted access. Make a request as described above.
+        }
+
+        @Override
+        public void onFailure(Exception e) {
+          // The request failed!
         }
       });
 }
 }}}
 
-If the service provides multiple scopes, more than one scope can be passed to the `withScopes()` method, e.g., `withScopes(Buzz.BuzzAuthScope.BUZZ_READONLY, Buzz.BuzzAuthScope.PHOTOS)`.
+If the service provides multiple scopes that are needed by the app, a list of scopes can be passed to `authorize()` method.
 
-The scopes you provide to the `withScopes()` method grant your application different access levels to your user's data. Some scopes provide read-only access while others also provide write access to their data. Read the API's documentation and decide which scopes your application requires.
+The scopes you provide to the `authorize()` method grant your application different access levels to your user's data. Some scopes provide read-only access while others also provide write access to their data. Read the API's documentation and decide which scopes your application requires.
 
-When using the `gwt-oauth2` implementation (the default), call the `login()` method to display a pop-up that asks your user to grant access to their data. If they grant access, the callback's `onSuccess()` method is invoked with the access token generated by the auth provider. Once you have this token, you then need to pass it to the transport:
-
-{{{
-private void initialize(String accessToken) {
-  new ClientGoogleApiRequestTransport()
-      .setApplicationName(APPLICATION_NAME)
-      .setAccessToken(accessToken) // <---------------------- add this line
-      .create(new Receiver<GoogleApiRequestTransport>() {
-        @Override
-        public void onSuccess(GoogleApiRequestTransport transport) {
-          // Same as above.
-        }
-      })
-      .fire();
-}
-}}}
-
-Note the absence of the call to `setApiAccessKey()` in the above sample. If you provide an access token, you should not also provide an API key. The access token uniquely identifies your application, and so the API key is an unnecessary addition.
+Calling the `authorize()` method may display a pop-up to ask your user to grant access to their data. If they grant access, the callback's `onSuccess()` method is invoked. If the user declines, or if an error occurs, the `onFailure()` method will be called.
 
 ==Next Steps==
 You should now have the basics of using the URL Shortener API in your GWT application. The concepts learned in this guide apply to all new Google API libraries.
