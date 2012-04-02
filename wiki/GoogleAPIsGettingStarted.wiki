@@ -114,6 +114,6 @@ Calling the `authorize()` method may display a pop-up to ask your user to grant 
 ==Next Steps==
 You should now have the basics of using the URL Shortener API in your GWT application. The concepts learned in this guide apply to all new Google API libraries.
 
-For a more complete sample of working with the URL Shortener API, with running code, see the [http://code.google.com/p/gwt-google-apis/source/browse/#svn%2Ftrunk%2Fapis%2Fsamples%2Furlshortener%2Fcom%2Fgoogle%2Fapi%2Fgwt%2Fsamples%2Furlshortener URL Shortener API Sample] ([http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/urlshortener.html demo]).
+For a more complete sample of working with the URL Shortener API, with running code, see the [http://code.google.com/p/gwt-google-apis/source/browse/trunk/apis/samples/urlshortener/com/google/api/gwt/samples/urlshortener/client/UrlshortenerEntryPoint.java URL Shortener API Sample] ([http://gwt-google-apis.googlecode.com/svn/trunk/apis/samples/urlshortener/demo/UrlshortenerSample.html demo]).
 
 To find out more about what you can do with a specific service, see the the library's specific API reference, or check out some [GoogleAPIsSamples sample applications].
