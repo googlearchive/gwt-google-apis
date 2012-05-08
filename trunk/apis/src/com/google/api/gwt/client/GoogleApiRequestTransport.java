@@ -24,8 +24,6 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 /**
  * {@link RequestTransport} designed to communicate with Google APIs.
  *
@@ -38,22 +36,21 @@ public class GoogleApiRequestTransport implements RequestTransport {
   private final Map<String, String> headers = new HashMap<String, String>();
 
   /**
-   * @param applicationName the application's api name of the form apiname/version
-   * @param apiKey an optional API key. See https://code.google.com/apis/console. A {@code null}
-   *     value will not be validated if it is not required.
+   * @param applicationName the application name to be sent in the User-Agent header of requests.
+   * @param apiKey an optional API key. See https://code.google.com/apis/console, or {@code null} to
+   *     send no API key.
    */
-  public GoogleApiRequestTransport(String applicationName, @Nullable String apiKey) {
+  public GoogleApiRequestTransport(String applicationName, String apiKey) {
     this(applicationName, apiKey, "https://www.googleapis.com");
   }
 
   /**
-   * @param applicationName the application's api name of the form apiname/version
-   * @param apiKey an optional API key. See https://code.google.com/apis/console. A {@code null}
-   *     value will not be validated if it is not required.
-   * @param baseUrl the base url of the Discovery service to use
+   * @param applicationName the application name to be sent in the User-Agent header of requests.
+   * @param apiKey an optional API key. See https://code.google.com/apis/console, or {@code null} to
+   *     send no API key.
+   * @param baseUrl the base URL of the Discovery service to use
    */
-  public GoogleApiRequestTransport(String applicationName, @Nullable String apiKey,
-      String baseUrl) {
+  public GoogleApiRequestTransport(String applicationName, String apiKey, String baseUrl) {
     this.apiKey = apiKey;
     this.userAgent =
         (applicationName == null ? "" : (applicationName + " ")) + "google-api-gwt-client/0.1";

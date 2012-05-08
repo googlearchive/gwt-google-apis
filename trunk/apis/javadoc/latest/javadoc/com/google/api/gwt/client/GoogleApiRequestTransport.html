@@ -96,7 +96,7 @@ Class GoogleApiRequestTransport</H2>
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.34"><B>GoogleApiRequestTransport</B></A><DT>extends <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+<DT><PRE>public class <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.32"><B>GoogleApiRequestTransport</B></A><DT>extends <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
 </PRE>
 
 <P>
@@ -189,25 +189,25 @@ Class GoogleApiRequestTransport</H2>
 <A NAME="GoogleApiRequestTransport(java.lang.String, java.lang.String)"><!-- --></A><H3>
 GoogleApiRequestTransport</H3>
 <PRE>
-public <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.45"><B>GoogleApiRequestTransport</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;applicationName,
+public <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.43"><B>GoogleApiRequestTransport</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;applicationName,
                                  <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;apiKey)</PRE>
 <DL>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>applicationName</CODE> - the application's api name of the form apiname/version<DD><CODE>apiKey</CODE> - an optional API key. See https://code.google.com/apis/console. A <code>null</code>
-     value will not be validated if it is not required.</DL>
+<DT><B>Parameters:</B><DD><CODE>applicationName</CODE> - the application name to be sent in the User-Agent header of requests.<DD><CODE>apiKey</CODE> - an optional API key. See https://code.google.com/apis/console, or <code>null</code> to
+     send no API key.</DL>
 </DL>
 <HR>
 
 <A NAME="GoogleApiRequestTransport(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 GoogleApiRequestTransport</H3>
 <PRE>
-public <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.55"><B>GoogleApiRequestTransport</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;applicationName,
+public <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.53"><B>GoogleApiRequestTransport</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;applicationName,
                                  <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;apiKey,
                                  <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;baseUrl)</PRE>
 <DL>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>applicationName</CODE> - the application's api name of the form apiname/version<DD><CODE>apiKey</CODE> - an optional API key. See https://code.google.com/apis/console. A <code>null</code>
-     value will not be validated if it is not required.<DD><CODE>baseUrl</CODE> - the base url of the Discovery service to use</DL>
+<DT><B>Parameters:</B><DD><CODE>applicationName</CODE> - the application name to be sent in the User-Agent header of requests.<DD><CODE>apiKey</CODE> - an optional API key. See https://code.google.com/apis/console, or <code>null</code> to
+     send no API key.<DD><CODE>baseUrl</CODE> - the base URL of the Discovery service to use</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -223,7 +223,7 @@ public <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiReque
 <A NAME="send(java.lang.String, TransportReceiver)"><!-- --></A><H3>
 send</H3>
 <PRE>
-public void <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.134"><B>send</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;payload,
+public void <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.131"><B>send</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;payload,
                  TransportReceiver&nbsp;receiver)</PRE>
 <DL>
 <DD><DL>
@@ -235,7 +235,7 @@ public void <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApi
 <A NAME="setRequestHeader(java.lang.String, java.lang.String)"><!-- --></A><H3>
 setRequestHeader</H3>
 <PRE>
-public void <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.157"><B>setRequestHeader</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;key,
+public void <A HREF="../../../../../src-html/com/google/api/gwt/client/GoogleApiRequestTransport.html#line.154"><B>setRequestHeader</B></A>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;key,
                              <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</PRE>
 <DL>
 <DD><DL>
