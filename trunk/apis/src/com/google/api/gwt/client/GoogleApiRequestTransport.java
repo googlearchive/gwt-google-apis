@@ -24,6 +24,8 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 /**
  * {@link RequestTransport} designed to communicate with Google APIs.
  *
@@ -35,15 +37,26 @@ public class GoogleApiRequestTransport implements RequestTransport {
   private final String userAgent;
   private final Map<String, String> headers = new HashMap<String, String>();
 
-  public GoogleApiRequestTransport(String applicationName, String apiKey) {
+  /**
+   * @param applicationName the application's api name of the form apiname/version
+   * @param apiKey an optional API key. See https://code.google.com/apis/console. A {@code null}
+   *     value will not be validated if it is not required.
+   */
+  public GoogleApiRequestTransport(String applicationName, @Nullable String apiKey) {
     this(applicationName, apiKey, "https://www.googleapis.com");
   }
 
-  public GoogleApiRequestTransport(String applicationName, String apiKey, String baseUrl) {
+  /**
+   * @param applicationName the application's api name of the form apiname/version
+   * @param apiKey an optional API key. See https://code.google.com/apis/console. A {@code null}
+   *     value will not be validated if it is not required.
+   * @param baseUrl the base url of the Discovery service to use
+   */
+  public GoogleApiRequestTransport(String applicationName, @Nullable String apiKey,
+      String baseUrl) {
     this.apiKey = apiKey;
     this.userAgent =
         (applicationName == null ? "" : (applicationName + " ")) + "google-api-gwt-client/0.1";
-
     baseConfigure(baseUrl);
   }
 
