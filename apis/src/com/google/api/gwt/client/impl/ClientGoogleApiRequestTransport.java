@@ -43,7 +43,7 @@ public class ClientGoogleApiRequestTransport implements
       receiver.onFailure(new ServerFailure("Transport is already created."));
     }
     this.transport =
-        new GoogleApiRequestTransport(baseUrl, applicationName, apiKey);
+        new GoogleApiRequestTransport(applicationName, apiKey, baseUrl);
     for (Map.Entry<String, String> entry : headers.entrySet()) {
       transport.setRequestHeader(entry.getKey(), entry.getValue());
     }
