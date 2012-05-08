@@ -21,6 +21,9 @@ import com.google.gwt.http.client.Response;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * {@link RequestTransport} designed to communicate with Google APIs.
  *
@@ -30,6 +33,7 @@ public class GoogleApiRequestTransport implements RequestTransport {
 
   private final String apiKey;
   private final String userAgent;
+  private final Map<String, String> headers = new HashMap<String, String>();
 
   public GoogleApiRequestTransport(String applicationName, String apiKey) {
     this(applicationName, apiKey, "https://www.googleapis.com");
@@ -51,7 +55,8 @@ public class GoogleApiRequestTransport implements RequestTransport {
     };
   }-*/;
 
-  private native void nativeSend(String payload, TransportReceiver receiver) /*-{
+  private native void nativeSend(String payload, JavaScriptObject headers,
+      TransportReceiver receiver) /*-{
     var callback =  $entry(function(result) {
       @com.google.api.gwt.client.GoogleApiRequestTransport::handleResult(*)
       (result, receiver);
@@ -73,6 +78,9 @@ public class GoogleApiRequestTransport implements RequestTransport {
         "apiVersion": payloadObject.apiVersion,
         "params": payloadObject.params
       }
+    }
+    for (x in headers) {
+      requestObj['headers'][x] = headers[x];
     }
     requestObj['body']['params']['key'] =
         this.@com.google.api.gwt.client.GoogleApiRequestTransport::apiKey;
@@ -127,9 +135,25 @@ public class GoogleApiRequestTransport implements RequestTransport {
 
   private void makeRequest(String payload, TransportReceiver receiver) {
     if (JsonUtils.safeToEval(payload)) {
-      nativeSend(payload, receiver);
+      nativeSend(payload, makeHeadersObj(), receiver);
     } else {
       receiver.onTransportFailure(new ServerFailure("Request payload is invalid."));
     }
   }
+
+  public void setRequestHeader(String key, String value) {
+    headers.put(key, value);
+  }
+
+  private JavaScriptObject makeHeadersObj() {
+    JavaScriptObject headersObj = JavaScriptObject.createObject();
+    for (Map.Entry<String, String> entry : headers.entrySet()) {
+      set(headersObj, entry.getKey(), entry.getValue());
+    }
+    return headersObj;
+  }
+
+  private static native void set(JavaScriptObject jso, String key, String value) /*-{
+    jso[key] = value;
+  }-*/;
 }

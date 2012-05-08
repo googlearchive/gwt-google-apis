@@ -17,6 +17,9 @@ import com.google.api.gwt.client.GoogleApiRequestTransport;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Provides access to Google API endpoints for RequestFactory.
  *
@@ -29,6 +32,7 @@ public class ClientGoogleApiRequestTransport implements
   private String baseUrl = "https://www.googleapis.com";
   private String apiKey;
   private String applicationName;
+  private Map<String, String> headers = new HashMap<String, String>();
   private GoogleApiRequestTransport transport;
 
   @Override
@@ -38,7 +42,11 @@ public class ClientGoogleApiRequestTransport implements
       // receiver.onSuccess(this);
       receiver.onFailure(new ServerFailure("Transport is already created."));
     }
-    this.transport = new GoogleApiRequestTransport(baseUrl, applicationName, apiKey);
+    this.transport =
+        new GoogleApiRequestTransport(baseUrl, applicationName, apiKey);
+    for (Map.Entry<String, String> entry : headers.entrySet()) {
+      transport.setRequestHeader(entry.getKey(), entry.getValue());
+    }
     receiver.onSuccess(this);
   }
 
@@ -82,6 +90,15 @@ public class ClientGoogleApiRequestTransport implements
       throw new IllegalStateException("Transport was already created.");
     }
     this.applicationName = applicationName;
+    return this;
+  }
+
+  @Override
+  public ClientGoogleApiRequestTransport setRequestHeader(String key, String value) {
+    if (this.transport != null) {
+      throw new IllegalStateException("Transport was already created.");
+    }
+    this.headers.put(key, value);
     return this;
   }
 }
