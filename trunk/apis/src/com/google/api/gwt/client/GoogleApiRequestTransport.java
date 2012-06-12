@@ -15,9 +15,7 @@
 package com.google.api.gwt.client;
 
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsonUtils;
-import com.google.gwt.http.client.Response;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
@@ -34,6 +32,7 @@ public class GoogleApiRequestTransport implements RequestTransport {
   private final String apiKey;
   private final String userAgent;
   private final Map<String, String> headers = new HashMap<String, String>();
+  private final String baseUrl;
 
   /**
    * @param applicationName the application name to be sent in the User-Agent header of requests.
@@ -54,77 +53,39 @@ public class GoogleApiRequestTransport implements RequestTransport {
     this.apiKey = apiKey;
     this.userAgent =
         (applicationName == null ? "" : (applicationName + " ")) + "google-api-gwt-client/0.1";
-    baseConfigure(baseUrl);
+    this.baseUrl = baseUrl;
   }
 
-  private static native void baseConfigure(String baseUrl) /*-{
-    $wnd['__GOOGLEAPIS'] = {
-      'googleapis.config' : {
-        'proxy': baseUrl + "/static/proxy.html",
-      }
-    };
-  }-*/;
-
-  private native void nativeSend(String payload, JavaScriptObject headers,
-      TransportReceiver receiver) /*-{
+  private native void nativeSend(String payload, TransportReceiver receiver) /*-{
     var callback =  $entry(function(result) {
-      @com.google.api.gwt.client.GoogleApiRequestTransport::handleResult(*)
-      (result, receiver);
+      if ('error' in result) {
+        var code = result['error']['code'];
+        var message = result['error']['message'];
+        @com.google.api.gwt.client.GoogleApiRequestTransport::handleError(*)
+            (code, message, receiver);
+      } else {
+        var resultStr = JSON.stringify(result);
+        receiver.
+            @com.google.web.bindery.requestfactory.shared.RequestTransport.TransportReceiver::onTransportSuccess(*)
+            (resultStr);
+      }
     });
 
     // TODO(jasonhall): Find some way to avoid this.
     eval('var payloadObject = ' + payload);
 
-    var requestObj = {
-      "url": "/rpc",
-      "headers": {
-        "Content-Type": "application/json",
-        "X-JavaScript-User-Agent":
-            this.@com.google.api.gwt.client.GoogleApiRequestTransport::userAgent
-      },
-      "httpMethod": "POST",
-      "body": {
-        "method": payloadObject.method,
-        "apiVersion": payloadObject.apiVersion,
-        "params": payloadObject.params
-      }
-    }
-    for (x in headers) {
-      requestObj['headers'][x] = headers[x];
-    }
-    requestObj['body']['params']['key'] =
-        this.@com.google.api.gwt.client.GoogleApiRequestTransport::apiKey;
+    var params = payloadObject['params'] || {};
+    params['key'] = this.@com.google.api.gwt.client.GoogleApiRequestTransport::apiKey;
+    params['root'] = this.@com.google.api.gwt.client.GoogleApiRequestTransport::baseUrl;
 
-    $wnd.googleapis.newHttpRequest(requestObj).execute(callback);
+    // TODO(jasonhall): Set the X-JavaScript-User-Agent header
+
+    $wnd.gapi.client.rpcRequest(payloadObject.method,
+        payloadObject.apiVersion, params).execute(callback);
   }-*/;
 
-  private static final class ApiResponseJso extends JavaScriptObject {
-    @SuppressWarnings("unused")
-    protected ApiResponseJso() {
-    }
-
-    final native String getBody() /*-{
-      return this.body;
-    }-*/;
-
-    final native int getStatus() /*-{
-      return this.status;
-    }-*/;
-
-    final native String getStatusText() /*-{
-      return this.statusText;
-    }-*/;
-  }
-
-  private static void handleResult(JavaScriptObject result, TransportReceiver receiver) {
-    ApiResponseJso response = result.cast();
-
-    if (response.getStatus() == Response.SC_OK) {
-      receiver.onTransportSuccess(response.getBody());
-    } else {
-      receiver.onTransportFailure(
-          new ServerFailure(response.getStatus() + " " + response.getStatusText()));
-    }
+  private static void handleError(int code, String message, TransportReceiver receiver) {
+    receiver.onTransportFailure(new ServerFailure(code + " " + message));
   }
 
   @Override
@@ -145,25 +106,9 @@ public class GoogleApiRequestTransport implements RequestTransport {
 
   private void makeRequest(String payload, TransportReceiver receiver) {
     if (JsonUtils.safeToEval(payload)) {
-      nativeSend(payload, makeHeadersObj(), receiver);
+      nativeSend(payload, receiver);
     } else {
       receiver.onTransportFailure(new ServerFailure("Request payload is invalid."));
     }
   }
-
-  public void setRequestHeader(String key, String value) {
-    headers.put(key, value);
-  }
-
-  private JavaScriptObject makeHeadersObj() {
-    JavaScriptObject headersObj = JavaScriptObject.createObject();
-    for (Map.Entry<String, String> entry : headers.entrySet()) {
-      set(headersObj, entry.getKey(), entry.getValue());
-    }
-    return headersObj;
-  }
-
-  private static native void set(JavaScriptObject jso, String key, String value) /*-{
-    jso[key] = value;
-  }-*/;
 }
