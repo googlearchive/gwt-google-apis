@@ -37,6 +37,4 @@ public interface GoogleApiRequestTransport<T extends GoogleApiRequestTransport<T
   T setApiAccessKey(String apiAccessKey);
 
   T setApplicationName(String applicationName);
-
-  T setRequestHeader(String key, String value);
 }
