@@ -38,14 +38,14 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
  */
 public class PlusEntryPoint implements EntryPoint {
 
-  private static final Plus PLUS = GWT.create(Plus.class);
+  private static final Plus plus = GWT.create(Plus.class);
   private static final String CLIENT_ID = "692753340433.apps.googleusercontent.com";
   private static final String API_KEY = "AIzaSyA5bNyuRQFaTQle_YC5BUH7tQzRmAPiqsM";
   private static final String APPLICATION_NAME = "PlusSample/1.0";
 
   @Override
   public void onModuleLoad() {
-    PLUS.initialize(new SimpleEventBus(), new GoogleApiRequestTransport(APPLICATION_NAME, API_KEY));
+    plus.initialize(new SimpleEventBus(), new GoogleApiRequestTransport(APPLICATION_NAME, API_KEY));
 
     final Button b = new Button("Authenticate to get public activities");
     b.addClickHandler(new ClickHandler() {
@@ -73,7 +73,7 @@ public class PlusEntryPoint implements EntryPoint {
   }
 
   private void getMe() {
-    PLUS.people().get("me").to(new Receiver<Person>() {
+    plus.people().get("me").to(new Receiver<Person>() {
       @Override
       public void onSuccess(Person person) {
         println("Hello " + person.getDisplayName());
@@ -84,7 +84,7 @@ public class PlusEntryPoint implements EntryPoint {
   }
 
   private void getMyActivities() {
-    PLUS.activities().list("me", Collection.PUBLIC).to(new Receiver<ActivityFeed>() {
+    plus.activities().list("me", Collection.PUBLIC).to(new Receiver<ActivityFeed>() {
       @Override
       public void onSuccess(ActivityFeed feed) {
         println("===== PUBLIC ACTIVITIES =====");
