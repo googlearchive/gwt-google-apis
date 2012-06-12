@@ -54,11 +54,11 @@ public class CalendarEntryPoint implements EntryPoint {
   private static final String CLIENT_ID = "692753340433.apps.googleusercontent.com";
   private static final String API_KEY = "AIzaSyA5bNyuRQFaTQle_YC5BUH7tQzRmAPiqsM";
   private static final String APPLICATION_NAME = "CalendarSample/1.0";
-  private static final Calendar CALENDAR = GWT.create(Calendar.class);
+  private static final Calendar calendar = GWT.create(Calendar.class);
 
   @Override
   public void onModuleLoad() {
-    CALENDAR.initialize(new SimpleEventBus(),
+    calendar.initialize(new SimpleEventBus(),
         new GoogleApiRequestTransport(APPLICATION_NAME, API_KEY));
 
     final Button b = new Button("Authenticate to insert, update and delete an event");
@@ -91,7 +91,7 @@ public class CalendarEntryPoint implements EntryPoint {
   private void getCalendarId() {
     // We need to find an ID of a calendar that we have permission to write events to. We'll just
     // pick the first one that gets returned, and we will delete the event when we're done.
-    CALENDAR.calendarList().list().setMinAccessRole(MinAccessRole.OWNER)
+    calendar.calendarList().list().setMinAccessRole(MinAccessRole.OWNER)
         .fire(new Receiver<CalendarList>() {
           @Override
           public void onSuccess(CalendarList list) {
@@ -105,7 +105,7 @@ public class CalendarEntryPoint implements EntryPoint {
   /** Insert a new event for the given calendar ID. */
   private void insertEvent(final String calendarId) {
     String today = DateTimeFormat.getFormat("yyyy-MM-dd").format(new Date());
-    EventsContext ctx = CALENDAR.events();
+    EventsContext ctx = calendar.events();
     Event event = ctx.create(Event.class)
         .setSummary("Learn about the Google API GWT client library")
         .setStart(ctx.create(EventDateTime.class).setDateTime(today))
@@ -127,7 +127,7 @@ public class CalendarEntryPoint implements EntryPoint {
 
   /** Get an event for the purposes of updating it. */
   private void getEventForUpdate(final String calendarId, final String eventId) {
-    final EventsContext ctx = CALENDAR.events();
+    final EventsContext ctx = calendar.events();
     ctx.get(calendarId, eventId).fire(new Receiver<Event>() {
       @Override
       public void onSuccess(Event event) {
@@ -159,7 +159,7 @@ public class CalendarEntryPoint implements EntryPoint {
 
   /** Delete an event by its ID. */
   private void deleteEvent(String calendarId, String eventId) {
-    CALENDAR.events().delete(calendarId, eventId).fire(new Receiver<EmptyResponse>() {
+    calendar.events().delete(calendarId, eventId).fire(new Receiver<EmptyResponse>() {
       @Override
       public void onSuccess(EmptyResponse r) {
         // The event has been deleted. And we're done!
