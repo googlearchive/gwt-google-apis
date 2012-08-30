@@ -71,9 +71,9 @@ Passing no key to the Maps API usually works for developing on the local machine
 If you are not sure which hostname/port combination to use in order to register for a Maps API Key, try printing out the value of `Window.Location.getHref()` in your app.
 
 
-==How do I use the Google Maps API for GWT with a Maps  API Premier client ID? ==
+==How do I use the Google Maps API for GWT with a Maps  API for Business client ID? ==
 
-Maps API Premier users can use `AjaxLoaderOptions` to set the client ID.  This will also bypass the need for an API key. For example:
+Maps API Business users can use `AjaxLoaderOptions` to set the client ID.  This will also bypass the need for an API key. For example:
 
 {{{
   AjaxLoaderOptions options = AjaxLoaderOptions.newInstance();
