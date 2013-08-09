@@ -27,11 +27,6 @@ Lets you discover information about other Google APIs, such as what APIs are ava
 || [http://code.google.com/apis/discovery/overview.html Documentation] | [http://code.google.com/apis/discovery/forum.html Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/discovery/0.3/index.html API Reference] ||
 || No samples yet. ||
 
-= Google Latitude API =
-
-|| [http://code.google.com/apis/latitude/overview.html Documentation] | [https://groups.google.com/group/google-latitude-api Help Forum] | [http://gwt-google-apis.googlecode.com/svn/javadoc/latitude/0.3/index.html API Reference] ||
-|| No samples yet. ||
-
 = Google Tasks API =
 Lets you manage your tasks and task lists.
 
