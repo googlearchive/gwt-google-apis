@@ -40,7 +40,7 @@ public class GoogleApiRequestTransport implements RequestTransport {
    *     send no API key.
    */
   public GoogleApiRequestTransport(String applicationName, String apiKey) {
-    this(applicationName, apiKey, "https://www.googleapis.com");
+    this(applicationName, apiKey, "https://content.googleapis.com");
   }
 
   /**
